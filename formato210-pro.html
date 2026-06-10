@@ -468,6 +468,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
             <span style="font-size:.75rem;color:var(--muted);margin-left:10px">Útil si no tienes el reporte exógena (cliente nuevo) <strong>o</strong> si necesitas agregar conceptos no reportados a DIAN después de cargar.</span>
           </div>
         </div>
+        <div class="card tab-off" id="cardReconVacio" style="text-align:center;padding:28px 18px">
+          <div style="font-size:2rem;margin-bottom:8px">🧾</div>
+          <p style="font-size:.9rem;color:var(--muted);margin:0 0 14px">La <strong>reconciliación de conceptos</strong> aparece aquí después de cargar el reporte de exógena.<br>Cada concepto se clasifica en su cédula y te avisamos lo que requiere tu decisión.</p>
+          <button class="btn-aplicar" onclick="cambiarTabF210('t210')">Ir a cargar la exógena →</button>
+        </div>
         <div class="card hidden" id="cardReconciliacion">
           <div class="section-title"><span class="num">3</span> Reconciliación de conceptos exógena</div>
           <div id="reconciliacionContainer">
@@ -1617,6 +1622,7 @@ function cargarReconciliacionDesdeExogena(result){
   });
   reconciliacionEstado.aplicada = false;
   document.getElementById('cardReconciliacion').classList.remove('hidden');
+  var _vac = document.getElementById('cardReconVacio'); if(_vac) _vac.classList.add('tab-off'); // ya hay reconciliación
   renderizarTablaReconciliacion();
 }
 function renderizarTablaReconciliacion(){
@@ -3077,8 +3083,17 @@ function cambiarTabF210(tab){
     if(b){ b.style.display = ''; document.getElementById('replica210Hint').textContent = ''; }
     if(typeof renderizarReplica210 === 'function') renderizarReplica210();
   }
+  sincReconVacio(tab);
   window.scrollTo({ top: 0, behavior: 'smooth' });
   if(typeof gtag !== 'undefined') gtag('event','f210_pro_tab', { tab: tab });
+}
+// El estado vacío de la reconciliación solo se ve en su pestaña cuando aún no hay exógena.
+function sincReconVacio(tab){
+  var rec = document.getElementById('cardReconciliacion');
+  var vac = document.getElementById('cardReconVacio');
+  if(!rec || !vac) return;
+  var mostrar = (tab === 'texogena') && rec.classList.contains('hidden');
+  vac.classList.toggle('tab-off', !mostrar);
 }
 // ── "DE DÓNDE SALIÓ" — trazabilidad de cada casilla a las filas de la exógena ──
 // Mapea casilla del 210 → cédula(s) de la reconciliación que la componen.
