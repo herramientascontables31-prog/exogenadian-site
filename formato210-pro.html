@@ -206,34 +206,35 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 .recon-table tr.manual td:first-child{border-left:3px solid #7C3AED}
 .recon-table .num-cell{font-family:'JetBrains Mono',monospace;text-align:right;white-space:nowrap}
 /* ── Preview del Formulario 210 real (grilla oficial DIAN) ── */
-.p210{border:1.5px solid #000;border-radius:4px;overflow:hidden;font-size:10px;margin-top:8px;background:#fff}
-.p210-hdr{background:#1a3c6e;color:#fff;text-align:center;font-weight:800;padding:5px;font-size:11px;letter-spacing:.5px}
-.p210-sec{background:#c6d9ec;color:#1a3c6e;font-weight:700;font-size:9px;padding:3px 6px;border-top:1px solid #000;text-transform:uppercase;letter-spacing:.3px}
-.p210-row{display:grid;grid-template-columns:1fr 30px 120px;border-bottom:1px solid #eee;min-height:20px}
-.p210-row>div{display:flex;align-items:center;padding:1px 5px}
-.p210-row .pl{font-size:9px;line-height:1.15}
-.p210-row .pc{justify-content:center;font-size:7px;color:#999;font-family:'JetBrains Mono',monospace;background:#f9f9f9}
-.p210-row .pv{justify-content:flex-end;font-family:'JetBrains Mono',monospace;font-size:10px;color:#ccc}
-.p210-row .pv.filled{font-weight:700;color:#1a3c6e;background:#edf4ff}
-.p210-row .pv.calc{font-weight:700;color:#2E7D32;background:#E8F5E9}
-.p210-row.total{background:#f0f2f5}
-.p210-row.total .pl{font-weight:700;color:#1a3c6e}
-.p210-row.result{background:#d4e6f1}
-.p210-row.result .pl{font-weight:800;color:#1a3c6e}
-.p210-row.result .pv{font-size:11px;font-weight:800}
-.p210-cg{display:grid;grid-template-columns:minmax(120px,1.4fr) repeat(4,minmax(64px,1fr));font-size:9px;border-bottom:1px solid #000}
-.p210-cg .ch{background:#e8eef5;font-weight:700;font-size:7px;text-align:center;padding:3px 2px;border-right:1px solid #ccc;color:#1a3c6e;text-transform:uppercase;display:flex;align-items:center;justify-content:center}
+.p210{border:1px solid #cbd5e1;border-radius:8px;overflow:hidden;font-size:11px;margin-top:8px;background:#fff}
+.p210-hdr{background:#1B3A5C;color:#fff;text-align:center;font-weight:700;padding:7px;font-size:12px;letter-spacing:.5px}
+.p210-sec{background:#1B3A5C;color:#fff;font-weight:700;font-size:10px;padding:5px 8px;text-transform:uppercase;letter-spacing:.4px}
+.p210-row{display:grid;grid-template-columns:1fr 34px 124px;border-bottom:1px solid #eef1f5;min-height:24px}
+.p210-row>div{display:flex;align-items:center;padding:2px 7px}
+.p210-row .pl{font-size:10px;line-height:1.2;color:#334155}
+.p210-row .pc{justify-content:center;font-size:9px;color:#64748b;font-family:'JetBrains Mono',monospace;background:#f8fafc;font-weight:600}
+.p210-row .pv{justify-content:flex-end;font-family:'JetBrains Mono',monospace;font-size:11px;color:#cbd5e1}
+.p210-row .pv.filled{font-weight:700;color:#1B3A5C;background:#eff6ff}
+.p210-row .pv.calc{font-weight:700;color:#15803d;background:#f6fdf9}
+.p210-row.total{background:#f1f5f9}
+.p210-row.total .pl{font-weight:700;color:#1B3A5C}
+.p210-row.total .pv{font-size:11px}
+.p210-row.result{background:#dbeafe}
+.p210-row.result .pl{font-weight:700;color:#1B3A5C}
+.p210-row.result .pv{font-size:12px;font-weight:800;color:#1B3A5C}
+.p210-cg{display:grid;grid-template-columns:minmax(124px,1.4fr) repeat(4,minmax(66px,1fr));font-size:11px;border-bottom:1px solid #cbd5e1}
+.p210-cg .ch{background:#e2e8f0;font-weight:700;font-size:8px;text-align:center;padding:4px 2px;border-right:1px solid #cbd5e1;color:#1B3A5C;text-transform:uppercase;letter-spacing:.2px;display:flex;align-items:center;justify-content:center}
 .p210-cg .ch:last-child{border-right:none}
 .p210-cr{display:contents}
-.p210-cr>div{border-bottom:1px solid #eee;border-right:1px solid #eee;padding:1px 4px;min-height:20px;display:flex;align-items:center}
+.p210-cr>div{border-bottom:1px solid #eef1f5;border-right:1px solid #eef1f5;padding:2px 5px;min-height:24px;display:flex;align-items:center}
 .p210-cr>div:last-child{border-right:none}
-.p210-cr .cl{font-size:8.5px;line-height:1.15}
-.p210-cr .cc{justify-content:flex-end;position:relative;font-family:'JetBrains Mono',monospace;font-size:9px;color:#ccc}
-.p210-cr .cc .cn{position:absolute;left:2px;top:1px;font-size:6px;color:#bbb;font-family:'JetBrains Mono',monospace}
-.p210-cr .cc.filled{font-weight:700;color:#1a3c6e;background:#edf4ff}
-.p210-cr .cc.calc{font-weight:700;color:#2E7D32;background:#E8F5E9}
-.p210-cr.tot>div{background:#f0f2f5;font-weight:700}
-@media(max-width:680px){.p210-cg{grid-template-columns:minmax(90px,1fr) repeat(4,minmax(48px,1fr));font-size:8px}}
+.p210-cr .cl{font-size:9.5px;line-height:1.2;color:#334155}
+.p210-cr .cc{justify-content:flex-end;position:relative;font-family:'JetBrains Mono',monospace;font-size:10px;color:#cbd5e1;padding-left:16px}
+.p210-cr .cc .cn{position:absolute;left:3px;top:2px;font-size:7px;color:#94a3b8;font-family:'JetBrains Mono',monospace;font-weight:600}
+.p210-cr .cc.filled{font-weight:700;color:#1B3A5C;background:#eff6ff}
+.p210-cr .cc.calc{font-weight:700;color:#15803d;background:#f6fdf9}
+.p210-cr.tot>div{background:#f1f5f9;font-weight:700}
+@media(max-width:680px){.p210-cg{grid-template-columns:minmax(90px,1fr) repeat(4,minmax(48px,1fr));font-size:9px}}
 .p210-edit{border:none;background:#FFFDE7;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;width:100%;outline:none;padding:1px 3px;color:#1a3c6e;font-weight:700;border-bottom:1px dashed #d4b500}
 /* Ícono "de dónde salió" en las casillas prediligenciadas desde la exógena */
 .origen-ic{position:absolute;left:14px;top:1px;font-size:9px;color:#2E75B6;cursor:pointer;font-weight:700;z-index:2}
@@ -2495,7 +2496,7 @@ function renderBeneficioAuditoria(ctx){
   var color = r.aplica ? 'var(--green2)' : (r.evaluable ? 'var(--amber)' : 'var(--muted)');
   var icono = r.aplica ? '&#10003;' : (r.evaluable ? '&#9888;' : '&#8505;');
   var extra = '';
-  if(r.aplica) extra = '<div style="margin-top:6px;padding:7px 9px;background:#fff;border-radius:8px;text-align:center;font-weight:700;color:var(--green2)">Firmeza en '+r.meses+' meses</div>';
+  if(r.aplica) extra = '<div style="margin-top:6px;padding:7px 9px;background:#fff;border-radius:8px;text-align:center;font-weight:700;color:var(--green)">Firmeza en '+r.meses+' meses</div>';
   box.innerHTML = '<strong style="color:'+color+'">'+icono+' '+r.mensaje+'</strong>'+extra;
   card.style.display='';
 }
@@ -2510,7 +2511,7 @@ function renderReajuste(){
   var r=reajusteFiscal.reajustar(costo, year);
   out.value = r.costoReajustado>0 ? r.costoReajustado.toLocaleString('es-CO') : '';
   if(nota) nota.innerHTML = costo>0
-    ? ('Mayor valor por reajuste ('+r.pct+'%): <strong style="color:var(--green2)">$ '+r.mayorValor.toLocaleString('es-CO')+'</strong>. Para activos adquiridos en años anteriores el reajuste es acumulativo (consulta la tabla histórica oficial Art. 868 ET).')
+    ? ('Mayor valor por reajuste ('+r.pct+'%): <strong style="color:var(--green)">$ '+r.mayorValor.toLocaleString('es-CO')+'</strong>. Para activos adquiridos en años anteriores el reajuste es acumulativo (consulta la tabla histórica oficial Art. 868 ET).')
     : '';
 }
 /* ── VENCIMIENTO + obligatoriedad por NIT (shared/vencimientos-pn.js) ── */
@@ -2556,7 +2557,7 @@ function renderRiesgos(ctx){
   if(tipsArr.length){
     html += '<div style="font-size:.7rem;color:var(--muted);margin:10px 0 5px;font-weight:700;letter-spacing:.04em">OPORTUNIDADES DE AHORRO</div>'
       + tipsArr.map(function(t){
-          var ah = t.ahorro>0 ? ' &middot; <span style="color:var(--green2);font-weight:700;white-space:nowrap">ahorro ~'+fCOP(t.ahorro)+'</span>' : '';
+          var ah = t.ahorro>0 ? ' &middot; <span style="color:var(--green);font-weight:700;white-space:nowrap">ahorro ~'+fCOP(t.ahorro)+'</span>' : '';
           return '<div style="padding:6px 8px;margin-bottom:6px;border-left:3px solid #0E7490;background:#F0FDFA">'
                + '<strong style="color:#0E7490">&#128161; '+t.titulo+'</strong>'+ah+'<br>'
                + '<span style="color:var(--muted)">'+t.detalle+'</span></div>';
@@ -2574,12 +2575,12 @@ function renderOptimizador(ctx){
   try { o = optimizador210.analizar(ctx.estado, ctx.year); }
   catch(e){ card.style.display='none'; return; }
   if(o.sinImpuesto){
-    box.innerHTML = '<span style="color:var(--green2)">Con estas cifras no hay impuesto a cargo, así que no hay nada que optimizar por ahora.</span>';
+    box.innerHTML = '<span style="color:var(--green)">Con estas cifras no hay impuesto a cargo, así que no hay nada que optimizar por ahora.</span>';
     card.style.display = '';
     return;
   }
   if(o.yaOptimo){
-    box.innerHTML = '<span style="color:var(--green2)">&#10004; Las deducciones ya están bien aprovechadas: aportar más a fondos voluntarios no bajaría el impuesto (ya tocó el tope del 40% / 1.340 UVT del Art. 336).</span>';
+    box.innerHTML = '<span style="color:var(--green)">&#10004; Las deducciones ya están bien aprovechadas: aportar más a fondos voluntarios no bajaría el impuesto (ya tocó el tope del 40% / 1.340 UVT del Art. 336).</span>';
     card.style.display = '';
     return;
   }
@@ -2588,7 +2589,7 @@ function renderOptimizador(ctx){
     + 'a un fondo de pensión voluntaria / cuenta AFC antes del cierre, el impuesto baja de '
     + '<span class="num">' + fCOP(o.actual.c129) + '</span> a <span class="num">' + fCOP(o.optimo.impuesto) + '</span>.'
     + '<div style="margin-top:6px;padding:7px 9px;background:#fff;border-radius:8px;text-align:center">'
-    +   'Ahorro estimado en renta: <span class="num" style="color:var(--green2);font-weight:700;font-size:1.05rem">' + fCOP(o.ahorro) + '</span>'
+    +   'Ahorro estimado en renta: <span class="num" style="color:var(--green);font-weight:700;font-size:1.05rem">' + fCOP(o.ahorro) + '</span>'
     + '</div>';
   // Simulador "¿qué pasa si?" sobre la curva aporte → impuesto (la curva ya la
   // devuelve optimizador210.analizar; aquí solo se visualiza)
@@ -2607,7 +2608,7 @@ function renderOptimizador(ctx){
       var p = curva[parseInt(sl.value, 10)] || curva[0];
       out.innerHTML = 'Aporte <span class="num" style="font-weight:700">' + fCOP(p.aporte) + '</span> &rarr; impuesto '
         + '<span class="num">' + fCOP(p.impuesto) + '</span> &middot; '
-        + '<span style="color:var(--green2)">ahorra ' + fCOP(p.ahorro) + '</span>';
+        + '<span style="color:var(--green)">ahorra ' + fCOP(p.ahorro) + '</span>';
     };
     sl.addEventListener('input', updCurva); updCurva();
   }
