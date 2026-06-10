@@ -1694,10 +1694,25 @@ function renderizarTablaReconciliacion(){
     var ingresoVentaEst = Math.round(retVentaActivos / 0.01);
     introHtml += '<div style="background:#EFF6FF;border-left:4px solid var(--pri);border-radius:6px;padding:10px 14px;margin:8px 0;font-size:.8rem;color:#1E3A5F;line-height:1.5">' +
       '🚗 <strong>Retención por venta ante notarios/tránsito: $' + Math.round(retVentaActivos).toLocaleString('es-CO') + '.</strong> ' +
-      'Esto indica que hubo una <strong>venta de activos fijos</strong> (vehículo o inmueble) con retefuente del 1% (Art. 398 ET). El ingreso estimado es <strong>$' + ingresoVentaEst.toLocaleString('es-CO') + '</strong> (retención ÷ 1%) y <strong>NO viene como ingreso en el reporte</strong> — hay que declararlo. Tú decides según la posesión del activo: ' +
-      '<strong>menos de 2 años</strong> → renta no laboral (casilla 74, con su costo fiscal en la 77); ' +
-      '<strong>2 años o más</strong> → ganancia ocasional al 15% (casillas 112-115 — ajústalas en el borrador; revisa la lista de soportes de la card 11). Confirma el valor real con la escritura o el contrato.' +
-      ' <button class="btn-aplicar" onclick="aplicarVentaActivosNoLaboral(' + ingresoVentaEst + ')">Agregar a no laborales c74</button>' +
+      'Hubo una <strong>venta de activo fijo</strong> (vehículo o inmueble) con retefuente del 1% (Art. 398 ET). El ingreso estimado es <strong>$' + ingresoVentaEst.toLocaleString('es-CO') + '</strong> (retención ÷ 1%) y <strong>no viene en el reporte</strong> — hay que declararlo. Solo tributa la <strong>utilidad</strong> (precio − costo fiscal), así que primero registra el costo:' +
+      '<div style="margin:8px 0;display:flex;align-items:center;gap:8px;flex-wrap:wrap">' +
+        '<label style="font-weight:600">Costo fiscal del activo:</label>' +
+        '<input id="ventaActivosCosto" type="text" inputmode="numeric" placeholder="0" oninput="formatNum(this)" style="width:140px;padding:5px 8px;border:1.5px solid #94a3b8;border-radius:6px;text-align:right;font-family:monospace">' +
+        '<span style="font-size:.74rem;color:var(--muted)">(lo que costó comprarlo + mejoras; de la escritura/factura)</span>' +
+      '</div>' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px">' +
+        '<div style="background:#fff;border:1px solid #BFDBFE;border-radius:8px;padding:8px 10px">' +
+          '<strong style="color:var(--pri)">Lo tuvo 2 años o más</strong><br>' +
+          '<span style="font-size:.74rem">→ <strong>Ganancia ocasional</strong>, tarifa fija <strong>15%</strong> (Art. 314). No sube tu renta ordinaria.</span><br>' +
+          '<button class="btn-aplicar" style="margin-top:6px" onclick="aplicarVentaActivos(' + ingresoVentaEst + ',\'go\')">Llevar a ganancia ocasional →</button>' +
+        '</div>' +
+        '<div style="background:#fff;border:1px solid #BFDBFE;border-radius:8px;padding:8px 10px">' +
+          '<strong style="color:var(--pri)">Lo tuvo menos de 2 años</strong><br>' +
+          '<span style="font-size:.74rem">→ <strong>Renta no laboral</strong>, tarifa <strong>progresiva</strong> de la tabla Art. 241 (0% a 39%): suma con tus demás rentas y tributa según el total.</span><br>' +
+          '<button class="btn-aplicar secondary" style="margin-top:6px" onclick="aplicarVentaActivos(' + ingresoVentaEst + ',\'nolab\')">Llevar a renta no laboral →</button>' +
+        '</div>' +
+      '</div>' +
+      '<div style="font-size:.74rem;color:var(--muted);margin-top:6px">Confirma el precio real con la escritura o el contrato. La GO casi siempre paga menos (15% fijo vs hasta 39%), pero solo aplica si lo poseyó ≥2 años.</div>' +
     '</div>';
   }
   var rowsHtml = filas.map(function(f, idx){
@@ -2148,15 +2163,28 @@ function aplicarCesantias2064(monto){
   renderizarTablaReconciliacion();
   recalcular();
 }
-function aplicarVentaActivosNoLaboral(monto){
-  var el = document.getElementById('nlIngBruto');
-  if(!el) return;
-  var actual = parseInt((el.value || '').replace(/[^\d]/g, ''), 10) || 0;
-  el.value = (actual + monto).toLocaleString('es-CO');
+// Aplica la venta de activo fijo como ganancia ocasional (15%) o renta no laboral
+// (tabla Art. 241). En ambos casos suma ingreso + su costo fiscal en las casillas correctas.
+function aplicarVentaActivos(ingreso, modo){
+  var costoEl = document.getElementById('ventaActivosCosto');
+  var costo = costoEl ? (parseInt((costoEl.value || '').replace(/[^\d]/g, ''), 10) || 0) : 0;
+  function sumar(id, monto){
+    var el = document.getElementById(id);
+    if(!el || !monto) return;
+    var actual = parseInt((el.value || '').replace(/[^\d]/g, ''), 10) || 0;
+    el.value = (actual + monto).toLocaleString('es-CO');
+  }
+  if(modo === 'go'){
+    sumar('goIngresos', ingreso); sumar('goCostos', costo);
+    expandirCard('cardGO');
+    if(typeof exoToast !== 'undefined') exoToast('Venta llevada a ganancia ocasional (15%): ingreso c112 y costo c113.', 'success');
+  } else {
+    sumar('nlIngBruto', ingreso); sumar('nlCostos', costo);
+    expandirCard('subNoLaboral');
+    if(typeof exoToast !== 'undefined') exoToast('Venta llevada a renta no laboral: ingreso c74 y costo c77. Tributa por tabla Art. 241.', 'success');
+  }
   reconciliacionEstado.ventaActivosAplicada = true;
-  expandirCard('subNoLaboral');
-  if(typeof exoToast !== 'undefined') exoToast('Venta de activos agregada a no laborales (c74). Registra el costo fiscal en la casilla 77.', 'success');
-  if(typeof gtag !== 'undefined') gtag('event','f210_pro_venta_activos_aplicada');
+  if(typeof gtag !== 'undefined') gtag('event','f210_pro_venta_activos_aplicada', { modo: modo });
   renderizarTablaReconciliacion();
   recalcular();
 }
