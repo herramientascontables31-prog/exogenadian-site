@@ -345,7 +345,35 @@
    * cada columna por rol con score de confianza.
    * Retorna: { mapping: {colNum: {rol, score}}, confianzaGlobal: 0-1 }
    */
+  // Detección por NOMBRE de header (autoritativa). El reporte MUISCA estándar trae
+  // los rótulos exactos: "Detalle", "Valor", "Uso declaración Sugerida", "NIT",
+  // "Nombre/Razón Social". Esto es mucho más robusto que la heurística de score, que
+  // se confunde cuando el reporte trae columnas extra (resúmenes "Salarios | 223.569.000").
+  function detectarColumnasPorHeader(sheet, headerRow){
+    var maxCol = sheet.actualColumnCount || 14;
+    var m = {};
+    for(var c = 1; c <= maxCol; c++){
+      var h = normalizar(getCellTextValue(sheet.getRow(headerRow).getCell(c)));
+      if(!h) continue;
+      if(!m.detalle && /^detalle$/.test(h)) m.detalle = { col:c, score:0.95 };
+      else if(!m.valor && /^valor$/.test(h)) m.valor = { col:c, score:0.95 };
+      else if(!m.usoSugerido && /uso\s*declaracion\s*sugerida|^uso\b/.test(h)) m.usoSugerido = { col:c, score:0.95 };
+      else if(!m.retencion && /^retencion/.test(h)) m.retencion = { col:c, score:0.9 };
+      else if(!m.nitInformante && /^nit$/.test(h)) m.nitInformante = { col:c, score:0.9 }; // 1er "NIT" = informante
+      else if(!m.nombreInformante && /^nombre\s*\/\s*razon social$/.test(h)) m.nombreInformante = { col:c, score:0.9 }; // 1er "Nombre/Razón Social" = informante
+    }
+    // Válido solo si están los 3 críticos para clasificar (detalle + valor + uso).
+    if(m.detalle && m.valor && m.usoSugerido) return m;
+    return null;
+  }
+
   function detectarColumnasPorContenido(sheet, headerRow, sampleSize){
+    // 1) intentar por nombre de header (autoritativo, robusto a columnas extra)
+    var porNombre = detectarColumnasPorHeader(sheet, headerRow);
+    if(porNombre){
+      return { mapping: porNombre, mappingPorColumna: null, confianzaGlobal: 0.92, rowsScanned: 0, fuente: 'header' };
+    }
+    // 2) fallback: heurística de contenido por score
     sampleSize = sampleSize || 12;
     var maxCol = sheet.actualColumnCount || 12;
 
@@ -733,6 +761,23 @@
       return { metadata: metadata, registros: registros, totales: totales, warnings: warnings };
     }
 
+    // OVERRIDE MUISCA: la detección flexible a veces elige una fila de aviso como header
+    // (caso real: detecta fila 10 en vez de la 14, perdiendo TODOS los ingresos de trabajo).
+    // Buscamos en las primeras 25 filas la fila que SÍ trae los rótulos oficiales del MUISCA
+    // (Detalle + Valor + Uso declaración Sugerida) y, si existe, mandamos: es la fuente de verdad.
+    if(!options.overrideMapping && !options.sheetIndex){
+      for(var hr = 1; hr <= Math.min(deteccion.sheet.rowCount, 25); hr++){
+        var hm = detectarColumnasPorHeader(deteccion.sheet, hr);
+        if(hm){
+          deteccion.header = { rowNum: hr, score: 1 };
+          deteccion.mapping = hm;
+          deteccion.confianza = 0.92;
+          deteccion.mappingPorColumna = null;
+          break;
+        }
+      }
+    }
+
     metadata.sheetName = deteccion.sheet.name;
     metadata.headerRowDetected = deteccion.header ? deteccion.header.rowNum : null;
     metadata.headerScore = deteccion.header ? deteccion.header.score : 0;
@@ -868,25 +913,42 @@
           continue;
         }
 
-        cedulaSugerida = MAPEO_USO_DIAN[usoNorm] || null;
-        if(!cedulaSugerida){
-          var keys = Object.keys(MAPEO_USO_DIAN);
-          for(var k = 0; k < keys.length; k++){
-            if(usoNorm.indexOf(keys[k]) >= 0){
-              cedulaSugerida = MAPEO_USO_DIAN[keys[k]];
-              break;
-            }
+        // EL R-CÓDIGO MANDA PRIMERO: es la señal más específica de la DIAN. Va ANTES
+        // del match por frase, porque frases como "...imputables a las rentas de trabajo"
+        // (que es R35, una renta EXENTA) engañaban al substring 'rentas de trabajo' y se
+        // clasificaban como INGRESO de trabajo, inflando la cédula (caso real Giraldo: +26,5M).
+        var renglon = extraerRenglon(usoSugerido);
+        if(renglon){
+          if(MAPEO_RENGLON_CEDULA[renglon]){
+            cedulaSugerida = MAPEO_RENGLON_CEDULA[renglon];
+            fuenteCedula = 'renglon_dian';
+          } else if(RENGLONES_INFORMATIVOS[renglon]){
+            cedulaSugerida = 'informativo';
+            fuenteCedula = 'renglon_dian';
           }
         }
-        if(cedulaSugerida) fuenteCedula = 'uso_dian';
 
-        // Formato ACTUAL del MUISCA: la columna trae un R-código (R32, R74…)
-        // en vez de una frase. Intentar mapearlo antes de declararlo no mapeado.
+        // Si el R-código no resolvió, recurrir al texto del uso sugerido.
         if(!cedulaSugerida){
-          var renglon = extraerRenglon(usoSugerido);
-          if(renglon){
-            if(MAPEO_RENGLON_CEDULA[renglon]){
-              cedulaSugerida = MAPEO_RENGLON_CEDULA[renglon];
+          cedulaSugerida = MAPEO_USO_DIAN[usoNorm] || null;
+          if(!cedulaSugerida){
+            var keys = Object.keys(MAPEO_USO_DIAN);
+            for(var k = 0; k < keys.length; k++){
+              if(usoNorm.indexOf(keys[k]) >= 0){
+                cedulaSugerida = MAPEO_USO_DIAN[keys[k]];
+                break;
+              }
+            }
+          }
+          if(cedulaSugerida) fuenteCedula = 'uso_dian';
+        }
+
+        // (compat) algunos formatos sin R-code que el texto tampoco mapeó:
+        if(!cedulaSugerida){
+          var renglon2 = extraerRenglon(usoSugerido);
+          if(renglon2){
+            if(MAPEO_RENGLON_CEDULA[renglon2]){
+              cedulaSugerida = MAPEO_RENGLON_CEDULA[renglon2];
               fuenteCedula = 'renglon_dian';
             } else if(RENGLONES_INFORMATIVOS[renglon]){
               cedulaSugerida = 'informativo';
