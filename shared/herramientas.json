@@ -280,16 +280,6 @@
       "orden": 99
     },
     {
-      "url": "formato210-express.html",
-      "grupo": "renta",
-      "titulo": "Renta F210 — Modo Express",
-      "desc": "",
-      "popular": false,
-      "hidden": true,
-      "sub": true,
-      "orden": 99
-    },
-    {
       "url": "formato210-pro.html",
       "grupo": "renta",
       "titulo": "Renta F210 — Modo Profesional",

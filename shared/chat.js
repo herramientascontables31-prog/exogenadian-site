@@ -292,18 +292,6 @@
       ],
       placeholder: 'Pregunta sobre F210, renglones, depuración...'
     },
-    'formato210-express': {
-      id: 'formato210-express',
-      name: '210 Express',
-      greeting: 'Estás en el **210 Express** (modo PRO, una pantalla para casos simples). Te ayudo con cédula general, tope Art. 336, anticipo Art. 807, descuento Art. 254-1 o cualquier renglón del 210.',
-      suggestions: [
-        '¿Cuál es el tope del 40%?',
-        'Dependientes Art. 387 vs Art. 336',
-        'Exención 25% Art. 206 num. 10',
-        '¿Cómo se calcula el anticipo?'
-      ],
-      placeholder: 'Pregunta sobre 210 Express, cédulas, deducciones...'
-    },
     'crear-sas': {
       id: 'crear-sas',
       name: 'Crear S.A.S.',

@@ -73,7 +73,6 @@
     'formato2516.html':{href:'tutoriales/f2516.html',label:'Tutorial F2516'},
     'renta-personas-naturales.html':{href:'tutoriales/f210.html',label:'Tutorial F210'},
     'formato210.html':{href:'tutoriales/f210.html',label:'Tutorial F210'},
-    'formato210-express.html':{href:'tutoriales/f210.html',label:'Tutorial F210'},
     'formato210-pro.html':{href:'tutoriales/f210.html',label:'Tutorial F210'}
   };
   var _tutMatch=TUTORIAL_MAP[page];

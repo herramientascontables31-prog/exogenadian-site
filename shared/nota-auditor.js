@@ -17,7 +17,7 @@
   // Solo herramientas que prediligencian un formulario DIAN desde el balance.
   var TOOLS = {
     'renta110':1,'renta260':1,'renta-juridica':1,'renta-personas-naturales':1,
-    'formato210':1,'formato210-pro':1,'formato210-express':1,
+    'formato210':1,'formato210-pro':1,
     'iva300':1,'retencion350':1,'formato2516':1,'patrimonio420':1,
     'exogena':1,'exogena-suite':1,'regimen-simple':1,'formato2593':1
   };
