@@ -175,7 +175,11 @@
     // ingreso y NO van en ninguna casilla del 210, pero la DIAN los cruza
     // (formato 1019) y generan alerta si no cuadran con los ingresos. Hay que
     // distinguirlos de los "intereses/rendimientos" que sí son renta de capital.
-    { re: /consignacion|movimiento(s)? (debito|credito)|deposito(s)? bancari|tarjeta(s)? de credito|compras y avances|ventas con tarjeta|gravamen.*movimiento|4 ?(x|por) ?mil|\bgmf\b/, cedula: 'informativo' },
+    { re: /consignacion|movimiento(s)? (debito|credito)|valor total de (los )?movimientos|deposito(s)? bancari|tarjeta(s)? de credito|total adquisiciones consumos|gastos tarjeta credito|compras y avances|ventas con tarjeta|gravamen.*movimiento|4 ?(x|por) ?mil|\bgmf\b/, cedula: 'informativo' },
+    // SALDOS y adquisiciones = patrimonio (c29) o movimientos del año (Tope 4), NO ingreso.
+    // Van antes que capital porque el informante suele ser un banco (matchea 'capital' por
+    // nombre) y "Saldo cuentas/CDT/inversión" o "Inversiones realizadas" no es renta.
+    { re: /^saldo\b|inversion(es)?.*(realizad|efectuad)|avaluo|adquisicion de bienes|bienes (o derechos|raices|inmuebles)|cuenta por cobrar|aporte.*derecho social/, cedula: 'informativo' },
     { re: /credito de vivienda|hipotecari|intereses (de )?vivienda/,                   cedula: 'deduccion_vivienda' },
     { re: /\bafc\b|\bavc\b|aporte(s)? voluntari|fondo.*pension.*voluntari|fvp\b/,      cedula: 'deduccion_avc' },
     { re: /prepagada|medicina prepagada|poliza de salud/,                              cedula: 'deduccion_salud_prepag' },
@@ -187,6 +191,11 @@
     { re: /honorario|servicio(s)? (profesional|tecnico|personal)|comision/,            cedula: 'honorarios' },
     { re: /salario|sueldo|nomina|prestacion(es)? social|cesantia|viatico|bonificacion|laboral/, cedula: 'trabajo' }
   ];
+
+  // Patrones del "uso sugerido" que NUNCA son ingreso de cédula (van a 'informativo').
+  // Cubren tanto el formato con rótulo ("Tope 4. Consignaciones…") como el formato que
+  // trae el concepto literal en esa columna ("Valor total de los movimientos…", "Saldo…").
+  var RE_USO_NO_INGRESO = /^tope\s*[34]\b|consumos?\s*tc|total adquisiciones consumos|gastos? tarjeta cr[eé]dito|tarjeta\s*cr[eé]dito\s*o\s*d[eé]bito|consignaciones\s*e\s*inversiones|valor total de (los )?movimientos|^saldo\b|inversion(es)?.*(realizad|efectuad)|^cdt\b|avaluo|adquisicion de bienes|cuenta por cobrar|aporte.*derecho social|se usa en renglones como/;
 
   function clasificarPorHeuristica(detalle, informante){
     var texto = normalizar((detalle || '') + ' ' + (informante || ''));
@@ -812,6 +821,26 @@
       var fuenteCedula = null; // 'uso_dian' | 'heuristica_concepto' | 'heuristica_keyword'
       if(usoSugerido){
         var usoNorm = normalizar(usoSugerido);
+
+        // GUARDA AUTORITATIVA: el "uso sugerido" de la DIAN manda sobre la heurística.
+        // Estos conceptos NO son ingreso de cédula (inflan c91 indebidamente):
+        //  · Topes 3/4 (consumos TC, consignaciones) — indicadores de obligación.
+        //  · SALDOS de cuentas/CDT/inversiones — patrimonio (c29), no renta.
+        //  · Inversiones/CDT "realizadas/efectuadas" en el año — movimiento (Tope 4).
+        //  · Avalúos, adquisiciones, cuentas por cobrar — patrimonio.
+        // Importante: el informante suele ser un banco, lo que engañaba a la heurística
+        // (la marcaba 'capital' por el nombre). Se distinguen de "Rendimientos/intereses
+        // pagados", que SÍ son renta de capital y NO matchean estos patrones.
+        if(RE_USO_NO_INGRESO.test(usoNorm)){
+          registros.push({
+            fila: r, descripcion: detalle, informante: informante, nitInformante: nitInfo,
+            valor: Math.round(valor), retencion: Math.round(retencion),
+            usoDIANSugerido: usoSugerido, cedulaSugerida: 'informativo',
+            cedulaFinal: 'informativo', fuenteCedula: 'uso_dian'
+          });
+          continue;
+        }
+
         cedulaSugerida = MAPEO_USO_DIAN[usoNorm] || null;
         if(!cedulaSugerida){
           var keys = Object.keys(MAPEO_USO_DIAN);
