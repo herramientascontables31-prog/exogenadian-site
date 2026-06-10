@@ -72,7 +72,6 @@
     'conciliacion.html':{href:'tutoriales/conciliacion.html',label:'Tutorial Conciliación'},
     'formato2516.html':{href:'tutoriales/f2516.html',label:'Tutorial F2516'},
     'renta-personas-naturales.html':{href:'tutoriales/f210.html',label:'Tutorial F210'},
-    'formato210.html':{href:'tutoriales/f210.html',label:'Tutorial F210'},
     'formato210-pro.html':{href:'tutoriales/f210.html',label:'Tutorial F210'}
   };
   var _tutMatch=TUTORIAL_MAP[page];
@@ -621,7 +620,6 @@ var MEGA_MENU_HTML='<div class="mega-grid"><div class="mega-group"><h6>📂 Exó
     'renta260.html':{title:'Régimen Simple F260',cat:'Tributarias',tags:'F260 SIMPLE bimestral anticipo'},
     'regimen-simple.html':{title:'Régimen Simple',cat:'Tributarias',tags:'SIMPLE RST tarifa anticipo'},
     'renta-personas-naturales.html':{title:'Renta PN — Hub F210',cat:'Tributarias',tags:'F210 renta personas naturales hub liquidador clientes calendario vencimientos PRO'},
-    'formato210.html':{title:'Renta F210 — Réplica DIAN',cat:'Tributarias',tags:'F210 renta natural cédula honorarios pensiones réplica oficial DIAN borrador PRO'},
     'formato210-pro.html':{title:'Renta F210 — Modo Profesional',cat:'Tributarias',tags:'F210 renta natural cédula PRO multi-cédula exógena Excel asesor papel trabajo dividendos ganancias ocasionales'},
     /* Exógena */
     'exogena.html':{title:'Exógena desde balance',cat:'Exógena',tags:'1001 1003 1005 1006 1007 1008 1009 1010 1012 2276 medios magnéticos balance prueba'},

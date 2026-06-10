@@ -224,6 +224,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 .p210-cr .cc.calc{font-weight:700;color:#2E7D32;background:#E8F5E9}
 .p210-cr.tot>div{background:#f0f2f5;font-weight:700}
 @media(max-width:680px){.p210-cg{grid-template-columns:minmax(90px,1fr) repeat(4,minmax(48px,1fr));font-size:8px}}
+.p210-edit{border:none;background:#FFFDE7;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;width:100%;outline:none;padding:1px 3px;color:#1a3c6e;font-weight:700;border-bottom:1px dashed #d4b500}
+.p210-edit:focus{background:#FFF9C4;box-shadow:inset 0 -2px 0 #f0c000}
+.p210-cr .cc .p210-edit{font-size:9px}
 .recon-table .concepto-cell{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--pri)}
 .recon-table .informante-cell{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .recon-table select.recon-cedula{padding:3px 5px;font-size:.74rem;border:1px solid var(--border);border-radius:4px;font-family:inherit;width:100%;background:#fff;font-family:'DM Sans',sans-serif}
@@ -325,9 +328,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 <div id="nav-container"></div>
 <script defer src="shared/pro.js?v=848fbf16"></script>
 <script defer src="shared/toast.js?v=9d7a298c"></script>
-<script defer src="shared/nav.js?v=b5ea96b3"></script>
+<script defer src="shared/nav.js?v=4aa5a7a3"></script>
 <script defer src="shared/pro-banner.js?v=a5944c54"></script>
-<script src="shared/renta-modo-selector.js?v=ffb725d6"></script>
 <script src="shared/parametros-renta-pn.js?v=a63bcba7"></script>
 <script src="shared/calculo210.js?v=e1be36dd"></script>
 <script src="shared/optimizer-210.js?v=658b477d"></script>
@@ -736,9 +738,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
           <button onclick="exportarEntregablePDF()" class="btn" style="background:var(--pri,#1B3A5C);color:#fff;margin-left:8px;margin-top:8px">&#128196; Entregable para el cliente (PDF)</button>
           <div style="font-size:.78rem;color:var(--muted);margin-top:10px">Un solo Excel: la <strong>réplica oficial del 210</strong> (casillas pobladas, lista para transcribir al MUISCA) + el <strong>papel de trabajo</strong> de 8 hojas. El entregable PDF trae el borrador + diagnóstico de riesgos + planeación. Atajos: <kbd>Ctrl+S</kbd> guardar &middot; <kbd>Ctrl+E</kbd> exportar Excel</div>
         </div>
-        <div class="card" id="cardReplica210">
-          <h3 onclick="toggleReplica210()" style="cursor:pointer;user-select:none">&#128203; Preview del Formulario 210 oficial <span style="font-size:.74rem;color:var(--muted);font-weight:400" id="replica210Hint">(clic para expandir)</span></h3>
-          <div id="replica210Body" style="display:none;margin-top:8px"></div>
+        <div class="card" id="cardReplica210" style="border:2px solid var(--pri,#1B3A5C)">
+          <h3 onclick="toggleReplica210()" style="cursor:pointer;user-select:none">&#128203; Formulario 210 — réplica oficial editable <span style="font-size:.74rem;color:var(--muted);font-weight:400" id="replica210Hint">(clic para contraer)</span></h3>
+          <div id="replica210Body" style="margin-top:8px"></div>
         </div>
         <div class="card" id="cardSugerida">
           <h3>&#9878;&#65039; No firmes la sugerida a ciegas</h3>
@@ -2848,6 +2850,23 @@ function toggleReplica210(){
   document.getElementById('replica210Hint').textContent = visible ? '(clic para expandir)' : '';
   if(!visible) renderizarReplica210();
 }
+// Casillas editables del 210 → input real del wizard que alimenta el motor.
+// Editar una casilla en la réplica escribe en ese input y recalcula todo.
+var CASILLA_INPUT_210 = {
+  29:'patBruto', 30:'patDeudas',
+  32:'trabIngBruto', 33:'trabIncrngo',
+  43:'honIngBruto', 44:'honIncrngo', 45:'honCostos',
+  58:'capIngBruto', 59:'capIncrngo', 60:'capCostos',
+  74:'nlIngBruto', 76:'nlIncrngo', 77:'nlCostos',
+  28:'ded1PctFE', 131:'saldoFavorAnt', 132:'retenciones'
+};
+function replica210Edit(el){
+  var wiz = document.getElementById(el.getAttribute('data-wiz'));
+  if(!wiz) return;
+  wiz.value = el.value;
+  if(typeof formatNum === 'function') formatNum(wiz);
+  recalcular(); // re-renderiza la réplica con los subtotales recalculados
+}
 function renderizarReplica210(){
   var cont = document.getElementById('replica210Body');
   if(!cont || cont.style.display === 'none') return;
@@ -2859,15 +2878,25 @@ function renderizarReplica210(){
   var sc = (r.cedulaGeneral && r.cedulaGeneral.subcedulas) || {};
   function nz(n){ return (typeof n === 'number' && isFinite(n)) ? Math.max(0, Math.round(n)) : 0; }
   function $(n){ var v = nz(n); return v ? '$' + v.toLocaleString('es-CO') : '—'; }
-  // fila simple (1 columna de valor): label, casilla, valor, tipo ('in'=editable azul,'calc'=verde,'res'=resultado)
+  // Genera el input editable de una casilla: escribe al input real del wizard y recalcula.
+  function edit(cas, val){
+    var wizId = CASILLA_INPUT_210[cas];
+    var v = nz(val);
+    return '<input class="p210-edit" inputmode="numeric" value="' + (v ? v.toLocaleString('es-CO') : '') + '" data-wiz="' + wizId + '" onchange="replica210Edit(this)" title="Editable — casilla ' + cas + '">';
+  }
+  // fila simple: 'in'=editable si tiene mapeo, 'calc'=verde readonly, 'res'=resultado
   function row(lbl, cas, val, tipo){
     var v = nz(val), cls = tipo === 'calc' ? 'calc' : (v ? 'filled' : '');
     var rc = tipo === 'res' ? ' result' : (tipo === 'calc' ? ' total' : '');
-    return '<div class="p210-row' + rc + '"><div class="pl">' + lbl + '</div><div class="pc">' + (cas||'') + '</div><div class="pv ' + cls + '">' + $(val) + '</div></div>';
+    var contenido = (tipo === 'in' && CASILLA_INPUT_210[cas]) ? edit(cas, val) : $(val);
+    return '<div class="p210-row' + rc + '"><div class="pl">' + lbl + '</div><div class="pc">' + (cas||'') + '</div><div class="pv ' + cls + '">' + contenido + '</div></div>';
   }
-  // celda de la grilla de cédulas
+  // celda de la grilla: editable si la casilla tiene mapeo y no es calculada
   function cell(cas, val, calc){
     var v = nz(val), cls = calc ? 'calc' : (v ? 'filled' : '');
+    if(!calc && CASILLA_INPUT_210[cas]){
+      return '<div class="cc ' + cls + '"><span class="cn">' + cas + '</span>' + edit(cas, val) + '</div>';
+    }
     return '<div class="cc ' + cls + '"><span class="cn">' + (cas||'') + '</span>' + $(val) + '</div>';
   }
   var h = '<div class="p210">';
@@ -2948,9 +2977,9 @@ function renderizarReplica210(){
   if(!nz(R.c134) && !nz(R.c137)) h += row('Saldo', 134, 0, 'res');
   h += '</div>';
   h += '<div style="font-size:.7rem;color:var(--muted);margin-top:6px;line-height:1.4">'
-     + '<span style="color:#1a3c6e;font-weight:700">Azul</span> = viene de la exógena/tus datos &middot; '
+     + '<span style="background:#FFFDE7;border-bottom:1px dashed #d4b500;padding:0 4px;color:#1a3c6e;font-weight:700">Amarillo</span> = editable (escribe aquí y recalcula) &middot; '
      + '<span style="color:#2E7D32;font-weight:700">verde</span> = lo calcula el motor. '
-     + 'Este es el formulario 210 tal como lo verás en el MUISCA. Descárgalo con el botón <strong>Calcular y descargar Excel</strong> (incluye la réplica oficial lista para transcribir).</div>';
+     + 'Edita cualquier casilla directamente sobre el formulario, como en el MUISCA. Las deducciones, dependientes e imputación fina están en las tarjetas de arriba. Descárgalo con <strong>Calcular y descargar Excel</strong>.</div>';
   cont.innerHTML = h;
 }
 // ── Entregable para el cliente: borrador 210 + diagnóstico + planeación ──
