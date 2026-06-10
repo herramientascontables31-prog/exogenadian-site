@@ -64,6 +64,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 .f210-tab.tiene-pendiente .tab-dot{display:inline-block}
 .tab-off{display:none!important}
 @media (max-width:640px){.f210-tab{padding:8px 11px;font-size:.78rem}}
+/* En la pestaña principal: año y exógena arriba, luego el formulario 210, luego declarante/patrimonio */
+#colFormulario{display:flex;flex-direction:column}
+#colFormulario>.card{order:9}
+#colFormulario>#cardAnio{order:1}
+#colFormulario>#cardExogena{order:2}
+#colFormulario>#cardReplica210{order:3}
+#colFormulario>#cardDeclarante{order:4}
+#colFormulario>#cardPatrimonio{order:5}
+#colFormulario>#cardComparativoAGAnterior{order:6}
 /* Sidebar vivo */
 .sidebar{position:sticky;top:16px}
 .sidebar .card{padding:18px}
@@ -437,14 +446,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
       </div>
     </div>
     <div class="f210-tabs" id="f210Tabs">
-      <button class="f210-tab active" data-tab="t210" onclick="cambiarTabF210('t210')">&#128203; Formulario 210</button>
+      <button class="f210-tab active" data-tab="t210" onclick="cambiarTabF210('t210')">&#128203; Formulario 210, declarante y patrimonio</button>
       <button class="f210-tab" data-tab="texogena" onclick="cambiarTabF210('texogena')">&#128229; Reconciliación</button>
       <button class="f210-tab" data-tab="trentas" onclick="cambiarTabF210('trentas')">&#128188; Rentas por cédula <span class="tab-dot"></span></button>
-      <button class="f210-tab" data-tab="tpatrimonio" onclick="cambiarTabF210('tpatrimonio')">&#129534; Declarante y patrimonio</button>
       <button class="f210-tab" data-tab="trevision" onclick="cambiarTabF210('trevision')">&#9878;&#65039; Revisión y descarga</button>
     </div>
     <div class="express-grid">
-      <div>
+      <div id="colFormulario">
         <div class="card" id="cardAnio">
           <div class="section-title"><span class="num">1</span> Año gravable</div>
           <div class="field-row">
@@ -684,7 +692,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
           </div>
           <div class="field-grid">
             <div class="field"><label>Salud prepagada <span class="hint">(cap 192 UVT &middot; trabajo)</span> <button class="icon-ayuda" onclick="mostrarAyuda('dedSalud')" title="Ver ayuda">ⓘ</button></label><input id="dedSalud" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
-            <div class="field"><label>Número de dependientes Art. 387 <button class="icon-ayuda" onclick="mostrarAyuda('depArt387Num')" title="Ver ayuda">ⓘ</button></label><input id="depArt387Num" type="number" min="0" max="10" value="0" oninput="recalcular()"></div>
+            <div class="field"><label>Número de dependientes a cargo <span class="hint">(máx 4)</span> <button class="icon-ayuda" onclick="mostrarAyuda('depArt387Num')" title="Ver ayuda">ⓘ</button></label><input id="depArt387Num" type="number" min="0" max="4" value="0" oninput="var h=document.getElementById('depArt336Num');if(h)h.value=this.value;recalcular()"></div>
           </div>
           <div class="field-grid" style="margin-top:8px">
             <div class="field"><label>Intereses crédito vivienda <span class="hint">(cap 1.200 UVT)</span> <button class="icon-ayuda" onclick="mostrarAyuda('dedVivienda')" title="Ver ayuda">ⓘ</button></label><input id="dedVivienda" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
@@ -713,7 +721,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
           </div>
           <div class="section-title" style="margin-top:18px;font-size:.85rem"><span style="color:var(--green);font-weight:700">FUERA del tope</span> &mdash; Art. 336 num. 3 inc. 2 y num. 5</div>
           <div class="field-grid">
-            <div class="field"><label>Dependientes Art. 336 (cantidad, max 4) <button class="icon-ayuda" onclick="mostrarAyuda('depArt336Num')" title="Ver ayuda">ⓘ</button></label><input id="depArt336Num" type="number" min="0" max="4" value="0" oninput="recalcular()"></div>
+            <div class="field"><label>Deducción por dependientes <span class="hint">(automática)</span></label><div style="font-size:.74rem;color:var(--muted);line-height:1.45;padding:6px 0">Con el <strong>número de dependientes</strong> de arriba se aplican las DOS deducciones: <strong>10% de la renta de trabajo</strong> (Art. 387, dentro del tope) y <strong>72 UVT por dependiente</strong> (Art. 336 num.3, fuera del tope — esta siempre baja el impuesto).</div><input type="hidden" id="depArt336Num" value="0"></div>
             <div class="field"><label>1% compras factura electrónica <span class="hint">(cap 240 UVT)</span> <button class="icon-ayuda" onclick="mostrarAyuda('ded1PctFE')" title="Ver ayuda">ⓘ</button></label><input id="ded1PctFE" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
           </div>
         </div>
@@ -3091,10 +3099,9 @@ function toggleReplica210(){
 // No se mueve el HTML: solo se muestra/oculta cada card según la pestaña activa
 // (con .tab-off, que respeta la lógica de .hidden propia de cada card).
 var TABS_F210 = {
-  t210:        ['cardAnio', 'cardExogena', 'cardReplica210'],
+  t210:        ['cardAnio', 'cardExogena', 'cardReplica210', 'cardDeclarante', 'cardComparativoAGAnterior', 'cardPatrimonio', 'cardReajusteFiscal', 'cardF160', 'cardPagosPrevios'],
   texogena:    ['cardReconciliacion', 'cardCertificado'],
   trentas:     ['cardCedulaGeneral', 'cardPensiones', 'cardDividendos', 'cardGO'],
-  tpatrimonio: ['cardDeclarante', 'cardComparativoAGAnterior', 'cardPatrimonio', 'cardReajusteFiscal', 'cardF160', 'cardPagosPrevios'],
   trevision:   ['cardSugerida', 'cardLiquidacion']
 };
 function cambiarTabF210(tab){
