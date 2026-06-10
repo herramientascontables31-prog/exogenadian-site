@@ -82,6 +82,18 @@
     return m ? 'R' + m[1] : null;
   }
 
+  // Clasifica un activo patrimonial por su descripción, para desglosar el patrimonio (c29).
+  function tipoBien(d){
+    var t = String(d||'').toLowerCase();
+    if(/veh[ií]culo|aval[uú]o veh|automotor|motociclet/.test(t)) return 'Vehículo';
+    if(/inmueble|predio|bien ra[ií]z|casa|apartament|lote|finca|aval[uú]o catastral/.test(t)) return 'Bien raíz';
+    if(/\bcdt\b/.test(t)) return 'CDT';
+    if(/fondo|cartera colectiva|inversi[oó]n|acci[oó]n|aporte.*social|derecho social|t[ií]tulo/.test(t)) return 'Inversión / acciones';
+    if(/cuenta.*(ahorro|corriente|bancaria)|saldo cuenta|dep[oó]sito/.test(t)) return 'Cuenta bancaria';
+    if(/cuenta por cobrar|cuentas por cobrar|cxc|pr[eé]stamo.*favor/.test(t)) return 'Cuenta por cobrar';
+    return 'Otro activo';
+  }
+
   function esFormatoMUISCA(sheet){
     // El reporte MUISCA SIEMPRE tiene "Consulta de Información reportada por terceros" en C1 o D1.
     var c1 = getCellText(sheet.getRow(1).getCell(3));
@@ -102,6 +114,7 @@
       ingDividendos: 0,
       gananciasOcasionales: 0,
       patrimonioBruto: 0,
+      bienes: [],            // desglose de activos patrimoniales (vehículos, inmuebles, cuentas…)
       patrimonioDeudas: 0,
       retencionesC132: 0,
       fe1Pct: 0,              // = 1% de las compras FE (lo que va en la casilla 28), NO el monto de compras
@@ -215,6 +228,7 @@
         }
         if(/tope\s*2/i.test(usoSugerido)){
           resumen.patrimonioBruto += valor;
+          resumen.bienes.push({ tipo: tipoBien(detalleConcepto), descripcion: detalleConcepto, valor: valor, informante: nombreInformante });
           metadata.registrosProcesados++;
           continue;
         }
@@ -243,6 +257,7 @@
 
       resumen[bucket] = (resumen[bucket] || 0) + valor;
       if(bucket === 'ingTrabajo' && /cesant/i.test(detalleConcepto)) resumen.cesantiasIngreso += valor;
+      if(bucket === 'patrimonioBruto') resumen.bienes.push({ tipo: tipoBien(detalleConcepto), descripcion: detalleConcepto, valor: valor, informante: nombreInformante });
       metadata.registrosProcesados++;
     }
 
@@ -250,8 +265,9 @@
     // "susceptible de beneficio" que la DIAN ya filtró; si no viene, las compras R28.
     resumen.fe1Pct = Math.round(0.01 * (resumen.feSusceptible || resumen.feBaseCompras));
 
-    // Redondear a miles (regla administrativa DIAN)
+    // Redondear a miles (regla administrativa DIAN). 'bienes' es un array → no se redondea.
     Object.keys(resumen).forEach(function(k){
+      if(k === 'bienes') return;
       resumen[k] = Math.round(resumen[k] / 1000) * 1000;
     });
 

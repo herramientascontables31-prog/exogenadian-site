@@ -378,7 +378,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 <script src="shared/decl-prev-210.js?v=a03c70c1"></script>
 <script src="shared/validaciones210.js?v=a6bc1c89"></script>
 <script src="shared/parser-exogena-pn.js?v=20e6b0db"></script>
-<script src="shared/parser-muisca-consultante.js?v=b08ef6fb"></script>
+<script src="shared/parser-muisca-consultante.js?v=a427c9ed"></script>
 <script src="shared/sugerida-parser-210.js?v=f53a18af"></script>
 <script src="shared/canonicalize-inputs.js?v=8e51ce11"></script>
 <script src="shared/excel-papel-trabajo.js?v=d25c4c92"></script>
@@ -506,6 +506,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
             <div class="field"><label>Deudas</label><input id="patDeudas" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
             <div class="field"><label>Patrimonio líquido año anterior <span class="hint">(conciliación)</span></label><input id="patLiqAnt" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
           </div>
+          <div id="bienesPatrimonioPanel" style="margin-top:10px"></div>
         </div>
         <div class="card" id="cardReajusteFiscal" data-expandible="true" data-expanded="false">
           <div class="section-title"><span class="num">6c</span> Reajuste fiscal de activos <span class="hint" style="font-weight:400;color:var(--muted);font-size:.78rem">(Art. 70 ET · opcional)</span></div>
@@ -564,6 +565,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
         <div class="card" id="cardCedulaGeneral">
           <div class="section-title"><span class="num">8</span> Cédula General</div>
           <div style="font-size:.78rem;color:var(--muted);margin-bottom:6px">Expanda las subcédulas que apliquen para este declarante. El motor consolida y aplica el tope Art. 336 (40% / 1.340 UVT) sobre el total — no por subcédula.</div>
+          <div id="sugCedulaGeneral"></div>
           <div class="subcard" id="subTrabajo" data-expandible="true" data-expanded="true">
             <div class="sub-title">Rentas de trabajo (salarios)<span class="sub-tag">25% Art. 206 num. 10 automático</span></div>
             <details class="soportes-panel">
@@ -1258,6 +1260,7 @@ function procesarArchivoExogena(file){
           setIfEmpty('ded1PctFE', rm.resumen.fe1Pct);            // ya viene como 1% de la base FE
           setIfEmpty('saldoFavorAnt', rm.resumen.saldoFavorAnterior); // casilla 131
           reconciliacionEstado.muiscaResumen = rm.resumen;       // insumos para asesorías (cesantías 206-4)
+          if(typeof renderBienesPatrimonio === 'function') renderBienesPatrimonio(rm.resumen.bienes);
           renderizarTablaReconciliacion();
           recalcular();
         }catch(_){}
@@ -2412,7 +2415,55 @@ function recalcular(){
   renderizarReplica210();
   renderComparacionSugerida();
   if(typeof renderComparacionPatrimonial === 'function') renderComparacionPatrimonial();
+  if(typeof renderSugerenciasCedula === 'function') renderSugerenciasCedula(ctx);
   if(typeof autoGuardarBorrador === 'function') autoGuardarBorrador();
+}
+/* Desglose de bienes del patrimonio (c29) leídos de la exógena: vehículos, inmuebles,
+   cuentas, inversiones… para que el contador verifique cada activo a 31-dic. */
+var _bienesPatrimonio = [];
+function renderBienesPatrimonio(bienes){
+  _bienesPatrimonio = bienes || [];
+  var box = document.getElementById('bienesPatrimonioPanel');
+  if(!box) return;
+  if(!_bienesPatrimonio.length){ box.innerHTML = ''; return; }
+  var $ = function(n){ return '$' + Math.round(n||0).toLocaleString('es-CO'); };
+  // Agrupa por tipo
+  var grupos = {};
+  _bienesPatrimonio.forEach(function(b){ (grupos[b.tipo] = grupos[b.tipo] || []).push(b); });
+  var total = _bienesPatrimonio.reduce(function(a,b){ return a + (b.valor||0); }, 0);
+  var ICON = { 'Vehículo':'🚗','Bien raíz':'🏠','CDT':'🏦','Inversión / acciones':'📈','Cuenta bancaria':'💳','Cuenta por cobrar':'📄','Otro activo':'📦' };
+  var html = '<details style="border:1px solid var(--border);border-radius:10px;overflow:hidden">'
+    + '<summary style="background:#f0f6ff;padding:9px 12px;cursor:pointer;font-weight:700;font-size:.84rem;color:var(--pri)">🏛️ Bienes del patrimonio según la exógena (' + _bienesPatrimonio.length + ') &mdash; total ' + $(total) + '</summary>'
+    + '<div style="padding:6px 0">';
+  Object.keys(grupos).forEach(function(tipo){
+    var sub = grupos[tipo].reduce(function(a,b){ return a + (b.valor||0); }, 0);
+    html += '<div style="padding:5px 12px;background:#fafbff;font-size:.76rem;font-weight:700;color:var(--muted);display:flex;justify-content:space-between"><span>' + (ICON[tipo]||'') + ' ' + tipo + '</span><span>' + $(sub) + '</span></div>';
+    grupos[tipo].forEach(function(b){
+      html += '<div style="padding:4px 12px 4px 26px;font-size:.78rem;display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #f3f3f3">'
+        + '<span style="flex:1">' + escHtml((b.descripcion||'').slice(0,55)) + (b.informante ? '<span style="color:var(--muted);font-size:.72rem"> · ' + escHtml((b.informante||'').slice(0,30)) + '</span>' : '') + '</span>'
+        + '<span style="font-family:monospace;white-space:nowrap">' + $(b.valor) + '</span></div>';
+    });
+  });
+  html += '<div style="padding:6px 12px;font-size:.72rem;color:var(--muted);font-style:italic">Verifica cada saldo/avalúo a 31 de diciembre. Estos activos ya están sumados en el patrimonio bruto (c29). La exógena no trae todos los bienes — agrega los que falten (inmuebles sin reporte, efectivo, etc.).</div>'
+    + '</div></details>';
+  box.innerHTML = html;
+}
+/* Sugerencias DENTRO de la cédula general (no solo en el sidebar): oportunidades de
+   ahorro y avisos relevantes a las rentas, justo donde el contador las diligencia. */
+function renderSugerenciasCedula(ctx){
+  var box = document.getElementById('sugCedulaGeneral');
+  if(!box || !ultimoResultado) { if(box) box.innerHTML=''; return; }
+  var tips = [];
+  if(window.advisor210){ try { tips = advisor210.tips(ultimoResultado, ctx.estado, ctx.year) || []; } catch(e){ tips = []; } }
+  if(!tips.length){ box.innerHTML = ''; return; }
+  var html = '<div style="background:#F0FDFA;border:1px solid #99F6E4;border-radius:10px;padding:10px 12px;margin:8px 0 14px">'
+    + '<div style="font-size:.74rem;font-weight:700;color:#0E7490;letter-spacing:.04em;margin-bottom:6px">💡 SUGERENCIAS PARA ESTAS RENTAS</div>'
+    + tips.map(function(t){
+        var ah = t.ahorro>0 ? ' <span style="color:#059669;font-weight:700;white-space:nowrap">· ahorro ~' + fCOP(t.ahorro) + '</span>' : '';
+        return '<div style="padding:5px 0;border-top:1px solid #CCFBF1;font-size:.8rem"><strong style="color:#0E7490">' + t.titulo + '</strong>' + ah + '<br><span style="color:var(--muted)">' + t.detalle + '</span></div>';
+      }).join('')
+    + '</div>';
+  box.innerHTML = html;
 }
 /* ── BENEFICIO DE AUDITORÍA (Art. 689-3, shared/beneficio-auditoria.js) ── */
 function renderBeneficioAuditoria(ctx){
