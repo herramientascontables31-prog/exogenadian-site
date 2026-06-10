@@ -55,6 +55,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 /* Layout 2 columnas */
 .express-grid{display:grid;grid-template-columns:1fr 340px;gap:18px;align-items:start}
 @media (max-width:980px){.express-grid{grid-template-columns:1fr}.sidebar{position:static!important}}
+/* Pestañas del liquidador (como las hojas de un libro de Excel) */
+.f210-tabs{display:flex;gap:3px;flex-wrap:wrap;margin:0 0 16px;border-bottom:2px solid var(--pri,#1B3A5C)}
+.f210-tab{padding:9px 16px;font-size:.85rem;font-weight:600;color:#64748b;background:#f1f5f9;border:1px solid #e2e8f0;border-bottom:none;border-radius:8px 8px 0 0;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:.12s;white-space:nowrap}
+.f210-tab:hover{background:#e8eef5;color:var(--pri)}
+.f210-tab.active{background:var(--pri,#1B3A5C);color:#fff;border-color:var(--pri)}
+.f210-tab .tab-dot{width:7px;height:7px;border-radius:50%;background:#f59e0b;display:none}
+.f210-tab.tiene-pendiente .tab-dot{display:inline-block}
+.tab-off{display:none!important}
+@media (max-width:640px){.f210-tab{padding:8px 11px;font-size:.78rem}}
 /* Sidebar vivo */
 .sidebar{position:sticky;top:16px}
 .sidebar .card{padding:18px}
@@ -402,6 +411,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
       <div class="acciones">
         <button class="btn-empezar" onclick="cerrarBienvenida()">Empezar declaración →</button>
       </div>
+    </div>
+    <div class="f210-tabs" id="f210Tabs">
+      <button class="f210-tab active" data-tab="t210" onclick="cambiarTabF210('t210')">&#128203; Formulario 210</button>
+      <button class="f210-tab" data-tab="texogena" onclick="cambiarTabF210('texogena')">&#128229; Exógena</button>
+      <button class="f210-tab" data-tab="trentas" onclick="cambiarTabF210('trentas')">&#128188; Rentas <span class="tab-dot"></span></button>
+      <button class="f210-tab" data-tab="tpatrimonio" onclick="cambiarTabF210('tpatrimonio')">&#129534; Deducciones y patrimonio</button>
+      <button class="f210-tab" data-tab="trevision" onclick="cambiarTabF210('trevision')">&#9878;&#65039; Revisión y descarga</button>
     </div>
     <div class="express-grid">
       <div>
@@ -829,6 +845,7 @@ function validarProGate(){
       inicializarSugerida();
       verificarBienvenida(); // B.1 — muestra panel educativo si es primer acceso
       recalcular();
+      cambiarTabF210('t210'); // arrancar en la hoja principal (Formulario 210)
     } else {
       errEl.style.color='#FCA5A5';
       errEl.textContent='Email no encontrado o suscripción inactiva.';
@@ -850,6 +867,7 @@ document.addEventListener('DOMContentLoaded', function(){
       inicializarSugerida();
       verificarBienvenida(); // B.1 — muestra panel educativo si es primer acceso
       recalcular();
+      cambiarTabF210('t210'); // arrancar en la hoja principal (Formulario 210)
     }
   });
   // Pills (radio activa)
@@ -2849,6 +2867,33 @@ function toggleReplica210(){
   document.getElementById('replica210Hint').textContent = visible ? '(clic para expandir)' : '';
   if(!visible) renderizarReplica210();
 }
+// ── PESTAÑAS: agrupan las cards por tema. El 210 es la hoja principal. ──
+// No se mueve el HTML: solo se muestra/oculta cada card según la pestaña activa
+// (con .tab-off, que respeta la lógica de .hidden propia de cada card).
+var TABS_F210 = {
+  t210:        ['cardReplica210'],
+  texogena:    ['cardAnio', 'cardExogena', 'cardReconciliacion', 'cardCertificado'],
+  trentas:     ['cardCedulaGeneral', 'cardPensiones', 'cardDividendos', 'cardGO'],
+  tpatrimonio: ['cardDeclarante', 'cardF160', 'cardPatrimonio', 'cardReajusteFiscal', 'cardComparativoAGAnterior', 'cardPagosPrevios'],
+  trevision:   ['cardSugerida', 'cardLiquidacion']
+};
+function cambiarTabF210(tab){
+  Object.keys(TABS_F210).forEach(function(t){
+    TABS_F210[t].forEach(function(id){
+      var el = document.getElementById(id);
+      if(el) el.classList.toggle('tab-off', t !== tab);
+    });
+  });
+  var tabs = document.querySelectorAll('.f210-tab');
+  for(var i = 0; i < tabs.length; i++){ tabs[i].classList.toggle('active', tabs[i].getAttribute('data-tab') === tab); }
+  if(tab === 't210'){
+    var b = document.getElementById('replica210Body');
+    if(b){ b.style.display = ''; document.getElementById('replica210Hint').textContent = ''; }
+    if(typeof renderizarReplica210 === 'function') renderizarReplica210();
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if(typeof gtag !== 'undefined') gtag('event','f210_pro_tab', { tab: tab });
+}
 // Casillas editables del 210 → input real del wizard que alimenta el motor.
 // Editar una casilla en la réplica escribe en ese input y recalcula todo.
 var CASILLA_INPUT_210 = {
@@ -2870,7 +2915,11 @@ function renderizarReplica210(){
   var cont = document.getElementById('replica210Body');
   if(!cont || cont.style.display === 'none') return;
   if(!ultimoResultado || !ultimoEstado){
-    cont.innerHTML = '<div style="font-size:.8rem;color:var(--muted);padding:8px 0">Diligencia el formulario (o carga la exógena) para ver el formulario 210.</div>';
+    cont.innerHTML = '<div style="padding:24px 16px;text-align:center;color:var(--muted)">'
+      + '<div style="font-size:2rem;margin-bottom:8px">📥</div>'
+      + '<p style="font-size:.9rem;margin:0 0 12px">Para empezar, <strong>carga el reporte de exógena</strong> del cliente y el formulario 210 se prediligencia solo.</p>'
+      + '<button class="btn-aplicar" onclick="cambiarTabF210(\'texogena\')">Ir a cargar la exógena →</button>'
+      + '<p style="font-size:.78rem;margin:12px 0 0">O diligencia las cédulas a mano en las otras pestañas.</p></div>';
     return;
   }
   var r = ultimoResultado, R = r.renglones || {}, year = ultimoEstado.year;
