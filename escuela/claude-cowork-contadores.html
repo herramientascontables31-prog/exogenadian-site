@@ -158,6 +158,59 @@ body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-
 .pipe-step{flex:0 0 auto;background:linear-gradient(135deg,var(--claude-50),#fff);border:1px solid var(--claude-300);border-radius:10px;padding:10px 14px;font-size:.82rem;color:var(--claude-700);font-weight:700}
 .pipe-arrow{color:var(--gray-400);font-size:1.1rem;font-weight:800}
 .nav-sep{padding:14px 20px 4px;font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--claude-700)}
+.chat-mock{background:#fff;border:1.5px solid var(--gray-200);border-radius:16px;margin:18px 0;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.06)}
+.chat-mock-bar{display:flex;align-items:center;gap:8px;background:var(--claude-50);border-bottom:1px solid var(--claude-100);padding:10px 16px}
+.chat-mock-bar .dot{width:10px;height:10px;border-radius:50%}
+.chat-mock-bar .dot:nth-child(1){background:#F87171}.chat-mock-bar .dot:nth-child(2){background:#FBBF24}.chat-mock-bar .dot:nth-child(3){background:#34D399}
+.chat-mock-bar span{margin-left:6px;font-size:.74rem;font-weight:700;color:var(--claude-700)}
+.chat-mock-body{padding:18px;display:flex;flex-direction:column;gap:12px;background:linear-gradient(180deg,#FDFCFA,#fff)}
+.msg{max-width:85%;padding:11px 15px;border-radius:14px;font-size:.85rem;line-height:1.55}
+.msg.user{align-self:flex-end;background:var(--green-600);color:#fff;border-bottom-right-radius:4px}
+.msg.claude{align-self:flex-start;background:var(--claude-50);border:1px solid var(--claude-100);color:var(--gray-800);border-bottom-left-radius:4px}
+.msg.claude .msg-who{display:flex;align-items:center;gap:6px;font-size:.7rem;font-weight:800;color:var(--claude-600);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+.msg.claude .msg-who::before{content:'';width:7px;height:7px;background:var(--claude-500);border-radius:50%}
+.msg table{width:100%;border-collapse:collapse;font-size:.76rem;margin-top:6px}
+.msg table th{background:#fff;border:1px solid var(--claude-100);padding:4px 8px;text-align:left;color:var(--claude-700)}
+.msg table td{border:1px solid var(--claude-100);padding:4px 8px;background:rgba(255,255,255,.7)}
+.term-mock{background:#0F172A;border-radius:14px;margin:18px 0;overflow:hidden;box-shadow:0 6px 24px rgba(15,23,42,.25)}
+.term-mock-bar{display:flex;align-items:center;gap:8px;background:#1E293B;padding:9px 16px}
+.term-mock-bar .dot{width:10px;height:10px;border-radius:50%}
+.term-mock-bar .dot:nth-child(1){background:#F87171}.term-mock-bar .dot:nth-child(2){background:#FBBF24}.term-mock-bar .dot:nth-child(3){background:#34D399}
+.term-mock-bar span{margin-left:6px;font-size:.72rem;font-weight:700;color:#94A3B8;font-family:'JetBrains Mono',monospace}
+.term-mock-body{padding:16px 20px;font-family:'JetBrains Mono',monospace;font-size:.78rem;line-height:1.75;color:#E2E8F0;overflow-x:auto}
+.term-mock-body .tp{color:#34D399;font-weight:700}
+.term-mock-body .tc{color:#FBBF24}
+.term-mock-body .tg{color:#64748B}
+.term-mock-body .tok{color:#A78BFA}
+.cursor-blink{display:inline-block;width:8px;height:14px;background:#34D399;vertical-align:text-bottom;animation:blink 1s step-start infinite}
+@keyframes blink{50%{opacity:0}}
+.svg-fig{background:#fff;border:1.5px solid var(--gray-200);border-radius:14px;padding:20px 16px 10px;margin:18px 0;text-align:center}
+.svg-fig svg{max-width:100%;height:auto}
+.svg-fig figcaption{font-size:.78rem;color:var(--gray-500);padding:8px 6px 6px;font-style:italic}
+.checklist{background:#fff;border:1.5px solid var(--green-200);border-radius:14px;padding:16px 20px;margin:18px 0}
+.checklist-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.checklist-head h4{font-size:.92rem;font-weight:800;color:var(--green-800)}
+.checklist-head .check-progress{font-size:.74rem;font-weight:800;color:var(--green-700);background:var(--green-50);border:1px solid var(--green-200);padding:3px 10px;border-radius:100px}
+.checklist label{display:flex;align-items:flex-start;gap:10px;padding:8px 4px;font-size:.88rem;color:var(--gray-700);line-height:1.5;cursor:pointer;border-radius:8px;transition:background .15s}
+.checklist label:hover{background:var(--green-50)}
+.checklist input[type=checkbox]{width:17px;height:17px;margin-top:2px;accent-color:var(--green-600);flex-shrink:0;cursor:pointer}
+.checklist label.done{color:var(--gray-400);text-decoration:line-through}
+.practica{background:linear-gradient(135deg,var(--claude-50),#fff);border:1.5px solid var(--claude-300);border-left:5px solid var(--claude-500);border-radius:14px;padding:18px 22px;margin:20px 0}
+.practica-titulo{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--claude-700);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.practica-titulo::before{content:'\1F4BC';font-size:1rem}
+.practica p,.practica li{font-size:.88rem;color:var(--gray-700);line-height:1.6}
+.practica ol,.practica ul{margin:6px 0 4px 20px;display:flex;flex-direction:column;gap:5px}
+.faq{margin:14px 0}
+.faq details{background:#fff;border:1.5px solid var(--gray-200);border-radius:12px;margin:8px 0;overflow:hidden}
+.faq details[open]{border-color:var(--green-300)}
+.faq summary{padding:13px 18px;font-size:.9rem;font-weight:700;color:var(--gray-800);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';font-size:1.2rem;font-weight:800;color:var(--green-600);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 18px 14px;font-size:.86rem;color:var(--gray-600);line-height:1.65}
+.pipe-step{transition:transform .2s,box-shadow .2s}
+.pipe-step.pulse{animation:pipePulse 2.4s ease-in-out infinite}
+@keyframes pipePulse{0%,100%{transform:none;box-shadow:none}50%{transform:translateY(-3px);box-shadow:0 6px 14px rgba(217,119,87,.25)}}
 </style>
 <script async src="../shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
 #exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
@@ -271,6 +324,32 @@ body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-
             <p>El agente para trabajo t&eacute;cnico: corre en la terminal, en app de escritorio o en el navegador. Ejecuta comandos, transforma archivos en lote y construye herramientas. Lo vemos en el M&oacute;dulo 11.</p>
           </div>
         </div>
+        <figure class="svg-fig">
+          <svg viewBox="0 0 680 270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama del ecosistema Claude: tres productos sobre una misma familia de modelos">
+            <rect x="20" y="18" width="200" height="92" rx="14" fill="#fff" stroke="#E5E7EB" stroke-width="2"/>
+            <text x="120" y="48" text-anchor="middle" font-family="Outfit,sans-serif" font-size="16" font-weight="800" fill="#374151">Claude.ai (web)</text>
+            <text x="120" y="72" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11.5" fill="#6B7280">Consultas sueltas,</text>
+            <text x="120" y="88" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11.5" fill="#6B7280">un PDF puntual</text>
+            <rect x="240" y="10" width="200" height="108" rx="14" fill="#FAF7F2" stroke="#D97757" stroke-width="2.5"/>
+            <text x="340" y="42" text-anchor="middle" font-family="Outfit,sans-serif" font-size="16" font-weight="800" fill="#A85B3F">Claude Cowork</text>
+            <text x="340" y="66" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11.5" fill="#78534A">Tu d&iacute;a a d&iacute;a: carpetas,</text>
+            <text x="340" y="82" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11.5" fill="#78534A">Projects, memoria, Skills</text>
+            <text x="340" y="104" text-anchor="middle" font-family="Outfit,sans-serif" font-size="10" font-weight="800" fill="#CC785C">M&Oacute;DULOS 2-10</text>
+            <rect x="460" y="18" width="200" height="92" rx="14" fill="#fff" stroke="#3D1F12" stroke-width="2"/>
+            <text x="560" y="48" text-anchor="middle" font-family="Outfit,sans-serif" font-size="16" font-weight="800" fill="#3D1F12">Claude Code</text>
+            <text x="560" y="72" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11.5" fill="#6B7280">Lotes, scripts,</text>
+            <text x="560" y="88" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11.5" fill="#6B7280">construir herramientas</text>
+            <line x1="120" y1="110" x2="120" y2="160" stroke="#9CA3AF" stroke-width="2" stroke-dasharray="4 4"/>
+            <line x1="340" y1="118" x2="340" y2="160" stroke="#D97757" stroke-width="2.5"/>
+            <line x1="560" y1="110" x2="560" y2="160" stroke="#9CA3AF" stroke-width="2" stroke-dasharray="4 4"/>
+            <rect x="20" y="160" width="640" height="54" rx="14" fill="#ECFDF5" stroke="#34D399" stroke-width="2"/>
+            <text x="340" y="183" text-anchor="middle" font-family="Outfit,sans-serif" font-size="13" font-weight="800" fill="#065F46">Misma familia de modelos debajo</text>
+            <text x="340" y="203" text-anchor="middle" font-family="Outfit,sans-serif" font-size="12" fill="#047857">Fable 5 &middot; Opus 4.8 &middot; Sonnet 4.6 &middot; Haiku 4.5</text>
+            <rect x="20" y="228" width="640" height="32" rx="10" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1.5"/>
+            <text x="340" y="249" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11.5" fill="#6B7280">Una sola cuenta Pro cubre los 3 frentes &mdash; t&uacute; eliges el envase seg&uacute;n la tarea</text>
+          </svg>
+          <figcaption>Los 3 frentes comparten cuenta y modelos: lo que cambia es d&oacute;nde y c&oacute;mo trabajas.</figcaption>
+        </figure>
         <div class="tip">
           <div class="tip-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><h4>Si vienes del curso de IA para Contadores</h4></div>
           <p>Ya viste <em>c&oacute;mo</em> pedirle cosas a Claude. Este curso es <em>d&oacute;nde</em>: en vez de chatear desde cero cada vez, montas una sola estructura por cliente y trabajas ah&iacute;. La curva real de ahorro empieza el segundo mes.</p>
@@ -380,10 +459,25 @@ body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-
       </div>
       <div class="content-block">
         <h2>Paso 3: Tu primera lectura local</h2>
-        <p>Con Cowork abierto, escribe en el chat:</p>
-        <div class="code-block">Mira el archivo C:\Users\TuNombre\Claude-Trabajo\clientes\pyme-abc\balance-2025-04.xlsx
-y dime cu&aacute;ntas cuentas tiene a nivel auxiliar y cu&aacute;l es el total del Activo.</div>
-        <p>Claude te va a pedir permiso para abrir el archivo (la primera vez por archivo). Le das aceptar y procesa <strong>sin que subas nada</strong>: lo lee del disco directo. Esa es la diferencia con claude.ai.</p>
+        <p>Con Cowork abierto, la conversaci&oacute;n se ve as&iacute;:</p>
+        <div class="chat-mock">
+          <div class="chat-mock-bar"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>Claude Cowork &mdash; Claude-Trabajo</span></div>
+          <div class="chat-mock-body">
+            <div class="msg user">Mira el archivo clientes\pyme-abc\balance-2025-04.xlsx y dime cu&aacute;ntas cuentas tiene a nivel auxiliar y cu&aacute;l es el total del Activo.</div>
+            <div class="msg claude"><div class="msg-who">Claude</div>Necesito permiso para leer <strong>balance-2025-04.xlsx</strong>. &iquest;Lo apruebas? <em>[Permitir] [Rechazar]</em></div>
+            <div class="msg user">Permitir</div>
+            <div class="msg claude"><div class="msg-who">Claude</div>Le&iacute; el balance. Tiene <strong>247 cuentas a nivel auxiliar</strong> (6 d&iacute;gitos). El total del Activo es <strong>$1.842.560.300</strong>. Nota: la cuenta 1110.05 Bancolombia muestra saldo negativo de -$2.150.000 &mdash; &iquest;quieres que la revisemos?</div>
+          </div>
+        </div>
+        <p>Claude pide permiso la primera vez por archivo, y procesa <strong>sin que subas nada</strong>: lo lee del disco directo. Esa es la diferencia con claude.ai. F&iacute;jate adem&aacute;s en el final de la respuesta: como ve el archivo completo, detecta cosas que no le preguntaste (el saldo negativo en bancos).</p>
+      </div>
+      <div class="checklist" data-checklist="m2-instalacion">
+        <div class="checklist-head"><h4>Checklist de instalaci&oacute;n &mdash; marca lo que ya hiciste</h4><span class="check-progress">0 / 5</span></div>
+        <label><input type="checkbox"> Descargu&eacute; Cowork desde <code>claude.ai/download</code> e inici&eacute; sesi&oacute;n con mi cuenta</label>
+        <label><input type="checkbox"> Cre&eacute; la carpeta dedicada <code>Claude-Trabajo\</code> (NO le di Documentos completo)</label>
+        <label><input type="checkbox"> Cre&eacute; las subcarpetas <code>clientes\</code>, <code>normativa-co\</code> y <code>plantillas\</code></label>
+        <label><input type="checkbox"> Copi&eacute; el balance de un cliente de prueba a su carpeta</label>
+        <label><input type="checkbox"> Hice mi primera lectura local y Claude me pidi&oacute; permiso antes de abrir el archivo</label>
       </div>
       <div class="resumen">
         <div class="resumen-titulo">Lo clave de este m&oacute;dulo</div>
@@ -473,6 +567,15 @@ y dime cu&aacute;ntas cuentas tiene a nivel auxiliar y cu&aacute;l es el total d
           <li><strong>Carpetas de OneDrive o Drive sincronizadas</strong> con clientes que no son tuyos &mdash; la carpeta de Claude debe ser local pura.</li>
         </ul>
       </div>
+      <div class="practica">
+        <div class="practica-titulo">Practica con un cliente real (15 min)</div>
+        <ol>
+          <li>Elige el cliente que <strong>mejor conoces</strong> y crea su carpeta con la plantilla est&aacute;ndar.</li>
+          <li>Escribe su <code>_cliente.md</code> de memoria, sin mirar papeles. Donde dudes (responsabilidades RUT exactas, CIIU), d&eacute;jalo marcado con <code>??</code>.</li>
+          <li>Abre Cowork y p&iacute;dele: <em>&ldquo;Lee la ficha _cliente.md de pyme-abc y dime qu&eacute; informaci&oacute;n cr&iacute;tica le falta para trabajar contigo&rdquo;</em>.</li>
+          <li>Completa los <code>??</code> con el RUT en mano. Esa ficha es la base de TODO lo que sigue.</li>
+        </ol>
+      </div>
       <div class="resumen">
         <div class="resumen-titulo">Lo clave de este m&oacute;dulo</div>
         <ul>
@@ -509,7 +612,17 @@ y dime cu&aacute;ntas cuentas tiene a nivel auxiliar y cu&aacute;l es el total d
           <li>Tab <strong>Custom Instructions</strong> &rarr; pega la plantilla de abajo.</li>
           <li>Tab <strong>Knowledge</strong> &rarr; sube los 3-5 archivos clave del cliente (PUC, &uacute;ltimo balance, RUT, &uacute;ltima renta).</li>
         </ol>
-        <p>Listo. A partir de ahora, cuando le hagas chat dentro de ese Project, Claude lee tu Custom Instructions y los archivos Knowledge antes de responder. No le tienes que volver a explicar qui&eacute;n es el cliente.</p>
+        <p>Listo. A partir de ahora, cuando le hagas chat dentro de ese Project, Claude lee tu Custom Instructions y los archivos Knowledge antes de responder. No le tienes que volver a explicar qui&eacute;n es el cliente. La diferencia se siente desde la primera pregunta:</p>
+        <div class="chat-mock">
+          <div class="chat-mock-bar"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>Project: PYME ABC SAS</span></div>
+          <div class="chat-mock-body">
+            <div class="msg user">&iquest;C&oacute;mo contabilizo la factura del agente comisionista de Panam&aacute;?</div>
+            <div class="msg claude"><div class="msg-who">Claude &middot; usando Custom Instructions</div>Para PYME ABC, seg&uacute;n el contexto recurrente del Project: comisi&oacute;n a agente del exterior &rarr; gasto 5125, <strong>retenci&oacute;n 1.5% por servicios desde el exterior (Art. 408 ET)</strong> como quedaron pactadas las comisiones del cliente. Asiento:
+              <table><tr><th>Cuenta PUC</th><th>D&eacute;bito</th><th>Cr&eacute;dito</th></tr><tr><td>5125.05 Comisiones</td><td>$4.200.000</td><td>&mdash;</td></tr><tr><td>2365.25 RteFte exterior</td><td>&mdash;</td><td>$63.000</td></tr><tr><td>2205.10 Proveedor ext.</td><td>&mdash;</td><td>$4.137.000</td></tr></table>
+            </div>
+            <div class="msg claude"><div class="msg-who">Sin Project (chat suelto)</div><em>&ldquo;Depende del pa&iacute;s, del convenio de doble imposici&oacute;n, del tipo de servicio&hellip; &iquest;me puedes dar m&aacute;s contexto del cliente?&rdquo;</em> &mdash; y arrancas de cero otra vez.</div>
+          </div>
+        </div>
       </div>
       <div class="content-block">
         <h2>Plantilla Custom Instructions (cop&iacute;ala y ad&aacute;ptala)</h2>
@@ -581,6 +694,20 @@ FORMATOS DE SALIDA:
       <div class="content-block">
         <h2>Memoria autom&aacute;tica &mdash; lo que Cowork recuerda solo</h2>
         <p>Dentro de un Project, Cowork va guardando hechos que t&uacute; le ense&ntilde;as: nombres, decisiones, fechas raras. La pr&oacute;xima vez los usa sin que se lo recuerdes. Lo puedes inspeccionar y editar en <em>Settings &rarr; Memory</em> del Project.</p>
+        <div class="chat-mock">
+          <div class="chat-mock-bar"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>Project: PYME ABC SAS &mdash; martes</span></div>
+          <div class="chat-mock-body">
+            <div class="msg user">Ojo: este cliente paga las primas el 15 de junio, no el 30 como los dem&aacute;s.</div>
+            <div class="msg claude"><div class="msg-who">Claude</div>Anotado. Guard&eacute; en memoria: <em>&ldquo;PYME ABC paga primas el 15 de junio&rdquo;</em>.</div>
+          </div>
+        </div>
+        <div class="chat-mock">
+          <div class="chat-mock-bar"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>Mismo Project &mdash; dos semanas despu&eacute;s</span></div>
+          <div class="chat-mock-body">
+            <div class="msg user">&iquest;Qu&eacute; provisiones debo revisar para el cierre de mayo?</div>
+            <div class="msg claude"><div class="msg-who">Claude &middot; usando memoria</div>Adem&aacute;s de las habituales (cartera Art. 145 ET, prestaciones), recuerda que <strong>este cliente paga primas el 15 de junio</strong> &mdash; la provisi&oacute;n de prima debe quedar completa en el cierre de mayo, no a mitad como har&iacute;as con un pago del 30.</div>
+          </div>
+        </div>
         <div class="tip">
           <div class="tip-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><h4>Cu&aacute;ndo borrar memoria</h4></div>
           <p>Cuando el cliente cambia de pol&iacute;tica contable (ej. pasa de Decreto 2649 a NIIF, o reclasifica una cuenta). Si no la borras, Claude va a seguir aplicando la regla vieja.</p>
@@ -666,6 +793,36 @@ NO inventes NITs. Si te falta uno, l&iacute;stalo en la columna "?".</div>
       </div>
       <div class="content-block">
         <h2>Flujo 1 &mdash; Cierre mensual</h2>
+        <figure class="svg-fig">
+          <svg viewBox="0 0 680 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Linea de tiempo del cierre mensual con Cowork">
+            <line x1="40" y1="70" x2="640" y2="70" stroke="#D1D5DB" stroke-width="3"/>
+            <circle cx="70" cy="70" r="9" fill="#059669"/>
+            <text x="70" y="40" text-anchor="middle" font-family="Outfit,sans-serif" font-size="12" font-weight="800" fill="#065F46">D&iacute;a 10</text>
+            <text x="70" y="100" text-anchor="middle" font-family="Outfit,sans-serif" font-size="10.5" fill="#6B7280">Llega el balance</text>
+            <text x="70" y="114" text-anchor="middle" font-family="Outfit,sans-serif" font-size="10.5" fill="#6B7280">a la carpeta</text>
+            <circle cx="215" cy="70" r="9" fill="#D97757"/>
+            <text x="215" y="40" text-anchor="middle" font-family="Outfit,sans-serif" font-size="12" font-weight="800" fill="#A85B3F">/cierre</text>
+            <text x="215" y="100" text-anchor="middle" font-family="Outfit,sans-serif" font-size="10.5" fill="#6B7280">Claude compara,</text>
+            <text x="215" y="114" text-anchor="middle" font-family="Outfit,sans-serif" font-size="10.5" fill="#6B7280">detecta inusuales</text>
+            <circle cx="360" cy="70" r="9" fill="#2563EB"/>
+            <text x="360" y="40" text-anchor="middle" font-family="Outfit,sans-serif" font-size="12" font-weight="800" fill="#1D4ED8">T&uacute; revisas</text>
+            <text x="360" y="100" text-anchor="middle" font-family="Outfit,sans-serif" font-size="10.5" fill="#6B7280">10 min sobre los</text>
+            <text x="360" y="114" text-anchor="middle" font-family="Outfit,sans-serif" font-size="10.5" fill="#6B7280">inusuales (criterio)</text>
+            <circle cx="505" cy="70" r="9" fill="#D97757"/>
+            <text x="505" y="40" text-anchor="middle" font-family="Outfit,sans-serif" font-size="12" font-weight="800" fill="#A85B3F">Ajustes</text>
+            <text x="505" y="100" text-anchor="middle" font-family="Outfit,sans-serif" font-size="10.5" fill="#6B7280">Claude propone,</text>
+            <text x="505" y="114" text-anchor="middle" font-family="Outfit,sans-serif" font-size="10.5" fill="#6B7280">t&uacute; apruebas</text>
+            <circle cx="615" cy="70" r="9" fill="#059669"/>
+            <text x="615" y="40" text-anchor="middle" font-family="Outfit,sans-serif" font-size="12" font-weight="800" fill="#065F46">Firma</text>
+            <text x="615" y="100" text-anchor="middle" font-family="Outfit,sans-serif" font-size="10.5" fill="#6B7280">y archiva</text>
+            <rect x="40" y="145" width="600" height="22" rx="11" fill="#FEE2E2"/>
+            <text x="340" y="160" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" font-weight="700" fill="#991B1B">Antes: 3-4 horas por cliente</text>
+            <rect x="40" y="178" width="135" height="22" rx="11" fill="#D1FAE5"/>
+            <text x="107" y="193" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" font-weight="800" fill="#065F46">Con Cowork: ~45 min</text>
+            <text x="195" y="193" font-family="Outfit,sans-serif" font-size="10.5" fill="#6B7280">(la revisi&oacute;n humana sigue siendo tuya &mdash; lo que se va es lo mec&aacute;nico)</text>
+          </svg>
+          <figcaption>El flujo completo del cierre: Claude hace lo mec&aacute;nico, tu criterio queda donde s&iacute; importa.</figcaption>
+        </figure>
         <ol>
           <li>Cliente te env&iacute;a el balance de prueba al d&iacute;a 10. Lo guardas en <code>clientes\pyme-abc\balances\2025-04.xlsx</code></li>
           <li>Abres el Project de PYME ABC en Cowork.</li>
@@ -819,6 +976,33 @@ Una tabla Markdown con columnas:
       <div class="content-block">
         <h2>Por qu&eacute; la <code>description</code> importa tanto</h2>
         <p>Claude lee el <code>description</code> del frontmatter de TODAS tus skills al inicio del chat y decide cu&aacute;les activar. Si tu description dice <em>&ldquo;clasifica cosas&rdquo;</em>, no se va a activar nunca. Si dice <em>&ldquo;Clasifica cuentas del PUC colombiano a conceptos del F1001... Usar cuando...&rdquo;</em> Claude sabe exactamente cu&aacute;ndo entrar.</p>
+        <figure class="svg-fig">
+          <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flujo de activacion de una skill">
+            <rect x="15" y="60" width="150" height="80" rx="12" fill="#ECFDF5" stroke="#34D399" stroke-width="2"/>
+            <text x="90" y="90" text-anchor="middle" font-family="Outfit,sans-serif" font-size="12" font-weight="800" fill="#065F46">T&uacute; escribes</text>
+            <text x="90" y="110" text-anchor="middle" font-family="Outfit,sans-serif" font-size="10.5" fill="#047857">&ldquo;Pre-arma el F1001</text>
+            <text x="90" y="124" text-anchor="middle" font-family="Outfit,sans-serif" font-size="10.5" fill="#047857">de mi cliente XYZ&rdquo;</text>
+            <path d="M165 100 L195 100" stroke="#9CA3AF" stroke-width="2.5" marker-end="url(#arr7)"/>
+            <rect x="200" y="60" width="150" height="80" rx="12" fill="#FAF7F2" stroke="#D97757" stroke-width="2"/>
+            <text x="275" y="84" text-anchor="middle" font-family="Outfit,sans-serif" font-size="12" font-weight="800" fill="#A85B3F">Claude escanea</text>
+            <text x="275" y="102" text-anchor="middle" font-family="Outfit,sans-serif" font-size="10.5" fill="#78534A">los description de</text>
+            <text x="275" y="116" text-anchor="middle" font-family="Outfit,sans-serif" font-size="10.5" fill="#78534A">todas tus skills</text>
+            <text x="275" y="132" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#CC785C">&ldquo;F1001&rdquo; &rarr; match!</text>
+            <path d="M350 100 L380 100" stroke="#9CA3AF" stroke-width="2.5" marker-end="url(#arr7)"/>
+            <rect x="385" y="60" width="135" height="80" rx="12" fill="#FAF7F2" stroke="#D97757" stroke-width="2"/>
+            <text x="452" y="90" text-anchor="middle" font-family="Outfit,sans-serif" font-size="12" font-weight="800" fill="#A85B3F">Carga SKILL.md</text>
+            <text x="452" y="110" text-anchor="middle" font-family="Outfit,sans-serif" font-size="10.5" fill="#78534A">instrucciones +</text>
+            <text x="452" y="124" text-anchor="middle" font-family="Outfit,sans-serif" font-size="10.5" fill="#78534A">contratos</text>
+            <path d="M520 100 L550 100" stroke="#9CA3AF" stroke-width="2.5" marker-end="url(#arr7)"/>
+            <rect x="555" y="60" width="110" height="80" rx="12" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2"/>
+            <text x="610" y="90" text-anchor="middle" font-family="Outfit,sans-serif" font-size="12" font-weight="800" fill="#1D4ED8">references/</text>
+            <text x="610" y="110" text-anchor="middle" font-family="Outfit,sans-serif" font-size="10.5" fill="#3B82F6">solo si las</text>
+            <text x="610" y="124" text-anchor="middle" font-family="Outfit,sans-serif" font-size="10.5" fill="#3B82F6">necesita</text>
+            <text x="340" y="175" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" font-style="italic" fill="#6B7280">Sin description clara, el flujo muere en el paso 2: la skill existe pero nunca se activa.</text>
+            <defs><marker id="arr7" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#9CA3AF"/></marker></defs>
+          </svg>
+          <figcaption>El description es el gatillo: Claude lo lee primero y decide si entra.</figcaption>
+        </figure>
         <div class="error-comun">
           <div class="error-comun-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg><h4>Errores comunes en la description</h4></div>
           <p>1) Demasiado gen&eacute;rica (&ldquo;Ayuda con ex&oacute;gena&rdquo;). 2) En ingl&eacute;s en una skill espa&ntilde;ola. 3) Sin la frase &ldquo;Usar cuando...&rdquo; (Claude no infiere el trigger sin ella). 4) M&aacute;s larga que 2 frases (se vuelve ruido).</p>
@@ -962,6 +1146,15 @@ Una tabla Markdown con columnas:
         <div class="code-block">Te paso el auxiliar de mi cliente XYZ del a&ntilde;o gravable. Pre-arma el F1001.
 [pegas o adjuntas la tabla]</div>
         <p>Claude detecta que mencionas F1001, lee la <code>description</code> de tu skill, la activa, carga las references y produce la tabla seg&uacute;n el contrato del SKILL.md. <strong>T&uacute; revisas</strong> las celdas marcadas con &ldquo;?&rdquo; (NITs faltantes) y los casos donde la skill us&oacute; el concepto-caj&oacute;n 5066 (suelen necesitar criterio humano).</p>
+      </div>
+      <div class="checklist" data-checklist="m8-skill1">
+        <div class="checklist-head"><h4>Montaje de tu primera skill &mdash; paso a paso</h4><span class="check-progress">0 / 6</span></div>
+        <label><input type="checkbox"> Cre&eacute; la carpeta <code>skills\clasificador-exogena-co\</code></label>
+        <label><input type="checkbox"> Pegu&eacute; el <code>SKILL.md</code> del M&oacute;dulo 7 (y ajust&eacute; el description a mi pr&aacute;ctica)</label>
+        <label><input type="checkbox"> Cre&eacute; <code>references/conceptos-f1001.md</code> con los conceptos de este m&oacute;dulo</label>
+        <label><input type="checkbox"> Arm&eacute; <code>examples/caso-pyme.md</code> con UN cliente m&iacute;o real (anonimizado)</label>
+        <label><input type="checkbox"> La prob&eacute; con un auxiliar real y Claude la activ&oacute; solo al mencionar F1001</label>
+        <label><input type="checkbox"> Revis&eacute; las celdas &ldquo;?&rdquo; (NITs faltantes) y los conceptos 5066 a mano</label>
       </div>
       <div class="resumen">
         <div class="resumen-titulo">Lo clave de este m&oacute;dulo</div>
@@ -1110,6 +1303,16 @@ Causa: movimiento de enero del a&ntilde;o siguiente colado en el AG actual.
 Acci&oacute;n: filtrar fechas del balance al per&iacute;odo exacto antes de generar XML.
         </div>
       </div>
+      <div class="practica">
+        <div class="practica-titulo">Practica: el cuadre que ya hiciste a mano (20 min)</div>
+        <ol>
+          <li>Toma un cliente cuyo IVA del a&ntilde;o pasado <strong>ya cuadraste manualmente</strong> (as&iacute; tienes contra qu&eacute; comparar).</li>
+          <li>Monta <code>cuadre-iva-co</code> y p&aacute;sale las 6 declaraciones + balance de diciembre.</li>
+          <li>Compara la tabla de la skill contra tu papel de trabajo: &iquest;detect&oacute; los mismos descuadres? &iquest;Encontr&oacute; alguno que se te pas&oacute;?</li>
+          <li>Si la skill marc&oacute; algo que NO es descuadre real (falso positivo), agr&eacute;galo como nota en el SKILL.md &mdash; as&iacute; aprende tu criterio.</li>
+        </ol>
+        <p>Este ejercicio con un caso ya resuelto es la forma m&aacute;s segura de calibrar confianza en la skill antes de usarla en vivo.</p>
+      </div>
       <div class="resumen">
         <div class="resumen-titulo">Lo clave de este m&oacute;dulo</div>
         <ul>
@@ -1219,6 +1422,14 @@ NO ejecutes las fases sin mi confirmaci&oacute;n entre cada una.
           </tbody>
         </table>
       </div>
+      <div class="checklist" data-checklist="m10-firma">
+        <div class="checklist-head"><h4>Checklist: skills listas para compartir</h4><span class="check-progress">0 / 5</span></div>
+        <label><input type="checkbox"> Corr&iacute; el pipeline <code>/exogena-full</code> end-to-end con 1 cliente (con las 3 paradas)</label>
+        <label><input type="checkbox"> Cre&eacute; el repo Git privado <code>firma-claude-skills</code> con README y CHANGELOG</label>
+        <label><input type="checkbox"> Sub&iacute; las 3 skills al repo (sin datos de clientes en los examples)</label>
+        <label><input type="checkbox"> Prob&eacute; el clone en <code>~/.claude/skills</code> en otro equipo (o el de mi auxiliar)</label>
+        <label><input type="checkbox"> Defin&iacute; qui&eacute;n aprueba los PR cuando cambie la norma</label>
+      </div>
       <div class="resumen">
         <div class="resumen-titulo">Lo clave de este m&oacute;dulo</div>
         <ul>
@@ -1278,7 +1489,20 @@ algunos meses traen la cabecera en la fila 3 y otros en la 5.
    con el acumulado por cuenta a nivel 4 d&iacute;gitos.
 3. Av&iacute;same si alg&uacute;n mes tiene cuentas que no aparecen en los dem&aacute;s.
 NO modifiques los archivos originales.</div>
-        <p>Claude escribe el script (Python con openpyxl o similar), te muestra qu&eacute; va a hacer, lo corre y te entrega el consolidado. Lo que a mano toma una tarde, sale en minutos &mdash; y el script queda guardado para el a&ntilde;o siguiente.</p>
+        <p>Claude escribe el script (Python con openpyxl o similar), te muestra qu&eacute; va a hacer, lo corre y te entrega el consolidado. As&iacute; se ve la sesi&oacute;n:</p>
+        <div class="term-mock">
+          <div class="term-mock-bar"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>claude &mdash; balances-cliente-abc</span></div>
+          <div class="term-mock-body"><span class="tp">&gt;</span> <span class="tc">Voy a hacer esto en 3 pasos:</span>
+<span class="tg">  1. Leer los 12 Excel y detectar d&oacute;nde arranca la cabecera de cada uno</span>
+<span class="tg">  2. Normalizar y generar consolidado-2025.xlsx (12 hojas + Anual)</span>
+<span class="tg">  3. Reportar cuentas que no aparecen en todos los meses</span>
+<span class="tok">&#9679; Ejecutar script consolidar.py</span> <span class="tg">&mdash; &iquest;aprobar? [s/n]</span> <span class="tp">s</span>
+<span class="tp">&#10003;</span> Le&iacute;dos 12 archivos <span class="tg">(cabecera en fila 3: ocho meses; fila 5: cuatro meses)</span>
+<span class="tp">&#10003;</span> consolidado-2025.xlsx generado <span class="tg">(13 hojas, 247 cuentas nivel 4)</span>
+<span class="tc">&#9888; La cuenta 5295 (donaciones) solo aparece en jun y dic &mdash; revisar si es normal.</span>
+<span class="tg">Originales intactos. El script qued&oacute; en consolidar.py para el a&ntilde;o entrante.</span> <span class="cursor-blink"></span></div>
+        </div>
+        <p>Lo que a mano toma una tarde, sale en minutos &mdash; y el script queda guardado para el a&ntilde;o siguiente. F&iacute;jate en el <code>[s/n]</code>: nada se ejecuta sin tu aprobaci&oacute;n.</p>
       </div>
       <div class="content-block">
         <h2>El modelo de permisos: Claude propone, t&uacute; apruebas</h2>
@@ -1370,6 +1594,46 @@ NO modifiques los archivos originales.</div>
           <p>NO empieces por el cliente m&aacute;s complejo: empieza por el que conoces de memoria. As&iacute; puedes comparar f&aacute;cilmente si Cowork acierta o se desv&iacute;a, sin perder tiempo verificando contra terceros.</p>
         </div>
       </div>
+      <div class="checklist" data-checklist="m12-plan30">
+        <div class="checklist-head"><h4>Tu plan de 30 d&iacute;as &mdash; m&aacute;rcalo a medida que avanzas (queda guardado)</h4><span class="check-progress">0 / 8</span></div>
+        <label><input type="checkbox"> Semana 1: Cowork instalado con carpeta dedicada</label>
+        <label><input type="checkbox"> Semana 1: cliente piloto con carpeta + <code>_cliente.md</code> + Project</label>
+        <label><input type="checkbox"> Semana 2: <code>/cierre</code> corrido sobre el piloto y comparado contra mi cierre manual</label>
+        <label><input type="checkbox"> Semana 3: estructura replicada en 3 clientes m&aacute;s</label>
+        <label><input type="checkbox"> Semana 3: <code>/req-dian</code> probado con un requerimiento real</label>
+        <label><input type="checkbox"> Semana 3: primera skill montada (clasificador-exogena-co)</label>
+        <label><input type="checkbox"> Semana 4: auxiliar con onboarding (si aplica) y Cowork documentado en 1 p&aacute;gina</label>
+        <label><input type="checkbox"> Semana 4: backup configurado (Git / Drive / disco externo)</label>
+      </div>
+      <div class="content-block">
+        <h2>Preguntas frecuentes</h2>
+        <div class="faq">
+          <details>
+            <summary>&iquest;Necesito plan pago de Claude para todo esto?</summary>
+            <p>Cowork funciona con cuenta Free, pero la utilidad real (l&iacute;mites de uso, Projects amplios, modelos grandes) arranca en <strong>Pro (~USD $20/mes)</strong>. Para un contador con cartera, se paga solo con el primer cierre del mes. Skills y Claude Code usan la misma cuenta.</p>
+          </details>
+          <details>
+            <summary>&iquest;Anthropic entrena sus modelos con los datos de mis clientes?</summary>
+            <p>En planes pagos (Pro/Max/Team/Enterprise) tu data no se usa para entrenamiento por defecto. Verif&iacute;calo en <em>Settings &rarr; Privacy</em> de tu cuenta. De todas formas: contrase&ntilde;as, tokens MUISCA y c&eacute;dulas crudas NUNCA van en carpetas ni en Knowledge (m&oacute;dulos 3 y 12).</p>
+          </details>
+          <details>
+            <summary>&iquest;Qu&eacute; pasa si Claude se equivoca en una cifra o una norma?</summary>
+            <p>Pasa, y por eso el curso insiste en los puntos de revisi&oacute;n humana: inusuales del cierre, l&iacute;nea por l&iacute;nea en respuestas DIAN, log del prevalidador. La regla: <strong>Claude redacta y calcula borradores; el contador firmante verifica y responde</strong>. Las skills ayudan porque obligan a citar la norma exacta &mdash; m&aacute;s f&aacute;cil de auditar que una respuesta suelta.</p>
+          </details>
+          <details>
+            <summary>&iquest;Las skills sirven tambi&eacute;n en claude.ai (web)?</summary>
+            <p>El flujo de este curso est&aacute; pensado para <strong>Cowork y Claude Code</strong>, que leen la carpeta <code>~/.claude/skills/</code> de tu disco. En la web puedes lograr algo parecido subiendo el SKILL.md al Knowledge de un Project, pero pierdes la activaci&oacute;n autom&aacute;tica y el versionado en Git.</p>
+          </details>
+          <details>
+            <summary>&iquest;Cu&aacute;nto me demoro montando todo el sistema?</summary>
+            <p>Con el plan de 30 d&iacute;as: la semana 1 es instalaci&oacute;n + 1 cliente piloto (una tarde), la semana 2 valida el cierre, y las semanas 3-4 escalan a 4 clientes + primera skill. El ahorro neto aparece el <strong>segundo mes</strong>, cuando ya no hay nada que montar.</p>
+          </details>
+          <details>
+            <summary>Soy auxiliar / estudiante, &iquest;me sirve este curso?</summary>
+            <p>S&iacute;, y es ventaja competitiva: las firmas est&aacute;n empezando a buscar gente que ya trabaje as&iacute;. Hazlo con datos de pr&aacute;ctica (no de clientes reales de tu empleador sin permiso) y al final emite tu certificado verificable.</p>
+          </details>
+        </div>
+      </div>
       <div class="content-block">
         <h2>Pr&oacute;ximas 2 skills que vale la pena construir</h2>
         <ol>
@@ -1407,6 +1671,10 @@ NO modifiques los archivos originales.</div>
           <li><strong>Plan 30 d&iacute;as</strong>: empezar con 1 cliente piloto y escalar.</li>
         </ul>
       </div>
+      <div class="content-block">
+        <h2>Examen final y certificado</h2>
+        <p>El curso cierra con un examen de <strong>10 preguntas</strong> (de un banco m&aacute;s amplio, en orden aleatorio). Nota m&iacute;nima 70%, hasta 3 intentos. Al aprobarlo puedes emitir tu certificado verificable con folio y hash &mdash; el mismo sistema de toda la Escuela.</p>
+      </div>
       <div data-cert-course="claude-cowork-contadores"></div>
       <div class="mod-nav">
         <a href="#modulo-11" class="prev" onclick="navigateTo(11)">&larr; M&oacute;dulo 11</a>
@@ -1418,8 +1686,8 @@ NO modifiques los archivos originales.</div>
 </div>
 <button class="sidebar-toggle" onclick="toggleSidebar()">&#9776;</button>
 <script src="../shared/certificado.js?v=c81033b2"></script>
-<script src="../shared/curso-meta.js?v=06a1faab"></script>
-<script src="../shared/quiz-banks.js?v=dbfc51d1"></script>
+<script src="../shared/curso-meta.js?v=d03af7d0"></script>
+<script src="../shared/quiz-banks.js?v=ff7eca86"></script>
 <script src="../shared/quiz-engine.js?v=eed75029"></script>
 <script src="../shared/cert-emit-widget.js?v=af5e7eeb"></script>
 <script>
@@ -1458,6 +1726,51 @@ function copyBlock(btn){
     setTimeout(function(){ btn.classList.remove('copied'); btn.textContent = old; }, 1500);
   });
 }
+/* Checklists interactivas con progreso persistente */
+(function(){
+  var KEY = 'exo-checks-' + CURSO_SLUG;
+  function load(){ try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){ return {}; } }
+  function save(d){ try { localStorage.setItem(KEY, JSON.stringify(d)); } catch(e){} }
+  function refresh(list){
+    var boxes = list.querySelectorAll('input[type=checkbox]');
+    var done = 0;
+    for (var i=0;i<boxes.length;i++){
+      boxes[i].parentElement.classList.toggle('done', boxes[i].checked);
+      if (boxes[i].checked) done++;
+    }
+    var prog = list.querySelector('.check-progress');
+    if (prog) prog.textContent = done + ' / ' + boxes.length;
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    var data = load();
+    var lists = document.querySelectorAll('.checklist[data-checklist]');
+    for (var l=0; l<lists.length; l++){
+      (function(list){
+        var id = list.getAttribute('data-checklist');
+        var boxes = list.querySelectorAll('input[type=checkbox]');
+        for (var i=0;i<boxes.length;i++){
+          (function(box, idx){
+            var k = id + ':' + idx;
+            if (data[k]) box.checked = true;
+            box.addEventListener('change', function(){
+              var d = load();
+              if (box.checked) d[k] = 1; else delete d[k];
+              save(d);
+              refresh(list);
+            });
+          })(boxes[i], i);
+        }
+        refresh(list);
+      })(lists[l]);
+    }
+    /* Pipeline: pulso escalonado */
+    var steps = document.querySelectorAll('.pipeline .pipe-step');
+    for (var s=0;s<steps.length;s++){
+      steps[s].classList.add('pulse');
+      steps[s].style.animationDelay = (s * 0.35) + 's';
+    }
+  });
+})();
 (function(){
   try {
     var hash = (window.location.hash || '').match(/^#modulo-(\d+)$/);

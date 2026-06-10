@@ -48,7 +48,7 @@
     'finanzas':          { nivel:'Básico',     lecturaMin:58,  prereq:null, esp:null },
     'ia-sin-miedo':      { nivel:'Básico',     lecturaMin:95,  prereq:null, esp:'ia' },
     'desarrollo-contadores':   { nivel:'Avanzado',   lecturaMin:120, prereq:'ia-automatizacion', esp:'ia' },
-    'claude-cowork-contadores':{ nivel:'Intermedio', lecturaMin:85,  prereq:'ia-automatizacion', esp:'ia' }
+    'claude-cowork-contadores':{ nivel:'Intermedio', lecturaMin:100, prereq:'ia-automatizacion', esp:'ia' }
   };
 
   // ─── Especializaciones (tracks). El tiempo total se calcula sumando la

@@ -14,6 +14,106 @@
 
   var BANKS = {
 
+    /* ═══ Claude para Contadores (Cowork + Skills + Claude Code) ═══ */
+    'claude-cowork-contadores': [
+      {
+        q: '¿Cuál es la diferencia clave entre Claude Cowork y claude.ai (web)?',
+        opts: ['Cowork usa modelos más inteligentes', 'Cowork ve tus carpetas locales y recuerda al cliente entre sesiones', 'La web es de pago y Cowork es gratis', 'Cowork solo funciona sin internet'],
+        correct: 1,
+        explanation: 'Los modelos son los mismos en ambos. Lo que cambia es el envase: Cowork es la app de escritorio que lee archivos de tu disco (sin subirlos a cada chat), soporta Projects, memoria persistente y Skills.'
+      },
+      {
+        q: 'Para el trabajo contable del día a día (clasificar cuentas, redactar un correo, revisar un balance), ¿qué modelo es el equilibrio recomendado entre velocidad e inteligencia?',
+        opts: ['Claude Haiku 4.5', 'Claude Fable 5', 'Claude Sonnet 4.6', 'Claude Opus 4.8'],
+        correct: 2,
+        explanation: 'Sonnet 4.6 es el balance velocidad/inteligencia para el día a día. Fable 5 y Opus 4.8 son para análisis complejos o trabajo largo y autónomo; Haiku 4.5 para tareas simples y rápidas.'
+      },
+      {
+        q: '¿Cuál de estos NUNCA debe ir en la carpeta del cliente que ve Claude?',
+        opts: ['El balance de prueba mensual', 'Las claves del MUISCA en un .txt', 'La ficha _cliente.md', 'Las declaraciones de IVA del año'],
+        correct: 1,
+        explanation: 'Contraseñas, tokens MUISCA y llaves nunca van en la carpeta, ni siquiera en .txt. Balances, declaraciones y la ficha del cliente son justamente lo que la carpeta debe contener.'
+      },
+      {
+        q: '¿Qué es el archivo _cliente.md en el modelo carpeta-por-cliente?',
+        opts: ['El backup cifrado del cliente', 'Una ficha corta con NIT, responsabilidades, sector y decisiones contables que Claude lee primero', 'El contrato de servicios firmado', 'El XML de exógena del año anterior'],
+        correct: 1,
+        explanation: 'Es un Markdown de ~30 líneas en la raíz de cada cliente: NIT, régimen, responsabilidades RUT, decisiones contables y contactos. Con esa ficha, cualquier pregunta arranca con contexto en vez de empezar de cero.'
+      },
+      {
+        q: 'En un Project de Claude, ¿cuál es la diferencia entre Custom Instructions y Knowledge?',
+        opts: ['Son lo mismo con distinto nombre', 'Instructions son las reglas permanentes de trabajo; Knowledge son los archivos de referencia que Claude consulta', 'Knowledge es de pago e Instructions gratis', 'Instructions se borran al cerrar el chat'],
+        correct: 1,
+        explanation: 'Custom Instructions = reglas fijas (quién es el cliente, cómo citar normas, formatos de salida). Knowledge = archivos de referencia estables (RUT, PUC, última renta). Ambos se cargan antes de cada respuesta del Project.'
+      },
+      {
+        q: '¿Cuándo debes revisar y borrar la memoria automática de un Project?',
+        opts: ['Cada vez que abres el chat', 'Nunca: la memoria es de solo lectura', 'Cuando el cliente cambia una política contable, para que Claude no siga aplicando la regla vieja', 'Solo cuando se llena el disco'],
+        correct: 2,
+        explanation: 'La memoria guarda hechos que le enseñaste. Si el cliente reclasifica una cuenta o cambia de política, la memoria vieja queda obsoleta y Claude seguiría aplicándola — hay que editarla en Settings → Memory.'
+      },
+      {
+        q: '¿Qué es un slash command como /cierre?',
+        opts: ['Un comando del sistema operativo', 'Un archivo Markdown con un prompt completo que se dispara escribiendo el comando en el chat', 'Una función de Excel', 'Un atajo de teclado de Windows'],
+        correct: 1,
+        explanation: 'Un slash command vive como archivo .md en tu carpeta: al escribir /cierre, Claude carga ese prompt completo (pasos, archivos a leer, formato de salida) y arranca. Ideal para tareas frecuentes del Project.'
+      },
+      {
+        q: '¿Cuál es el criterio para convertir un slash command en una Skill?',
+        opts: ['Cuando el prompt supera las 5 líneas', 'Cuando te copias el comando de un cliente a otro ajustando variables cada vez: la lógica se repite en todos los clientes', 'Cuando Claude lo sugiere', 'Las skills y los slash commands son lo mismo'],
+        correct: 1,
+        explanation: 'El slash command vive en un Project específico. Si la misma lógica aplica a TODOS tus clientes (clasificar F1001, cuadrar IVA), merece ser skill: parametrizada, con norma y ejemplos, cargable donde sea y compartible con el equipo.'
+      },
+      {
+        q: '¿Para qué sirve el "description" del frontmatter en un SKILL.md?',
+        opts: ['Es decorativo, solo documentación', 'Es el gatillo: Claude lo lee al inicio del chat y decide cuándo activar la skill', 'Define el precio de la skill', 'Indica la versión del modelo'],
+        correct: 1,
+        explanation: 'Claude escanea los description de todas tus skills y activa la que corresponda. Por eso debe ser específico, en español y con la frase "Usar cuando..." — un description genérico hace que la skill nunca se active.'
+      },
+      {
+        q: 'La carpeta references/ de una skill sirve para:',
+        opts: ['Guardar los balances de los clientes', 'Documentos largos (como la norma DIAN resumida) que se cargan solo cuando la skill los necesita', 'Los logs de errores de Claude', 'Copias de seguridad del SKILL.md'],
+        correct: 1,
+        explanation: 'La Res. 000227/2024 completa son ~80 páginas; resumida en references/ son 6. Claude la consulta solo cuando la skill está activa, sin cargar todo siempre. Se actualiza cuando la DIAN saca resolución modificatoria.'
+      },
+      {
+        q: 'La skill cuadre-iva-co detecta un descuadre de hace 3 bimestres. ¿Qué debe hacer según sus restricciones?',
+        opts: ['Presentar la corrección automáticamente en el MUISCA', 'Reportar la diferencia con causa probable, sin sugerir corrección automática: la firmeza (Art. 714 ET) y la sanción (Art. 644) son decisión del contador', 'Ignorarlo si es menor al 10%', 'Borrar la declaración con error'],
+        correct: 1,
+        explanation: 'La skill reporta diferencias >1% con causa probable (digitación / norma / temporal). Presentar corrección implica evaluar firmeza y sanción del Art. 644 ET — eso es criterio del contador, nunca de la skill.'
+      },
+      {
+        q: 'En la clasificación del F1001, el concepto 5066 (Otros pagos) se usa:',
+        opts: ['Para todos los gastos del grupo 51', 'Solo como cajón final, cuando ningún otro concepto encaja — y esas filas las revisa el contador', 'Para la nómina que ya está en F2276', 'Para los pagos al exterior'],
+        correct: 1,
+        explanation: 'El 5066 es el cajón final del F1001. Si la skill lo usa mucho, algo anda mal en la clasificación. Las filas con 5066 y los NITs faltantes ("?") son exactamente donde interviene el criterio humano.'
+      },
+      {
+        q: '¿Por qué el prompt orquestador /exogena-full incluye la instrucción "PÁRATE" entre fases?',
+        opts: ['Para ahorrar tokens', 'Porque Claude no puede leer dos archivos seguidos', 'Para forzar la revisión humana entre fases: sin eso, Claude entrega todo en un bloque que nadie revisa', 'Es un requisito técnico del MUISCA'],
+        correct: 2,
+        explanation: 'Cada flecha del pipeline es un punto de revisión humana. "PÁRATE" mantiene a Claude en modo asistente: entrega la fase, espera tu OK y sigue. Sin eso, te llega un papel de trabajo de 12 páginas sin control.'
+      },
+      {
+        q: '¿Cuándo conviene usar Claude Code en vez de Cowork?',
+        opts: ['Para analizar UN balance y conversar sobre él', 'Cuando la tarea es en lote: hacer LO MISMO sobre muchos archivos (consolidar 12 balances, renombrar 40 PDFs) o construir una herramienta', 'Cuando no tienes internet', 'Cuando el cliente es del régimen simple'],
+        correct: 1,
+        explanation: 'La regla práctica: "mira este archivo y dime..." = Cowork (conversación); "para cada archivo..." o "todos los meses hago..." = Claude Code (ejecución en lote con scripts que quedan guardados).'
+      },
+      {
+        q: 'Reglas de oro al usar Claude Code con datos de clientes:',
+        opts: ['Darle acceso a la raíz con todos los clientes para ahorrar tiempo', 'Activar el modo automático desde el día uno', 'Trabajar sobre copias, leer lo que apruebas y no activar el modo automático hasta dominar la herramienta', 'Dejar que corra de noche sin supervisión'],
+        correct: 2,
+        explanation: 'Claude Code ejecuta comandos y modifica archivos, por eso pide aprobación. Con datos de clientes: duplicar la carpeta antes de tareas en lote, entender cada comando que apruebas y nada de auto-aprobar al principio.'
+      },
+      {
+        q: 'Al leer un archivo local con Cowork, ¿qué sale de tu computador?',
+        opts: ['Nada, todo es 100% local', 'El archivo completo queda almacenado para siempre en Anthropic', 'El contenido viaja como contexto al modelo en el momento del análisis; el archivo en sí sigue en tu disco', 'Solo el nombre del archivo'],
+        correct: 2,
+        explanation: 'Hay que ser preciso: el archivo no se "sube" a una biblioteca, pero su contenido sí viaja al modelo cuando lo analiza. Por eso aplican las reglas de privacidad: plan pago (sin entrenamiento por defecto), nada de claves ni cédulas crudas, y datos sensibles anonimizados.'
+      }
+    ],
+
     /* ═══ Curso de Ventas Completo ═══ */
     'ventas': [
       {
