@@ -234,6 +234,22 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 .p210-cr.tot>div{background:#f0f2f5;font-weight:700}
 @media(max-width:680px){.p210-cg{grid-template-columns:minmax(90px,1fr) repeat(4,minmax(48px,1fr));font-size:8px}}
 .p210-edit{border:none;background:#FFFDE7;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;width:100%;outline:none;padding:1px 3px;color:#1a3c6e;font-weight:700;border-bottom:1px dashed #d4b500}
+/* Ícono "de dónde salió" en las casillas prediligenciadas desde la exógena */
+.origen-ic{position:absolute;left:14px;top:1px;font-size:9px;color:#2E75B6;cursor:pointer;font-weight:700;z-index:2}
+.origen-ic:hover{color:#1B3A5C}
+.p210-row .pc .origen-ic{position:static;margin-right:3px}
+#origenModal{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:9999;display:none;align-items:center;justify-content:center;padding:16px}
+#origenModal.show{display:flex}
+.origen-box{background:#fff;border-radius:12px;max-width:520px;width:100%;max-height:80vh;overflow:auto;box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.origen-box-hd{background:var(--pri,#1B3A5C);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;border-radius:12px 12px 0 0}
+.origen-box-hd h4{margin:0;font-size:.95rem}
+.origen-box-hd button{background:rgba(255,255,255,.2);border:none;color:#fff;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:1rem}
+.origen-row{display:flex;justify-content:space-between;gap:10px;padding:7px 16px;border-bottom:1px solid #f0f0f0;font-size:.82rem}
+.origen-row:last-child{border-bottom:none}
+.origen-row .od{flex:1}
+.origen-row .od .oi{font-size:.72rem;color:var(--muted)}
+.origen-row .ov{font-family:'JetBrains Mono',monospace;font-weight:700;white-space:nowrap}
+.origen-total{background:#f0f6ff;font-weight:700;border-top:2px solid var(--pri)}
 .p210-edit:focus{background:#FFF9C4;box-shadow:inset 0 -2px 0 #f0c000}
 .p210-cr .cc .p210-edit{font-size:9px}
 .recon-table .concepto-cell{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--pri)}
@@ -333,6 +349,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 </script></head>
 <body>
 <div class="exo-loading hidden" id="loadingOverlay"><div class="spinner"></div><div>Procesando...</div></div>
+<div id="origenModal" onclick="if(event.target===this)cerrarOrigen()">
+  <div class="origen-box">
+    <div class="origen-box-hd"><h4 id="origenTitulo">De dónde salió</h4><button onclick="cerrarOrigen()" title="Cerrar">&times;</button></div>
+    <div id="origenBody"></div>
+  </div>
+</div>
 <div id="ayudaOverlay" class="ayuda-overlay" onclick="cerrarAyuda()"></div>
 <aside id="ayudaPanel" class="ayuda-panel" role="dialog" aria-label="Ayuda contextual">
   <button class="ayuda-cerrar" onclick="cerrarAyuda()" aria-label="Cerrar ayuda">×</button>
@@ -2990,6 +3012,47 @@ function cambiarTabF210(tab){
   window.scrollTo({ top: 0, behavior: 'smooth' });
   if(typeof gtag !== 'undefined') gtag('event','f210_pro_tab', { tab: tab });
 }
+// ── "DE DÓNDE SALIÓ" — trazabilidad de cada casilla a las filas de la exógena ──
+// Mapea casilla del 210 → cédula(s) de la reconciliación que la componen.
+var CASILLA_ORIGEN = {
+  32: ['trabajo','trabajo_exenta'],
+  33: ['incrngo','incrngo_salud','incrngo_pension','incrngo_trabajo'],
+  43: ['honorarios'],
+  58: ['capital'],
+  74: ['noLaboral'],
+  76: ['incrngo_nolaboral'],
+  99: ['pensiones'],
+  104: ['dividendos_no_grav'], 107: ['dividendos_no_grav'], 108: ['dividendos_grav'],
+  112: ['gananciasOcasionales']
+};
+// Devuelve {total, filas:[{valor, desc, informante}]} de la reconciliación para una casilla.
+function getOrigenCasilla(cas){
+  var ceds = CASILLA_ORIGEN[cas];
+  if(!ceds || !window.reconciliacionEstado || !reconciliacionEstado.filas) return null;
+  var filas = reconciliacionEstado.filas.filter(function(f){
+    return !f.excluida && ceds.indexOf(f.cedulaFinal) >= 0 && (f.valor || 0) > 0;
+  });
+  if(!filas.length) return null;
+  var total = filas.reduce(function(a,f){ return a + (f.valor || 0); }, 0);
+  return { total: total, filas: filas };
+}
+function mostrarOrigenCasilla(cas){
+  var o = getOrigenCasilla(cas);
+  if(!o){ if(typeof exoToast !== 'undefined') exoToast('Esta casilla no viene de la exógena (la digitaste o se calcula).', 'info'); return; }
+  var $ = function(n){ return '$' + Math.round(n||0).toLocaleString('es-CO'); };
+  document.getElementById('origenTitulo').textContent = 'Casilla ' + cas + ' — de dónde salió';
+  var rows = o.filas.map(function(f){
+    var desc = (f.descripcion || f.concepto || '(sin detalle)');
+    return '<div class="origen-row"><div class="od">' + escHtml(desc.slice(0,70))
+      + (f.informante ? '<div class="oi">' + escHtml((f.informante||'').slice(0,45)) + (f.nit ? ' · NIT ' + escHtml(f.nit) : '') + '</div>' : '')
+      + '</div><div class="ov">' + $(f.valor) + '</div></div>';
+  }).join('');
+  rows += '<div class="origen-row origen-total"><div class="od">Total casilla ' + cas + ' (' + o.filas.length + ' concepto' + (o.filas.length>1?'s':'') + ')</div><div class="ov">' + $(o.total) + '</div></div>';
+  document.getElementById('origenBody').innerHTML = rows;
+  document.getElementById('origenModal').classList.add('show');
+  if(typeof gtag !== 'undefined') gtag('event','f210_pro_origen_casilla', { casilla: cas });
+}
+function cerrarOrigen(){ document.getElementById('origenModal').classList.remove('show'); }
 // Casillas editables del 210 → input real del wizard que alimenta el motor.
 // Editar una casilla en la réplica escribe en ese input y recalcula todo.
 var CASILLA_INPUT_210 = {
@@ -3031,20 +3094,24 @@ function renderizarReplica210(){
     var v = nz(val);
     return '<input class="p210-edit" inputmode="numeric" value="' + (v ? v.toLocaleString('es-CO') : '') + '" data-wiz="' + wizId + '" onchange="replica210Edit(this)" title="Editable — casilla ' + cas + '">';
   }
+  // Ícono "de dónde salió" si la casilla tiene origen rastreable en la exógena.
+  function origenIc(cas){
+    return getOrigenCasilla(cas) ? '<span class="origen-ic" onclick="mostrarOrigenCasilla(' + cas + ')" title="¿De dónde salió? Ver el detalle de la exógena">&#9432;</span>' : '';
+  }
   // fila simple: 'in'=editable si tiene mapeo, 'calc'=verde readonly, 'res'=resultado
   function row(lbl, cas, val, tipo){
     var v = nz(val), cls = tipo === 'calc' ? 'calc' : (v ? 'filled' : '');
     var rc = tipo === 'res' ? ' result' : (tipo === 'calc' ? ' total' : '');
     var contenido = (tipo === 'in' && CASILLA_INPUT_210[cas]) ? edit(cas, val) : $(val);
-    return '<div class="p210-row' + rc + '"><div class="pl">' + lbl + '</div><div class="pc">' + (cas||'') + '</div><div class="pv ' + cls + '">' + contenido + '</div></div>';
+    return '<div class="p210-row' + rc + '"><div class="pl">' + lbl + '</div><div class="pc">' + origenIc(cas) + (cas||'') + '</div><div class="pv ' + cls + '">' + contenido + '</div></div>';
   }
   // celda de la grilla: editable si la casilla tiene mapeo y no es calculada
   function cell(cas, val, calc){
     var v = nz(val), cls = calc ? 'calc' : (v ? 'filled' : '');
     if(!calc && CASILLA_INPUT_210[cas]){
-      return '<div class="cc ' + cls + '"><span class="cn">' + cas + '</span>' + edit(cas, val) + '</div>';
+      return '<div class="cc ' + cls + '">' + origenIc(cas) + '<span class="cn">' + cas + '</span>' + edit(cas, val) + '</div>';
     }
-    return '<div class="cc ' + cls + '"><span class="cn">' + (cas||'') + '</span>' + $(val) + '</div>';
+    return '<div class="cc ' + cls + '">' + origenIc(cas) + '<span class="cn">' + (cas||'') + '</span>' + $(val) + '</div>';
   }
   var h = '<div class="p210">';
   h += '<div class="p210-hdr">FORMULARIO 210 &middot; AG ' + year + '</div>';
