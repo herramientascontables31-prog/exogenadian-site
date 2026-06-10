@@ -590,6 +590,33 @@
   var CEDULAS_INGRESO = ['trabajo','honorarios','capital','noLaboral','pensiones',
                          'dividendos_no_grav','dividendos_grav','gananciasOcasionales'];
 
+  // Explica POR QUÉ una fila quedó como 'informativo' y A DÓNDE va realmente.
+  // Clave para el contador: distinguir lo que SÍ entra a la declaración (patrimonio,
+  // deudas, retención — prellenadas por separado) de lo que de verdad no va (consumos,
+  // consignaciones: solo indicadores que la DIAN cruza). El uso sugerido de la DIAN manda.
+  function motivoInformativo(f){
+    var u = normalizar((f.usoDIANSugerido || '') + ' ' + (f.descripcion || f.concepto || ''));
+    // Orden: lo MULTI-renglón/ambiguo (adquisiciones que mencionan varias casillas) primero,
+    // luego consumos/consignaciones, y al final los R-código limpios (deuda/retención/FE).
+    if(/se usa en renglones como|adquisicion de bienes|avaluo|bienes (o derechos|raices)/.test(u))
+      return '→ Adquisición de un BIEN/derecho: normalmente va al PATRIMONIO (casilla 29). Si en el año lo VENDIÓ, evalúa ganancia ocasional o renta no laboral según la posesión. Decide con la escritura/contrato.';
+    if(/tope\s*3|consumos?\s*tc|tarjeta\s*cr[eé]dito\s*o\s*d[eé]bito|total adquisiciones consumos/.test(u))
+      return 'NO va al 210: consumos con tarjeta — solo indicador que la DIAN cruza (verifica que la capacidad de pago los justifique).';
+    if(/tope\s*4|consignaciones|valor total de (los )?movimientos/.test(u))
+      return 'NO va al 210: consignaciones/movimientos bancarios — la DIAN los cruza (formato 1019). Deben poder justificarse (traslados, préstamos, dineros de terceros).';
+    if(/^saldo|tope\s*2|\br29\b|inversion(es)?.*(realizad|efectuad)|cuenta por cobrar|saldo inversion|aporte.*derecho social/.test(u))
+      return '→ SÍ va a la declaración: es un ACTIVO del PATRIMONIO (casilla 29, ya prellenada). Verifica el saldo a 31-dic.';
+    if(/\br30\b|deuda|pasivo/.test(u))
+      return '→ SÍ va a la declaración: es una DEUDA (casilla 30, ya prellenada con el patrimonio). Verifica el saldo a 31-dic.';
+    if(/\br132\b|retencion/.test(u))
+      return '→ SÍ va a la declaración: es una RETENCIÓN (casilla 132, ya prellenada). Confirma contra el certificado.';
+    if(/\br28\b|factura electr[oó]nica|susceptible de beneficio/.test(u))
+      return '→ Base de compras con factura electrónica: el 1% deducible (casilla 28) ya quedó prellenado.';
+    if(/promedio|ingreso laboral promedio|cesantia|\br3[67]\b/.test(u))
+      return '→ Renta exenta de trabajo / insumo de cesantías (Art. 206-4). Aplícalo desde la asesoría de cesantías si corresponde.';
+    return 'Informativo: revisa si corresponde a patrimonio, deuda o retención (van a sus casillas) o a un movimiento que no va al 210.';
+  }
+
   function calcularCuadre(filas){
     var c = {
       total: 0, clasificado: 0, ingresos: 0, informativo: 0, excluido: 0, pendiente: 0,
@@ -606,7 +633,7 @@
         c.noVanEnDeclaracion.push({ descripcion: f.descripcion || f.concepto || '', informante: f.informante || '', valor: v, motivo: f.motivoExclusion || 'Excluido manualmente' });
       } else if(ced === 'informativo'){
         c.informativo += v; c.conteo.informativo++;
-        c.noVanEnDeclaracion.push({ descripcion: f.descripcion || f.concepto || '', informante: f.informante || '', valor: v, motivo: 'Informativo (consignaciones / patrimonio / retención): no es ingreso de cédula' });
+        c.noVanEnDeclaracion.push({ descripcion: f.descripcion || f.concepto || '', informante: f.informante || '', valor: v, motivo: motivoInformativo(f) });
       } else if(!ced){
         c.pendiente += v; c.conteo.pendiente++;
       } else {

@@ -311,7 +311,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 <script src="shared/reajuste-fiscal.js?v=761bd775"></script>
 <script src="shared/decl-prev-210.js?v=a03c70c1"></script>
 <script src="shared/validaciones210.js?v=a6bc1c89"></script>
-<script src="shared/parser-exogena-pn.js?v=b02807f5"></script>
+<script src="shared/parser-exogena-pn.js?v=a586c4fd"></script>
 <script src="shared/parser-muisca-consultante.js?v=b08ef6fb"></script>
 <script src="shared/sugerida-parser-210.js?v=f53a18af"></script>
 <script src="shared/canonicalize-inputs.js?v=8e51ce11"></script>
@@ -683,14 +683,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
         </div>
         <div class="card" id="cardLiquidacion" style="text-align:center;background:linear-gradient(135deg,#ECFDF5 0%,#D1FAE5 100%);border:1px solid var(--green2)">
           <div class="section-title" style="justify-content:center;margin-bottom:14px"><span class="num">12</span> Liquidación final y descarga</div>
-          <div style="margin-bottom:14px;padding:10px;background:#fff;border:1px solid var(--border);border-radius:8px;text-align:left;max-width:560px;margin-left:auto;margin-right:auto">
-            <label style="display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--pri);cursor:pointer">
-              <input type="checkbox" id="cas994ConSalvedades" onchange="toggleSalvedades()" style="width:16px;height:16px;cursor:pointer">
-              <strong>¿Firmas con salvedades?</strong> <span class="hint" style="font-weight:400;color:var(--muted)">(c994)</span>
-            </label>
-            <div style="font-size:.74rem;color:var(--muted);margin-top:4px;margin-left:24px">Marca esta opción si tienes observaciones que dejas explícitas en la declaración.</div>
-            <textarea id="cas994TextoSalvedades" class="hidden" placeholder="Detalla las salvedades que dejas en la declaración (aparecen en Hoja 2 del Excel papel de trabajo y en Hoja 8 Bitácora)..." style="width:100%;margin-top:10px;padding:10px;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:.85rem;min-height:80px;resize:vertical"></textarea>
-          </div>
           <div style="margin-bottom:14px;padding:10px 12px;background:#fff;border:1px solid var(--border);border-radius:8px;text-align:left;max-width:560px;margin-left:auto;margin-right:auto;display:flex;gap:10px;flex-wrap:wrap">
             <div style="flex:1;min-width:200px"><label style="display:block;font-size:.72rem;color:var(--muted);margin-bottom:3px">Consignaciones bancarias del año <span style="opacity:.7">(opcional · diagnóstico bancos)</span></label><input type="text" id="entCons" inputmode="numeric" placeholder="$" style="width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:.85rem"></div>
             <div style="flex:1;min-width:200px"><label style="display:block;font-size:.72rem;color:var(--muted);margin-bottom:3px">Aportes a seguridad social pagados <span style="opacity:.7">(opcional · diagnóstico UGPP)</span></label><input type="text" id="entSS" inputmode="numeric" placeholder="$" style="width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:.85rem"></div>
@@ -981,14 +973,6 @@ function sincTrabIngBruto(){
     var el = document.getElementById('trabIngBruto');
     if(el) el.value = (c355 + c356).toLocaleString('es-CO');
   }
-}
-/* A.3.b — Muestra/oculta textarea de salvedades según el toggle c994. */
-function toggleSalvedades(){
-  var chk = document.getElementById('cas994ConSalvedades');
-  var ta = document.getElementById('cas994TextoSalvedades');
-  if(!chk || !ta) return;
-  ta.classList.toggle('hidden', !chk.checked);
-  if(!chk.checked) ta.value = '';
 }
 /* Recalcula patrimonio líquido AG-1 (read-only) cada vez que cambian bruto/deudas. */
 function recalcAGAnterior(){
@@ -2161,18 +2145,11 @@ function construirEstado(){
                       + (dedAvcAfcTarget   === 'capital'   ? dedAvcAfc   : 0);
   var dedNomNoLaboral = (dedViviendaTarget === 'noLaboral' ? dedVivienda : 0)
                       + (dedAvcAfcTarget   === 'noLaboral' ? dedAvcAfc   : 0);
-  // A.3.b — c994 firma con salvedades
-  var chk994 = document.getElementById('cas994ConSalvedades');
-  var firmaConSalvedades = !!(chk994 && chk994.checked);
-  var textoSalvedades = firmaConSalvedades ? vTxt('cas994TextoSalvedades') : '';
   var estado = {
     declarante: {
       cc: vTxt('cc'),
       nombre: vTxt('nombre'),
-      declaracionesPrevias: parseInt(document.getElementById('prevDecl').value) || 0,
-      // A.3.b — c994
-      firmaConSalvedades: firmaConSalvedades,
-      textoSalvedades: textoSalvedades
+      declaracionesPrevias: parseInt(document.getElementById('prevDecl').value) || 0
     },
     patrimonio: {
       bruto: v('patBruto'),
@@ -2487,8 +2464,6 @@ function guardarBorrador(silencioso){
     'dedSalud','depArt387Num','dedVivienda','dedViviendaImputarA',
     'dedAvcAfc','dedAvcAfcImputarA','depArt336Num','ded1PctFE',
     'patBruto','patDeudas','patLiqAnt','prevDecl',
-    // A.3.b — c994 salvedades
-    'cas994TextoSalvedades',
     // Datos comparativos AG-1
     'agAntPatBruto','agAntDeudas','agAntRentaCedularGen','agAntRentaPensiones',
     'agAntRentaDividendos','agAntImpuestoNeto','agAntRetenciones','agAntSaldoFavorAG2'
@@ -2498,9 +2473,6 @@ function guardarBorrador(silencioso){
   data.year = getYear();
   data.honModo = (document.querySelector('input[name="honModo"]:checked') || {}).value || 'rentasNoLaborales';
   data.f160 = (document.querySelector('input[name="f160"]:checked') || {}).value || 'no';
-  // A.3.b — c994 firma con salvedades (checkbox, no input)
-  var chk994 = document.getElementById('cas994ConSalvedades');
-  data.cas994ConSalvedades = !!(chk994 && chk994.checked);
   // U2 — checkbox declarativo par. 5 Art. 206
   var chkPar5 = document.getElementById('par5Confirma');
   data.par5Confirma = !!(chkPar5 && chkPar5.checked);
@@ -2592,9 +2564,7 @@ function restaurarBorrador(){
         var rad = document.querySelector('input[name="f160"][value="'+data.f160+'"]');
         if(rad){ rad.checked=true; rad.dispatchEvent(new Event('change')); toggleF160(); }
       } else if(k === 'cas994ConSalvedades'){
-        // A.3.b — restaurar checkbox y disparar toggle del textarea
-        var chk = document.getElementById('cas994ConSalvedades');
-        if(chk){ chk.checked = !!data[k]; toggleSalvedades(); }
+        // Salvedades c994 eliminadas — ignorar la clave en borradores guardados antiguos
       } else if(k === 'par5Confirma'){
         // U2 — checkbox declarativo par. 5 Art. 206
         var chkP5 = document.getElementById('par5Confirma');
