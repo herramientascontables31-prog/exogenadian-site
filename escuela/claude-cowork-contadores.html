@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<script src="../shared/cookie-consent.js?v=dc60b695"></script>
+<script src="../shared/cookie-consent.js?v=9fc53d44"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -13,12 +13,12 @@ gtag('config', 'G-S7SM6ST4CC');
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <meta name="theme-color" content="#059669">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Curso Claude Cowork para Contadores &mdash; Una carpeta por cliente, contexto que no se pierde | Ex&oacute;genaDIAN</title>
-<meta name="description" content="Aprende a usar Claude Cowork (el escritorio de Anthropic) como contador colombiano. 7 m&oacute;dulos: instalar, organizar carpetas por cliente, crear Projects reutilizables, memoria persistente, flujos de cierre/requerimiento/ex&oacute;gena, privacidad y backup.">
+<title>Curso Claude para Contadores &mdash; Cowork, Skills y Claude Code en tu pr&aacute;ctica contable | Ex&oacute;genaDIAN</title>
+<meta name="description" content="Curso unificado de Claude para el contador colombiano. 12 m&oacute;dulos: ecosistema y modelos de Anthropic, Claude Cowork con carpeta-por-cliente, Projects y memoria, 3 Skills contables (F1001, cuadre IVA, prevalidador), pipeline encadenado, Claude Code y privacidad Ley 1581.">
 <link rel="canonical" href="https://exogenadian.com/escuela/claude-cowork-contadores.html">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="Curso Claude Cowork para Contadores &mdash; Una carpeta por cliente | Ex&oacute;genaDIAN">
-<meta property="og:description" content="Domina Claude Cowork: el escritorio de Anthropic con carpetas-por-cliente, Projects y memoria persistente. 7 m&oacute;dulos pr&aacute;cticos para contadores colombianos.">
+<meta property="og:title" content="Curso Claude para Contadores &mdash; Cowork, Skills y Claude Code | Ex&oacute;genaDIAN">
+<meta property="og:description" content="El curso completo de Claude para contadores colombianos: escritorio Cowork carpeta-por-cliente, Skills con normativa DIAN y Claude Code. 12 m&oacute;dulos pr&aacute;cticos.">
 <meta property="og:url" content="https://exogenadian.com/escuela/claude-cowork-contadores.html">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_CO">
@@ -28,7 +28,7 @@ gtag('config', 'G-S7SM6ST4CC');
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Course","name":"Claude Cowork para Contadores","description":"7 m&oacute;dulos pr&aacute;cticos para usar Claude Cowork como contador colombiano: instalaci&oacute;n, carpetas por cliente, Projects, memoria y flujos de cierre.","provider":{"@type":"Organization","name":"Ex&oacute;genaDIAN","url":"https://exogenadian.com"},"educationalLevel":"Professional","inLanguage":"es","audience":{"@type":"Audience","audienceType":"Contadores p&uacute;blicos colombianos"}}
+{"@context":"https://schema.org","@type":"Course","name":"Claude para Contadores (Cowork + Skills + Claude Code)","description":"12 m&oacute;dulos pr&aacute;cticos para dominar Claude como contador colombiano: ecosistema y modelos de Anthropic, escritorio Cowork con carpeta-por-cliente, Projects y memoria, Skills contables con normativa DIAN, pipeline encadenado y Claude Code.","provider":{"@type":"Organization","name":"Ex&oacute;genaDIAN","url":"https://exogenadian.com"},"educationalLevel":"Professional","inLanguage":"es","audience":{"@type":"Audience","audienceType":"Contadores p&uacute;blicos colombianos"}}
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -148,6 +148,16 @@ body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-
 .copy-btn{background:#334155;color:#E2E8F0;border:none;padding:5px 12px;border-radius:6px;font-size:.72rem;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;transition:.2s;float:right;margin-top:-4px}
 .copy-btn:hover{background:#475569}
 .copy-btn.copied{background:var(--green-600);color:#fff}
+.code-block .cs{color:#FB7185}
+.skill-card{background:#fff;border:1.5px solid var(--claude-300);border-radius:14px;padding:18px 22px;margin:16px 0;position:relative}
+.skill-card .skill-pill{display:inline-flex;align-items:center;gap:6px;background:var(--claude-100);color:var(--claude-700);font-size:.7rem;font-weight:800;padding:3px 10px;border-radius:100px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.skill-card h4{font-family:'Fraunces',serif;font-size:1.1rem;color:var(--gray-900);margin-bottom:6px}
+.skill-card p{font-size:.88rem;color:var(--gray-600);line-height:1.6}
+.skill-card .skill-norma{display:inline-block;background:var(--amber-50);border:1px solid #FDE68A;color:var(--amber-700);padding:2px 8px;border-radius:6px;font-size:.74rem;font-weight:600;margin:6px 4px 0 0}
+.pipeline{background:#fff;border:1.5px solid var(--gray-200);border-radius:14px;padding:16px;margin:18px 0;display:flex;align-items:center;gap:8px;flex-wrap:wrap;overflow-x:auto}
+.pipe-step{flex:0 0 auto;background:linear-gradient(135deg,var(--claude-50),#fff);border:1px solid var(--claude-300);border-radius:10px;padding:10px 14px;font-size:.82rem;color:var(--claude-700);font-weight:700}
+.pipe-arrow{color:var(--gray-400);font-size:1.1rem;font-weight:800}
+.nav-sep{padding:14px 20px 4px;font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--claude-700)}
 </style>
 <script async src="../shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
 #exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
@@ -185,7 +195,7 @@ body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-
 })();
 </script></head>
 <body>
-<script defer src="../shared/pro.js?v=848fbf16"></script>
+<script defer src="../shared/pro.js?v=994665f5"></script>
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 <div class="curso-layout">
   <aside class="sidebar" id="sidebar">
@@ -194,18 +204,26 @@ body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-
     </div>
     <div class="sidebar-curso">
       <h3>Escuela Contable IA</h3>
-      <p>Claude Cowork para Contadores</p>
-      <span class="claude-pill">Nivel 2 &middot; Ruta IA</span>
+      <p>Claude para Contadores</p>
+      <span class="claude-pill">Cowork + Skills + Code &middot; Ruta IA</span>
     </div>
-    <div class="progress-bar"><div class="fill" id="progressFill" style="width:14%"></div></div>
+    <div class="progress-bar"><div class="fill" id="progressFill" style="width:8%"></div></div>
     <nav class="sidebar-nav" id="sidebarNav">
-      <a href="#modulo-1" class="active" onclick="navigateTo(1)"><span class="nav-num">1</span> Qu&eacute; es Cowork y por qu&eacute;</a>
-      <a href="#modulo-2" onclick="navigateTo(2)"><span class="nav-num">2</span> Instalar y configurar</a>
+      <div class="nav-sep">Parte 1 &middot; Claude Cowork</div>
+      <a href="#modulo-1" class="active" onclick="navigateTo(1)"><span class="nav-num">1</span> El ecosistema Claude y sus modelos</a>
+      <a href="#modulo-2" onclick="navigateTo(2)"><span class="nav-num">2</span> Instalar y configurar Cowork</a>
       <a href="#modulo-3" onclick="navigateTo(3)"><span class="nav-num">3</span> Carpeta-por-cliente</a>
       <a href="#modulo-4" onclick="navigateTo(4)"><span class="nav-num">4</span> Projects: contexto que no se borra</a>
       <a href="#modulo-5" onclick="navigateTo(5)"><span class="nav-num">5</span> Memoria + slash commands</a>
       <a href="#modulo-6" onclick="navigateTo(6)"><span class="nav-num">6</span> 3 flujos t&iacute;picos</a>
-      <a href="#modulo-7" onclick="navigateTo(7)"><span class="nav-num">7</span> Privacidad, backup y cierre</a>
+      <div class="nav-sep">Parte 2 &middot; Skills</div>
+      <a href="#modulo-7" onclick="navigateTo(7)"><span class="nav-num">7</span> Qu&eacute; es una Skill y su anatom&iacute;a</a>
+      <a href="#modulo-8" onclick="navigateTo(8)"><span class="nav-num">8</span> Skill: clasificador-exogena-co</a>
+      <a href="#modulo-9" onclick="navigateTo(9)"><span class="nav-num">9</span> Skills: cuadre IVA + prevalidador</a>
+      <a href="#modulo-10" onclick="navigateTo(10)"><span class="nav-num">10</span> Encadenar skills y compartirlas</a>
+      <div class="nav-sep">Parte 3 &middot; Claude Code y cierre</div>
+      <a href="#modulo-11" onclick="navigateTo(11)"><span class="nav-num">11</span> Claude Code para contadores</a>
+      <a href="#modulo-12" onclick="navigateTo(12)"><span class="nav-num">12</span> Privacidad, backup y plan 30 d&iacute;as</a>
     </nav>
     <div class="sidebar-back"><a href="../escuela.html">&larr; Volver a la Escuela</a></div>
   </aside>
@@ -213,32 +231,32 @@ body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-
     <section id="modulo-1" class="modulo-section active">
       <div class="mod-header">
         <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; <a href="../especializacion-ia.html">Ruta IA</a> &rsaquo; M&oacute;dulo 1</div>
-        <div class="mod-num">M&oacute;dulo 1 de 7 &middot; Gratis</div>
-        <h1>Qu&eacute; es Claude Cowork y por qu&eacute; un contador colombiano lo necesita</h1>
-        <p class="mod-desc">Claude Cowork es el escritorio de Anthropic: una app que se instala en tu computador y puede ver tus carpetas, leer tus Excel y recordar al cliente entre sesiones. Para un contador con 15 clientes, eso cambia c&oacute;mo trabajas en cierre y en mayo.</p>
+        <div class="mod-num">M&oacute;dulo 1 de 12 &middot; Gratis</div>
+        <h1>El ecosistema Claude: productos, modelos y los t&eacute;rminos que vas a o&iacute;r</h1>
+        <p class="mod-desc">Antes de instalar nada, un mapa: qu&eacute; productos vende Anthropic (web, Cowork, Claude Code), qu&eacute; modelos hay debajo (Fable 5, Opus, Sonnet, Haiku) y qu&eacute; significa cada t&eacute;rmino que va a aparecer en el curso. Con el mapa claro, el resto fluye.</p>
         <div class="objetivos">
           <div class="objetivos-titulo">Al finalizar este m&oacute;dulo</div>
           <ul>
-            <li>Distinguir Claude.ai (web) vs. Claude Cowork (escritorio) vs. Claude Code (CLI)</li>
-            <li>Entender por qu&eacute; Cowork es el frente que m&aacute;s tiempo ahorra a un contador con cartera</li>
-            <li>Saber qu&eacute; vas a producir al final del curso: una carpeta-por-cliente reutilizable</li>
+            <li>Distinguir Claude.ai (web) vs. Claude Cowork (escritorio) vs. Claude Code (terminal)</li>
+            <li>Saber qu&eacute; modelo elegir seg&uacute;n la tarea (Fable 5, Opus 4.8, Sonnet 4.6, Haiku 4.5)</li>
+            <li>Manejar el glosario: Project, Knowledge, memoria, slash command, Skill, token, contexto</li>
           </ul>
         </div>
       </div>
       <div class="curso-hero">
         <span class="curso-pill">Promesa del curso</span>
-        <h2>Al final de los 7 m&oacute;dulos vas a tener una carpeta-por-cliente con Claude Cowork que retoma el contexto sin que tengas que explicarlo cada vez.</h2>
-        <p>Vas a salir con: una estructura de carpetas est&aacute;ndar para tus clientes (PUC, balances hist&oacute;ricos, declaraciones, normativa local), un <strong>Project en Claude</strong> por cliente con sus Custom Instructions, y los 3 flujos m&aacute;s frecuentes &mdash;cierre mensual, respuesta a requerimiento DIAN, temporada de ex&oacute;gena&mdash; corriendo encima.</p>
+        <h2>Al final de los 12 m&oacute;dulos vas a tener Claude trabajando contigo en 3 niveles: Cowork con carpeta-por-cliente, 3 Skills contables propias y tu primer flujo en Claude Code.</h2>
+        <p>Vas a salir con: una estructura de carpetas est&aacute;ndar para tus clientes, un <strong>Project en Claude</strong> por cliente con sus Custom Instructions, los 3 flujos m&aacute;s frecuentes (cierre mensual, requerimiento DIAN, ex&oacute;gena), 3 <strong>Skills</strong> reutilizables con normativa colombiana (clasificador F1001, cuadre IVA, validador del prevalidador) y el criterio para saber cu&aacute;ndo dar el salto a <strong>Claude Code</strong>.</p>
         <div class="curso-stats">
-          <div><strong>7</strong>m&oacute;dulos</div>
-          <div><strong>1</strong>plantilla carpeta</div>
+          <div><strong>12</strong>m&oacute;dulos</div>
+          <div><strong>3</strong>skills funcionales</div>
           <div><strong>3</strong>flujos integrados</div>
           <div><strong>100%</strong>gratis</div>
         </div>
       </div>
       <div class="content-block">
         <h2>Los 3 &ldquo;frentes&rdquo; de Claude (sin confundirse)</h2>
-        <p>Anthropic vende a Claude con varios envases. Saber cu&aacute;l es cu&aacute;l te ahorra plata y tiempo:</p>
+        <p>Anthropic vende a Claude con varios envases. Saber cu&aacute;l es cu&aacute;l te ahorra plata y tiempo. Este curso cubre los tres &mdash;Cowork a fondo (m&oacute;dulos 2-6), Skills (7-10) y Claude Code como puerta de entrada (11)&mdash;:</p>
         <div class="cards-grid">
           <div class="card-mini">
             <h4>Claude.ai (web)</h4>
@@ -246,11 +264,11 @@ body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-
           </div>
           <div class="card-mini is-claude">
             <h4>Claude Cowork (escritorio)</h4>
-            <p>App que instalas. Ve tus carpetas, recuerda al cliente entre sesiones, soporta <strong>Projects</strong> y <strong>memory</strong>. Es lo que este curso ense&ntilde;a.</p>
+            <p>App que instalas. Ve tus carpetas, recuerda al cliente entre sesiones, soporta <strong>Projects</strong>, <strong>memoria</strong> y <strong>Skills</strong>. Es el coraz&oacute;n de este curso.</p>
           </div>
-          <div class="card-mini">
-            <h4>Claude Code (CLI)</h4>
-            <p>Para construir software. Si est&aacute;s armando tu propio liquidador o app, eso va en el curso <a href="desarrollo-contadores.html">Desarrollo para Contadores</a>.</p>
+          <div class="card-mini is-claude">
+            <h4>Claude Code (terminal)</h4>
+            <p>El agente para trabajo t&eacute;cnico: corre en la terminal, en app de escritorio o en el navegador. Ejecuta comandos, transforma archivos en lote y construye herramientas. Lo vemos en el M&oacute;dulo 11.</p>
           </div>
         </div>
         <div class="tip">
@@ -259,16 +277,49 @@ body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-
         </div>
       </div>
       <div class="content-block">
-        <h2>Por qu&eacute; Cowork importa m&aacute;s a un contador que a otros profesionales</h2>
+        <h2>Los modelos: qu&eacute; hay debajo del chat</h2>
+        <p>Claude no es un solo cerebro: es una familia de modelos y t&uacute; eliges cu&aacute;l usar en el selector del chat (web, Cowork y Code). La regla pr&aacute;ctica: m&aacute;s capacidad = m&aacute;s lento y consume m&aacute;s de tu cuota del plan.</p>
+        <table class="tabla-norm">
+          <thead><tr><th>Modelo</th><th>Qu&eacute; es</th><th>Cu&aacute;ndo usarlo como contador</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Claude Fable 5</strong></td><td>El m&aacute;s potente de la familia (nivel superior a Opus)</td><td>An&aacute;lisis complejos: respuesta a requerimiento especial, planeaci&oacute;n tributaria, conciliaciones enredadas</td></tr>
+            <tr><td><strong>Claude Opus 4.8</strong></td><td>El Opus m&aacute;s capaz; excelente en trabajo largo y aut&oacute;nomo</td><td>Cierres completos, ex&oacute;gena de principio a fin, tareas de varias horas</td></tr>
+            <tr><td><strong>Claude Sonnet 4.6</strong></td><td>El equilibrio velocidad/inteligencia</td><td>El d&iacute;a a d&iacute;a: clasificar cuentas, redactar correos, revisar un balance</td></tr>
+            <tr><td><strong>Claude Haiku 4.5</strong></td><td>El m&aacute;s r&aacute;pido y liviano</td><td>Preguntas puntuales, extraer un dato de un PDF, tareas simples en volumen</td></tr>
+          </tbody>
+        </table>
+        <div class="error-comun">
+          <div class="error-comun-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg><h4>Ojo con los nombres que circulan en redes</h4></div>
+          <p>Los modelos oficiales vigentes son los de la tabla: <strong>Fable 5, Opus 4.8, Sonnet 4.6 y Haiku 4.5</strong>. Cualquier otro nombre que veas circular (variantes inventadas, &ldquo;filtraciones&rdquo;) no es un modelo oficial de Anthropic. Verifica siempre en el selector de modelos de tu app o en la documentaci&oacute;n oficial antes de pagar un curso o cambiar tu flujo por un &ldquo;modelo nuevo&rdquo;.</p>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>Glosario: los t&eacute;rminos que vas a o&iacute;r en el curso</h2>
+        <table class="tabla-norm">
+          <thead><tr><th>T&eacute;rmino</th><th>Qu&eacute; significa (en lenguaje de contador)</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Project</strong></td><td>Un contenedor por cliente con instrucciones permanentes y archivos de referencia. Como el archivador f&iacute;sico del cliente, pero que Claude lee solo. (M&oacute;dulo 4)</td></tr>
+            <tr><td><strong>Custom Instructions</strong></td><td>Las reglas fijas del Project: qui&eacute;n es el cliente, c&oacute;mo citar normas, en qu&eacute; formato entregar. Se escriben una vez.</td></tr>
+            <tr><td><strong>Knowledge</strong></td><td>Los archivos de referencia que subes al Project (RUT, PUC, &uacute;ltima renta). Claude los consulta antes de responder.</td></tr>
+            <tr><td><strong>Memoria</strong></td><td>Lo que Claude guarda solo entre sesiones: &ldquo;este cliente paga primas el 15 de junio&rdquo;. Editable y borrable. (M&oacute;dulo 5)</td></tr>
+            <tr><td><strong>Slash command</strong></td><td>Un atajo tipo <code>/cierre</code> que dispara un prompt completo guardado en un archivo. (M&oacute;dulo 5)</td></tr>
+            <tr><td><strong>Skill</strong></td><td>Una receta empaquetada: instrucciones + norma + ejemplos en una carpeta que Claude activa solo cuando la tarea lo amerita. (M&oacute;dulos 7-10)</td></tr>
+            <tr><td><strong>Token</strong></td><td>La unidad en que el modelo mide el texto (~4 caracteres). Los planes limitan cu&aacute;ntos tokens consumes por per&iacute;odo.</td></tr>
+            <tr><td><strong>Ventana de contexto</strong></td><td>Cu&aacute;nto &ldquo;cabe en la mesa&rdquo; de una conversaci&oacute;n: todo lo que Claude tiene presente a la vez. Si la conversaci&oacute;n crece demasiado, lo viejo se resume o se pierde &mdash; por eso los Projects y la memoria importan.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="content-block">
+        <h2>Por qu&eacute; esto importa m&aacute;s a un contador que a otros profesionales</h2>
         <p>Un dise&ntilde;ador o un copywriter trabaja en proyectos puntuales. Un contador trabaja con los <strong>mismos 15 clientes todos los meses</strong>. Cada cliente tiene PUC propio, sector propio, hist&oacute;rico de ajustes, costumbres de contabilizaci&oacute;n. Si cada vez que abres Claude tienes que re-explicar &ldquo;mi cliente es una PYME importadora del sector textil con responsabilidades 05-09-42-O-13&rdquo;, est&aacute;s perdiendo tokens y tiempo.</p>
-        <p>Cowork resuelve eso con dos cosas: <strong>carpetas locales</strong> (Claude lee tus Excel sin que los subas a cada chat) y <strong>Projects</strong> (un contenedor con instrucciones permanentes y archivos de referencia). Combinadas son lo que Avora vende como &ldquo;el frente Cowork&rdquo; y es donde un contador realmente cambia c&oacute;mo trabaja.</p>
+        <p>Cowork resuelve eso con dos cosas: <strong>carpetas locales</strong> (Claude lee tus Excel sin que los subas a cada chat) y <strong>Projects</strong> (un contenedor con instrucciones permanentes y archivos de referencia). Y cuando la misma l&oacute;gica se repite en TODOS tus clientes &mdash;clasificar F1001, cuadrar IVA&mdash; la conviertes en una <strong>Skill</strong> que escribes una vez y disparas siempre. Ese es el arco del curso.</p>
       </div>
       <div class="resumen">
         <div class="resumen-titulo">Lo clave de este m&oacute;dulo</div>
         <ul>
-          <li><strong>Cowork = escritorio.</strong> Ve tus carpetas, recuerda al cliente, soporta Projects.</li>
-          <li>Para un contador con cartera, Cowork es el frente que m&aacute;s tiempo libera.</li>
-          <li>Al final del curso tendr&aacute;s una carpeta-por-cliente y un Project funcional.</li>
+          <li><strong>3 frentes:</strong> web (consultas sueltas), Cowork (tu d&iacute;a a d&iacute;a con carpetas), Claude Code (terminal y automatizaci&oacute;n).</li>
+          <li><strong>4 modelos vigentes:</strong> Fable 5 (tope), Opus 4.8 (trabajo largo), Sonnet 4.6 (d&iacute;a a d&iacute;a), Haiku 4.5 (r&aacute;pido). Desconf&iacute;a de nombres no oficiales.</li>
+          <li><strong>El arco del curso:</strong> carpeta-por-cliente &rarr; Projects &rarr; flujos &rarr; Skills &rarr; Claude Code.</li>
         </ul>
       </div>
       <div class="mod-nav">
@@ -279,7 +330,7 @@ body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-
     <section id="modulo-2" class="modulo-section">
       <div class="mod-header">
         <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; <a href="../especializacion-ia.html">Ruta IA</a> &rsaquo; M&oacute;dulo 2</div>
-        <div class="mod-num">M&oacute;dulo 2 de 7</div>
+        <div class="mod-num">M&oacute;dulo 2 de 12</div>
         <h1>Instalar Claude Cowork y dejarlo viendo tus carpetas</h1>
         <p class="mod-desc">Descarga, login con la cuenta de Claude Pro que ya usas, y la decisi&oacute;n importante: <strong>qu&eacute; carpeta dejarle ver</strong>. Si le abres todo el disco, est&aacute;s violando privacidad de clientes. Si no le abres nada, no sirve.</p>
         <div class="objetivos">
@@ -350,7 +401,7 @@ y dime cu&aacute;ntas cuentas tiene a nivel auxiliar y cu&aacute;l es el total d
     <section id="modulo-3" class="modulo-section">
       <div class="mod-header">
         <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; <a href="../especializacion-ia.html">Ruta IA</a> &rsaquo; M&oacute;dulo 3</div>
-        <div class="mod-num">M&oacute;dulo 3 de 7</div>
+        <div class="mod-num">M&oacute;dulo 3 de 12</div>
         <h1>El modelo carpeta-por-cliente</h1>
         <p class="mod-desc">Una carpeta = un cliente. Misma estructura para todos. Cuando le digas a Claude &ldquo;trabaja sobre pyme-abc&rdquo; sabr&aacute; ad&oacute;nde mirar sin que se lo deletrees. Esta es la base de todo lo que sigue.</p>
         <div class="objetivos">
@@ -438,7 +489,7 @@ y dime cu&aacute;ntas cuentas tiene a nivel auxiliar y cu&aacute;l es el total d
     <section id="modulo-4" class="modulo-section">
       <div class="mod-header">
         <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; <a href="../especializacion-ia.html">Ruta IA</a> &rsaquo; M&oacute;dulo 4</div>
-        <div class="mod-num">M&oacute;dulo 4 de 7</div>
+        <div class="mod-num">M&oacute;dulo 4 de 12</div>
         <h1>Projects en Claude &mdash; contexto que no se borra</h1>
         <p class="mod-desc">Un Project en Claude es un contenedor con <strong>Custom Instructions permanentes</strong> y <strong>archivos de referencia</strong> (Knowledge). Cada cliente tendr&aacute; su Project. Cuando entras, Claude ya sabe el PUC, las responsabilidades y c&oacute;mo le gusta al cliente que se contabilicen las cosas.</p>
         <div class="objetivos">
@@ -515,7 +566,7 @@ FORMATOS DE SALIDA:
     <section id="modulo-5" class="modulo-section">
       <div class="mod-header">
         <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; <a href="../especializacion-ia.html">Ruta IA</a> &rsaquo; M&oacute;dulo 5</div>
-        <div class="mod-num">M&oacute;dulo 5 de 7</div>
+        <div class="mod-num">M&oacute;dulo 5 de 12</div>
         <h1>Memoria persistente y slash commands</h1>
         <p class="mod-desc">Cowork tiene memoria autom&aacute;tica: si en un chat le ense&ntilde;as algo (&ldquo;mi cliente paga las primas el 15 de junio, no el 30&rdquo;), te lo recuerda en chats siguientes del mismo Project. Y los <strong>slash commands</strong> custom te dejan disparar tareas frecuentes con dos palabras.</p>
         <div class="objetivos">
@@ -601,7 +652,7 @@ NO inventes NITs. Si te falta uno, l&iacute;stalo en la columna "?".</div>
     <section id="modulo-6" class="modulo-section">
       <div class="mod-header">
         <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; <a href="../especializacion-ia.html">Ruta IA</a> &rsaquo; M&oacute;dulo 6</div>
-        <div class="mod-num">M&oacute;dulo 6 de 7</div>
+        <div class="mod-num">M&oacute;dulo 6 de 12</div>
         <h1>3 flujos t&iacute;picos en Cowork</h1>
         <p class="mod-desc">Los 3 momentos donde la inversi&oacute;n en montar todo lo anterior te paga: cierre mensual (cada mes), respuesta a requerimiento DIAN (a demanda) y temporada de ex&oacute;gena (febrero-abril).</p>
         <div class="objetivos">
@@ -636,7 +687,7 @@ NO inventes NITs. Si te falta uno, l&iacute;stalo en la columna "?".</div>
         </ol>
         <div class="error-comun">
           <div class="error-comun-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg><h4>No deleges la respuesta final</h4></div>
-          <p>El borrador es de Claude, la respuesta es tuya. Si firmas algo que no leiste y lleva un dato falso, el delito penal por declaraci&oacute;n inexacta es tuyo, no de Anthropic. Cowork acelera la redacci&oacute;n; <strong>no</strong> reemplaza el criterio del contador firmante.</p>
+          <p>El borrador es de Claude, la respuesta es tuya. Si firmas algo que no le&iacute;ste y lleva un dato falso, el delito penal por declaraci&oacute;n inexacta es tuyo, no de Anthropic. Cowork acelera la redacci&oacute;n; <strong>no</strong> reemplaza el criterio del contador firmante.</p>
         </div>
       </div>
       <div class="content-block">
@@ -665,13 +716,606 @@ NO inventes NITs. Si te falta uno, l&iacute;stalo en la columna "?".</div>
       </div>
       <div class="mod-nav">
         <a href="#modulo-5" class="prev" onclick="navigateTo(5)">&larr; M&oacute;dulo 5</a>
-        <a href="#modulo-7" class="next" onclick="navigateTo(7)">M&oacute;dulo 7: Privacidad y cierre &rarr;</a>
+        <a href="#modulo-7" class="next" onclick="navigateTo(7)">M&oacute;dulo 7: Qu&eacute; es una Skill &rarr;</a>
       </div>
     </section>
     <section id="modulo-7" class="modulo-section">
       <div class="mod-header">
         <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; <a href="../especializacion-ia.html">Ruta IA</a> &rsaquo; M&oacute;dulo 7</div>
-        <div class="mod-num">M&oacute;dulo 7 de 7</div>
+        <div class="mod-num">M&oacute;dulo 7 de 12</div>
+        <h1>Qu&eacute; es una Skill y su anatom&iacute;a</h1>
+        <p class="mod-desc">Una Skill es una <em>receta</em> que le ense&ntilde;as a Claude una vez y la usas siempre &mdash;en Cowork y tambi&eacute;n en Claude Code&mdash;. Para un contador, las Skills convierten tus mejores prompts (cuadre IVA, clasificaci&oacute;n F1001) en herramientas que se activan solas cuando la tarea lo amerita.</p>
+        <div class="objetivos">
+          <div class="objetivos-titulo">Al finalizar este m&oacute;dulo</div>
+          <ul>
+            <li>Distinguir Skill vs. prompt suelto vs. slash command</li>
+            <li>Conocer la estructura de carpeta de una skill (<code>SKILL.md</code> + references + examples)</li>
+            <li>Saber escribir el <code>description</code> que hace que Claude la active en el momento correcto</li>
+          </ul>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>Skill vs. prompt vs. slash command</h2>
+        <table class="tabla-norm">
+          <thead><tr><th>&nbsp;</th><th>Prompt suelto</th><th>Slash command</th><th>Skill</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Vive en</strong></td><td>Tu memoria / nota suelta</td><td>Un archivo <code>.md</code> en la carpeta</td><td>Una carpeta dedicada con <code>SKILL.md</code> + scripts + ejemplos</td></tr>
+            <tr><td><strong>Reusable</strong></td><td>No (lo reescribes cada vez)</td><td>S&iacute; con un comando</td><td>S&iacute; y composable con otras skills</td></tr>
+            <tr><td><strong>Sirve para</strong></td><td>Tareas &uacute;nicas</td><td>Tareas frecuentes en un Project</td><td>Tareas que se repiten en TODOS los clientes y quieres compartir con tu equipo</td></tr>
+            <tr><td><strong>Tama&ntilde;o</strong></td><td>1-5 l&iacute;neas</td><td>10-30 l&iacute;neas</td><td>50-500 l&iacute;neas + ejemplos + tests</td></tr>
+          </tbody>
+        </table>
+        <div class="tip">
+          <div class="tip-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><h4>Criterio para subir de slash a skill</h4></div>
+          <p>Si te vas a copiar el slash command de un cliente a otro y le tienes que ajustar variables cada vez, ya merece ser skill. Las skills se parametrizan y se cargan donde sea (no viven dentro de un Project espec&iacute;fico) &mdash; y la misma carpeta sirve en Cowork y en Claude Code.</p>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>3 casos contables donde una Skill paga rapid&iacute;simo</h2>
+        <div class="cards-grid">
+          <div class="card-mini is-claude">
+            <h4>Clasificador F1001</h4>
+            <p>Mapear cuentas del PUC a uno de los 28 conceptos del F1001. Lo haces igual para los 15 clientes. <strong>La montamos en el M&oacute;dulo 8.</strong></p>
+          </div>
+          <div class="card-mini is-claude">
+            <h4>Cuadre IVA vs. balance</h4>
+            <p>IVA generado del 300 contra cuenta 2408. IVA descontable contra cuenta 1355. Misma l&oacute;gica, distintas cifras. <strong>M&oacute;dulo 9.</strong></p>
+          </div>
+          <div class="card-mini is-claude">
+            <h4>Lectura del prevalidador</h4>
+            <p>El log del prevalidador es feo y enumera errores t&eacute;cnicos. Una skill que los traduce a &ldquo;te falta el NIT del tercero X en F1001&rdquo; te ahorra 30 min por iteraci&oacute;n. <strong>M&oacute;dulo 9.</strong></p>
+          </div>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>Estructura de la carpeta</h2>
+        <div class="fs-tree">
+<span class="fs-folder">skills\clasificador-exogena-co\</span>
+&nbsp;&nbsp;<span class="fs-file">SKILL.md</span>      <span class="fs-comment"># El archivo principal: descripci&oacute;n + instrucciones</span>
+&nbsp;&nbsp;<span class="fs-folder">references\</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-file">res-227-2024.md</span>   <span class="fs-comment"># Norma DIAN resumida</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-file">conceptos-f1001.md</span> <span class="fs-comment"># Los 28 conceptos del F1001</span>
+&nbsp;&nbsp;<span class="fs-folder">examples\</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-file">caso-pyme.md</span>      <span class="fs-comment"># Ejemplo entrada/salida real</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-file">caso-esal.md</span>
+&nbsp;&nbsp;<span class="fs-folder">scripts\</span>      <span class="fs-comment"># Opcional: scripts ejecutables Python/JS</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-file">verificar_nit.py</span>
+        </div>
+        <p>Esta estructura no es opcional: Claude busca exactamente estos archivos para entender qu&eacute; hace la skill y cu&aacute;ndo activarla.</p>
+      </div>
+      <div class="content-block">
+        <h2>El archivo SKILL.md &mdash; tres bloques</h2>
+        <p>SKILL.md tiene tres bloques bien definidos: <strong>frontmatter</strong> (nombre + descripci&oacute;n para que Claude sepa cu&aacute;ndo activarla), <strong>instrucciones</strong> (qu&eacute; hacer paso a paso) y <strong>contratos</strong> (qu&eacute; espera de entrada y qu&eacute; entrega de salida).</p>
+        <button class="copy-btn" onclick="copyBlock(this)">Copiar</button>
+        <div class="code-block">
+<span class="ck">---</span>
+<span class="cv">name:</span> clasificador-exogena-co
+<span class="cv">description:</span> Clasifica cuentas del PUC colombiano a conceptos del F1001
+&nbsp;&nbsp;de informaci&oacute;n ex&oacute;gena DIAN AG. Usar cuando el usuario quiera
+&nbsp;&nbsp;pre-armar el F1001 desde un balance o un auxiliar.
+<span class="ck">---</span>
+<span class="ck"># Clasificador Ex&oacute;gena CO</span>
+<span class="ck">## Cu&aacute;ndo activarte</span>
+Cuando el usuario pegue un auxiliar contable, un balance o un listado de cuentas
+y mencione: F1001, ex&oacute;gena, medios magn&eacute;ticos, pagos a terceros o Art. 631 ET.
+<span class="ck">## Lo que haces</span>
+1. Lee la entrada (Excel/CSV con cuentas y movimientos).
+2. Para cada cuenta del grupo 5 (gastos), 7 (costos) y 13xxxx (deudores no operacionales relevantes),
+&nbsp;&nbsp;&nbsp;asigna uno de los 28 conceptos del F1001 (ver references/conceptos-f1001.md).
+3. Para conceptos con tarifas IVA o retenci&oacute;n diferenciadas, desglosa en columnas
+&nbsp;&nbsp;&nbsp;(ver el detalle de las 9 columnas en references/conceptos-f1001.md).
+4. Si una cuenta no mapea a ning&uacute;n concepto, mu&eacute;vela a "Concepto 5066 &mdash; Otros pagos".
+5. Si una cuenta DEBE excluirse del F1001 (ej. n&oacute;mina ya en F2276), mu&eacute;vela a "exclusi&oacute;n" con motivo.
+<span class="ck">## Lo que entregas</span>
+Una tabla Markdown con columnas:
+| C&oacute;digo PUC | Nombre cuenta | Concepto F1001 | Justificaci&oacute;n (norma) | Valor base | Valor IVA mayor | Valor reten |
+<span class="ck">## Restricciones</span>
+- NUNCA inventes el NIT de un tercero. Si falta, marca "?" y l&iacute;stalo aparte.
+- SIEMPRE cita el art&iacute;culo del ET o de la Res. 000227 que justifica la clasificaci&oacute;n.
+- Si una cuenta tiene movimiento por debajo del tope reportable, m&aacute;rcala "&lt; tope: no reportable".
+- Para personas naturales asalariadas (concepto 5004), redondear a m&uacute;ltiplos de mil seg&uacute;n especificaci&oacute;n MUISCA.
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>Por qu&eacute; la <code>description</code> importa tanto</h2>
+        <p>Claude lee el <code>description</code> del frontmatter de TODAS tus skills al inicio del chat y decide cu&aacute;les activar. Si tu description dice <em>&ldquo;clasifica cosas&rdquo;</em>, no se va a activar nunca. Si dice <em>&ldquo;Clasifica cuentas del PUC colombiano a conceptos del F1001... Usar cuando...&rdquo;</em> Claude sabe exactamente cu&aacute;ndo entrar.</p>
+        <div class="error-comun">
+          <div class="error-comun-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg><h4>Errores comunes en la description</h4></div>
+          <p>1) Demasiado gen&eacute;rica (&ldquo;Ayuda con ex&oacute;gena&rdquo;). 2) En ingl&eacute;s en una skill espa&ntilde;ola. 3) Sin la frase &ldquo;Usar cuando...&rdquo; (Claude no infiere el trigger sin ella). 4) M&aacute;s larga que 2 frases (se vuelve ruido).</p>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>References &mdash; donde vive la norma</h2>
+        <p>La carpeta <code>references/</code> es para documentos largos que NO quieres cargar siempre, sino solo cuando la skill los necesita. La Res. 000227/2024 completa son 80 p&aacute;ginas; resumida en <code>res-227-2024.md</code> son 6. Cargas la versi&oacute;n resumida y Claude trabaja sobre eso.</p>
+        <div class="tip">
+          <div class="tip-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><h4>Cu&aacute;ndo actualizar references</h4></div>
+          <p>Cada vez que la DIAN saca una resoluci&oacute;n modificatoria. Para AG actual, las modificatorias 000233 y 000237 de 2025 ya est&aacute;n integradas; cuando salga la pr&oacute;xima toca actualizar.</p>
+        </div>
+      </div>
+      <div class="resumen">
+        <div class="resumen-titulo">Lo clave de este m&oacute;dulo</div>
+        <ul>
+          <li><strong>Skill = receta + scripts + ejemplos.</strong> Vive aparte del Project y sirve en Cowork y Claude Code.</li>
+          <li>Se justifica cuando la l&oacute;gica se repite en todos tus clientes.</li>
+          <li>El <code>description</code> es el trigger: claro, espec&iacute;fico, en espa&ntilde;ol, con &ldquo;Usar cuando...&rdquo;.</li>
+          <li>Las references se actualizan cuando cambia la norma.</li>
+        </ul>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-6" class="prev" onclick="navigateTo(6)">&larr; M&oacute;dulo 6</a>
+        <a href="#modulo-8" class="next" onclick="navigateTo(8)">M&oacute;dulo 8: clasificador-exogena-co &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-8" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; <a href="../especializacion-ia.html">Ruta IA</a> &rsaquo; M&oacute;dulo 8</div>
+        <div class="mod-num">M&oacute;dulo 8 de 12</div>
+        <h1>Tu primera Skill: <code>clasificador-exogena-co</code></h1>
+        <p class="mod-desc">Construimos la primera skill completa de principio a fin. Es la que m&aacute;s tiempo libera durante temporada (enero-abril): clasifica autom&aacute;ticamente cuentas del PUC a los 28 conceptos del F1001 con la norma DIAN vigente.</p>
+        <div class="objetivos">
+          <div class="objetivos-titulo">Al finalizar este m&oacute;dulo</div>
+          <ul>
+            <li>Tener <code>skills\clasificador-exogena-co\</code> funcionando</li>
+            <li>Haber probado con un balance real y verificado el cruce con Res. 000227/2024</li>
+            <li>Entender d&oacute;nde intervenir manualmente y d&oacute;nde dejar correr</li>
+          </ul>
+        </div>
+      </div>
+      <div class="skill-card">
+        <span class="skill-pill">Skill #1</span>
+        <h4>clasificador-exogena-co</h4>
+        <p>Lee un auxiliar contable y devuelve una tabla con concepto F1001 asignado por cuenta, valor base, valor IVA mayor, valor retenci&oacute;n y norma que justifica la clasificaci&oacute;n.</p>
+        <span class="skill-norma">Res. 000227/2024</span>
+        <span class="skill-norma">Art. 631 ET</span>
+        <span class="skill-norma">Decreto 2650/1993 (PUC)</span>
+      </div>
+      <div class="content-block">
+        <h2>Paso 1 &mdash; SKILL.md (c&oacute;piala y ad&aacute;ptala)</h2>
+        <p>Ya la vimos completa en el M&oacute;dulo 7. Solo aseg&uacute;rate de pegarla en <code>skills\clasificador-exogena-co\SKILL.md</code>.</p>
+      </div>
+      <div class="content-block">
+        <h2>Paso 2 &mdash; references/conceptos-f1001.md (los m&aacute;s usados)</h2>
+        <button class="copy-btn" onclick="copyBlock(this)">Copiar</button>
+        <div class="code-block">
+<span class="ck"># Conceptos del F1001 &mdash; AG vigente</span>
+<span class="ck">## Fuente:</span> Res. 000227/2024 DIAN mod. por 000233 y 000237/2025
+<span class="ck">## Conceptos m&aacute;s usados (ordenados por frecuencia en PYMES CO)</span>
+<span class="cv">5001</span> &mdash; Salarios, prestaciones sociales y dem&aacute;s pagos laborales.
+&nbsp;&nbsp;&nbsp;Cuentas PUC t&iacute;picas: 5105 / 5205 / 7105.
+&nbsp;&nbsp;&nbsp;NO reportar si est&aacute; en F2276 N&oacute;mina (excepto pagos no reportados ah&iacute;).
+<span class="cv">5004</span> &mdash; Honorarios profesionales personas naturales / jur&iacute;dicas.
+&nbsp;&nbsp;&nbsp;Cuentas PUC: 5110, 5210, 7110.
+&nbsp;&nbsp;&nbsp;Desglose: base de retenci&oacute;n 10% PJ / 11% PN no declarante / 4% RST.
+<span class="cv">5006</span> &mdash; Servicios en general (no honorarios).
+&nbsp;&nbsp;&nbsp;Cuentas PUC: 5135 (mantenimiento), 5140 (gastos legales), 5145.
+&nbsp;&nbsp;&nbsp;Reten est&aacute;ndar 4-6% seg&uacute;n declarante.
+<span class="cv">5008</span> &mdash; Arrendamientos.
+&nbsp;&nbsp;&nbsp;Cuenta PUC: 5120.
+&nbsp;&nbsp;&nbsp;Reten 3.5% (bienes inmuebles), 4% (bienes muebles).
+<span class="cv">5010</span> &mdash; Compra de activos fijos.
+&nbsp;&nbsp;&nbsp;Cuentas PUC: 152x, 154x, 156x.
+&nbsp;&nbsp;&nbsp;Concepto distinto si es por leasing financiero (1465 / 2335).
+<span class="cv">5011</span> &mdash; Compra de inventarios (mercanc&iacute;as).
+&nbsp;&nbsp;&nbsp;Cuentas PUC: 1435 / 6135 / 7405.
+&nbsp;&nbsp;&nbsp;Si es importaci&oacute;n: incluir aranceles e IVA importaci&oacute;n en valor base.
+<span class="cv">5013</span> &mdash; Compra de bienes no inventario (suministros, papeler&iacute;a).
+&nbsp;&nbsp;&nbsp;Cuentas PUC: 5195, 7195.
+<span class="cv">5014</span> &mdash; Pagos a comisionistas, intermediarios.
+&nbsp;&nbsp;&nbsp;Cuenta PUC: 5125.
+&nbsp;&nbsp;&nbsp;Reten 10% (PJ y PN declarante).
+<span class="cv">5015</span> &mdash; Aportes parafiscales (SENA, ICBF, CCF).
+&nbsp;&nbsp;&nbsp;Cuenta PUC: 2370.
+<span class="cv">5018</span> &mdash; Aportes seguridad social (salud, pensi&oacute;n, ARL).
+&nbsp;&nbsp;&nbsp;Cuentas PUC: 2380.
+<span class="cv">5020</span> &mdash; Intereses y rendimientos financieros pagados.
+&nbsp;&nbsp;&nbsp;Cuentas PUC: 5305, 7305.
+<span class="cv">5022</span> &mdash; Donaciones.
+&nbsp;&nbsp;&nbsp;Cuentas PUC: 5295.
+&nbsp;&nbsp;&nbsp;Tener cuidado: descuento renta Art. 257 ET requiere ESAL beneficiaria.
+<span class="cv">5024</span> &mdash; Impuestos efectivamente pagados (predial, ICA, vehic).
+&nbsp;&nbsp;&nbsp;Cuenta PUC: 5115.
+<span class="cv">5027</span> &mdash; Servicios p&uacute;blicos.
+&nbsp;&nbsp;&nbsp;Cuenta PUC: 5135.
+<span class="cv">5029</span> &mdash; Pagos al exterior (no servicios t&eacute;cnicos).
+&nbsp;&nbsp;&nbsp;Reten 33%-35% seg&uacute;n concepto y CDI.
+<span class="cv">5066</span> &mdash; Otros pagos &mdash; CAJ&Oacute;N FINAL. Usar SOLO si ning&uacute;n otro encaja.
+        </div>
+        <div class="tip">
+          <div class="tip-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><h4>Por qu&eacute; solo los m&aacute;s usados</h4></div>
+          <p>El F1001 vigente tiene 28 conceptos. En una PYME ordinaria CO usas activamente unos 15. Esta reference documenta los cr&iacute;ticos para que la skill clasifique correcto; los ex&oacute;ticos (operaciones con el exterior, pagos a entidades estatales) los agregas seg&uacute;n te aparezcan.</p>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>Paso 3 &mdash; examples/caso-pyme.md</h2>
+        <p>Los examples son CR&Iacute;TICOS para skills contables. Claude mejora much&iacute;simo cuando ve un caso entrada-salida concreto. Pega uno de tus clientes reales (anonimizado):</p>
+        <button class="copy-btn" onclick="copyBlock(this)">Copiar</button>
+        <div class="code-block">
+<span class="ck"># Caso: PYME importadora textil</span>
+<span class="ck">## Entrada (auxiliar contable enero-diciembre simplificado)</span>
+| C&oacute;digo PUC | Nombre cuenta | Valor anual | NIT tercero |
+|------|-------|-------|------|
+| 5105.05 | Sueldos personal operativo | $480.000.000 | varios (N&oacute;mina) |
+| 5110.05 | Honorarios contador externo | $36.000.000 | 79.123.456 |
+| 5125.05 | Comisiones por venta | $24.000.000 | 900.456.789 |
+| 5135.05 | Mantenimiento equipos | $8.500.000 | 800.111.222 |
+| 5120.05 | Arriendo oficina | $84.000.000 | 8.123.456 |
+| 6135.05 | Compra mercanc&iacute;a importada | $1.250.000.000 | varios proveedores ext |
+| 5295.05 | Donaci&oacute;n a fundaci&oacute;n | $5.000.000 | 800.999.000 (ESAL) |
+<span class="ck">## Salida esperada (lo que la skill debe producir)</span>
+| C&oacute;digo PUC | Concepto F1001 | Justificaci&oacute;n | Valor base | Reportable |
+|------|-------|-------|-------|------|
+| 5105.05 | (excluido) | Ya en F2276 N&oacute;mina | $480M | NO |
+| 5110.05 | <span class="cv">5004</span> Honorarios | PN profesional, retenci&oacute;n 11% | $36M | S&Iacute; (tope: s&iacute; supera) |
+| 5125.05 | <span class="cv">5014</span> Comisiones | Intermediario PJ, retenci&oacute;n 10% | $24M | S&Iacute; |
+| 5135.05 | <span class="cv">5006</span> Servicios | Mantenimiento PJ no declarante | $8.5M | S&Iacute; |
+| 5120.05 | <span class="cv">5008</span> Arriendos | Inmueble PN, retenci&oacute;n 3.5% | $84M | S&Iacute; |
+| 6135.05 | <span class="cv">5011</span> Inventarios | Importaci&oacute;n: incluir aranceles e IVA imp en base | $1.250M | S&Iacute; (desglosado por proveedor) |
+| 5295.05 | <span class="cv">5022</span> Donaciones | Verificar Art. 257 ET para descuento | $5M | S&Iacute; |
+<span class="ck">## Notas</span>
+- N&oacute;mina (5105) NO va en F1001 porque ya se reporta agregada en F2276.
+- Compras importadas se desglosan por proveedor extranjero con NIT formato exterior.
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>Paso 4 &mdash; Probar la skill</h2>
+        <p>En Cowork, abre cualquier Project. Si tienes la skill en <code>~/.claude/skills/clasificador-exogena-co/</code> (o en la carpeta de skills del Project), basta con escribir:</p>
+        <div class="code-block">Te paso el auxiliar de mi cliente XYZ del a&ntilde;o gravable. Pre-arma el F1001.
+[pegas o adjuntas la tabla]</div>
+        <p>Claude detecta que mencionas F1001, lee la <code>description</code> de tu skill, la activa, carga las references y produce la tabla seg&uacute;n el contrato del SKILL.md. <strong>T&uacute; revisas</strong> las celdas marcadas con &ldquo;?&rdquo; (NITs faltantes) y los casos donde la skill us&oacute; el concepto-caj&oacute;n 5066 (suelen necesitar criterio humano).</p>
+      </div>
+      <div class="resumen">
+        <div class="resumen-titulo">Lo clave de este m&oacute;dulo</div>
+        <ul>
+          <li>3 archivos: <code>SKILL.md</code>, <code>references/conceptos-f1001.md</code>, <code>examples/caso-pyme.md</code>.</li>
+          <li>El ejemplo entrada-salida es lo que m&aacute;s sube la calidad.</li>
+          <li>NITs faltantes y concepto 5066 son las celdas donde t&uacute; intervienes.</li>
+        </ul>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-7" class="prev" onclick="navigateTo(7)">&larr; M&oacute;dulo 7</a>
+        <a href="#modulo-9" class="next" onclick="navigateTo(9)">M&oacute;dulo 9: cuadre IVA + prevalidador &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-9" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; <a href="../especializacion-ia.html">Ruta IA</a> &rsaquo; M&oacute;dulo 9</div>
+        <div class="mod-num">M&oacute;dulo 9 de 12</div>
+        <h1>Skills 2 y 3: <code>cuadre-iva-co</code> + <code>validador-prevalidador</code></h1>
+        <p class="mod-desc">Dos skills m&aacute;s, mismas piezas: la primera cuadra las declaraciones IVA 300 del a&ntilde;o contra el balance; la segunda traduce los logs t&eacute;cnicos del prevalidador V9 a lenguaje de contador con la acci&oacute;n correctiva exacta.</p>
+        <div class="objetivos">
+          <div class="objetivos-titulo">Al finalizar este m&oacute;dulo</div>
+          <ul>
+            <li>Tener <code>skills\cuadre-iva-co\</code> y <code>skills\validador-prevalidador\</code> funcionando</li>
+            <li>Entender el modelo de saldos a favor vs por pagar y c&oacute;mo afecta el cuadre</li>
+            <li>Ahorrar al menos 30 min por iteraci&oacute;n del prevalidador</li>
+          </ul>
+        </div>
+      </div>
+      <div class="skill-card">
+        <span class="skill-pill">Skill #2</span>
+        <h4>cuadre-iva-co</h4>
+        <p>Lee las 6 declaraciones IVA 300 bimestrales (o cuatrimestrales/anual seg&uacute;n el caso) y las cuadra contra balance: 2408 vs IVA generado, 1355 vs IVA descontable, 2367 vs retenciones de IVA practicadas.</p>
+        <span class="skill-norma">Art. 437 ET</span>
+        <span class="skill-norma">Art. 488 ET</span>
+        <span class="skill-norma">Decreto 1625/2016</span>
+      </div>
+      <div class="content-block">
+        <h2>SKILL.md del cuadre IVA</h2>
+        <button class="copy-btn" onclick="copyBlock(this)">Copiar</button>
+        <div class="code-block">
+<span class="ck">---</span>
+<span class="cv">name:</span> cuadre-iva-co
+<span class="cv">description:</span> Cuadra las declaraciones IVA 300 del a&ntilde;o contra el balance contable
+&nbsp;&nbsp;colombiano. Activar cuando el usuario quiera revisar consistencia de IVA generado,
+&nbsp;&nbsp;descontable, retenciones y saldos antes de cierre o ex&oacute;gena.
+<span class="ck">---</span>
+<span class="ck"># Cuadre IVA CO</span>
+<span class="ck">## Pasos</span>
+1. Lee las declaraciones IVA: en orden, F300 bimestre 1 a 6 (o equivalente anual RST).
+2. Lee el balance acumulado de diciembre.
+3. Por cada bimestre, calcula:
+&nbsp;&nbsp;&nbsp;a) IVA generado del 300 (renglones 27 al 58) vs movimiento de la cuenta 2408 en el bimestre.
+&nbsp;&nbsp;&nbsp;b) IVA descontable del 300 (renglones 67 al 79) vs movimiento de la cuenta 1355 en el bimestre.
+&nbsp;&nbsp;&nbsp;c) Retenciones de IVA practicadas (renglones 91-92) vs movimiento de 2367.
+&nbsp;&nbsp;&nbsp;d) Saldo a favor o pagar (renglones 93-96) vs cuenta 1355.95 o 2408 saldo final.
+4. Reporta diferencias &gt; 1% en cada celda con causa probable (digitaci&oacute;n / norma / temporal).
+5. Si hay saldos a favor: verifica que se imputaron al siguiente bimestre o se solicitaron.
+<span class="ck">## Contrato de salida</span>
+Tabla por bimestre:
+| Bimestre | Concepto | Declaraci&oacute;n 300 | Balance | Diferencia | Causa probable | Acci&oacute;n sugerida |
+<span class="ck">## Restricciones</span>
+- Si el cliente es RST: la declaraci&oacute;n es anual (F260), no bimestral. Usar references/cuadre-rst.md.
+- Si maneja AIU: la base de IVA cambia &mdash; ver references/aiu.md.
+- NO sugerir "presentar correcci&oacute;n" sin revisar firmeza (Art. 714 ET).
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg><h4>Saldos a favor y firmeza</h4></div>
+          <p>La skill puede detectar un descuadre de hace 3 bimestres, pero presentar correcci&oacute;n con sanci&oacute;n del Art. 644 ET es decisi&oacute;n tuya. La firmeza juega: una declaraci&oacute;n con saldo a favor solicitado en devoluci&oacute;n queda en firme distinto que una con saldo a pagar. La skill no debe sugerir correcci&oacute;n autom&aacute;tica.</p>
+        </div>
+      </div>
+      <div class="skill-card">
+        <span class="skill-pill">Skill #3</span>
+        <h4>validador-prevalidador</h4>
+        <p>Lee el log del prevalidador V9 (XML o log de texto) y devuelve cada error en formato &ldquo;Rengl&oacute;n X del F1001: falta NIT del tercero Y; soluci&oacute;n: corregir el registro #N&rdquo;.</p>
+        <span class="skill-norma">Prevalidador DIAN V9</span>
+        <span class="skill-norma">Res. 000227/2024</span>
+      </div>
+      <div class="content-block">
+        <h2>SKILL.md del validador</h2>
+        <button class="copy-btn" onclick="copyBlock(this)">Copiar</button>
+        <div class="code-block">
+<span class="ck">---</span>
+<span class="cv">name:</span> validador-prevalidador
+<span class="cv">description:</span> Traduce errores del prevalidador V9 a lenguaje contable con la acci&oacute;n
+&nbsp;&nbsp;correctiva exacta. Activar cuando el usuario pegue un log de error o XML del prevalidador.
+<span class="ck">---</span>
+<span class="ck"># Validador del Prevalidador V9</span>
+<span class="ck">## Cu&aacute;ndo activarte</span>
+Cuando el usuario pegue un texto que contenga: &ldquo;PrevalidadorV9&rdquo;, &ldquo;EXCG&rdquo;, &ldquo;error de validaci&oacute;n&rdquo;,
+o un bloque XML con tags &lt;Errores&gt; o &lt;ValidationResult&gt;.
+<span class="ck">## Pasos</span>
+1. Detecta el tipo de error (categoriza con references/catalogo-errores.md):
+&nbsp;&nbsp;&nbsp;- Estructurales (tag mal formado, encoding)
+&nbsp;&nbsp;&nbsp;- De negocio (NIT inv&aacute;lido, concepto fuera de cat&aacute;logo)
+&nbsp;&nbsp;&nbsp;- De cruce (suma de subconceptos no coincide con valor total)
+&nbsp;&nbsp;&nbsp;- De tope (valor por debajo del m&iacute;nimo reportable)
+2. Para cada error, identifica:
+&nbsp;&nbsp;&nbsp;- Formato afectado (F1001/F1005/...)
+&nbsp;&nbsp;&nbsp;- Registro / rengl&oacute;n
+&nbsp;&nbsp;&nbsp;- Causa probable
+&nbsp;&nbsp;&nbsp;- Acci&oacute;n correctiva paso a paso
+3. Prioriza: bloquean transmisi&oacute;n vs son advertencias.
+<span class="ck">## Contrato de salida</span>
+| # | Formato | Registro | Tipo error | Mensaje crudo | Traducci&oacute;n contable | Acci&oacute;n |
+|---|------|------|------|------|------|------|
+<span class="ck">## Restricciones</span>
+- NUNCA sugieras &ldquo;ignorar el error&rdquo; sin verificar que es advertencia, no bloqueante.
+- Si el error es de NIT que no existe en RUES, sugerir consulta NIT antes de inventar tipoDoc.
+- Para errores recurrentes en el mismo cliente, sugerir actualizar plantilla maestra del cliente.
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>references/catalogo-errores.md (los 10 m&aacute;s comunes)</h2>
+        <button class="copy-btn" onclick="copyBlock(this)">Copiar</button>
+        <div class="code-block">
+<span class="ck">## E001 &mdash; NIT del tercero no v&aacute;lido (d&iacute;gito verificaci&oacute;n)</span>
+Causa: NIT mal digitado o d&iacute;gito de verificaci&oacute;n incorrecto.
+Acci&oacute;n: validar con consulta NIT DIAN. Si NIT correcto, ajustar DV.
+<span class="ck">## E002 &mdash; Suma de subconceptos &ne; valor reportado</span>
+Causa: t&iacute;pico cuando se llena valor base sin desglosar IVA mayor / reten.
+Acci&oacute;n: revisar columnas 4-9 del F1001, verificar que sumen al total.
+<span class="ck">## E003 &mdash; Concepto fuera del cat&aacute;logo del a&ntilde;o</span>
+Causa: c&oacute;digo de concepto que cambi&oacute; entre AG (DIAN actualiza cada a&ntilde;o).
+Acci&oacute;n: validar concepto vigente seg&uacute;n Res. del a&ntilde;o (ej. AG 2025 = Res. 000227/2024).
+<span class="ck">## E004 &mdash; TipoDoc inconsistente con NIT</span>
+Causa: NIT formato persona jur&iacute;dica con tipoDoc=CC. T&iacute;pico en extranjeros (CE/PEP/PPT).
+Acci&oacute;n: revisar tipoDoc; si es extranjero, usar 21=CE / 41=PAS / 47=PEP / 48=PPT.
+<span class="ck">## E005 &mdash; Direcci&oacute;n del tercero excede longitud</span>
+Causa: direcciones largas con caracteres especiales. Prevalidador trunca o rechaza.
+Acci&oacute;n: simplificar direcci&oacute;n a m&aacute;x 100 caracteres sin acentos ni &amp;.
+<span class="ck">## E006 &mdash; Concepto requerido seg&uacute;n responsabilidades RUT</span>
+Causa: cliente tiene resp 05 pero no report&oacute; F1005 (IVA descontable).
+Acci&oacute;n: revisar responsabilidades RUT vs formatos enviados.
+<span class="ck">## E007 &mdash; Suma F1001 vs F1011 difiere</span>
+Causa: pagos por conceptos sumados &ne; total renta de ese tipo.
+Acci&oacute;n: verificar cruces F1001 / F1004 / F1011 con renta del cliente.
+<span class="ck">## E008 &mdash; Pa&iacute;s incorrecto para pagos al exterior</span>
+Causa: c&oacute;digo de pa&iacute;s no v&aacute;lido en cat&aacute;logo DIAN.
+Acci&oacute;n: usar cat&aacute;logo ISO 3 letras seg&uacute;n especificaci&oacute;n.
+<span class="ck">## E009 &mdash; Valor negativo en concepto que no admite negativo</span>
+Causa: devoluci&oacute;n o NC mal aplicada al concepto positivo.
+Acci&oacute;n: reportar como reducci&oacute;n del bimestre anterior o reclasificar concepto.
+<span class="ck">## E010 &mdash; Fecha fuera del per&iacute;odo declarado</span>
+Causa: movimiento de enero del a&ntilde;o siguiente colado en el AG actual.
+Acci&oacute;n: filtrar fechas del balance al per&iacute;odo exacto antes de generar XML.
+        </div>
+      </div>
+      <div class="resumen">
+        <div class="resumen-titulo">Lo clave de este m&oacute;dulo</div>
+        <ul>
+          <li><strong>cuadre-iva-co:</strong> 4 cruces por bimestre (generado, descontable, retenido, saldo); diferencias &gt; 1% con causa probable. La acci&oacute;n correctiva la decide el contador, no la skill.</li>
+          <li><strong>validador-prevalidador:</strong> el cat&aacute;logo de 10 errores cubre el 90% de los casos en CO; la salida tabulada separa bloqueantes de advertencias.</li>
+          <li>Errores recurrentes en un cliente = se&ntilde;al para ajustar su plantilla maestra.</li>
+        </ul>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-8" class="prev" onclick="navigateTo(8)">&larr; M&oacute;dulo 8</a>
+        <a href="#modulo-10" class="next" onclick="navigateTo(10)">M&oacute;dulo 10: Encadenar skills &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-10" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; <a href="../especializacion-ia.html">Ruta IA</a> &rsaquo; M&oacute;dulo 10</div>
+        <div class="mod-num">M&oacute;dulo 10 de 12</div>
+        <h1>Encadenar skills y compartirlas con tu firma</h1>
+        <p class="mod-desc">Una skill sola te ahorra una tarea. Tres skills encadenadas te ahorran un proceso. Y versionadas en Git, todo tu equipo se beneficia cuando la DIAN cambia la resoluci&oacute;n y t&uacute; actualizas la reference una sola vez.</p>
+        <div class="objetivos">
+          <div class="objetivos-titulo">Al finalizar este m&oacute;dulo</div>
+          <ul>
+            <li>Tener el pipeline ex&oacute;gena corriendo end-to-end en uno de tus clientes</li>
+            <li>Saber d&oacute;nde va la supervisi&oacute;n humana entre paso y paso</li>
+            <li>Tener tus 3 skills en un repo Git privado con proceso de cambios</li>
+          </ul>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>El pipeline visual</h2>
+        <div class="pipeline">
+          <div class="pipe-step">Balance + IVAs</div>
+          <span class="pipe-arrow">&rarr;</span>
+          <div class="pipe-step">clasificador-exogena-co</div>
+          <span class="pipe-arrow">&rarr;</span>
+          <div class="pipe-step">cuadre-iva-co</div>
+          <span class="pipe-arrow">&rarr;</span>
+          <div class="pipe-step">Generar XML</div>
+          <span class="pipe-arrow">&rarr;</span>
+          <div class="pipe-step">validador-prevalidador</div>
+          <span class="pipe-arrow">&rarr;</span>
+          <div class="pipe-step">Transmitir</div>
+        </div>
+        <p>Cada flecha es un punto de revisi&oacute;n humana. La idea NO es darle &ldquo;haz la exo de XYZ&rdquo; y que termine sin ver. Es que cada skill haga su parte, t&uacute; revises, y pases a la siguiente.</p>
+      </div>
+      <div class="content-block">
+        <h2>Prompt orquestador</h2>
+        <p>Tu Project del cliente puede tener un slash command <code>/exogena-full</code> que orquesta las 3 skills en orden:</p>
+        <button class="copy-btn" onclick="copyBlock(this)">Copiar</button>
+        <div class="code-block">
+<span class="ck">---</span>
+<span class="cv">name:</span> exogena-full
+<span class="cv">description:</span> Pipeline completo de ex&oacute;gena para el cliente activo
+<span class="ck">---</span>
+Vas a procesar la ex&oacute;gena AG completa del cliente. Tres fases, una revisi&oacute;n humana entre cada una.
+<span class="cs">FASE 1 &mdash; Clasificaci&oacute;n F1001</span>
+Carga balances/12.xlsx y usa la skill clasificador-exogena-co.
+Entrega tabla y P&Aacute;RATE. Espera mi OK antes de pasar a la Fase 2.
+<span class="cs">FASE 2 &mdash; Cuadre IVA</span>
+Carga las declaraciones declaraciones/iva-300/*.pdf y usa la skill cuadre-iva-co.
+Cruza el resultado con lo de la Fase 1 (IVA descontable de F1005 debe casar con cuenta 1355).
+Entrega tabla de cuadre y P&Aacute;RATE.
+<span class="cs">FASE 3 &mdash; Validaci&oacute;n previa</span>
+Genera los CSVs/XMLs para el prevalidador.
+Cuando yo te pase el log del prevalidador, usa la skill validador-prevalidador.
+NO ejecutes las fases sin mi confirmaci&oacute;n entre cada una.
+        </div>
+        <div class="tip">
+          <div class="tip-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><h4>P&Aacute;RATE entre fases &mdash; importante</h4></div>
+          <p>La instrucci&oacute;n &ldquo;P&Aacute;RATE&rdquo; es lo que mantiene a Claude en modo asistente. Sin eso, intentar&aacute; hacer todo en un solo bloque y te llega un papel de trabajo de 12 p&aacute;ginas que ya nadie revisa.</p>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>Skills para tu firma &mdash; versionar en Git</h2>
+        <p>Si trabajas solo, basta con tener las skills en tu disco. Si tienes equipo o aspiras a tenerlo, las skills van en repositorio Git compartido:</p>
+        <div class="fs-tree">
+<span class="fs-folder">firma-claude-skills\</span>  <span class="fs-comment"># Repo Git privado</span>
+&nbsp;&nbsp;<span class="fs-file">README.md</span>      <span class="fs-comment"># C&oacute;mo instalar, c&oacute;mo contribuir</span>
+&nbsp;&nbsp;<span class="fs-file">CHANGELOG.md</span>   <span class="fs-comment"># Cada cambio normativo aplicado</span>
+&nbsp;&nbsp;<span class="fs-folder">skills\</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-folder">clasificador-exogena-co\</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-folder">cuadre-iva-co\</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-folder">validador-prevalidador\</span>
+&nbsp;&nbsp;<span class="fs-folder">.github\</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-file">PULL_REQUEST_TEMPLATE.md</span>  <span class="fs-comment"># Plantilla para cambios</span>
+        </div>
+        <h3>Onboarding de un nuevo miembro del equipo</h3>
+        <ol>
+          <li>Le das acceso al repo privado.</li>
+          <li>Clona en su carpeta de Claude: <code>git clone &lt;url&gt; ~/.claude/skills</code></li>
+          <li>Listo. Las 3 skills aparecen cuando trabaje cualquier cliente, en Cowork o en Claude Code.</li>
+        </ol>
+        <div class="tip">
+          <div class="tip-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><h4>Pol&iacute;tica de cambios</h4></div>
+          <p>Cambio en una skill = PR al repo. Quien revisa: el contador senior. Revisi&oacute;n m&iacute;nima: que la <code>description</code> sigue siendo clara, que el <code>SKILL.md</code> cita la norma actualizada y que el <code>CHANGELOG.md</code> menciona la resoluci&oacute;n que justific&oacute; el cambio.</p>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>Cuando cambia la normativa</h2>
+        <table class="tabla-norm">
+          <thead><tr><th>Tipo de cambio normativo</th><th>Acci&oacute;n en las skills</th></tr></thead>
+          <tbody>
+            <tr><td>Res. modificatoria de ex&oacute;gena (anual)</td><td>Actualizar references/ de clasificador-exogena-co y validador-prevalidador</td></tr>
+            <tr><td>Nueva tarifa UVT (anual)</td><td>Si las skills tienen valores en UVT, dejar variable. Si tienen pesos, actualizar.</td></tr>
+            <tr><td>Reforma tributaria mayor (Ley)</td><td>Revisi&oacute;n manual completa. No todas las skills pueden seguir siendo v&aacute;lidas.</td></tr>
+            <tr><td>Decreto reglamentario nuevo</td><td>Agregar al references correspondiente.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="resumen">
+        <div class="resumen-titulo">Lo clave de este m&oacute;dulo</div>
+        <ul>
+          <li>Pipeline = orquestador que llama skills en orden con paradas humanas.</li>
+          <li>&ldquo;P&Aacute;RATE&rdquo; entre fases evita el chorro de 12 p&aacute;ginas sin revisar.</li>
+          <li>Skills en Git privado para versi&oacute;n + propagaci&oacute;n al equipo; PR template + CHANGELOG mantienen trazabilidad normativa.</li>
+        </ul>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-9" class="prev" onclick="navigateTo(9)">&larr; M&oacute;dulo 9</a>
+        <a href="#modulo-11" class="next" onclick="navigateTo(11)">M&oacute;dulo 11: Claude Code &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-11" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; <a href="../especializacion-ia.html">Ruta IA</a> &rsaquo; M&oacute;dulo 11</div>
+        <div class="mod-num">M&oacute;dulo 11 de 12</div>
+        <h1>Claude Code para contadores &mdash; cu&aacute;ndo pasar a la terminal</h1>
+        <p class="mod-desc">Claude Code es el agente de Anthropic para trabajo t&eacute;cnico: en vez de conversar sobre un archivo, <strong>ejecuta</strong> &mdash; corre comandos, transforma 40 Excel en lote, escribe scripts y los prueba. No necesitas ser programador para sacarle provecho; necesitas saber cu&aacute;ndo usarlo en vez de Cowork.</p>
+        <div class="objetivos">
+          <div class="objetivos-titulo">Al finalizar este m&oacute;dulo</div>
+          <ul>
+            <li>Saber cu&aacute;ndo una tarea es de Cowork y cu&aacute;ndo es de Claude Code</li>
+            <li>Tenerlo instalado y haber corrido tu primera tarea en lote</li>
+            <li>Entender el modelo de permisos (Claude propone, t&uacute; apruebas)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>Cowork vs. Claude Code &mdash; la regla pr&aacute;ctica</h2>
+        <table class="tabla-norm">
+          <thead><tr><th>La tarea es...</th><th>&Uacute;salo en</th><th>Por qu&eacute;</th></tr></thead>
+          <tbody>
+            <tr><td>Analizar UN balance, redactar UNA respuesta, revisar UN cierre</td><td><strong>Cowork</strong></td><td>Es conversaci&oacute;n sobre archivos: lees, preguntas, ajustas.</td></tr>
+            <tr><td>Hacer LO MISMO sobre 40 archivos (renombrar PDFs de clientes, consolidar 12 balances mensuales en uno, convertir todos los extractos a CSV)</td><td><strong>Claude Code</strong></td><td>Es ejecuci&oacute;n en lote: Claude escribe el script, lo corre, verifica el resultado.</td></tr>
+            <tr><td>Construir una herramienta que vas a usar todos los meses (liquidador, conciliador, generador de certificados)</td><td><strong>Claude Code</strong></td><td>Es desarrollo de software &mdash; y la profundizaci&oacute;n va en <a href="desarrollo-contadores.html">Desarrollo para Contadores</a>.</td></tr>
+          </tbody>
+        </table>
+        <div class="tip">
+          <div class="tip-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><h4>El test de la repetici&oacute;n</h4></div>
+          <p>Si al describir la tarea dices &ldquo;para cada archivo...&rdquo; o &ldquo;todos los meses hago...&rdquo;, es Claude Code. Si dices &ldquo;mira este archivo y dime...&rdquo;, es Cowork.</p>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>D&oacute;nde corre y c&oacute;mo se instala</h2>
+        <p>Claude Code existe en varios formatos: <strong>CLI en la terminal</strong> (el original), <strong>app de escritorio</strong> (Windows/Mac), <strong>web</strong> en <code>claude.ai/code</code> y <strong>extensiones de IDE</strong> (VS Code, JetBrains). Para un contador sin terminal, la app de escritorio o la web son la puerta de entrada m&aacute;s amable; usa la misma cuenta Pro de Claude que ya tienes.</p>
+        <p>Una vez dentro, el flujo es el mismo de Cowork pero orientado a acci&oacute;n: le se&ntilde;alas una carpeta de trabajo, le describes la tarea, y Claude propone los pasos y los ejecuta.</p>
+      </div>
+      <div class="content-block">
+        <h2>Tu primera tarea en lote</h2>
+        <p>Caso real de temporada: el cliente te mand&oacute; 12 balances mensuales en 12 Excel con formatos ligeramente distintos, y necesitas un consolidado anual. En Claude Code, parado sobre la carpeta:</p>
+        <div class="code-block">En esta carpeta hay 12 archivos balance-2025-01.xlsx a balance-2025-12.xlsx.
+Cada uno tiene columnas C&oacute;digo PUC / Nombre / D&eacute;bito / Cr&eacute;dito / Saldo, aunque
+algunos meses traen la cabecera en la fila 3 y otros en la 5.
+1. Lee los 12 y normal&iacute;zalos a la misma estructura.
+2. Genera consolidado-2025.xlsx con una hoja por mes + una hoja "Anual"
+   con el acumulado por cuenta a nivel 4 d&iacute;gitos.
+3. Av&iacute;same si alg&uacute;n mes tiene cuentas que no aparecen en los dem&aacute;s.
+NO modifiques los archivos originales.</div>
+        <p>Claude escribe el script (Python con openpyxl o similar), te muestra qu&eacute; va a hacer, lo corre y te entrega el consolidado. Lo que a mano toma una tarde, sale en minutos &mdash; y el script queda guardado para el a&ntilde;o siguiente.</p>
+      </div>
+      <div class="content-block">
+        <h2>El modelo de permisos: Claude propone, t&uacute; apruebas</h2>
+        <p>A diferencia del chat, Claude Code puede ejecutar comandos y modificar archivos. Por eso trabaja con permisos: antes de correr un comando o editar un archivo te lo muestra y espera tu aprobaci&oacute;n. Reglas de oro para un contador:</p>
+        <ul>
+          <li><strong>Trabaja sobre copias.</strong> Antes de una tarea en lote, duplica la carpeta. Los originales del cliente no se tocan.</li>
+          <li><strong>Lee lo que apruebas.</strong> Si propone borrar o sobreescribir algo y no entiendes por qu&eacute;, pregunta antes de aprobar.</li>
+          <li><strong>No actives el modo autom&aacute;tico</strong> (aprobar todo sin preguntar) con datos de clientes hasta que lleves semanas us&aacute;ndolo.</li>
+        </ul>
+        <div class="error-comun">
+          <div class="error-comun-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg><h4>Error com&uacute;n</h4></div>
+          <p>Darle acceso a la carpeta ra&iacute;z con TODOS los clientes para una tarea de uno solo. Igual que en Cowork (M&oacute;dulo 2): carpeta dedicada por tarea, y Claude solo ve lo que necesita.</p>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>Tus skills tambi&eacute;n funcionan aqu&iacute;</h2>
+        <p>Las skills que montaste en los M&oacute;dulos 7-9 viven en <code>~/.claude/skills/</code> &mdash; y Claude Code las lee del mismo lugar. El clasificador F1001 que usas conversando en Cowork es el mismo que Claude Code puede invocar dentro de un script de lote para procesar los 15 clientes de una sentada (con tu revisi&oacute;n entre cliente y cliente, como en el pipeline del M&oacute;dulo 10).</p>
+        <p>Si esto te abre el apetito de construir herramientas propias &mdash;tu liquidador, tu conciliador, tu p&aacute;gina&mdash; el camino completo (Git, Next.js, TypeScript, c&oacute;mo pedirle bien las cosas a Claude Code) est&aacute; en <a href="desarrollo-contadores.html">Desarrollo para Contadores</a>.</p>
+      </div>
+      <div class="resumen">
+        <div class="resumen-titulo">Lo clave de este m&oacute;dulo</div>
+        <ul>
+          <li><strong>Regla:</strong> conversaci&oacute;n sobre UN archivo = Cowork; ejecuci&oacute;n sobre MUCHOS = Claude Code.</li>
+          <li>Corre en terminal, escritorio, web e IDE &mdash; misma cuenta Pro.</li>
+          <li>Permisos: propone antes de ejecutar. Copias primero, originales intactos.</li>
+          <li>Las mismas skills de <code>~/.claude/skills/</code> sirven en Cowork y en Code.</li>
+        </ul>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-10" class="prev" onclick="navigateTo(10)">&larr; M&oacute;dulo 10</a>
+        <a href="#modulo-12" class="next" onclick="navigateTo(12)">M&oacute;dulo 12: Privacidad y cierre &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-12" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; <a href="../especializacion-ia.html">Ruta IA</a> &rsaquo; M&oacute;dulo 12</div>
+        <div class="mod-num">M&oacute;dulo 12 de 12</div>
         <h1>Privacidad, backup y plan de adopci&oacute;n</h1>
         <p class="mod-desc">Cierre del curso: qu&eacute; sale del computador y qu&eacute; no, c&oacute;mo respaldar tu carpeta de Claude sin filtrar al cliente, y un plan de adopci&oacute;n a 30 d&iacute;as para que esto realmente entre en tu pr&aacute;ctica.</p>
         <div class="objetivos">
@@ -716,8 +1360,8 @@ NO inventes NITs. Si te falta uno, l&iacute;stalo en la columna "?".</div>
           <thead><tr><th>Semana</th><th>Acci&oacute;n</th><th>Entregable</th></tr></thead>
           <tbody>
             <tr><td>1</td><td>Instalar Cowork + crear carpeta + 1 cliente piloto (el que mejor conozcas)</td><td>1 Project + 1 ficha <code>_cliente.md</code> funcionando</td></tr>
-            <tr><td>2</td><td>Correr <code>/cierre</code> sobre el cliente piloto. Comparar contra cierre manual del mismo mes.</td><td>Papel de trabajo generado vs. el tuyo histo&oacute;rico</td></tr>
-            <tr><td>3</td><td>Replicar la estructura para 3 clientes m&aacute;s. Crear <code>/req-dian</code> y prob&aacute;rselo a un requerimiento real.</td><td>4 Projects activos</td></tr>
+            <tr><td>2</td><td>Correr <code>/cierre</code> sobre el cliente piloto. Comparar contra cierre manual del mismo mes.</td><td>Papel de trabajo generado vs. el tuyo hist&oacute;rico</td></tr>
+            <tr><td>3</td><td>Replicar la estructura para 3 clientes m&aacute;s. Crear <code>/req-dian</code> y probarlo con un requerimiento real. Montar tu primera Skill (M&oacute;dulo 8).</td><td>4 Projects activos + 1 skill</td></tr>
             <tr><td>4</td><td>Onboarding de tu auxiliar (si tienes). Documentar tu Cowork en una sola p&aacute;gina interna.</td><td>Equipo trabajando con la misma estructura</td></tr>
           </tbody>
         </table>
@@ -727,36 +1371,43 @@ NO inventes NITs. Si te falta uno, l&iacute;stalo en la columna "?".</div>
         </div>
       </div>
       <div class="content-block">
+        <h2>Pr&oacute;ximas 2 skills que vale la pena construir</h2>
+        <ol>
+          <li><strong><code>respuesta-requerimiento-dian</code></strong> &mdash; recibe un PDF de requerimiento, identifica art&iacute;culos invocados, mapea a archivos del cliente y arma borrador estructurado.</li>
+          <li><strong><code>conciliador-bancario</code></strong> &mdash; toma extracto bancario CSV + auxiliar 1110 y deja las partidas conciliadas / no conciliadas separadas con causa.</li>
+        </ol>
+      </div>
+      <div class="content-block">
         <h2>Siguiente paso en la Ruta IA</h2>
-        <p>Cuando tengas Cowork andando con 3-4 clientes, el siguiente nivel es construir tus propias <strong>Skills de Claude</strong>: recetas reutilizables (clasificador de exo, cuadre IVA, validador del prevalidador) que disparas con un comando. Van al curso <a href="claude-skills-contadores.html">Skills de Claude para Contadores</a>.</p>
-        <p>Y si te interesa la aplicaci&oacute;n m&aacute;s densa &mdash;hacer la ex&oacute;gena AG completa con Claude de A a Z&mdash; vas a la <a href="exogena-claude.html">masterclass de Ex&oacute;gena con Claude</a> (15 m&oacute;dulos).</p>
+        <p>Con Cowork andando, tus 3 skills montadas y el primer contacto con Claude Code, el siguiente paso depende de tu temporada: si viene ex&oacute;gena, la aplicaci&oacute;n m&aacute;s densa est&aacute; en la <a href="exogena-claude.html">masterclass de Ex&oacute;gena con Claude</a> (15 m&oacute;dulos). Si quieres construir tu propio software contable, sigue con <a href="desarrollo-contadores.html">Desarrollo para Contadores</a>.</p>
       </div>
       <div class="resumen">
         <div class="resumen-titulo">Resumen del curso entero</div>
         <ul>
-          <li><strong>Cowork = escritorio + memoria.</strong> Ve tus carpetas, recuerda al cliente.</li>
+          <li><strong>Ecosistema:</strong> web para consultas, Cowork para el d&iacute;a a d&iacute;a, Claude Code para automatizar. Modelos: Fable 5 / Opus 4.8 / Sonnet 4.6 / Haiku 4.5.</li>
           <li><strong>Carpeta-por-cliente</strong> con misma estructura siempre + ficha <code>_cliente.md</code>.</li>
-          <li><strong>Un Project por cliente</strong> con Custom Instructions + Knowledge.</li>
+          <li><strong>Un Project por cliente</strong> con Custom Instructions + Knowledge, y memoria que se revisa.</li>
           <li><strong>3 slash commands</strong>: <code>/cierre</code>, <code>/req-dian</code>, <code>/exogena</code>.</li>
+          <li><strong>3 Skills propias</strong>: clasificador F1001, cuadre IVA, validador del prevalidador &mdash; encadenadas en pipeline con pausas humanas y versionadas en Git.</li>
           <li><strong>Plan 30 d&iacute;as</strong>: empezar con 1 cliente piloto y escalar.</li>
         </ul>
       </div>
       <div data-cert-course="claude-cowork-contadores"></div>
       <div class="mod-nav">
-        <a href="#modulo-6" class="prev" onclick="navigateTo(6)">&larr; M&oacute;dulo 6</a>
-        <a href="claude-skills-contadores.html" class="next">Siguiente curso: Skills de Claude &rarr;</a>
+        <a href="#modulo-11" class="prev" onclick="navigateTo(11)">&larr; M&oacute;dulo 11</a>
+        <a href="../especializacion-ia.html" class="next">Ver la Ruta IA completa &rarr;</a>
       </div>
     </section>
   </div>
 </div>
 <button class="sidebar-toggle" onclick="toggleSidebar()">&#9776;</button>
-<script src="../shared/certificado.js?v=383dd956"></script>
-<script src="../shared/curso-meta.js?v=6b7779f4"></script>
-<script src="../shared/quiz-banks.js?v=bd69b5f6"></script>
-<script src="../shared/quiz-engine.js?v=faaf346e"></script>
-<script src="../shared/cert-emit-widget.js?v=81c77b40"></script>
+<script src="../shared/certificado.js?v=c81033b2"></script>
+<script src="../shared/curso-meta.js?v=06a1faab"></script>
+<script src="../shared/quiz-banks.js?v=dbfc51d1"></script>
+<script src="../shared/quiz-engine.js?v=eed75029"></script>
+<script src="../shared/cert-emit-widget.js?v=af5e7eeb"></script>
 <script>
-var TOTAL_MODS = 7;
+var TOTAL_MODS = 12;
 var CURSO_SLUG = 'claude-cowork-contadores';
 function toggleSidebar(){
   var sb = document.getElementById('sidebar');
@@ -793,6 +1444,11 @@ function copyBlock(btn){
 }
 (function(){
   try {
+    var hash = (window.location.hash || '').match(/^#modulo-(\d+)$/);
+    if (hash) {
+      var n = parseInt(hash[1], 10);
+      if (n >= 1 && n <= TOTAL_MODS) { navigateTo(n); return; }
+    }
     var saved = parseInt(localStorage.getItem('exo-curso-' + CURSO_SLUG) || '1', 10);
     if (saved > 1 && saved <= TOTAL_MODS) navigateTo(saved);
   } catch(e){}

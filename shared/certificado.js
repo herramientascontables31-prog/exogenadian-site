@@ -164,11 +164,13 @@
       pro: true
     },
     'claude-cowork-contadores': {
-      name: 'Claude Cowork para Contadores',
-      desc: 'uso del escritorio Claude Cowork (Anthropic) en práctica contable colombiana: carpeta-por-cliente, Projects con Custom Instructions y Knowledge, memoria persistente, slash commands custom (/cierre, /req-dian, /exogena) y privacidad bajo Ley 1581/2012',
+      name: 'Claude para Contadores (Cowork + Skills + Claude Code)',
+      desc: 'dominio del ecosistema Claude (Anthropic) en práctica contable colombiana: productos y modelos vigentes, escritorio Cowork con carpeta-por-cliente, Projects con Custom Instructions y Knowledge, memoria persistente, slash commands custom (/cierre, /req-dian, /exogena), construcción de las skills clasificador-exogena-co (Res. 000227/2024), cuadre-iva-co (Art. 437 ET) y validador-prevalidador V9, pipeline orquestado con versionado en Git, introducción a Claude Code y privacidad bajo Ley 1581/2012',
       short: 'CCWK',
       pro: true
     },
+    /* legado: curso fusionado dentro de claude-cowork-contadores (jun-2026).
+       Se conserva para que los certificados CSKC ya emitidos sigan verificando. */
     'claude-skills-contadores': {
       name: 'Skills de Claude para Contadores',
       desc: 'creación y encadenamiento de Skills de Claude para tareas contables colombianas: anatomía de una skill (SKILL.md + references + examples), construcción de las skills clasificador-exogena-co (Res. 000227/2024), cuadre-iva-co (Art. 437 ET) y validador-prevalidador V9, pipeline orquestado y versionado en Git para equipos',
@@ -212,8 +214,8 @@
     },
     'prog-ia': {
       name: 'Programa de formación en IA Contable',
-      desc: 'ruta progresiva de 7 cursos para el contador AI-first: IA sin miedo, IA y automatización con 78 prompts, escritorio Claude Cowork por cliente, masterclass de exógena con Claude, auditoría de EEFF con IA, creación de Skills propias (clasificador exógena, cuadre IVA, validador prevalidador) y desarrollo de software con Claude Code',
-      short: 'RIA', pro: true, progMeta: { cursos: 7, horas: '~12 h' }
+      desc: 'ruta progresiva de 6 cursos para el contador AI-first: IA sin miedo, IA y automatización con 78 prompts, Claude para Contadores (Cowork por cliente + Skills propias + Claude Code), masterclass de exógena con Claude, auditoría de EEFF con IA y desarrollo de software con Claude Code',
+      short: 'RIA', pro: true, progMeta: { cursos: 6, horas: '~12 h' }
     },
     'prog-exogena': {
       name: 'Programa de formación en Información Exógena',

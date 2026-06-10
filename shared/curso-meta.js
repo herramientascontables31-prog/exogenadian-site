@@ -48,8 +48,7 @@
     'finanzas':          { nivel:'Básico',     lecturaMin:58,  prereq:null, esp:null },
     'ia-sin-miedo':      { nivel:'Básico',     lecturaMin:95,  prereq:null, esp:'ia' },
     'desarrollo-contadores':   { nivel:'Avanzado',   lecturaMin:120, prereq:'ia-automatizacion', esp:'ia' },
-    'claude-cowork-contadores':{ nivel:'Intermedio', lecturaMin:38,  prereq:'ia-automatizacion', esp:'ia' },
-    'claude-skills-contadores':{ nivel:'Avanzado',   lecturaMin:42,  prereq:'claude-cowork-contadores', esp:'ia' }
+    'claude-cowork-contadores':{ nivel:'Intermedio', lecturaMin:85,  prereq:'ia-automatizacion', esp:'ia' }
   };
 
   // ─── Especializaciones (tracks). El tiempo total se calcula sumando la
@@ -133,7 +132,7 @@
       color: '#059669',
       colorBg: '#ECFDF5',
       colorBorder: '#A7F3D0',
-      cursos: ['ia-sin-miedo', 'ia-automatizacion', 'claude-cowork-contadores', 'exogena-claude', 'auditar-eeff-ia', 'claude-skills-contadores', 'desarrollo-contadores']
+      cursos: ['ia-sin-miedo', 'ia-automatizacion', 'claude-cowork-contadores', 'exogena-claude', 'auditar-eeff-ia', 'desarrollo-contadores']
     }
   };
 
