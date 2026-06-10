@@ -692,7 +692,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
           </div>
           <div class="field-grid">
             <div class="field"><label>Salud prepagada <span class="hint">(cap 192 UVT &middot; trabajo)</span> <button class="icon-ayuda" onclick="mostrarAyuda('dedSalud')" title="Ver ayuda">ⓘ</button></label><input id="dedSalud" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
-            <div class="field"><label>Número de dependientes a cargo <span class="hint">(máx 4)</span> <button class="icon-ayuda" onclick="mostrarAyuda('depArt387Num')" title="Ver ayuda">ⓘ</button></label><input id="depArt387Num" type="number" min="0" max="4" value="0" oninput="var h=document.getElementById('depArt336Num');if(h)h.value=this.value;recalcular()"></div>
+            <div class="field"><label>Número total de dependientes a cargo <span class="hint">(máx 5)</span> <button class="icon-ayuda" onclick="mostrarAyuda('depArt387Num')" title="Ver ayuda">ⓘ</button></label><input id="depArt387Num" type="number" min="0" max="5" value="0" oninput="recalcular()"></div>
           </div>
           <div class="field-grid" style="margin-top:8px">
             <div class="field"><label>Intereses crédito vivienda <span class="hint">(cap 1.200 UVT)</span> <button class="icon-ayuda" onclick="mostrarAyuda('dedVivienda')" title="Ver ayuda">ⓘ</button></label><input id="dedVivienda" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
@@ -721,7 +721,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
           </div>
           <div class="section-title" style="margin-top:18px;font-size:.85rem"><span style="color:var(--green);font-weight:700">FUERA del tope</span> &mdash; Art. 336 num. 3 inc. 2 y num. 5</div>
           <div class="field-grid">
-            <div class="field"><label>Deducción por dependientes <span class="hint">(automática)</span></label><div style="font-size:.74rem;color:var(--muted);line-height:1.45;padding:6px 0">Con el <strong>número de dependientes</strong> de arriba se aplican las DOS deducciones: <strong>10% de la renta de trabajo</strong> (Art. 387, dentro del tope) y <strong>72 UVT por dependiente</strong> (Art. 336 num.3, fuera del tope — esta siempre baja el impuesto).</div><input type="hidden" id="depArt336Num" value="0"></div>
+            <div class="field"><label>Deducción por dependientes <span class="hint">(automática)</span></label><div style="font-size:.74rem;color:var(--muted);line-height:1.45;padding:6px 0">Según el <strong>Concepto DIAN 416/2025</strong>: el <strong>1er dependiente</strong> da el <strong>10% de la renta de trabajo</strong> (Art. 387, dentro del tope); del <strong>2° al 5°</strong> dan <strong>72 UVT cada uno</strong> (Art. 336, fuera del tope — siempre baja el impuesto). Necesitas <strong>≥2 dependientes</strong> para usar ambas.</div><input type="hidden" id="depArt336Num" value="0"></div>
             <div class="field"><label>1% compras factura electrónica <span class="hint">(cap 240 UVT)</span> <button class="icon-ayuda" onclick="mostrarAyuda('ded1PctFE')" title="Ver ayuda">ⓘ</button></label><input id="ded1PctFE" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
           </div>
         </div>
@@ -2371,7 +2371,9 @@ function construirEstado(){
         otrasRentasExentas: 0,
         deduccionesNominales: dedNomNoLaboral
       },
-      dependientesArt336Numero: parseInt(document.getElementById('depArt336Num').value) || 0,
+      // Concepto DIAN 416/2025: desde AG2025 el 1er dependiente toma el 10% (Art.387) y
+      // los ADICIONALES (hasta 4 distintos) toman 72 UVT c/u (Art.336). AG2024: cada uno 72 UVT.
+      dependientesArt336Numero: (year >= 2025 ? Math.max(depArt387Num - 1, 0) : depArt387Num),
       facturaElectronica1Pct: v('ded1PctFE')
     },
     cedulaPensiones: {
