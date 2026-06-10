@@ -87,7 +87,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 .field{display:flex;flex-direction:column;gap:4px}
 .field label{font-size:.78rem;font-weight:600;color:var(--muted)}
 .field label .hint{font-weight:400;font-size:.72rem;color:var(--pri2)}
-.field input,.field select{padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:.9rem;font-family:inherit;font-family:'JetBrains Mono',monospace;text-align:right}
+.field input,.field select{padding:10px 12px;border:1.5px solid #94a3b8;background:#f8fafc;border-radius:8px;font-size:.9rem;font-family:inherit;font-family:'JetBrains Mono',monospace;text-align:right}
+.field input:hover,.field select:hover{border-color:#64748b}
 .field input[type=text]:not(.no-mono),.field input[type=number]{font-family:'JetBrains Mono',monospace;text-align:right}
 .field input.text-left,.field select{text-align:left;font-family:'DM Sans',sans-serif}
 .field input:focus,.field select:focus{outline:none;border-color:var(--pri2);box-shadow:0 0 0 3px rgba(46,117,182,.15)}
@@ -418,7 +419,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
       <h3>Cómo funciona</h3>
       <ol>
         <li><strong>Cargas el reporte exógena DIAN</strong> del cliente (drag-and-drop)</li>
-        <li><strong>El sistema prefilenta</strong> el wizard con esa información</li>
+        <li><strong>El sistema prediligencia</strong> el formulario 210 con esa información</li>
         <li>En cada cédula te recordamos <strong>qué soportes verificar</strong></li>
         <li>El motor aplica <strong>norma vigente (Ley 2277/2022)</strong> y detecta inconsistencias proactivamente</li>
         <li>Generas <strong>Excel papel de trabajo profesional</strong> defendible</li>
@@ -1742,9 +1743,7 @@ function renderizarTablaReconciliacion(){
     alertasHtml += '<div class="recon-warnings"><strong>' + sinCedula + ' registro(s)</strong> sin cédula asignada. ' +
       'Selecciona una cédula final en el dropdown o márcalos como excluidos antes de aceptar.</div>';
   }
-  if(noImplementadas > 0){
-    alertasHtml += '<div class="recon-warnings"><strong>' + noImplementadas + ' registro(s)</strong> apuntan a cédulas todavía no implementadas (pensiones / dividendos / GO). ' +
-      'Sus valores se acumulan en un slot pendiente — se conectarán cuando esas cards tengan inputs estables.</div>';
+  if(false && noImplementadas > 0){ // pensiones/dividendos/GO ya tienen renglones (jun-2026)
   }
   var iaBtnHtml = '';
   if(sinCedula > 0 && window.agentePreclasificadorPN){
@@ -1760,7 +1759,7 @@ function renderizarTablaReconciliacion(){
         iaBtnHtml +
       '</div>' +
       '<button class="btn btn-success" onclick="reconAceptarTodo()" style="font-size:.92rem;padding:10px 22px"' + (sinCedula > 0 ? ' disabled style="opacity:.5;cursor:not-allowed;font-size:.92rem;padding:10px 22px"' : '') + '>' +
-        'Aceptar todo y prefilenta wizard &rarr;' +
+        'Aplicar al formulario 210 &rarr;' +
       '</button>' +
     '</div>';
   var aplicadaHtml = '';
@@ -1789,14 +1788,31 @@ function _renderCuadreReporte(filas){
   };
   var noVanHtml = '';
   if(c.noVanEnDeclaracion.length > 0){
-    noVanHtml = '<details style="margin-top:8px"><summary style="cursor:pointer;font-size:.8rem;color:#92400E;font-weight:600">' +
-      'Ver ' + c.noVanEnDeclaracion.length + ' concepto(s) informativo(s) — a dónde va cada uno (patrimonio, deudas, retención o no van)</summary>' +
-      '<ul style="margin:6px 0 0 16px;font-size:.76rem;color:var(--muted);line-height:1.5">' +
-      c.noVanEnDeclaracion.slice(0,40).map(function(n){
-        return '<li><strong>' + $(n.valor) + '</strong> — ' + escHtml((n.descripcion||'(sin detalle)').slice(0,60)) +
-               (n.informante ? ' · ' + escHtml(n.informante.slice(0,30)) : '') +
-               '<br><span style="opacity:.8">' + escHtml(n.motivo) + '</span></li>';
-      }).join('') + '</ul></details>';
+    // Clasifica cada concepto informativo en 3 grupos claros para que el contador
+    // distinga lo que YA quedó aplicado de lo que solo requiere su criterio.
+    function grupoConcepto(m){
+      m = m || '';
+      if(/NO va al 210/.test(m)) return 'noVan';
+      if(/SÍ va a la declaración|Base de compras con factura|ya (prellenad|qued)/.test(m)) return 'aplicado';
+      return 'decision';
+    }
+    var grupos = { decision: [], aplicado: [], noVan: [] };
+    c.noVanEnDeclaracion.slice(0,40).forEach(function(n){ grupos[grupoConcepto(n.motivo)].push(n); });
+    function itemHtml(n){
+      return '<li><strong>' + $(n.valor) + '</strong> — ' + escHtml((n.descripcion||'(sin detalle)').slice(0,60)) +
+             (n.informante ? ' · ' + escHtml(n.informante.slice(0,30)) : '') +
+             '<br><span style="opacity:.85">' + escHtml(n.motivo) + '</span></li>';
+    }
+    function bloque(arr, abierto, color, titulo){
+      if(!arr.length) return '';
+      return '<details' + (abierto?' open':'') + ' style="margin-top:8px;border-left:3px solid ' + color + ';padding-left:8px">' +
+        '<summary style="cursor:pointer;font-size:.8rem;color:' + color + ';font-weight:700">' + titulo.replace('{n}', arr.length) + '</summary>' +
+        '<ul style="margin:6px 0 0 16px;font-size:.76rem;color:var(--muted);line-height:1.5">' + arr.map(itemHtml).join('') + '</ul></details>';
+    }
+    noVanHtml =
+      bloque(grupos.decision, true,  '#B45309', '⚠ {n} concepto(s) que requieren TU decisión (¿venta de activo? ¿cesantías 206-4?)') +
+      bloque(grupos.aplicado, false, '#059669', '✓ {n} concepto(s) YA aplicados automáticamente (patrimonio c29, deudas c30, retención c132, FE c28) — solo verifica los saldos') +
+      bloque(grupos.noVan,    false, '#64748B', 'ⓘ {n} concepto(s) que NO van al 210 (consumos y movimientos — solo cruce DIAN)');
   }
   var alertasHtml = c.alertas.map(function(a){
     var bg = a.nivel === 'dian' ? '#FEE2E2' : (a.nivel === 'warn' ? '#FEF3C7' : '#EFF6FF');
@@ -2160,10 +2176,10 @@ function renderizarResumenAplicado(){
   if(p.dividendos_no_grav > 0 || p.dividendos_grav > 0) pendRows += '<div style="font-size:.76rem;color:#92400E">Dividendos pendiente: ' + fCOPshort(p.dividendos_no_grav + p.dividendos_grav) + ' (paso 5+ card 10)</div>';
   if(p.gananciasOcasionales > 0) pendRows += '<div style="font-size:.76rem;color:#92400E">GO pendiente: ' + fCOPshort(p.gananciasOcasionales) + ' (paso 5+ card 11)</div>';
   return '<div class="recon-aplicada">' +
-    '<strong>&#10004; Reconciliación aplicada al wizard</strong>' +
+    '<strong>&#10004; Listo — cifras aplicadas al Formulario 210</strong>' +
     '<div class="recon-resumen-aplicado">' + (rows || '<div style="font-size:.78rem;color:var(--muted)">Sin valores acumulados (todos excluidos o $0)</div>') + '</div>' +
     (pendRows || '') +
-    '<div style="font-size:.74rem;color:var(--muted);margin-top:8px">Las cifras están ahora en los inputs del wizard y el sidebar vivo. Puedes editar cualquier subcédula manualmente — el motor recalcula al instante.</div>' +
+    '<div style="font-size:.74rem;color:var(--muted);margin-top:8px">Las cifras ya están en el Formulario 210 y en las cédulas. Ve a la pestaña <strong>📋 Formulario 210</strong> para verlo, o edita cualquier cédula a mano — el motor recalcula al instante.</div>' +
   '</div>';
 }
 /* Construye el bloque comparativoAGAnterior del estado.
