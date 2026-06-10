@@ -195,6 +195,35 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 .recon-table tr.manual td{background:#EDE9FE}
 .recon-table tr.manual td:first-child{border-left:3px solid #7C3AED}
 .recon-table .num-cell{font-family:'JetBrains Mono',monospace;text-align:right;white-space:nowrap}
+/* ── Preview del Formulario 210 real (grilla oficial DIAN) ── */
+.p210{border:1.5px solid #000;border-radius:4px;overflow:hidden;font-size:10px;margin-top:8px;background:#fff}
+.p210-hdr{background:#1a3c6e;color:#fff;text-align:center;font-weight:800;padding:5px;font-size:11px;letter-spacing:.5px}
+.p210-sec{background:#c6d9ec;color:#1a3c6e;font-weight:700;font-size:9px;padding:3px 6px;border-top:1px solid #000;text-transform:uppercase;letter-spacing:.3px}
+.p210-row{display:grid;grid-template-columns:1fr 30px 120px;border-bottom:1px solid #eee;min-height:20px}
+.p210-row>div{display:flex;align-items:center;padding:1px 5px}
+.p210-row .pl{font-size:9px;line-height:1.15}
+.p210-row .pc{justify-content:center;font-size:7px;color:#999;font-family:'JetBrains Mono',monospace;background:#f9f9f9}
+.p210-row .pv{justify-content:flex-end;font-family:'JetBrains Mono',monospace;font-size:10px;color:#ccc}
+.p210-row .pv.filled{font-weight:700;color:#1a3c6e;background:#edf4ff}
+.p210-row .pv.calc{font-weight:700;color:#2E7D32;background:#E8F5E9}
+.p210-row.total{background:#f0f2f5}
+.p210-row.total .pl{font-weight:700;color:#1a3c6e}
+.p210-row.result{background:#d4e6f1}
+.p210-row.result .pl{font-weight:800;color:#1a3c6e}
+.p210-row.result .pv{font-size:11px;font-weight:800}
+.p210-cg{display:grid;grid-template-columns:minmax(120px,1.4fr) repeat(4,minmax(64px,1fr));font-size:9px;border-bottom:1px solid #000}
+.p210-cg .ch{background:#e8eef5;font-weight:700;font-size:7px;text-align:center;padding:3px 2px;border-right:1px solid #ccc;color:#1a3c6e;text-transform:uppercase;display:flex;align-items:center;justify-content:center}
+.p210-cg .ch:last-child{border-right:none}
+.p210-cr{display:contents}
+.p210-cr>div{border-bottom:1px solid #eee;border-right:1px solid #eee;padding:1px 4px;min-height:20px;display:flex;align-items:center}
+.p210-cr>div:last-child{border-right:none}
+.p210-cr .cl{font-size:8.5px;line-height:1.15}
+.p210-cr .cc{justify-content:flex-end;position:relative;font-family:'JetBrains Mono',monospace;font-size:9px;color:#ccc}
+.p210-cr .cc .cn{position:absolute;left:2px;top:1px;font-size:6px;color:#bbb;font-family:'JetBrains Mono',monospace}
+.p210-cr .cc.filled{font-weight:700;color:#1a3c6e;background:#edf4ff}
+.p210-cr .cc.calc{font-weight:700;color:#2E7D32;background:#E8F5E9}
+.p210-cr.tot>div{background:#f0f2f5;font-weight:700}
+@media(max-width:680px){.p210-cg{grid-template-columns:minmax(90px,1fr) repeat(4,minmax(48px,1fr));font-size:8px}}
 .recon-table .concepto-cell{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--pri)}
 .recon-table .informante-cell{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .recon-table select.recon-cedula{padding:3px 5px;font-size:.74rem;border:1px solid var(--border);border-radius:4px;font-family:inherit;width:100%;background:#fff;font-family:'DM Sans',sans-serif}
@@ -708,7 +737,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
           <div style="font-size:.78rem;color:var(--muted);margin-top:10px">El <strong>borrador 210</strong> es el formulario oficial en Excel con las casillas pobladas. El entregable trae el <strong>borrador del 210 + diagnóstico de riesgos + planeación de beneficios</strong>. Atajos: <kbd>Ctrl+S</kbd> guardar &middot; <kbd>Ctrl+E</kbd> exportar Excel</div>
         </div>
         <div class="card" id="cardReplica210">
-          <h3 onclick="toggleReplica210()" style="cursor:pointer;user-select:none">&#128203; Formulario 210 — vista casilla por casilla <span style="font-size:.74rem;color:var(--muted);font-weight:400" id="replica210Hint">(clic para expandir)</span></h3>
+          <h3 onclick="toggleReplica210()" style="cursor:pointer;user-select:none">&#128203; Preview del Formulario 210 oficial <span style="font-size:.74rem;color:var(--muted);font-weight:400" id="replica210Hint">(clic para expandir)</span></h3>
           <div id="replica210Body" style="display:none;margin-top:8px"></div>
         </div>
         <div class="card" id="cardSugerida">
@@ -2813,47 +2842,92 @@ function renderizarReplica210(){
   var cont = document.getElementById('replica210Body');
   if(!cont || cont.style.display === 'none') return;
   if(!ultimoResultado || !ultimoEstado){
-    cont.innerHTML = '<div style="font-size:.8rem;color:var(--muted);padding:8px 0">Diligencia el formulario (o carga la exógena) para ver las casillas.</div>';
+    cont.innerHTML = '<div style="font-size:.8rem;color:var(--muted);padding:8px 0">Diligencia el formulario (o carga la exógena) para ver el formulario 210.</div>';
     return;
   }
-  var tabla = excelPapelTrabajo._internal.buildCasillasTabla();
-  var resolver = excelPapelTrabajo._internal.resolverValor;
-  var r = ultimoResultado, ctx = ultimoEstado;
-  // Subsecciones opcionales todas en cero → colapsadas a una línea
-  var zero = {}, rango = {};
-  tabla.forEach(function(it){
-    if(it.tipo !== 'casilla' || !it.subseccion) return;
-    if(!rango[it.subseccion]) rango[it.subseccion] = [];
-    rango[it.subseccion].push(it.cas);
-    var v = resolver(it, r, ctx);
-    var n = (typeof v === 'number') ? v : 0;
-    if(n !== 0) zero[it.subseccion] = false;
-    else if(zero[it.subseccion] !== false) zero[it.subseccion] = true;
+  var r = ultimoResultado, R = r.renglones || {}, year = ultimoEstado.year;
+  var sc = (r.cedulaGeneral && r.cedulaGeneral.subcedulas) || {};
+  function nz(n){ return (typeof n === 'number' && isFinite(n)) ? Math.max(0, Math.round(n)) : 0; }
+  function $(n){ var v = nz(n); return v ? '$' + v.toLocaleString('es-CO') : '—'; }
+  // fila simple (1 columna de valor): label, casilla, valor, tipo ('in'=editable azul,'calc'=verde,'res'=resultado)
+  function row(lbl, cas, val, tipo){
+    var v = nz(val), cls = tipo === 'calc' ? 'calc' : (v ? 'filled' : '');
+    var rc = tipo === 'res' ? ' result' : (tipo === 'calc' ? ' total' : '');
+    return '<div class="p210-row' + rc + '"><div class="pl">' + lbl + '</div><div class="pc">' + (cas||'') + '</div><div class="pv ' + cls + '">' + $(val) + '</div></div>';
+  }
+  // celda de la grilla de cédulas
+  function cell(cas, val, calc){
+    var v = nz(val), cls = calc ? 'calc' : (v ? 'filled' : '');
+    return '<div class="cc ' + cls + '"><span class="cn">' + (cas||'') + '</span>' + $(val) + '</div>';
+  }
+  var h = '<div class="p210">';
+  h += '<div class="p210-hdr">FORMULARIO 210 &middot; AG ' + year + '</div>';
+  // ── PATRIMONIO ──
+  h += '<div class="p210-sec">Patrimonio</div>';
+  h += row('Total patrimonio bruto', 29, R.c29, 'in');
+  h += row('Deudas', 30, R.c30, 'in');
+  h += row('Total patrimonio líquido (29 − 30)', 31, R.c31, 'calc');
+  // ── CÉDULA GENERAL (grilla 4 columnas) ──
+  h += '<div class="p210-sec">Cédula general — 4 subcédulas</div>';
+  h += '<div class="p210-cg">';
+  h += '<div class="ch">Concepto</div><div class="ch">Rentas de trabajo</div><div class="ch">Honorarios y servicios</div><div class="ch">Rentas de capital</div><div class="ch">Rentas no laborales</div>';
+  var subs = ['trabajo','honorarios','capital','noLaboral'];
+  var filas = [
+    { lbl:'Ingresos brutos',                 key:'ingresosBrutos',      cas:[32,43,58,74] },
+    { lbl:'Ing. no constitutivos (INCRNGO)', key:'incrngo',             cas:[33,44,59,76] },
+    { lbl:'Costos y deducciones',            key:'costos',              cas:[null,45,60,77] },
+    { lbl:'Renta líquida',                   key:'ingresoNeto',         cas:[34,46,61,78], calc:true },
+    { lbl:'Rentas exentas y ded. limitadas', key:'exentasYDeducciones', cas:[41,53,69,86], calc:true },
+    { lbl:'Renta líquida ordinaria',         key:'rentaSubcedula',      cas:[42,57,73,90], calc:true }
+  ];
+  filas.forEach(function(f){
+    h += '<div class="p210-cr' + (f.calc ? ' tot' : '') + '"><div class="cl">' + f.lbl + '</div>';
+    subs.forEach(function(s, i){
+      if(f.cas[i] === null){ h += '<div class="cc" style="background:#f5f5f5"></div>'; return; }
+      var val = (sc[s] && sc[s][f.key]) || 0;
+      h += cell(f.cas[i], val, f.calc);
+    });
+    h += '</div>';
   });
-  var colapsables = ['hono', 'cedPensiones', 'cedDividendos', 'go'];
-  var html = '', started = false;
-  tabla.forEach(function(it){
-    if(it.tipo === 'banda'){
-      if(it.subseccion) started = true;
-      if(!started) return;
-      html += '<div style="background:var(--pri,#1B3A5C);color:#fff;font-size:.74rem;font-weight:700;padding:5px 10px;margin-top:10px;border-radius:4px">' + it.titulo + '</div>';
-      if(it.subseccion && colapsables.indexOf(it.subseccion) >= 0 && zero[it.subseccion]){
-        var c = rango[it.subseccion];
-        html += '<div style="font-size:.72rem;color:var(--muted);padding:4px 10px;font-style:italic">Renglones c' + c[0] + '-c' + c[c.length-1] + ': todos en cero (sección colapsada)</div>';
-      }
-      return;
-    }
-    if(!started || it.tipo !== 'casilla') return;
-    if(it.subseccion && colapsables.indexOf(it.subseccion) >= 0 && zero[it.subseccion]) return;
-    var v = resolver(it, r, ctx);
-    var n = (typeof v === 'number' && isFinite(v)) ? Math.round(v) : null;
-    var sub = it.categoria === 'subtotal';
-    html += '<div style="display:flex;align-items:baseline;gap:8px;padding:3px 10px;border-bottom:1px solid #f0f0f0;font-size:.78rem' + (sub ? ';background:#F0F6FF;font-weight:700' : '') + '">' +
-      '<span style="font-family:JetBrains Mono,monospace;color:var(--pri);min-width:30px;text-align:right">' + it.cas + '</span>' +
-      '<span style="flex:1">' + it.etiqueta + '</span>' +
-      '<span style="font-family:JetBrains Mono,monospace">' + (n === null ? '&mdash;' : '$' + Math.max(0, n).toLocaleString('es-CO')) + '</span></div>';
-  });
-  cont.innerHTML = html;
+  h += '</div>';
+  // ── CONSOLIDADO CÉDULA GENERAL ──
+  h += row('Renta líquida cedular general', 91, R.c91, 'calc');
+  h += row('Rentas exentas y deducciones (limitadas)', 92, R.c92, 'calc');
+  h += row('Renta líquida gravable cédula general', 97, R.c97, 'calc');
+  // ── Secciones opcionales: solo si tienen valor ──
+  if(nz(R.c99) || nz(R.c103)){
+    h += '<div class="p210-sec">Cédula de pensiones</div>';
+    h += row('Ingresos brutos por pensiones', 99, R.c99, 'in');
+    h += row('Renta líquida gravable de pensiones', 103, R.c103, 'calc');
+  }
+  if(nz(R.c104) || nz(R.c107)){
+    h += '<div class="p210-sec">Cédula de dividendos</div>';
+    h += row('Dividendos no gravados (2017+)', 107, R.c107, 'in');
+  }
+  if(nz(R.c112) || nz(R.c115) || nz(R.c127)){
+    h += '<div class="p210-sec">Ganancias ocasionales</div>';
+    h += row('Ingresos por ganancias ocasionales', 112, R.c112, 'in');
+    h += row('Ganancias ocasionales gravables', 115, R.c115, 'calc');
+  }
+  // ── LIQUIDACIÓN PRIVADA ──
+  h += '<div class="p210-sec">Liquidación privada</div>';
+  h += row('Renta líquida gravable (Art. 241)', 111, R.c111, 'calc');
+  h += row('Impuesto sobre la renta líquida', 116, R.c116, 'calc');
+  h += row('Impuesto neto de renta', 126, R.c126, 'calc');
+  if(nz(R.c127)) h += row('Impuesto de ganancias ocasionales', 127, R.c127, 'calc');
+  h += row('Total impuesto a cargo', 129, R.c129, 'calc');
+  if(nz(R.c131)) h += row('Saldo a favor año anterior', 131, R.c131, 'in');
+  h += row('Retenciones del año', 132, R.c132, 'in');
+  if(nz(R.c133)) h += row('Anticipo año siguiente', 133, R.c133, 'calc');
+  if(nz(R.c134)) h += row('SALDO A PAGAR', 134, R.c134, 'res');
+  if(nz(R.c137)) h += row('SALDO A FAVOR', 137, R.c137, 'res');
+  if(!nz(R.c134) && !nz(R.c137)) h += row('Saldo', 134, 0, 'res');
+  h += '</div>';
+  h += '<div style="font-size:.7rem;color:var(--muted);margin-top:6px;line-height:1.4">'
+     + '<span style="color:#1a3c6e;font-weight:700">Azul</span> = viene de la exógena/tus datos &middot; '
+     + '<span style="color:#2E7D32;font-weight:700">verde</span> = lo calcula el motor. '
+     + 'Este es el formulario 210 tal como lo verás en el MUISCA. Descárgalo con el botón <strong>Borrador 210 (réplica oficial)</strong>.</div>';
+  cont.innerHTML = h;
 }
 // ── Entregable para el cliente: borrador 210 + diagnóstico + planeación ──
 /* Diagnóstico de riesgos del 210 (reutilizado por el entregable PDF y el panel
