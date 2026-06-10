@@ -495,8 +495,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
           </div>
           <div id="reajNota" style="margin-top:6px;font-size:.74rem;color:var(--muted)"></div>
         </div>
-        <div class="card" id="cardComparativoAGAnterior" data-expandible="true" data-expanded="false">
-          <div class="section-title"><span class="num">6b</span> Datos comparativos año anterior <span class="hint" style="font-weight:400;color:var(--muted);font-size:.78rem">(opcional pero recomendado)</span></div>
+        <div class="card" id="cardComparativoAGAnterior">
+          <div class="section-title"><span class="num">6b</span> Declaración del año anterior y comparación patrimonial <span class="hint" style="font-weight:400;color:var(--muted);font-size:.78rem">(sube el PDF — recomendado)</span></div>
           <div style="font-size:.78rem;color:var(--muted);margin-bottom:8px">Si tienes los datos del año anterior, las hojas <strong>4 (validaciones)</strong>, <strong>7 (liquidación)</strong> y comparativos del Excel se enriquecen significativamente: aparece la conciliación patrimonial Art. 236-237 ET y el anticipo Art. 807 con opción 2 (promedio).</div>
           <div style="margin-bottom:10px;padding:8px 10px;border:1px dashed var(--border);border-radius:8px;background:#fafbff">
             <label for="declPrevFile" class="btn-sec" style="display:inline-block;cursor:pointer;font-size:.8rem">&#128206; Importar el 210 del año anterior (PDF)</label>
@@ -520,6 +520,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
             <div class="field"><label>Saldo a favor AG-2 <span class="hint">(opcional)</span></label><input id="agAntSaldoFavorAG2" type="text" oninput="formatNum(this)" placeholder="0"></div>
           </div>
           <div style="margin-top:6px;font-size:.74rem;color:var(--muted);font-style:italic">Si dejas todo en cero, el modo comparativo no se activa y las hojas 4/7 omiten esas secciones con nota explicativa.</div>
+          <div id="comparPatrimonialPanel" style="margin-top:12px"></div>
         </div>
         <div class="card" id="cardPagosPrevios">
           <div class="section-title"><span class="num">7</span> Pagos previos y declaraciones</div>
@@ -1053,6 +1054,40 @@ function recalcAGAnterior(){
   var el = document.getElementById('agAntPatLiquido');
   if(el) el.value = pl > 0 ? pl.toLocaleString('es-CO') : '';
   recalcular();
+}
+/* Comparación patrimonial (Art. 236-239 ET): el patrimonio líquido no puede crecer
+   más de lo que los ingresos del año permiten financiar. Lo que no se justifica, la
+   DIAN puede gravarlo como renta. Se muestra prominente en la pestaña de patrimonio. */
+function renderComparacionPatrimonial(){
+  var panel = document.getElementById('comparPatrimonialPanel');
+  if(!panel) return;
+  var patLiqAnt = Math.max(0, v('agAntPatBruto') - v('agAntDeudas'));
+  var patLiqHoy = Math.max(0, v('patBruto') - v('patDeudas'));
+  if(patLiqAnt <= 0 || patLiqHoy <= 0){ panel.innerHTML = ''; return; }
+  var R = (ultimoResultado && ultimoResultado.renglones) || {};
+  var f = function(n){ return '$' + Math.round(n||0).toLocaleString('es-CO'); };
+  var incremento = patLiqHoy - patLiqAnt;
+  // Lo que financia el crecimiento del patrimonio en el año: renta líquida gravable +
+  // rentas exentas y deducciones (sí entran al bolsillo) + ganancia ocasional gravable +
+  // ingresos no constitutivos − impuesto a cargo − retenciones ya pagadas no recuperadas.
+  var rentaDisponible = (R.c97||0) + (R.c92||0) + (R.c103||0) + (R.c107||0) + (R.c115||0) - (R.c129||0);
+  var noJustificado = incremento - rentaDisponible;
+  var html = '<div style="border:1px solid var(--border);border-radius:10px;overflow:hidden">'
+    + '<div style="background:var(--pri);color:#fff;padding:8px 12px;font-weight:700;font-size:.85rem">⚖️ Comparación patrimonial (Art. 236-239 ET)</div>'
+    + '<div style="padding:10px 12px;font-size:.82rem">'
+    + '<div style="display:flex;justify-content:space-between;padding:2px 0"><span>Patrimonio líquido año anterior</span><strong>' + f(patLiqAnt) + '</strong></div>'
+    + '<div style="display:flex;justify-content:space-between;padding:2px 0"><span>Patrimonio líquido este año</span><strong>' + f(patLiqHoy) + '</strong></div>'
+    + '<div style="display:flex;justify-content:space-between;padding:2px 0;border-top:1px solid #eee;margin-top:3px"><span><strong>Creció</strong></span><strong style="color:' + (incremento>=0?'#1a3c6e':'#059669') + '">' + f(incremento) + '</strong></div>'
+    + '<div style="display:flex;justify-content:space-between;padding:2px 0"><span>Lo que tus ingresos del año justifican</span><strong>' + f(rentaDisponible) + '</strong></div>';
+  if(incremento > 0 && noJustificado > 1000000){
+    html += '<div style="background:#FEE2E2;border-left:4px solid #991B1B;border-radius:6px;padding:8px 10px;margin-top:8px;font-size:.78rem;color:#7F1D1D">'
+      + '<strong>⚠ ' + f(noJustificado) + ' sin justificar.</strong> El patrimonio creció más de lo que la renta declarada permite financiar. La DIAN puede gravar ese exceso como renta (arts. 236-239 ET). Documenta el origen: préstamos recibidos, herencias o donaciones, valorizaciones, gananciales, o ingresos que faltan por declarar.</div>';
+  } else {
+    html += '<div style="background:#ECFDF5;border-left:4px solid #059669;border-radius:6px;padding:8px 10px;margin-top:8px;font-size:.78rem;color:#065F46">'
+      + '✓ El crecimiento del patrimonio está respaldado por los ingresos del año. Sin riesgo por comparación patrimonial.</div>';
+  }
+  html += '</div></div>';
+  panel.innerHTML = html;
 }
 function skipExogena(){
   var hayReconciliacion = window.reconciliacionEstado &&
@@ -2354,6 +2389,7 @@ function recalcular(){
   renderBeneficioAuditoria(ctx);
   renderizarReplica210();
   renderComparacionSugerida();
+  if(typeof renderComparacionPatrimonial === 'function') renderComparacionPatrimonial();
   if(typeof autoGuardarBorrador === 'function') autoGuardarBorrador();
 }
 /* ── BENEFICIO DE AUDITORÍA (Art. 689-3, shared/beneficio-auditoria.js) ── */
@@ -2520,7 +2556,36 @@ function aplicarDeclPrev(c){
   if(typeof recalcular==='function') recalcular();
   if(typeof exoToast!=='undefined') exoToast('Datos del año anterior aplicados al comparativo','exito');
 }
-if(window.declPrev210) declPrev210.init({ fileInputId:'declPrevFile', resultId:'declPrevResultado', aplicar: aplicarDeclPrev });
+// Lectura ROBUSTA del PDF del 210 del año anterior: parser posicional (extrae todas las
+// casillas) → autollena TODO el comparativo de una. Es lo que el contador usa normalmente.
+function procesarDeclAnteriorPDF(file){
+  var out = document.getElementById('declPrevResultado');
+  if(!file){ return; }
+  if(!window.sugeridaParser){ if(out) out.innerHTML = '<span style="color:var(--red);font-size:.78rem">Lector de PDF no disponible. Recarga la página.</span>'; return; }
+  if(out) out.innerHTML = '<span style="color:var(--muted);font-size:.8rem">Leyendo la declaración del año anterior…</span>';
+  file.arrayBuffer().then(function(ab){ return window.sugeridaParser.parse(ab); }).then(function(r){
+    if(!r.ok){
+      // Fallback al lector por etiquetas con confirmación manual
+      if(window.declPrev210 && window.pdfLines){
+        window.pdfLines.extraer(file).then(function(lineas){ declPrev210 && declPrev210.parse && aplicarDeclPrev(declPrev210.parse(lineas)); }).catch(function(){});
+      }
+      if(out) out.innerHTML = '<div style="background:#FFFBEB;border-left:3px solid var(--amber);border-radius:6px;padding:8px 10px;font-size:.78rem;color:#78350F">No pude leer todas las casillas automáticamente. Verifica que sea el PDF oficial del 210 (AG 2023+) o digita los valores a mano abajo.</div>';
+      return;
+    }
+    var c = r.casillas;
+    function set(id, v){ var e=document.getElementById(id); if(!e || !v) return; e.value=String(Math.round(v)); if(typeof formatNum==='function') formatNum(e); }
+    set('agAntPatBruto', c[29]); set('agAntDeudas', c[30]);
+    set('agAntRentaCedularGen', c[97]); set('agAntRentaPensiones', c[103]); set('agAntRentaDividendos', c[107]);
+    set('agAntImpuestoNeto', c[126]); set('agAntRetenciones', c[132]); set('agAntSaldoFavorAG2', c[137]);
+    if(typeof recalcAGAnterior==='function') recalcAGAnterior();
+    if(typeof renderBeneficioAuditoria==='function') renderBeneficioAuditoria();
+    if(typeof recalcular==='function') recalcular();
+    if(out) out.innerHTML = '<div style="background:#ECFDF5;border-left:3px solid #059669;border-radius:6px;padding:8px 10px;font-size:.78rem;color:#065F46">✓ Declaración AG ' + (r.anio||'anterior') + ' leída — patrimonio, rentas, impuesto y retenciones del año anterior cargados. Revisa los valores abajo.</div>';
+    if(typeof gtag !== 'undefined') gtag('event','f210_pro_decl_anterior_pdf');
+  }).catch(function(e){ if(out) out.innerHTML = '<span style="color:var(--red);font-size:.78rem">No se pudo leer el PDF: ' + ((e&&e.message)||'error') + '</span>'; });
+}
+// El PDF del año anterior se lee con el parser posicional (robusto, autollena todo).
+(function(){ var inp = document.getElementById('declPrevFile'); if(inp) inp.addEventListener('change', function(){ if(inp.files && inp.files[0]) procesarDeclAnteriorPDF(inp.files[0]); }); })();
 function setText(id, txt){
   var el = document.getElementById(id);
   if(el) el.textContent = txt;
