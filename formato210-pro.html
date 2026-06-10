@@ -235,6 +235,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 .recon-table .sug-tag{font-size:.68rem;background:var(--pri3);color:var(--pri);padding:1px 6px;border-radius:3px;font-family:'DM Sans',sans-serif}
 .recon-table .sug-tag.null{background:#FEE2E2;color:#991B1B}
 .recon-table .btn-row{padding:2px 8px;font-size:.7rem;border:1px solid var(--border);background:#fff;border-radius:4px;cursor:pointer;font-family:inherit}
+.btn-aplicar{display:inline-block;margin-top:8px;padding:7px 16px;font-size:.8rem;font-weight:700;border:none;border-radius:8px;background:#059669;color:#fff;cursor:pointer;font-family:inherit;box-shadow:0 2px 6px -2px rgba(5,150,105,.5);transition:.12s}
+.btn-aplicar:hover{background:#047857;transform:translateY(-1px)}
+.btn-aplicar.secondary{background:#fff;color:#1B3A5C;border:1.5px solid #1B3A5C;box-shadow:none}
+.btn-aplicar.secondary:hover{background:#f0f6ff}
 .recon-table .btn-row:hover{border-color:var(--pri2);color:var(--pri)}
 .recon-table .btn-row.danger{color:#991B1B;border-color:#FCA5A5}
 .recon-table .btn-row.danger:hover{background:#FEE2E2}
@@ -1198,14 +1202,14 @@ function renderizarResumenExogena(result, fileName){
   var t = result.totales;
   var warns = result.warnings || [];
   var labels = {
-    trabajo:    'Trabajo (5001/5051/5060/5061)',
-    honorarios: 'Honorarios y servicios (5002/5003/5016)',
-    capital:    'Capital (5004/5005/5070/5071)',
-    noLaboral:  'No laborales / otros',
-    pensiones:  'Pensiones (5022)',
-    dividendos: 'Dividendos (5010/5011)',
-    gananciasOcasionales: 'Ganancias ocasionales (5044)',
-    otros:      'Otros (INCRNGO 5008/5009 · deducciones 5012-5014)'
+    trabajo:    'Rentas de trabajo',
+    honorarios: 'Honorarios y servicios',
+    capital:    'Rentas de capital',
+    noLaboral:  'Rentas no laborales',
+    pensiones:  'Pensiones',
+    dividendos: 'Dividendos',
+    gananciasOcasionales: 'Ganancias ocasionales',
+    otros:      'INCRNGO y deducciones'
   };
   var totalesHtml = '';
   ['trabajo','honorarios','capital','noLaboral','pensiones','dividendos','gananciasOcasionales','otros'].forEach(function(k){
@@ -1312,12 +1316,7 @@ function renderizarResumenExogena(result, fileName){
     topesHtml +
     '<div class="totales">' + totalesHtml + '</div>' +
     warnsHtml +
-    disclaimerHtml +
-    '<div style="margin-top:14px;text-align:center">' +
-      '<button class="btn btn-primary" onclick="document.getElementById(\'cardReconciliacion\').scrollIntoView({behavior:\'smooth\',block:\'start\'})">' +
-        'Ir a reconciliación &darr;' +
-      '</button>' +
-    '</div>';
+    disclaimerHtml;
 }
 /* renderizarMapeoManual — UI N3/falla
    Cuando el parser no puede determinar la estructura con confianza suficiente,
@@ -1544,8 +1543,8 @@ function renderizarTablaReconciliacion(){
   if(danoTotal > 0 && !reconciliacionEstado.danoEmergenteAplicado){
     introHtml += '<div style="background:#FFFBEB;border-left:4px solid #D97706;border-radius:6px;padding:10px 14px;margin:8px 0;font-size:.8rem;color:#78350F;line-height:1.5">' +
       '⚖️ <strong>Siniestros por daño emergente detectados: $' + Math.round(danoTotal).toLocaleString('es-CO') + '.</strong> ' +
-      'El ingreso bruto va en la casilla 74, pero el <strong>Art. 45 ET</strong> permite tratar el mismo valor como <strong>INCRNGO (casilla 76)</strong> — la renta líquida queda en cero — <em>siempre que el cliente demuestre que invirtió la totalidad de la indemnización en reponer el bien asegurado antes de presentar la declaración</em>. Pide el soporte de la reposición. El lucro cesante sí es gravado.' +
-      ' <button class="btn-row" style="margin-left:6px" onclick="aplicarIncrngoDanoEmergente(' + Math.round(danoTotal) + ')">Aplicar como INCRNGO c76</button>' +
+      'El ingreso bruto va en la casilla 74, pero el <strong>Art. 45 ET</strong> permite tratar el mismo valor como <strong>INCRNGO (casilla 76)</strong> — la renta líquida queda en cero — en cualquiera de estos dos casos: <em>(a) el cliente invirtió la totalidad de la indemnización en comprar bienes iguales o similares a los asegurados antes de presentar la declaración; o (b) si no alcanzó a comprarlos, constituyó un fondo destinado exclusivamente a esa adquisición</em>. Pide el soporte (factura de reposición o acta del fondo). El lucro cesante sí es gravado.' +
+      ' <button class="btn-aplicar" onclick="aplicarIncrngoDanoEmergente(' + Math.round(danoTotal) + ')">Aplicar como INCRNGO c76</button>' +
     '</div>';
   }
   // Asesoría venta de activos fijos: retención ante notarios/tránsito (Art. 398 ET, retefuente 1%).
@@ -1563,8 +1562,8 @@ function renderizarTablaReconciliacion(){
     introHtml += '<div style="background:#FDF4FF;border-left:4px solid #A855F7;border-radius:6px;padding:10px 14px;margin:8px 0;font-size:.8rem;color:#581C87;line-height:1.5">' +
       '🧾 <strong>Ingresos por documento soporte: $' + Math.round(mresDS.ingDocSoporte).toLocaleString('es-CO') + '.</strong> ' +
       'Empresas reportaron compras hechas al declarante con <strong>documento soporte</strong> (porque él no factura electrónicamente). Eso es un <strong>ingreso</strong> que debe entrar a la declaración — clasifícalo según la actividad: honorarios/servicios personales o renta no laboral (venta de bienes u otra actividad).' +
-      ' <button class="btn-row" style="margin-left:6px" onclick="aplicarDocSoporte(' + Math.round(mresDS.ingDocSoporte) + ',\'honIngBruto\')">A honorarios c43</button>' +
-      ' <button class="btn-row" style="margin-left:4px" onclick="aplicarDocSoporte(' + Math.round(mresDS.ingDocSoporte) + ',\'nlIngBruto\')">A no laborales c74</button>' +
+      ' <button class="btn-aplicar" onclick="aplicarDocSoporte(' + Math.round(mresDS.ingDocSoporte) + ',\'honIngBruto\')">A honorarios c43</button>' +
+      ' <button class="btn-aplicar secondary" onclick="aplicarDocSoporte(' + Math.round(mresDS.ingDocSoporte) + ',\'nlIngBruto\')">A no laborales c74</button>' +
     '</div>';
   }
   // Asesoría cesantías Art. 206-4: el reporte trae el insumo exacto (ingreso laboral
@@ -1584,7 +1583,7 @@ function renderizarTablaReconciliacion(){
           '💼 <strong>Cesantías detectadas: $' + Math.round(mres.cesantiasIngreso).toLocaleString('es-CO') + '.</strong> ' +
           'El reporte trae el ingreso laboral promedio de los últimos 6 meses: <strong>$' + Math.round(mres.ingPromedio6m).toLocaleString('es-CO') + '/mes ≈ ' + Math.round(promUvtMes) + ' UVT</strong>. ' +
           'Por la escala del <strong>Art. 206 num. 4 ET</strong>' + (promUvtMes <= 350 ? ' (≤ 350 UVT/mes)' : '') + ', el <strong>' + Math.round(pctEx*100) + '%</strong> de las cesantías es renta exenta = <strong>$' + cesExentas.toLocaleString('es-CO') + '</strong> (esta exención es ADICIONAL al 25% del num. 10 y entra al límite del 40%/1.340 UVT). Verifica el promedio con el certificado laboral.' +
-          ' <button class="btn-row" style="margin-left:6px" onclick="aplicarCesantias2064(' + cesExentas + ')">Aplicar como cesantías exentas</button>' +
+          ' <button class="btn-aplicar" onclick="aplicarCesantias2064(' + cesExentas + ')">Aplicar como cesantías exentas</button>' +
         '</div>';
       }
     }
@@ -1596,7 +1595,7 @@ function renderizarTablaReconciliacion(){
       'Esto indica que hubo una <strong>venta de activos fijos</strong> (vehículo o inmueble) con retefuente del 1% (Art. 398 ET). El ingreso estimado es <strong>$' + ingresoVentaEst.toLocaleString('es-CO') + '</strong> (retención ÷ 1%) y <strong>NO viene como ingreso en el reporte</strong> — hay que declararlo. Tú decides según la posesión del activo: ' +
       '<strong>menos de 2 años</strong> → renta no laboral (casilla 74, con su costo fiscal en la 77); ' +
       '<strong>2 años o más</strong> → ganancia ocasional al 15% (casillas 112-115 — ajústalas en el borrador; revisa la lista de soportes de la card 11). Confirma el valor real con la escritura o el contrato.' +
-      ' <button class="btn-row" style="margin-left:6px" onclick="aplicarVentaActivosNoLaboral(' + ingresoVentaEst + ')">Agregar a no laborales c74</button>' +
+      ' <button class="btn-aplicar" onclick="aplicarVentaActivosNoLaboral(' + ingresoVentaEst + ')">Agregar a no laborales c74</button>' +
     '</div>';
   }
   var rowsHtml = filas.map(function(f, idx){
@@ -1697,7 +1696,7 @@ function _renderCuadreReporte(filas){
   var noVanHtml = '';
   if(c.noVanEnDeclaracion.length > 0){
     noVanHtml = '<details style="margin-top:8px"><summary style="cursor:pointer;font-size:.8rem;color:#92400E;font-weight:600">' +
-      'Ver ' + c.noVanEnDeclaracion.length + ' concepto(s) que NO van en la declaración (informarle al cliente)</summary>' +
+      'Ver ' + c.noVanEnDeclaracion.length + ' concepto(s) informativo(s) — a dónde va cada uno (patrimonio, deudas, retención o no van)</summary>' +
       '<ul style="margin:6px 0 0 16px;font-size:.76rem;color:var(--muted);line-height:1.5">' +
       c.noVanEnDeclaracion.slice(0,40).map(function(n){
         return '<li><strong>' + $(n.valor) + '</strong> — ' + escHtml((n.descripcion||'(sin detalle)').slice(0,60)) +
