@@ -340,7 +340,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 <script src="shared/reajuste-fiscal.js?v=761bd775"></script>
 <script src="shared/decl-prev-210.js?v=a03c70c1"></script>
 <script src="shared/validaciones210.js?v=a6bc1c89"></script>
-<script src="shared/parser-exogena-pn.js?v=611d017e"></script>
+<script src="shared/parser-exogena-pn.js?v=20e6b0db"></script>
 <script src="shared/parser-muisca-consultante.js?v=b08ef6fb"></script>
 <script src="shared/sugerida-parser-210.js?v=f53a18af"></script>
 <script src="shared/canonicalize-inputs.js?v=8e51ce11"></script>
@@ -354,9 +354,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
       <h1><span>210</span> <em>PRO</em></h1>
       <p>Declaración Persona Natural &middot; prefill desde reporte exógena DIAN</p>
     </div>
-    <div class="header-right">
-      <span id="proBadgeHeader" style="display:none;background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:.7rem;font-weight:700">PRO</span><br>
-      100% en navegador
+    <div class="header-right" style="text-align:right">
+      <span id="proBadgeHeader" style="display:none;background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:.7rem;font-weight:700">PRO</span>
+      <button id="btnNuevoCliente" onclick="reiniciarTodo()" title="Borra todo y empieza una declaración nueva" style="display:none;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#fff;padding:5px 12px;border-radius:8px;font-size:.74rem;font-weight:600;cursor:pointer;font-family:inherit;margin-left:8px">&#128260; Nuevo cliente / Reiniciar</button>
+      <div style="font-size:.7rem;margin-top:4px;opacity:.85">100% en navegador</div>
     </div>
   </div>
   <div id="proGate" class="card" style="padding:0;overflow:hidden">
@@ -731,10 +732,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
               <option value="otro">Otra actividad gravada</option>
             </select></div>
           </div>
-          <button onclick="exportarExcelAsesor()" class="btn btn-success">&#128202; Calcular y exportar Excel papel de trabajo</button>
-          <button onclick="exportarBorrador210Oficial()" class="btn" style="background:#0F766E;color:#fff;margin-left:8px;margin-top:8px">&#128203; Borrador 210 (réplica oficial DIAN)</button>
+          <button onclick="exportarExcelAsesor()" class="btn btn-success">&#128202; Calcular y descargar Excel (borrador 210 oficial + papel de trabajo)</button>
           <button onclick="exportarEntregablePDF()" class="btn" style="background:var(--pri,#1B3A5C);color:#fff;margin-left:8px;margin-top:8px">&#128196; Entregable para el cliente (PDF)</button>
-          <div style="font-size:.78rem;color:var(--muted);margin-top:10px">El <strong>borrador 210</strong> es el formulario oficial en Excel con las casillas pobladas. El entregable trae el <strong>borrador del 210 + diagnóstico de riesgos + planeación de beneficios</strong>. Atajos: <kbd>Ctrl+S</kbd> guardar &middot; <kbd>Ctrl+E</kbd> exportar Excel</div>
+          <div style="font-size:.78rem;color:var(--muted);margin-top:10px">Un solo Excel: la <strong>réplica oficial del 210</strong> (casillas pobladas, lista para transcribir al MUISCA) + el <strong>papel de trabajo</strong> de 8 hojas. El entregable PDF trae el borrador + diagnóstico de riesgos + planeación. Atajos: <kbd>Ctrl+S</kbd> guardar &middot; <kbd>Ctrl+E</kbd> exportar Excel</div>
         </div>
         <div class="card" id="cardReplica210">
           <h3 onclick="toggleReplica210()" style="cursor:pointer;user-select:none">&#128203; Preview del Formulario 210 oficial <span style="font-size:.74rem;color:var(--muted);font-weight:400" id="replica210Hint">(clic para expandir)</span></h3>
@@ -813,6 +813,7 @@ function validarProGate(){
       document.getElementById('proGate').classList.add('hidden');
       document.getElementById('proContent').classList.remove('hidden');
       var b=document.getElementById('proBadgeHeader');if(b)b.style.display='inline-block';
+      var bn=document.getElementById('btnNuevoCliente');if(bn)bn.style.display='inline-block';
       if(typeof gtag!=='undefined'){
         gtag('event','f210_pro_activated');
         // TODO: eliminar evento legacy f210_express_pro_activated después de 2026-07-31 (transición rebrand Express → Pro)
@@ -837,6 +838,7 @@ document.addEventListener('DOMContentLoaded', function(){
       document.getElementById('proGate').classList.add('hidden');
       document.getElementById('proContent').classList.remove('hidden');
       var b=document.getElementById('proBadgeHeader');if(b)b.style.display='inline-block';
+      var bn=document.getElementById('btnNuevoCliente');if(bn)bn.style.display='inline-block';
       restaurarBorrador();
       inicializarDropZone();
       inicializarSugerida();
@@ -2481,6 +2483,33 @@ function setText(id, txt){
    previo del contador mapeando los campos genéricos a la subcédula correcta. */
 var BORRADOR_KEY    = 'f210_pro_borrador_v2';
 var BORRADOR_KEY_V1 = 'f210_express_borrador';
+/* ── REINICIAR: borra todo y empieza una declaración nueva (otro cliente) ── */
+function reiniciarTodo(){
+  if(!confirm('¿Borrar todos los datos y empezar una declaración nueva?\n\nSe eliminará la información del cliente actual de este navegador. Esta acción no se puede deshacer.')) return;
+  try { localStorage.removeItem(BORRADOR_KEY); localStorage.removeItem(BORRADOR_KEY_V1); } catch(_){}
+  // Limpiar todos los inputs de texto/número y textareas
+  document.querySelectorAll('#proContent input[type=text], #proContent input[type=email], #proContent input[type=number], #proContent input:not([type]), #proContent textarea').forEach(function(el){
+    if(el.id === 'proKeyGate') return;
+    el.value = '';
+  });
+  // Checkboxes a su estado por defecto
+  document.querySelectorAll('#proContent input[type=checkbox]').forEach(function(el){ el.checked = false; });
+  // Selects a la primera opción
+  document.querySelectorAll('#proContent select').forEach(function(el){ el.selectedIndex = 0; });
+  // Reconciliación y exógena
+  if(typeof reconciliacionEstado !== 'undefined'){ reconciliacionEstado.filas = []; reconciliacionEstado.aplicada = false; reconciliacionEstado.muiscaResumen = null; reconciliacionEstado.danoEmergenteAplicado = false; reconciliacionEstado.ventaActivosAplicada = false; reconciliacionEstado.cesantias2064Aplicada = false; reconciliacionEstado.docSoporteAplicado = false; }
+  ultimoExogenaResult = null; ultimoExogenaWorkbook = null;
+  sugeridaCasillas = null; sugeridaMeta = null;
+  var card = document.getElementById('cardReconciliacion'); if(card) card.classList.add('hidden');
+  ['exogenaSummary','reconciliacionContainer','sugeridaResult','replica210Body'].forEach(function(id){ var e = document.getElementById(id); if(e) e.innerHTML = ''; });
+  var fileExo = document.getElementById('fileExogena'); if(fileExo) fileExo.value = '';
+  var fileSug = document.getElementById('fileSugerida'); if(fileSug) fileSug.value = '';
+  // Recalcular a cero y subir
+  if(typeof recalcular === 'function') recalcular();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if(typeof exoToast !== 'undefined') exoToast('Listo: declaración nueva, empieza de cero.', 'success');
+  if(typeof gtag !== 'undefined') gtag('event','f210_pro_reiniciar');
+}
 function guardarBorrador(silencioso){
   var ids = [
     'cc','nombre','retenciones','saldoFavorAnt','anticipoPrevPagado',
@@ -2639,7 +2668,20 @@ async function generarExcelYDescargar(){
   var p = paramsRentaPN.getParams(ultimoEstado.year);
   var canonical = canonicalizeInputs.canonicalize(ultimoEstado.estado, ultimoEstado.year, p);
   var hash = await hashSha256Hex(canonical);
-  var wb = new ExcelJS.Workbook();
+  // UN SOLO Excel: primera hoja = borrador 210 sobre la réplica OFICIAL DIAN (plantilla
+  // poblada), seguida de las 8 hojas del papel de trabajo. No hay dos archivos separados.
+  var wb = null, conReplica = false;
+  try {
+    var res = await fetch('template_210_oficial.xlsx');
+    if(res.ok){
+      wb = new ExcelJS.Workbook();
+      await wb.xlsx.load(await res.arrayBuffer());
+      var basura = wb.getWorksheet('Hoja1'); if(basura) wb.removeWorksheet(basura.id);
+      poblarHoja210Oficial(wb.getWorksheet('210') || wb.worksheets[0], ultimoResultado, ultimoEstado);
+      conReplica = true;
+    }
+  } catch(e){ wb = null; }
+  if(!wb) wb = new ExcelJS.Workbook(); // fallback offline: solo papel de trabajo
   excelPapelTrabajo.generarExcelPapelTrabajo(wb, ultimoResultado, ultimoEstado, hash, window.reconciliacionEstado);
   var buf = await wb.xlsx.writeBuffer();
   var blob = new Blob([buf], { type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
@@ -2651,10 +2693,28 @@ async function generarExcelYDescargar(){
   URL.revokeObjectURL(a.href);
   if(typeof gtag !== 'undefined'){
     gtag('event','f210_pro_excel_descargado');
-    // TODO: eliminar evento legacy f210_express_excel_descargado después de 2026-07-31 (transición rebrand Express → Pro)
-    gtag('event','f210_express_excel_descargado');
+    gtag('event','f210_pro_borrador_oficial_descargado');
   }
-  if(typeof exoToast !== 'undefined') exoToast('Excel papel de trabajo descargado', 'success');
+  if(typeof exoToast !== 'undefined') exoToast(conReplica ? 'Excel descargado: borrador 210 oficial + papel de trabajo' : 'Excel papel de trabajo descargado', 'success');
+}
+/* Puebla la hoja "210" (plantilla oficial DIAN) con los valores del motor. */
+function poblarHoja210Oficial(ws, r, ctx){
+  if(!ws) return;
+  var tabla = excelPapelTrabajo._internal.buildCasillasTabla();
+  var resolver = excelPapelTrabajo._internal.resolverValor;
+  tabla.forEach(function(item){
+    if(item.tipo !== 'casilla') return;
+    var addr = MAPA_CELDAS_210[item.cas];
+    if(!addr) return;
+    var v = resolver(item, r, ctx);
+    if(item.tipoValor === 'texto'){ if(v) ws.getCell(addr).value = String(v); return; }
+    var n = (typeof v === 'number' && isFinite(v)) ? Math.round(v) : 0;
+    if(n < 0) n = 0; // regla DIAN: ningún renglón en negativo
+    ws.getCell(addr).value = n;
+  });
+  ws.getCell('Z8').value = Math.round((ctx.estado.cedulaGeneral && ctx.estado.cedulaGeneral.facturaElectronica1Pct) || 0);
+  ws.getCell('D4').value = ctx.year;
+  if(ctx.estado.declarante && ctx.estado.declarante.cc) ws.getCell('D7').value = String(ctx.estado.declarante.cc).replace(/[^\d]/g,'');
 }
 async function hashSha256Hex(str){
   var encoder = new TextEncoder();
@@ -2682,56 +2742,6 @@ var MAPA_CELDAS_210 = {
   138:'G48', // número de dependientes económicos (Art. 336 num. 3 inc. 2)
   139:'M48'  // adición por dependientes a la casilla 92 (72 UVT × dep, máx 4) — la fórmula de c92 del template la suma
 };
-function exportarBorrador210Oficial(){
-  if(!ultimoResultado || !ultimoEstado){
-    if(typeof exoToast !== 'undefined') exoToast('Llena los campos primero', 'error');
-    return;
-  }
-  document.getElementById('loadingOverlay').classList.remove('hidden');
-  generarBorrador210Oficial()
-    .catch(function(err){
-      console.error(err);
-      if(typeof exoToast !== 'undefined') exoToast('Error: ' + (err.message || err), 'error');
-    })
-    .then(function(){
-      document.getElementById('loadingOverlay').classList.add('hidden');
-    });
-}
-async function generarBorrador210Oficial(){
-  var res = await fetch('template_210_oficial.xlsx');
-  if(!res.ok) throw new Error('No se pudo cargar la plantilla oficial.');
-  var wb = new ExcelJS.Workbook();
-  await wb.xlsx.load(await res.arrayBuffer());
-  var ws = wb.getWorksheet('210') || wb.worksheets[0];
-  var tabla = excelPapelTrabajo._internal.buildCasillasTabla();
-  var resolver = excelPapelTrabajo._internal.resolverValor;
-  var r = ultimoResultado, ctx = ultimoEstado;
-  tabla.forEach(function(item){
-    if(item.tipo !== 'casilla') return;
-    var addr = MAPA_CELDAS_210[item.cas];
-    if(!addr) return;
-    var v = resolver(item, r, ctx);
-    if(item.tipoValor === 'texto'){ if(v) ws.getCell(addr).value = String(v); return; }
-    var n = (typeof v === 'number' && isFinite(v)) ? Math.round(v) : 0;
-    if(n < 0) n = 0; // regla DIAN: ningún renglón en negativo
-    ws.getCell(addr).value = n;
-  });
-  // c28 (1% factura electrónica) no está en la tabla canónica con cas 28 mapeable
-  ws.getCell('Z8').value = Math.round((ctx.estado.cedulaGeneral && ctx.estado.cedulaGeneral.facturaElectronica1Pct) || 0);
-  // Encabezado: año y NIT
-  ws.getCell('D4').value = ctx.year;
-  if(ctx.estado.declarante && ctx.estado.declarante.cc) ws.getCell('D7').value = String(ctx.estado.declarante.cc).replace(/[^\d]/g,'');
-  var buf = await wb.xlsx.writeBuffer();
-  var blob = new Blob([buf], { type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-  var nombre = (ctx.estado.declarante.cc || 'PN').replace(/\s+/g,'') + '_' + ctx.year;
-  var a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'F210-Borrador-Oficial-' + nombre + '.xlsx';
-  a.click();
-  URL.revokeObjectURL(a.href);
-  if(typeof gtag !== 'undefined') gtag('event','f210_pro_borrador_oficial_descargado');
-  if(typeof exoToast !== 'undefined') exoToast('Borrador 210 (réplica oficial) descargado', 'success');
-}
 /* ── COMPARADOR CONTRA LA DECLARACIÓN SUGERIDA DIAN ──
    Parser posicional portado de CalculaRenta (shared/sugerida-parser-210.js),
    calibrado contra declaraciones reales AG2024. La comparación se refresca
@@ -2872,19 +2882,33 @@ function renderizarReplica210(){
   h += '<div class="p210-cg">';
   h += '<div class="ch">Concepto</div><div class="ch">Rentas de trabajo</div><div class="ch">Honorarios y servicios</div><div class="ch">Rentas de capital</div><div class="ch">Rentas no laborales</div>';
   var subs = ['trabajo','honorarios','capital','noLaboral'];
+  // Total exentas = exenta25 (25% trabajo/hon) + otras exentas. El motor no separa AFC de
+  // vivienda por subcédula; esas filas se muestran (estructura oficial) con — y el valor
+  // agrupado cae en los totales (37/40/41), igual que el MUISCA consolida.
+  function totalExentas(s){ return (sc[s].exenta25||0) + (sc[s].otrasRentasExentas||0); }
   var filas = [
-    { lbl:'Ingresos brutos',                 key:'ingresosBrutos',      cas:[32,43,58,74] },
-    { lbl:'Ing. no constitutivos (INCRNGO)', key:'incrngo',             cas:[33,44,59,76] },
-    { lbl:'Costos y deducciones',            key:'costos',              cas:[null,45,60,77] },
-    { lbl:'Renta líquida',                   key:'ingresoNeto',         cas:[34,46,61,78], calc:true },
-    { lbl:'Rentas exentas y ded. limitadas', key:'exentasYDeducciones', cas:[41,53,69,86], calc:true },
-    { lbl:'Renta líquida ordinaria',         key:'rentaSubcedula',      cas:[42,57,73,90], calc:true }
+    { lbl:'Ingresos brutos',                          fn:function(s){return sc[s].ingresosBrutos;},      cas:[32,43,58,74] },
+    { lbl:'Devoluciones, rebajas y descuentos',       fn:function(s){return null;},                       cas:[null,null,null,75] },
+    { lbl:'Ingresos no constitutivos de renta',       fn:function(s){return sc[s].incrngo;},              cas:[33,44,59,76] },
+    { lbl:'Costos y deducciones procedentes',         fn:function(s){return sc[s].costos;},               cas:[null,45,60,77] },
+    { lbl:'Renta líquida',                            fn:function(s){return sc[s].ingresoNeto;},          cas:[34,46,61,78], calc:true },
+    { lbl:'Aportes voluntarios AFC, FVP y/o AVC',     fn:function(s){return null;},                       cas:[35,47,63,80] },
+    { lbl:'Otras rentas exentas (incl. 25% Art.206)', fn:function(s){return totalExentas(s);},            cas:[36,48,64,81] },
+    { lbl:'Total rentas exentas',                     fn:function(s){return totalExentas(s);},            cas:[37,49,65,82], calc:true },
+    { lbl:'Intereses de vivienda',                    fn:function(s){return null;},                       cas:[38,50,66,83] },
+    { lbl:'Otras deducciones imputables',             fn:function(s){return sc[s].deduccionesNominales;}, cas:[39,51,67,84] },
+    { lbl:'Total deducciones imputables',             fn:function(s){return sc[s].deduccionesNominales;}, cas:[40,52,68,85], calc:true },
+    { lbl:'Rentas exentas y/o ded. imputables (limitadas)', fn:function(s){return sc[s].exentasYDeducciones;}, cas:[41,53,69,86], calc:true },
+    { lbl:'Renta líquida ordinaria del ejercicio',    fn:function(s){return sc[s].rentaLiquidaAntesExentas;}, cas:[null,54,70,87], calc:true },
+    { lbl:'Pérdida líquida del ejercicio',            fn:function(s){return sc[s].perdida;},              cas:[null,55,71,88], calc:true },
+    { lbl:'Renta líquida ordinaria',                  fn:function(s){return sc[s].rentaSubcedula;},       cas:[42,57,73,90], calc:true }
   ];
   filas.forEach(function(f){
     h += '<div class="p210-cr' + (f.calc ? ' tot' : '') + '"><div class="cl">' + f.lbl + '</div>';
     subs.forEach(function(s, i){
       if(f.cas[i] === null){ h += '<div class="cc" style="background:#f5f5f5"></div>'; return; }
-      var val = (sc[s] && sc[s][f.key]) || 0;
+      var val = sc[s] ? f.fn(s) : null;
+      if(val === null){ h += '<div class="cc"><span class="cn">' + f.cas[i] + '</span>—</div>'; return; }
       h += cell(f.cas[i], val, f.calc);
     });
     h += '</div>';
@@ -2926,7 +2950,7 @@ function renderizarReplica210(){
   h += '<div style="font-size:.7rem;color:var(--muted);margin-top:6px;line-height:1.4">'
      + '<span style="color:#1a3c6e;font-weight:700">Azul</span> = viene de la exógena/tus datos &middot; '
      + '<span style="color:#2E7D32;font-weight:700">verde</span> = lo calcula el motor. '
-     + 'Este es el formulario 210 tal como lo verás en el MUISCA. Descárgalo con el botón <strong>Borrador 210 (réplica oficial)</strong>.</div>';
+     + 'Este es el formulario 210 tal como lo verás en el MUISCA. Descárgalo con el botón <strong>Calcular y descargar Excel</strong> (incluye la réplica oficial lista para transcribir).</div>';
   cont.innerHTML = h;
 }
 // ── Entregable para el cliente: borrador 210 + diagnóstico + planeación ──

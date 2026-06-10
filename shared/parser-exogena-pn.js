@@ -176,6 +176,9 @@
     // (formato 1019) y generan alerta si no cuadran con los ingresos. Hay que
     // distinguirlos de los "intereses/rendimientos" que sí son renta de capital.
     { re: /consignacion|movimiento(s)? (debito|credito)|valor total de (los )?movimientos|deposito(s)? bancari|tarjeta(s)? de credito|total adquisiciones consumos|gastos tarjeta credito|compras y avances|ventas con tarjeta|gravamen.*movimiento|4 ?(x|por) ?mil|\bgmf\b/, cedula: 'informativo' },
+    // Base de facturación electrónica (de ella sale el 1% deducible c28, ya prellenado por
+    // parser-muisca). Viene sin "uso sugerido" → quedaba como pendiente rojo sin serlo.
+    { re: /monto total de facturacion|facturacion electronica susceptible|susceptible de beneficio/, cedula: 'informativo' },
     // SALDOS y adquisiciones = patrimonio (c29) o movimientos del año (Tope 4), NO ingreso.
     // Van antes que capital porque el informante suele ser un banco (matchea 'capital' por
     // nombre) y "Saldo cuentas/CDT/inversión" o "Inversiones realizadas" no es renta.
@@ -195,7 +198,7 @@
   // Patrones del "uso sugerido" que NUNCA son ingreso de cédula (van a 'informativo').
   // Cubren tanto el formato con rótulo ("Tope 4. Consignaciones…") como el formato que
   // trae el concepto literal en esa columna ("Valor total de los movimientos…", "Saldo…").
-  var RE_USO_NO_INGRESO = /^tope\s*[34]\b|consumos?\s*tc|total adquisiciones consumos|gastos? tarjeta cr[eé]dito|tarjeta\s*cr[eé]dito\s*o\s*d[eé]bito|consignaciones\s*e\s*inversiones|valor total de (los )?movimientos|^saldo\b|inversion(es)?.*(realizad|efectuad)|^cdt\b|avaluo|adquisicion de bienes|cuenta por cobrar|aporte.*derecho social|se usa en renglones como/;
+  var RE_USO_NO_INGRESO = /^tope\s*[234]\b|consumos?\s*tc|total adquisiciones consumos|gastos? tarjeta cr[eé]dito|tarjeta\s*cr[eé]dito\s*o\s*d[eé]bito|consignaciones\s*e\s*inversiones|valor total de (los )?movimientos|^saldo\b|inversion(es)?.*(realizad|efectuad)|^cdt\b|avaluo|adquisicion de bienes|cuenta por cobrar|aporte.*derecho social|se usa en renglones como/;
 
   function clasificarPorHeuristica(detalle, informante){
     var texto = normalizar((detalle || '') + ' ' + (informante || ''));
