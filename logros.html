@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#7C3AED">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Tus logros financieros — Sistema de progreso ExógenaDIAN</title>
+<meta name="description" content="Sistema de logros financieros: 26 hitos desbloqueables que rastrean tu progreso real con base en TUS datos en el navegador. Fondo de emergencia, deuda mala fuera, AFC, FIRE — celebra cada paso.">
+<meta name="keywords" content="logros financieros, progreso financiero, gamificación finanzas personales colombia, hitos ahorro, motivación financiera">
+<link rel="canonical" href="https://exogenadian.com/logros.html">
+<meta property="og:title" content="Tus logros financieros — ExógenaDIAN">
+<meta property="og:description" content="26 hitos desbloqueables que celebran tu progreso real. Calculados desde tus datos privados en el navegador.">
+<meta property="og:url" content="https://exogenadian.com/logros.html">
+<meta property="og:type" content="website"><meta property="og:locale" content="es_CO"><meta property="og:site_name" content="ExógenaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png">
+<meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/finanzas-wow.css?v=a660abd8">
+<style>
+:root{--bg:#f7f5fc;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--pri:#1B3A5C;--violet:#7C3AED;--violet2:#EDE9FE;--violet3:#5B21B6;--gold:#F59E0B;--gold2:#FEF3C7;--green:#059669;--green2:#ECFDF5;--green3:#D1FAE5;--red:#DC2626;--border:#e2e8f0;--radius:10px;--shadow:0 2px 12px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+.container{max-width:1100px;margin:0 auto;padding:20px}
+.hero{background:linear-gradient(135deg,#5B21B6 0%,#7C3AED 50%,#A78BFA 100%);padding:30px 32px;border-radius:16px;margin-bottom:24px;color:#fff;position:relative;overflow:hidden}
+.hero::before{content:'🏆';position:absolute;font-size:8rem;opacity:.1;top:-12px;right:24px;line-height:1}
+.hero h1{font-size:1.6rem;font-weight:800;margin-bottom:6px;position:relative;z-index:1}
+.hero p{opacity:.94;font-size:.95rem;max-width:680px;position:relative;z-index:1}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px;position:relative;z-index:1}
+.hero-stat{background:rgba(255,255,255,.14);border-radius:10px;padding:14px;text-align:center;backdrop-filter:blur(6px)}
+.hero-stat .v{font-size:1.7rem;font-weight:800;font-family:'JetBrains Mono',monospace;line-height:1}
+.hero-stat .l{font-size:.74rem;opacity:.86;margin-top:4px;text-transform:uppercase;letter-spacing:.4px;font-weight:600}
+.cat{margin-bottom:28px}
+.cat-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.cat-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;background:linear-gradient(135deg,var(--violet),var(--violet3));color:#fff;box-shadow:0 4px 14px rgba(124,58,237,.3)}
+.cat-header h2{font-size:1.1rem;font-weight:700;color:var(--pri);flex:1}
+.cat-header .cnt{font-size:.78rem;color:var(--muted);background:#fff;padding:4px 10px;border-radius:100px;font-weight:600;border:1px solid var(--border)}
+.logros-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.logro{background:#fff;border:2px solid var(--border);border-radius:14px;padding:18px;transition:.2s;position:relative;overflow:hidden}
+.logro.locked{opacity:.55;filter:grayscale(.7)}
+.logro.unlocked{border-color:var(--violet);background:linear-gradient(135deg,#fff,var(--violet2))}
+.logro.unlocked.gold{border-color:var(--gold);background:linear-gradient(135deg,#fff,var(--gold2))}
+.logro.unlocked::before{content:'✓';position:absolute;top:8px;right:10px;width:24px;height:24px;background:var(--violet);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:800;box-shadow:0 2px 8px rgba(124,58,237,.4)}
+.logro.unlocked.gold::before{background:var(--gold)}
+.logro-icon{font-size:2rem;line-height:1;margin-bottom:8px}
+.logro-title{font-size:.95rem;font-weight:700;color:var(--pri);margin-bottom:4px;line-height:1.3}
+.logro-desc{font-size:.78rem;color:var(--muted);line-height:1.45;margin-bottom:10px}
+.logro-progress{height:6px;background:#F1F5F9;border-radius:100px;overflow:hidden;margin-top:8px}
+.logro-progress-bar{height:100%;background:linear-gradient(90deg,var(--violet),#A78BFA);border-radius:100px;transition:width .8s ease-out}
+.logro.unlocked .logro-progress-bar{background:linear-gradient(90deg,var(--violet3),var(--violet))}
+.logro.unlocked.gold .logro-progress-bar{background:linear-gradient(90deg,#D97706,var(--gold))}
+.logro-progress-text{display:flex;justify-content:space-between;align-items:center;font-size:.7rem;color:var(--muted);margin-top:4px;font-weight:600;font-family:'JetBrains Mono',monospace}
+.logro-cta{display:inline-block;margin-top:8px;font-size:.74rem;color:var(--violet3);text-decoration:none;font-weight:600}
+.logro-cta:hover{text-decoration:underline}
+.empty-state{background:#fff;border:1px solid var(--border);border-radius:14px;padding:40px 24px;text-align:center;max-width:640px;margin:0 auto;display:none}
+.empty-state .ic{font-size:3.5rem;margin-bottom:12px}
+.empty-state h2{font-size:1.2rem;color:var(--pri);margin-bottom:8px}
+.empty-state p{color:var(--muted);font-size:.92rem;margin-bottom:18px;line-height:1.55}
+.empty-state .links{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:480px;margin:0 auto}
+.empty-state .links a{padding:12px 16px;background:var(--violet2);border-radius:8px;text-decoration:none;color:var(--violet3);font-size:.85rem;font-weight:600}
+.empty-state .links a:hover{background:var(--violet);color:#fff}
+.celebration{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:9999}
+.celebration.show{display:flex;animation:fadeIn .3s}
+.celebration-card{background:#fff;border-radius:18px;padding:30px;text-align:center;max-width:380px;animation:pop .5s cubic-bezier(.34,1.56,.64,1)}
+.celebration-icon{font-size:5rem;animation:bounce 1s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes pop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+/* Botón descargar certificado mini en logros dorados */
+.logro-cert-btn{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:7px 14px;background:linear-gradient(135deg,#F59E0B,#D97706);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:.78rem;font-weight:700;cursor:pointer;text-decoration:none}
+.logro-cert-btn:hover{filter:brightness(1.05);transform:translateY(-1px)}
+.logro-cert-btn.locked{background:linear-gradient(135deg,#94A3B8,#64748B)}
+/* Modal mini-certificado de logro */
+#certLogroModal{display:none;position:fixed;inset:0;background:rgba(15,23,42,.86);backdrop-filter:blur(4px);z-index:9999;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
+#certLogroModal.show{display:flex}
+.cert-logro-sheet{background:#FFFDF7;border-radius:6px;max-width:600px;width:100%;padding:50px 48px;text-align:center;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.5);animation:popModal .4s cubic-bezier(.34,1.56,.64,1);overflow:hidden;font-family:'DM Sans',sans-serif}
+.cert-logro-sheet::before{content:'';position:absolute;inset:10px;border:2px solid #F59E0B;border-radius:3px;pointer-events:none}
+.cert-logro-sheet::after{content:'';position:absolute;inset:14px;border:1px solid #FCD34D;border-radius:2px;pointer-events:none}
+.cert-logro-corner{position:absolute;width:36px;height:36px;color:#D97706}
+.cert-logro-tl{top:18px;left:18px}
+.cert-logro-tr{top:18px;right:18px;transform:rotate(90deg)}
+.cert-logro-bl{bottom:18px;left:18px;transform:rotate(270deg)}
+.cert-logro-br{bottom:18px;right:18px;transform:rotate(180deg)}
+.cert-logro-brand{font-size:.78rem;font-weight:700;color:#92400E;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;position:relative;z-index:1}
+.cert-logro-icon{font-size:5rem;line-height:1;margin-bottom:12px;position:relative;z-index:1}
+.cert-logro-title{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:700;color:#7C2D12;margin-bottom:6px;letter-spacing:-.01em;position:relative;z-index:1}
+.cert-logro-sub{font-size:.86rem;color:#92400E;margin-bottom:18px;font-style:italic;position:relative;z-index:1}
+.cert-logro-divider{width:60px;height:2px;background:#D97706;margin:0 auto 18px;position:relative;z-index:1}
+.cert-logro-name{font-size:.78rem;color:#78716C;text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:4px;position:relative;z-index:1}
+.cert-logro-namev{font-family:'Fraunces',serif;font-size:1.35rem;color:#1C1917;font-weight:600;margin-bottom:18px;position:relative;z-index:1}
+.cert-logro-quote{font-size:.86rem;color:#57534E;font-style:italic;line-height:1.55;margin:0 auto 16px;max-width:420px;position:relative;z-index:1}
+.cert-logro-quote-author{font-size:.74rem;color:#A8A29E;margin-bottom:24px;position:relative;z-index:1}
+.cert-logro-meta{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding-top:18px;border-top:1px solid #FCD34D;font-size:.78rem;color:#78716C;position:relative;z-index:1}
+.cert-logro-meta-label{text-transform:uppercase;letter-spacing:.06em;font-weight:600;font-size:.66rem;color:#A8A29E;display:block;margin-bottom:2px}
+.cert-logro-meta-val{font-family:'JetBrains Mono',monospace;font-weight:700;color:#1C1917}
+.cert-logro-actions{display:flex;gap:10px;justify-content:center;margin-top:22px;flex-wrap:wrap;position:relative;z-index:1}
+.cert-logro-actions button,.cert-logro-actions a{padding:11px 22px;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-weight:700;cursor:pointer;font-size:.86rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.cert-logro-print{background:#059669;color:#fff}
+.cert-logro-cancel{background:#F1F5F9;color:#64748B}
+.cert-logro-pro-cta{background:linear-gradient(135deg,#F59E0B,#D97706);color:#fff}
+/* Lock overlay para free */
+.cert-logro-lock{position:absolute;inset:0;background:rgba(255,253,247,.85);backdrop-filter:blur(2px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 30px;z-index:5;border-radius:6px}
+.cert-logro-lock h3{font-family:'Fraunces',serif;color:#7C2D12;font-size:1.3rem;margin-bottom:8px}
+.cert-logro-lock p{color:#78716C;font-size:.86rem;line-height:1.55;margin-bottom:18px;max-width:340px}
+@media print{
+  body * {visibility:hidden}
+  #certLogroModal,#certLogroModal *{visibility:visible}
+  #certLogroModal{position:absolute;inset:0;background:#fff;display:block !important}
+  .cert-logro-actions,.cert-logro-lock{display:none !important}
+  .cert-logro-sheet{box-shadow:none;max-width:100%;margin:0;padding:60px 50px}
+}
+.share-card{margin-top:8px}
+.foot{padding:18px 22px;background:var(--violet2);border-radius:12px;font-size:.84rem;color:var(--violet3);text-align:center;margin-top:16px}
+@media(max-width:768px){.logros-grid{grid-template-columns:1fr}.hero-stats{grid-template-columns:1fr 1fr 1fr;gap:8px}.hero-stat .v{font-size:1.3rem}.hero-stat .l{font-size:.66rem}}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div id="nav-container"></div>
+<script defer src="shared/pro.js?v=848fbf16"></script>
+<script defer src="shared/pro.js?v=848fbf16"></script>
+<script src="shared/perfil-contador.js?v=cc60e2c8"></script>
+<script src="shared/asesor-mode.js?v=f2e5d144"></script>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<script src="shared/finanzas-privacy.js?v=aed97e2f"></script>
+<div class="container">
+<div class="hero">
+  <h1>🏆 Tus logros financieros</h1>
+  <p>26 hitos desbloqueables que rastrean tu progreso real con base en los datos que ya guardaste. Más logros = más control. Todo se calcula <strong>desde tu navegador</strong> — nada se envía.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="v" id="hsTotal">0/26</div><div class="l">Desbloqueados</div></div>
+    <div class="hero-stat"><div class="v" id="hsPct">0%</div><div class="l">Progreso</div></div>
+    <div class="hero-stat"><div class="v" id="hsGold">0/5</div><div class="l">Hitos dorados</div></div>
+  </div>
+</div>
+<div class="empty-state" id="emptyState">
+  <div class="ic">🎯</div>
+  <h2>Todavía no has empezado</h2>
+  <p>Para desbloquear logros, primero llena al menos una herramienta. Tus datos viven solo en tu navegador — nadie más los ve.</p>
+  <div class="links">
+    <a href="salario-neto.html">💼 Calcular salario neto</a>
+    <a href="pyg-personal.html">📊 Armar mi PyG</a>
+    <a href="fondo-emergencia.html">🛟 Fondo emergencia</a>
+    <a href="finanzas.html">📚 Ver todas →</a>
+  </div>
+</div>
+<div id="logrosBody"></div>
+<div class="foot">
+  🔒 Cero servidores, cero tracking. Si borras los datos del navegador, los logros se reinician. Para respaldo: <a href="javascript:FinanzasPrivacy.exportAll()" style="color:var(--violet3);font-weight:700">descargar JSON</a>.
+</div>
+<div class="wow-share-card" style="margin-top:14px">
+  <div class="wow-share-title">📸 Comparte tus avances</div>
+  <div class="wow-share-sub">Tu progreso financiero, sin números íntimos.</div>
+  <div class="share-card" id="shareCard"></div>
+</div>
+</div>
+<div id="certLogroModal" role="dialog" aria-modal="true">
+  <div class="cert-logro-sheet" id="certLogroSheet">
+    <svg class="cert-logro-corner cert-logro-tl" viewBox="0 0 36 36" fill="none"><path d="M3 33V6a3 3 0 013-3h27" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <svg class="cert-logro-corner cert-logro-tr" viewBox="0 0 36 36" fill="none"><path d="M3 33V6a3 3 0 013-3h27" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <svg class="cert-logro-corner cert-logro-bl" viewBox="0 0 36 36" fill="none"><path d="M3 33V6a3 3 0 013-3h27" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <svg class="cert-logro-corner cert-logro-br" viewBox="0 0 36 36" fill="none"><path d="M3 33V6a3 3 0 013-3h27" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <div class="cert-logro-brand">🏆 ExógenaDIAN · Hito dorado</div>
+    <div class="cert-logro-icon" id="clIcon">🏆</div>
+    <div class="cert-logro-title" id="clTitle">—</div>
+    <div class="cert-logro-sub" id="clSub">—</div>
+    <div class="cert-logro-divider"></div>
+    <div class="cert-logro-name">Otorgado a</div>
+    <div class="cert-logro-namev" id="clName">—</div>
+    <div class="cert-logro-quote" id="clQuote">—</div>
+    <div class="cert-logro-quote-author" id="clQuoteAuthor">—</div>
+    <div class="cert-logro-meta">
+      <div><span class="cert-logro-meta-label">Fecha</span><span class="cert-logro-meta-val" id="clFecha">—</span></div>
+      <div><span class="cert-logro-meta-label">Código</span><span class="cert-logro-meta-val" id="clCode">—</span></div>
+    </div>
+    <div id="clAsesorFooter" style="display:none;margin-top:14px;padding-top:12px;border-top:1px dashed #FCD34D;font-size:.74rem;color:#78716C;text-align:center;position:relative;z-index:1"></div>
+    <div class="cert-logro-actions">
+      <button class="cert-logro-print" type="button" onclick="window.print()" id="clPrintBtn">🖨️ Imprimir / PDF</button>
+      <button class="cert-logro-cancel" type="button" onclick="cerrarCertLogro()">Cerrar</button>
+    </div>
+    <div class="cert-logro-lock" id="clLock" style="display:none">
+      <div style="font-size:3rem;margin-bottom:8px">🔒</div>
+      <h3>Certificado PRO</h3>
+      <p>Los certificados de hitos dorados son exclusivos para usuarios PRO. Demuestra tu progreso con un PDF compartible.</p>
+      <a href="precios.html" class="cert-logro-pro-cta">Ver planes PRO →</a>
+      <button class="cert-logro-cancel" type="button" onclick="cerrarCertLogro()" style="margin-top:10px">Cerrar</button>
+    </div>
+  </div>
+</div>
+<div class="celebration" id="celebration">
+  <div class="celebration-card">
+    <div class="celebration-icon" id="celIcon">🎉</div>
+    <h2 id="celTitle" style="color:var(--violet3);margin:14px 0 6px">¡Logro desbloqueado!</h2>
+    <p id="celDesc" style="color:var(--muted);font-size:.92rem;line-height:1.55"></p>
+    <button onclick="cerrarCelebracion()" style="margin-top:18px;padding:10px 24px;background:var(--violet);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-family:inherit">Seguir</button>
+  </div>
+</div>
+<script>
+'use strict';
+function get(k){
+  if(typeof FinanzasStore!=='undefined' && FinanzasStore.get) return FinanzasStore.get(k);
+  try{var raw=localStorage.getItem('fp:'+k);if(!raw)return null;var p=JSON.parse(raw);return p&&p.v?p.v:null}catch(e){return null}
+}
+function getMonths(prefix){
+  var keys=[];
+  if(typeof FinanzasStore!=='undefined' && FinanzasStore.list){
+    keys=(FinanzasStore.list(prefix)||[]).slice();
+  }else{
+    for(var i=0;i<localStorage.length;i++){
+      var k=localStorage.key(i);
+      if(k && k.indexOf('fp:'+prefix)===0) keys.push(k.substring(3));
+    }
+  }
+  return keys.sort();
+}
+function num(v){
+  if(typeof v==='number')return v;
+  if(!v)return 0;
+  return parseInt(String(v).replace(/[^\d.-]/g,''),10)||0;
+}
+function recolectarTodo(){
+  var d={};
+  d.salario=get('perfil-salario');
+  var pygs=getMonths('pyg:');
+  d.pygMeses=pygs.length;
+  d.pygUltimo = pygs.length>0 ? get(pygs[pygs.length-1]) : null;
+  d.deudas=get('deudas');
+  d.fondo=get('fondo-emergencia');
+  d.fire=get('fire-colombia');
+  d.inv=get('inversion-101');
+  d.hipot=get('capacidad-hipotecaria');
+  d.pareja=get('pareja-finanzas');
+  d.carro=get('puedo-comprar-carro');
+  d.salud=get('salud-financiera');
+  // Curso de finanzas — cuenta cuántos módulos están marcados (key: fp:curso-finanzas:mN)
+  var cursoMods=0;
+  try{for(var i=1;i<=15;i++){if(localStorage.getItem('fp:curso-finanzas:m'+i)==='1')cursoMods++}}catch(e){}
+  d.cursoFinanzas={completados:cursoMods, total:15};
+  return d;
+}
+// Define los 24 logros
+var LOGROS=[
+  // ── Categoría: Inicio ──
+  {cat:'inicio',id:'primer_paso',icon:'🎯',title:'Primer paso',desc:'Llenaste tu primera calculadora. El comienzo es lo más difícil.',cta:{href:'finanzas.html',text:'Ver todas →'},
+    check:function(d){return d.salario||d.pygUltimo||d.deudas||d.fondo||d.fire||d.inv||d.hipot||d.pareja||d.carro?{ok:true}:{ok:false,p:0}}},
+  {cat:'inicio',id:'sueldo_neto',icon:'💼',title:'Conoces tu sueldo neto',desc:'Sabes cuánto te cae al banco y qué se descuenta. La línea de base.',cta:{href:'salario-neto.html',text:'Calcular ahora →'},
+    check:function(d){return d.salario&&d.salario.bruto?{ok:true}:{ok:false,p:0}}},
+  {cat:'inicio',id:'pyg_inaugural',icon:'📊',title:'PyG inaugural',desc:'Llenaste tu primer estado de pérdidas y ganancias personal.',cta:{href:'pyg-personal.html',text:'Armar PyG →'},
+    check:function(d){return d.pygMeses>=1?{ok:true}:{ok:false,p:0}}},
+  {cat:'inicio',id:'deudas_audit',icon:'💳',title:'Deudas auditadas',desc:'Le miraste a los ojos a la deuda: saldos, tasas, cuotas. Sin esquivar.',cta:{href:'deudas.html',text:'Auditar deudas →'},
+    check:function(d){return d.deudas&&d.deudas.rows&&d.deudas.rows.length>0?{ok:true}:{ok:false,p:0}}},
+  // ── Categoría: Hábito ──
+  {cat:'habito',id:'pyg_3',icon:'📊',title:'PyG x 3 meses',desc:'Tres meses seguidos llevando el PyG. Es hábito, no novedad.',
+    check:function(d){return d.pygMeses>=3?{ok:true}:{ok:false,p:Math.min(100,d.pygMeses/3*100),current:d.pygMeses,target:3,unit:'meses'}}},
+  {cat:'habito',id:'pyg_6',icon:'📊',title:'PyG x 6 meses',desc:'Medio año de PyG. Aquí ya tienes datos para detectar patrones.',
+    check:function(d){return d.pygMeses>=6?{ok:true}:{ok:false,p:Math.min(100,d.pygMeses/6*100),current:d.pygMeses,target:6,unit:'meses'}}},
+  {cat:'habito',id:'pyg_12',icon:'📊',title:'PyG x 12 meses',desc:'Un año entero. Conoces tu finanzas mejor que tu banco.',gold:true,
+    check:function(d){return d.pygMeses>=12?{ok:true,gold:true}:{ok:false,p:Math.min(100,d.pygMeses/12*100),current:d.pygMeses,target:12,unit:'meses'}}},
+  {cat:'habito',id:'pareja_split',icon:'💑',title:'Money date arrancado',desc:'Calculaste el split en pareja. La conversación ya empezó.',cta:{href:'pareja-finanzas.html',text:'Ir a la herramienta →'},
+    check:function(d){return d.pareja&&(num(d.pareja.ingreso1)>0||num(d.pareja.ingreso2)>0)?{ok:true}:{ok:false,p:0}}},
+  // ── Categoría: Colchón ──
+  {cat:'colchon',id:'colchon_inicio',icon:'🛟',title:'Primer escudo',desc:'Tienes algo guardado. Mejor algo que cero.',cta:{href:'fondo-emergencia.html',text:'Calcular tope →'},
+    check:function(d){var a=num(d.fondo&&d.fondo.actual);return a>0?{ok:true}:{ok:false,p:0}}},
+  {cat:'colchon',id:'colchon_1m',icon:'🛟',title:'Colchón de 1 mes',desc:'Cubres tus gastos de un mes sin tocar trabajo. Ya no es emergencia: es buffer.',
+    check:function(d){var a=num(d.fondo&&d.fondo.actual),g=num(d.fondo&&d.fondo.gastos);if(g<=0||a<=0)return{ok:false,p:0};var m=a/g;return m>=1?{ok:true}:{ok:false,p:Math.min(100,m*100),current:m.toFixed(1),target:1,unit:'meses'}}},
+  {cat:'colchon',id:'colchon_3m',icon:'🛟',title:'Colchón de 3 meses',desc:'El mínimo recomendado para empleados con estabilidad.',
+    check:function(d){var a=num(d.fondo&&d.fondo.actual),g=num(d.fondo&&d.fondo.gastos);if(g<=0||a<=0)return{ok:false,p:0};var m=a/g;return m>=3?{ok:true}:{ok:false,p:Math.min(100,m/3*100),current:m.toFixed(1),target:3,unit:'meses'}}},
+  {cat:'colchon',id:'colchon_6m',icon:'🛟',title:'Colchón de 6 meses',desc:'Pro: si pierdes el ingreso hoy, tienes medio año de pista.',gold:true,
+    check:function(d){var a=num(d.fondo&&d.fondo.actual),g=num(d.fondo&&d.fondo.gastos);if(g<=0||a<=0)return{ok:false,p:0};var m=a/g;return m>=6?{ok:true,gold:true}:{ok:false,p:Math.min(100,m/6*100),current:m.toFixed(1),target:6,unit:'meses'}}},
+  // ── Categoría: Deuda ──
+  {cat:'deuda',id:'deuda_mala_id',icon:'💳',title:'Deuda mala identificada',desc:'Encontraste deudas con tasa > 25% (TC, libre inversión). El primer paso para sacarlas.',cta:{href:'salir-de-deudas.html',text:'Plan de salida →'},
+    check:function(d){if(!d.deudas||!d.deudas.rows)return{ok:false,p:0};var malas=d.deudas.rows.filter(function(r){return num(r.tasa)>=25&&num(r.saldo)>0});return malas.length>0?{ok:true}:{ok:false,p:0}}},
+  {cat:'deuda',id:'sin_deuda_mala',icon:'✨',title:'Sin deuda mala',desc:'No tienes ninguna deuda con tasa > 25%. La parte hostil del balance.',
+    check:function(d){if(!d.deudas||!d.deudas.rows||d.deudas.rows.length===0)return d.pygUltimo?{ok:true}:{ok:false,p:0};var malas=d.deudas.rows.filter(function(r){return num(r.tasa)>=25&&num(r.saldo)>0});return malas.length===0?{ok:true}:{ok:false,p:50}}},
+  {cat:'deuda',id:'sin_deuda',icon:'🕊️',title:'Cero deuda',desc:'Ningún pasivo activo. Cada peso que entra es tuyo.',gold:true,
+    check:function(d){if(!d.deudas||!d.deudas.rows)return{ok:false,p:0};var act=d.deudas.rows.filter(function(r){return num(r.saldo)>0});return act.length===0?{ok:true,gold:true}:{ok:false,p:Math.max(0,100-act.length*15)}}},
+  {cat:'deuda',id:'cuota_30',icon:'⚖️',title:'Cuotas bajo el 30%',desc:'Tus cuotas no superan el 30% del ingreso. Sostenible.',
+    check:function(d){if(!d.deudas)return{ok:false,p:0};var ing=num(d.deudas.ingreso),cuota=0;if(d.deudas.rows){d.deudas.rows.forEach(function(r){if(num(r.saldo)>0)cuota+=num(r.cuota)})}if(ing<=0)return{ok:false,p:0};var pct=cuota/ing*100;return pct<=30?{ok:true}:{ok:false,p:Math.max(0,100-(pct-30)*2),current:pct.toFixed(0)+'%',target:'30%'}}},
+  // ── Categoría: Inversión ──
+  {cat:'inversion',id:'afc_activo',icon:'💼',title:'AFC activado',desc:'Aportas a la cuenta AFC. Reduces base gravable + ahorro forzado.',cta:{href:'salario-neto.html',text:'Configurar →'},
+    check:function(d){return d.salario&&num(d.salario.afc)>0?{ok:true}:{ok:false,p:0}}},
+  {cat:'inversion',id:'afc_max',icon:'💎',title:'AFC al máximo',desc:'Aportas el equivalente al 30% del ingreso a AFC + Pensión voluntaria. Tope ET.',
+    check:function(d){if(!d.salario)return{ok:false,p:0};var b=num(d.salario.bruto),a=num(d.salario.afc)+num(d.salario.volPen);if(b<=0)return{ok:false,p:0};var pct=a/b*100;return pct>=25?{ok:true}:{ok:false,p:Math.min(100,pct/25*100),current:pct.toFixed(1)+'%',target:'25%'}}},
+  {cat:'inversion',id:'inv_definida',icon:'📈',title:'Inversión definida',desc:'Tienes asignación clara entre vehículos. Salir de "lo dejaré en la cuenta de ahorros".',cta:{href:'inversion-101.html',text:'Asignar cartera →'},
+    check:function(d){return d.inv&&(num(d.inv.capital)>0||num(d.inv.aporte)>0)?{ok:true}:{ok:false,p:0}}},
+  // ── Categoría: FIRE / Retiro ──
+  {cat:'fire',id:'fire_definido',icon:'🔥',title:'Plan FIRE arrancado',desc:'Calculaste cuánto necesitas para vivir de tus inversiones.',cta:{href:'fire-colombia.html',text:'Calcular FIRE →'},
+    check:function(d){return d.fire&&(num(d.fire.gastos)>0||num(d.fire.aporte)>0)?{ok:true}:{ok:false,p:0}}},
+  {cat:'fire',id:'fire_25',icon:'🔥',title:'FIRE — 25% del camino',desc:'Tienes 25% del capital objetivo. Un cuarto del camino recorrido.',
+    check:function(d){if(!d.fire)return{ok:false,p:0};var act=num(d.fire.capital),obj=num(d.fire.gastos)*12*25;if(obj<=0||act<=0)return{ok:false,p:0};var pct=act/obj*100;return pct>=25?{ok:true}:{ok:false,p:Math.min(100,pct/25*100),current:pct.toFixed(1)+'%',target:'25%'}}},
+  {cat:'fire',id:'fire_50',icon:'🔥',title:'FIRE — la mitad',desc:'50% del capital FIRE. Coast FIRE: si paras de aportar, igual llegas.',
+    check:function(d){if(!d.fire)return{ok:false,p:0};var act=num(d.fire.capital),obj=num(d.fire.gastos)*12*25;if(obj<=0||act<=0)return{ok:false,p:0};var pct=act/obj*100;return pct>=50?{ok:true}:{ok:false,p:Math.min(100,pct/50*100),current:pct.toFixed(1)+'%',target:'50%'}}},
+  {cat:'fire',id:'fire_100',icon:'🏆',title:'FIRE alcanzado',desc:'Independencia financiera. Trabajar es opción, no obligación.',gold:true,
+    check:function(d){if(!d.fire)return{ok:false,p:0};var act=num(d.fire.capital),obj=num(d.fire.gastos)*12*25;if(obj<=0||act<=0)return{ok:false,p:0};var pct=act/obj*100;return pct>=100?{ok:true,gold:true}:{ok:false,p:Math.min(100,pct),current:pct.toFixed(1)+'%',target:'100%'}}},
+  // ── Categoría: Educación ──
+  {cat:'educacion',id:'curso_inicio',icon:'🎓',title:'Curso arrancado',desc:'Marcaste tu primer módulo del curso de Finanzas Personales.',cta:{href:'escuela/finanzas.html',text:'Ir al curso →'},
+    check:function(d){return d.cursoFinanzas.completados>=1?{ok:true}:{ok:false,p:0}}},
+  {cat:'educacion',id:'curso_completo',icon:'🏆',title:'Curso completo · Certificado PRO',desc:'Marcaste los 15 módulos. Desbloqueas tu Certificado de Finanzas Personales (requiere PRO).',gold:true,cta:{href:'escuela/finanzas.html',text:'Continuar el curso →'},
+    check:function(d){var c=d.cursoFinanzas.completados;return c>=15?{ok:true,gold:true}:{ok:false,p:Math.min(100,c/15*100),current:c,target:15,unit:'módulos'}}},
+];
+var CATS={
+  'inicio':{n:'Primeros pasos',ic:'🚀'},
+  'habito':{n:'Hábito',ic:'⏰'},
+  'colchon':{n:'Colchón / defensa',ic:'🛟'},
+  'deuda':{n:'Limpieza de deuda',ic:'💳'},
+  'inversion':{n:'Inversión',ic:'💎'},
+  'fire':{n:'Independencia financiera',ic:'🔥'},
+  'educacion':{n:'Educación financiera',ic:'🎓'}
+};
+var datos=null;
+var resultados=[];
+function init(){
+  datos=recolectarTodo();
+  resultados=LOGROS.map(function(l){var r=l.check(datos);return Object.assign({},l,r,{p:r.p==null?(r.ok?100:0):r.p})});
+  var unlocked=resultados.filter(function(r){return r.ok}).length;
+  var goldUnlocked=resultados.filter(function(r){return r.ok&&r.gold}).length;
+  var goldTotal=LOGROS.filter(function(l){return l.gold}).length;
+  var totalActividad=Object.keys(datos).filter(function(k){return datos[k]!=null && (typeof datos[k]!=='object'||Object.keys(datos[k]).length>0)}).length;
+  if(unlocked===0 && totalActividad===0){
+    document.getElementById('emptyState').style.display='block';
+    document.getElementById('logrosBody').style.display='none';
+    document.querySelector('.wow-share-card').style.display='none';
+    document.getElementById('hsTotal').textContent='0/'+LOGROS.length;
+    document.getElementById('hsPct').textContent='0%';
+    document.getElementById('hsGold').textContent='0/'+goldTotal;
+    return;
+  }
+  document.getElementById('hsTotal').textContent=unlocked+'/'+LOGROS.length;
+  document.getElementById('hsPct').textContent=Math.round(unlocked/LOGROS.length*100)+'%';
+  document.getElementById('hsGold').textContent=goldUnlocked+'/'+goldTotal;
+  renderLogros();
+  renderShareCard(unlocked,goldUnlocked,goldTotal);
+  detectarNuevos(unlocked);
+  if(typeof gtag!=='undefined') gtag('event','logros_view',{unlocked:unlocked,total:LOGROS.length});
+}
+function renderLogros(){
+  var html='';
+  Object.keys(CATS).forEach(function(catKey){
+    var items=resultados.filter(function(r){return r.cat===catKey});
+    if(items.length===0)return;
+    var cat=CATS[catKey];
+    var catUnlocked=items.filter(function(r){return r.ok}).length;
+    html+='<div class="cat">';
+    html+='<div class="cat-header">';
+    html+='<div class="cat-icon">'+cat.ic+'</div>';
+    html+='<h2>'+cat.n+'</h2>';
+    html+='<span class="cnt">'+catUnlocked+' / '+items.length+'</span>';
+    html+='</div>';
+    html+='<div class="logros-grid">';
+    items.forEach(function(r){
+      var cls='logro '+(r.ok?'unlocked':'locked')+(r.ok&&r.gold?' gold':'');
+      html+='<div class="'+cls+'">';
+      html+='<div class="logro-icon">'+r.icon+'</div>';
+      html+='<div class="logro-title">'+r.title+'</div>';
+      html+='<div class="logro-desc">'+r.desc+'</div>';
+      if(!r.ok && r.p>0){
+        html+='<div class="logro-progress"><div class="logro-progress-bar" style="width:'+r.p.toFixed(0)+'%"></div></div>';
+        html+='<div class="logro-progress-text"><span>'+(r.current||r.p.toFixed(0)+'%')+'</span><span>'+(r.target?'meta '+r.target+(r.unit?' '+r.unit:''):'')+'</span></div>';
+      }else if(r.ok){
+        html+='<div class="logro-progress"><div class="logro-progress-bar" style="width:100%"></div></div>';
+        html+='<div class="logro-progress-text"><span>✨ Desbloqueado</span><span></span></div>';
+      }
+      if(!r.ok && r.cta){
+        html+='<a href="'+r.cta.href+'" class="logro-cta">'+r.cta.text+'</a>';
+      }
+      // Botón certificado solo para hitos dorados desbloqueados
+      if(r.ok && r.gold){
+        html+='<button class="logro-cert-btn" type="button" onclick="abrirCertLogro(\''+r.id+'\')">🏆 Mi certificado</button>';
+      }
+      html+='</div>';
+    });
+    html+='</div></div>';
+  });
+  document.getElementById('logrosBody').innerHTML=html;
+}
+// ─── Certificado de logro dorado ───
+var QUOTES_HITOS={
+  pyg_12:{q:'No es posible mejorar lo que no se mide. Doce meses de PyG no es disciplina, es construcción de criterio financiero.',a:'— Peter Drucker (adaptado)',sub:'12 meses de PyG personal completos'},
+  colchon_6m:{q:'La paz mental que da un colchón de seis meses no la compra ningún ingreso. Es libertad operativa.',a:'— Dave Ramsey, Baby Step 3',sub:'Colchón de 6 meses de gastos'},
+  sin_deuda:{q:'El que paga lo que debe sabe lo que tiene. Cero pasivos = cada peso que entra es propio.',a:'— Refrán popular colombiano',sub:'Sin deudas activas'},
+  fire_100:{q:'Hacerlo bien con el dinero depende menos de qué tan inteligente eres y más de cómo te comportas. Y tú te comportaste durante años.',a:'— Morgan Housel, La psicología del dinero',sub:'Independencia financiera alcanzada'},
+  curso_completo:{q:'Las parejas que prosperan financieramente tienen una conversación de plata cada semana. El conocimiento sin práctica no cambia nada.',a:'— David Bach + Morgan Housel',sub:'15 módulos del curso de Finanzas Personales'}
+};
+function generarCodigoLogro(id){
+  var nowStr=Date.now().toString(36).toUpperCase();
+  return 'EXO-'+id.toUpperCase().substring(0,6)+'-'+nowStr.substring(nowStr.length-5);
+}
+window.abrirCertLogro=function(logroId){
+  var logro=null;
+  for(var i=0;i<resultados.length;i++) if(resultados[i].id===logroId){logro=resultados[i];break}
+  if(!logro || !logro.ok || !logro.gold) return;
+  var q=QUOTES_HITOS[logroId]||{q:logro.desc,a:'— ExógenaDIAN',sub:logro.title};
+  var nombre='';
+  try{
+    var sal=get('perfil-salario');
+    if(sal && sal.nombre) nombre=sal.nombre;
+    if(!nombre){
+      var pareja=get('pareja-finanzas');
+      if(pareja && pareja.nombre1) nombre=pareja.nombre1;
+    }
+  }catch(e){}
+  if(!nombre) nombre=prompt('Nombre que aparecerá en el certificado:','')||'';
+  if(!nombre || nombre.trim().length<3) return;
+  var hoy=new Date();
+  var meses=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  var fechaStr=hoy.getDate()+' de '+meses[hoy.getMonth()]+' de '+hoy.getFullYear();
+  var codigoStr=generarCodigoLogro(logroId);
+  document.getElementById('clIcon').textContent=logro.icon;
+  document.getElementById('clTitle').textContent=logro.title;
+  document.getElementById('clSub').textContent=q.sub;
+  document.getElementById('clName').textContent=nombre.trim();
+  document.getElementById('clQuote').textContent='"'+q.q+'"';
+  document.getElementById('clQuoteAuthor').textContent=q.a;
+  document.getElementById('clFecha').textContent=fechaStr;
+  document.getElementById('clCode').textContent=codigoStr;
+  // Validación PRO
+  document.getElementById('clLock').style.display='none';
+  if(window.exoPro && window.exoPro.check){
+    window.exoPro.check().then(function(isPro){
+      if(!isPro) document.getElementById('clLock').style.display='flex';
+    });
+  } else {
+    document.getElementById('clLock').style.display='flex';
+  }
+  // Modo asesor: si está activo, agregar footer brandeado
+  var asesorFooter=document.getElementById('clAsesorFooter');
+  asesorFooter.style.display='none';
+  if(window.asesorMode){
+    var line=window.asesorMode.footerLine();
+    if(line){
+      asesorFooter.textContent=line;
+      asesorFooter.style.display='block';
+    }
+  }
+  document.getElementById('certLogroModal').classList.add('show');
+  if(typeof gtag!=='undefined') gtag('event','logro_cert_open',{logro:logroId});
+};
+window.cerrarCertLogro=function(){
+  document.getElementById('certLogroModal').classList.remove('show');
+};
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape') cerrarCertLogro();
+});
+function renderShareCard(unlocked,goldUnlocked,goldTotal){
+  var pct=Math.round(unlocked/LOGROS.length*100);
+  var line = pct>=80?'Casi todo el camino. Disciplina sostenida.':
+             pct>=50?'Más de la mitad. El hábito está construido.':
+             pct>=25?'Cuarto del camino. Consistencia gana al genio.':
+             'Empezando. El primer paso es el más difícil.';
+  document.getElementById('shareCard').innerHTML=
+    '<div class="share-card-label">Mi progreso financiero</div>'+
+    '<div class="share-card-amount">'+unlocked+'/'+LOGROS.length+'</div>'+
+    '<div class="share-card-line">'+line+'</div>'+
+    '<div class="share-card-stats">'+
+      '<div class="share-card-stat">Avance<strong>'+pct+'%</strong></div>'+
+      '<div class="share-card-stat">Hitos dorados<strong>'+goldUnlocked+'/'+goldTotal+'</strong></div>'+
+      '<div class="share-card-stat">Categorías<strong>'+Object.keys(CATS).length+'</strong></div>'+
+    '</div>'+
+    '<div class="share-actions">'+
+      '<button onclick="copiarShareLogros('+unlocked+','+pct+')">📋 Copiar</button>'+
+    '</div>'+
+    '<div class="share-card-foot">exogenadian.com/logros</div>';
+}
+function copiarShareLogros(unlocked,pct){
+  var txt='Mi progreso financiero: '+unlocked+'/'+LOGROS.length+' logros ('+pct+'%).\nCalculado en exogenadian.com/logros';
+  if(navigator.clipboard) navigator.clipboard.writeText(txt).then(function(){exoToast('Copiado al portapapeles','success')});
+  if(typeof gtag!=='undefined') gtag('event','logros_share');
+}
+// Celebración del último desbloqueo: si hay logros nuevos respecto al último visto
+function detectarNuevos(unlocked){
+  try{
+    var prev=parseInt(localStorage.getItem('fp_logros_seen')||'0',10);
+    if(unlocked>prev){
+      var nuevo=resultados.filter(function(r){return r.ok}).slice(-1)[0];
+      if(nuevo && prev>0){
+        document.getElementById('celIcon').textContent=nuevo.icon;
+        document.getElementById('celTitle').textContent='¡'+nuevo.title+'!';
+        document.getElementById('celDesc').textContent=nuevo.desc;
+        document.getElementById('celebration').classList.add('show');
+      }
+      localStorage.setItem('fp_logros_seen',String(unlocked));
+    }
+  }catch(e){}
+}
+function cerrarCelebracion(){document.getElementById('celebration').classList.remove('show')}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+</script>
+</body>
+</html>

@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S7SM6ST4CC');
+</script>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prevalidador de Formatos Exogena DIAN 2025 | ExogenaDIAN</title>
+<meta name="description" content="Detecta errores en tus formatos de exogena DIAN antes de subirlos al prevalidador. Valida DV, tipos de documento, conceptos, municipios y mas. 100% en tu navegador.">
+<link rel="canonical" href="https://exogenadian.com/prevalidador.html">
+<meta property="og:title" content="Prevalidador de Formatos Exogena DIAN 2025 | ExogenaDIAN">
+<meta property="og:description" content="Detecta errores en tus formatos de exogena antes de subirlos al prevalidador DIAN.">
+<meta property="og:url" content="https://exogenadian.com/prevalidador.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="ExogenaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png">
+<meta name="robots" content="index, follow">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Prevalidador de Formatos Exogena DIAN 2025","url":"https://exogenadian.com/prevalidador.html","description":"Detecta errores en tus formatos de exogena DIAN antes de subirlos al prevalidador. Valida DV, tipos de documento, conceptos, municipios y mas.","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"COP"}}
+</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--green:#059669;--green2:#ECFDF5;--red:#DC2626;--red2:#FEF2F2;--amber:#D97706;--amber2:#FFFBEB;--border:#e2e8f0;--radius:12px;--shadow:0 2px 12px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+.container{max-width:1200px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#7C3AED 0%,#A855F7 50%,#C084FC 100%);padding:28px 32px;border-radius:16px;margin-bottom:24px;color:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.header h1{font-size:1.5rem;font-weight:700;display:flex;align-items:center;gap:10px}
+.header h1 span{background:rgba(255,255,255,.15);padding:4px 12px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:1.3rem;font-weight:600}
+.header p{opacity:.85;font-size:.85rem;margin-top:4px}
+.header-right{text-align:right;font-size:.8rem;opacity:.75}
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:24px;margin-bottom:20px;box-shadow:var(--shadow)}
+.card-title{font-size:1.05rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.drop-zone{border:2px dashed var(--border);border-radius:var(--radius);padding:48px 32px;text-align:center;cursor:pointer;transition:.3s;position:relative}
+.drop-zone:hover,.drop-zone.drag{border-color:var(--pri2);background:var(--pri3)}
+.drop-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.dz-icon{font-size:2.5rem;margin-bottom:8px;display:block}
+.dz-title{font-weight:700;font-size:1.1rem;color:var(--pri)}
+.dz-hint{color:var(--muted);font-size:.82rem;margin-top:4px}
+.dz-file{margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--green);font-weight:600}
+.hidden{display:none!important}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:20px}
+.stat-card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:16px 20px;text-align:center;box-shadow:var(--shadow)}
+.stat-card .val{font-size:1.8rem;font-weight:800;font-family:'JetBrains Mono',monospace}
+.stat-card .lbl{font-size:.75rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.stat-card.ok{border-color:#A7F3D0;background:#F0FDF4}.stat-card.ok .val{color:var(--green)}
+.stat-card.err{border-color:#FECACA;background:#FEF2F2}.stat-card.err .val{color:var(--red)}
+.stat-card.warn{border-color:#FDE68A;background:#FFFBEB}.stat-card.warn .val{color:var(--amber)}
+.stat-card.info{border-color:#BFDBFE;background:#EFF6FF}.stat-card.info .val{color:var(--pri2)}
+.fmt-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.fmt-tab{padding:8px 16px;border:1.5px solid var(--border);border-radius:8px;font-size:.82rem;font-weight:600;cursor:pointer;transition:.2s;background:var(--card);display:flex;align-items:center;gap:6px}
+.fmt-tab:hover{border-color:var(--pri2);background:var(--pri3)}
+.fmt-tab.active{border-color:var(--pri2);background:var(--pri);color:#fff}
+.fmt-tab .badge{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;border-radius:10px;font-size:.7rem;font-weight:700;padding:0 6px}
+.fmt-tab .badge.ok{background:#D1FAE5;color:#065F46}
+.fmt-tab .badge.err{background:#FEE2E2;color:#991B1B}
+.err-table{width:100%;border-collapse:separate;border-spacing:0;font-size:.82rem}
+.err-table th{background:var(--pri);color:#fff;padding:10px 12px;text-align:left;font-weight:600;position:sticky;top:0;z-index:1}
+.err-table th:first-child{border-radius:8px 0 0 0}.err-table th:last-child{border-radius:0 8px 0 0}
+.err-table td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
+.err-table tr:nth-child(even) td{background:#f8fafc}
+.err-table tr:hover td{background:var(--pri3)}
+.sev-error{color:var(--red);font-weight:700}
+.sev-warn{color:var(--amber);font-weight:700}
+.sev-info{color:var(--pri2);font-weight:600}
+.err-cell{font-family:'JetBrains Mono',monospace;font-size:.75rem;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.summary-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+.summary-bar .pill{padding:6px 14px;border-radius:20px;font-size:.78rem;font-weight:600}
+.summary-bar .pill.ok{background:#D1FAE5;color:#065F46}
+.summary-bar .pill.err{background:#FEE2E2;color:#991B1B}
+.filter-bar{display:flex;gap:8px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+.filter-bar select,.filter-bar input{padding:6px 10px;border:1px solid var(--border);border-radius:8px;font-size:.82rem;font-family:inherit}
+.btn-export{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border:none;border-radius:10px;font-size:.88rem;font-weight:700;cursor:pointer;transition:.2s;font-family:inherit}
+.btn-export:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--pri);color:#fff}
+.btn-primary:hover{background:var(--pri2)}
+.btn-green{background:var(--green);color:#fff}
+.btn-green:hover{background:#047857}
+.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--text)}
+.btn-outline:hover{border-color:var(--pri2);background:var(--pri3)}
+.progress-ring{display:inline-flex;align-items:center;justify-content:center;position:relative}
+.progress-ring svg{transform:rotate(-90deg)}
+.progress-ring .pct{position:absolute;font-size:.7rem;font-weight:800}
+.scroll-table{max-height:500px;overflow:auto;border:1px solid var(--border);border-radius:var(--radius)}
+.fmt-summary{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-bottom:20px}
+.fmt-summary-card{background:var(--card);border-radius:10px;border:1px solid var(--border);padding:16px;display:flex;align-items:center;gap:14px;transition:.2s;cursor:pointer}
+.fmt-summary-card:hover{border-color:var(--pri2);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.fmt-summary-card .fmt-name{font-weight:700;font-size:.95rem}
+.fmt-summary-card .fmt-detail{font-size:.78rem;color:var(--muted)}
+@media(max-width:768px){
+  .header{padding:20px}.header h1{font-size:1.2rem}
+  .stats{grid-template-columns:1fr 1fr}
+  .container{padding:12px}
+  .card{padding:16px}
+}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div id="nav-container"></div>
+<script defer src="shared/pro.js?v=848fbf16"></script>
+<script defer src="shared/pro-gate.js?v=c9ccfa6c"></script>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<script defer src="shared/pro-banner.js?v=a5944c54"></script>
+<main>
+<div class="container">
+<div class="header">
+  <div>
+    <h1><span>PRE</span> Detector de Errores</h1>
+    <p>Valida tus formatos de exogena antes de subirlos al prevalidador DIAN. Detecta errores de DV, tipos de documento, conceptos, municipios y mas. <strong style="background:rgba(255,255,255,.2);padding:2px 8px;border-radius:6px">No verifica NITs ni razones sociales contra la DIAN.</strong></p>
+  </div>
+  <div class="header-right">
+    Resolucion 000227/2025<br>AG 2025 &middot; 100% en tu navegador
+  </div>
+</div>
+<div id="stepUpload">
+  <div class="card">
+    <div class="card-title">Sube tu archivo de formatos</div>
+    <p style="color:var(--muted);font-size:.85rem;margin-bottom:16px">
+      Sube el Excel con los formatos de exogena ya armados. El sistema detecta automáticamente las hojas de cada formato (F1001, F1003, F1005, F1006, F1007, F1008, F1009, F1010, F1012, F2276) y valida cada registro buscando los mismos errores que genera el prevalidador DIAN.
+    </p>
+    <div class="drop-zone" id="dropZone">
+      <input type="file" accept=".xlsx,.xls,.csv" id="fileInput" onchange="handleFile(this.files[0])">
+      <span class="dz-icon">&#128269;</span>
+      <div class="dz-title">Arrastra tu archivo Excel aquí</div>
+      <div class="dz-hint">o haz clic para seleccionar &middot; .xlsx / .xls</div>
+      <div class="dz-file" id="fileName"></div>
+    </div>
+    <div style="margin-top:16px;padding:14px;background:#F5F3FF;border-radius:10px;border:1px solid #DDD6FE">
+      <div style="font-weight:700;font-size:.85rem;color:#5B21B6;margin-bottom:6px">Que valida este módulo?</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;font-size:.8rem;color:#6D28D9">
+        <div>&#10003; Digito de verificación (DV)</div>
+        <div>&#10003; Tipos de documento validos</div>
+        <div>&#10003; Conceptos por formato</div>
+        <div>&#10003; Códigos de departamento/municipio</div>
+        <div>&#10003; Nombres vs razon social</div>
+        <div>&#10003; Campos obligatorios vacios</div>
+        <div>&#10003; Longitudes y rangos de valores</div>
+        <div>&#10003; Pais de residencia</div>
+        <div>&#10003; Dirección obligatoria</div>
+        <div>&#10003; Cuantias menores (222222222)</div>
+      </div>
+      <div style="margin-top:12px;padding:10px 14px;background:#FEF2F2;border:1px solid #FECACA;border-radius:8px;font-size:.8rem;color:#991B1B;display:flex;align-items:flex-start;gap:8px">
+        <span style="font-size:1.1rem;flex-shrink:0">&#9888;&#65039;</span>
+        <div><strong>Limitacion:</strong> Esta herramienta <strong>no verifica NITs ni razones sociales contra la DIAN</strong>. La DIAN bloquea las consultas masivas al RUT/MUISCA, por lo que no es posible validar si un NIT existe o si la razon social corresponde al NIT reportado. Para eso, usa el <a href="consultanit.html" style="color:#991B1B;font-weight:600">Consulta NIT DIAN</a> uno por uno.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="stepResults" class="hidden">
+  <div class="stats" id="statsGrid"></div>
+  <div style="padding:12px 16px;background:#FEF2F2;border:1px solid #FECACA;border-radius:10px;margin-bottom:20px;font-size:.82rem;color:#991B1B;display:flex;align-items:center;gap:10px">
+    <span style="font-size:1.2rem;flex-shrink:0">&#9888;&#65039;</span>
+    <span><strong>Esta herramienta no verifica NITs ni razones sociales contra la DIAN.</strong> La DIAN bloquea consultas masivas. Los NITs se validan solo en formato y digito de verificación, no contra el RUT.</span>
+  </div>
+  <div class="card">
+    <div class="card-title">Resumen por formato</div>
+    <div class="fmt-summary" id="fmtSummary"></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+      <div class="card-title" style="margin-bottom:0">Detalle de errores</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn-export btn-primary" onclick="exportErrors()">Descargar errores (.xlsx)</button>
+        <button class="btn-export btn-outline" onclick="resetAll()">Validar otro archivo</button>
+      </div>
+    </div>
+    <div class="filter-bar">
+      <select id="filterFormat" onchange="renderErrors()">
+        <option value="">Todos los formatos</option>
+      </select>
+      <select id="filterSev" onchange="renderErrors()">
+        <option value="">Todas las severidades</option>
+        <option value="error">Solo errores</option>
+        <option value="advertencia">Solo advertencias</option>
+      </select>
+      <select id="filterRule" onchange="renderErrors()">
+        <option value="">Todas las reglas</option>
+      </select>
+      <input type="text" id="filterNit" placeholder="Filtrar por NIT..." oninput="renderErrors()" style="width:160px">
+      <span style="font-size:.78rem;color:var(--muted);margin-left:auto" id="errCount"></span>
+    </div>
+    <div class="scroll-table" id="errTableContainer">
+      <table class="err-table">
+        <thead>
+          <tr>
+            <th style="width:40px">#</th>
+            <th>Formato</th>
+            <th>Fila</th>
+            <th>NIT</th>
+            <th>Campo</th>
+            <th>Valor actual</th>
+            <th>Error</th>
+            <th>Severidad</th>
+          </tr>
+        </thead>
+        <tbody id="errBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+</main>
+<script>
+/* ═══════════════════════════════════════════════════════
+   PREVALIDADOR DE FORMATOS EXOGENA DIAN
+   Motor de deteccion de errores basado en XSD DIAN AG2025
+   ═══════════════════════════════════════════════════════ */
+/* ── DATOS DE REFERENCIA ── */
+const DPTOS_VALID=new Set(['05','08','11','13','15','17','18','19','20','23','25','27','41','44','47','50','52','54','63','66','68','70','73','76','81','85','86','88','91','94','95','97','99']);
+let MPIOS_VALID={};
+fetch('data/municipios.json').then(r=>r.json()).then(data=>{
+  for(const[cod] of Object.entries(data)){
+    const dp=cod.substring(0,2),mp=cod.substring(2);
+    if(!MPIOS_VALID[dp])MPIOS_VALID[dp]=new Set();
+    MPIOS_VALID[dp].add(mp);
+  }
+}).catch(()=>{
+  MPIOS_VALID={'11':new Set(['001']),'05':new Set(['001']),'08':new Set(['001']),'13':new Set(['001']),'76':new Set(['001'])};
+});
+const TD_VALIDOS=new Set([11,12,13,21,22,31,33,41,42,43,44,46,47,48,50]);
+const TD_PN=new Set([11,12,13,21,22,41,47]); // Persona natural
+const TD_PJ=new Set([31,33,44,50]);           // Persona juridica
+const TD_EXTRANJERO=new Set([42,43,44,50,41,46,48]);
+const DV_PESOS=[71,67,59,53,47,43,41,37,29,23,19,17,13,7,3];
+const NM='222222222'; // Cuantias menores
+function calcDv(n){
+  n=String(n).replace(/[.\-\s]/g,'').trim();
+  if(!n||!/^\d+$/.test(n)||n===NM)return'';
+  const np=n.padStart(15,'0');
+  let s=0;for(let i=0;i<15;i++)s+=parseInt(np[i])*DV_PESOS[i];
+  const r=s%11;
+  return r>=2?String(11-r):String(r);
+}
+/* ── CONCEPTOS VALIDOS POR FORMATO (Resolucion 000227/2025) ── */
+const CONCEPTOS={
+  'F1001':new Set([5001,5002,5003,5004,5005,5006,5007,5008,5009,5010,5011,5012,5013,5014,5015,5016,5017,5018,5019,5020,5021,5022,5023,5024,5025,5027,5028,5029,5030,5031,5032,5033,5034,5035,5036,5037,5038,5039,5040,5041,5042,5043,5044,5045,5046,5047,5048,5049,5050,5051,5052,5053,5054,5055,5056,5058,5059,5060,5061,5062,5063,5064,5065,5066,5067,5068,5069,5070,5071,5072,5073,5074,5075,5076,5077,5078,5079,5080]),
+  'F1003':new Set([1301,1302,1303,1304,1305,1306,1307,1308,1309,1310,1311]),
+  'F1005':null,  // Sin restriccion de concepto en XSD
+  'F1006':null,
+  'F1007':new Set([4001,4002,4003,4004,4005,4006,4007,4008,4009,4010,4020]),
+  'F1008':new Set([1315,1316,1317,1318,1319,1320,1325]),
+  'F1009':new Set([2201,2202,2203,2204,2205,2206,2207,2208]),
+  'F1010':null,  // Sin concepto
+  'F1012':new Set([2101,2102,2103,2104,2105,2106,2107,2108,2109,2110]),
+  'F2276':null,  // Sin concepto standard
+};
+/* ── DEFINICION DE CAMPOS POR FORMATO (basado en XSD DIAN) ──
+   Ojo: la coincidencia de aliases usa substring (h.includes(alias)). Listar
+   aliases en orden de mas especifico a mas generico para evitar colisiones
+   (ej: 'ivavcg' antes que 'iva' para que "IVA Mayor Valor 490" no caiga en
+   'imp' o 'iva'). */
+const FIELD_ALIASES={
+  cpt:['concepto','cpt','con','cpto','conceptos','codigo_concepto','codcpt','concepto_dian'],
+  entinfo:['entidad_informante','entinfo'],
+  tdoc:['tipo_documento','tdoc','tipo_doc','td','tipo','tipodoc','tipo_id','tipodocumento'],
+  nid:['nit_informado','numero_identificacion','num_id','nit_tercero','nit','nid','nitb','identificacion','documento'],
+  dv:['dv','digito_verificacion','digito','dig_ver','digverificacion'],
+  apl1:['primer_apellido','apl1','apellido1','apellido_1','pap','primerapellido'],
+  apl2:['segundo_apellido','apl2','apellido2','apellido_2','sap','segundoapellido'],
+  nom1:['primer_nombre','nom1','nombre1','nombre_1','pno','primernombre'],
+  nom2:['otros_nombres','nom2','nombre2','nombre_2','ono','otrosnombres','segundo_nombre'],
+  raz:['razon_social','raz','razonsocial','rs','razon','nombre_empresa'],
+  dir:['direccion','dir','direccion_informado'],
+  dpto:['codigo_departamento','departamento','dpto','depto','dep','cdpt'],
+  mun:['codigo_municipio','municipio_dian','municipio','mun','mpio','mcpo','cmcp'],
+  pais:['pais_residencia','pais','codigo_pais','paist'],
+  // Campos monetarios con headers explicitos (alineados con FMT_HEADERS de
+  // exogena.html post-fix prevalidador AG2025). Listados como aliases para
+  // que tomen precedencia sobre el matching por substring de moneyFields.
+  ided:['iva_mayor_valor_deducible','iva_mayor_valor_costo_o_gasto_deducible','ided'],
+  inded:['iva_mayor_valor_no_deducible','iva_mayor_valor_costo_o_gasto_no_deducible','inded'],
+  ivavcg:['iva_mayor_valor_costo_o_gasto_art_490','iva_mayor_valor_costo_o_gasto','art_490_et','ivavcg'],
+  valnom:['valor_nominal_accion_aporte','valor_nominal','valor_patrimonial','valnom'],
+  valprm:['valor_prima_colocacion','valor_prima','prima_colocacion','valprm'],
+  por:['porcentaje_participacion_entero','participacion_entero','por'],
+  dec:['porcentaje_participacion_decimal','participacion_decimal','dec'],
+};
+/* ── CAMPOS REQUERIDOS POR FORMATO ── */
+const REQUIRED={
+  'F1001':{always:['cpt','tdoc','nid','pais'],money:['pago','pnded','ided','inded','retp','reta','comun','ndom']},
+  'F1003':{always:['cpt','tdoc','nid','dir','dpto','mun'],money:['valor','ret']},
+  'F1005':{always:['tdoc','nid'],money:['vimp','ivade']},
+  'F1006':{always:['tdoc','nid'],money:['imp','iva','icon']},
+  'F1007':{always:['cpt','tdoc','nid','pais'],money:['ibru','dred']},
+  'F1008':{always:['cpt','tdoc','nid','pais'],money:['sal']},
+  'F1009':{always:['cpt','tdoc','nid','pais'],money:['sal']},
+  'F1010':{always:['tdoc','nid','pais'],money:['valnom','valprm','por']},
+  'F1012':{always:['cpt','tdoc','nid','pais'],money:['val']},
+  'F2276':{always:['entinfo','tdoc','nid','pais','apl1','nom1'],money:['pasa','paec','pabop','vaex','paho','pase','paco','papre','pavia','paga','patra','vapo','potro','cein','ceco','auce','peju','tingbtp','apos','apof','aprais','apov','apafc','apavc','vare']},
+};
+/* ── MAPEO DE HOJAS A FORMATOS ── */
+function detectFormat(sheetName){
+  const s=sheetName.toUpperCase().replace(/\s+/g,'');
+  const patterns=[
+    [/F?1001|PAGOS/,'F1001'],
+    [/F?1003|RETENCIONES?\b/,'F1003'],
+    [/F?1005|IVA\s*DESC|DESCONTABLE/,'F1005'],
+    [/F?1006|IVA\s*GEN|GENERADO/,'F1006'],
+    [/F?1007|INGRESO/,'F1007'],
+    [/F?1008|CU?E?NTAS?\s*POR?\s*COBR|CXC|C\.?\s*X\s*C/,'F1008'],
+    [/F?1009|CU?E?NTAS?\s*POR?\s*PAG|CXP|C\.?\s*X\s*P/,'F1009'],
+    [/F?1010|SOCIO|ACCIONISTA/,'F1010'],
+    [/F?1012|INVERSI|DECLARACION/,'F1012'],
+    [/F?2276|RENTA|NOMINA|TRABAJO/,'F2276'],
+  ];
+  for(const[re,fmt] of patterns){
+    if(re.test(s))return fmt;
+  }
+  return null;
+}
+/* ── DETECTAR COLUMNAS EN UNA HOJA ── */
+function mapColumns(headers,fmt){
+  const map={};
+  const norm=h=>(h||'').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'_').replace(/_+/g,'_').trim();
+  for(let i=0;i<headers.length;i++){
+    const h=norm(headers[i]);
+    if(!h)continue;
+    for(const[field,aliases] of Object.entries(FIELD_ALIASES)){
+      if(map[field]!==undefined)continue;
+      for(const a of aliases){
+        if(h===a||h.includes(a)){map[field]=i;break}
+      }
+    }
+    // Campos monetarios directos
+    const moneyFields=['pago','pnded','ided','inded','retp','reta','comun','ndom',
+      'valor','ret','vimp','ivade','ivavcg','imp','iva','icon',
+      'ibru','dred','sal','valnom','valprm','por','dec','val',
+      'pasa','paec','pabop','vaex','paho','pase','paco','papre','pavia','paga',
+      'patra','vapo','potro','cein','ceco','auce','peju','tingbtp',
+      'apos','apof','aprais','apov','apafc','apavc','vare','ivav','rfiva',
+      'pagahuvt','vilap'];
+    for(const mf of moneyFields){
+      if(map[mf]===undefined && (h===mf||h.includes(mf))){map[mf]=i}
+    }
+  }
+  return map;
+}
+/* ═══ MOTOR DE VALIDACION ═══ */
+let allErrors=[];
+let formatStats={};
+function validate(data,fmt,sheetName){
+  const errors=[];
+  const rows=data;
+  if(!rows||rows.length===0)return errors;
+  // Detectar fila de encabezado
+  const headers=rows[0].map(c=>(c||'').toString().trim());
+  const colMap=mapColumns(headers,fmt);
+  const getVal=(row,field)=>{
+    const idx=colMap[field];
+    if(idx===undefined||idx>=row.length)return undefined;
+    const v=row[idx];
+    return v===null||v===undefined?'':String(v).trim();
+  };
+  const getNum=(row,field)=>{
+    const v=getVal(row,field);
+    if(v===''||v===undefined)return 0;
+    const n=parseFloat(String(v).replace(/[,$\s]/g,''));
+    return isNaN(n)?0:n;
+  };
+  const addErr=(fila,campo,valor,msg,sev='error')=>{
+    errors.push({formato:fmt,hoja:sheetName,fila,nit:getVal(rows[fila],'nid')||'',campo,valor:String(valor).substring(0,80),mensaje:msg,severidad:sev});
+  };
+  // Validar cada fila de datos (skip header)
+  for(let i=1;i<rows.length;i++){
+    const row=rows[i];
+    if(!row||row.every(c=>c===null||c===undefined||String(c).trim()===''))continue;
+    const nid=getVal(row,'nid');
+    const tdocStr=getVal(row,'tdoc');
+    const tdoc=parseInt(tdocStr)||0;
+    const dvVal=getVal(row,'dv');
+    const apl1=getVal(row,'apl1');
+    const apl2=getVal(row,'apl2');
+    const nom1=getVal(row,'nom1');
+    const raz=getVal(row,'raz');
+    const dir=getVal(row,'dir');
+    const dptoStr=getVal(row,'dpto');
+    const munStr=getVal(row,'mun');
+    const paisStr=getVal(row,'pais');
+    const pais=parseInt(paisStr)||0;
+    const cptStr=getVal(row,'cpt');
+    const cpt=parseInt(cptStr)||0;
+    const esCuantiasMenores=nid===NM;
+    // ── 1. CAMPOS OBLIGATORIOS ──
+    const req=REQUIRED[fmt];
+    if(req){
+      for(const f of req.always){
+        const v=getVal(row,f);
+        if(v===''||v===undefined){
+          addErr(i,f,'(vacio)','Campo obligatorio vacio','error');
+        }
+      }
+    }
+    // ── 2. TIPO DE DOCUMENTO ──
+    if(tdocStr!==''&&tdocStr!==undefined){
+      if(!TD_VALIDOS.has(tdoc)){
+        addErr(i,'tdoc',tdocStr,'Tipo de documento no valido. Valores permitidos: 11,12,13,21,22,31,33,41,42,43,44,46,47,48,50','error');
+      }
+    }
+    // ── 3. NIT / IDENTIFICACION ──
+    if(nid!==''&&nid!==undefined){
+      // Longitud maxima 20
+      if(nid.length>20){
+        addErr(i,'nid',nid,'NIT excede 20 caracteres (tiene '+nid.length+')','error');
+      }
+      // Solo alfanumerico
+      if(!/^[a-zA-Z0-9]+$/.test(nid)&&!esCuantiasMenores){
+        addErr(i,'nid',nid,'NIT contiene caracteres invalidos (solo alfanumerico)','error');
+      }
+    }
+    // ── 4. DIGITO DE VERIFICACION (DV) ──
+    if(nid&&/^\d+$/.test(nid)&&!esCuantiasMenores&&TD_PJ.has(tdoc)){
+      const dvCalc=calcDv(nid);
+      if(dvVal!==''&&dvVal!==undefined&&dvCalc!==''){
+        if(dvVal!==dvCalc){
+          addErr(i,'dv',dvVal,'DV incorrecto. Para NIT '+nid+' el DV correcto es '+dvCalc,'error');
+        }
+      }
+      // Si el formato requiere DV y no viene
+      if((dvVal===''||dvVal===undefined)&&['F1003','F1005','F1006','F1008','F1009','F1010','F1012'].includes(fmt)){
+        addErr(i,'dv','(vacio)','Falta DV para persona juridica NIT '+nid+'. DV correcto: '+dvCalc,'advertencia');
+      }
+    }
+    // DV para persona natural con CC
+    if(nid&&/^\d+$/.test(nid)&&!esCuantiasMenores&&TD_PN.has(tdoc)&&dvVal!==''&&dvVal!==undefined){
+      const dvCalc=calcDv(nid);
+      if(dvCalc!==''&&dvVal!==dvCalc){
+        addErr(i,'dv',dvVal,'DV incorrecto para CC '+nid+'. DV correcto: '+dvCalc,'error');
+      }
+    }
+    // ── 5. NOMBRES vs RAZON SOCIAL ──
+    if(!esCuantiasMenores&&tdocStr!==''){
+      if(TD_PJ.has(tdoc)){
+        // Persona juridica: debe tener razon social, NO nombres
+        if(!raz&&fmt!=='F1005'&&fmt!=='F1006'){
+          addErr(i,'raz','(vacio)','Persona juridica (TD '+tdoc+') requiere razon social','advertencia');
+        }
+        if(apl1||nom1){
+          addErr(i,'apl1/nom1',apl1||nom1,'Persona juridica (TD '+tdoc+') no debe tener nombres de persona natural','advertencia');
+        }
+      }else if(TD_PN.has(tdoc)){
+        // Persona natural: debe tener al menos primer apellido y primer nombre
+        if(fmt==='F2276'){
+          if(!apl1) addErr(i,'apl1','(vacio)','Persona natural (TD '+tdoc+') requiere primer apellido','error');
+          if(!nom1) addErr(i,'nom1','(vacio)','Persona natural (TD '+tdoc+') requiere primer nombre','error');
+        }else{
+          if(!apl1&&!nom1&&!raz){
+            addErr(i,'apl1/nom1/raz','(vacio)','Tercero sin nombre ni razon social','error');
+          }
+        }
+        if(raz&&apl1){
+          addErr(i,'raz',raz,'Persona natural (TD '+tdoc+') no debe tener razon social si tiene apellidos','advertencia');
+        }
+      }
+    }
+    // ── 6. CUANTIAS MENORES ──
+    if(esCuantiasMenores){
+      if(tdoc!==43&&tdocStr!==''){
+        addErr(i,'tdoc',tdocStr,'Cuantias menores (NIT 222222222) debe tener tipo documento 43','error');
+      }
+      if(raz&&raz.toUpperCase()!=='CUANTIAS MENORES'&&raz.toUpperCase()!=='CUANTÍAS MENORES'){
+        addErr(i,'raz',raz,'Cuantias menores debe tener razon social "CUANTIAS MENORES"','advertencia');
+      }
+    }
+    // ── 7. CONCEPTO ──
+    if(CONCEPTOS[fmt]&&cptStr!==''&&cptStr!==undefined){
+      if(!CONCEPTOS[fmt].has(cpt)){
+        addErr(i,'cpt',cptStr,'Concepto '+cpt+' no es valido para formato '+fmt,'error');
+      }
+    }
+    if(cptStr!==''&&cptStr!==undefined){
+      if(cpt<0||cpt>9999){
+        addErr(i,'cpt',cptStr,'Concepto fuera de rango (0-9999)','error');
+      }
+    }
+    // ── 8. DEPARTAMENTO y MUNICIPIO ──
+    if(dptoStr!==''&&dptoStr!==undefined){
+      const dpNorm=String(dptoStr).padStart(2,'0');
+      if(!DPTOS_VALID.has(dpNorm)){
+        addErr(i,'dpto',dptoStr,'Codigo de departamento no valido. Debe ser codigo DIVIPOLA (ej: 11=Bogota, 05=Antioquia)','error');
+      }
+      if(munStr!==''&&munStr!==undefined){
+        const mpNorm=String(munStr).padStart(3,'0');
+        if(MPIOS_VALID[dpNorm]&&!MPIOS_VALID[dpNorm].has(mpNorm)){
+          addErr(i,'mun',munStr,'Municipio '+mpNorm+' no existe en departamento '+dpNorm,'error');
+        }
+      }
+    }
+    // ── 9. PAIS ──
+    if(paisStr!==''&&paisStr!==undefined){
+      if(pais<1||pais>9999){
+        addErr(i,'pais',paisStr,'Codigo de pais fuera de rango (1-9999)','error');
+      }
+      // Si es colombiano (169) y es persona extranjera
+      if(TD_EXTRANJERO.has(tdoc)&&!TD_PJ.has(tdoc)&&pais===169&&tdoc!==41){
+        addErr(i,'pais',paisStr,'Tipo documento extranjero (TD '+tdoc+') con pais Colombia (169). Verificar si es correcto','advertencia');
+      }
+    }
+    // ── 10. DIRECCION ──
+    // F1003 requiere direccion minimo 8 caracteres
+    if(fmt==='F1003'){
+      if(dir!==undefined&&dir!==''){
+        if(dir.length<8){
+          addErr(i,'dir',dir,'Direccion muy corta para F1003. Minimo 8 caracteres (tiene '+dir.length+')','error');
+        }
+      }
+    }
+    // F1008, F1009, F1010 requiere minimo 2
+    if(['F1008','F1009','F1010'].includes(fmt)){
+      if(dir!==undefined&&dir!==''&&dir.length<2){
+        addErr(i,'dir',dir,'Direccion debe tener minimo 2 caracteres','error');
+      }
+    }
+    // Direccion maxima 200
+    if(dir&&dir.length>200){
+      addErr(i,'dir',dir.substring(0,40)+'...','Direccion excede 200 caracteres (tiene '+dir.length+')','error');
+    }
+    // ── 11. LONGITUDES DE NOMBRES ──
+    if(apl1&&apl1.length>60) addErr(i,'apl1',apl1.substring(0,30)+'...','Primer apellido excede 60 caracteres','error');
+    if(apl2){const v=getVal(row,'apl2');if(v&&v.length>60) addErr(i,'apl2',v.substring(0,30)+'...','Segundo apellido excede 60 caracteres','error');}
+    if(nom1&&nom1.length>60) addErr(i,'nom1',nom1.substring(0,30)+'...','Primer nombre excede 60 caracteres','error');
+    if(raz&&raz.length>450) addErr(i,'raz',raz.substring(0,40)+'...','Razon social excede 450 caracteres','error');
+    // ── 12. VALORES MONETARIOS ──
+    if(req&&req.money){
+      for(const mf of req.money){
+        const mv=getVal(row,mf);
+        if(mv!==''&&mv!==undefined){
+          const cleaned=String(mv).replace(/[,$\s]/g,'');
+          if(cleaned!==''){
+            const num=parseFloat(cleaned);
+            if(isNaN(num)){
+              addErr(i,mf,mv,'Valor no numerico en campo monetario','error');
+            }else if(num<0){
+              addErr(i,mf,mv,'Valor negativo no permitido en campo monetario','error');
+            }else if(cleaned.length>18&&!cleaned.includes('.')){
+              addErr(i,mf,mv,'Valor excede 18 digitos','error');
+            }
+          }
+        }
+      }
+    }
+    // ── 13. VALIDACIONES CRUZADAS ──
+    // Si pais != 169 (Colombia) y hay departamento/municipio colombiano
+    if(pais&&pais!==169&&pais!==0){
+      if(dptoStr&&dptoStr!=='0'&&dptoStr!==''){
+        addErr(i,'dpto',dptoStr,'Pais extranjero ('+pais+') no debe tener departamento colombiano','advertencia');
+      }
+    }
+    // Si es colombiano debe tener dpto y mun en formatos que lo requieren
+    if(pais===169&&['F1001','F1003','F1008','F1009','F1010'].includes(fmt)){
+      if(!dptoStr||dptoStr===''||dptoStr==='0'){
+        if(!esCuantiasMenores){
+          addErr(i,'dpto','(vacio)','Tercero colombiano sin departamento','advertencia');
+        }
+      }
+      if(!munStr||munStr===''||munStr==='0'){
+        if(!esCuantiasMenores){
+          addErr(i,'mun','(vacio)','Tercero colombiano sin municipio','advertencia');
+        }
+      }
+    }
+    // F1001: pago debe ser >= 0
+    if(fmt==='F1001'){
+      const pago=getNum(row,'pago');
+      const pnded=getNum(row,'pnded');
+      if(pago===0&&pnded===0){
+        addErr(i,'pago','0','Pago y pago no deducible ambos en cero','advertencia');
+      }
+    }
+    // F2276: total ingresos brutos debe coincidir con suma de componentes
+    if(fmt==='F2276'){
+      const componentes=['pasa','paec','pabop','vaex','paho','pase','paco','papre','pavia','paga','patra','vapo','potro'];
+      const suma=componentes.reduce((acc,f)=>acc+getNum(row,f),0);
+      const cein=getNum(row,'cein');
+      const ceco=getNum(row,'ceco');
+      const auce=getNum(row,'auce');
+      const peju=getNum(row,'peju');
+      const total=getNum(row,'tingbtp');
+      const sumaTotal=suma+cein+ceco+auce+peju;
+      if(total>0&&sumaTotal>0&&Math.abs(total-sumaTotal)>1){
+        addErr(i,'tingbtp',total,'Total ingresos brutos ('+total.toLocaleString('es-CO')+') no coincide con la suma de componentes ('+sumaTotal.toLocaleString('es-CO')+'). Diferencia: '+Math.abs(total-sumaTotal).toLocaleString('es-CO'),'advertencia');
+      }
+    }
+    // F1003: valor retencion no debe ser mayor que valor sujeto a retencion
+    if(fmt==='F1003'){
+      const valor=getNum(row,'valor');
+      const ret=getNum(row,'ret');
+      if(ret>0&&valor>0&&ret>valor){
+        addErr(i,'ret',ret,'Retencion ('+ret.toLocaleString('es-CO')+') mayor que valor sujeto a retencion ('+valor.toLocaleString('es-CO')+')','advertencia');
+      }
+    }
+    // F1010: porcentaje participacion
+    if(fmt==='F1010'){
+      const por=getNum(row,'por');
+      if(por>100){
+        addErr(i,'por',por,'Porcentaje de participacion mayor a 100%','error');
+      }
+    }
+  }
+  return errors;
+}
+/* ═══ PROCESAMIENTO DEL ARCHIVO ═══ */
+let workbookData={};
+function handleFile(file){
+  if(!file)return;
+  var MAX_FILE_SIZE=20*1024*1024;
+  if(file.size>MAX_FILE_SIZE){showToast('El archivo excede el límite de 20 MB.','warning');return}
+  var ext=(file.name||'').split('.').pop().toLowerCase();
+  if(['xlsx','xls','csv'].indexOf(ext)===-1){showToast('Formato no soportado: .'+ext+'. Solo Excel o CSV.','error');return}
+  document.getElementById('fileName').textContent=file.name+' ('+formatBytes(file.size)+')';
+  const reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      const wb=XLSX.read(e.target.result,{type:'array',cellDates:true,cellText:false});
+      processWorkbook(wb,file.name);
+    }catch(err){
+      showToast('Error al leer el archivo: '+err.message,'error');
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+function processWorkbook(wb,fileName){
+  allErrors=[];
+  formatStats={};
+  workbookData={};
+  let totalRows=0,totalFormats=0;
+  for(const sn of wb.SheetNames){
+    const fmt=detectFormat(sn);
+    if(!fmt)continue;
+    const ws=wb.Sheets[sn];
+    const data=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
+    if(!data||data.length<=1)continue;
+    workbookData[fmt]={sheetName:sn,data};
+    const rowCount=data.length-1; // minus header
+    totalRows+=rowCount;
+    totalFormats++;
+    const errs=validate(data,fmt,sn);
+    allErrors=allErrors.concat(errs);
+    const errCount=errs.filter(e=>e.severidad==='error').length;
+    const warnCount=errs.filter(e=>e.severidad==='advertencia').length;
+    formatStats[fmt]={rows:rowCount,errors:errCount,warnings:warnCount,sheet:sn};
+  }
+  if(totalFormats===0){
+    showToast('No se detectaron formatos de exogena en las hojas del archivo. Las hojas deben llamarse F1001, F1003, F1005, etc. o contener palabras clave como "Pagos", "Retenciones", "Ingresos".','error');
+    return;
+  }
+  renderResults(totalRows,totalFormats);
+}
+/* ═══ RENDER ═══ */
+function renderResults(totalRows,totalFormats){
+  document.getElementById('stepUpload').classList.add('hidden');
+  document.getElementById('stepResults').classList.remove('hidden');
+  const totalErr=allErrors.filter(e=>e.severidad==='error').length;
+  const totalWarn=allErrors.filter(e=>e.severidad==='advertencia').length;
+  const pct=totalRows>0?Math.round(((totalRows-(totalErr>0?new Set(allErrors.filter(e=>e.severidad==='error').map(e=>e.formato+'-'+e.fila)).size:0))/totalRows)*100):100;
+  // Stats grid
+  document.getElementById('statsGrid').innerHTML=
+    '<div class="stat-card info"><div class="val">'+totalFormats+'</div><div class="lbl">Formatos detectados</div></div>'+
+    '<div class="stat-card info"><div class="val">'+totalRows.toLocaleString()+'</div><div class="lbl">Registros analizados</div></div>'+
+    '<div class="stat-card '+(totalErr>0?'err':'ok')+'"><div class="val">'+totalErr.toLocaleString()+'</div><div class="lbl">Errores</div></div>'+
+    '<div class="stat-card '+(totalWarn>0?'warn':'ok')+'"><div class="val">'+totalWarn.toLocaleString()+'</div><div class="lbl">Advertencias</div></div>'+
+    '<div class="stat-card '+(pct===100?'ok':pct>80?'warn':'err')+'"><div class="val">'+pct+'%</div><div class="lbl">Tasa de aprobacion</div></div>';
+  // Format summary cards
+  const fmtOrder=['F1001','F1003','F1005','F1006','F1007','F1008','F1009','F1010','F1012','F2276'];
+  const fmtLabels={'F1001':'Pagos','F1003':'Retenciones','F1005':'IVA Descontable','F1006':'IVA Generado','F1007':'Ingresos','F1008':'CxC','F1009':'CxP','F1010':'Socios','F1012':'Inversiones','F2276':'Rentas de Trabajo'};
+  let summaryHtml='';
+  for(const f of fmtOrder){
+    const s=formatStats[f];
+    if(!s)continue;
+    const hasErr=s.errors>0;
+    const hasWarn=s.warnings>0;
+    const icon=hasErr?'&#10060;':hasWarn?'&#9888;&#65039;':'&#9989;';
+    const borderColor=hasErr?'#FECACA':hasWarn?'#FDE68A':'#A7F3D0';
+    summaryHtml+=
+      '<div class="fmt-summary-card" style="border-color:'+borderColor+'" onclick="filterByFormat(\''+f+'\')">'+
+      '<div style="font-size:1.5rem">'+icon+'</div>'+
+      '<div>'+
+        '<div class="fmt-name">'+f+' &mdash; '+fmtLabels[f]+'</div>'+
+        '<div class="fmt-detail">'+s.rows+' registros'+
+          (s.errors>0?' &middot; <strong style="color:var(--red)">'+s.errors+' errores</strong>':'')+
+          (s.warnings>0?' &middot; <span style="color:var(--amber)">'+s.warnings+' advert.</span>':'')+
+          (s.errors===0&&s.warnings===0?' &middot; <span style="color:var(--green)">Sin errores</span>':'')+
+        '</div>'+
+      '</div></div>';
+  }
+  document.getElementById('fmtSummary').innerHTML=summaryHtml;
+  // Populate filter dropdowns
+  const fmtSelect=document.getElementById('filterFormat');
+  fmtSelect.innerHTML='<option value="">Todos los formatos</option>';
+  for(const f of fmtOrder){
+    if(formatStats[f]) fmtSelect.innerHTML+='<option value="'+f+'">'+f+' - '+fmtLabels[f]+'</option>';
+  }
+  populateRuleFilter();
+  renderErrors();
+}
+function populateRuleFilter(){
+  const rules=new Set(allErrors.map(e=>e.mensaje.substring(0,60)));
+  const sel=document.getElementById('filterRule');
+  sel.innerHTML='<option value="">Todas las reglas</option>';
+  for(const r of [...rules].sort()){
+    sel.innerHTML+='<option value="'+escHtml(r)+'">'+escHtml(r.substring(0,50))+'</option>';
+  }
+}
+function renderErrors(){
+  const fmtFilter=document.getElementById('filterFormat').value;
+  const sevFilter=document.getElementById('filterSev').value;
+  const ruleFilter=document.getElementById('filterRule').value;
+  const nitFilter=document.getElementById('filterNit').value.trim().toLowerCase();
+  let filtered=allErrors;
+  if(fmtFilter) filtered=filtered.filter(e=>e.formato===fmtFilter);
+  if(sevFilter) filtered=filtered.filter(e=>e.severidad===sevFilter);
+  if(ruleFilter) filtered=filtered.filter(e=>e.mensaje.substring(0,60)===ruleFilter);
+  if(nitFilter) filtered=filtered.filter(e=>e.nit.toLowerCase().includes(nitFilter));
+  document.getElementById('errCount').textContent='Mostrando '+Math.min(filtered.length,500)+' de '+filtered.length+' registros';
+  const display=filtered.slice(0,500);
+  let html='';
+  for(let i=0;i<display.length;i++){
+    const e=display[i];
+    const sevClass=e.severidad==='error'?'sev-error':'sev-warn';
+    html+=
+      '<tr>'+
+      '<td>'+(i+1)+'</td>'+
+      '<td><strong>'+e.formato+'</strong></td>'+
+      '<td>'+e.fila+'</td>'+
+      '<td class="err-cell">'+escHtml(e.nit)+'</td>'+
+      '<td><strong>'+escHtml(e.campo)+'</strong></td>'+
+      '<td class="err-cell" title="'+escHtml(e.valor)+'">'+escHtml(e.valor)+'</td>'+
+      '<td>'+escHtml(e.mensaje)+'</td>'+
+      '<td class="'+sevClass+'">'+e.severidad.toUpperCase()+'</td>'+
+      '</tr>';
+  }
+  if(display.length===0){
+    html='<tr><td colspan="8" style="text-align:center;padding:32px;color:var(--green);font-weight:700;font-size:1.1rem">&#9989; No se encontraron errores'+(fmtFilter||sevFilter||nitFilter?' con los filtros aplicados':'')+'</td></tr>';
+  }
+  document.getElementById('errBody').innerHTML=html;
+}
+function filterByFormat(fmt){
+  document.getElementById('filterFormat').value=fmt;
+  renderErrors();
+  document.getElementById('errTableContainer').scrollIntoView({behavior:'smooth'});
+}
+/* ═══ EXPORTAR ERRORES ═══ */
+async function exportErrors(){
+  if(allErrors.length===0){showToast('No hay errores para exportar','info');return}
+  if(!(await exoProGate('de errores del Prevalidador'))) return;
+  const wb=XLSX.utils.book_new();
+  // Hoja resumen
+  const summaryData=[['Formato','Hoja','Registros','Errores','Advertencias','Estado']];
+  const fmtOrder=['F1001','F1003','F1005','F1006','F1007','F1008','F1009','F1010','F1012','F2276'];
+  for(const f of fmtOrder){
+    const s=formatStats[f];
+    if(!s)continue;
+    summaryData.push([f,s.sheet,s.rows,s.errors,s.warnings,s.errors===0?'OK':'REVISAR']);
+  }
+  summaryData.push([]);
+  summaryData.push(['Total','',
+    Object.values(formatStats).reduce((a,s)=>a+s.rows,0),
+    allErrors.filter(e=>e.severidad==='error').length,
+    allErrors.filter(e=>e.severidad==='advertencia').length,
+    ''
+  ]);
+  const wsSummary=XLSX.utils.aoa_to_sheet(summaryData);
+  XLSX.utils.book_append_sheet(wb,wsSummary,'Resumen');
+  // Hoja de errores detallados
+  const errData=[['Formato','Hoja','Fila','NIT','Campo','Valor Actual','Error','Severidad']];
+  for(const e of allErrors){
+    errData.push([e.formato,e.hoja,e.fila,e.nit,e.campo,e.valor,e.mensaje,e.severidad]);
+  }
+  const wsErr=XLSX.utils.aoa_to_sheet(errData);
+  XLSX.utils.book_append_sheet(wb,wsErr,'Errores Detallados');
+  // Hoja por cada formato con errores
+  for(const f of fmtOrder){
+    const fErrs=allErrors.filter(e=>e.formato===f);
+    if(fErrs.length===0)continue;
+    const fData=[['Fila','NIT','Campo','Valor','Error','Severidad']];
+    for(const e of fErrs) fData.push([e.fila,e.nit,e.campo,e.valor,e.mensaje,e.severidad]);
+    const wsF=XLSX.utils.aoa_to_sheet(fData);
+    XLSX.utils.book_append_sheet(wb,wsF,f);
+  }
+  XLSX.writeFile(wb,'Prevalidacion_Exogena_'+new Date().toISOString().slice(0,10)+'.xlsx');
+  showToast('Archivo de errores descargado','success');
+}
+/* ═══ UTILIDADES ═══ */
+function resetAll(){
+  allErrors=[];
+  formatStats={};
+  workbookData={};
+  document.getElementById('stepResults').classList.add('hidden');
+  document.getElementById('stepUpload').classList.remove('hidden');
+  document.getElementById('fileName').textContent='';
+  document.getElementById('fileInput').value='';
+}
+function formatBytes(b){
+  if(b<1024)return b+' B';
+  if(b<1048576)return(b/1024).toFixed(1)+' KB';
+  return(b/1048576).toFixed(1)+' MB';
+}
+function escHtml(s){
+  const d=document.createElement('div');
+  d.textContent=s;
+  return d.innerHTML;
+}
+function showToast(msg,type){
+  if(typeof exoToast==='function'){exoToast(msg,type);return}
+  const t=document.createElement('div');
+  t.style.cssText='position:fixed;bottom:20px;right:20px;padding:14px 24px;border-radius:12px;color:#fff;font-size:.88rem;font-weight:600;z-index:9999;max-width:400px;box-shadow:0 8px 24px rgba(0,0,0,.15);animation:slideIn .3s';
+  t.style.background=type==='error'?'#DC2626':type==='success'?'#059669':type==='warning'?'#D97706':'#2563EB';
+  t.textContent=msg;
+  document.body.appendChild(t);
+  setTimeout(()=>{t.style.opacity='0';t.style.transition='opacity .3s';setTimeout(()=>t.remove(),300)},4000);
+}
+/* ── Drag & Drop ── */
+const dz=document.getElementById('dropZone');
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag')});
+dz.addEventListener('dragleave',()=>dz.classList.remove('drag'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag');if(e.dataTransfer.files[0])handleFile(e.dataTransfer.files[0])});
+</script>
+<section style="max-width:1200px;margin:32px auto 0;padding:0 20px 40px">
+  <h3 style="font-size:1rem;font-weight:700;color:#374151;margin-bottom:12px">Herramientas relacionadas</h3>
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <a href="exogena.html" style="padding:8px 16px;background:#ECFDF5;color:#047857;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:500">Generar Formatos Exogena</a>
+    <a href="sanciones.html" style="padding:8px 16px;background:#ECFDF5;color:#047857;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:500">Sanciones Exogena</a>
+    <a href="vencimientos.html" style="padding:8px 16px;background:#ECFDF5;color:#047857;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:500">Vencimientos</a>
+    <a href="consultanit.html" style="padding:8px 16px;background:#ECFDF5;color:#047857;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:500">Consulta NIT DIAN</a>
+  </div>
+</section>
+</main>
+<link rel="stylesheet" href="shared/chat.css?v=a52afe72">
+<script defer src="shared/chat.js?v=a45c7cf2"></script>
+</body>
+</html>

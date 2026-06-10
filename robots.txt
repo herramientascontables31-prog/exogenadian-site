@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://exogenadian.com/sitemap.xml
+
+# No indexar
+Disallow: /archivos_prueba/
+Disallow: /referencias/
+Disallow: /node_modules/
+Disallow: /docs/
+Disallow: /gracias.html

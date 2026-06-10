@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="../shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S7SM6ST4CC');
+</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutorial: c&oacute;mo generar los Estados Financieros (ESF, ERI, ECP, EFE) en exogenadian.com | Ex&oacute;genaDIAN</title>
+<meta name="description" content="Tutorial paso a paso: c&oacute;mo subir el balance de prueba, completar el encabezado, revisar la clasificaci&oacute;n NIIF, resolver las cuentas con signo opuesto (correctoras) y exportar el ESF, ERI, ECP y EFE con revelaciones.">
+<link rel="canonical" href="https://exogenadian.com/tutoriales/estadosfinancieros.html">
+<meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tutorial-mockups.css?v=dccdc93b">
+<style>
+:root{--green-900:#064E3B;--green-800:#065F46;--green-700:#047857;--green-600:#059669;--green-500:#10B981;--green-400:#34D399;--green-300:#6EE7B7;--green-200:#A7F3D0;--green-100:#D1FAE5;--green-50:#ECFDF5;--white:#FFF;--gray-50:#F9FAFB;--gray-100:#F3F4F6;--gray-200:#E5E7EB;--gray-300:#D1D5DB;--gray-400:#9CA3AF;--gray-500:#6B7280;--gray-600:#4B5563;--gray-700:#374151;--gray-800:#1F2937;--gray-900:#111827;--amber-50:#FFFBEB;--amber-100:#FEF3C7;--amber-500:#F59E0B;--amber-700:#92400E;--amber-800:#78350F;--blue-50:#EFF6FF;--blue-100:#DBEAFE;--blue-500:#3B82F6;--blue-700:#1D4ED8;--purple-50:#F5F3FF;--purple-500:#8B5CF6;--purple-700:#6D28D9;--rose-50:#FFF1F2;--rose-500:#F43F5E;--rose-700:#BE123C}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-900);line-height:1.6}
+.tut-layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh}@media(max-width:900px){.tut-layout{grid-template-columns:1fr}}
+.sidebar{background:#fff;border-right:1px solid var(--gray-200);padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}.sidebar-header{padding:16px 20px;border-bottom:1px solid var(--gray-100)}.sidebar-header a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--gray-800);font-weight:800;font-size:.9rem}.sidebar-header a div{width:28px;height:28px;background:linear-gradient(135deg,var(--green-600),var(--green-400));border-radius:7px;display:grid;place-items:center;color:#fff;font-size:.7rem;font-weight:900}.sidebar-curso{padding:16px 20px;border-bottom:1px solid var(--gray-100)}.sidebar-curso h3{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--green-700);margin-bottom:4px}.sidebar-curso p{font-size:.88rem;font-weight:700;color:var(--gray-800)}
+.sidebar-nav{padding:12px 0;flex:1}.sidebar-nav a{display:flex;align-items:center;gap:10px;padding:10px 20px;text-decoration:none;color:var(--gray-500);font-size:.85rem;font-weight:500;transition:all .15s;border-left:3px solid transparent}.sidebar-nav a:hover{background:var(--green-50);color:var(--green-700)}.sidebar-nav a.active{background:var(--green-50);color:var(--green-700);font-weight:700;border-left-color:var(--green-600)}.sidebar-nav a .num{width:24px;height:24px;border-radius:50%;background:var(--gray-100);color:var(--gray-500);display:grid;place-items:center;font-size:.72rem;font-weight:700;flex-shrink:0}.sidebar-nav a.active .num{background:var(--green-600);color:#fff}
+.sidebar-back{padding:16px 20px;border-top:1px solid var(--gray-100);margin-top:auto}.sidebar-back a{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--gray-400);font-size:.82rem;font-weight:500}.sidebar-back a:hover{color:var(--gray-700)}
+.main{padding:32px 40px 60px;max-width:880px}@media(max-width:900px){.main{padding:20px 16px 80px}.sidebar{display:none}}
+.breadcrumb{font-size:.78rem;color:var(--gray-400);margin-bottom:8px}.breadcrumb a{color:var(--gray-400);text-decoration:none}.breadcrumb a:hover{color:var(--green-600)}
+.tag{display:inline-flex;align-items:center;gap:6px;background:var(--green-100);color:var(--green-700);padding:4px 14px;border-radius:100px;font-size:.74rem;font-weight:700;margin-bottom:14px}
+h1.tut-title{font-family:'Fraunces',serif;font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;letter-spacing:-.02em;margin-bottom:10px;line-height:1.2}p.tut-lead{font-size:1.05rem;color:var(--gray-600);max-width:680px;line-height:1.6;margin-bottom:30px}
+.step{margin-bottom:40px;padding-top:20px;border-top:2px solid var(--gray-200)}.step:first-of-type{border-top:none;padding-top:0}.step-num{display:inline-flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:.9rem;color:var(--green-700);font-weight:700;margin-bottom:8px}.step-num span{display:grid;place-items:center;width:32px;height:32px;background:var(--green-600);color:#fff;border-radius:50%;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:800}.step h2{font-family:'Fraunces',serif;font-size:1.45rem;font-weight:700;margin-bottom:8px;color:var(--gray-900);line-height:1.25}.step p{font-size:.95rem;color:var(--gray-700);line-height:1.7;margin-bottom:14px}.step ul,.step ol{margin:8px 0 16px 22px;display:flex;flex-direction:column;gap:7px}.step li{font-size:.94rem;color:var(--gray-700);line-height:1.6}.step h3{font-size:1.05rem;font-weight:700;margin:18px 0 8px;color:var(--gray-800)}.step code{font-family:'JetBrains Mono',monospace;font-size:.86rem;background:var(--gray-100);padding:2px 7px;border-radius:5px;color:var(--gray-800)}
+.capture{background:var(--gray-100);border:2px dashed var(--gray-300);border-radius:12px;padding:30px 20px;margin:18px 0;text-align:center;color:var(--gray-500);font-size:.85rem;line-height:1.55}.capture .cap-icon{font-size:2rem;display:block;margin-bottom:10px;opacity:.55}.capture .cap-label{font-weight:700;color:var(--gray-700);font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}.capture em{font-style:normal;background:#fff;padding:2px 8px;border-radius:5px;font-size:.82rem;color:var(--gray-700);font-weight:600}
+.tip{background:var(--blue-50);border-left:4px solid var(--blue-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:#1E40AF;line-height:1.6}.tip strong{color:var(--blue-700)}.warn{background:var(--amber-50);border-left:4px solid var(--amber-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:var(--amber-800);line-height:1.6}.warn strong{color:var(--amber-700)}.err{background:var(--rose-50);border-left:4px solid var(--rose-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:#9F1239;line-height:1.6}.err strong{color:var(--rose-700)}
+.tabla{width:100%;border-collapse:collapse;margin:14px 0;border-radius:10px;overflow:hidden;border:1px solid var(--gray-200);font-size:.86rem}.tabla th{background:var(--gray-100);padding:9px 13px;text-align:left;font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gray-600)}.tabla td{padding:9px 13px;border-top:1px solid var(--gray-100);color:var(--gray-700)}.tabla tr:hover{background:var(--green-50)}.tabla code{font-family:'JetBrains Mono',monospace;font-size:.78rem;background:var(--white);padding:1px 5px;border-radius:3px}
+.cta-end{background:linear-gradient(135deg,var(--green-50),#D1FAE5);border:2px solid var(--green-300);border-radius:16px;padding:28px 26px;margin:30px 0 20px;text-align:center}.cta-end h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;color:var(--green-800);margin-bottom:6px}.cta-end p{font-size:.92rem;color:var(--green-700);margin-bottom:16px}.cta-end a{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:var(--green-600);color:#fff;border-radius:12px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 14px rgba(5,150,105,.25);transition:all .2s}.cta-end a:hover{background:var(--green-700);transform:translateY(-2px)}
+.step-nav{display:flex;justify-content:space-between;margin-top:30px;padding-top:20px;border-top:2px solid var(--gray-200);gap:10px;flex-wrap:wrap}.step-nav a{display:inline-flex;align-items:center;gap:7px;padding:11px 22px;border-radius:10px;text-decoration:none;font-weight:700;font-size:.88rem;background:var(--gray-100);color:var(--gray-700);transition:all .2s}.step-nav a:hover{background:var(--gray-200)}.step-nav a.next{background:var(--green-600);color:#fff;box-shadow:0 4px 12px rgba(5,150,105,.25)}.step-nav a.next:hover{background:var(--green-700)}
+</style>
+<script async src="../shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div class="tut-layout">
+  <aside class="sidebar">
+    <div class="sidebar-header"><a href="../index.html"><div>E</div>Ex&oacute;genaDIAN</a></div>
+    <div class="sidebar-curso"><h3>Tutorial</h3><p>Estados Financieros (ESF, ERI, ECP, EFE)</p></div>
+    <nav class="sidebar-nav">
+      <a href="#intro" class="active"><span class="num">0</span> Antes de empezar</a>
+      <a href="#paso1"><span class="num">1</span> Cargar balance y encabezado</a>
+      <a href="#paso2"><span class="num">2</span> Mapear columnas</a>
+      <a href="#paso3"><span class="num">3</span> Clasificaci&oacute;n y cuentas correctoras</a>
+      <a href="#paso4"><span class="num">4</span> Revelaciones y exportar</a>
+      <a href="#errores"><span class="num">!</span> Advertencias y errores</a>
+      <a href="#tips"><span class="num">i</span> Tips Colombia</a>
+    </nav>
+    <div class="sidebar-back"><a href="../tutoriales.html">&larr; Todos los tutoriales</a></div>
+  </aside>
+  <div class="main">
+    <div class="breadcrumb"><a href="../index.html">Inicio</a> &rsaquo; <a href="../tutoriales.html">Tutoriales</a> &rsaquo; Estados Financieros</div>
+    <span class="tag">Tutorial &middot; ~12 min</span>
+    <h1 class="tut-title">C&oacute;mo generar los Estados Financieros en exogenadian.com</h1>
+    <p class="tut-lead">Gu&iacute;a paso a paso para usar la herramienta de Estados Financieros (<a href="../estadosfinancieros.html">estadosfinancieros.html</a>): subir el balance de prueba, completar el encabezado de la empresa, revisar la clasificaci&oacute;n NIIF, resolver bien las cuentas con &laquo;signo opuesto a su naturaleza&raquo; (las correctoras) y exportar el ESF, ERI, ECP y EFE con sus revelaciones.</p>
+    <section id="intro" class="step">
+      <h2>Antes de empezar &mdash; lista de chequeo</h2>
+      <p>Para que los estados financieros salgan bien al primer intento, ten a la mano:</p>
+      <ul>
+        <li><strong>Balance de prueba al corte</strong> en Excel/CSV, con <strong>saldos finales</strong> de TODAS las clases (1 a 9). Lo exportas de tu software contable (Siigo, World Office, Helisa, Alegra, Odoo&hellip;).</li>
+        <li>Que cada fila traiga al menos: <strong>c&oacute;digo PUC</strong>, <strong>nombre de la cuenta</strong> y el <strong>saldo final</strong> (o columnas D&eacute;bito y Cr&eacute;dito).</li>
+        <li>El <strong>balance del a&ntilde;o anterior</strong> al mismo corte, si quieres el comparativo (NIIF exige dos per&iacute;odos).</li>
+        <li>Datos del encabezado: <strong>NIT</strong>, <strong>raz&oacute;n social</strong>, <strong>a&ntilde;o</strong> y <strong>fecha de corte</strong>.</li>
+      </ul>
+      <div class="tip">
+        <strong>Tip:</strong> la herramienta detecta sola la convenci&oacute;n de signos de tu software (Siigo / World Office / Helisa &mdash; d&eacute;bito&#8209;positivo o valor absoluto). No tienes que &laquo;arreglar&raquo; los signos del balance antes de subirlo. <strong>Todo el procesamiento ocurre en tu navegador</strong>, no se sube nada a ning&uacute;n servidor.
+      </div>
+      <div class="mockup">
+        <div class="mockup-bar"><div class="mockup-dots"><span></span><span></span><span></span></div><div class="mockup-url">exogenadian.com/estadosfinancieros.html</div></div>
+        <div class="mockup-body">
+          <div class="mockup-h">Estados Financieros NIIF</div>
+          <div class="mockup-grid-2">
+            <div><div class="mockup-label">Balance del a&ntilde;o</div><div class="mockup-dropzone"><span class="mockup-dropzone-icon">&#128202;</span>Arrastra el balance de prueba<br><span style="font-size:.62rem;color:#9CA3AF">.xlsx o .csv</span></div></div>
+            <div><div class="mockup-label">Comparativo (a&ntilde;o anterior)</div><div class="mockup-dropzone"><span class="mockup-dropzone-icon">&#128203;</span>Opcional<br><span style="font-size:.62rem;color:#9CA3AF">.xlsx o .csv</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="paso1" class="step">
+      <div class="step-num"><span>1</span> Paso 1</div>
+      <h2>Cargar el balance y completar el encabezado</h2>
+      <p>Entra a <a href="../estadosfinancieros.html">exogenadian.com/estadosfinancieros.html</a>. Arrastra tu balance de prueba a la zona <strong>&laquo;Inicio&raquo;</strong>. Si vas a hacer el comparativo, sube tambi&eacute;n el balance del a&ntilde;o anterior en la segunda zona.</p>
+      <h3>Datos del encabezado</h3>
+      <p>Llena los campos de configuraci&oacute;n &mdash;estos salen impresos en los estados financieros y en las notas:</p>
+      <table class="tabla">
+        <thead><tr><th>Campo</th><th>Qu&eacute; va aqu&iacute;</th></tr></thead>
+        <tbody>
+          <tr><td><strong>NIT</strong></td><td>NIT de la empresa. <strong>Importante:</strong> con base en este NIT la herramienta recuerda tus decisiones (ver Paso 3). Ej: <code>901657282-9</code>.</td></tr>
+          <tr><td><strong>Raz&oacute;n social</strong></td><td>Nombre legal de la empresa, tal como debe aparecer en los EEFF.</td></tr>
+          <tr><td><strong>A&ntilde;o / Fecha de corte</strong></td><td>El corte del balance. Si es 31 de diciembre, queda como corte <strong>anual</strong>; cualquier otra fecha es <strong>parcial</strong> (corte intermedio).</td></tr>
+          <tr><td><strong>Fecha de corte comparativo</strong></td><td>Se autocompleta con el mismo d&iacute;a/mes del a&ntilde;o anterior. Aj&uacute;stala si tu comparativo es a otra fecha.</td></tr>
+        </tbody>
+      </table>
+      <div class="warn">
+        <strong>El balance debe estar completo (clases 1 a 9) y al corte correcto.</strong> Si subes solo el balance del Estado de Situaci&oacute;n (clases 1, 2 y 3) sin las de resultado (4, 5, 6, 7), la ecuaci&oacute;n contable no va a cuadrar y el ERI saldr&aacute; vac&iacute;o.
+      </div>
+      <div class="step-nav"><span></span><a href="#paso2" class="next">Paso 2: Mapear columnas &rarr;</a></div>
+    </section>
+    <section id="paso2" class="step">
+      <div class="step-num"><span>2</span> Paso 2</div>
+      <h2>Verificar el mapeo de columnas</h2>
+      <p>La herramienta reconoce autom&aacute;ticamente las columnas del balance por el nombre del encabezado. Igual <strong>revisa</strong> que haya marcado bien:</p>
+      <table class="tabla">
+        <thead><tr><th>Columna</th><th>Qu&eacute; busca</th><th>Nombres que reconoce</th></tr></thead>
+        <tbody>
+          <tr><td><strong>C&oacute;digo</strong></td><td>C&oacute;digo PUC de la cuenta</td><td><code>codigo</code>, <code>cuenta</code>, <code>cta</code>, <code>puc</code></td></tr>
+          <tr><td><strong>Nombre</strong></td><td>Descripci&oacute;n de la cuenta</td><td><code>nombre</code>, <code>descripcion</code>, <code>cuenta</code></td></tr>
+          <tr><td><strong>Saldo final</strong></td><td>Saldo al corte</td><td><code>saldo</code>, <code>saldo final</code>, <code>neto</code></td></tr>
+          <tr><td>D&eacute;bito / Cr&eacute;dito</td><td>Si no hay columna de saldo &uacute;nico</td><td><code>debito</code>, <code>credito</code>, <code>debe</code>, <code>haber</code></td></tr>
+        </tbody>
+      </table>
+      <div class="tip">
+        <strong>Si tu software exporta filas de t&iacute;tulo decorativas arriba</strong> (logo, NIT, per&iacute;odo) ajusta la fila de encabezado para que apunte a la fila real de t&iacute;tulos. Si una columna queda en blanco o amarilla, sel&eacute;ccionala manualmente en el dropdown.
+      </div>
+      <div class="step-nav"><a href="#paso1">&larr; Paso 1</a><a href="#paso3" class="next">Paso 3: Clasificaci&oacute;n &rarr;</a></div>
+    </section>
+    <section id="paso3" class="step">
+      <div class="step-num"><span>3</span> Paso 3</div>
+      <h2>Clasificaci&oacute;n NIIF y cuentas con signo opuesto</h2>
+      <p>La herramienta clasifica autom&aacute;ticamente cada cuenta del PUC en el <strong>ESF</strong> (Activo, Pasivo, Patrimonio) y el <strong>ERI</strong> (Ingresos, Costos, Gastos). Revisa la clasificaci&oacute;n &mdash;puedes ajustar la secci&oacute;n NIIF de cualquier cuenta.</p>
+      <h3>La validaci&oacute;n de la ecuaci&oacute;n contable</h3>
+      <p>Arriba ver&aacute;s si <strong>Activo = Pasivo + Patrimonio</strong>. Si dice <strong>&laquo;Ecuaci&oacute;n contable NO cuadra&raquo;</strong>, casi siempre es por una de estas causas:</p>
+      <ul>
+        <li>El <strong>resultado del ejercicio no est&aacute; cerrado</strong> (las cuentas 4, 5, 6 traen saldo y no se trasladaron a patrimonio).</li>
+        <li><strong>Falta alguna cuenta</strong> &mdash;el balance no qued&oacute; completo.</li>
+        <li>El balance es de un <strong>corte equivocado</strong> o mezcla per&iacute;odos.</li>
+      </ul>
+      <h3>&laquo;Cuentas con signo opuesto a su naturaleza&raquo; &mdash; lo m&aacute;s importante</h3>
+      <p>Si aparece un <strong>recuadro rojo</strong> diciendo que se filtraron cuentas con &laquo;signo opuesto a su naturaleza&raquo;: <strong>NO borres ni cambies los signos de tu balance.</strong> En la gran mayor&iacute;a de los casos NO es un error contable &mdash; son <strong>cuentas correctoras</strong> (de naturaleza contraria), totalmente normales en el PUC colombiano:</p>
+      <table class="tabla">
+        <thead><tr><th>Cuenta</th><th>Por qu&eacute; tiene signo &laquo;al rev&eacute;s&raquo;</th></tr></thead>
+        <tbody>
+          <tr><td>Depreciaci&oacute;n / amortizaci&oacute;n acumulada (<code>1592</code>, <code>1698</code>, <code>1798</code>&hellip;)</td><td>Resta del activo &rarr; saldo cr&eacute;dito (contra&#8209;activo). Es normal.</td></tr>
+          <tr><td>Deterioros y provisiones (<code>1299</code>, <code>1399</code>, <code>1499</code>&hellip;)</td><td>Tambi&eacute;n restan del activo. Saldo cr&eacute;dito leg&iacute;timo.</td></tr>
+          <tr><td>P&eacute;rdidas acumuladas / del ejercicio (<code>3710</code>, <code>3610</code>)</td><td>Reducen el patrimonio &rarr; saldo d&eacute;bito. Es normal.</td></tr>
+          <tr><td>Capital por suscribir / suscrito por cobrar (<code>3105</code>&hellip;)</td><td>Resta del capital &rarr; saldo d&eacute;bito (contra&#8209;patrimonio).</td></tr>
+        </tbody>
+      </table>
+      <p>En el recuadro, cada cuenta tiene tres botones. Esto es lo que hace cada uno:</p>
+      <table class="tabla">
+        <thead><tr><th>Bot&oacute;n</th><th>Cu&aacute;ndo usarlo</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Es correctora</strong></td><td>Cuenta de naturaleza contraria leg&iacute;tima (las de la tabla de arriba). <strong>Es la opci&oacute;n correcta el 90% de las veces.</strong> Entra a los EEFF restando bien.</td></tr>
+          <tr><td><strong>Saldo v&aacute;lido</strong></td><td>El saldo es real aunque vaya contra su naturaleza (ej. un sobregiro bancario contabilizado en el activo).</td></tr>
+          <tr><td><strong>Ocultar</strong></td><td>S&iacute; es un error contable de digitaci&oacute;n &mdash; cor&iacute;gelo en tu software y vuelve a subir el balance.</td></tr>
+        </tbody>
+      </table>
+      <div class="tip">
+        <strong>Tu decisi&oacute;n se guarda por NIT.</strong> La primera vez marcas las correctoras de ese cliente; las pr&oacute;ximas veces que subas su balance, la herramienta ya las recuerda. Por eso es importante poner bien el NIT en el Paso 1.
+      </div>
+      <div class="tip">
+        <strong>&iquest;Dudas con una cuenta puntual?</strong> En ese mismo recuadro hay un bot&oacute;n <strong>&laquo;&#129302; Preg&uacute;ntale a Exa cu&aacute;les son correctoras&raquo;</strong>: el asistente IA revisa las cuentas marcadas y te dice cu&aacute;les reclasificar. Tambi&eacute;n hay un bot&oacute;n &laquo;&iquest;Por qu&eacute; no cuadra?&raquo; junto a la alerta de la ecuaci&oacute;n contable.
+      </div>
+      <div class="warn">
+        Hist&oacute;ricamente la herramienta no reconoc&iacute;a algunas correctoras (amortizaci&oacute;n de diferidos <code>1798</code>, p&eacute;rdidas acumuladas <code>3710</code>, capital por suscribir) y las marcaba como anomal&iacute;a. Ya se corrigi&oacute;: ahora se reconocen autom&aacute;ticamente. Si a&uacute;n ves alguna correctora poco com&uacute;n marcada, usa el bot&oacute;n <strong>&laquo;Es correctora&raquo;</strong> &mdash; queda resuelto y recordado por NIT.
+      </div>
+      <div class="step-nav"><a href="#paso2">&larr; Paso 2</a><a href="#paso4" class="next">Paso 4: Revelaciones &rarr;</a></div>
+    </section>
+    <section id="paso4" class="step">
+      <div class="step-num"><span>4</span> Paso 4</div>
+      <h2>Revelaciones y exportar los estados financieros</h2>
+      <p>Con la clasificaci&oacute;n revisada y la ecuaci&oacute;n cuadrada, la herramienta arma los cuatro estados financieros con sus revelaciones:</p>
+      <table class="tabla">
+        <thead><tr><th>Estado</th><th>Qu&eacute; es</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ESF</strong></td><td>Estado de Situaci&oacute;n Financiera (el &laquo;balance general&raquo;): Activo, Pasivo y Patrimonio.</td></tr>
+          <tr><td><strong>ERI</strong></td><td>Estado de Resultados Integral: ingresos, costos, gastos y resultado del ejercicio.</td></tr>
+          <tr><td><strong>ECP</strong></td><td>Estado de Cambios en el Patrimonio.</td></tr>
+          <tr><td><strong>EFE</strong></td><td>Estado de Flujos de Efectivo.</td></tr>
+        </tbody>
+      </table>
+      <p>Cada uno trae sus <strong>notas / revelaciones</strong> precargadas seg&uacute;n NIIF. Rev&iacute;salas y aj&uacute;stalas a la realidad de la empresa &mdash;la herramienta respeta tus ediciones manuales.</p>
+      <div class="mockup">
+        <div class="mockup-body mockup-body--gray">
+          <div class="mockup-tabs">
+            <span class="mockup-tab mockup-tab--active">ESF</span>
+            <span class="mockup-tab">ERI</span>
+            <span class="mockup-tab">ECP</span>
+            <span class="mockup-tab">EFE</span>
+            <span class="mockup-tab">Revelaciones</span>
+          </div>
+          <div style="padding:14px;text-align:center"><span class="mockup-btn-primary" style="font-size:.82rem;padding:9px 22px">Exportar Excel / PDF</span></div>
+        </div>
+      </div>
+      <p>Exporta a <strong>Excel o PDF</strong> con el membrete de tu firma para entregar al cliente, a revisor&iacute;a fiscal o como soporte de la declaraci&oacute;n de renta. Algunas funciones avanzadas (exportaci&oacute;n con formato, an&aacute;lisis ampliado) son <strong>PRO</strong>.</p>
+      <div class="step-nav"><a href="#paso3">&larr; Paso 3</a><a href="#errores" class="next">Advertencias y errores &rarr;</a></div>
+    </section>
+    <section id="errores" class="step">
+      <h2>Qu&eacute; hacer ante cada advertencia o error</h2>
+      <p>Esta es la gu&iacute;a completa: el mensaje exacto que ves, por qu&eacute; aparece y el paso a paso para resolverlo. Est&aacute; dividida en tres momentos: al <strong>cargar el archivo</strong>, en la <strong>validaci&oacute;n contable</strong> (Paso 3) y al <strong>generar los estados</strong>.</p>
+      <h3>Caso real resuelto, paso a paso</h3>
+      <p>Este es el mensaje exacto que motiv&oacute; este tutorial &mdash;un usuario subi&oacute; su balance y le sali&oacute;:</p>
+      <div class="capture">
+        <span class="cap-icon">&#9940;</span>
+        <span class="cap-label">Lo que vio el usuario</span>
+        <em>3 cuentas con signo opuesto a su naturaleza fueron filtradas (no se cargan a los EEFF) &mdash; total: 45.854.555</em>
+      </div>
+      <table class="tabla">
+        <thead><tr><th>C&oacute;digo</th><th>Cuenta</th><th>Saldo</th><th>&iquest;Qu&eacute; es realmente?</th></tr></thead>
+        <tbody>
+          <tr><td><code>17981601</code></td><td>Amortizaci&oacute;n programas de computador</td><td>&#8209;1.852.416</td><td>Amortizaci&oacute;n acumulada &rarr; <strong>contra&#8209;activo</strong>. Resta del intangible. Saldo cr&eacute;dito normal.</td></tr>
+          <tr><td><code>31051001</code></td><td>Capital por suscribir (DB)</td><td>&#8209;5.000.000</td><td>Resta del capital &rarr; <strong>contra&#8209;patrimonio</strong>. Saldo d&eacute;bito normal.</td></tr>
+          <tr><td><code>37100501</code></td><td>P&eacute;rdidas acumuladas</td><td>&#8209;39.002.139</td><td>Reduce el patrimonio &rarr; saldo d&eacute;bito. Es normal.</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Diagn&oacute;stico:</strong> ninguna de las tres es un error. Son <strong>cuentas correctoras</strong> (naturaleza contraria) totalmente leg&iacute;timas del PUC. El balance estaba bien; la herramienta era la que estaba siendo demasiado estricta. Soluci&oacute;n en 3 clics:</p>
+      <ol>
+        <li>NO tocar el balance. Bajar al recuadro rojo <em>&laquo;&#9940; Cuentas con signo opuesto a su naturaleza&raquo;</em>.</li>
+        <li>En cada una de las 3 filas, clic en el bot&oacute;n negro <strong>&laquo;Es correctora&raquo;</strong>.</li>
+        <li>Los EEFF se recalculan solos: el intangible queda neto de su amortizaci&oacute;n, el patrimonio refleja las p&eacute;rdidas acumuladas y el capital por suscribir. La decisi&oacute;n queda <strong>guardada por ese NIT</strong> &mdash; no hay que repetirla el pr&oacute;ximo cierre.</li>
+      </ol>
+      <div class="tip">
+        <strong>Atajo:</strong> el bot&oacute;n <strong>&laquo;&#129302; Preg&uacute;ntale a Exa cu&aacute;les son correctoras&raquo;</strong> (en el mismo recuadro) le pasa al asistente la lista exacta de cuentas y te dice, una por una, cu&aacute;l marcar y cu&aacute;l revisar.
+      </div>
+      <div class="warn">
+        <strong>Ojo &mdash; ahora hay menos falsas alarmas:</strong> la herramienta ya reconoce <strong>autom&aacute;ticamente</strong> las correctoras comunes (depreciaci&oacute;n y amortizaci&oacute;n acumulada incluida la de diferidos <code>1798</code>, deterioros, provisiones, p&eacute;rdidas acumuladas <code>3710</code>, capital por suscribir <code>310510</code>). Por eso, si despu&eacute;s de cargar el balance <strong>todav&iacute;a</strong> aparece una cuenta en el recuadro rojo, es m&aacute;s probable que sea una <strong>anomal&iacute;a real</strong> &mdash;t&iacute;picamente un <strong>banco con saldo cr&eacute;dito</strong> (sobregiro mal contabilizado en el activo). En ese caso usa &laquo;Saldo v&aacute;lido&raquo; si el sobregiro es real, o &laquo;Ocultar&raquo; y cor&iacute;gelo si fue un error.
+      </div>
+      <h3>1) Errores al cargar el archivo</h3>
+      <table class="tabla">
+        <thead><tr><th>Mensaje</th><th>Causa</th><th>Qu&eacute; hacer</th></tr></thead>
+        <tbody>
+          <tr><td><strong>&laquo;El archivo excede el l&iacute;mite de 20 MB&raquo;</strong></td><td>Balance muy pesado (im&aacute;genes, hojas extra, formato cargado).</td><td>En Excel borra hojas que no sean el balance, quita formato condicional/im&aacute;genes y guarda como <code>.xlsx</code> limpio o <code>.csv</code>.</td></tr>
+          <tr><td><strong>&laquo;Formato no soportado&raquo;</strong></td><td>Subiste PDF, ODS u otro formato.</td><td>Exporta el balance como Excel (<code>.xlsx</code>/<code>.xls</code>) o <code>.csv</code> desde tu software contable.</td></tr>
+          <tr><td><strong>&laquo;El archivo no tiene hojas de datos&raquo; / &laquo;est&aacute; vac&iacute;o&raquo;</strong></td><td>Se export&oacute; con filtros activos, una hoja vac&iacute;a o solo la cabecera.</td><td>Vuelve a exportar el balance completo, sin filtros, con todas las cuentas visibles.</td></tr>
+          <tr><td><strong>&laquo;No se pudo leer el archivo. Verifica que sea un Excel v&aacute;lido&raquo;</strong></td><td>Archivo corrupto o protegido con contrase&ntilde;a.</td><td>Abre el archivo en Excel, qu&iacute;tale la protecci&oacute;n y gu&aacute;rdalo de nuevo (&laquo;Guardar como&raquo; &rarr; Libro de Excel).</td></tr>
+          <tr><td><strong>&laquo;Faltan columnas obligatorias: &hellip;&raquo;</strong></td><td>El mapeo no encontr&oacute; C&oacute;digo, Nombre o Saldo.</td><td>Vuelve al <strong>Paso 2</strong> y selecciona manualmente esas columnas en los dropdowns. Revisa que la fila de encabezado apunte a los t&iacute;tulos reales.</td></tr>
+          <tr><td><strong>&laquo;Primero carga un archivo de balance&raquo;</strong></td><td>Intentaste avanzar sin cargar el balance principal.</td><td>Sube primero el balance del a&ntilde;o en la zona &laquo;Inicio&raquo;.</td></tr>
+          <tr><td><strong>&laquo;No se pudieron detectar las columnas del balance comparativo&raquo;</strong></td><td>El balance del a&ntilde;o anterior no trae &laquo;Saldo Final&raquo; ni columnas D&eacute;bitos/Cr&eacute;ditos reconocibles.</td><td>Exporta el comparativo con las mismas columnas que el balance principal (c&oacute;digo, nombre y saldo final).</td></tr>
+        </tbody>
+      </table>
+      <h3>2) Advertencias en la validaci&oacute;n contable (Paso 3)</h3>
+      <div class="warn">
+        <strong>&laquo;Ecuaci&oacute;n contable NO cuadra: Activos &ne; Pasivos + Patrimonio. Diferencia: $X&raquo;</strong><br>
+        Significa que el balance no est&aacute; balanceado. Rev&iacute;salo en este orden:
+        <ol style="margin:8px 0 0 20px">
+          <li><strong>Resultado del ejercicio sin cerrar:</strong> es la causa #1. Si las cuentas 4&#8209;5&#8209;6 traen saldo y no se trasladaron a la 36/37, la diferencia es <em>justo</em> la utilidad/p&eacute;rdida del periodo. Es normal en un balance de prueba pre&#8209;cierre &mdash;la herramienta arma igual el ERI.</li>
+          <li><strong>Falta una cuenta o un grupo:</strong> el balance se export&oacute; incompleto. Compara el total del activo con tu software.</li>
+          <li><strong>Corte equivocado:</strong> el balance es de otra fecha o mezcla periodos.</li>
+          <li><strong>Cuentas correctoras filtradas:</strong> si tambi&eacute;n sali&oacute; el recuadro rojo, resu&eacute;lvelo primero (ver caso real arriba) &mdash;al reincorporarlas la ecuaci&oacute;n suele cuadrar.</li>
+        </ol>
+        Usa el bot&oacute;n <strong>&laquo;&#129302; &iquest;Por qu&eacute; no cuadra?&raquo;</strong> para que Exa analice tu caso puntual.
+      </div>
+      <div class="err">
+        <strong>&laquo;N cuenta(s) con signo opuesto a su naturaleza fueron filtradas&raquo;</strong> (recuadro rojo)<br>
+        Esas cuentas quedan en <strong>$0</strong> hasta que decidas, as&iacute; que los EEFF salen incompletos mientras tanto. Para CADA cuenta del recuadro:
+        <ul style="margin:8px 0 0 20px">
+          <li><strong>Es correctora</strong> &rarr; si es contra&#8209;cuenta leg&iacute;tima (depreciaci&oacute;n/amortizaci&oacute;n acumulada, deterioros, provisiones, p&eacute;rdidas acumuladas, capital por suscribir). <em>La opci&oacute;n correcta casi siempre.</em></li>
+          <li><strong>Saldo v&aacute;lido</strong> &rarr; si el saldo es real aunque vaya contra su naturaleza (ej. sobregiro bancario en el activo).</li>
+          <li><strong>Ocultar</strong> &rarr; si s&iacute; es un error de digitaci&oacute;n: corr&iacute;gelo en tu software y vuelve a subir el balance.</li>
+        </ul>
+        <strong>Nunca borres ni inviertas los signos del balance.</strong> Eso da&ntilde;ar&iacute;a tu contabilidad y no es lo que pide la herramienta.
+      </div>
+      <h3>3) Problemas al generar los estados</h3>
+      <table class="tabla">
+        <thead><tr><th>S&iacute;ntoma</th><th>Causa</th><th>Qu&eacute; hacer</th></tr></thead>
+        <tbody>
+          <tr><td><strong>El ERI sale vac&iacute;o o en cero</strong></td><td>Subiste un balance solo con clases 1&#8209;3, o el ejercicio ya se cerr&oacute; contra patrimonio (las 4&#8209;5&#8209;6 quedaron en cero).</td><td>Sube el balance de prueba <em>antes</em> del cierre. Si solo tienes el cerrado, usa el balance comparativo que conserva el detalle de resultados; la herramienta reconstruye el ERI desde los movimientos.</td></tr>
+          <tr><td><strong>Una cuenta qued&oacute; en la secci&oacute;n NIIF equivocada</strong></td><td>Clasificaci&oacute;n autom&aacute;tica por PUC con un caso at&iacute;pico.</td><td>En el Paso 3, cambia manualmente la secci&oacute;n NIIF de esa cuenta en su dropdown. Se guarda por NIT.</td></tr>
+          <tr><td><strong>El comparativo no aparece</strong></td><td>No subiste el balance del a&ntilde;o anterior, o qued&oacute; en otra fecha de corte.</td><td>Sube el balance del periodo anterior y ajusta la &laquo;Fecha de corte comparativo&raquo; en el Paso 1.</td></tr>
+          <tr><td><strong>&laquo;Tu balance no tiene saldo inicial ni columnas deb/cre&raquo; (Flujo de efectivo)</strong></td><td>El EFE necesita el movimiento del periodo; tu balance solo trae saldo final.</td><td>Exporta el balance con columnas <strong>Saldo Inicial</strong> y/o <strong>D&eacute;bitos/Cr&eacute;ditos</strong> (no solo saldo final). El ESF, ERI y ECP s&iacute; salen sin eso; solo el EFE lo exige.</td></tr>
+          <tr><td><strong>Una cuenta no se clasific&oacute; (c&oacute;digo no PUC)</strong></td><td>El c&oacute;digo no corresponde al PUC est&aacute;ndar (ej. cuentas de orden o c&oacute;digos internos como <code>9999</code>), o cae en el grupo &laquo;otro&raquo;.</td><td>En el Paso 3 asign&aacute;le manualmente la secci&oacute;n NIIF, o ren&oacute;mbrala con su c&oacute;digo PUC correcto en el origen. Aparece listada en la carta de hallazgos como &laquo;cuentas sin clasificar con variaci&oacute;n&raquo;.</td></tr>
+          <tr><td><strong>Aviso de la prueba de Benford / materialidad</strong></td><td>Es una alerta anal&iacute;tica (forense), no un error. Indica concentraciones inusuales de d&iacute;gitos o partidas sobre la materialidad.</td><td>Es informativa: rev&iacute;sala como control de calidad. No impide generar los estados.</td></tr>
+          <tr><td><strong>Las cifras no coinciden con tu software</strong></td><td>Hay correctoras sin marcar, o el redondeo/materialidad difiere.</td><td>Resuelve primero el recuadro rojo. Luego compara grupo por grupo; ajusta la materialidad si la usas.</td></tr>
+        </tbody>
+      </table>
+      <div class="tip">
+        <strong>Regla general:</strong> ante cualquier mensaje, el orden es &mdash; (1) resolver el recuadro rojo de signo opuesto, (2) revisar la ecuaci&oacute;n contable, (3) revisar la clasificaci&oacute;n NIIF, (4) generar y exportar. Casi todos los problemas se resuelven en ese orden, y todas tus decisiones quedan guardadas por NIT.
+      </div>
+    </section>
+    <section id="tips" class="step">
+      <h2>Tips espec&iacute;ficos para Colombia</h2>
+      <div class="tip">
+        <strong>Cuentas correctoras del PUC:</strong> en el Decreto 2650 muchas cuentas tienen naturaleza contraria a su clase por dise&ntilde;o (depreciaci&oacute;n y amortizaci&oacute;n acumulada, deterioros, provisiones, p&eacute;rdidas acumuladas, capital por suscribir). Que tengan saldo &laquo;al rev&eacute;s&raquo; NO es un error &mdash; deben restar dentro de su grupo, no eliminarse.
+      </div>
+      <div class="tip">
+        <strong>Comparativo obligatorio:</strong> bajo NIIF (Grupo 1 plenas y Grupo 2 Pymes) los estados financieros se presentan con <strong>dos per&iacute;odos</strong>. Sube tambi&eacute;n el balance del a&ntilde;o anterior para que el ESF y el ERI salgan comparativos.
+      </div>
+      <div class="tip">
+        <strong>Borrador, no documento final:</strong> los estados financieros generados son un apoyo. Deben ser revisados, ajustados y firmados por el contador p&uacute;blico y, cuando aplique, dictaminados por el revisor fiscal antes de su aprobaci&oacute;n por la asamblea y su presentaci&oacute;n.
+      </div>
+      <div class="tip">
+        <strong>&Uacute;til para renta:</strong> el ESF y el ERI generados sirven como base para el Formulario 110 y la conciliaci&oacute;n fiscal (2516). Puedes pasar directamente a la herramienta de <a href="../renta110.html">Renta F110</a>.
+      </div>
+      <div class="cta-end">
+        <h3>Abrir la herramienta de Estados Financieros</h3>
+        <p>Listo para armar el ESF, ERI, ECP y EFE del cierre.</p>
+        <a href="../estadosfinancieros.html">Ir a estadosfinancieros.html &rarr;</a>
+      </div>
+      <div class="step-nav"><a href="#errores">&larr; Advertencias y errores</a><a href="../tutoriales.html" class="next">Volver a Tutoriales &rarr;</a></div>
+    </section>
+  </div>
+</div>
+<script>
+(function(){
+  var links = document.querySelectorAll('.sidebar-nav a');
+  var sections = Array.from(links).map(function(a){ var id = a.getAttribute('href').replace('#',''); return document.getElementById(id); }).filter(Boolean);
+  function update(){
+    var y = window.scrollY + 80;
+    var current = sections[0];
+    sections.forEach(function(s){ if(s && s.offsetTop <= y) current = s; });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if(current){ var match = document.querySelector('.sidebar-nav a[href="#'+current.id+'"]'); if(match) match.classList.add('active'); }
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  update();
+})();
+</script>
+</body>
+</html>

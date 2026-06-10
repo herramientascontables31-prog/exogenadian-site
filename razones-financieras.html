@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Razones Financieras — Liquidez, Endeudamiento, Rentabilidad | ExógenaDIAN</title>
+<meta name="description" content="Calcula GRATIS razones financieras desde tu balance: liquidez, endeudamiento, actividad y rentabilidad. 15+ indicadores con semáforos y descarga en Excel.">
+<meta name="keywords" content="razones financieras, indicadores financieros, liquidez, endeudamiento, rentabilidad, ROA, ROE, EBITDA, Colombia">
+<link rel="canonical" href="https://exogenadian.com/razones-financieras.html">
+<meta property="og:title" content="Razones Financieras Gratis | ExógenaDIAN">
+<meta property="og:description" content="15+ indicadores financieros con semáforos y descarga en Excel. Sin registro, 100% en tu navegador.">
+<meta property="og:url" content="https://exogenadian.com/razones-financieras.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="ExógenaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png">
+<meta name="robots" content="index, follow">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Razones Financieras","url":"https://exogenadian.com/razones-financieras.html","description":"Calculadora gratuita de razones financieras. Liquidez, endeudamiento, actividad y rentabilidad.","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"COP"},"author":{"@type":"Organization","name":"ExógenaDIAN","url":"https://exogenadian.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://exogenadian.com/"},{"@type":"ListItem","position":2,"name":"Razones Financieras","item":"https://exogenadian.com/razones-financieras.html"}]}
+</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js" integrity="sha384-Pqp51FUN2/qzfxZxBCtF0stpc9ONI6MYZpVqmo8m20SoaQCzf+arZvACkLkirlPz" crossorigin="anonymous"></script>
+<script src="shared/balance-loader.js?v=9347f34a"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--card2:#F3F4F6;--border:#e2e8f0;--text:#1a1a2e;--muted:#6b7280;--green:#22C55E;--green2:#166534;--green3:#ECFDF5;--yellow:#EAB308;--yellow2:#854d0e;--yellow3:#FEF9C3;--red:#EF4444;--red2:#991B1B;--red3:#FEE2E2;--blue:#3B82F6;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--mono:'JetBrains Mono',monospace;--sans:'DM Sans',sans-serif;--radius:12px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.5;min-height:100vh}
+.container{max-width:1200px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#1B3A5C 0%,#2E75B6 100%);padding:28px 32px;border-radius:16px;margin-bottom:24px;color:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.header h1{font-size:1.4rem;font-weight:700;display:flex;align-items:center;gap:10px}
+.header p{opacity:.85;font-size:.83rem;margin-top:4px}
+.header-right{text-align:right;font-size:.78rem;opacity:.8}
+.badge{display:inline-block;background:rgba(16,185,129,.2);color:#6EE7B7;padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:700;margin-top:6px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:20px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.card-title{font-size:1rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;color:var(--pri)}
+.card-sub{font-size:.78rem;color:var(--muted);margin-bottom:14px}
+.field{margin-bottom:10px}
+.field label{display:block;font-size:.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
+.field input{width:100%;padding:8px 12px;background:var(--card);border:1.5px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--mono);font-size:.92rem;transition:.2s;text-align:right}
+.field input:focus{outline:none;border-color:var(--pri2);box-shadow:0 0 0 3px rgba(46,117,182,.15)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field-text input{text-align:left;font-family:var(--sans)}
+.alert{padding:12px 16px;border-radius:8px;font-size:.82rem;margin-bottom:14px;display:flex;align-items:flex-start;gap:8px}
+.alert-info{background:var(--pri3);color:var(--pri);border:1px solid #B4C6E7}
+.alert-warn{background:var(--yellow3);color:var(--yellow2);border:1px solid #FCD34D}
+.btn{padding:11px 22px;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:.9rem;font-family:var(--sans);transition:.15s;display:inline-flex;align-items:center;gap:6px}
+.btn-pri{background:var(--pri2);color:#fff}.btn-pri:hover{background:var(--pri)}
+.btn-green{background:#059669;color:#fff}.btn-green:hover{background:#047857}
+.btn-out{background:transparent;border:1.5px solid var(--border);color:var(--muted)}.btn-out:hover{border-color:var(--pri2);color:var(--pri2)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+/* Resultados */
+.result-section{margin-bottom:18px}
+.result-section-title{font-size:.78rem;font-weight:700;color:var(--pri);text-transform:uppercase;letter-spacing:.5px;padding:10px 0 8px;border-bottom:2px solid var(--pri3);margin-bottom:10px}
+.razon-row{display:grid;grid-template-columns:24px 1fr 130px;gap:10px;align-items:center;padding:9px 4px;border-bottom:1px solid var(--border);transition:background .12s;cursor:pointer}
+.razon-row:hover{background:var(--card2)}
+.razon-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+.razon-dot.g{background:var(--green)}
+.razon-dot.y{background:var(--yellow)}
+.razon-dot.r{background:var(--red)}
+.razon-dot.n{background:#9CA3AF}
+.razon-name{font-weight:600;font-size:.88rem;color:var(--text)}
+.razon-fmla{font-size:.7rem;color:var(--muted);font-family:var(--mono);margin-top:2px;line-height:1.4}
+.razon-val{text-align:right;font-family:var(--mono);font-size:1.05rem;font-weight:700;color:var(--pri)}
+.razon-unit{font-size:.7rem;color:var(--muted);font-weight:500;display:block}
+.razon-tip{display:none;margin:0 0 6px 36px;padding:10px 14px;background:var(--card2);border:1px solid var(--border);border-radius:8px;font-size:.78rem;color:var(--text);line-height:1.5}
+.razon-tip.show{display:block}
+.razon-tip strong{color:var(--pri)}
+.placeholder-msg{text-align:center;color:var(--muted);padding:40px 20px;font-size:.88rem}
+.placeholder-msg .ico{font-size:2.4rem;margin-bottom:8px;display:block;opacity:.5}
+.summary-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.stat-pill{background:var(--card2);border-radius:10px;padding:10px;text-align:center;border:1px solid var(--border)}
+.stat-pill .v{font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--pri)}
+.stat-pill .l{font-size:.68rem;color:var(--muted);text-transform:uppercase;font-weight:600;margin-top:2px}
+.stat-pill.g .v{color:var(--green2)}
+.stat-pill.y .v{color:var(--yellow2)}
+.stat-pill.r .v{color:var(--red2)}
+.footer{margin-top:32px;padding:16px 20px;border-top:1px solid var(--border);text-align:center;font-size:.76rem;color:var(--muted);line-height:1.6}
+.footer a{color:var(--pri2);text-decoration:none;font-weight:600}
+.subgroup{font-size:.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin:14px 0 6px;padding-top:6px;border-top:1px dashed var(--border)}
+.subgroup:first-of-type{margin-top:0;border-top:none;padding-top:0}
+.input-help{font-size:.68rem;color:var(--muted);margin-top:2px;font-style:italic}
+@media(max-width:900px){
+  .grid2{grid-template-columns:1fr}
+  .container{padding:12px}
+  .header{flex-direction:column;text-align:center;padding:20px}
+  .header-right{text-align:center}
+  .field-row{grid-template-columns:1fr}
+  .razon-row{grid-template-columns:18px 1fr 100px}
+  .summary-stats{grid-template-columns:repeat(2,1fr)}
+}
+@media print{
+  body{background:#fff;margin:0;padding:0}
+  body > *:not(.container){display:none!important}
+  .header{background:#1B3A5C!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .actions,.no-print{display:none!important}
+}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div id="nav-container"></div>
+<script defer src="shared/pro.js?v=848fbf16"></script>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<script defer src="shared/pro-banner.js?v=a5944c54"></script>
+<div class="container">
+<div class="header">
+  <div>
+    <h1>&#128202; Razones Financieras</h1>
+    <p>Liquidez, endeudamiento, actividad y rentabilidad &middot; 15+ indicadores</p>
+    <div class="badge">100% gratis &middot; Sin registro</div>
+  </div>
+  <div class="header-right">100% en tu navegador<br>Tus datos no salen de tu equipo</div>
+</div>
+<div class="alert alert-info">
+  <span>&#128161;</span>
+  <div>Ingresa los totales de tu Estado de Situación Financiera y Estado de Resultados. La herramienta calcula automáticamente las razones financieras y muestra un semáforo de referencia. <strong>Los rangos son orientativos generales</strong> — cada sector tiene parámetros distintos. Próximamente: comparación contra benchmarks sectoriales.</div>
+</div>
+<div class="grid2">
+<div>
+<div class="card">
+  <div class="card-title">&#128194; Cargar balance de prueba <span style="font-weight:400;color:var(--muted);font-size:.78rem">(opcional, autollena los campos)</span></div>
+  <div class="card-sub">Sube tu balance en Excel y la herramienta clasifica las cuentas con el PUC y llena automáticamente los inputs. También puedes ingresarlos a mano.</div>
+  <div id="balanceLoaderHost"></div>
+  <div id="usePriorBalance" style="display:none;margin-top:10px;padding:10px 12px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;font-size:.82rem;color:#1E40AF">
+    <span id="usePriorBalanceText"></span>
+    <button type="button" class="btn btn-out" style="margin-left:10px;padding:4px 10px;font-size:.78rem" onclick="aplicarBalanceGuardado()">Usar este balance</button>
+    <button type="button" class="btn btn-out" style="padding:4px 10px;font-size:.78rem" onclick="descartarBalanceGuardado()">Descartar</button>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">&#127970; Datos de la sociedad</div>
+  <div class="field-row">
+    <div class="field field-text"><label>Razón social</label><input type="text" id="cfgEmpresa" placeholder="Ej: ABC S.A.S"></div>
+    <div class="field field-text"><label>NIT</label><input type="text" id="cfgNit" placeholder="900.123.456-7"></div>
+  </div>
+  <div class="field-row">
+    <div class="field field-text"><label>Período</label><input type="text" id="cfgPeriodo" placeholder="Ej: Año 2025" value=""></div>
+    <div class="field"><label>Días del período</label><input type="text" id="cfgDias" value="360" placeholder="360"></div>
+  </div>
+  <div class="input-help">Para anualizar rotaciones se usa 360 días por convención. Si analizas un trimestre usa 90.</div>
+</div>
+<div class="card">
+  <div class="card-title">&#128181; Estado de Situación Financiera</div>
+  <div class="card-sub">Saldos al cierre del período (en pesos)</div>
+  <div class="subgroup">Activos corrientes</div>
+  <div class="field-row">
+    <div class="field"><label>Efectivo y equivalentes</label><input type="text" id="i_efectivo" data-money></div>
+    <div class="field"><label>Cuentas por cobrar</label><input type="text" id="i_cxc" data-money></div>
+  </div>
+  <div class="field-row">
+    <div class="field"><label>Inventarios</label><input type="text" id="i_inventarios" data-money></div>
+    <div class="field"><label>Otros activos corrientes</label><input type="text" id="i_otros_ac" data-money></div>
+  </div>
+  <div class="subgroup">Activos no corrientes</div>
+  <div class="field-row">
+    <div class="field"><label>Propiedad, planta y equipo (neto)</label><input type="text" id="i_ppe" data-money></div>
+    <div class="field"><label>Otros activos no corrientes</label><input type="text" id="i_otros_anc" data-money></div>
+  </div>
+  <div class="subgroup">Pasivos corrientes</div>
+  <div class="field-row">
+    <div class="field"><label>Obligaciones financieras CP</label><input type="text" id="i_obl_cp" data-money></div>
+    <div class="field"><label>Proveedores</label><input type="text" id="i_proveedores" data-money></div>
+  </div>
+  <div class="field-row">
+    <div class="field"><label>Otros pasivos corrientes</label><input type="text" id="i_otros_pc" data-money></div>
+    <div class="field"><label>Obligaciones financieras LP</label><input type="text" id="i_obl_lp" data-money></div>
+  </div>
+  <div class="field"><label>Otros pasivos no corrientes</label><input type="text" id="i_otros_pnc" data-money></div>
+  <div class="subgroup">Patrimonio</div>
+  <div class="field"><label>Total patrimonio</label><input type="text" id="i_patrimonio" data-money></div>
+  <div class="alert alert-warn" id="balanceAlert" style="display:none;margin-top:14px"></div>
+</div>
+<div class="card">
+  <div class="card-title">&#128202; Estado de Resultados Integral</div>
+  <div class="card-sub">Acumulado del período (en pesos)</div>
+  <div class="field-row">
+    <div class="field"><label>Ingresos operacionales</label><input type="text" id="i_ingresos" data-money></div>
+    <div class="field"><label>Costo de ventas</label><input type="text" id="i_costo" data-money></div>
+  </div>
+  <div class="field-row">
+    <div class="field"><label>Gastos de administración</label><input type="text" id="i_gtos_admin" data-money></div>
+    <div class="field"><label>Gastos de ventas</label><input type="text" id="i_gtos_ventas" data-money></div>
+  </div>
+  <div class="field-row">
+    <div class="field"><label>Depreciación + Amortización</label><input type="text" id="i_depam" data-money></div>
+    <div class="field"><label>Gastos financieros (intereses)</label><input type="text" id="i_gtos_fin" data-money></div>
+  </div>
+  <div class="field-row">
+    <div class="field"><label>Otros ingresos / gastos (neto)</label><input type="text" id="i_otros_neto" data-money><div class="input-help">Positivo = ingreso neto. Negativo = gasto neto.</div></div>
+    <div class="field"><label>Impuesto de renta</label><input type="text" id="i_imporenta" data-money></div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">&#128200; Saldos promedio <span style="font-weight:400;color:var(--muted);font-size:.78rem">(opcional)</span></div>
+  <div class="card-sub">Para rotaciones más precisas. Si se dejan vacíos, se usa el saldo de cierre.</div>
+  <div class="field-row">
+    <div class="field"><label>CxC promedio</label><input type="text" id="i_cxc_prom" data-money></div>
+    <div class="field"><label>Inventario promedio</label><input type="text" id="i_inv_prom" data-money></div>
+  </div>
+  <div class="field-row">
+    <div class="field"><label>Proveedores promedio</label><input type="text" id="i_prov_prom" data-money></div>
+    <div class="field"><label>Activo total promedio</label><input type="text" id="i_act_prom" data-money></div>
+  </div>
+  <div class="field"><label>Patrimonio promedio</label><input type="text" id="i_pat_prom" data-money></div>
+</div>
+<div class="actions" style="margin-bottom:20px">
+  <button class="btn btn-pri" onclick="calcular()">&#129518; Calcular razones</button>
+  <button class="btn btn-out" onclick="cargarEjemplo()">&#128221; Cargar ejemplo</button>
+  <button class="btn btn-out" onclick="limpiar()">&#128260; Limpiar</button>
+</div>
+</div>
+<div>
+  <div class="card" id="resultsCard">
+    <div class="card-title">&#127919; Indicadores</div>
+    <div id="resultsContent">
+      <div class="placeholder-msg">
+        <span class="ico">&#128202;</span>
+        Ingresa los datos del balance y haz clic en <strong>Calcular razones</strong>.
+        <br><br>
+        <span style="font-size:.8rem">Se generan 15+ indicadores con semáforos de referencia.</span>
+      </div>
+    </div>
+  </div>
+  <div class="card" id="downloadCard" style="display:none">
+    <div class="card-title">&#128190; Descargar resultados</div>
+    <div class="card-sub">Excel con todas las razones, fórmulas y valores. Lista para anexar a tu papel de trabajo.</div>
+    <div class="actions" style="margin-top:0">
+      <button class="btn btn-green" onclick="exportarExcel()">&#128202; Descargar Excel</button>
+      <button class="btn btn-out" onclick="window.print()">&#128424; Imprimir / PDF</button>
+    </div>
+  </div>
+</div>
+</div>
+<div class="footer">
+  <a href="index.html">ExógenaDIAN</a> &middot;
+  <a href="estadosfinancieros.html">Estados Financieros</a> &middot;
+  <a href="dashboard.html">Dashboard Financiero</a> &middot;
+  <a href="analisis-vertical-horizontal.html">Análisis Vertical y Horizontal</a><br>
+  Rangos de referencia generales &mdash; cada sector tiene parámetros distintos. El contador debe interpretar.
+  100% procesado en tu navegador.
+</div>
+</div>
+<script>
+/* ═══ FORMATO ═══ */
+function fN(n){return Math.round(n||0).toLocaleString('es-CO')}
+function fNum(n,d){d=d===undefined?2:d;if(!isFinite(n))return '—';return n.toLocaleString('es-CO',{minimumFractionDigits:d,maximumFractionDigits:d})}
+function fPct(n,d){d=d===undefined?1:d;if(!isFinite(n))return '—';return n.toLocaleString('es-CO',{minimumFractionDigits:d,maximumFractionDigits:d})+'%'}
+function fDays(n){if(!isFinite(n))return '—';return Math.round(n).toLocaleString('es-CO')+' días'}
+function parse(s){if(typeof s==='number')return s;if(!s)return 0;var v=String(s).replace(/[^\d.,\-]/g,'').replace(/\./g,'').replace(',','.');return parseFloat(v)||0}
+function fmtMoneyInput(el){
+  var raw=el.value.replace(/[^\d\-]/g,'');
+  var neg=raw.startsWith('-');
+  raw=raw.replace(/-/g,'');
+  if(!raw){el.value=neg?'-':'';return}
+  el.value=(neg?'-':'')+parseInt(raw).toLocaleString('es-CO');
+}
+/* Auto-formato en todos los inputs de dinero */
+document.querySelectorAll('input[data-money]').forEach(function(el){
+  el.setAttribute('inputmode','numeric');
+  el.setAttribute('autocomplete','off');
+  el.placeholder='0';
+  el.addEventListener('input',function(){fmtMoneyInput(this)});
+});
+/* ═══ LECTURA DE INPUTS ═══ */
+function getInputs(){
+  var v={};
+  ['efectivo','cxc','inventarios','otros_ac','ppe','otros_anc',
+   'obl_cp','proveedores','otros_pc','obl_lp','otros_pnc','patrimonio',
+   'ingresos','costo','gtos_admin','gtos_ventas','depam','gtos_fin','otros_neto','imporenta',
+   'cxc_prom','inv_prom','prov_prom','act_prom','pat_prom'
+  ].forEach(function(k){v[k]=parse(document.getElementById('i_'+k).value)});
+  v.dias=parse(document.getElementById('cfgDias').value)||360;
+  v.empresa=document.getElementById('cfgEmpresa').value||'EMPRESA S.A.S';
+  v.nit=document.getElementById('cfgNit').value||'';
+  v.periodo=document.getElementById('cfgPeriodo').value||'';
+  return v;
+}
+/* ═══ CÁLCULO DE EEFF DERIVADOS ═══ */
+function calcEEFF(v){
+  var actCorr=v.efectivo+v.cxc+v.inventarios+v.otros_ac;
+  var actNoCorr=v.ppe+v.otros_anc;
+  var activo=actCorr+actNoCorr;
+  var pasCorr=v.obl_cp+v.proveedores+v.otros_pc;
+  var pasNoCorr=v.obl_lp+v.otros_pnc;
+  var pasivo=pasCorr+pasNoCorr;
+  var totalPasPat=pasivo+v.patrimonio;
+  var ingNetos=v.ingresos;
+  var utilBruta=ingNetos-v.costo;
+  var utilOp=utilBruta-v.gtos_admin-v.gtos_ventas;
+  var utilAntesImp=utilOp+v.otros_neto-v.gtos_fin;
+  var utilNeta=utilAntesImp-v.imporenta;
+  var ebitda=utilOp+v.depam;
+  var oblFin=v.obl_cp+v.obl_lp;
+  return {actCorr:actCorr,actNoCorr:actNoCorr,activo:activo,
+    pasCorr:pasCorr,pasNoCorr:pasNoCorr,pasivo:pasivo,
+    totalPasPat:totalPasPat,
+    ingNetos:ingNetos,utilBruta:utilBruta,utilOp:utilOp,
+    utilAntesImp:utilAntesImp,utilNeta:utilNeta,ebitda:ebitda,
+    oblFin:oblFin};
+}
+/* ═══ PROMEDIOS (usa promedio si está, si no usa cierre) ═══ */
+function avg(prom,cierre){return prom>0?prom:cierre}
+/* ═══ SEMÁFORO ═══ */
+// Devuelve {color: 'g'|'y'|'r'|'n', text: explicación corta}
+// Nota: rangos generales orientativos. Cada sector tiene parámetros distintos.
+function sem(rules,val){
+  if(typeof val!=='number'||isNaN(val))return {color:'n',text:'—'};
+  // Infinity: tomar el tramo superior; -Infinity: el inferior
+  if(val===Infinity)return {color:rules[rules.length-1].color,text:rules[rules.length-1].text};
+  if(val===-Infinity)return {color:rules[0].color,text:rules[0].text};
+  for(var i=0;i<rules.length;i++){
+    var r=rules[i];
+    if(val>=r.min && val<r.max)return {color:r.color,text:r.text};
+  }
+  return {color:'n',text:'fuera de rango'};
+}
+/* Colores: g=verde (saludable), y=amarillo (atención), r=rojo (alerta), n=neutro */
+var R = {
+  // Liquidez
+  razonCorriente: [
+    {min:-Infinity,max:1,color:'r',text:'Insuficiente'},
+    {min:1,max:1.5,color:'y',text:'Ajustada'},
+    {min:1.5,max:3,color:'g',text:'Saludable'},
+    {min:3,max:Infinity,color:'y',text:'Activos ociosos'}
+  ],
+  pruebaAcida: [
+    {min:-Infinity,max:0.7,color:'r',text:'Insuficiente'},
+    {min:0.7,max:1,color:'y',text:'Ajustada'},
+    {min:1,max:Infinity,color:'g',text:'Saludable'}
+  ],
+  capitalTrabajo: [
+    {min:-Infinity,max:0,color:'r',text:'Negativo'},
+    {min:0,max:1,color:'y',text:'Cero'},
+    {min:1,max:Infinity,color:'g',text:'Positivo'}
+  ],
+  // Endeudamiento (% sobre activo)
+  endeudamiento: [
+    {min:-Infinity,max:50,color:'g',text:'Bajo'},
+    {min:50,max:70,color:'y',text:'Moderado'},
+    {min:70,max:Infinity,color:'r',text:'Alto'}
+  ],
+  endeudamientoFin: [
+    {min:-Infinity,max:25,color:'g',text:'Bajo'},
+    {min:25,max:40,color:'y',text:'Moderado'},
+    {min:40,max:Infinity,color:'r',text:'Alto'}
+  ],
+  cobertura: [
+    {min:-Infinity,max:1.5,color:'r',text:'Crítica'},
+    {min:1.5,max:3,color:'y',text:'Ajustada'},
+    {min:3,max:Infinity,color:'g',text:'Cómoda'}
+  ],
+  apalancamiento: [
+    {min:-Infinity,max:1,color:'g',text:'Conservador'},
+    {min:1,max:2,color:'y',text:'Moderado'},
+    {min:2,max:Infinity,color:'r',text:'Alto'}
+  ],
+  // Actividad (días — depende del sector)
+  rotCartera: [
+    {min:-Infinity,max:45,color:'g',text:'Eficiente'},
+    {min:45,max:90,color:'y',text:'Moderada'},
+    {min:90,max:Infinity,color:'r',text:'Lenta'}
+  ],
+  rotInv: [
+    {min:-Infinity,max:60,color:'g',text:'Eficiente'},
+    {min:60,max:120,color:'y',text:'Moderada'},
+    {min:120,max:Infinity,color:'r',text:'Lenta'}
+  ],
+  rotProv: [
+    // Más días = mejor uso de financiación de proveedores, pero >120 puede indicar tensión
+    {min:-Infinity,max:30,color:'y',text:'Pago rápido'},
+    {min:30,max:90,color:'g',text:'Saludable'},
+    {min:90,max:Infinity,color:'y',text:'Pago lento'}
+  ],
+  ciclo: [
+    // Ciclo de efectivo (días)
+    {min:-Infinity,max:0,color:'g',text:'Negativo (excelente)'},
+    {min:0,max:60,color:'g',text:'Corto'},
+    {min:60,max:120,color:'y',text:'Moderado'},
+    {min:120,max:Infinity,color:'r',text:'Largo'}
+  ],
+  // Rentabilidad (porcentajes)
+  margen: [
+    {min:-Infinity,max:0,color:'r',text:'Negativo'},
+    {min:0,max:5,color:'y',text:'Bajo'},
+    {min:5,max:Infinity,color:'g',text:'Saludable'}
+  ],
+  roe: [
+    {min:-Infinity,max:0,color:'r',text:'Negativo'},
+    {min:0,max:8,color:'y',text:'Bajo'},
+    {min:8,max:Infinity,color:'g',text:'Atractivo'}
+  ],
+  roa: [
+    {min:-Infinity,max:0,color:'r',text:'Negativo'},
+    {min:0,max:4,color:'y',text:'Bajo'},
+    {min:4,max:Infinity,color:'g',text:'Saludable'}
+  ]
+};
+/* ═══ MOTOR DE RAZONES ═══ */
+// Cada razón devuelve: nombre, valor, unidad, fórmula, semáforo, descripción
+function calcRazones(v){
+  var e=calcEEFF(v);
+  var dias=v.dias||360;
+  var cxcProm=avg(v.cxc_prom,v.cxc);
+  var invProm=avg(v.inv_prom,v.inventarios);
+  var provProm=avg(v.prov_prom,v.proveedores);
+  var actProm=avg(v.act_prom,e.activo);
+  var patProm=avg(v.pat_prom,v.patrimonio);
+  var compras=v.costo+(v.inventarios-(v.inv_prom>0?2*v.inv_prom-v.inventarios:v.inventarios));
+  // Estimación de compras: si no se conoce, usa costo de ventas (proxy)
+  if(compras<=0)compras=v.costo;
+  var razones=[];
+  // ─── LIQUIDEZ ───
+  razones.push({grupo:'Liquidez',nombre:'Razón corriente',
+    valor:e.pasCorr>0?e.actCorr/e.pasCorr:NaN,
+    fmt:function(x){return fNum(x,2)},
+    unidad:'veces',
+    formula:'Activo corriente / Pasivo corriente',
+    desc:'Capacidad de cubrir pasivos corrientes con activos corrientes. Ideal entre 1.5 y 2.5.',
+    rango:R.razonCorriente});
+  razones.push({grupo:'Liquidez',nombre:'Prueba ácida',
+    valor:e.pasCorr>0?(e.actCorr-v.inventarios)/e.pasCorr:NaN,
+    fmt:function(x){return fNum(x,2)},
+    unidad:'veces',
+    formula:'(Activo corriente − Inventarios) / Pasivo corriente',
+    desc:'Liquidez sin depender de la venta de inventarios. Mide cobertura inmediata.',
+    rango:R.pruebaAcida});
+  razones.push({grupo:'Liquidez',nombre:'Capital de trabajo',
+    valor:e.actCorr-e.pasCorr,
+    fmt:function(x){return '$'+fN(x)},
+    unidad:'COP',
+    formula:'Activo corriente − Pasivo corriente',
+    desc:'Recursos disponibles después de cubrir las obligaciones de corto plazo.',
+    rango:R.capitalTrabajo});
+  // ─── ENDEUDAMIENTO ───
+  razones.push({grupo:'Endeudamiento',nombre:'Endeudamiento total',
+    valor:e.activo>0?(e.pasivo/e.activo)*100:NaN,
+    fmt:function(x){return fPct(x,1)},
+    unidad:'%',
+    formula:'Pasivo total / Activo total × 100',
+    desc:'Porcentaje del activo financiado con deuda. Bajo nivel reduce riesgo.',
+    rango:R.endeudamiento});
+  razones.push({grupo:'Endeudamiento',nombre:'Endeudamiento financiero',
+    valor:e.activo>0?(e.oblFin/e.activo)*100:NaN,
+    fmt:function(x){return fPct(x,1)},
+    unidad:'%',
+    formula:'Obligaciones financieras / Activo total × 100',
+    desc:'Porcentaje del activo financiado con deuda con costo (bancos).',
+    rango:R.endeudamientoFin});
+  razones.push({grupo:'Endeudamiento',nombre:'Cobertura de intereses',
+    valor:v.gtos_fin>0?e.utilOp/v.gtos_fin:(e.utilOp>0?Infinity:NaN),
+    fmt:function(x){return isFinite(x)?fNum(x,2):'sin gtos. fin.'},
+    unidad:'veces',
+    formula:'Utilidad operacional / Gastos financieros',
+    desc:'Cuántas veces la utilidad operacional cubre los intereses. Idealmente >3.',
+    rango:R.cobertura});
+  razones.push({grupo:'Endeudamiento',nombre:'Apalancamiento',
+    valor:v.patrimonio>0?e.pasivo/v.patrimonio:NaN,
+    fmt:function(x){return fNum(x,2)},
+    unidad:'veces',
+    formula:'Pasivo total / Patrimonio',
+    desc:'Cuántas veces la deuda excede al patrimonio. Mayor a 2 indica alto apalancamiento.',
+    rango:R.apalancamiento});
+  razones.push({grupo:'Endeudamiento',nombre:'Concentración corto plazo',
+    valor:e.pasivo>0?(e.pasCorr/e.pasivo)*100:NaN,
+    fmt:function(x){return fPct(x,1)},
+    unidad:'%',
+    formula:'Pasivo corriente / Pasivo total × 100',
+    desc:'Porcentaje de la deuda que vence en menos de un año. >70% indica alta presión de caja.',
+    rango:R.endeudamiento});
+  // ─── ACTIVIDAD ───
+  razones.push({grupo:'Actividad',nombre:'Rotación de cartera',
+    valor:v.ingresos>0?(cxcProm/v.ingresos)*dias:NaN,
+    fmt:fDays,
+    unidad:'días',
+    formula:'(CxC promedio / Ingresos) × '+dias,
+    desc:'Días promedio que tardas en cobrar a tus clientes. Menos = mejor.',
+    rango:R.rotCartera});
+  razones.push({grupo:'Actividad',nombre:'Rotación de inventarios',
+    valor:v.costo>0?(invProm/v.costo)*dias:NaN,
+    fmt:fDays,
+    unidad:'días',
+    formula:'(Inventario promedio / Costo de ventas) × '+dias,
+    desc:'Días que el inventario permanece en bodega antes de venderse.',
+    rango:R.rotInv});
+  razones.push({grupo:'Actividad',nombre:'Rotación de proveedores',
+    valor:compras>0?(provProm/compras)*dias:NaN,
+    fmt:fDays,
+    unidad:'días',
+    formula:'(Proveedores promedio / Compras) × '+dias,
+    desc:'Días promedio de pago a proveedores. Compras estimadas con costo de ventas si no se separa.',
+    rango:R.rotProv});
+  var rotCart=v.ingresos>0?(cxcProm/v.ingresos)*dias:0;
+  var rotInv=v.costo>0?(invProm/v.costo)*dias:0;
+  var rotProv=compras>0?(provProm/compras)*dias:0;
+  razones.push({grupo:'Actividad',nombre:'Ciclo operacional',
+    valor:rotCart+rotInv,
+    fmt:fDays,
+    unidad:'días',
+    formula:'Rotación cartera + Rotación inventarios',
+    desc:'Días entre comprar inventario y cobrar la venta.',
+    rango:R.ciclo});
+  razones.push({grupo:'Actividad',nombre:'Ciclo de efectivo',
+    valor:rotCart+rotInv-rotProv,
+    fmt:fDays,
+    unidad:'días',
+    formula:'Ciclo operacional − Rotación proveedores',
+    desc:'Días que la operación se autofinancia con caja. Menos = mejor; negativo = excelente.',
+    rango:R.ciclo});
+  // ─── RENTABILIDAD ───
+  razones.push({grupo:'Rentabilidad',nombre:'Margen bruto',
+    valor:v.ingresos>0?(e.utilBruta/v.ingresos)*100:NaN,
+    fmt:function(x){return fPct(x,1)},
+    unidad:'%',
+    formula:'Utilidad bruta / Ingresos × 100',
+    desc:'Margen tras costos directos. Compara contra el sector.',
+    rango:R.margen});
+  razones.push({grupo:'Rentabilidad',nombre:'Margen operacional',
+    valor:v.ingresos>0?(e.utilOp/v.ingresos)*100:NaN,
+    fmt:function(x){return fPct(x,1)},
+    unidad:'%',
+    formula:'Utilidad operacional / Ingresos × 100',
+    desc:'Margen tras gastos operativos. Mide eficiencia operativa.',
+    rango:R.margen});
+  razones.push({grupo:'Rentabilidad',nombre:'Margen neto',
+    valor:v.ingresos>0?(e.utilNeta/v.ingresos)*100:NaN,
+    fmt:function(x){return fPct(x,1)},
+    unidad:'%',
+    formula:'Utilidad neta / Ingresos × 100',
+    desc:'Rentabilidad final tras impuestos.',
+    rango:R.margen});
+  razones.push({grupo:'Rentabilidad',nombre:'ROE',
+    valor:patProm>0?(e.utilNeta/patProm)*100:NaN,
+    fmt:function(x){return fPct(x,1)},
+    unidad:'%',
+    formula:'Utilidad neta / Patrimonio promedio × 100',
+    desc:'Retorno sobre el patrimonio. Mide eficiencia del capital del accionista.',
+    rango:R.roe});
+  razones.push({grupo:'Rentabilidad',nombre:'ROA',
+    valor:actProm>0?(e.utilNeta/actProm)*100:NaN,
+    fmt:function(x){return fPct(x,1)},
+    unidad:'%',
+    formula:'Utilidad neta / Activo total promedio × 100',
+    desc:'Retorno sobre activos. Mide qué tan bien la empresa usa sus recursos.',
+    rango:R.roa});
+  razones.push({grupo:'Rentabilidad',nombre:'EBITDA',
+    valor:e.ebitda,
+    fmt:function(x){return '$'+fN(x)},
+    unidad:'COP',
+    formula:'Utilidad operacional + Depreciación + Amortización',
+    desc:'Generación de caja operativa antes de intereses, impuestos y partidas no monetarias.',
+    rango:R.capitalTrabajo});
+  razones.push({grupo:'Rentabilidad',nombre:'Margen EBITDA',
+    valor:v.ingresos>0?(e.ebitda/v.ingresos)*100:NaN,
+    fmt:function(x){return fPct(x,1)},
+    unidad:'%',
+    formula:'EBITDA / Ingresos × 100',
+    desc:'Generación de caja operativa por peso de venta.',
+    rango:R.margen});
+  // Asignar semáforo a cada razón
+  razones.forEach(function(r){r.sem=sem(r.rango,r.valor)});
+  return {razones:razones,eeff:e};
+}
+/* ═══ RENDER ═══ */
+var lastResults=null;
+function calcular(){
+  var v=getInputs();
+  if(v.ingresos===0 && v.efectivo===0 && v.cxc===0){
+    exoToast('Ingresa al menos algunos datos del balance.','warning');
+    return;
+  }
+  // Validar cuadre patrimonial
+  var e=calcEEFF(v);
+  var diff=Math.abs(e.activo-e.totalPasPat);
+  var alertEl=document.getElementById('balanceAlert');
+  if(e.activo>0 && diff>e.activo*0.001){
+    alertEl.style.display='flex';
+    alertEl.innerHTML='<span>&#9888;</span><div><strong>Balance descuadrado:</strong> Activo ('+fN(e.activo)+') ≠ Pasivo + Patrimonio ('+fN(e.totalPasPat)+'). Diferencia: '+fN(diff)+'. Las razones se calculan igual, pero revisa los datos.</div>';
+  }else{
+    alertEl.style.display='none';
+  }
+  var res=calcRazones(v);
+  lastResults={inputs:v,eeff:res.eeff,razones:res.razones};
+  renderResults(res.razones);
+  document.getElementById('downloadCard').style.display='block';
+  document.getElementById('resultsCard').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function renderResults(razones){
+  var grupos={};
+  razones.forEach(function(r){if(!grupos[r.grupo])grupos[r.grupo]=[];grupos[r.grupo].push(r)});
+  // Stats summary
+  var counts={g:0,y:0,r:0,n:0};
+  razones.forEach(function(r){counts[r.sem.color]++});
+  var statsH='<div class="summary-stats">'
+    +'<div class="stat-pill g"><div class="v">'+counts.g+'</div><div class="l">Saludable</div></div>'
+    +'<div class="stat-pill y"><div class="v">'+counts.y+'</div><div class="l">Atención</div></div>'
+    +'<div class="stat-pill r"><div class="v">'+counts.r+'</div><div class="l">Alerta</div></div>'
+    +'<div class="stat-pill"><div class="v">'+razones.length+'</div><div class="l">Total</div></div>'
+    +'</div>';
+  var h=statsH;
+  ['Liquidez','Endeudamiento','Actividad','Rentabilidad'].forEach(function(g){
+    if(!grupos[g])return;
+    h+='<div class="result-section">';
+    h+='<div class="result-section-title">'+g+'</div>';
+    grupos[g].forEach(function(r,i){
+      var id='r-'+g.toLowerCase()+'-'+i;
+      h+='<div class="razon-row" onclick="toggleTip(\''+id+'\')">';
+      h+='<div class="razon-dot '+r.sem.color+'" title="'+r.sem.text+'"></div>';
+      h+='<div><div class="razon-name">'+r.nombre+'</div><div class="razon-fmla">'+r.formula+'</div></div>';
+      h+='<div><div class="razon-val">'+r.fmt(r.valor)+'</div><div class="razon-unit">'+r.sem.text+'</div></div>';
+      h+='</div>';
+      h+='<div class="razon-tip" id="'+id+'"><strong>'+r.nombre+':</strong> '+r.desc+'</div>';
+    });
+    h+='</div>';
+  });
+  document.getElementById('resultsContent').innerHTML=h;
+}
+function toggleTip(id){
+  var el=document.getElementById(id);
+  if(el)el.classList.toggle('show');
+}
+/* ═══ CARGA AUTOMÁTICA DESDE BALANCE ═══ */
+function setMoneyInput(id,val){
+  var el=document.getElementById(id);if(!el)return;
+  el.value=Math.round(val||0).toLocaleString('es-CO');
+}
+function aplicarAggregates(agg,meta){
+  if(!agg)return;
+  var g=function(k){return agg[k]||0};
+  // ESF — usamos abs para activos contra y pasivos (que en algunos balances
+  // vienen como crédito negativo y en otros como positivo). El formulario
+  // espera todos los inputs positivos.
+  setMoneyInput('i_efectivo', Math.abs(g('efectivo')+g('inv_cp')));
+  setMoneyInput('i_cxc',      Math.abs(g('cxc'))-Math.abs(g('deterioro_cartera')));
+  setMoneyInput('i_inventarios', Math.abs(g('inventarios')));
+  setMoneyInput('i_otros_ac', Math.abs(g('diferidos_act'))+Math.abs(g('otros_act')));
+  setMoneyInput('i_ppe',      Math.abs(g('ppe'))-Math.abs(g('depreciacion')));
+  setMoneyInput('i_otros_anc',Math.abs(g('intangibles'))-Math.abs(g('amortizacion'))+Math.abs(g('inv_lp'))+Math.abs(g('otros_act_nc'))+Math.abs(g('valorizaciones')));
+  setMoneyInput('i_obl_cp',   Math.abs(g('oblig_fin_cp')));
+  setMoneyInput('i_proveedores', Math.abs(g('proveedores')));
+  setMoneyInput('i_otros_pc', Math.abs(g('cxp'))+Math.abs(g('impuestos'))+Math.abs(g('laborales'))+Math.abs(g('provisiones'))+Math.abs(g('otros_pas_c')));
+  setMoneyInput('i_obl_lp',   Math.abs(g('oblig_fin_lp')));
+  setMoneyInput('i_otros_pnc',Math.abs(g('diferidos_pas'))+Math.abs(g('otros_pas')));
+  setMoneyInput('i_patrimonio', (agg._totals&&agg._totals.patrimonio)||0);
+  // ERI — convertimos a positivos. El saldo de gastos/costos/ingresos en PUC suele venir
+  // con su signo natural (ingresos crédito, gastos débito). Tomamos abs para los inputs
+  // que el formulario espera positivos.
+  setMoneyInput('i_ingresos', Math.abs(g('ing_operacionales')+g('dev_ventas')));
+  setMoneyInput('i_costo',    Math.abs(g('costo_ventas')+g('costo_prod')));
+  setMoneyInput('i_gtos_admin', Math.abs(g('gtos_admin')));
+  setMoneyInput('i_gtos_ventas', Math.abs(g('gtos_ventas')));
+  setMoneyInput('i_depam',    Math.abs(g('depam')));
+  setMoneyInput('i_gtos_fin', Math.abs(g('gtos_fin')));
+  // otros_neto: ingresos no operacionales − gastos no operacionales (sin financieros, sin depam)
+  var otrosNeto=Math.abs(g('ing_no_operacionales')+g('otros_ing'))
+              - Math.abs(g('gtos_no_op')+g('otros_gtos'));
+  setMoneyInput('i_otros_neto', otrosNeto);
+  setMoneyInput('i_imporenta', Math.abs(g('imp_renta')));
+  // Metadata
+  if(meta){
+    if(meta.empresa&&!document.getElementById('cfgEmpresa').value)document.getElementById('cfgEmpresa').value=meta.empresa;
+    if(meta.nit&&!document.getElementById('cfgNit').value)document.getElementById('cfgNit').value=meta.nit;
+  }
+  if(typeof exoToast==='function')exoToast('Inputs autollenados desde el balance. Haz clic en "Calcular razones".','success');
+}
+function aplicarBalanceGuardado(){
+  var saved=window.BalanceLoader&&BalanceLoader.recover('razones_actual');
+  if(!saved){document.getElementById('usePriorBalance').style.display='none';return}
+  aplicarAggregates(saved.aggregates,saved.meta);
+  document.getElementById('usePriorBalance').style.display='none';
+}
+function descartarBalanceGuardado(){
+  document.getElementById('usePriorBalance').style.display='none';
+}
+(function initBalanceLoader(){
+  if(!window.BalanceLoader){console.warn('BalanceLoader no cargado');return}
+  BalanceLoader.mountDropZone(document.getElementById('balanceLoaderHost'),{
+    label:'Cargar balance de prueba (.xlsx, .xls, .csv)',
+    sublabel:'El PUC clasifica automáticamente y autollena los 20 campos del formulario',
+    storageKey:'razones_actual',
+    onLoad:function(state){aplicarAggregates(state.aggregates,state.meta)}
+  });
+  // Si hay un balance previo en sessionStorage (de esta o de otra herramienta), ofrecer reutilizarlo.
+  var saved=BalanceLoader.recover('razones_actual')||BalanceLoader.recover('eeff_actual');
+  if(saved&&saved.aggregates){
+    var box=document.getElementById('usePriorBalance');
+    var t=saved.aggregates._totals||{};
+    document.getElementById('usePriorBalanceText').innerHTML=
+      'Detectamos un balance ya cargado'+(saved.meta&&saved.meta.empresa?(' de <strong>'+saved.meta.empresa+'</strong>'):'')+
+      ' (Activo $'+BalanceLoader.fN(t.activo||0)+'). ¿Lo usamos?';
+    box.style.display='block';
+  }
+})();
+/* ═══ EJEMPLO Y LIMPIAR ═══ */
+function cargarEjemplo(){
+  // Ejemplo: pequeña empresa comercial saludable
+  var ej={
+    cfgEmpresa:'Comercial Ejemplo S.A.S',cfgNit:'900.123.456-7',cfgPeriodo:'Año 2025',cfgDias:'360',
+    i_efectivo:'45000000',i_cxc:'120000000',i_inventarios:'180000000',i_otros_ac:'15000000',
+    i_ppe:'320000000',i_otros_anc:'20000000',
+    i_obl_cp:'80000000',i_proveedores:'95000000',i_otros_pc:'25000000',
+    i_obl_lp:'150000000',i_otros_pnc:'10000000',
+    i_patrimonio:'340000000',
+    i_ingresos:'1200000000',i_costo:'780000000',i_gtos_admin:'180000000',i_gtos_ventas:'80000000',
+    i_depam:'40000000',i_gtos_fin:'25000000',i_otros_neto:'5000000',i_imporenta:'45000000'
+  };
+  Object.keys(ej).forEach(function(k){
+    var el=document.getElementById(k);
+    if(el){el.value=ej[k];if(el.hasAttribute('data-money'))fmtMoneyInput(el)}
+  });
+  exoToast('Ejemplo cargado. Haz clic en "Calcular razones".','info');
+}
+function limpiar(){
+  document.querySelectorAll('input').forEach(function(el){
+    if(el.id==='cfgDias'){el.value='360';return}
+    el.value='';
+  });
+  document.getElementById('resultsContent').innerHTML=
+    '<div class="placeholder-msg"><span class="ico">&#128202;</span>Ingresa los datos del balance y haz clic en <strong>Calcular razones</strong>.</div>';
+  document.getElementById('downloadCard').style.display='none';
+  document.getElementById('balanceAlert').style.display='none';
+  lastResults=null;
+}
+/* ═══ EXPORT EXCEL ═══ */
+async function exportarExcel(){
+  if(!lastResults){exoToast('Primero calcula las razones.','warning');return}
+  if(typeof ExcelJS==='undefined'){exoToast('Cargando librería Excel… intenta de nuevo en un momento.','warning');return}
+  var v=lastResults.inputs;
+  var razones=lastResults.razones;
+  var e=lastResults.eeff;
+  var wb=new ExcelJS.Workbook();
+  wb.creator='ExógenaDIAN.com — Razones Financieras';
+  wb.created=new Date();
+  // ── Hoja 1: Razones ──
+  var ws=wb.addWorksheet('Razones financieras');
+  ws.columns=[{width:8},{width:38},{width:42},{width:18},{width:14},{width:18}];
+  ws.mergeCells('A1:F1');
+  ws.getCell('A1').value=v.empresa;
+  ws.getCell('A1').font={bold:true,size:14,color:{argb:'FF1B3A5C'}};
+  ws.getCell('A1').alignment={horizontal:'center'};
+  ws.mergeCells('A2:F2');
+  ws.getCell('A2').value='NIT: '+v.nit+(v.periodo?' — '+v.periodo:'');
+  ws.getCell('A2').alignment={horizontal:'center'};
+  ws.getCell('A2').font={size:10,color:{argb:'FF6B7280'}};
+  ws.mergeCells('A3:F3');
+  ws.getCell('A3').value='RAZONES FINANCIERAS';
+  ws.getCell('A3').font={bold:true,size:12,color:{argb:'FF1B3A5C'}};
+  ws.getCell('A3').alignment={horizontal:'center'};
+  // Headers
+  var hdrRow=ws.getRow(5);
+  ['Sem.','Indicador','Fórmula','Valor','Unidad','Lectura'].forEach(function(h,i){
+    var c=hdrRow.getCell(i+1);
+    c.value=h;
+    c.font={bold:true,color:{argb:'FFFFFFFF'},size:10};
+    c.fill={type:'pattern',pattern:'solid',fgColor:{argb:'FF1B3A5C'}};
+    c.alignment={horizontal:i===0?'center':'left',vertical:'middle'};
+    c.border={bottom:{style:'thin',color:{argb:'FF999999'}}};
+  });
+  var r=6;
+  var grupos={};
+  razones.forEach(function(rz){if(!grupos[rz.grupo])grupos[rz.grupo]=[];grupos[rz.grupo].push(rz)});
+  var colorMap={g:'FF22C55E',y:'FFEAB308',r:'FFEF4444',n:'FF9CA3AF'};
+  var bgMap={g:'FFECFDF5',y:'FFFEF9C3',r:'FFFEE2E2',n:'FFF3F4F6'};
+  ['Liquidez','Endeudamiento','Actividad','Rentabilidad'].forEach(function(g){
+    if(!grupos[g])return;
+    var sec=ws.getRow(r);
+    sec.getCell(1).value='';
+    sec.getCell(2).value=g.toUpperCase();
+    sec.getCell(2).font={bold:true,color:{argb:'FF1B3A5C'},size:10};
+    sec.getCell(2).fill={type:'pattern',pattern:'solid',fgColor:{argb:'FFD6E4F0'}};
+    ws.mergeCells(r,2,r,6);
+    sec.getCell(2).alignment={horizontal:'left'};
+    r++;
+    grupos[g].forEach(function(rz){
+      var row=ws.getRow(r);
+      row.getCell(1).value='●';
+      row.getCell(1).font={color:{argb:colorMap[rz.sem.color]},bold:true,size:14};
+      row.getCell(1).alignment={horizontal:'center'};
+      row.getCell(2).value=rz.nombre;
+      row.getCell(2).font={bold:true};
+      row.getCell(3).value=rz.formula;
+      row.getCell(3).font={italic:true,size:9,color:{argb:'FF6B7280'}};
+      var valStr=rz.fmt(rz.valor);
+      row.getCell(4).value=valStr;
+      row.getCell(4).alignment={horizontal:'right'};
+      row.getCell(4).font={name:'Consolas',bold:true};
+      row.getCell(5).value=rz.unidad;
+      row.getCell(5).font={size:9,color:{argb:'FF6B7280'}};
+      row.getCell(6).value=rz.sem.text;
+      row.getCell(6).fill={type:'pattern',pattern:'solid',fgColor:{argb:bgMap[rz.sem.color]}};
+      row.getCell(6).font={bold:true,size:9};
+      row.getCell(6).alignment={horizontal:'center'};
+      r++;
+    });
+    r++;
+  });
+  // ── Hoja 2: Inputs ──
+  var ws2=wb.addWorksheet('Datos ingresados');
+  ws2.columns=[{width:42},{width:22}];
+  ws2.mergeCells('A1:B1');
+  ws2.getCell('A1').value='DATOS INGRESADOS — '+v.empresa;
+  ws2.getCell('A1').font={bold:true,size:12,color:{argb:'FF1B3A5C'}};
+  ws2.getCell('A1').alignment={horizontal:'center'};
+  var inputDefs=[
+    ['ESF — ACTIVOS CORRIENTES',null],
+    ['Efectivo y equivalentes',v.efectivo],
+    ['Cuentas por cobrar',v.cxc],
+    ['Inventarios',v.inventarios],
+    ['Otros activos corrientes',v.otros_ac],
+    ['Total activos corrientes',e.actCorr],
+    ['ESF — ACTIVOS NO CORRIENTES',null],
+    ['Propiedad, planta y equipo (neto)',v.ppe],
+    ['Otros activos no corrientes',v.otros_anc],
+    ['Total activos no corrientes',e.actNoCorr],
+    ['TOTAL ACTIVO',e.activo],
+    ['ESF — PASIVOS CORRIENTES',null],
+    ['Obligaciones financieras CP',v.obl_cp],
+    ['Proveedores',v.proveedores],
+    ['Otros pasivos corrientes',v.otros_pc],
+    ['Total pasivos corrientes',e.pasCorr],
+    ['ESF — PASIVOS NO CORRIENTES',null],
+    ['Obligaciones financieras LP',v.obl_lp],
+    ['Otros pasivos no corrientes',v.otros_pnc],
+    ['Total pasivos no corrientes',e.pasNoCorr],
+    ['TOTAL PASIVO',e.pasivo],
+    ['Total patrimonio',v.patrimonio],
+    ['TOTAL PASIVO + PATRIMONIO',e.totalPasPat],
+    ['ERI',null],
+    ['Ingresos operacionales',v.ingresos],
+    ['Costo de ventas',v.costo],
+    ['Utilidad bruta',e.utilBruta],
+    ['Gastos administración',v.gtos_admin],
+    ['Gastos ventas',v.gtos_ventas],
+    ['Utilidad operacional',e.utilOp],
+    ['Depreciación + Amortización',v.depam],
+    ['EBITDA',e.ebitda],
+    ['Otros ingresos/gastos (neto)',v.otros_neto],
+    ['Gastos financieros',v.gtos_fin],
+    ['Utilidad antes de impuestos',e.utilAntesImp],
+    ['Impuesto de renta',v.imporenta],
+    ['Utilidad neta',e.utilNeta]
+  ];
+  var rr=3;
+  inputDefs.forEach(function(d){
+    var row=ws2.getRow(rr++);
+    row.getCell(1).value=d[0];
+    if(d[1]===null){
+      row.getCell(1).font={bold:true,color:{argb:'FF1B3A5C'},size:10};
+      row.getCell(1).fill={type:'pattern',pattern:'solid',fgColor:{argb:'FFD6E4F0'}};
+      row.getCell(2).fill={type:'pattern',pattern:'solid',fgColor:{argb:'FFD6E4F0'}};
+    }else{
+      row.getCell(2).value=d[1];
+      row.getCell(2).numFmt='#,##0';
+      row.getCell(2).alignment={horizontal:'right'};
+      if(/^TOTAL|EBITDA|^Utilidad/.test(d[0])){
+        row.getCell(1).font={bold:true};
+        row.getCell(2).font={bold:true};
+      }
+    }
+  });
+  // ── Hoja 3: Glosario ──
+  var ws3=wb.addWorksheet('Glosario');
+  ws3.columns=[{width:30},{width:48},{width:42}];
+  var hr=ws3.getRow(1);
+  ['Razón','Descripción','Fórmula'].forEach(function(h,i){
+    var c=hr.getCell(i+1);
+    c.value=h;c.font={bold:true,color:{argb:'FFFFFFFF'}};
+    c.fill={type:'pattern',pattern:'solid',fgColor:{argb:'FF1B3A5C'}};
+  });
+  var rg=2;
+  razones.forEach(function(rz){
+    var row=ws3.getRow(rg++);
+    row.getCell(1).value=rz.nombre;row.getCell(1).font={bold:true};
+    row.getCell(2).value=rz.desc;
+    row.getCell(2).alignment={wrapText:true,vertical:'top'};
+    row.getCell(3).value=rz.formula;
+    row.getCell(3).font={italic:true,size:9,color:{argb:'FF6B7280'}};
+    row.height=32;
+  });
+  // Download
+  var buf=await wb.xlsx.writeBuffer();
+  var blob=new Blob([buf],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  var per=String(v.periodo||new Date().getFullYear()).replace(/\s+/g,'_').replace(/[^A-Za-z0-9_\-]/g,'');
+  var name='Razones_'+(v.empresa||'EEFF').replace(/\s+/g,'_').replace(/[^A-Za-z0-9_\-]/g,'')+'_'+per+'.xlsx';
+  a.href=url;a.download=name;a.click();
+  URL.revokeObjectURL(url);
+  exoToast('Excel descargado.','success');
+}
+/* Toast fallback si shared/toast.js no expone exoToast */
+if(typeof exoToast!=='function'){
+  window.exoToast=function(msg,type){console.log('['+type+']',msg);alert(msg)};
+}
+</script>
+<section style="max-width:1200px;margin:32px auto 0;padding:0 20px 40px">
+  <h3 style="font-size:1rem;font-weight:700;color:#374151;margin-bottom:12px">Herramientas relacionadas</h3>
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <a href="estadosfinancieros.html" style="padding:8px 16px;background:#ECFDF5;color:#047857;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:500">Estados Financieros NIIF</a>
+    <a href="dashboard.html" style="padding:8px 16px;background:#ECFDF5;color:#047857;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:500">Dashboard Financiero</a>
+    <a href="analisis-vertical-horizontal.html" style="padding:8px 16px;background:#ECFDF5;color:#047857;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:500">Análisis Vertical y Horizontal</a>
+    <a href="conciliacion.html" style="padding:8px 16px;background:#ECFDF5;color:#047857;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:500">Conciliación contable</a>
+  </div>
+</section>
+<link rel="stylesheet" href="shared/chat.css?v=a52afe72">
+<script defer src="shared/chat.js?v=a45c7cf2"></script>
+</body>
+</html>

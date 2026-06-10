@@ -1,0 +1,377 @@
+/* ═══ ExógenaDIAN — Certificate Generation System ═══
+   Uso:
+     <script src="shared/certificado.js"></script>   (o ../shared/certificado.js desde /escuela/)
+
+     await exoCertificado.generate('iva300', 'María Camila Pérez');
+
+   Verificación determinística (sin DB):
+     El código incluye SHA-256(canonical(nombre|curso|fecha)) truncado a 8 hex.
+     Cualquiera con la URL completa del cert puede recomputar y validar.
+*/
+(function(){
+  'use strict';
+
+  // Cursos con `pro: true` requieren suscripción para emitir certificado.
+  // IA tiene flujo dual free/pro propio en su HTML — se deja sin `pro: true` aquí.
+  var COURSES = {
+    'ventas': {
+      name: 'Curso de Ventas Completo',
+      desc: 'curso completo de ventas: mentalidad y hábitos, perder la pena, prospección, descubrimiento con SPIN y Gap Selling, calificación BANT/MEDDIC/CHAMP, propuesta de valor con el modelo Challenger, manejo de objeciones, cierre y negociación, vender en redes y tráfico pagado 2026, posventa con SPICED e IA aplicada a ventas',
+      short: 'VEN',
+      pro: true
+    },
+    'ia-automatizacion': {
+      name: 'IA y Automatización para Contadores',
+      desc: 'uso de inteligencia artificial aplicada a la práctica contable colombiana: revisión de balances, generación de exógena, declaraciones de renta, IVA, retención, consulta normativa y dashboards',
+      short: 'IA'
+    },
+    'iva300': {
+      name: 'Formulario 300 — IVA',
+      desc: 'declaración del IVA bimestral, IVA generado vs descontable, proporcionalidad, importaciones y práctica con balance real',
+      short: 'IVA',
+      pro: true
+    },
+    'renta110': {
+      name: 'Declaración de Renta F110',
+      desc: 'depuración de renta para personas jurídicas, patrimonio, ingresos, costos, gastos no deducibles, tasa mínima de tributación',
+      short: 'F110',
+      pro: true
+    },
+    'renta-pn-210': {
+      name: 'Declaración de Renta F210 — Personas Naturales',
+      desc: 'residencia, sistema cedular, subcédulas (trabajo, capital, no laborales, pensiones, dividendos), tope Art. 336, GO, anticipo y conciliación patrimonial',
+      short: 'F210',
+      pro: true
+    },
+    'retencion350': {
+      name: 'Retención en la Fuente 350',
+      desc: 'retención por renta, IVA, autorretención, bases mínimas, tarifas en UVT y práctica con auxiliar contable',
+      short: 'RF',
+      pro: true
+    },
+    'exogena': {
+      name: 'Medios Magnéticos — Exógena DIAN',
+      desc: '10 formatos de información exógena, clasificación de conceptos, Art. 631 ET y prevalidación MUISCA',
+      short: 'EXG',
+      pro: true
+    },
+    'exogena-claude': {
+      name: 'Exógena DIAN con Claude',
+      desc: 'masterclass para hacer información exógena DIAN AG 2025 con IA: privacidad y Ley 1581, plantilla R-C-D-T-F-R, cuadre IVA 300, F1001-F2276 y prevalidador V9',
+      short: 'EXGC',
+      pro: true
+    },
+    'devoluciones': {
+      name: 'Devoluciones DIAN — Renta e IVA',
+      desc: 'imputación, compensación y devolución de saldos a favor, regímenes estándar/automática/garantía/oficio, formato 010 y anexos 1220 y 1439',
+      short: 'DEV',
+      pro: true
+    },
+    'ingresos-para-terceros': {
+      name: 'Ingresos Recibidos para Terceros',
+      desc: 'mandato, agencia y corresponsalía: tratamiento contable PUC 2815 / NIIF 15, renta, IVA, ICA, retención, facturación electrónica y exógena F5247',
+      short: 'IPT',
+      pro: true
+    },
+    'sanciones': {
+      name: 'Sanciones DIAN',
+      desc: 'gradualidad, extemporaneidad, corrección voluntaria, sanciones por exógena y procedimiento sancionatorio',
+      short: 'SAN',
+      pro: true
+    },
+    'nomina': {
+      name: 'Nómina y Seguridad Social',
+      desc: 'liquidación de nómina, prestaciones sociales, seguridad social, parafiscales, retención por salarios y nómina electrónica',
+      short: 'NOM',
+      pro: true
+    },
+    'derecho-laboral': {
+      name: 'Derecho Laboral — CST',
+      desc: 'contrato, jornada, recargos, prestaciones, licencias, fuero, acoso, terminación e indemnización; derecho de petición, Mintrabajo, conciliación y tutela',
+      short: 'DLAB',
+      pro: true
+    },
+    'procedimiento': {
+      name: 'Procedimiento Tributario',
+      desc: 'fiscalización DIAN, requerimiento especial, liquidación oficial, firmeza, ineficacia, recursos, pruebas y cobro coactivo',
+      short: 'PT',
+      pro: true
+    },
+    'ica': {
+      name: 'ICA — Industria y Comercio',
+      desc: 'hecho generador, territorialidad, tarifas CIIU, ReteICA, descuento en renta y plataformas digitales',
+      short: 'ICA',
+      pro: true
+    },
+    'niif': {
+      name: 'NIIF para Contadores',
+      desc: 'marco conceptual, reconocimiento, medición, presentación de estados financieros bajo NIIF y conciliación fiscal F2516',
+      short: 'NIIF',
+      pro: true
+    },
+    'f2516': {
+      name: 'Conciliación Fiscal F2516',
+      desc: 'depuración NIIF → fiscal: ESF y ERI, patrimonio contable vs fiscal, diferencias permanentes y temporarias, impuesto diferido NIC 12/Sec. 29 Pymes, llenado del prevalidador F2516 V9 y caso integrador',
+      short: 'F2516',
+      pro: true
+    },
+    'regimen-simple': {
+      name: 'Régimen Simple de Tributación',
+      desc: 'inscripción, 4 grupos de actividad, tarifas Art. 908 ET, anticipo bimestral F2593, declaración anual F260',
+      short: 'RST',
+      pro: true
+    },
+    'contabilidad-basica': {
+      name: 'Contabilidad Básica',
+      desc: 'fundamentos contables colombianos: cuenta y partida doble, PUC del Decreto 2650/1993, ciclo contable, asientos típicos, kárdex, ajustes de cierre, estados financieros NIIF e introducción a NIIF para Grupos 1, 2 y 3',
+      short: 'CB',
+      pro: true
+    },
+    'finanzas-no-financieros': {
+      name: 'Finanzas para No Financieros',
+      desc: 'lectura e interpretación de estados financieros para administradores, emprendedores y profesionales no contadores: ESF, ERI, flujo de efectivo, indicadores básicos, punto de equilibrio, análisis vertical y horizontal',
+      short: 'FNF',
+      pro: true
+    },
+    'auditar-eeff-ia': {
+      name: 'Auditar EEFF con IA',
+      desc: 'auditoría de estados financieros asistida por IA generativa (Claude, ChatGPT, Gemini): preparación del balance, detección de errores, análisis automatizado, conciliación bancaria, hallazgos por sector y redacción de informes',
+      short: 'AEIA',
+      pro: true
+    },
+    'cargar-exogena-muisca': {
+      name: 'Cargar Exógena al MUISCA',
+      desc: 'cómo subir los XML al MUISCA paso a paso: generación del archivo desde el prevalidador V9, acceso al portal, validación pre-cargue, confirmación con acuse, correcciones por reemplazo y consecuencias del incumplimiento',
+      short: 'MUISCA',
+      pro: true
+    },
+    'finanzas': {
+      name: 'Finanzas Personales para Colombia',
+      desc: 'salario neto, PyG personal, dos colchones (imprevistos y desempleo), deuda buena vs mala, ¿puedo comprar carro?, capacidad hipotecaria, posponer lujos, plan a 5 años, inversión 101 (FIC, AFC, ETF iCOLCAP, S&P 500), FIRE Colombia, plata en pareja',
+      short: 'FIN',
+      pro: true
+    },
+    'ia-sin-miedo': {
+      name: 'Inteligencia Artificial Aplicada: del Uso a la Construcción',
+      desc: 'uso práctico de la inteligencia artificial para público general: qué es la IA y cuál herramienta sirve según la necesidad, ChatGPT, Claude (chat, Code, Cowork), Gemini y Codex, IA dentro de Word/Excel/PowerPoint, automatización con Google Apps Script, creación y alojamiento de páginas web y apps de cálculo, diseño de imágenes y logos, revisión de textos, cómo preguntar bien (R-C-T-F), casos de la vida real, seguridad, privacidad y criterio, y una parte aplicada de retos para construir y publicar páginas y aplicaciones reales con IA',
+      short: 'IASM',
+      pro: true
+    },
+    'desarrollo-contadores': {
+      name: 'Desarrollo para Contadores',
+      desc: 'fundamentos de desarrollo de software para contadores que construyen o supervisan herramientas con IA: las 3 capas de una app, Git, terminal, Next.js, React, TypeScript, Prisma, PostgreSQL, tests, migraciones y cómo pedirle bien las cosas a Claude Code con analogías contables en cada paso',
+      short: 'DEVC',
+      pro: true
+    },
+    'claude-cowork-contadores': {
+      name: 'Claude Cowork para Contadores',
+      desc: 'uso del escritorio Claude Cowork (Anthropic) en práctica contable colombiana: carpeta-por-cliente, Projects con Custom Instructions y Knowledge, memoria persistente, slash commands custom (/cierre, /req-dian, /exogena) y privacidad bajo Ley 1581/2012',
+      short: 'CCWK',
+      pro: true
+    },
+    'claude-skills-contadores': {
+      name: 'Skills de Claude para Contadores',
+      desc: 'creación y encadenamiento de Skills de Claude para tareas contables colombianas: anatomía de una skill (SKILL.md + references + examples), construcción de las skills clasificador-exogena-co (Res. 000227/2024), cuadre-iva-co (Art. 437 ET) y validador-prevalidador V9, pipeline orquestado y versionado en Git para equipos',
+      short: 'CSKC',
+      pro: true
+    },
+
+    /* ─── Programas (rutas de formación). Constancia de finalización, NO título
+       académico. Emitido al aprobar las evaluaciones de todos los cursos de la
+       ruta. progMeta.cursos y progMeta.horas precomputados de curso-meta.js
+       (horas = solo contenido de lectura medido; práctica adicional). ─── */
+    'prog-fundamentos': {
+      name: 'Programa de formación en Fundamentos Contables',
+      desc: 'contabilidad desde cero, lectura de estados financieros y marco NIIF para Grupos 1, 2 y 3',
+      short: 'RFND', pro: true, progMeta: { cursos: 3, horas: '~2 h' }
+    },
+    'prog-trib-pj': {
+      name: 'Programa de formación en Tributación de Personas Jurídicas',
+      desc: 'renta F110, conciliación fiscal F2516, retención 350, información exógena, cargue al MUISCA, sanciones, procedimiento tributario e ingresos para terceros',
+      short: 'RPJ', pro: true, progMeta: { cursos: 8, horas: '~7,5 h' }
+    },
+    'prog-trib-pn': {
+      name: 'Programa de formación en Tributación de Personas Naturales',
+      desc: 'declaración de renta F210 cedular, retención en la fuente, sanciones y procedimiento tributario para personas naturales',
+      short: 'RPN', pro: true, progMeta: { cursos: 4, horas: '~4,5 h' }
+    },
+    'prog-iva-dev': {
+      name: 'Programa de formación en IVA y Devoluciones',
+      desc: 'IVA bimestral F300, retención de IVA y devoluciones DIAN de saldos a favor',
+      short: 'RIVA', pro: true, progMeta: { cursos: 3, horas: '~2,5 h' }
+    },
+    'prog-rst': {
+      name: 'Programa de formación en Régimen Simple de Tributación',
+      desc: 'Régimen Simple (F2593 y F260), ICA consolidado y retenciones aplicables',
+      short: 'RRST', pro: true, progMeta: { cursos: 3, horas: '~2,5 h' }
+    },
+    'prog-nomina': {
+      name: 'Programa de formación en Nómina y Derecho Laboral',
+      desc: 'liquidación de nómina, prestaciones, seguridad social y derecho laboral bajo el CST',
+      short: 'RNOM', pro: true, progMeta: { cursos: 2, horas: '~2,5 h' }
+    },
+    'prog-ia': {
+      name: 'Programa de formación en IA Contable',
+      desc: 'ruta progresiva de 7 cursos para el contador AI-first: IA sin miedo, IA y automatización con 78 prompts, escritorio Claude Cowork por cliente, masterclass de exógena con Claude, auditoría de EEFF con IA, creación de Skills propias (clasificador exógena, cuadre IVA, validador prevalidador) y desarrollo de software con Claude Code',
+      short: 'RIA', pro: true, progMeta: { cursos: 7, horas: '~12 h' }
+    },
+    'prog-exogena': {
+      name: 'Programa de formación en Información Exógena',
+      desc: 'medios magnéticos del Art. 631 ET, ingresos recibidos para terceros, cargue al MUISCA y automatización de la exógena con IA',
+      short: 'REXG', pro: true, progMeta: { cursos: 4, horas: '~5,5 h' }
+    }
+  };
+
+  var STORAGE_KEY = 'exo_certificates';
+
+  /* ═══ Hash determinístico SHA-256 truncado ═══
+     Forma canónica: nombre (NFC, trim, lowercase) | curso | fecha (YYYY-MM-DD)
+     Devuelve 8 chars hex en mayúsculas.
+  */
+  function canonicalize(nombre, cursoId, fecha) {
+    var n = String(nombre || '').normalize('NFC').trim().replace(/\s+/g, ' ').toLowerCase();
+    return n + '|' + String(cursoId || '') + '|' + String(fecha || '');
+  }
+
+  function bufferToHex(buf) {
+    var arr = new Uint8Array(buf);
+    var hex = '';
+    for (var i = 0; i < arr.length; i++) {
+      var h = arr[i].toString(16);
+      if (h.length < 2) h = '0' + h;
+      hex += h;
+    }
+    return hex;
+  }
+
+  function computeHash(nombre, cursoId, fecha) {
+    var canonical = canonicalize(nombre, cursoId, fecha);
+    var enc = new TextEncoder().encode(canonical);
+    if (window.crypto && window.crypto.subtle && window.crypto.subtle.digest) {
+      return window.crypto.subtle.digest('SHA-256', enc).then(function(buf) {
+        return bufferToHex(buf).substring(0, 8).toUpperCase();
+      });
+    }
+    // Fallback (crypto.subtle no disponible — solo en contextos no seguros)
+    return Promise.reject(new Error('crypto.subtle no disponible — el sitio debe servirse por HTTPS'));
+  }
+
+  function getStoredCertificates() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    } catch(e) { return []; }
+  }
+
+  function saveCertificate(cert) {
+    var certs = getStoredCertificates();
+    // Evita duplicados por código
+    for (var i = 0; i < certs.length; i++) {
+      if (certs[i].codigo === cert.codigo) return;
+    }
+    certs.push(cert);
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(certs));
+    } catch(e) {}
+  }
+
+  function findCertificate(code) {
+    var certs = getStoredCertificates();
+    for (var i = 0; i < certs.length; i++) {
+      if (certs[i].codigo === code) return certs[i];
+    }
+    return null;
+  }
+
+  function buildCode(cursoId, fecha, hash8) {
+    var course = COURSES[cursoId];
+    var short = course ? course.short : 'GEN';
+    var year = (fecha || '').substring(0, 4) || new Date().getFullYear();
+    return 'EXO-' + short + '-' + year + '-' + hash8;
+  }
+
+  // Verificación determinística: dado payload (nombre+curso+fecha) y codigo,
+  // recomputa el hash y compara. No requiere localStorage.
+  function verifyCertificate(nombre, cursoId, fecha, codigo) {
+    return computeHash(nombre, cursoId, fecha).then(function(hash8) {
+      var expected = buildCode(cursoId, fecha, hash8);
+      return expected === codigo;
+    });
+  }
+
+  function todayISO() {
+    var d = new Date();
+    return d.getFullYear() + '-' +
+      String(d.getMonth() + 1).padStart(2, '0') + '-' +
+      String(d.getDate()).padStart(2, '0');
+  }
+
+  function generateCertificate(cursoId, studentName, options) {
+    options = options || {};
+    var course = COURSES[cursoId];
+    if (!course) {
+      console.error('Curso no encontrado: ' + cursoId);
+      return Promise.resolve(null);
+    }
+
+    var nombre = String(studentName || '').trim();
+    if (!nombre) {
+      console.error('Nombre requerido');
+      return Promise.resolve(null);
+    }
+
+    var fecha = options.fecha || todayISO();
+
+    return computeHash(nombre, cursoId, fecha).then(function(hash8) {
+      var code = buildCode(cursoId, fecha, hash8);
+      var cert = {
+        codigo: code,
+        nombre: nombre,
+        cursoId: cursoId,
+        cursoNombre: course.name,
+        cursoDesc: course.desc,
+        fecha: fecha,
+        modulosCompletados: options.modulosCompletados || 'todos',
+        timestamp: new Date().getTime()
+      };
+
+      saveCertificate(cert);
+
+      // Skip redirect si options.skipRedirect (útil para tests/widgets headless)
+      if (!options.skipRedirect) {
+        var basePath = '';
+        if (window.location.pathname.indexOf('/escuela/') !== -1) {
+          basePath = '../';
+        }
+        var hash = '#nombre=' + encodeURIComponent(cert.nombre) +
+          '&curso=' + encodeURIComponent(cursoId) +
+          '&codigo=' + encodeURIComponent(code) +
+          '&fecha=' + encodeURIComponent(fecha);
+        window.location.href = basePath + 'certificado.html' + hash;
+      }
+      return cert;
+    });
+  }
+
+  // Construye la URL pública de verificación con payload completo.
+  function buildVerifyUrl(nombre, cursoId, codigo, fecha, baseOrigin) {
+    var origin = baseOrigin || (window.location.protocol + '//' + window.location.host);
+    var hash = '#nombre=' + encodeURIComponent(nombre) +
+      '&curso=' + encodeURIComponent(cursoId) +
+      '&codigo=' + encodeURIComponent(codigo) +
+      '&fecha=' + encodeURIComponent(fecha);
+    return origin + '/verificar-certificado.html' + hash;
+  }
+
+  // Expose globally
+  window.exoCertificado = {
+    COURSES: COURSES,
+    generate: generateCertificate,
+    find: findCertificate,
+    getAll: getStoredCertificates,
+    verify: verifyCertificate,
+    computeHash: computeHash,
+    buildCode: buildCode,
+    buildVerifyUrl: buildVerifyUrl,
+    canonicalize: canonicalize
+  };
+})();

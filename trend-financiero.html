@@ -1,0 +1,2621 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trend Financiero — Tendencia mensual de Balance y P&G | ExógenaDIAN</title>
+<meta name="description" content="Carga varios balances mensuales (hasta 12) y genera automáticamente la tendencia comparativa de Activos, Pasivos, Patrimonio, Ingresos y Utilidad. Sparkline + variación + notas de análisis editables. Exporta a Excel y Word.">
+<meta name="keywords" content="trend financiero, tendencia balance, análisis mensual, P&G mensual, balance comparativo mensual, evolución utilidad, gerencial contable">
+<link rel="canonical" href="https://exogenadian.com/trend-financiero.html">
+<meta property="og:title" content="Trend Financiero — Tendencia mensual | ExógenaDIAN">
+<meta property="og:description" content="Carga varios balances mensuales y genera tendencia comparativa con sparkline y notas de análisis.">
+<meta property="og:url" content="https://exogenadian.com/trend-financiero.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="ExógenaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png">
+<meta name="robots" content="index, follow">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js" integrity="sha384-Pqp51FUN2/qzfxZxBCtF0stpc9ONI6MYZpVqmo8m20SoaQCzf+arZvACkLkirlPz" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/html-docx-js@0.3.1/dist/html-docx.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--green:#548235;--green2:#E2EFDA;--red:#CC0000;--amber:#D97706;--amber2:#FFF8E1;--border:#e2e8f0;--radius:10px;--shadow:0 2px 12px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+.container{max-width:1280px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#1B3A5C 0%,#2E75B6 100%);padding:28px 32px;border-radius:16px;margin-bottom:24px;color:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.header h1{font-size:1.6rem;font-weight:700;display:flex;align-items:center;gap:10px}
+.header p{opacity:.85;font-size:.88rem;margin-top:6px;max-width:640px}
+.header-right{text-align:right;font-size:.8rem;opacity:.85}
+.header-right a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.3)}
+.steps{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.step-pill{flex:1;min-width:160px;padding:12px 16px;background:var(--card);border:2px solid var(--border);border-radius:var(--radius);font-size:.82rem;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:8px}
+.step-pill .num{width:26px;height:26px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:#fff}
+.step-pill.active{border-color:var(--pri2);color:var(--pri);background:var(--pri3)}
+.step-pill.active .num{background:var(--pri2)}
+.step-pill.done{border-color:var(--green);color:var(--green)}
+.step-pill.done .num{background:var(--green)}
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:24px;margin-bottom:20px;box-shadow:var(--shadow)}
+.card-title{font-size:1.05rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.drop-zone{border:2px dashed var(--border);border-radius:var(--radius);padding:36px 24px;text-align:center;cursor:pointer;transition:.3s;position:relative}
+.drop-zone:hover,.drop-zone.drag{border-color:var(--pri2);background:var(--pri3)}
+.drop-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.dz-icon{font-size:2rem;margin-bottom:6px;display:block}
+.dz-title{font-weight:700;font-size:1rem;color:var(--pri)}
+.dz-hint{color:var(--muted);font-size:.82rem;margin-top:4px}
+.config-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.config-item{display:flex;flex-direction:column;gap:4px}
+.config-item label{font-size:.8rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.config-item input,.config-item select{padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:.9rem;font-family:inherit}
+.config-item input:focus,.config-item select:focus{outline:none;border-color:var(--pri2);box-shadow:0 0 0 3px rgba(46,117,182,.15)}
+.btn{padding:10px 22px;border:none;border-radius:8px;font-weight:600;font-size:.9rem;cursor:pointer;font-family:inherit;transition:.2s}
+.btn-primary{background:var(--pri2);color:#fff}
+.btn-primary:hover{background:var(--pri)}
+.btn-primary:disabled{background:#9CA3AF;cursor:not-allowed}
+.btn-outline{background:transparent;color:var(--pri);border:1px solid var(--pri2)}
+.btn-outline:hover{background:var(--pri3)}
+.actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
+.hidden{display:none!important}
+.alert{padding:12px 16px;border-radius:8px;display:flex;gap:10px;align-items:flex-start;font-size:.88rem;margin-bottom:12px}
+.alert-info{background:var(--pri3);color:var(--pri)}
+.alert-warn{background:var(--amber2);color:var(--amber)}
+.alert-success{background:var(--green2);color:var(--green)}
+/* Lista de balances cargados */
+.balance-list{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.balance-row{display:grid;grid-template-columns:32px 1fr 140px 90px 90px 36px;gap:12px;align-items:center;padding:10px 14px;background:#f8fafc;border:1px solid var(--border);border-radius:8px}
+.balance-row.prev-year{background:#FEF3C7;border-color:#FCD34D}
+.balance-row .idx{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:.85rem;font-weight:600}
+.balance-row .fname{font-size:.85rem;font-weight:600;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.balance-row select{padding:6px 10px;border:1px solid var(--border);border-radius:6px;font-size:.85rem;font-family:inherit;background:#fff}
+.balance-row .size{font-size:.75rem;color:var(--muted);font-family:'JetBrains Mono',monospace;text-align:right}
+.balance-row .rm{background:transparent;border:none;color:var(--red);font-size:1.2rem;cursor:pointer;line-height:1}
+.balance-row.dup{background:#fef2f2;border-color:#fca5a5}
+/* Tabla trend */
+.trend-scroll{overflow-x:auto;border:1px solid var(--border);border-radius:8px}
+.trend-table{width:100%;border-collapse:collapse;min-width:800px;font-size:.84rem}
+.trend-table th{background:#f3f4f6;color:var(--pri);font-weight:700;text-align:left;padding:8px 10px;border-bottom:2px solid var(--pri2);font-size:.78rem;text-transform:uppercase;letter-spacing:.3px;position:sticky;top:0;z-index:1;white-space:nowrap}
+.trend-table th.num{text-align:right}
+.trend-table td{padding:6px 10px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
+.trend-table td.num{text-align:right;font-family:'JetBrains Mono',monospace;font-size:.82rem}
+.trend-table tr.section td{background:var(--pri);color:#fff;font-weight:700;text-transform:uppercase;letter-spacing:.4px;font-size:.78rem;padding:6px 10px}
+.trend-table tr.subtotal td{font-weight:700;background:#f8fafc;border-top:1px solid #cbd5e1;border-bottom:1px solid #cbd5e1}
+.trend-table tr.total td{font-weight:800;background:#e0f2fe;border-top:2px solid var(--pri2);border-bottom:2px solid var(--pri2)}
+.trend-table .spark{width:100px}
+.trend-table .var-pos{color:var(--green)}
+.trend-table .var-neg{color:var(--red)}
+/* Notas de análisis */
+.notas-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+.nota-card{background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;padding:14px}
+.nota-card label{font-size:.82rem;font-weight:700;color:#854d0e;margin-bottom:6px;display:block;text-transform:uppercase;letter-spacing:.3px}
+.nota-card textarea{width:100%;min-height:72px;padding:8px 10px;border:1px solid #fcd34d;border-radius:6px;font-family:inherit;font-size:.85rem;background:#fff;resize:vertical;line-height:1.45}
+.nota-card textarea:focus{outline:none;border-color:#d97706;box-shadow:0 0 0 3px rgba(217,119,6,.15)}
+/* Mapper de columnas */
+.col-mapper{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin:16px 0}
+.col-map-item{background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:12px}
+.col-map-item.mapped{border-color:var(--green);background:var(--green2)}
+.col-map-item .cml{font-size:.75rem;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.col-map-item .cml .req{color:var(--red);font-weight:800}
+.col-map-item select{width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:.82rem;font-family:inherit;background:#fff}
+.raw-preview{max-height:240px;overflow:auto;background:#0f172a;color:#cbd5e1;border-radius:8px;padding:12px;font-family:'JetBrains Mono',monospace;font-size:.72rem;line-height:1.55}
+.raw-preview .row{display:flex;gap:8px}
+.raw-preview .ridx{color:#64748b;flex-shrink:0;width:30px}
+.raw-preview .rcell{color:#e2e8f0;border-right:1px solid #334155;padding-right:6px;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.raw-preview .header-row .rcell{color:#fbbf24;font-weight:600}
+@media (max-width:720px){
+  .config-grid{grid-template-columns:1fr}
+  .notas-grid{grid-template-columns:1fr}
+  .balance-row{grid-template-columns:24px 1fr 110px 80px 36px;font-size:.78rem}
+  .balance-row .size{display:none}
+}
+/* ═══ Dashboard de indicadores ═══ */
+.dash-cat{margin:18px 0 8px;display:flex;align-items:center;gap:10px}
+.dash-cat-title{font-size:.92rem;font-weight:800;color:var(--pri);text-transform:uppercase;letter-spacing:.4px;display:flex;align-items:center;gap:8px}
+.dash-cat-title .ico{font-size:1.1rem}
+.dash-cat-line{flex:1;height:2px;background:linear-gradient(90deg,var(--pri2) 0%,transparent 100%);border-radius:1px}
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.ind-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 16px;position:relative;overflow:hidden;transition:.2s;display:flex;flex-direction:column;min-height:175px}
+.ind-card:hover{box-shadow:0 6px 20px rgba(0,0,0,.08);transform:translateY(-1px)}
+.ind-card .ind-tag{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.ind-card .ind-sem{width:10px;height:10px;border-radius:50%;display:inline-block;flex-shrink:0}
+.ind-card .ind-sem.g{background:#10B981}
+.ind-card .ind-sem.a{background:#F59E0B}
+.ind-card .ind-sem.r{background:#DC2626}
+.ind-card .ind-sem.n{background:#9CA3AF}
+.ind-card .ind-name{font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;flex:1}
+.ind-card .ind-rec{font-size:.66rem;color:var(--muted);font-weight:600;padding:2px 7px;background:#F3F4F6;border-radius:999px;white-space:nowrap}
+.ind-card .ind-value{font-size:1.55rem;font-weight:800;color:var(--text);font-family:'JetBrains Mono',monospace;margin:2px 0 0 0;line-height:1.1}
+.ind-card .ind-value.pos{color:#059669}
+.ind-card .ind-value.neg{color:#DC2626}
+.ind-card .ind-value.warn{color:#D97706}
+.ind-card .ind-mes{font-size:.7rem;color:var(--muted);font-weight:500;margin-top:1px}
+.ind-card .ind-chart{height:60px;margin-top:auto;position:relative}
+.ind-card .ind-chart canvas{width:100% !important;height:100% !important}
+.ind-card .ind-formula{font-size:.68rem;color:#9CA3AF;font-style:italic;margin-top:4px;line-height:1.3}
+.dash-empresa{background:linear-gradient(135deg,#1B3A5C 0%,#2E75B6 100%);color:#fff;padding:18px 22px;border-radius:12px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.dash-empresa h3{font-size:1.15rem;font-weight:800;margin-bottom:2px}
+.dash-empresa p{font-size:.85rem;opacity:.9}
+.dash-empresa .dash-periodo{text-align:right}
+.dash-empresa .dash-periodo .label{font-size:.7rem;opacity:.7;text-transform:uppercase;letter-spacing:.3px}
+.dash-empresa .dash-periodo .val{font-size:1rem;font-weight:700}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<nav id="globalNav"></nav>
+<div class="container">
+  <div class="header">
+    <div>
+      <h1>📈 Trend Financiero</h1>
+      <p>Carga los balances mensuales del año y obtén la tendencia comparativa de Activos, Pasivos, Patrimonio, Ingresos y Utilidad. Sparkline + variación + notas de análisis editables.</p>
+    </div>
+    <div class="header-right">
+      <div><strong>Función PRO</strong></div>
+      <div style="margin-top:4px">¿Sin PRO? <a href="precios.html">Ver planes</a></div>
+    </div>
+  </div>
+  <div class="steps">
+    <div class="step-pill active" id="pill1"><span class="num">1</span> Configuración</div>
+    <div class="step-pill" id="pill2"><span class="num">2</span> Cargar balances</div>
+    <div class="step-pill" id="pill3"><span class="num">3</span> Verificar columnas</div>
+    <div class="step-pill" id="pill4"><span class="num">4</span> Trend + análisis</div>
+  </div>
+  <div id="step1">
+    <div class="card">
+      <div class="card-title"><span>⚙️</span> Datos de la empresa</div>
+      <div class="config-grid">
+        <div class="config-item"><label>Nombre / Razón social</label><input type="text" id="cfgEmpresa" placeholder="EMPRESA S.A.S"></div>
+        <div class="config-item"><label>NIT</label><input type="text" id="cfgNit" placeholder="900.123.456-7"></div>
+        <div class="config-item"><label>Año del trend</label><input type="number" id="cfgYear" min="2018" max="2050" value="2026"></div>
+        <div class="config-item"><label>Moneda</label><select id="cfgMoneda"><option value="pesos">Pesos colombianos (COP)</option><option value="miles">Miles de pesos</option><option value="millones">Millones de pesos</option></select></div>
+        <div class="config-item"><label>Representante Legal</label><input type="text" id="cfgRepLegal" placeholder="Nombre completo"></div>
+        <div class="config-item"><label>Contador Público</label><input type="text" id="cfgContador" placeholder="Nombre completo"></div>
+        <div class="config-item"><label>T.P. Contador</label><input type="text" id="cfgTPContador" placeholder="123456-T"></div>
+        <div class="config-item"><label>Ciudad</label><input type="text" id="cfgCiudad" placeholder="Bogotá D.C."></div>
+      </div>
+      <div class="alert alert-info" style="margin-top:18px">
+        <span>💡</span>
+        <div>Esta herramienta es <strong>complementaria</strong> a Estados Financieros. NO genera revelaciones ni notas NIIF — para eso usa <a href="estadosfinancieros.html" style="color:var(--pri);font-weight:600">Estados Financieros</a>. Aquí solo verás <strong>tendencia mensual</strong> y podrás escribir tus propias <strong>notas de análisis gerencial</strong>.</div>
+      </div>
+      <div class="actions"><button class="btn btn-primary" onclick="irAStep(2)">Continuar →</button></div>
+    </div>
+  </div>
+  <div id="step2" class="hidden">
+    <div class="card">
+      <div class="card-title"><span>📂</span> Cargar balances mensuales</div>
+      <div class="alert alert-info">
+        <span>📋</span>
+        <div>Sube uno o más balances <strong>acumulados al cierre de cada mes</strong> (ej. balance al 31-ene, balance al 28-feb, etc.). Cada archivo se asigna automáticamente al mes detectado por el nombre — puedes corregirlo manualmente. <strong>Mínimo 2 meses</strong>, máximo 12.</div>
+      </div>
+      <div class="drop-zone" id="dropZone">
+        <span class="dz-icon">📁</span>
+        <div class="dz-title">Arrastra hasta 12 balances mensuales</div>
+        <div class="dz-hint">.xlsx · .xls · .csv — puedes seleccionar varios a la vez</div>
+        <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" multiple>
+      </div>
+      <div id="balanceList" class="balance-list"></div>
+      <div id="dupWarn" class="alert alert-warn hidden" style="margin-top:12px"><span>⚠</span><div>Tienes <strong id="dupCount">0</strong> meses repetidos. Asigna meses únicos antes de continuar.</div></div>
+      <div class="actions">
+        <button class="btn btn-outline" onclick="irAStep(1)">← Volver</button>
+        <button class="btn btn-primary" id="btnConfirmFiles" onclick="confirmarArchivos()" disabled>Confirmar archivos →</button>
+      </div>
+    </div>
+  </div>
+  <div id="step3" class="hidden">
+    <div class="card">
+      <div class="card-title"><span>🔧</span> Verificar columnas del balance</div>
+      <div class="alert alert-info"><span>💡</span><div>Asumimos que todos los balances tienen el <strong>mismo formato</strong>. Verifica el mapping del primer archivo y aplicamos a todos.</div></div>
+      <div id="hdrPreview"></div>
+      <div style="margin:20px 0 8px;font-weight:700;font-size:.9rem;color:var(--pri)">Asignación de columnas <span style="font-weight:400;color:var(--muted);font-size:.8rem">(<span style="color:var(--red)">*</span> obligatoria)</span></div>
+      <div class="col-mapper" id="colMapper"></div>
+      <div class="actions">
+        <button class="btn btn-outline" onclick="irAStep(2)">← Volver</button>
+        <button class="btn btn-primary" onclick="procesarTodos()">Procesar todos →</button>
+      </div>
+    </div>
+  </div>
+  <div id="step4" class="hidden">
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px">
+        <div class="card-title" style="margin-bottom:0"><span>📈</span> Tendencia mensual</div>
+        <button class="btn btn-outline" onclick="irAStep(2)" style="font-size:.82rem">← Cargar otros archivos</button>
+      </div>
+      <div id="trendSummary" class="alert alert-success"><span>✅</span><div id="trendSummaryText">Trend listo</div></div>
+      <div style="display:flex;gap:18px;align-items:center;margin-bottom:10px;flex-wrap:wrap">
+        <label style="font-size:.85rem;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px">
+          Escala:
+          <select id="cfgEscala" onchange="onEscalaChange()" style="padding:6px 10px;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:.85rem">
+            <option value="pesos">Pesos ($1)</option>
+            <option value="miles">Miles ($000)</option>
+            <option value="millones" selected>Millones ($000.000)</option>
+          </select>
+        </label>
+        <label style="font-size:.85rem;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px">
+          Vista P&G:
+          <select id="cfgVistaPyG" onchange="onVistaChange()" style="padding:6px 10px;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:.85rem">
+            <option value="mov" selected>Movimiento del mes</option>
+            <option value="ytd">Acumulado YTD (año a la fecha)</option>
+          </select>
+        </label>
+        <span id="escalaHint" style="font-size:.8rem;color:var(--muted);font-style:italic">Cifras expresadas en millones de pesos</span>
+      </div>
+      <div class="trend-scroll"><table class="trend-table" id="trendTable"></table></div>
+    </div>
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px">
+        <div class="card-title" style="margin-bottom:0"><span>📊</span> P&G Detallado mensual <span style="font-weight:400;color:var(--muted);font-size:.82rem;margin-left:8px">(movimiento del mes por subcuenta PUC 4-dig)</span></div>
+        <div style="display:flex;gap:6px">
+          <button class="btn btn-outline" onclick="expandirTodo()" style="font-size:.78rem;padding:6px 12px">↧ Expandir todo</button>
+          <button class="btn btn-outline" onclick="colapsarTodo()" style="font-size:.78rem;padding:6px 12px">↥ Colapsar todo</button>
+        </div>
+      </div>
+      <div class="alert alert-info" style="font-size:.82rem">
+        <span>💡</span>
+        <div>Click en una fila para <strong>expandir/colapsar</strong> sus subcuentas auxiliares. Las filas en <strong>negrita azul</strong> son cuentas mayores (4 dígitos PUC), las que tienen sangría son auxiliares (6+ dígitos). Filas destacadas muestran utilidades y márgenes.</div>
+      </div>
+      <div class="trend-scroll"><table class="trend-table" id="pygDetTable"></table></div>
+    </div>
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;flex-wrap:wrap;gap:10px">
+        <div class="card-title" style="margin-bottom:0"><span>📊</span> Dashboard de indicadores financieros</div>
+        <button class="btn btn-primary" onclick="exportarHTML()" style="background:#7C3AED;font-size:.85rem">📥 Descargar dashboard HTML</button>
+      </div>
+      <p class="card-sub" style="font-size:.82rem;color:var(--muted);margin-bottom:14px">23 indicadores calculados mes a mes, con semáforos según rangos recomendables y mini-gráficas de tendencia. El HTML descargable es un archivo único standalone que puedes enviar a tu cliente por correo o WhatsApp.</p>
+      <div id="dashboardContainer"></div>
+    </div>
+    <div class="card hidden" id="cardComparativo">
+      <div class="card-title"><span>↔️</span> Comparativo año anterior <span style="font-weight:400;color:var(--muted);font-size:.82rem;margin-left:8px">(mes vs mismo mes del año anterior)</span></div>
+      <div class="alert alert-info" style="font-size:.82rem"><span>💡</span><div>Para cada mes del año actual cargado, se compara con el mismo mes del año anterior si está disponible. <strong>Balance</strong>: saldo final. <strong>P&G</strong>: movimiento del mes.</div></div>
+      <div class="trend-scroll"><table class="trend-table" id="compTable"></table></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span>📅</span> Análisis mensual <span style="font-weight:400;color:var(--muted);font-size:.82rem;margin-left:8px">(una nota por cada mes cargado — autoguardado)</span></div>
+      <div id="notasMesGrid" class="notas-grid"></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span>📝</span> Análisis general <span style="font-weight:400;color:var(--muted);font-size:.82rem;margin-left:8px">(temático — autoguardado)</span></div>
+      <div class="notas-grid">
+        <div class="nota-card"><label>Análisis de Activos</label><textarea id="notaActivos" placeholder="Ej: los activos corrientes crecen 15% en el trimestre por aumento de cartera..."></textarea></div>
+        <div class="nota-card"><label>Análisis de Pasivos</label><textarea id="notaPasivos" placeholder="Ej: las obligaciones financieras bajan tras pago de cuota en abril..."></textarea></div>
+        <div class="nota-card"><label>Análisis de Ingresos</label><textarea id="notaIngresos" placeholder="Ej: ingresos en alza desde marzo por nuevo cliente X..."></textarea></div>
+        <div class="nota-card"><label>Análisis de Costos y Gastos</label><textarea id="notaGastos" placeholder="Ej: gastos de administración estables; costo de ventas sube en línea con ingresos..."></textarea></div>
+        <div class="nota-card" style="grid-column:1/-1"><label>Conclusión general / Recomendaciones</label><textarea id="notaConclusion" placeholder="Ej: la empresa muestra crecimiento sostenido; margen neto estable en 12%. Recomendamos..." style="min-height:96px"></textarea></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span>📥</span> Exportar</div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="exportarExcel()">Descargar Excel</button>
+        <button class="btn btn-primary" onclick="exportarWord()" style="background:var(--green)">Descargar Word</button>
+      </div>
+      <div class="alert alert-info" style="margin-top:14px">
+        <span>📊</span>
+        <div>El Excel incluye 3 hojas: <strong>Trend</strong> (tabla resumen), <strong>Notas</strong> (tus análisis) y <strong>Balances mensuales</strong> (datos crudos por mes). El Word trae la tabla formateada + tus notas + firmas.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="shared/exopro.js"></script>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<script src="shared/related-links.js"></script>
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   TREND FINANCIERO — herramienta independiente
+   Reusa parser/clasificador de estadosfinancieros.html, agrega trend mensual
+   ═══════════════════════════════════════════════════════════════════ */
+// GLOBALS
+let monthlyFiles = []; // [{name, file, rawData, mes:1-12, year, classified, esfData, eriData, pucNames}]
+let prevYearFiles = []; // mismos campos, pero año anterior. Se llena en procesarTodos.
+let colMap = {code:-1,name:-1,saldoFin:-1,deb:-1,cre:-1,saldoIni:-1};
+let detectedHeaderRow = 0;
+let convencionValorAbsoluto = false;
+// true  → los balances traen el MOVIMIENTO del mes (Mayor y Balances mensual: deb/cre del
+//         mes, acumulado en saldo final). La serie P&G por archivo YA es movimiento.
+// false → balances ACUMULADOS desde enero (deb/cre crecen YTD). La serie YA es acumulada.
+// Lo decide detectarPygMensual() en procesarTodos.
+let pygMensual = false;
+let firstRawData = null; // para el mapper UI
+const MESES = ['','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const MESES_CORTO = ['','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+const COL_FIELDS = [
+  {key:'code',label:'Código cuenta',required:true,icon:'#',hints:['cuenta','codigo','código','code','puc','cta']},
+  {key:'name',label:'Nombre',required:true,icon:'📝',hints:['nombre','descripcion','descripción','concepto','detalle']},
+  {key:'saldoFin',label:'Saldo Final',required:true,icon:'📈',hints:['saldo final','saldo total','saldo actual','final','saldo']},
+  {key:'deb',label:'Débitos',required:false,icon:'➕',hints:['debito','débito','debitos','débitos','debe','db','cargo','cargos']},
+  {key:'cre',label:'Créditos',required:false,icon:'➖',hints:['credito','crédito','creditos','créditos','haber','cr','abono','abonos']},
+  {key:'saldoIni',label:'Saldo Inicial',required:false,icon:'⏪',hints:['saldo inicial','saldo anterior','inicial','apertura','si']}
+];
+/* ═══ UTILITIES ═══ */
+function norm(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim()}
+function cellStr(v){if(v===null||v===undefined)return'';if(v instanceof Date)return v.toISOString().slice(0,10);return String(v).trim()}
+function toNum(v){if(typeof v==='number')return v;if(!v)return 0;const s=String(v).replace(/[^\d.,\-]/g,'').replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.');const n=parseFloat(s);return isNaN(n)?0:n}
+function fN(n){if(!n)return '0';const r=Math.round(n);const s=Math.abs(r).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');return r<0?'-'+s:s}
+function hintMatch(h,hint){return h===hint||h.includes(hint)}
+function unitLabel(m){return m==='miles'?'miles de pesos':m==='millones'?'millones de pesos':'pesos colombianos'}
+/* ═══ HEADER ROW + COL MAP DETECT ═══ */
+function autoDetectHeaderRow(rd){
+  let bestRow=0,bestScore=0;
+  for(let i=0;i<Math.min(20,rd.length);i++){
+    const row=rd[i];if(!row)continue;
+    const rn=row.map(c=>norm(cellStr(c)));
+    let score=0;
+    for(const f of COL_FIELDS){
+      for(const h of rn){if(!h||h.length>50)continue;for(const hint of f.hints){if(hintMatch(h,hint)){score++;break}}}
+    }
+    if(score>bestScore){bestScore=score;bestRow=i}
+  }
+  return bestRow;
+}
+function detectColumnMap(headers){
+  const m={code:-1,name:-1,saldoFin:-1,deb:-1,cre:-1,saldoIni:-1};
+  const fieldOrder=['saldoIni','saldoFin','name','deb','cre','code'];
+  for(const key of fieldOrder){
+    const field=COL_FIELDS.find(f=>f.key===key);if(!field)continue;
+    for(let j=0;j<headers.length;j++){
+      const h=headers[j];if(!h||h.length>50)continue;
+      if(Object.values(m).includes(j))continue;
+      for(const hint of field.hints){if(hintMatch(h,hint)){m[key]=j;break}}
+      if(m[key]!==-1)break;
+    }
+  }
+  if(m.code===-1){
+    for(let j=0;j<headers.length;j++){
+      if(Object.values(m).includes(j))continue;
+      const h=headers[j];
+      if(h&&(h==='cuenta'||h.includes('codigo')||h.includes('código'))){m.code=j;break}
+    }
+  }
+  if(m.code===-1&&!Object.values(m).includes(0))m.code=0;
+  return m;
+}
+/* ═══ CLASSIFY ACCOUNT (PUC → grupo) ═══ */
+function classifyAccount(code,name){
+  const c=String(code).replace(/\s/g,'');
+  const c2=c.substring(0,2),c4=c.substring(0,4);
+  let clase='Otro',seccion='Sin clasificar',corriente='',grupo='otro';
+  if(c.startsWith('1')){
+    clase='Activo';corriente='Corriente';
+    if(c2==='11'){seccion='Efectivo';grupo='efectivo'}
+    else if(c2==='12'){seccion='Inversiones';grupo=(c4==='1205'||c4==='1210'||c4==='1215')?'inv_cp':'inv_lp'}
+    else if(c2==='13'){seccion='Deudores';grupo=(c4==='1399')?'deterioro_cartera':'cxc'}
+    else if(c2==='14'){seccion='Inventarios';grupo='inventarios'}
+    else if(c2==='15'){seccion='PPE';corriente='No Corriente';grupo=(c4==='1592')?'depreciacion':'ppe'}
+    else if(c2==='16'){seccion='Intangibles';corriente='No Corriente';grupo=(c4==='1698')?'amortizacion':'intangibles'}
+    else if(c2==='17'){seccion='Diferidos';grupo='diferidos_act'}
+    else if(c2==='18'||c2==='19'){seccion='Otros activos';corriente='No Corriente';grupo=c2==='19'?'valorizaciones':'otros_act_nc'}
+    else{seccion='Otros activos';grupo='otros_act'}
+  }
+  else if(c.startsWith('2')){
+    clase='Pasivo';corriente='Corriente';
+    if(c2==='21'){seccion='Obligaciones financieras';grupo='oblig_fin_cp'}
+    else if(c2==='22'){seccion='Proveedores';grupo='proveedores'}
+    else if(c2==='23'){seccion='Cuentas por pagar';grupo='cxp'}
+    else if(c2==='24'){seccion='Impuestos';grupo='impuestos'}
+    else if(c2==='25'){seccion='Laborales';grupo='laborales'}
+    else if(c2==='26'){seccion='Provisiones';grupo='provisiones'}
+    else if(c2==='27'){seccion='Diferidos pasivo';corriente='No Corriente';grupo='diferidos_pas'}
+    else{seccion='Otros pasivos';grupo='otros_pas_c'}
+  }
+  else if(c.startsWith('3')){
+    clase='Patrimonio';corriente='';
+    if(c2==='31'){seccion='Capital';grupo='capital'}
+    else if(c2==='32'){seccion='Superávit capital';grupo='superavit_cap'}
+    else if(c2==='33'){seccion='Reservas';grupo='reservas'}
+    else if(c2==='34'){seccion='Revalorización';grupo='revalorizacion'}
+    else if(c2==='36'){seccion='Resultado ejercicio';grupo='resultado_ej'}
+    else if(c2==='37'){seccion='Resultados anteriores';grupo='resultados_ant'}
+    else if(c2==='38'){seccion='Superávit valorizaciones';grupo='superavit_val'}
+    else{seccion='Otros patrimonio';grupo='otros_pat'}
+  }
+  else if(c.startsWith('4')){
+    clase='Ingreso';corriente='';
+    if(c4==='4175'){seccion='Devoluciones';grupo='dev_ventas'}
+    else if(c2==='41'){seccion='Ingresos ordinarios';grupo='ing_operacionales'}
+    else if(c2==='42'){seccion='Otros ingresos';grupo='ing_no_operacionales'}
+    else{seccion='Otros ingresos';grupo='otros_ing'}
+  }
+  else if(c.startsWith('5')){
+    clase='Gasto';corriente='';
+    if(c2==='51'){seccion='Gastos administración';grupo='gtos_admin'}
+    else if(c2==='52'){seccion='Gastos ventas';grupo='gtos_ventas'}
+    else if(c2==='53'){seccion='Otros gastos';grupo='gtos_no_op'}
+    else if(c2==='54'){seccion='Impuesto renta';grupo='imp_renta'}
+    else{seccion='Otros gastos';grupo='otros_gtos'}
+  }
+  else if(c.startsWith('6')){clase='Costo';seccion='Costo ventas';grupo='costo_ventas'}
+  else if(c.startsWith('7')){clase='Costo prod';seccion='Costo producción';grupo='costo_prod'}
+  return {clase,seccion,corriente,grupo};
+}
+/* ═══ CLASSIFY BALANCE ROWS (con sistemaCerrado) ═══ */
+function classifyBalanceRows(srcData,headerRow,cMap){
+  const result=[];
+  const allCodes=new Set();
+  for(let i=headerRow+1;i<srcData.length;i++){
+    const row=srcData[i];if(!row)continue;
+    const code=cellStr(row[cMap.code]).replace(/\s/g,'');
+    if(code&&/^\d{2,}$/.test(code))allCodes.add(code);
+  }
+  function isParent(code){for(const o of allCodes){if(o!==code&&o.startsWith(code)&&o.length>code.length)return true}return false}
+  const byCode=new Map();
+  for(let i=headerRow+1;i<srcData.length;i++){
+    const row=srcData[i];if(!row)continue;
+    const code=cellStr(row[cMap.code]).replace(/\s/g,'');
+    if(!code||!/^\d{2,}$/.test(code))continue;
+    if(/^(total|procesado|elaborado)/i.test(cellStr(row[cMap.name]||'')))continue;
+    if(isParent(code))continue;
+    const name=cMap.name>=0?cellStr(row[cMap.name]):'';
+    const saldoFin=cMap.saldoFin>=0?toNum(row[cMap.saldoFin]):0;
+    const deb=cMap.deb>=0?toNum(row[cMap.deb]):0;
+    const cre=cMap.cre>=0?toNum(row[cMap.cre]):0;
+    const saldoIni=cMap.saldoIni>=0?toNum(row[cMap.saldoIni]):0;
+    if(byCode.has(code)){
+      const acc=byCode.get(code);acc.saldoFin+=saldoFin;acc.deb+=deb;acc.cre+=cre;acc.saldoIni+=saldoIni;
+      if(!acc.name&&name)acc.name=name;
+    } else {
+      byCode.set(code,{code,name,saldoFin,deb,cre,saldoIni});
+    }
+  }
+  // Detectar si TODO el P&L viene cerrado (todas las 4-7 en 0).
+  let _hasMov47=false,_allZero47=true;
+  byCode.forEach(a=>{if(['4','5','6','7'].includes(a.code[0])){if(a.deb!==0||a.cre!==0)_hasMov47=true;if(a.saldoFin!==0)_allZero47=false}});
+  const sistemaCerrado=_hasMov47&&_allZero47;
+  byCode.forEach(a=>{
+    if(a.saldoFin===0&&(a.deb!==0||a.cre!==0)){
+      const fd=a.code[0];const matAct=a.deb,matCre=a.cre;
+      const cerrada=Math.abs(matAct-matCre)<=Math.max(1,0.01*Math.max(matAct,matCre));
+      if(['4','5','6','7'].includes(fd)){
+        if(cerrada&&sistemaCerrado){
+          const mov=Math.max(Math.abs(matAct),Math.abs(matCre));
+          a.saldoFin=(fd==='4'&&!convencionValorAbsoluto)?-mov:mov;
+        } else if(!cerrada){
+          const neto=fd==='4'?(matCre-matAct):(matAct-matCre);
+          if(neto!==0) a.saldoFin=(fd==='4'&&!convencionValorAbsoluto)?-neto:neto;
+        }
+      }
+    }
+    if(a.saldoFin===0)return;
+    const cls=classifyAccount(a.code,a.name);
+    result.push({code:a.code,name:a.name,saldoFin:a.saldoFin,deb:a.deb,cre:a.cre,saldoIni:a.saldoIni,clase:cls.clase,seccion:cls.seccion,corriente:cls.corriente,grupo:cls.grupo});
+  });
+  return result;
+}
+function getDisplayValue(a){
+  let v=a.saldoFin;
+  const fd=a.code[0];
+  if(['2','3','4'].includes(fd)&&!convencionValorAbsoluto)v=-v;
+  return Math.round(v);
+}
+/* ═══ DETECT CONVENTION (signo) ═══ */
+function detectConvention(accounts){
+  let pasPos=0,pasNeg=0;
+  accounts.forEach(a=>{if(a.clase!=='Pasivo'||a.saldoFin===0)return;if(a.saldoFin>0)pasPos++;else pasNeg++});
+  return pasPos>=pasNeg ? 'VAL-ABS' : 'DB-POS';
+}
+/* ═══ STEP NAVIGATION ═══ */
+function irAStep(n){
+  for(let i=1;i<=4;i++){
+    document.getElementById('step'+i).classList.toggle('hidden',i!==n);
+    const pill=document.getElementById('pill'+i);
+    pill.classList.toggle('active',i===n);
+    pill.classList.toggle('done',i<n);
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+/* ═══ STEP 2: DROP + DETECCIÓN DE MES POR NOMBRE ═══ */
+// Devuelve {mes, year}. Si no detecta año, deja 0 (luego se asigna el año del config).
+function detectarMesYAnio(filename){
+  const n=norm(filename);
+  let year=0;
+  // Año primero: 4 dígitos 20xx
+  const ym=n.match(/(20\d{2})/);
+  if(ym)year=parseInt(ym[1]);
+  // patrón yyyy-mm o yyyymm
+  let m=n.match(/(20\d{2})[-_ ]?(\d{2})/);
+  if(m){const mm=parseInt(m[2]);if(mm>=1&&mm<=12)return {mes:mm,year:parseInt(m[1])}}
+  // patrón mes-texto
+  for(let i=1;i<=12;i++){
+    const corto=norm(MESES_CORTO[i]);
+    const largo=norm(MESES[i]);
+    if(n.includes(' '+corto+' ')||n.includes(' '+corto+'_')||n.startsWith(corto+' ')||n.endsWith(' '+corto)||n.includes(largo))return {mes:i,year:year};
+  }
+  // patrón solo número de mes
+  m=n.match(/\bm(\d{1,2})\b/);
+  if(m){const mm=parseInt(m[1]);if(mm>=1&&mm<=12)return {mes:mm,year:year}}
+  return {mes:0,year:year};
+}
+// Compat con código viejo
+function detectarMesPorNombre(filename){return detectarMesYAnio(filename).mes}
+function setupDropZone(){
+  const dz=document.getElementById('dropZone');
+  const inp=document.getElementById('fileInput');
+  dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag')});
+  dz.addEventListener('dragleave',()=>dz.classList.remove('drag'));
+  dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag');manejarArchivos(e.dataTransfer.files)});
+  inp.addEventListener('change',e=>manejarArchivos(e.target.files));
+}
+async function manejarArchivos(files){
+  const warnings=[];
+  for(const f of files){
+    if(monthlyFiles.length>=12){alert('Máximo 12 archivos');break}
+    try{
+      const data=await readFile(f);
+      const wb=XLSX.read(data,{type:'array'});
+      const ws=wb.Sheets[wb.SheetNames[0]];
+      const rawData=XLSX.utils.sheet_to_json(ws,{header:1,defval:'',raw:true});
+      // Detectar archivos rotos: celdas con string '#######' o '#REF!' (Excel guardó
+      // overflow visual en vez del número). Caso típico: export de Helisa/Siigo con
+      // columnas estrechas.
+      let badCells=0,totalCells=0;
+      for(let i=0;i<Math.min(rawData.length,200);i++){
+        const row=rawData[i]||[];
+        for(const cell of row){
+          if(cell===''||cell===null||cell===undefined) continue;
+          totalCells++;
+          const s=String(cell);
+          if(/^#+$/.test(s.trim())||s.indexOf('#REF!')>=0||s.indexOf('#VALUE!')>=0||s.indexOf('#NUM!')>=0) badCells++;
+        }
+      }
+      const pctBad=totalCells?badCells/totalCells:0;
+      if(pctBad>0.05){
+        warnings.push(f.name+' ('+Math.round(pctBad*100)+'% celdas con #######)');
+      }
+      const det=detectarMesYAnio(f.name);
+      const yDef=parseInt(document.getElementById('cfgYear').value)||new Date().getFullYear();
+      monthlyFiles.push({name:f.name,file:f,rawData,mes:det.mes,year:det.year||yDef});
+    }catch(e){alert('No pude leer '+f.name+': '+(e.message||e))}
+  }
+  renderBalanceList();
+  if(warnings.length){
+    alert('⚠ Archivo(s) con celdas dañadas:\n\n'+warnings.join('\n')+'\n\nExcel guardó "#######" en vez de los números (la columna estaba muy estrecha al guardar). Estos balances se cargarán en CERO.\n\nFix: abre el archivo en Excel → Ctrl+A → doble click en el borde de cualquier columna para auto-ajustar → Ctrl+S → vuelve a cargar.');
+  }
+}
+function readFile(file){
+  return new Promise((res,rej)=>{
+    const r=new FileReader();
+    r.onload=e=>res(e.target.result);
+    r.onerror=()=>rej(new Error('FileReader error'));
+    r.readAsArrayBuffer(file);
+  });
+}
+function renderBalanceList(){
+  const list=document.getElementById('balanceList');
+  list.innerHTML='';
+  const cfgY=parseInt(document.getElementById('cfgYear').value)||new Date().getFullYear();
+  // Conteo mes+año (clave compuesta)
+  const mesAnioUsados={};
+  monthlyFiles.forEach(f=>{
+    if(f.mes>0){const k=f.year+'-'+f.mes;mesAnioUsados[k]=(mesAnioUsados[k]||0)+1}
+  });
+  monthlyFiles.forEach((f,i)=>{
+    const k=f.year+'-'+f.mes;
+    const dup=f.mes>0&&mesAnioUsados[k]>1;
+    const esPrev=f.year<cfgY;
+    const row=document.createElement('div');
+    row.className='balance-row'+(dup?' dup':'')+(esPrev?' prev-year':'');
+    const sizeK=(f.file.size/1024).toFixed(1)+' KB';
+    let optsMes='<option value="0">— Mes —</option>';
+    for(let m=1;m<=12;m++)optsMes+='<option value="'+m+'"'+(f.mes===m?' selected':'')+'>'+MESES[m]+'</option>';
+    let optsAno='';
+    for(let y=cfgY-1;y<=cfgY;y++)optsAno+='<option value="'+y+'"'+(f.year===y?' selected':'')+'>'+y+'</option>';
+    row.innerHTML='<div class="idx">'+(i+1)+'</div>'
+      +'<div class="fname" title="'+f.name+'">'+f.name+(esPrev?' <span style="background:#FCD34D;color:#78350F;padding:1px 6px;border-radius:4px;font-size:.7rem;margin-left:4px;font-weight:700">AÑO ANT.</span>':'')+'</div>'
+      +'<select onchange="cambiarMes('+i+',this.value)">'+optsMes+'</select>'
+      +'<select onchange="cambiarAno('+i+',this.value)" title="Año del balance">'+optsAno+'</select>'
+      +'<div class="size">'+sizeK+'</div>'
+      +'<button class="rm" onclick="quitarArchivo('+i+')" title="Quitar">✕</button>';
+    list.appendChild(row);
+  });
+  const dupCount=Object.values(mesAnioUsados).filter(c=>c>1).length;
+  document.getElementById('dupWarn').classList.toggle('hidden',dupCount===0);
+  if(dupCount>0)document.getElementById('dupCount').textContent=dupCount;
+  // Validación: al menos 2 archivos del año config, sin duplicados mes+año
+  const delAnoActual=monthlyFiles.filter(f=>f.year===cfgY&&f.mes>0).length;
+  const allWithMonth=monthlyFiles.every(f=>f.mes>0);
+  document.getElementById('btnConfirmFiles').disabled=!(delAnoActual>=2&&allWithMonth&&dupCount===0);
+}
+function cambiarMes(i,m){monthlyFiles[i].mes=parseInt(m)||0;renderBalanceList()}
+function cambiarAno(i,y){monthlyFiles[i].year=parseInt(y)||(parseInt(document.getElementById('cfgYear').value)||new Date().getFullYear());renderBalanceList()}
+function quitarArchivo(i){monthlyFiles.splice(i,1);renderBalanceList()}
+function confirmarArchivos(){
+  const cfgY=parseInt(document.getElementById('cfgYear').value)||new Date().getFullYear();
+  const delAct=monthlyFiles.filter(f=>f.year===cfgY&&f.mes>0);
+  if(delAct.length<2){alert('Sube al menos 2 archivos del año '+cfgY);return}
+  // Orden: año asc, luego mes asc — los del año anterior van primero internamente,
+  // pero al renderizar separamos current/prev.
+  monthlyFiles.sort((a,b)=>(a.year-b.year)||(a.mes-b.mes));
+  // Tomar el primer archivo como referencia para mapear columnas
+  firstRawData=monthlyFiles[0].rawData;
+  detectedHeaderRow=autoDetectHeaderRow(firstRawData);
+  const row=firstRawData[detectedHeaderRow]||[];
+  colMap=detectColumnMap(row.map(c=>norm(cellStr(c))));
+  irAStep(3);
+  renderMapper();
+  renderHdrPreview();
+}
+/* ═══ STEP 3: MAPPER + PREVIEW ═══ */
+function renderHdrPreview(){
+  const el=document.getElementById('hdrPreview');
+  let h='<div class="raw-preview">';
+  const start=Math.max(0,detectedHeaderRow-1);
+  const end=Math.min(firstRawData.length,detectedHeaderRow+5);
+  for(let i=start;i<end;i++){
+    const row=firstRawData[i]||[];
+    h+='<div class="row'+(i===detectedHeaderRow?' header-row':'')+'"><div class="ridx">'+i+'</div>';
+    row.slice(0,8).forEach(c=>{h+='<div class="rcell">'+cellStr(c).substring(0,40)+'</div>'});
+    h+='</div>';
+  }
+  h+='</div>';
+  el.innerHTML=h;
+}
+function renderMapper(){
+  const el=document.getElementById('colMapper');
+  const row=firstRawData[detectedHeaderRow]||[];
+  let h='';
+  COL_FIELDS.forEach(f=>{
+    const mapped=colMap[f.key]>=0;
+    h+='<div class="col-map-item'+(mapped?' mapped':'')+'">';
+    h+='<div class="cml">'+(f.icon||'')+' '+f.label+(f.required?' <span class="req">*</span>':'')+'</div>';
+    h+='<select onchange="colMap[\''+f.key+'\']=parseInt(this.value);renderMapper()">';
+    h+='<option value="-1">— No asignado —</option>';
+    row.forEach((c,j)=>{
+      const txt=cellStr(c).substring(0,40)||'col '+j;
+      h+='<option value="'+j+'"'+(colMap[f.key]===j?' selected':'')+'>'+txt+'</option>';
+    });
+    h+='</select></div>';
+  });
+  el.innerHTML=h;
+}
+/* ═══ STEP 4: PROCESAR Y CONSTRUIR TREND ═══ */
+async function procesarTodos(){
+  // Sin gate aquí: el usuario ve el dashboard completo GRATIS (gráficos,
+  // indicadores, comparativos). El candado PRO cae solo al DESCARGAR
+  // (exportarHTML / exportarExcel / exportarWord).
+  // Validar requeridos
+  if(colMap.code<0||colMap.name<0||(colMap.saldoFin<0&&(colMap.deb<0||colMap.cre<0))){
+    alert('Faltan columnas: necesitas Código, Nombre y (Saldo Final o Débitos+Créditos).');return;
+  }
+  // Separar año actual vs año anterior. monthlyFiles queda solo con el año actual
+  // para no romper el código existente; prevYearFiles guarda los del año anterior.
+  const cfgY=parseInt(document.getElementById('cfgYear').value)||new Date().getFullYear();
+  const allFiles=monthlyFiles.slice();
+  monthlyFiles=allFiles.filter(f=>f.year===cfgY);
+  prevYearFiles=allFiles.filter(f=>f.year===cfgY-1);
+  // Clasificar todos los balances (current + prev)
+  for(const mf of allFiles){
+    const hdr=autoDetectHeaderRow(mf.rawData);
+    mf.classified=classifyBalanceRows(mf.rawData,hdr,colMap);
+    convencionValorAbsoluto=detectConvention(mf.classified)==='VAL-ABS';
+    mf.esfData=buildESFData(mf.classified);
+    mf.eriData=buildERIData(mf.classified);
+    mf.pucNames={};
+    for(let i=hdr+1;i<mf.rawData.length;i++){
+      const row=mf.rawData[i];if(!row)continue;
+      const code=cellStr(row[colMap.code]).replace(/\s/g,'');
+      if(!/^\d+$/.test(code))continue;
+      const name=cellStr(row[colMap.name]);
+      if(code.length===4 && name && !mf.pucNames[code]) mf.pucNames[code]=name;
+    }
+  }
+  // ¿Los balances traen el movimiento del mes (Mayor y Balances mensual) o el acumulado YTD?
+  pygMensual=detectarPygMensual(monthlyFiles);
+  irAStep(4);
+  const cfgMon=(document.getElementById('cfgMoneda')||{}).value;
+  if(cfgMon){const escSel=document.getElementById('cfgEscala');if(escSel){escSel.value=cfgMon}}
+  renderTrend();
+  renderPyGDetallado();
+  renderDashboard();
+  renderComparativo();
+  renderNotasMes();
+  onEscalaChange();
+  cargarNotasGuardadas();
+}
+function buildESFData(classified){
+  const data={};
+  classified.forEach(a=>{
+    const v=getDisplayValue(a);
+    data[a.grupo]=(data[a.grupo]||0)+v;
+  });
+  return data;
+}
+function buildERIData(classified){
+  return buildESFData(classified); // mismo agregado por grupo, las claves de ingresos/gastos están separadas
+}
+/* ═══ TREND TABLE + SPARKLINE ═══ */
+function sparklineSVG(values,{w=100,h=24,color='#2E75B6'}={}){
+  if(!values.length)return '';
+  const max=Math.max(...values),min=Math.min(...values);
+  const range=max-min||1;
+  const step=values.length>1?w/(values.length-1):w;
+  const pts=values.map((v,i)=>(i*step).toFixed(1)+','+(h-((v-min)/range)*(h-4)-2).toFixed(1)).join(' ');
+  const last=values[values.length-1];
+  const lastX=(values.length-1)*step;
+  const lastY=h-((last-min)/range)*(h-4)-2;
+  return '<svg width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'" style="display:inline-block;vertical-align:middle">'
+    +'<polyline points="'+pts+'" fill="none" stroke="'+color+'" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>'
+    +'<circle cx="'+lastX.toFixed(1)+'" cy="'+lastY.toFixed(1)+'" r="2.2" fill="'+color+'"/>'
+    +'</svg>';
+}
+// Variación mes a mes promedio (en %). Devuelve null si todos los pares son
+// inválidos (v_anterior ~0). El umbral evita la explosión que mostraba '92965215735%'
+// cuando un mes tenía valor casi 0 (caso reportado por Juan 27-may).
+function variacionPromedio(values){
+  // Umbral relativo: ignoramos pares donde |prev| < 1% del máximo absoluto de la serie
+  const maxAbs=values.reduce((a,v)=>Math.max(a,Math.abs(v)),0);
+  const minBase=Math.max(1000,maxAbs*0.01);
+  let sum=0,n=0;
+  for(let i=1;i<values.length;i++){
+    const prev=values[i-1];
+    if(Math.abs(prev)<minBase)continue;
+    sum+=(values[i]-prev)/Math.abs(prev);n++;
+  }
+  return n>0?sum/n*100:null;
+}
+function fmtVariacion(v){
+  if(v===null||v===undefined||!isFinite(v))return '—';
+  return (v>=0?'+':'')+v.toFixed(1)+'%';
+}
+// Escala de visualización: pesos / miles / millones. El toggle aplica al render
+// SIN reprocesar los datos. Helpers fmtEscala(v) y getEscala() leen el dropdown.
+function getEscala(){const el=document.getElementById('cfgEscala');return el?el.value:'pesos'}
+// Vista P&G: 'mov' = movimiento del mes (db-cr/cre-db por mes), 'ytd' = saldo
+// final acumulado YTD. Default 'mov' (es lo que pide la usuaria 27-may-2026).
+function getVistaPyG(){const el=document.getElementById('cfgVistaPyG');return el?el.value:'mov'}
+// Devuelve el valor P&G para un mes según el modo. Para grupos del P&G:
+// - 'mov': suma movimientos del mes (db-cr o cre-db según naturaleza)
+// - 'ytd': usa esfData[grupo] que es la suma de saldos finales acumulados
+function pygVal(mf, grupo){
+  if(getVistaPyG()==='mov'){
+    // Mapear grupo a prefijo PUC para sumar movimientos
+    const map={'ing_operacionales':'41','dev_ventas':'4175','ing_no_operacionales':'42','otros_ing':'42','costo_ventas':'6','costo_prod':'7','gtos_admin':'51','gtos_ventas':'52','gtos_no_op':'53','imp_renta':'54'};
+    const pref=map[grupo];
+    if(!pref)return mf.esfData[grupo]||0;
+    let t=0;
+    mf.classified.forEach(a=>{if(a.code.startsWith(pref))t+=movMes(a)});
+    // dev_ventas es subgrupo de 41 (4175). En 'mov' lo regresamos como tal sumando solo ese código
+    if(grupo==='dev_ventas'){t=0;mf.classified.forEach(a=>{if(a.code.startsWith('4175'))t+=movMes(a)});}
+    if(grupo==='ing_operacionales'){
+      // restar devoluciones para que ing_operacionales sea ya neto en MOV
+      // (en YTD el esfData ya las incluye porque suman con signo)
+      let dev=0;mf.classified.forEach(a=>{if(a.code.startsWith('4175'))dev+=movMes(a)});
+      // Movimientos ingresos: 41 incluye 4175. Para tener ingresos brutos sin dev:
+      let bruto=0;mf.classified.forEach(a=>{if(a.code.startsWith('41')&&!a.code.startsWith('4175'))bruto+=movMes(a)});
+      return bruto;
+    }
+    return t;
+  }
+  return mf.esfData[grupo]||0;
+}
+function escalaDivisor(esc){return esc==='miles'?1000:esc==='millones'?1000000:1}
+function fmtEscala(v,esc){
+  if(v===null||v===undefined||!isFinite(v))return '—';
+  const d=escalaDivisor(esc||getEscala());
+  if(d===1) return fN(v);
+  // Para miles/millones mostrar con 1 decimal si abs<10, sin decimales si >=10
+  const n=v/d;
+  if(Math.abs(n)<0.005) return '0';
+  const dec=Math.abs(n)<10?1:0;
+  const r=Math.round(n*Math.pow(10,dec))/Math.pow(10,dec);
+  const ent=Math.trunc(r);
+  const entStr=Math.abs(ent).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+  if(dec===0) return (r<0?'-':'')+entStr;
+  const decPart=Math.abs(r-ent).toFixed(dec).slice(2);
+  return (r<0?'-':'')+entStr+','+decPart;
+}
+// Movimiento del MES (no acumulado) para una cuenta. Helisa/Siigo: deb/cre son del
+// periodo del balance. Clase 4 (ingreso, natural crédito): mov = cre - deb.
+// Clases 5/6/7 (gasto/costo, natural débito): mov = deb - cre.
+function movMes(a){
+  const fd=a.code[0];
+  if(fd==='4') return (a.cre||0)-(a.deb||0);
+  return (a.deb||0)-(a.cre||0);
+}
+// Agrupa cuentas hoja (no padres) por subcuenta 4-dig PUC.
+// Devuelve {'5105':{name,vals:[mes1,...],hijas:{'510506':{name,vals:[]},...}}}
+function aggBySub4(monthlyFiles, claseFilter){
+  const result={};
+  monthlyFiles.forEach((mf,idx)=>{
+    mf.classified.forEach(a=>{
+      if(claseFilter && !claseFilter.includes(a.clase))return;
+      if(!/^\d/.test(a.code))return;
+      const sub4=a.code.substring(0,4);
+      if(sub4.length<4)return;
+      if(!result[sub4]) result[sub4]={code:sub4,name:'',clase:a.clase,vals:new Array(monthlyFiles.length).fill(0),hijas:{}};
+      const v=movMes(a);
+      result[sub4].vals[idx]+=v;
+      if(!result[sub4].name && a.name) result[sub4].name=a.name;
+      if(a.code.length>4){
+        const sub6=a.code.substring(0,6);
+        if(!result[sub4].hijas[sub6]) result[sub4].hijas[sub6]={code:sub6,name:'',vals:new Array(monthlyFiles.length).fill(0)};
+        result[sub4].hijas[sub6].vals[idx]+=v;
+        if(!result[sub4].hijas[sub6].name && a.name) result[sub4].hijas[sub6].name=a.name;
+      }
+    });
+  });
+  // Preferir el nombre del padre 4-dig si existe en pucNames de algún balance.
+  monthlyFiles.forEach(mf=>{
+    if(!mf.pucNames)return;
+    Object.keys(mf.pucNames).forEach(sub4=>{
+      if(result[sub4]) result[sub4].name=mf.pucNames[sub4];
+    });
+  });
+  // Filtrar las que son todo 0
+  Object.keys(result).forEach(k=>{
+    if(result[k].vals.every(v=>Math.round(v)===0)) delete result[k];
+    else {
+      Object.keys(result[k].hijas).forEach(h=>{
+        if(result[k].hijas[h].vals.every(v=>Math.round(v)===0)) delete result[k].hijas[h];
+      });
+    }
+  });
+  return result;
+}
+// Devuelve los códigos sub4 ordenados de un dict
+function sortedSub4(dict){return Object.keys(dict).sort()}
+// Para una sección PUC (lista de clases o ranges 4-dig), suma totales por mes.
+function sumSub4(dict, sub4List){
+  const n=monthlyFiles.length;
+  const tot=new Array(n).fill(0);
+  sub4List.forEach(s4=>{
+    if(dict[s4]) dict[s4].vals.forEach((v,i)=>{tot[i]+=v});
+  });
+  return tot;
+}
+// Suma todos los sub4 de una sección que empiezan por prefijo (ej. '51', '52')
+function sumByPrefix(dict, prefix){
+  const n=monthlyFiles.length;
+  const tot=new Array(n).fill(0);
+  Object.keys(dict).forEach(s4=>{
+    if(s4.startsWith(prefix)) dict[s4].vals.forEach((v,i)=>{tot[i]+=v});
+  });
+  return tot;
+}
+function sumArr(a,b){return a.map((v,i)=>v+(b[i]||0))}
+function subArr(a,b){return a.map((v,i)=>v-(b[i]||0))}
+// ═══ MOVIMIENTO vs ACUMULADO ═══
+// Los balances de prueba vienen ACUMULADOS desde enero (período 01-ene → fin de
+// mes), así que (deb-cre) de cada archivo es el acumulado YTD a esa fecha.
+// Para el movimiento del mes: mov[i] = acum[i] - acum[i-1]. El primer mes
+// cargado queda como su propio acumulado (no hay mes previo con qué restar).
+function deAcumular(serie){return serie.map((v,i)=>i===0?v:v-serie[i-1])}
+// Suma acumulada (inversa de deAcumular). Para balances que ya traen el MOVIMIENTO
+// del mes, el YTD se obtiene sumando los meses.
+function acumular(serie){let s=0;return serie.map(v=>(s+=v))}
+// Aplica la vista P&G a la serie de movMes por archivo. Según el tipo de balance:
+//  • pygMensual=false (acumulado YTD): 'mov' de-acumula, 'ytd' deja tal cual.
+//  • pygMensual=true  (movimiento mensual): 'mov' deja tal cual, 'ytd' acumula.
+function aplicarVistaPyG(serie){
+  if(pygMensual) return getVistaPyG()==='mov' ? serie.slice() : acumular(serie);
+  return getVistaPyG()==='mov' ? deAcumular(serie) : serie.slice();
+}
+// Acumulado del período (YTD): último valor si la serie ya es acumulada (pygMensual=false),
+// suma de los meses si la serie es movimiento mensual (pygMensual=true).
+function ytdDe(serie){
+  if(!serie.length) return 0;
+  return pygMensual ? serie.reduce((a,b)=>a+b,0) : serie[serie.length-1];
+}
+// Decide si los balances cargados traen el MOVIMIENTO del mes (Mayor y Balances mensual:
+// deb/cre del mes) o el ACUMULADO YTD (deb/cre desde enero). Compara, sobre los ingresos
+// (41), si la SUMA de movimientos por archivo cuadra con el saldo final del último mes
+// (⇒ mensual) o si el ÚLTIMO movimiento ya es ese saldo (⇒ acumulado). Usa el saldo final
+// como verdad de tierra porque siempre es acumulado YTD. mov() y bal() están hoisted.
+function detectarPygMensual(files){
+  if(!files || files.length<2) return false;                    // 1 mes: indistinto → acumulado
+  const m=files.map(mf=>mov(mf,'41'));                           // movMes de ingresos por archivo
+  const saldoLevel=Math.abs(bal(files[files.length-1],'41'));   // ingresos acumulados (saldo final último)
+  if(saldoLevel<1) return false;                                // sin datos confiables → comportamiento actual
+  const cumLast=Math.abs(m.reduce((a,b)=>a+b,0));               // total si fueran mensuales
+  const lvlLast=Math.abs(m[m.length-1]);                        // total si fueran acumulados
+  const errCum=Math.abs(cumLast-saldoLevel)/saldoLevel;
+  const errLvl=Math.abs(lvlLast-saldoLevel)/saldoLevel;
+  return errCum<errLvl && errCum<0.5;                          // mensual solo si su hipótesis cuadra claramente mejor
+}
+// Valor P&G ACUMULADO (deb-cre) de un grupo en un balance. Base para de-acumular.
+// Réplica de la rama 'mov' de pygVal pero SIN el switch de vista (siempre acumulado).
+function pygAcum(mf, grupo){
+  const map={'ing_operacionales':'41','dev_ventas':'4175','ing_no_operacionales':'42','otros_ing':'42','costo_ventas':'6','costo_prod':'7','gtos_admin':'51','gtos_ventas':'52','gtos_no_op':'53','imp_renta':'54'};
+  const pref=map[grupo];
+  if(!pref)return mf.esfData[grupo]||0;
+  if(grupo==='ing_operacionales'){
+    let bruto=0;mf.classified.forEach(a=>{if(a.code.startsWith('41')&&!a.code.startsWith('4175'))bruto+=movMes(a)});
+    return bruto;
+  }
+  if(grupo==='dev_ventas'){let t=0;mf.classified.forEach(a=>{if(a.code.startsWith('4175'))t+=movMes(a)});return t}
+  let t=0;mf.classified.forEach(a=>{if(a.code.startsWith(pref))t+=movMes(a)});
+  return t;
+}
+function val(mf,grupo){return mf.esfData[grupo]||0}
+function renderTrend(){
+  const tbl=document.getElementById('trendTable');
+  const meses=monthlyFiles.map(f=>f.mes);
+  const empresa=document.getElementById('cfgEmpresa').value||'(empresa sin nombre)';
+  const year=document.getElementById('cfgYear').value;
+  const esc=getEscala();
+  const ytdSty='background:#EEF2F7;border-left:2px solid #94A3B8;font-weight:600';
+  let html='<thead><tr><th style="min-width:240px">Concepto</th>';
+  meses.forEach(m=>{html+='<th class="num">'+MESES_CORTO[m]+' '+year+'</th>'});
+  html+='<th class="num" style="'+ytdSty+'" title="Acumulado del año a la fecha. Balance = saldo de cierre; P&G = acumulado del período.">YTD</th>';
+  html+='<th class="spark">Tendencia</th><th class="num" title="Variación porcentual promedio mes a mes. Ej: +10% significa que en promedio cada mes crece un 10% respecto al anterior.">Tendencia mensual</th></tr></thead><tbody>';
+  // pyg=true → fn devuelve valor ACUMULADO; se de-acumula a movimiento según vista y la columna YTD muestra el acumulado.
+  // pyg falsy → cuentas de balance: saldo final del mes; YTD = saldo de cierre (último mes).
+  function row(label,fn,cls,pyg){
+    const raw=monthlyFiles.map(fn);
+    const disp=pyg?aplicarVistaPyG(raw):raw;
+    const ytd=pyg?ytdDe(raw):(raw.length?raw[raw.length-1]:0);
+    const cssVar=variacionPromedio(disp);
+    const varCls=cssVar===null?'':(cssVar>=0?'var-pos':'var-neg');
+    const varStr=fmtVariacion(cssVar);
+    const color=cls==='section'?'#fff':cls==='total'?'#059669':'#2E75B6';
+    let r='<tr'+(cls?' class="'+cls+'"':'')+'><td>'+label+'</td>';
+    disp.forEach(v=>{r+='<td class="num">'+fmtEscala(v,esc)+'</td>'});
+    r+='<td class="num" style="'+ytdSty+'">'+fmtEscala(ytd,esc)+'</td>';
+    r+='<td class="spark">'+sparklineSVG(disp,{color})+'</td>';
+    r+='<td class="num '+varCls+'">'+varStr+'</td></tr>';
+    return r;
+  }
+  function sectionRow(label){
+    return '<tr class="section"><td colspan="'+(meses.length+4)+'">'+label+'</td></tr>';
+  }
+  // BALANCE — totales por clase desde classified (no por grupo, asegura cuadre)
+  function totalClase(mf,clase){
+    let t=0;
+    mf.classified.forEach(a=>{if(a.clase===clase)t+=getDisplayValue(a)});
+    return t;
+  }
+  function totalActivosCorrientes(mf){return val(mf,'efectivo')+val(mf,'inv_cp')+val(mf,'cxc')+val(mf,'deterioro_cartera')+val(mf,'inventarios')+val(mf,'diferidos_act')+val(mf,'otros_act')}
+  function totalActivosNoCorrientes(mf){return val(mf,'ppe')+val(mf,'depreciacion')+val(mf,'intangibles')+val(mf,'amortizacion')+val(mf,'inv_lp')+val(mf,'otros_act_nc')+val(mf,'valorizaciones')}
+  function totalPasivosCorrientes(mf){return val(mf,'oblig_fin_cp')+val(mf,'proveedores')+val(mf,'cxp')+val(mf,'impuestos')+val(mf,'laborales')+val(mf,'provisiones')+val(mf,'otros_pas_c')}
+  function totalPasivosNoCorrientes(mf){return val(mf,'oblig_fin_lp')+val(mf,'diferidos_pas')+val(mf,'otros_pas')}
+  html+=sectionRow('Balance — Activos');
+  html+=row('Activos corrientes',totalActivosCorrientes,'subtotal');
+  html+=row('Activos no corrientes',totalActivosNoCorrientes,'subtotal');
+  html+=row('TOTAL ACTIVOS',mf=>totalClase(mf,'Activo'),'total');
+  html+=sectionRow('Balance — Pasivos');
+  html+=row('Pasivos corrientes',totalPasivosCorrientes,'subtotal');
+  html+=row('Pasivos no corrientes',totalPasivosNoCorrientes,'subtotal');
+  html+=row('TOTAL PASIVOS',mf=>totalClase(mf,'Pasivo'),'total');
+  html+=sectionRow('Balance — Patrimonio');
+  html+=row('TOTAL PATRIMONIO',mf=>{
+    // Patrimonio = clase 3 + utilidad/pérdida del período (clase 4 - 5-6-7)
+    let t=0,uti=0;
+    mf.classified.forEach(a=>{
+      const v=getDisplayValue(a);
+      if(a.clase==='Patrimonio')t+=v;
+      else if(a.clase==='Ingreso')uti+=v;
+      else if(a.clase==='Gasto'||a.clase==='Costo'||a.clase==='Costo prod')uti-=v;
+    });
+    return t+uti;
+  },'total');
+  // P&G — modo dinámico (movimiento del mes / acumulado YTD)
+  const vista=getVistaPyG();
+  const tituloPyG=vista==='mov'?'P&G — Movimiento del mes':'P&G — Acumulado YTD';
+  const sufijoUtil=vista==='mov'?'del mes':'YTD';
+  html+=sectionRow(tituloPyG);
+  html+=row('Ingresos operacionales',mf=>pygAcum(mf,'ing_operacionales')-pygAcum(mf,'dev_ventas'),'subtotal',true);
+  html+=row('(-) Costo de ventas',mf=>pygAcum(mf,'costo_ventas')+pygAcum(mf,'costo_prod'),'',true);
+  html+=row('UTILIDAD BRUTA',mf=>pygAcum(mf,'ing_operacionales')-pygAcum(mf,'dev_ventas')-pygAcum(mf,'costo_ventas')-pygAcum(mf,'costo_prod'),'subtotal',true);
+  html+=row('(-) Gastos administración',mf=>pygAcum(mf,'gtos_admin'),'',true);
+  html+=row('(-) Gastos ventas',mf=>pygAcum(mf,'gtos_ventas'),'',true);
+  html+=row('UTILIDAD OPERACIONAL',mf=>pygAcum(mf,'ing_operacionales')-pygAcum(mf,'dev_ventas')-pygAcum(mf,'costo_ventas')-pygAcum(mf,'costo_prod')-pygAcum(mf,'gtos_admin')-pygAcum(mf,'gtos_ventas'),'subtotal',true);
+  html+=row('(+) Otros ingresos',mf=>pygAcum(mf,'ing_no_operacionales')+pygAcum(mf,'otros_ing'),'',true);
+  html+=row('(-) Otros gastos',mf=>pygAcum(mf,'gtos_no_op'),'',true);
+  html+=row('UTILIDAD ANTES IMPUESTOS',mf=>pygAcum(mf,'ing_operacionales')-pygAcum(mf,'dev_ventas')-pygAcum(mf,'costo_ventas')-pygAcum(mf,'costo_prod')-pygAcum(mf,'gtos_admin')-pygAcum(mf,'gtos_ventas')+pygAcum(mf,'ing_no_operacionales')+pygAcum(mf,'otros_ing')-pygAcum(mf,'gtos_no_op'),'subtotal',true);
+  html+=row('(-) Impuesto de renta',mf=>pygAcum(mf,'imp_renta'),'',true);
+  html+=row('UTILIDAD NETA '+sufijoUtil.toUpperCase(),mf=>pygAcum(mf,'ing_operacionales')-pygAcum(mf,'dev_ventas')-pygAcum(mf,'costo_ventas')-pygAcum(mf,'costo_prod')-pygAcum(mf,'gtos_admin')-pygAcum(mf,'gtos_ventas')+pygAcum(mf,'ing_no_operacionales')+pygAcum(mf,'otros_ing')-pygAcum(mf,'gtos_no_op')-pygAcum(mf,'imp_renta'),'total',true);
+  html+='</tbody>';
+  tbl.innerHTML=html;
+  // Summary
+  document.getElementById('trendSummaryText').textContent=
+    'Trend de '+monthlyFiles.length+' meses ('+MESES_CORTO[meses[0]]+' a '+MESES_CORTO[meses[meses.length-1]]+' '+year+') para '+empresa+'. Sparkline + variación % promedio mes a mes.';
+}
+/* ═══ P&G DETALLADO — vista por subcuenta 4-dig PUC ═══ */
+function renderPyGDetallado(){
+  const tbl=document.getElementById('pygDetTable');
+  if(!tbl)return;
+  const meses=monthlyFiles.map(f=>f.mes);
+  const year=document.getElementById('cfgYear').value;
+  const esc=getEscala();
+  const ytdSty='background:#EEF2F7;border-left:2px solid #94A3B8;font-weight:600';
+  // Agrupar clase 4/5/6/7 a nivel sub4
+  const agg=aggBySub4(monthlyFiles,['Ingreso','Gasto','Costo','Costo prod']);
+  // vals SIEMPRE llega como serie ACUMULADA; aquí se aplica la vista (mov/ytd) y se anexa la columna YTD.
+  function row(label,vals,opts){
+    opts=opts||{};
+    const cls=opts.cls||'';
+    const sub4=opts.sub4||'';
+    const parent=opts.parent||'';
+    const indent=opts.indent||0;
+    const disp=aplicarVistaPyG(vals);   // movimiento del mes (o acumulado según vista)
+    const ytd=ytdDe(vals);              // acumulado del período (siempre)
+    const cssVar=variacionPromedio(disp);
+    const varCls=cssVar===null?'':(cssVar>=0?'var-pos':'var-neg');
+    const varStr=fmtVariacion(cssVar);
+    const color=cls.indexOf('total')>=0?'#059669':cls.indexOf('subtotal')>=0?'#2E75B6':'#6B7280';
+    const dataAttrs=(sub4?' data-sub4="'+sub4+'"':'')+(parent?' data-parent="'+parent+'"':'');
+    const style=opts.style||'';
+    const expandIcon=opts.expandable?'<span class="exp-icon" style="display:inline-block;width:14px;color:#9CA3AF;cursor:pointer;font-size:.75rem">▸</span> ':'';
+    const labelStyle=indent?'padding-left:'+(indent*16+8)+'px':'';
+    const onClick=opts.expandable?' onclick="toggleSub4(\''+sub4+'\')" style="cursor:pointer"':'';
+    let r='<tr'+(cls?' class="'+cls+'"':'')+dataAttrs+(style?' style="'+style+'"':'')+'>';
+    r+='<td'+onClick+(labelStyle?' style="'+labelStyle+'"':'')+'>'+expandIcon+label+'</td>';
+    disp.forEach(v=>{r+='<td class="num">'+fmtEscala(v,esc)+'</td>'});
+    r+='<td class="num" style="'+ytdSty+'">'+fmtEscala(ytd,esc)+'</td>';
+    r+='<td class="spark">'+sparklineSVG(disp,{color})+'</td>';
+    r+='<td class="num '+varCls+'">'+varStr+'</td></tr>';
+    return r;
+  }
+  function sectionRow(label){return '<tr class="section"><td colspan="'+(meses.length+4)+'">'+label+'</td></tr>'}
+  // vals = porcentajes por mes (ya en base de la vista activa); ytdPct = margen del acumulado.
+  function rowPct(label,vals,ytdPct,cls){
+    const cssVar=variacionPromedio(vals);
+    const varStr=fmtVariacion(cssVar);
+    function pc(v){return v===null||!isFinite(v)?'—':v.toFixed(1)+'%'}
+    function pcol(v){return (v===null||!isFinite(v))?'#6B7280':v>=10?'#059669':v>=5?'#D97706':v>=0?'#6B7280':'#DC2626'}
+    let r='<tr'+(cls?' class="'+cls+'"':'')+'><td><strong>'+label+'</strong></td>';
+    vals.forEach(v=>{r+='<td class="num" style="font-weight:700;color:'+pcol(v)+'">'+pc(v)+'</td>'});
+    r+='<td class="num" style="'+ytdSty+';color:'+pcol(ytdPct)+'">'+pc(ytdPct)+'</td>';
+    r+='<td class="spark">'+sparklineSVG(vals.filter(v=>isFinite(v)),{color:'#7C3AED'})+'</td>';
+    r+='<td class="num">'+varStr+'</td></tr>';
+    return r;
+  }
+  // Subtotales calculados por prefijo PUC
+  const ingOp=sumByPrefix(agg,'41');
+  const devVtas=sumByPrefix(agg,'4175'); // si está en 41xx, ya se incluyó. Pero 4175 es subcuenta del 41, no se duplica porque sumByPrefix '41' suma 4135, 4140, 4175, etc.
+  const ingNetos=ingOp; // las devoluciones suelen venir con signo negativo en movimiento
+  const costos=subArr(sumByPrefix(agg,'6'),new Array(meses.length).fill(0)).map((v,i)=>v+sumByPrefix(agg,'7')[i]);
+  const utilBruta=subArr(ingNetos,costos);
+  const gtosAdmin=sumByPrefix(agg,'51');
+  const gtosVtas=sumByPrefix(agg,'52');
+  const utilOp=subArr(subArr(utilBruta,gtosAdmin),gtosVtas);
+  const otrosIng=sumByPrefix(agg,'42');
+  const otrosGtos=sumByPrefix(agg,'53');
+  const utilAI=subArr(sumArr(utilOp,otrosIng),otrosGtos);
+  const impRenta=sumByPrefix(agg,'54');
+  const utilNeta=subArr(utilAI,impRenta);
+  // Márgenes: en vista 'mov' se calculan sobre el movimiento del mes; la columna YTD sobre el acumulado.
+  const dispIng=aplicarVistaPyG(ingNetos), dispUB=aplicarVistaPyG(utilBruta), dispUO=aplicarVistaPyG(utilOp), dispUN=aplicarVistaPyG(utilNeta);
+  const margenBruto=dispIng.map((v,i)=>v?(dispUB[i]/v*100):null);
+  const margenOp=dispIng.map((v,i)=>v?(dispUO[i]/v*100):null);
+  const margenNeto=dispIng.map((v,i)=>v?(dispUN[i]/v*100):null);
+  const ytdIng=ytdDe(ingNetos);
+  const margenBrutoYTD=ytdIng?ytdDe(utilBruta)/ytdIng*100:null;
+  const margenOpYTD=ytdIng?ytdDe(utilOp)/ytdIng*100:null;
+  const margenNetoYTD=ytdIng?ytdDe(utilNeta)/ytdIng*100:null;
+  // Construir HTML
+  let html='<thead><tr><th style="min-width:280px">Concepto</th>';
+  meses.forEach(m=>{html+='<th class="num">'+MESES_CORTO[m]+'</th>'});
+  html+='<th class="num" style="'+ytdSty+'" title="Acumulado del año a la fecha (suma de los meses cargados)">YTD</th>';
+  html+='<th class="spark">Tendencia</th><th class="num" title="Variación porcentual promedio mes a mes. Ej: +10% significa que en promedio cada mes crece un 10% respecto al anterior.">Tendencia mensual</th></tr></thead><tbody>';
+  // Helper: renderiza una sección con sus sub4
+  function renderSeccion(titulo, prefijos, ordenColor){
+    html+=sectionRow(titulo);
+    const sub4s=sortedSub4(agg).filter(s=>prefijos.some(p=>s.startsWith(p)));
+    sub4s.forEach(s4=>{
+      const g=agg[s4];
+      const hijasKeys=Object.keys(g.hijas).sort();
+      const expandable=hijasKeys.length>0;
+      html+=row((s4+' '+(g.name||'').replace(/\s+/g,' ').trim()).trim(),g.vals,{cls:'sub4-row',sub4:s4,expandable:expandable});
+      hijasKeys.forEach(h=>{
+        const hi=g.hijas[h];
+        html+=row(h+' '+(hi.name||'').trim(),hi.vals,{cls:'sub6-row',parent:s4,indent:1,style:'display:none;background:#f8fafc'});
+      });
+    });
+  }
+  // ═══ INGRESOS ═══
+  renderSeccion('INGRESOS OPERACIONALES', ['41']);
+  html+=row('INGRESOS NETOS', ingNetos, {cls:'subtotal'});
+  // ═══ COSTOS ═══
+  if(costos.some(v=>Math.round(v)!==0)){
+    renderSeccion('COSTO DE VENTAS', ['6','7']);
+    html+=row('TOTAL COSTOS', costos, {cls:'subtotal'});
+  }
+  html+=row('UTILIDAD BRUTA', utilBruta, {cls:'total'});
+  html+=rowPct('% Margen Bruto', margenBruto, margenBrutoYTD, 'margen-row');
+  // ═══ GASTOS ADMIN ═══
+  if(gtosAdmin.some(v=>Math.round(v)!==0)){
+    renderSeccion('GASTOS DE ADMINISTRACIÓN', ['51']);
+    html+=row('TOTAL GASTOS ADMINISTRACIÓN', gtosAdmin, {cls:'subtotal'});
+  }
+  // ═══ GASTOS VENTAS ═══
+  if(gtosVtas.some(v=>Math.round(v)!==0)){
+    renderSeccion('GASTOS DE VENTAS', ['52']);
+    html+=row('TOTAL GASTOS DE VENTAS', gtosVtas, {cls:'subtotal'});
+  }
+  html+=row('UTILIDAD OPERACIONAL', utilOp, {cls:'total'});
+  html+=rowPct('% Margen Operacional', margenOp, margenOpYTD, 'margen-row');
+  // ═══ NO OPERACIONALES ═══
+  if(otrosIng.some(v=>Math.round(v)!==0)){
+    renderSeccion('OTROS INGRESOS NO OPERACIONALES', ['42']);
+  }
+  if(otrosGtos.some(v=>Math.round(v)!==0)){
+    renderSeccion('OTROS GASTOS NO OPERACIONALES', ['53']);
+  }
+  html+=row('UTILIDAD ANTES DE IMPUESTOS', utilAI, {cls:'subtotal'});
+  if(impRenta.some(v=>Math.round(v)!==0)){
+    renderSeccion('IMPUESTO DE RENTA', ['54']);
+  }
+  html+=row('UTILIDAD NETA DEL PERÍODO', utilNeta, {cls:'total'});
+  html+=rowPct('% Margen Neto', margenNeto, margenNetoYTD, 'margen-row');
+  html+='</tbody>';
+  tbl.innerHTML=html;
+}
+/* ═══ Toggle escala + expandir/colapsar ═══ */
+function onEscalaChange(){
+  const esc=getEscala();
+  document.getElementById('escalaHint').textContent='Cifras expresadas en '+(esc==='pesos'?'pesos colombianos':esc==='miles'?'miles de pesos':'millones de pesos');
+  renderTrend();
+  renderPyGDetallado();
+  if(typeof renderDashboard==='function')renderDashboard();
+  if(typeof renderComparativo==='function')renderComparativo();
+}
+function onVistaChange(){
+  renderTrend();
+  renderPyGDetallado();
+  if(typeof renderDashboard==='function')renderDashboard();
+  if(typeof renderComparativo==='function')renderComparativo();
+}
+function toggleSub4(sub4){
+  const rows=document.querySelectorAll('#pygDetTable tr[data-parent="'+sub4+'"]');
+  if(!rows.length)return;
+  const firstVisible=rows[0].style.display!=='none';
+  const parentRow=document.querySelector('#pygDetTable tr[data-sub4="'+sub4+'"]');
+  const icon=parentRow?parentRow.querySelector('.exp-icon'):null;
+  rows.forEach(r=>{r.style.display=firstVisible?'none':''});
+  if(icon)icon.textContent=firstVisible?'▸':'▾';
+}
+function expandirTodo(){
+  document.querySelectorAll('#pygDetTable tr[data-parent]').forEach(r=>{r.style.display=''});
+  document.querySelectorAll('#pygDetTable .exp-icon').forEach(i=>{i.textContent='▾'});
+}
+function colapsarTodo(){
+  document.querySelectorAll('#pygDetTable tr[data-parent]').forEach(r=>{r.style.display='none'});
+  document.querySelectorAll('#pygDetTable .exp-icon').forEach(i=>{i.textContent='▸'});
+}
+/* ═══ INDICADORES FINANCIEROS ═══
+   23 indicadores por mes. Cada uno con: valor por mes, rango recomendable,
+   color del semáforo según valor actual. */
+// Devuelve el saldo final por grupo (snapshot del mes) para un balance dado.
+function bal(mf, prefijoPUC){
+  let t=0;
+  mf.classified.forEach(a=>{
+    if(a.code.startsWith(prefijoPUC)) t+=getDisplayValue(a);
+  });
+  return t;
+}
+// Movimiento del mes acumulado por prefijo PUC
+function mov(mf, prefijoPUC){
+  let t=0;
+  mf.classified.forEach(a=>{
+    if(a.code.startsWith(prefijoPUC)) t+=movMes(a);
+  });
+  return t;
+}
+// Movimiento del mes por uno o varios códigos exactos (4-dig)
+function movCodes(mf, codes){
+  let t=0;
+  mf.classified.forEach(a=>{
+    const s4=a.code.substring(0,4);
+    if(codes.includes(s4)) t+=movMes(a);
+  });
+  return t;
+}
+// Devuelve un array de 1 entrada por mes con los componentes financieros base.
+// Los componentes de BALANCE son saldo final (snapshot del mes). Los de P&G se
+// calculan acumulados (deb-cre) y, si la vista es 'mov', se de-acumulan a
+// movimiento del mes — necesario para que las rotaciones (× 30 días) y los
+// márgenes cuadren con el P&G y no usen el acumulado YTD.
+function computeBaseSeries(){
+  const base=monthlyFiles.map(mf=>{
+    // Balance (saldos finales del mes, snapshot)
+    const ac = bal(mf,'11')+bal(mf,'12')+bal(mf,'13')+bal(mf,'14')+bal(mf,'17'); // act corrientes
+    const inv = bal(mf,'14');
+    const cxc = bal(mf,'13')-bal(mf,'1399'); // cartera neta del deterioro
+    const ant = bal(mf,'15')+bal(mf,'16')+bal(mf,'18')+bal(mf,'19'); // act no corr
+    const at = ac+ant;
+    const pc = bal(mf,'21')+bal(mf,'22')+bal(mf,'23')+bal(mf,'24')+bal(mf,'25')+bal(mf,'26')+bal(mf,'27');
+    const pnc = 0; // no se distingue CP/LP en PUC sin más info; queda 0 — para mejorar
+    const pt = pc+pnc;
+    const pat = bal(mf,'3');
+    const oblFin = bal(mf,'21')+bal(mf,'22'); // financieros + proveedores como aprox
+    const cxp = bal(mf,'22')+bal(mf,'23'); // proveedores + cxp
+    // P&G del mes (movimiento)
+    const ventas = mov(mf,'41');
+    const devVtas = mov(mf,'4175'); // ya incluido en 41
+    const ingNetos = ventas; // ya incluyen dev en signo
+    const cmv = mov(mf,'6')+mov(mf,'7');
+    const utilBruta = ingNetos-cmv;
+    const gAdmin = mov(mf,'51');
+    const gVtas = mov(mf,'52');
+    const utilOp = utilBruta-gAdmin-gVtas;
+    const otrosIng = mov(mf,'42');
+    const gNoOp = mov(mf,'53');
+    const utilAI = utilOp+otrosIng-gNoOp;
+    const impRenta = mov(mf,'54');
+    const utilNeta = utilAI-impRenta;
+    const compras = cmv; // aprox: compras del periodo ≈ CMV cuando no hay variación grande de inventario
+    // Depreciación + amortización (códigos 5160, 5165, 5170, 1592 mov, 1698 mov)
+    const depAmort = movCodes(mf,['5160','5165','7160','7165']); // depreciaciones gastos
+    const ebit = utilOp;
+    const ebitda = ebit+depAmort;
+    // Patrimonio incluye utilidad del ejercicio (ya viene en 36 pero también lo calculamos por seguridad)
+    const patTotal = pat + (bal(mf,'4')*0); // patrimonio ya trae resultado del ej
+    return {
+      ac, inv, cxc, at, pc, pt, pat:patTotal, oblFin, cxp,
+      ventas:ingNetos, cmv, utilBruta, gAdmin, gVtas, utilOp, otrosIng, gNoOp, utilAI, impRenta, utilNeta,
+      compras, depAmort, ebit, ebitda
+    };
+  });
+  // Ajustar flujos de P&G según el tipo de balance y la vista (los de balance quedan en saldo final).
+  // base[k] viene como suma de movMes por archivo. Si los archivos son ACUMULADOS, esa serie es
+  // acumulada (de-acumular para 'mov'); si son MENSUALES, ya es movimiento (acumular para 'ytd').
+  const flowKeys=['ventas','cmv','utilBruta','gAdmin','gVtas','utilOp','otrosIng','gNoOp','utilAI','impRenta','utilNeta','compras','depAmort','ebit','ebitda'];
+  const transform = pygMensual
+    ? (getVistaPyG()==='ytd' ? acumular : null)      // mensual: 'mov' tal cual, 'ytd' acumula
+    : (getVistaPyG()==='mov' ? deAcumular : null);   // acumulado: 'mov' de-acumula, 'ytd' tal cual
+  if(transform){
+    flowKeys.forEach(k=>{
+      const movs=transform(base.map(b=>b[k]));
+      base.forEach((b,i)=>{b[k]=movs[i]});
+    });
+  }
+  return base;
+}
+// Helpers para semáforos
+function semaforo(valor, ranges){
+  // ranges: {good:fn, warn:fn, bad:fn} con funciones que devuelven true/false
+  if(valor===null||valor===undefined||!isFinite(valor))return 'n';
+  if(ranges.good(valor))return 'g';
+  if(ranges.warn(valor))return 'a';
+  return 'r';
+}
+function pct(v){return v===null||v===undefined||!isFinite(v)?'—':(v*100).toFixed(1)+'%'}
+function num(v,dec){if(v===null||v===undefined||!isFinite(v))return '—';dec=dec===undefined?2:dec;return v.toFixed(dec)}
+function nDays(v){return v===null||v===undefined||!isFinite(v)?'—':Math.round(v)+' días'}
+function money(v){return fmtEscala(v,getEscala())}
+// Define todos los indicadores: nombre, fórmula, valores por mes, rango recomendable.
+function calcularIndicadores(){
+  const base=computeBaseSeries();
+  const n=base.length;
+  const arr=(fn)=>base.map((b,i)=>{try{const v=fn(b,i);return isFinite(v)?v:null}catch(e){return null}});
+  const inds=[];
+  // === LIQUIDEZ ===
+  inds.push({cat:'Liquidez',name:'Razón Corriente',formula:'Activo Corriente / Pasivo Corriente',rec:'> 1.5',
+    fmt:v=>num(v,2),vals:arr(b=>b.pc?b.ac/b.pc:null),
+    sem:v=>v>=1.5?'g':v>=1?'a':'r'});
+  inds.push({cat:'Liquidez',name:'Prueba Ácida',formula:'(AC − Inventario) / Pasivo Corriente',rec:'> 1',
+    fmt:v=>num(v,2),vals:arr(b=>b.pc?(b.ac-b.inv)/b.pc:null),
+    sem:v=>v>=1?'g':v>=0.7?'a':'r'});
+  inds.push({cat:'Liquidez',name:'Capital de Trabajo',formula:'AC − PC',rec:'> 0',
+    fmt:v=>money(v),vals:arr(b=>b.ac-b.pc),
+    sem:v=>v>0?'g':v>=0?'a':'r'});
+  inds.push({cat:'Liquidez',name:'Solidez',formula:'Activo Total / Pasivo Total',rec:'> 1.5',
+    fmt:v=>num(v,2),vals:arr(b=>b.pt?b.at/b.pt:null),
+    sem:v=>v>=1.5?'g':v>=1?'a':'r'});
+  // === RENTABILIDAD ===
+  inds.push({cat:'Rentabilidad',name:'Margen Bruto',formula:'Utilidad Bruta / Ingresos',rec:'> 30%',
+    fmt:pct,vals:arr(b=>b.ventas?b.utilBruta/b.ventas:null),
+    sem:v=>v>=0.30?'g':v>=0.15?'a':'r'});
+  inds.push({cat:'Rentabilidad',name:'Margen Operacional',formula:'Utilidad Operacional / Ingresos',rec:'> 10%',
+    fmt:pct,vals:arr(b=>b.ventas?b.utilOp/b.ventas:null),
+    sem:v=>v>=0.10?'g':v>=0.03?'a':'r'});
+  inds.push({cat:'Rentabilidad',name:'Margen Neto',formula:'Utilidad Neta / Ingresos',rec:'> 5%',
+    fmt:pct,vals:arr(b=>b.ventas?b.utilNeta/b.ventas:null),
+    sem:v=>v>=0.05?'g':v>0?'a':'r'});
+  inds.push({cat:'Rentabilidad',name:'ROA (Rendimiento Activo)',formula:'Utilidad Neta / Activo Total',rec:'> 5%',
+    fmt:pct,vals:arr(b=>b.at?b.utilNeta/b.at:null),
+    sem:v=>v>=0.05?'g':v>0?'a':'r'});
+  inds.push({cat:'Rentabilidad',name:'ROE (Rendimiento Patrimonio)',formula:'Utilidad Neta / Patrimonio',rec:'> 15%',
+    fmt:pct,vals:arr(b=>b.pat?b.utilNeta/b.pat:null),
+    sem:v=>v>=0.15?'g':v>0.05?'a':'r'});
+  // === ENDEUDAMIENTO ===
+  inds.push({cat:'Endeudamiento',name:'Razón de Endeudamiento',formula:'Pasivo Total / Activo Total',rec:'< 60%',
+    fmt:pct,vals:arr(b=>b.at?b.pt/b.at:null),
+    sem:v=>v<=0.50?'g':v<=0.70?'a':'r'});
+  inds.push({cat:'Endeudamiento',name:'Endeudamiento Financiero',formula:'Obligaciones Financieras / Activo',rec:'< 30%',
+    fmt:pct,vals:arr(b=>b.at?b.oblFin/b.at:null),
+    sem:v=>v<=0.30?'g':v<=0.50?'a':'r'});
+  inds.push({cat:'Endeudamiento',name:'Apalancamiento Total',formula:'Pasivo / Patrimonio',rec:'< 1.5',
+    fmt:v=>num(v,2),vals:arr(b=>b.pat?b.pt/b.pat:null),
+    sem:v=>v<=1.5?'g':v<=2.5?'a':'r'});
+  // === ACTIVIDAD / ROTACIONES ===
+  inds.push({cat:'Actividad',name:'Rotación de Cartera (días)',formula:'CxC × 30 / Ventas',rec:'< 60 días',
+    fmt:nDays,vals:arr(b=>b.ventas?b.cxc*30/b.ventas:null),
+    sem:v=>v<=45?'g':v<=75?'a':'r'});
+  inds.push({cat:'Actividad',name:'Rotación de Inventarios (días)',formula:'Inventario × 30 / CMV',rec:'< 60 días',
+    fmt:nDays,vals:arr(b=>b.cmv?b.inv*30/b.cmv:null),
+    sem:v=>v<=45?'g':v<=75?'a':'r'});
+  inds.push({cat:'Actividad',name:'Rotación de Proveedores (días)',formula:'CxP × 30 / Compras',rec:'> 30 días',
+    fmt:nDays,vals:arr(b=>b.compras?b.cxp*30/b.compras:null),
+    sem:v=>v>=30?'g':v>=15?'a':'r'});
+  inds.push({cat:'Actividad',name:'Rotación de Activos (veces)',formula:'Ventas / Activo Total',rec:'> 0.5',
+    fmt:v=>num(v,2),vals:arr(b=>b.at?b.ventas/b.at:null),
+    sem:v=>v>=0.5?'g':v>=0.2?'a':'r'});
+  // === EBITDA / VALOR ===
+  inds.push({cat:'Valor & EBITDA',name:'EBIT',formula:'Utilidad Operacional',rec:'> 0',
+    fmt:money,vals:arr(b=>b.ebit),
+    sem:v=>v>0?'g':v>=0?'a':'r'});
+  inds.push({cat:'Valor & EBITDA',name:'EBITDA',formula:'EBIT + Depreciación + Amortización',rec:'> 0',
+    fmt:money,vals:arr(b=>b.ebitda),
+    sem:v=>v>0?'g':v>=0?'a':'r'});
+  inds.push({cat:'Valor & EBITDA',name:'Margen EBITDA',formula:'EBITDA / Ingresos',rec:'> 10%',
+    fmt:pct,vals:arr(b=>b.ventas?b.ebitda/b.ventas:null),
+    sem:v=>v>=0.10?'g':v>=0.05?'a':'r'});
+  inds.push({cat:'Valor & EBITDA',name:'KTNO (Capital de Trabajo Operativo Neto)',formula:'CxC + Inventarios − CxP',rec:'según sector',
+    fmt:money,vals:arr(b=>b.cxc+b.inv-b.cxp),
+    sem:v=>v>=0?'g':'a'});
+  inds.push({cat:'Valor & EBITDA',name:'PKT (Productividad Capital Trabajo)',formula:'KTNO / Ingresos',rec:'< 30%',
+    fmt:pct,vals:arr(b=>b.ventas?(b.cxc+b.inv-b.cxp)/b.ventas:null),
+    sem:v=>v<=0.20?'g':v<=0.40?'a':'r'});
+  // === CICLO DE EFECTIVO ===
+  inds.push({cat:'Ciclo de Efectivo',name:'Ciclo Operativo (días)',formula:'Días Inv + Días CxC',rec:'< 90 días',
+    fmt:nDays,vals:arr(b=>{
+      const di=b.cmv?b.inv*30/b.cmv:0;
+      const dc=b.ventas?b.cxc*30/b.ventas:0;
+      return di+dc;
+    }),sem:v=>v<=75?'g':v<=120?'a':'r'});
+  inds.push({cat:'Ciclo de Efectivo',name:'Ciclo de Efectivo (días)',formula:'Ciclo Operativo − Días CxP',rec:'lo más bajo',
+    fmt:nDays,vals:arr(b=>{
+      const di=b.cmv?b.inv*30/b.cmv:0;
+      const dc=b.ventas?b.cxc*30/b.ventas:0;
+      const dp=b.compras?b.cxp*30/b.compras:0;
+      return di+dc-dp;
+    }),sem:v=>v<=30?'g':v<=60?'a':'r'});
+  return inds;
+}
+// Renderiza el dashboard con cards por categoría y mini-gráficas Chart.js.
+let _chartInstances=[];
+function renderDashboard(){
+  const cont=document.getElementById('dashboardContainer');
+  if(!cont)return;
+  // Destruir charts previos
+  _chartInstances.forEach(c=>{try{c.destroy()}catch(e){}});
+  _chartInstances=[];
+  const empresa=document.getElementById('cfgEmpresa').value||'(empresa sin nombre)';
+  const nit=document.getElementById('cfgNit').value||'';
+  const year=document.getElementById('cfgYear').value;
+  const meses=monthlyFiles.map(f=>f.mes);
+  const periodo=MESES_CORTO[meses[0]]+' a '+MESES_CORTO[meses[meses.length-1]]+' '+year;
+  let h='<div class="dash-empresa">'
+    +'<div><h3>'+empresa+'</h3><p>NIT: '+(nit||'—')+' · '+monthlyFiles.length+' meses cargados</p></div>'
+    +'<div class="dash-periodo"><div class="label">Periodo</div><div class="val">'+periodo+'</div></div>'
+    +'</div>';
+  const inds=calcularIndicadores();
+  // Agrupar por categoría
+  const cats={};
+  inds.forEach(i=>{if(!cats[i.cat])cats[i.cat]=[];cats[i.cat].push(i)});
+  const catOrder=['Liquidez','Rentabilidad','Endeudamiento','Actividad','Valor & EBITDA','Ciclo de Efectivo'];
+  const catIcons={'Liquidez':'💧','Rentabilidad':'📈','Endeudamiento':'⚖️','Actividad':'🔄','Valor & EBITDA':'💎','Ciclo de Efectivo':'⏱️'};
+  const canvasIds=[];
+  catOrder.forEach(cat=>{
+    if(!cats[cat])return;
+    h+='<div class="dash-cat"><div class="dash-cat-title"><span class="ico">'+catIcons[cat]+'</span> '+cat+'</div><div class="dash-cat-line"></div></div>';
+    h+='<div class="dash-grid">';
+    cats[cat].forEach((ind,idx)=>{
+      const lastV=ind.vals[ind.vals.length-1];
+      const sem=lastV===null?'n':ind.sem(lastV);
+      const valStr=ind.fmt(lastV);
+      const cid='dchart_'+canvasIds.length;
+      canvasIds.push({id:cid,vals:ind.vals,sem:sem});
+      h+='<div class="ind-card">'
+        +'<div class="ind-tag"><span class="ind-sem '+sem+'"></span><span class="ind-name">'+ind.name+'</span><span class="ind-rec">'+ind.rec+'</span></div>'
+        +'<div class="ind-value">'+valStr+'</div>'
+        +'<div class="ind-mes">'+MESES_CORTO[meses[meses.length-1]]+' '+year+'</div>'
+        +'<div class="ind-chart"><canvas id="'+cid+'"></canvas></div>'
+        +'<div class="ind-formula">'+ind.formula+'</div>'
+        +'</div>';
+    });
+    h+='</div>';
+  });
+  cont.innerHTML=h;
+  // Crear las gráficas Chart.js
+  if(typeof Chart==='undefined'){
+    console.warn('Chart.js no cargado');return;
+  }
+  canvasIds.forEach(ci=>{
+    const ctx=document.getElementById(ci.id);
+    if(!ctx)return;
+    const semColor={g:'#10B981',a:'#F59E0B',r:'#DC2626',n:'#9CA3AF'}[ci.sem];
+    try{
+      const c=new Chart(ctx,{
+        type:'line',
+        data:{labels:meses.map(m=>MESES_CORTO[m]),datasets:[{
+          data:ci.vals.map(v=>v===null||!isFinite(v)?null:v),
+          borderColor:semColor,
+          backgroundColor:semColor+'22',
+          borderWidth:2,
+          tension:0.3,
+          pointRadius:3,
+          pointBackgroundColor:semColor,
+          fill:true
+        }]},
+        options:{
+          responsive:true,maintainAspectRatio:false,
+          plugins:{legend:{display:false},tooltip:{enabled:true,callbacks:{label:function(c){return c.parsed.y!==null?c.parsed.y.toLocaleString('es-CO',{maximumFractionDigits:2}):'—'}}}},
+          scales:{x:{display:false},y:{display:false}},
+          animation:{duration:300}
+        }
+      });
+      _chartInstances.push(c);
+    }catch(e){console.error('Error creando chart',ci.id,e)}
+  });
+}
+/* ═══ COMPARATIVO AÑO ANTERIOR ═══
+   Por cada mes del año actual cargado, busca el mismo mes en prevYearFiles
+   y arma una tabla con Concepto | Actual | Anterior | Var $ | Var %. */
+function findPrev(mes){return prevYearFiles.find(f=>f.mes===mes)}
+function renderComparativo(){
+  const card=document.getElementById('cardComparativo');
+  const tbl=document.getElementById('compTable');
+  if(!card||!tbl)return;
+  // Necesitamos al menos 1 mes que tenga par año anterior
+  const pares=monthlyFiles.map(mf=>({mes:mf.mes,cur:mf,prev:findPrev(mf.mes)})).filter(p=>p.prev);
+  if(pares.length===0){card.classList.add('hidden');return}
+  card.classList.remove('hidden');
+  const cfgY=parseInt(document.getElementById('cfgYear').value);
+  const esc=getEscala();
+  function valBal(mf,fn){return fn(mf)}
+  function totalClaseFn(mf,clase){let t=0;mf.classified.forEach(a=>{if(a.clase===clase)t+=getDisplayValue(a)});return t}
+  function vG(mf,g){return mf.esfData[g]||0}
+  // Construir header: por cada mes con par, 4 columnas (Actual | Anterior | Δ$ | Δ%)
+  let html='<thead><tr><th rowspan="2" style="min-width:230px;vertical-align:bottom">Concepto</th>';
+  pares.forEach(p=>{html+='<th colspan="4" style="text-align:center;background:#1B3A5C">'+MESES_CORTO[p.mes]+'</th>'});
+  html+='</tr><tr>';
+  pares.forEach(p=>{
+    html+='<th class="num" style="font-size:.7rem">'+cfgY+'</th>';
+    html+='<th class="num" style="font-size:.7rem;background:#3B5A78">'+(cfgY-1)+'</th>';
+    html+='<th class="num" style="font-size:.7rem">Var $</th>';
+    html+='<th class="num" style="font-size:.7rem">Var %</th>';
+  });
+  html+='</tr></thead><tbody>';
+  // Para P&G: el valor acumulado (fnVal) se de-acumula a movimiento del mes dentro
+  // de su propia serie (año actual vs año anterior por separado). En vista 'ytd' deja el acumulado.
+  function movEnSerie(serie,mf,fnAcum){
+    if(getVistaPyG()!=='mov') return fnAcum(mf);
+    const s=serie.slice().sort((a,b)=>a.mes-b.mes);
+    const idx=s.findIndex(x=>x.mes===mf.mes);
+    if(idx<=0) return fnAcum(mf);
+    return fnAcum(mf)-fnAcum(s[idx-1]);
+  }
+  function rowComp(label,fnVal,cls,opts){
+    opts=opts||{};
+    let r='<tr'+(cls?' class="'+cls+'"':'')+'><td>'+label+'</td>';
+    pares.forEach(p=>{
+      const vc=opts.pyg?movEnSerie(monthlyFiles,p.cur,fnVal):fnVal(p.cur,opts);
+      const va=opts.pyg?movEnSerie(prevYearFiles,p.prev,fnVal):fnVal(p.prev,opts);
+      const diff=vc-va;
+      const pct=va?(diff/Math.abs(va)*100):null;
+      const pctStr=pct===null?'—':(pct>=0?'+':'')+pct.toFixed(1)+'%';
+      const col=diff>=0?'#059669':'#DC2626';
+      r+='<td class="num">'+fmtEscala(vc,esc)+'</td>';
+      r+='<td class="num" style="color:#6B7280">'+fmtEscala(va,esc)+'</td>';
+      r+='<td class="num" style="color:'+col+';font-weight:600">'+fmtEscala(diff,esc)+'</td>';
+      r+='<td class="num" style="color:'+col+';font-weight:600">'+pctStr+'</td>';
+    });
+    r+='</tr>';
+    return r;
+  }
+  function sectionRow(label){const cs=1+pares.length*4;return '<tr class="section"><td colspan="'+cs+'">'+label+'</td></tr>'}
+  // BALANCE
+  html+=sectionRow('BALANCE — saldos finales');
+  html+=rowComp('Total Activos',mf=>totalClaseFn(mf,'Activo'),'total');
+  html+=rowComp('Activos corrientes',mf=>vG(mf,'efectivo')+vG(mf,'inv_cp')+vG(mf,'cxc')+vG(mf,'deterioro_cartera')+vG(mf,'inventarios')+vG(mf,'diferidos_act')+vG(mf,'otros_act'),'subtotal');
+  html+=rowComp('Activos no corrientes',mf=>vG(mf,'ppe')+vG(mf,'depreciacion')+vG(mf,'intangibles')+vG(mf,'amortizacion')+vG(mf,'inv_lp')+vG(mf,'otros_act_nc')+vG(mf,'valorizaciones'),'subtotal');
+  html+=rowComp('Total Pasivos',mf=>totalClaseFn(mf,'Pasivo'),'total');
+  html+=rowComp('Total Patrimonio',mf=>{let t=0,u=0;mf.classified.forEach(a=>{const v=getDisplayValue(a);if(a.clase==='Patrimonio')t+=v;else if(a.clase==='Ingreso')u+=v;else if(a.clase==='Gasto'||a.clase==='Costo'||a.clase==='Costo prod')u-=v});return t+u},'total');
+  // P&G — respeta el toggle: movimiento del mes (de-acumulado por serie) o acumulado YTD
+  html+=sectionRow(getVistaPyG()==='mov'?'P&G — movimiento del mes':'P&G — acumulado YTD');
+  html+=rowComp('Ingresos operacionales',mf=>{let t=0;mf.classified.forEach(a=>{if(a.code.startsWith('41')&&!a.code.startsWith('4175'))t+=movMes(a)});return t},'subtotal',{pyg:true});
+  html+=rowComp('(-) Costo de ventas',mf=>{let t=0;mf.classified.forEach(a=>{if(a.code.startsWith('6')||a.code.startsWith('7'))t+=movMes(a)});return t},'',{pyg:true});
+  html+=rowComp('UTILIDAD BRUTA',mf=>{let i=0,c=0;mf.classified.forEach(a=>{if(a.code.startsWith('41')&&!a.code.startsWith('4175'))i+=movMes(a);if(a.code.startsWith('6')||a.code.startsWith('7'))c+=movMes(a)});return i-c},'subtotal',{pyg:true});
+  html+=rowComp('(-) Gastos administración',mf=>{let t=0;mf.classified.forEach(a=>{if(a.code.startsWith('51'))t+=movMes(a)});return t},'',{pyg:true});
+  html+=rowComp('(-) Gastos ventas',mf=>{let t=0;mf.classified.forEach(a=>{if(a.code.startsWith('52'))t+=movMes(a)});return t},'',{pyg:true});
+  html+=rowComp('UTILIDAD OPERACIONAL',mf=>{let i=0,c=0,a1=0,a2=0;mf.classified.forEach(a=>{if(a.code.startsWith('41')&&!a.code.startsWith('4175'))i+=movMes(a);if(a.code.startsWith('6')||a.code.startsWith('7'))c+=movMes(a);if(a.code.startsWith('51'))a1+=movMes(a);if(a.code.startsWith('52'))a2+=movMes(a)});return i-c-a1-a2},'subtotal',{pyg:true});
+  html+=rowComp('UTILIDAD NETA',mf=>{let i=0,c=0,a1=0,a2=0,oi=0,og=0,ir=0;mf.classified.forEach(a=>{if(a.code.startsWith('41')&&!a.code.startsWith('4175'))i+=movMes(a);if(a.code.startsWith('6')||a.code.startsWith('7'))c+=movMes(a);if(a.code.startsWith('51'))a1+=movMes(a);if(a.code.startsWith('52'))a2+=movMes(a);if(a.code.startsWith('42'))oi+=movMes(a);if(a.code.startsWith('53'))og+=movMes(a);if(a.code.startsWith('54'))ir+=movMes(a)});return i-c-a1-a2+oi-og-ir},'total',{pyg:true});
+  html+='</tbody>';
+  tbl.innerHTML=html;
+}
+/* ═══ EXPORTAR DASHBOARD HTML AUTOCONTENIDO ═══ */
+async function exportarHTML(){
+  if(typeof exoProGate==='function'){if(!(await exoProGate('Trend Financiero — Dashboard HTML')))return}
+  const empresa=document.getElementById('cfgEmpresa').value||'EMPRESA';
+  const nit=document.getElementById('cfgNit').value||'';
+  const ciudad=document.getElementById('cfgCiudad').value||'';
+  const year=document.getElementById('cfgYear').value;
+  const meses=monthlyFiles.map(f=>f.mes);
+  const periodo=MESES_CORTO[meses[0]]+' a '+MESES_CORTO[meses[meses.length-1]]+' '+year;
+  const inds=calcularIndicadores();
+  const cats={};
+  inds.forEach(i=>{if(!cats[i.cat])cats[i.cat]=[];cats[i.cat].push(i)});
+  const catOrder=['Liquidez','Rentabilidad','Endeudamiento','Actividad','Valor & EBITDA','Ciclo de Efectivo'];
+  const catIcons={'Liquidez':'💧','Rentabilidad':'📈','Endeudamiento':'⚖️','Actividad':'🔄','Valor & EBITDA':'💎','Ciclo de Efectivo':'⏱️'};
+  const fechaGen=new Date().toLocaleDateString('es-CO',{year:'numeric',month:'long',day:'numeric'});
+  // ─── KPIs principales (Resumen ejecutivo) ───
+  // P&G usa pygVal (respeta toggle mov/ytd); Balance usa valG (saldo final siempre).
+  const vistaH=getVistaPyG();
+  const vistaHLabel=vistaH==='mov'?'Movimiento del mes':'Acumulado YTD';
+  function valG(mf,g){return mf.esfData[g]||0}
+  function totalClaseFn(mf,clase){let t=0;mf.classified.forEach(a=>{if(a.clase===clase)t+=getDisplayValue(a)});return t}
+  const valsIngresosAcum=monthlyFiles.map(mf=>pygAcum(mf,'ing_operacionales')-pygAcum(mf,'dev_ventas'));
+  const valsUtilNetaAcum=monthlyFiles.map(mf=>pygAcum(mf,'ing_operacionales')-pygAcum(mf,'dev_ventas')-pygAcum(mf,'costo_ventas')-pygAcum(mf,'costo_prod')-pygAcum(mf,'gtos_admin')-pygAcum(mf,'gtos_ventas')+pygAcum(mf,'ing_no_operacionales')+pygAcum(mf,'otros_ing')-pygAcum(mf,'gtos_no_op')-pygAcum(mf,'imp_renta'));
+  const valsIngresos=aplicarVistaPyG(valsIngresosAcum);   // movimiento del mes (o acumulado según vista)
+  const valsUtilNeta=aplicarVistaPyG(valsUtilNetaAcum);
+  const valsActivos=monthlyFiles.map(mf=>totalClaseFn(mf,'Activo'));
+  const valsPatrimonio=monthlyFiles.map(mf=>{let t=0,u=0;mf.classified.forEach(a=>{const v=getDisplayValue(a);if(a.clase==='Patrimonio')t+=v;else if(a.clase==='Ingreso')u+=v;else if(a.clase==='Gasto'||a.clase==='Costo'||a.clase==='Costo prod')u-=v});return t+u});
+  const lastIdx=meses.length-1;
+  const kpiIngresos=valsIngresos[lastIdx]||0;
+  const kpiUtilNeta=valsUtilNeta[lastIdx]||0;
+  const kpiMargenNeto=kpiIngresos?kpiUtilNeta/kpiIngresos*100:0;
+  const kpiROE=valsPatrimonio[lastIdx]?valsUtilNeta[lastIdx]/valsPatrimonio[lastIdx]*100:0;
+  // ─── ESF mensual (para tabla) ───
+  function valsFn(fn){return monthlyFiles.map(fn)}
+  const esfRows=[
+    {sec:'ACTIVOS'},
+    {lbl:'Activos corrientes',vals:valsFn(mf=>valG(mf,'efectivo')+valG(mf,'inv_cp')+valG(mf,'cxc')+valG(mf,'deterioro_cartera')+valG(mf,'inventarios')+valG(mf,'diferidos_act')+valG(mf,'otros_act')),bold:true},
+    {lbl:'  Efectivo y equivalentes',vals:valsFn(mf=>valG(mf,'efectivo'))},
+    {lbl:'  Cartera (CxC)',vals:valsFn(mf=>valG(mf,'cxc')+valG(mf,'deterioro_cartera'))},
+    {lbl:'  Inventarios',vals:valsFn(mf=>valG(mf,'inventarios'))},
+    {lbl:'  Otros corrientes',vals:valsFn(mf=>valG(mf,'inv_cp')+valG(mf,'diferidos_act')+valG(mf,'otros_act'))},
+    {lbl:'Activos no corrientes',vals:valsFn(mf=>valG(mf,'ppe')+valG(mf,'depreciacion')+valG(mf,'intangibles')+valG(mf,'amortizacion')+valG(mf,'inv_lp')+valG(mf,'otros_act_nc')+valG(mf,'valorizaciones')),bold:true},
+    {lbl:'TOTAL ACTIVOS',vals:valsActivos,total:true},
+    {sec:'PASIVOS'},
+    {lbl:'Pasivos corrientes',vals:valsFn(mf=>valG(mf,'oblig_fin_cp')+valG(mf,'proveedores')+valG(mf,'cxp')+valG(mf,'impuestos')+valG(mf,'laborales')+valG(mf,'provisiones')+valG(mf,'otros_pas_c')),bold:true},
+    {lbl:'  Obligaciones financieras',vals:valsFn(mf=>valG(mf,'oblig_fin_cp'))},
+    {lbl:'  Proveedores',vals:valsFn(mf=>valG(mf,'proveedores'))},
+    {lbl:'  Cuentas por pagar',vals:valsFn(mf=>valG(mf,'cxp'))},
+    {lbl:'  Impuestos por pagar',vals:valsFn(mf=>valG(mf,'impuestos'))},
+    {lbl:'  Obligaciones laborales',vals:valsFn(mf=>valG(mf,'laborales'))},
+    {lbl:'Pasivos no corrientes',vals:valsFn(mf=>valG(mf,'oblig_fin_lp')+valG(mf,'diferidos_pas')+valG(mf,'otros_pas')),bold:true},
+    {lbl:'TOTAL PASIVOS',vals:valsFn(mf=>totalClaseFn(mf,'Pasivo')),total:true},
+    {sec:'PATRIMONIO'},
+    {lbl:'Capital + Reservas',vals:valsFn(mf=>valG(mf,'capital')+valG(mf,'superavit_cap')+valG(mf,'reservas'))},
+    {lbl:'Resultados acumulados',vals:valsFn(mf=>valG(mf,'resultados_ant')+valG(mf,'resultado_ej'))},
+    {lbl:'Resultado del periodo',vals:valsFn(mf=>{let u=0;mf.classified.forEach(a=>{const v=getDisplayValue(a);if(a.clase==='Ingreso')u+=v;else if(a.clase==='Gasto'||a.clase==='Costo'||a.clase==='Costo prod')u-=v});return u})},
+    {lbl:'TOTAL PATRIMONIO',vals:valsPatrimonio,total:true}
+  ];
+  // ─── P&G Detallado (subcuentas 4-dig agrupadas por sección PUC) ───
+  const agg=aggBySub4(monthlyFiles,['Ingreso','Gasto','Costo','Costo prod']);
+  function sumByPref(prefix){const n=meses.length;const tot=new Array(n).fill(0);Object.keys(agg).forEach(s4=>{if(s4.startsWith(prefix))agg[s4].vals.forEach((v,i)=>{tot[i]+=v})});return tot}
+  const ingOp=sumByPref('41');
+  const costos=sumByPref('6').map((v,i)=>v+sumByPref('7')[i]);
+  const utilBruta=ingOp.map((v,i)=>v-costos[i]);
+  const gAdm=sumByPref('51');const gVtas=sumByPref('52');
+  const utilOp=utilBruta.map((v,i)=>v-gAdm[i]-gVtas[i]);
+  const otrosI=sumByPref('42');const otrosG=sumByPref('53');
+  const utilAI=utilOp.map((v,i)=>v+otrosI[i]-otrosG[i]);
+  const impRta=sumByPref('54');
+  const utilN=utilAI.map((v,i)=>v-impRta[i]);
+  // Márgenes en base de la vista (movimiento o acumulado) + margen YTD del período.
+  const dispIngOp=aplicarVistaPyG(ingOp), dispUB=aplicarVistaPyG(utilBruta), dispUO=aplicarVistaPyG(utilOp), dispUN=aplicarVistaPyG(utilN);
+  const mgBruto=dispIngOp.map((v,i)=>v?(dispUB[i]/v*100):null);
+  const mgOp=dispIngOp.map((v,i)=>v?(dispUO[i]/v*100):null);
+  const mgN=dispIngOp.map((v,i)=>v?(dispUN[i]/v*100):null);
+  const ytdIngOp=ytdDe(ingOp);
+  const mgBrutoYTD=ytdIngOp?ytdDe(utilBruta)/ytdIngOp*100:null;
+  const mgOpYTD=ytdIngOp?ytdDe(utilOp)/ytdIngOp*100:null;
+  const mgNYTD=ytdIngOp?ytdDe(utilN)/ytdIngOp*100:null;
+  const pgSecciones=[
+    {titulo:'INGRESOS OPERACIONALES',prefijos:['41']},
+    {totalLabel:'INGRESOS NETOS',vals:ingOp,subtotal:true}
+  ];
+  if(costos.some(v=>Math.round(v)!==0)){pgSecciones.push({titulo:'COSTO DE VENTAS',prefijos:['6','7']},{totalLabel:'TOTAL COSTOS',vals:costos,subtotal:true})}
+  pgSecciones.push({totalLabel:'UTILIDAD BRUTA',vals:utilBruta,total:true},{margenLabel:'% MARGEN BRUTO',vals:mgBruto,ytd:mgBrutoYTD});
+  if(gAdm.some(v=>Math.round(v)!==0)){pgSecciones.push({titulo:'GASTOS DE ADMINISTRACIÓN',prefijos:['51']},{totalLabel:'TOTAL GASTOS ADMINISTRACIÓN',vals:gAdm,subtotal:true})}
+  if(gVtas.some(v=>Math.round(v)!==0)){pgSecciones.push({titulo:'GASTOS DE VENTAS',prefijos:['52']},{totalLabel:'TOTAL GASTOS DE VENTAS',vals:gVtas,subtotal:true})}
+  pgSecciones.push({totalLabel:'UTILIDAD OPERACIONAL',vals:utilOp,total:true},{margenLabel:'% MARGEN OPERACIONAL',vals:mgOp,ytd:mgOpYTD});
+  if(otrosI.some(v=>Math.round(v)!==0)){pgSecciones.push({titulo:'OTROS INGRESOS NO OPERACIONALES',prefijos:['42']})}
+  if(otrosG.some(v=>Math.round(v)!==0)){pgSecciones.push({titulo:'OTROS GASTOS NO OPERACIONALES',prefijos:['53']})}
+  pgSecciones.push({totalLabel:'UTILIDAD ANTES DE IMPUESTOS',vals:utilAI,subtotal:true});
+  if(impRta.some(v=>Math.round(v)!==0)){pgSecciones.push({titulo:'IMPUESTO DE RENTA',prefijos:['54']})}
+  pgSecciones.push({totalLabel:'UTILIDAD NETA DEL PERÍODO',vals:utilN,total:true},{margenLabel:'% MARGEN NETO',vals:mgN,ytd:mgNYTD});
+  // Resolver prefijos a filas reales. Las filas de valor llegan ACUMULADAS y se
+  // de-acumulan según la vista; la columna ytd guarda siempre el acumulado del período.
+  const pgRows=[];
+  pgSecciones.forEach(sec=>{
+    if(sec.titulo){
+      pgRows.push({sec:sec.titulo});
+      Object.keys(agg).sort().forEach(s4=>{
+        if(sec.prefijos.some(p=>s4.startsWith(p))){const g=agg[s4];pgRows.push({lbl:(s4+' '+(g.name||'').trim()).trim(),vals:aplicarVistaPyG(g.vals),ytd:ytdDe(g.vals)})}
+      });
+    } else if(sec.totalLabel){pgRows.push({lbl:sec.totalLabel,vals:aplicarVistaPyG(sec.vals),ytd:ytdDe(sec.vals),total:sec.total,subtotal:sec.subtotal})}
+    else if(sec.margenLabel){pgRows.push({lbl:sec.margenLabel,vals:sec.vals,ytd:sec.ytd,margen:true})}
+  });
+  // ESF: cada fila de balance lleva su YTD = saldo de cierre (último mes).
+  esfRows.forEach(r=>{if(r.vals)r.ytd=r.vals[r.vals.length-1]});
+  // Notas
+  const notas={
+    activos:document.getElementById('notaActivos').value,
+    pasivos:document.getElementById('notaPasivos').value,
+    ingresos:document.getElementById('notaIngresos').value,
+    gastos:document.getElementById('notaGastos').value,
+    conclusion:document.getElementById('notaConclusion').value
+  };
+  // Notas mensuales: array ordenado por mes cargado
+  const nMesData=getNotasMes();
+  const notasMes=monthlyFiles.map(mf=>({mes:mf.mes,label:MESES[mf.mes]+' '+year,texto:nMesData[mf.mes]||''}));
+  // Datos para JSON embebido
+  const dataJS={
+    empresa,nit,ciudad,year,periodo,fechaGen,meses:meses.map(m=>MESES_CORTO[m]),
+    vistaPyG:vistaH,
+    kpis:{ingresos:kpiIngresos,utilNeta:kpiUtilNeta,margenNeto:kpiMargenNeto,roe:kpiROE,
+      sIngresos:valsIngresos,sUtilNeta:valsUtilNeta,sActivos:valsActivos,sPatrimonio:valsPatrimonio},
+    cats:catOrder.filter(c=>cats[c]).map(c=>({cat:c,icon:catIcons[c],inds:cats[c].map(i=>{const lastV=i.vals[i.vals.length-1];const sem=lastV===null?'n':i.sem(lastV);return{name:i.name,formula:i.formula,rec:i.rec,vals:i.vals,sem:sem,valStr:i.fmt(lastV)}})})),
+    esfRows,pgRows,notas,notasMes
+  };
+  // Helper: formato moneda con escala automática (millones si > $10M)
+  function fmtMoneyJS(){return ''}
+  const html=`<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><title>Dashboard Financiero · ${empresa} · ${periodo}</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"><\/script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;background:#F3F4F6;color:#111;line-height:1.5;-webkit-font-smoothing:antialiased}
+.container{max-width:1280px;margin:0 auto;padding:24px}
+/* HERO */
+.hero{background:linear-gradient(135deg,#0F2A47 0%,#1B3A5C 40%,#2E75B6 100%);color:#fff;padding:36px 40px;border-radius:18px;margin-bottom:24px;position:relative;overflow:hidden;box-shadow:0 10px 40px rgba(15,42,71,.25)}
+.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(255,255,255,.08) 0%,transparent 70%);border-radius:50%}
+.hero::after{content:'';position:absolute;bottom:-50px;left:30%;width:250px;height:250px;background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 70%);border-radius:50%}
+.hero-content{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:20px}
+.hero h1{font-size:1.9rem;font-weight:800;margin-bottom:8px;letter-spacing:-.3px}
+.hero .sub{font-size:1rem;opacity:.9;margin-bottom:14px}
+.hero .meta{display:flex;gap:24px;flex-wrap:wrap;font-size:.85rem;opacity:.85}
+.hero .meta b{font-weight:700}
+.hero-tag{background:rgba(255,255,255,.15);backdrop-filter:blur(10px);padding:5px 14px;border-radius:999px;font-size:.78rem;font-weight:700;letter-spacing:.4px;display:inline-block;margin-bottom:10px}
+.hero .periodo-box{background:rgba(255,255,255,.1);backdrop-filter:blur(10px);padding:14px 20px;border-radius:12px;text-align:right;min-width:180px}
+.hero .periodo-box .lbl{font-size:.7rem;opacity:.75;text-transform:uppercase;letter-spacing:.6px;margin-bottom:2px}
+.hero .periodo-box .val{font-size:1.1rem;font-weight:800}
+.hero .periodo-box .meses{font-size:.78rem;opacity:.85;margin-top:6px}
+/* TOOLBAR */
+.toolbar{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.toolbar button{padding:9px 18px;border:none;border-radius:9px;font-weight:600;font-size:.85rem;cursor:pointer;font-family:inherit;transition:.2s;display:inline-flex;align-items:center;gap:6px}
+.toolbar .btn-print{background:#1B3A5C;color:#fff}
+.toolbar .btn-print:hover{background:#0F2A47}
+.toolbar .btn-share{background:#10B981;color:#fff}
+.toolbar .btn-share:hover{background:#059669}
+@media print{.toolbar{display:none}}
+/* KPIs ejecutivos */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:28px}
+.kpi-card{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 8px rgba(0,0,0,.04);border:1px solid #E5E7EB;position:relative;overflow:hidden}
+.kpi-card.featured{background:linear-gradient(135deg,#fff 0%,#F8FBFF 100%);border-color:#2E75B6}
+.kpi-card .kpi-lbl{font-size:.72rem;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.kpi-card .kpi-val{font-size:1.85rem;font-weight:800;color:#111;font-family:'Cascadia Code','JetBrains Mono',monospace;line-height:1.1;margin-bottom:4px}
+.kpi-card .kpi-val.pos{color:#059669}
+.kpi-card .kpi-val.neg{color:#DC2626}
+.kpi-card .kpi-sub{font-size:.75rem;color:#6B7280}
+.kpi-card .kpi-spark{height:38px;margin-top:10px;position:relative}
+/* Section */
+.section{margin-bottom:32px}
+.section-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.section-head h2{font-size:1.15rem;font-weight:800;color:#1B3A5C;display:flex;align-items:center;gap:8px}
+.section-head .ico{font-size:1.3rem}
+.section-head .line{flex:1;height:2px;background:linear-gradient(90deg,#2E75B6 0%,transparent 100%);border-radius:1px}
+/* Legend */
+.legend{background:#fff;border:1px solid #E5E7EB;border-radius:12px;padding:14px 18px;margin-bottom:18px;display:flex;gap:24px;flex-wrap:wrap;font-size:.85rem;color:#374151}
+.legend-item{display:flex;align-items:center;gap:7px}
+.legend-item .dot{width:11px;height:11px;border-radius:50%}
+/* Dashboard cat */
+.dash-cat{margin:18px 0 10px;display:flex;align-items:center;gap:10px}
+.dash-cat-title{font-size:.9rem;font-weight:800;color:#1B3A5C;text-transform:uppercase;letter-spacing:.4px;display:flex;align-items:center;gap:8px}
+.dash-cat-title .ico{font-size:1.15rem}
+.dash-cat-line{flex:1;height:1px;background:linear-gradient(90deg,#CBD5E1 0%,transparent 100%)}
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.ind-card{background:#fff;border:1px solid #E5E7EB;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;min-height:185px;box-shadow:0 1px 3px rgba(0,0,0,.04);transition:.2s}
+.ind-card:hover{box-shadow:0 6px 16px rgba(0,0,0,.06);transform:translateY(-1px)}
+.ind-card .ind-tag{display:flex;align-items:center;gap:7px;margin-bottom:6px}
+.ind-card .ind-sem{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+.ind-card .ind-sem.g{background:#10B981;box-shadow:0 0 0 3px rgba(16,185,129,.2)}
+.ind-card .ind-sem.a{background:#F59E0B;box-shadow:0 0 0 3px rgba(245,158,11,.2)}
+.ind-card .ind-sem.r{background:#DC2626;box-shadow:0 0 0 3px rgba(220,38,38,.2)}
+.ind-card .ind-sem.n{background:#9CA3AF}
+.ind-card .ind-name{font-size:.76rem;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.3px;flex:1}
+.ind-card .ind-rec{font-size:.66rem;color:#6B7280;font-weight:600;padding:2px 8px;background:#F3F4F6;border-radius:999px;white-space:nowrap}
+.ind-card .ind-value{font-size:1.55rem;font-weight:800;color:#111;font-family:'Cascadia Code','JetBrains Mono',monospace;margin:3px 0 1px;line-height:1.1}
+.ind-card .ind-mes{font-size:.7rem;color:#6B7280;font-weight:500}
+.ind-card .ind-chart{height:60px;margin-top:auto;position:relative}
+.ind-card .ind-formula{font-size:.68rem;color:#9CA3AF;font-style:italic;margin-top:6px;line-height:1.3}
+/* Tables */
+.tbl-wrap{background:#fff;border:1px solid #E5E7EB;border-radius:12px;overflow:auto;margin-bottom:16px;box-shadow:0 2px 6px rgba(0,0,0,.03)}
+.tbl{width:100%;border-collapse:collapse;font-size:.84rem}
+.tbl th{background:#1B3A5C;color:#fff;padding:10px 12px;text-align:right;font-size:.75rem;text-transform:uppercase;letter-spacing:.3px;font-weight:700;position:sticky;top:0;white-space:nowrap}
+.tbl th:first-child{text-align:left;min-width:240px}
+.tbl td{padding:6px 12px;border-bottom:1px solid #F1F5F9;text-align:right;font-family:'Cascadia Code','JetBrains Mono',monospace;font-size:.82rem;white-space:nowrap}
+.tbl td:first-child{text-align:left;font-family:inherit;font-size:.85rem}
+.tbl tr.sec td{background:#2E75B6;color:#fff;font-weight:800;text-transform:uppercase;letter-spacing:.4px;font-size:.78rem;padding:8px 12px}
+.tbl tr.bold td{background:#F8FAFC;font-weight:700}
+.tbl tr.total td{background:#DBEAFE;font-weight:800;border-top:2px solid #2E75B6;border-bottom:3px double #2E75B6}
+.tbl tr.margen td{background:#EDE9FE;color:#7C3AED;font-weight:700;font-size:.85rem}
+.tbl .var{font-weight:700}
+.tbl .var.pos{color:#059669}
+.tbl .var.neg{color:#DC2626}
+/* Notas */
+.notas-stack{display:flex;flex-direction:column;gap:10px}
+.nota{background:#FFFBEB;border:1px solid #FCD34D;border-left:4px solid #F59E0B;border-radius:10px;padding:14px 18px}
+.nota h4{font-size:.88rem;font-weight:800;color:#92400E;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px}
+.nota p{font-size:.92rem;color:#451A03;line-height:1.55;white-space:pre-wrap}
+.nota p.empty{color:#9CA3AF;font-style:italic}
+.nota.nota-mes{background:#EFF6FF;border-color:#93C5FD;border-left-color:#2E75B6}
+.nota.nota-mes h4{color:#1B3A5C}
+.nota.nota-mes p{color:#0F2A47}
+/* Footer */
+.footer{margin-top:36px;padding:18px;text-align:center;color:#9CA3AF;font-size:.78rem;border-top:1px solid #E5E7EB}
+.footer a{color:#2E75B6;text-decoration:none;font-weight:600}
+.footer .brand{font-size:.85rem;color:#1B3A5C;font-weight:700;margin-bottom:4px}
+@media print{
+  body{background:#fff;font-size:11pt}
+  .container{padding:10px;max-width:none}
+  .hero{break-inside:avoid;box-shadow:none;padding:20px}
+  .hero h1{font-size:1.4rem}
+  .kpi-grid,.dash-grid{gap:10px}
+  .kpi-card,.ind-card{box-shadow:none;border:1px solid #ccc}
+  .section{break-inside:avoid}
+  .dash-cat,.dash-grid,.tbl-wrap,.nota{break-inside:avoid}
+  .ind-card{min-height:130px;page-break-inside:avoid}
+  .ind-chart{height:36px}
+}
+@media (max-width:600px){
+  .container{padding:14px}
+  .hero{padding:24px}
+  .hero h1{font-size:1.4rem}
+  .kpi-card .kpi-val{font-size:1.4rem}
+  .ind-card .ind-value{font-size:1.3rem}
+  .tbl{font-size:.78rem}
+  .tbl td,.tbl th{padding:5px 7px}
+}
+</style></head><body>
+<div class="container">
+  <div class="hero">
+    <div class="hero-content">
+      <div>
+        <span class="hero-tag">📊 INFORME GERENCIAL</span>
+        <h1>${empresa}</h1>
+        <p class="sub">Dashboard Financiero Mensual con Indicadores</p>
+        <div class="meta">
+          <span><b>NIT:</b> ${nit||'—'}</span>
+          ${ciudad?'<span><b>Ciudad:</b> '+ciudad+'</span>':''}
+          <span><b>Emitido:</b> ${fechaGen}</span>
+          <span><b>Vista P&G:</b> ${vistaHLabel}</span>
+        </div>
+      </div>
+      <div class="periodo-box">
+        <div class="lbl">Periodo analizado</div>
+        <div class="val">${periodo}</div>
+        <div class="meses">${monthlyFiles.length} meses cargados</div>
+      </div>
+    </div>
+  </div>
+  <div class="toolbar">
+    <button class="btn-print" onclick="window.print()">🖨️ Imprimir / PDF</button>
+    <button class="btn-share" onclick="if(navigator.share){navigator.share({title:'Dashboard ${empresa}',text:'Dashboard financiero ${periodo}'})}else{alert('Comparte la URL del archivo')}">📤 Compartir</button>
+  </div>
+  <div id="ejecutivo"></div>
+  <div id="esf"></div>
+  <div id="pyg"></div>
+  <div id="indicadores"></div>
+  <div id="notasMensuales"></div>
+  <div id="notas"></div>
+  <div class="footer">
+    <div class="brand">Generado con ExógenaDIAN.com</div>
+    <div>Herramienta gratuita para contadores · Tus datos no salen del navegador</div>
+    <div style="margin-top:6px">Crea tu propio dashboard en <a href="https://exogenadian.com/trend-financiero.html">https://exogenadian.com/trend-financiero.html</a></div>
+  </div>
+</div>
+<script>
+const data=${JSON.stringify(dataJS).replace(/<\/script>/g,'<\\/script>')};
+const semColor={g:'#10B981',a:'#F59E0B',r:'#DC2626',n:'#9CA3AF'};
+function fN(n){if(n===null||n===undefined||!isFinite(n))return'—';if(!n)return'0';const r=Math.round(n);const s=Math.abs(r).toString().replace(/\\B(?=(\\d{3})+(?!\\d))/g,'.');return r<0?'-'+s:s}
+function fmtPct(v){return v===null||!isFinite(v)?'—':v.toFixed(1)+'%'}
+function variacionProm(vals){const maxAbs=vals.reduce((a,v)=>Math.max(a,Math.abs(v||0)),0);const minBase=Math.max(1000,maxAbs*0.01);let s=0,n=0;for(let i=1;i<vals.length;i++){const p=vals[i-1];if(p===null||p===undefined||!isFinite(p)||Math.abs(p)<minBase)continue;s+=(vals[i]-p)/Math.abs(p);n++}return n>0?s/n*100:null}
+// ─── KPIs ejecutivos ───
+function buildKpis(){
+  const ejec=document.getElementById('ejecutivo');
+  const varIng=variacionProm(data.kpis.sIngresos);
+  const varUti=variacionProm(data.kpis.sUtilNeta);
+  const ultMes=data.meses[data.meses.length-1]+' '+data.year;
+  const ingLbl=data.vistaPyG==='ytd'?'Ingresos acumulados a '+ultMes:'Ingresos de '+ultMes;
+  const utiLbl=data.vistaPyG==='ytd'?'Utilidad Neta acumulada a '+ultMes:'Utilidad Neta de '+ultMes;
+  ejec.innerHTML='<div class="section"><div class="section-head"><span class="ico">⭐</span><h2>Resumen ejecutivo</h2><div class="line"></div></div>'
+    +'<div class="kpi-grid">'
+    +kpiCard(ingLbl,'featured',fN(data.kpis.ingresos),'',data.kpis.sIngresos,varIng,'#2E75B6')
+    +kpiCard(utiLbl,data.kpis.utilNeta>=0?'featured':'',fN(data.kpis.utilNeta),data.kpis.utilNeta>=0?'pos':'neg',data.kpis.sUtilNeta,varUti,data.kpis.utilNeta>=0?'#10B981':'#DC2626')
+    +kpiCard('Margen Neto · '+ultMes,'',fmtPct(data.kpis.margenNeto),data.kpis.margenNeto>=5?'pos':data.kpis.margenNeto>=0?'':'neg',data.kpis.sUtilNeta.map((u,i)=>data.kpis.sIngresos[i]?u/data.kpis.sIngresos[i]*100:null),null,data.kpis.margenNeto>=5?'#10B981':'#F59E0B')
+    +kpiCard('ROE · '+ultMes,'',fmtPct(data.kpis.roe),data.kpis.roe>=15?'pos':data.kpis.roe>=5?'':'neg',data.kpis.sUtilNeta.map((u,i)=>data.kpis.sPatrimonio[i]?u/data.kpis.sPatrimonio[i]*100:null),null,data.kpis.roe>=15?'#10B981':'#F59E0B')
+    +'</div></div>';
+}
+function kpiCard(lbl,cls,val,valCls,sparkVals,vari,color){
+  const id='kpi_'+Math.random().toString(36).substr(2,6);
+  setTimeout(()=>{const ctx=document.getElementById(id);if(ctx&&typeof Chart!=='undefined')new Chart(ctx,{type:'line',data:{labels:data.meses,datasets:[{data:sparkVals.map(v=>v===null||!isFinite(v)?null:v),borderColor:color,backgroundColor:color+'22',borderWidth:2,tension:0.3,pointRadius:2,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{display:false},y:{display:false}}}})},10);
+  const subTxt=vari!==null?'Tendencia '+(vari>=0?'+':'')+vari.toFixed(1)+'% mensual':'';
+  return '<div class="kpi-card '+cls+'">'
+    +'<div class="kpi-lbl">'+lbl+'</div>'
+    +'<div class="kpi-val '+(valCls||'')+'">'+val+'</div>'
+    +(subTxt?'<div class="kpi-sub">'+subTxt+'</div>':'')
+    +'<div class="kpi-spark"><canvas id="'+id+'"></canvas></div>'
+    +'</div>';
+}
+// ─── Indicadores ───
+function buildIndicadores(){
+  const cont=document.getElementById('indicadores');
+  let h='<div class="section"><div class="section-head"><span class="ico">📊</span><h2>Indicadores financieros</h2><div class="line"></div></div>'
+    +'<div class="legend">'
+    +'<div class="legend-item"><span class="dot" style="background:#10B981"></span> Saludable</div>'
+    +'<div class="legend-item"><span class="dot" style="background:#F59E0B"></span> Atención</div>'
+    +'<div class="legend-item"><span class="dot" style="background:#DC2626"></span> Crítico</div>'
+    +'<div class="legend-item"><span class="dot" style="background:#9CA3AF"></span> Sin datos</div>'
+    +'</div>';
+  const canvasInfo=[];
+  let cid=0;
+  data.cats.forEach(c=>{
+    h+='<div class="dash-cat"><div class="dash-cat-title"><span class="ico">'+c.icon+'</span> '+c.cat+'</div><div class="dash-cat-line"></div></div>';
+    h+='<div class="dash-grid">';
+    c.inds.forEach(i=>{
+      const id='c'+(cid++);
+      canvasInfo.push({id,vals:i.vals,sem:i.sem});
+      h+='<div class="ind-card">'
+        +'<div class="ind-tag"><span class="ind-sem '+i.sem+'"></span><span class="ind-name">'+i.name+'</span><span class="ind-rec">'+i.rec+'</span></div>'
+        +'<div class="ind-value">'+i.valStr+'</div>'
+        +'<div class="ind-mes">'+data.meses[data.meses.length-1]+' '+data.year+'</div>'
+        +'<div class="ind-chart"><canvas id="'+id+'"></canvas></div>'
+        +'<div class="ind-formula">'+i.formula+'</div>'
+        +'</div>';
+    });
+    h+='</div>';
+  });
+  h+='</div>';
+  cont.innerHTML=h;
+  if(typeof Chart!=='undefined'){
+    canvasInfo.forEach(ci=>{
+      const ctx=document.getElementById(ci.id);if(!ctx)return;
+      const color=semColor[ci.sem];
+      try{new Chart(ctx,{type:'line',data:{labels:data.meses,datasets:[{data:ci.vals.map(v=>v===null||!isFinite(v)?null:v),borderColor:color,backgroundColor:color+'22',borderWidth:2,tension:0.3,pointRadius:3,pointBackgroundColor:color,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{enabled:true,callbacks:{label:function(c){return c.parsed.y!==null?c.parsed.y.toLocaleString('es-CO',{maximumFractionDigits:2}):'-'}}}},scales:{x:{display:false},y:{display:false}},animation:{duration:300}}})}catch(e){}
+    });
+  }
+}
+// ─── Tabla helper ───
+function tableHTML(rows,title,icon){
+  let h='<div class="section"><div class="section-head"><span class="ico">'+icon+'</span><h2>'+title+'</h2><div class="line"></div></div>';
+  const ytdSty='background:#EEF2F7;border-left:2px solid #94A3B8;font-weight:700';
+  h+='<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Concepto</th>';
+  data.meses.forEach(m=>{h+='<th>'+m+' '+data.year+'</th>'});
+  h+='<th style="'+ytdSty+'" title="Acumulado del año a la fecha">YTD</th>';
+  h+='<th title="Variación porcentual promedio mes a mes">Tendencia mensual</th></tr></thead><tbody>';
+  rows.forEach(r=>{
+    if(r.sec){const cs=data.meses.length+3;h+='<tr class="sec"><td colspan="'+cs+'">'+r.sec+'</td></tr>';return}
+    let cls='';if(r.total)cls='total';else if(r.subtotal)cls='bold';else if(r.bold)cls='bold';else if(r.margen)cls='margen';
+    const va=variacionProm(r.vals||[]);
+    const varStr=va===null?'—':(va>=0?'+':'')+va.toFixed(1)+'%';
+    const varCls=va===null?'':(va>=0?'pos':'neg');
+    h+='<tr'+(cls?' class="'+cls+'"':'')+'><td>'+r.lbl+'</td>';
+    (r.vals||[]).forEach(v=>{
+      if(r.margen) h+='<td>'+(v===null||!isFinite(v)?'—':v.toFixed(1)+'%')+'</td>';
+      else h+='<td>'+fN(v)+'</td>';
+    });
+    const ytdTxt=r.margen?(r.ytd===null||r.ytd===undefined||!isFinite(r.ytd)?'—':r.ytd.toFixed(1)+'%'):fN(r.ytd);
+    h+='<td style="'+ytdSty+'">'+ytdTxt+'</td>';
+    h+='<td class="var '+varCls+'">'+varStr+'</td></tr>';
+  });
+  h+='</tbody></table></div></div>';
+  return h;
+}
+function buildESF(){document.getElementById('esf').innerHTML=tableHTML(data.esfRows,'Estado de Situación Financiera Mensual','💼')}
+function buildPYG(){document.getElementById('pyg').innerHTML=tableHTML(data.pgRows,'P&G Detallado Mensual','📈')}
+function buildNotas(){
+  const n=data.notas;
+  const hayAlguna=n.activos||n.pasivos||n.ingresos||n.gastos||n.conclusion;
+  if(!hayAlguna)return;
+  const ord=[
+    ['Análisis de Activos',n.activos],
+    ['Análisis de Pasivos',n.pasivos],
+    ['Análisis de Ingresos',n.ingresos],
+    ['Análisis de Costos y Gastos',n.gastos],
+    ['Conclusión general',n.conclusion]
+  ];
+  let h='<div class="section"><div class="section-head"><span class="ico">📝</span><h2>Análisis general</h2><div class="line"></div></div><div class="notas-stack">';
+  ord.forEach(([titulo,txt])=>{
+    if(!txt)return;
+    h+='<div class="nota"><h4>'+titulo+'</h4><p>'+txt.replace(/</g,'&lt;').replace(/\\n/g,'<br>')+'</p></div>';
+  });
+  h+='</div></div>';
+  document.getElementById('notas').innerHTML=h;
+}
+function buildNotasMensuales(){
+  const nm=data.notasMes||[];
+  const conNotas=nm.filter(x=>x.texto&&x.texto.trim());
+  if(conNotas.length===0)return;
+  let h='<div class="section"><div class="section-head"><span class="ico">📅</span><h2>Análisis mensual</h2><div class="line"></div></div><div class="notas-stack">';
+  conNotas.forEach(item=>{
+    h+='<div class="nota nota-mes"><h4>'+item.label+'</h4><p>'+item.texto.replace(/</g,'&lt;').replace(/\\n/g,'<br>')+'</p></div>';
+  });
+  h+='</div></div>';
+  document.getElementById('notasMensuales').innerHTML=h;
+}
+buildKpis();
+buildESF();
+buildPYG();
+buildIndicadores();
+buildNotasMensuales();
+buildNotas();
+<\/script>
+</body></html>`;
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download='Dashboard_Financiero_'+empresa.replace(/\s+/g,'_')+'_'+year+'.html';
+  a.click();URL.revokeObjectURL(url);
+  if(typeof gtag==='function')gtag('event','trend_html_dashboard_descargado',{meses:monthlyFiles.length});
+}
+/* ═══ NOTAS PERSISTIDAS ═══ */
+function _nitKey(){return (document.getElementById('cfgNit').value||'').replace(/[^0-9]/g,'')||'_sin_nit_'}
+function _notasKey(){return 'trend:notas:'+_nitKey()}
+function _notasMesKey(){return 'trend:notasMes:'+_nitKey()}
+function guardarNotas(){
+  const data={
+    activos:document.getElementById('notaActivos').value,
+    pasivos:document.getElementById('notaPasivos').value,
+    ingresos:document.getElementById('notaIngresos').value,
+    gastos:document.getElementById('notaGastos').value,
+    conclusion:document.getElementById('notaConclusion').value
+  };
+  try{localStorage.setItem(_notasKey(),JSON.stringify(data))}catch(e){}
+}
+function guardarNotasMes(){
+  const data={};
+  document.querySelectorAll('#notasMesGrid textarea[data-mes]').forEach(t=>{
+    const m=t.dataset.mes;
+    if(t.value.trim()) data[m]=t.value;
+  });
+  try{localStorage.setItem(_notasMesKey(),JSON.stringify(data))}catch(e){}
+}
+function cargarNotasGuardadas(){
+  try{
+    const raw=localStorage.getItem(_notasKey());
+    if(raw){
+      const d=JSON.parse(raw);
+      document.getElementById('notaActivos').value=d.activos||'';
+      document.getElementById('notaPasivos').value=d.pasivos||'';
+      document.getElementById('notaIngresos').value=d.ingresos||'';
+      document.getElementById('notaGastos').value=d.gastos||'';
+      document.getElementById('notaConclusion').value=d.conclusion||'';
+    }
+    // Notas mensuales
+    const rawM=localStorage.getItem(_notasMesKey());
+    if(rawM){
+      const dM=JSON.parse(rawM);
+      document.querySelectorAll('#notasMesGrid textarea[data-mes]').forEach(t=>{
+        if(dM[t.dataset.mes]) t.value=dM[t.dataset.mes];
+      });
+    }
+  }catch(e){}
+}
+// Render del grid de notas mensuales — una textarea por cada mes cargado.
+function renderNotasMes(){
+  const cont=document.getElementById('notasMesGrid');
+  if(!cont)return;
+  let h='';
+  monthlyFiles.forEach(mf=>{
+    const m=mf.mes;
+    const lbl=MESES[m]+' '+document.getElementById('cfgYear').value;
+    h+='<div class="nota-card"><label>'+lbl+'</label>'
+      +'<textarea data-mes="'+m+'" placeholder="Ej: en '+MESES[m].toLowerCase()+' las ventas subieron por la campaña de descuentos / margen bajó por aumento del costo de materia prima / etc."></textarea>'
+      +'</div>';
+  });
+  cont.innerHTML=h;
+  // Listener autoguardado
+  cont.querySelectorAll('textarea[data-mes]').forEach(t=>{
+    t.addEventListener('input',guardarNotasMes);
+  });
+}
+// Devuelve el dict actual {mes: nota} para exportar
+function getNotasMes(){
+  const d={};
+  document.querySelectorAll('#notasMesGrid textarea[data-mes]').forEach(t=>{
+    if(t.value.trim()) d[t.dataset.mes]=t.value;
+  });
+  return d;
+}
+['notaActivos','notaPasivos','notaIngresos','notaGastos','notaConclusion'].forEach(id=>{
+  document.addEventListener('input',e=>{if(e.target&&e.target.id===id)guardarNotas()});
+});
+/* ═══ EXPORT EXCEL ═══ */
+async function exportarExcel(){
+  if(typeof exoProGate==='function'){if(!(await exoProGate('Trend Financiero — Excel')))return}
+  const empresa=document.getElementById('cfgEmpresa').value||'EMPRESA';
+  const nit=document.getElementById('cfgNit').value||'';
+  const year=document.getElementById('cfgYear').value;
+  const ciudad=document.getElementById('cfgCiudad').value||'';
+  const meses=monthlyFiles.map(f=>f.mes);
+  const periodo=MESES_CORTO[meses[0]]+' a '+MESES_CORTO[meses[meses.length-1]]+' '+year;
+  const wb=new ExcelJS.Workbook();
+  wb.creator='ExogenaDIAN.com';wb.created=new Date();
+  // Paleta corporativa
+  const CC={pri:'FF1B3A5C',pri2:'FF2E75B6',pri3:'FFD6E4F0',acc:'FF7C3AED',
+    g:'FF10B981',gBg:'FFD1FAE5',a:'FFF59E0B',aBg:'FFFEF3C7',r:'FFDC2626',rBg:'FFFEE2E2',n:'FF9CA3AF',
+    headFg:'FFFFFFFF',altRow:'FFF9FAFB',sub:'FFE0F2FE'};
+  const semBg={g:CC.gBg,a:CC.aBg,r:CC.rBg,n:'FFF3F4F6'};
+  const semFg={g:CC.g,a:CC.a,r:CC.r,n:CC.n};
+  function hdrStyle(row,cols){
+    for(let c=1;c<=cols;c++){
+      const cell=row.getCell(c);
+      cell.font={bold:true,color:{argb:CC.headFg},size:10};
+      cell.fill={type:'pattern',pattern:'solid',fgColor:{argb:CC.pri}};
+      cell.alignment={vertical:'middle',horizontal:c===1?'left':'right'};
+      cell.border={bottom:{style:'medium',color:{argb:CC.pri2}}};
+    }
+    row.height=22;
+  }
+  function sectionRow(ws,label,cols){
+    const r=ws.addRow([label]);
+    if(cols>1)ws.mergeCells(r.number,1,r.number,cols);
+    r.getCell(1).font={bold:true,color:{argb:CC.headFg},size:11};
+    r.getCell(1).fill={type:'pattern',pattern:'solid',fgColor:{argb:CC.pri2}};
+    r.getCell(1).alignment={vertical:'middle'};
+    r.height=20;
+    return r;
+  }
+  // ════════════════════════════════════════════════════
+  // HOJA 1 — PORTADA
+  // ════════════════════════════════════════════════════
+  const s0=wb.addWorksheet('Portada',{properties:{tabColor:{argb:CC.pri}}});
+  s0.getColumn(1).width=4;
+  s0.getColumn(2).width=44;
+  s0.getColumn(3).width=44;
+  // Banner empresa
+  s0.mergeCells('B2:C2');
+  s0.getCell('B2').value='📊 TREND FINANCIERO Y DASHBOARD DE INDICADORES';
+  s0.getCell('B2').font={bold:true,size:18,color:{argb:'FFFFFFFF'}};
+  s0.getCell('B2').fill={type:'pattern',pattern:'solid',fgColor:{argb:CC.pri}};
+  s0.getCell('B2').alignment={horizontal:'center',vertical:'middle'};
+  s0.getRow(2).height=36;
+  // Datos empresa
+  function infoRow(rn,label,value,bold){
+    s0.getCell('B'+rn).value=label;
+    s0.getCell('B'+rn).font={bold:true,size:11,color:{argb:CC.pri}};
+    s0.getCell('B'+rn).alignment={horizontal:'right'};
+    s0.getCell('C'+rn).value=value;
+    s0.getCell('C'+rn).font={bold:bold||false,size:11};
+    s0.getCell('C'+rn).alignment={horizontal:'left'};
+    s0.getRow(rn).height=20;
+  }
+  infoRow(4,'Empresa:',empresa,true);
+  infoRow(5,'NIT:',nit||'—');
+  infoRow(6,'Ciudad:',ciudad||'—');
+  infoRow(7,'Año:',year);
+  infoRow(8,'Periodo cubierto:',periodo,true);
+  infoRow(9,'Meses cargados:',monthlyFiles.length);
+  infoRow(10,'Fecha de emisión:',new Date().toLocaleDateString('es-CO',{year:'numeric',month:'long',day:'numeric'}));
+  infoRow(11,'Generado con:','ExógenaDIAN.com — Trend Financiero');
+  // Contenido
+  s0.mergeCells('B13:C13');
+  s0.getCell('B13').value='📑 CONTENIDO';
+  s0.getCell('B13').font={bold:true,size:13,color:{argb:CC.headFg}};
+  s0.getCell('B13').fill={type:'pattern',pattern:'solid',fgColor:{argb:CC.pri2}};
+  s0.getCell('B13').alignment={horizontal:'center'};
+  s0.getRow(13).height=24;
+  const contenido=[
+    ['1. Indicadores Mensuales','23 ratios financieros mes a mes con semáforo y rango recomendable'],
+    ['2. Estado de Situación Financiera','Balance mensual: Activos, Pasivos y Patrimonio detallado'],
+    ['3. P&G Detallado Mensual','Estado de resultados desglosado por subcuenta PUC con márgenes %'],
+    ['4. Resumen','Vista consolidada Balance + P&G con variación promedio'],
+    ['5. Detalle de Cuentas','Matriz cuenta × mes con todos los movimientos'],
+    ['6. Notas de Análisis','Comentarios editables del contador / analista']
+  ];
+  contenido.forEach((c,i)=>{
+    const rn=14+i;
+    s0.getCell('B'+rn).value=c[0];
+    s0.getCell('B'+rn).font={bold:true,size:10,color:{argb:CC.pri}};
+    s0.getCell('B'+rn).alignment={vertical:'top'};
+    s0.getCell('C'+rn).value=c[1];
+    s0.getCell('C'+rn).font={size:10,color:{argb:'FF374151'}};
+    s0.getCell('C'+rn).alignment={vertical:'top',wrapText:true};
+    s0.getRow(rn).height=22;
+  });
+  // Leyenda semáforos
+  const lr=21;
+  s0.mergeCells('B'+lr+':C'+lr);
+  s0.getCell('B'+lr).value='🚦 LEYENDA SEMÁFOROS';
+  s0.getCell('B'+lr).font={bold:true,size:13,color:{argb:CC.headFg}};
+  s0.getCell('B'+lr).fill={type:'pattern',pattern:'solid',fgColor:{argb:CC.pri2}};
+  s0.getCell('B'+lr).alignment={horizontal:'center'};
+  s0.getRow(lr).height=24;
+  const leyenda=[
+    ['🟢 Saludable','El indicador está dentro del rango recomendable'],
+    ['🟡 Atención','El indicador está cerca del límite pero aún aceptable'],
+    ['🔴 Crítico','El indicador está fuera del rango — requiere acción'],
+    ['⚪ Sin datos','No hay datos suficientes para calcular el indicador']
+  ];
+  leyenda.forEach((l,i)=>{
+    const rn=lr+1+i;
+    s0.getCell('B'+rn).value=l[0];
+    s0.getCell('B'+rn).font={bold:true,size:10};
+    s0.getCell('B'+rn).alignment={horizontal:'left'};
+    s0.getCell('C'+rn).value=l[1];
+    s0.getCell('C'+rn).font={size:10,color:{argb:'FF374151'}};
+    s0.getRow(rn).height=20;
+  });
+  // ════════════════════════════════════════════════════
+  // HOJA 2 — INDICADORES MENSUALES
+  // ════════════════════════════════════════════════════
+  const inds=calcularIndicadores();
+  const s1=wb.addWorksheet('Indicadores',{properties:{tabColor:{argb:CC.acc}}});
+  s1.addRow([empresa+' — Indicadores Financieros Mensuales — '+periodo]);
+  s1.getCell('A1').font={bold:true,size:14,color:{argb:CC.pri}};
+  s1.mergeCells(1,1,1,5+meses.length);
+  s1.addRow([]);
+  const indCols=['Indicador','Fórmula','Rango ideal'].concat(meses.map(m=>MESES_CORTO[m]+' '+year)).concat(['Tendencia mensual']);
+  const indHdr=s1.addRow(indCols);
+  hdrStyle(indHdr,indCols.length);
+  // Agrupar por categoría
+  const cats={};
+  inds.forEach(i=>{if(!cats[i.cat])cats[i.cat]=[];cats[i.cat].push(i)});
+  const catOrder=['Liquidez','Rentabilidad','Endeudamiento','Actividad','Valor & EBITDA','Ciclo de Efectivo'];
+  catOrder.forEach(cat=>{
+    if(!cats[cat])return;
+    sectionRow(s1,cat.toUpperCase(),indCols.length);
+    cats[cat].forEach(ind=>{
+      const row=s1.addRow([ind.name,ind.formula,ind.rec].concat(ind.vals.map((v,i)=>v===null||!isFinite(v)?'—':v)).concat([variacionPromedio(ind.vals)===null?'—':variacionPromedio(ind.vals)/100]));
+      row.getCell(1).font={bold:true,size:10};
+      row.getCell(2).font={italic:true,size:9,color:{argb:'FF6B7280'}};
+      row.getCell(3).font={size:9,color:{argb:CC.pri2}};
+      row.getCell(3).alignment={horizontal:'center'};
+      // Cada celda de mes: aplicar semáforo según valor y formato
+      ind.vals.forEach((v,i)=>{
+        const c=row.getCell(4+i);
+        const sem=v===null||!isFinite(v)?'n':ind.sem(v);
+        c.fill={type:'pattern',pattern:'solid',fgColor:{argb:semBg[sem]}};
+        c.font={size:10,color:{argb:semFg[sem]},bold:true};
+        c.alignment={horizontal:'right'};
+        // Formato: porcentajes, días, número, dinero
+        const fmtType=ind.fmt(0);
+        if(typeof v==='number'&&isFinite(v)){
+          if(/\%/.test(ind.fmt(v))) c.numFmt='0.0%';
+          else if(/d[ií]as/.test(ind.fmt(v))) c.numFmt='0" días"';
+          else if(Math.abs(v)>=10000) c.numFmt='#,##0';
+          else c.numFmt='0.00';
+        }
+      });
+      const lastCol=row.getCell(indCols.length);
+      const va=variacionPromedio(ind.vals);
+      if(va!==null) lastCol.numFmt='+0.0%;-0.0%;—';
+      lastCol.font={bold:true,color:{argb:va===null?CC.n:(va>=0?CC.g:CC.r)}};
+      row.height=18;
+    });
+  });
+  s1.getColumn(1).width=32;
+  s1.getColumn(2).width=42;
+  s1.getColumn(3).width=14;
+  for(let i=4;i<=indCols.length;i++)s1.getColumn(i).width=13;
+  s1.views=[{state:'frozen',ySplit:3,xSplit:3}];
+  // ════════════════════════════════════════════════════
+  // HOJA 3 — ESF MENSUAL (balance pivoteado)
+  // ════════════════════════════════════════════════════
+  const s2=wb.addWorksheet('ESF Mensual',{properties:{tabColor:{argb:'FF059669'}}});
+  s2.addRow([empresa+' — Estado de Situación Financiera — '+periodo]);
+  s2.getCell('A1').font={bold:true,size:14,color:{argb:CC.pri}};
+  s2.mergeCells(1,1,1,1+meses.length);
+  s2.addRow([]);
+  const esfCols=['Concepto'].concat(meses.map(m=>MESES_CORTO[m]+' '+year));
+  hdrStyle(s2.addRow(esfCols),esfCols.length);
+  function valG(mf,g){return mf.esfData[g]||0}
+  function totalClaseFn(mf,clase){let t=0;mf.classified.forEach(a=>{if(a.clase===clase)t+=getDisplayValue(a)});return t}
+  function valsFn(fn){return monthlyFiles.map(fn)}
+  function esfRow(label,vals,opts){
+    opts=opts||{};
+    const r=s2.addRow([label].concat(vals.map(Math.round)));
+    r.getCell(1).font={bold:opts.bold||false,size:10,color:{argb:opts.color||'FF111111'}};
+    for(let i=2;i<=esfCols.length;i++){r.getCell(i).numFmt='#,##0';r.getCell(i).font={size:10,bold:opts.bold||false};}
+    if(opts.bold){
+      for(let i=1;i<=esfCols.length;i++) r.getCell(i).fill={type:'pattern',pattern:'solid',fgColor:{argb:CC.sub}};
+    }
+    if(opts.total){
+      for(let i=1;i<=esfCols.length;i++) {r.getCell(i).fill={type:'pattern',pattern:'solid',fgColor:{argb:CC.pri3}};r.getCell(i).border={top:{style:'thin'},bottom:{style:'double'}};}
+    }
+  }
+  sectionRow(s2,'ACTIVOS',esfCols.length);
+  esfRow('Activos corrientes',valsFn(mf=>valG(mf,'efectivo')+valG(mf,'inv_cp')+valG(mf,'cxc')+valG(mf,'deterioro_cartera')+valG(mf,'inventarios')+valG(mf,'diferidos_act')+valG(mf,'otros_act')),{bold:true});
+  esfRow('  Efectivo y equivalentes',valsFn(mf=>valG(mf,'efectivo')));
+  esfRow('  Cartera (CxC)',valsFn(mf=>valG(mf,'cxc')+valG(mf,'deterioro_cartera')));
+  esfRow('  Inventarios',valsFn(mf=>valG(mf,'inventarios')));
+  esfRow('  Otros activos corrientes',valsFn(mf=>valG(mf,'inv_cp')+valG(mf,'diferidos_act')+valG(mf,'otros_act')));
+  esfRow('Activos no corrientes',valsFn(mf=>valG(mf,'ppe')+valG(mf,'depreciacion')+valG(mf,'intangibles')+valG(mf,'amortizacion')+valG(mf,'inv_lp')+valG(mf,'otros_act_nc')+valG(mf,'valorizaciones')),{bold:true});
+  esfRow('  PPE neto',valsFn(mf=>valG(mf,'ppe')+valG(mf,'depreciacion')));
+  esfRow('  Intangibles netos',valsFn(mf=>valG(mf,'intangibles')+valG(mf,'amortizacion')));
+  esfRow('  Otros activos no corrientes',valsFn(mf=>valG(mf,'inv_lp')+valG(mf,'otros_act_nc')+valG(mf,'valorizaciones')));
+  esfRow('TOTAL ACTIVOS',valsFn(mf=>totalClaseFn(mf,'Activo')),{total:true});
+  sectionRow(s2,'PASIVOS',esfCols.length);
+  esfRow('Pasivos corrientes',valsFn(mf=>valG(mf,'oblig_fin_cp')+valG(mf,'proveedores')+valG(mf,'cxp')+valG(mf,'impuestos')+valG(mf,'laborales')+valG(mf,'provisiones')+valG(mf,'otros_pas_c')),{bold:true});
+  esfRow('  Obligaciones financieras CP',valsFn(mf=>valG(mf,'oblig_fin_cp')));
+  esfRow('  Proveedores',valsFn(mf=>valG(mf,'proveedores')));
+  esfRow('  Cuentas por pagar',valsFn(mf=>valG(mf,'cxp')));
+  esfRow('  Impuestos por pagar',valsFn(mf=>valG(mf,'impuestos')));
+  esfRow('  Obligaciones laborales',valsFn(mf=>valG(mf,'laborales')));
+  esfRow('Pasivos no corrientes',valsFn(mf=>valG(mf,'oblig_fin_lp')+valG(mf,'diferidos_pas')+valG(mf,'otros_pas')),{bold:true});
+  esfRow('TOTAL PASIVOS',valsFn(mf=>totalClaseFn(mf,'Pasivo')),{total:true});
+  sectionRow(s2,'PATRIMONIO',esfCols.length);
+  esfRow('Capital social',valsFn(mf=>valG(mf,'capital')+valG(mf,'superavit_cap')));
+  esfRow('Reservas',valsFn(mf=>valG(mf,'reservas')));
+  esfRow('Resultados acumulados',valsFn(mf=>valG(mf,'resultados_ant')+valG(mf,'resultado_ej')));
+  esfRow('Resultado del periodo',valsFn(mf=>{let u=0;mf.classified.forEach(a=>{const v=getDisplayValue(a);if(a.clase==='Ingreso')u+=v;else if(a.clase==='Gasto'||a.clase==='Costo'||a.clase==='Costo prod')u-=v});return u}));
+  esfRow('TOTAL PATRIMONIO',valsFn(mf=>{let t=0,u=0;mf.classified.forEach(a=>{const v=getDisplayValue(a);if(a.clase==='Patrimonio')t+=v;else if(a.clase==='Ingreso')u+=v;else if(a.clase==='Gasto'||a.clase==='Costo'||a.clase==='Costo prod')u-=v});return t+u}),{total:true});
+  esfRow('TOTAL PASIVO + PATRIMONIO',valsFn(mf=>{const p=totalClaseFn(mf,'Pasivo');let t=0,u=0;mf.classified.forEach(a=>{const v=getDisplayValue(a);if(a.clase==='Patrimonio')t+=v;else if(a.clase==='Ingreso')u+=v;else if(a.clase==='Gasto'||a.clase==='Costo'||a.clase==='Costo prod')u-=v});return p+t+u}),{total:true});
+  s2.getColumn(1).width=38;
+  for(let i=2;i<=esfCols.length;i++)s2.getColumn(i).width=15;
+  s2.views=[{state:'frozen',ySplit:3,xSplit:1}];
+  // ════════════════════════════════════════════════════
+  // HOJA 4 — P&G DETALLADO MENSUAL
+  // ════════════════════════════════════════════════════
+  const s3=wb.addWorksheet('P&G Detallado',{properties:{tabColor:{argb:'FFEC4899'}}});
+  s3.addRow([empresa+' — P&G Detallado Mensual — '+periodo]);
+  s3.getCell('A1').font={bold:true,size:14,color:{argb:CC.pri}};
+  s3.mergeCells(1,1,1,1+meses.length+1);
+  s3.addRow([]);
+  const pgCols=['Concepto'].concat(meses.map(m=>MESES_CORTO[m]+' '+year)).concat(['YTD','Tendencia mensual']);
+  hdrStyle(s3.addRow(pgCols),pgCols.length);
+  const agg=aggBySub4(monthlyFiles,['Ingreso','Gasto','Costo','Costo prod']);
+  const ytdCol=pgCols.length-1; // penúltima columna = YTD
+  // vals llega ACUMULADO; se de-acumula a movimiento según vista y se anexa YTD (acumulado).
+  function pgRow(label,vals,opts){
+    opts=opts||{};
+    const disp=aplicarVistaPyG(vals);
+    const ytd=ytdDe(vals);
+    const va=variacionPromedio(disp);
+    const r=s3.addRow([label].concat(disp.map(v=>typeof v==='number'?Math.round(v):v)).concat([Math.round(ytd), va===null?'—':va/100]));
+    r.getCell(1).font={bold:opts.bold||opts.total,size:10,color:{argb:opts.color||'FF111111'}};
+    if(opts.indent) r.getCell(1).alignment={indent:opts.indent};
+    for(let i=2;i<=pgCols.length-1;i++){r.getCell(i).numFmt='#,##0';r.getCell(i).font={size:10,bold:opts.bold||opts.total}}
+    r.getCell(ytdCol).font={bold:true,size:10,color:{argb:CC.pri}};
+    if(va!==null){const lc=r.getCell(pgCols.length);lc.numFmt='+0.0%;-0.0%;—';lc.font={bold:true,color:{argb:va>=0?CC.g:CC.r}}}
+    if(opts.bold){for(let i=1;i<=pgCols.length;i++)r.getCell(i).fill={type:'pattern',pattern:'solid',fgColor:{argb:CC.sub}}}
+    if(opts.total){for(let i=1;i<=pgCols.length;i++){r.getCell(i).fill={type:'pattern',pattern:'solid',fgColor:{argb:CC.pri3}};r.getCell(i).border={top:{style:'thin'},bottom:{style:'double'}}}}
+  }
+  function pctRow(label,vals,ytdPct){
+    const va=variacionPromedio(vals);
+    const r=s3.addRow([label].concat(vals.map(v=>v===null||!isFinite(v)?'—':v/100)).concat([ytdPct===null||!isFinite(ytdPct)?'—':ytdPct/100, va===null?'—':va/100]));
+    r.getCell(1).font={bold:true,color:{argb:CC.acc}};
+    for(let i=1;i<=pgCols.length;i++){r.getCell(i).fill={type:'pattern',pattern:'solid',fgColor:{argb:'FFEDE9FE'}};r.getCell(i).font={bold:true,color:{argb:CC.acc},size:10}}
+    for(let i=2;i<=pgCols.length-1;i++)r.getCell(i).numFmt='0.0%';
+    if(va!==null) r.getCell(pgCols.length).numFmt='+0.0%;-0.0%;—';
+  }
+  function sumByPref(prefix){
+    const n=meses.length;
+    const tot=new Array(n).fill(0);
+    Object.keys(agg).forEach(s4=>{
+      if(s4.startsWith(prefix)) agg[s4].vals.forEach((v,i)=>{tot[i]+=v});
+    });
+    return tot;
+  }
+  function renderSec(titulo,prefijos){
+    sectionRow(s3,titulo,pgCols.length);
+    Object.keys(agg).sort().forEach(s4=>{
+      if(prefijos.some(p=>s4.startsWith(p))){
+        const g=agg[s4];
+        pgRow((s4+' '+(g.name||'').trim()).trim(),g.vals,{indent:1});
+      }
+    });
+  }
+  const ingOp=sumByPref('41');
+  const costos=sumByPref('6').map((v,i)=>v+sumByPref('7')[i]);
+  const utilBruta=ingOp.map((v,i)=>v-costos[i]);
+  const gAdm=sumByPref('51');
+  const gVtas=sumByPref('52');
+  const utilOp=utilBruta.map((v,i)=>v-gAdm[i]-gVtas[i]);
+  const otrosIng=sumByPref('42');
+  const otrosGtos=sumByPref('53');
+  const utilAI=utilOp.map((v,i)=>v+otrosIng[i]-otrosGtos[i]);
+  const impRta=sumByPref('54');
+  const utilNeta=utilAI.map((v,i)=>v-impRta[i]);
+  const dispIngX=aplicarVistaPyG(ingOp), dispUBx=aplicarVistaPyG(utilBruta), dispUOx=aplicarVistaPyG(utilOp), dispUNx=aplicarVistaPyG(utilNeta);
+  const mgBruto=dispIngX.map((v,i)=>v?(dispUBx[i]/v*100):null);
+  const mgOp=dispIngX.map((v,i)=>v?(dispUOx[i]/v*100):null);
+  const mgNeto=dispIngX.map((v,i)=>v?(dispUNx[i]/v*100):null);
+  const ytdIngX=ytdDe(ingOp);
+  const mgBrutoYTD=ytdIngX?ytdDe(utilBruta)/ytdIngX*100:null;
+  const mgOpYTD=ytdIngX?ytdDe(utilOp)/ytdIngX*100:null;
+  const mgNetoYTD=ytdIngX?ytdDe(utilNeta)/ytdIngX*100:null;
+  renderSec('INGRESOS OPERACIONALES',['41']);
+  pgRow('INGRESOS NETOS',ingOp,{bold:true});
+  if(costos.some(v=>Math.round(v)!==0)){renderSec('COSTO DE VENTAS',['6','7']);pgRow('TOTAL COSTOS',costos,{bold:true})}
+  pgRow('UTILIDAD BRUTA',utilBruta,{total:true});
+  pctRow('% MARGEN BRUTO',mgBruto,mgBrutoYTD);
+  if(gAdm.some(v=>Math.round(v)!==0)){renderSec('GASTOS DE ADMINISTRACIÓN',['51']);pgRow('TOTAL GASTOS ADMINISTRACIÓN',gAdm,{bold:true})}
+  if(gVtas.some(v=>Math.round(v)!==0)){renderSec('GASTOS DE VENTAS',['52']);pgRow('TOTAL GASTOS DE VENTAS',gVtas,{bold:true})}
+  pgRow('UTILIDAD OPERACIONAL',utilOp,{total:true});
+  pctRow('% MARGEN OPERACIONAL',mgOp,mgOpYTD);
+  if(otrosIng.some(v=>Math.round(v)!==0)){renderSec('OTROS INGRESOS NO OPERACIONALES',['42'])}
+  if(otrosGtos.some(v=>Math.round(v)!==0)){renderSec('OTROS GASTOS NO OPERACIONALES',['53'])}
+  pgRow('UTILIDAD ANTES DE IMPUESTOS',utilAI,{bold:true});
+  if(impRta.some(v=>Math.round(v)!==0)){renderSec('IMPUESTO DE RENTA',['54'])}
+  pgRow('UTILIDAD NETA DEL PERÍODO',utilNeta,{total:true});
+  pctRow('% MARGEN NETO',mgNeto,mgNetoYTD);
+  s3.getColumn(1).width=44;
+  for(let i=2;i<=pgCols.length;i++)s3.getColumn(i).width=14;
+  s3.views=[{state:'frozen',ySplit:3,xSplit:1}];
+  // ════════════════════════════════════════════════════
+  // HOJA 5 — RESUMEN (trend simple consolidado)
+  // ════════════════════════════════════════════════════
+  const s4=wb.addWorksheet('Resumen',{properties:{tabColor:{argb:CC.pri2}}});
+  s4.addRow([empresa+' — Resumen Trend — '+periodo]);
+  s4.getCell('A1').font={bold:true,size:14,color:{argb:CC.pri}};
+  s4.mergeCells(1,1,1,1+meses.length+1);
+  s4.addRow([]);
+  const resCols=['Concepto'].concat(meses.map(m=>MESES_CORTO[m]+' '+year)).concat(['YTD','Tendencia mensual']);
+  hdrStyle(s4.addRow(resCols),resCols.length);
+  // opts.pyg → vals ACUMULADO: de-acumula a movimiento según vista + YTD acumulado.
+  // sin pyg → balance: saldo final del mes, YTD = saldo de cierre (último mes).
+  function resRow(label,vals,opts){
+    opts=opts||{};
+    const yc=resCols.length-1;
+    const disp=opts.pyg?aplicarVistaPyG(vals):vals;
+    const ytd=opts.pyg?ytdDe(vals):(vals.length?vals[vals.length-1]:0);
+    const va=variacionPromedio(disp);
+    const r=s4.addRow([label].concat(disp.map(Math.round)).concat([Math.round(ytd), va===null?'—':va/100]));
+    r.getCell(1).font={bold:opts.bold||opts.total,size:10};
+    for(let i=2;i<=resCols.length-1;i++){r.getCell(i).numFmt='#,##0';r.getCell(i).font={size:10,bold:opts.bold||opts.total}}
+    r.getCell(yc).font={bold:true,size:10,color:{argb:CC.pri}};
+    if(va!==null){const lc=r.getCell(resCols.length);lc.numFmt='+0.0%;-0.0%;—';lc.font={bold:true,color:{argb:va>=0?CC.g:CC.r}}}
+    if(opts.bold){for(let i=1;i<=resCols.length;i++)r.getCell(i).fill={type:'pattern',pattern:'solid',fgColor:{argb:CC.sub}}}
+    if(opts.total){for(let i=1;i<=resCols.length;i++){r.getCell(i).fill={type:'pattern',pattern:'solid',fgColor:{argb:CC.pri3}};r.getCell(i).border={top:{style:'thin'},bottom:{style:'double'}}}}
+  }
+  sectionRow(s4,'BALANCE GENERAL',resCols.length);
+  resRow('Total Activos',valsFn(mf=>totalClaseFn(mf,'Activo')),{total:true});
+  resRow('Total Pasivos',valsFn(mf=>totalClaseFn(mf,'Pasivo')),{total:true});
+  resRow('Total Patrimonio',valsFn(mf=>{let t=0,u=0;mf.classified.forEach(a=>{const v=getDisplayValue(a);if(a.clase==='Patrimonio')t+=v;else if(a.clase==='Ingreso')u+=v;else if(a.clase==='Gasto'||a.clase==='Costo'||a.clase==='Costo prod')u-=v});return t+u}),{total:true});
+  const vistaExc=getVistaPyG();
+  sectionRow(s4,vistaExc==='mov'?'P&G — MOVIMIENTO DEL MES':'P&G — ACUMULADO YTD',resCols.length);
+  resRow('Ingresos operacionales',valsFn(mf=>pygAcum(mf,'ing_operacionales')-pygAcum(mf,'dev_ventas')),{bold:true,pyg:true});
+  resRow('(-) Costo de ventas',valsFn(mf=>pygAcum(mf,'costo_ventas')+pygAcum(mf,'costo_prod')),{pyg:true});
+  resRow('UTILIDAD BRUTA',valsFn(mf=>pygAcum(mf,'ing_operacionales')-pygAcum(mf,'dev_ventas')-pygAcum(mf,'costo_ventas')-pygAcum(mf,'costo_prod')),{bold:true,pyg:true});
+  resRow('(-) Gastos administración',valsFn(mf=>pygAcum(mf,'gtos_admin')),{pyg:true});
+  resRow('(-) Gastos ventas',valsFn(mf=>pygAcum(mf,'gtos_ventas')),{pyg:true});
+  resRow('UTILIDAD OPERACIONAL',valsFn(mf=>pygAcum(mf,'ing_operacionales')-pygAcum(mf,'dev_ventas')-pygAcum(mf,'costo_ventas')-pygAcum(mf,'costo_prod')-pygAcum(mf,'gtos_admin')-pygAcum(mf,'gtos_ventas')),{bold:true,pyg:true});
+  resRow('(+) Otros ingresos',valsFn(mf=>pygAcum(mf,'ing_no_operacionales')+pygAcum(mf,'otros_ing')),{pyg:true});
+  resRow('(-) Otros gastos',valsFn(mf=>pygAcum(mf,'gtos_no_op')),{pyg:true});
+  resRow('(-) Impuesto de renta',valsFn(mf=>pygAcum(mf,'imp_renta')),{pyg:true});
+  resRow('UTILIDAD NETA '+(vistaExc==='mov'?'DEL MES':'YTD'),valsFn(mf=>pygAcum(mf,'ing_operacionales')-pygAcum(mf,'dev_ventas')-pygAcum(mf,'costo_ventas')-pygAcum(mf,'costo_prod')-pygAcum(mf,'gtos_admin')-pygAcum(mf,'gtos_ventas')+pygAcum(mf,'ing_no_operacionales')+pygAcum(mf,'otros_ing')-pygAcum(mf,'gtos_no_op')-pygAcum(mf,'imp_renta')),{total:true,pyg:true});
+  s4.getColumn(1).width=38;
+  for(let i=2;i<=resCols.length;i++)s4.getColumn(i).width=14;
+  // ════════════════════════════════════════════════════
+  // HOJA 6 — DETALLE CUENTAS (pivoteado: cuenta × mes)
+  // ════════════════════════════════════════════════════
+  const s5=wb.addWorksheet('Detalle Cuentas',{properties:{tabColor:{argb:'FF6B7280'}}});
+  s5.addRow([empresa+' — Detalle de Cuentas por Mes (saldo final)']);
+  s5.getCell('A1').font={bold:true,size:14,color:{argb:CC.pri}};
+  s5.mergeCells(1,1,1,3+meses.length);
+  s5.addRow([]);
+  const detCols=['Código','Cuenta','Clase'].concat(meses.map(m=>MESES_CORTO[m]+' '+year));
+  hdrStyle(s5.addRow(detCols),detCols.length);
+  // Construir matriz cuenta × mes
+  const matriz={};
+  monthlyFiles.forEach((mf,idx)=>{
+    mf.classified.forEach(a=>{
+      if(!matriz[a.code]) matriz[a.code]={name:a.name,clase:a.clase,vals:new Array(meses.length).fill(0)};
+      matriz[a.code].vals[idx]=getDisplayValue(a);
+      if(!matriz[a.code].name) matriz[a.code].name=a.name;
+    });
+  });
+  Object.keys(matriz).sort().forEach(code=>{
+    const m=matriz[code];
+    const r=s5.addRow([code,m.name,m.clase].concat(m.vals.map(Math.round)));
+    for(let i=4;i<=detCols.length;i++){r.getCell(i).numFmt='#,##0';r.getCell(i).font={size:9}}
+    r.getCell(1).font={size:9,bold:true};r.getCell(2).font={size:9};r.getCell(3).font={size:9,color:{argb:CC.pri2}};
+  });
+  s5.getColumn(1).width=12;s5.getColumn(2).width=44;s5.getColumn(3).width=14;
+  for(let i=4;i<=detCols.length;i++)s5.getColumn(i).width=14;
+  s5.views=[{state:'frozen',ySplit:3,xSplit:3}];
+  s5.autoFilter={from:{row:3,column:1},to:{row:3,column:detCols.length}};
+  // ════════════════════════════════════════════════════
+  // HOJA 7 — NOTAS DE ANÁLISIS (mensuales + globales)
+  // ════════════════════════════════════════════════════
+  const s6=wb.addWorksheet('Notas',{properties:{tabColor:{argb:'FFFCD34D'}}});
+  s6.addRow(['Notas de análisis — '+empresa+' '+year]);
+  s6.getCell('A1').font={bold:true,size:14,color:{argb:CC.pri}};
+  s6.mergeCells('A1:B1');
+  s6.addRow([]);
+  // Sección 1: Notas mensuales
+  const notasMesData=getNotasMes();
+  const tieneMes=Object.keys(notasMesData).length>0;
+  if(tieneMes||monthlyFiles.length){
+    const secM=s6.addRow(['ANÁLISIS MENSUAL']);
+    s6.mergeCells(secM.number,1,secM.number,2);
+    secM.getCell(1).font={bold:true,size:12,color:{argb:CC.headFg}};
+    secM.getCell(1).fill={type:'pattern',pattern:'solid',fgColor:{argb:CC.pri2}};
+    secM.height=22;
+    monthlyFiles.forEach(mf=>{
+      const lbl=MESES[mf.mes]+' '+year;
+      const txt=notasMesData[mf.mes]||'(sin notas — edita en la herramienta web)';
+      const r=s6.addRow([lbl,txt]);
+      r.getCell(1).font={bold:true,color:{argb:'FF1B3A5C'},size:11};
+      r.getCell(1).fill={type:'pattern',pattern:'solid',fgColor:{argb:'FFEFF6FF'}};
+      r.getCell(1).alignment={vertical:'top'};
+      r.getCell(2).alignment={wrapText:true,vertical:'top'};
+      r.getCell(2).font={size:11};
+      if(!notasMesData[mf.mes]) r.getCell(2).font={italic:true,color:{argb:'FF9CA3AF'},size:11};
+      r.height=Math.max(28,Math.min(180,(txt||'').length/3));
+    });
+    s6.addRow([]);
+  }
+  // Sección 2: Notas globales
+  const secG=s6.addRow(['ANÁLISIS GENERAL']);
+  s6.mergeCells(secG.number,1,secG.number,2);
+  secG.getCell(1).font={bold:true,size:12,color:{argb:CC.headFg}};
+  secG.getCell(1).fill={type:'pattern',pattern:'solid',fgColor:{argb:CC.pri2}};
+  secG.height=22;
+  const notas=[
+    ['Análisis de Activos',document.getElementById('notaActivos').value],
+    ['Análisis de Pasivos',document.getElementById('notaPasivos').value],
+    ['Análisis de Ingresos',document.getElementById('notaIngresos').value],
+    ['Análisis de Costos y Gastos',document.getElementById('notaGastos').value],
+    ['Conclusión general',document.getElementById('notaConclusion').value]
+  ];
+  notas.forEach(([lbl,txt])=>{
+    const r=s6.addRow([lbl,txt||'(sin notas — edita en la herramienta web)']);
+    r.getCell(1).font={bold:true,color:{argb:'FF854D0E'},size:11};
+    r.getCell(1).fill={type:'pattern',pattern:'solid',fgColor:{argb:'FFFEF9C3'}};
+    r.getCell(1).alignment={vertical:'top',wrapText:true};
+    r.getCell(2).alignment={wrapText:true,vertical:'top'};
+    r.getCell(2).font={size:11};
+    if(!txt) r.getCell(2).font={italic:true,color:{argb:'FF9CA3AF'},size:11};
+    r.height=Math.max(40,Math.min(180,(txt||'').length/3));
+  });
+  s6.getColumn(1).width=34;
+  s6.getColumn(2).width=84;
+  const buf=await wb.xlsx.writeBuffer();
+  const blob=new Blob([buf],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='Trend_Financiero_'+empresa.replace(/\s+/g,'_')+'_'+year+'.xlsx';a.click();URL.revokeObjectURL(url);
+  if(typeof gtag==='function')gtag('event','trend_excel_descargado',{meses:monthlyFiles.length,hojas:7});
+}
+/* ═══ EXPORT WORD ═══ */
+async function exportarWord(){
+  if(typeof exoProGate==='function'){if(!(await exoProGate('Trend Financiero — Word')))return}
+  const empresa=document.getElementById('cfgEmpresa').value||'EMPRESA S.A.S';
+  const nit=document.getElementById('cfgNit').value||'';
+  const year=document.getElementById('cfgYear').value;
+  const ciudad=document.getElementById('cfgCiudad').value||'Bogotá D.C.';
+  const repLegal=document.getElementById('cfgRepLegal').value||'';
+  const contador=document.getElementById('cfgContador').value||'';
+  const tpContador=document.getElementById('cfgTPContador').value||'';
+  const moneda=document.getElementById('cfgMoneda').value;
+  function val(mf,g){return mf.esfData[g]||0}
+  function totalClase(mf,clase){let t=0;mf.classified.forEach(a=>{if(a.clase===clase)t+=getDisplayValue(a)});return t}
+  function vals(fn){return monthlyFiles.map(fn)}
+  const meses=monthlyFiles.map(f=>f.mes);
+  const colsHead=meses.map(m=>'<th class="num">'+MESES_CORTO[m]+'</th>').join('');
+  // opts.pyg → values ACUMULADO: de-acumula a movimiento según vista + YTD acumulado.
+  // sin pyg → balance: saldo final del mes, YTD = saldo de cierre.
+  function rowW(label,values,cls,opts){
+    opts=opts||{};
+    const disp=opts.pyg?aplicarVistaPyG(values):values;
+    const ytd=opts.pyg?ytdDe(values):(values.length?values[values.length-1]:0);
+    const variacion=variacionPromedio(disp);
+    const varStr=fmtVariacion(variacion);
+    const color=variacion===null?'#9CA3AF':(variacion>=0?'#059669':'#DC2626');
+    let r='<tr'+(cls?' class="'+cls+'"':'')+'><td>'+label+'</td>';
+    disp.forEach(v=>{r+='<td class="num">'+fN(v)+'</td>'});
+    r+='<td class="num" style="background:#EEF2F7;font-weight:bold">'+fN(ytd)+'</td>';
+    r+='<td class="num" style="color:'+color+'">'+varStr+'</td></tr>';
+    return r;
+  }
+  function sectionRow(label){return '<tr class="section-row"><td colspan="'+(meses.length+3)+'">'+label+'</td></tr>'}
+  let trendHtml='<table><thead><tr><th>Concepto</th>'+colsHead+'<th class="num" style="background:#EEF2F7">YTD</th><th class="num" title="Variación porcentual promedio mes a mes. Ej: +10% significa que en promedio cada mes crece un 10% respecto al anterior.">Tendencia mensual</th></tr></thead><tbody>';
+  trendHtml+=sectionRow('BALANCE — Activos');
+  trendHtml+=rowW('Activos corrientes',vals(mf=>val(mf,'efectivo')+val(mf,'inv_cp')+val(mf,'cxc')+val(mf,'deterioro_cartera')+val(mf,'inventarios')+val(mf,'diferidos_act')+val(mf,'otros_act')),'subtotal');
+  trendHtml+=rowW('Activos no corrientes',vals(mf=>val(mf,'ppe')+val(mf,'depreciacion')+val(mf,'intangibles')+val(mf,'amortizacion')+val(mf,'inv_lp')+val(mf,'otros_act_nc')+val(mf,'valorizaciones')),'subtotal');
+  trendHtml+=rowW('TOTAL ACTIVOS',vals(mf=>totalClase(mf,'Activo')),'total');
+  trendHtml+=sectionRow('BALANCE — Pasivos');
+  trendHtml+=rowW('Pasivos corrientes',vals(mf=>val(mf,'oblig_fin_cp')+val(mf,'proveedores')+val(mf,'cxp')+val(mf,'impuestos')+val(mf,'laborales')+val(mf,'provisiones')+val(mf,'otros_pas_c')),'subtotal');
+  trendHtml+=rowW('Pasivos no corrientes',vals(mf=>val(mf,'oblig_fin_lp')+val(mf,'diferidos_pas')+val(mf,'otros_pas')),'subtotal');
+  trendHtml+=rowW('TOTAL PASIVOS',vals(mf=>totalClase(mf,'Pasivo')),'total');
+  trendHtml+=sectionRow('BALANCE — Patrimonio');
+  trendHtml+=rowW('TOTAL PATRIMONIO',vals(mf=>{let t=0,u=0;mf.classified.forEach(a=>{const v=getDisplayValue(a);if(a.clase==='Patrimonio')t+=v;else if(a.clase==='Ingreso')u+=v;else if(a.clase==='Gasto'||a.clase==='Costo'||a.clase==='Costo prod')u-=v});return t+u}),'total');
+  const sufW=getVistaPyG()==='mov'?'DEL MES':'YTD';
+  trendHtml+=sectionRow(getVistaPyG()==='mov'?'P&G — movimiento del mes (columna YTD = acumulado)':'P&G — acumulado YTD');
+  trendHtml+=rowW('Ingresos operacionales',vals(mf=>pygAcum(mf,'ing_operacionales')-pygAcum(mf,'dev_ventas')),'subtotal',{pyg:true});
+  trendHtml+=rowW('(-) Costo de ventas',vals(mf=>pygAcum(mf,'costo_ventas')+pygAcum(mf,'costo_prod')),'',{pyg:true});
+  trendHtml+=rowW('UTILIDAD BRUTA',vals(mf=>pygAcum(mf,'ing_operacionales')-pygAcum(mf,'dev_ventas')-pygAcum(mf,'costo_ventas')-pygAcum(mf,'costo_prod')),'subtotal',{pyg:true});
+  trendHtml+=rowW('(-) Gastos administración',vals(mf=>pygAcum(mf,'gtos_admin')),'',{pyg:true});
+  trendHtml+=rowW('(-) Gastos ventas',vals(mf=>pygAcum(mf,'gtos_ventas')),'',{pyg:true});
+  trendHtml+=rowW('UTILIDAD OPERACIONAL',vals(mf=>pygAcum(mf,'ing_operacionales')-pygAcum(mf,'dev_ventas')-pygAcum(mf,'costo_ventas')-pygAcum(mf,'costo_prod')-pygAcum(mf,'gtos_admin')-pygAcum(mf,'gtos_ventas')),'subtotal',{pyg:true});
+  trendHtml+=rowW('(+) Otros ingresos',vals(mf=>pygAcum(mf,'ing_no_operacionales')+pygAcum(mf,'otros_ing')),'',{pyg:true});
+  trendHtml+=rowW('(-) Otros gastos',vals(mf=>pygAcum(mf,'gtos_no_op')),'',{pyg:true});
+  trendHtml+=rowW('(-) Impuesto de renta',vals(mf=>pygAcum(mf,'imp_renta')),'',{pyg:true});
+  trendHtml+=rowW('UTILIDAD NETA '+sufW,vals(mf=>pygAcum(mf,'ing_operacionales')-pygAcum(mf,'dev_ventas')-pygAcum(mf,'costo_ventas')-pygAcum(mf,'costo_prod')-pygAcum(mf,'gtos_admin')-pygAcum(mf,'gtos_ventas')+pygAcum(mf,'ing_no_operacionales')+pygAcum(mf,'otros_ing')-pygAcum(mf,'gtos_no_op')-pygAcum(mf,'imp_renta')),'total',{pyg:true});
+  trendHtml+='</tbody></table>';
+  function nota(titulo,texto){
+    const t=(texto||'').trim();
+    if(!t)return '';
+    return '<h3>'+titulo+'</h3><p>'+t.replace(/\n/g,'<br>')+'</p>';
+  }
+  const notasHtml=
+    nota('Análisis de Activos',document.getElementById('notaActivos').value)
+    +nota('Análisis de Pasivos',document.getElementById('notaPasivos').value)
+    +nota('Análisis de Ingresos',document.getElementById('notaIngresos').value)
+    +nota('Análisis de Costos y Gastos',document.getElementById('notaGastos').value)
+    +nota('Conclusión general',document.getElementById('notaConclusion').value);
+  const firmasHtml=(repLegal||contador)?
+    '<table style="width:100%;margin-top:60pt;border-collapse:collapse"><tr>'
+    +(repLegal?'<td style="width:50%;text-align:center;padding:8pt"><p style="border-top:1px solid #000;padding-top:4pt">&nbsp;</p><p style="font-weight:bold;margin:2pt 0">'+repLegal+'</p><p style="font-size:9pt;color:#666">Representante Legal</p></td>':'')
+    +(contador?'<td style="width:50%;text-align:center;padding:8pt"><p style="border-top:1px solid #000;padding-top:4pt">&nbsp;</p><p style="font-weight:bold;margin:2pt 0">'+contador+'</p><p style="font-size:9pt;color:#666">Contador Público'+(tpContador?' — T.P. '+tpContador:'')+'</p></td>':'')
+    +'</tr></table>':'';
+  const html='<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><style>'
+    +'@page{margin:2cm 2cm}body{font-family:Georgia,serif;font-size:10pt;color:#000}'
+    +'h1{font-size:16pt;color:#1B3A5C;text-align:center;margin:0 0 4pt 0}'
+    +'h2{font-size:13pt;color:#1B3A5C;border-bottom:1px solid #1B3A5C;padding-bottom:4pt;margin:18pt 0 8pt 0}'
+    +'h3{font-size:11pt;color:#1B3A5C;margin:12pt 0 4pt 0}'
+    +'p{margin:4pt 0;text-align:justify}'
+    +'table{border-collapse:collapse;width:100%;margin:6pt 0;font-size:9pt}'
+    +'th,td{padding:2pt 5pt;border:none}'
+    +'th{color:#1B3A5C;text-align:left;border-bottom:1px solid #1B3A5C;font-size:8.5pt;text-transform:uppercase}'
+    +'th.num,td.num{text-align:right;font-family:"Courier New",monospace}'
+    +'tr.section-row td{background:#1B3A5C;color:#fff;font-weight:bold;text-transform:uppercase;padding:4pt 6pt;font-size:9pt}'
+    +'tr.subtotal td{font-weight:bold;background:#f8fafc;border-top:1px solid #666;border-bottom:1px solid #666}'
+    +'tr.total td{font-weight:bold;background:#e0f2fe;border-top:1px solid #1B3A5C;border-bottom:3px double #1B3A5C}'
+    +'</style></head><body>'
+    +'<div style="text-align:center;margin-bottom:18pt">'
+    +'<h1>'+empresa+'</h1>'
+    +'<p style="font-size:10pt">NIT: '+nit+'</p>'
+    +'<p style="font-size:12pt;font-weight:bold;margin-top:14pt">TREND FINANCIERO</p>'
+    +'<p style="font-size:10pt">Tendencia mensual '+MESES[meses[0]]+' a '+MESES[meses[meses.length-1]]+' de '+year+'</p>'
+    +'<p style="font-size:9pt;color:#666">(Cifras expresadas en '+unitLabel(moneda)+')</p>'
+    +'<p style="font-size:9pt;margin-top:8pt">'+ciudad+'</p>'
+    +'</div>'
+    +'<h2>Tabla de tendencia</h2>'
+    +trendHtml
+    +(notasHtml?'<h2>Notas de análisis</h2>'+notasHtml:'')
+    +firmasHtml
+    +'</body></html>';
+  try{
+    const blob=htmlDocx.asBlob(html);
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=url;a.download='Trend_Financiero_'+empresa.replace(/\s+/g,'_')+'_'+year+'.docx';a.click();URL.revokeObjectURL(url);
+  }catch(e){
+    alert('Error generando Word: '+(e.message||e));
+  }
+  if(typeof gtag==='function')gtag('event','trend_word_descargado',{meses:monthlyFiles.length});
+}
+/* ═══ INIT ═══ */
+document.addEventListener('DOMContentLoaded',()=>{
+  setupDropZone();
+});
+</script>
+</body>
+</html>

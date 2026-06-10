@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S7SM6ST4CC');
+</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#1B3A5C">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulario 420 — Impuesto al Patrimonio Personas Naturales 2026 | ExógenaDIAN</title>
+<meta name="description" content="Calcula GRATIS tu Impuesto al Patrimonio 2026 (Formulario 420 DIAN, UVT $52.374). Tarifas progresivas 0,5% / 1,0% / 1,5% aplicadas correctamente, exclusión casa habitación 12.000 UVT, validaciones para evitar sanciones. Excel descargable PRO con fórmulas vivas.">
+<meta name="keywords" content="impuesto al patrimonio 2026, formulario 420 DIAN, UVT 2026, patrimonio personas naturales, ley 2277 2022, art 295-3 ET, art 296-3 ET, tarifa impuesto patrimonio, 72000 UVT, exclusión casa habitación 12000 UVT, sanción inexactitud patrimonio">
+<link rel="canonical" href="https://exogenadian.com/patrimonio420.html">
+<meta property="og:title" content="Formulario 420 — Impuesto al Patrimonio Personas Naturales 2026">
+<meta property="og:description" content="Calcula GRATIS tu Impuesto al Patrimonio 2026 (UVT $52.374) con tarifas progresivas correctas. Excel descargable PRO.">
+<meta property="og:url" content="https://exogenadian.com/patrimonio420.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="ExógenaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png">
+<meta name="robots" content="index, follow">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Formulario 420 Impuesto al Patrimonio","url":"https://exogenadian.com/patrimonio420.html","description":"Calcula GRATIS el Impuesto al Patrimonio 2026 (UVT $52.374) con tarifas progresivas correctas según Art. 296-3 ET y exclusión de casa habitación 12.000 UVT. Excel PRO con fórmulas vivas.","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"COP"},"author":{"@type":"Organization","name":"ExógenaDIAN","url":"https://exogenadian.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://exogenadian.com/"},{"@type":"ListItem","position":2,"name":"Impuesto al Patrimonio F420","item":"https://exogenadian.com/patrimonio420.html"}]}
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js" integrity="sha384-Pqp51FUN2/qzfxZxBCtF0stpc9ONI6MYZpVqmo8m20SoaQCzf+arZvACkLkirlPz" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--green:#548235;--green2:#E2EFDA;--red:#CC0000;--amber:#D97706;--amber2:#FFF8E1;--border:#e2e8f0;--radius:10px;--shadow:0 2px 12px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+.container{max-width:1200px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#1B3A5C 0%,#2E75B6 100%);padding:28px 32px;border-radius:16px;margin-bottom:24px;color:#fff;display:flex;align-items:center;justify-content:space-between}
+.header h1{font-size:1.5rem;font-weight:700;display:flex;align-items:center;gap:10px}
+.header h1 span{background:rgba(255,255,255,.15);padding:4px 12px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:600}
+.header p{opacity:.85;font-size:.85rem;margin-top:4px}
+.header-right{text-align:right;font-size:.8rem;opacity:.85}
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:12px;margin-bottom:10px;box-shadow:var(--shadow)}
+.card-title{font-size:1.05rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.btn{padding:10px 24px;border:none;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;transition:.2s;font-family:inherit;display:inline-flex;align-items:center;gap:6px}
+.btn-primary{background:var(--pri2);color:#fff}.btn-primary:hover{background:var(--pri);transform:translateY(-1px)}
+.btn-success{background:var(--green);color:#fff}.btn-success:hover{opacity:.9}
+.btn-outline{background:transparent;border:2px solid var(--border);color:var(--text)}.btn-outline:hover{border-color:var(--pri2);color:var(--pri)}
+.btn-mini{padding:5px 12px;font-size:.78rem;font-weight:600;border-radius:6px;border:1px solid var(--pri2);background:#fff;color:var(--pri);cursor:pointer;transition:.15s}
+.btn-mini:hover{background:var(--pri3)}
+.alert{padding:14px 18px;border-radius:8px;font-size:.85rem;margin-bottom:12px;display:flex;align-items:flex-start;gap:10px;border-left:4px solid}
+.alert-info{background:var(--pri3);color:var(--pri);border-color:#B4C6E7}
+.alert-warn{background:#FFFBEB;color:#78350F;border-color:#F59E0B}
+.alert-error{background:#FEF2F2;color:#991B1B;border-color:#EF4444}
+.alert-success{background:#ECFDF5;color:#065F46;border-color:#059669}
+.alert strong{display:block;margin-bottom:4px;font-size:.9rem}
+.alert-list{margin:4px 0 0 18px;padding:0;font-size:.82rem}
+.alert-list li{margin-bottom:2px}
+/* Sticky context bar */
+.ctx-bar{position:sticky;top:0;z-index:40;background:#1B3A5C;color:#fff;padding:7px 18px;font-size:.78rem;display:flex;gap:18px;align-items:center;justify-content:center;border-radius:0 0 8px 8px;margin-bottom:12px;flex-wrap:wrap}
+.ctx-bar span{font-family:'JetBrains Mono',monospace}
+.ctx-bar strong{color:#93C5FD}
+/* Tariff visual panel */
+.tariff-panel{background:#fff;border:2px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px}
+.tariff-title{font-weight:700;font-size:.95rem;margin-bottom:10px;color:var(--pri);display:flex;align-items:center;gap:8px}
+.tariff-tramos{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px}
+.tramo{padding:8px 10px;border-radius:8px;border:2px solid var(--border);background:#f8fafc;font-size:.75rem;text-align:center;transition:.2s}
+.tramo .t-range{font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted)}
+.tramo .t-rate{font-size:1.1rem;font-weight:800;color:var(--pri);margin-top:2px}
+.tramo .t-label{font-size:.7rem;color:var(--muted);margin-top:2px}
+.tramo.active{background:#ECFDF5;border-color:var(--green);box-shadow:0 0 0 2px rgba(84,130,53,.15)}
+.tramo.active .t-rate{color:var(--green)}
+.breakdown{background:#f8fafc;border:1px dashed var(--border);border-radius:8px;padding:10px;font-size:.82rem;font-family:'JetBrains Mono',monospace;line-height:1.6;white-space:pre-wrap;color:var(--pri)}
+.breakdown b{color:var(--green);font-weight:700}
+/* DIAN FORM STYLES */
+.dian-form{border:2px solid #000;font-family:Arial,Helvetica,sans-serif;font-size:11px;background:#fff;max-width:1100px;margin:0 auto}
+.dian-top{display:grid;grid-template-columns:80px 1fr 120px;border-bottom:2px solid #000}
+.dian-top-left{background:#1a3c6e;color:#fff;display:flex;align-items:center;justify-content:center;padding:8px;font-size:9px;text-align:center;font-weight:700;line-height:1.2;border-right:1px solid #000}
+.dian-top-center{padding:6px 12px}
+.dian-top-center .dian-title{font-size:13px;font-weight:700;text-align:center;margin:2px 0}
+.dian-top-center .dian-subtitle{font-size:9px;color:#555;text-align:center}
+.dian-top-right{background:#1a3c6e;color:#fff;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:900;font-family:'JetBrains Mono',monospace;border-left:1px solid #000}
+.dian-sec{background:#d4e6f1;padding:3px 8px;font-weight:700;font-size:9px;border-bottom:1px solid #000;text-transform:uppercase;color:#1a3c6e;letter-spacing:.3px}
+.f110-grid{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #000}
+.f110-col{border-right:1px solid #ccc}
+.f110-col:last-child{border-right:none}
+.f110-row{display:grid;grid-template-columns:1fr 32px 150px;border-bottom:1px solid #ddd;font-size:10px;min-height:22px}
+.f110-row:hover{background:#f5f8fc}
+.f110-row .f-label{padding:2px 6px;font-size:9px;display:flex;align-items:center;line-height:1.2}
+.f110-row .f-cas{display:flex;align-items:center;justify-content:center;font-size:7.5px;color:#888;font-family:'JetBrains Mono',monospace;background:#f9f9f9;border-left:1px solid #eee;border-right:1px solid #eee}
+.f110-row .f-val{padding:1px 4px;display:flex;align-items:center;justify-content:flex-end}
+.f110-row .f-val input{border:none;background:transparent;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;width:100%;outline:none;padding:1px 3px;color:#aaa}
+.f110-row .f-val input.filled{font-weight:700;color:#1a3c6e;background:#edf4ff}
+.f110-row .f-val input.computed{font-weight:700;color:#2E7D32;background:#E8F5E9;cursor:default}
+.f110-row.f-total{background:#f0f2f5;font-weight:700}
+.f110-row.f-total .f-label{font-weight:700;color:#1a3c6e}
+.f110-row.f-result{background:#d4e6f1}
+.f110-row.f-result .f-label{font-weight:700;color:#1a3c6e}
+.f110-row.f-result .f-val input{font-size:11px;font-weight:800}
+.f110-datos{border-bottom:2px solid #000}
+.datos-row{display:grid;grid-template-columns:60px 1fr 60px 1fr;border-bottom:1px solid #ddd}
+.datos-row>div{padding:4px 8px;border-right:1px solid #eee;display:flex;flex-direction:column}
+.datos-row .lbl{font-size:8.5px;color:#5a6472;font-weight:600;margin-bottom:2px}
+.datos-row input,.datos-row select{border:none;border-bottom:1px solid #cfd8e3;background:transparent;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:10.5px;width:100%;outline:none;padding:3px 2px;color:#1a3c6e;transition:border-color .15s}
+.datos-row input:focus,.datos-row select:focus{border-bottom-color:#2E75B6}
+.datos-row input::placeholder{color:#b8c2cf;font-weight:400}
+.dian-footer{padding:8px 12px;font-size:8px;color:#888;text-align:center;border-top:1px solid #ccc;background:#fafafa}
+.dian-footer strong{color:#1a3c6e}
+.config-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.config-item{display:flex;flex-direction:column;gap:4px}
+.config-item label{font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.3px}
+.config-item input,.config-item select{padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:.88rem;font-family:inherit}
+.config-item input:focus,.config-item select:focus{outline:none;border-color:var(--pri2);box-shadow:0 0 0 3px rgba(46,117,182,.15)}
+.config-item small{font-size:.72rem;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px}
+.stat-card{background:var(--card);border-radius:var(--radius);padding:14px;border:1px solid var(--border);text-align:center}
+.stat-card .val{font-size:1.25rem;font-weight:700;font-family:'JetBrains Mono',monospace}
+.stat-card .lbl{font-size:.72rem;color:var(--muted);font-weight:600;text-transform:uppercase;margin-top:4px}
+.stat-card.blue .val{color:var(--pri2)}.stat-card.green .val{color:var(--green)}.stat-card.amber .val{color:var(--amber)}.stat-card.red .val{color:var(--red)}
+.hidden{display:none!important}
+details{margin-bottom:10px}
+details>summary{cursor:pointer;padding:10px 14px;background:#F0F9FF;border:1px solid #BAE6FD;border-radius:8px;font-weight:600;color:var(--pri);font-size:.9rem;list-style:none}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:'▶ ';font-size:.7rem;margin-right:6px;display:inline-block;transition:transform .2s}
+details[open]>summary::before{transform:rotate(90deg)}
+details>div{padding:12px 16px;background:#fff;border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;font-size:.88rem;line-height:1.6}
+.example-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+@media(max-width:900px){.f110-grid{grid-template-columns:1fr}.config-grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.tariff-tramos{grid-template-columns:1fr 1fr}}
+@media print {
+  body{background:#fff!important;font-size:11pt;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #nav-container,#excelProLock,.btn,.actions,button,.example-btns,.ctx-bar{display:none!important}
+  .container{max-width:100%!important;padding:0!important}
+  .header{border-radius:0!important;padding:16px!important}
+  .card{box-shadow:none!important;border:1px solid #ccc!important}
+  .dian-form{max-width:100%!important;page-break-inside:avoid}
+  @page{margin:10mm}
+}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div id="nav-container"></div>
+<script defer src="shared/pro.js?v=848fbf16"></script>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<script defer src="shared/pro-banner.js?v=a5944c54"></script>
+<div class="ctx-bar">
+  <span>📅 Año gravable <strong id="ctxYear">2026</strong></span>
+  <span>🔢 UVT <strong id="ctxUvt">$52.374</strong></span>
+  <span>📌 Fecha causación <strong>1 ene <span id="ctxYear2">2026</span></strong></span>
+  <span>⚖️ Umbral obligación <strong>72.000 UVT = <span id="ctxUmbral">$3.770.928.000</span></strong></span>
+</div>
+<div class="container" style="margin-top:14px;margin-bottom:0">
+  <div style="background:#FFFBEB;border:1.5px solid #FDE68A;border-radius:14px;padding:16px 18px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+      <span style="font-size:1.1rem">⚠️</span>
+      <strong style="color:#78350F;font-size:.95rem">Cambios recientes (datos vigentes a mayo 2026)</strong>
+    </div>
+    <ul style="margin:0 0 0 22px;font-size:.86rem;color:#78350F;line-height:1.6">
+      <li><strong>Sentencia C-079 del 15-abr-2026</strong> (Corte Constitucional) declaró inexequible el <strong>Decreto Legislativo 1474/2025</strong>, que había rebajado el umbral de personas naturales de 72.000 a 40.000 UVT. <strong>El umbral vuelve a 72.000 UVT</strong>; las personas naturales que pagaron anticipadamente con el umbral de 40.000 UVT pueden solicitar devolución a la DIAN (Comunicado DIAN No. 059/2026).</li>
+      <li><strong>Plazos Formulario 420 (PN) — AG 2026:</strong> primera cuota del 12 al 26 de mayo de 2026 según último dígito del NIT; segunda cuota el <strong>14 de septiembre de 2026</strong> (Decreto 2229/2023, art. 1.6.1.13.2.53 del DUR 1625/2016).</li>
+      <li>Si eres <strong>persona jurídica con patrimonio líquido ≥ 200.000 UVT</strong> al 1-mar-2026, te aplica el impuesto temporal del <strong>Decreto 0173/2026</strong> con el <strong>Formulario 425</strong> (no el 420). Esta herramienta es exclusiva para personas naturales y sucesiones ilíquidas.</li>
+    </ul>
+  </div>
+</div>
+<div class="container">
+  <div class="header" style="padding:22px 28px">
+    <div>
+      <h1><span>420</span> Impuesto al Patrimonio</h1>
+      <p>Personas Naturales y Sucesiones Ilíquidas · AG 2026 · Ley 2277/2022 Art. 35-40 · Arts. 292-3 a 298-8 ET</p>
+    </div>
+    <div class="header-right">
+      <span id="proBadgeHeader" style="display:none;background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:.75rem;font-weight:700">PRO</span><br>
+      100% en navegador · Sin registro
+    </div>
+  </div>
+  <details>
+    <summary>🧭 ¿Estoy obligado a declarar Impuesto al Patrimonio 2026?</summary>
+    <div>
+      <p><strong>Sujetos pasivos</strong> (Art. 292-3 ET, modif. Ley 2277/2022):</p>
+      <ol style="margin:8px 0 8px 22px">
+        <li>Personas naturales y sucesiones ilíquidas contribuyentes del impuesto sobre la renta o regímenes sustitutivos.</li>
+        <li>Personas naturales nacionales o extranjeras que no tengan residencia en el país, respecto de su patrimonio poseído <em>directamente</em> en Colombia, salvo excepciones de tratados.</li>
+        <li>Personas naturales no residentes con patrimonio poseído <em>indirectamente</em> a través de establecimiento permanente en Colombia (la obligación recae en el EP).</li>
+        <li>Sucesiones ilíquidas de causantes sin residencia, por el patrimonio poseído en Colombia.</li>
+        <li>Sociedades o entidades extranjeras no declarantes de renta, por bienes en Colombia distintos a acciones, cuentas por cobrar o inversiones de portafolio (Art. 18-1 ET).</li>
+      </ol>
+      <p><strong>Hecho generador</strong> (Art. 294-3 ET): posesión al 1 de enero de cada año de un patrimonio líquido igual o superior a <strong>72.000 UVT</strong> (para 2026: $52.374 × 72.000 = <strong>$3.770.928.000</strong>).</p>
+      <p><strong>Si tu patrimonio líquido al 1 ene 2026 es inferior a $3.770.928.000, no estás obligado a presentar el F420.</strong></p>
+      <p style="margin-top:10px"><strong>Plazos AG 2026 (Art. 1.6.1.13.2.53 del Decreto 1625 de 2016 — DUR, sustituido por el Decreto 2229 de 2023):</strong></p>
+      <ul style="margin:6px 0 6px 22px;font-size:.88rem">
+        <li><strong>Primera cuota (50 %)</strong> — entre el 12 y el 26 de mayo de 2026 según el último dígito del NIT (1→12 may; 2→13 may; 3→14 may; 4→15 may; 5→19 may; 6→20 may; 7→21 may; 8→22 may; 9→25 may; 0→26 may).</li>
+        <li><strong>Segunda cuota (50 %)</strong> — 14 de septiembre de 2026 para todos.</li>
+      </ul>
+      <p style="margin-top:6px"><strong>Formulario aplicable:</strong> Formulario 420 prescrito por la <strong>Resolución DIAN 000071 del 4 de mayo de 2023</strong> (la DIAN no prescribió formulario nuevo de personas naturales para 2026).</p>
+    </div>
+  </details>
+  <div class="card" style="padding:12px 14px">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+      <div style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--pri)">🧪 Probar con un caso de ejemplo:</strong> (escribe valores realistas para ver cómo se aplica cada tramo de tarifa)</div>
+      <div class="example-btns">
+        <button class="btn-mini" onclick="cargarEjemplo(75000)">75.000 UVT (tramo 0,5%)</button>
+        <button class="btn-mini" onclick="cargarEjemplo(100000)">100.000 UVT (tramo 0,5%)</button>
+        <button class="btn-mini" onclick="cargarEjemplo(150000)">150.000 UVT (tramo 1,0%)</button>
+        <button class="btn-mini" onclick="cargarEjemplo(300000)">300.000 UVT (tramo 1,5%)</button>
+        <button class="btn-mini" onclick="limpiarFormulario()" style="border-color:var(--muted);color:var(--muted)">Limpiar</button>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="padding:16px">
+    <div class="card-title" style="margin-bottom:10px"><span>⚙️</span> Configuración</div>
+    <div class="config-grid">
+      <div class="config-item">
+        <label>Año gravable</label>
+        <select id="cfgYear" onchange="cambiarAnio()">
+          <option value="2026" selected>2026 (UVT $52.374)</option>
+          <option value="2025">2025 (UVT $49.799)</option>
+          <option value="2024">2024 (UVT $47.065)</option>
+        </select>
+        <small>El UVT y las validaciones se ajustan automáticamente al año.</small>
+      </div>
+      <div class="config-item">
+        <label>Tipo de declarante</label>
+        <select id="cfgTipo" onchange="recalcular()">
+          <option value="pn_res">Persona natural residente</option>
+          <option value="pn_nores">Persona natural no residente (bienes en Colombia)</option>
+          <option value="suc">Sucesión ilíquida</option>
+          <option value="soc_ext">Sociedad/entidad extranjera (Art. 292-3 num. 5)</option>
+        </select>
+        <small>Solo personas naturales residentes y sucesiones pueden aplicar exclusión casa habitación.</small>
+      </div>
+      <div class="config-item">
+        <label>¿Corrección?</label>
+        <select id="cfgCorr" onchange="recalcular()">
+          <option value="0">No (declaración inicial)</option>
+          <option value="1">Corrección privada (Art. 588 ET)</option>
+          <option value="2">Corrección con proyecto DIAN (Art. 589 ET)</option>
+          <option value="3">Corrección por acto administrativo</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="dian-form">
+    <div class="dian-top">
+      <div class="dian-top-left">DIAN<br>Colombia</div>
+      <div class="dian-top-center">
+        <div class="dian-title">Declaración del Impuesto al Patrimonio</div>
+        <div class="dian-subtitle">Año gravable <span id="formYear">2026</span> · Privada · Ley 2277/2022</div>
+      </div>
+      <div class="dian-top-right">420</div>
+    </div>
+    <div class="f110-datos">
+      <div class="dian-sec">Datos del declarante</div>
+      <div class="datos-row">
+        <div><span class="lbl">1. Año</span><input id="c1" value="2026" readonly></div>
+        <div style="grid-column:span 3"><span class="lbl">4. No. formulario (DIAN asigna)</span><input id="c4" placeholder="(automático)"></div>
+      </div>
+      <div class="datos-row" style="grid-template-columns:1.6fr 55px 1fr 1fr">
+        <div><span class="lbl">5. NIT</span><input id="c5" placeholder="900875335" oninput="onNitChange()"></div>
+        <div><span class="lbl">6. DV</span><input id="c6" readonly style="background:#f9f9f9"></div>
+        <div><span class="lbl">12. Cód. seccional</span><input id="c12" placeholder="32"></div>
+        <div><span class="lbl">25. Cód. corrección</span><input id="c25" readonly style="background:#f9f9f9"></div>
+      </div>
+      <div class="datos-row">
+        <div style="grid-column:span 2"><span class="lbl">7. Primer apellido</span><input id="c7" placeholder="PÉREZ"></div>
+        <div style="grid-column:span 2"><span class="lbl">8. Segundo apellido</span><input id="c8" placeholder="GÓMEZ"></div>
+      </div>
+      <div class="datos-row">
+        <div style="grid-column:span 2"><span class="lbl">9. Primer nombre</span><input id="c9" placeholder="JUAN"></div>
+        <div style="grid-column:span 2"><span class="lbl">10. Otros nombres</span><input id="c10" placeholder="ANDRÉS"></div>
+      </div>
+      <div class="datos-row">
+        <div style="grid-column:span 3"><span class="lbl">11. Razón social (solo entidades)</span><input id="c11" placeholder="(deja en blanco si es persona natural)"></div>
+        <div><span class="lbl">26. Formulario anterior</span><input id="c26" placeholder="(si es corrección)"></div>
+      </div>
+      <div class="datos-row">
+        <div style="grid-column:span 4">
+          <span class="lbl">27. ¿Beneficiario de convenio para evitar doble imposición?</span>
+          <select id="c27" onchange="recalcular()" style="padding:4px;border:1px solid #ddd;font-size:10px">
+            <option value="0">No</option>
+            <option value="1">Sí</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="f110-grid">
+      <div class="f110-col">
+        <div class="dian-sec">Determinación del patrimonio líquido</div>
+        <div class="f110-row"><div class="f-label">Patrimonio bruto (sin acciones ni cuotas)</div><div class="f-cas">28</div><div class="f-val"><input id="c28" oninput="recalcular()"></div></div>
+        <div class="f110-row"><div class="f-label">Valor patrimonial acciones / cuotas de interés social</div><div class="f-cas">29</div><div class="f-val"><input id="c29" oninput="recalcular()"></div></div>
+        <div class="f110-row"><div class="f-label">Pasivos (Art. 283 ET)</div><div class="f-cas">30</div><div class="f-val"><input id="c30" oninput="recalcular()"></div></div>
+        <div class="f110-row f-total"><div class="f-label">Patrimonio líquido (28 + 29 − 30)</div><div class="f-cas">31</div><div class="f-val"><input id="c31" class="computed" readonly></div></div>
+        <div class="dian-sec">Base gravable de acciones / cuotas (Art. 295-3 num. 1 ET)</div>
+        <div class="f110-row"><div class="f-label">Acciones no bolsa — registre el <strong>VALOR INTRÍNSECO</strong> (Art. 73 &gt; intrínseco)</div><div class="f-cas">32</div><div class="f-val"><input id="c32" oninput="recalcular()"></div></div>
+        <div class="f110-row"><div class="f-label">Acciones no bolsa — registre el <strong>COSTO FISCAL AJUSTADO Art. 73</strong> (&lt; intrínseco)</div><div class="f-cas">33</div><div class="f-val"><input id="c33" oninput="recalcular()"></div></div>
+        <div class="f110-row"><div class="f-label">Acciones que cotizan en bolsa (promedio año anterior)</div><div class="f-cas">34</div><div class="f-val"><input id="c34" oninput="recalcular()"></div></div>
+        <div class="f110-row f-total"><div class="f-label">Base gravable acciones / cuotas (32 + 33 + 34)</div><div class="f-cas">35</div><div class="f-val"><input id="c35" class="computed" readonly></div></div>
+        <details style="margin-top:10px;background:#F0FDF4;border:1px solid var(--green3);border-radius:8px;padding:0 12px">
+          <summary style="cursor:pointer;padding:10px 0;font-weight:700;color:#065F46;font-size:.86rem">📘 ¿Cómo calculo la base gravable de mis acciones? (evita el requerimiento)</summary>
+          <div style="font-size:.83rem;color:#065F46;line-height:1.6;padding-bottom:12px">
+            <p>Las acciones se declaran <strong>dos veces</strong>: a valor patrimonial en la casilla <strong>29</strong> (es parte del patrimonio bruto), y a su <strong>base gravable</strong> en la 32/33/34. La casilla 36 reemplaza el valor de la 29 por el de la 35 (36 = 28 − 30 + 35). Si declara la 29 pero deja la 35 en $0, la base queda subestimada y la DIAN envía requerimiento por inexactitud (Art. 647 ET).</p>
+            <p style="margin-top:8px"><strong>Regla (Art. 295-3 num. 1 ET) para sociedades nacionales NO inscritas en bolsa:</strong> la base gravable de las acciones es el <strong>MENOR</strong> entre (a) el costo fiscal de adquisición ajustado anualmente por Art. 73 ET, y (b) el valor intrínseco. Acciones adquiridas antes de 2006 → se entienden adquiridas en 2006.</p>
+            <ul style="margin:6px 0 0 18px">
+              <li>Si el <strong>menor es el intrínseco</strong> → ese valor va en la casilla <strong>32</strong>.</li>
+              <li>Si el <strong>menor es el costo fiscal ajustado</strong> → ese valor va en la casilla <strong>33</strong>.</li>
+            </ul>
+            <div style="margin-top:10px;padding:10px 12px;background:#fff;border:1px solid var(--green3);border-radius:6px">
+              <strong style="font-size:.82rem">Calculadora de valor intrínseco</strong>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+                <label style="font-size:.78rem">Patrimonio contable de la sociedad a 1-ene<input id="intrPat" oninput="calcIntrinseco()" style="width:100%;margin-top:3px"></label>
+                <label style="font-size:.78rem">Acciones / cuotas en circulación<input id="intrAcc" oninput="calcIntrinseco()" style="width:100%;margin-top:3px"></label>
+              </div>
+              <div id="intrResult" style="margin-top:8px;font-size:.82rem;font-weight:600"></div>
+            </div>
+            <p style="margin-top:8px;font-size:.76rem;color:var(--muted)">Excepción (Art. 295-3 par. 4): sociedades emergentes innovadoras que cumplan los 4 requisitos → solo costo fiscal, por 4 años.</p>
+          </div>
+        </details>
+      </div>
+      <div class="f110-col">
+        <div class="dian-sec">Patrimonio líquido ajustado y exclusiones</div>
+        <div class="f110-row f-total"><div class="f-label">Patrimonio líquido ajustado (28 − 30 + 35)</div><div class="f-cas">36</div><div class="f-val"><input id="c36" class="computed" readonly></div></div>
+        <div class="f110-row"><div class="f-label">Exclusión casa/apto habitación (máx. 12.000 UVT)</div><div class="f-cas">37</div><div class="f-val"><input id="c37" oninput="recalcular()"></div></div>
+        <div class="f110-row"><div class="f-label">Exclusión convenios internacionales</div><div class="f-cas">38</div><div class="f-val"><input id="c38" oninput="recalcular()"></div></div>
+        <div class="f110-row f-total"><div class="f-label">Total exclusiones (37 + 38)</div><div class="f-cas">39</div><div class="f-val"><input id="c39" class="computed" readonly></div></div>
+        <div class="f110-row f-result"><div class="f-label">Base gravable (36 − 39)</div><div class="f-cas">40</div><div class="f-val"><input id="c40" class="computed" readonly></div></div>
+        <div class="dian-sec">Liquidación privada</div>
+        <div class="f110-row f-result"><div class="f-label">Impuesto al patrimonio (tarifa Art. 296-3 ET)</div><div class="f-cas">41</div><div class="f-val"><input id="c41" class="computed" readonly></div></div>
+        <div class="f110-row"><div class="f-label">Descuento tributario convenios internacionales</div><div class="f-cas">42</div><div class="f-val"><input id="c42" oninput="recalcular()"></div></div>
+        <div class="f110-row f-total"><div class="f-label">Saldo a pagar por impuesto (41 − 42)</div><div class="f-cas">43</div><div class="f-val"><input id="c43" class="computed" readonly></div></div>
+        <div class="f110-row"><div class="f-label">Sanciones (Art. 641, 644, 647, 651 ET)</div><div class="f-cas">44</div><div class="f-val"><input id="c44" oninput="recalcular()"></div></div>
+        <div class="f110-row f-result" style="background:#FEF3C7"><div class="f-label">TOTAL SALDO A PAGAR (43 + 44)</div><div class="f-cas">45</div><div class="f-val"><input id="c45" class="computed" readonly style="background:#FEF3C7;color:#92400E"></div></div>
+      </div>
+    </div>
+    <div class="f110-datos" style="border-top:1px solid #000">
+      <div class="dian-sec">Signatario</div>
+      <div class="datos-row">
+        <div><span class="lbl">46. NIT signatario</span><input id="c46" placeholder="(si firma apoderado)" oninput="onSignNitChange()"></div>
+        <div><span class="lbl">47. DV</span><input id="c47" readonly style="background:#f9f9f9"></div>
+        <div><span class="lbl">981. Cód. representación</span><input id="c981" placeholder="(ver tabla)"></div>
+        <div><span class="lbl">994. Con salvedades</span>
+          <select id="c994" style="padding:4px;font-size:10px;border:1px solid #ddd">
+            <option value="0">No</option><option value="1">Sí</option>
+          </select>
+        </div>
+      </div>
+      <div class="datos-row">
+        <div><span class="lbl">982. Cód. CP/RF</span>
+          <select id="c982" style="padding:4px;font-size:10px;border:1px solid #ddd">
+            <option value="">(No aplica)</option>
+            <option value="1">1 - Contador</option>
+            <option value="2">2 - Revisor Fiscal</option>
+          </select>
+        </div>
+        <div><span class="lbl">983. No. Tarjeta profesional</span><input id="c983"></div>
+        <div style="grid-column:span 2"><span class="lbl">997. Fecha efectiva transacción</span><input id="c997" type="date"></div>
+      </div>
+    </div>
+    <div class="dian-footer">
+      <strong>ExógenaDIAN</strong> · Borrador Formulario 420 · Impuesto al Patrimonio · Ley 2277/2022 · Arts. 292-3 a 298-8 ET · El contador público o el revisor fiscal debe validar antes de presentar.
+    </div>
+  </div>
+  <div class="tariff-panel">
+    <div class="tariff-title">📐 Cálculo del Impuesto por Tramos (Art. 296-3 ET)</div>
+    <div class="tariff-tramos">
+      <div class="tramo" id="tramo1">
+        <div class="t-range">&lt; 72.000 UVT</div>
+        <div class="t-rate">0%</div>
+        <div class="t-label">No obligado</div>
+      </div>
+      <div class="tramo" id="tramo2">
+        <div class="t-range">72.000 – 122.000</div>
+        <div class="t-rate">0,5%</div>
+        <div class="t-label">marginal</div>
+      </div>
+      <div class="tramo" id="tramo3">
+        <div class="t-range">122.000 – 239.000</div>
+        <div class="t-rate">1,0%</div>
+        <div class="t-label">marginal + 250 UVT</div>
+      </div>
+      <div class="tramo" id="tramo4">
+        <div class="t-range">&gt; 239.000 UVT</div>
+        <div class="t-rate">1,5%</div>
+        <div class="t-label">marginal + 1.420 UVT · hasta 2026</div>
+      </div>
+    </div>
+    <div class="breakdown" id="breakdown">Ingresa los valores arriba para ver el desglose del cálculo por tramos.</div>
+  </div>
+  <div id="validaciones"></div>
+  <div class="stats" id="resumen"></div>
+  <div style="text-align:center;margin:16px 0">
+    <div id="excelProLock" style="display:inline-block;padding:18px 28px;background:#f8fafc;border:2px dashed var(--border);border-radius:12px;max-width:480px">
+      <div style="font-size:.95rem;font-weight:700;color:var(--pri);margin-bottom:4px">📊 Descargar Excel Formulario 420</div>
+      <div style="font-size:.78rem;color:var(--muted);margin-bottom:10px">Réplica del formato DIAN · Fórmulas vivas · 6 hojas (formulario + desglose + 3 anexos + normativa)</div>
+      <div id="proActive" style="display:none;margin-bottom:8px">
+        <span style="background:#E8F5E9;color:#2E7D32;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:700">✓ PRO activo</span>
+      </div>
+      <div id="proKeyBox">
+        <input type="email" id="proKey" placeholder="Ingresa tu email PRO" style="padding:8px 14px;border:1px solid var(--border);border-radius:8px;font-size:.85rem;font-family:inherit;width:240px;text-align:center">
+      </div>
+      <button id="btnDescargar" onclick="descargarPro()" class="btn btn-success" style="padding:10px 24px;margin-top:10px">Descargar Excel 420 →</button>
+      <div id="proError" style="margin-top:6px;font-size:.75rem;color:var(--red)"></div>
+      <div id="proSubscribeLink" style="margin-top:8px"><a href="precios.html" style="font-size:.78rem;color:#059669;font-weight:600;text-decoration:none">¿No tienes clave? Suscríbete PRO ($49.900/mes) →</a></div>
+    </div>
+    <p style="margin-top:12px;font-size:.78rem;color:var(--muted);max-width:620px;margin-left:auto;margin-right:auto">
+      💡 También puedes <a href="blog/impuesto-patrimonio-personas-naturales-2025.html" style="color:var(--pri2);font-weight:600">leer la guía completa</a> con normativa citada, exclusiones y casos prácticos.
+    </p>
+  </div>
+</div>
+<div style="margin-top:32px;padding:16px 20px;background:#f9fafb;border-top:1px solid #e5e7eb;text-align:center;font-size:.76rem;color:#9ca3af;line-height:1.6">
+  <a href="index.html" style="color:#059669;text-decoration:none;font-weight:600">ExógenaDIAN</a> · Datos vigentes a mayo 2026. Esta herramienta calcula el Impuesto al Patrimonio de personas naturales y sucesiones ilíquidas (Formulario 420). Si eres persona jurídica con patrimonio ≥ 200.000 UVT al 1-mar-2026, te aplica el régimen temporal del Decreto 0173/2026 con Formulario 425, no esta herramienta. Los valores calculados son estimaciones basadas en los datos que ingresas; un contador público o revisor fiscal debe validar la base gravable, exclusiones y tarifas antes de presentar. La normativa puede cambiar por sentencias o decretos posteriores.<br>
+  🔒 Procesamiento 100% en tu navegador · Sin IA · Sin servidores · <a href="politica-privacidad.html" style="color:#059669">Política de privacidad</a>
+</div>
+<script>
+/* ═══════════════════════════════════════════════════════════
+   IMPUESTO AL PATRIMONIO F420 — LÓGICA
+   Referencia normativa:
+   - Ley 2277 de 2022, Arts. 35 a 40 (crea impuesto)
+   - Art. 292-3 ET: sujetos pasivos
+   - Art. 294-3 ET: hecho generador (72.000 UVT al 1 ene)
+   - Art. 295-3 ET: base gravable
+   - Art. 296-3 ET: tarifas progresivas
+   - Art. 577 ET: redondeo a miles
+   ═══════════════════════════════════════════════════════════ */
+const UVT_BY_YEAR = { 2024: 47065, 2025: 49799, 2026: 52374 };
+// Estado
+let cfgYear = 2026;
+let cfgUvt = UVT_BY_YEAR[2026];
+let proUnlocked = false;
+// Ayudantes formateo
+const fmt0 = n => (n||0).toLocaleString('es-CO',{maximumFractionDigits:0});
+const fmtMoney = n => '$' + fmt0(Math.round(n||0));
+const parseNum = s => {
+  if(!s) return 0;
+  const clean = String(s).replace(/[^0-9\-]/g,'');
+  return parseInt(clean,10) || 0;
+};
+const roundToThousand = n => Math.round((n||0)/1000)*1000;
+// Formatear inputs al salir del campo
+function fmtField(el){
+  if(!el) return;
+  // Art. 577 ET: cada casilla se aproxima al múltiplo de mil más cercano
+  const v = roundToThousand(parseNum(el.value));
+  if(v !== 0){ el.value = fmt0(v); el.classList.add('filled'); }
+  else { el.value = ''; el.classList.remove('filled'); }
+}
+// Cálculo DV del NIT (algoritmo DIAN)
+function calcDV(nit){
+  const cleanNit = String(nit||'').replace(/\D/g,'');
+  if(!cleanNit) return '';
+  const pesos = [3,7,13,17,19,23,29,37,41,43,47,53,59,67,71];
+  let suma = 0;
+  const rev = cleanNit.split('').reverse();
+  for(let i=0; i<rev.length && i<pesos.length; i++){
+    suma += parseInt(rev[i],10) * pesos[i];
+  }
+  const resto = suma % 11;
+  return resto > 1 ? (11 - resto) : resto;
+}
+function onNitChange(){
+  const nit = document.getElementById('c5').value;
+  const dv = calcDV(nit);
+  document.getElementById('c6').value = dv !== '' ? dv : '';
+  recalcular();
+}
+function onSignNitChange(){
+  const nit = document.getElementById('c46').value;
+  const dv = calcDV(nit);
+  document.getElementById('c47').value = dv !== '' ? dv : '';
+}
+// Valor intrínseco = patrimonio contable a 1-ene ÷ acciones en circulación (Art. 295-3 num.1 ET)
+function calcIntrinseco(){
+  const pat = parseNum(document.getElementById('intrPat').value);
+  const acc = parseNum(document.getElementById('intrAcc').value);
+  const el = document.getElementById('intrResult');
+  if(!pat || !acc){ el.textContent = ''; return; }
+  const intrUnit = pat / acc;
+  el.innerHTML = `Valor intrínseco por acción: <span style="font-family:'JetBrains Mono',monospace">${fmtMoney(intrUnit)}</span> · `
+    + `total ${acc.toLocaleString('es-CO')} acciones: <span style="font-family:'JetBrains Mono',monospace">${fmtMoney(pat)}</span>`
+    + `<br><span style="font-size:.76rem;font-weight:400">Compare este intrínseco con su costo fiscal ajustado por Art. 73. Registre el <strong>menor</strong>: si gana el intrínseco va a la <strong>casilla 32</strong>; si gana el costo fiscal ajustado va a la <strong>casilla 33</strong>.</span>`;
+}
+/* ═══════════════════════════════════════════════════════════
+   FUNCIÓN CRÍTICA — Tarifa progresiva Art. 296-3 ET
+   ⚠️ Esta es la fórmula que las plantillas Excel artesanales
+   han roto históricamente. Aquí los 4 tramos están cubiertos
+   explícitamente y cada uno devuelve su desglose auditable.
+   ═══════════════════════════════════════════════════════════ */
+function calcularImpuestoPatrimonio(basePesos, uvt){
+  const baseUVT = basePesos / uvt;
+  let impuestoUVT = 0;
+  let tramoAplicado = 0;
+  let formula = '';
+  let exceso = 0;
+  let acumulado = 0;
+  let tarifa = 0;
+  if(baseUVT <= 72000){
+    tramoAplicado = 1;
+    impuestoUVT = 0;
+    formula = `Base = ${fmt0(baseUVT)} UVT ≤ 72.000 UVT → No hay hecho generador (Art. 294-3 ET).`;
+  } else if(baseUVT <= 122000){
+    tramoAplicado = 2;
+    tarifa = 0.005;
+    exceso = baseUVT - 72000;
+    impuestoUVT = exceso * tarifa;
+    formula = `Base = ${fmt0(baseUVT)} UVT\n` +
+              `  Tramo 2 (Art. 296-3 ET): 0,5% sobre exceso de 72.000 UVT\n` +
+              `  Exceso = ${fmt0(baseUVT)} − 72.000 = ${fmt0(exceso)} UVT\n` +
+              `  Impuesto = ${fmt0(exceso)} × 0,5% = ${fmt0(impuestoUVT)} UVT\n` +
+              `  Impuesto = ${fmt0(impuestoUVT)} UVT × $${fmt0(uvt)} = ${fmtMoney(impuestoUVT*uvt)}`;
+  } else if(baseUVT <= 239000){
+    tramoAplicado = 3;
+    tarifa = 0.010;
+    acumulado = 250;
+    exceso = baseUVT - 122000;
+    impuestoUVT = acumulado + (exceso * tarifa);
+    formula = `Base = ${fmt0(baseUVT)} UVT\n` +
+              `  Tramo 3 (Art. 296-3 ET): 1,0% sobre exceso de 122.000 UVT + 250 UVT acumulados\n` +
+              `  Exceso = ${fmt0(baseUVT)} − 122.000 = ${fmt0(exceso)} UVT\n` +
+              `  Impuesto = 250 + (${fmt0(exceso)} × 1,0%) = ${fmt0(impuestoUVT)} UVT\n` +
+              `  Impuesto = ${fmt0(impuestoUVT)} UVT × $${fmt0(uvt)} = ${fmtMoney(impuestoUVT*uvt)}`;
+  } else {
+    tramoAplicado = 4;
+    tarifa = 0.015;
+    acumulado = 1420;
+    exceso = baseUVT - 239000;
+    impuestoUVT = acumulado + (exceso * tarifa);
+    formula = `Base = ${fmt0(baseUVT)} UVT\n` +
+              `  Tramo 4 (Art. 296-3 ET): 1,5% sobre exceso de 239.000 UVT + 1.420 UVT acumulados (vigencia hasta 2026)\n` +
+              `  Exceso = ${fmt0(baseUVT)} − 239.000 = ${fmt0(exceso)} UVT\n` +
+              `  Impuesto = 1.420 + (${fmt0(exceso)} × 1,5%) = ${fmt0(impuestoUVT)} UVT\n` +
+              `  Impuesto = ${fmt0(impuestoUVT)} UVT × $${fmt0(uvt)} = ${fmtMoney(impuestoUVT*uvt)}`;
+  }
+  const impuestoPesos = roundToThousand(impuestoUVT * uvt);
+  formula += `\n  Redondeo a miles (Art. 577 ET) → ${fmtMoney(impuestoPesos)}`;
+  return { impuestoPesos, impuestoUVT, baseUVT, tramoAplicado, tarifa, exceso, acumulado, formula };
+}
+function cambiarAnio(){
+  cfgYear = parseInt(document.getElementById('cfgYear').value,10);
+  cfgUvt = UVT_BY_YEAR[cfgYear] || UVT_BY_YEAR[2026];
+  document.getElementById('ctxYear').textContent = cfgYear;
+  document.getElementById('ctxYear2').textContent = cfgYear;
+  document.getElementById('ctxUvt').textContent = '$' + fmt0(cfgUvt);
+  document.getElementById('ctxUmbral').textContent = '$' + fmt0(72000 * cfgUvt);
+  document.getElementById('c1').value = cfgYear;
+  document.getElementById('formYear').textContent = cfgYear;
+  recalcular();
+}
+function recalcular(){
+  const tipo = document.getElementById('cfgTipo').value;
+  // Corrección
+  document.getElementById('c25').value = document.getElementById('cfgCorr').value;
+  // Entradas
+  // Art. 577 ET: cada casilla declarada se aproxima al múltiplo de mil más cercano
+  const c28 = roundToThousand(parseNum(document.getElementById('c28').value));
+  const c29 = roundToThousand(parseNum(document.getElementById('c29').value));
+  const c30 = roundToThousand(parseNum(document.getElementById('c30').value));
+  const c32 = roundToThousand(parseNum(document.getElementById('c32').value));
+  const c33 = roundToThousand(parseNum(document.getElementById('c33').value));
+  const c34 = roundToThousand(parseNum(document.getElementById('c34').value));
+  const c37raw = roundToThousand(parseNum(document.getElementById('c37').value));
+  const c38 = roundToThousand(parseNum(document.getElementById('c38').value));
+  const c42 = roundToThousand(parseNum(document.getElementById('c42').value));
+  const c44 = roundToThousand(parseNum(document.getElementById('c44').value));
+  // C31 = 28 + 29 - 30
+  const c31 = roundToThousand(c28 + c29 - c30);
+  // C35 = 32 + 33 + 34
+  const c35 = roundToThousand(c32 + c33 + c34);
+  // C36 = 28 - 30 + 35
+  const c36 = roundToThousand(c28 - c30 + c35);
+  // C37: cap a 12.000 UVT y solo para personas naturales/sucesiones
+  const tope37 = 12000 * cfgUvt;
+  let c37 = c37raw;
+  let c37capped = false;
+  let c37noPermitido = false;
+  if(tipo === 'soc_ext'){
+    c37 = 0;
+    if(c37raw > 0) c37noPermitido = true;
+  } else if(c37raw > tope37){
+    c37 = tope37;
+    c37capped = true;
+  }
+  const c39 = roundToThousand(c37 + c38);
+  const c40 = roundToThousand(Math.max(0, c36 - c39));
+  // C41: impuesto con tarifa progresiva (ya redondeado a miles dentro de la función)
+  const { impuestoPesos: c41, baseUVT, tramoAplicado, formula } = calcularImpuestoPatrimonio(c40, cfgUvt);
+  const c43 = roundToThousand(Math.max(0, c41 - c42));
+  const c45 = roundToThousand(c43 + c44);
+  // Render casillas computadas
+  const setVal = (id, val) => {
+    const el = document.getElementById(id);
+    el.value = val ? fmt0(val) : '';
+  };
+  setVal('c31', c31);
+  setVal('c35', c35);
+  setVal('c36', c36);
+  // Mostrar C37 capeado si aplica
+  if(c37capped || c37noPermitido){
+    document.getElementById('c37').value = fmt0(c37);
+    document.getElementById('c37').classList.add('filled');
+  }
+  setVal('c39', c39);
+  setVal('c40', c40);
+  setVal('c41', c41);
+  setVal('c43', c43);
+  setVal('c45', c45);
+  // Resaltar tramo activo
+  for(let i=1; i<=4; i++){
+    const t = document.getElementById('tramo'+i);
+    t.classList.toggle('active', i === tramoAplicado);
+  }
+  // Breakdown
+  document.getElementById('breakdown').textContent = formula || '—';
+  // Validaciones
+  renderValidaciones({
+    nit: document.getElementById('c5').value.trim(),
+    c28, c29, c30, c35, c36, c37raw, c37, c37capped, c37noPermitido,
+    c40, c31, baseUVT, tipo, c44
+  });
+  // Stats
+  renderResumen({ c31, baseUVT, c40, c41, c45, tramoAplicado });
+}
+function renderResumen(d){
+  const esObligado = d.baseUVT > 72000 || (d.c31/cfgUvt) > 72000;
+  const html = `
+    <div class="stat-card ${esObligado?'amber':'green'}">
+      <div class="val">${esObligado?'SÍ':'NO'}</div>
+      <div class="lbl">¿Obligado?</div>
+    </div>
+    <div class="stat-card blue">
+      <div class="val">${fmt0(d.baseUVT)}</div>
+      <div class="lbl">Base en UVT</div>
+    </div>
+    <div class="stat-card green">
+      <div class="val">Tramo ${d.tramoAplicado}</div>
+      <div class="lbl">Tarifa aplicada</div>
+    </div>
+    <div class="stat-card red">
+      <div class="val">${fmtMoney(d.c45)}</div>
+      <div class="lbl">Total a pagar</div>
+    </div>
+  `;
+  document.getElementById('resumen').innerHTML = html;
+}
+function renderValidaciones(d){
+  const alerts = [];
+  // NIT vacío
+  if(!d.nit){
+    alerts.push({tipo:'warn', titulo:'NIT requerido para descargar el Excel',
+      txt:'Ingresa el NIT en la casilla 5. El DV se calcula automáticamente.'});
+  }
+  // Pasivos > patrimonio bruto + acciones
+  if(d.c30 > (d.c28 + d.c29) && d.c30 > 0){
+    alerts.push({tipo:'error', titulo:'Casilla 30 (Pasivos) supera el patrimonio bruto',
+      txt:`Pasivos ${fmtMoney(d.c30)} > Patrimonio bruto + acciones ${fmtMoney(d.c28+d.c29)}. Los pasivos solo pueden aceptarse hasta el monto de los activos (Art. 283 ET). Revisa tu información.`});
+  }
+  // ⚠️ ERROR QUE GENERA REQUERIMIENTO DIAN: acciones en C29 pero base gravable de acciones (C35) en cero
+  if(d.c29 > 0 && d.c35 === 0){
+    alerts.push({tipo:'error', titulo:'⚠️ Declaraste valor patrimonial de acciones (29) pero la base gravable de acciones (35) está en $0',
+      txt:`La casilla 36 (patrimonio líquido ajustado) se calcula como <strong>28 − 30 + 35</strong>: NO incluye la casilla 29. Si declaras acciones en la casilla 29 (${fmtMoney(d.c29)}) debes diligenciar también su base gravable en las casillas 32/33/34 (Art. 295-3 parágrafo ET). Si dejas la 35 en $0, la base gravable queda subestimada en ${fmtMoney(d.c29)} y la DIAN te enviará un requerimiento por inexactitud (Art. 647 ET). Diligencia la base gravable de las acciones antes de presentar.`});
+  }
+  // Inconsistencia inversa: base gravable de acciones sin valor patrimonial declarado
+  if(d.c35 > 0 && d.c29 === 0){
+    alerts.push({tipo:'warn', titulo:'Base gravable de acciones (35) diligenciada pero casilla 29 en $0',
+      txt:`Declaraste base gravable de acciones ${fmtMoney(d.c35)} pero el valor patrimonial de las acciones (casilla 29) está vacío. Las acciones son parte del patrimonio bruto: normalmente la casilla 29 debe estar diligenciada cuando posees acciones o cuotas. Verifica la coherencia.`});
+  }
+  // Casa habitación > tope 12.000 UVT (solo si persona natural)
+  if(d.c37capped){
+    alerts.push({tipo:'warn', titulo:'Casilla 37 excedía el tope legal — se ajustó automáticamente',
+      txt:`La exclusión de casa o apartamento de habitación está limitada a 12.000 UVT del año gravable (${cfgYear}: ${fmtMoney(12000*cfgUvt)}). Ajusté tu valor al tope legal.`});
+  }
+  if(d.c37noPermitido){
+    alerts.push({tipo:'error', titulo:'Exclusión casa habitación no aplica',
+      txt:'Solo las personas naturales y sucesiones ilíquidas pueden excluir hasta 12.000 UVT del valor de la casa de habitación (Art. 295-3 ET). Las sociedades extranjeras no tienen esta exclusión.'});
+  }
+  // ⚠️ ALERTA DESTACADA: tramo 0,5% (el bug histórico de plantillas Excel)
+  if(d.baseUVT > 72000 && d.baseUVT <= 122000){
+    alerts.push({tipo:'warn', titulo:'⚠️ Base en el tramo crítico 0,5% — verificación obligatoria',
+      txt:`Tu base gravable está entre 72.000 y 122.000 UVT (${fmt0(d.baseUVT)} UVT). Este es el tramo donde muchas plantillas Excel artesanales contienen fórmulas erradas que calculan $0 en lugar del 0,5% marginal sobre el exceso. Nuestra herramienta aplica la fórmula del Art. 296-3 ET correctamente. Revisa el desglose del cálculo arriba para confirmar.`});
+  }
+  // No obligado
+  if(d.baseUVT < 72000 && d.c31 > 0){
+    if((d.c31/cfgUvt) >= 72000){
+      alerts.push({tipo:'info', titulo:'Patrimonio líquido ≥ 72.000 UVT pero base gravable < 72.000 UVT',
+        txt:'Tu patrimonio líquido supera el umbral del hecho generador, pero tras restar exclusiones la base gravable no causa impuesto. Verifica las exclusiones declaradas.'});
+    } else {
+      alerts.push({tipo:'success', titulo:'No obligado a declarar Impuesto al Patrimonio',
+        txt:`Tu patrimonio líquido ${fmtMoney(d.c31)} está por debajo del umbral de 72.000 UVT (${fmtMoney(72000*cfgUvt)}). No estás obligado a presentar F420 por el año ${cfgYear}.`});
+    }
+  }
+  // Render
+  const html = alerts.map(a => `
+    <div class="alert alert-${a.tipo}">
+      <div style="flex:1">
+        <strong>${a.titulo}</strong>
+        <div>${a.txt}</div>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('validaciones').innerHTML = html;
+}
+function cargarEjemplo(uvt){
+  const base = uvt * cfgUvt;
+  document.getElementById('c5').value = '900875335';
+  document.getElementById('c7').value = 'PÉREZ';
+  document.getElementById('c9').value = 'JUAN';
+  document.getElementById('c12').value = '32';
+  document.getElementById('c28').value = fmt0(base + 200000000);
+  document.getElementById('c29').value = fmt0(0);
+  document.getElementById('c30').value = fmt0(200000000);
+  document.getElementById('c32').value = '';
+  document.getElementById('c33').value = '';
+  document.getElementById('c34').value = '';
+  document.getElementById('c37').value = '';
+  document.getElementById('c38').value = '';
+  document.getElementById('c42').value = '';
+  document.getElementById('c44').value = '';
+  onNitChange();
+  document.querySelectorAll('.f-val input:not(.computed)').forEach(fmtField);
+}
+function limpiarFormulario(){
+  document.querySelectorAll('.f-val input').forEach(el => { el.value = ''; el.classList.remove('filled'); });
+  document.querySelectorAll('.datos-row input').forEach(el => { if(el.id !== 'c1') el.value = ''; });
+  recalcular();
+}
+// Formatear al blur
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.f-val input:not(.computed)').forEach(el => {
+    el.addEventListener('blur', () => fmtField(el));
+  });
+  cambiarAnio();
+  autoValidarPro();
+});
+/* ═══════════════════════════════════════════════════════════
+   PRO / EXCEL EXPORT
+   ═══════════════════════════════════════════════════════════ */
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwT5ofExiwOKKLnBlwH6Uqhs4cdDpaieSiLn2dYf5D-6yPIdJ_9XEWeIGYyq1ViNKiasQ/exec';
+function getDeviceFingerprint(){
+  let uid = localStorage.getItem('exogenadian_device_id');
+  if(!uid){
+    uid = 'D-' + (crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substr(2,9)).split('-').slice(0,2).join('');
+    localStorage.setItem('exogenadian_device_id', uid);
+  }
+  return uid;
+}
+function showProActive(){
+  proUnlocked = true;
+  document.getElementById('proActive').style.display = '';
+  document.getElementById('proKeyBox').style.display = 'none';
+  document.getElementById('proSubscribeLink').innerHTML = '<a href="#" onclick="cerrarSesionPro();return false" style="font-size:.72rem;color:var(--muted);text-decoration:none">Cambiar email PRO</a>';
+  document.getElementById('proError').textContent = '';
+  const b = document.getElementById('proBadgeHeader'); if(b) b.style.display = '';
+}
+function cerrarSesionPro(){
+  localStorage.removeItem('exogenadian_pro_email');
+  localStorage.removeItem('exogenadian_pro_key');
+  proUnlocked = false;
+  document.getElementById('proActive').style.display = 'none';
+  document.getElementById('proKeyBox').style.display = '';
+  document.getElementById('proKey').value = '';
+  document.getElementById('proSubscribeLink').innerHTML = '<a href="precios.html" style="font-size:.78rem;color:#059669;font-weight:600;text-decoration:none">¿No tienes cuenta? Suscríbete PRO →</a>';
+}
+async function validarClaveServidor(valor){
+  const fp = getDeviceFingerprint();
+  const isEmail = valor.includes('@');
+  const action = isEmail ? 'validateEmail' : 'validateKey';
+  const param = isEmail ? 'email' : 'key';
+  const url = APPS_SCRIPT_URL + '?action=' + action + '&' + param + '=' + encodeURIComponent(valor) + '&device=' + encodeURIComponent(fp);
+  const res = await fetch(url);
+  return await res.json();
+}
+async function autoValidarPro(){
+  const saved = localStorage.getItem('exogenadian_pro_email') || localStorage.getItem('exogenadian_pro_key');
+  if(!saved) return;
+  try {
+    const data = await validarClaveServidor(saved);
+    if(data.valid) showProActive();
+    else {
+      localStorage.removeItem('exogenadian_pro_email');
+      localStorage.removeItem('exogenadian_pro_key');
+    }
+  } catch(e) {
+    const lastCheck = localStorage.getItem('exogenadian_pro_lastcheck');
+    if(lastCheck && Date.now() - parseInt(lastCheck) < 86400000) showProActive();
+  }
+}
+async function descargarPro(){
+  const errEl = document.getElementById('proError');
+  const nit = document.getElementById('c5').value.trim();
+  if(!nit){ errEl.textContent = 'Ingresa primero el NIT del declarante (casilla 5).'; errEl.style.color = 'var(--red)'; return; }
+  if(proUnlocked){
+    errEl.textContent = 'Generando Excel...'; errEl.style.color = 'var(--green)';
+    try {
+      await exportExcel();
+      errEl.textContent = 'Excel descargado.'; errEl.style.color = 'var(--green)';
+      gtag('event','patrimonio420_excel_descargado',{method:'pro'});
+    } catch(ex){ errEl.style.color = 'var(--red)'; errEl.textContent = 'Error: ' + ex.message; console.error(ex); }
+    return;
+  }
+  const key = document.getElementById('proKey').value.trim().toLowerCase();
+  if(!key){ errEl.textContent = 'Ingresa tu email PRO'; errEl.style.color = 'var(--red)'; return; }
+  errEl.textContent = 'Verificando suscripción...'; errEl.style.color = 'var(--muted)';
+  const t0 = Date.now();
+  try {
+    const data = await validarClaveServidor(key);
+    const elapsed = Date.now() - t0;
+    if(elapsed < 1000) await new Promise(r => setTimeout(r, 1000 - elapsed));
+    if(data.valid){
+      if(key.includes('@')) localStorage.setItem('exogenadian_pro_email', key);
+      else localStorage.setItem('exogenadian_pro_key', key);
+      localStorage.setItem('exogenadian_pro_lastcheck', Date.now().toString());
+      showProActive();
+      errEl.textContent = 'Generando Excel...'; errEl.style.color = 'var(--green)';
+      try {
+        await exportExcel();
+        errEl.textContent = 'Excel descargado.'; errEl.style.color = 'var(--green)';
+      } catch(ex){ errEl.style.color = 'var(--red)'; errEl.textContent = 'Error: ' + ex.message; console.error(ex); }
+      return;
+    }
+    errEl.style.color = 'var(--red)';
+    if(data.reason === 'Clave expirada') errEl.textContent = 'Suscripción expirada (' + data.expiry + '). Renueva en exogenadian.com';
+    else if(data.reason === 'Clave cancelada') errEl.textContent = 'Suscripción cancelada. Contacta soporte.';
+    else if(data.reason && data.reason.includes('dispositivos')) errEl.textContent = 'Límite de dispositivos. Contacta soporte.';
+    else errEl.textContent = 'Clave no encontrada. Verifica o suscríbete.';
+  } catch(e){ errEl.style.color = 'var(--red)'; errEl.textContent = 'Error de conexión: ' + e.message; console.error(e); }
+}
+/* ═══════════════════════════════════════════════════════════
+   EXCEL EXPORT — 6 hojas
+   1. Formulario 420 (réplica DIAN con fórmulas vivas)
+   2. Desglose tarifa
+   3. Anexo patrimonio bruto
+   4. Anexo pasivos
+   5. Anexo acciones / cuotas
+   6. Referencia normativa
+   ═══════════════════════════════════════════════════════════ */
+async function exportExcel(){
+  recalcular();
+  // Recolectar datos del formulario
+  const get = id => document.getElementById(id).value;
+  const getN = id => roundToThousand(parseNum(document.getElementById(id).value));
+  const cv = id => parseNum(document.getElementById(id).value);
+  const datos = {
+    year: cfgYear, uvt: cfgUvt,
+    nit: get('c5'), dv: get('c6'),
+    seccional: get('c12'),
+    cod_corr: (get('c25') && get('c25') !== '0') ? get('c25') : '',
+    c26: get('c26'),
+    apellido1: get('c7'), apellido2: get('c8'),
+    nombre1: get('c9'), nombre2: get('c10'),
+    razon: get('c11'),
+    benef_conv: get('c27') === '1' ? 'X' : '',
+    c28: getN('c28'), c29: getN('c29'), c30: getN('c30'),
+    c32: getN('c32'), c33: getN('c33'), c34: getN('c34'),
+    c37: getN('c37'), c38: getN('c38'),
+    c42: getN('c42'), c44: getN('c44'),
+    sign_nit: get('c46'), sign_dv: get('c47'),
+    c981: get('c981'), c982: get('c982'), c983: get('c983')
+  };
+  // Cargar la plantilla oficial DIAN (formato real, fórmulas embebidas)
+  const tplRes = await fetch('template_420.xlsx');
+  if(!tplRes.ok) throw new Error('No se pudo cargar la plantilla oficial (template_420.xlsx).');
+  const wb = new ExcelJS.Workbook();
+  await wb.xlsx.load(await tplRes.arrayBuffer());
+  const ws = wb.getWorksheet('420') || wb.worksheets[0];
+  const setN = (cell, val) => { const c = ws.getCell(cell); c.value = Number(val) || 0; };
+  const setT = (cell, val) => { const c = ws.getCell(cell); c.value = (val == null ? '' : String(val)); };
+  // Datos generales (celdas mapeadas del template)
+  setN('D4', datos.year);
+  setT('D7', datos.nit); setT('L7', datos.dv);
+  setT('N7', datos.apellido1); setT('P7', datos.apellido2);
+  setT('U7', datos.nombre1); setT('W7', datos.nombre2);
+  setT('D9', datos.razon); setT('Y9', datos.seccional);
+  setT('H10', datos.cod_corr); setT('N10', datos.c26);
+  setT('N11', datos.benef_conv);
+  setT('G32', datos.sign_nit); setT('O32', datos.sign_dv);
+  setT('F34', datos.c981); setT('H38', datos.c982); setT('G41', datos.c983);
+  // Casillas de entrada — el template recalcula 31/35/36/39/40/43/45 con sus fórmulas
+  setN('U13', datos.c28); setN('U14', datos.c29); setN('U15', datos.c30);
+  setN('U17', datos.c32); setN('U18', datos.c33); setN('U19', datos.c34);
+  setN('U22', datos.c37); setN('U23', datos.c38);
+  setN('U27', datos.c42); setN('U29', datos.c44);
+  // Limpiar las celdas "scratch" que el autor del template dejó fuera del
+  // formulario oficial (columnas AC/AD: "UVT 2024", 47065, "RENGLO 40 EN UVT").
+  // El descargable debe ser SOLO el formulario oficial limpio.
+  ['AC25','AC26','AD25','AD26'].forEach(c => { ws.getCell(c).value = null; });
+  // Casilla 41 (impuesto): IF plano equivalente a Art. 296-3 ET, autocontenido
+  // con el UVT del año embebido como literal (sin depender de celdas auxiliares
+  // ni de la ArrayFormula _xlfn.IFS del template). Redondeo a miles Art. 577 ET.
+  const U = cfgUvt;
+  const tarifaFormula =
+    `ROUND(IF(U25/${U}<=72000,0,` +
+    `IF(U25/${U}<=122000,(U25/${U}-72000)*0.005*${U},` +
+    `IF(U25/${U}<=239000,(250+(U25/${U}-122000)*0.01)*${U},` +
+    `(1420+(U25/${U}-239000)*0.015)*${U}))))/1000,0)*1000`;
+  // ExcelJS no guarda el valor cacheado de las fórmulas: hay que (1) marcar el
+  // libro para recalcular al abrir y (2) escribir el resultado calculado en JS
+  // en cada celda con fórmula, para que se vea correcto aún sin recálculo.
+  wb.calcProperties.fullCalcOnLoad = true;
+  const setRes = (cell, formulaText, res) => {
+    ws.getCell(cell).value = { formula: formulaText, result: Number(res) || 0 };
+  };
+  setRes('U16', 'U13+U14-U15', cv('c31'));
+  setRes('U20', 'SUM(U17:AA19)', cv('c35'));
+  setRes('U21', 'U13-U15+U20', cv('c36'));
+  setRes('U24', 'U22+U23', cv('c39'));
+  setRes('U25', 'U21-U24', cv('c40'));
+  setRes('U26', tarifaFormula, cv('c41'));
+  setRes('U28', 'U26-U27', cv('c43'));
+  setRes('U30', 'U28+U29', cv('c45'));
+  ws.getCell('V34').value = { formula: 'U30', result: cv('c45') };
+  // Generar y descargar
+  const buf = await wb.xlsx.writeBuffer();
+  const blob = new Blob([buf], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `F420_Patrimonio_${datos.year}_${(datos.nit||'').replace(/\D/g,'')}.xlsx`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</script>
+<script src="shared/nota-auditor.js?v=f606bec7"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+/* ═══════════════════════════════════════════════════════════
+   ExogenaDIAN — Wow Factor (compartido por las 9 tools)
+
+   Bloques visuales que se renderizan después del resultado base:
+     .gancho       Frase memorable según el caso
+     .narrativa    Párrafo que cuenta la historia con TUS cifras
+     .aha-grid     3 tarjetas con cifras chocantes (good/neutro/bad)
+     .action-ladder 3 pasos accionables numerados
+     .share-card   Bloque verde oscuro screenshot-worthy
+
+   Uso: <link rel="stylesheet" href="shared/finanzas-wow.css"> +
+        elementos con class correspondiente.
+   ═══════════════════════════════════════════════════════════ */
+
+:root{
+  --wow-pri:#1B3A5C;
+  --wow-pri2:#2E75B6;
+  --wow-green:#059669;
+  --wow-green-dark:#064E3B;
+  --wow-green-light:#ECFDF5;
+  --wow-red:#DC2626;
+  --wow-amber:#D97706;
+  --wow-muted:#6b7280;
+  --wow-border:#e2e8f0;
+}
+
+/* ─── Gancho — frase memorable arriba del total ─── */
+.gancho{font-family:'DM Sans','Outfit',sans-serif;font-size:clamp(1.05rem,2vw,1.4rem);font-weight:700;color:var(--wow-pri);text-align:center;padding:14px 18px;margin:14px 0 6px;letter-spacing:-.01em;line-height:1.3}
+.gancho em{font-style:normal;background:linear-gradient(135deg,var(--wow-green),#34D399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ─── Narrativa — párrafo que cuenta la historia con TUS cifras ─── */
+.narrativa{background:linear-gradient(135deg,#F0F9FF,var(--wow-green-light));border-left:4px solid var(--wow-green);border-radius:0 12px 12px 0;padding:18px 22px;margin:18px 0;font-size:.96rem;color:#1a1a2e;line-height:1.7}
+.narrativa strong{color:var(--wow-green);font-weight:700}
+.narrativa .num{font-family:'JetBrains Mono','DM Mono',monospace;font-weight:700;color:var(--wow-pri);font-size:1.02em}
+
+/* ─── Aha cards — 3 cifras chocantes lado a lado ─── */
+.aha-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
+.aha-card{background:#fff;border:1.5px solid var(--wow-border);border-radius:12px;padding:18px 16px;text-align:center;position:relative;overflow:hidden;transition:.2s}
+.aha-card:hover{transform:translateY(-2px);border-color:var(--wow-green);box-shadow:0 8px 24px rgba(5,150,105,.08)}
+.aha-card .aha-num{font-family:'JetBrains Mono','DM Mono',monospace;font-size:1.5rem;font-weight:800;color:var(--wow-pri);line-height:1.1;margin-bottom:6px}
+.aha-card.bad .aha-num{color:var(--wow-red)}
+.aha-card.good .aha-num{color:var(--wow-green)}
+.aha-card .aha-lbl{font-size:.78rem;color:var(--wow-muted);font-weight:600;line-height:1.4}
+.aha-card .aha-tag{position:absolute;top:8px;right:8px;font-size:.62rem;font-weight:700;padding:2px 8px;border-radius:8px;background:var(--wow-green-light);color:var(--wow-green);text-transform:uppercase;letter-spacing:.05em}
+.aha-card.bad .aha-tag{background:#FEF2F2;color:var(--wow-red)}
+@media(max-width:600px){.aha-grid{grid-template-columns:1fr}}
+
+/* ─── Action ladder — pasos concretos basados en TU resultado ─── */
+.action-ladder{margin:18px 0}
+.action-step{display:flex;gap:14px;padding:14px 16px;background:#F9FAFB;border:1px solid var(--wow-border);border-radius:10px;margin-bottom:10px;transition:.2s}
+.action-step:hover{border-color:var(--wow-green);background:var(--wow-green-light)}
+.action-step .action-num{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--wow-green);color:#fff;display:grid;place-items:center;font-weight:800;font-size:.82rem}
+.action-step .action-body h4{font-size:.92rem;font-weight:700;color:var(--wow-pri);margin-bottom:4px}
+.action-step .action-body p{font-size:.84rem;color:var(--wow-muted);line-height:1.55}
+.action-step .action-body p strong{color:var(--wow-green);font-weight:700}
+
+/* ─── Share-card — el resultado en formato Instagram, screenshot-worthy ─── */
+.share-card{position:relative;background:linear-gradient(135deg,var(--wow-green-dark),#047857);color:#fff;padding:36px 28px 24px;border-radius:18px;margin:20px 0;text-align:center;overflow:hidden;box-shadow:0 12px 40px rgba(6,78,59,.25)}
+.share-card::before{content:'';position:absolute;top:-30px;right:-30px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none}
+.share-card::after{content:'';position:absolute;bottom:-50px;left:-50px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.03);pointer-events:none}
+.share-card-label{font-size:.74rem;font-weight:700;color:rgba(255,255,255,.6);letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px;position:relative;z-index:1}
+.share-card-amount{font-family:'JetBrains Mono','DM Mono',monospace;font-size:clamp(2rem,5vw,3rem);font-weight:900;letter-spacing:-.02em;line-height:1;margin-bottom:10px;position:relative;z-index:1}
+.share-card-line{font-family:'DM Sans','Outfit',sans-serif;font-size:1rem;color:rgba(255,255,255,.92);font-weight:500;line-height:1.4;margin-bottom:18px;position:relative;z-index:1;max-width:420px;margin-left:auto;margin-right:auto}
+.share-card-line em{font-style:normal;color:#6EE7B7;font-weight:700}
+.share-card-stats{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;padding-top:14px;border-top:1px solid rgba(255,255,255,.12);position:relative;z-index:1}
+.share-card-stat{font-size:.78rem;color:rgba(255,255,255,.7)}
+.share-card-stat strong{display:block;font-family:'JetBrains Mono','DM Mono',monospace;font-size:1rem;color:#fff;font-weight:700;margin-top:2px}
+.share-card-foot{margin-top:14px;font-size:.66rem;color:rgba(255,255,255,.5);letter-spacing:.12em;text-transform:uppercase;font-weight:600;position:relative;z-index:1}
+.share-card-foot::before{content:'\1F4F8  ';opacity:.6}
+.share-actions{display:flex;gap:8px;justify-content:center;margin-top:14px;flex-wrap:wrap;position:relative;z-index:1}
+.share-actions button{padding:8px 16px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:8px;font-size:.82rem;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s}
+.share-actions button:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.35)}
+
+/* ─── Wrapper card de acciones — para envolver el action-ladder ─── */
+.wow-actions-card{background:#fff;border-radius:12px;border:1px solid var(--wow-border);padding:22px 24px;margin:18px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.wow-actions-card .wow-actions-title{font-size:1rem;font-weight:700;color:var(--wow-pri);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.wow-actions-card .wow-actions-sub{font-size:.84rem;color:var(--wow-muted);margin-bottom:12px}
+
+/* ─── Wrapper card del share — fondo neutro alrededor ─── */
+.wow-share-card{background:#fff;border-radius:12px;border:1px solid var(--wow-border);padding:22px 24px;margin:18px 0;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.wow-share-card .wow-share-title{font-size:1rem;font-weight:700;color:var(--wow-pri);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.wow-share-card .wow-share-sub{font-size:.84rem;color:var(--wow-muted);margin-bottom:14px}

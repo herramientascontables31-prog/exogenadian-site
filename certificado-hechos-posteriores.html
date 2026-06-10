@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#1B3A5C">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certificación de Hechos Posteriores al Cierre — NIC 10 / Sección 32 NIIF PYMES | ExógenaDIAN</title>
+<meta name="description" content="Genera la certificación de hechos posteriores al cierre conforme a NIC 10 (Plenas) o Sección 32 (NIIF PYMES). Distingue hechos que ajustan vs no ajustan los EEFF. Firma RL + Contador.">
+<meta name="keywords" content="hechos posteriores al cierre, NIC 10, Seccion 32 NIIF PYMES, eventos subsecuentes, certificacion contable">
+<meta name="author" content="ExogenaDIAN">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://exogenadian.com/certificado-hechos-posteriores.html">
+<meta property="og:title" content="Certificación de Hechos Posteriores al Cierre | ExogenaDIAN">
+<meta property="og:description" content="Documento legal sobre hechos ocurridos entre cierre y emisión de EEFF.">
+<meta property="og:url" content="https://exogenadian.com/certificado-hechos-posteriores.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="ExogenaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://exogenadian.com/"},{"@type":"ListItem","position":2,"name":"Certificados","item":"https://exogenadian.com/certificados.html"},{"@type":"ListItem","position":3,"name":"Hechos Posteriores","item":"https://exogenadian.com/certificado-hechos-posteriores.html"}]}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/certificados.css?v=11951c17">
+<style>
+body{font-family:'DM Sans',sans-serif;background:#F9FAFB;color:#111;margin:0}
+a{color:#2E75B6}
+.no-perfil{max-width:760px;margin:30px auto;background:#FFFBEB;border:1px solid #FCD34D;color:#78350F;padding:20px 24px;border-radius:12px;line-height:1.55}
+.no-perfil a{color:#92400E;font-weight:700}
+.section-label{font-size:.78rem;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.3px;margin:14px 0 6px;padding-top:6px;border-top:1px solid #E5E7EB}
+.section-label:first-child{padding-top:0;border-top:none;margin-top:0}
+.radio-group{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.radio-group label{display:flex;align-items:flex-start;gap:8px;font-size:.86rem;font-weight:500;color:#374151;text-transform:none;letter-spacing:0;line-height:1.4;cursor:pointer;padding:8px 10px;border:1px solid #E5E7EB;border-radius:8px;transition:.2s}
+.radio-group label:hover{background:#F9FAFB}
+.radio-group label.sel{background:#EFF6FF;border-color:#2E75B6}
+.radio-group input{margin-top:3px}
+.hechos-list{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.hecho-item{display:grid;grid-template-columns:auto 1fr auto auto;gap:6px;align-items:center;padding:8px;background:#fff;border:1px solid #E5E7EB;border-radius:8px}
+.hecho-item input[type=date]{padding:4px 6px;font-size:.8rem;width:130px}
+.hecho-item select{padding:4px 6px;font-size:.8rem}
+.hecho-item input[type=text]{flex:1;padding:4px 8px;font-size:.85rem}
+.hecho-item .rm{background:transparent;border:none;color:#CC0000;font-size:1.2rem;cursor:pointer;padding:0 6px}
+.btn-add{margin-top:8px;padding:6px 12px;background:#EFF6FF;border:1px dashed #2E75B6;color:#1B3A5C;border-radius:6px;cursor:pointer;font-size:.82rem;font-weight:600}
+.btn-add:hover{background:#DBEAFE}
+.firmas-doble{display:grid;grid-template-columns:1fr 1fr;gap:24pt;margin-top:30pt}
+.firmas-doble .firma-bloque{padding-top:14pt}
+.firmas-doble img{max-height:18mm;margin-bottom:4pt}
+.firmas-doble .firma-linea{display:block;border-top:1pt solid #111;margin-top:14pt;padding-top:4pt;font-weight:700;font-size:10.5pt}
+.firmas-doble .firma-datos{font-size:9.5pt;line-height:1.5;margin-top:2pt}
+.hechos-doc{margin:8pt 0 12pt;border-collapse:collapse;width:100%}
+.hechos-doc th,.hechos-doc td{border:1pt solid #D1D5DB;padding:6pt 8pt;font-size:10pt;text-align:left;vertical-align:top}
+.hechos-doc th{background:#F3F4F6;color:#1B3A5C;font-weight:700;font-size:9.5pt;text-transform:uppercase}
+.hechos-doc tr.ajusta{background:#FEF3C7}
+.hechos-doc tr.no-ajusta{background:#DBEAFE}
+@media print{.firmas-doble{display:grid;grid-template-columns:1fr 1fr;gap:24pt}}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div id="nav-container"></div>
+<script defer src="shared/pro.js?v=848fbf16"></script>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<script src="shared/perfil-contador.js?v=cc60e2c8"></script>
+<script src="shared/cert-helpers.js?v=cdfa986d"></script>
+<div class="cert-toolbar">
+  <a href="certificados.html" class="btn btn-edit">← Volver a certificados</a>
+  <button class="btn btn-print" onclick="window.print()">🖨️ Imprimir / PDF</button>
+  <button class="btn btn-edit" onclick="descargarWord()">📝 Descargar Word</button>
+  <span class="hint">NIC 10 / Sección 32 — Hechos ocurridos entre cierre y emisión.</span>
+</div>
+<div class="cert-layout">
+  <aside class="cert-form" id="formPanel">
+    <h2>Hechos Posteriores</h2>
+    <p class="sub">NIC 10 (Plenas) / Sección 32 NIIF PYMES. Documento que la administración entrega al RF o terceros sobre eventos entre el cierre y la emisión de los EEFF.</p>
+    <div class="section-label">Empresa</div>
+    <label for="cliSelect">Cliente</label>
+    <select id="cliSelect"><option value="">— Llenar manualmente —</option></select>
+    <label for="emp_nombre">Razón social</label>
+    <input type="text" id="emp_nombre" placeholder="Comercializadora ABC S.A.S.">
+    <div class="row2">
+      <div><label for="emp_nit">NIT</label><input type="text" id="emp_nit" placeholder="900123456"></div>
+      <div><label for="emp_ciudad">Ciudad</label><input type="text" id="emp_ciudad" placeholder="Bogotá"></div>
+    </div>
+    <div class="section-label">Periodo</div>
+    <label for="fecha_corte">Fecha de corte de los EEFF</label>
+    <input type="date" id="fecha_corte">
+    <label for="marco">Marco normativo</label>
+    <select id="marco">
+      <option>NIIF para Pymes (Decreto 2420/2015)</option>
+      <option>NIIF Plenas (Decreto 2420/2015)</option>
+      <option>Marco para Microempresas (Grupo 3)</option>
+    </select>
+    <div class="section-label">¿Hubo hechos significativos?</div>
+    <div class="radio-group" id="rgHubo">
+      <label class="sel"><input type="radio" name="hubo" value="no" checked> <span><strong>No</strong> — entre la fecha de corte y la emisión no ocurrieron hechos que requieran ajuste o revelación.</span></label>
+      <label><input type="radio" name="hubo" value="si"> <span><strong>Sí</strong> — registrar los hechos abajo (que ajustan y/o que no ajustan).</span></label>
+    </div>
+    <div id="hechosWrap" style="display:none">
+      <div class="section-label">Hechos a revelar</div>
+      <p class="hint-sm" style="margin:0 0 6px;font-size:.78rem;color:#6B7280;line-height:1.4"><strong>Ajustan:</strong> condición existía al cierre (ej. demanda fallada con valor distinto a la provisión). <strong>No ajustan:</strong> condición surgió después (ej. incendio en bodega en febrero).</p>
+      <div class="hechos-list" id="hechosList"></div>
+      <button type="button" class="btn-add" onclick="agregarHecho()">+ Agregar hecho</button>
+    </div>
+    <div class="section-label">Firmante 1 — Representante Legal</div>
+    <label for="rl_nombre">Nombre del RL</label>
+    <input type="text" id="rl_nombre" placeholder="Carlos Gómez">
+    <div class="row2">
+      <div><label for="rl_cc">Cédula</label><input type="text" id="rl_cc" placeholder="79.123.456"></div>
+      <div><label for="rl_cargo">Cargo</label><input type="text" id="rl_cargo" value="Representante Legal"></div>
+    </div>
+    <div class="section-label">Firmante 2 — Contador (perfil)</div>
+    <p class="hint-sm" style="margin:0">Se usa tu perfil del contador.</p>
+  </aside>
+  <div class="cert-preview-wrap">
+    <article class="cert-sheet" id="sheet">
+      <div class="cert-membrete" id="membrete"></div>
+      <h1>Certificación de Hechos Posteriores al Cierre</h1>
+      <p class="cert-fecha" style="text-align:right"><span id="vCiudadFecha">—</span></p>
+      <p>Los suscritos, <strong id="vRlNombre">[RL]</strong>, identificado(a) con cédula de ciudadanía N° <span id="vRlCC">—</span>, en calidad de <strong id="vRlCargo">Representante Legal</strong>, y <strong id="vContador">[Contador]</strong>, identificado(a) con cédula de ciudadanía N° <span id="vContadorCC">—</span>, Contador(a) Público(a) con Tarjeta Profesional N° <strong id="vContadorTP">—</strong> expedida por la Junta Central de Contadores, ambos de <strong id="vEmpNombre">[Empresa]</strong>, identificada con NIT <span id="vEmpNit">—</span>,</p>
+      <h2 style="text-align:center;margin-top:14pt;font-size:12pt">CERTIFICAN</h2>
+      <p>Que, en cumplimiento de la <strong id="vNorma">NIC 10 / Sección 32 NIIF PYMES — Hechos Ocurridos Después del Periodo sobre el que se Informa</strong>, hemos evaluado los hechos ocurridos entre la fecha de corte de los estados financieros, <strong id="vFechaCorte">—</strong>, y la fecha de emisión y autorización para publicación de los mismos, <strong id="vFechaEmision">—</strong>, con el siguiente resultado:</p>
+      <div id="vBloqueResultado"></div>
+      <p style="margin-top:12pt">Los hechos posteriores que <em>ajustan</em> han sido reconocidos en los estados financieros como modificaciones a los importes a la fecha de corte. Los hechos posteriores que <em>no ajustan</em> se revelan en las notas a los estados financieros sin modificar las cifras del periodo informado.</p>
+      <p style="margin-top:8pt" id="vCierre">Se expide la presente certificación en <strong id="vCiudad">—</strong>, a los <strong id="vDia">—</strong> días del mes de <strong id="vMes">—</strong> de <strong id="vAnoEmision">—</strong>.</p>
+      <div class="firmas-doble">
+        <div class="firma-bloque">
+          <div class="firma-linea"><span id="vF1Nombre">[RL]</span></div>
+          <div class="firma-datos"><div>C.C. <span id="vF1CC">—</span></div><div id="vF1Cargo">Representante Legal</div></div>
+        </div>
+        <div class="firma-bloque">
+          <div id="vF2Img"></div>
+          <div class="firma-linea"><span id="vF2Nombre">[Contador]</span></div>
+          <div class="firma-datos"><div>C.C. <span id="vF2CC">—</span></div><div>T.P. <span id="vF2TP">—</span> · Contador Público</div></div>
+        </div>
+      </div>
+      <div class="cert-marca-agua">Generado con <a href="https://exogenadian.com" target="_blank">exogenadian.com</a> — herramienta gratuita para contadores</div>
+    </article>
+  </div>
+</div>
+<script>
+(function(){
+  'use strict';
+  var $=function(id){return document.getElementById(id);};
+  var H=window.certHelpers;
+  var perfil=perfilContador.get()||{};
+  if(!perfil.nombre){
+    var aviso=document.createElement('div');
+    aviso.style.cssText='grid-column:1/-1;margin:0 0 14px;padding:12px 16px;background:#FFFBEB;border:1px solid #FCD34D;color:#78350F;border-radius:12px;font-size:.9rem;line-height:1.55';
+    aviso.innerHTML='💡 <strong>Tip:</strong> <a href="certificados.html" style="color:#92400E;font-weight:700">guarda tu perfil</a> para autollenar tu nombre, cédula y T.P.';
+    var layout=document.querySelector('.cert-layout');
+    if(layout) layout.insertBefore(aviso, layout.firstChild);
+  }
+  var hoy=new Date();
+  $('fecha_corte').value=(hoy.getFullYear()-1)+'-12-31';
+  var clientes=perfilContador.clientes.list();
+  var sel=$('cliSelect');
+  clientes.forEach(function(c){
+    var opt=document.createElement('option');opt.value=c.id;opt.textContent=c.nombre+(c.nit?(' — '+c.nit):'');sel.appendChild(opt);
+  });
+  sel.addEventListener('change', function(){
+    if(!sel.value) return;
+    var c=perfilContador.clientes.get(sel.value);if(!c) return;
+    $('emp_nombre').value=c.nombre||'';$('emp_nit').value=c.nit||'';$('emp_ciudad').value=c.ciudad||'';
+    if(c.rl_nombre) $('rl_nombre').value=c.rl_nombre;
+    if(c.rl_cc) $('rl_cc').value=c.rl_cc;
+    if(c.rl_cargo) $('rl_cargo').value=c.rl_cargo;
+    render();
+  });
+  // Toggle hubo / no hubo
+  document.querySelectorAll('input[name=hubo]').forEach(function(r){
+    r.addEventListener('change', function(){
+      document.querySelectorAll('#rgHubo label').forEach(function(l){l.classList.remove('sel')});
+      r.parentElement.classList.add('sel');
+      $('hechosWrap').style.display=r.value==='si'?'':'none';
+      if(r.value==='si' && document.querySelectorAll('#hechosList .hecho-item').length===0) agregarHecho();
+      render();
+    });
+  });
+  window.agregarHecho=function(){
+    var idx=document.querySelectorAll('#hechosList .hecho-item').length;
+    var div=document.createElement('div');
+    div.className='hecho-item';
+    div.innerHTML=
+      '<input type="date" class="h-fecha" placeholder="Fecha">'+
+      '<input type="text" class="h-desc" placeholder="Descripción del hecho (ej. Incendio en bodega afecta inventarios por $X)">'+
+      '<select class="h-tipo"><option value="ajusta">Ajusta</option><option value="no-ajusta" selected>No ajusta</option></select>'+
+      '<button type="button" class="rm" onclick="quitarHecho(this)">✕</button>';
+    document.getElementById('hechosList').appendChild(div);
+    div.querySelector('.h-fecha').addEventListener('input',render);
+    div.querySelector('.h-desc').addEventListener('input',render);
+    div.querySelector('.h-tipo').addEventListener('change',render);
+    render();
+  };
+  window.quitarHecho=function(btn){btn.closest('.hecho-item').remove();render()};
+  function render(){
+    var p=perfilContador.get()||{};
+    var memb=$('membrete');
+    var empNombre=$('emp_nombre').value.trim()||'[Empresa]';
+    var empNit=$('emp_nit').value.trim()||'—';
+    var empCiudad=$('emp_ciudad').value.trim();
+    memb.innerHTML='<div class="cert-membrete-info" style="text-align:center;width:100%">'+
+      '<div class="nombre">'+H.esc(empNombre)+'</div>'+
+      '<div class="sub">NIT '+H.esc(empNit)+(empCiudad?(' · '+H.esc(empCiudad)):'')+'</div></div>';
+    var hoyD=new Date();
+    $('vCiudadFecha').textContent=(empCiudad?(empCiudad+', '):'')+hoyD.getDate()+' de '+H.MESES[hoyD.getMonth()]+' de '+hoyD.getFullYear();
+    $('vCiudad').textContent=empCiudad||'la ciudad';
+    $('vDia').textContent=hoyD.getDate();
+    $('vMes').textContent=H.MESES[hoyD.getMonth()];
+    $('vAnoEmision').textContent=hoyD.getFullYear();
+    $('vEmpNombre').textContent=empNombre;
+    $('vEmpNit').textContent=empNit;
+    $('vRlNombre').textContent=$('rl_nombre').value.trim()||'[RL]';
+    $('vRlCC').textContent=$('rl_cc').value.trim()||'—';
+    $('vRlCargo').textContent=$('rl_cargo').value.trim()||'Representante Legal';
+    $('vContador').textContent=p.nombre||'';
+    $('vContadorCC').textContent=p.cc||'—';
+    $('vContadorTP').textContent=p.tp||'—';
+    $('vFechaCorte').textContent=$('fecha_corte').value?H.formatFechaLarga($('fecha_corte').value):'—';
+    $('vFechaEmision').textContent=H.formatFechaLarga(hoyD.toISOString().slice(0,10));
+    var marcoSel=$('marco').value;
+    if(marcoSel.indexOf('Plenas')>=0) $('vNorma').textContent='NIC 10 — Hechos Ocurridos Después del Periodo sobre el que se Informa (NIIF Plenas)';
+    else if(marcoSel.indexOf('Micro')>=0) $('vNorma').textContent='Capítulo 14 — Hechos Posteriores (Decreto 2706/2012, Marco para Microempresas)';
+    else $('vNorma').textContent='Sección 32 — Hechos Ocurridos Después del Periodo sobre el que se Informa (NIIF para PYMES)';
+    var hubo=document.querySelector('input[name=hubo]:checked').value;
+    var bloque=$('vBloqueResultado');
+    if(hubo==='no'){
+      bloque.innerHTML='<p style="margin-top:8pt;background:#ECFDF5;padding:10pt 14pt;border-left:3px solid #059669"><strong>Resultado:</strong> Entre la fecha de cierre y la fecha de emisión <strong>no han ocurrido hechos que requieran ajuste o revelación</strong> en los presentes estados financieros conforme al marco normativo aplicable.</p>';
+    } else {
+      var items=document.querySelectorAll('#hechosList .hecho-item');
+      if(items.length===0){
+        bloque.innerHTML='<p style="margin-top:8pt;color:#991B1B;font-style:italic">[Agrega al menos un hecho en el panel de la izquierda]</p>';
+        return;
+      }
+      var rows='';
+      items.forEach(function(it){
+        var fecha=it.querySelector('.h-fecha').value;
+        var desc=it.querySelector('.h-desc').value.trim();
+        var tipo=it.querySelector('.h-tipo').value;
+        var fechaTxt=fecha?H.formatFechaLarga(fecha):'—';
+        var tipoTxt=tipo==='ajusta'?'Ajusta':'No ajusta';
+        rows+='<tr class="'+(tipo==='ajusta'?'ajusta':'no-ajusta')+'"><td>'+H.esc(fechaTxt)+'</td><td>'+H.esc(desc||'(sin descripción)')+'</td><td>'+tipoTxt+'</td></tr>';
+      });
+      bloque.innerHTML='<p style="margin-top:8pt"><strong>Resultado:</strong> Se identificaron los siguientes hechos posteriores significativos:</p>'+
+        '<table class="hechos-doc"><thead><tr><th style="width:140pt">Fecha</th><th>Descripción</th><th style="width:80pt">Tipo</th></tr></thead><tbody>'+rows+'</tbody></table>';
+    }
+    $('vF1Nombre').textContent=$('rl_nombre').value.trim()||'[RL]';
+    $('vF1CC').textContent=$('rl_cc').value.trim()||'—';
+    $('vF1Cargo').textContent=$('rl_cargo').value.trim()||'Representante Legal';
+    $('vF2Img').innerHTML=p.firma_base64?('<img src="'+p.firma_base64+'" alt="">'):'';
+    $('vF2Nombre').textContent=p.nombre||'';
+    $('vF2CC').textContent=p.cc||'—';
+    $('vF2TP').textContent=p.tp||'—';
+  }
+  ;['emp_nombre','emp_nit','emp_ciudad','rl_nombre','rl_cc','rl_cargo','fecha_corte'].forEach(function(id){$(id).addEventListener('input',render)});
+  $('marco').addEventListener('change',render);
+  if(window.exoPro && exoPro.check){exoPro.check().then(function(isPro){if(isPro) $('sheet').setAttribute('data-pro','1')})}
+  window.descargarWord=function(){
+    var emp=$('emp_nombre').value.trim().replace(/[^a-zA-Z0-9]/g,'-')||'empresa';
+    var fc=$('fecha_corte').value||'';
+    H.downloadAsWord($('sheet'), 'hechos-posteriores-'+emp+'-'+fc);
+  };
+  render();
+})();
+</script>
+</body>
+</html>

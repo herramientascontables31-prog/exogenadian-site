@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S7SM6ST4CC');
+</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutoriales &mdash; C&oacute;mo usar exogenadian.com (Ex&oacute;gena, Renta, IVA, RteFte, Conciliaci&oacute;n) | Ex&oacute;genaDIAN</title>
+<meta name="description" content="Gu&iacute;as paso a paso para usar exogenadian.com: c&oacute;mo generar la informaci&oacute;n ex&oacute;gena DIAN, F110 renta, F300 IVA, F350 retenci&oacute;n y conciliaci&oacute;n bancaria. Capturas reales, errores comunes y tips de cada herramienta.">
+<meta name="keywords" content="tutorial exogena DIAN, c&oacute;mo usar exogenadian, manual exogena, paso a paso F110 renta, paso a paso F300 IVA, gu&iacute;a F350 retenci&oacute;n, conciliaci&oacute;n bancaria tutorial">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://exogenadian.com/tutoriales.html">
+<meta property="og:title" content="Tutoriales &mdash; C&oacute;mo usar exogenadian.com | Ex&oacute;genaDIAN">
+<meta property="og:description" content="Gu&iacute;as paso a paso de cada herramienta del sitio: ex&oacute;gena, F110, F300, F350, conciliaci&oacute;n. Capturas reales y tips operativos.">
+<meta property="og:url" content="https://exogenadian.com/tutoriales.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="Ex&oacute;genaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green-900:#064E3B;--green-800:#065F46;--green-700:#047857;--green-600:#059669;--green-500:#10B981;--green-400:#34D399;--green-300:#6EE7B7;--green-200:#A7F3D0;--green-100:#D1FAE5;--green-50:#ECFDF5;
+  --white:#FFF;--gray-50:#F9FAFB;--gray-100:#F3F4F6;--gray-200:#E5E7EB;--gray-300:#D1D5DB;--gray-400:#9CA3AF;--gray-500:#6B7280;--gray-600:#4B5563;--gray-700:#374151;--gray-800:#1F2937;--gray-900:#111827;
+  --amber-50:#FFFBEB;--amber-100:#FEF3C7;--amber-500:#F59E0B;--amber-700:#92400E;
+  --blue-50:#EFF6FF;--blue-100:#DBEAFE;--blue-500:#3B82F6;--blue-700:#1D4ED8;
+  --purple-50:#F5F3FF;--purple-500:#8B5CF6;--purple-700:#6D28D9;
+  --rose-50:#FFF1F2;--rose-500:#F43F5E;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Outfit',sans-serif;background:#fff;color:var(--gray-900);overflow-x:hidden;width:100%;max-width:100vw}
+/* HERO */
+.tut-hero{padding:120px 24px 70px;text-align:center;background:linear-gradient(170deg,#ECFDF5 0%,#D1FAE5 40%,#ECFDF5 100%);position:relative;overflow:hidden}
+.tut-hero::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(5,150,105,.08) 0%,transparent 60%);pointer-events:none}
+.tut-hero-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(5,150,105,.1);border:1px solid rgba(5,150,105,.25);border-radius:100px;padding:6px 20px;font-size:.8rem;font-weight:700;color:var(--green-700);margin-bottom:20px}
+.tut-hero-pill .dot{width:8px;height:8px;background:var(--green-500);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.tut-hero h1{font-family:'Fraunces',serif;font-size:clamp(2.2rem,5vw,3.4rem);font-weight:700;color:var(--gray-900);margin-bottom:16px;letter-spacing:-.02em;line-height:1.15}
+.tut-hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--green-700),var(--green-500));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.tut-hero p.sub{color:var(--gray-600);font-size:1.15rem;max-width:680px;margin:0 auto 32px;line-height:1.65}
+.tut-hero .stats{display:inline-flex;flex-wrap:wrap;gap:30px;justify-content:center;margin-top:8px}
+.tut-hero .stats div{font-size:.84rem;color:var(--gray-600)}
+.tut-hero .stats strong{display:block;font-size:1.5rem;color:var(--green-700);font-family:'Fraunces',serif;font-weight:700;margin-bottom:2px}
+/* DIFERENCIACIÓN ESCUELA vs TUTORIALES */
+.tut-vs{padding:60px 24px;background:#fff}
+.tut-vs-inner{max-width:900px;margin:0 auto}
+.tut-vs h2{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:700;text-align:center;margin-bottom:30px;letter-spacing:-.01em}
+.tut-vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.tut-vs-card{padding:24px 26px;border-radius:14px;border:1.5px solid var(--gray-200);background:var(--gray-50)}
+.tut-vs-card.tutoriales{background:linear-gradient(135deg,var(--green-50),#fff);border-color:var(--green-300)}
+.tut-vs-card.escuela{background:linear-gradient(135deg,var(--amber-50),#fff);border-color:#FDE68A}
+.tut-vs-card .tag{display:inline-block;font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:6px;margin-bottom:10px}
+.tut-vs-card.tutoriales .tag{background:var(--green-700);color:#fff}
+.tut-vs-card.escuela .tag{background:var(--amber-700);color:#fff}
+.tut-vs-card h3{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:700;margin-bottom:8px}
+.tut-vs-card p{font-size:.92rem;color:var(--gray-600);line-height:1.6}
+.tut-vs-card a{display:inline-block;margin-top:12px;font-size:.85rem;color:var(--green-700);font-weight:700;text-decoration:none}
+.tut-vs-card a:hover{text-decoration:underline}
+@media(max-width:700px){.tut-vs-grid{grid-template-columns:1fr}}
+/* GRID DE TUTORIALES */
+.tut-grid-section{padding:60px 24px 100px;background:var(--gray-50)}
+.tut-grid-section h2{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:700;text-align:center;margin-bottom:8px;letter-spacing:-.01em}
+.tut-grid-section .sub{text-align:center;color:var(--gray-500);font-size:1rem;margin-bottom:36px}
+.tut-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px}
+.tut-card{background:#fff;border:2px solid var(--gray-200);border-radius:18px;padding:26px 24px;transition:all .25s;text-decoration:none;color:inherit;cursor:pointer;display:flex;flex-direction:column;position:relative}
+.tut-card.live{border-color:var(--green-300)}
+.tut-card.live:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(5,150,105,.12);border-color:var(--green-500)}
+.tut-card.soon{opacity:.65;cursor:default;background:var(--gray-50)}
+.tut-card .badge{position:absolute;top:14px;right:14px;font-size:.66rem;font-weight:800;padding:4px 10px;border-radius:100px;letter-spacing:.04em;text-transform:uppercase}
+.tut-card.live .badge{background:var(--green-100);color:var(--green-700);border:1px solid var(--green-300)}
+.tut-card.soon .badge{background:var(--gray-200);color:var(--gray-500)}
+.tut-card .icon{width:54px;height:54px;border-radius:14px;display:grid;place-items:center;font-size:1.6rem;margin-bottom:14px}
+.tut-card.live .icon{background:var(--green-100);border:1px solid var(--green-300)}
+.tut-card.soon .icon{background:var(--gray-100);border:1px solid var(--gray-200)}
+.tut-card h3{font-family:'Fraunces',serif;font-size:1.18rem;font-weight:700;margin-bottom:6px;color:var(--gray-900)}
+.tut-card .desc{font-size:.9rem;color:var(--gray-600);line-height:1.55;margin-bottom:14px;flex:1}
+.tut-card .meta{font-size:.76rem;color:var(--gray-500);font-weight:600;margin-top:auto;padding-top:10px;border-top:1px solid var(--gray-100);display:flex;align-items:center;gap:6px}
+.tut-card.live .meta{color:var(--green-700)}
+.tut-card .arrow{font-size:1rem;margin-left:auto}
+/* FOOTER CTA */
+.tut-cta{padding:60px 24px;text-align:center;background:#fff}
+.tut-cta h2{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:700;margin-bottom:10px}
+.tut-cta p{color:var(--gray-600);font-size:1rem;max-width:560px;margin:0 auto 24px;line-height:1.6}
+.tut-cta a{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--green-600);color:#fff;border-radius:14px;font-weight:700;font-size:1rem;text-decoration:none;box-shadow:0 8px 22px rgba(5,150,105,.2);transition:all .2s}
+.tut-cta a:hover{background:var(--green-700);transform:translateY(-2px)}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div id="nav-container"></div>
+<script defer src="shared/pro.js?v=848fbf16"></script>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<script defer src="shared/pro-banner.js?v=a5944c54"></script>
+<section class="tut-hero">
+  <div class="tut-hero-pill"><span class="dot"></span> Nuevo: Centro de Tutoriales</div>
+  <h1>C&oacute;mo usar <em>exogenadian.com</em></h1>
+  <p class="sub">Gu&iacute;as paso a paso para cada herramienta del sitio: ex&oacute;gena, F110 renta, F300 IVA, F350 retenci&oacute;n y conciliaci&oacute;n bancaria. Con capturas reales, errores comunes y tips operativos.</p>
+  <div class="stats">
+    <div><strong>7</strong>tutoriales</div>
+    <div><strong>7</strong>publicados</div>
+    <div><strong>100%</strong>gratis</div>
+  </div>
+</section>
+<section class="tut-vs">
+  <div class="tut-vs-inner">
+    <h2>&iquest;Tutoriales o Escuela?</h2>
+    <div class="tut-vs-grid">
+      <div class="tut-vs-card tutoriales">
+        <span class="tag">Tutoriales</span>
+        <h3>C&oacute;mo usar la p&aacute;gina</h3>
+        <p>Aqu&iacute; aprendes a usar las herramientas del sitio paso a paso: qu&eacute; bot&oacute;n apretar, qu&eacute; archivo subir, c&oacute;mo se ven los resultados, c&oacute;mo descargar. Foco operativo.</p>
+        <a href="#tutoriales">Ver tutoriales &rarr;</a>
+      </div>
+      <div class="tut-vs-card escuela">
+        <span class="tag">Escuela</span>
+        <h3>Normativa y conceptos</h3>
+        <p>Si lo que quieres es entender la normativa &mdash;el Estatuto Tributario, las resoluciones, los plazos, los conceptos DIAN&mdash; ah&iacute; vive ese contenido. 14+ cursos gratuitos.</p>
+        <a href="escuela.html">Ir a la Escuela &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="tut-grid-section" id="tutoriales">
+  <h2>Tutoriales disponibles</h2>
+  <p class="sub">Gu&iacute;as paso a paso, una por cada herramienta principal del sitio.</p>
+  <div class="tut-grid">
+    <a href="tutoriales/exogena.html" class="tut-card live">
+      <span class="badge">Disponible</span>
+      <div class="icon">&#128221;</div>
+      <h3>Generar la informaci&oacute;n ex&oacute;gena</h3>
+      <p class="desc">Tutorial completo de la herramienta principal: subir balance de prueba, mapear columnas, revisar la clasificaci&oacute;n autom&aacute;tica, completar datos de terceros y descargar el Excel con los 10 formatos DIAN.</p>
+      <div class="meta">6 pasos &middot; ~15 min <span class="arrow">&rarr;</span></div>
+    </a>
+    <a href="tutoriales/estadosfinancieros.html" class="tut-card live">
+      <span class="badge">Disponible</span>
+      <div class="icon">&#128209;</div>
+      <h3>Estados Financieros (ESF, ERI, ECP, EFE)</h3>
+      <p class="desc">C&oacute;mo generar los estados financieros NIIF desde el balance de prueba: cargar el balance y el encabezado, mapear columnas, revisar la clasificaci&oacute;n y resolver las cuentas correctoras (signo opuesto), y exportar el ESF, ERI, ECP y EFE con sus revelaciones.</p>
+      <div class="meta">5 pasos &middot; ~12 min <span class="arrow">&rarr;</span></div>
+    </a>
+    <a href="tutoriales/cce.html" class="tut-card live">
+      <span class="badge">Disponible</span>
+      <div class="icon">&#127970;</div>
+      <h3>Ex&oacute;gena CCE (5247&ndash;5252)</h3>
+      <p class="desc">Tutorial + curso: qu&eacute; es un Contrato de Colaboraci&oacute;n Empresarial (consorcio, UT, mandato, joint venture, cuentas en participaci&oacute;n), qu&eacute; reporta cada uno de los 6 formatos, c&oacute;mo armar el Excel desde el balance del contrato y dos ejemplos num&eacute;ricos completos.</p>
+      <div class="meta">5 pasos + 2 ejemplos &middot; ~20 min <span class="arrow">&rarr;</span></div>
+    </a>
+    <a href="tutoriales/f110.html" class="tut-card live">
+      <span class="badge">Disponible</span>
+      <div class="icon">&#128202;</div>
+      <h3>Renta personas jur&iacute;dicas (F110)</h3>
+      <p class="desc">C&oacute;mo usar la herramienta del F110: cargar balance, depurar renta, identificar gastos no deducibles con las 63 reglas, calcular tasa m&iacute;nima (Art. 240-1) y descargar el F110.</p>
+      <div class="meta">6 pasos &middot; ~12 min <span class="arrow">&rarr;</span></div>
+    </a>
+    <a href="tutoriales/f300.html" class="tut-card live">
+      <span class="badge">Disponible</span>
+      <div class="icon">&#129534;</div>
+      <h3>IVA (F300)</h3>
+      <p class="desc">C&oacute;mo armar la declaraci&oacute;n de IVA bimestral, cuatrimestral o anual: ingresos gravados/exentos/excluidos, prorrateo en clientes mixtos, casillas DIAN y cruce con FE.</p>
+      <div class="meta">6 pasos &middot; ~10 min <span class="arrow">&rarr;</span></div>
+    </a>
+    <a href="tutoriales/f310.html" class="tut-card live">
+      <span class="badge">Disponible</span>
+      <div class="icon">&#127869;&#65039;</div>
+      <h3>Impuesto al Consumo (F310)</h3>
+      <p class="desc">C&oacute;mo generar el borrador del F310 desde balance o desde el listado FE del MUISCA: tarifa 8% restaurantes/bares, 4% telefon&iacute;a, vehiculos y bolsas pl&aacute;sticas. PRO listado MUISCA.</p>
+      <div class="meta">7 pasos &middot; ~8 min <span class="arrow">&rarr;</span></div>
+    </a>
+    <a href="tutoriales/f350.html" class="tut-card live">
+      <span class="badge">Disponible</span>
+      <div class="icon">&#129518;</div>
+      <h3>Retenci&oacute;n en la fuente (F350)</h3>
+      <p class="desc">C&oacute;mo armar el F350 mensual desde el balance por terceros o el auxiliar 2365: mapear conceptos, editar bases y tarifas, validar bases m&iacute;nimas (Decreto 0572/2025).</p>
+      <div class="meta">5 pasos &middot; ~10 min <span class="arrow">&rarr;</span></div>
+    </a>
+    <a href="tutoriales/conciliacion.html" class="tut-card live">
+      <span class="badge">Disponible</span>
+      <div class="icon">&#128178;</div>
+      <h3>Conciliaci&oacute;n bancaria</h3>
+      <p class="desc">C&oacute;mo conciliar el extracto bancario contra el auxiliar 1110: cargar los 2 archivos, configurar tolerancia, revisar 4 tabs (conciliados, solo extracto, solo auxiliar, parciales) y descargar papel de trabajo.</p>
+      <div class="meta">5 pasos &middot; ~10 min <span class="arrow">&rarr;</span></div>
+    </a>
+  </div>
+</section>
+<section class="tut-cta">
+  <h2>&iquest;Te falta una herramienta?</h2>
+  <p>Si usas alguna funci&oacute;n del sitio que a&uacute;n no tiene tutorial y necesitas apoyo, escribe y la priorizamos.</p>
+  <a href="mailto:soporte@exogenadian.com">Pedir un tutorial &rarr;</a>
+</section>
+<div id="footer-container"></div>
+</body>
+</html>

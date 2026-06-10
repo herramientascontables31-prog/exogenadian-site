@@ -1,0 +1,1951 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="../shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S7SM6ST4CC');
+</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curso NIIF para Contadores &mdash; Escuela Contable IA | Ex&oacute;genaDIAN</title>
+<meta name="description" content="Curso completo de NIIF en Colombia: marco conceptual, grupos 1-2-3, activos, instrumentos financieros, activos biol&oacute;gicos, pasivos, deterioro, impuesto diferido, consolidados, conciliaci&oacute;n fiscal-contable, revelaciones y pr&aacute;ctica con estados financieros reales.">
+<link rel="canonical" href="https://exogenadian.com/escuela/niif.html">
+<meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green-900:#064E3B;--green-800:#065F46;--green-700:#047857;--green-600:#059669;--green-500:#10B981;--green-400:#34D399;--green-300:#6EE7B7;--green-200:#A7F3D0;--green-100:#D1FAE5;--green-50:#ECFDF5;
+  --white:#FFF;--gray-50:#F9FAFB;--gray-100:#F3F4F6;--gray-200:#E5E7EB;--gray-300:#D1D5DB;--gray-400:#9CA3AF;--gray-500:#6B7280;--gray-600:#4B5563;--gray-700:#374151;--gray-800:#1F2937;--gray-900:#111827;
+  --amber-50:#FFFBEB;--amber-100:#FEF3C7;--amber-500:#F59E0B;--amber-700:#92400E;--amber-800:#78350F;
+  --blue-50:#EFF6FF;--blue-100:#DBEAFE;--blue-500:#3B82F6;--blue-700:#1D4ED8;
+  --purple-50:#F5F3FF;--purple-100:#EDE9FE;--purple-500:#8B5CF6;--purple-700:#6D28D9;
+  --rose-50:#FFF1F2;--rose-500:#F43F5E;--rose-700:#BE123C;
+  --emerald-50:#ECFDF5;--emerald-800:#065F46;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-900);line-height:1.6}
+/* ===== LAYOUT ===== */
+.curso-layout{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+@media(max-width:900px){.curso-layout{grid-template-columns:1fr}}
+/* ===== SIDEBAR ===== */
+.sidebar{background:var(--white);border-right:1px solid var(--gray-200);padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
+.sidebar-header{padding:16px 20px;border-bottom:1px solid var(--gray-100)}
+.sidebar-header a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--gray-800);font-weight:800;font-size:.9rem}
+.sidebar-header a div{width:28px;height:28px;background:linear-gradient(135deg,#059669,#34D399);border-radius:7px;display:grid;place-items:center;color:#fff;font-size:.7rem;font-weight:900}
+.sidebar-header small{display:block;font-size:.72rem;color:var(--gray-400);font-weight:500;margin-top:2px}
+.sidebar-curso{padding:16px 20px;border-bottom:1px solid var(--gray-100)}
+.sidebar-curso h3{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--emerald-800);margin-bottom:4px}
+.sidebar-curso p{font-size:.88rem;font-weight:700;color:var(--gray-800)}
+.sidebar-nav{padding:12px 0;flex:1}
+.sidebar-nav a{display:flex;align-items:center;gap:10px;padding:10px 20px;text-decoration:none;color:var(--gray-500);font-size:.85rem;font-weight:500;transition:all .15s;border-left:3px solid transparent}
+.sidebar-nav a:hover{background:var(--green-50);color:var(--green-700)}
+.sidebar-nav a.active{background:var(--green-50);color:var(--green-700);font-weight:700;border-left-color:var(--green-600)}
+.sidebar-nav a .nav-num{width:24px;height:24px;border-radius:50%;background:var(--gray-100);color:var(--gray-500);display:grid;place-items:center;font-size:.72rem;font-weight:700;flex-shrink:0}
+.sidebar-nav a.active .nav-num{background:var(--green-600);color:#fff}
+.sidebar-nav a.completed .nav-num{background:var(--green-200);color:var(--green-700)}
+.sidebar-back{padding:16px 20px;border-top:1px solid var(--gray-100);margin-top:auto}
+.sidebar-back a{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--gray-400);font-size:.82rem;font-weight:500;transition:color .15s}
+.sidebar-back a:hover{color:var(--gray-700)}
+.sidebar-toggle{display:none;position:fixed;bottom:20px;left:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--green-600);color:#fff;border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 16px rgba(5,150,105,.3)}
+@media(max-width:900px){
+  .sidebar{display:none;position:fixed;top:0;left:0;z-index:199;width:280px;box-shadow:4px 0 20px rgba(0,0,0,.1)}
+  .sidebar.open{display:flex}
+  .sidebar-toggle{display:block}
+  .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:198}
+  .sidebar-overlay.open{display:block}
+}
+/* ===== MAIN CONTENT ===== */
+.curso-main{padding:32px 40px 60px;max-width:860px}
+@media(max-width:900px){.curso-main{padding:20px 16px 80px}}
+/* Module header */
+.mod-header{margin-bottom:32px}
+.mod-breadcrumb{font-size:.78rem;color:var(--gray-400);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.mod-breadcrumb a{color:var(--gray-400);text-decoration:none}
+.mod-breadcrumb a:hover{color:var(--green-600)}
+.mod-num{display:inline-flex;align-items:center;gap:8px;background:var(--emerald-50);color:var(--emerald-800);padding:4px 14px;border-radius:100px;font-size:.78rem;font-weight:700;margin-bottom:12px}
+.mod-header h1{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;letter-spacing:-.02em;margin-bottom:8px;line-height:1.2}
+.mod-header .mod-desc{font-size:1rem;color:var(--gray-500);max-width:600px;line-height:1.6}
+/* Content blocks */
+.content-block{margin-bottom:28px}
+.content-block h2{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;margin-bottom:12px;color:var(--gray-900);padding-bottom:8px;border-bottom:2px solid var(--green-200)}
+.content-block h3{font-size:1.05rem;font-weight:700;margin:20px 0 8px;color:var(--gray-800)}
+.content-block p{font-size:.92rem;color:var(--gray-600);line-height:1.7;margin-bottom:12px}
+.content-block ul,.content-block ol{margin:8px 0 16px 20px;display:flex;flex-direction:column;gap:6px}
+.content-block li{font-size:.9rem;color:var(--gray-600);line-height:1.6}
+/* Norma card */
+.norma{background:var(--amber-50);border:1.5px solid #FDE68A;border-radius:14px;padding:20px 24px;margin:20px 0}
+.norma-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.norma-icon{width:32px;height:32px;border-radius:8px;background:#FDE68A;display:grid;place-items:center;font-size:.9rem;flex-shrink:0}
+.norma-header h4{font-size:.92rem;font-weight:700;color:var(--amber-800)}
+.norma-header .norma-tag{font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:4px;background:var(--amber-500);color:#fff;text-transform:uppercase;letter-spacing:.04em}
+.norma blockquote{font-size:.88rem;color:#78350F;line-height:1.65;padding:12px 16px;background:rgba(255,255,255,.6);border-radius:8px;border-left:3px solid var(--amber-500);margin:8px 0;font-style:italic}
+.norma blockquote strong{font-style:normal;color:var(--amber-800)}
+.norma p{font-size:.85rem;color:#78350F;line-height:1.6;margin:8px 0}
+.norma .norma-aplicacion{font-size:.82rem;color:var(--green-800);background:var(--green-50);padding:10px 14px;border-radius:8px;border:1px solid var(--green-200);margin-top:12px}
+.norma .norma-aplicacion strong{color:var(--green-700)}
+/* Tip card */
+.tip{background:var(--blue-50);border:1.5px solid #BFDBFE;border-radius:14px;padding:18px 22px;margin:20px 0}
+.tip-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.tip-header h4{font-size:.88rem;font-weight:700;color:var(--blue-700)}
+.tip p{font-size:.88rem;color:#1E40AF;line-height:1.6}
+/* Error com&uacute;n */
+.error-comun{background:var(--rose-50);border:1.5px solid #FECACA;border-radius:14px;padding:18px 22px;margin:20px 0}
+.error-comun-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.error-comun-header h4{font-size:.88rem;font-weight:700;color:var(--rose-700)}
+.error-comun p{font-size:.88rem;color:#9F1239;line-height:1.6}
+/* Tabla normativa */
+.tabla-norm{width:100%;border-collapse:collapse;margin:16px 0;border-radius:10px;overflow:hidden;border:1px solid var(--gray-200)}
+.tabla-norm th{background:var(--gray-100);padding:10px 14px;text-align:left;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-500)}
+.tabla-norm td{padding:10px 14px;font-size:.85rem;border-top:1px solid var(--gray-100);color:var(--gray-700)}
+.tabla-norm tr:hover{background:var(--green-50)}
+.tabla-norm code{font-family:'JetBrains Mono',monospace;font-size:.8rem;background:var(--gray-100);padding:1px 6px;border-radius:4px}
+/* Ejemplo pr&aacute;ctico */
+.ejemplo{background:var(--white);border:1.5px solid var(--gray-200);border-radius:14px;overflow:hidden;margin:20px 0;box-shadow:0 2px 8px rgba(0,0,0,.03)}
+.ejemplo-header{background:var(--gray-50);padding:12px 20px;border-bottom:1px solid var(--gray-200);display:flex;align-items:center;gap:8px}
+.ejemplo-header h4{font-size:.85rem;font-weight:700;color:var(--gray-700)}
+.ejemplo-body{padding:16px 20px}
+.ejemplo-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-100);font-size:.88rem}
+.ejemplo-row:last-child{border-bottom:none}
+.ejemplo-row .label{color:var(--gray-600)}
+.ejemplo-row .value{font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.85rem}
+.ejemplo-row.total{border-top:2px solid var(--green-200);border-bottom:none;padding-top:12px;margin-top:4px}
+.ejemplo-row.total .label{font-weight:700;color:var(--gray-900)}
+.ejemplo-row.total .value{color:var(--green-700);font-size:.95rem}
+/* Navigation between modules */
+.mod-nav{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:24px;border-top:2px solid var(--gray-200)}
+.mod-nav a{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:12px;text-decoration:none;font-weight:700;font-size:.92rem;transition:all .2s}
+.mod-nav .prev{background:var(--gray-100);color:var(--gray-700)}
+.mod-nav .prev:hover{background:var(--gray-200)}
+.mod-nav .next{background:var(--green-600);color:#fff;box-shadow:0 4px 12px rgba(5,150,105,.25)}
+.mod-nav .next:hover{background:var(--green-700);transform:translateY(-1px)}
+/* CTA practica */
+.cta-practica{background:linear-gradient(135deg,var(--emerald-50),#D1FAE5);border:2px solid var(--green-300);border-radius:16px;padding:28px 24px;text-align:center;margin:28px 0}
+.cta-practica h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;color:var(--green-800);margin-bottom:8px}
+.cta-practica p{font-size:.92rem;color:var(--green-700);margin-bottom:16px}
+.cta-practica a{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--green-600);color:#fff;border-radius:12px;font-weight:700;font-size:1rem;text-decoration:none;box-shadow:0 4px 16px rgba(5,150,105,.3);transition:all .2s}
+.cta-practica a:hover{background:var(--green-700);transform:translateY(-2px)}
+/* Progress */
+.progress-bar{height:4px;background:var(--gray-200);border-radius:2px;margin:12px 20px;overflow:hidden}
+.progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--green-500),var(--green-400));border-radius:2px;transition:width .3s}
+/* Expand/collapse */
+.expandible{margin:12px 0}
+.expandible-toggle{display:flex;align-items:center;gap:8px;width:100%;padding:10px 14px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;cursor:pointer;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:600;color:var(--gray-700);transition:all .15s;text-align:left}
+.expandible-toggle:hover{background:var(--gray-100)}
+.expandible-toggle svg{width:16px;height:16px;transition:transform .2s;flex-shrink:0}
+.expandible-content{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.expandible.open .expandible-content{max-height:2000px}
+.expandible.open .expandible-toggle svg{transform:rotate(180deg)}
+</style>
+<script async src="../shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<script defer src="../shared/pro.js?v=848fbf16"></script>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+<div class="curso-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html">
+        <div>E</div>
+        Ex&oacute;genaDIAN
+      </a>
+    </div>
+    <div class="sidebar-curso">
+      <h3>Escuela Contable IA</h3>
+      <p>NIIF para Contadores</p>
+    </div>
+    <div class="progress-bar"><div class="fill" id="progressFill" style="width:10%"></div></div>
+    <nav class="sidebar-nav" id="sidebarNav">
+      <a href="#modulo-1" class="active" onclick="navigateTo(1)">
+        <span class="nav-num">1</span> Marco conceptual y grupos
+      </a>
+      <a href="#modulo-2" onclick="navigateTo(2)">
+        <span class="nav-num">2</span> Grupo 1 vs 2 vs 3
+      </a>
+      <a href="#modulo-3" onclick="navigateTo(3)">
+        <span class="nav-num">3</span> Activos bajo NIIF
+      </a>
+      <a href="#modulo-4" onclick="navigateTo(4)">
+        <span class="nav-num">4</span> Instrumentos y biol&oacute;gicos
+      </a>
+      <a href="#modulo-5" onclick="navigateTo(5)">
+        <span class="nav-num">5</span> Pasivos e ingresos
+      </a>
+      <a href="#modulo-6" onclick="navigateTo(6)">
+        <span class="nav-num">6</span> Deterioro e impuesto diferido
+      </a>
+      <a href="#modulo-7" onclick="navigateTo(7)">
+        <span class="nav-num">7</span> Consolidados y combinaciones
+      </a>
+      <a href="#modulo-8" onclick="navigateTo(8)">
+        <span class="nav-num">8</span> Conciliaci&oacute;n fiscal-contable
+      </a>
+      <a href="#modulo-9" onclick="navigateTo(9)">
+        <span class="nav-num">9</span> Revelaciones y pol&iacute;ticas
+      </a>
+      <a href="#modulo-10" onclick="navigateTo(10)">
+        <span class="nav-num">10</span> Pr&aacute;ctica con EEFF reales
+      </a>
+    </nav>
+    <div class="sidebar-back">
+      <a href="../escuela.html">&larr; Volver a la Escuela</a>
+    </div>
+  </aside>
+  <div class="curso-main">
+    <section id="modulo-1" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">NIIF</a> &rsaquo; M&oacute;dulo 1
+        </div>
+        <div class="mod-num">M&oacute;dulo 1 de 10</div>
+        <h1>Marco conceptual y grupos NIIF en Colombia</h1>
+        <p class="mod-desc">Antes de aplicar cualquier est&aacute;ndar, necesitas entender c&oacute;mo se adopt&oacute; NIIF en Colombia, a qu&eacute; grupo pertenece tu cliente y qu&eacute; estados financieros debe preparar.</p>
+      </div>
+      <div class="content-block">
+        <h2>Adopci&oacute;n de NIIF en Colombia</h2>
+        <p>Colombia adopt&oacute; las Normas Internacionales de Informaci&oacute;n Financiera mediante la Ley 1314 de 2009, que estableci&oacute; un marco normativo &uacute;nico de contabilidad. La reglamentaci&oacute;n se consolid&oacute; en el Decreto &Uacute;nico Reglamentario 2420 de 2015, que compila los marcos t&eacute;cnicos normativos para los tres grupos de preparadores de informaci&oacute;n financiera.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Decreto 2420 de 2015 &mdash; DUR de Contabilidad</h4>
+            <span class="norma-tag">Obligatorio</span>
+          </div>
+          <blockquote>
+            Compila los marcos t&eacute;cnicos normativos de informaci&oacute;n financiera: <strong>Anexo 1</strong> (NIIF Plenas &mdash; Grupo 1), <strong>Anexo 2</strong> (NIIF para PYMES &mdash; Grupo 2) y <strong>Anexo 3</strong> (Contabilidad simplificada &mdash; Grupo 3). Cada anexo se actualiza peri&oacute;dicamente mediante decretos modificatorios.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>En la pr&aacute;ctica:</strong> Lo primero que debes hacer con un cliente nuevo es clasificarlo en su grupo. El grupo determina qu&eacute; normas aplica, qu&eacute; estados financieros presenta y ante qui&eacute;n reporta.
+          </div>
+        </div>
+        <h3>Los tres grupos de preparadores</h3>
+        <p>La clasificaci&oacute;n depende de tres criterios: tama&ntilde;o de activos totales en SMLMV, n&uacute;mero de trabajadores y si es emisor de valores o entidad de inter&eacute;s p&uacute;blico.</p>
+        <table class="tabla-norm">
+          <thead>
+            <tr>
+              <th>Criterio</th>
+              <th>Grupo 1 &mdash; NIIF Plenas</th>
+              <th>Grupo 2 &mdash; NIIF PYMES</th>
+              <th>Grupo 3 &mdash; Micro</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Activos totales</strong></td>
+              <td>&gt; 30.000 SMLMV</td>
+              <td>500 &ndash; 30.000 SMLMV</td>
+              <td>&lt; 500 SMLMV</td>
+            </tr>
+            <tr>
+              <td><strong>Trabajadores</strong></td>
+              <td>&gt; 200 empleados</td>
+              <td>11 &ndash; 200 empleados</td>
+              <td>&lt; 10 empleados</td>
+            </tr>
+            <tr>
+              <td><strong>Marco normativo</strong></td>
+              <td>NIC/NIIF completas (Anexo 1, Dec. 2420)</td>
+              <td>NIIF para PYMES (Anexo 2, Dec. 2420)</td>
+              <td>Contabilidad simplificada (Anexo 3, Dec. 2420)</td>
+            </tr>
+            <tr>
+              <td><strong>Quienes siempre son Grupo 1</strong></td>
+              <td>Emisores de valores, entidades de inter&eacute;s p&uacute;blico, matrices de subordinadas Grupo 1</td>
+              <td>&mdash;</td>
+              <td>&mdash;</td>
+            </tr>
+            <tr>
+              <td><strong>SMLMV 2026</strong></td>
+              <td colspan="3">$1.423.500 (Decreto 2292/2025). 30.000 SMLMV = $42.705.000.000 | 500 SMLMV = $711.750.000</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p>Para clasificar al grupo se usan los criterios del a&ntilde;o <strong>inmediatamente anterior</strong>. Si un cliente del Grupo 2 super&oacute; los 30.000 SMLMV en 2025, debe migrar a Grupo 1 para estados financieros de 2026. La migraci&oacute;n requiere periodo de transici&oacute;n y ESFA (Estado de Situaci&oacute;n Financiera de Apertura).</p>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n</h4>
+          </div>
+          <p>Aplicar NIIF Plenas (NIC completas) a una empresa del <strong>Grupo 2</strong>. Las NIIF para PYMES tienen diferencias importantes: no permiten modelo de revaluaci&oacute;n en PPE, simplifican instrumentos financieros y no exigen ORI separado. Usar el marco equivocado invalida los estados financieros.</p>
+        </div>
+        <h3>Marco conceptual 2018</h3>
+        <p>El Marco Conceptual revisado (vigente desde 2020 en Colombia) define los conceptos fundamentales:</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Marco Conceptual para la Informaci&oacute;n Financiera (2018)</h4>
+          </div>
+          <blockquote>
+            Establece el objetivo de la informaci&oacute;n financiera de prop&oacute;sito general: <strong>proporcionar informaci&oacute;n &uacute;til a inversores, prestamistas y otros acreedores</strong> para tomar decisiones sobre suministro de recursos a la entidad. Las caracter&iacute;sticas cualitativas fundamentales son <strong>relevancia</strong> y <strong>representaci&oacute;n fiel</strong>.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Definiciones clave:</strong> Activo = recurso econ&oacute;mico presente controlado por la entidad como resultado de sucesos pasados. Pasivo = obligaci&oacute;n presente de transferir un recurso econ&oacute;mico. Ingreso = incremento en activos o disminuci&oacute;n en pasivos que incrementa patrimonio (distinto de aportes).
+          </div>
+        </div>
+        <h3>Estados financieros seg&uacute;n NIC 1</h3>
+        <p>La NIC 1 &ldquo;Presentaci&oacute;n de Estados Financieros&rdquo; exige un juego completo de estados financieros:</p>
+        <table class="tabla-norm">
+          <thead>
+            <tr><th>Estado financiero</th><th>Contenido principal</th><th>Nombre com&uacute;n Colombia</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Estado de Situaci&oacute;n Financiera (ESF)</strong></td>
+              <td>Activos, pasivos y patrimonio a la fecha de corte</td>
+              <td>Balance General</td>
+            </tr>
+            <tr>
+              <td><strong>Estado de Resultados Integral (ERI)</strong></td>
+              <td>Ingresos, costos, gastos y resultado del periodo</td>
+              <td>Estado de P&eacute;rdidas y Ganancias + ORI</td>
+            </tr>
+            <tr>
+              <td><strong>Otro Resultado Integral (ORI)</strong></td>
+              <td>Ganancias/p&eacute;rdidas no realizadas (revaluaciones, coberturas, diferencia en cambio)</td>
+              <td>Puede presentarse junto al ERI o separado</td>
+            </tr>
+            <tr>
+              <td><strong>Estado de Cambios en el Patrimonio</strong></td>
+              <td>Movimiento de cada componente del patrimonio</td>
+              <td>Estado de Cambios en el Patrimonio</td>
+            </tr>
+            <tr>
+              <td><strong>Estado de Flujos de Efectivo</strong></td>
+              <td>Flujos de operaci&oacute;n, inversi&oacute;n y financiaci&oacute;n</td>
+              <td>Flujo de Caja</td>
+            </tr>
+            <tr>
+              <td><strong>Notas a los Estados Financieros</strong></td>
+              <td>Pol&iacute;ticas contables, estimaciones, desgloses, hechos posteriores</td>
+              <td>Notas</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="expandible" onclick="this.classList.toggle('open')">
+          <button class="expandible-toggle">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            Ver: Diferencias clave entre Grupo 1, 2 y 3 en la pr&aacute;ctica
+          </button>
+          <div class="expandible-content" style="padding:12px 14px">
+            <table class="tabla-norm">
+              <thead><tr><th>Aspecto</th><th>Grupo 1</th><th>Grupo 2</th><th>Grupo 3</th></tr></thead>
+              <tbody>
+                <tr><td>Modelo de PPE</td><td>Costo o revaluaci&oacute;n</td><td>Solo costo</td><td>Costo hist&oacute;rico</td></tr>
+                <tr><td>ORI separado</td><td>Obligatorio</td><td>No exigido separadamente</td><td>No aplica</td></tr>
+                <tr><td>Impuesto diferido</td><td>Obligatorio (NIC 12)</td><td>Obligatorio (Secc. 29)</td><td>No aplica</td></tr>
+                <tr><td>Instrumentos financieros</td><td>NIIF 9 (complejo)</td><td>Secc. 11-12 (simplificado)</td><td>Costo amortizado b&aacute;sico</td></tr>
+                <tr><td>Reporte Supersociedades</td><td>XBRL taxonom&iacute;a completa</td><td>XBRL simplificado</td><td>Formato &uacute;nico</td></tr>
+                <tr><td>Formato DIAN</td><td>F2516 + F110</td><td>F2516 + F110</td><td>F2516 simplificado</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <span></span>
+        <a href="#modulo-2" class="next" onclick="navigateTo(2)">M&oacute;dulo 2: Grupo 1 vs 2 vs 3 &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-2" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">NIIF</a> &rsaquo; M&oacute;dulo 2
+        </div>
+        <div class="mod-num">M&oacute;dulo 2 de 10</div>
+        <h1>Grupo 1 vs Grupo 2 vs Grupo 3: diferencias pr&aacute;cticas</h1>
+        <p class="mod-desc">El grupo al que pertenece tu cliente determina todo: qu&eacute; normas aplica, c&oacute;mo mide sus activos, qu&eacute; revela y c&oacute;mo reporta. Aqu&iacute; profundizamos en las diferencias pr&aacute;cticas que afectan tu trabajo diario.</p>
+      </div>
+      <div class="content-block">
+        <h2>Marco legal: Ley 1314 de 2009 y Decreto 2420 de 2015</h2>
+        <p>La Ley 1314 de 2009 es la norma fundacional que orden&oacute; la convergencia de Colombia hacia est&aacute;ndares internacionales de contabilidad. Facult&oacute; al Gobierno para expedir los marcos t&eacute;cnicos normativos, que se consolidaron en el Decreto 2420 de 2015 con sus tres anexos.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Ley 1314 de 2009 &mdash; Art. 1 y 2</h4>
+            <span class="norma-tag">Fundamento</span>
+          </div>
+          <blockquote>
+            Se establecen <strong>normas de contabilidad e informaci&oacute;n financiera y de aseguramiento de informaci&oacute;n</strong> aceptadas en Colombia, que conforman un sistema &uacute;nico y homog&eacute;neo de alta calidad, comprensible y de forzosa observancia. La acci&oacute;n del Estado se dirigir&aacute; hacia la convergencia con <strong>est&aacute;ndares internacionales de aceptaci&oacute;n mundial</strong>.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>En la pr&aacute;ctica:</strong> Antes de la Ley 1314, Colombia usaba el Decreto 2649/93 (PUC). Desde la convergencia, el PUC sigue vigente como cat&aacute;logo de cuentas, pero la medici&oacute;n, reconocimiento y revelaci&oacute;n se rigen por NIIF seg&uacute;n el grupo de la entidad.
+          </div>
+        </div>
+        <h3>Grupo 1 &mdash; NIIF Plenas (NIC/NIIF completas)</h3>
+        <p>Aplican el Anexo 1 del Decreto 2420 de 2015. Son empresas grandes, emisores de valores, entidades de inter&eacute;s p&uacute;blico y matrices de subordinadas que sean Grupo 1. Aplican <strong>todas</strong> las NIC y NIIF vigentes sin simplificaci&oacute;n.</p>
+        <h3>Grupo 2 &mdash; NIIF para PYMES (Secciones 1 a 35)</h3>
+        <p>Es la mayor&iacute;a de empresas colombianas. Aplican el Anexo 2 del Decreto 2420, que contiene la NIIF para PYMES organizada en 35 secciones. Es un marco simplificado pero igualmente exigente en medici&oacute;n y revelaci&oacute;n.</p>
+        <h3>Grupo 3 &mdash; Microempresas (contabilidad simplificada)</h3>
+        <p>Aplican el Anexo 3 del Decreto 2420. Son microempresas con menos de 10 empleados y menos de 500 SMLMV en activos. Pueden llevar contabilidad simplificada e incluso, en algunos casos, un sistema de partida simple (contabilidad de caja).</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Decreto 2420 de 2015 &mdash; Anexos t&eacute;cnicos</h4>
+          </div>
+          <blockquote>
+            <strong>Anexo 1:</strong> Marco t&eacute;cnico normativo para los preparadores de informaci&oacute;n financiera que conforman el <strong>Grupo 1</strong> (NIIF Plenas). <strong>Anexo 2:</strong> Marco t&eacute;cnico normativo para el <strong>Grupo 2</strong> (NIIF para PYMES). <strong>Anexo 3:</strong> Marco t&eacute;cnico normativo para el <strong>Grupo 3</strong> (contabilidad simplificada para microempresas).
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Actualizaciones:</strong> Estos anexos se actualizan peri&oacute;dicamente. Las &uacute;ltimas modificaciones incorporan cambios del IASB hasta 2024, incluyendo la NIIF para PYMES revisada (tercera edici&oacute;n). Siempre verifica la versi&oacute;n vigente en el CTCP.
+          </div>
+        </div>
+        <h2>Comparaci&oacute;n detallada de est&aacute;ndares clave por grupo</h2>
+        <table class="tabla-norm">
+          <thead>
+            <tr>
+              <th>Tema</th>
+              <th>Grupo 1 (NIIF Plenas)</th>
+              <th>Grupo 2 (NIIF PYMES)</th>
+              <th>Grupo 3 (Micro)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>PPE &mdash; Medici&oacute;n posterior</strong></td>
+              <td>Costo o revaluaci&oacute;n (NIC 16). Depreciaci&oacute;n por componentes obligatoria</td>
+              <td>Solo modelo del costo (Secc. 17). Componentes solo si piezas tienen vidas &uacute;tiles significativamente diferentes</td>
+              <td>Costo hist&oacute;rico sin componentes</td>
+            </tr>
+            <tr>
+              <td><strong>Instrumentos financieros</strong></td>
+              <td>NIIF 9 completa: costo amortizado, VR con cambios en ORI, VR con cambios en resultados. Modelo de p&eacute;rdidas crediticias esperadas</td>
+              <td>Secciones 11-12 simplificadas: costo amortizado o VR en resultados. Deterioro solo con evidencia objetiva</td>
+              <td>Costo menos deterioro b&aacute;sico</td>
+            </tr>
+            <tr>
+              <td><strong>Reconocimiento de ingresos</strong></td>
+              <td>NIIF 15: modelo de 5 pasos, obligaciones de desempe&ntilde;o, contraprestaci&oacute;n variable</td>
+              <td>Secci&oacute;n 23: principios b&aacute;sicos de transferencia de riesgos y recompensas, sin modelo de 5 pasos</td>
+              <td>Criterio de caja (cuando se cobra)</td>
+            </tr>
+            <tr>
+              <td><strong>Arrendamientos</strong></td>
+              <td>NIIF 16: activo por derecho de uso + pasivo para todos los arrendamientos</td>
+              <td>Secci&oacute;n 20: clasifica en operativo (gasto lineal) o financiero (activo + pasivo)</td>
+              <td>Gasto cuando se paga</td>
+            </tr>
+            <tr>
+              <td><strong>Consolidaci&oacute;n</strong></td>
+              <td>NIIF 10: obligatoria si hay control</td>
+              <td>Secci&oacute;n 9: obligatoria si hay control</td>
+              <td>No aplica</td>
+            </tr>
+            <tr>
+              <td><strong>Impuesto diferido</strong></td>
+              <td>NIC 12: obligatorio, m&eacute;todo del balance</td>
+              <td>Secci&oacute;n 29: obligatorio, m&eacute;todo del balance</td>
+              <td>No aplica</td>
+            </tr>
+            <tr>
+              <td><strong>Goodwill</strong></td>
+              <td>No se amortiza, test de deterioro anual (NIIF 3)</td>
+              <td>Se amortiza en m&aacute;ximo 10 a&ntilde;os (Secc. 19)</td>
+              <td>No aplica</td>
+            </tr>
+            <tr>
+              <td><strong>ORI (Otro Resultado Integral)</strong></td>
+              <td>Obligatorio como estado separado o dentro del ERI</td>
+              <td>No exigido como estado separado</td>
+              <td>No aplica</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p>La mayor&iacute;a de contadores colombianos trabajan con empresas del <strong>Grupo 2</strong>. No cometas el error de estudiar solo NIIF Plenas: las secciones de NIIF para PYMES tienen diferencias significativas. Por ejemplo, en Grupo 2 <strong>no existe</strong> el concepto de activo por derecho de uso (NIIF 16), sino que se usa la clasificaci&oacute;n cl&aacute;sica de arrendamiento operativo vs. financiero (Secc. 20).</p>
+        </div>
+        <h2>Transici&oacute;n entre grupos</h2>
+        <p>Cuando una empresa cambia de tama&ntilde;o y supera (o baja de) los umbrales, debe migrar de grupo. Este proceso requiere:</p>
+        <ol>
+          <li>Verificar que los criterios se cumplieron durante <strong>dos a&ntilde;os consecutivos</strong> (para evitar migraciones por fluctuaciones temporales).</li>
+          <li>Preparar un <strong>Estado de Situaci&oacute;n Financiera de Apertura (ESFA)</strong> bajo el nuevo marco.</li>
+          <li>Aplicar las exenciones de primera adopci&oacute;n disponibles (NIIF 1 para migrar a Grupo 1, Secc. 35 para migrar a Grupo 2).</li>
+          <li>Informar a Supersociedades y actualizar el reporte XBRL correspondiente.</li>
+        </ol>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n</h4>
+          </div>
+          <p>No migrar de grupo cuando se superan los umbrales. Algunas empresas del Grupo 2 crecen y superan los 30.000 SMLMV en activos, pero siguen aplicando NIIF para PYMES. Esto invalida sus estados financieros ante Supersociedades y la DIAN. Tambi&eacute;n ocurre al rev&eacute;s: empresas Grupo 1 que bajan de tama&ntilde;o y podr&iacute;an simplificar su reporte migrando a Grupo 2, pero no lo hacen por desconocimiento.</p>
+        </div>
+        <div class="expandible" onclick="this.classList.toggle('open')">
+          <button class="expandible-toggle">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            Ver: Mapeo de NIC/NIIF Plenas a Secciones NIIF PYMES
+          </button>
+          <div class="expandible-content" style="padding:12px 14px">
+            <table class="tabla-norm">
+              <thead><tr><th>Norma Plena (Grupo 1)</th><th>Secci&oacute;n PYMES (Grupo 2)</th><th>Tema</th></tr></thead>
+              <tbody>
+                <tr><td>NIC 1</td><td>Secciones 3-8</td><td>Presentaci&oacute;n de estados financieros</td></tr>
+                <tr><td>NIC 2</td><td>Secci&oacute;n 13</td><td>Inventarios</td></tr>
+                <tr><td>NIC 12</td><td>Secci&oacute;n 29</td><td>Impuesto a las ganancias (diferido)</td></tr>
+                <tr><td>NIC 16</td><td>Secci&oacute;n 17</td><td>Propiedad, planta y equipo</td></tr>
+                <tr><td>NIC 19</td><td>Secci&oacute;n 28</td><td>Beneficios a empleados</td></tr>
+                <tr><td>NIC 36</td><td>Secci&oacute;n 27</td><td>Deterioro del valor de los activos</td></tr>
+                <tr><td>NIC 37</td><td>Secci&oacute;n 21</td><td>Provisiones y contingencias</td></tr>
+                <tr><td>NIC 38</td><td>Secci&oacute;n 18</td><td>Activos intangibles</td></tr>
+                <tr><td>NIC 41</td><td>Secci&oacute;n 34</td><td>Agricultura (activos biol&oacute;gicos)</td></tr>
+                <tr><td>NIIF 3</td><td>Secci&oacute;n 19</td><td>Combinaciones de negocios</td></tr>
+                <tr><td>NIIF 9</td><td>Secciones 11-12</td><td>Instrumentos financieros</td></tr>
+                <tr><td>NIIF 10</td><td>Secci&oacute;n 9</td><td>Estados financieros consolidados</td></tr>
+                <tr><td>NIIF 15</td><td>Secci&oacute;n 23</td><td>Ingresos de actividades ordinarias</td></tr>
+                <tr><td>NIIF 16</td><td>Secci&oacute;n 20</td><td>Arrendamientos</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-1" class="prev" onclick="navigateTo(1)">&larr; M&oacute;dulo 1</a>
+        <a href="#modulo-3" class="next" onclick="navigateTo(3)">M&oacute;dulo 3: Activos bajo NIIF &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-3" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">NIIF</a> &rsaquo; M&oacute;dulo 3
+        </div>
+        <div class="mod-num">M&oacute;dulo 3 de 10</div>
+        <h1>Activos bajo NIIF: PPE, intangibles, inventarios y arrendamientos</h1>
+        <p class="mod-desc">Los activos son donde NIIF m&aacute;s cambia frente a la contabilidad local anterior. Aqu&iacute; aprendes las normas clave con sus cuentas PUC y errores que generan diferencias con la DIAN.</p>
+      </div>
+      <div class="content-block">
+        <h2>NIC 16 &mdash; Propiedad, Planta y Equipo (PPE)</h2>
+        <p>La PPE se reconoce cuando es probable que fluyan beneficios econ&oacute;micos futuros y el costo se pueda medir con fiabilidad. El reconocimiento inicial es al costo, que incluye precio de compra, aranceles, costos de instalaci&oacute;n y estimaci&oacute;n del desmantelamiento.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>NIC 16 &mdash; Medici&oacute;n posterior</h4>
+            <span class="norma-tag">Cr&iacute;tico</span>
+          </div>
+          <blockquote>
+            Despu&eacute;s del reconocimiento inicial, la entidad elegir&aacute; como pol&iacute;tica contable el <strong>modelo del costo</strong> (costo - depreciaci&oacute;n acumulada - deterioro) o el <strong>modelo de revaluaci&oacute;n</strong> (valor razonable a la fecha de revaluaci&oacute;n - depreciaci&oacute;n posterior - deterioro posterior). La pol&iacute;tica se aplica a toda una clase de PPE.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>En Colombia:</strong> El modelo de revaluaci&oacute;n solo aplica para Grupo 1 (NIIF Plenas). Las PYMES del Grupo 2 deben usar exclusivamente el modelo del costo. El super&aacute;vit por revaluaci&oacute;n va al ORI (cuenta 3810 PUC) y genera impuesto diferido.
+          </div>
+        </div>
+        <h3>Depreciaci&oacute;n por componentes</h3>
+        <p>NIC 16 exige depreciar por separado cada parte significativa de un activo que tenga vida &uacute;til diferente. Esto es la <strong>depreciaci&oacute;n por componentes</strong>.</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <h4>Ejemplo &mdash; Depreciaci&oacute;n por componentes de un veh&iacute;culo</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Costo del veh&iacute;culo</span><span class="value">$120.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Componente 1: Carrocer&iacute;a y chasis (70%)</span><span class="value">$84.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">&nbsp;&nbsp;Vida &uacute;til: 10 a&ntilde;os &rarr; Dep. anual</span><span class="value">$8.400.000</span></div>
+            <div class="ejemplo-row"><span class="label">Componente 2: Motor (20%)</span><span class="value">$24.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">&nbsp;&nbsp;Vida &uacute;til: 5 a&ntilde;os &rarr; Dep. anual</span><span class="value">$4.800.000</span></div>
+            <div class="ejemplo-row"><span class="label">Componente 3: Llantas y suspensi&oacute;n (10%)</span><span class="value">$12.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">&nbsp;&nbsp;Vida &uacute;til: 3 a&ntilde;os &rarr; Dep. anual</span><span class="value">$4.000.000</span></div>
+            <div class="ejemplo-row total"><span class="label">Depreciaci&oacute;n total a&ntilde;o 1 (NIIF)</span><span class="value">$17.200.000</span></div>
+            <div class="ejemplo-row"><span class="label">Depreciaci&oacute;n fiscal (5 a&ntilde;os, Art. 137 ET)</span><span class="value">$24.000.000</span></div>
+            <div class="ejemplo-row"><span class="label" style="color:var(--rose-500)">Diferencia temporaria &rarr; Impuesto diferido</span><span class="value" style="color:var(--rose-500)">$6.800.000</span></div>
+          </div>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n</h4>
+          </div>
+          <p>Depreciar fiscalmente usando las vidas &uacute;tiles NIIF. La depreciaci&oacute;n fiscal tiene sus propias reglas (Art. 137 ET: edificios 45 a&ntilde;os, maquinaria 15, veh&iacute;culos 5, equipos de c&oacute;mputo 5). La diferencia entre depreciaci&oacute;n NIIF y fiscal genera <strong>diferencias temporarias</strong> que se registran como impuesto diferido (ver M&oacute;dulo 6).</p>
+        </div>
+        <h2>NIC 38 &mdash; Activos intangibles</h2>
+        <p>Un intangible se reconoce si es identificable (separable o surge de derechos contractuales), es probable que genere beneficios econ&oacute;micos futuros y su costo se puede medir con fiabilidad. Se mide inicialmente al costo.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>NIC 38 &mdash; Vida &uacute;til y amortizaci&oacute;n</h4>
+          </div>
+          <blockquote>
+            Los intangibles con <strong>vida &uacute;til finita</strong> se amortizan. Los de <strong>vida &uacute;til indefinida</strong> no se amortizan sino que se someten a prueba de deterioro anualmente (NIC 36). El goodwill adquirido no se amortiza bajo NIIF Plenas; bajo NIIF PYMES (Secc. 19) s&iacute; se amortiza en un m&aacute;ximo de 10 a&ntilde;os.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>PUC:</strong> Cuentas 16 (intangibles) &mdash; <code>1605</code> cr&eacute;dito mercantil, <code>1610</code> marcas, <code>1615</code> patentes, <code>1620</code> concesiones y franquicias, <code>1635</code> licencias, <code>1698</code> amortizaci&oacute;n acumulada.
+          </div>
+        </div>
+        <h2>NIC 2 &mdash; Inventarios</h2>
+        <p>Los inventarios se miden al <strong>menor entre el costo y el valor neto realizable (VNR)</strong>. El VNR es el precio estimado de venta menos los costos estimados para terminar y vender.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>NIC 2 &mdash; F&oacute;rmulas de costo permitidas</h4>
+          </div>
+          <table class="tabla-norm">
+            <thead><tr><th>M&eacute;todo</th><th>Descripci&oacute;n</th><th>Permitido NIIF</th><th>Permitido fiscal (Art. 65 ET)</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>PEPS / FIFO</strong></td>
+                <td>Primeras en entrar, primeras en salir</td>
+                <td>S&iacute;</td>
+                <td>S&iacute;</td>
+              </tr>
+              <tr>
+                <td><strong>Promedio ponderado</strong></td>
+                <td>Costo promedio de las unidades disponibles</td>
+                <td>S&iacute;</td>
+                <td>S&iacute;</td>
+              </tr>
+              <tr>
+                <td><strong>Identificaci&oacute;n espec&iacute;fica</strong></td>
+                <td>Costo individual de cada unidad</td>
+                <td>S&iacute; (para no intercambiables)</td>
+                <td>S&iacute;</td>
+              </tr>
+              <tr>
+                <td><strong>UEPS / LIFO</strong></td>
+                <td>&Uacute;ltimas en entrar, primeras en salir</td>
+                <td><strong>No permitido</strong></td>
+                <td>No permitido</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p>El ajuste a VNR se registra como gasto en resultados (<code>5199</code> o <code>5305</code>) con contrapartida en la cuenta <code>1499</code> (provisi&oacute;n para obsolescencia). Este ajuste <strong>no es deducible fiscalmente</strong> hasta que el inventario se venda o destruya efectivamente (Art. 64 ET), generando diferencia temporaria y <strong>activo por impuesto diferido</strong>.</p>
+        </div>
+        <h2>NIIF 16 &mdash; Arrendamientos</h2>
+        <p>Desde 2019, el arrendatario reconoce <strong>todos los arrendamientos</strong> (excepto de corto plazo &le; 12 meses y de bajo valor) en el balance: un activo por derecho de uso y un pasivo por arrendamiento.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>NIIF 16 &mdash; Reconocimiento del arrendatario</h4>
+            <span class="norma-tag">Cr&iacute;tico</span>
+          </div>
+          <blockquote>
+            El arrendatario reconocer&aacute; un <strong>activo por derecho de uso</strong> y un <strong>pasivo por arrendamiento</strong> en la fecha de comienzo del arrendamiento. El activo se deprecia; el pasivo se mide al valor presente de los pagos futuros descontados a la tasa impl&iacute;cita o tasa incremental de endeudamiento.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>PUC:</strong> Activo por derecho de uso en <code>1607xx</code> (algunos usan subcuentas espec&iacute;ficas bajo el grupo del activo subyacente). Pasivo por arrendamiento en <code>2120xx</code> o <code>2220xx</code> (corto y largo plazo). La depreciaci&oacute;n del activo va a <code>5160/5260</code> y el inter&eacute;s del pasivo a <code>5305</code>.
+          </div>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n</h4>
+          </div>
+          <p>Deducir fiscalmente la depreciaci&oacute;n del activo por derecho de uso y los intereses del pasivo por arrendamiento. Fiscalmente, el gasto deducible sigue siendo <strong>el canon de arrendamiento pagado</strong> (Art. 127-1 ET). La diferencia entre el gasto NIIF (depreciaci&oacute;n + inter&eacute;s) y el gasto fiscal (canon) genera diferencia temporaria. Esto se concilia en el <strong>Formato 2516</strong>.</p>
+        </div>
+        <div class="expandible" onclick="this.classList.toggle('open')">
+          <button class="expandible-toggle">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            Ver: Resumen de cuentas PUC por tipo de activo NIIF
+          </button>
+          <div class="expandible-content" style="padding:12px 14px">
+            <table class="tabla-norm">
+              <thead><tr><th>Norma</th><th>Tipo de activo</th><th>Cuentas PUC principales</th></tr></thead>
+              <tbody>
+                <tr><td>NIC 16</td><td>Propiedad, planta y equipo</td><td><code>15xx</code> &mdash; 1504 terrenos, 1516 maquinaria, 1524 equipo oficina, 1540 veh&iacute;culos, 1592 dep. acum.</td></tr>
+                <tr><td>NIC 38</td><td>Intangibles</td><td><code>16xx</code> &mdash; 1605 cr&eacute;dito mercantil, 1610 marcas, 1635 licencias, 1698 amort. acum.</td></tr>
+                <tr><td>NIC 2</td><td>Inventarios</td><td><code>14xx</code> &mdash; 1405 materias primas, 1430 productos terminados, 1435 mercanc&iacute;as, 1499 provisi&oacute;n</td></tr>
+                <tr><td>NIIF 16</td><td>Derecho de uso</td><td><code>1607xx</code> activo ROU, <code>2120/2220</code> pasivo arrendamiento</td></tr>
+                <tr><td>NIC 40</td><td>Propiedades de inversi&oacute;n</td><td><code>1505xx</code> o cuentas espec&iacute;ficas de inversi&oacute;n inmobiliaria</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-2" class="prev" onclick="navigateTo(2)">&larr; M&oacute;dulo 2</a>
+        <a href="#modulo-4" class="next" onclick="navigateTo(4)">M&oacute;dulo 4: Instrumentos y biol&oacute;gicos &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-4" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">NIIF</a> &rsaquo; M&oacute;dulo 4
+        </div>
+        <div class="mod-num">M&oacute;dulo 4 de 10</div>
+        <h1>Instrumentos financieros y activos biol&oacute;gicos</h1>
+        <p class="mod-desc">Dos temas que muchos contadores evitan pero que son frecuentes en Colombia: desde la CxC hasta las inversiones en CDTs, y desde ganader&iacute;a hasta cultivos de palma. Aqu&iacute; los abordamos con enfoque pr&aacute;ctico.</p>
+      </div>
+      <div class="content-block">
+        <h2>Instrumentos financieros: NIIF 9 / Secciones 11-12</h2>
+        <p>Un instrumento financiero es cualquier contrato que d&eacute; lugar a un activo financiero en una entidad y a un pasivo financiero o instrumento de patrimonio en otra. En la pr&aacute;ctica colombiana, los m&aacute;s comunes son: efectivo, cuentas por cobrar, inversiones en CDTs, pr&eacute;stamos a empleados y cuentas por pagar.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>NIIF 9 &mdash; Clasificaci&oacute;n y medici&oacute;n</h4>
+            <span class="norma-tag">Cr&iacute;tico</span>
+          </div>
+          <blockquote>
+            Los activos financieros se clasifican seg&uacute;n el <strong>modelo de negocio</strong> de la entidad para gestionar los activos y las <strong>caracter&iacute;sticas de los flujos de efectivo contractuales</strong>. Las tres categor&iacute;as son: <strong>costo amortizado</strong>, <strong>valor razonable con cambios en ORI</strong> y <strong>valor razonable con cambios en resultados</strong>.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Grupo 2 (Secciones 11-12):</strong> Las PYMES usan un modelo simplificado con solo dos categor&iacute;as: instrumentos financieros b&aacute;sicos (Secc. 11, medidos a costo amortizado o costo menos deterioro) y otros instrumentos financieros (Secc. 12, medidos a valor razonable con cambios en resultados).
+          </div>
+        </div>
+        <h3>Clasificaci&oacute;n pr&aacute;ctica para empresas colombianas</h3>
+        <table class="tabla-norm">
+          <thead>
+            <tr>
+              <th>Instrumento</th>
+              <th>Grupo 1 (NIIF 9)</th>
+              <th>Grupo 2 (Secc. 11-12)</th>
+              <th>Cuenta PUC</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Efectivo y bancos</strong></td>
+              <td>Costo amortizado</td>
+              <td>Costo (Secc. 11)</td>
+              <td><code>1105-1110</code></td>
+            </tr>
+            <tr>
+              <td><strong>CxC comerciales</strong></td>
+              <td>Costo amortizado (modelo simplificado de PCE)</td>
+              <td>Costo amortizado menos deterioro (Secc. 11)</td>
+              <td><code>1305</code></td>
+            </tr>
+            <tr>
+              <td><strong>CDTs</strong></td>
+              <td>Costo amortizado (si se mantienen a vencimiento)</td>
+              <td>Costo amortizado (Secc. 11)</td>
+              <td><code>1240</code></td>
+            </tr>
+            <tr>
+              <td><strong>Acciones cotizadas</strong></td>
+              <td>VR con cambios en resultados (o en ORI si se designa)</td>
+              <td>VR con cambios en resultados (Secc. 12)</td>
+              <td><code>1205</code></td>
+            </tr>
+            <tr>
+              <td><strong>Pr&eacute;stamos a empleados</strong></td>
+              <td>Costo amortizado (tasa de mercado o impl&iacute;cita)</td>
+              <td>Costo amortizado (Secc. 11)</td>
+              <td><code>1365</code></td>
+            </tr>
+            <tr>
+              <td><strong>Derivados (forwards, swaps)</strong></td>
+              <td>VR con cambios en resultados (o cobertura)</td>
+              <td>VR con cambios en resultados (Secc. 12)</td>
+              <td><code>1245</code></td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Deterioro de instrumentos financieros: p&eacute;rdidas crediticias esperadas</h3>
+        <p>Bajo NIIF 9 (Grupo 1), el modelo de deterioro es de <strong>p&eacute;rdidas crediticias esperadas (PCE)</strong>, no de p&eacute;rdidas incurridas. Para cuentas por cobrar comerciales, se aplica el enfoque simplificado: la provisi&oacute;n se calcula usando una <strong>matriz de p&eacute;rdidas</strong> basada en el historial de cobro de la empresa.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>NIIF 9 &mdash; Modelo simplificado para CxC comerciales</h4>
+          </div>
+          <blockquote>
+            Para cuentas por cobrar comerciales que no contengan un componente financiero significativo, la entidad medir&aacute; la <strong>correcci&oacute;n de valor por p&eacute;rdidas</strong> por un importe igual a las p&eacute;rdidas crediticias esperadas durante el <strong>tiempo de vida del activo</strong>. Se permite usar una <strong>matriz de provisiones</strong> basada en la experiencia hist&oacute;rica de p&eacute;rdidas crediticias.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Diferencia fiscal:</strong> La provisi&oacute;n de cartera bajo NIIF (PCE) no coincide con la deducci&oacute;n fiscal de cartera (Art. 145 ET, que exige requisitos de tiempo y gesti&oacute;n de cobro). La diferencia genera impuesto diferido.
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p>Para la mayor&iacute;a de PYMES colombianas (Grupo 2, Secc. 11), el deterioro de cartera se reconoce cuando hay <strong>evidencia objetiva</strong> de que no se cobrar&aacute;: morosidad superior a 90-180 d&iacute;as, quiebra del deudor, acuerdo de reestructuraci&oacute;n. Es m&aacute;s simple que el modelo de PCE del Grupo 1, pero igualmente debe documentarse.</p>
+        </div>
+        <h2>Activos biol&oacute;gicos: NIC 41 / Secci&oacute;n 34</h2>
+        <p>Colombia es un pa&iacute;s con actividad agropecuaria significativa: ganader&iacute;a, caf&eacute;, palma africana, flores, ca&ntilde;a de az&uacute;car, banano. Todas estas actividades involucran <strong>activos biol&oacute;gicos</strong> que se miden bajo NIC 41 (Grupo 1) o Secci&oacute;n 34 (Grupo 2).</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>NIC 41 &mdash; Agricultura</h4>
+            <span class="norma-tag">Sector clave</span>
+          </div>
+          <blockquote>
+            Un <strong>activo biol&oacute;gico</strong> es un animal vivo o una planta viva. Se mide al <strong>valor razonable menos los costos de venta</strong>, excepto cuando el valor razonable no puede medirse de forma fiable. Los cambios en el valor razonable se reconocen en el <strong>resultado del periodo</strong>.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Excepci&oacute;n importante:</strong> Las <strong>plantas productoras</strong> (bearer plants) &mdash; como palma africana, caf&eacute;, ca&ntilde;a, &aacute;rboles frutales &mdash; se tratan como PPE bajo NIC 16 (desde la enmienda de 2014). Solo el <strong>producto biol&oacute;gico</strong> (fruto de palma, cereza de caf&eacute;) se mide a valor razonable.
+          </div>
+        </div>
+        <h3>Tipos de activos biol&oacute;gicos en Colombia</h3>
+        <table class="tabla-norm">
+          <thead>
+            <tr>
+              <th>Tipo</th>
+              <th>Ejemplos Colombia</th>
+              <th>Medici&oacute;n NIIF</th>
+              <th>Cuenta PUC</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Activos biol&oacute;gicos consumibles</strong></td>
+              <td>Ganado para venta, pollos de engorde, peces</td>
+              <td>Valor razonable menos costos de venta</td>
+              <td><code>1584</code> semovientes</td>
+            </tr>
+            <tr>
+              <td><strong>Activos biol&oacute;gicos para producir frutos</strong></td>
+              <td>Vacas lecheras, gallinas ponedoras</td>
+              <td>Valor razonable menos costos de venta</td>
+              <td><code>1584</code> semovientes</td>
+            </tr>
+            <tr>
+              <td><strong>Plantas productoras (bearer plants)</strong></td>
+              <td>Palma africana, cafetales, ca&ntilde;a de az&uacute;car, &aacute;rboles frutales</td>
+              <td>Como PPE (NIC 16): costo menos depreciaci&oacute;n</td>
+              <td><code>1588</code> o subcuentas de PPE</td>
+            </tr>
+            <tr>
+              <td><strong>Producto agr&iacute;cola (cosechado)</strong></td>
+              <td>Leche, fruto de palma, cereza de caf&eacute;, flores cortadas</td>
+              <td>Valor razonable menos costos de venta al punto de cosecha, luego NIC 2 (inventario)</td>
+              <td><code>14xx</code> inventarios</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <h4>Ejemplo &mdash; Contabilidad ganadera bajo NIIF</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Hato ganadero al inicio del a&ntilde;o: 200 cabezas</span><span class="value">$600.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Nacimientos: 30 terneros (VR al nacimiento)</span><span class="value">$45.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Ventas: 40 cabezas (valor en libros)</span><span class="value">($120.000.000)</span></div>
+            <div class="ejemplo-row"><span class="label">Cambio en valor razonable por crecimiento y precio</span><span class="value">$85.000.000</span></div>
+            <div class="ejemplo-row total"><span class="label">Hato ganadero al cierre: 190 cabezas (VR)</span><span class="value">$610.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Ganancia por cambio en VR reconocida en P&amp;L</span><span class="value">$85.000.000</span></div>
+            <div class="ejemplo-row"><span class="label" style="color:var(--rose-500)">Efecto fiscal: esta ganancia no realizada no se grava hasta la venta</span><span class="value" style="color:var(--rose-500)">Dif. temporaria</span></div>
+          </div>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n</h4>
+          </div>
+          <p>Registrar los activos biol&oacute;gicos al costo hist&oacute;rico y no actualizar a valor razonable. Muchas fincas ganaderas en Colombia siguen con el ganado al costo de compra sin reconocer cambios en valor razonable, violando NIC 41. Otro error frecuente: tratar las <strong>plantas productoras</strong> (palma, caf&eacute;) como activos biol&oacute;gicos a VR cuando desde 2016 deben tratarse como PPE (NIC 16). Solo el fruto es activo biol&oacute;gico.</p>
+        </div>
+        <div class="expandible" onclick="this.classList.toggle('open')">
+          <button class="expandible-toggle">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            Ver: Valor razonable del ganado &mdash; fuentes de precios en Colombia
+          </button>
+          <div class="expandible-content" style="padding:12px 14px">
+            <p style="font-size:.88rem;color:var(--gray-600);margin-bottom:12px">Para determinar el valor razonable del ganado bovino en Colombia se pueden usar las siguientes fuentes de precios observables (Nivel 2 de NIIF 13):</p>
+            <table class="tabla-norm">
+              <thead><tr><th>Fuente</th><th>Descripci&oacute;n</th><th>Frecuencia</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Subastas ganaderas</strong></td><td>Precios de transacci&oacute;n en subastas regionales (Montecarlo, Puerto Boyac&aacute;, Llanos)</td><td>Semanal</td></tr>
+                <tr><td><strong>FEDEG&Aacute;N</strong></td><td>Reportes de precios del ganado en pie por regi&oacute;n y categor&iacute;a</td><td>Mensual</td></tr>
+                <tr><td><strong>Frigor&iacute;ficos certificados</strong></td><td>Precios de compra en planta de sacrificio</td><td>Diario</td></tr>
+                <tr><td><strong>Gu&iacute;as de movilizaci&oacute;n ICA</strong></td><td>Volumen y precios de referencia por municipio</td><td>Mensual</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-3" class="prev" onclick="navigateTo(3)">&larr; M&oacute;dulo 3</a>
+        <a href="#modulo-5" class="next" onclick="navigateTo(5)">M&oacute;dulo 5: Pasivos e ingresos &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-5" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">NIIF</a> &rsaquo; M&oacute;dulo 5
+        </div>
+        <div class="mod-num">M&oacute;dulo 5 de 10</div>
+        <h1>Pasivos e ingresos: provisiones, NIIF 15 y beneficios a empleados</h1>
+        <p class="mod-desc">Los pasivos bajo NIIF no son solo &ldquo;lo que debes&rdquo;. Incluyen provisiones por obligaciones probables, ingresos diferidos y beneficios post-empleo. Aqu&iacute; aprendes las tres normas clave.</p>
+      </div>
+      <div class="content-block">
+        <h2>NIC 37 &mdash; Provisiones, pasivos contingentes y activos contingentes</h2>
+        <p>Una provisi&oacute;n es un pasivo de monto o vencimiento incierto. Se reconoce cuando existe una obligaci&oacute;n presente (legal o impl&iacute;cita), es probable que se requiera una salida de recursos y se puede hacer una estimaci&oacute;n fiable del monto.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>NIC 37 &mdash; Criterios de reconocimiento</h4>
+            <span class="norma-tag">Cr&iacute;tico</span>
+          </div>
+          <blockquote>
+            Se reconoce una provisi&oacute;n cuando: <strong>(a)</strong> existe una obligaci&oacute;n presente como resultado de un suceso pasado; <strong>(b)</strong> es <strong>probable</strong> (m&aacute;s de 50%) que se requiera una salida de recursos; y <strong>(c)</strong> puede hacerse una estimaci&oacute;n fiable del monto. Si la salida es solo <strong>posible</strong>, no se reconoce sino que se <strong>revela</strong> como pasivo contingente en notas.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>En la pr&aacute;ctica colombiana:</strong> Las provisiones m&aacute;s comunes son: litigios laborales y civiles, garant&iacute;as de productos, obligaciones de desmantelamiento y contratos onerosos. Se registran en cuentas <code>2610xx</code> (provisiones diversas) o <code>2620xx</code>.
+          </div>
+        </div>
+        <table class="tabla-norm">
+          <thead>
+            <tr><th>Probabilidad de salida</th><th>Tratamiento contable</th><th>D&oacute;nde aparece</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Probable</strong> (&gt; 50%)</td>
+              <td>Reconocer provisi&oacute;n (pasivo)</td>
+              <td>Estado de Situaci&oacute;n Financiera + Notas</td>
+            </tr>
+            <tr>
+              <td><strong>Posible</strong> (20-50%)</td>
+              <td>Revelar como pasivo contingente</td>
+              <td>Solo en Notas</td>
+            </tr>
+            <tr>
+              <td><strong>Remota</strong> (&lt; 20%)</td>
+              <td>No reconocer ni revelar</td>
+              <td>Ninguno</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n</h4>
+          </div>
+          <p>Deducir fiscalmente las provisiones contables. El Art. 105 del ET establece que las deducciones solo se reconocen cuando se ha <strong>realizado el pago efectivo</strong> o existe una obligaci&oacute;n cierta y determinada. Las provisiones NIIF (estimaciones de salida probable) generalmente <strong>no son deducibles</strong> hasta que se pagan, creando un <strong>activo por impuesto diferido</strong>.</p>
+        </div>
+        <h2>NIIF 15 &mdash; Ingresos de actividades ordinarias procedentes de contratos con clientes</h2>
+        <p>NIIF 15 reemplaz&oacute; la NIC 18 y la NIC 11, unificando el reconocimiento de ingresos en un modelo de <strong>5 pasos</strong>.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>NIIF 15 &mdash; Modelo de 5 pasos</h4>
+          </div>
+          <table class="tabla-norm">
+            <thead><tr><th>Paso</th><th>Descripci&oacute;n</th><th>Ejemplo pr&aacute;ctico</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>1</strong></td>
+                <td>Identificar el contrato con el cliente</td>
+                <td>Contrato de consultor&iacute;a por $100M, 12 meses, con implementaci&oacute;n de software</td>
+              </tr>
+              <tr>
+                <td><strong>2</strong></td>
+                <td>Identificar las obligaciones de desempe&ntilde;o</td>
+                <td>Obl. 1: Consultor&iacute;a ($60M). Obl. 2: Licencia de software ($40M)</td>
+              </tr>
+              <tr>
+                <td><strong>3</strong></td>
+                <td>Determinar el precio de la transacci&oacute;n</td>
+                <td>$100M fijos (sin componentes variables en este caso)</td>
+              </tr>
+              <tr>
+                <td><strong>4</strong></td>
+                <td>Asignar el precio a cada obligaci&oacute;n</td>
+                <td>Seg&uacute;n precio individual relativo: $60M consultor&iacute;a, $40M licencia</td>
+              </tr>
+              <tr>
+                <td><strong>5</strong></td>
+                <td>Reconocer el ingreso cuando se satisface la obligaci&oacute;n</td>
+                <td>Consultor&iacute;a: a lo largo del tiempo (% avance). Licencia: en un momento (entrega)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <h4>Ejemplo &mdash; Ingreso diferido bajo NIIF 15</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Contrato anual de mantenimiento cobrado anticipadamente</span><span class="value">$36.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Fecha de cobro: enero 1</span><span class="value">&mdash;</span></div>
+            <div class="ejemplo-row"><span class="label">Ingreso reconocido al cierre (mar. 31): 3/12</span><span class="value">$9.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Ingreso diferido (pasivo) restante</span><span class="value">$27.000.000</span></div>
+            <div class="ejemplo-row total"><span class="label">Cuenta 2805 &mdash; Ingresos recibidos por anticipado</span><span class="value">$27.000.000</span></div>
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p>Fiscalmente, el Art. 28 ET establece que los ingresos se realizan cuando se reciben efectivamente o cuando el derecho al pago est&aacute; fijado, lo primero que ocurra. En el ejemplo del mantenimiento anticipado, <strong>fiscalmente los $36M se gravan cuando se cobran</strong>, aunque contablemente se difieren. Esto genera una <strong>diferencia temporaria deducible</strong> y un activo por impuesto diferido temporal.</p>
+        </div>
+        <h2>NIC 19 &mdash; Beneficios a empleados</h2>
+        <p>NIC 19 clasifica los beneficios a empleados en cuatro categor&iacute;as y exige reconocer el costo cuando el empleado presta el servicio, no cuando se paga.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>NIC 19 &mdash; Categor&iacute;as de beneficios</h4>
+          </div>
+          <table class="tabla-norm">
+            <thead><tr><th>Categor&iacute;a</th><th>Ejemplos en Colombia</th><th>Cuentas PUC</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Corto plazo</strong></td>
+                <td>Salarios, primas, cesant&iacute;as, vacaciones causadas</td>
+                <td><code>2505-2510</code> salarios, <code>2510</code> cesant&iacute;as, <code>2515</code> vacaciones</td>
+              </tr>
+              <tr>
+                <td><strong>Post-empleo &mdash; aportaci&oacute;n definida</strong></td>
+                <td>Aportes a fondos de pensiones, ARL, cajas de compensaci&oacute;n</td>
+                <td><code>2370</code> aportes seguridad social</td>
+              </tr>
+              <tr>
+                <td><strong>Post-empleo &mdash; beneficio definido</strong></td>
+                <td>Pensiones de jubilaci&oacute;n a cargo de la empresa (pensiones de sanaci&oacute;n)</td>
+                <td><code>2610</code> provisi&oacute;n pensiones (c&aacute;lculo actuarial)</td>
+              </tr>
+              <tr>
+                <td><strong>Largo plazo</strong></td>
+                <td>Primas de antig&uuml;edad, bonos quinquenales</td>
+                <td><code>2610</code> provisiones</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="norma-aplicacion">
+            <strong>Diferencia clave Colombia:</strong> Las cesant&iacute;as en Colombia se consignan anualmente al fondo (plazo m&aacute;ximo 14 de febrero). Bajo NIIF se tratan como beneficio de corto plazo con aportaci&oacute;n definida. Las vacaciones acumuladas se reconocen como pasivo aunque no se hayan pagado.
+          </div>
+        </div>
+        <div class="expandible" onclick="this.classList.toggle('open')">
+          <button class="expandible-toggle">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            Ver: Pensiones de jubilaci&oacute;n a cargo del empleador (c&aacute;lculo actuarial)
+          </button>
+          <div class="expandible-content" style="padding:12px 14px">
+            <p style="font-size:.88rem;color:var(--gray-600);margin-bottom:12px">Empresas colombianas con <strong>pensiones de jubilaci&oacute;n previas a la Ley 100/1993</strong> deben reconocer el pasivo actuarial completo bajo NIC 19. El c&aacute;lculo requiere un actuario certificado y considera: tasa de descuento (bonos TES), tablas de mortalidad (resoluci&oacute;n Superfinanciera), incrementos salariales esperados y probabilidad de permanencia.</p>
+            <p style="font-size:.88rem;color:var(--gray-600);margin-bottom:12px">Las remediciones actuariales (cambios en supuestos demogr&aacute;ficos y financieros) se reconocen en <strong>ORI</strong> bajo NIIF Plenas (NIC 19.120), no en resultados. Bajo NIIF PYMES, van a resultados directamente.</p>
+            <p style="font-size:.88rem;color:var(--gray-600)">Fiscalmente, el gasto deducible es el aporte efectivo al fondo de pensiones o el pago directo al pensionado, no la provisi&oacute;n actuarial contable.</p>
+          </div>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-4" class="prev" onclick="navigateTo(4)">&larr; M&oacute;dulo 4</a>
+        <a href="#modulo-6" class="next" onclick="navigateTo(6)">M&oacute;dulo 6: Deterioro e impuesto diferido &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-6" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">NIIF</a> &rsaquo; M&oacute;dulo 6
+        </div>
+        <div class="mod-num">M&oacute;dulo 6 de 10</div>
+        <h1>Deterioro, valor razonable e impuesto diferido</h1>
+        <p class="mod-desc">Estos tres temas son los que m&aacute;s diferencias generan entre la contabilidad NIIF y la fiscal. Dominarlos es cr&iacute;tico para el Formato 2516 y la conciliaci&oacute;n fiscal.</p>
+      </div>
+      <div class="content-block">
+        <h2>NIC 36 &mdash; Deterioro del valor de los activos</h2>
+        <p>Un activo est&aacute; deteriorado cuando su <strong>importe en libros</strong> supera su <strong>importe recuperable</strong>. El importe recuperable es el mayor entre el valor razonable menos costos de venta y el valor en uso (flujos de caja descontados).</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>NIC 36 &mdash; Indicadores de deterioro</h4>
+            <span class="norma-tag">Cr&iacute;tico</span>
+          </div>
+          <blockquote>
+            La entidad evaluar&aacute; en cada fecha de cierre si existe alg&uacute;n <strong>indicio</strong> de que un activo pueda estar deteriorado. Si existe tal indicio, la entidad estimar&aacute; el importe recuperable del activo.
+          </blockquote>
+          <table class="tabla-norm">
+            <thead><tr><th>Tipo</th><th>Indicadores externos</th><th>Indicadores internos</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Ejemplos</strong></td>
+                <td>Disminuci&oacute;n significativa del valor de mercado; cambios adversos en entorno tecnol&oacute;gico, legal o econ&oacute;mico; aumento de tasas de inter&eacute;s</td>
+                <td>Evidencia de obsolescencia o da&ntilde;o f&iacute;sico; cambios en el uso del activo; desempe&ntilde;o econ&oacute;mico inferior al esperado</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="norma-aplicacion">
+            <strong>PUC:</strong> P&eacute;rdida por deterioro en <code>5299</code> o <code>5399</code> (gasto). Reversi&oacute;n de deterioro en <code>4299</code> (ingreso). Deterioro acumulado en contracuenta del activo (ej: <code>1599</code> para PPE, <code>1699</code> para intangibles). El goodwill <strong>nunca</strong> se revierte.
+          </div>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n</h4>
+          </div>
+          <p>No evaluar indicios de deterioro al cierre y dejar activos sobrevalorados. Supersociedades y revisores fiscales verifican que se haya documentado la evaluaci&oacute;n. Otro error frecuente: deducir fiscalmente el deterioro contable. El Art. 105 ET establece que las p&eacute;rdidas por deterioro <strong>no son deducibles</strong> (salvo cartera vencida con los requisitos del Art. 145 ET).</p>
+        </div>
+        <h2>NIIF 13 &mdash; Medici&oacute;n del valor razonable</h2>
+        <p>Cuando NIIF exige o permite medir al valor razonable, NIIF 13 establece c&oacute;mo hacerlo. Define una jerarqu&iacute;a de tres niveles seg&uacute;n la calidad de los datos de entrada.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>NIIF 13 &mdash; Jerarqu&iacute;a de valor razonable</h4>
+          </div>
+          <table class="tabla-norm">
+            <thead><tr><th>Nivel</th><th>Datos de entrada</th><th>Ejemplo</th><th>Fiabilidad</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Nivel 1</strong></td>
+                <td>Precios cotizados en mercados activos para activos id&eacute;nticos</td>
+                <td>Acciones cotizadas en BVC, bonos TES</td>
+                <td>M&aacute;xima</td>
+              </tr>
+              <tr>
+                <td><strong>Nivel 2</strong></td>
+                <td>Datos observables distintos de cotizaciones (precios de activos similares, tasas de referencia)</td>
+                <td>Inmuebles comparables, swaps basados en IBR</td>
+                <td>Media</td>
+              </tr>
+              <tr>
+                <td><strong>Nivel 3</strong></td>
+                <td>Datos no observables (modelos internos, supuestos de la gerencia)</td>
+                <td>Aval&uacute;os de maquinaria especializada, marcas propias, goodwill</td>
+                <td>M&iacute;nima (requiere revelaciones extensas)</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="norma-aplicacion">
+            <strong>En Colombia:</strong> Los aval&uacute;os de inmuebles y maquinaria (Nivel 2-3) son los m&aacute;s frecuentes. El avaluador debe ser independiente y usar metodolog&iacute;as reconocidas. Los aval&uacute;os se actualizan m&iacute;nimo cada 3-5 a&ntilde;os (seg&uacute;n pol&iacute;tica) y se revelan en notas.
+          </div>
+        </div>
+        <h2>NIC 12 &mdash; Impuesto diferido</h2>
+        <p>Este es el tema m&aacute;s cr&iacute;tico para contadores colombianos porque conecta directamente NIIF con la declaraci&oacute;n de renta y el Formato 2516. El impuesto diferido surge de las <strong>diferencias temporarias</strong> entre la base contable y la base fiscal de activos y pasivos.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>NIC 12 &mdash; Diferencias temporarias</h4>
+            <span class="norma-tag">Cr&iacute;tico</span>
+          </div>
+          <blockquote>
+            Una <strong>diferencia temporaria</strong> es la diferencia entre el importe en libros de un activo o pasivo en el estado de situaci&oacute;n financiera y su base fiscal. Las diferencias temporarias pueden ser: <strong>imponibles</strong> (dar&aacute;n lugar a cantidades imponibles futuras &rarr; Pasivo por impuesto diferido) o <strong>deducibles</strong> (dar&aacute;n lugar a cantidades deducibles futuras &rarr; Activo por impuesto diferido).
+          </blockquote>
+        </div>
+        <table class="tabla-norm">
+          <thead><tr><th>Partida</th><th>Base NIIF</th><th>Base fiscal</th><th>Tipo diferencia</th><th>Efecto</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Depreciaci&oacute;n PPE</strong></td>
+              <td>Vida &uacute;til NIIF (ej: 10-20 a&ntilde;os)</td>
+              <td>Vida &uacute;til fiscal (Art. 137 ET: 5-45 a&ntilde;os)</td>
+              <td>Imponible o deducible (depende)</td>
+              <td>DTL o DTA</td>
+            </tr>
+            <tr>
+              <td><strong>Provisiones (NIC 37)</strong></td>
+              <td>Se reconoce pasivo</td>
+              <td>No se acepta hasta el pago</td>
+              <td>Deducible</td>
+              <td>DTA (Activo)</td>
+            </tr>
+            <tr>
+              <td><strong>NIIF 16 arrendamientos</strong></td>
+              <td>Activo ROU + Pasivo lease</td>
+              <td>Canon pagado como gasto</td>
+              <td>Imponible (activo) + Deducible (pasivo)</td>
+              <td>DTA + DTL neto</td>
+            </tr>
+            <tr>
+              <td><strong>Valor razonable PPE</strong></td>
+              <td>Valor razonado &gt; costo</td>
+              <td>Costo fiscal (Art. 69 ET)</td>
+              <td>Imponible</td>
+              <td>DTL (Pasivo)</td>
+            </tr>
+            <tr>
+              <td><strong>Deterioro inventarios</strong></td>
+              <td>VNR &lt; costo</td>
+              <td>Costo fiscal (hasta venta)</td>
+              <td>Deducible</td>
+              <td>DTA (Activo)</td>
+            </tr>
+            <tr>
+              <td><strong>Beneficios empleados LP</strong></td>
+              <td>Pasivo actuarial completo</td>
+              <td>Solo pagos efectivos</td>
+              <td>Deducible</td>
+              <td>DTA (Activo)</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <h4>Ejemplo &mdash; C&aacute;lculo de impuesto diferido por provisi&oacute;n de litigios</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Provisi&oacute;n por litigio laboral (NIIF) &mdash; pasivo reconocido</span><span class="value">$80.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Base fiscal del pasivo (no aceptado fiscalmente)</span><span class="value">$0</span></div>
+            <div class="ejemplo-row"><span class="label">Diferencia temporaria deducible</span><span class="value">$80.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Tasa de impuesto vigente (tarifa general)</span><span class="value">35%</span></div>
+            <div class="ejemplo-row total"><span class="label">Activo por impuesto diferido (DTA) &mdash; Cta. 1710</span><span class="value">$28.000.000</span></div>
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Conexi&oacute;n con el Formato 2516</h4>
+          </div>
+          <p>El Formato 2516 (conciliaci&oacute;n fiscal) es exactamente el puente entre NIIF y la declaraci&oacute;n de renta. Cada l&iacute;nea del 2516 compara el valor NIIF vs. el valor fiscal de activos, pasivos, ingresos, costos y gastos. Las diferencias deben coincidir con el impuesto diferido registrado en cuentas <code>1710</code> (DTA) y <code>2715</code> (DTL). Si el 2516 no cuadra con tu balance NIIF y tu F110, la DIAN detecta inconsistencias.</p>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n</h4>
+          </div>
+          <p>No registrar impuesto diferido porque &ldquo;la empresa es peque&ntilde;a&rdquo;. <strong>Todos los contribuyentes del Grupo 1 y Grupo 2 est&aacute;n obligados</strong> a registrar impuesto diferido. No hacerlo es una omisi&oacute;n de NIIF y genera diferencias en el 2516. Otro error: usar la tasa del 33% cuando la tarifa general vigente es del <strong>35%</strong> (Art. 240 ET).</p>
+        </div>
+        <div class="expandible" onclick="this.classList.toggle('open')">
+          <button class="expandible-toggle">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            Ver: Cuentas PUC del impuesto diferido y su conciliaci&oacute;n
+          </button>
+          <div class="expandible-content" style="padding:12px 14px">
+            <table class="tabla-norm">
+              <thead><tr><th>Cuenta PUC</th><th>Nombre</th><th>Naturaleza</th><th>Origen com&uacute;n</th></tr></thead>
+              <tbody>
+                <tr><td><code>1710</code></td><td>Activo por impuesto diferido (DTA)</td><td>D&eacute;bito</td><td>Provisiones, deterioro, beneficios LP, inventario a VNR</td></tr>
+                <tr><td><code>171005</code></td><td>DTA por diferencias temporarias</td><td>D&eacute;bito</td><td>Partidas individuales de diferencias deducibles</td></tr>
+                <tr><td><code>2715</code></td><td>Pasivo por impuesto diferido (DTL)</td><td>Cr&eacute;dito</td><td>Revaluaci&oacute;n PPE, depreciaci&oacute;n acelerada fiscal, plusval&iacute;a</td></tr>
+                <tr><td><code>271505</code></td><td>DTL por diferencias temporarias</td><td>Cr&eacute;dito</td><td>Partidas individuales de diferencias imponibles</td></tr>
+                <tr><td><code>5405</code></td><td>Gasto por impuesto diferido</td><td>D&eacute;bito</td><td>Incremento neto del DTL o disminuci&oacute;n del DTA</td></tr>
+                <tr><td><code>5405</code></td><td>Beneficio por impuesto diferido</td><td>Cr&eacute;dito</td><td>Incremento neto del DTA o disminuci&oacute;n del DTL</td></tr>
+              </tbody>
+            </table>
+            <p style="font-size:.85rem;color:var(--gray-600);margin-top:12px"><strong>Verificaci&oacute;n:</strong> DTA (1710) + DTL (2715) neto debe coincidir con la columna &ldquo;Efecto impositivo&rdquo; del Formato 2516. Si no coincide, hay un error en el c&aacute;lculo de diferencias temporarias o en la tasa aplicada.</p>
+          </div>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-5" class="prev" onclick="navigateTo(5)">&larr; M&oacute;dulo 5</a>
+        <a href="#modulo-7" class="next" onclick="navigateTo(7)">M&oacute;dulo 7: Consolidados y combinaciones &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-7" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">NIIF</a> &rsaquo; M&oacute;dulo 7
+        </div>
+        <div class="mod-num">M&oacute;dulo 7 de 10</div>
+        <h1>Estados financieros consolidados y combinaciones de negocios</h1>
+        <p class="mod-desc">Muchas empresas colombianas tienen estructuras de holding, subsidiarias y asociadas pero no consolidan. Aqu&iacute; aprendes cu&aacute;ndo es obligatorio, c&oacute;mo se hace y qu&eacute; errores evitar.</p>
+      </div>
+      <div class="content-block">
+        <h2>NIIF 10 / Secci&oacute;n 9 &mdash; Estados financieros consolidados</h2>
+        <p>Una entidad controladora debe presentar estados financieros consolidados en los que incluya todas sus subsidiarias. El concepto clave es el <strong>control</strong>: se controla una entidad cuando se tiene poder sobre ella, se est&aacute; expuesto a rendimientos variables y se puede usar el poder para afectar esos rendimientos.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>NIIF 10 &mdash; Definici&oacute;n de control</h4>
+            <span class="norma-tag">Cr&iacute;tico</span>
+          </div>
+          <blockquote>
+            Un inversor controla una participada cuando est&aacute; expuesto, o tiene derecho, a <strong>rendimientos variables</strong> procedentes de su implicaci&oacute;n en la participada y tiene la capacidad de influir en esos rendimientos a trav&eacute;s de su <strong>poder</strong> sobre &eacute;sta. El poder surge generalmente de derechos de voto (&gt; 50%), pero tambi&eacute;n puede existir <strong>control de facto</strong> con menor participaci&oacute;n.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>En Colombia:</strong> NIC 27 (Anexo 1, Grupo 1) y Secci&oacute;n 9 (Anexo 2, Grupo 2) obligan a consolidar. Supersociedades exige estados financieros consolidados a las matrices y controlantes inscritas. El C&oacute;digo de Comercio (Art. 260-261) define la situaci&oacute;n de control y grupo empresarial.
+          </div>
+        </div>
+        <h3>Procedimiento de consolidaci&oacute;n</h3>
+        <p>La consolidaci&oacute;n l&iacute;nea por l&iacute;nea implica sumar los activos, pasivos, ingresos y gastos de la controladora y cada subsidiaria, y luego realizar las eliminaciones necesarias:</p>
+        <table class="tabla-norm">
+          <thead>
+            <tr><th>Paso</th><th>Descripci&oacute;n</th><th>Efecto</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1</strong></td>
+              <td>Sumar l&iacute;nea por l&iacute;nea los EEFF de controladora y subsidiarias</td>
+              <td>Total bruto combinado</td>
+            </tr>
+            <tr>
+              <td><strong>2</strong></td>
+              <td>Eliminar la inversi&oacute;n de la controladora contra el patrimonio de la subsidiaria</td>
+              <td>Desaparece la cuenta de inversi&oacute;n y el capital de la subsidiaria</td>
+            </tr>
+            <tr>
+              <td><strong>3</strong></td>
+              <td>Eliminar transacciones intercompa&ntilde;&iacute;a (CxC, CxP, ventas, compras, dividendos)</td>
+              <td>Evita duplicar ingresos/gastos y saldos rec&iacute;procos</td>
+            </tr>
+            <tr>
+              <td><strong>4</strong></td>
+              <td>Eliminar utilidades no realizadas en operaciones entre empresas del grupo</td>
+              <td>Si la subsidiaria vendi&oacute; inventario a la controladora con margen, se elimina la utilidad no vendida a terceros</td>
+            </tr>
+            <tr>
+              <td><strong>5</strong></td>
+              <td>Reconocer la participaci&oacute;n no controladora (inter&eacute;s minoritario)</td>
+              <td>Aparece como componente del patrimonio consolidado y como parte del resultado</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n</h4>
+          </div>
+          <p>No consolidar porque &ldquo;cada empresa presenta sus propios estados financieros&rdquo;. Si una empresa tiene subsidiarias (controladas directa o indirectamente), <strong>debe consolidar</strong>. Supersociedades sanciona a las matrices que no presentan estados financieros consolidados. Otro error: no eliminar transacciones intercompa&ntilde;&iacute;a, lo que infla artificialmente los ingresos y activos del grupo.</p>
+        </div>
+        <h2>NIIF 3 / Secci&oacute;n 19 &mdash; Combinaciones de negocios</h2>
+        <p>Cuando una empresa adquiere el control de otra (por compra de acciones o de activos netos), se aplica el <strong>m&eacute;todo de adquisici&oacute;n</strong>. La adquirente reconoce los activos y pasivos identificables de la adquirida a valor razonable, y la diferencia entre el precio pagado y el valor razonable neto es el <strong>goodwill (cr&eacute;dito mercantil)</strong>.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>NIIF 3 &mdash; M&eacute;todo de adquisici&oacute;n</h4>
+          </div>
+          <blockquote>
+            La adquirente reconocer&aacute; el <strong>goodwill</strong> como un activo. Se mide como el exceso de la contraprestaci&oacute;n transferida sobre el valor razonable neto de los activos identificables adquiridos y los pasivos asumidos. Bajo <strong>NIIF Plenas</strong> el goodwill no se amortiza sino que se somete a prueba de deterioro anual (NIC 36). Bajo <strong>NIIF PYMES</strong> (Secc. 19) s&iacute; se amortiza en un m&aacute;ximo de 10 a&ntilde;os.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>PUC:</strong> Goodwill adquirido en <code>1605</code> (cr&eacute;dito mercantil). Amortizaci&oacute;n acumulada en <code>1698</code>. Deterioro acumulado en <code>1699</code>.
+          </div>
+        </div>
+        <h2>NIC 28 / Secci&oacute;n 14 &mdash; Inversiones en asociadas (m&eacute;todo de participaci&oacute;n)</h2>
+        <p>Cuando se tiene <strong>influencia significativa</strong> (generalmente 20%-50% de participaci&oacute;n) sin control, la inversi&oacute;n se contabiliza por el <strong>m&eacute;todo de participaci&oacute;n (equity method)</strong>: se reconoce la inversi&oacute;n inicialmente al costo y se ajusta por la participaci&oacute;n en los resultados de la asociada.</p>
+        <h3>Negocios conjuntos: NIIF 11 / Secci&oacute;n 15</h3>
+        <p>Un negocio conjunto es un acuerdo en el que dos o m&aacute;s partes tienen control conjunto. Si es una <strong>operaci&oacute;n conjunta</strong>, cada parte reconoce sus activos y obligaciones directamente. Si es un <strong>negocio conjunto</strong> (entidad separada), se aplica el m&eacute;todo de participaci&oacute;n.</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <h4>Ejemplo &mdash; Consolidaci&oacute;n de controladora con 2 subsidiarias</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Controladora &mdash; Total activos individuales</span><span class="value">$8.000.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Subsidiaria A (80% participaci&oacute;n) &mdash; Total activos</span><span class="value">$3.000.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Subsidiaria B (100% participaci&oacute;n) &mdash; Total activos</span><span class="value">$1.500.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Suma bruta de activos</span><span class="value">$12.500.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Eliminaci&oacute;n inversi&oacute;n en Subsidiaria A</span><span class="value">($2.400.000.000)</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Eliminaci&oacute;n inversi&oacute;n en Subsidiaria B</span><span class="value">($1.500.000.000)</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Eliminaci&oacute;n CxC/CxP intercompa&ntilde;&iacute;a</span><span class="value">($200.000.000)</span></div>
+            <div class="ejemplo-row total"><span class="label">Total activos consolidados</span><span class="value">$8.400.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Inter&eacute;s minoritario (20% patrimonio Sub. A)</span><span class="value">$180.000.000</span></div>
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p>En Colombia, muchas PYMES tienen estructuras de holding pero no consolidan porque creen que &ldquo;solo aplica para empresas grandes&rdquo;. La obligaci&oacute;n de consolidar es independiente del tama&ntilde;o: si hay <strong>control</strong>, hay consolidaci&oacute;n. Verifica con tus clientes si tienen participaciones en otras sociedades &mdash; podr&iacute;an estar incumpliendo sin saberlo.</p>
+        </div>
+        <div class="expandible" onclick="this.classList.toggle('open')">
+          <button class="expandible-toggle">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            Ver: Resumen de m&eacute;todos contables seg&uacute;n nivel de participaci&oacute;n
+          </button>
+          <div class="expandible-content" style="padding:12px 14px">
+            <table class="tabla-norm">
+              <thead><tr><th>Participaci&oacute;n</th><th>Relaci&oacute;n</th><th>Norma</th><th>M&eacute;todo contable</th></tr></thead>
+              <tbody>
+                <tr><td><strong>&gt; 50%</strong> (o control de facto)</td><td>Subsidiaria</td><td>NIIF 10 / Secc. 9</td><td>Consolidaci&oacute;n l&iacute;nea por l&iacute;nea</td></tr>
+                <tr><td><strong>20% - 50%</strong> (influencia significativa)</td><td>Asociada</td><td>NIC 28 / Secc. 14</td><td>M&eacute;todo de participaci&oacute;n (equity)</td></tr>
+                <tr><td><strong>Control conjunto</strong></td><td>Negocio conjunto</td><td>NIIF 11 / Secc. 15</td><td>M&eacute;todo de participaci&oacute;n</td></tr>
+                <tr><td><strong>&lt; 20%</strong> (sin influencia)</td><td>Inversi&oacute;n financiera</td><td>NIIF 9 / Secc. 11-12</td><td>Valor razonable o costo amortizado</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-6" class="prev" onclick="navigateTo(6)">&larr; M&oacute;dulo 6</a>
+        <a href="#modulo-8" class="next" onclick="navigateTo(8)">M&oacute;dulo 8: Conciliaci&oacute;n fiscal-contable &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-8" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">NIIF</a> &rsaquo; M&oacute;dulo 8
+        </div>
+        <div class="mod-num">M&oacute;dulo 8 de 10</div>
+        <h1>Conciliaci&oacute;n fiscal-contable: diferencias temporarias y permanentes</h1>
+        <p class="mod-desc">El Art. 772-1 del ET obliga a conciliar las cifras NIIF con las fiscales. Aqu&iacute; aprendes a identificar cada tipo de diferencia, calcular el impuesto diferido y conectar todo con el Formato 2516.</p>
+      </div>
+      <div class="content-block">
+        <h2>Obligaci&oacute;n de conciliar: Art. 772-1 ET</h2>
+        <p>Desde la adopci&oacute;n de NIIF en Colombia, la contabilidad y la base fiscal divergen. El Art&iacute;culo 772-1 del Estatuto Tributario establece que los contribuyentes obligados a llevar contabilidad deben llevar un sistema de <strong>registro de diferencias</strong> entre la base contable NIIF y la base fiscal, que se materializa en el <strong>Formato 2516</strong> (conciliaci&oacute;n fiscal).</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art. 772-1 ET &mdash; Conciliaci&oacute;n fiscal</h4>
+            <span class="norma-tag">Obligatorio</span>
+          </div>
+          <blockquote>
+            Los contribuyentes obligados a llevar contabilidad deber&aacute;n llevar un <strong>sistema de registro de las diferencias</strong> que surjan entre la aplicaci&oacute;n de los nuevos marcos t&eacute;cnicos normativos contables y las disposiciones del Estatuto Tributario. El Gobierno Nacional reglamentar&aacute; la materia. La DIAN podr&aacute; solicitar este registro en cualquier momento.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Formato 2516:</strong> Es el reporte de conciliaci&oacute;n fiscal que se presenta junto con la declaraci&oacute;n de renta. Contiene columnas para el valor contable (NIIF), los ajustes (diferencias) y el valor fiscal. Debe cuadrar l&iacute;nea por l&iacute;nea con el ESF, ERI y el Formulario 110.
+          </div>
+        </div>
+        <h2>Diferencias temporarias vs. diferencias permanentes</h2>
+        <p>No todas las diferencias entre NIIF y fiscal generan impuesto diferido. Es fundamental distinguir entre los dos tipos:</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>NIC 12 / Secci&oacute;n 29 &mdash; Tipos de diferencias</h4>
+            <span class="norma-tag">Cr&iacute;tico</span>
+          </div>
+          <table class="tabla-norm">
+            <thead>
+              <tr><th>Tipo</th><th>Definici&oacute;n</th><th>Genera impuesto diferido</th><th>Ejemplos</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Temporaria</strong></td>
+                <td>Diferencia entre base contable y base fiscal que se <strong>reversar&aacute; en el futuro</strong></td>
+                <td><strong>S&iacute;</strong> &mdash; DTA o DTL</td>
+                <td>Depreciaci&oacute;n (diferente vida &uacute;til), provisiones (deducibles al pagar), NIIF 16, deterioro inventario</td>
+              </tr>
+              <tr>
+                <td><strong>Permanente</strong></td>
+                <td>Diferencia que <strong>nunca se reversar&aacute;</strong></td>
+                <td><strong>No</strong></td>
+                <td>Gastos no deducibles (multas, sanciones, exceso de representaci&oacute;n), ingresos no gravados (dividendos de utilidades gravadas), impuesto al patrimonio</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Las 5 diferencias temporarias m&aacute;s comunes en Colombia</h3>
+        <table class="tabla-norm">
+          <thead>
+            <tr><th>#</th><th>Partida</th><th>Tratamiento NIIF</th><th>Tratamiento fiscal</th><th>Tipo de diferencia</th><th>Impuesto diferido</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1</strong></td>
+              <td>Depreciaci&oacute;n PPE</td>
+              <td>Vida &uacute;til NIIF seg&uacute;n componentes (ej: 10-20 a&ntilde;os)</td>
+              <td>Vida &uacute;til fiscal fija (Art. 137 ET: veh&iacute;culos 5, edificios 45)</td>
+              <td>Temporaria</td>
+              <td>DTA o DTL seg&uacute;n cu&aacute;l vida &uacute;til sea mayor</td>
+            </tr>
+            <tr>
+              <td><strong>2</strong></td>
+              <td>Provisiones (NIC 37)</td>
+              <td>Se reconoce gasto y pasivo cuando es probable (&gt;50%)</td>
+              <td>No deducible hasta que se paga efectivamente (Art. 105 ET)</td>
+              <td>Temporaria deducible</td>
+              <td>DTA</td>
+            </tr>
+            <tr>
+              <td><strong>3</strong></td>
+              <td>Cambios en valor razonable</td>
+              <td>Se reconoce en resultados o en ORI</td>
+              <td>No se grava hasta la enajenaci&oacute;n (Art. 28 y 69 ET)</td>
+              <td>Temporaria imponible</td>
+              <td>DTL</td>
+            </tr>
+            <tr>
+              <td><strong>4</strong></td>
+              <td>Arrendamientos (NIIF 16)</td>
+              <td>Activo ROU + pasivo; gasto = depreciaci&oacute;n + inter&eacute;s</td>
+              <td>Gasto = canon pagado (Art. 127-1 ET)</td>
+              <td>Temporaria</td>
+              <td>DTA neto (generalmente)</td>
+            </tr>
+            <tr>
+              <td><strong>5</strong></td>
+              <td>Deterioro de activos (NIC 36)</td>
+              <td>Se reconoce p&eacute;rdida cuando el importe recuperable &lt; importe en libros</td>
+              <td>No deducible salvo cartera (Art. 145 ET)</td>
+              <td>Temporaria deducible</td>
+              <td>DTA</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Diferencias permanentes comunes</h3>
+        <table class="tabla-norm">
+          <thead>
+            <tr><th>Partida</th><th>Norma fiscal</th><th>Efecto</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Gastos de representaci&oacute;n excesivos</strong></td>
+              <td>L&iacute;mite del 1% de ingresos netos (Art. 107-1 ET)</td>
+              <td>Gasto contable, no deducible fiscalmente. Diferencia permanente</td>
+            </tr>
+            <tr>
+              <td><strong>Multas y sanciones</strong></td>
+              <td>No deducibles (Art. 105 ET)</td>
+              <td>Gasto contable, nunca deducible. Diferencia permanente</td>
+            </tr>
+            <tr>
+              <td><strong>Gravamen a los movimientos financieros (4x1000)</strong></td>
+              <td>Deducible al 50% (Art. 115 ET)</td>
+              <td>El 50% no deducible es diferencia permanente</td>
+            </tr>
+            <tr>
+              <td><strong>Dividendos de sociedades nacionales</strong></td>
+              <td>No gravados si provienen de utilidades ya gravadas en cabeza de la sociedad (Art. 49 ET)</td>
+              <td>Ingreso contable, no gravado fiscalmente. Diferencia permanente</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <h4>Ejemplo &mdash; Empresa con 5 diferencias comunes</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Utilidad contable NIIF (antes de impuestos)</span><span class="value">$500.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(+) Provisi&oacute;n litigio no deducible (temporaria)</span><span class="value">$80.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(+) Deterioro inventario no deducible (temporaria)</span><span class="value">$25.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Mayor depreciaci&oacute;n fiscal vs NIIF (temporaria)</span><span class="value">($40.000.000)</span></div>
+            <div class="ejemplo-row"><span class="label">(+) Multas DIAN no deducibles (permanente)</span><span class="value">$15.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Dividendos no gravados (permanente)</span><span class="value">($30.000.000)</span></div>
+            <div class="ejemplo-row total"><span class="label">Renta l&iacute;quida fiscal</span><span class="value">$550.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Impuesto corriente (35%)</span><span class="value">$192.500.000</span></div>
+            <div class="ejemplo-row"><span class="label">DTA por temporarias deducibles: ($80M+$25M) &times; 35%</span><span class="value">$36.750.000</span></div>
+            <div class="ejemplo-row"><span class="label">DTL por temporaria imponible: $40M &times; 35%</span><span class="value">($14.000.000)</span></div>
+            <div class="ejemplo-row"><span class="label">Gasto de impuesto en ERI (corriente + diferido neto)</span><span class="value">$169.750.000</span></div>
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Conexi&oacute;n con el Formato 2516</h4>
+          </div>
+          <p>El Formato 2516 es la materializaci&oacute;n de esta conciliaci&oacute;n. Su estructura tiene: <strong>Columna 1</strong> (valor NIIF, que debe coincidir con el ESF y ERI), <strong>Columna 2</strong> (ajustes/diferencias), y <strong>Columna 3</strong> (valor fiscal, que debe coincidir con el F110). Los DTA (cta. 1710) y DTL (cta. 2715) en el balance deben corresponder exactamente a las diferencias temporarias del 2516 multiplicadas por la tasa del 35%.</p>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n</h4>
+          </div>
+          <p>Calcular impuesto diferido sobre <strong>diferencias permanentes</strong>. Las multas, sanciones, gastos no deducibles y los ingresos no gravados <strong>nunca generan impuesto diferido</strong> porque nunca se revertir&aacute;n. Solo las diferencias temporarias (que se reversar&aacute;n en periodos futuros) generan DTA o DTL. Otro error grave: reconocer un DTA sin evaluar si habr&aacute; <strong>utilidades fiscales futuras</strong> suficientes para utilizarlo (NIC 12.24).</p>
+        </div>
+        <div class="expandible" onclick="this.classList.toggle('open')">
+          <button class="expandible-toggle">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            Ver: Checklist de conciliaci&oacute;n fiscal-contable paso a paso
+          </button>
+          <div class="expandible-content" style="padding:12px 14px">
+            <table class="tabla-norm">
+              <thead><tr><th>#</th><th>Paso</th><th>Verificaci&oacute;n</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>Partir de la utilidad contable NIIF (antes de impuestos)</td><td>Debe coincidir con el ERI</td></tr>
+                <tr><td>2</td><td>Identificar todas las diferencias temporarias (activos y pasivos)</td><td>Comparar base NIIF vs. base fiscal de cada partida</td></tr>
+                <tr><td>3</td><td>Identificar las diferencias permanentes</td><td>Gastos no deducibles, ingresos no gravados</td></tr>
+                <tr><td>4</td><td>Calcular la renta l&iacute;quida fiscal</td><td>Debe coincidir con el F110</td></tr>
+                <tr><td>5</td><td>Calcular el impuesto corriente (35%)</td><td>Casilla del F110</td></tr>
+                <tr><td>6</td><td>Calcular el impuesto diferido (DTA y DTL)</td><td>Diferencias temporarias &times; 35%</td></tr>
+                <tr><td>7</td><td>Registrar en cuentas 1710 (DTA) y 2715 (DTL)</td><td>Debe coincidir con el F2516</td></tr>
+                <tr><td>8</td><td>Verificar la triada: ESF = F2516 col. NIIF, F110 = F2516 col. fiscal</td><td>Si no cuadra, hay error en alguno de los tres</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-7" class="prev" onclick="navigateTo(7)">&larr; M&oacute;dulo 7</a>
+        <a href="#modulo-9" class="next" onclick="navigateTo(9)">M&oacute;dulo 9: Revelaciones y pol&iacute;ticas &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-9" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">NIIF</a> &rsaquo; M&oacute;dulo 9
+        </div>
+        <div class="mod-num">M&oacute;dulo 9 de 10</div>
+        <h1>Revelaciones, pol&iacute;ticas contables y hechos posteriores</h1>
+        <p class="mod-desc">Los estados financieros sin notas est&aacute;n incompletos. Este m&oacute;dulo cubre las normas que definen qu&eacute; revelar, c&oacute;mo cambiar pol&iacute;ticas y c&oacute;mo tratar los hechos que ocurren despu&eacute;s del cierre.</p>
+      </div>
+      <div class="content-block">
+        <h2>NIC 1 &mdash; Revelaciones obligatorias</h2>
+        <p>Las notas a los estados financieros son parte integral del juego completo. NIC 1 establece revelaciones m&iacute;nimas que incluyen pol&iacute;ticas contables significativas, fuentes de incertidumbre en estimaciones y desgloses de partidas del ESF y ERI.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>NIC 1 &mdash; Contenido m&iacute;nimo de las notas</h4>
+          </div>
+          <blockquote>
+            Las notas: <strong>(a)</strong> presentar&aacute;n informaci&oacute;n sobre las bases de preparaci&oacute;n y pol&iacute;ticas contables espec&iacute;ficas; <strong>(b)</strong> revelar&aacute;n informaci&oacute;n requerida por las NIIF que no se presente en los estados financieros; y <strong>(c)</strong> suministrar&aacute;n informaci&oacute;n adicional relevante para la comprensi&oacute;n de los estados financieros.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Estructura t&iacute;pica de notas en Colombia:</strong> 1) Entidad y marco legal. 2) Bases de preparaci&oacute;n y declaraci&oacute;n de cumplimiento NIIF. 3) Pol&iacute;ticas contables significativas. 4) Juicios y estimaciones cr&iacute;ticas. 5) Desgloses de cada l&iacute;nea del ESF y ERI. 6) Partes relacionadas. 7) Hechos posteriores. 8) Contingencias.
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p>Supersociedades revisa que las notas no sean una copia gen&eacute;rica del texto de la norma. Las notas deben ser <strong>espec&iacute;ficas de la entidad</strong>. En vez de &ldquo;la empresa deprecia sus activos seg&uacute;n NIC 16&rdquo;, debe decir &ldquo;los veh&iacute;culos se deprecian en l&iacute;nea recta a 10 a&ntilde;os por componente principal, con valor residual del 10%&rdquo;.</p>
+        </div>
+        <h2>NIC 8 &mdash; Pol&iacute;ticas contables, cambios en estimaciones y errores</h2>
+        <p>NIC 8 diferencia tres situaciones que se tratan de forma muy distinta:</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>NIC 8 &mdash; Tratamiento diferenciado</h4>
+            <span class="norma-tag">Cr&iacute;tico</span>
+          </div>
+          <table class="tabla-norm">
+            <thead><tr><th>Situaci&oacute;n</th><th>Definici&oacute;n</th><th>Tratamiento</th><th>Ejemplo</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Cambio de pol&iacute;tica contable</strong></td>
+                <td>Cambio en los principios, bases, convenciones o reglas aplicadas</td>
+                <td><strong>Retrospectivo:</strong> reexpresar periodos anteriores como si siempre se hubiera aplicado la nueva pol&iacute;tica</td>
+                <td>Cambiar de PEPS a promedio ponderado en inventarios</td>
+              </tr>
+              <tr>
+                <td><strong>Cambio en estimaci&oacute;n contable</strong></td>
+                <td>Ajuste del importe en libros por informaci&oacute;n nueva</td>
+                <td><strong>Prospectivo:</strong> solo afecta el periodo actual y futuros</td>
+                <td>Cambiar la vida &uacute;til de una m&aacute;quina de 10 a 8 a&ntilde;os</td>
+              </tr>
+              <tr>
+                <td><strong>Correcci&oacute;n de error</strong></td>
+                <td>Omisi&oacute;n o inexactitud que se hab&iacute;a podido conocer</td>
+                <td><strong>Retrospectivo:</strong> reexpresar periodos anteriores y ajustar saldos iniciales de resultados acumulados</td>
+                <td>Descubrir que no se registr&oacute; una depreciaci&oacute;n durante 2 a&ntilde;os</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n</h4>
+          </div>
+          <p>Tratar un cambio de pol&iacute;tica contable como cambio en estimaci&oacute;n (prospectivamente) para evitar reexpresar comparativos. Esto distorsiona los estados financieros y es una violaci&oacute;n de NIC 8. Supersociedades lo revisa. Tambi&eacute;n: contabilizar correcciones de errores de periodos anteriores como gasto/ingreso del periodo corriente en vez de ajustar resultados acumulados.</p>
+        </div>
+        <h2>NIC 10 &mdash; Hechos ocurridos despu&eacute;s del periodo sobre el que se informa</h2>
+        <p>Los hechos posteriores al cierre pero anteriores a la autorizaci&oacute;n de los estados financieros se clasifican en dos tipos:</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>NIC 10 &mdash; Tipos de hechos posteriores</h4>
+          </div>
+          <table class="tabla-norm">
+            <thead><tr><th>Tipo</th><th>Definici&oacute;n</th><th>Tratamiento</th><th>Ejemplo</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Que implican ajuste</strong></td>
+                <td>Proporcionan evidencia de condiciones que <strong>ya exist&iacute;an</strong> al cierre</td>
+                <td>Ajustar los estados financieros</td>
+                <td>Sentencia judicial desfavorable de un litigio que ya estaba provisionado; quiebra de un deudor que ya ten&iacute;a cartera vencida</td>
+              </tr>
+              <tr>
+                <td><strong>Que no implican ajuste</strong></td>
+                <td>Indican condiciones que <strong>surgieron despu&eacute;s</strong> del cierre</td>
+                <td>Revelar en notas (no ajustar cifras)</td>
+                <td>Incendio de bodega en enero; adquisici&oacute;n de empresa en febrero; ca&iacute;da del mercado en enero</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="norma-aplicacion">
+            <strong>Fecha clave:</strong> La entidad debe revelar la fecha en que los estados financieros fueron autorizados para su publicaci&oacute;n y qui&eacute;n los autoriz&oacute;. En Colombia, generalmente es la fecha de aprobaci&oacute;n por la Asamblea o Junta de Socios (marzo-abril del a&ntilde;o siguiente).
+          </div>
+        </div>
+        <h2>NIC 24 &mdash; Informaci&oacute;n a revelar sobre partes relacionadas</h2>
+        <p>Se debe revelar la naturaleza de las relaciones con partes vinculadas y las transacciones realizadas, incluyendo montos, saldos pendientes, t&eacute;rminos y condiciones.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>NIC 24 &mdash; Partes relacionadas</h4>
+          </div>
+          <blockquote>
+            Son partes relacionadas: la controladora, las subsidiarias, asociadas, negocios conjuntos, <strong>personal clave de la direcci&oacute;n</strong> (y sus familiares cercanos), y entidades controladas o influidas por lo anterior. Se deben revelar: pr&eacute;stamos, compras/ventas, prestaci&oacute;n de servicios, garant&iacute;as y remuneraci&oacute;n de la gerencia.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Conexi&oacute;n fiscal:</strong> Las transacciones con vinculados econ&oacute;micos deben estar a precios de mercado (Art. 260-1 y ss. ET &mdash; precios de transferencia). Si una empresa colombiana tiene operaciones con vinculados del exterior y supera los topes, debe presentar declaraci&oacute;n informativa de precios de transferencia. Las notas NIIF de partes relacionadas son la base para este reporte.
+          </div>
+        </div>
+        <h3>Estructura del documento de pol&iacute;ticas contables</h3>
+        <p>Toda empresa debe tener un <strong>manual de pol&iacute;ticas contables</strong> aprobado por la administraci&oacute;n. Su estructura t&iacute;pica incluye:</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <h4>Estructura del manual de pol&iacute;ticas contables</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">1. Objetivo y alcance del manual</span><span class="value">&mdash;</span></div>
+            <div class="ejemplo-row"><span class="label">2. Marco normativo aplicable (Dec. 2420/2015, grupo)</span><span class="value">&mdash;</span></div>
+            <div class="ejemplo-row"><span class="label">3. Moneda funcional y de presentaci&oacute;n</span><span class="value">COP</span></div>
+            <div class="ejemplo-row"><span class="label">4. Pol&iacute;tica de efectivo e instrumentos financieros</span><span class="value">&mdash;</span></div>
+            <div class="ejemplo-row"><span class="label">5. Pol&iacute;tica de cuentas por cobrar y deterioro de cartera</span><span class="value">&mdash;</span></div>
+            <div class="ejemplo-row"><span class="label">6. Pol&iacute;tica de inventarios (m&eacute;todo, VNR)</span><span class="value">&mdash;</span></div>
+            <div class="ejemplo-row"><span class="label">7. Pol&iacute;tica de PPE (modelo, vidas &uacute;tiles, componentes)</span><span class="value">&mdash;</span></div>
+            <div class="ejemplo-row"><span class="label">8. Pol&iacute;tica de intangibles y amortizaci&oacute;n</span><span class="value">&mdash;</span></div>
+            <div class="ejemplo-row"><span class="label">9. Pol&iacute;tica de arrendamientos (NIIF 16)</span><span class="value">&mdash;</span></div>
+            <div class="ejemplo-row"><span class="label">10. Pol&iacute;tica de ingresos (NIIF 15)</span><span class="value">&mdash;</span></div>
+            <div class="ejemplo-row"><span class="label">11. Pol&iacute;tica de provisiones y contingencias</span><span class="value">&mdash;</span></div>
+            <div class="ejemplo-row"><span class="label">12. Pol&iacute;tica de beneficios a empleados</span><span class="value">&mdash;</span></div>
+            <div class="ejemplo-row"><span class="label">13. Pol&iacute;tica de impuesto diferido</span><span class="value">&mdash;</span></div>
+            <div class="ejemplo-row"><span class="label">14. Aprobaci&oacute;n y vigencia</span><span class="value">Firma representante legal</span></div>
+          </div>
+        </div>
+        <div class="expandible" onclick="this.classList.toggle('open')">
+          <button class="expandible-toggle">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            Ver: Checklist de revelaciones m&iacute;nimas por norma
+          </button>
+          <div class="expandible-content" style="padding:12px 14px">
+            <table class="tabla-norm">
+              <thead><tr><th>Norma</th><th>Revelaciones obligatorias m&iacute;nimas</th></tr></thead>
+              <tbody>
+                <tr><td><strong>NIC 16 PPE</strong></td><td>M&eacute;todos de depreciaci&oacute;n, vidas &uacute;tiles, valores residuales, conciliaci&oacute;n de saldos, restricciones, compromisos de compra</td></tr>
+                <tr><td><strong>NIC 2 Inventarios</strong></td><td>Pol&iacute;ticas de valoraci&oacute;n, valor total en libros por categor&iacute;a, importe reconocido como gasto, ajustes a VNR</td></tr>
+                <tr><td><strong>NIC 37 Provisiones</strong></td><td>Naturaleza, calendario, incertidumbres, movimiento del periodo (saldo inicial + incrementos + reversiones + usos = saldo final)</td></tr>
+                <tr><td><strong>NIIF 15 Ingresos</strong></td><td>Desagregaci&oacute;n de ingresos, saldos de contrato (activos/pasivos), obligaciones pendientes, juicios significativos</td></tr>
+                <tr><td><strong>NIC 12 Imp. diferido</strong></td><td>Componentes del gasto por impuesto, conciliaci&oacute;n tasa efectiva vs. nominal, detalle de diferencias temporarias por tipo</td></tr>
+                <tr><td><strong>NIC 24 Relacionadas</strong></td><td>Nombre de la controladora, transacciones por tipo, saldos pendientes, t&eacute;rminos, remuneraci&oacute;n gerencia clave</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-8" class="prev" onclick="navigateTo(8)">&larr; M&oacute;dulo 8</a>
+        <a href="#modulo-10" class="next" onclick="navigateTo(10)">M&oacute;dulo 10: Pr&aacute;ctica con EEFF reales &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-10" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">NIIF</a> &rsaquo; M&oacute;dulo 10
+        </div>
+        <div class="mod-num">M&oacute;dulo 10 de 10</div>
+        <h1>Pr&aacute;ctica: genera y verifica tus Estados Financieros</h1>
+        <p class="mod-desc">Todo lo aprendido se aplica ahora. Usa la herramienta de Estados Financieros para generar el juego completo y verifica la consistencia entre EEFF, renta, F2516 y Supersociedades.</p>
+      </div>
+      <div class="content-block">
+        <h2>Genera tus Estados Financieros NIIF</h2>
+        <p>Nuestra herramienta gratuita de Estados Financieros toma tu balance de prueba y genera autom&aacute;ticamente el ESF (Estado de Situaci&oacute;n Financiera) y el ERI (Estado de Resultado Integral), con clasificaci&oacute;n NIIF y formato listo para presentar.</p>
+        <div class="cta-practica">
+          <h3>Herramienta de Estados Financieros</h3>
+          <p>Sube tu balance de prueba y obt&eacute;n ESF + ERI al instante, con clasificaci&oacute;n NIIF autom&aacute;tica.</p>
+          <a href="../estadosfinancieros.html">Ir a la herramienta &rarr;</a>
+        </div>
+        <h2>Cross-checks: verificaciones cruzadas obligatorias</h2>
+        <p>Un juego de estados financieros NIIF no existe en el vac&iacute;o. Debe ser consistente con todos los reportes que la empresa presenta ante diferentes entidades. Estas son las verificaciones cr&iacute;ticas:</p>
+        <h3>1. EEFF vs. Balance de prueba</h3>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Verificaci&oacute;n b&aacute;sica de integridad</h4>
+          </div>
+          <table class="tabla-norm">
+            <thead><tr><th>Verificaci&oacute;n</th><th>Qu&eacute; debe cumplirse</th><th>Si no cumple</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Activos del ESF</td>
+                <td>= Suma de cuentas clase 1 del balance</td>
+                <td>Partida omitida o mal clasificada</td>
+              </tr>
+              <tr>
+                <td>Pasivos del ESF</td>
+                <td>= Suma de cuentas clase 2 del balance</td>
+                <td>Pasivo no reconocido o duplicado</td>
+              </tr>
+              <tr>
+                <td>Patrimonio del ESF</td>
+                <td>= Suma de cuentas clase 3 del balance</td>
+                <td>Resultado del periodo no trasladado</td>
+              </tr>
+              <tr>
+                <td>Ecuaci&oacute;n contable</td>
+                <td>Activo = Pasivo + Patrimonio (diferencia = $0)</td>
+                <td>Error de cuadre en asientos</td>
+              </tr>
+              <tr>
+                <td>Resultado del ERI</td>
+                <td>= Ingresos (cl. 4) - Costos (cl. 6) - Gastos (cl. 5)</td>
+                <td>Ingreso o gasto no clasificado</td>
+              </tr>
+              <tr>
+                <td>Resultado ERI vs. Patrimonio</td>
+                <td>Utilidad neta del ERI = cuenta 3605 en patrimonio</td>
+                <td>Cierre de resultados no ejecutado</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>2. EEFF NIIF vs. Declaraci&oacute;n de Renta (F110)</h3>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Conciliaci&oacute;n contable-fiscal</h4>
+          </div>
+          <table class="tabla-norm">
+            <thead><tr><th>Concepto</th><th>EEFF (NIIF)</th><th>F110 (Fiscal)</th><th>Diferencia com&uacute;n</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Total activos</td>
+                <td>ESF &mdash; Total activo</td>
+                <td>Casilla patrimonio bruto</td>
+                <td>Activos a valor razonable vs. costo fiscal</td>
+              </tr>
+              <tr>
+                <td>Total pasivos</td>
+                <td>ESF &mdash; Total pasivo</td>
+                <td>Casilla deudas</td>
+                <td>Provisiones NIIF no aceptadas fiscalmente</td>
+              </tr>
+              <tr>
+                <td>Ingresos brutos</td>
+                <td>ERI &mdash; Ingresos operacionales</td>
+                <td>Casilla ingresos brutos</td>
+                <td>Ingresos diferidos NIIF, ganancia en cambio no realizada</td>
+              </tr>
+              <tr>
+                <td>Costos y gastos</td>
+                <td>ERI &mdash; Costos + Gastos</td>
+                <td>Casillas costos y deducciones</td>
+                <td>Depreciaci&oacute;n, deterioro, provisiones, NIIF 16</td>
+              </tr>
+              <tr>
+                <td>Utilidad neta vs. renta l&iacute;quida</td>
+                <td>ERI &mdash; Resultado del periodo</td>
+                <td>Casilla renta l&iacute;quida</td>
+                <td>Todas las diferencias temporarias y permanentes</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="norma-aplicacion">
+            <strong>Regla de oro:</strong> El total de activos del ESF <strong>nunca ser&aacute; igual</strong> al patrimonio bruto del F110 si existen diferencias entre base NIIF y base fiscal. Esas diferencias deben estar documentadas en el Formato 2516.
+          </div>
+        </div>
+        <h3>3. EEFF vs. Formato 2516 (Conciliaci&oacute;n fiscal)</h3>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>El F2516 es el puente</h4>
+          </div>
+          <p>El Formato 2516 debe partir de las cifras NIIF (columna contable) y llegar a las cifras fiscales (columna fiscal). La columna de diferencias debe coincidir exactamente con el impuesto diferido registrado en cuentas 1710/2715. Si hay discrepancia, alguno de los tres est&aacute; mal: o los EEFF, o el F2516, o el F110.</p>
+        </div>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <h4>Verificaci&oacute;n cruzada &mdash; Triada NIIF-Fiscal</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">ESF: Total activo (NIIF)</span><span class="value">$5.200.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">F2516: Total activo col. contable</span><span class="value">$5.200.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">F2516: Total activo col. fiscal</span><span class="value">$4.850.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">F2516: Diferencia en activos</span><span class="value">$350.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">F110: Patrimonio bruto (fiscal)</span><span class="value">$4.850.000.000</span></div>
+            <div class="ejemplo-row total"><span class="label">Impuesto diferido esperado (35% &times; $350M)</span><span class="value">$122.500.000</span></div>
+            <div class="ejemplo-row"><span class="label">Balance cta. 2715 (DTL neto)</span><span class="value">$122.500.000 &check;</span></div>
+          </div>
+        </div>
+        <h3>4. EEFF vs. Reporte a Supersociedades</h3>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n</h4>
+          </div>
+          <p>Reportar cifras diferentes a Supersociedades (SIREM/STORM) y a la DIAN (F110/F2516). Supersociedades recibe los estados financieros bajo <strong>NIIF</strong>, que deben coincidir exactamente con el ESF y ERI aprobados por la asamblea. Si la DIAN cruza las cifras NIIF de Supersociedades con la columna contable del F2516 y no coinciden, se genera requerimiento autom&aacute;tico.</p>
+        </div>
+        <div class="expandible" onclick="this.classList.toggle('open')">
+          <button class="expandible-toggle">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            Ver: Checklist completo de consistencia NIIF
+          </button>
+          <div class="expandible-content" style="padding:12px 14px">
+            <table class="tabla-norm">
+              <thead><tr><th>#</th><th>Verificaci&oacute;n</th><th>Fuente A</th><th>Fuente B</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>Activo = Pasivo + Patrimonio</td><td>ESF</td><td>Balance de prueba</td></tr>
+                <tr><td>2</td><td>Utilidad neta ERI = Resultado en patrimonio</td><td>ERI</td><td>ESF (cta. 3605)</td></tr>
+                <tr><td>3</td><td>Cifras NIIF del 2516 = ESF + ERI</td><td>F2516 col. contable</td><td>ESF + ERI</td></tr>
+                <tr><td>4</td><td>Cifras fiscales del 2516 = F110</td><td>F2516 col. fiscal</td><td>F110 casillas</td></tr>
+                <tr><td>5</td><td>Diferencias 2516 = Impuesto diferido</td><td>F2516 diferencias</td><td>Ctas. 1710 + 2715</td></tr>
+                <tr><td>6</td><td>Supersociedades = ESF + ERI aprobados</td><td>SIREM/STORM</td><td>EEFF asamblea</td></tr>
+                <tr><td>7</td><td>Flujo de efectivo: var. caja = saldo final - saldo inicial</td><td>Flujo de efectivo</td><td>ESF cta. 11</td></tr>
+                <tr><td>8</td><td>Cambios patrimonio: saldo final = ESF patrimonio</td><td>Edo. cambios patrimonio</td><td>ESF clase 3</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tu siguiente paso</h4>
+          </div>
+          <p>Con el dominio de NIIF puedes abordar con solidez la <strong>declaraci&oacute;n de renta</strong> (curso Renta 110) y la <strong>informaci&oacute;n ex&oacute;gena</strong>. La base contable NIIF bien preparada es el fundamento de todo reporte tributario correcto. Regresa a la Escuela para explorar los dem&aacute;s cursos.</p>
+        </div>
+        <div style="background:linear-gradient(135deg,var(--emerald-50),#D1FAE5);border:2px solid var(--green-300);border-radius:16px;padding:28px 24px;text-align:center;margin:28px 0">
+          <h3 style="font-family:'Fraunces',serif;font-size:1.2rem;font-weight:700;color:var(--emerald-800);margin-bottom:8px">Volver a la Escuela Contable IA</h3>
+          <p style="font-size:.9rem;color:var(--green-700);margin-bottom:16px">Explora los dem&aacute;s cursos: Renta 110, IVA 300, Retenci&oacute;n 350, Ex&oacute;gena y m&aacute;s.</p>
+          <a href="../escuela.html" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:var(--green-700);color:#fff;border-radius:12px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 16px rgba(6,95,70,.3);transition:all .2s" onmouseover="this.style.background='#064E3B'" onmouseout="this.style.background='#065F46'">Ir a la Escuela &rarr;</a>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-9" class="prev" onclick="navigateTo(9)">&larr; M&oacute;dulo 9</a>
+        <a href="../escuela.html" class="next" style="background:var(--gray-800)">Volver a la Escuela &rarr;</a>
+      </div>
+    </section>
+  </div>
+</div>
+<section style="background:linear-gradient(180deg,#F9FAFB,#fff);padding:60px 24px 80px;border-top:1px solid #E5E7EB">
+  <div data-curso-meta="niif" style="text-align:center;margin-bottom:28px"></div>
+  <div data-cert-widget="niif"></div>
+</section>
+<script src="../shared/certificado.js?v=383dd956"></script>
+<script src="../shared/cert-emit-widget.js?v=81c77b40"></script>
+<script src="../shared/quiz-banks.js?v=bd69b5f6"></script>
+<script src="../shared/quiz-engine.js?v=faaf346e"></script>
+<script src="../shared/curso-meta.js?v=6b7779f4"></script>
+<button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()" aria-label="Abrir men&uacute;">&#9776;</button>
+<script>
+/* Module navigation */
+var currentModule = 1;
+var totalModules = 10;
+function navigateTo(n) {
+  document.querySelectorAll('.modulo-section').forEach(function(s){ s.style.display = 'none'; });
+  var target = document.getElementById('modulo-' + n);
+  if (target) target.style.display = 'block';
+  var links = document.querySelectorAll('.sidebar-nav a');
+  links.forEach(function(a, i) {
+    a.classList.remove('active');
+    if (i < n - 1) a.classList.add('completed');
+    if (i === n - 1) a.classList.add('active');
+  });
+  var pct = Math.round((n / totalModules) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  currentModule = n;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('open');
+  if (typeof gtag !== 'undefined') gtag('event', 'escuela_modulo', { curso: 'niif', modulo: n });
+}
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('open');
+}
+</script>
+</body>
+</html>

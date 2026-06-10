@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S7SM6ST4CC');
+</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¡Gracias por tu compra! — Exógena DIAN</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-900: #064E3B;
+    --green-700: #047857;
+    --green-600: #059669;
+    --green-500: #10B981;
+    --green-400: #34D399;
+    --green-300: #6EE7B7;
+    --green-100: #D1FAE5;
+    --green-50: #ECFDF5;
+    --mint: #F0FFF4;
+    --white: #FFFFFF;
+    --gray-50: #F9FAFB;
+    --gray-100: #F3F4F6;
+    --gray-200: #E5E7EB;
+    --gray-400: #9CA3AF;
+    --gray-500: #6B7280;
+    --gray-600: #4B5563;
+    --gray-700: #374151;
+    --gray-800: #1F2937;
+    --gray-900: #111827;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: linear-gradient(170deg, var(--white) 0%, var(--green-50) 50%, var(--mint) 100%);
+    color: var(--gray-900);
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px; position: relative; overflow: hidden;
+  }
+  body::before {
+    content: ''; position: absolute; top: -20%; right: -15%; width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(16,185,129,0.1) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+  }
+  body::after {
+    content: ''; position: absolute; bottom: -15%; left: -10%; width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(52,211,153,0.07) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+  }
+  .container {
+    max-width: 560px; width: 100%;
+    text-align: center; position: relative; z-index: 1;
+  }
+  .success-icon {
+    width: 82px; height: 82px;
+    background: var(--green-100);
+    border: 3px solid var(--green-300);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    margin: 0 auto 24px;
+    font-size: 2.2rem;
+    animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 8px 30px rgba(16,185,129,0.15);
+  }
+  @keyframes popIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 4vw, 2.3rem);
+    margin-bottom: 12px; letter-spacing: -0.02em;
+    color: var(--gray-900);
+  }
+  .subtitle {
+    color: var(--gray-500);
+    font-size: 1.02rem; line-height: 1.65;
+    margin-bottom: 32px;
+  }
+  .ref-box {
+    background: var(--white);
+    border: 1.5px solid var(--green-200);
+    border-radius: 12px;
+    padding: 12px 20px;
+    margin-bottom: 24px;
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 0.86rem; color: var(--gray-500);
+    animation: fadeUp 0.6s 0.15s ease-out both;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .ref-box strong {
+    color: var(--green-700);
+    font-family: monospace; font-size: 0.9rem;
+  }
+  .steps-box {
+    background: var(--white);
+    border: 1.5px solid var(--gray-200);
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: left;
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s 0.4s ease-out both;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  }
+  .steps-title {
+    font-weight: 700; font-size: 0.95rem;
+    margin-bottom: 16px; color: var(--gray-800);
+  }
+  .step-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    margin-bottom: 12px; font-size: 0.88rem;
+    color: var(--gray-500); line-height: 1.5;
+  }
+  .step-item:last-child { margin-bottom: 0; }
+  .step-num {
+    width: 26px; height: 26px;
+    background: var(--green-600); color: white;
+    border-radius: 50%; display: grid; place-items: center;
+    font-size: 0.72rem; font-weight: 800;
+    flex-shrink: 0; margin-top: 0px;
+    box-shadow: 0 2px 8px rgba(5,150,105,0.25);
+  }
+  .format-info {
+    background: var(--green-50);
+    border: 1px solid var(--green-100);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    text-align: left;
+    animation: fadeUp 0.6s 0.5s ease-out both;
+  }
+  .format-info p {
+    font-size: 0.84rem; color: var(--gray-500);
+    line-height: 1.6; margin-bottom: 6px;
+  }
+  .format-info p:last-child { margin-bottom: 0; }
+  .format-info strong { color: var(--green-700); }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 12px; color: var(--gray-400);
+    font-size: 0.85rem; text-decoration: none;
+    transition: all 0.2s; font-weight: 500;
+    animation: fadeUp 0.6s 0.6s ease-out both;
+  }
+  .back-link:hover { color: var(--green-600); gap: 8px; }
+  @media (max-width: 600px) {
+    .steps-box { padding: 22px 18px; }
+  }
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div class="container">
+  <div class="success-icon">✅</div>
+  <h1>¡Gracias por tu suscripción!</h1>
+  <p class="subtitle">Tu pago fue procesado exitosamente. Estamos generando tu clave PRO...</p>
+  <div class="ref-box" id="refBox" style="display:none;">
+    🧾 Referencia: <strong id="refId"></strong>
+  </div>
+  <div id="proKeyBox" style="display:none;background:#fff;border:3px solid var(--green-400);border-radius:16px;padding:28px;margin-bottom:24px;animation:fadeUp .6s .2s ease-out both">
+    <p style="font-size:.82rem;color:var(--gray-500);margin-bottom:8px;text-transform:uppercase;letter-spacing:2px;font-weight:700">Suscripción PRO activa</p>
+    <div style="background:var(--green-50);border:2px solid var(--green-300);border-radius:12px;padding:20px;margin-bottom:16px;text-align:center">
+      <p style="font-size:2.5rem;margin-bottom:8px">✅</p>
+      <p style="font-size:1.1rem;font-weight:700;color:var(--green-700);margin-bottom:4px">PRO activado con tu email</p>
+      <p id="proEmailDisplay" style="font-family:monospace;font-size:1rem;font-weight:600;color:var(--gray-600)"></p>
+    </div>
+    <p style="font-size:.88rem;color:var(--gray-500);line-height:1.6;text-align:center">Para activar PRO en cualquier herramienta, solo ingresa tu email. No necesitas guardar ninguna clave.</p>
+  </div>
+  <div id="proAccept" style="display:none;background:#fff;border:1.5px solid var(--green-300);border-radius:16px;padding:28px;margin-bottom:24px;text-align:left;animation:fadeUp .6s .2s ease-out both">
+    <p style="font-size:.95rem;font-weight:700;color:var(--gray-800);margin-bottom:14px;text-align:center">Un último paso para activar PRO</p>
+    <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:.84rem;color:var(--gray-600);line-height:1.55">
+      <input type="checkbox" id="acceptTerms" style="margin-top:3px;width:18px;height:18px;accent-color:#059669;flex-shrink:0;cursor:pointer">
+      <span>Acepto que al activar mi clave PRO, la prestación del servicio digital comienza de inmediato y <strong>renuncio al derecho de retracto</strong> conforme al artículo 47 de la Ley 1480 de 2011. He revisado las funciones PRO en la <a href="precios.html" target="_blank" style="color:#059669;font-weight:600">página de precios</a> y los <a href="https://exogenadian.com/terminos.html" target="_blank" style="color:#059669;font-weight:600">términos y condiciones</a>.</span>
+    </label>
+    <button id="acceptBtn" onclick="onAcceptTerms()" disabled style="margin-top:18px;width:100%;padding:14px;background:var(--gray-200);color:var(--gray-400);border:none;border-radius:12px;font-family:'Outfit',sans-serif;font-weight:700;font-size:1rem;cursor:not-allowed;transition:all .25s">
+      Activar mi PRO →
+    </button>
+  </div>
+  <div id="proLoading" style="display:none;background:#fff;border:1.5px solid var(--gray-200);border-radius:16px;padding:28px;margin-bottom:24px">
+    <p style="font-size:1rem;color:var(--gray-500)">⏳ Activando tu suscripción PRO...</p>
+  </div>
+  <div id="proError" style="display:none;background:#FFF1F2;border:1.5px solid #FFE4E6;border-radius:16px;padding:28px;margin-bottom:24px">
+    <p style="font-size:.95rem;color:#BE123C;margin-bottom:12px;font-weight:700">No se pudo activar automáticamente</p>
+    <p style="font-size:.85rem;color:var(--gray-500);margin-bottom:8px">Tu pago ya fue procesado. Puedes activar PRO ingresando tu email en cualquier herramienta.</p>
+    <p style="font-size:.85rem;color:var(--gray-500);margin-bottom:4px"><strong>1.</strong> Intenta <a href="javascript:location.reload()" style="color:#059669;font-weight:700">recargar esta página</a></p>
+    <p style="font-size:.85rem;color:var(--gray-500)"><strong>2.</strong> Si persiste, escríbenos a <a href="https://wa.me/573054559574" style="color:#059669;font-weight:700">WhatsApp</a></p>
+  </div>
+  <div class="steps-box">
+    <p class="steps-title">¿Cómo uso PRO?</p>
+    <div class="step-item"><div class="step-num">1</div> Abre cualquier herramienta (IVA 300, Exógena, Estados Financieros)</div>
+    <div class="step-item"><div class="step-num">2</div> Ingresa tu email en el campo "Email PRO" y dale Activar</div>
+    <div class="step-item"><div class="step-num">3</div> ¡Listo! Si cambias de navegador o dispositivo, solo vuelve a ingresar tu email</div>
+  </div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:24px;animation:fadeUp .6s .5s ease-out both">
+    <a href="https://exogenadian.com/iva300.html" style="padding:12px 24px;background:var(--green-600);color:#fff;border-radius:12px;text-decoration:none;font-weight:700;font-size:.9rem">IVA 300 →</a>
+    <a href="https://exogenadian.com/exogena.html" target="_blank" style="padding:12px 24px;background:var(--green-600);color:#fff;border-radius:12px;text-decoration:none;font-weight:700;font-size:.9rem">Exógena →</a>
+    <a href="https://exogenadian.com/estadosfinancieros.html" style="padding:12px 24px;background:var(--green-600);color:#fff;border-radius:12px;text-decoration:none;font-weight:700;font-size:.9rem">Estados Financieros →</a>
+  </div>
+  <p style="font-size:.82rem;color:var(--gray-400);margin-bottom:16px">¿Necesitas ayuda? <a href="https://wa.me/573054559574?text=Hola%2C%20acabo%20de%20suscribirme%20a%20PRO%20y%20necesito%20ayuda" target="_blank" style="color:var(--green-600);text-decoration:none;font-weight:600">Escríbenos</a></p>
+  <a href="https://exogenadian.com" class="back-link">← Volver al inicio</a>
+</div>
+<script defer src="shared/pro.js?v=848fbf16"></script>
+<script>
+  const APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbwT5ofExiwOKKLnBlwH6Uqhs4cdDpaieSiLn2dYf5D-6yPIdJ_9XEWeIGYyq1ViNKiasQ/exec';
+  const params = new URLSearchParams(window.location.search);
+  // Wompi redirige con ?id=TRANSACCION_ID
+  const transactionId = params.get('id') || '';
+  const referencia = params.get('reference') || params.get('ref') || transactionId || 'WEB-'+Date.now();
+  // Detectar plan por prefijo del ref (M=mensual, T=trimestral, A=anual)
+  var planFromRef={M:{name:'PRO Mensual',value:49900},T:{name:'PRO Trimestral',value:89900},A:{name:'PRO Anual',value:179900}};
+  var refPrefix=(referencia||'').charAt(0).toUpperCase();
+  var planInfo=planFromRef[refPrefix]||{name:'PRO ExógenaDIAN',value:49900};
+  // GA4: pago completado (el usuario llegó a la página de confirmación)
+  gtag('event','pago_completado',{
+    transaction_id: transactionId,
+    referencia: referencia,
+    plan: planInfo.name
+  });
+  // GA4: standard purchase event for native reports
+  gtag('event','purchase',{
+    transaction_id: transactionId,
+    value: planInfo.value,
+    currency: 'COP',
+    items: [{item_name:planInfo.name,item_category:'subscription',price:planInfo.value,quantity:1}]
+  });
+  if (referencia) {
+    document.getElementById('refBox').style.display = 'inline-flex';
+    document.getElementById('refId').textContent = referencia;
+  }
+  // Checkbox habilita botón
+  document.getElementById('acceptTerms').addEventListener('change',function(){
+    var btn=document.getElementById('acceptBtn');
+    if(this.checked){
+      btn.disabled=false;
+      btn.style.background='var(--green-600)';
+      btn.style.color='#fff';
+      btn.style.cursor='pointer';
+      btn.style.boxShadow='0 4px 14px rgba(5,150,105,0.3)';
+    }else{
+      btn.disabled=true;
+      btn.style.background='var(--gray-200)';
+      btn.style.color='var(--gray-400)';
+      btn.style.cursor='not-allowed';
+      btn.style.boxShadow='none';
+    }
+  });
+  // Mostrar aceptación en lugar del loading
+  document.getElementById('proAccept').style.display='block';
+  // Al aceptar, activar PRO
+  window.onAcceptTerms=async function(){
+    document.getElementById('proAccept').style.display='none';
+    document.getElementById('proLoading').style.display='block';
+    try{
+      if(!transactionId){
+        throw new Error('No transaction ID from Wompi');
+      }
+      const url=APPS_SCRIPT_URL
+        +'?action=generateKey'
+        +'&transactionId='+encodeURIComponent(transactionId)
+        +'&ref='+encodeURIComponent(referencia);
+      const resp=await fetch(url);
+      const data=await resp.json();
+      if(data.success && data.clave){
+        try{
+          const valResp=await fetch(APPS_SCRIPT_URL+'?action=validateKey&key='+encodeURIComponent(data.clave));
+          const valData=await valResp.json();
+        }catch(e){}
+        let email='';
+        try{
+          const txResp=await fetch('https://production.wompi.co/v1/transactions/'+transactionId);
+          const txData=await txResp.json();
+          email=txData.data?.customer_email||'';
+        }catch(e){}
+        document.getElementById('proLoading').style.display='none';
+        document.getElementById('proKeyBox').style.display='block';
+        document.getElementById('proEmailDisplay').textContent=email||'(revisa tu correo de pago)';
+        // GA4: registro/activación PRO completada
+        gtag('event','registro_completado',{
+          method: email?'email':'clave',
+          transaction_id: transactionId
+        });
+        // Activación consistente: además del email/clave, se fija la fecha
+        // de activación (red de seguridad de expiración local en pro.js) y se
+        // dispara una revalidación que puebla plan/escuela/caché desde el
+        // servidor. No se baja a minúsculas la clave (puede ser case-sensitive).
+        if(email){
+          localStorage.setItem('exogenadian_pro_email',email.toLowerCase());
+        }else{
+          localStorage.setItem('exogenadian_pro_key',data.clave);
+        }
+        localStorage.setItem('exogenadian_pro_activated_at',String(Date.now()));
+        try{ if(window.exoPro && window.exoPro.revalidate) window.exoPro.revalidate(); }catch(e){}
+      }else{
+        throw new Error(data.error || 'No key returned');
+      }
+    }catch(e){
+      console.error('Error activando PRO:',e);
+      document.getElementById('proLoading').style.display='none';
+      document.getElementById('proError').style.display='block';
+    }
+  };
+</script>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
+<link rel="stylesheet" href="shared/chat.css?v=a52afe72">
+<script defer src="shared/chat.js?v=a45c7cf2"></script>
+</body>
+</html>

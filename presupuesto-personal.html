@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Plantilla de Presupuesto Personal Excel — Gratis 2026 | ExógenaDIAN</title>
+<meta name="description" content="Plantilla de presupuesto personal en Excel para Colombia 2026. 7 hojas formuladas: plan mensual planificado vs real, alcancía para gastos no mensuales (SOAT, predial, prima), metas, plan de deudas (avalancha), patrimonio neto y tracker 12 meses. Gratis y editable.">
+<meta name="keywords" content="plantilla presupuesto personal excel gratis, presupuesto familiar colombia, hoja de cálculo finanzas personales, plantilla 50/30/20, sinking funds excel, presupuesto mensual Colombia 2026, plantilla deudas avalancha, calculadora patrimonio personal, alcancía gastos no mensuales SOAT predial">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://exogenadian.com/presupuesto-personal.html">
+<meta property="og:title" content="Plantilla de Presupuesto Personal Excel — Gratis 2026 | ExógenaDIAN">
+<meta property="og:description" content="7 hojas formuladas: plan mensual, alcancía (SOAT/predial/Navidad), metas, deudas, patrimonio y tracker 12 meses. Sesgo de contador aplicado a tu plata.">
+<meta property="og:url" content="https://exogenadian.com/presupuesto-personal.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="ExógenaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Plantilla de Presupuesto Personal — ExógenaDIAN","url":"https://exogenadian.com/presupuesto-personal.html","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"COP"},"description":"Plantilla Excel gratuita con 7 hojas: plan mensual, alcancía de sinking funds, metas, deudas, patrimonio y tracker 12 meses para Colombia 2026."}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://exogenadian.com/"},{"@type":"ListItem","position":2,"name":"Finanzas Personales","item":"https://exogenadian.com/finanzas.html"},{"@type":"ListItem","position":3,"name":"Plantilla de Presupuesto","item":"https://exogenadian.com/presupuesto-personal.html"}]}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--green:#059669;--green2:#ECFDF5;--green3:#D1FAE5;--red:#DC2626;--red2:#FEF2F2;--amber:#D97706;--amber2:#FFF8E1;--amber3:#FEF3C7;--border:#e2e8f0;--radius:12px;--shadow:0 2px 12px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased}
+.container{max-width:1080px;margin:0 auto;padding:20px}
+.breadcrumb{font-size:.82rem;color:var(--muted);margin:60px 0 6px}
+.breadcrumb a{color:var(--muted);text-decoration:none}
+.breadcrumb a:hover{color:var(--pri2)}
+.breadcrumb .sep{margin:0 8px;color:#cbd5e1}
+.header{background:linear-gradient(135deg,#1B3A5C 0%,#059669 100%);padding:32px 36px;border-radius:18px;margin-bottom:22px;color:#fff;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(255,255,255,.08) 0%,transparent 70%);pointer-events:none}
+.header-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:5px 14px;font-size:.74rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;margin-bottom:12px}
+.header h1{font-size:clamp(1.5rem,3.5vw,2rem);font-weight:800;letter-spacing:-.02em;margin-bottom:8px;line-height:1.15}
+.header p{opacity:.92;font-size:.95rem;max-width:680px;line-height:1.55}
+.header-actions{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap;position:relative;z-index:1}
+.btn-dl{padding:14px 24px;background:#fff;color:var(--pri);border:none;border-radius:10px;font-weight:800;font-size:.95rem;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 14px rgba(0,0,0,.15);transition:.2s}
+.btn-dl:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.btn-dl-out{padding:14px 24px;background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4);border-radius:10px;font-weight:700;font-size:.92rem;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:.2s}
+.btn-dl-out:hover{background:rgba(255,255,255,.1);border-color:#fff}
+.preview-card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;margin-bottom:22px}
+.preview-head{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.preview-head h2{font-size:1.05rem;font-weight:700;color:var(--pri);display:flex;align-items:center;gap:8px}
+.preview-head .legend{font-size:.74rem;color:var(--muted)}
+.preview-head .legend span{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:middle}
+.tabs{display:flex;gap:0;background:#F1F5F9;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:thin}
+.tabs::-webkit-scrollbar{height:4px}
+.tabs::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:4px}
+.tab{padding:13px 18px;background:transparent;border:none;cursor:pointer;font-family:inherit;font-size:.84rem;font-weight:600;color:var(--muted);border-bottom:3px solid transparent;white-space:nowrap;transition:.15s;display:flex;align-items:center;gap:6px}
+.tab:hover{color:var(--pri2);background:rgba(46,117,182,.05)}
+.tab.active{color:var(--pri);background:#fff;border-bottom-color:var(--green)}
+.tab .tab-emoji{font-size:1rem}
+.sheet{display:none;padding:18px 22px 26px;overflow-x:auto}
+.sheet.active{display:block;animation:fadeIn .3s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.sheet-intro{padding:12px 16px;background:linear-gradient(135deg,var(--pri3),#fff);border-left:3px solid var(--pri2);border-radius:0 8px 8px 0;margin-bottom:14px;font-size:.86rem;color:var(--pri);line-height:1.55}
+.sheet-intro strong{font-weight:700}
+.xl-grid{width:100%;border-collapse:collapse;font-size:.78rem;font-family:'DM Sans',sans-serif;min-width:560px}
+.xl-grid th, .xl-grid td{border:1px solid #d1d5db;padding:6px 10px;vertical-align:middle}
+.xl-grid thead th{background:#E2E8F0;color:#475569;font-weight:600;font-size:.7rem;text-align:center;letter-spacing:.5px;font-family:'JetBrains Mono',monospace;width:60px}
+.xl-grid thead th:first-child{width:32px;background:#CBD5E1;color:#475569}
+.xl-grid tbody td:first-child{background:#E2E8F0;color:#64748B;font-family:'JetBrains Mono',monospace;font-size:.7rem;text-align:center;font-weight:600;width:32px}
+.xl-grid tbody td.lbl{font-weight:500;color:#1f2937}
+.xl-grid tbody td.num{text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600}
+.xl-grid tbody tr.hd td{background:#1B3A5C;color:#fff;font-weight:700;text-align:center;font-size:.82rem;letter-spacing:.3px}
+.xl-grid tbody tr.hd td:first-child{background:#CBD5E1;color:#64748B}
+.xl-grid tbody tr.cat td{background:#D6E4F0;color:#1B3A5C;font-weight:700;font-size:.78rem}
+.xl-grid tbody tr.cat td:first-child{background:#E2E8F0;color:#64748B}
+.xl-grid tbody tr.sub td{background:#D1FAE5;color:#065F46;font-weight:700}
+.xl-grid tbody tr.sub td:first-child{background:#E2E8F0;color:#64748B}
+.xl-grid tbody tr.bal td{background:#1B3A5C;color:#fff;font-weight:800;font-size:.86rem}
+.xl-grid tbody tr.bal td:first-child{background:#CBD5E1;color:#475569}
+.xl-grid td.input{background:#FEF3C7;color:#92400E}
+.xl-grid td.calc{background:#ECFDF5;color:#065F46;font-style:italic}
+.xl-grid td.formula::before{content:'= ';opacity:.55;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#059669}
+.xl-grid tr.b50 td{background:#FEF7E6}
+.xl-grid tr.b30 td{background:#EEF2FF}
+.xl-grid tr.b20 td{background:#ECFDF5}
+.xl-grid tr.b50 td:first-child, .xl-grid tr.b30 td:first-child, .xl-grid tr.b20 td:first-child{background:#E2E8F0}
+.note{margin-top:14px;padding:10px 14px;background:#F8FAFC;border:1px dashed #CBD5E1;border-radius:8px;font-size:.78rem;color:var(--muted);line-height:1.55}
+.note strong{color:var(--pri)}
+.value-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:24px 0}
+.val-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px;box-shadow:var(--shadow)}
+.val-card .ic{font-size:1.5rem;margin-bottom:8px}
+.val-card h4{font-size:.92rem;font-weight:700;color:var(--pri);margin-bottom:4px}
+.val-card p{font-size:.82rem;color:var(--muted);line-height:1.5}
+.howto{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:26px 28px;margin-bottom:22px;box-shadow:var(--shadow)}
+.howto h2{font-size:1.15rem;color:var(--pri);font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.howto-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.howto-step{position:relative;padding:18px;background:#F8FAFC;border:1px solid var(--border);border-radius:10px}
+.howto-step .num{position:absolute;top:-12px;left:14px;width:26px;height:26px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-size:.78rem;font-weight:800}
+.howto-step h4{font-size:.86rem;font-weight:700;color:var(--pri);margin:8px 0 4px}
+.howto-step p{font-size:.78rem;color:var(--muted);line-height:1.5}
+.crosslinks{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:22px;box-shadow:var(--shadow)}
+.crosslinks h3{font-size:.95rem;color:var(--pri);font-weight:700;margin-bottom:12px}
+.crosslinks-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.crosslink{display:block;padding:14px 16px;background:#F8FAFC;border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text);transition:.2s}
+.crosslink:hover{border-color:var(--pri2);background:var(--pri3);transform:translateY(-1px)}
+.crosslink strong{display:block;font-size:.84rem;color:var(--pri);margin-bottom:2px}
+.crosslink small{font-size:.72rem;color:var(--muted);line-height:1.4}
+.faq-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:26px 28px;margin-bottom:22px;box-shadow:var(--shadow)}
+.faq-card h2{font-size:1.15rem;color:var(--pri);font-weight:700;margin-bottom:14px}
+.faq-item{border-bottom:1px solid var(--border);padding:12px 0}
+.faq-item:last-child{border-bottom:none}
+.faq-q{cursor:pointer;font-size:.92rem;font-weight:600;color:var(--pri);display:flex;justify-content:space-between;align-items:center;list-style:none;padding:6px 0}
+.faq-q::-webkit-details-marker{display:none}
+.faq-q::after{content:'+';font-size:1.2rem;color:var(--muted);transition:.2s}
+.faq-item[open] .faq-q::after{transform:rotate(45deg)}
+.faq-a{padding:8px 0 4px;font-size:.86rem;color:#374151;line-height:1.65}
+.bottom-cta{background:linear-gradient(135deg,#ECFDF5,#D1FAE5);border:1.5px solid #A7F3D0;border-radius:var(--radius);padding:30px;text-align:center;margin-bottom:22px}
+.bottom-cta h2{font-size:1.25rem;color:#065F46;font-weight:800;margin-bottom:8px}
+.bottom-cta p{color:#047857;font-size:.92rem;margin-bottom:18px}
+@media(max-width:768px){
+  .container{padding:16px}
+  .header{padding:24px 22px}
+  .preview-head{padding:14px 18px}
+  .sheet{padding:14px 14px 20px}
+  .howto-steps{grid-template-columns:1fr 1fr}
+  .header-actions{flex-direction:column}
+  .btn-dl, .btn-dl-out{width:100%;justify-content:center}
+}
+@media(max-width:500px){
+  .howto-steps{grid-template-columns:1fr}
+}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div id="navContainer"></div>
+<div class="container">
+<div class="breadcrumb">
+  <a href="index.html">Inicio</a><span class="sep">›</span>
+  <a href="finanzas.html">Finanzas Personales</a><span class="sep">›</span>
+  Plantilla de Presupuesto
+</div>
+<header class="header">
+  <span class="header-pill">📥 Plantilla Excel · Gratis · 2026</span>
+  <h1>Plantilla de Presupuesto Personal — Excel formulada para Colombia</h1>
+  <p>7 hojas conectadas que la mayoría de plantillas no traen: plan mensual <em>planificado vs real</em>, una <em>alcancía</em> para SOAT/predial/Navidad, metas con plazo, deudas con motor de avalancha, patrimonio neto y tracker de 12 meses. Sin moralismo, sin macros sospechosas, sin pedirte correo.</p>
+  <div class="header-actions">
+    <button class="btn-dl" id="btnDownload">⬇️ Descargar gratis (7 hojas)</button>
+    <button class="btn-dl" id="btnDownloadPro" style="background:linear-gradient(135deg,#FBBF24,#F59E0B);color:#78350F">⭐ PRO — 12 hojas</button>
+    <a href="finanzas.html" class="btn-dl-out">← Volver a Finanzas</a>
+  </div>
+</header>
+<div class="preview-card">
+  <div class="preview-head">
+    <h2>👀 Preview — así se ve la plantilla</h2>
+    <div class="legend">
+      <span style="background:#FEF3C7;border:1px solid #FDE68A"></span> tú llenas ·
+      <span style="background:#ECFDF5;border:1px solid #A7F3D0"></span> calcula sola ·
+      <span style="background:#1B3A5C"></span> totales
+    </div>
+  </div>
+  <div class="tabs" role="tablist">
+    <button class="tab active" data-sheet="empieza"><span class="tab-emoji">🏁</span> Empieza</button>
+    <button class="tab" data-sheet="plan"><span class="tab-emoji">💰</span> Plan mensual</button>
+    <button class="tab" data-sheet="alcancía"><span class="tab-emoji">🐷</span> Alcancía</button>
+    <button class="tab" data-sheet="metas"><span class="tab-emoji">🎯</span> Metas</button>
+    <button class="tab" data-sheet="deudas"><span class="tab-emoji">💳</span> Deudas</button>
+    <button class="tab" data-sheet="patrimonio"><span class="tab-emoji">📈</span> Patrimonio</button>
+    <button class="tab" data-sheet="tracker"><span class="tab-emoji">📅</span> Tracker</button>
+  </div>
+  <div class="sheet active" data-sheet="empieza">
+    <div class="sheet-intro"><strong>🏁 Empieza aquí.</strong> Una sola hoja con tus 4 datos base. Tu ingreso promedio, el tamaño del hogar y la meta del año — para tener contexto a la vista cuando llenes las demás hojas. No alimenta fórmulas (cada hoja se llena independiente), es tu carátula de referencia.</div>
+    <table class="xl-grid">
+      <thead>
+        <tr><th></th><th>A</th><th>B</th><th>C</th></tr>
+      </thead>
+      <tbody>
+        <tr class="hd"><td>1</td><td colspan="3">PRESUPUESTO PERSONAL — 2026</td></tr>
+        <tr><td>2</td><td colspan="3"></td></tr>
+        <tr class="cat"><td>3</td><td colspan="3">DATOS BÁSICOS</td></tr>
+        <tr><td>4</td><td class="lbl">Ingreso mensual neto promedio</td><td class="num input">4.500.000</td><td class="lbl" style="color:#6b7280;font-size:.72rem">→ tu sueldo neto + ingresos variables promedio</td></tr>
+        <tr><td>5</td><td class="lbl">Personas en el hogar</td><td class="num input">2</td><td class="lbl" style="color:#6b7280;font-size:.72rem">→ ajusta gastos fijos esperados</td></tr>
+        <tr><td>6</td><td class="lbl">Meta principal del año</td><td class="lbl input" style="text-align:left">Cuota inicial vivienda</td><td class="lbl" style="color:#6b7280;font-size:.72rem">→ aparece en la hoja Metas</td></tr>
+        <tr><td>7</td><td class="lbl">Tasa de ahorro objetivo</td><td class="num input">20%</td><td class="lbl" style="color:#6b7280;font-size:.72rem">→ regla 50/30/20 default</td></tr>
+        <tr><td>8</td><td colspan="3"></td></tr>
+        <tr class="cat"><td>9</td><td colspan="3">CÓMO USAR ESTE TEMPLATE</td></tr>
+        <tr><td>10</td><td class="lbl" colspan="3">1. Llena solo las celdas amarillas. Las verdes se calculan solas.</td></tr>
+        <tr><td>11</td><td class="lbl" colspan="3">2. Usa la hoja Plan mensual cada mes — escribe Plan al inicio, Real al final.</td></tr>
+        <tr><td>12</td><td class="lbl" colspan="3">3. Alcancía: lista los gastos no mensuales y el template te dice cuánto apartar mes.</td></tr>
+        <tr><td>13</td><td class="lbl" colspan="3">4. Patrimonio: revísalo cada 3 meses, no cada semana — el ruido distrae.</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>Por qué esta hoja existe:</strong> casi todas las plantillas te dejan empezar en blanco. Acá entras 4 datos y todo lo demás tiene contexto. Es la diferencia entre "plantilla genérica" y "presupuesto tuyo".</div>
+  </div>
+  <div class="sheet" data-sheet="plan">
+    <div class="sheet-intro"><strong>💰 Plan mensual.</strong> Cuatro columnas: Plan (lo que decides al inicio del mes), Real (lo que pasó), Variación (la diferencia, calculada) y % del ingreso. Categorías ya organizadas en 50/30/20. Abajo verás cuánto te queda y cómo te paraste vs los topes.</div>
+    <table class="xl-grid">
+      <thead>
+        <tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+      </thead>
+      <tbody>
+        <tr class="hd"><td>1</td><td>Categoría</td><td>Concepto</td><td>Plan</td><td>Real</td><td>Var.</td><td>% ing</td></tr>
+        <tr class="cat"><td>2</td><td colspan="6">💰 INGRESOS</td></tr>
+        <tr><td>3</td><td></td><td class="lbl">Sueldo neto</td><td class="num input">4.200.000</td><td class="num input">4.200.000</td><td class="num calc formula">D3-C3</td><td class="num calc formula">D3/$D$5</td></tr>
+        <tr><td>4</td><td></td><td class="lbl">Variables / freelance</td><td class="num input">300.000</td><td class="num input">521.000</td><td class="num calc formula">D4-C4</td><td class="num calc formula">D4/$D$5</td></tr>
+        <tr class="sub"><td>5</td><td></td><td>Subtotal ingresos</td><td class="num formula">SUM(C3:C4)</td><td class="num formula">SUM(D3:D4)</td><td class="num formula">D5-C5</td><td class="num">100%</td></tr>
+        <tr class="cat"><td>6</td><td colspan="6">🏠 NECESIDADES (50%)</td></tr>
+        <tr><td>7</td><td></td><td class="lbl">Vivienda (arriendo/cuota)</td><td class="num input">1.300.000</td><td class="num input">1.300.000</td><td class="num calc">0</td><td class="num calc">27,5%</td></tr>
+        <tr><td>8</td><td></td><td class="lbl">Mercado y servicios</td><td class="num input">650.000</td><td class="num input">712.000</td><td class="num calc">+62.000</td><td class="num calc">15,1%</td></tr>
+        <tr><td>9</td><td></td><td class="lbl">Transporte / gasolina</td><td class="num input">280.000</td><td class="num input">295.000</td><td class="num calc">+15.000</td><td class="num calc">6,2%</td></tr>
+        <tr class="sub"><td>10</td><td></td><td>Subtotal necesidades</td><td class="num formula">SUM(C7:C9)</td><td class="num formula">SUM(D7:D9)</td><td class="num">+77K</td><td class="num">48,9%</td></tr>
+        <tr class="cat"><td>11</td><td colspan="6">🎈 DESEOS (30%)</td></tr>
+        <tr><td>12</td><td></td><td class="lbl">Comer fuera + suscripciones</td><td class="num input">500.000</td><td class="num input">621.000</td><td class="num calc">+121.000</td><td class="num calc">13,2%</td></tr>
+        <tr><td>13</td><td></td><td class="lbl">Ocio, ropa, gustos</td><td class="num input">350.000</td><td class="num input">280.000</td><td class="num calc">−70.000</td><td class="num calc">5,9%</td></tr>
+        <tr class="cat"><td>14</td><td colspan="6">💳 CUOTAS DE DEUDAS</td></tr>
+        <tr><td>15</td><td></td><td class="lbl">Tarjetas + libre inversión</td><td class="num input">450.000</td><td class="num input">450.000</td><td class="num calc">0</td><td class="num calc">9,5%</td></tr>
+        <tr class="cat"><td>16</td><td colspan="6">💰 AHORRO E INVERSIÓN</td></tr>
+        <tr><td>17</td><td></td><td class="lbl">FIC + AFC + Pensión vol.</td><td class="num input">450.000</td><td class="num input">383.000</td><td class="num calc">−67.000</td><td class="num calc">8,1%</td></tr>
+        <tr class="cat"><td>18</td><td colspan="6">🐷 APORTE A ALCANCÍA</td></tr>
+        <tr><td>19</td><td></td><td class="lbl">Sinking funds del mes</td><td class="num input">220.000</td><td class="num input">200.000</td><td class="num calc">−20.000</td><td class="num calc">4,2%</td></tr>
+        <tr class="bal"><td>20</td><td colspan="2">BALANCE DEL MES (Ingresos − Gastos)</td><td class="num">+300.000</td><td class="num">+480.000</td><td class="num">+180.000</td><td class="num">10,2%</td></tr>
+        <tr><td>21</td><td colspan="6"></td></tr>
+        <tr class="cat"><td>22</td><td colspan="6">🎯 VISTA 50/30/20</td></tr>
+        <tr class="b50"><td>23</td><td></td><td class="lbl">50% Necesidades — tope vs real</td><td class="num">2.360.500</td><td class="num">2.307.000</td><td class="num">✅ ok</td><td class="num">48,9%</td></tr>
+        <tr class="b30"><td>24</td><td></td><td class="lbl">30% Deseos — tope vs real</td><td class="num">1.416.300</td><td class="num">901.000</td><td class="num">✅ ok</td><td class="num">19,1%</td></tr>
+        <tr class="b20"><td>25</td><td></td><td class="lbl">20% Ahorro + Cuotas + Alcancía</td><td class="num">944.200</td><td class="num">1.033.000</td><td class="num">✅ ok</td><td class="num">21,9%</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>Lo que no copia de YNAB ni Mint:</strong> separar <em>cuotas de deudas malas</em> de <em>ahorro</em>. La mayoría las junta y eso esconde que estás pagando intereses, no construyendo nada. Acá las ves separadas — incómodo, pero honesto.</div>
+  </div>
+  <div class="sheet" data-sheet="alcancía">
+    <div class="sheet-intro"><strong>🐷 Alcancía — sinking funds.</strong> Los gastos que NO son mensuales pero llegan: SOAT, predial, vacaciones, prima de salud, declaración de renta, Navidad. La columna "Apartar mensual" te dice cuánto separar cada mes para que cuando lleguen no te tumben el flujo.</div>
+    <table class="xl-grid">
+      <thead>
+        <tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+      </thead>
+      <tbody>
+        <tr class="hd"><td>1</td><td>Concepto</td><td>Mes en que cae</td><td>Monto estimado</td><td>Apartar mensual</td></tr>
+        <tr><td>2</td><td class="lbl">SOAT</td><td class="lbl input" style="text-align:center">Mar</td><td class="num input">680.000</td><td class="num calc formula">C2/12</td></tr>
+        <tr><td>3</td><td class="lbl">Tecnomecánica</td><td class="lbl input" style="text-align:center">Ago</td><td class="num input">160.000</td><td class="num calc formula">C3/12</td></tr>
+        <tr><td>4</td><td class="lbl">Impuesto vehicular</td><td class="lbl input" style="text-align:center">Jun</td><td class="num input">580.000</td><td class="num calc formula">C4/12</td></tr>
+        <tr><td>5</td><td class="lbl">Predial</td><td class="lbl input" style="text-align:center">Mar</td><td class="num input">1.200.000</td><td class="num calc formula">C5/12</td></tr>
+        <tr><td>6</td><td class="lbl">Declaración renta PN</td><td class="lbl input" style="text-align:center">Ago-Oct</td><td class="num input">450.000</td><td class="num calc formula">C6/12</td></tr>
+        <tr><td>7</td><td class="lbl">Vacaciones (mid-year)</td><td class="lbl input" style="text-align:center">Jul</td><td class="num input">2.500.000</td><td class="num calc formula">C7/12</td></tr>
+        <tr><td>8</td><td class="lbl">Navidad (regalos + cena)</td><td class="lbl input" style="text-align:center">Dic</td><td class="num input">1.400.000</td><td class="num calc formula">C8/12</td></tr>
+        <tr><td>9</td><td class="lbl">Cumpleaños del año</td><td class="lbl input" style="text-align:center">Varios</td><td class="num input">600.000</td><td class="num calc formula">C9/12</td></tr>
+        <tr><td>10</td><td class="lbl">Mantenimiento carro</td><td class="lbl input" style="text-align:center">Varios</td><td class="num input">800.000</td><td class="num calc formula">C10/12</td></tr>
+        <tr><td>11</td><td class="lbl">Médicos / odontología</td><td class="lbl input" style="text-align:center">Varios</td><td class="num input">700.000</td><td class="num calc formula">C11/12</td></tr>
+        <tr><td>12</td><td class="lbl">Útiles escolares</td><td class="lbl input" style="text-align:center">Ene+Jul</td><td class="num input">900.000</td><td class="num calc formula">C12/12</td></tr>
+        <tr><td>13</td><td class="lbl">Renovación cédula/pasaporte</td><td class="lbl input" style="text-align:center">—</td><td class="num input">350.000</td><td class="num calc formula">C13/12</td></tr>
+        <tr><td>14</td><td class="lbl">Suscripciones anuales</td><td class="lbl input" style="text-align:center">—</td><td class="num input">480.000</td><td class="num calc formula">C14/12</td></tr>
+        <tr class="bal"><td>15</td><td colspan="2">TOTAL APARTAR MENSUAL</td><td class="num">10.800.000 / año</td><td class="num">≈ 900.000 / mes</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>El sesgo de contador:</strong> el predial y el SOAT no son "imprevistos" — los conoces 365 días antes. La alcancía los convierte en gastos mensuales pequeños en vez de golpes anuales que tumban tu ahorro. Es el truco más subestimado del presupuesto colombiano.</div>
+  </div>
+  <div class="sheet" data-sheet="metas">
+    <div class="sheet-intro"><strong>🎯 Metas de ahorro.</strong> Define qué quieres ahorrar, en cuánto tiempo, y el template te dice <em>cuánto apartar mensual</em>. Plazo en meses, monto en pesos, lo demás se calcula. Pre-cargada con las metas más comunes en Colombia 2026.</div>
+    <table class="xl-grid">
+      <thead>
+        <tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+      </thead>
+      <tbody>
+        <tr class="hd"><td>1</td><td>Meta</td><td>Plazo (meses)</td><td>Objetivo</td><td>Ya tengo</td><td>Falta</td><td>Apartar/mes</td></tr>
+        <tr><td>2</td><td class="lbl">Fondo emergencia (3 meses gastos)</td><td class="num input">6</td><td class="num input">9.000.000</td><td class="num input">2.500.000</td><td class="num calc formula">C2-D2</td><td class="num calc formula">E2/B2</td></tr>
+        <tr><td>3</td><td class="lbl">Fondo desempleo (6 meses gastos)</td><td class="num input">18</td><td class="num input">18.000.000</td><td class="num input">0</td><td class="num calc formula">C3-D3</td><td class="num calc formula">E3/B3</td></tr>
+        <tr><td>4</td><td class="lbl">Cuota inicial vivienda</td><td class="num input">36</td><td class="num input">60.000.000</td><td class="num input">8.000.000</td><td class="num calc formula">C4-D4</td><td class="num calc formula">E4/B4</td></tr>
+        <tr><td>5</td><td class="lbl">Viaje grande</td><td class="num input">12</td><td class="num input">8.000.000</td><td class="num input">1.200.000</td><td class="num calc formula">C5-D5</td><td class="num calc formula">E5/B5</td></tr>
+        <tr><td>6</td><td class="lbl">Reserva educación / cursos</td><td class="num input">12</td><td class="num input">3.000.000</td><td class="num input">500.000</td><td class="num calc formula">C6-D6</td><td class="num calc formula">E6/B6</td></tr>
+        <tr><td>7</td><td class="lbl">— meta libre —</td><td class="num input">—</td><td class="num input">—</td><td class="num input">—</td><td class="num calc">—</td><td class="num calc">—</td></tr>
+        <tr class="bal"><td>8</td><td colspan="5">TOTAL APARTAR MENSUAL EN METAS</td><td class="num">≈ 4.303.000</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>El reality check:</strong> si la suma del "Apartar/mes" supera tu cubo de Ahorro del Plan mensual, alguna meta tiene plazo iluso. Esta hoja te obliga a ajustar plazo o monto antes de auto-engañarte. Sin moralismo.</div>
+  </div>
+  <div class="sheet" data-sheet="deudas">
+    <div class="sheet-intro"><strong>💳 Plan de deudas — avalancha.</strong> Lista cada deuda con saldo y tasa E.A. El template ordena automático por tasa más alta primero (avalancha) y calcula tasa promedio ponderada — el número que la mayoría no conoce de su propio bolsillo.</div>
+    <table class="xl-grid">
+      <thead>
+        <tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+      </thead>
+      <tbody>
+        <tr class="hd"><td>1</td><td>Acreedor</td><td>Saldo</td><td>Tasa E.A.</td><td>Cuota mín.</td><td>Cuota plan</td><td>Orden ataque</td></tr>
+        <tr><td>2</td><td class="lbl">Tarjeta Bancolombia</td><td class="num input">3.200.000</td><td class="num input">28,5%</td><td class="num input">180.000</td><td class="num input">350.000</td><td class="num calc formula">RANK(C2,$C$2:$C$5,0)</td></tr>
+        <tr><td>3</td><td class="lbl">Tarjeta Davivienda</td><td class="num input">1.800.000</td><td class="num input">26,8%</td><td class="num input">120.000</td><td class="num input">120.000</td><td class="num calc">2</td></tr>
+        <tr><td>4</td><td class="lbl">Libre inversión banco</td><td class="num input">8.500.000</td><td class="num input">19,2%</td><td class="num input">320.000</td><td class="num input">320.000</td><td class="num calc">3</td></tr>
+        <tr><td>5</td><td class="lbl">Hipoteca</td><td class="num input">120.000.000</td><td class="num input">10,8%</td><td class="num input">1.450.000</td><td class="num input">1.450.000</td><td class="num calc">— buena</td></tr>
+        <tr class="sub"><td>6</td><td>Total saldo deudas malas</td><td class="num formula">SUM(B2:B4)</td><td colspan="3">→ 13.500.000</td></tr>
+        <tr class="sub"><td>7</td><td>Tasa promedio ponderada</td><td colspan="2" class="num formula">SUMPRODUCT(B2:B4,C2:C4)/SUM(B2:B4)</td><td colspan="3" class="lbl">≈ 22,4% E.A.</td></tr>
+        <tr class="bal"><td>8</td><td colspan="3">PLAN AVALANCHA — abono extra a la deuda con tasa más alta</td><td colspan="3">Tarjeta Bancolombia (28,5%)</td></tr>
+        <tr><td>9</td><td colspan="6"></td></tr>
+        <tr class="cat"><td>10</td><td colspan="6">⚠️ ALERTAS DE TASA</td></tr>
+        <tr><td>11</td><td class="lbl" colspan="2">¿Alguna deuda > 23,8% E.A.?</td><td colspan="3" class="lbl">→ revisa tasa de usura del trimestre. Banca de Oportunidades publica el límite cada mes.</td></tr>
+        <tr><td>12</td><td class="lbl" colspan="2">¿Cuotas/ingreso > 35%?</td><td colspan="3" class="lbl">→ apalancamiento riesgoso. Cuota total no debería pasar de ese tope.</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>Por qué la tasa promedio ponderada importa:</strong> no es el promedio simple. Si tienes $10M al 28% y $1M al 12%, el ponderado es ~26,5% — no 20%. Esa es la tasa <em>real</em> a la que estás endeudado. Si no la sabes, no sabes qué tan urgente es atacar.</div>
+  </div>
+  <div class="sheet" data-sheet="patrimonio">
+    <div class="sheet-intro"><strong>📈 Patrimonio neto.</strong> Activos − Pasivos = lo que realmente vales financieramente. Pre-cargado con las cuentas que importan en Colombia: AFC, pensión voluntaria, FNA, FIC. Revísalo cada 3 meses, no cada semana — el ruido del corto plazo distrae.</div>
+    <table class="xl-grid">
+      <thead>
+        <tr><th></th><th>A</th><th>B</th><th>C</th></tr>
+      </thead>
+      <tbody>
+        <tr class="hd"><td>1</td><td colspan="3">PATRIMONIO NETO — corte mes</td></tr>
+        <tr class="cat"><td>2</td><td colspan="3">🟢 ACTIVOS</td></tr>
+        <tr><td>3</td><td class="lbl">Cuentas corrientes / ahorros</td><td class="num input">3.200.000</td><td class="lbl" style="color:#6b7280;font-size:.72rem">→ líquido inmediato</td></tr>
+        <tr><td>4</td><td class="lbl">Cuentas alta rentabilidad / bolsillos</td><td class="num input">5.500.000</td><td></td></tr>
+        <tr><td>5</td><td class="lbl">CDT</td><td class="num input">2.000.000</td><td></td></tr>
+        <tr><td>6</td><td class="lbl">FIC (fondos de inversión)</td><td class="num input">4.800.000</td><td class="lbl" style="color:#6b7280;font-size:.72rem">→ retefuente 4% al rendimiento</td></tr>
+        <tr><td>7</td><td class="lbl">AFC (cuenta para vivienda)</td><td class="num input">6.000.000</td><td class="lbl" style="color:#6b7280;font-size:.72rem">→ exenta hasta 30% del ingreso (tope 3.800 UVT)</td></tr>
+        <tr><td>8</td><td class="lbl">Pensión voluntaria</td><td class="num input">3.500.000</td><td></td></tr>
+        <tr><td>9</td><td class="lbl">FNA (cesantías)</td><td class="num input">7.200.000</td><td class="lbl" style="color:#6b7280;font-size:.72rem">→ tasa social VIS</td></tr>
+        <tr><td>10</td><td class="lbl">Inmueble (avalúo comercial)</td><td class="num input">0</td><td></td></tr>
+        <tr><td>11</td><td class="lbl">Vehículo (valor venta hoy)</td><td class="num input">35.000.000</td><td class="lbl" style="color:#6b7280;font-size:.72rem">→ deprecia 10-15% año</td></tr>
+        <tr class="sub"><td>12</td><td>Total activos</td><td class="num formula">SUM(B3:B11)</td><td>67.200.000</td></tr>
+        <tr class="cat"><td>13</td><td colspan="3">🔴 PASIVOS</td></tr>
+        <tr><td>14</td><td class="lbl">Hipoteca (saldo)</td><td class="num input">0</td><td></td></tr>
+        <tr><td>15</td><td class="lbl">Crédito vehículo</td><td class="num input">12.000.000</td><td></td></tr>
+        <tr><td>16</td><td class="lbl">Tarjetas de crédito</td><td class="num input">5.000.000</td><td></td></tr>
+        <tr><td>17</td><td class="lbl">Libre inversión</td><td class="num input">8.500.000</td><td></td></tr>
+        <tr><td>18</td><td class="lbl">Crédito educativo</td><td class="num input">0</td><td></td></tr>
+        <tr><td>19</td><td class="lbl">Otras deudas</td><td class="num input">0</td><td></td></tr>
+        <tr class="sub"><td>20</td><td>Total pasivos</td><td class="num formula">SUM(B14:B19)</td><td>25.500.000</td></tr>
+        <tr class="bal"><td>21</td><td>PATRIMONIO NETO</td><td class="num formula">B12-B20</td><td>41.700.000</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>El número que casi nadie calcula:</strong> patrimonio neto. No es lo que ganas, no es lo que tienes en el banco — es activos − pasivos. Verlo crecer (o caer) trimestre a trimestre es la métrica más honesta sobre si estás avanzando o solo manteniéndote.</div>
+  </div>
+  <div class="sheet" data-sheet="tracker">
+    <div class="sheet-intro"><strong>📅 Tracker mensual — 12 meses.</strong> Cada mes copias los totales del Plan mensual. Al final del año ves la curva: cómo evolucionó tu tasa de ahorro, cuándo subió/bajó tu patrimonio y si hay un patrón estacional (Ene caro, Dic peor).</div>
+    <table class="xl-grid">
+      <thead>
+        <tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th></tr>
+      </thead>
+      <tbody>
+        <tr class="hd"><td>1</td><td>Mes</td><td>Ingreso</td><td>Necesid.</td><td>Deseos</td><td>Cuotas deuda</td><td>Ahorro+Alcancía</td><td>Patrim. neto</td><td>Tasa ahorro</td></tr>
+        <tr><td>2</td><td class="lbl">Enero</td><td class="num input">4.721.000</td><td class="num input">2.307.000</td><td class="num input">901.000</td><td class="num input">450.000</td><td class="num input">833.000</td><td class="num input">42.100.000</td><td class="num calc formula">F2/B2</td></tr>
+        <tr><td>3</td><td class="lbl">Febrero</td><td class="num input">4.380.000</td><td class="num input">2.180.000</td><td class="num input">820.000</td><td class="num input">450.000</td><td class="num input">930.000</td><td class="num input">42.900.000</td><td class="num calc">21,2%</td></tr>
+        <tr><td>4</td><td class="lbl">Marzo</td><td class="num input">4.450.000</td><td class="num input">3.512.000</td><td class="num input">700.000</td><td class="num input">450.000</td><td class="num input">238.000</td><td class="num input">42.300.000</td><td class="num calc">5,3%</td></tr>
+        <tr><td>5</td><td class="lbl">… (Abril a Diciembre)</td><td class="num">…</td><td class="num">…</td><td class="num">…</td><td class="num">…</td><td class="num">…</td><td class="num">…</td><td class="num">…</td></tr>
+        <tr class="sub"><td>13</td><td>Total año</td><td class="num formula">SUM(B2:B12)</td><td class="num formula">SUM(C2:C12)</td><td class="num formula">SUM(D2:D12)</td><td class="num formula">SUM(E2:E12)</td><td class="num formula">SUM(F2:F12)</td><td class="num">—</td><td class="num">—</td></tr>
+        <tr class="bal"><td>14</td><td>Tasa ahorro promedio</td><td colspan="6">Tu performance del año real, no la del mes que recuerdas</td><td class="num formula">F13/B13</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>Lo que revela el tracker:</strong> casi todos creen que ahorran "como un 15%" — el promedio real suele ser 7-9%. Marzo (predial+SOAT) y Diciembre (Navidad+vacaciones) son los meses que tumban el promedio anual. Verlo en una sola tabla es lo que cambia el comportamiento.</div>
+  </div>
+</div>
+<div class="howto">
+  <h2>🧭 Cómo usar la plantilla</h2>
+  <div class="howto-steps">
+    <div class="howto-step">
+      <div class="num">1</div>
+      <h4>Llena <em>Empieza</em></h4>
+      <p>4 datos: ingreso, hogar, meta, tasa de ahorro objetivo. Toma 2 minutos.</p>
+    </div>
+    <div class="howto-step">
+      <div class="num">2</div>
+      <h4>Define el <em>Plan</em> del mes</h4>
+      <p>Columna C: lo que <em>decides</em> gastar. Es planeación, no profecía. Ajustarás.</p>
+    </div>
+    <div class="howto-step">
+      <div class="num">3</div>
+      <h4>Carga la <em>Alcancía</em></h4>
+      <p>Lista los gastos no mensuales (SOAT, predial, Navidad). El template te dice cuánto apartar.</p>
+    </div>
+    <div class="howto-step">
+      <div class="num">4</div>
+      <h4>Cierre del mes</h4>
+      <p>Llena la columna <em>Real</em>. Mira la variación. Pasa los totales al <em>Tracker</em>. Repite.</p>
+    </div>
+  </div>
+</div>
+<div class="value-grid">
+  <div class="val-card">
+    <div class="ic">🔢</div>
+    <h4>Formulada de verdad</h4>
+    <p>Subtotales, %, variaciones y reglas 50/30/20 en fórmulas Excel. No es un PDF disfrazado.</p>
+  </div>
+  <div class="val-card">
+    <div class="ic">🇨🇴</div>
+    <h4>Con sesgo colombiano</h4>
+    <p>AFC, pensión voluntaria, FNA, predial, SOAT, retención por salarios — pre-cargados.</p>
+  </div>
+  <div class="val-card">
+    <div class="ic">🚫</div>
+    <h4>Sin pedir correo</h4>
+    <p>Descarga directa, sin newsletter forzoso, sin embudo. Si quieres más, vuelves cuando quieras.</p>
+  </div>
+  <div class="val-card">
+    <div class="ic">🔄</div>
+    <h4>Compatible con la web</h4>
+    <p>Llena en Excel offline, vuelve a <a href="pyg-personal.html" style="color:#059669;font-weight:700">PyG personal</a> para visualizar el histórico online.</p>
+  </div>
+</div>
+<div class="crosslinks">
+  <h3>Herramientas que se complementan</h3>
+  <div class="crosslinks-grid">
+    <a href="salario-neto.html" class="crosslink"><strong>💰 Salario neto</strong><small>Calcula tu ingreso real con FSP, AFC y retefuente.</small></a>
+    <a href="pyg-personal.html" class="crosslink"><strong>📊 PyG personal</strong><small>Versión web del template, con histórico mensual guardado.</small></a>
+    <a href="deudas.html" class="crosslink"><strong>💳 Auditor de deudas</strong><small>Avalancha vs bola de nieve, tasa promedio, plan de salida.</small></a>
+    <a href="fondo-emergencia.html" class="crosslink"><strong>🛟 Fondo de emergencia</strong><small>Imprevistos vs desempleo: dos colchones distintos.</small></a>
+    <a href="capacidad-hipotecaria.html" class="crosslink"><strong>🏠 Capacidad hipotecaria</strong><small>Decreto 583/2025: hasta 40% del ingreso, 80% VIS.</small></a>
+    <a href="crecimiento.html" class="crosslink"><strong>📈 Costo de oportunidad</strong><small>¿Y si no me lo gasto? — proyecta a 3-5 años.</small></a>
+  </div>
+</div>
+<div class="faq-card">
+  <h2>Preguntas frecuentes</h2>
+  <details class="faq-item">
+    <summary class="faq-q">¿Funciona en Google Sheets / LibreOffice?</summary>
+    <div class="faq-a">Sí. El archivo es <code>.xlsx</code> estándar — lo abres en Excel 2016+, Google Sheets, LibreOffice Calc o Numbers. Las fórmulas son básicas (SUM, SUMPRODUCT, RANK, IF) — funcionan en todas.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q">¿Por qué tener este template si ya tienen PyG personal?</summary>
+    <div class="faq-a">Son complementarios. <strong>PyG personal</strong> (web) es retrospectivo: registras lo que pasó y te dice tu tasa de ahorro real con histórico. <strong>Esta plantilla</strong> (Excel) es planificación + variance + sinking funds + metas + patrimonio. Mucha gente llena el Excel mensual offline y luego usa PyG para visualizar el agregado.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q">¿Por qué la hoja de alcancía es distinta?</summary>
+    <div class="faq-a">La mayoría de plantillas no la trae. En Colombia, los gastos no mensuales (SOAT, predial, Navidad, vacaciones, declaración de renta PN) son los que tumban el flujo. Repartirlos en 12 mensualidades es el truco que evita endeudarse cada marzo y cada diciembre.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q">¿La descarga me suscribe a algo?</summary>
+    <div class="faq-a">No. Es un botón que genera el archivo en tu navegador y lo descarga. No mandamos correos, no usamos pixel de tracking más allá del Analytics estándar de la página. Si quieres ver más herramientas, vuelves a la página cuando quieras.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q">¿Puedo modificar el template?</summary>
+    <div class="faq-a">Por completo. Cambia categorías, agrega filas, modifica fórmulas. Es tu plantilla — la entregamos abierta porque cada hogar tiene gastos distintos. La estructura 50/30/20 + alcancía + metas + patrimonio es la propuesta — adáptala.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q">¿Tasa de usura, AFC, retefuente — de dónde sacan los números?</summary>
+    <div class="faq-a">Tasa de usura: Banca de Oportunidades / SuperFinanciera (publicación trimestral). AFC: Art. 126-4 ET (exención hasta 30% del ingreso o 3.800 UVT). Retefuente por salarios: Art. 383 ET y Procedimiento 1 / 2. Decreto 583/2025: vigente desde mayo 28/2025 — cambió el tope de cuota hipotecaria.</div>
+  </details>
+</div>
+<div class="value-grid" style="margin:32px 0 8px">
+  <div class="val-card" style="border-color:#A7F3D0">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+      <div>
+        <div class="ic">📥</div>
+        <h4 style="font-size:1.05rem;color:#065F46">Gratis</h4>
+      </div>
+      <span style="background:#D1FAE5;color:#065F46;font-size:.66rem;font-weight:800;padding:3px 10px;border-radius:100px;letter-spacing:.05em;text-transform:uppercase">7 hojas</span>
+    </div>
+    <ul style="list-style:none;padding:0;font-size:.85rem;color:#374151;line-height:1.8;margin:0">
+      <li>✓ 🏁 Empieza (carátula)</li>
+      <li>✓ 💰 Plan mensual planificado vs real</li>
+      <li>✓ 🐷 Alcancía (sinking funds)</li>
+      <li>✓ 🎯 Metas de ahorro</li>
+      <li>✓ 💳 Plan de deudas con avalancha</li>
+      <li>✓ 📈 Patrimonio neto</li>
+      <li>✓ 📅 Tracker 12 meses</li>
+    </ul>
+    <button class="btn-dl" id="btnDownload2" style="background:#059669;color:#fff;width:100%;margin-top:14px">⬇️ Descargar gratis</button>
+  </div>
+  <div class="val-card" style="border-color:#F59E0B;background:linear-gradient(135deg,#FFFBEB,#FEF3C7)">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+      <div>
+        <div class="ic">⭐</div>
+        <h4 style="font-size:1.05rem;color:#78350F">PRO</h4>
+      </div>
+      <span style="background:linear-gradient(135deg,#F59E0B,#D97706);color:#fff;font-size:.66rem;font-weight:800;padding:3px 10px;border-radius:100px;letter-spacing:.05em;text-transform:uppercase">12 hojas</span>
+    </div>
+    <p style="font-size:.78rem;color:#92400E;margin-bottom:8px;font-weight:600">Todo lo de Gratis +</p>
+    <ul style="list-style:none;padding:0;font-size:.85rem;color:#78350F;line-height:1.8;margin:0">
+      <li>⭐ 📊 Tracker 5 años (60 meses)</li>
+      <li>⭐ 💼 Simulador AFC anual con beneficio fiscal</li>
+      <li>⭐ 🏠 Amortización hipoteca real con abonos extra</li>
+      <li>⭐ 🔥 Plan FIRE Colombia (gastos × 25/30)</li>
+      <li>⭐ 💎 Plan inversión 101 — asignación por edad</li>
+    </ul>
+    <button class="btn-dl" id="btnDownloadPro2" style="background:linear-gradient(135deg,#F59E0B,#D97706);color:#fff;width:100%;margin-top:14px">⭐ Descargar PRO</button>
+    <p style="font-size:.72rem;color:#92400E;margin-top:8px;text-align:center"><a href="precios.html" style="color:#92400E;font-weight:700">¿No tienes PRO? Ver planes →</a></p>
+  </div>
+</div>
+<div class="bottom-cta">
+  <h2>📥 Empieza con tus datos reales</h2>
+  <p>La gratis es completa. La PRO suma 5 hojas para quien ya quiere ir más profundo: 5 años, AFC anual, amortización hipotecaria, FIRE Colombia y asignación de inversión.</p>
+</div>
+</div>
+<footer style="padding:24px 28px;background:#fff;border-top:1px solid var(--border);text-align:center">
+  <p style="font-size:.78rem;color:var(--muted)">© 2026 ExógenaDIAN · <a href="finanzas.html" style="color:var(--pri2);text-decoration:none">Volver a Finanzas Personales</a></p>
+</footer>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
+<script defer src="shared/pro.js?v=848fbf16"></script>
+<script src="shared/finanzas-privacy.js?v=aed97e2f"></script>
+<script>
+(function(){
+  function init(){
+    if (!window.FinanzasPrivacy) return;
+    var c = document.querySelector('.container') || document.body;
+    if (c) {
+      FinanzasPrivacy.autoLoad(c, 'presupuesto-personal');
+      FinanzasPrivacy.autoSave(c, 'presupuesto-personal', {debounce:800});
+    }
+  }
+  if (document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>
+<script>
+// ─── Tabs ───
+(function(){
+  var tabs = document.querySelectorAll('.tab');
+  var sheets = document.querySelectorAll('.sheet');
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      var name = t.dataset.sheet;
+      tabs.forEach(function(x){ x.classList.toggle('active', x === t); });
+      sheets.forEach(function(s){ s.classList.toggle('active', s.dataset.sheet === name); });
+      if (typeof gtag !== 'undefined') gtag('event','presupuesto_tab_view',{tab:name});
+    });
+  });
+})();
+// ─── Descarga Excel ───
+function descargarPresupuesto(pro){
+  if (!window.ExcelJS) {
+    alert('La librería de Excel no cargó. Recarga la página.');
+    return;
+  }
+  if (typeof gtag !== 'undefined') gtag('event','presupuesto_download',{tipo: pro ? 'xlsx-pro' : 'xlsx'});
+  var anio = new Date().getFullYear();
+  var wb = new ExcelJS.Workbook();
+  wb.creator = 'ExógenaDIAN';
+  wb.created = new Date();
+  // Estilos comunes
+  var fillNavy   = {type:'pattern',pattern:'solid',fgColor:{argb:'FF1B3A5C'}};
+  var fillGreen  = {type:'pattern',pattern:'solid',fgColor:{argb:'FFD1FAE5'}};
+  var fillCat    = {type:'pattern',pattern:'solid',fgColor:{argb:'FFD6E4F0'}};
+  var fillAmber  = {type:'pattern',pattern:'solid',fgColor:{argb:'FFFEF3C7'}};
+  var fillCalc   = {type:'pattern',pattern:'solid',fgColor:{argb:'FFECFDF5'}};
+  var fillGray   = {type:'pattern',pattern:'solid',fgColor:{argb:'FFF1F5F9'}};
+  var fontWhite  = {bold:true,color:{argb:'FFFFFFFF'},size:12};
+  var fontCat    = {bold:true,color:{argb:'FF1B3A5C'},size:11};
+  var fontSub    = {bold:true,color:{argb:'FF065F46'},size:11};
+  var bdr        = {top:{style:'thin',color:{argb:'FFE2E8F0'}},bottom:{style:'thin',color:{argb:'FFE2E8F0'}},left:{style:'thin',color:{argb:'FFE2E8F0'}},right:{style:'thin',color:{argb:'FFE2E8F0'}}};
+  function styleHeader(ws, range, text){
+    ws.mergeCells(range);
+    var c = ws.getCell(range.split(':')[0]);
+    c.value = text;
+    c.fill = fillNavy; c.font = fontWhite;
+    c.alignment = {horizontal:'center',vertical:'middle'};
+  }
+  function fmtMoney(cell){ cell.numFmt = '#,##0'; cell.alignment = {horizontal:'right'}; }
+  function fmtPct(cell){ cell.numFmt = '0.0%'; cell.alignment = {horizontal:'right'}; }
+  // ════════════════════════════════════════════════════════
+  // HOJA 1: 🏁 Empieza
+  // ════════════════════════════════════════════════════════
+  var ws1 = wb.addWorksheet('🏁 Empieza', {properties:{tabColor:{argb:'FF059669'}}});
+  ws1.columns = [{width:38},{width:22},{width:48}];
+  styleHeader(ws1, 'A1:C1', 'PRESUPUESTO PERSONAL — '+anio);
+  ws1.getRow(1).height = 30;
+  ws1.addRow([]);
+  var rDB = ws1.addRow(['DATOS BÁSICOS','','']);
+  rDB.getCell(1).fill = fillCat; rDB.getCell(1).font = fontCat; rDB.getCell(1).border = bdr;
+  ws1.mergeCells('A'+rDB.number+':C'+rDB.number);
+  function addInput(label, defaultValue, hint){
+    var r = ws1.addRow([label, defaultValue, hint||'']);
+    r.getCell(1).border = bdr; r.getCell(1).font = {size:11};
+    r.getCell(2).fill = fillAmber; r.getCell(2).font = {bold:true,color:{argb:'FF92400E'},size:11};
+    r.getCell(2).border = bdr;
+    if (typeof defaultValue === 'number') fmtMoney(r.getCell(2));
+    r.getCell(3).font = {italic:true,color:{argb:'FF6B7280'},size:9};
+    r.getCell(3).border = bdr;
+    return r;
+  }
+  var rIng = addInput('Ingreso mensual neto promedio (COP)', 0, '→ tu sueldo neto + variables promedio');
+  var rHog = addInput('Personas en el hogar', 1, '→ ajusta gastos esperados');
+  var rMeta = addInput('Meta principal del año', '', '→ aparece en hoja Metas');
+  var rTasa = ws1.addRow(['Tasa de ahorro objetivo', 0.20, '→ regla 50/30/20 default']);
+  rTasa.getCell(1).border = bdr; rTasa.getCell(1).font = {size:11};
+  rTasa.getCell(2).fill = fillAmber; rTasa.getCell(2).font = {bold:true,color:{argb:'FF92400E'},size:11};
+  rTasa.getCell(2).border = bdr; fmtPct(rTasa.getCell(2));
+  rTasa.getCell(3).font = {italic:true,color:{argb:'FF6B7280'},size:9}; rTasa.getCell(3).border = bdr;
+  ws1.addRow([]);
+  var rIns = ws1.addRow(['CÓMO USAR ESTE TEMPLATE','','']);
+  rIns.getCell(1).fill = fillCat; rIns.getCell(1).font = fontCat; rIns.getCell(1).border = bdr;
+  ws1.mergeCells('A'+rIns.number+':C'+rIns.number);
+  ['1. Llena solo las celdas amarillas. Las verdes se calculan solas.',
+   '2. Plan mensual: escribe "Plan" al inicio del mes, "Real" al final.',
+   '3. Alcancía: lista los gastos no mensuales — el template te dice cuánto apartar/mes.',
+   '4. Patrimonio: revísalo cada 3 meses, no cada semana.',
+   '5. Tracker: copia los totales del Plan mensual cada cierre de mes.',
+   '',
+   '💡 Si quieres versión web con histórico automático: exogenadian.com/pyg-personal.html'
+  ].forEach(function(txt){
+    var r = ws1.addRow([txt,'','']);
+    r.getCell(1).font = {size:10,color:{argb:'FF374151'}};
+    ws1.mergeCells('A'+r.number+':C'+r.number);
+  });
+  // ════════════════════════════════════════════════════════
+  // HOJA 2: 💰 Plan mensual
+  // ════════════════════════════════════════════════════════
+  var ws2 = wb.addWorksheet('💰 Plan mensual', {properties:{tabColor:{argb:'FF2E75B6'}}});
+  ws2.columns = [{width:18},{width:34},{width:14},{width:14},{width:14},{width:10}];
+  styleHeader(ws2, 'A1:F1', 'PLAN MENSUAL — Plan vs Real ('+anio+')');
+  ws2.getRow(1).height = 28;
+  ws2.addRow([]);
+  var thRow = ws2.addRow(['Categoría','Concepto','Plan','Real','Variación','% ing']);
+  thRow.eachCell(function(c){ c.fill = fillNavy; c.font = fontWhite; c.alignment={horizontal:'center'}; c.border=bdr; });
+  var CATS_PLAN = [
+    {titulo:'💰 INGRESOS', filas:[
+      'Sueldo neto','Variables / freelance','Otros ingresos'
+    ]},
+    {titulo:'🏠 NECESIDADES (≈50%)', filas:[
+      'Vivienda (arriendo/cuota hipoteca)','Servicios públicos','Mercado','Transporte / gasolina','Salud (EPS, medicina prepagada)','Educación','Internet / celular'
+    ]},
+    {titulo:'🎈 DESEOS (≈30%)', filas:[
+      'Restaurantes / comer fuera','Suscripciones (Netflix, Spotify, etc.)','Ocio / entretenimiento','Ropa','Gustos / regalos','Café / pequeños lujos'
+    ]},
+    {titulo:'💳 CUOTAS DE DEUDAS', filas:[
+      'Tarjetas de crédito','Crédito libre inversión','Otras cuotas'
+    ]},
+    {titulo:'💰 AHORRO E INVERSIÓN', filas:[
+      'FIC / cuenta alta rentabilidad','AFC (Art. 126-4 ET)','Pensión voluntaria','FNA','Abono extra a deudas malas','Otras inversiones'
+    ]},
+    {titulo:'🐷 APORTE A ALCANCÍA', filas:[
+      'Sinking funds del mes (ver hoja Alcancía)'
+    ]}
+  ];
+  var ingTotalRow = null;
+  var rowsByCat = {};
+  CATS_PLAN.forEach(function(cat){
+    var catRow = ws2.addRow([cat.titulo,'','','','','']);
+    catRow.eachCell(function(c){ c.fill = fillCat; c.font = fontCat; c.border = bdr; });
+    ws2.mergeCells('A'+catRow.number+':F'+catRow.number);
+    var startRow = catRow.number + 1;
+    cat.filas.forEach(function(label){
+      var r = ws2.addRow(['', label, 0, 0, '', '']);
+      r.getCell(1).fill = fillGray; r.getCell(1).border = bdr;
+      r.getCell(2).font = {color:{argb:'FF374151'},size:10}; r.getCell(2).border = bdr;
+      [3,4].forEach(function(i){
+        var c = r.getCell(i);
+        c.fill = fillAmber; c.font = {bold:true,color:{argb:'FF92400E'},size:10};
+        c.border = bdr; fmtMoney(c);
+      });
+      r.getCell(5).value = {formula:'D'+r.number+'-C'+r.number};
+      r.getCell(5).fill = fillCalc; r.getCell(5).border = bdr; fmtMoney(r.getCell(5));
+      r.getCell(6).fill = fillCalc; r.getCell(6).border = bdr;
+    });
+    var endRow = ws2.lastRow.number;
+    var subRow = ws2.addRow(['','Subtotal '+cat.titulo,
+      {formula:'SUM(C'+startRow+':C'+endRow+')'},
+      {formula:'SUM(D'+startRow+':D'+endRow+')'},
+      {formula:'SUM(E'+startRow+':E'+endRow+')'},
+      ''
+    ]);
+    subRow.eachCell(function(c){ c.fill = fillGreen; c.font = fontSub; c.border = bdr; });
+    [3,4,5].forEach(function(i){ fmtMoney(subRow.getCell(i)); });
+    rowsByCat[cat.titulo] = {sub: subRow.number, start: startRow, end: endRow};
+    if (cat.titulo === '💰 INGRESOS') ingTotalRow = subRow.number;
+  });
+  // % ingreso (columna F) para todas las filas
+  CATS_PLAN.forEach(function(cat){
+    var info = rowsByCat[cat.titulo];
+    for (var r = info.start; r <= info.end; r++){
+      ws2.getCell('F'+r).value = {formula:'IF($D$'+ingTotalRow+'=0,0,D'+r+'/$D$'+ingTotalRow+')'};
+      fmtPct(ws2.getCell('F'+r));
+    }
+    ws2.getCell('F'+info.sub).value = {formula:'IF($D$'+ingTotalRow+'=0,0,D'+info.sub+'/$D$'+ingTotalRow+')'};
+    fmtPct(ws2.getCell('F'+info.sub));
+    ws2.getCell('F'+info.sub).fill = fillGreen; ws2.getCell('F'+info.sub).font = fontSub;
+  });
+  // Balance del mes
+  ws2.addRow([]);
+  var sumGastosReal = '(D'+rowsByCat['🏠 NECESIDADES (≈50%)'].sub+'+D'+rowsByCat['🎈 DESEOS (≈30%)'].sub+'+D'+rowsByCat['💳 CUOTAS DE DEUDAS'].sub+'+D'+rowsByCat['💰 AHORRO E INVERSIÓN'].sub+'+D'+rowsByCat['🐷 APORTE A ALCANCÍA'].sub+')';
+  var sumGastosPlan = '(C'+rowsByCat['🏠 NECESIDADES (≈50%)'].sub+'+C'+rowsByCat['🎈 DESEOS (≈30%)'].sub+'+C'+rowsByCat['💳 CUOTAS DE DEUDAS'].sub+'+C'+rowsByCat['💰 AHORRO E INVERSIÓN'].sub+'+C'+rowsByCat['🐷 APORTE A ALCANCÍA'].sub+')';
+  var balRow = ws2.addRow(['','BALANCE DEL MES (Ingresos − Gastos)',
+    {formula:'C'+ingTotalRow+'-'+sumGastosPlan},
+    {formula:'D'+ingTotalRow+'-'+sumGastosReal},
+    '',''
+  ]);
+  balRow.eachCell(function(c){ c.fill = fillNavy; c.font = {bold:true,color:{argb:'FFFFFFFF'},size:11}; c.border = bdr; });
+  [3,4].forEach(function(i){ fmtMoney(balRow.getCell(i)); });
+  // Vista 50/30/20
+  ws2.addRow([]);
+  var vrH = ws2.addRow(['🎯 VISTA 50/30/20','Tope esperado','Plan','Real','Diferencia',''])
+  vrH.eachCell(function(c){ c.fill = fillCat; c.font = fontCat; c.border = bdr; });
+  var nec = rowsByCat['🏠 NECESIDADES (≈50%)'].sub;
+  var des = rowsByCat['🎈 DESEOS (≈30%)'].sub;
+  var ahor = rowsByCat['💰 AHORRO E INVERSIÓN'].sub;
+  var deu = rowsByCat['💳 CUOTAS DE DEUDAS'].sub;
+  var v50 = ws2.addRow(['','50% Necesidades',
+    {formula:'D'+ingTotalRow+'*0.5'},
+    {formula:'C'+nec},
+    {formula:'D'+nec},
+    {formula:'D'+nec+'-D'+ingTotalRow+'*0.5'}
+  ]);
+  v50.eachCell(function(c){ c.border = bdr; }); [3,4,5,6].forEach(function(i){ fmtMoney(v50.getCell(i)); });
+  v50.getCell(2).fill = {type:'pattern',pattern:'solid',fgColor:{argb:'FFFEF7E6'}};
+  var v30 = ws2.addRow(['','30% Deseos',
+    {formula:'D'+ingTotalRow+'*0.3'},
+    {formula:'C'+des},
+    {formula:'D'+des},
+    {formula:'D'+des+'-D'+ingTotalRow+'*0.3'}
+  ]);
+  v30.eachCell(function(c){ c.border = bdr; }); [3,4,5,6].forEach(function(i){ fmtMoney(v30.getCell(i)); });
+  v30.getCell(2).fill = {type:'pattern',pattern:'solid',fgColor:{argb:'FFEEF2FF'}};
+  var v20 = ws2.addRow(['','20% Ahorro + Cuotas + Alcancía',
+    {formula:'D'+ingTotalRow+'*0.2'},
+    {formula:'C'+ahor+'+C'+deu+'+C'+rowsByCat['🐷 APORTE A ALCANCÍA'].sub},
+    {formula:'D'+ahor+'+D'+deu+'+D'+rowsByCat['🐷 APORTE A ALCANCÍA'].sub},
+    {formula:'(D'+ahor+'+D'+deu+'+D'+rowsByCat['🐷 APORTE A ALCANCÍA'].sub+')-D'+ingTotalRow+'*0.2'}
+  ]);
+  v20.eachCell(function(c){ c.border = bdr; }); [3,4,5,6].forEach(function(i){ fmtMoney(v20.getCell(i)); });
+  v20.getCell(2).fill = {type:'pattern',pattern:'solid',fgColor:{argb:'FFECFDF5'}};
+  ws2.addRow([]);
+  var t1 = ws2.addRow(['','💡 Llena las columnas Plan (C) y Real (D). Variación (E) y % ingreso (F) se calculan solas.','','','','']);
+  t1.getCell(2).font = {italic:true,color:{argb:'FF6B7280'},size:9};
+  ws2.mergeCells('B'+t1.number+':F'+t1.number);
+  // ════════════════════════════════════════════════════════
+  // HOJA 3: 🐷 Alcancía (sinking funds)
+  // ════════════════════════════════════════════════════════
+  var ws3 = wb.addWorksheet('🐷 Alcancía', {properties:{tabColor:{argb:'FFD97706'}}});
+  ws3.columns = [{width:34},{width:20},{width:18},{width:18}];
+  styleHeader(ws3, 'A1:D1', 'ALCANCÍA — Gastos no mensuales (sinking funds)');
+  ws3.getRow(1).height = 28;
+  ws3.addRow([]);
+  var th3 = ws3.addRow(['Concepto','Mes en que cae','Monto estimado','Apartar mensual']);
+  th3.eachCell(function(c){ c.fill = fillNavy; c.font = fontWhite; c.alignment={horizontal:'center'}; c.border = bdr; });
+  var alcancíaItems = [
+    ['SOAT','Mar', 0],
+    ['Tecnomecánica','Ago', 0],
+    ['Impuesto vehicular','Jun', 0],
+    ['Predial','Mar', 0],
+    ['Declaración renta PN','Ago-Oct', 0],
+    ['Vacaciones (mid-year)','Jul', 0],
+    ['Navidad (regalos + cena)','Dic', 0],
+    ['Cumpleaños del año','Varios', 0],
+    ['Mantenimiento carro','Varios', 0],
+    ['Médicos / odontología','Varios', 0],
+    ['Útiles escolares','Ene+Jul', 0],
+    ['Renovación cédula/pasaporte','—', 0],
+    ['Suscripciones anuales','—', 0],
+    ['Mantenimiento vivienda','Varios', 0],
+    ['Otro 1','—', 0],
+    ['Otro 2','—', 0]
+  ];
+  var alcancíaStart = ws3.lastRow.number + 1;
+  alcancíaItems.forEach(function(item){
+    var r = ws3.addRow([item[0], item[1], item[2], '']);
+    r.getCell(1).font = {size:10,color:{argb:'FF374151'}}; r.getCell(1).border = bdr;
+    r.getCell(2).fill = fillAmber; r.getCell(2).font = {bold:true,color:{argb:'FF92400E'},size:10};
+    r.getCell(2).border = bdr; r.getCell(2).alignment = {horizontal:'center'};
+    r.getCell(3).fill = fillAmber; r.getCell(3).font = {bold:true,color:{argb:'FF92400E'},size:10};
+    r.getCell(3).border = bdr; fmtMoney(r.getCell(3));
+    r.getCell(4).value = {formula:'C'+r.number+'/12'};
+    r.getCell(4).fill = fillCalc; r.getCell(4).font = {color:{argb:'FF065F46'},size:10};
+    r.getCell(4).border = bdr; fmtMoney(r.getCell(4));
+  });
+  var alcancíaEnd = ws3.lastRow.number;
+  var totAlcancía = ws3.addRow(['TOTAL', '',
+    {formula:'SUM(C'+alcancíaStart+':C'+alcancíaEnd+')'},
+    {formula:'SUM(D'+alcancíaStart+':D'+alcancíaEnd+')'}
+  ]);
+  totAlcancía.eachCell(function(c){ c.fill = fillNavy; c.font = fontWhite; c.border = bdr; });
+  fmtMoney(totAlcancía.getCell(3)); fmtMoney(totAlcancía.getCell(4));
+  ws3.addRow([]);
+  var nh = ws3.addRow(['💡 Apartar mensual = Monto/12. Trasládalo a "Aporte a alcancía" en el Plan mensual.','','','']);
+  nh.getCell(1).font = {italic:true,color:{argb:'FF6B7280'},size:10};
+  ws3.mergeCells('A'+nh.number+':D'+nh.number);
+  // ════════════════════════════════════════════════════════
+  // HOJA 4: 🎯 Metas
+  // ════════════════════════════════════════════════════════
+  var ws4 = wb.addWorksheet('🎯 Metas', {properties:{tabColor:{argb:'FF8B5CF6'}}});
+  ws4.columns = [{width:34},{width:14},{width:18},{width:18},{width:18},{width:18}];
+  styleHeader(ws4, 'A1:F1', 'METAS DE AHORRO — '+anio);
+  ws4.getRow(1).height = 28;
+  ws4.addRow([]);
+  var th4 = ws4.addRow(['Meta','Plazo (meses)','Objetivo','Ya tengo','Falta','Apartar/mes']);
+  th4.eachCell(function(c){ c.fill = fillNavy; c.font = fontWhite; c.alignment={horizontal:'center'}; c.border = bdr; });
+  var metas = [
+    ['Fondo emergencia (3 meses gastos)', 6],
+    ['Fondo desempleo (6 meses gastos)', 18],
+    ['Cuota inicial vivienda', 36],
+    ['Cuota inicial carro (si aplica)', 24],
+    ['Viaje grande', 12],
+    ['Reserva educación / cursos', 12],
+    ['Equipo de trabajo / pc', 6],
+    ['— meta libre —', 12],
+    ['— meta libre —', 12]
+  ];
+  var metaStart = ws4.lastRow.number + 1;
+  metas.forEach(function(m){
+    var r = ws4.addRow([m[0], m[1], 0, 0, '', '']);
+    r.getCell(1).font = {size:10,color:{argb:'FF374151'}}; r.getCell(1).border = bdr;
+    [2,3,4].forEach(function(i){
+      var c = r.getCell(i);
+      c.fill = fillAmber; c.font = {bold:true,color:{argb:'FF92400E'},size:10};
+      c.border = bdr;
+      if (i > 1) fmtMoney(c); else c.alignment = {horizontal:'center'};
+    });
+    r.getCell(5).value = {formula:'C'+r.number+'-D'+r.number};
+    r.getCell(5).fill = fillCalc; r.getCell(5).border = bdr; fmtMoney(r.getCell(5));
+    r.getCell(6).value = {formula:'IF(B'+r.number+'=0,0,E'+r.number+'/B'+r.number+')'};
+    r.getCell(6).fill = fillCalc; r.getCell(6).border = bdr; fmtMoney(r.getCell(6));
+  });
+  var metaEnd = ws4.lastRow.number;
+  var totMetas = ws4.addRow(['TOTAL APARTAR MENSUAL EN METAS', '', '', '', '',
+    {formula:'SUM(F'+metaStart+':F'+metaEnd+')'}
+  ]);
+  totMetas.eachCell(function(c){ c.fill = fillNavy; c.font = fontWhite; c.border = bdr; });
+  fmtMoney(totMetas.getCell(6));
+  ws4.mergeCells('A'+totMetas.number+':E'+totMetas.number);
+  // ════════════════════════════════════════════════════════
+  // HOJA 5: 💳 Deudas
+  // ════════════════════════════════════════════════════════
+  var ws5 = wb.addWorksheet('💳 Deudas', {properties:{tabColor:{argb:'FFDC2626'}}});
+  ws5.columns = [{width:30},{width:18},{width:14},{width:16},{width:16},{width:14}];
+  styleHeader(ws5, 'A1:F1', 'PLAN DE DEUDAS — Avalancha');
+  ws5.getRow(1).height = 28;
+  ws5.addRow([]);
+  var th5 = ws5.addRow(['Acreedor','Saldo','Tasa E.A.','Cuota mín.','Cuota plan','Orden ataque']);
+  th5.eachCell(function(c){ c.fill = fillNavy; c.font = fontWhite; c.alignment={horizontal:'center'}; c.border = bdr; });
+  var deudaStart = ws5.lastRow.number + 1;
+  for (var i = 0; i < 8; i++){
+    var r = ws5.addRow(['', 0, 0, 0, 0, '']);
+    r.getCell(1).fill = fillAmber; r.getCell(1).font = {bold:true,color:{argb:'FF92400E'},size:10};
+    r.getCell(1).border = bdr;
+    [2,4,5].forEach(function(idx){
+      var c = r.getCell(idx);
+      c.fill = fillAmber; c.font = {bold:true,color:{argb:'FF92400E'},size:10};
+      c.border = bdr; fmtMoney(c);
+    });
+    r.getCell(3).fill = fillAmber; r.getCell(3).font = {bold:true,color:{argb:'FF92400E'},size:10};
+    r.getCell(3).border = bdr; fmtPct(r.getCell(3));
+    r.getCell(6).value = {formula:'IF(C'+r.number+'=0,"",RANK(C'+r.number+',$C$'+deudaStart+':$C$'+(deudaStart+7)+',0))'};
+    r.getCell(6).fill = fillCalc; r.getCell(6).border = bdr; r.getCell(6).alignment = {horizontal:'center'};
+  }
+  var deudaEnd = ws5.lastRow.number;
+  var totDeu = ws5.addRow(['TOTAL DEUDAS',
+    {formula:'SUM(B'+deudaStart+':B'+deudaEnd+')'},
+    {formula:'IF(SUM(B'+deudaStart+':B'+deudaEnd+')=0,0,SUMPRODUCT(B'+deudaStart+':B'+deudaEnd+',C'+deudaStart+':C'+deudaEnd+')/SUM(B'+deudaStart+':B'+deudaEnd+'))'},
+    '',
+    {formula:'SUM(E'+deudaStart+':E'+deudaEnd+')'},
+    ''
+  ]);
+  totDeu.eachCell(function(c){ c.fill = fillNavy; c.font = fontWhite; c.border = bdr; });
+  fmtMoney(totDeu.getCell(2));
+  fmtPct(totDeu.getCell(3));
+  fmtMoney(totDeu.getCell(5));
+  ws5.addRow([]);
+  var alertHdr = ws5.addRow(['⚠️ ALERTAS','','','','','']);
+  alertHdr.getCell(1).fill = fillCat; alertHdr.getCell(1).font = fontCat; alertHdr.getCell(1).border = bdr;
+  ws5.mergeCells('A'+alertHdr.number+':F'+alertHdr.number);
+  ['Tasa de usura (consumo/ordinario): consulta SuperFinanciera publicación mensual. Si alguna deuda la supera → reclama.',
+   'Cuota total / ingreso > 35% → apalancamiento alto. > 40% → tope legal hipoteca (Decreto 583/2025).',
+   'Avalancha = atacas la tasa más alta primero (matemáticamente óptima).',
+   'Bola de nieve = atacas el saldo más bajo primero (motivacional).',
+   'El abono extra es lo que acelera. Sin abono extra, las dos estrategias dan igual.'
+  ].forEach(function(txt){
+    var r = ws5.addRow([txt,'','','','','']);
+    r.getCell(1).font = {size:10,color:{argb:'FF374151'}};
+    ws5.mergeCells('A'+r.number+':F'+r.number);
+  });
+  // ════════════════════════════════════════════════════════
+  // HOJA 6: 📈 Patrimonio
+  // ════════════════════════════════════════════════════════
+  var ws6 = wb.addWorksheet('📈 Patrimonio', {properties:{tabColor:{argb:'FF065F46'}}});
+  ws6.columns = [{width:38},{width:20},{width:50}];
+  styleHeader(ws6, 'A1:C1', 'PATRIMONIO NETO — corte mes');
+  ws6.getRow(1).height = 28;
+  ws6.addRow([]);
+  function patHeader(text){
+    var r = ws6.addRow([text,'','']);
+    r.getCell(1).fill = fillCat; r.getCell(1).font = fontCat; r.getCell(1).border = bdr;
+    ws6.mergeCells('A'+r.number+':C'+r.number);
+    return r;
+  }
+  function patItem(label, hint){
+    var r = ws6.addRow([label, 0, hint||'']);
+    r.getCell(1).font = {size:10,color:{argb:'FF374151'}}; r.getCell(1).border = bdr;
+    r.getCell(2).fill = fillAmber; r.getCell(2).font = {bold:true,color:{argb:'FF92400E'},size:10};
+    r.getCell(2).border = bdr; fmtMoney(r.getCell(2));
+    r.getCell(3).font = {italic:true,color:{argb:'FF6B7280'},size:9};
+    r.getCell(3).border = bdr;
+    return r;
+  }
+  patHeader('🟢 ACTIVOS');
+  var actStart = ws6.lastRow.number + 1;
+  patItem('Cuentas corrientes / ahorros', 'Líquido inmediato');
+  patItem('Cuentas alta rentabilidad / bolsillos', '');
+  patItem('CDT', 'Plazo fijo, retención 4% al rendimiento');
+  patItem('FIC (fondos de inversión)', 'Retefuente 4% al rendimiento');
+  patItem('AFC', 'Exenta hasta 30% ingreso, tope 3.800 UVT (Art. 126-4 ET)');
+  patItem('Pensión voluntaria', 'Beneficio fiscal similar');
+  patItem('FNA / cesantías', 'Tasa social VIS, hipoteca con beneficios');
+  patItem('Acciones / fondos extranjeros', '');
+  patItem('Inmuebles (avalúo comercial)', 'Valor de venta hoy, no avalúo catastral');
+  patItem('Vehículos (valor venta hoy)', 'Deprecia 10-15% año');
+  patItem('Otros activos', '');
+  var actEnd = ws6.lastRow.number;
+  var totAct = ws6.addRow(['Total activos',
+    {formula:'SUM(B'+actStart+':B'+actEnd+')'}, ''
+  ]);
+  totAct.eachCell(function(c){ c.fill = fillGreen; c.font = fontSub; c.border = bdr; });
+  fmtMoney(totAct.getCell(2));
+  patHeader('🔴 PASIVOS');
+  var pasStart = ws6.lastRow.number + 1;
+  patItem('Hipoteca (saldo)', 'Deuda buena — financia activo que se aprecia');
+  patItem('Crédito vehículo', '');
+  patItem('Tarjetas de crédito', 'Saldo total no pagado');
+  patItem('Crédito libre inversión', '');
+  patItem('Crédito educativo', '');
+  patItem('Otras deudas', '');
+  var pasEnd = ws6.lastRow.number;
+  var totPas = ws6.addRow(['Total pasivos',
+    {formula:'SUM(B'+pasStart+':B'+pasEnd+')'}, ''
+  ]);
+  totPas.eachCell(function(c){ c.fill = fillGreen; c.font = fontSub; c.border = bdr; });
+  fmtMoney(totPas.getCell(2));
+  ws6.addRow([]);
+  var totNeto = ws6.addRow(['PATRIMONIO NETO',
+    {formula:'B'+totAct.number+'-B'+totPas.number}, '= Activos − Pasivos'
+  ]);
+  totNeto.eachCell(function(c){ c.fill = fillNavy; c.font = fontWhite; c.border = bdr; });
+  fmtMoney(totNeto.getCell(2));
+  // ════════════════════════════════════════════════════════
+  // HOJA 7: 📅 Tracker
+  // ════════════════════════════════════════════════════════
+  var ws7 = wb.addWorksheet('📅 Tracker', {properties:{tabColor:{argb:'FF7C3AED'}}});
+  ws7.columns = [{width:14},{width:14},{width:14},{width:14},{width:14},{width:16},{width:18},{width:14}];
+  styleHeader(ws7, 'A1:H1', 'TRACKER MENSUAL '+anio+' — Cierre cada mes');
+  ws7.getRow(1).height = 28;
+  ws7.addRow([]);
+  var th7 = ws7.addRow(['Mes','Ingreso','Necesidades','Deseos','Cuotas deudas','Ahorro+Alcancía','Patrimonio neto','Tasa ahorro']);
+  th7.eachCell(function(c){ c.fill = fillNavy; c.font = fontWhite; c.alignment={horizontal:'center'}; c.border = bdr; });
+  var meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  var trackStart = ws7.lastRow.number + 1;
+  meses.forEach(function(m){
+    var r = ws7.addRow([m, 0, 0, 0, 0, 0, 0, '']);
+    r.getCell(1).font = {bold:true,size:10,color:{argb:'FF1B3A5C'}}; r.getCell(1).border = bdr;
+    [2,3,4,5,6,7].forEach(function(i){
+      var c = r.getCell(i);
+      c.fill = fillAmber; c.font = {bold:true,color:{argb:'FF92400E'},size:10};
+      c.border = bdr; fmtMoney(c);
+    });
+    r.getCell(8).value = {formula:'IF(B'+r.number+'=0,0,F'+r.number+'/B'+r.number+')'};
+    r.getCell(8).fill = fillCalc; r.getCell(8).border = bdr; fmtPct(r.getCell(8));
+  });
+  var trackEnd = ws7.lastRow.number;
+  var totTrack = ws7.addRow(['TOTAL AÑO',
+    {formula:'SUM(B'+trackStart+':B'+trackEnd+')'},
+    {formula:'SUM(C'+trackStart+':C'+trackEnd+')'},
+    {formula:'SUM(D'+trackStart+':D'+trackEnd+')'},
+    {formula:'SUM(E'+trackStart+':E'+trackEnd+')'},
+    {formula:'SUM(F'+trackStart+':F'+trackEnd+')'},
+    '—',
+    {formula:'IF(B'+(trackEnd+1)+'=0,0,F'+(trackEnd+1)+'/B'+(trackEnd+1)+')'}
+  ]);
+  totTrack.eachCell(function(c){ c.fill = fillNavy; c.font = fontWhite; c.border = bdr; });
+  [2,3,4,5,6].forEach(function(i){ fmtMoney(totTrack.getCell(i)); });
+  fmtPct(totTrack.getCell(8));
+  ws7.addRow([]);
+  var nt = ws7.addRow(['💡 Cada cierre de mes, copia los subtotales del Plan mensual aquí. La tasa de ahorro real del año aparece sola.','','','','','','','']);
+  nt.getCell(1).font = {italic:true,color:{argb:'FF6B7280'},size:10};
+  ws7.mergeCells('A'+nt.number+':H'+nt.number);
+  // ─── Si es PRO, añadir 5 hojas extras ───
+  var styles = {fillNavy:fillNavy, fillGreen:fillGreen, fillCat:fillCat, fillAmber:fillAmber, fillCalc:fillCalc, fillGray:fillGray, fontWhite:fontWhite, fontCat:fontCat, fontSub:fontSub, bdr:bdr};
+  if (pro) {
+    addPROTracker5y(wb, styles, anio);
+    addPROSimuladorAFC(wb, styles, anio);
+    addPROAmortizacionHipoteca(wb, styles, anio);
+    addPROPlanFIRE(wb, styles, anio);
+    addPROInversion101(wb, styles, anio);
+  }
+  // ─── Generar y descargar ───
+  var nSheets = pro ? 12 : 7;
+  var fileName = pro ? 'presupuesto-personal-PRO-'+anio+'.xlsx' : 'presupuesto-personal-'+anio+'.xlsx';
+  wb.xlsx.writeBuffer().then(function(buf){
+    var blob = new Blob([buf], {type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = fileName;
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(a.href); }, 0);
+    if (typeof exoToast === 'function') {
+      exoToast('Plantilla descargada — '+nSheets+' hojas formuladas', 'success');
+    }
+  }).catch(function(err){
+    console.error(err);
+    alert('Error al generar el archivo. Revisa la consola.');
+  });
+}
+// ════════════════════════════════════════════════════════
+//   HOJAS PRO — solo se añaden si pro=true
+// ════════════════════════════════════════════════════════
+function fmtMoney(c){ c.numFmt='#,##0'; c.alignment={horizontal:'right'}; }
+function fmtPct(c){ c.numFmt='0.0%'; c.alignment={horizontal:'right'}; }
+// PRO 1 — Tracker 5 años (60 meses)
+function addPROTracker5y(wb, S, anioBase){
+  var ws = wb.addWorksheet('📊 Tracker 5 años', {properties:{tabColor:{argb:'FFEC4899'}}});
+  ws.columns = [{width:8},{width:10},{width:14},{width:14},{width:14},{width:14},{width:12},{width:14}];
+  ws.mergeCells('A1:H1');
+  var t = ws.getCell('A1');
+  t.value = 'TRACKER 5 AÑOS — '+anioBase+' a '+(anioBase+4);
+  t.fill = S.fillNavy; t.font = {bold:true,color:{argb:'FFFFFFFF'},size:14};
+  t.alignment = {horizontal:'center',vertical:'middle'};
+  ws.getRow(1).height = 28;
+  ws.addRow([]);
+  var hdr = ws.addRow(['Año','Mes','Ingreso','Gastos','Cuotas deuda','Ahorro+Hucha','Tasa ahorro','Patrim. neto fin mes']);
+  hdr.eachCell(function(c){ c.fill=S.fillNavy; c.font=S.fontWhite; c.alignment={horizontal:'center'}; c.border=S.bdr; });
+  var meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  var firstDataRow = ws.lastRow.number + 1;
+  for (var y = 0; y < 5; y++){
+    var anioActual = anioBase + y;
+    var yearStartRow = ws.lastRow.number + 1;
+    for (var m = 0; m < 12; m++){
+      var r = ws.addRow([anioActual, meses[m], 0, 0, 0, 0, '', 0]);
+      r.getCell(1).font = {bold:true,size:9,color:{argb:'FF1B3A5C'}}; r.getCell(1).border=S.bdr; r.getCell(1).alignment={horizontal:'center'};
+      r.getCell(2).font = {size:9,color:{argb:'FF374151'}}; r.getCell(2).border=S.bdr; r.getCell(2).alignment={horizontal:'center'};
+      [3,4,5,6,8].forEach(function(i){
+        var cc = r.getCell(i);
+        cc.fill = S.fillAmber; cc.font={bold:true,color:{argb:'FF92400E'},size:9};
+        cc.border = S.bdr; fmtMoney(cc);
+      });
+      r.getCell(7).value = {formula:'IF(C'+r.number+'=0,0,F'+r.number+'/C'+r.number+')'};
+      r.getCell(7).fill = S.fillCalc; r.getCell(7).border=S.bdr; fmtPct(r.getCell(7));
+    }
+    var yearEndRow = ws.lastRow.number;
+    var totRow = ws.addRow(['TOTAL '+anioActual, '',
+      {formula:'SUM(C'+yearStartRow+':C'+yearEndRow+')'},
+      {formula:'SUM(D'+yearStartRow+':D'+yearEndRow+')'},
+      {formula:'SUM(E'+yearStartRow+':E'+yearEndRow+')'},
+      {formula:'SUM(F'+yearStartRow+':F'+yearEndRow+')'},
+      {formula:'IF(C'+(yearEndRow+1)+'=0,0,F'+(yearEndRow+1)+'/C'+(yearEndRow+1)+')'},
+      {formula:'H'+yearEndRow}
+    ]);
+    totRow.eachCell(function(c){ c.fill=S.fillGreen; c.font=S.fontSub; c.border=S.bdr; });
+    [3,4,5,6,8].forEach(function(i){ fmtMoney(totRow.getCell(i)); });
+    fmtPct(totRow.getCell(7));
+    ws.mergeCells('A'+totRow.number+':B'+totRow.number);
+  }
+  // GRAN TOTAL 5 años
+  ws.addRow([]);
+  var gtRow = ws.addRow(['GRAN TOTAL 5 AÑOS', '',
+    {formula:'SUMIF(B'+firstDataRow+':B'+(ws.lastRow.number-1)+',"<>"&"",C'+firstDataRow+':C'+(ws.lastRow.number-1)+')'},
+    {formula:'SUMIF(B'+firstDataRow+':B'+(ws.lastRow.number-1)+',"<>"&"",D'+firstDataRow+':D'+(ws.lastRow.number-1)+')'},
+    {formula:'SUMIF(B'+firstDataRow+':B'+(ws.lastRow.number-1)+',"<>"&"",E'+firstDataRow+':E'+(ws.lastRow.number-1)+')'},
+    {formula:'SUMIF(B'+firstDataRow+':B'+(ws.lastRow.number-1)+',"<>"&"",F'+firstDataRow+':F'+(ws.lastRow.number-1)+')'},
+    'promedio: completar', '—'
+  ]);
+  gtRow.eachCell(function(c){ c.fill=S.fillNavy; c.font=S.fontWhite; c.border=S.bdr; });
+  [3,4,5,6].forEach(function(i){ fmtMoney(gtRow.getCell(i)); });
+  ws.mergeCells('A'+gtRow.number+':B'+gtRow.number);
+  ws.addRow([]);
+  var nota = ws.addRow(['💡 Cada cierre de mes, copia los totales del Plan mensual aquí. La curva de patrimonio neto es la métrica más honesta de progreso a 5 años.','','','','','','','']);
+  nota.getCell(1).font={italic:true,color:{argb:'FF6B7280'},size:9};
+  ws.mergeCells('A'+nota.number+':H'+nota.number);
+}
+// PRO 2 — Simulador AFC anual con beneficio fiscal
+function addPROSimuladorAFC(wb, S, anio){
+  var ws = wb.addWorksheet('💼 Simulador AFC', {properties:{tabColor:{argb:'FF8B5CF6'}}});
+  ws.columns = [{width:38},{width:18},{width:18},{width:50}];
+  ws.mergeCells('A1:D1');
+  var t = ws.getCell('A1');
+  t.value = 'SIMULADOR AFC ANUAL — Art. 126-4 ET — '+anio;
+  t.fill = S.fillNavy; t.font={bold:true,color:{argb:'FFFFFFFF'},size:14}; t.alignment={horizontal:'center'};
+  ws.getRow(1).height = 28;
+  ws.addRow([]);
+  // Inputs
+  var hdr1 = ws.addRow(['INPUTS — completa los 4 datos','','','']);
+  hdr1.getCell(1).fill=S.fillCat; hdr1.getCell(1).font=S.fontCat; hdr1.getCell(1).border=S.bdr;
+  ws.mergeCells('A'+hdr1.number+':D'+hdr1.number);
+  function addIn(label, val, hint){
+    var r = ws.addRow([label, val, '', hint||'']);
+    r.getCell(1).border=S.bdr; r.getCell(1).font={size:11};
+    r.getCell(2).fill=S.fillAmber; r.getCell(2).font={bold:true,color:{argb:'FF92400E'},size:11};
+    r.getCell(2).border=S.bdr;
+    if (typeof val === 'number') fmtMoney(r.getCell(2));
+    r.getCell(4).font={italic:true,color:{argb:'FF6B7280'},size:9}; r.getCell(4).border=S.bdr;
+    return r;
+  }
+  var rBruto = addIn('Salario bruto mensual', 5000000, '→ tu sueldo bruto mensual');
+  var rDep = addIn('Dependientes (0-2)', 0, '→ Art. 387 ET, 10% bruto/mes c/u, máx 32 UVT');
+  var rPrep = addIn('Prepagada mensual', 0, '→ deducción Art. 387, máx 16 UVT/mes');
+  var rAFC = addIn('Aporte AFC mensual', 1500000, '→ tope 30% bruto / 3.800 UVT año (Art. 126-4 ET)');
+  ws.addRow([]);
+  // UVT 2026 referencia
+  var rUVT = ws.addRow(['UVT 2026', 52374, '', '→ Resolución DIAN']);
+  rUVT.getCell(1).border=S.bdr; rUVT.getCell(1).font={size:10,italic:true};
+  rUVT.getCell(2).font={bold:true,size:10}; rUVT.getCell(2).border=S.bdr; fmtMoney(rUVT.getCell(2));
+  ws.addRow([]);
+  // Cálculos
+  var hdr2 = ws.addRow(['CÁLCULO MENSUAL','','','']);
+  hdr2.getCell(1).fill=S.fillCat; hdr2.getCell(1).font=S.fontCat; hdr2.getCell(1).border=S.bdr;
+  ws.mergeCells('A'+hdr2.number+':D'+hdr2.number);
+  function addCalc(label, formula, hint){
+    var r = ws.addRow([label, {formula:formula}, '', hint||'']);
+    r.getCell(1).border=S.bdr; r.getCell(1).font={size:10};
+    r.getCell(2).fill=S.fillCalc; r.getCell(2).font={bold:true,color:{argb:'FF065F46'},size:10};
+    r.getCell(2).border=S.bdr; fmtMoney(r.getCell(2));
+    r.getCell(4).font={italic:true,color:{argb:'FF6B7280'},size:9}; r.getCell(4).border=S.bdr;
+    return r;
+  }
+  var brutoRef = 'B'+rBruto.number;
+  var afcRef = 'B'+rAFC.number;
+  var depRef = 'B'+rDep.number;
+  var prepRef = 'B'+rPrep.number;
+  var uvtRef = 'B'+rUVT.number;
+  var rSalud = addCalc('(−) Salud 4%', brutoRef+'*0.04', '');
+  var rPension = addCalc('(−) Pensión 4%', brutoRef+'*0.04', '');
+  var rFSP = addCalc('(−) FSP escalonado', 'IF('+brutoRef+'/$B$'+rUVT.number+'/12*52374/1750905>4,IF('+brutoRef+'/1750905>20,'+brutoRef+'*0.02,'+brutoRef+'*0.01),0)', '→ Art. 27 Ley 100');
+  var rAFCMaxIngr = addCalc('Tope AFC 30% bruto', brutoRef+'*0.3', '→ Art. 126-4');
+  var rAFCMaxUVT = addCalc('Tope AFC 3.800 UVT/año (mensual)', uvtRef+'*3800/12', '');
+  var rAFCEfectivo = addCalc('AFC efectivo (mín de los 3)', 'MIN('+afcRef+',B'+rAFCMaxIngr.number+',B'+rAFCMaxUVT.number+')', '');
+  var rDedDep = addCalc('Deducción dependientes', 'MIN('+brutoRef+'*0.1,'+uvtRef+'*32)*'+depRef, '→ Art. 387 ET');
+  var rDedPrep = addCalc('Deducción prepagada', 'MIN('+prepRef+','+uvtRef+'*16)', '→ Art. 387 ET');
+  var rBaseDed = addCalc('(=) Base después deducciones', brutoRef+'-B'+rSalud.number+'-B'+rPension.number+'-B'+rFSP.number+'-B'+rAFCEfectivo.number+'-B'+rDedDep.number+'-B'+rDedPrep.number, '');
+  var rExenta25 = addCalc('Renta exenta 25% (Art. 206 num.10)', 'MIN(B'+rBaseDed.number+'*0.25,'+uvtRef+'*790/12)', '→ tope 65,83 UVT/mes');
+  var rBaseGrav = addCalc('(=) Base gravable mensual', 'MAX(B'+rBaseDed.number+'-B'+rExenta25.number+',0)', '');
+  var rBaseGravUVT = addCalc('Base gravable en UVT', 'B'+rBaseGrav.number+'/'+uvtRef, '');
+  ws.addRow([]);
+  // Comparativo CON vs SIN AFC
+  var hdr3 = ws.addRow(['IMPACTO AFC — comparativo','','','']);
+  hdr3.getCell(1).fill=S.fillCat; hdr3.getCell(1).font=S.fontCat; hdr3.getCell(1).border=S.bdr;
+  ws.mergeCells('A'+hdr3.number+':D'+hdr3.number);
+  // Para el comparativo, calculamos retención simplificada con tabla 383 (aproximación)
+  // Retención mensual = aprox base UVT * tasa marginal. Para esta simulación didáctica,
+  // usamos la tabla escalonada del Art. 383 ET.
+  function tablaRet(uvtRefStr){
+    return 'IF('+uvtRefStr+'<=95,0,IF('+uvtRefStr+'<=150,('+uvtRefStr+'-95)*0.19,IF('+uvtRefStr+'<=360,('+uvtRefStr+'-150)*0.28+10.45,IF('+uvtRefStr+'<=640,('+uvtRefStr+'-360)*0.33+69.25,IF('+uvtRefStr+'<=945,('+uvtRefStr+'-640)*0.35+161.65,IF('+uvtRefStr+'<=2300,('+uvtRefStr+'-945)*0.37+268.4,('+uvtRefStr+'-2300)*0.39+769.75))))))';
+  }
+  var rRetConAFC = addCalc('Retención mensual CON AFC', '('+tablaRet('B'+rBaseGravUVT.number)+')*'+uvtRef, '→ Tabla Art. 383 ET');
+  // Sin AFC: recalculamos base gravable sin restar AFC
+  var sinAFCBase = brutoRef+'-B'+rSalud.number+'-B'+rPension.number+'-B'+rFSP.number+'-B'+rDedDep.number+'-B'+rDedPrep.number;
+  var sinAFCBaseExenta = '('+sinAFCBase+'-MIN(('+sinAFCBase+')*0.25,'+uvtRef+'*790/12))';
+  var sinAFCUVT = '('+sinAFCBaseExenta+'/'+uvtRef+')';
+  var rRetSinAFC = addCalc('Retención mensual SIN AFC', '('+tablaRet(sinAFCUVT)+')*'+uvtRef, '→ comparativo');
+  var rAhorroMes = addCalc('AHORRO MENSUAL EN RETENCIÓN', 'B'+rRetSinAFC.number+'-B'+rRetConAFC.number, '');
+  var rAhorroAnio = addCalc('AHORRO ANUAL', 'B'+rAhorroMes.number+'*12', '');
+  var rAFCAnio = addCalc('Aporte AFC anual', 'B'+rAFCEfectivo.number+'*12', '');
+  ws.addRow([]);
+  var rFinal = ws.addRow(['BENEFICIO TOTAL — Aporte AFC + Retención evitada año',
+    {formula:'B'+rAFCAnio.number+'+B'+rAhorroAnio.number}, '', 'Plata que sigue siendo TUYA'
+  ]);
+  rFinal.eachCell(function(c){ c.fill=S.fillNavy; c.font=S.fontWhite; c.border=S.bdr; });
+  fmtMoney(rFinal.getCell(2));
+  ws.addRow([]);
+  var ntAFC = ws.addRow(['💡 La AFC NO es un gasto. Es plata tuya en cuenta separada (uso vivienda) que además te ahorra retefuente. Tope conjunto con pensión voluntaria: 30% bruto o 3.800 UVT/año.','','','']);
+  ntAFC.getCell(1).font={italic:true,color:{argb:'FF6B7280'},size:9};
+  ws.mergeCells('A'+ntAFC.number+':D'+ntAFC.number);
+}
+// PRO 3 — Amortización hipoteca real con abonos extra
+function addPROAmortizacionHipoteca(wb, S, anio){
+  var ws = wb.addWorksheet('🏠 Amortización', {properties:{tabColor:{argb:'FF06B6D4'}}});
+  ws.columns = [{width:38},{width:18},{width:18},{width:50}];
+  ws.mergeCells('A1:D1');
+  var t = ws.getCell('A1');
+  t.value = 'AMORTIZACIÓN HIPOTECA — Decreto 583/2025';
+  t.fill = S.fillNavy; t.font={bold:true,color:{argb:'FFFFFFFF'},size:14}; t.alignment={horizontal:'center'};
+  ws.getRow(1).height = 28;
+  ws.addRow([]);
+  // Inputs
+  var hdr = ws.addRow(['INPUTS','','','']);
+  hdr.getCell(1).fill=S.fillCat; hdr.getCell(1).font=S.fontCat; hdr.getCell(1).border=S.bdr;
+  ws.mergeCells('A'+hdr.number+':D'+hdr.number);
+  function addIn(label, val, hint){
+    var r = ws.addRow([label, val, '', hint||'']);
+    r.getCell(1).border=S.bdr; r.getCell(1).font={size:11};
+    r.getCell(2).fill=S.fillAmber; r.getCell(2).font={bold:true,color:{argb:'FF92400E'},size:11};
+    r.getCell(2).border=S.bdr;
+    if (typeof val === 'number' && val < 1) { r.getCell(2).numFmt='0.00%'; r.getCell(2).alignment={horizontal:'right'}; }
+    else if (typeof val === 'number') fmtMoney(r.getCell(2));
+    r.getCell(4).font={italic:true,color:{argb:'FF6B7280'},size:9}; r.getCell(4).border=S.bdr;
+    return r;
+  }
+  var rMonto = addIn('Monto del crédito', 200000000, '→ valor financiado por el banco');
+  var rTasa = addIn('Tasa E.A.', 0.13, '→ tasa efectiva anual cotizada');
+  var rPlazo = addIn('Plazo (años)', 20, '→ típico 15-20 años');
+  var rExtra = addIn('Abono extra mensual', 200000, '→ adicional a la cuota base');
+  ws.addRow([]);
+  // Cálculos base (cuota fija)
+  var hdr2 = ws.addRow(['CÁLCULOS BASE','','','']);
+  hdr2.getCell(1).fill=S.fillCat; hdr2.getCell(1).font=S.fontCat; hdr2.getCell(1).border=S.bdr;
+  ws.mergeCells('A'+hdr2.number+':D'+hdr2.number);
+  function addCalc(label, formula, hint){
+    var r = ws.addRow([label, {formula:formula}, '', hint||'']);
+    r.getCell(1).border=S.bdr; r.getCell(1).font={size:10};
+    r.getCell(2).fill=S.fillCalc; r.getCell(2).font={bold:true,color:{argb:'FF065F46'},size:10};
+    r.getCell(2).border=S.bdr; fmtMoney(r.getCell(2));
+    r.getCell(4).font={italic:true,color:{argb:'FF6B7280'},size:9}; r.getCell(4).border=S.bdr;
+    return r;
+  }
+  var montoRef = 'B'+rMonto.number;
+  var tasaRef = 'B'+rTasa.number;
+  var plazoRef = 'B'+rPlazo.number;
+  var extraRef = 'B'+rExtra.number;
+  var rTasaMes = addCalc('Tasa mensual equivalente', '(1+'+tasaRef+')^(1/12)-1', '→ pasa de E.A. a mensual');
+  ws.getCell('B'+rTasaMes.number).numFmt = '0.0000%';
+  var rNCuotas = addCalc('Número total de cuotas', plazoRef+'*12', '');
+  ws.getCell('B'+rNCuotas.number).numFmt = '#,##0';
+  var rCuotaBase = addCalc('Cuota base mensual', montoRef+'*B'+rTasaMes.number+'*(1+B'+rTasaMes.number+')^B'+rNCuotas.number+'/((1+B'+rTasaMes.number+')^B'+rNCuotas.number+'-1)', '→ fórmula amortización francesa');
+  var rTotalSinExtra = addCalc('Total a pagar SIN abono extra', 'B'+rCuotaBase.number+'*B'+rNCuotas.number, '');
+  var rInteresesSinExtra = addCalc('Intereses totales SIN abono extra', 'B'+rTotalSinExtra.number+'-'+montoRef, '');
+  ws.addRow([]);
+  // Tabla de amortización mes a mes (240 meses para 20 años)
+  var hdr3 = ws.addRow(['TABLA DE AMORTIZACIÓN — primeros 60 meses (5 años)','','','']);
+  hdr3.getCell(1).fill=S.fillCat; hdr3.getCell(1).font=S.fontCat; hdr3.getCell(1).border=S.bdr;
+  ws.mergeCells('A'+hdr3.number+':D'+hdr3.number);
+  var thAmort = ws.addRow(['Cuota #','Intereses','Capital + extra','Saldo final']);
+  thAmort.eachCell(function(c){ c.fill=S.fillNavy; c.font=S.fontWhite; c.alignment={horizontal:'center'}; c.border=S.bdr; });
+  var firstAmRow = ws.lastRow.number + 1;
+  for (var i = 1; i <= 60; i++){
+    var prevSaldoCell = i === 1 ? montoRef : 'D'+(ws.lastRow.number);
+    var r = ws.addRow([i,
+      {formula:prevSaldoCell+'*B'+rTasaMes.number},
+      {formula:'MIN(B'+rCuotaBase.number+'-'+prevSaldoCell+'*B'+rTasaMes.number+'+'+extraRef+','+prevSaldoCell+')'},
+      {formula:'MAX('+prevSaldoCell+'-(B'+rCuotaBase.number+'-'+prevSaldoCell+'*B'+rTasaMes.number+')-'+extraRef+',0)'}
+    ]);
+    r.getCell(1).font={size:9,color:{argb:'FF374151'}}; r.getCell(1).border=S.bdr; r.getCell(1).alignment={horizontal:'center'};
+    [2,3,4].forEach(function(idx){
+      r.getCell(idx).fill=S.fillCalc;
+      r.getCell(idx).font={size:9,color:{argb:'FF065F46'}};
+      r.getCell(idx).border=S.bdr;
+      fmtMoney(r.getCell(idx));
+    });
+  }
+  ws.addRow([]);
+  var ntAm = ws.addRow(['💡 La fila "Saldo final" del mes 60 te dice cuánto debes después de 5 años. Comparado con el saldo SIN abono extra ($'+
+    Math.round(200000000*0.85).toLocaleString('es-CO')+' aprox.), la diferencia es el ahorro acumulado en intereses.','','','']);
+  ntAm.getCell(1).font={italic:true,color:{argb:'FF6B7280'},size:9};
+  ws.mergeCells('A'+ntAm.number+':D'+ntAm.number);
+  ws.addRow([]);
+  var ntAm2 = ws.addRow(['🔥 El truco más rentable de la hipoteca: cada peso abonado al capital se ahorra los intereses futuros sobre ese peso. En los primeros años (cuando casi todo va a intereses), un abono extra recorta meses al final del plazo.','','','']);
+  ntAm2.getCell(1).font={italic:true,color:{argb:'FF047857'},size:10,bold:true};
+  ws.mergeCells('A'+ntAm2.number+':D'+ntAm2.number);
+}
+// PRO 4 — Plan FIRE Colombia
+function addPROPlanFIRE(wb, S, anio){
+  var ws = wb.addWorksheet('🔥 Plan FIRE', {properties:{tabColor:{argb:'FFEF4444'}}});
+  ws.columns = [{width:36},{width:18},{width:50}];
+  ws.mergeCells('A1:C1');
+  var t = ws.getCell('A1');
+  t.value = 'PLAN FIRE COLOMBIA — Trinity Study × buffer Latam';
+  t.fill = S.fillNavy; t.font={bold:true,color:{argb:'FFFFFFFF'},size:14}; t.alignment={horizontal:'center'};
+  ws.getRow(1).height = 28;
+  ws.addRow([]);
+  // Inputs
+  var hdr = ws.addRow(['INPUTS','','']);
+  hdr.getCell(1).fill=S.fillCat; hdr.getCell(1).font=S.fontCat; hdr.getCell(1).border=S.bdr;
+  ws.mergeCells('A'+hdr.number+':C'+hdr.number);
+  function addIn(label, val, hint){
+    var r = ws.addRow([label, val, hint||'']);
+    r.getCell(1).border=S.bdr; r.getCell(1).font={size:11};
+    r.getCell(2).fill=S.fillAmber; r.getCell(2).font={bold:true,color:{argb:'FF92400E'},size:11};
+    r.getCell(2).border=S.bdr;
+    if (typeof val === 'number' && val < 1) { r.getCell(2).numFmt='0.0%'; r.getCell(2).alignment={horizontal:'right'}; }
+    else if (typeof val === 'number') fmtMoney(r.getCell(2));
+    r.getCell(3).font={italic:true,color:{argb:'FF6B7280'},size:9}; r.getCell(3).border=S.bdr;
+    return r;
+  }
+  var rEdad = addIn('Edad actual', 32, '→ tu edad hoy');
+  var rGastosMes = addIn('Gastos esenciales mensuales', 4000000, '→ no incluye lujos, sí cubrir vida básica');
+  var rCapital = addIn('Capital ya invertido', 30000000, '→ FIC + AFC + acciones + ETFs (no hipoteca)');
+  var rAporteMes = addIn('Aporte mensual planeado', 1500000, '→ lo que destinas a inversión cada mes');
+  var rTasaReal = addIn('Tasa real esperada', 0.06, '→ rendimiento - inflación, conservador 5-7%');
+  ws.addRow([]);
+  // Cálculos
+  var hdr2 = ws.addRow(['NÚMEROS FIRE','','']);
+  hdr2.getCell(1).fill=S.fillCat; hdr2.getCell(1).font=S.fontCat; hdr2.getCell(1).border=S.bdr;
+  ws.mergeCells('A'+hdr2.number+':C'+hdr2.number);
+  var gastosAnioRef = 'B'+rGastosMes.number+'*12';
+  var rGastosAnio = ws.addRow(['Gastos anuales', {formula:gastosAnioRef}, '→ gastos × 12']);
+  rGastosAnio.getCell(1).border=S.bdr; rGastosAnio.getCell(2).fill=S.fillCalc; rGastosAnio.getCell(2).font={bold:true,color:{argb:'FF065F46'}}; rGastosAnio.getCell(2).border=S.bdr; fmtMoney(rGastosAnio.getCell(2));
+  rGastosAnio.getCell(3).font={italic:true,color:{argb:'FF6B7280'},size:9}; rGastosAnio.getCell(3).border=S.bdr;
+  var rFire25 = ws.addRow(['Número FIRE estándar (gastos × 25)', {formula:'B'+rGastosAnio.number+'*25'}, '→ Trinity Study clásico']);
+  rFire25.getCell(1).border=S.bdr; rFire25.getCell(2).fill=S.fillCalc; rFire25.getCell(2).font={bold:true,color:{argb:'FF065F46'}}; rFire25.getCell(2).border=S.bdr; fmtMoney(rFire25.getCell(2));
+  rFire25.getCell(3).font={italic:true,color:{argb:'FF6B7280'},size:9}; rFire25.getCell(3).border=S.bdr;
+  var rFire30 = ws.addRow(['Número FIRE Colombia (gastos × 30)', {formula:'B'+rGastosAnio.number+'*30'}, '→ buffer +20% por inflación volátil COP']);
+  rFire30.getCell(1).border=S.bdr; rFire30.getCell(2).fill=S.fillNavy; rFire30.getCell(2).font={bold:true,color:{argb:'FFFFFFFF'},size:11}; rFire30.getCell(2).border=S.bdr; fmtMoney(rFire30.getCell(2));
+  rFire30.getCell(3).font={italic:true,color:{argb:'FF6B7280'},size:9}; rFire30.getCell(3).border=S.bdr;
+  ws.addRow([]);
+  // Tabla proyección año a año
+  var hdr3 = ws.addRow(['PROYECCIÓN AÑO A AÑO','','']);
+  hdr3.getCell(1).fill=S.fillCat; hdr3.getCell(1).font=S.fontCat; hdr3.getCell(1).border=S.bdr;
+  ws.mergeCells('A'+hdr3.number+':C'+hdr3.number);
+  var thFire = ws.addRow(['Año (edad)','Saldo fin de año','¿Cumple FIRE Colombia?']);
+  thFire.eachCell(function(c){ c.fill=S.fillNavy; c.font=S.fontWhite; c.alignment={horizontal:'center'}; c.border=S.bdr; });
+  for (var y = 1; y <= 25; y++){
+    var prevSaldoCell = y === 1 ? 'B'+rCapital.number : 'B'+(ws.lastRow.number);
+    var r = ws.addRow([y+' (edad '+(32+y)+')',
+      {formula:prevSaldoCell+'*(1+B'+rTasaReal.number+')+B'+rAporteMes.number+'*12'},
+      {formula:'IF(B'+(ws.lastRow.number+1)+'>=B'+rFire30.number+',"✅ FIRE alcanzado","faltan "&TEXT(B'+rFire30.number+'-B'+(ws.lastRow.number+1)+',"#,##0"))'}
+    ]);
+    r.getCell(1).font={bold:true,size:9,color:{argb:'FF1B3A5C'}}; r.getCell(1).border=S.bdr; r.getCell(1).alignment={horizontal:'center'};
+    r.getCell(2).fill=S.fillCalc; r.getCell(2).font={bold:true,color:{argb:'FF065F46'},size:10}; r.getCell(2).border=S.bdr; fmtMoney(r.getCell(2));
+    r.getCell(3).font={size:9,color:{argb:'FF374151'}}; r.getCell(3).border=S.bdr; r.getCell(3).alignment={horizontal:'left'};
+    // edad dinámica basada en B[rEdad.number]
+    r.getCell(1).value = {formula:'CONCATENATE("Año ",'+y+'," (edad ",'+'B'+rEdad.number+'+'+y+',")")'};
+  }
+  ws.addRow([]);
+  var ntFire = ws.addRow(['💡 La regla del 4% (Bengen 1994): si tienes 25× tus gastos invertidos en cartera 60/40, puedes retirar el 4% el primer año y ajustarlo por inflación cada año, con muy alta probabilidad de que dure 30+ años. Para Colombia, ×30 da buffer extra.','','']);
+  ntFire.getCell(1).font={italic:true,color:{argb:'FF6B7280'},size:9};
+  ws.mergeCells('A'+ntFire.number+':C'+ntFire.number);
+  var ntFire2 = ws.addRow(['🔥 FIRE no es retirarse — es tener la opción de retirarte. La diferencia entre trabajar porque DEBES y trabajar porque QUIERES es enorme.','','']);
+  ntFire2.getCell(1).font={italic:true,color:{argb:'FFEF4444'},size:10,bold:true};
+  ws.mergeCells('A'+ntFire2.number+':C'+ntFire2.number);
+}
+// PRO 5 — Plan inversión 101 con asignación por edad
+function addPROInversion101(wb, S, anio){
+  var ws = wb.addWorksheet('💎 Inversión 101', {properties:{tabColor:{argb:'FF7C3AED'}}});
+  ws.columns = [{width:38},{width:14},{width:18},{width:50}];
+  ws.mergeCells('A1:D1');
+  var t = ws.getCell('A1');
+  t.value = 'PLAN DE INVERSIÓN 101 — asignación por edad y perfil';
+  t.fill = S.fillNavy; t.font={bold:true,color:{argb:'FFFFFFFF'},size:14}; t.alignment={horizontal:'center'};
+  ws.getRow(1).height = 28;
+  ws.addRow([]);
+  // Inputs
+  var hdr = ws.addRow(['INPUTS','','','']);
+  hdr.getCell(1).fill=S.fillCat; hdr.getCell(1).font=S.fontCat; hdr.getCell(1).border=S.bdr;
+  ws.mergeCells('A'+hdr.number+':D'+hdr.number);
+  function addIn(label, val, hint){
+    var r = ws.addRow([label, val, '', hint||'']);
+    r.getCell(1).border=S.bdr; r.getCell(1).font={size:11};
+    r.getCell(2).fill=S.fillAmber; r.getCell(2).font={bold:true,color:{argb:'FF92400E'},size:11};
+    r.getCell(2).border=S.bdr;
+    if (typeof val === 'number') fmtMoney(r.getCell(2));
+    r.getCell(4).font={italic:true,color:{argb:'FF6B7280'},size:9}; r.getCell(4).border=S.bdr;
+    return r;
+  }
+  var rEdad = addIn('Edad actual', 32, '→ regla 100-edad = % renta variable');
+  var rPerfil = ws.addRow(['Perfil riesgo (1=conservador, 2=moderado, 3=agresivo)', 2, '', '→ ajusta ±10% sobre regla 100-edad']);
+  rPerfil.getCell(1).border=S.bdr; rPerfil.getCell(1).font={size:11};
+  rPerfil.getCell(2).fill=S.fillAmber; rPerfil.getCell(2).font={bold:true,color:{argb:'FF92400E'},size:11};
+  rPerfil.getCell(2).border=S.bdr; rPerfil.getCell(2).alignment={horizontal:'center'};
+  rPerfil.getCell(4).font={italic:true,color:{argb:'FF6B7280'},size:9}; rPerfil.getCell(4).border=S.bdr;
+  var rCapital = addIn('Capital disponible para invertir', 30000000, '→ aparte del fondo de emergencia');
+  var rAporte = addIn('Aporte mensual sostenido', 1500000, '→ lo que vas a invertir cada mes');
+  ws.addRow([]);
+  // Cálculo de % renta variable según edad y perfil
+  var hdr2 = ws.addRow(['ASIGNACIÓN SUGERIDA','','','']);
+  hdr2.getCell(1).fill=S.fillCat; hdr2.getCell(1).font=S.fontCat; hdr2.getCell(1).border=S.bdr;
+  ws.mergeCells('A'+hdr2.number+':D'+hdr2.number);
+  // % RV = MAX(MIN(100 - edad + (perfil-2)*10, 90), 30)
+  var pctRVFormula = 'MAX(MIN(100-B'+rEdad.number+'+(B'+rPerfil.number+'-2)*10,90),30)/100';
+  function addAlloc(label, pctFormula, hint){
+    var r = ws.addRow([label, {formula:pctFormula}, {formula:pctFormula+'*(B'+rCapital.number+')'}, hint||'']);
+    r.getCell(1).border=S.bdr; r.getCell(1).font={size:10};
+    r.getCell(2).fill=S.fillCalc; r.getCell(2).font={bold:true,color:{argb:'FF065F46'},size:10}; r.getCell(2).border=S.bdr;
+    r.getCell(2).numFmt='0%'; r.getCell(2).alignment={horizontal:'center'};
+    r.getCell(3).fill=S.fillCalc; r.getCell(3).font={bold:true,color:{argb:'FF065F46'},size:10}; r.getCell(3).border=S.bdr;
+    fmtMoney(r.getCell(3));
+    r.getCell(4).font={italic:true,color:{argb:'FF6B7280'},size:9}; r.getCell(4).border=S.bdr;
+    return r;
+  }
+  var thAlloc = ws.addRow(['Vehículo','% asignación','Monto COP','Notas']);
+  thAlloc.eachCell(function(c){ c.fill=S.fillNavy; c.font=S.fontWhite; c.alignment={horizontal:'center'}; c.border=S.bdr; });
+  // % RV total = pctRVFormula
+  // Distribución dentro de RV: 60% local (ETF iCOLCAP), 40% internacional (S&P)
+  // Distribución dentro de RF: 50% AFC/Pensión vol., 30% FIC moderado, 15% CDT, 5% efectivo
+  addAlloc('🟢 ETF iCOLCAP (acciones colombianas)', pctRVFormula+'*0.6', '→ exposición local, dividendos BVC, T+2');
+  addAlloc('🌎 ETF S&P 500 / NASDAQ (internacional)', pctRVFormula+'*0.4', '→ vía Renta4, BTG, plataforma de bolsa');
+  addAlloc('🏠 AFC + Pensión Voluntaria', '(1-'+pctRVFormula+')*0.5', '→ Art. 126-1/126-4 ET, doble beneficio fiscal');
+  addAlloc('💧 FIC moderado / cuenta alta rentabilidad', '(1-'+pctRVFormula+')*0.3', '→ liquidez 1-3 días, 9-13% E.A.');
+  addAlloc('🔒 CDT 360 días', '(1-'+pctRVFormula+')*0.15', '→ tasa fija, plazo definido, 12-14% E.A.');
+  addAlloc('💵 Efectivo / cuenta de ahorro', '(1-'+pctRVFormula+')*0.05', '→ buffer mínimo, no contar como inversión');
+  ws.addRow([]);
+  // Aporte mensual también asignado
+  var hdr3 = ws.addRow(['APORTE MENSUAL DISTRIBUIDO','','','']);
+  hdr3.getCell(1).fill=S.fillCat; hdr3.getCell(1).font=S.fontCat; hdr3.getCell(1).border=S.bdr;
+  ws.mergeCells('A'+hdr3.number+':D'+hdr3.number);
+  function addApt(label, pctFormula){
+    var r = ws.addRow([label, {formula:pctFormula}, {formula:pctFormula+'*(B'+rAporte.number+')'}, '/ mes']);
+    r.getCell(1).border=S.bdr; r.getCell(1).font={size:10};
+    r.getCell(2).fill=S.fillCalc; r.getCell(2).font={bold:true,color:{argb:'FF065F46'},size:10}; r.getCell(2).border=S.bdr;
+    r.getCell(2).numFmt='0%'; r.getCell(2).alignment={horizontal:'center'};
+    r.getCell(3).fill=S.fillCalc; r.getCell(3).font={bold:true,color:{argb:'FF065F46'},size:10}; r.getCell(3).border=S.bdr;
+    fmtMoney(r.getCell(3));
+    r.getCell(4).font={italic:true,color:{argb:'FF6B7280'},size:9}; r.getCell(4).border=S.bdr;
+    return r;
+  }
+  addApt('🟢 ETF iCOLCAP', pctRVFormula+'*0.6');
+  addApt('🌎 ETF internacional', pctRVFormula+'*0.4');
+  addApt('🏠 AFC + Pensión voluntaria', '(1-'+pctRVFormula+')*0.5');
+  addApt('💧 FIC moderado', '(1-'+pctRVFormula+')*0.3');
+  addApt('🔒 CDT', '(1-'+pctRVFormula+')*0.15');
+  addApt('💵 Efectivo', '(1-'+pctRVFormula+')*0.05');
+  ws.addRow([]);
+  // Notas
+  var nt = ws.addRow(['💡 Regla 100-edad (clásica): a tu edad, el % en renta variable debería ser 100-edad. Ajustamos ±10% según tolerancia al riesgo.','','','']);
+  nt.getCell(1).font={italic:true,color:{argb:'FF6B7280'},size:9};
+  ws.mergeCells('A'+nt.number+':D'+nt.number);
+  var nt2 = ws.addRow(['🔥 La asignación es punto de partida — no consejo personalizado. Ajusta según tu situación: hijos por venir, empresa propia, herencia esperada, etc.','','','']);
+  nt2.getCell(1).font={italic:true,color:{argb:'FF6B7280'},size:9};
+  ws.mergeCells('A'+nt2.number+':D'+nt2.number);
+  var nt3 = ws.addRow(['⭐ Cómo abrir cuenta de bolsa en Colombia: Renta4, BTG Pactual, Acciones y Valores, Trii, Davivienda Renta Variable. Trámite 100% online en todas. Sin mínimo elevado en la mayoría.','','','']);
+  nt3.getCell(1).font={italic:true,color:{argb:'FF7C3AED'},size:10,bold:true};
+  ws.mergeCells('A'+nt3.number+':D'+nt3.number);
+}
+// ════════════════════════════════════════════════════════
+//   GATING PRO
+// ════════════════════════════════════════════════════════
+function descargarPresupuestoPRO(){
+  // Si exoPro no cargó por alguna razón, intentar leer directo de localStorage
+  // (mismas claves que shared/pro.js usa)
+  if (typeof exoPro === 'undefined' || !exoPro.check) {
+    var fallbackEmail = localStorage.getItem('exogenadian_pro_email');
+    var fallbackKey = localStorage.getItem('exogenadian_pro_key');
+    if (fallbackEmail || fallbackKey) {
+      // Hay credenciales guardadas — asumimos PRO y dejamos descargar.
+      // (validación completa la haría exoPro.check pero al menos no bloqueamos al suscriptor)
+      if (typeof exoToast === 'function') exoToast('Verificando PRO localmente — descarga lista', 'info');
+      descargarPresupuesto(true);
+      return;
+    }
+    if (confirm('La versión PRO requiere suscripción.\n\n¿Quieres ver los planes PRO?')) {
+      window.location.href = 'precios.html';
+    }
+    return;
+  }
+  // Mostrar feedback mientras se verifica
+  if (typeof exoToast === 'function') exoToast('Verificando tu suscripción PRO...', 'info');
+  exoPro.check().then(function(isPro){
+    if (isPro) {
+      descargarPresupuesto(true);
+    } else {
+      // Antes de mandar a precios, dar fallback por localStorage
+      var fallbackEmail = localStorage.getItem('exogenadian_pro_email');
+      var fallbackKey = localStorage.getItem('exogenadian_pro_key');
+      if (fallbackEmail || fallbackKey) {
+        // Hay credenciales pero check falló — quizá problema de red/Apps Script.
+        // Permitir descarga con aviso.
+        var fb = confirm('No pude verificar tu PRO en este momento (revisa tu conexión).\n\n¿Quieres descargar la plantilla PRO igualmente? Si después no eres PRO, te invitamos a suscribirte.');
+        if (fb) descargarPresupuesto(true);
+        return;
+      }
+      // Paywall normal
+      var go = confirm('La plantilla PRO con 12 hojas (5 hojas extra: Tracker 5 años, Simulador AFC, Amortización hipoteca, Plan FIRE, Inversión 101) requiere suscripción PRO.\n\n¿Ver planes y suscribirte?');
+      if (go) window.location.href = 'precios.html';
+    }
+  }).catch(function(err){
+    console.error('exoPro.check error', err);
+    // Si falla la verificación, dar fallback por localStorage
+    var fallbackEmail = localStorage.getItem('exogenadian_pro_email');
+    var fallbackKey = localStorage.getItem('exogenadian_pro_key');
+    if (fallbackEmail || fallbackKey) {
+      if (typeof exoToast === 'function') exoToast('Verificación falló — descarga local concedida', 'warning');
+      descargarPresupuesto(true);
+    } else {
+      alert('No se pudo verificar PRO. Recarga la página o revisa tu conexión.');
+    }
+  });
+}
+document.getElementById('btnDownload').addEventListener('click', function(){ descargarPresupuesto(false); });
+document.getElementById('btnDownload2').addEventListener('click', function(){ descargarPresupuesto(false); });
+document.getElementById('btnDownloadPro').addEventListener('click', descargarPresupuestoPRO);
+document.getElementById('btnDownloadPro2').addEventListener('click', descargarPresupuestoPRO);
+</script>
+</body>
+</html>

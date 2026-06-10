@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="../shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S7SM6ST4CC');
+</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutorial: c&oacute;mo hacer la conciliaci&oacute;n bancaria en exogenadian.com | Ex&oacute;genaDIAN</title>
+<meta name="description" content="Tutorial paso a paso: c&oacute;mo cargar el extracto bancario y el auxiliar 1110, configurar tolerancia, procesar la conciliaci&oacute;n autom&aacute;tica, ajustar partidas y descargar el papel de trabajo.">
+<link rel="canonical" href="https://exogenadian.com/tutoriales/conciliacion.html">
+<meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tutorial-mockups.css?v=dccdc93b">
+<style>
+:root{--green-900:#064E3B;--green-800:#065F46;--green-700:#047857;--green-600:#059669;--green-500:#10B981;--green-400:#34D399;--green-300:#6EE7B7;--green-200:#A7F3D0;--green-100:#D1FAE5;--green-50:#ECFDF5;--white:#FFF;--gray-50:#F9FAFB;--gray-100:#F3F4F6;--gray-200:#E5E7EB;--gray-300:#D1D5DB;--gray-400:#9CA3AF;--gray-500:#6B7280;--gray-600:#4B5563;--gray-700:#374151;--gray-800:#1F2937;--gray-900:#111827;--amber-50:#FFFBEB;--amber-100:#FEF3C7;--amber-500:#F59E0B;--amber-700:#92400E;--amber-800:#78350F;--blue-50:#EFF6FF;--blue-100:#DBEAFE;--blue-500:#3B82F6;--blue-700:#1D4ED8;--purple-50:#F5F3FF;--purple-500:#8B5CF6;--purple-700:#6D28D9;--rose-50:#FFF1F2;--rose-500:#F43F5E;--rose-700:#BE123C}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-900);line-height:1.6}
+.tut-layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh}@media(max-width:900px){.tut-layout{grid-template-columns:1fr}}
+.sidebar{background:#fff;border-right:1px solid var(--gray-200);padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}.sidebar-header{padding:16px 20px;border-bottom:1px solid var(--gray-100)}.sidebar-header a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--gray-800);font-weight:800;font-size:.9rem}.sidebar-header a div{width:28px;height:28px;background:linear-gradient(135deg,var(--green-600),var(--green-400));border-radius:7px;display:grid;place-items:center;color:#fff;font-size:.7rem;font-weight:900}.sidebar-curso{padding:16px 20px;border-bottom:1px solid var(--gray-100)}.sidebar-curso h3{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--green-700);margin-bottom:4px}.sidebar-curso p{font-size:.88rem;font-weight:700;color:var(--gray-800)}
+.sidebar-nav{padding:12px 0;flex:1}.sidebar-nav a{display:flex;align-items:center;gap:10px;padding:10px 20px;text-decoration:none;color:var(--gray-500);font-size:.85rem;font-weight:500;transition:all .15s;border-left:3px solid transparent}.sidebar-nav a:hover{background:var(--green-50);color:var(--green-700)}.sidebar-nav a.active{background:var(--green-50);color:var(--green-700);font-weight:700;border-left-color:var(--green-600)}.sidebar-nav a .num{width:24px;height:24px;border-radius:50%;background:var(--gray-100);color:var(--gray-500);display:grid;place-items:center;font-size:.72rem;font-weight:700;flex-shrink:0}.sidebar-nav a.active .num{background:var(--green-600);color:#fff}
+.sidebar-back{padding:16px 20px;border-top:1px solid var(--gray-100);margin-top:auto}.sidebar-back a{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--gray-400);font-size:.82rem;font-weight:500}.sidebar-back a:hover{color:var(--gray-700)}
+.main{padding:32px 40px 60px;max-width:880px}@media(max-width:900px){.main{padding:20px 16px 80px}.sidebar{display:none}}
+.breadcrumb{font-size:.78rem;color:var(--gray-400);margin-bottom:8px}.breadcrumb a{color:var(--gray-400);text-decoration:none}.breadcrumb a:hover{color:var(--green-600)}
+.tag{display:inline-flex;align-items:center;gap:6px;background:var(--green-100);color:var(--green-700);padding:4px 14px;border-radius:100px;font-size:.74rem;font-weight:700;margin-bottom:14px}
+h1.tut-title{font-family:'Fraunces',serif;font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;letter-spacing:-.02em;margin-bottom:10px;line-height:1.2}p.tut-lead{font-size:1.05rem;color:var(--gray-600);max-width:680px;line-height:1.6;margin-bottom:30px}
+.step{margin-bottom:40px;padding-top:20px;border-top:2px solid var(--gray-200)}.step:first-of-type{border-top:none;padding-top:0}.step-num{display:inline-flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:.9rem;color:var(--green-700);font-weight:700;margin-bottom:8px}.step-num span{display:grid;place-items:center;width:32px;height:32px;background:var(--green-600);color:#fff;border-radius:50%;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:800}.step h2{font-family:'Fraunces',serif;font-size:1.45rem;font-weight:700;margin-bottom:8px;color:var(--gray-900);line-height:1.25}.step p{font-size:.95rem;color:var(--gray-700);line-height:1.7;margin-bottom:14px}.step ul,.step ol{margin:8px 0 16px 22px;display:flex;flex-direction:column;gap:7px}.step li{font-size:.94rem;color:var(--gray-700);line-height:1.6}.step h3{font-size:1.05rem;font-weight:700;margin:18px 0 8px;color:var(--gray-800)}.step code{font-family:'JetBrains Mono',monospace;font-size:.86rem;background:var(--gray-100);padding:2px 7px;border-radius:5px;color:var(--gray-800)}
+.capture{background:var(--gray-100);border:2px dashed var(--gray-300);border-radius:12px;padding:30px 20px;margin:18px 0;text-align:center;color:var(--gray-500);font-size:.85rem;line-height:1.55}.capture .cap-icon{font-size:2rem;display:block;margin-bottom:10px;opacity:.55}.capture .cap-label{font-weight:700;color:var(--gray-700);font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}.capture em{font-style:normal;background:#fff;padding:2px 8px;border-radius:5px;font-size:.82rem;color:var(--gray-700);font-weight:600}
+.tip{background:var(--blue-50);border-left:4px solid var(--blue-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:#1E40AF;line-height:1.6}.tip strong{color:var(--blue-700)}.warn{background:var(--amber-50);border-left:4px solid var(--amber-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:var(--amber-800);line-height:1.6}.warn strong{color:var(--amber-700)}.err{background:var(--rose-50);border-left:4px solid var(--rose-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:#9F1239;line-height:1.6}.err strong{color:var(--rose-700)}
+.tabla{width:100%;border-collapse:collapse;margin:14px 0;border-radius:10px;overflow:hidden;border:1px solid var(--gray-200);font-size:.86rem}.tabla th{background:var(--gray-100);padding:9px 13px;text-align:left;font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gray-600)}.tabla td{padding:9px 13px;border-top:1px solid var(--gray-100);color:var(--gray-700)}.tabla tr:hover{background:var(--green-50)}.tabla code{font-family:'JetBrains Mono',monospace;font-size:.78rem;background:var(--white);padding:1px 5px;border-radius:3px}
+.cta-end{background:linear-gradient(135deg,var(--green-50),#D1FAE5);border:2px solid var(--green-300);border-radius:16px;padding:28px 26px;margin:30px 0 20px;text-align:center}.cta-end h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;color:var(--green-800);margin-bottom:6px}.cta-end p{font-size:.92rem;color:var(--green-700);margin-bottom:16px}.cta-end a{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:var(--green-600);color:#fff;border-radius:12px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 14px rgba(5,150,105,.25);transition:all .2s}.cta-end a:hover{background:var(--green-700);transform:translateY(-2px)}
+.step-nav{display:flex;justify-content:space-between;margin-top:30px;padding-top:20px;border-top:2px solid var(--gray-200);gap:10px;flex-wrap:wrap}.step-nav a{display:inline-flex;align-items:center;gap:7px;padding:11px 22px;border-radius:10px;text-decoration:none;font-weight:700;font-size:.88rem;background:var(--gray-100);color:var(--gray-700);transition:all .2s}.step-nav a:hover{background:var(--gray-200)}.step-nav a.next{background:var(--green-600);color:#fff;box-shadow:0 4px 12px rgba(5,150,105,.25)}.step-nav a.next:hover{background:var(--green-700)}
+</style>
+<script async src="../shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div class="tut-layout">
+  <aside class="sidebar">
+    <div class="sidebar-header"><a href="../index.html"><div>E</div>Ex&oacute;genaDIAN</a></div>
+    <div class="sidebar-curso"><h3>Tutorial</h3><p>Conciliaci&oacute;n bancaria</p></div>
+    <nav class="sidebar-nav">
+      <a href="#intro" class="active"><span class="num">0</span> Antes de empezar</a>
+      <a href="#paso1"><span class="num">1</span> Subir los 2 archivos</a>
+      <a href="#paso2"><span class="num">2</span> Configuraci&oacute;n</a>
+      <a href="#paso3"><span class="num">3</span> Procesar conciliaci&oacute;n</a>
+      <a href="#paso4"><span class="num">4</span> Revisar tabs</a>
+      <a href="#paso5"><span class="num">5</span> Descargar Excel</a>
+      <a href="#errores"><span class="num">!</span> Advertencias y errores</a>
+      <a href="#tips"><span class="num">i</span> Tips Colombia</a>
+    </nav>
+    <div class="sidebar-back"><a href="../tutoriales.html">&larr; Todos los tutoriales</a></div>
+  </aside>
+  <div class="main">
+    <div class="breadcrumb"><a href="../index.html">Inicio</a> &rsaquo; <a href="../tutoriales.html">Tutoriales</a> &rsaquo; Conciliaci&oacute;n</div>
+    <span class="tag">Tutorial &middot; ~10 min</span>
+    <h1 class="tut-title">C&oacute;mo hacer la conciliaci&oacute;n bancaria en exogenadian.com</h1>
+    <p class="tut-lead">Gu&iacute;a paso a paso para usar la herramienta de conciliaci&oacute;n (<a href="../conciliacion.html">conciliacion.html</a>): cargar el extracto bancario y el auxiliar contable de la cuenta 1110, configurar tolerancia y formato, dejar que la herramienta cruce fecha + monto y revisar manualmente las partidas pendientes.</p>
+    <section id="intro" class="step">
+      <h2>Antes de empezar &mdash; lista de chequeo</h2>
+      <p>Para que la conciliaci&oacute;n salga bien al primer intento, ten:</p>
+      <ul>
+        <li><strong>Extracto bancario del per&iacute;odo</strong> en Excel/CSV/TSV/TXT. Lo descargas del banco (Bancolombia, Davivienda, BBVA, Banco de Bogot&aacute;, etc.). Cada banco tiene un formato propio &mdash;la herramienta los detecta autom&aacute;ticamente.</li>
+        <li><strong>Auxiliar contable de la cuenta 1110</strong> (bancos) en Excel/CSV. Lo exportas de tu software contable (Siigo, World Office, Helisa, Alegra). Si tu cliente tiene varias cuentas bancarias, exporta una por una.</li>
+        <li><strong>Saldo inicial</strong> y <strong>saldo final</strong> de cada uno (extracto y auxiliar). Sirven como verificaci&oacute;n cruzada.</li>
+      </ul>
+      <div class="tip">
+        <strong>Tip:</strong> si el extracto trae los movimientos en una sola columna "Valor" con signos (positivo abono, negativo cargo), la herramienta lo entiende. Si vienen separados en dos columnas (D&eacute;bito / Cr&eacute;dito), tambi&eacute;n. Y si el banco invirti&oacute; los signos al rev&eacute;s del auxiliar contable, hay un toggle "Invertir D&eacute;bito/Cr&eacute;dito".
+      </div>
+      <div class="mockup">
+        <div class="mockup-bar"><div class="mockup-dots"><span></span><span></span><span></span></div><div class="mockup-url">exogenadian.com/conciliacion.html</div></div>
+        <div class="mockup-body">
+          <div class="mockup-h">Conciliaci&oacute;n bancaria</div>
+          <div class="mockup-grid-2">
+            <div><div class="mockup-label">Extracto bancario</div><div class="mockup-dropzone"><span class="mockup-dropzone-icon">&#127974;</span>Arrastra el extracto<br><span style="font-size:.62rem;color:#9CA3AF">.xlsx, .csv, .txt</span></div></div>
+            <div><div class="mockup-label">Auxiliar contable</div><div class="mockup-dropzone"><span class="mockup-dropzone-icon">&#128203;</span>Arrastra el auxiliar 1110<br><span style="font-size:.62rem;color:#9CA3AF">.xlsx o .csv</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="paso1" class="step">
+      <div class="step-num"><span>1</span> Paso 1</div>
+      <h2>Subir los dos archivos</h2>
+      <p>Entra a <a href="../conciliacion.html">exogenadian.com/conciliacion.html</a>. Vas a ver dos drop-zones lado a lado:</p>
+      <ol>
+        <li><strong>Extracto Bancario</strong> (a la izquierda)</li>
+        <li><strong>Libro Auxiliar Contable</strong> (a la derecha)</li>
+      </ol>
+      <p>Arrastra cada archivo a su zona correspondiente, o haz clic para abrir el explorador.</p>
+      <div class="mockup">
+        <div class="mockup-body">
+          <div class="mockup-grid-2">
+            <div><div class="mockup-label">Extracto</div><div class="mockup-dropzone mockup-dropzone--filled"><span class="mockup-dropzone-icon">&#9989;</span>extracto_bancolombia.xlsx</div></div>
+            <div><div class="mockup-label">Auxiliar</div><div class="mockup-dropzone"><span class="mockup-dropzone-icon">&#128229;</span>Sin archivo</div></div>
+          </div>
+          <div style="margin-top:10px;text-align:center"><span class="mockup-btn-secondary">&#128206; Descargar archivos de ejemplo</span></div>
+        </div>
+      </div>
+      <h3>Formatos aceptados</h3>
+      <table class="tabla">
+        <thead><tr><th>Formato</th><th>Detalle</th></tr></thead>
+        <tbody>
+          <tr><td>Excel (.xlsx, .xls)</td><td>El m&aacute;s com&uacute;n &mdash;exportado del banco o del software contable.</td></tr>
+          <tr><td>CSV (.csv)</td><td>Si el banco te lo entrega como CSV.</td></tr>
+          <tr><td>TSV / TXT</td><td>Algunos bancos exportan en este formato.</td></tr>
+        </tbody>
+      </table>
+      <h3>De d&oacute;nde sale cada archivo</h3>
+      <table class="tabla">
+        <thead><tr><th>Archivo</th><th>De d&oacute;nde</th><th>Qu&eacute; debe traer</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Extracto bancario</strong></td><td>Banca virtual del banco: Bancolombia, Davivienda, BBVA, Banco de Bogot&aacute;, Banco de Occidente, Banco Popular, AV Villas, Itau, etc.</td><td>Fecha, descripci&oacute;n, valor (con signo o D&eacute;bito/Cr&eacute;dito separados). Idealmente saldo inicial y final del per&iacute;odo.</td></tr>
+          <tr><td><strong>Auxiliar contable</strong> de la cuenta del banco</td><td>Software contable: Siigo, World Office, Helisa, Alegra, MidaSoft, Odoo, Simit, etc. Exportar el auxiliar de la cuenta <code>1110</code> (o subcuenta espec&iacute;fica del banco).</td><td>Fecha, descripci&oacute;n, D&eacute;bito, Cr&eacute;dito, saldo. Una fila por movimiento contabilizado.</td></tr>
+        </tbody>
+      </table>
+      <div class="tip">
+        <strong>Si tu cliente tiene varias cuentas bancarias</strong> (p. ej. corriente y ahorros), debes conciliarlas por separado &mdash;una conciliaci&oacute;n a la vez. No mezcles dos bancos en el mismo archivo.
+      </div>
+      <div class="step-nav"><span></span><a href="#paso2" class="next">Paso 2: Configuraci&oacute;n &rarr;</a></div>
+    </section>
+    <section id="paso2" class="step">
+      <div class="step-num"><span>2</span> Paso 2</div>
+      <h2>Configurar la conciliaci&oacute;n</h2>
+      <p>Despu&eacute;s de cargar los archivos, la herramienta abre un panel de configuraci&oacute;n por cada uno:</p>
+      <table class="tabla">
+        <thead><tr><th>Campo</th><th>Qu&eacute; va aqu&iacute;</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Fila de encabezado</strong></td><td>La fila que tiene los t&iacute;tulos (Fecha, Detalle, D&eacute;bito, Cr&eacute;dito). Autom&aacute;tica en la mayor&iacute;a de casos. Si el archivo tiene cabeceras decorativas arriba, ajusta manualmente.</td></tr>
+          <tr><td><strong>Sin encabezado</strong></td><td>Checkbox si el archivo NO trae fila de t&iacute;tulos.</td></tr>
+          <tr><td><strong>Saldo inicial</strong></td><td>El saldo del primer d&iacute;a del per&iacute;odo. Sirve para validaci&oacute;n.</td></tr>
+          <tr><td><strong>Saldo final</strong></td><td>El saldo del &uacute;ltimo d&iacute;a del per&iacute;odo. Sirve para validaci&oacute;n.</td></tr>
+          <tr><td><strong>Invertir D&eacute;bito/Cr&eacute;dito</strong></td><td>Activar si el extracto bancario muestra los signos al rev&eacute;s del auxiliar contable (algunos bancos lo hacen).</td></tr>
+        </tbody>
+      </table>
+      <div class="mockup">
+        <div class="mockup-body">
+          <div class="mockup-h">Configurar archivo: Extracto bancario</div>
+          <div class="mockup-form">
+            <div><div class="mockup-label">Fila de encabezado</div><div class="mockup-input">Fila 1 &#9662;</div></div>
+            <div><div class="mockup-label">Sin encabezado</div><div class="mockup-input">&#9744; No</div></div>
+            <div><div class="mockup-label">Saldo inicial</div><div class="mockup-input">15.250.000</div></div>
+            <div><div class="mockup-label">Saldo final</div><div class="mockup-input">18.420.500</div></div>
+            <div class="mockup-form-full"><div class="mockup-label">Invertir D&eacute;bito / Cr&eacute;dito</div><div class="mockup-input">&#9744; No (default)</div></div>
+          </div>
+        </div>
+      </div>
+      <h3>Las columnas que detecta la herramienta</h3>
+      <p>El mapper detecta autom&aacute;ticamente las columnas relevantes del extracto y del auxiliar usando los nombres del header. <strong>Es el paso donde m&aacute;s usuarios se quedan</strong>; vale la pena revisar qu&eacute; columnas marc&oacute;:</p>
+      <table class="tabla">
+        <thead><tr><th>Columna</th><th>Qu&eacute; busca</th><th>Nombres que reconoce</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Fecha</strong></td><td>Fecha del movimiento</td><td><code>fecha</code>, <code>date</code>, <code>fec</code>, <code>fch</code></td></tr>
+          <tr><td><strong>Detalle</strong></td><td>Descripci&oacute;n del movimiento</td><td><code>descripcion</code>, <code>detalle</code>, <code>concepto</code>, <code>observacion</code>, <code>movimiento</code></td></tr>
+          <tr><td><strong>D&eacute;bito</strong></td><td>Salidas / retiros / cargos</td><td><code>debito</code>, <code>cargo</code>, <code>retiro</code>, <code>salida</code>, <code>egreso</code></td></tr>
+          <tr><td><strong>Cr&eacute;dito</strong></td><td>Entradas / abonos / consignaciones</td><td><code>credito</code>, <code>abono</code>, <code>deposito</code>, <code>entrada</code>, <code>consignacion</code>, <code>ingreso</code></td></tr>
+          <tr><td>Valor (alternativa)</td><td>Si el archivo trae UNA sola columna de monto con signo</td><td><code>valor</code>, <code>monto</code>, <code>importe</code>, <code>vlr</code>, <code>amount</code></td></tr>
+        </tbody>
+      </table>
+      <div class="tip">
+        <strong>&iquest;Tu extracto trae el monto con signo (un solo n&uacute;mero positivo o negativo) en vez de columnas D&eacute;bito/Cr&eacute;dito separadas?</strong> No es problema. La herramienta detecta esto autom&aacute;ticamente: positivos los trata como cr&eacute;ditos (entradas) y negativos como d&eacute;bitos (salidas). Es t&iacute;pico de extractos exportados como CSV "raw" del banco.
+      </div>
+      <h3>Casos t&iacute;picos donde el mapeo se equivoca</h3>
+      <ul>
+        <li><strong>Extracto sin header</strong> (CSV "raw" del banco, sin t&iacute;tulos de columna): activa el checkbox <em>"Sin encabezado"</em>. La herramienta usar&aacute; la posici&oacute;n de columna (1&ordf;=Fecha, 2&ordf;=Detalle, etc.) y un dropdown manual para confirmar.</li>
+        <li><strong>Davivienda con D&iacute;a y Mes en columnas separadas</strong>: algunos extractos antiguos vienen con una columna "D&iacute;a" y otra "Mes" en vez de una sola Fecha. La herramienta detecta este caso y junta los dos campos autom&aacute;ticamente, pero verifica en el preview que las fechas se vean bien.</li>
+        <li><strong>Header en fila 2 o m&aacute;s abajo</strong> (filas decorativas arriba con logo del banco, NIT del cliente, per&iacute;odo): cambia el campo <em>"Fila de encabezado"</em> a la fila correcta.</li>
+        <li><strong>Bancolombia con doble cabecera</strong> ("Movimientos del per&iacute;odo" en fila 1, sub-headers en fila 2): mismo arreglo, ajustar la fila de header.</li>
+        <li><strong>Auxiliar con columna "Saldo" pero sin D&eacute;bito/Cr&eacute;dito</strong>: el cruce no funciona &mdash;necesitas Db/Cr o un valor por movimiento. Vuelve al software contable y exporta el auxiliar con detalle de movimientos, no solo saldos.</li>
+        <li><strong>Extracto con signos invertidos respecto al auxiliar</strong> (algunos bancos muestran d&eacute;bito como positivo y cr&eacute;dito como negativo): activa el checkbox <em>"Invertir D&eacute;bito/Cr&eacute;dito"</em> SOLO en ese archivo.</li>
+        <li><strong>Fechas en formato inusual</strong>: la herramienta soporta DD/MM/YYYY, YYYY-MM-DD, DD-MMM-YY y la mayor&iacute;a de los formatos colombianos. Si el preview muestra fechas raras (ej. "45123" como n&uacute;mero), abre el Excel y dale formato fecha antes de subir.</li>
+      </ul>
+      <div class="warn">
+        <strong>Si una columna sale en amarillo o en blanco:</strong> abre el dropdown de mapeo y selecciona manualmente la columna correcta del archivo. Confirma en el preview que la columna marcada como D&eacute;bito tiene los retiros y la marcada como Cr&eacute;dito tiene los abonos &mdash;si est&aacute;n al rev&eacute;s, ning&uacute;n movimiento va a empatar.
+      </div>
+      <h3>Tolerancia de monto</h3>
+      <p>La herramienta deja una tolerancia para empatar movimientos con peque&ntilde;as diferencias (centavos por redondeo, comisiones de un peso). Las opciones predefinidas son:</p>
+      <ul>
+        <li><strong>$10</strong> &mdash; estricto, casi sin tolerancia.</li>
+        <li><strong>$50</strong> &mdash; recomendado por defecto.</li>
+        <li><strong>$100</strong></li>
+        <li><strong>$500</strong> &mdash; tolerante (para conciliaciones donde hay muchos GMF que se redondean).</li>
+        <li><strong>Custom</strong> &mdash; defines un monto espec&iacute;fico.</li>
+      </ul>
+      <div class="warn">
+        <strong>La tolerancia es por movimiento, no por total.</strong> Si pones $50, la herramienta empata un movimiento de $1.000.000 con uno de $999.985 (diferencia $15). Pero NO empata uno de $1.000.000 con $999.940 (diferencia $60). Las diferencias mayores quedan en "Parciales" o "Sin conciliar" para revisi&oacute;n manual.
+      </div>
+      <div class="step-nav"><a href="#paso1">&larr; Paso 1</a><a href="#paso3" class="next">Paso 3: Procesar &rarr;</a></div>
+    </section>
+    <section id="paso3" class="step">
+      <div class="step-num"><span>3</span> Paso 3</div>
+      <h2>Procesar la conciliaci&oacute;n</h2>
+      <p>Una vez configurado, click en <strong>"Conciliar"</strong>. La herramienta cruza autom&aacute;ticamente los dos archivos por:</p>
+      <ul>
+        <li><strong>Fecha</strong> (con tolerancia de &plusmn;2 d&iacute;as por defecto, &uacute;til cuando el banco aplica el movimiento un d&iacute;a despu&eacute;s).</li>
+        <li><strong>Monto</strong> (con la tolerancia que configuraste).</li>
+        <li><strong>Sentido</strong> (d&eacute;bito vs cr&eacute;dito).</li>
+      </ul>
+      <div class="mockup">
+        <div class="mockup-body" style="text-align:center">
+          <div class="mockup-h" style="margin-bottom:4px">Listo para conciliar</div>
+          <div class="mockup-sub">Tolerancia $50 &middot; Fecha &plusmn;2 d&iacute;as</div>
+          <span class="mockup-btn-primary" style="font-size:.82rem;padding:9px 22px">Conciliar &rarr;</span>
+          <div class="mockup-spinner" style="margin-top:8px;justify-content:center">Procesando 268 movimientos...</div>
+        </div>
+      </div>
+      <p>El procesamiento toma 2-10 segundos seg&uacute;n el volumen de movimientos.</p>
+      <div class="step-nav"><a href="#paso2">&larr; Paso 2</a><a href="#paso4" class="next">Paso 4: Revisar &rarr;</a></div>
+    </section>
+    <section id="paso4" class="step">
+      <div class="step-num"><span>4</span> Paso 4</div>
+      <h2>Revisar las 4 pesta&ntilde;as de resultados</h2>
+      <p>La pantalla de resultados tiene cuatro tabs. Cada uno representa un estado del cruce:</p>
+      <table class="tabla">
+        <thead><tr><th>Tab</th><th>Qu&eacute; contiene</th><th>Acci&oacute;n t&iacute;pica</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Conciliados</strong></td><td>Movimientos que empataron 100%: misma fecha (&plusmn;2 d&iacute;as), monto exacto (dentro de tolerancia), mismo sentido.</td><td>Revisar al azar para validar la calidad del match. No requiere acci&oacute;n.</td></tr>
+          <tr><td><strong>Solo Extracto</strong></td><td>Movimientos del banco que NO est&aacute;n en el auxiliar contable. T&iacute;picos: GMF, comisiones, intereses ganados, abonos por terceros.</td><td>Verificar y registrar contablemente lo que falta.</td></tr>
+          <tr><td><strong>Solo Auxiliar</strong></td><td>Movimientos del libro que NO est&aacute;n en el extracto. T&iacute;picos: cheques pendientes de cobro, dep&oacute;sitos en tr&aacute;nsito.</td><td>Confirmar si est&aacute;n en proceso o si hay error.</td></tr>
+          <tr><td><strong>Parciales</strong></td><td>Movimientos donde fecha y sentido empataron pero el monto no (diferencia mayor a la tolerancia).</td><td>Revisar manualmente: probable error de digitaci&oacute;n.</td></tr>
+        </tbody>
+      </table>
+      <div class="mockup">
+        <div class="mockup-body mockup-body--gray">
+          <div class="mockup-tabs">
+            <span class="mockup-tab">Conciliados <strong>245</strong></span>
+            <span class="mockup-tab mockup-tab--active">Solo extracto <strong>12</strong></span>
+            <span class="mockup-tab">Solo auxiliar <strong>8</strong></span>
+            <span class="mockup-tab">Parciales <strong>3</strong></span>
+          </div>
+          <table class="mockup-table">
+            <thead><tr><th>Fecha</th><th>Detalle</th><th>D&eacute;bito</th><th>Cr&eacute;dito</th></tr></thead>
+            <tbody>
+              <tr><td>2025-03-04</td><td>GMF</td><td class="mockup-table-num">2.450</td><td></td></tr>
+              <tr><td>2025-03-08</td><td>Comisi&oacute;n manejo</td><td class="mockup-table-num">12.800</td><td></td></tr>
+              <tr><td>2025-03-15</td><td>Intereses ganados</td><td></td><td class="mockup-table-num">3.250</td></tr>
+              <tr><td>2025-03-22</td><td>Abono ID 4587</td><td></td><td class="mockup-table-num">1.250.000</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <h3>Editar movimientos manualmente</h3>
+      <p>Cada fila tiene un bot&oacute;n para mover manualmente un movimiento entre tabs (ej. forzar un match aunque la diferencia est&eacute; fuera de tolerancia, o desconciliar un match falso).</p>
+      <div class="step-nav"><a href="#paso3">&larr; Paso 3</a><a href="#paso5" class="next">Paso 5: Descargar &rarr;</a></div>
+    </section>
+    <section id="paso5" class="step">
+      <div class="step-num"><span>5</span> Paso 5</div>
+      <h2>Descargar el Excel del papel de trabajo</h2>
+      <p>Cuando termines de revisar los 4 tabs y ajustar manualmente lo que sea necesario, click en <strong>"Descargar Excel"</strong>. La descarga es <strong>gratis</strong>, no requiere PRO.</p>
+      <div class="mockup">
+        <div class="mockup-body" style="text-align:center;padding:20px 18px">
+          <div class="mockup-h" style="margin-bottom:4px">&#128202; Papel de trabajo listo</div>
+          <div class="mockup-sub">Excel con los 4 tabs y resumen de conciliaci&oacute;n</div>
+          <div style="display:flex;gap:8px;align-items:center;justify-content:center"><span class="mockup-btn-primary" style="font-size:.82rem;padding:9px 22px">Descargar Excel</span><span class="mockup-chip mockup-chip--ok">Gratis</span></div>
+        </div>
+      </div>
+      <h3>Qu&eacute; trae el Excel</h3>
+      <ul>
+        <li>Hoja <strong>Resumen</strong>: saldo inicial, saldo final, total movimientos, % conciliado.</li>
+        <li>Hoja <strong>Conciliados</strong>: detalle de cada match.</li>
+        <li>Hoja <strong>Solo Extracto</strong>: partidas pendientes de registrar contablemente.</li>
+        <li>Hoja <strong>Solo Auxiliar</strong>: partidas pendientes de cobrar/depositar.</li>
+        <li>Hoja <strong>Parciales</strong>: diferencias por revisar.</li>
+        <li>Hoja <strong>Ajustes propuestos</strong>: con los asientos contables sugeridos para registrar GMF, comisiones, etc.</li>
+      </ul>
+      <p>Sirve como papel de trabajo de cierre mensual para auditor&iacute;a, revisor fiscal o simplemente para tu archivo de soporte.</p>
+      <div class="step-nav"><a href="#paso4">&larr; Paso 4</a><a href="#errores" class="next">Advertencias y errores &rarr;</a></div>
+    </section>
+    <section id="errores" class="step">
+      <h2>Qu&eacute; hacer ante cada advertencia o error</h2>
+      <p>Por momento: al <strong>cargar los archivos</strong>, al <strong>procesar el cruce</strong> y cuando los <strong>resultados se ven raros</strong>.</p>
+      <h3>1) Al cargar el extracto o el auxiliar</h3>
+      <table class="tabla">
+        <thead><tr><th>Mensaje</th><th>Qu&eacute; hacer</th></tr></thead>
+        <tbody>
+          <tr><td><strong>&laquo;El archivo excede 20 MB&raquo;</strong></td><td>Exporta como CSV (pesa mucho menos) o recorta el extracto al periodo que vas a conciliar.</td></tr>
+          <tr><td><strong>&laquo;Archivo vac&iacute;o o sin datos suficientes&raquo;</strong></td><td>Se export&oacute; con filtros o solo la cabecera. Vuelve a exportar el extracto/auxiliar completo del periodo.</td></tr>
+          <tr><td><strong>&laquo;Error al leer el archivo&raquo;</strong></td><td>Archivo corrupto o protegido. &Aacute;brelo en Excel, qu&iacute;tale la protecci&oacute;n y gu&aacute;rdalo de nuevo.</td></tr>
+          <tr><td><strong>&laquo;Mapeo de columnas incorrecto&raquo;</strong></td><td>Nombres de columna no est&aacute;ndar. Usa los dropdowns para indicar manualmente Fecha, Detalle, D&eacute;bito/Cr&eacute;dito o Valor.</td></tr>
+          <tr><td><strong>&laquo;Fechas no reconocidas&raquo;</strong></td><td>Formato ambiguo (03/04/2025). Configura dd/mm/yyyy o mm/dd/yyyy en el panel del archivo. Si ves n&uacute;meros tipo &laquo;45123&raquo;, dale formato fecha en Excel antes de subir.</td></tr>
+        </tbody>
+      </table>
+      <h3>2) Al procesar el cruce</h3>
+      <table class="tabla">
+        <thead><tr><th>Mensaje</th><th>Causa &mdash; Qu&eacute; hacer</th></tr></thead>
+        <tbody>
+          <tr><td><strong>&laquo;No se encontraron movimientos en el extracto&raquo;</strong></td><td>El mapeo del extracto qued&oacute; mal o la fila de encabezado est&aacute; equivocada. Rev&iacute;sala y vuelve a procesar.</td></tr>
+          <tr><td><strong>&laquo;No se encontraron movimientos en el auxiliar&raquo;</strong></td><td>El auxiliar no trae D&eacute;bito/Cr&eacute;dito ni valor por movimiento (solo saldos). Vuelve al software y exporta el auxiliar de la <code>1110</code> con detalle de movimientos.</td></tr>
+          <tr><td><strong>&laquo;No se detectaron cruces&raquo;</strong></td><td>Casi siempre: (1) no es la misma cuenta bancaria en ambos archivos; (2) el sentido D&eacute;bito/Cr&eacute;dito est&aacute; invertido &rarr; activa el toggle <em>&laquo;Invertir D&eacute;bito/Cr&eacute;dito&raquo;</em> SOLO en el extracto; (3) tolerancia demasiado estricta &rarr; s&uacute;bela a $100&ndash;$500.</td></tr>
+        </tbody>
+      </table>
+      <h3>3) Resultados raros</h3>
+      <div class="warn">
+        <strong>Pocos matches inesperados (&lt;50%):</strong> revisa en este orden &mdash; (1) misma cuenta bancaria en ambos archivos; (2) sentido D/C no invertido (toggle); (3) tolerancia no muy estricta (sube a $100&ndash;$500); (4) tolerancia de fecha &mdash;el banco a veces aplica el movimiento 1&ndash;2 d&iacute;as despu&eacute;s. Las diferencias reales quedan en &laquo;Solo extracto&raquo; (GMF, comisiones, intereses) y &laquo;Solo auxiliar&raquo; (cheques/dep&oacute;sitos en tr&aacute;nsito) &mdash;eso es normal, no un error.
+      </div>
+      <div class="tip">
+        <strong>Regla general:</strong> (1) misma cuenta en extracto y auxiliar, (2) mapeo y fechas correctos, (3) sentido D/C alineado (toggle si aplica), (4) tolerancia razonable ($50&ndash;$100). Lo que quede sin cruzar casi siempre es partida conciliatoria real (GMF, comisiones, cheques en tr&aacute;nsito), no un fallo de la herramienta.
+      </div>
+    </section>
+    <section id="tips" class="step">
+      <h2>Tips espec&iacute;ficos para Colombia</h2>
+      <div class="tip">
+        <strong>GMF separado:</strong> en Colombia, el banco descuenta el 4 &times; 1000 del GMF en una transacci&oacute;n separada del movimiento principal. T&iacute;picamente queda como "Solo Extracto" hasta que lo registras en cuenta 530525. La herramienta lo identifica como concepto "GMF" y sugiere el asiento de ajuste.
+      </div>
+      <div class="tip">
+        <strong>NIT en extractos:</strong> los extractos colombianos rara vez traen NIT del tercero, solo el detalle del movimiento ("PAGO PROVEEDOR XYZ" o "TRANSFERENCIA RECIBIDA"). El cruce se hace por monto + fecha + sentido, no por NIT.
+      </div>
+      <div class="tip">
+        <strong>Cheques en desuso:</strong> los cheques se usan poco en 2025. Si tu cliente todav&iacute;a los usa, la diferencia entre fecha de emisi&oacute;n y fecha de cobro puede ser larga &mdash;ten paciencia con cheques en "Solo Auxiliar" que tardan en aparecer en el extracto.
+      </div>
+      <div class="tip">
+        <strong>Conciliaci&oacute;n mensual obligatoria:</strong> revisor&iacute;a fiscal y auditor&iacute;a externa exigen conciliaci&oacute;n bancaria mensual con papel de trabajo firmado. El Excel descargado de la herramienta sirve como soporte directo.
+      </div>
+      <div class="cta-end">
+        <h3>Abrir la herramienta de conciliaci&oacute;n</h3>
+        <p>Listo para conciliar el cierre del mes en curso.</p>
+        <a href="../conciliacion.html">Ir a conciliacion.html &rarr;</a>
+      </div>
+      <div class="step-nav"><a href="#errores">&larr; Advertencias y errores</a><a href="../tutoriales.html" class="next">Volver a Tutoriales &rarr;</a></div>
+    </section>
+  </div>
+</div>
+<script>
+(function(){
+  var links = document.querySelectorAll('.sidebar-nav a');
+  var sections = Array.from(links).map(function(a){ var id = a.getAttribute('href').replace('#',''); return document.getElementById(id); }).filter(Boolean);
+  function update(){
+    var y = window.scrollY + 80;
+    var current = sections[0];
+    sections.forEach(function(s){ if(s && s.offsetTop <= y) current = s; });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if(current){ var match = document.querySelector('.sidebar-nav a[href="#'+current.id+'"]'); if(match) match.classList.add('active'); }
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  update();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Auditor + Plan de Salida de Deudas — Avalancha vs Bola de Nieve | ExógenaDIAN</title>
+<meta name="description" content="Audita el costo real de todas tus deudas (tasa promedio ponderada, intereses año, ratio cuota/ingreso) y arma tu plan de salida (avalancha vs bola de nieve). Una sola lista, dos vistas.">
+<meta name="keywords" content="auditor deudas colombia, salir de deudas, avalancha vs bola de nieve, tasa promedio ponderada, plan salida deudas, tarjetas crédito tasa real, usura colombia">
+<link rel="canonical" href="https://exogenadian.com/deudas.html">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Auditor + Plan de Salida de Deudas | ExógenaDIAN">
+<meta property="og:description" content="Audita el costo real y arma tu plan de salida (avalancha vs bola de nieve). Una sola lista, dos vistas.">
+<meta property="og:url" content="https://exogenadian.com/deudas.html">
+<meta property="og:type" content="website"><meta property="og:locale" content="es_CO">
+<meta property="og:image" content="https://exogenadian.com/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Auditor y Plan de Salida de Deudas","url":"https://exogenadian.com/deudas.html","description":"Audita tasa promedio ponderada, intereses estimados año 1, ratio cuota/ingreso. Compara avalancha vs bola de nieve con tu lista real.","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"COP"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://exogenadian.com/"},{"@type":"ListItem","position":2,"name":"Finanzas Personales","item":"https://exogenadian.com/finanzas.html"},{"@type":"ListItem","position":3,"name":"Deudas","item":"https://exogenadian.com/deudas.html"}]}</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.0/jspdf.plugin.autotable.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+<link rel="stylesheet" href="shared/finanzas-wow.css?v=a660abd8">
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--green:#059669;--green2:#ECFDF5;--green3:#D1FAE5;--red:#DC2626;--red2:#FEF2F2;--amber:#D97706;--amber2:#FFF8E1;--amber3:#FEF3C7;--border:#e2e8f0;--radius:10px;--shadow:0 2px 12px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+.container{max-width:1000px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#7F1D1D 0%,#DC2626 100%);padding:26px 32px;border-radius:16px;margin-bottom:18px;color:#fff}
+.header h1{font-size:1.4rem;font-weight:700;display:flex;align-items:center;gap:10px}
+.header p{opacity:.9;font-size:.85rem;margin-top:6px;max-width:620px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.tab{padding:14px 18px;background:#fff;border:2px solid var(--border);border-radius:12px;cursor:pointer;text-align:center;transition:.2s}
+.tab:hover{border-color:var(--pri2)}
+.tab.active{border-color:var(--pri);background:var(--pri3);box-shadow:0 0 0 3px rgba(46,117,182,.12)}
+.tab strong{display:block;font-size:.95rem;color:var(--pri);margin-bottom:3px}
+.tab small{font-size:.74rem;color:var(--muted)}
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:22px;margin-bottom:18px;box-shadow:var(--shadow)}
+.card-title{font-size:1rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;color:var(--pri)}
+.deu-table{width:100%;border-collapse:collapse;font-size:.86rem}
+.deu-table th{background:var(--pri);color:#fff;padding:10px 8px;text-align:left;font-size:.72rem;text-transform:uppercase;letter-spacing:.3px}
+.deu-table td{padding:6px 8px;border-bottom:1px solid var(--border);vertical-align:middle}
+.deu-table input{width:100%;padding:7px 9px;border:1.5px solid transparent;border-radius:6px;font-size:.86rem;font-family:'JetBrains Mono',monospace;background:transparent;transition:.15s}
+.deu-table input:focus{outline:none;border-color:var(--pri2);background:#fff;box-shadow:0 0 0 2px rgba(46,117,182,.15)}
+.deu-table input.desc{font-family:'DM Sans',sans-serif;text-align:left}
+.deu-table .col-act{width:6%;text-align:center}
+.btn-del{background:var(--red2);color:var(--red);border:none;width:28px;height:28px;border-radius:6px;cursor:pointer;font-weight:700;font-size:1rem}
+.btn-del:hover{background:var(--red);color:#fff}
+.add-btn{margin-top:12px;padding:9px 18px;background:transparent;border:1.5px dashed var(--border);color:var(--muted);border-radius:8px;font-weight:600;cursor:pointer;font-size:.86rem}
+.add-btn:hover{border-color:var(--pri2);color:var(--pri2);background:var(--pri3)}
+.input-row{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.input-row label{font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase}
+.input-row input{padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:.95rem;font-family:'JetBrains Mono',monospace}
+.input-row input:focus{outline:none;border-color:var(--pri2);box-shadow:0 0 0 3px rgba(46,117,182,.12)}
+.btn{padding:11px 22px;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:.9rem;font-family:inherit;transition:.15s}
+.btn-pri{background:var(--pri2);color:#fff;width:100%}.btn-pri:hover{background:var(--pri)}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#047857}
+.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--text)}.btn-outline:hover{border-color:var(--pri2);color:var(--pri2)}
+.btn-row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.kpi{background:var(--card);border-radius:var(--radius);padding:14px;border:1px solid var(--border);text-align:center}
+.kpi .val{font-size:1.2rem;font-weight:700;font-family:'JetBrains Mono',monospace}
+.kpi .lbl{font-size:.68rem;color:var(--muted);font-weight:600;text-transform:uppercase;margin-top:4px}
+.kpi.green .val{color:var(--green)}.kpi.blue .val{color:var(--pri2)}.kpi.amber .val{color:var(--amber)}.kpi.red .val{color:var(--red)}
+.alert{padding:12px 16px;border-radius:8px;font-size:.86rem;margin-bottom:12px;line-height:1.5}
+.alert-info{background:var(--pri3);color:var(--pri);border:1px solid #B4C6E7}
+.alert-green{background:var(--green2);color:#065F46;border:1px solid #A7F3D0}
+.alert-warn{background:var(--amber3);color:#92400E;border:1px solid #FDE68A}
+.alert-red{background:var(--red2);color:#991B1B;border:1px solid #FECACA}
+.bar-row{display:grid;grid-template-columns:160px 1fr 100px;gap:10px;align-items:center;margin-bottom:8px;font-size:.84rem}
+.bar-bg{height:22px;background:#F3F4F6;border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,#DC2626,#F87171);transition:width .4s}
+.bar-fill.usury{background:linear-gradient(90deg,#7F1D1D,#DC2626)}
+.bar-pct{font-family:'JetBrains Mono',monospace;font-weight:700;text-align:right;font-size:.78rem}
+.bar-label{font-weight:600}
+.heads-up{padding:14px 18px;background:linear-gradient(90deg,#7F1D1D,#DC2626);color:#fff;border-radius:10px;margin-top:14px;font-size:.92rem;line-height:1.5}
+.heads-up strong{display:block;font-size:1.05rem;margin-bottom:4px}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
+.strategy{padding:22px;border-radius:14px;border:2px solid}
+.strategy.aval{background:linear-gradient(135deg,#FEF7E6,#FEF3C7);border-color:#F59E0B}
+.strategy.snow{background:linear-gradient(135deg,#EEF2FF,#E0E7FF);border-color:#6366F1}
+.strategy.winner{box-shadow:0 0 0 4px rgba(5,150,105,.25)}
+.strategy h3{font-size:1.1rem;font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.strategy.aval h3{color:#92400E}
+.strategy.snow h3{color:#312E81}
+.strategy .strat-sub{font-size:.78rem;color:var(--muted);margin-bottom:14px}
+.strat-stats{display:flex;flex-direction:column;gap:8px}
+.strat-stat{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(255,255,255,.6);border-radius:8px;font-size:.86rem}
+.strat-stat strong{font-family:'JetBrains Mono',monospace}
+.strat-stat.big{font-size:1rem;font-weight:700;background:#fff;border:1px solid rgba(0,0,0,.05)}
+.strategy.winner::before{content:'✅ Recomendado';display:inline-block;background:var(--green);color:#fff;font-size:.7rem;padding:3px 10px;border-radius:20px;margin-bottom:8px;font-weight:700}
+.savings-banner{background:linear-gradient(90deg,var(--green),#10B981);color:#fff;padding:18px 22px;border-radius:14px;margin:14px 0;font-size:1rem;text-align:center}
+.savings-banner strong{font-size:1.4rem;font-family:'JetBrains Mono',monospace;display:block;margin-top:4px}
+.timeline-table{width:100%;border-collapse:collapse;font-size:.84rem;margin-top:10px}
+.timeline-table th{background:#F9FAFB;color:var(--pri);padding:8px 10px;text-align:left;font-size:.74rem;text-transform:uppercase}
+.timeline-table td{padding:6px 10px;border-bottom:1px solid var(--border)}
+.timeline-table td.num{text-align:right;font-family:'JetBrains Mono',monospace}
+.cross-links{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.cross-link{display:block;padding:14px 16px;background:#F9FAFB;border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text)}
+.cross-link:hover{border-color:var(--pri2);background:var(--pri3)}
+.cross-link strong{display:block;font-size:.88rem;color:var(--pri)}
+.cross-link small{font-size:.72rem;color:var(--muted)}
+.tab-content{display:none}.tab-content.active{display:block;animation:fadeIn .3s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.disclaimer{margin-top:14px;padding:12px 16px;background:var(--amber2);border:1px solid #FDE68A;border-radius:8px;font-size:.74rem;color:#92400E;line-height:1.5}
+@media(max-width:768px){.tabs,.kpis,.compare-grid,.cross-links{grid-template-columns:1fr}.kpis,.cross-links{grid-template-columns:1fr 1fr}.deu-table{font-size:.78rem}.bar-row{grid-template-columns:100px 1fr 70px}}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div id="navContainer"></div>
+<div class="container">
+<div class="header">
+  <h1><span>💳</span> Tus deudas</h1>
+  <p>Audita el costo real (tasa promedio ponderada, intereses año, ratio cuota/ingreso) y después arma tu plan de salida (avalancha vs bola de nieve). Una sola lista, dos vistas.</p>
+</div>
+<div class="tabs">
+  <div class="tab active" id="tabAuditar" onclick="setTab('auditar')">
+    <strong>🔍 Auditar mis deudas</strong>
+    <small>Cuánto te están sacando de verdad</small>
+  </div>
+  <div class="tab" id="tabPlan" onclick="setTab('plan')">
+    <strong>🪜 Plan de salida</strong>
+    <small>Avalancha vs bola de nieve</small>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">📋 Lista de tus deudas</div>
+  <p style="font-size:.84rem;color:var(--muted);margin-bottom:12px">Saca los extractos. Para cada deuda: descripción, saldo, tasa <strong>E.A.</strong>, cuota mensual, meses restantes. La lista la usan los dos tabs.</p>
+  <table class="deu-table">
+    <thead>
+      <tr>
+        <th style="width:28%">Descripción</th>
+        <th style="width:16%">Saldo</th>
+        <th style="width:12%">Tasa E.A.</th>
+        <th style="width:16%">Cuota mes</th>
+        <th style="width:14%">Meses rest.</th>
+        <th class="col-act"></th>
+      </tr>
+    </thead>
+    <tbody id="deuRows"></tbody>
+  </table>
+  <button class="add-btn" onclick="addRow()">+ Agregar otra deuda</button>
+  <div class="btn-row">
+    <button class="btn btn-green" onclick="guardarLista()">💾 Guardar lista</button>
+    <button class="btn btn-outline" onclick="cargarLista()" id="btnCargar" style="display:none">📂 Cargar guardada</button>
+    <button class="btn btn-outline" onclick="limpiarLista()">🗑️ Empezar de cero</button>
+  </div>
+</div>
+<div class="tab-content active" id="contentAuditar">
+  <div class="card">
+    <div class="card-title">💰 Tu ingreso mensual</div>
+    <div class="input-row">
+      <label>Ingreso neto mensual</label>
+      <input type="text" id="ingreso" placeholder="$0" inputmode="numeric">
+      <span style="font-size:.72rem;color:var(--muted);font-family:'DM Sans'">Para calcular qué % de tu ingreso se va en cuotas. <a href="salario-neto.html" style="color:var(--pri2)">¿No lo sabes? calcúlalo</a>.</span>
+    </div>
+  </div>
+  <button class="btn btn-pri" onclick="auditar()">🔍 Auditar mis deudas</button>
+  <div id="resultsAuditar" style="display:none;animation:fadeIn .4s">
+    <div class="card" style="margin-top:18px">
+      <div class="card-title">💥 El veredicto</div>
+      <div class="kpis" id="kpisAud"></div>
+      <div id="alertasAud"></div>
+      <div id="headsUp"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">📊 Tamaño de cada deuda</div>
+      <div id="barsSaldo"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">🔥 Cuál te quema más (intereses año 1)</div>
+      <div id="barsCosto"></div>
+      <div class="gancho" id="ganchoDeu"></div>
+      <div class="narrativa" id="narrativaDeu"></div>
+      <div class="aha-grid" id="ahaGridDeu"></div>
+    </div>
+    <div class="wow-actions-card" id="cardActionsDeu" style="display:none">
+      <div class="wow-actions-title">🎯 Tu plan de ataque</div>
+      <div class="wow-actions-sub">Lo que tu lista de deudas dispara, ordenado por impacto.</div>
+      <div class="action-ladder" id="actionLadderDeu"></div>
+    </div>
+    <div class="wow-share-card" id="cardShareDeu" style="display:none">
+      <div class="wow-share-title">📸 Compártelo</div>
+      <div class="wow-share-sub">El número que duele de tu deuda, listo para Instagram.</div>
+      <div class="share-card" id="shareCardDeu"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">⬇️ Descargar auditoría</div>
+      <div class="btn-row">
+        <button class="btn btn-green" onclick="exportPDF('aud')">📄 PDF</button>
+        <button class="btn btn-green" onclick="exportExcel('aud')">📊 Excel</button>
+        <button class="btn btn-outline" onclick="setTab('plan')">→ Pasar al plan de salida</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tab-content" id="contentPlan">
+  <div class="card">
+    <div class="card-title">💪 ¿Cuánto extra puedes abonar?</div>
+    <div class="input-row">
+      <label>Abono extra mensual (más allá de las cuotas mínimas)</label>
+      <input type="text" id="abonoExtra" placeholder="$0" inputmode="numeric">
+      <span style="font-size:.72rem;color:var(--muted);font-family:'DM Sans'">Lo que liberes apretándote del PyG. Aunque sean $200.000, hace diferencia.</span>
+    </div>
+  </div>
+  <button class="btn btn-pri" onclick="comparar()">⚖️ Comparar avalancha vs bola de nieve</button>
+  <div id="resultsPlan" style="display:none;animation:fadeIn .4s">
+    <div class="card" style="margin-top:18px">
+      <div class="card-title">⚖️ Comparación</div>
+      <div class="compare-grid" id="compareGrid"></div>
+      <div id="savingsBanner"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">📊 Orden de pago — avalancha</div>
+      <p style="font-size:.84rem;color:var(--muted);margin-bottom:8px">Pagas mínimas de todas, abono extra a la deuda con tasa más alta.</p>
+      <table class="timeline-table" id="timelineAval"></table>
+    </div>
+    <div class="card">
+      <div class="card-title">⛄ Orden de pago — bola de nieve</div>
+      <p style="font-size:.84rem;color:var(--muted);margin-bottom:8px">Igual pero atacas primero la deuda con menor saldo.</p>
+      <table class="timeline-table" id="timelineSnow"></table>
+    </div>
+    <div class="card">
+      <div class="card-title">⬇️ Descargar plan</div>
+      <div class="btn-row">
+        <button class="btn btn-green" onclick="exportPDF('plan')">📄 PDF</button>
+        <button class="btn btn-green" onclick="exportExcel('plan')">📊 Excel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">📚 Después</div>
+  <div class="cross-links">
+    <a href="fondo-emergencia.html" class="cross-link"><strong>🛟 Fondo emergencia</strong><small>Lo siguiente cuando te liberes</small></a>
+    <a href="pyg-personal.html" class="cross-link"><strong>📊 PyG personal</strong><small>De aquí sale el abono extra</small></a>
+    <a href="crecimiento.html" class="cross-link"><strong>📈 ¿Y si lo invierto?</strong><small>Una vez libre de deudas malas</small></a>
+  </div>
+</div>
+<div class="disclaimer">
+  Cálculo didáctico. Los intereses estimados asumen tasas y cuotas constantes — la realidad varía mes a mes (mora, intereses sobre intereses en tarjetas, tasas reseteadas). Tus datos se guardan SOLO en tu navegador.
+</div>
+</div>
+<script src="shared/parametros-financieros.js?v=e116ea2a"></script>
+<script src="shared/finanzas-store.js?v=61d9057f"></script>
+<script src="shared/finanzas-export.js?v=abe34dd6"></script>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<script src="shared/finanzas-privacy.js?v=aed97e2f"></script>
+<script>
+'use strict';
+var ultimoAud = null, ultimoPlan = null;
+function $(id){ return document.getElementById(id); }
+function fmt(n){ if(n==null||isNaN(n))return '$0'; return '$'+Math.round(n).toLocaleString('es-CO'); }
+function num(id){ var v=$(id).value.replace(/[^\d]/g,''); return parseInt(v,10)||0; }
+function parseNum(s){ return parseInt(String(s||'').replace(/[^\d]/g,''),10) || 0; }
+function parsePct(s){ return parseFloat(String(s||'').replace(/[^\d.,]/g,'').replace(',','.')) || 0; }
+function escapeHtml(s){ return String(s||'').replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+['ingreso','abonoExtra'].forEach(function(id){
+  $(id).addEventListener('input', function(){
+    var raw = this.value.replace(/[^\d]/g,'');
+    this.value = raw ? '$'+parseInt(raw,10).toLocaleString('es-CO') : '';
+  });
+});
+function setTab(name){
+  $('tabAuditar').classList.toggle('active', name==='auditar');
+  $('tabPlan').classList.toggle('active', name==='plan');
+  $('contentAuditar').classList.toggle('active', name==='auditar');
+  $('contentPlan').classList.toggle('active', name==='plan');
+  if (history.replaceState) history.replaceState(null, '', '#'+name);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+// Si el usuario llega con #plan
+if (location.hash === '#plan') setTab('plan');
+window.addEventListener('hashchange', function(){
+  if (location.hash === '#plan') setTab('plan');
+  if (location.hash === '#auditar' || location.hash === '') setTab('auditar');
+});
+function rowTemplate(idx, data){
+  data = data || {};
+  return '<tr data-idx="'+idx+'">'+
+    '<td><input type="text" class="desc" data-f="desc" placeholder="Tarjeta X" value="'+(data.desc||'')+'"></td>'+
+    '<td><input type="text" data-f="saldo" placeholder="$0" inputmode="numeric" value="'+(data.saldo?'$'+(+data.saldo).toLocaleString('es-CO'):'')+'"></td>'+
+    '<td><input type="text" data-f="tasa" placeholder="25%" inputmode="decimal" value="'+(data.tasa?data.tasa+'%':'')+'"></td>'+
+    '<td><input type="text" data-f="cuota" placeholder="$0" inputmode="numeric" value="'+(data.cuota?'$'+(+data.cuota).toLocaleString('es-CO'):'')+'"></td>'+
+    '<td><input type="text" data-f="meses" placeholder="24" inputmode="numeric" value="'+(data.meses||'')+'"></td>'+
+    '<td class="col-act"><button class="btn-del" onclick="delRow(this)">×</button></td>'+
+  '</tr>';
+}
+function bindRow(tr){
+  tr.querySelectorAll('input').forEach(function(inp){
+    var f = inp.getAttribute('data-f');
+    if (f === 'saldo' || f === 'cuota'){
+      inp.addEventListener('input', function(){
+        var raw = this.value.replace(/[^\d]/g,'');
+        this.value = raw ? '$'+parseInt(raw,10).toLocaleString('es-CO') : '';
+      });
+    } else if (f === 'tasa'){
+      inp.addEventListener('blur', function(){
+        var v = parsePct(this.value);
+        this.value = v ? v+'%' : '';
+      });
+    } else if (f === 'meses'){
+      inp.addEventListener('input', function(){ this.value = this.value.replace(/[^\d]/g,'').slice(0,3); });
+    }
+  });
+}
+function addRow(data){
+  var tbody = $('deuRows');
+  var idx = tbody.children.length;
+  tbody.insertAdjacentHTML('beforeend', rowTemplate(idx, data));
+  bindRow(tbody.lastElementChild);
+}
+function delRow(btn){
+  var tr = btn.closest('tr');
+  if ($('deuRows').children.length <= 1) {
+    tr.querySelectorAll('input').forEach(function(i){ i.value=''; });
+    return;
+  }
+  tr.remove();
+}
+function readDeudas(opts){
+  opts = opts || {};
+  var rows = [];
+  $('deuRows').querySelectorAll('tr').forEach(function(tr,i){
+    var get = function(f){ return tr.querySelector('[data-f="'+f+'"]').value; };
+    var saldo = parseNum(get('saldo'));
+    var tasa  = parsePct(get('tasa'));
+    var cuota = parseNum(get('cuota'));
+    var meses = parseInt(get('meses'),10) || 0;
+    var desc  = get('desc') || ('Deuda '+(i+1));
+    var minRequired = opts.requireCuota ? (saldo > 0 && tasa > 0 && cuota > 0) : (saldo > 0 && tasa > 0);
+    if (minRequired) rows.push({ desc:desc, saldo:saldo, tasa:tasa, cuota:cuota, meses:meses, id:i });
+  });
+  return rows;
+}
+function guardarLista(){
+  var rows = readDeudas();
+  if (rows.length === 0) { exoToast('Nada que guardar', 'warning'); return; }
+  var data = { rows: rows, ingreso: num('ingreso') };
+  if (FinanzasStore.set('deudas', data)) exoToast('Lista guardada en este navegador', 'success');
+}
+function cargarLista(){
+  var d = FinanzasStore.get('deudas');
+  if (!d || !d.rows) { exoToast('No hay lista guardada', 'info'); return; }
+  $('deuRows').innerHTML = '';
+  d.rows.forEach(function(r){ addRow(r); });
+  if (d.ingreso) $('ingreso').value = '$'+d.ingreso.toLocaleString('es-CO');
+  exoToast('Lista cargada', 'success');
+}
+function limpiarLista(){
+  if (!confirm('¿Borrar todas las filas? (esto NO borra lo guardado)')) return;
+  $('deuRows').innerHTML = '';
+  addRow(); addRow();
+  $('resultsAuditar').style.display = 'none';
+  $('resultsPlan').style.display = 'none';
+}
+// ─── Auditor ───
+function interesesProximos(saldo, tasaEa, cuota, mesesRest, horizonteMeses){
+  var i = Math.pow(1 + tasaEa/100, 1/12) - 1;
+  var s = saldo, totalInt = 0;
+  var n = Math.min(horizonteMeses, mesesRest || horizonteMeses);
+  for (var m = 0; m < n && s > 0; m++){
+    var interes = s * i;
+    totalInt += interes;
+    var principal = cuota - interes;
+    if (principal <= 0) { totalInt += (n - m - 1) * s * i; break; }
+    s = Math.max(s - principal, 0);
+  }
+  return totalInt;
+}
+function auditar(){
+  var rows = readDeudas();
+  if (rows.length === 0) { exoToast('Mete al menos una deuda con saldo y tasa', 'warning'); return; }
+  var ingreso = num('ingreso');
+  var saldoTotal = 0, cuotaTotal = 0, interesAnio = 0, sumProd = 0;
+  rows.forEach(function(r){
+    saldoTotal += r.saldo;
+    cuotaTotal += r.cuota;
+    sumProd    += r.saldo * r.tasa;
+    r.interesAnio = interesesProximos(r.saldo, r.tasa, r.cuota, r.meses, 12);
+    interesAnio += r.interesAnio;
+  });
+  var tasaProm = saldoTotal > 0 ? sumProd / saldoTotal : 0;
+  var pctIng   = ingreso > 0 ? cuotaTotal / ingreso * 100 : 0;
+  var costoEf  = saldoTotal > 0 ? interesAnio / saldoTotal * 100 : 0;
+  ultimoAud = { rows:rows, saldoTotal:saldoTotal, cuotaTotal:cuotaTotal, interesAnio:interesAnio, tasaProm:tasaProm, pctIng:pctIng, ingreso:ingreso, costoEf:costoEf };
+  $('kpisAud').innerHTML =
+    '<div class="kpi blue"><div class="val">'+fmt(saldoTotal)+'</div><div class="lbl">Deuda total</div></div>'+
+    '<div class="kpi red"><div class="val">'+tasaProm.toFixed(2)+'%</div><div class="lbl">Tasa prom. E.A.</div></div>'+
+    '<div class="kpi amber"><div class="val">'+fmt(interesAnio)+'</div><div class="lbl">Intereses año 1</div></div>'+
+    '<div class="kpi '+(pctIng>35?'red':pctIng>30?'amber':pctIng>0?'green':'blue')+'"><div class="val">'+(ingreso?pctIng.toFixed(1)+'%':'—')+'</div><div class="lbl">Cuota / ingreso</div></div>';
+  var alertas = [];
+  var usura = ParametrosFinanzas.P.tasas.usuraConsumo;
+  rows.forEach(function(r){
+    if (r.tasa > usura - 1) alertas.push('<div class="alert alert-red"><strong>🚨 '+escapeHtml(r.desc)+' al '+r.tasa.toFixed(2)+'%.</strong> Usura legal abril 2026: '+usura.toFixed(2)+'%. Si supera la usura, denuncia ante SuperFinanciera.</div>');
+  });
+  if (pctIng > 35)      alertas.push('<div class="alert alert-red"><strong>🟥 Apagando incendios:</strong> '+pctIng.toFixed(0)+'% del ingreso comprometido. Para deuda nueva HOY. <a href="#plan" onclick="setTab(\'plan\');return false" style="color:#991B1B;font-weight:700">Plan de salida →</a></div>');
+  else if (pctIng > 30) alertas.push('<div class="alert alert-warn"><strong>🟧 Sobreendeudado:</strong> '+pctIng.toFixed(0)+'% en cuotas, sobre el 30% recomendado.</div>');
+  else if (pctIng > 0 && pctIng <= 20) alertas.push('<div class="alert alert-green"><strong>🟩 Bajo control:</strong> '+pctIng.toFixed(0)+'%. Manejable.</div>');
+  $('alertasAud').innerHTML = alertas.join('');
+  $('headsUp').innerHTML = saldoTotal > 0 ?
+    '<div class="heads-up"><strong>El número que duele:</strong>en los próximos 12 meses pagas '+fmt(interesAnio)+' SOLO en intereses ('+(costoEf).toFixed(1)+'% costo financiero efectivo año 1).'+
+    (ingreso > 0 ? ' Eso es '+(interesAnio/ingreso/12*100).toFixed(1)+'% de tu ingreso mensual yéndose en humo.':'')+'</div>' : '';
+  $('barsSaldo').innerHTML = rows.slice().sort(function(a,b){ return b.saldo-a.saldo; }).map(function(r){
+    var pct = saldoTotal > 0 ? r.saldo/saldoTotal*100 : 0;
+    return '<div class="bar-row"><div class="bar-label">'+escapeHtml(r.desc)+'</div>'+
+      '<div class="bar-bg"><div class="bar-fill" style="width:'+pct.toFixed(1)+'%"></div></div>'+
+      '<div class="bar-pct">'+fmt(r.saldo)+'<br><span style="font-size:.7rem;color:var(--muted)">'+pct.toFixed(0)+'%</span></div></div>';
+  }).join('');
+  $('barsCosto').innerHTML = rows.slice().sort(function(a,b){ return b.interesAnio-a.interesAnio; }).map(function(r){
+    var pct = interesAnio > 0 ? r.interesAnio/interesAnio*100 : 0;
+    var clsUsury = r.tasa > usura - 2 ? ' usury' : '';
+    return '<div class="bar-row"><div class="bar-label">'+escapeHtml(r.desc)+' <small style="color:var(--muted);font-weight:400">'+r.tasa.toFixed(1)+'%</small></div>'+
+      '<div class="bar-bg"><div class="bar-fill'+clsUsury+'" style="width:'+pct.toFixed(1)+'%"></div></div>'+
+      '<div class="bar-pct">'+fmt(r.interesAnio)+'<br><span style="font-size:.7rem;color:var(--muted)">'+pct.toFixed(0)+'%</span></div></div>';
+  }).join('');
+  renderWowFactorDeu();
+  $('resultsAuditar').style.display = 'block';
+  $('resultsAuditar').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+function renderWowFactorDeu(){
+  if (!ultimoAud) return;
+  var c = ultimoAud;
+  var usura = ParametrosFinanzas.P.tasas.usuraConsumo;
+  var tieneUsura = c.rows.some(function(r){ return r.tasa > usura - 0.5; });
+  var pctIngMes = c.ingreso > 0 ? (c.interesAnio/12)/c.ingreso*100 : 0;
+  // Gancho
+  var gancho;
+  if (c.tasaProm > 24)            gancho = 'Tu plata trabaja para el banco. <em>No para ti.</em>';
+  else if (c.pctIng > 35)         gancho = 'Estás apagando incendios. <em>No construyendo nada.</em>';
+  else if (c.pctIng > 30)         gancho = '30% del ingreso en cuotas. <em>Margen de error: cero.</em>';
+  else if (c.tasaProm > 18)       gancho = 'Tu tasa promedio te dice cuánto cuesta tu plata. <em>Cara.</em>';
+  else                             gancho = 'Lo que la cuenta dice. <em>Sin moralismo.</em>';
+  document.getElementById('ganchoDeu').innerHTML = gancho;
+  // Narrativa
+  var narr = 'Tienes <strong>'+c.rows.length+' deudas</strong> por un total de <span class="num">'+fmt(c.saldoTotal)+'</span>. Tu tasa promedio ponderada es <strong>'+c.tasaProm.toFixed(2)+'%</strong> E.A. — el número que la mayoría no conoce.';
+  narr += '<br><br>En los próximos 12 meses pagas <span class="num">'+fmt(c.interesAnio)+'</span> SOLO en intereses ('+c.costoEf.toFixed(1)+'% del saldo, sin amortizar capital).';
+  if (c.ingreso > 0) {
+    narr += '<br><br>Como % de tu ingreso: cuotas <strong>'+c.pctIng.toFixed(1)+'%</strong>, intereses <strong>'+pctIngMes.toFixed(1)+'%</strong> mensual. ';
+    if (c.pctIng > 35) narr += 'Apagando incendios — no construyes patrimonio.';
+    else if (c.pctIng > 30) narr += 'Sobre el 30% recomendado. Un mes con imprevisto te tumba.';
+  }
+  if (tieneUsura) narr += '<br><br><strong>⚠️ ALERTA:</strong> alguna deuda supera la usura ('+usura.toFixed(2)+'%). Por ley puedes denunciar ante SuperFinanciera.';
+  document.getElementById('narrativaDeu').innerHTML = narr;
+  // Ahas
+  var ahas = [];
+  ahas.push('<div class="aha-card '+(c.tasaProm > 20 ? 'bad' : c.tasaProm > 12 ? '' : 'good')+'"><span class="aha-tag">tasa real</span><div class="aha-num">'+c.tasaProm.toFixed(1)+'%</div><div class="aha-lbl">ponderada — define tu urgencia</div></div>');
+  ahas.push('<div class="aha-card bad"><span class="aha-tag">año 1</span><div class="aha-num">'+fmt(c.interesAnio)+'</div><div class="aha-lbl">intereses puros, sin amortizar</div></div>');
+  if (c.ingreso > 0) ahas.push('<div class="aha-card '+(c.pctIng > 35 ? 'bad' : c.pctIng > 25 ? '' : 'good')+'"><span class="aha-tag">cuotas/ingreso</span><div class="aha-num">'+c.pctIng.toFixed(0)+'%</div><div class="aha-lbl">comprometido en cuotas</div></div>');
+  else ahas.push('<div class="aha-card bad"><span class="aha-tag">costo efectivo</span><div class="aha-num">'+c.costoEf.toFixed(1)+'%</div><div class="aha-lbl">año 1 sobre el saldo</div></div>');
+  document.getElementById('ahaGridDeu').innerHTML = ahas.join('');
+  // Action ladder
+  var actions = [];
+  if (tieneUsura) actions.push({h:'Denuncia las deudas sobre usura', p:'Ley 510/1999: si pasa de '+usura.toFixed(2)+'%, denuncia ante SuperFinanciera (gratis, semanas). Es derecho.'});
+  actions.push({h:'Consolida tarjetas en libre inversión', p:'Pasar de 26-29% a 16-22% E.A. ahorra plata real. Llama al banco antes de caer en mora.'});
+  if (c.pctIng > 30) actions.push({h:'No tomes deuda nueva — ni una más', p:'Tus cuotas suman <strong>'+c.pctIng.toFixed(0)+'%</strong>. Cualquier deuda nueva te empuja a impago.'});
+  actions.push({h:'Pasa al plan de salida', p:'Avalancha o bola de nieve. Cuando una deuda cae, su cuota mínima se suma al abono extra (efecto bola).'});
+  document.getElementById('cardActionsDeu').style.display = 'block';
+  document.getElementById('actionLadderDeu').innerHTML = actions.slice(0,3).map(function(a,i){
+    return '<div class="action-step"><div class="action-num">'+(i+1)+'</div><div class="action-body"><h4>'+a.h+'</h4><p>'+a.p+'</p></div></div>';
+  }).join('');
+  // Share card
+  var shareLine;
+  if (c.tasaProm > 22) shareLine = 'Mi tasa promedio: <em>'+c.tasaProm.toFixed(1)+'%</em>. Trabajando para bajarla.';
+  else if (c.pctIng > 35) shareLine = '<em>'+c.pctIng.toFixed(0)+'%</em> de mi ingreso en cuotas. Apagando incendios.';
+  else shareLine = 'Tasa real ponderada de mi deuda: <em>'+c.tasaProm.toFixed(1)+'%</em>.';
+  document.getElementById('cardShareDeu').style.display = 'block';
+  document.getElementById('shareCardDeu').innerHTML =
+    '<div class="share-card-label">Mi auditoría de deudas</div>'+
+    '<div class="share-card-amount">'+fmt(c.interesAnio)+'</div>'+
+    '<div class="share-card-line">'+shareLine+' Intereses año 1.</div>'+
+    '<div class="share-card-stats">'+
+      '<div class="share-card-stat">Saldo total<strong>'+fmt(c.saldoTotal)+'</strong></div>'+
+      '<div class="share-card-stat">Tasa pond.<strong>'+c.tasaProm.toFixed(1)+'%</strong></div>'+
+      '<div class="share-card-stat">Cuota/ingr<strong>'+(c.ingreso > 0 ? c.pctIng.toFixed(0)+'%' : '—')+'</strong></div>'+
+    '</div>'+
+    '<div class="share-actions">'+
+      '<button onclick="copiarShareDeu()">📋 Copiar texto</button>'+
+    '</div>'+
+    '<div class="share-card-foot">exogenadian.com/deudas</div>';
+}
+function copiarShareDeu(){
+  if (!ultimoAud) return;
+  var c = ultimoAud;
+  var txt = 'Mi auditoría de deudas\n';
+  txt += 'Tasa promedio ponderada: '+c.tasaProm.toFixed(2)+'% E.A.\n';
+  txt += 'Intereses año 1: '+fmt(c.interesAnio)+'\n';
+  txt += 'Saldo total: '+fmt(c.saldoTotal)+'\n';
+  txt += 'Calculado en exogenadian.com/deudas';
+  if (navigator.clipboard) navigator.clipboard.writeText(txt).then(function(){ exoToast('Copiado al portapapeles', 'success'); });
+  if (typeof gtag !== 'undefined') gtag('event','deudas_share',{tipo:'copy'});
+}
+// ─── Plan de salida ───
+function simular(deudas, abonoExtra, strategy){
+  var d = deudas.map(function(x){ return Object.assign({}, x, { saldo:x.saldo, vivo:true, mesLib:0, intPagado:0, saldoIni:x.saldo }); });
+  var totalIntereses = 0, mes = 0, MAX = 600;
+  while (d.some(function(x){ return x.vivo; }) && mes < MAX) {
+    mes++;
+    var extra = abonoExtra;
+    d.forEach(function(x){
+      if (!x.vivo) return;
+      var i = Math.pow(1+x.tasa/100, 1/12) - 1;
+      var int = x.saldo * i;
+      x.intPagado += int;
+      totalIntereses += int;
+      var pagoMin = Math.min(x.cuota, x.saldo + int);
+      var principal = Math.max(pagoMin - int, 0);
+      x.saldo = Math.max(x.saldo - principal, 0);
+      if (x.saldo <= 0.5) { x.saldo = 0; x.vivo = false; x.mesLib = mes; }
+    });
+    if (extra > 0) {
+      while (extra > 0 && d.some(function(x){ return x.vivo; })) {
+        var next = d.filter(function(x){ return x.vivo; }).sort(function(a,b){
+          return strategy === 'aval' ? b.tasa - a.tasa : a.saldo - b.saldo;
+        })[0];
+        var p = Math.min(extra, next.saldo);
+        next.saldo -= p;
+        if (next.saldo <= 0.5) { next.saldo = 0; next.vivo = false; next.mesLib = mes; }
+        extra -= p;
+      }
+    }
+  }
+  return { meses: mes, intereses: totalIntereses, deudas: d };
+}
+function comparar(){
+  var deudas = readDeudas({requireCuota:true});
+  if (deudas.length === 0) { exoToast('Mete deudas con saldo, tasa Y cuota', 'warning'); return; }
+  var extra = num('abonoExtra');
+  for (var i=0; i<deudas.length; i++) {
+    var im = Math.pow(1+deudas[i].tasa/100, 1/12) - 1;
+    if (deudas[i].cuota <= deudas[i].saldo * im) {
+      exoToast('La cuota de "'+deudas[i].desc+'" no cubre los intereses. Revísala.', 'warning');
+      return;
+    }
+  }
+  var aval = simular(deudas, extra, 'aval');
+  var snow = simular(deudas, extra, 'snow');
+  var ahorroPlata = snow.intereses - aval.intereses;
+  var ahorroMeses = snow.meses - aval.meses;
+  var winner = ahorroPlata > 0 ? 'aval' : ahorroPlata < 0 ? 'snow' : 'tie';
+  ultimoPlan = { aval:aval, snow:snow, deudas:deudas, extra:extra, winner:winner, ahorroPlata:ahorroPlata, ahorroMeses:ahorroMeses };
+  $('compareGrid').innerHTML =
+    '<div class="strategy aval'+(winner==='aval'?' winner':'')+'">'+
+      '<h3>🔥 Avalancha</h3>'+
+      '<div class="strat-sub">Ataca primero la deuda con mayor tasa E.A.</div>'+
+      '<div class="strat-stats">'+
+        '<div class="strat-stat big"><span>Liberación</span><strong>'+aval.meses+' meses</strong></div>'+
+        '<div class="strat-stat"><span>Fecha estimada</span><strong>'+fechaFutura(aval.meses)+'</strong></div>'+
+        '<div class="strat-stat big" style="background:rgba(220,38,38,.08)"><span>Intereses pagados</span><strong style="color:#991B1B">'+fmt(aval.intereses)+'</strong></div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="strategy snow'+(winner==='snow'?' winner':'')+'">'+
+      '<h3>⛄ Bola de nieve</h3>'+
+      '<div class="strat-sub">Ataca primero la deuda con menor saldo</div>'+
+      '<div class="strat-stats">'+
+        '<div class="strat-stat big"><span>Liberación</span><strong>'+snow.meses+' meses</strong></div>'+
+        '<div class="strat-stat"><span>Fecha estimada</span><strong>'+fechaFutura(snow.meses)+'</strong></div>'+
+        '<div class="strat-stat big" style="background:rgba(220,38,38,.08)"><span>Intereses pagados</span><strong style="color:#991B1B">'+fmt(snow.intereses)+'</strong></div>'+
+      '</div>'+
+    '</div>';
+  if (Math.abs(ahorroPlata) >= 1000) {
+    $('savingsBanner').innerHTML =
+      '<div class="savings-banner">'+
+      (winner === 'aval' ? 'Con avalancha te ahorras<strong>'+fmt(Math.abs(ahorroPlata))+'</strong>'+(ahorroMeses!==0?' y sales '+Math.abs(ahorroMeses)+' meses antes':'')+' frente a la bola de nieve.'
+        : 'Con tu lista la bola de nieve te ahorra<strong>'+fmt(Math.abs(ahorroPlata))+'</strong> frente a la avalancha.')+
+      '</div>';
+  } else {
+    $('savingsBanner').innerHTML = '<div class="alert alert-info" style="margin-top:14px">Con tu lista las dos estrategias dan casi lo mismo. Escoge la que te dé más motivación.</div>';
+  }
+  $('timelineAval').innerHTML = renderTimeline(aval);
+  $('timelineSnow').innerHTML = renderTimeline(snow);
+  $('resultsPlan').style.display = 'block';
+  $('resultsPlan').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+function renderTimeline(sim){
+  var rows = sim.deudas.slice().sort(function(a,b){ return a.mesLib - b.mesLib; });
+  var html = '<thead><tr><th>Orden</th><th>Deuda</th><th style="text-align:right">Tasa</th><th style="text-align:right">Saldo inicial</th><th style="text-align:right">Mes liberación</th><th style="text-align:right">Intereses pagados</th></tr></thead><tbody>';
+  rows.forEach(function(r,i){
+    html += '<tr><td>#'+(i+1)+'</td><td>'+escapeHtml(r.desc)+'</td><td class="num">'+r.tasa.toFixed(1)+'%</td><td class="num">'+fmt(r.saldoIni)+'</td><td class="num">Mes '+r.mesLib+' ('+fechaFutura(r.mesLib)+')</td><td class="num">'+fmt(r.intPagado)+'</td></tr>';
+  });
+  return html + '</tbody>';
+}
+function fechaFutura(meses){
+  var d = new Date(); d.setMonth(d.getMonth() + meses);
+  var ms=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  return ms[d.getMonth()]+' '+d.getFullYear();
+}
+// ─── Export ───
+function exportPDF(modo){
+  if (modo === 'aud' && !ultimoAud) { exoToast('Audita primero', 'warning'); return; }
+  if (modo === 'plan' && !ultimoPlan) { exoToast('Calcula primero', 'warning'); return; }
+  if (modo === 'aud') exportPDFAuditor();
+  else exportPDFPlan();
+}
+function exportPDFAuditor(){
+  var c = ultimoAud;
+  var usura = ParametrosFinanzas.P.tasas.usuraConsumo;
+  var tieneUsura = c.rows.some(function(r){ return r.tasa > usura - 0.5; });
+  var pctIngMes = c.ingreso > 0 ? (c.interesAnio/12)/c.ingreso*100 : 0;
+  // Frase hero — varía con el caso
+  var fraseHero;
+  if (c.tasaProm > 24)            fraseHero = { texto:'Tu plata trabaja para el banco,\nno para ti.', autor:'ExógenaDIAN' };
+  else if (c.pctIng > 35)         fraseHero = { texto:'Estás apagando incendios.\nNo construyendo nada.', autor:'ExógenaDIAN' };
+  else if (c.pctIng > 30)         fraseHero = { texto:'30% del ingreso en cuotas.\nMargen de error: cero.', autor:'ExógenaDIAN' };
+  else if (c.tasaProm > 18)       fraseHero = { texto:'Tu tasa promedio te dice cuánto\ncuesta tu plata. Cara.', autor:'ExógenaDIAN' };
+  else                             fraseHero = { texto:'Lo que la cuenta dice cuando\nnadie le pone moralismo.', autor:'ExógenaDIAN' };
+  // Narrativa
+  var narrativa = 'Tienes '+c.rows.length+' deudas por un total de '+fmt(c.saldoTotal)+'. Tu tasa promedio ponderada es '+c.tasaProm.toFixed(2)+'% E.A. — ese es el número que la mayoría no conoce de su propio bolsillo. ';
+  narrativa += 'En los próximos 12 meses vas a pagar '+fmt(c.interesAnio)+' SOLO en intereses. Eso es '+c.costoEf.toFixed(1)+'% del saldo total, sin tocar capital. ';
+  if (c.ingreso > 0) {
+    narrativa += '\n\nEn términos de tu ingreso: tus cuotas son '+c.pctIng.toFixed(1)+'% mensual, y el costo en intereses es '+pctIngMes.toFixed(1)+'% de tu sueldo cada mes. ';
+    if (c.pctIng > 35) narrativa += 'Estás apagando incendios — no construyes patrimonio, lo financias para otros. ';
+    else if (c.pctIng > 30) narrativa += 'Estás sobre el 30% recomendado. Un mes con un imprevisto te tumba. ';
+    else if (c.pctIng > 0) narrativa += 'Estás bajo control. La pelea es ahora reducir tasas, no volumen. ';
+  }
+  if (tieneUsura) narrativa += '\n\nALERTA: alguna de tus deudas supera la tasa de usura ('+usura.toFixed(2)+'%). Por ley puedes denunciar ante SuperFinanciera y el banco debe ajustar. No es opcional, es derecho.';
+  // 3 ahas
+  var ahas = [
+    { num: c.tasaProm.toFixed(1)+'%', label: 'tasa real ponderada — el número que define tu urgencia', tipo: c.tasaProm > 20 ? 'bad' : c.tasaProm > 12 ? 'neutro' : 'good' },
+    { num: fmt(c.interesAnio), label: 'en intereses puros este año, sin amortizar capital', tipo: 'bad' }
+  ];
+  if (c.ingreso > 0) ahas.push({ num: c.pctIng.toFixed(0)+'%', label: 'de tu ingreso comprometido en cuotas mensuales', tipo: c.pctIng > 35 ? 'bad' : c.pctIng > 25 ? 'neutro' : 'good' });
+  else ahas.push({ num: c.costoEf.toFixed(1)+'%', label: 'costo financiero efectivo año 1 sobre el saldo', tipo: 'bad' });
+  // Plan a 3 horizontes
+  var plan = {
+    p30: 'Listar deudas (ya lo hiciste). Identificar la de mayor tasa y dirigir TODO abono extra ahí. Detener cualquier deuda nueva — primero apagas, después gastas.',
+    p12m: 'Avalancha en piloto automático: cuotas mínimas en todas + abono extra a la de mayor tasa. Cuando caiga, su cuota mínima se suma al abono extra. Renegociar tasas con bancos: pasar tarjeta del 26-29% a libre inversión 16-22% es plata real recuperada.',
+    p5y: 'Cero deudas malas (tarjetas, libre inversión, fiados). Solo deuda hipotecaria si compraste vivienda. La diferencia entre 5 años de pagar intereses y 5 años de invertir compounding es de orden de magnitud — literal.'
+  };
+  // Consejos
+  var consejos = [];
+  if (tieneUsura) consejos.push({
+    titulo: 'Denuncia las deudas sobre la usura',
+    impacto: 'Reducción legal',
+    desc: 'Ley 510/1999 y Decretos reglamentarios: ninguna deuda puede pasar la tasa de usura del trimestre ('+usura.toFixed(2)+'% E.A. abril 2026). Si tu banco cobra más, denuncia ante SuperFinanciera (https://www.superfinanciera.gov.co). El proceso es gratuito y se resuelve en semanas.'
+  });
+  consejos.push({
+    titulo: 'Consolida tarjetas en un libre inversión más barato',
+    impacto: '5-10 puntos menos',
+    desc: 'Pasar saldo de tarjeta (26-29% E.A.) a libre inversión (16-22% E.A.) ahorra plata real y simplifica el seguimiento. Llama al banco antes de caer en mora — la negociación es más fácil con histórico limpio.'
+  });
+  if (c.pctIng > 30) consejos.push({
+    titulo: 'No tomes deuda nueva — ni una más',
+    impacto: 'Detiene la sangría',
+    desc: 'Tus cuotas suman '+c.pctIng.toFixed(0)+'% del ingreso. Cualquier deuda nueva te empuja al 40%+ y entras en zona de impago. Antes de pensar en bajar deuda, asegura no agregar más. Es disciplina, no estrategia.'
+  });
+  consejos.push({
+    titulo: 'No cierres tarjetas viejas que ya pagaste',
+    impacto: 'Score crediticio',
+    desc: 'Cerrar una tarjeta vieja baja el promedio de antigüedad de tu historial — empeora tu score. Mantenla con saldo cero y úsala para una compra pequeña al mes (que pagues en cuota única). El crédito que no necesitas urgente es el que el banco te presta cuando lo necesitas.'
+  });
+  consejos.push({
+    titulo: 'Llama antes de caer en mora',
+    impacto: 'Reestructuración blanda',
+    desc: 'Antes de los 60-90 días, los bancos sí reestructuran con tasa más baja o plazo extendido. Después la conversación cambia: capital + intereses + costos jurídicos. La llamada incómoda hoy es plata mañana.'
+  });
+  // Frase nevera
+  var fraseNevera = c.tasaProm > 22 ? {
+    texto: 'La deuda no es solo intereses.\nEs la fila de meses futuros que ya están\ncomprometidos antes de vivirlos.',
+    autor: 'Morgan Housel — La psicología del dinero'
+  } : {
+    texto: 'Regla #1: nunca pierdas dinero.\nRegla #2: nunca olvides la regla #1.',
+    autor: 'Warren Buffett'
+  };
+  // Inputs y resultados
+  var inputs = c.rows.map(function(r){ return [r.desc, fmt(r.saldo)+' al '+r.tasa.toFixed(2)+'% E.A.']; });
+  if (c.ingreso > 0) inputs.push(['Ingreso mensual', fmt(c.ingreso)]);
+  var resultados = [
+    ['Deuda total', fmt(c.saldoTotal)],
+    ['Tasa promedio ponderada', c.tasaProm.toFixed(2)+'%'],
+    ['Cuota total mes', fmt(c.cuotaTotal)],
+    ['Intereses año 1', fmt(c.interesAnio)],
+    ['Costo financiero efectivo', c.costoEf.toFixed(2)+'%']
+  ];
+  if (c.ingreso > 0) resultados.push(['Cuota / ingreso', c.pctIng.toFixed(1)+'%']);
+  exportFinanzasReporte({
+    titulo: 'Auditoría de Deudas Colombia 2026',
+    slug: 'auditor-deudas',
+    subtitulo: 'Tu radiografía honesta: tasa promedio, costo real y plan de ataque',
+    hero: {
+      label: 'Intereses próximos 12 meses',
+      valor: fmt(c.interesAnio),
+      subvalor: c.tasaProm.toFixed(1)+'% tasa ponderada · '+(c.ingreso>0?c.pctIng.toFixed(0)+'% de tu ingreso comprometido':'sin ingreso definido')
+    },
+    fraseHero: fraseHero,
+    inputs: inputs,
+    resultados: resultados,
+    narrativa: narrativa,
+    ahas: ahas,
+    plan: plan,
+    consejos: consejos.slice(0, 4),
+    fraseNevera: fraseNevera,
+    fuente: 'Tasa usura consumo abril 2026: '+usura.toFixed(2)+'% (SuperFin Res. 0517) | Ley 510/1999 | Habeas Data Ley 1266/2008'
+  });
+}
+function exportPDFPlan(){
+  var c = ultimoPlan;
+  var saldoTotal = c.deudas.reduce(function(s,d){ return s+d.saldo; }, 0);
+  var winnerData = c.winner === 'aval' ? c.aval : c.winner === 'snow' ? c.snow : c.aval;
+  var winnerName = c.winner === 'aval' ? 'Avalancha' : c.winner === 'snow' ? 'Bola de nieve' : 'Avalancha (empate)';
+  var ahorroAbs = Math.abs(c.ahorroPlata);
+  // Frase hero
+  var fraseHero;
+  if (c.extra > 0 && winnerData.meses < 24)        fraseHero = { texto:'Hay luz al final del túnel.\nY tiene fecha.', autor:'ExógenaDIAN' };
+  else if (c.extra > 0 && winnerData.meses > 60)   fraseHero = { texto:'5 años no es eternidad.\nEs un plan.', autor:'ExógenaDIAN' };
+  else if (c.extra > 0)                            fraseHero = { texto:'Una estrategia abandonada al 50%\nrinde 0%. Escoge una y aguanta.', autor:'Adaptación de Dave Ramsey' };
+  else                                              fraseHero = { texto:'Sin abono extra,\nlas dos estrategias dan igual.', autor:'ExógenaDIAN' };
+  // Narrativa
+  var narrativa = 'Tienes '+c.deudas.length+' deudas por '+fmt(saldoTotal)+'. Vamos a comparar dos estrategias:\n\n';
+  narrativa += '🔥 AVALANCHA: pagas mínimas en todas y diriges el abono extra a la deuda con MAYOR tasa. Matemáticamente óptima — te ahorra más en intereses.\n\n';
+  narrativa += '⛄ BOLA DE NIEVE: pagas mínimas en todas y diriges el abono extra a la deuda con MENOR saldo. Matemáticamente subóptima, pero genera victorias visibles más rápido.\n\n';
+  narrativa += 'Con tu lista actual:\n';
+  narrativa += '• Avalancha: '+c.aval.meses+' meses, '+fmt(c.aval.intereses)+' en intereses totales.\n';
+  narrativa += '• Bola de nieve: '+c.snow.meses+' meses, '+fmt(c.snow.intereses)+' en intereses totales.\n';
+  if (ahorroAbs > 100000) narrativa += '\n'+winnerName+' te ahorra '+fmt(ahorroAbs)+' frente a la otra. ';
+  else narrativa += '\nLa diferencia entre estrategias es mínima ('+fmt(ahorroAbs)+'). ';
+  narrativa += 'Lo que mueve la aguja no es la estrategia, es el ABONO EXTRA. Sin él, las dos pagan eternamente lo que prometiste.';
+  // Ahas
+  var ahas = [
+    { num: winnerData.meses+' meses', label: 'para liquidar todo con la mejor estrategia', tipo: winnerData.meses > 60 ? 'bad' : winnerData.meses > 36 ? 'neutro' : 'good' },
+    { num: fmt(winnerData.intereses), label: 'en intereses totales — el costo real de tu deuda', tipo: 'bad' },
+    { num: fmt(c.extra), label: c.extra > 0 ? 'de abono extra mensual — el motor del plan' : 'sin abono extra: pagas eternamente', tipo: c.extra > 0 ? 'good' : 'bad' }
+  ];
+  // Plan
+  var plan = {
+    p30: 'Escoge UNA estrategia y NO la cambies. Si te entran ganas de tirar la toalla cada dos meses → bola de nieve. Si tienes disciplina y te emociona el número final → avalancha. La que abandones al mes 4 no sirve.',
+    p12m: 'Mantén el abono extra de '+(c.extra>0?fmt(c.extra)+'/mes':'al menos $200.000/mes')+' sin excepciones. Cada cuota mínima que se libere por una deuda liquidada se suma al abono extra (efecto bola/avalancha). Renegocia tasas en paralelo.',
+    p5y: 'Cero deudas malas en '+winnerData.meses+' meses si mantienes el ritmo. Después: fondo de emergencia 6 meses + AFC al máximo. La libertad financiera no es renta — es no deber nada y poder elegir.'
+  };
+  // Consejos
+  var consejos = [
+    { titulo: 'Estrategia recomendada para TI: '+winnerName, impacto: ahorroAbs > 100000 ? 'Ahorras '+fmt(ahorroAbs) : 'Empate técnico', desc: c.winner === 'aval' ? 'Avalancha es matemáticamente superior con tu lista. Atacas primero la deuda con mayor tasa E.A. — la que más sangra cada mes. Pierdes la satisfacción de cerrar deudas chiquitas rápido, ganas plata en intereses.' : c.winner === 'snow' ? 'Bola de nieve es ligeramente superior en plata con tu lista (raro pero pasa). Atacas el saldo más bajo primero. Bonus: ves cómo se cierra la primera deuda más rápido, motivación visible.' : 'Tus deudas están balanceadas y las dos estrategias dan casi lo mismo. Escoge la que sostengas: avalancha si tienes disciplina, bola de nieve si necesitas victorias rápidas.' },
+    { titulo: 'No pauses el abono extra "por una vez"', impacto: 'Mes pausado = mes ganado por el banco', desc: 'Cada mes que no abonas extra, los intereses sobre el saldo no abonado son intereses tuyos a la basura. Si surge un imprevisto, recórtalo de deseos antes que del abono. La regla en pareja: o ambos o ninguno acepta pausar.' },
+    { titulo: 'Refinancia cuando aparezca tasa más baja', impacto: 'Cada punto cuenta', desc: 'Si en el camino el banco te ofrece libre inversión a tasa menor que tu tarjeta, acéptalo y consolida — pero no extiendas el plazo. La tentación es bajar la cuota; el truco es pagar igual con la cuota nueva = liquidas más rápido.' },
+    { titulo: 'Cuando la primera deuda caiga, no celebres con plata extra', impacto: 'Cuota libre = abono extra', desc: 'La cuota mínima que ya no pagas DEBE ir 100% al abono extra de la siguiente deuda. Es el "snowball/avalanche effect". Si te la gastas en celebrar, reseteas el plan a su velocidad inicial.' }
+  ];
+  // Frase nevera
+  var fraseNevera = {
+    texto: 'El plan personal financiero que funciona\nes el que sigues. La motivación es\nun recurso escaso.',
+    autor: 'Dave Ramsey — defensa de la bola de nieve'
+  };
+  // Inputs y resultados
+  var inputs = c.deudas.map(function(d){ return [d.desc+' ('+d.tasa.toFixed(1)+'% E.A.)', fmt(d.saldo)]; });
+  inputs.push(['Abono extra mensual', fmt(c.extra)]);
+  var resultados = [
+    ['🔥 Avalancha — meses para liquidar', c.aval.meses+' meses'],
+    ['🔥 Avalancha — intereses totales', fmt(c.aval.intereses)],
+    ['⛄ Bola de nieve — meses', c.snow.meses+' meses'],
+    ['⛄ Bola de nieve — intereses', fmt(c.snow.intereses)],
+    ['Diferencia entre estrategias', fmt(ahorroAbs)+' a favor de '+winnerName]
+  ];
+  exportFinanzasReporte({
+    titulo: 'Plan de Salida de Deudas',
+    slug: 'salir-de-deudas',
+    subtitulo: 'Avalancha vs Bola de Nieve — tu camino con fechas',
+    hero: {
+      label: 'Quedas libre en',
+      valor: winnerData.meses+' meses',
+      subvalor: 'con '+winnerName+' + '+fmt(c.extra)+' de abono extra mensual'
+    },
+    fraseHero: fraseHero,
+    inputs: inputs,
+    resultados: resultados,
+    narrativa: narrativa,
+    ahas: ahas,
+    plan: plan,
+    consejos: consejos.slice(0, 4),
+    fraseNevera: fraseNevera,
+    fuente: 'Simulación amortización francesa, tasas constantes | Avalancha (Dave Ramsey) vs Bola de nieve | Habeas Data Ley 1266/2008'
+  });
+}
+function exportExcel(modo){
+  if (modo === 'aud' && !ultimoAud) return;
+  if (modo === 'plan' && !ultimoPlan) return;
+  var c = modo === 'aud' ? ultimoAud : ultimoPlan;
+  if (modo === 'aud') {
+    exportFinanzasExcel({
+      titulo:'Auditoría deudas', slug:'auditor-deudas',
+      inputs: c.rows.map(function(r,i){ return [(i+1)+'. '+r.desc+' ('+r.tasa.toFixed(2)+'%)', r.saldo]; }),
+      resultados: [['Deuda total', c.saldoTotal],['Tasa prom. ponderada', c.tasaProm.toFixed(2)+'%'],['Intereses año 1', c.interesAnio],['Cuota total', c.cuotaTotal],['Cuota/ingreso', c.ingreso?c.pctIng.toFixed(1)+'%':'—']],
+      destacado: { label:'INTERESES AÑO 1', valor: c.interesAnio },
+      interpretacion: 'Costo financiero efectivo: '+c.costoEf.toFixed(2)+'%',
+      fuente:'Auditoría — '+new Date().toLocaleDateString('es-CO')
+    });
+  } else {
+    exportFinanzasExcel({
+      titulo:'Plan salida deudas', slug:'salir-de-deudas',
+      inputs: c.deudas.map(function(d){ return [d.desc, d.saldo]; }).concat([['Abono extra', c.extra]]),
+      resultados: [['Avalancha — meses', c.aval.meses],['Avalancha — intereses', c.aval.intereses],['Bola nieve — meses', c.snow.meses],['Bola nieve — intereses', c.snow.intereses],['Diferencia', c.ahorroPlata]],
+      destacado: { label:'AHORRO MEJOR', valor: Math.abs(c.ahorroPlata) },
+      interpretacion: 'Mejor: '+(c.winner==='aval'?'Avalancha':c.winner==='snow'?'Bola de nieve':'Empate'),
+      fuente:'Plan salida — '+new Date().toLocaleDateString('es-CO')
+    });
+  }
+}
+window.addEventListener('DOMContentLoaded', function(){
+  addRow(); addRow();
+  if (FinanzasStore.isAvailable() && FinanzasStore.get('deudas')) $('btnCargar').style.display = 'inline-flex';
+});
+</script>
+</body>
+</html>

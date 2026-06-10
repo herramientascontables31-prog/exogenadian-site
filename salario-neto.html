@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Calculadora Salario Neto Colombia 2026 — ¿Cuánto te queda en el bolsillo? | ExógenaDIAN</title>
+<meta name="description" content="Calcula GRATIS tu salario neto mensual en Colombia 2026. Te mostramos cuánto te llega al bolsillo después de salud, pensión, FSP y retención. Simulador de aportes AFC y pensión voluntaria con su efecto en tu retención. Total anual con prestaciones.">
+<meta name="keywords" content="salario neto colombia 2026, calculadora sueldo neto, cuánto me queda salario, neto vs bruto colombia, calculadora salario integral, simulador AFC, aporte voluntario pensión, salario anual real">
+<link rel="canonical" href="https://exogenadian.com/salario-neto.html">
+<meta property="og:title" content="Calculadora Salario Neto Colombia 2026 — ¿Cuánto te queda en el bolsillo?">
+<meta property="og:description" content="Calcula tu salario neto, simula aportes a AFC y pensión voluntaria, y mira tu sueldo anual real con prestaciones.">
+<meta property="og:url" content="https://exogenadian.com/salario-neto.html">
+<meta property="og:type" content="website"><meta property="og:locale" content="es_CO"><meta property="og:site_name" content="ExógenaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="robots" content="index, follow">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora Salario Neto Colombia","url":"https://exogenadian.com/salario-neto.html","description":"Herramienta didáctica para calcular el salario neto mensual y anual de un asalariado en Colombia, con simulador de aportes AFC y pensión voluntaria.","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"COP"},"author":{"@type":"Organization","name":"ExógenaDIAN","url":"https://exogenadian.com"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"¿Cómo se calcula el salario neto en Colombia?","acceptedAnswer":{"@type":"Answer","text":"Al salario bruto se le restan los aportes obligatorios (salud 4%, pensión 4%, y FSP del 1% al 2% si gana más de 4 SMLMV) y la retención en la fuente (Art. 383 ET). El resultado es el salario neto que te transfieren a la cuenta."}},
+{"@type":"Question","name":"¿Cuánto es el salario integral y cómo afecta?","acceptedAnswer":{"@type":"Answer","text":"El salario integral aplica para sueldos superiores a 13 SMLMV e incluye prestaciones sociales. Los aportes a salud, pensión y FSP se calculan sobre el 70% del salario integral, no sobre el 100%. Esto reduce los descuentos pero el trabajador no recibe primas, cesantías ni intereses por separado."}},
+{"@type":"Question","name":"¿Aportar a AFC o pensión voluntaria reduce mi retención?","acceptedAnswer":{"@type":"Answer","text":"Sí. Los aportes voluntarios a fondos de pensión (Art. 126-1 ET) y a cuentas AFC (Art. 126-4 ET) reducen tu base gravable hasta el 30% del ingreso conjunto, con tope anual de 3.800 UVT. Esto baja tu retención mensual y a la vez te construye ahorro/inversión de largo plazo."}},
+{"@type":"Question","name":"¿Cuál es mi salario anual real?","acceptedAnswer":{"@type":"Answer","text":"Tu salario anual real incluye 12 sueldos netos + cesantías (1 sueldo) + intereses sobre cesantías (12% anual) + prima (1 sueldo) + vacaciones (medio sueldo). Para un asalariado con prestaciones, el ingreso anual equivale aproximadamente a 14,5 sueldos."}}
+]}</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://exogenadian.com/"},{"@type":"ListItem","position":2,"name":"Finanzas Personales","item":"https://exogenadian.com/finanzas.html"},{"@type":"ListItem","position":3,"name":"Salario Neto","item":"https://exogenadian.com/salario-neto.html"}]}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.0/jspdf.plugin.autotable.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--green:#059669;--green2:#ECFDF5;--green3:#D1FAE5;--red:#DC2626;--amber:#D97706;--amber2:#FFF8E1;--amber3:#FEF3C7;--border:#e2e8f0;--radius:10px;--shadow:0 2px 12px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+.container{max-width:940px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#1B3A5C 0%,#2E75B6 100%);padding:28px 32px;border-radius:16px;margin-bottom:24px;color:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.header h1{font-size:1.4rem;font-weight:700;display:flex;align-items:center;gap:10px}
+.header h1 span{font-size:1.5rem}
+.header p{opacity:.85;font-size:.85rem;margin-top:4px;max-width:540px}
+.header-right{text-align:right;font-size:.78rem;opacity:.75}
+.badge-ley{display:inline-block;background:rgba(16,185,129,.2);color:#6EE7B7;padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:700;margin-top:6px}
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:24px;margin-bottom:20px;box-shadow:var(--shadow)}
+.card-title{font-size:1.05rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px;color:var(--pri)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-grid.cols3{grid-template-columns:1fr 1fr 1fr}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-group.full{grid-column:1/-1}
+.form-group label{font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;display:flex;align-items:center;gap:4px}
+.form-group label .tip{cursor:help;background:var(--pri3);color:var(--pri);width:16px;height:16px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;position:relative}
+.form-group label .tip:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--pri);color:#fff;padding:6px 10px;border-radius:6px;font-size:.72rem;white-space:normal;max-width:300px;z-index:10;font-weight:400;text-transform:none;letter-spacing:0;line-height:1.4;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.form-group input,.form-group select{padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:.95rem;font-family:'DM Sans',sans-serif;transition:.2s}
+.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--pri2);box-shadow:0 0 0 3px rgba(46,117,182,.12)}
+.form-group input.money{font-family:'JetBrains Mono',monospace}
+.form-group .hint{font-size:.7rem;color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0}
+.alert{padding:12px 16px;border-radius:8px;font-size:.82rem;margin-bottom:14px;line-height:1.5}
+.alert-info{background:var(--pri3);color:var(--pri);border:1px solid #B4C6E7}
+.alert-green{background:var(--green2);color:#065F46;border:1px solid #A7F3D0}
+.alert-warn{background:var(--amber3);color:#92400E;border:1px solid #FDE68A}
+.btn-row{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.btn{padding:11px 24px;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:.9rem;font-family:inherit;transition:.15s;display:inline-flex;align-items:center;gap:6px}
+.btn-pri{background:var(--pri2);color:#fff;width:100%;justify-content:center}
+.btn-pri:hover{background:var(--pri);transform:translateY(-1px);box-shadow:0 4px 14px rgba(27,58,92,.3)}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#047857}
+.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--text)}.btn-outline:hover{border-color:var(--pri2);color:var(--pri2)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.results{display:none;animation:fadeIn .4s ease-out}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.kpi{background:var(--card);border-radius:var(--radius);padding:16px;border:1px solid var(--border);text-align:center}
+.kpi .val{font-size:1.25rem;font-weight:700;font-family:'JetBrains Mono',monospace}
+.kpi .lbl{font-size:.7rem;color:var(--muted);font-weight:600;text-transform:uppercase;margin-top:4px}
+.kpi.green .val{color:var(--green)}.kpi.blue .val{color:var(--pri2)}.kpi.amber .val{color:var(--amber)}.kpi.red .val{color:var(--red)}
+.dep-table{width:100%;border-collapse:collapse;font-size:.88rem}
+.dep-table th{background:var(--pri);color:#fff;padding:10px 12px;text-align:left;font-size:.75rem;text-transform:uppercase;letter-spacing:.3px}
+.dep-table th:last-child{text-align:right}
+.dep-table td{padding:9px 12px;border-bottom:1px solid var(--border)}
+.dep-table td:last-child{text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600}
+.dep-table tr:nth-child(even){background:#FAFBFC}
+.dep-table tr.highlight{background:var(--pri3);font-weight:700}
+.dep-table tr.total{background:var(--green2);font-weight:700}
+.dep-table tr.total td{color:#065F46;font-size:.95rem;padding:12px}
+.dep-table tr.ded td{color:var(--red)}
+.result-total{background:linear-gradient(135deg,#059669 0%,#047857 100%);color:#fff;border-radius:14px;padding:24px 28px;margin-top:18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.result-total .label{font-size:1rem;font-weight:600;opacity:.95}
+.result-total .label small{display:block;font-size:.78rem;opacity:.85;font-weight:400;margin-top:3px}
+.result-total .amount{font-size:2rem;font-weight:800;font-family:'JetBrains Mono',monospace;line-height:1}
+.compare-box{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.compare-col{border-radius:12px;padding:18px;text-align:center}
+.compare-col.sin{background:#FEF2F2;border:1px solid #FECACA}
+.compare-col.con{background:var(--green2);border:1px solid #A7F3D0}
+.compare-col .compare-label{font-size:.78rem;font-weight:600;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.compare-col .compare-val{font-size:1.4rem;font-weight:800;font-family:'JetBrains Mono',monospace}
+.compare-col.con .compare-val{color:var(--green)}
+.compare-col.sin .compare-val{color:var(--red)}
+.compare-col .compare-diff{margin-top:8px;font-size:.82rem;font-weight:700}
+.anual-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.anual-card{background:#F9FAFB;border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.anual-card .anual-lbl{font-size:.72rem;color:var(--muted);font-weight:600;text-transform:uppercase}
+.anual-card .anual-val{font-size:1rem;font-weight:700;font-family:'JetBrains Mono',monospace;margin-top:4px}
+.cross-links{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}
+.cross-link{display:block;padding:14px 16px;background:#F9FAFB;border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text);transition:.2s}
+.cross-link:hover{border-color:var(--pri2);background:var(--pri3)}
+.cross-link strong{display:block;font-size:.88rem;color:var(--pri);margin-bottom:3px}
+.cross-link small{font-size:.72rem;color:var(--muted);line-height:1.4}
+.disclaimer{margin-top:16px;padding:14px 18px;background:var(--amber2);border:1px solid #FDE68A;border-radius:8px;font-size:.76rem;color:#92400E;line-height:1.6}
+.normativa-list{margin-top:16px;padding:14px 18px;background:#F9FAFB;border:1px solid var(--border);border-radius:8px;font-size:.78rem;color:var(--muted);line-height:1.8}
+.toggle-box{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#F9FAFB;border:1px solid var(--border);border-radius:10px;cursor:pointer}
+.toggle-box input[type=checkbox]{width:17px;height:17px;accent-color:var(--pri2)}
+.toggle-box span{font-size:.85rem;color:var(--text);font-weight:500}
+/* ═══ WOW FACTOR — bloques diseñados para impacto y compartir ═══ */
+/* Frase gancho — línea memorable arriba del total */
+.gancho{font-family:'DM Sans',sans-serif;font-size:clamp(1.05rem,2vw,1.4rem);font-weight:700;color:var(--pri);text-align:center;padding:14px 18px;margin:14px 0 6px;letter-spacing:-.01em;line-height:1.3}
+.gancho em{font-style:normal;background:linear-gradient(135deg,var(--green),#34D399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+/* Narrativa — párrafo que cuenta la historia con TUS cifras */
+.narrativa{background:linear-gradient(135deg,#F0F9FF,var(--green2));border-left:4px solid var(--green);border-radius:0 12px 12px 0;padding:18px 22px;margin:18px 0;font-size:.96rem;color:var(--text);line-height:1.7}
+.narrativa strong{color:var(--green);font-weight:700}
+.narrativa .num{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--pri);font-size:1.02em}
+/* Aha cards — 3 cifras chocantes lado a lado */
+.aha-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
+.aha-card{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:18px 16px;text-align:center;position:relative;overflow:hidden;transition:.2s}
+.aha-card:hover{transform:translateY(-2px);border-color:var(--green);box-shadow:0 8px 24px rgba(5,150,105,.08)}
+.aha-card .aha-num{font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:800;color:var(--pri);line-height:1.1;margin-bottom:6px}
+.aha-card.bad .aha-num{color:var(--red)}
+.aha-card.good .aha-num{color:var(--green)}
+.aha-card .aha-lbl{font-size:.78rem;color:var(--muted);font-weight:600;line-height:1.4}
+.aha-card .aha-tag{position:absolute;top:8px;right:8px;font-size:.62rem;font-weight:700;padding:2px 8px;border-radius:8px;background:var(--green2);color:var(--green);text-transform:uppercase;letter-spacing:.05em}
+.aha-card.bad .aha-tag{background:#FEF2F2;color:var(--red)}
+@media(max-width:600px){.aha-grid{grid-template-columns:1fr}}
+/* Action ladder — pasos concretos basados en tu resultado */
+.action-ladder{margin:18px 0}
+.action-step{display:flex;gap:14px;padding:14px 16px;background:#F9FAFB;border:1px solid var(--border);border-radius:10px;margin-bottom:10px;transition:.2s}
+.action-step:hover{border-color:var(--green);background:var(--green2)}
+.action-step .action-num{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:800;font-size:.82rem}
+.action-step .action-body h4{font-size:.92rem;font-weight:700;color:var(--pri);margin-bottom:4px}
+.action-step .action-body p{font-size:.84rem;color:var(--muted);line-height:1.55}
+.action-step .action-body p strong{color:var(--green);font-weight:700}
+/* Share-card — el resultado en formato Instagram, screenshot-worthy */
+.share-card{position:relative;background:linear-gradient(135deg,#064E3B,#047857);color:#fff;padding:36px 28px 24px;border-radius:18px;margin:20px 0;text-align:center;overflow:hidden;box-shadow:0 12px 40px rgba(6,78,59,.25)}
+.share-card::before{content:'';position:absolute;top:-30px;right:-30px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none}
+.share-card::after{content:'';position:absolute;bottom:-50px;left:-50px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.03);pointer-events:none}
+.share-card-label{font-size:.74rem;font-weight:700;color:rgba(255,255,255,.6);letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px;position:relative;z-index:1}
+.share-card-amount{font-family:'JetBrains Mono',monospace;font-size:clamp(2rem,5vw,3rem);font-weight:900;letter-spacing:-.02em;line-height:1;margin-bottom:10px;position:relative;z-index:1}
+.share-card-line{font-family:'DM Sans',sans-serif;font-size:1rem;color:rgba(255,255,255,.92);font-weight:500;line-height:1.4;margin-bottom:18px;position:relative;z-index:1;max-width:420px;margin-left:auto;margin-right:auto}
+.share-card-line em{font-style:normal;color:#6EE7B7;font-weight:700}
+.share-card-stats{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;padding-top:14px;border-top:1px solid rgba(255,255,255,.12);position:relative;z-index:1}
+.share-card-stat{font-size:.78rem;color:rgba(255,255,255,.7)}
+.share-card-stat strong{display:block;font-family:'JetBrains Mono',monospace;font-size:1rem;color:#fff;font-weight:700;margin-top:2px}
+.share-card-foot{margin-top:14px;font-size:.66rem;color:rgba(255,255,255,.5);letter-spacing:.12em;text-transform:uppercase;font-weight:600;position:relative;z-index:1}
+.share-card-foot::before{content:'\1F4F8  ';opacity:.6}
+.share-actions{display:flex;gap:8px;justify-content:center;margin-top:14px;flex-wrap:wrap;position:relative;z-index:1}
+.share-actions button{padding:8px 16px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:8px;font-size:.82rem;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s}
+.share-actions button:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.35)}
+@media(max-width:768px){.form-grid,.form-grid.cols3,.kpis,.compare-box,.anual-grid,.cross-links{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.result-total{flex-direction:column;text-align:center}}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div id="navContainer"></div>
+<div class="container">
+<div class="header">
+  <div>
+    <h1><span>💰</span> Calculadora Salario Neto Colombia</h1>
+    <p>¿Cuánto te queda en el bolsillo después de salud, pensión y retención? Incluye simulador de aportes AFC y total anual real con prestaciones.</p>
+    <span class="badge-ley">Vigente 2026 — UVT $52.374 — SMLMV $1.750.905</span>
+  </div>
+  <div class="header-right">
+    Tabla Art. 383 ET<br>
+    Procedimiento 1 simplificado<br>
+    Art. 27 Ley 100/1993 (FSP)
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">📋 Tu salario</div>
+  <div class="form-grid">
+    <div class="form-group full">
+      <label>Salario bruto mensual <span class="tip" data-tip="Lo que aparece en tu contrato como salario, incluyendo auxilio de transporte si te lo pagan. Para salario integral marca la casilla de abajo.">?</span></label>
+      <input type="text" id="salario" class="money" placeholder="$5.000.000" inputmode="numeric">
+    </div>
+    <div class="form-group full">
+      <label class="toggle-box" style="cursor:pointer;text-transform:none;letter-spacing:0">
+        <input type="checkbox" id="esIntegral" onchange="toggleIntegral()">
+        <span>Es <strong>salario integral</strong> (los aportes se calculan sobre el 70% — Art. 132 CST)</span>
+      </label>
+    </div>
+    <div class="form-group">
+      <label>Dependientes económicos</label>
+      <select id="dependientes">
+        <option value="0">0 — sin dependientes</option>
+        <option value="1">1 dependiente</option>
+        <option value="2">2 dependientes (máximo)</option>
+      </select>
+      <span class="hint">Hijos menores, padres a cargo, cónyuge sin ingresos. Máx 2 (Art. 387 ET).</span>
+    </div>
+    <div class="form-group">
+      <label>Aportes a AFC (mensual) <span class="tip" data-tip="Cuenta de Ahorro para el Fomento de la Construcción. Aportar baja tu retención y construye ahorro para vivienda. Tope conjunto con pensión voluntaria: 30% del ingreso ó 3.800 UVT/año.">?</span></label>
+      <input type="text" id="afc" class="money" placeholder="$0" inputmode="numeric">
+      <span class="hint">Reduce tu base gravable. Art. 126-4 ET.</span>
+    </div>
+    <div class="form-group">
+      <label>Aportes voluntarios a pensión (mensual) <span class="tip" data-tip="Aporte voluntario a tu fondo de pensiones (AFP). También baja tu retención. Tope: 25% del ingreso ó 3.800 UVT/año, conjunto con AFC máx 30%.">?</span></label>
+      <input type="text" id="volPension" class="money" placeholder="$0" inputmode="numeric">
+      <span class="hint">Reduce tu base gravable. Art. 126-1 ET.</span>
+    </div>
+    <div class="form-group">
+      <label>Medicina prepagada (mensual)</label>
+      <input type="text" id="prepagada" class="money" placeholder="$0" inputmode="numeric">
+      <span class="hint">Hasta 16 UVT/mes. Art. 387 ET.</span>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-pri" onclick="calcular()">Calcular salario neto</button>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-outline" onclick="cargarPerfil()" id="btnCargarPerfil" style="display:none">📂 Cargar mis datos guardados</button>
+    <button class="btn btn-outline" onclick="guardarPerfil()">💾 Guardar mi perfil</button>
+  </div>
+</div>
+<div class="results" id="results">
+  <div class="card">
+    <div class="card-title">💵 Resultado del mes</div>
+    <div class="kpis" id="kpis"></div>
+    <table class="dep-table" id="tblDep"><thead></thead><tbody></tbody></table>
+    <div class="result-total" id="resultTotal"></div>
+    <div class="gancho" id="gancho"></div>
+    <div class="narrativa" id="narrativa"></div>
+    <div class="aha-grid" id="ahaGrid"></div>
+  </div>
+  <div class="card" id="cardActions" style="display:none">
+    <div class="card-title">🎯 Tu plan accionable — basado en TUS números</div>
+    <p style="font-size:.86rem;color:var(--muted);margin-bottom:14px">Estos son los movimientos concretos que tu resultado dispara. Ordenados por impacto en tu bolsillo.</p>
+    <div class="action-ladder" id="actionLadder"></div>
+  </div>
+  <div class="card" id="cardShare" style="display:none">
+    <div class="card-title">📸 Compártelo</div>
+    <p style="font-size:.86rem;color:var(--muted);margin-bottom:14px">Diseñado para screenshot a Instagram Stories o Twitter. Tu número, sin ego.</p>
+    <div class="share-card" id="shareCard"></div>
+  </div>
+  <div class="card" id="cardCompare" style="display:none">
+    <div class="card-title">🔄 ¿Y si aportas a AFC o pensión voluntaria?</div>
+    <p style="font-size:.88rem;color:var(--muted);margin-bottom:12px">Aportar a estos vehículos reduce tu retención mensual y al mismo tiempo te construye ahorro/inversión. Comparativo:</p>
+    <div class="compare-box" id="compareBox"></div>
+    <div class="alert alert-info" style="margin-top:14px">
+      <strong>💡 Lectura didáctica:</strong> el peso que aportas a AFC o pensión voluntaria no se evapora — sigue siendo tuyo, solo que en otra cuenta. Y de ese peso, la DIAN te "devuelve" la fracción que te habrían retenido.
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">📅 Tu sueldo anual real</div>
+    <p style="font-size:.88rem;color:var(--muted);margin-bottom:12px">Si eres asalariado con prestaciones, además del sueldo neto recibes prima, cesantías, intereses sobre cesantías y vacaciones. El total real anual:</p>
+    <div class="anual-grid" id="anualGrid"></div>
+    <div class="result-total" id="anualTotal" style="margin-top:18px"></div>
+    <div class="alert alert-warn" id="integralWarn" style="margin-top:14px;display:none">
+      <strong>⚠️ Salario integral:</strong> ya incluye prestaciones dentro del sueldo mensual, así que no recibes prima, cesantías ni intereses por separado. Tu anual son solo 12 sueldos netos + vacaciones.
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">📚 Aprende más</div>
+    <div class="cross-links">
+      <a href="retencion-fuente.html" class="cross-link">
+        <strong>🧮 Retención detallada</strong>
+        <small>Procedimiento 1 y 2 con todas las deducciones del ET</small>
+      </a>
+      <a href="liquidador.html" class="cross-link">
+        <strong>📋 Liquidación laboral</strong>
+        <small>Cesantías, prima, vacaciones, indemnización</small>
+      </a>
+      <a href="costoreal.html" class="cross-link">
+        <strong>💸 Costo real de un crédito</strong>
+        <small>Cuánto pagas de verdad por una cuota mensual</small>
+      </a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">⬇️ Descargar resultado</div>
+    <div class="btn-row">
+      <button class="btn btn-green" onclick="exportPDF()">📄 PDF</button>
+      <button class="btn btn-green" onclick="exportExcel()">📊 Excel</button>
+      <button class="btn btn-outline" onclick="copiarWhatsApp()">💬 Copiar para WhatsApp</button>
+    </div>
+  </div>
+  <div class="normativa-list">
+    <strong>Normativa aplicada:</strong><br>
+    • Aportes obligatorios: Arts. 55, 56 ET — Salud y pensión 4% cada uno<br>
+    • FSP escalonado: Art. 27 Ley 100/93 + Decreto 1833/2016 (1% si gana &gt; 4 SMLMV, hasta 2% si gana &gt; 20 SMLMV)<br>
+    • Renta exenta 25% trabajo: Art. 206 num. 10 ET — máx 65,83 UVT/mes (790 UVT/año)<br>
+    • Dependientes: Art. 387 ET — 10% ingreso, máx 32 UVT/mes por dependiente, hasta 2<br>
+    • Aportes voluntarios pensión: Art. 126-1 ET — máx 25% ingreso, 3.800 UVT/año<br>
+    • Aportes AFC: Art. 126-4 ET — conjunto con pensión vol. máx 30% ingreso, 3.800 UVT/año<br>
+    • Tabla retención: Art. 383 ET (Procedimiento 1)<br>
+    • Salario integral: Art. 132 CST — IBC = 70% del salario integral
+  </div>
+  <div class="disclaimer">
+    <strong>⚠️ Aviso:</strong> Este es un cálculo didáctico de referencia con fines educativos. Los aportes voluntarios y deducciones tienen condiciones específicas (permanencia mínima, certificados, etc.). Para tu caso particular consulta con tu contador o usa la <a href="retencion-fuente.html" style="color:#92400E;font-weight:700">calculadora detallada</a>. Esto no constituye asesoría financiera ni tributaria.
+  </div>
+</div>
+</div>
+<script src="shared/parametros-financieros.js?v=e116ea2a"></script>
+<script src="shared/finanzas-store.js?v=61d9057f"></script>
+<script src="shared/finanzas-export.js?v=abe34dd6"></script>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<script src="shared/finanzas-privacy.js?v=aed97e2f"></script>
+<script>
+'use strict';
+var P = ParametrosFinanzas.P;
+var ultimoCalculo = null;
+// ─── Helpers ───
+function $(id){ return document.getElementById(id); }
+function fmt(n){ return (n==null||isNaN(n))?'$0':'$'+Math.round(n).toLocaleString('es-CO'); }
+function num(id){
+  var v = $(id).value.replace(/[^\d]/g,'');
+  return parseInt(v,10)||0;
+}
+function fmtUVT(n){ return (n||0).toFixed(2)+' UVT'; }
+// Format inputs as money on blur
+['salario','afc','volPension','prepagada'].forEach(function(id){
+  var el = $(id);
+  if(!el) return;
+  el.addEventListener('input', function(){
+    var raw = this.value.replace(/[^\d]/g,'');
+    this.value = raw ? '$'+parseInt(raw,10).toLocaleString('es-CO') : '';
+  });
+});
+function toggleIntegral(){
+  var hint = $('esIntegral').checked
+    ? 'Salario integral: aportes de salud y pensión sobre el 70% del bruto.'
+    : '';
+  // visual feedback could go here
+}
+// ─── Tabla 383 ET (mensual, en UVT) ───
+function retencionArt383(baseUVT){
+  if (baseUVT <= 95)   return 0;
+  if (baseUVT <= 150)  return (baseUVT-95) * 0.19;
+  if (baseUVT <= 360)  return (baseUVT-150) * 0.28 + 10.45;
+  if (baseUVT <= 640)  return (baseUVT-360) * 0.33 + 69.25;
+  if (baseUVT <= 945)  return (baseUVT-640) * 0.35 + 161.65;
+  if (baseUVT <= 2300) return (baseUVT-945) * 0.37 + 268.40;
+  return (baseUVT-2300) * 0.39 + 769.75;
+}
+// ─── FSP escalonado (Art. 27 L.100/93 + Dec. 1833/2016) ───
+function fspPct(salario, smlmv){
+  var n = salario / smlmv;
+  if (n > 20) return 0.020;
+  if (n > 19) return 0.018;
+  if (n > 18) return 0.016;
+  if (n > 17) return 0.014;
+  if (n > 16) return 0.012;
+  if (n >  4) return 0.010;
+  return 0;
+}
+// ─── Cálculo principal ───
+function calcularNeto(opts){
+  var bruto    = opts.bruto;
+  var integral = !!opts.integral;
+  var nDep     = opts.nDep || 0;
+  var afc      = opts.afc || 0;
+  var volPen   = opts.volPen || 0;
+  var prepa    = opts.prepa || 0;
+  var uvt   = P.uvt;
+  var smlmv = P.smlmv;
+  // Base de cotización: 70% si integral, 100% si ordinario
+  var baseAportes = integral ? Math.round(bruto * 0.70) : bruto;
+  var salud   = Math.round(baseAportes * 0.04);
+  var pension = Math.round(baseAportes * 0.04);
+  var pctFSP  = fspPct(baseAportes, smlmv);
+  var fsp     = pctFSP > 0 ? Math.round(baseAportes * pctFSP) : 0;
+  // Ingreso para depuración fiscal: el bruto completo
+  var sub1 = bruto - salud - pension - fsp;
+  // Deducciones (topes ET)
+  var dedDep   = nDep > 0
+    ? Math.min(Math.round(bruto * 0.10), Math.round(32*uvt)) * Math.min(nDep, 2)
+    : 0;
+  var dedPrep  = Math.min(prepa, Math.round(16*uvt));
+  var dedVolP  = Math.min(volPen, Math.round(bruto*0.25), Math.round(3800*uvt/12));
+  var dedAFC   = Math.min(afc, Math.max(Math.round(bruto*0.30) - dedVolP, 0), Math.max(Math.round(3800*uvt/12) - dedVolP, 0));
+  var totalDed = dedDep + dedPrep + dedVolP + dedAFC;
+  var sub2     = Math.max(sub1 - totalDed, 0);
+  var exenta25 = Math.min(Math.round(sub2 * 0.25), Math.round(uvt * 790 / 12));
+  // Art. 336 ET: deducciones + rentas exentas <= min(40% ingreso neto, 1.340 UVT/año)
+  var topeArt336 = Math.min(Math.round(sub1 * 0.40), Math.round(uvt * 1340 / 12));
+  var dedYExentas = Math.min(totalDed + exenta25, topeArt336);
+  var aplicaTope336 = (totalDed + exenta25) > topeArt336;
+  var baseGrav = Math.max(sub1 - dedYExentas, 0);
+  var baseUVT  = baseGrav / uvt;
+  var retCOP   = Math.round(retencionArt383(baseUVT) * uvt);
+  // Aportes voluntarios sí salen del bolsillo (van a su cuenta, pero ya no están en el neto)
+  var neto = bruto - salud - pension - fsp - retCOP - dedVolP - dedAFC;
+  return {
+    bruto: bruto, integral: integral, nDep: nDep,
+    baseAportes: baseAportes,
+    salud: salud, pension: pension, fsp: fsp, pctFSP: pctFSP,
+    afc: dedAFC, volPen: dedVolP, prepa: dedPrep, dedDep: dedDep,
+    exenta25: exenta25, baseGrav: baseGrav, baseUVT: baseUVT, retCOP: retCOP,
+    topeArt336: topeArt336, aplicaTope336: aplicaTope336,
+    neto: neto,
+    tasaEf: bruto ? (salud+pension+fsp+retCOP)/bruto : 0
+  };
+}
+// ─── Render ───
+function calcular(){
+  var bruto = num('salario');
+  if (bruto <= 0) { exoToast('Ingresa tu salario bruto', 'warning'); return; }
+  var opts = {
+    bruto: bruto,
+    integral: $('esIntegral').checked,
+    nDep: parseInt($('dependientes').value, 10) || 0,
+    afc: num('afc'),
+    volPen: num('volPension'),
+    prepa: num('prepagada')
+  };
+  var r = calcularNeto(opts);
+  var rSinAportes = calcularNeto({ bruto: bruto, integral: opts.integral, nDep: opts.nDep, afc: 0, volPen: 0, prepa: opts.prepa });
+  ultimoCalculo = { r: r, rSin: rSinAportes, opts: opts };
+  renderResultado(r, rSinAportes, opts);
+  $('results').style.display = 'block';
+  $('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function renderResultado(r, rSin, opts){
+  // KPIs
+  $('kpis').innerHTML =
+    '<div class="kpi blue"><div class="val">'+fmt(r.bruto)+'</div><div class="lbl">Bruto</div></div>'+
+    '<div class="kpi red"><div class="val">'+fmt(r.salud+r.pension+r.fsp+r.retCOP)+'</div><div class="lbl">Total descuentos</div></div>'+
+    '<div class="kpi amber"><div class="val">'+(r.tasaEf*100).toFixed(1)+'%</div><div class="lbl">Tasa efectiva</div></div>'+
+    '<div class="kpi green"><div class="val">'+fmt(r.neto)+'</div><div class="lbl">Te queda</div></div>';
+  // Tabla
+  var thead = $('tblDep').querySelector('thead');
+  var tbody = $('tblDep').querySelector('tbody');
+  thead.innerHTML = '<tr><th>Concepto</th><th>Detalle</th><th>Valor</th></tr>';
+  var rows = [];
+  rows.push(['Salario bruto', r.integral?'Integral — base aportes 70%':'Ordinario', r.bruto, 'normal']);
+  rows.push(['(−) Salud (4%)', 'Sobre '+fmt(r.baseAportes), r.salud, 'ded']);
+  rows.push(['(−) Pensión (4%)', 'Sobre '+fmt(r.baseAportes), r.pension, 'ded']);
+  if (r.fsp > 0) rows.push(['(−) FSP ('+(r.pctFSP*100).toFixed(1)+'%)', 'Aplica > 4 SMLMV', r.fsp, 'ded']);
+  if (r.dedDep > 0) rows.push(['Dependientes ('+r.nDep+')', 'Reduce base gravable — Art. 387', r.dedDep, 'highlight']);
+  if (r.volPen > 0) rows.push(['Aportes vol. pensión', 'A tu fondo AFP — Art. 126-1', r.volPen, 'highlight']);
+  if (r.afc > 0) rows.push(['Aportes AFC', 'A tu cuenta AFC — Art. 126-4', r.afc, 'highlight']);
+  if (r.prepa > 0) rows.push(['Medicina prepagada', 'Reduce base — Art. 387', r.prepa, 'highlight']);
+  rows.push(['Renta exenta 25%', 'Art. 206 num. 10 ET — máx 65,83 UVT/mes', r.exenta25, 'highlight']);
+  rows.push(['Base gravable', fmtUVT(r.baseUVT), r.baseGrav, 'highlight']);
+  rows.push(['(−) Retención en la fuente', 'Tabla Art. 383 ET', r.retCOP, 'ded']);
+  if (r.volPen > 0 || r.afc > 0) rows.push(['(−) Aportes voluntarios desembolsados', 'Sale de tu mes pero queda como ahorro tuyo', r.volPen+r.afc, 'ded']);
+  rows.push(['SALARIO NETO', 'Lo que te transfieren a la cuenta', r.neto, 'total']);
+  tbody.innerHTML = rows.map(function(rw){
+    return '<tr class="'+rw[3]+'"><td>'+rw[0]+'</td><td style="color:var(--muted);font-size:.78rem">'+rw[1]+'</td><td>'+fmt(rw[2])+'</td></tr>';
+  }).join('');
+  // Total destacado
+  $('resultTotal').innerHTML =
+    '<div class="label">Te queda al bolsillo<small>Después de descuentos y aportes voluntarios</small></div>'+
+    '<div class="amount">'+fmt(r.neto)+'</div>';
+  // Comparativo con/sin aportes voluntarios — solo si el usuario NO los puso ya
+  var aportesPuestos = (opts.afc + opts.volPen) > 0;
+  if (!aportesPuestos) {
+    // Simulación: ¿qué pasaría si aportara el máximo conjunto del 30%?
+    var simMax = Math.round(opts.bruto * 0.30);
+    var simAFC = Math.min(simMax, Math.round(P.uvt * 3800 / 12));
+    var rSim = calcularNeto({ bruto: opts.bruto, integral: opts.integral, nDep: opts.nDep, afc: simAFC, volPen: 0, prepa: opts.prepa });
+    var ahorroRet = rSin.retCOP - rSim.retCOP;
+    if (ahorroRet > 0) {
+      $('cardCompare').style.display = 'block';
+      $('compareBox').innerHTML =
+        '<div class="compare-col sin">'+
+          '<div class="compare-label">Sin aportes voluntarios</div>'+
+          '<div class="compare-val">'+fmt(rSin.neto)+'</div>'+
+          '<div class="compare-diff" style="color:var(--red)">Retención: '+fmt(rSin.retCOP)+'/mes</div>'+
+        '</div>'+
+        '<div class="compare-col con">'+
+          '<div class="compare-label">Aportando '+fmt(simAFC)+' a AFC</div>'+
+          '<div class="compare-val">'+fmt(rSim.neto)+'</div>'+
+          '<div class="compare-diff" style="color:var(--green)">Retención: '+fmt(rSim.retCOP)+'/mes (ahorras '+fmt(ahorroRet)+')</div>'+
+        '</div>';
+    } else {
+      $('cardCompare').style.display = 'none';
+    }
+  } else {
+    // Ya está aportando — comparar con escenario sin aportes
+    var ahorro = rSin.retCOP - r.retCOP;
+    if (ahorro > 0) {
+      $('cardCompare').style.display = 'block';
+      $('compareBox').innerHTML =
+        '<div class="compare-col sin">'+
+          '<div class="compare-label">Sin aportes voluntarios</div>'+
+          '<div class="compare-val">'+fmt(rSin.neto)+'</div>'+
+          '<div class="compare-diff" style="color:var(--red)">Retención: '+fmt(rSin.retCOP)+'/mes</div>'+
+        '</div>'+
+        '<div class="compare-col con">'+
+          '<div class="compare-label">Con tus aportes ('+fmt(opts.afc+opts.volPen)+')</div>'+
+          '<div class="compare-val">'+fmt(r.neto)+'</div>'+
+          '<div class="compare-diff" style="color:var(--green)">Ahorras '+fmt(ahorro)+'/mes en retención</div>'+
+        '</div>';
+    }
+  }
+  // Anual
+  var netoMensual = r.neto;
+  var cesantias, intCes, prima, vacaciones, totalAnual;
+  if (r.integral) {
+    cesantias = 0; intCes = 0; prima = 0;
+    vacaciones = Math.round(r.bruto * 0.5); // 15 días = medio sueldo (sobre el bruto, que ya incluye prestaciones)
+    totalAnual = netoMensual * 12 + vacaciones;
+    $('integralWarn').style.display = 'block';
+  } else {
+    cesantias = r.bruto;
+    intCes = Math.round(cesantias * 0.12);
+    prima = r.bruto;
+    vacaciones = Math.round(r.bruto * 0.5);
+    totalAnual = netoMensual * 12 + cesantias + intCes + prima + vacaciones;
+    $('integralWarn').style.display = 'none';
+  }
+  var equiv = (totalAnual / netoMensual).toFixed(1);
+  $('anualGrid').innerHTML =
+    '<div class="anual-card"><div class="anual-lbl">Sueldos netos × 12</div><div class="anual-val">'+fmt(netoMensual*12)+'</div></div>'+
+    (r.integral
+      ? '<div class="anual-card"><div class="anual-lbl">Vacaciones</div><div class="anual-val">'+fmt(vacaciones)+'</div></div>'
+      : '<div class="anual-card"><div class="anual-lbl">Prima de servicios</div><div class="anual-val">'+fmt(prima)+'</div></div>'+
+        '<div class="anual-card"><div class="anual-lbl">Cesantías + intereses</div><div class="anual-val">'+fmt(cesantias+intCes)+'</div></div>'
+    );
+  $('anualTotal').innerHTML =
+    '<div class="label">Tu sueldo anual real<small>'+equiv+' veces tu sueldo neto mensual</small></div>'+
+    '<div class="amount">'+fmt(totalAnual)+'</div>';
+  // Wow factor: gancho + narrativa + aha cards + action ladder + share card
+  renderWowFactor(r, rSin, opts, totalAnual);
+}
+// ─── Wow factor — narrativa, aha, plan, share ───
+function renderWowFactor(r, rSin, opts, totalAnual){
+  var tasaPct = (r.tasaEf*100).toFixed(1);
+  var totalDescuentos = r.salud + r.pension + r.fsp + r.retCOP;
+  var aportesTuyos = r.salud + r.pension; // salud y pensión "vuelven a ti" (cobertura, fondo de pensión)
+  var seVa = r.fsp + r.retCOP; // FSP y retención: plata que NO recuperas
+  var maxAFC = Math.min(Math.round(opts.bruto*0.30), Math.round(P.uvt*3800/12));
+  var aportandoAFC = (opts.afc + opts.volPen) > 0;
+  var ahorroPotencialMes = !aportandoAFC ? (rSin.retCOP - calcularNeto({bruto:opts.bruto,integral:opts.integral,nDep:opts.nDep,afc:maxAFC,volPen:0,prepa:opts.prepa}).retCOP) : 0;
+  var ahorroPotencialAnio = ahorroPotencialMes * 12;
+  var aportesAnioPotencial = maxAFC * 12;
+  // ── Gancho — frase memorable según el caso ──
+  var gancho;
+  if (r.retCOP === 0 && r.salud === 0) {
+    gancho = 'Estás bajo el umbral de retención. <em>La excepción, no la regla.</em>';
+  } else if (r.aplicaTope336) {
+    gancho = 'Tope Art. 336 ET activo. <em>La DIAN ya te tiene ubicado.</em>';
+  } else if (r.tasaEf > 0.30) {
+    gancho = 'Pagas como rico. <em>¿Lo estás siendo?</em>';
+  } else if (r.retCOP > 0 && !aportandoAFC) {
+    gancho = 'Tu sueldo bruto es ficción. <em>Tu neto es la verdad.</em>';
+  } else if (aportandoAFC) {
+    gancho = 'Ya juegas con sesgo de contador. <em>Bien por ti.</em>';
+  } else if (r.integral) {
+    gancho = 'Salario integral oculta más de lo que muestra. <em>Acá lo abrimos.</em>';
+  } else {
+    gancho = 'Lo que entra ≠ lo que ves. <em>Acá la diferencia.</em>';
+  }
+  $('gancho').innerHTML = gancho;
+  // ── Narrativa — cuenta la historia con cifras ──
+  var narrativa = 'Te entran <span class="num">'+fmt(r.bruto)+'</span> de bruto pero solo <span class="num">'+fmt(r.neto)+'</span> al bolsillo. ';
+  narrativa += 'El sistema te quita el <strong>'+tasaPct+'%</strong> antes de que veas un peso. ';
+  narrativa += 'De eso, <span class="num">'+fmt(aportesTuyos)+'</span> son aportes que vuelven a ti — salud (cobertura EPS) y pensión (saldo en tu fondo). ';
+  if (seVa > 0) {
+    narrativa += 'Pero <span class="num">'+fmt(seVa)+'</span> se va sin retorno: ';
+    if (r.fsp > 0 && r.retCOP > 0) narrativa += 'FSP ('+fmt(r.fsp)+') + retefuente ('+fmt(r.retCOP)+').';
+    else if (r.retCOP > 0) narrativa += 'retefuente Art. 383 ET.';
+    else if (r.fsp > 0) narrativa += 'FSP escalonado (Art. 27 Ley 100/93).';
+  } else {
+    narrativa += 'Hoy no se va nada en retefuente — no aplica para tu nivel.';
+  }
+  if (!aportandoAFC && ahorroPotencialMes > 0) {
+    narrativa += '<br><br>Si maximizas AFC al 30% (<span class="num">'+fmt(maxAFC)+'</span>/mes), <strong>te ahorras <span class="num">'+fmt(ahorroPotencialMes)+'</span>/mes en retención</strong> y te construyes <span class="num">'+fmt(aportesAnioPotencial)+'</span>/año en cuenta tuya. Esa es la única optimización fiscal legal y gratis que el banco no te cuenta.';
+  } else if (aportandoAFC) {
+    var ahorroMesActual = rSin.retCOP - r.retCOP;
+    narrativa += '<br><br>Tus aportes voluntarios ya te ahorran <span class="num">'+fmt(ahorroMesActual)+'</span>/mes en retención. Y los <span class="num">'+fmt((opts.afc+opts.volPen)*12)+'</span>/año siguen siendo tuyos — solo que ahora trabajan en lugar de gastarse.';
+  }
+  $('narrativa').innerHTML = narrativa;
+  // ── 3 Aha cards — cifras chocantes ──
+  var ahaHTML = '';
+  // 1: Tasa efectiva (si hay)
+  if (r.tasaEf > 0) {
+    ahaHTML += '<div class="aha-card bad"><span class="aha-tag">se evapora</span><div class="aha-num">'+tasaPct+'%</div><div class="aha-lbl">de tu sueldo desaparece antes de verlo</div></div>';
+  } else {
+    ahaHTML += '<div class="aha-card good"><span class="aha-tag">100% tuyo</span><div class="aha-num">$0</div><div class="aha-lbl">descuentos — estás bajo umbral</div></div>';
+  }
+  // 2: Plata anual que NO ves
+  var seVaAnio = seVa * 12;
+  if (seVaAnio > 0) {
+    ahaHTML += '<div class="aha-card bad"><span class="aha-tag">al año</span><div class="aha-num">'+fmt(seVaAnio)+'</div><div class="aha-lbl">en retefuente + FSP que no recuperas</div></div>';
+  } else {
+    ahaHTML += '<div class="aha-card good"><span class="aha-tag">anual real</span><div class="aha-num">'+fmt(totalAnual)+'</div><div class="aha-lbl">con prima, cesantías y vacaciones</div></div>';
+  }
+  // 3: Ahorro potencial AFC o anual real
+  if (!aportandoAFC && ahorroPotencialAnio > 0) {
+    ahaHTML += '<div class="aha-card good"><span class="aha-tag">si aportas AFC</span><div class="aha-num">'+fmt(ahorroPotencialAnio)+'</div><div class="aha-lbl">/año en retención que vuelve a ti</div></div>';
+  } else if (aportandoAFC) {
+    var ahorroAnio = (rSin.retCOP - r.retCOP) * 12;
+    ahaHTML += '<div class="aha-card good"><span class="aha-tag">ya ahorras</span><div class="aha-num">'+fmt(ahorroAnio)+'</div><div class="aha-lbl">/año en retención por tus aportes voluntarios</div></div>';
+  } else {
+    ahaHTML += '<div class="aha-card"><span class="aha-tag">anual real</span><div class="aha-num">'+fmt(totalAnual)+'</div><div class="aha-lbl">sueldo total con prestaciones</div></div>';
+  }
+  $('ahaGrid').innerHTML = ahaHTML;
+  // ── Action ladder — 3 acciones concretas ──
+  var actions = [];
+  if (!aportandoAFC && ahorroPotencialMes >= 50000) {
+    actions.push({
+      h: 'Activa AFC o pensión voluntaria — el truco más rentable',
+      p: 'Aportar <strong>'+fmt(maxAFC)+'/mes</strong> a AFC te ahorra <strong>'+fmt(ahorroPotencialMes)+'/mes</strong> en retefuente. Esa plata sigue siendo tuya, solo que en cuenta separada (uso vivienda). En 5 años son ~'+fmt(ahorroPotencialMes*60)+' que la DIAN no te quita + '+fmt(maxAFC*60)+' de capital tuyo. Art. 126-4 ET.'
+    });
+  } else if (aportandoAFC && (opts.afc + opts.volPen) < maxAFC) {
+    var faltante = maxAFC - (opts.afc + opts.volPen);
+    actions.push({
+      h: 'Subir aportes hasta el tope — todavía hay margen',
+      p: 'Estás aportando <strong>'+fmt(opts.afc+opts.volPen)+'/mes</strong>, pero el tope conjunto AFC + pensión vol. permite <strong>'+fmt(maxAFC)+'/mes</strong> (30% del bruto, máx 3.800 UVT/año). Te quedan <strong>'+fmt(faltante)+'/mes</strong> de espacio fiscal sin usar.'
+    });
+  }
+  if (opts.nDep === 0 && r.retCOP > 0) {
+    actions.push({
+      h: '¿Tienes hijos, padres o pareja sin ingresos?',
+      p: 'Si los tienes y no los reportaste, cada dependiente es <strong>10% del bruto</strong> deducible (máx 32 UVT ≈ '+fmt(Math.round(P.uvt*32))+'/mes). Hasta 2 dependientes. <strong>Reduce tu retención.</strong> Art. 387 ET. Recuerda: certificación notariada anual.'
+    });
+  }
+  if (opts.prepa === 0 && r.retCOP > 0) {
+    actions.push({
+      h: 'Prepagada también es deducible',
+      p: 'Si pagas medicina prepagada, deduces hasta <strong>16 UVT/mes</strong> ('+fmt(Math.round(P.uvt*16))+'). Para sueldos altos, suele ser plata real en bolsillo cada mes. Art. 387 ET.'
+    });
+  }
+  if (r.tasaEf > 0.20 && r.retCOP > 100000 && (opts.afc + opts.volPen) >= maxAFC*0.9) {
+    actions.push({
+      h: 'Llevar gastos personales a tu declaración anual',
+      p: 'Si ya optimizaste AFC + dependientes + prepagada y aún te retienen mucho, el ajuste fino es la <strong>declaración de renta PN</strong>. Allá puedes incluir intereses de hipoteca, donaciones y otros conceptos que la retención mensual no contempla.'
+    });
+  }
+  if (actions.length === 0) {
+    actions.push({
+      h: 'Tu retención está optimizada',
+      p: 'Estás aprovechando AFC, dependientes y/o prepagada. La siguiente palanca es de mayor plazo: maximizar el <strong>aporte anual a pensión voluntaria</strong> y revisar deducibles en la declaración de renta PN.'
+    });
+  }
+  $('cardActions').style.display = 'block';
+  $('actionLadder').innerHTML = actions.slice(0,3).map(function(a,i){
+    return '<div class="action-step"><div class="action-num">'+(i+1)+'</div>'+
+      '<div class="action-body"><h4>'+a.h+'</h4><p>'+a.p+'</p></div></div>';
+  }).join('');
+  // ── Share card — la cifra grande con tus datos ──
+  var shareLine;
+  if (r.tasaEf > 0.20) shareLine = 'El <em>'+tasaPct+'%</em> de mi sueldo se evapora antes de verlo.';
+  else if (r.tasaEf > 0) shareLine = 'Mi tasa efectiva: <em>'+tasaPct+'%</em>. Bajo el promedio colombiano.';
+  else shareLine = '<em>0% de retención</em> — bajo el umbral del Art. 383 ET.';
+  $('cardShare').style.display = 'block';
+  $('shareCard').innerHTML =
+    '<div class="share-card-label">Mi neto real Colombia 2026</div>'+
+    '<div class="share-card-amount">'+fmt(r.neto)+'</div>'+
+    '<div class="share-card-line">'+shareLine+'</div>'+
+    '<div class="share-card-stats">'+
+      '<div class="share-card-stat">Bruto<strong>'+fmt(r.bruto)+'</strong></div>'+
+      '<div class="share-card-stat">Tasa efectiva<strong>'+tasaPct+'%</strong></div>'+
+      '<div class="share-card-stat">Anual real<strong>'+fmt(totalAnual)+'</strong></div>'+
+    '</div>'+
+    '<div class="share-actions">'+
+      '<button onclick="copiarShareCard()">📋 Copiar texto</button>'+
+      '<button onclick="screenshotShareCard()">📸 Cómo capturar</button>'+
+    '</div>'+
+    '<div class="share-card-foot">exogenadian.com/salario-neto</div>';
+}
+function copiarShareCard(){
+  if (!ultimoCalculo) return;
+  var r = ultimoCalculo.r;
+  var tasaPct = (r.tasaEf*100).toFixed(1);
+  var txt = 'Mi neto real Colombia 2026: '+fmt(r.neto)+' / mes\n';
+  txt += 'Bruto: '+fmt(r.bruto)+' — Tasa efectiva: '+tasaPct+'%\n';
+  txt += 'Calculado en exogenadian.com/salario-neto';
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(txt).then(function(){ exoToast('Copiado al portapapeles', 'success'); });
+  } else {
+    exoToast('Copia manual: '+txt, 'info');
+  }
+  if (typeof gtag !== 'undefined') gtag('event','salario_neto_share',{tipo:'copy'});
+}
+function screenshotShareCard(){
+  exoToast('Toma screenshot de la tarjeta verde con tu celular o Win+Shift+S', 'info', 5000);
+  if (typeof gtag !== 'undefined') gtag('event','salario_neto_share',{tipo:'screenshot_hint'});
+}
+// ─── Persistencia ───
+function guardarPerfil(){
+  var perfil = {
+    bruto: num('salario'),
+    integral: $('esIntegral').checked,
+    nDep: parseInt($('dependientes').value, 10) || 0,
+    afc: num('afc'),
+    volPen: num('volPension'),
+    prepa: num('prepagada')
+  };
+  if (FinanzasStore.set('perfil-salario', perfil)) {
+    exoToast('Perfil guardado en este navegador', 'success');
+  } else {
+    exoToast('No se pudo guardar (almacenamiento local bloqueado)', 'warning');
+  }
+}
+function cargarPerfil(){
+  var perfil = FinanzasStore.get('perfil-salario');
+  if (!perfil) { exoToast('No hay perfil guardado', 'info'); return; }
+  $('salario').value     = perfil.bruto ? '$'+perfil.bruto.toLocaleString('es-CO') : '';
+  $('esIntegral').checked = !!perfil.integral;
+  $('dependientes').value = String(perfil.nDep || 0);
+  $('afc').value          = perfil.afc ? '$'+perfil.afc.toLocaleString('es-CO') : '';
+  $('volPension').value   = perfil.volPen ? '$'+perfil.volPen.toLocaleString('es-CO') : '';
+  $('prepagada').value    = perfil.prepa ? '$'+perfil.prepa.toLocaleString('es-CO') : '';
+  exoToast('Perfil cargado', 'success');
+}
+// Mostrar botón "Cargar" solo si hay perfil guardado
+window.addEventListener('DOMContentLoaded', function(){
+  if (FinanzasStore.isAvailable() && FinanzasStore.get('perfil-salario')) {
+    $('btnCargarPerfil').style.display = 'inline-flex';
+  }
+});
+// ─── Exportar ───
+function exportPDF(){
+  if (!ultimoCalculo) { exoToast('Calcula primero', 'warning'); return; }
+  var r = ultimoCalculo.r;
+  var rSin = ultimoCalculo.rSin;
+  var opts = ultimoCalculo.opts;
+  // ── Cálculos derivados (espejo del wow factor) ──
+  var tasaPct = (r.tasaEf*100).toFixed(1);
+  var aportesTuyos = r.salud + r.pension;
+  var seVa = r.fsp + r.retCOP;
+  var maxAFC = Math.min(Math.round(opts.bruto*0.30), Math.round(P.uvt*3800/12));
+  var aportandoAFC = (opts.afc + opts.volPen) > 0;
+  var ahorroPotencialMes = !aportandoAFC ? (rSin.retCOP - calcularNeto({bruto:opts.bruto,integral:opts.integral,nDep:opts.nDep,afc:maxAFC,volPen:0,prepa:opts.prepa}).retCOP) : 0;
+  var ahorroPotencialAnio = ahorroPotencialMes * 12;
+  var ahorroActualAnio = aportandoAFC ? (rSin.retCOP - r.retCOP) * 12 : 0;
+  // Anual real
+  var cesantias, intCes, prima, vacaciones, totalAnual;
+  if (r.integral) {
+    vacaciones = Math.round(r.bruto * 0.5);
+    totalAnual = r.neto * 12 + vacaciones;
+  } else {
+    cesantias = r.bruto;
+    intCes = Math.round(cesantias * 0.12);
+    prima = r.bruto;
+    vacaciones = Math.round(r.bruto * 0.5);
+    totalAnual = r.neto * 12 + cesantias + intCes + prima + vacaciones;
+  }
+  // ── Frase hero (varía con el caso) ──
+  var fraseHero;
+  if (r.retCOP === 0 && r.salud === 0)        fraseHero = { texto:'Estás bajo el umbral.\nLa excepción, no la regla.', autor:'ExógenaDIAN' };
+  else if (r.aplicaTope336)                   fraseHero = { texto:'Tope Art. 336 ET activo.\nLa DIAN ya te tiene ubicado.', autor:'ExógenaDIAN' };
+  else if (r.tasaEf > 0.30)                   fraseHero = { texto:'Pagas como rico.\n¿Lo estás siendo?', autor:'ExógenaDIAN' };
+  else if (r.retCOP > 0 && !aportandoAFC)     fraseHero = { texto:'Tu sueldo bruto es ficción.\nTu neto es la verdad.', autor:'ExógenaDIAN — sesgo de contador' };
+  else if (aportandoAFC)                      fraseHero = { texto:'Ya juegas con sesgo de contador.\nMantén el ritmo.', autor:'ExógenaDIAN' };
+  else if (r.integral)                        fraseHero = { texto:'Salario integral oculta más\nde lo que muestra. Acá lo abrimos.', autor:'ExógenaDIAN' };
+  else                                         fraseHero = { texto:'Lo que entra ≠ lo que ves.\nAcá la diferencia.', autor:'ExógenaDIAN' };
+  // ── Narrativa larga (tipo lectura honesta) ──
+  var narrativa = 'Te entran '+fmt(r.bruto)+' de bruto pero solo '+fmt(r.neto)+' al bolsillo. El sistema te quita el '+tasaPct+'% antes de que veas un peso. ';
+  narrativa += 'De ese descuento, '+fmt(aportesTuyos)+' son aportes que vuelven a ti — la salud te da cobertura EPS, la pensión queda como saldo en tu fondo. ';
+  if (seVa > 0) {
+    narrativa += 'Pero '+fmt(seVa)+' se va sin retorno: ';
+    if (r.fsp > 0 && r.retCOP > 0) narrativa += 'FSP ('+fmt(r.fsp)+') más retefuente Art. 383 ('+fmt(r.retCOP)+'). ';
+    else if (r.retCOP > 0) narrativa += 'retefuente Art. 383 ET. ';
+    else if (r.fsp > 0) narrativa += 'FSP escalonado (Art. 27 Ley 100/93). ';
+  }
+  if (!aportandoAFC && ahorroPotencialMes > 0) {
+    narrativa += '\n\nSi maximizaras AFC al 30% del bruto ('+fmt(maxAFC)+'/mes), te ahorrarías '+fmt(ahorroPotencialMes)+'/mes en retención y construirías '+fmt(maxAFC*12)+' al año en cuenta tuya (uso vivienda). En 5 años son '+fmt(maxAFC*60)+' que la DIAN no te quita más '+fmt(ahorroPotencialMes*60)+' que recuperas en retención. Esa es la única optimización fiscal legal y gratis que el banco no te cuenta.';
+  } else if (aportandoAFC) {
+    narrativa += '\n\nTus aportes voluntarios actuales ('+fmt(opts.afc+opts.volPen)+'/mes) ya te ahorran '+fmt(rSin.retCOP - r.retCOP)+'/mes en retención. Y los '+fmt((opts.afc+opts.volPen)*12)+'/año siguen siendo tuyos — solo que ahora trabajan en lugar de gastarse. Bien jugado.';
+  }
+  // ── 3 Aha cards ──
+  var ahas = [];
+  if (r.tasaEf > 0) ahas.push({ num: tasaPct+'%', label: 'de tu sueldo desaparece antes de verlo', tipo:'bad' });
+  else ahas.push({ num: '$0', label: 'descuentos — estás bajo umbral', tipo:'good' });
+  if (seVa * 12 > 0) ahas.push({ num: fmt(seVa*12), label: '/año en retefuente + FSP que no recuperas', tipo:'bad' });
+  else ahas.push({ num: fmt(totalAnual), label: '/año real con prima, cesantías y vacaciones', tipo:'good' });
+  if (!aportandoAFC && ahorroPotencialAnio > 0) ahas.push({ num: fmt(ahorroPotencialAnio), label: '/año si activas AFC, vuelve a ti', tipo:'good' });
+  else if (aportandoAFC) ahas.push({ num: fmt(ahorroActualAnio), label: '/año ya ahorras en retención', tipo:'good' });
+  else ahas.push({ num: fmt(totalAnual), label: '/año real con prestaciones', tipo:'good' });
+  // ── Plan a 3 horizontes ──
+  var plan = {};
+  if (!aportandoAFC && ahorroPotencialMes > 0) {
+    plan.p30  = 'Activa AFC con tu fondo de pensiones — basta el formulario en el banco. Aporta '+fmt(maxAFC)+'/mes. La retención del próximo mes baja '+fmt(ahorroPotencialMes)+' inmediatamente.';
+    plan.p12m = 'Mantén el aporte al máximo. Al cabo del año tendrás '+fmt(maxAFC*12)+' en cuenta AFC y la DIAN te habrá "devuelto" '+fmt(ahorroPotencialAnio)+' que de otra manera se iban en retefuente.';
+    plan.p5y  = 'Si mantienes el aporte 5 años, '+fmt(maxAFC*60)+' acumulados en AFC. Es la cuota inicial de un VIS o el 30% de un No VIS en ciudades intermedias. Más '+fmt(ahorroPotencialMes*60)+' en retención no pagada.';
+  } else if (aportandoAFC) {
+    plan.p30  = 'Verifica que tu aporte está en el tope conjunto del 30% del bruto ('+fmt(maxAFC)+'). Si te queda margen, súbelo este mes.';
+    plan.p12m = 'Mantén el ritmo. Tus '+fmt((opts.afc+opts.volPen)*12)+'/año en aportes + el ahorro en retención son tu margen real para vivienda o jubilación temprana.';
+    plan.p5y  = 'Tendrás '+fmt((opts.afc+opts.volPen)*60)+' netos en AFC a 5 años, listos para vivienda. Si la AFC se queda corta, considera diversificar a pensión voluntaria con la misma lógica.';
+  } else {
+    plan.p30  = 'Empieza por el diagnóstico completo: usa la herramienta PyG personal para ver a dónde se va realmente tu neto este mes.';
+    plan.p12m = 'Construye el fondo de emergencia (3 meses de gastos esenciales) antes de pensar en optimizar fiscal.';
+    plan.p5y  = 'Una vez tengas fondo de emergencia + cero deudas malas, ahí sí maximiza AFC y considera pensión voluntaria.';
+  }
+  // ── Consejos personalizados (3-4) ──
+  var consejos = [];
+  if (!aportandoAFC && ahorroPotencialMes >= 50000) consejos.push({
+    titulo: 'Activa AFC o pensión voluntaria',
+    impacto: '+'+fmt(ahorroPotencialMes)+'/mes',
+    desc: 'Aportar '+fmt(maxAFC)+'/mes a AFC reduce tu retefuente en '+fmt(ahorroPotencialMes)+'/mes. Esa plata sigue siendo tuya, va a una cuenta tuya (uso vivienda). Art. 126-4 ET. Tope conjunto con pensión vol.: 30% del ingreso o 3.800 UVT/año.'
+  });
+  if (aportandoAFC && (opts.afc + opts.volPen) < maxAFC*0.95) consejos.push({
+    titulo: 'Subir aportes hasta el tope — todavía hay margen',
+    impacto: 'Tope: '+fmt(maxAFC)+'/mes',
+    desc: 'Estás aportando '+fmt(opts.afc+opts.volPen)+'/mes pero el tope conjunto AFC + pensión vol. permite '+fmt(maxAFC)+'/mes. Te quedan '+fmt(maxAFC - opts.afc - opts.volPen)+'/mes de espacio fiscal sin usar.'
+  });
+  if (opts.nDep === 0 && r.retCOP > 0) consejos.push({
+    titulo: '¿Tienes hijos, padres a cargo o pareja sin ingresos?',
+    impacto: 'Hasta 32 UVT/mes',
+    desc: 'Cada dependiente reduce 10% del bruto deducible (máx 32 UVT, ~$'+Math.round(P.uvt*32).toLocaleString('es-CO')+'/mes). Hasta 2 dependientes. Recuerda: certificación notariada anual. Art. 387 ET.'
+  });
+  if (opts.prepa === 0 && r.retCOP > 0) consejos.push({
+    titulo: 'Medicina prepagada también es deducible',
+    impacto: 'Hasta 16 UVT/mes',
+    desc: 'Si pagas plan complementario o prepagada, deduces hasta '+Math.round(P.uvt*16).toLocaleString('es-CO')+' al mes de la base gravable. Reduce tu retención cada mes. Art. 387 ET.'
+  });
+  consejos.push({
+    titulo: 'Revisa anualmente con declaración de renta PN',
+    impacto: 'Saldo a favor posible',
+    desc: 'La retención mensual es estimación. En la declaración anual incluyes intereses de hipoteca, donaciones, gastos médicos y otros conceptos que la retención no contempla. Resultado: saldo a favor o devolución. Si te retienen mucho y no declaras, dejas plata sobre la mesa.'
+  });
+  // ── Frase nevera (cierre) ──
+  var fraseNevera = aportandoAFC ? {
+    texto: 'La libertad financiera no es una cantidad de plata.\nEs la capacidad de decir "no".',
+    autor: 'Morgan Housel — La psicología del dinero'
+  } : {
+    texto: 'Hacerlo bien con el dinero depende menos de\nqué tan inteligente eres y más de cómo te comportas.',
+    autor: 'Morgan Housel — La psicología del dinero'
+  };
+  // ── Inputs y resultados (paso a paso) ──
+  var inputs = [
+    ['Salario bruto', fmt(r.bruto)],
+    ['Tipo', r.integral ? 'Integral (base aportes 70%)' : 'Ordinario'],
+    ['Dependientes', String(r.nDep)],
+    ['Aportes AFC', fmt(opts.afc)],
+    ['Aportes vol. pensión', fmt(opts.volPen)],
+    ['Medicina prepagada', fmt(opts.prepa)]
+  ];
+  var resultados = [
+    ['(-) Salud (4%)', fmt(r.salud)],
+    ['(-) Pensión (4%)', fmt(r.pension)]
+  ];
+  if (r.fsp > 0) resultados.push(['(-) FSP ('+(r.pctFSP*100).toFixed(1)+'%)', fmt(r.fsp)]);
+  resultados.push(['Base gravable ('+fmtUVT(r.baseUVT)+')', fmt(r.baseGrav)]);
+  resultados.push(['(-) Retención Art. 383', fmt(r.retCOP)]);
+  if (r.volPen > 0) resultados.push(['(-) Aporte vol. pensión (a tu fondo)', fmt(r.volPen)]);
+  if (r.afc > 0) resultados.push(['(-) Aporte AFC (a tu cuenta)', fmt(r.afc)]);
+  resultados.push(['Tasa efectiva descuentos', tasaPct+'%']);
+  // ── Anexo anual ──
+  var anexoItems = [['Sueldos × 12', fmt(r.neto * 12)]];
+  if (!r.integral) {
+    anexoItems.push(['Prima de servicios', fmt(prima)]);
+    anexoItems.push(['Cesantías', fmt(cesantias)]);
+    anexoItems.push(['Intereses sobre cesantías (12%)', fmt(intCes)]);
+  }
+  anexoItems.push(['Vacaciones (medio sueldo)', fmt(vacaciones)]);
+  exportFinanzasReporte({
+    titulo: 'Salario Neto Colombia 2026',
+    slug: 'salario-neto',
+    subtitulo: 'Tu reporte personalizado de salario y optimización fiscal',
+    hero: {
+      label: 'Te queda al bolsillo',
+      valor: fmt(r.neto),
+      subvalor: 'de un bruto de ' + fmt(r.bruto) + ' (' + (100-r.tasaEf*100).toFixed(1) + '% real)'
+    },
+    fraseHero: fraseHero,
+    inputs: inputs,
+    resultados: resultados,
+    narrativa: narrativa,
+    ahas: ahas,
+    plan: plan,
+    consejos: consejos.slice(0, 4),
+    anexo: {
+      titulo: 'Tu sueldo anual real con prestaciones',
+      items: anexoItems,
+      total: { label: 'Total año (' + (totalAnual/r.neto).toFixed(1) + '× tu neto mensual)', valor: fmt(totalAnual) }
+    },
+    fraseNevera: fraseNevera,
+    fuente: 'ET arts. 383, 387, 126-1, 126-4, 206 num.10, 336 | UVT 2026 = $52.374 | SMLMV $1.750.905 | Art. 27 Ley 100/1993 (FSP)'
+  });
+}
+function exportExcel(){
+  if (!ultimoCalculo) { exoToast('Calcula primero', 'warning'); return; }
+  var r = ultimoCalculo.r;
+  var inputs = [
+    ['Salario bruto', r.bruto],
+    ['Tipo', r.integral ? 'Integral' : 'Ordinario'],
+    ['Dependientes', r.nDep],
+    ['Aportes AFC', ultimoCalculo.opts.afc],
+    ['Aportes vol. pensión', ultimoCalculo.opts.volPen],
+    ['Medicina prepagada', ultimoCalculo.opts.prepa]
+  ];
+  var resultados = [
+    ['(-) Salud (4%)', r.salud],
+    ['(-) Pensión (4%)', r.pension]
+  ];
+  if (r.fsp > 0) resultados.push(['(-) FSP', r.fsp]);
+  resultados.push(['Base gravable', r.baseGrav]);
+  resultados.push(['(-) Retención Art. 383', r.retCOP]);
+  if (r.volPen > 0) resultados.push(['(-) Aporte vol. pensión', r.volPen]);
+  if (r.afc > 0) resultados.push(['(-) Aporte AFC', r.afc]);
+  exportFinanzasExcel({
+    titulo: 'Salario neto mensual',
+    slug: 'salario-neto',
+    subtitulo: 'Procedimiento 1 simplificado — 2026',
+    inputs: inputs,
+    resultados: resultados,
+    destacado: { label: 'TE QUEDA AL BOLSILLO', valor: r.neto },
+    interpretacion: 'Tu salario neto representa el '+(100-r.tasaEf*100).toFixed(1)+'% del bruto.',
+    fuente: 'ET arts. 383, 387, 126-1, 126-4 | UVT 2026 = $52.374'
+  });
+}
+function copiarWhatsApp(){
+  if (!ultimoCalculo) { exoToast('Calcula primero', 'warning'); return; }
+  var r = ultimoCalculo.r;
+  var txt = '*Salario neto mensual — Colombia 2026*\n\n'+
+    'Bruto: '+fmt(r.bruto)+(r.integral?' (integral)':'')+'\n'+
+    'Salud (4%): -'+fmt(r.salud)+'\n'+
+    'Pensión (4%): -'+fmt(r.pension)+'\n'+
+    (r.fsp>0?'FSP: -'+fmt(r.fsp)+'\n':'')+
+    'Retención: -'+fmt(r.retCOP)+'\n'+
+    ((r.afc+r.volPen)>0?'Aportes vol.: -'+fmt(r.afc+r.volPen)+'\n':'')+
+    '\n*Te queda: '+fmt(r.neto)+'*\n'+
+    'Tasa efectiva descuentos: '+(r.tasaEf*100).toFixed(1)+'%\n\n'+
+    '_Calculado en ExógenaDIAN.com/salario-neto.html_';
+  navigator.clipboard.writeText(txt).then(function(){
+    exoToast('Copiado al portapapeles', 'success');
+  });
+}
+</script>
+</body>
+</html>

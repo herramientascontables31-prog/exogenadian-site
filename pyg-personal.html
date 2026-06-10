@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PyG Personal — Tu Estado de Resultados Mensual | ExógenaDIAN</title>
+<meta name="description" content="Registra tus ingresos y gastos del mes. Detecta fugas, mide tu tasa de ahorro real, compara con la regla 50/30/20 y guarda histórico mes a mes.">
+<link rel="canonical" href="https://exogenadian.com/pyg-personal.html">
+<meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.0/jspdf.plugin.autotable.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+<link rel="stylesheet" href="shared/finanzas-wow.css?v=a660abd8">
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--green:#059669;--green2:#ECFDF5;--green3:#D1FAE5;--red:#DC2626;--red2:#FEF2F2;--amber:#D97706;--amber2:#FFF8E1;--amber3:#FEF3C7;--border:#e2e8f0;--radius:10px;--shadow:0 2px 12px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+.container{max-width:980px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#1B3A5C 0%,#2E75B6 100%);padding:26px 32px;border-radius:16px;margin-bottom:22px;color:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.header h1{font-size:1.4rem;font-weight:700;display:flex;align-items:center;gap:10px}
+.header p{opacity:.85;font-size:.85rem;margin-top:4px;max-width:560px}
+.header-right{text-align:right;font-size:.78rem;opacity:.75}
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:22px;margin-bottom:18px;box-shadow:var(--shadow)}
+.card-title{font-size:1rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;color:var(--pri)}
+.cat-block{margin-bottom:14px}
+.cat-head{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#F9FAFB;border:1px solid var(--border);border-radius:8px;cursor:pointer}
+.cat-head h3{font-size:.88rem;font-weight:700;color:var(--pri)}
+.cat-head .cat-total{font-size:.92rem;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--pri)}
+.cat-body{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 4px 0}
+.cat-body.full{grid-template-columns:1fr}
+.input-row{display:flex;flex-direction:column;gap:3px}
+.input-row label{font-size:.74rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.3px}
+.input-row input{padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.92rem;font-family:'JetBrains Mono',monospace;transition:.15s}
+.input-row input:focus{outline:none;border-color:var(--pri2);box-shadow:0 0 0 3px rgba(46,117,182,.12)}
+.input-row .hint{font-size:.66rem;color:var(--muted);font-weight:400}
+.month-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:8px}
+.btn{padding:11px 22px;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:.9rem;font-family:inherit;transition:.15s}
+.btn-pri{background:var(--pri2);color:#fff;width:100%}.btn-pri:hover{background:var(--pri)}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#047857}
+.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--text)}.btn-outline:hover{border-color:var(--pri2);color:var(--pri2)}
+.btn-row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.kpi{background:var(--card);border-radius:var(--radius);padding:14px;border:1px solid var(--border);text-align:center}
+.kpi .val{font-size:1.2rem;font-weight:700;font-family:'JetBrains Mono',monospace}
+.kpi .lbl{font-size:.68rem;color:var(--muted);font-weight:600;text-transform:uppercase;margin-top:4px}
+.kpi.green .val{color:var(--green)}.kpi.blue .val{color:var(--pri2)}.kpi.amber .val{color:var(--amber)}.kpi.red .val{color:var(--red)}
+.alert{padding:12px 16px;border-radius:8px;font-size:.86rem;margin-bottom:12px;line-height:1.5}
+.alert-info{background:var(--pri3);color:var(--pri);border:1px solid #B4C6E7}
+.alert-green{background:var(--green2);color:#065F46;border:1px solid #A7F3D0}
+.alert-warn{background:var(--amber3);color:#92400E;border:1px solid #FDE68A}
+.alert-red{background:var(--red2);color:#991B1B;border:1px solid #FECACA}
+.dep-table{width:100%;border-collapse:collapse;font-size:.9rem}
+.dep-table th{background:var(--pri);color:#fff;padding:10px 12px;text-align:left;font-size:.74rem;text-transform:uppercase}
+.dep-table th:last-child{text-align:right}
+.dep-table td{padding:9px 12px;border-bottom:1px solid var(--border)}
+.dep-table td:last-child{text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600}
+.dep-table tr.subt{background:#F9FAFB;font-weight:700}
+.dep-table tr.subt td{color:var(--pri)}
+.dep-table tr.total{background:linear-gradient(90deg,var(--pri),var(--pri2));color:#fff}
+.dep-table tr.total td{padding:12px;font-size:1rem;color:#fff!important}
+.dep-table tr.ded td{color:var(--red)}
+.bucket-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.bucket{padding:18px;border-radius:12px;text-align:center;border:1px solid}
+.bucket.b50{background:#FEF7E6;border-color:#FCD34D}
+.bucket.b30{background:#EEF2FF;border-color:#A5B4FC}
+.bucket.b20{background:var(--green2);border-color:#A7F3D0}
+.bucket .b-target{font-size:.74rem;font-weight:600;color:var(--muted);text-transform:uppercase}
+.bucket .b-real{font-size:1.5rem;font-weight:800;font-family:'JetBrains Mono',monospace;margin-top:6px}
+.bucket .b-vs{font-size:.78rem;font-weight:600;margin-top:4px}
+.bucket.ok .b-vs{color:var(--green)}
+.bucket.over .b-vs{color:var(--red)}
+.cross-links{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.cross-link{display:block;padding:14px 16px;background:#F9FAFB;border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text);transition:.2s}
+.cross-link:hover{border-color:var(--pri2);background:var(--pri3)}
+.cross-link strong{display:block;font-size:.88rem;color:var(--pri);margin-bottom:3px}
+.cross-link small{font-size:.72rem;color:var(--muted);line-height:1.4}
+.results{display:none}.results.show{display:block;animation:fadeIn .4s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.disclaimer{margin-top:14px;padding:12px 16px;background:var(--amber2);border:1px solid #FDE68A;border-radius:8px;font-size:.74rem;color:#92400E;line-height:1.5}
+.history-table{width:100%;font-size:.85rem;border-collapse:collapse}
+.history-table th,.history-table td{padding:8px 10px;border-bottom:1px solid var(--border);text-align:right}
+.history-table th{text-align:left;color:var(--muted);font-weight:600;font-size:.74rem;text-transform:uppercase}
+.history-table th:first-child,.history-table td:first-child{text-align:left;font-family:'DM Sans'}
+.history-table td:not(:first-child){font-family:'JetBrains Mono',monospace}
+.history-table tr.curr{background:var(--green2)}
+@media(max-width:768px){.kpis,.bucket-grid,.cross-links,.month-row,.cat-body{grid-template-columns:1fr}.kpis,.bucket-grid{grid-template-columns:1fr 1fr}}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div id="navContainer"></div>
+<div class="container">
+<div class="header">
+  <div>
+    <h1><span>📊</span> PyG Personal</h1>
+    <p>Tu Estado de Resultados del mes. Detecta dónde se va la plata, cuánto ahorras de verdad, y guarda histórico mes a mes en este navegador.</p>
+  </div>
+  <div class="header-right">
+    Vista regla 50/30/20<br>
+    Persistencia local (sin login)<br>
+    Sin nube, sin servidor
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">📅 Mes que estás registrando</div>
+  <div class="month-row">
+    <div class="input-row">
+      <label>Mes</label>
+      <select id="mes" style="padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.92rem"></select>
+    </div>
+    <div class="input-row">
+      <label>Año</label>
+      <select id="anio" style="padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.92rem"></select>
+    </div>
+    <div class="input-row">
+      <label style="visibility:hidden">_</label>
+      <button class="btn btn-outline" onclick="cargarMes()" id="btnCargar">Cargar este mes</button>
+    </div>
+  </div>
+  <div id="mesInfo" style="font-size:.82rem;color:var(--muted);margin-top:6px"></div>
+</div>
+<div class="card">
+  <div class="card-title">💵 Ingresos del mes</div>
+  <div class="cat-body">
+    <div class="input-row">
+      <label>Salario neto</label>
+      <input type="text" id="ingSalario" class="money" placeholder="$0" inputmode="numeric">
+      <span class="hint">Lo que te transfieren a la cuenta. <a href="salario-neto.html" style="color:var(--pri2)">¿No sabes el neto?</a></span>
+    </div>
+    <div class="input-row">
+      <label>Honorarios / freelance</label>
+      <input type="text" id="ingFreelance" class="money" placeholder="$0" inputmode="numeric">
+      <span class="hint">Después de retefuente y aportes a SS</span>
+    </div>
+    <div class="input-row">
+      <label>Otros ingresos</label>
+      <input type="text" id="ingOtros" class="money" placeholder="$0" inputmode="numeric">
+      <span class="hint">Arriendos, dividendos, ventas</span>
+    </div>
+    <div class="input-row">
+      <label>Auxilios / bonos esporádicos</label>
+      <input type="text" id="ingBonos" class="money" placeholder="$0" inputmode="numeric">
+      <span class="hint">Prima, cesantías retiradas, regalos</span>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">🏠 Gastos esenciales</div>
+  <div class="cat-body">
+    <div class="input-row"><label>Arriendo / cuota vivienda</label><input type="text" id="gArriendo" class="money" placeholder="$0" inputmode="numeric"></div>
+    <div class="input-row"><label>Servicios públicos + internet</label><input type="text" id="gServicios" class="money" placeholder="$0" inputmode="numeric"></div>
+    <div class="input-row"><label>Mercado / alimentación</label><input type="text" id="gMercado" class="money" placeholder="$0" inputmode="numeric"></div>
+    <div class="input-row"><label>Transporte (gasolina, transporte, parqueadero)</label><input type="text" id="gTransporte" class="money" placeholder="$0" inputmode="numeric"></div>
+    <div class="input-row"><label>Salud (EPS, copagos, medicamentos)</label><input type="text" id="gSalud" class="money" placeholder="$0" inputmode="numeric"></div>
+    <div class="input-row"><label>Educación / colegio / universidad</label><input type="text" id="gEducacion" class="money" placeholder="$0" inputmode="numeric"></div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">💳 Cuotas de deudas</div>
+  <div class="cat-body">
+    <div class="input-row">
+      <label>Tarjetas de crédito (cuota mínima/total)</label>
+      <input type="text" id="dTarjetas" class="money" placeholder="$0" inputmode="numeric">
+      <span class="hint">Si pagas en cuotas, lo que te aparece este mes</span>
+    </div>
+    <div class="input-row"><label>Crédito de consumo / libre inversión</label><input type="text" id="dConsumo" class="money" placeholder="$0" inputmode="numeric"></div>
+    <div class="input-row"><label>Crédito vehículo</label><input type="text" id="dCarro" class="money" placeholder="$0" inputmode="numeric"></div>
+    <div class="input-row"><label>Otras deudas</label><input type="text" id="dOtras" class="money" placeholder="$0" inputmode="numeric"></div>
+  </div>
+  <div class="alert alert-info" style="margin-top:10px">
+    <strong>Tip:</strong> la cuota de vivienda no la metas aquí, va en "Gastos esenciales". Aquí solo deudas malas y consumo.
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">🍔 Deseos y gustos</div>
+  <div class="cat-body">
+    <div class="input-row"><label>Restaurantes / domicilios / cafés</label><input type="text" id="wRestaurantes" class="money" placeholder="$0" inputmode="numeric"></div>
+    <div class="input-row"><label>Suscripciones (Netflix, Spotify, gym, etc)</label><input type="text" id="wSubs" class="money" placeholder="$0" inputmode="numeric"></div>
+    <div class="input-row"><label>Entretenimiento / salidas</label><input type="text" id="wEntret" class="money" placeholder="$0" inputmode="numeric"></div>
+    <div class="input-row"><label>Ropa, tecnología, hogar</label><input type="text" id="wRopa" class="money" placeholder="$0" inputmode="numeric"></div>
+    <div class="input-row"><label>Viajes / regalos</label><input type="text" id="wViajes" class="money" placeholder="$0" inputmode="numeric"></div>
+    <div class="input-row"><label>Otros gustos</label><input type="text" id="wOtros" class="money" placeholder="$0" inputmode="numeric"></div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">💰 Ahorro e inversión</div>
+  <div class="cat-body">
+    <div class="input-row"><label>A fondo de emergencia</label><input type="text" id="aEmergencia" class="money" placeholder="$0" inputmode="numeric"></div>
+    <div class="input-row"><label>AFC / pensión voluntaria</label><input type="text" id="aAFC" class="money" placeholder="$0" inputmode="numeric"></div>
+    <div class="input-row"><label>Inversión (CDT, FIC, acciones, finca raíz)</label><input type="text" id="aInversion" class="money" placeholder="$0" inputmode="numeric"></div>
+    <div class="input-row"><label>Ahorro libre (cuenta, alcancía)</label><input type="text" id="aLibre" class="money" placeholder="$0" inputmode="numeric"></div>
+    <div class="input-row"><label>Abono extra a deudas (más allá de la cuota)</label><input type="text" id="aDeudas" class="money" placeholder="$0" inputmode="numeric"></div>
+  </div>
+  <div class="alert alert-info" style="margin-top:10px">
+    El abono <strong>extra</strong> a deudas cuenta como ahorro (te libera de intereses). La cuota normal va arriba en "cuotas de deudas".
+  </div>
+</div>
+<button class="btn btn-pri" onclick="calcular()">Calcular mi PyG</button>
+<div class="btn-row">
+  <button class="btn btn-green" onclick="guardarMes()">💾 Guardar este mes</button>
+  <button class="btn btn-outline" onclick="limpiarMes()">🗑️ Limpiar</button>
+</div>
+<div class="results" id="results">
+  <div class="card" style="margin-top:18px">
+    <div class="card-title">📈 Resultado del mes</div>
+    <div class="kpis" id="kpis"></div>
+    <div id="alertas"></div>
+    <table class="dep-table" id="tblDep"><tbody></tbody></table>
+    <div class="gancho" id="ganchoPyG"></div>
+    <div class="narrativa" id="narrativaPyG"></div>
+    <div class="aha-grid" id="ahaGridPyG"></div>
+  </div>
+  <div class="wow-actions-card" id="cardActionsPyG" style="display:none">
+    <div class="wow-actions-title">🎯 Tu plan accionable — basado en TUS números</div>
+    <div class="wow-actions-sub">Movimientos concretos que tu PyG dispara, ordenados por impacto.</div>
+    <div class="action-ladder" id="actionLadderPyG"></div>
+  </div>
+  <div class="wow-share-card" id="cardSharePyG" style="display:none">
+    <div class="wow-share-title">📸 Compártelo</div>
+    <div class="wow-share-sub">Diseñado para screenshot a Instagram Stories. Tu tasa de ahorro real, sin ego.</div>
+    <div class="share-card" id="shareCardPyG"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">🪣 Vista regla 50/30/20</div>
+    <p style="font-size:.86rem;color:var(--muted);margin-bottom:8px">Lo que recomienda la regla clásica: 50% para necesidades, 30% para deseos, 20% para ahorro/deudas. No es ley — es guía.</p>
+    <div class="bucket-grid" id="bucketGrid"></div>
+    <div class="alert alert-info" style="margin-top:14px" id="bucketsMsg"></div>
+  </div>
+  <div class="card" id="cardHistorial" style="display:none">
+    <div class="card-title">📅 Tu histórico</div>
+    <p style="font-size:.86rem;color:var(--muted);margin-bottom:8px">Tus PyG mensuales guardados en este navegador:</p>
+    <table class="history-table" id="histTable"></table>
+    <div class="btn-row" style="margin-top:10px">
+      <button class="btn btn-outline" onclick="exportarHistorialJSON()" style="font-size:.82rem">📦 Descargar todo (JSON)</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">📚 Sigue auditando</div>
+    <div class="cross-links">
+      <a href="deudas.html" class="cross-link">
+        <strong>💳 Auditor de deudas</strong>
+        <small>Tasa promedio ponderada y costo financiero anual</small>
+      </a>
+      <a href="salario-neto.html" class="cross-link">
+        <strong>💼 Salario neto</strong>
+        <small>¿Cuánto te queda al bolsillo de tu sueldo?</small>
+      </a>
+      <a href="costoreal.html" class="cross-link">
+        <strong>💸 Costo real de un crédito</strong>
+        <small>Lo que pagas de verdad por una cuota</small>
+      </a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">⬇️ Descargar / Importar</div>
+    <p style="font-size:.84rem;color:var(--muted);margin-bottom:10px"><strong>PDF / Excel</strong> exportan el mes que acabas de calcular. <strong>Plantilla 12 meses</strong> es un Excel formulado con todo el año listo para llenar offline (lo puedes subir de vuelta y los datos quedan en este navegador).</p>
+    <div class="btn-row">
+      <button class="btn btn-green" onclick="exportPDF()">📄 PDF (este mes)</button>
+      <button class="btn btn-green" onclick="exportExcel()">📊 Excel (este mes)</button>
+      <button class="btn btn-outline" onclick="descargarPlantillaAnual()">📋 Plantilla 12 meses</button>
+      <label class="btn btn-outline" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px">
+        ⬆️ Subir Excel
+        <input type="file" id="fileImport" accept=".xlsx" style="display:none" onchange="subirExcel(this.files[0])">
+      </label>
+    </div>
+  </div>
+  <div class="disclaimer">
+    Cálculo didáctico de referencia. Tus datos se guardan SOLO en este navegador (localStorage). Si limpias el caché del navegador o entras en modo incógnito, no los vas a ver. Descarga el JSON si quieres respaldarlos.
+  </div>
+</div>
+</div>
+<script src="shared/parametros-financieros.js?v=e116ea2a"></script>
+<script src="shared/finanzas-store.js?v=61d9057f"></script>
+<script src="shared/finanzas-export.js?v=abe34dd6"></script>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<script src="shared/finanzas-privacy.js?v=aed97e2f"></script>
+<script>
+'use strict';
+var ultimoCalculo = null;
+function $(id){ return document.getElementById(id); }
+function fmt(n){ if(n==null||isNaN(n))return '$0'; return '$'+Math.round(n).toLocaleString('es-CO'); }
+function num(id){ var v=$(id).value.replace(/[^\d]/g,''); return parseInt(v,10)||0; }
+var INPUTS_ING   = ['ingSalario','ingFreelance','ingOtros','ingBonos'];
+var INPUTS_ESEN  = ['gArriendo','gServicios','gMercado','gTransporte','gSalud','gEducacion'];
+var INPUTS_DEUDA = ['dTarjetas','dConsumo','dCarro','dOtras'];
+var INPUTS_DESEO = ['wRestaurantes','wSubs','wEntret','wRopa','wViajes','wOtros'];
+var INPUTS_AHO   = ['aEmergencia','aAFC','aInversion','aLibre','aDeudas'];
+var TODOS = INPUTS_ING.concat(INPUTS_ESEN, INPUTS_DEUDA, INPUTS_DESEO, INPUTS_AHO);
+// Format inputs as money
+TODOS.forEach(function(id){
+  var el = $(id); if(!el) return;
+  el.addEventListener('input', function(){
+    var raw = this.value.replace(/[^\d]/g,'');
+    this.value = raw ? '$'+parseInt(raw,10).toLocaleString('es-CO') : '';
+  });
+});
+// Selector mes/año
+(function initMesAnio(){
+  var meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  var hoy = new Date();
+  var mesEl = $('mes'), anioEl = $('anio');
+  meses.forEach(function(m,i){
+    var o = document.createElement('option'); o.value = String(i+1).padStart(2,'0'); o.textContent = m;
+    if (i+1 === hoy.getMonth()+1) o.selected = true;
+    mesEl.appendChild(o);
+  });
+  for (var y = hoy.getFullYear(); y >= hoy.getFullYear()-3; y--){
+    var o = document.createElement('option'); o.value = String(y); o.textContent = String(y);
+    if (y === hoy.getFullYear()) o.selected = true;
+    anioEl.appendChild(o);
+  }
+})();
+function claveMes(){ return $('anio').value + '-' + $('mes').value; }
+function setVal(id, v){
+  $(id).value = v ? '$'+(+v).toLocaleString('es-CO') : '';
+}
+function limpiarMes(){
+  TODOS.forEach(function(id){ $(id).value = ''; });
+  $('results').classList.remove('show');
+  $('mesInfo').textContent = '';
+  exoToast('Inputs limpiados (no se borró lo guardado)', 'info');
+}
+function cargarMes(){
+  var key = 'pyg:' + claveMes();
+  var data = FinanzasStore.get(key);
+  if (!data) {
+    $('mesInfo').textContent = 'No hay datos guardados para este mes.';
+    return;
+  }
+  Object.keys(data).forEach(function(id){ if ($(id)) setVal(id, data[id]); });
+  var meta = FinanzasStore.getMeta(key);
+  $('mesInfo').textContent = 'Cargado. Última edición: '+(meta?meta.savedAt.toLocaleString('es-CO'):'—');
+  exoToast('Mes cargado', 'success');
+  setTimeout(calcular, 100);
+}
+function guardarMes(){
+  var data = {};
+  TODOS.forEach(function(id){ data[id] = num(id); });
+  var key = 'pyg:' + claveMes();
+  if (FinanzasStore.set(key, data)) {
+    $('mesInfo').textContent = 'Guardado: '+ new Date().toLocaleString('es-CO');
+    exoToast('Mes '+claveMes()+' guardado', 'success');
+    if (ultimoCalculo) renderHistorial();
+  } else {
+    exoToast('No se pudo guardar', 'warning');
+  }
+}
+function calcular(){
+  var ing  = INPUTS_ING.reduce(function(s,id){ return s+num(id); }, 0);
+  var esen = INPUTS_ESEN.reduce(function(s,id){ return s+num(id); }, 0);
+  var deu  = INPUTS_DEUDA.reduce(function(s,id){ return s+num(id); }, 0);
+  var des  = INPUTS_DESEO.reduce(function(s,id){ return s+num(id); }, 0);
+  var aho  = INPUTS_AHO.reduce(function(s,id){ return s+num(id); }, 0);
+  var gastos = esen + deu + des + aho;
+  var balance = ing - gastos;
+  var pctAho = ing ? aho/ing*100 : 0;
+  var pctDeu = ing ? deu/ing*100 : 0;
+  var pctEsen = ing ? esen/ing*100 : 0;
+  var pctDes = ing ? des/ing*100 : 0;
+  ultimoCalculo = { ing:ing, esen:esen, deu:deu, des:des, aho:aho, balance:balance, pctAho:pctAho, pctDeu:pctDeu, pctEsen:pctEsen, pctDes:pctDes };
+  // KPIs
+  $('kpis').innerHTML =
+    '<div class="kpi blue"><div class="val">'+fmt(ing)+'</div><div class="lbl">Ingresos</div></div>'+
+    '<div class="kpi red"><div class="val">'+fmt(gastos)+'</div><div class="lbl">Gastos totales</div></div>'+
+    '<div class="kpi '+(balance<0?'red':'green')+'"><div class="val">'+fmt(balance)+'</div><div class="lbl">Balance</div></div>'+
+    '<div class="kpi '+(pctAho>=10?'green':pctAho>0?'amber':'red')+'"><div class="val">'+pctAho.toFixed(1)+'%</div><div class="lbl">Tasa ahorro</div></div>';
+  // Alertas
+  var alertas = [];
+  if (balance < 0) alertas.push('<div class="alert alert-red"><strong>⚠️ Estás gastando más de lo que ganas.</strong> Diferencia: '+fmt(Math.abs(balance))+'/mes. Si esto se repite, te endeudas para vivir. Empieza por la categoría más grande de "Deseos" o "Cuotas de deuda".</div>');
+  else if (pctAho < 10 && ing > 0) alertas.push('<div class="alert alert-warn"><strong>⚠️ Tu tasa de ahorro está debajo del 10%.</strong> No es emergencia pero a este ritmo tardas en construir fondo de emergencia o patrimonio. Mira la categoría "Deseos" — suele ser donde está la fuga.</div>');
+  else if (pctAho >= 20) alertas.push('<div class="alert alert-green"><strong>✅ Estás ahorrando '+pctAho.toFixed(0)+'% del ingreso.</strong> Por encima del 20% recomendado. Buen mes.</div>');
+  if (pctDeu > 35) alertas.push('<div class="alert alert-red"><strong>🚨 '+pctDeu.toFixed(0)+'% de tu ingreso se va en cuotas de deuda.</strong> Estado: apagando incendios. Prioridad absoluta: salir de deudas malas. <a href="deudas.html" style="color:#991B1B;font-weight:700">Audita tus deudas →</a></div>');
+  else if (pctDeu > 30) alertas.push('<div class="alert alert-warn"><strong>⚠️ '+pctDeu.toFixed(0)+'% del ingreso comprometido en cuotas de deuda.</strong> Por encima del 30% recomendado. <a href="deudas.html" style="color:#92400E;font-weight:700">Audita el costo real →</a></div>');
+  $('alertas').innerHTML = alertas.join('');
+  // Tabla
+  var rows = [
+    ['<strong>INGRESOS</strong>','','subt'],
+    ['Salario neto','', 'norm', num('ingSalario')],
+    ['Honorarios / freelance','', 'norm', num('ingFreelance')],
+    ['Otros ingresos','', 'norm', num('ingOtros')],
+    ['Bonos / esporádicos','', 'norm', num('ingBonos')],
+    ['Total ingresos','100%','subt', ing],
+    ['<strong>GASTOS ESENCIALES</strong>',pctEsen.toFixed(1)+'%','subt'],
+    ['Arriendo / cuota vivienda','','norm', num('gArriendo')],
+    ['Servicios públicos','','norm', num('gServicios')],
+    ['Mercado','','norm', num('gMercado')],
+    ['Transporte','','norm', num('gTransporte')],
+    ['Salud','','norm', num('gSalud')],
+    ['Educación','','norm', num('gEducacion')],
+    ['Subtotal esenciales','','subt', esen],
+    ['<strong>CUOTAS DE DEUDA</strong>',pctDeu.toFixed(1)+'%','subt'],
+    ['Tarjetas de crédito','','norm', num('dTarjetas')],
+    ['Consumo','','norm', num('dConsumo')],
+    ['Vehículo','','norm', num('dCarro')],
+    ['Otras','','norm', num('dOtras')],
+    ['Subtotal deudas','','subt', deu],
+    ['<strong>DESEOS</strong>',pctDes.toFixed(1)+'%','subt'],
+    ['Restaurantes / domicilios','','norm', num('wRestaurantes')],
+    ['Suscripciones','','norm', num('wSubs')],
+    ['Entretenimiento','','norm', num('wEntret')],
+    ['Ropa / tech / hogar','','norm', num('wRopa')],
+    ['Viajes / regalos','','norm', num('wViajes')],
+    ['Otros gustos','','norm', num('wOtros')],
+    ['Subtotal deseos','','subt', des],
+    ['<strong>AHORRO E INVERSIÓN</strong>',pctAho.toFixed(1)+'%','subt'],
+    ['Fondo emergencia','','norm', num('aEmergencia')],
+    ['AFC / pensión voluntaria','','norm', num('aAFC')],
+    ['Inversión','','norm', num('aInversion')],
+    ['Ahorro libre','','norm', num('aLibre')],
+    ['Abono extra deudas','','norm', num('aDeudas')],
+    ['Subtotal ahorro','','subt', aho],
+    ['BALANCE DEL MES','','total', balance]
+  ];
+  $('tblDep').querySelector('tbody').innerHTML = rows.filter(function(r){
+    return r[2] !== 'norm' || (r[3] != null && r[3] > 0);
+  }).map(function(r){
+    var val = r[3] != null ? fmt(r[3]) : '';
+    return '<tr class="'+r[2]+'"><td>'+r[0]+'</td><td style="color:var(--muted);font-size:.78rem">'+r[1]+'</td><td>'+val+'</td></tr>';
+  }).join('');
+  // Vista 50/30/20
+  var P = ParametrosFinanzas.P.prudencia.regla503020;
+  var t50 = ing * P.necesidades / 100;
+  var t30 = ing * P.deseos / 100;
+  var t20 = ing * P.ahorroDeuda / 100;
+  var r50 = esen, r30 = des, r20 = aho + deu;
+  function bk(target, real, pct, lbl, cls){
+    var status = real <= target ? 'ok' : 'over';
+    var diff = real - target;
+    var diffTxt = diff <= 0
+      ? 'Por debajo del cubo: '+fmt(Math.abs(diff))
+      : 'Excede el cubo en '+fmt(diff);
+    return '<div class="bucket '+cls+' '+status+'">'+
+      '<div class="b-target">'+pct+'% — '+lbl+'</div>'+
+      '<div class="b-real">'+fmt(real)+'</div>'+
+      '<div class="b-vs">Tope: '+fmt(target)+'<br>'+diffTxt+'</div>'+
+      '</div>';
+  }
+  $('bucketGrid').innerHTML =
+    bk(t50, r50, 50, 'Necesidades', 'b50') +
+    bk(t30, r30, 30, 'Deseos', 'b30') +
+    bk(t20, r20, 20, 'Ahorro + deuda', 'b20');
+  var bMsg = '';
+  if (r50 > t50)      bMsg += '<strong>Necesidades por encima del 50%:</strong> revisa arriendo, servicios y transporte. Si no puedes mover la vivienda, el resto se ajusta. ';
+  else if (r30 > t30) bMsg += '<strong>Deseos por encima del 30%:</strong> aquí casi siempre es donde está la fuga (restaurantes, suscripciones, ropa). ';
+  else if (r20 < t20) bMsg += '<strong>Ahorro y abono a deudas por debajo del 20%:</strong> es el cubo más fácil de mover — lo que recortes en deseos va automáticamente acá. ';
+  else                bMsg = '<strong>Estás en regla 50/30/20.</strong> Buen mes.';
+  $('bucketsMsg').innerHTML = bMsg;
+  renderHistorial();
+  renderWowFactorPyG();
+  $('results').classList.add('show');
+  $('results').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+// ─── Wow Factor: gancho + narrativa + ahas + plan + share ───
+function renderWowFactorPyG(){
+  if (!ultimoCalculo) return;
+  var c = ultimoCalculo;
+  var totalGastos = c.esen + c.deu + c.des + c.aho;
+  var pctReal50 = c.pctEsen, pctReal30 = c.pctDes;
+  var sobre30 = pctReal30 > 30;
+  var deficit = c.balance < 0;
+  var ahorroBajo = c.pctAho < 10;
+  // Gancho
+  var gancho;
+  if (deficit)              gancho = 'Gastas más de lo que ganas. <em>La tasa de ahorro real: negativa.</em>';
+  else if (c.pctAho >= 20)  gancho = '20% de ahorro real. <em>Estás en el percentil alto.</em>';
+  else if (ahorroBajo)      gancho = 'Casi todos creen que ahorran 15%. <em>El promedio real es 7-9%.</em>';
+  else if (c.pctDeu > 30)   gancho = '30% del ingreso en cuotas malas. <em>Margen cero.</em>';
+  else                      gancho = 'Tu PyG no juzga. <em>Solo informa.</em>';
+  document.getElementById('ganchoPyG').innerHTML = gancho;
+  // Narrativa
+  var narr = 'Este mes ('+claveMes()+') entraron <span class="num">'+fmt(c.ing)+'</span> y se fueron <span class="num">'+fmt(totalGastos)+'</span>. Balance: '+(c.balance >= 0 ? '<strong>+'+fmt(c.balance)+' a favor</strong>.' : '<strong>'+fmt(c.balance)+' en contra</strong>.');
+  narr += '<br><br>Distribución por cubo (regla 50/30/20):<br>';
+  narr += '• 🏠 Necesidades: <span class="num">'+pctReal50.toFixed(1)+'%</span> '+(pctReal50 > 50 ? '(sobre el tope)' : '(sano)')+'<br>';
+  narr += '• 🎈 Deseos: <span class="num">'+pctReal30.toFixed(1)+'%</span> '+(sobre30 ? '(arriba del 30%)' : '(dentro del tope)')+'<br>';
+  narr += '• 💳 Cuotas deudas: <span class="num">'+c.pctDeu.toFixed(1)+'%</span> '+(c.pctDeu > 30 ? '(zona crítica)' : '')+'<br>';
+  narr += '• 💰 Ahorro real: <span class="num">'+c.pctAho.toFixed(1)+'%</span>'+(ahorroBajo ? ' (debajo del 10%)' : '');
+  if (deficit) narr += '<br><br><strong>La aritmética no opina:</strong> si esto pasa más de 2-3 meses, terminas tomando deuda mala para sostener nivel. Conversación urgente: ¿qué baja del cubo de deseos?';
+  else if (ahorroBajo) narr += '<br><br>La diferencia entre quien construye patrimonio y quien no es la <strong>tasa de ahorro sostenida</strong>. Mover ese '+c.pctAho.toFixed(1)+'% al 15-20% en 12 meses es factible.';
+  document.getElementById('narrativaPyG').innerHTML = narr;
+  // 3 Aha cards
+  var ahas = [];
+  ahas.push('<div class="aha-card '+(c.pctAho >= 15 ? 'good' : c.pctAho >= 5 ? '' : 'bad')+'"><span class="aha-tag">tasa real</span><div class="aha-num">'+c.pctAho.toFixed(1)+'%</div><div class="aha-lbl">tu tasa de ahorro este mes</div></div>');
+  ahas.push('<div class="aha-card '+(c.balance >= 0 ? 'good' : 'bad')+'"><span class="aha-tag">'+(c.balance >= 0 ? 'a favor' : 'en contra')+'</span><div class="aha-num">'+fmt(c.balance)+'</div><div class="aha-lbl">balance del mes</div></div>');
+  ahas.push('<div class="aha-card '+(sobre30 ? 'bad' : '')+'"><span class="aha-tag">deseos</span><div class="aha-num">'+pctReal30.toFixed(0)+'%</div><div class="aha-lbl">en deseos (la palanca más fácil)</div></div>');
+  document.getElementById('ahaGridPyG').innerHTML = ahas.join('');
+  // Action ladder
+  var actions = [];
+  if (deficit) actions.push({h:'URGENTE — sin déficit no hay plan', p:'Recorta <strong>'+fmt(Math.abs(c.balance))+'</strong> del cubo de deseos hasta volver a balance cero. Suscripciones que no usas, comer fuera, ocio. Si en 2 meses no logras balance, las cuotas de deudas deben renegociarse.'});
+  if (sobre30) actions.push({h:'Deseos sobre el 30% — la palanca más fácil', p:'Anota cada gasto de deseos durante 30 días. Te sorprenderá: <strong>5-10% de recorte</strong> es identificable sin afectar calidad básica de vida.'});
+  if (c.pctDeu > 25) actions.push({h:'Cuotas de deuda comen tu ahorro', p:'Tarjetas (26-29%) consolidadas en libre inversión (16-22%) liberan plata real. Audita primero, después consolida. <strong>Cada punto de tasa = ~$'+Math.round(c.deu*0.01).toLocaleString('es-CO')+'/mes</strong>.'});
+  if (c.pctAho < 15) actions.push({h:'Pagarte primero — la mecánica que sí funciona', p:'Programa transferencia automática del <strong>10%</strong> el día que te pagan, a cuenta separada. La fricción protege la plata. En 6 meses ya no la extrañas.'});
+  actions.push({h:'Llena este PyG cada mes', p:'Un mes solo es anécdota. <strong>6 meses son patrón.</strong> El histórico abajo te muestra tu tasa promedio real (no la del mes que recuerdas).'});
+  if (actions.length > 0) {
+    document.getElementById('cardActionsPyG').style.display = 'block';
+    document.getElementById('actionLadderPyG').innerHTML = actions.slice(0,3).map(function(a,i){
+      return '<div class="action-step"><div class="action-num">'+(i+1)+'</div><div class="action-body"><h4>'+a.h+'</h4><p>'+a.p+'</p></div></div>';
+    }).join('');
+  }
+  // Share card
+  var shareLine;
+  if (c.pctAho >= 20) shareLine = 'Mi tasa de ahorro: <em>'+c.pctAho.toFixed(0)+'%</em>. Por encima de la mediana colombiana.';
+  else if (c.pctAho >= 10) shareLine = 'Mi tasa de ahorro real: <em>'+c.pctAho.toFixed(0)+'%</em>. Subiendo cada mes.';
+  else if (c.balance < 0) shareLine = '<em>Balance negativo</em> este mes. Recorto deseos para volver a flote.';
+  else shareLine = 'Mi tasa de ahorro real: <em>'+c.pctAho.toFixed(0)+'%</em>. Trabajando para subir.';
+  document.getElementById('cardSharePyG').style.display = 'block';
+  document.getElementById('shareCardPyG').innerHTML =
+    '<div class="share-card-label">Mi PyG personal '+claveMes()+'</div>'+
+    '<div class="share-card-amount">'+c.pctAho.toFixed(1)+'%</div>'+
+    '<div class="share-card-line">'+shareLine+'</div>'+
+    '<div class="share-card-stats">'+
+      '<div class="share-card-stat">Ingreso<strong>'+fmt(c.ing)+'</strong></div>'+
+      '<div class="share-card-stat">Balance<strong>'+fmt(c.balance)+'</strong></div>'+
+      '<div class="share-card-stat">Deseos<strong>'+pctReal30.toFixed(0)+'%</strong></div>'+
+    '</div>'+
+    '<div class="share-actions">'+
+      '<button onclick="copiarSharePyG()">📋 Copiar texto</button>'+
+    '</div>'+
+    '<div class="share-card-foot">exogenadian.com/pyg-personal</div>';
+}
+function copiarSharePyG(){
+  if (!ultimoCalculo) return;
+  var c = ultimoCalculo;
+  var txt = 'Mi PyG personal '+claveMes()+'\n';
+  txt += 'Tasa de ahorro real: '+c.pctAho.toFixed(1)+'%\n';
+  txt += 'Ingreso: '+fmt(c.ing)+' · Balance: '+fmt(c.balance)+'\n';
+  txt += 'Calculado en exogenadian.com/pyg-personal';
+  if (navigator.clipboard) navigator.clipboard.writeText(txt).then(function(){ exoToast('Copiado al portapapeles', 'success'); });
+  if (typeof gtag !== 'undefined') gtag('event','pyg_share',{tipo:'copy'});
+}
+function renderHistorial(){
+  var keys = FinanzasStore.list('pyg:').sort().reverse();
+  if (keys.length === 0) { $('cardHistorial').style.display = 'none'; return; }
+  $('cardHistorial').style.display = 'block';
+  var rows = ['<thead><tr><th>Mes</th><th>Ingresos</th><th>Gastos</th><th>Balance</th><th>% Ahorro</th></tr></thead><tbody>'];
+  var actual = 'pyg:' + claveMes();
+  keys.slice(0, 12).forEach(function(k){
+    var d = FinanzasStore.get(k);
+    if (!d) return;
+    var ingT = INPUTS_ING.reduce(function(s,id){ return s+(d[id]||0); }, 0);
+    var ahoT = INPUTS_AHO.reduce(function(s,id){ return s+(d[id]||0); }, 0);
+    var gT = INPUTS_ESEN.concat(INPUTS_DEUDA, INPUTS_DESEO, INPUTS_AHO).reduce(function(s,id){ return s+(d[id]||0); }, 0);
+    var bal = ingT - gT;
+    var pAho = ingT ? ahoT/ingT*100 : 0;
+    var label = k.replace('pyg:','');
+    rows.push('<tr class="'+(k===actual?'curr':'')+'"><td>'+label+'</td><td>'+fmt(ingT)+'</td><td>'+fmt(gT)+'</td><td style="color:'+(bal<0?'var(--red)':'var(--green)')+'">'+fmt(bal)+'</td><td>'+pAho.toFixed(1)+'%</td></tr>');
+  });
+  rows.push('</tbody>');
+  $('histTable').innerHTML = rows.join('');
+}
+function exportarHistorialJSON(){
+  FinanzasStore.downloadJSON('pyg-personal-historico-'+new Date().toISOString().slice(0,10)+'.json');
+  exoToast('Backup descargado', 'success');
+}
+// ─── Plantilla anual Excel formulado ───
+var MESES_ES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+// Estructura de categorías y filas para la plantilla anual
+var CATS = [
+  { titulo:'INGRESOS', filas:[
+    {id:'ingSalario', label:'Salario neto'},
+    {id:'ingFreelance', label:'Honorarios / freelance'},
+    {id:'ingOtros', label:'Otros ingresos'},
+    {id:'ingBonos', label:'Bonos / esporádicos'}
+  ]},
+  { titulo:'GASTOS ESENCIALES', filas:[
+    {id:'gArriendo', label:'Arriendo / cuota vivienda'},
+    {id:'gServicios', label:'Servicios públicos + internet'},
+    {id:'gMercado', label:'Mercado / alimentación'},
+    {id:'gTransporte', label:'Transporte'},
+    {id:'gSalud', label:'Salud'},
+    {id:'gEducacion', label:'Educación'}
+  ]},
+  { titulo:'CUOTAS DE DEUDAS', filas:[
+    {id:'dTarjetas', label:'Tarjetas de crédito'},
+    {id:'dConsumo', label:'Crédito de consumo'},
+    {id:'dCarro', label:'Crédito vehículo'},
+    {id:'dOtras', label:'Otras deudas'}
+  ]},
+  { titulo:'DESEOS', filas:[
+    {id:'wRestaurantes', label:'Restaurantes / domicilios'},
+    {id:'wSubs', label:'Suscripciones'},
+    {id:'wEntret', label:'Entretenimiento'},
+    {id:'wRopa', label:'Ropa / tech / hogar'},
+    {id:'wViajes', label:'Viajes / regalos'},
+    {id:'wOtros', label:'Otros gustos'}
+  ]},
+  { titulo:'AHORRO E INVERSIÓN', filas:[
+    {id:'aEmergencia', label:'Fondo de emergencia'},
+    {id:'aAFC', label:'AFC / pensión voluntaria'},
+    {id:'aInversion', label:'Inversión'},
+    {id:'aLibre', label:'Ahorro libre'},
+    {id:'aDeudas', label:'Abono extra deudas'}
+  ]}
+];
+function descargarPlantillaAnual(){
+  if (!window.ExcelJS){ exoToast('ExcelJS no cargó','error'); return; }
+  var anio = new Date().getFullYear();
+  var wb = new ExcelJS.Workbook(); wb.created = new Date(); wb.creator = 'ExógenaDIAN';
+  // Pre-cargar histórico del usuario: si tiene PyG guardado para algún mes, lo incluimos
+  var historicoUsuario = {};
+  var mesesConDatos = 0;
+  if (typeof FinanzasStore !== 'undefined' && FinanzasStore.isAvailable()) {
+    for (var mm = 1; mm <= 12; mm++) {
+      var key = 'pyg:'+anio+'-'+String(mm).padStart(2,'0');
+      var d = FinanzasStore.get(key);
+      if (d) { historicoUsuario[mm] = d; mesesConDatos++; }
+    }
+  }
+  var fillNavy   = {type:'pattern',pattern:'solid',fgColor:{argb:'FF1B3A5C'}};
+  var fontWhite  = {bold:true,color:{argb:'FFFFFFFF'},size:11};
+  var fillGray   = {type:'pattern',pattern:'solid',fgColor:{argb:'FFF0F2F5'}};
+  var fillCat    = {type:'pattern',pattern:'solid',fgColor:{argb:'FFD6E4F0'}};
+  var fillGreen  = {type:'pattern',pattern:'solid',fgColor:{argb:'FFD1FAE5'}};
+  var fillAmber  = {type:'pattern',pattern:'solid',fgColor:{argb:'FFFEF3C7'}};
+  var fillRed    = {type:'pattern',pattern:'solid',fgColor:{argb:'FFFEE2E2'}};
+  var bdr = {top:{style:'thin',color:{argb:'FFE2E8F0'}},bottom:{style:'thin',color:{argb:'FFE2E8F0'}},left:{style:'thin',color:{argb:'FFE2E8F0'}},right:{style:'thin',color:{argb:'FFE2E8F0'}}};
+  // ─── Hoja por mes ───
+  // Cada mes: A=Categoría, B=Concepto, C=Valor, D=% del ingreso (fórmula)
+  // Filas estructuradas para que el Resumen Anual pueda apuntar exactamente
+  var rowMap = {}; // { 'ingSalario': fila # en hoja, 'gArriendo': ..., etc. }
+  MESES_ES.forEach(function(mesNombre, mIdx){
+    var ws = wb.addWorksheet(mesNombre);
+    ws.columns = [{width:24},{width:36},{width:18},{width:14}];
+    // Datos guardados del usuario para este mes (si los tiene)
+    var datosMes = historicoUsuario[mIdx + 1] || {};
+    // Header — marcado si tiene datos del usuario
+    ws.mergeCells('A1:D1');
+    var c1 = ws.getCell('A1');
+    var tieneDatos = Object.keys(datosMes).some(function(k){ return datosMes[k] > 0; });
+    c1.value = 'PyG Personal — '+mesNombre+' '+anio + (tieneDatos ? ' (con tus datos)' : '');
+    c1.fill = fillNavy; c1.font = {bold:true,color:{argb:'FFFFFFFF'},size:14}; c1.alignment={horizontal:'center',vertical:'middle'};
+    ws.getRow(1).height = 28;
+    if (tieneDatos) { ws.properties.tabColor = {argb:'FF10B981'}; }
+    ws.addRow([]);
+    var thRow = ws.addRow(['Categoría','Concepto','Valor (COP)','% ingreso']);
+    thRow.eachCell(function(c){ c.fill = fillNavy; c.font = fontWhite; c.alignment={horizontal:'center'}; c.border=bdr; });
+    var ingTotalRow = null;
+    var rowsByCat = {};
+    CATS.forEach(function(cat){
+      // Cabecera de categoría
+      var catRow = ws.addRow([cat.titulo, '', '', '']);
+      catRow.eachCell(function(c){ c.fill = fillCat; c.font={bold:true,color:{argb:'FF1B3A5C'},size:10}; c.border=bdr; });
+      ws.mergeCells('A'+catRow.number+':D'+catRow.number);
+      var startRow = catRow.number + 1;
+      cat.filas.forEach(function(item){
+        var valorPrecargado = datosMes[item.id] || 0;
+        var r = ws.addRow(['', item.label, valorPrecargado, '']);
+        r.getCell(1).fill = fillGray; r.getCell(1).border = bdr;
+        r.getCell(2).font = {color:{argb:'FF374151'},size:10}; r.getCell(2).border = bdr;
+        r.getCell(3).numFmt = '#,##0'; r.getCell(3).alignment = {horizontal:'right'};
+        r.getCell(3).fill = fillAmber; r.getCell(3).font = {bold:true,color:{argb:'FF92400E'},size:10};
+        r.getCell(3).border = bdr;
+        r.getCell(4).numFmt = '0.0%'; r.getCell(4).alignment = {horizontal:'right'};
+        r.getCell(4).font = {color:{argb:'FF6B7280'},size:9}; r.getCell(4).border = bdr;
+        // Solo registramos el rowMap para el primer mes (todos los meses tienen la misma estructura)
+        if (mIdx === 0) rowMap[item.id] = r.number;
+      });
+      var endRow = ws.lastRow.number;
+      // Subtotal de la categoría
+      var subRow = ws.addRow(['', 'Subtotal '+cat.titulo, { formula:'SUM(C'+startRow+':C'+endRow+')' }, '']);
+      subRow.eachCell(function(c){ c.fill = fillGreen; c.font={bold:true,color:{argb:'FF065F46'},size:10}; c.border=bdr; });
+      subRow.getCell(3).numFmt = '#,##0';
+      rowsByCat[cat.titulo] = { sub: subRow.number, start: startRow, end: endRow };
+      if (cat.titulo === 'INGRESOS') ingTotalRow = subRow.number;
+    });
+    // Llenar % ingreso (columna D) para cada fila — referencia al subtotal de ingresos
+    // Lo hacemos al final cuando ya tenemos ingTotalRow
+    CATS.forEach(function(cat){
+      if (cat.titulo === 'INGRESOS') return;
+      var info = rowsByCat[cat.titulo];
+      for (var r = info.start; r <= info.end; r++){
+        ws.getCell('D'+r).value = { formula:'IF(C'+ingTotalRow+'=0,0,C'+r+'/C'+ingTotalRow+')' };
+      }
+      // Subtotal % ingreso
+      ws.getCell('D'+info.sub).value = { formula:'IF(C'+ingTotalRow+'=0,0,C'+info.sub+'/C'+ingTotalRow+')' };
+      ws.getCell('D'+info.sub).numFmt = '0.0%'; ws.getCell('D'+info.sub).font = {bold:true,size:10};
+    });
+    // Balance del mes
+    ws.addRow([]);
+    var balLabel = 'BALANCE DEL MES (Ingresos - Total gastos)';
+    var sumGastos = '(C'+rowsByCat['GASTOS ESENCIALES'].sub+'+C'+rowsByCat['CUOTAS DE DEUDAS'].sub+'+C'+rowsByCat['DESEOS'].sub+'+C'+rowsByCat['AHORRO E INVERSIÓN'].sub+')';
+    var balRow = ws.addRow(['', balLabel, { formula:'C'+ingTotalRow+'-'+sumGastos }, '']);
+    balRow.eachCell(function(c){ c.fill = fillNavy; c.font={bold:true,color:{argb:'FFFFFFFF'},size:11}; c.border=bdr; c.alignment={horizontal:'right'}; });
+    balRow.getCell(2).alignment = {horizontal:'left'};
+    balRow.getCell(3).numFmt = '#,##0';
+    // Vista 50/30/20
+    ws.addRow([]);
+    var vRow = ws.addRow(['VISTA 50/30/20','Cubo','Tope','Real / Diferencia']);
+    vRow.eachCell(function(c){ c.fill = fillCat; c.font={bold:true,color:{argb:'FF1B3A5C'},size:10}; c.border=bdr; });
+    var v50 = ws.addRow(['','50% Necesidades (Esenciales)', { formula:'C'+ingTotalRow+'*0.5' }, { formula:'C'+rowsByCat['GASTOS ESENCIALES'].sub }]);
+    v50.eachCell(function(c){ c.border=bdr; c.numFmt = '#,##0'; });
+    var v30 = ws.addRow(['','30% Deseos', { formula:'C'+ingTotalRow+'*0.3' }, { formula:'C'+rowsByCat['DESEOS'].sub }]);
+    v30.eachCell(function(c){ c.border=bdr; c.numFmt = '#,##0'; });
+    var v20 = ws.addRow(['','20% Ahorro + Cuotas deuda', { formula:'C'+ingTotalRow+'*0.2' }, { formula:'C'+rowsByCat['AHORRO E INVERSIÓN'].sub+'+C'+rowsByCat['CUOTAS DE DEUDAS'].sub }]);
+    v20.eachCell(function(c){ c.border=bdr; c.numFmt = '#,##0'; });
+    // Notas
+    ws.addRow([]);
+    var nRow = ws.addRow(['','💡 Llena solo la columna C. % y subtotales se calculan solos.']);
+    nRow.getCell(2).font = {italic:true,color:{argb:'FF6B7280'},size:9};
+  });
+  // ─── Hoja Resumen Anual (al inicio) ───
+  var wsRes = wb.addWorksheet('Resumen Anual', { properties: {tabColor: {argb: 'FF059669'}} });
+  // Mover al primer lugar
+  wb.worksheets.forEach(function(s,i){ if (s.name === 'Resumen Anual') wb.worksheets.splice(0,0, wb.worksheets.splice(i,1)[0]); });
+  wsRes.columns = [{width:36}].concat(MESES_ES.map(function(){ return {width:12}; })).concat([{width:14}]);
+  wsRes.mergeCells(1,1,1,14);
+  var t = wsRes.getCell(1,1); t.value = 'PyG Personal — Resumen anual '+anio;
+  t.fill = fillNavy; t.font = {bold:true,color:{argb:'FFFFFFFF'},size:14}; t.alignment = {horizontal:'center'};
+  wsRes.getRow(1).height = 28;
+  wsRes.addRow([]);
+  // Encabezado meses
+  var headers = ['Concepto'].concat(MESES_ES).concat(['TOTAL AÑO']);
+  var hdr = wsRes.addRow(headers);
+  hdr.eachCell(function(c){ c.fill = fillNavy; c.font = fontWhite; c.alignment = {horizontal:'center'}; c.border = bdr; });
+  function addCatRow(label){
+    var r = wsRes.addRow([label].concat(MESES_ES.map(function(){ return ''; })).concat(['']));
+    r.eachCell(function(c){ c.fill = fillCat; c.font = {bold:true,color:{argb:'FF1B3A5C'},size:10}; c.border = bdr; });
+    return r;
+  }
+  function addItemRow(label, fieldId){
+    var arr = [label];
+    MESES_ES.forEach(function(m){ arr.push({ formula:'\''+m+'\'!C'+rowMap[fieldId] }); });
+    arr.push({ formula:'SUM(B'+(wsRes.lastRow.number+1)+':M'+(wsRes.lastRow.number+1)+')' });
+    var r = wsRes.addRow(arr);
+    r.eachCell(function(c, col){
+      c.border = bdr;
+      if (col > 1) { c.numFmt = '#,##0'; c.alignment = {horizontal:'right'}; }
+    });
+    return r;
+  }
+  function addSubtotalRow(label, fieldIds){
+    // Suma fila a fila (por mes) de los items dados
+    var arr = [label];
+    MESES_ES.forEach(function(m, mIdx){
+      var refs = fieldIds.map(function(id){ return '\''+m+'\'!C'+rowMap[id]; });
+      arr.push({ formula: refs.join('+') });
+    });
+    arr.push({ formula:'SUM(B'+(wsRes.lastRow.number+1)+':M'+(wsRes.lastRow.number+1)+')' });
+    var r = wsRes.addRow(arr);
+    r.eachCell(function(c, col){
+      c.fill = fillGreen;
+      c.font = {bold:true, color:{argb:'FF065F46'}, size:10};
+      c.border = bdr;
+      if (col > 1) { c.numFmt = '#,##0'; c.alignment = {horizontal:'right'}; }
+    });
+    return r;
+  }
+  CATS.forEach(function(cat){
+    addCatRow(cat.titulo);
+    cat.filas.forEach(function(item){ addItemRow(item.label, item.id); });
+    addSubtotalRow('Subtotal '+cat.titulo, cat.filas.map(function(f){ return f.id; }));
+    wsRes.addRow([]);
+  });
+  // Balance anual
+  var balLabels = ['BALANCE DEL AÑO'];
+  MESES_ES.forEach(function(m){
+    var ingIds = CATS[0].filas.map(function(f){ return '\''+m+'\'!C'+rowMap[f.id]; });
+    var gastoIds = [].concat(CATS[1].filas, CATS[2].filas, CATS[3].filas, CATS[4].filas).map(function(f){ return '\''+m+'\'!C'+rowMap[f.id]; });
+    balLabels.push({ formula: '('+ingIds.join('+')+')-('+gastoIds.join('+')+')' });
+  });
+  balLabels.push({ formula:'SUM(B'+(wsRes.lastRow.number+1)+':M'+(wsRes.lastRow.number+1)+')' });
+  var balR = wsRes.addRow(balLabels);
+  balR.eachCell(function(c, col){
+    c.fill = fillNavy; c.font = {bold:true,color:{argb:'FFFFFFFF'},size:11}; c.border = bdr;
+    if (col > 1) { c.numFmt = '#,##0'; c.alignment = {horizontal:'right'}; }
+  });
+  wsRes.addRow([]);
+  var inst = wsRes.addRow(['💡 Llena cada hoja mensual. Los totales se calculan automáticamente. Cuando termines, súbelo de vuelta a exogenadian.com/pyg-personal.html para que la herramienta web tenga tu histórico.']);
+  wsRes.mergeCells(inst.number,1,inst.number,14);
+  inst.getCell(1).font = {italic:true,color:{argb:'FF6B7280'},size:10};
+  wb.xlsx.writeBuffer().then(function(buf){
+    var b = new Blob([buf], {type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(b);
+    var nombreArchivo = mesesConDatos > 0
+      ? 'pyg-personal-mi-historico-'+anio+'.xlsx'
+      : 'pyg-personal-plantilla-'+anio+'.xlsx';
+    a.download = nombreArchivo;
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(a.href); }, 0);
+    var msg = mesesConDatos > 0
+      ? 'Descargado — '+mesesConDatos+' '+(mesesConDatos===1?'mes':'meses')+' con TUS datos + '+(12-mesesConDatos)+' por llenar'
+      : 'Plantilla descargada — 12 meses formulados';
+    exoToast(msg, 'success');
+  });
+}
+// ─── Importar Excel de plantilla ───
+function subirExcel(file){
+  if (!file || !window.ExcelJS) return;
+  var reader = new FileReader();
+  reader.onload = function(e){
+    var wb = new ExcelJS.Workbook();
+    wb.xlsx.load(e.target.result).then(function(){
+      var anio = new Date().getFullYear();
+      var importados = 0;
+      MESES_ES.forEach(function(mesNombre, mIdx){
+        var ws = wb.getWorksheet(mesNombre);
+        if (!ws) return;
+        var data = {};
+        var any = false;
+        Object.keys(rowMapKnown).forEach(function(id){
+          var rowNum = rowMapKnown[id];
+          var v = ws.getCell('C'+rowNum).value;
+          var num = (typeof v === 'number') ? v : (v && v.result ? v.result : 0);
+          if (num && !isNaN(num)) { data[id] = Math.round(num); any = true; }
+          else { data[id] = 0; }
+        });
+        if (any) {
+          var key = 'pyg:' + anio + '-' + String(mIdx+1).padStart(2,'0');
+          FinanzasStore.set(key, data);
+          importados++;
+        }
+      });
+      if (importados > 0) {
+        exoToast('Importados '+importados+' meses. Selecciona uno y "Cargar este mes" para verlo.', 'success');
+        renderHistorial();
+      } else {
+        exoToast('El archivo no parece ser una plantilla válida (o todos los meses están vacíos).', 'warning');
+      }
+    }).catch(function(err){
+      console.error(err);
+      exoToast('No se pudo leer el archivo: '+(err.message||err), 'error');
+    });
+  };
+  reader.readAsArrayBuffer(file);
+  // Reset input para permitir re-subir el mismo archivo
+  $('fileImport').value = '';
+}
+// rowMapKnown: mismo mapeo que la plantilla descargada (filas fijas en cada hoja mensual)
+// Generamos el mapa desde CATS sin tener que ejecutar la descarga primero.
+// Estructura: header(2) + thRow(3) + cat1Header(4) + 4 ingresos(5-8) + sub(9) + cat2Header(10)...
+var rowMapKnown = (function(){
+  var map = {};
+  var row = 3; // thRow
+  CATS.forEach(function(cat){
+    row++; // categoría header
+    cat.filas.forEach(function(item){
+      row++; // fila del item
+      map[item.id] = row;
+    });
+    row++; // subtotal
+  });
+  return map;
+})();
+function exportPDF(){
+  if (!ultimoCalculo) { exoToast('Calcula primero','warning'); return; }
+  var c = ultimoCalculo;
+  var totalGastos = c.esen + c.deu + c.des + c.aho;
+  var pctReal50 = c.pctEsen;
+  var pctReal30 = c.pctDes;
+  var pctReal20 = c.pctAho + c.pctDeu;
+  var sobre50 = pctReal50 > 50;
+  var sobre30 = pctReal30 > 30;
+  var deficit = c.balance < 0;
+  var ahorroBajo = c.pctAho < 10;
+  // Frase hero
+  var fraseHero;
+  if (deficit)              fraseHero = { texto:'Gastas más de lo que ganas.\nLa tasa de ahorro real: negativa.', autor:'ExógenaDIAN' };
+  else if (c.pctAho >= 20)  fraseHero = { texto:'20% de ahorro real.\nEstás en el percentil alto.', autor:'ExógenaDIAN' };
+  else if (ahorroBajo)      fraseHero = { texto:'Casi todos creen que ahorran 15%.\nEl promedio real es 7-9%.', autor:'Adaptación de Morgan Housel' };
+  else if (c.pctDeu > 30)   fraseHero = { texto:'30% del ingreso en cuotas malas.\nMargen cero.', autor:'ExógenaDIAN' };
+  else                       fraseHero = { texto:'Tu PyG no juzga.\nSolo informa.', autor:'ExógenaDIAN' };
+  // Narrativa
+  var narrativa = 'Este mes ('+claveMes()+') entraron '+fmt(c.ing)+' y se fueron '+fmt(totalGastos)+'. ';
+  narrativa += 'Tu balance: '+(c.balance >= 0 ? '+'+fmt(c.balance)+' a favor.' : fmt(c.balance)+' en contra.');
+  narrativa += '\n\nDistribución por cubo (regla 50/30/20):\n';
+  narrativa += '• 🏠 Necesidades: '+pctReal50.toFixed(1)+'% '+(sobre50?'(sobre el tope, vivienda + servicios + mercado pesan más de lo recomendado)':'(dentro del tope, sano)')+'.\n';
+  narrativa += '• 🎈 Deseos: '+pctReal30.toFixed(1)+'% '+(sobre30?'(arriba del 30% — mira restaurantes, suscripciones, ocio)':'(dentro del tope)')+'.\n';
+  narrativa += '• 💳 Cuotas deudas: '+c.pctDeu.toFixed(1)+'% '+(c.pctDeu > 30?'(zona crítica — cuotas comen más que el ahorro)':'')+'.\n';
+  narrativa += '• 💰 Ahorro real: '+c.pctAho.toFixed(1)+'%'+(ahorroBajo?' (debajo del 10% mínimo)':' ('+(c.pctAho>=20?'objetivo cumplido':'razonable')+')')+'.';
+  if (deficit) narrativa += '\n\nEstás gastando más de lo que ganas. La aritmética no opina: si esto pasa más de 2-3 meses seguidos, terminas tomando deuda mala para sostener nivel. La conversación urgente es: ¿qué baja del cubo de deseos? ¿qué deuda mala se ataca primero?';
+  else if (ahorroBajo) narrativa += '\n\nLa diferencia entre quien construye patrimonio y quien no es la tasa de ahorro sostenida — no el ingreso. Mover ese '+c.pctAho.toFixed(1)+'% al 15-20% en 12 meses es factible recortando suscripciones, restaurantes y "pequeños lujos" automáticos.';
+  // Ahas
+  var ahas = [
+    { num: c.pctAho.toFixed(1)+'%', label: 'tasa de ahorro real este mes', tipo: c.pctAho >= 15 ? 'good' : c.pctAho >= 5 ? 'neutro' : 'bad' },
+    { num: fmt(c.balance), label: c.balance >= 0 ? 'a favor — ya es ahorro real' : 'en contra — déficit del mes', tipo: c.balance >= 0 ? 'good' : 'bad' },
+    { num: pctReal30.toFixed(0)+'%', label: 'en deseos (la palanca más fácil de mover)', tipo: sobre30 ? 'bad' : 'neutro' }
+  ];
+  // Plan
+  var plan = {
+    p30: 'Programa transferencia automática del 10% de tu ingreso a una cuenta separada de la del débito (idealmente en otro banco — la fricción protege la plata). Si tu ahorro hoy es '+c.pctAho.toFixed(0)+'%, el objetivo del próximo mes es 10% mínimo.',
+    p12m: 'Sube la tasa de ahorro 1 punto cada 2-3 meses. De '+c.pctAho.toFixed(0)+'% a '+(Math.min(c.pctAho+5,20).toFixed(0))+'% en 12 meses. Cada aumento que NO se gaste es años de jubilación adelantados (Housel).',
+    p5y: 'Tasa de ahorro sostenida de 15-20% durante 5 años + cero deudas malas = patrimonio real. La diferencia con quien gana lo mismo y no ahorra es de orden de magnitud. Histórico mensual aquí mismo es tu mejor evidencia.'
+  };
+  // Consejos
+  var consejos = [];
+  if (deficit) consejos.push({
+    titulo: 'URGENTE — sin déficit no hay plan',
+    impacto: 'Detener la sangría',
+    desc: 'Antes que nada, recorta '+fmt(Math.abs(c.balance))+' del cubo de deseos hasta volver a balance cero. Suscripciones que no usas, comer fuera, ocio. Si en 2 meses no logras balance, las cuotas de deudas deben renegociarse — no es disciplina, es matemática rota.'
+  });
+  if (sobre30) consejos.push({
+    titulo: 'Deseos sobre el 30% — la palanca más fácil',
+    impacto: 'Cada $100K aquí = +0,5% ahorro',
+    desc: 'Restaurantes, suscripciones, ocio, ropa: estos no afectan tu calidad básica de vida si bajas un 20%. Plan: anota cada gasto de deseos durante 30 días. Te sorprenderá lo identificable que es 5-10% de recorte.'
+  });
+  if (c.pctDeu > 25) consejos.push({
+    titulo: 'Cuotas de deuda comen tu ahorro',
+    impacto: 'Liberar '+fmt(Math.round(c.deu*0.3))+'/mes',
+    desc: 'Tus cuotas de deuda son '+c.pctDeu.toFixed(0)+'%. Esa plata podría ir a inversión. Plan acelerado: usa el auditor de deudas para ver tasa promedio. Las tarjetas (26-29%) consolidadas en libre inversión (16-22%) liberan plata real cada mes.'
+  });
+  if (c.pctAho < 15) consejos.push({
+    titulo: 'Pagarte primero — la mecánica que sí funciona',
+    impacto: '+5-10 puntos en 12 meses',
+    desc: 'La gente normal hace: sueldo → gasto → (lo que sobre, ahorro). Como nunca sobra, no hay ahorro. Programa transferencia automática del 10% el día que te pagan. La fricción de "ya salió de la cuenta" protege la plata. En 6 meses ya no la extrañas.'
+  });
+  consejos.push({
+    titulo: 'Llena este PyG cada mes — el histórico es tu evidencia',
+    impacto: 'Visibilidad real',
+    desc: 'Un mes solo es anécdota. 6 meses son patrón. La tabla de histórico abajo te muestra tu tasa de ahorro PROMEDIO real (no la del mes que recuerdas). Casi todos creen que ahorran 15%; el promedio real suele ser 7-9%. Verlo en una tabla es lo que cambia comportamiento.'
+  });
+  // Frase nevera
+  var fraseNevera = ahorroBajo || deficit ? {
+    texto: 'Ahorrar es la diferencia entre\ntu ego y tu ingreso.',
+    autor: 'Morgan Housel — La psicología del dinero'
+  } : c.pctAho >= 15 ? {
+    texto: 'La riqueza es lo que no se ve.',
+    autor: 'Morgan Housel — La psicología del dinero'
+  } : {
+    texto: 'Una parte de lo que ganas es para ti.\nQue no sea menos que una décima parte.',
+    autor: 'George S. Clason — El hombre más rico de Babilonia'
+  };
+  // Inputs y resultados
+  var inputs = [
+    ['Ingresos totales del mes', fmt(c.ing)],
+    ['🏠 Necesidades (esenciales)', fmt(c.esen)+' ('+c.pctEsen.toFixed(1)+'%)'],
+    ['💳 Cuotas de deuda', fmt(c.deu)+' ('+c.pctDeu.toFixed(1)+'%)'],
+    ['🎈 Deseos', fmt(c.des)+' ('+c.pctDes.toFixed(1)+'%)'],
+    ['💰 Ahorro / inversión', fmt(c.aho)+' ('+c.pctAho.toFixed(1)+'%)']
+  ];
+  var resultados = [
+    ['Total gastos', fmt(totalGastos)],
+    ['Balance del mes', fmt(c.balance)],
+    ['Vista 50/30/20 — Necesidades real', pctReal50.toFixed(1)+'% (tope sano: 50%)'],
+    ['Vista 50/30/20 — Deseos real', pctReal30.toFixed(1)+'% (tope sano: 30%)'],
+    ['Vista 50/30/20 — Ahorro+Cuotas real', pctReal20.toFixed(1)+'% (mínimo: 20%)']
+  ];
+  exportFinanzasReporte({
+    titulo: 'PyG Personal — '+claveMes(),
+    slug: 'pyg-personal',
+    subtitulo: 'Tu Estado de Resultados del mes con análisis 50/30/20',
+    hero: {
+      label: c.balance >= 0 ? 'Ahorro del mes' : 'Déficit del mes',
+      valor: fmt(c.balance),
+      subvalor: c.pctAho.toFixed(1)+'% tasa de ahorro real · ingreso '+fmt(c.ing)
+    },
+    fraseHero: fraseHero,
+    inputs: inputs,
+    resultados: resultados,
+    narrativa: narrativa,
+    ahas: ahas,
+    plan: plan,
+    consejos: consejos.slice(0, 4),
+    fraseNevera: fraseNevera,
+    fuente: 'Regla 50/30/20 (Elizabeth Warren, 2005) | UVT 2026 = $52.374 | SMLMV $1.750.905'
+  });
+}
+function exportExcel(){
+  if (!ultimoCalculo) { exoToast('Calcula primero','warning'); return; }
+  var c = ultimoCalculo;
+  exportFinanzasExcel({
+    titulo: 'PyG Personal '+claveMes(),
+    slug: 'pyg-personal-'+claveMes(),
+    subtitulo: 'Estado de Resultados mensual',
+    inputs: [
+      ['Salario neto', num('ingSalario')],
+      ['Freelance', num('ingFreelance')],
+      ['Otros', num('ingOtros')],
+      ['Bonos', num('ingBonos')]
+    ],
+    resultados: [
+      ['Ingresos totales', c.ing],
+      ['Esenciales', c.esen],
+      ['Cuotas deuda', c.deu],
+      ['Deseos', c.des],
+      ['Ahorro', c.aho],
+      ['Tasa ahorro', (c.pctAho).toFixed(1)+'%']
+    ],
+    destacado: { label: c.balance >= 0 ? 'AHORRO DEL MES' : 'DÉFICIT', valor: c.balance },
+    interpretacion: 'Balance: '+fmt(c.balance)+' — tasa ahorro '+c.pctAho.toFixed(1)+'%',
+    fuente: 'PyG personal — '+new Date().toLocaleDateString('es-CO')
+  });
+}
+window.addEventListener('DOMContentLoaded', function(){
+  if (FinanzasStore.isAvailable()) {
+    renderHistorial();
+    var key = 'pyg:'+claveMes();
+    if (FinanzasStore.get(key)) {
+      $('mesInfo').textContent = 'Tienes datos guardados para este mes. Botón "Cargar este mes" para verlos.';
+    }
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S7SM6ST4CC');
+</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ExógenaDIAN IA — Análisis tributario con inteligencia artificial</title>
+<meta name="description" content="Herramientas de inteligencia artificial para contadores colombianos. Audita tu balance, consulta el Estatuto Tributario, redacta respuestas a requerimientos DIAN y genera resúmenes ejecutivos de declaraciones.">
+<meta name="keywords" content="IA contable Colombia, inteligencia artificial contadores, estatuto tributario con IA, cruces de información DIAN con IA, auditor DIAN inteligencia artificial, asistente contable IA, exógena DIAN IA, declaración de renta IA, consulta tributaria IA Colombia, herramientas contables inteligencia artificial, DIAN IA, fiscalización DIAN IA">
+<meta name="author" content="ExógenaDIAN">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://exogenadian.com/ia.html">
+<meta property="og:title" content="ExógenaDIAN IA — Análisis tributario con inteligencia artificial">
+<meta property="og:description" content="Audita tu balance, consulta el Estatuto Tributario, redacta respuestas a requerimientos y genera resúmenes ejecutivos de declaraciones con IA. Diseñado para contadores colombianos.">
+<meta property="og:url" content="https://exogenadian.com/ia.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="ExógenaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ExógenaDIAN IA — Análisis tributario con inteligencia artificial">
+<meta name="twitter:description" content="Herramientas de IA para contadores colombianos. Auditor del balance, habla con el Estatuto Tributario, respuesta a requerimientos y resumen de declaraciones.">
+<meta name="twitter:image" content="https://exogenadian.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"ExógenaDIAN IA — Análisis tributario con inteligencia artificial",
+  "url":"https://exogenadian.com/ia.html",
+  "description":"Herramientas de inteligencia artificial para contadores colombianos. Audita tu balance de prueba, consulta el Estatuto Tributario, redacta respuestas a requerimientos DIAN y genera resúmenes ejecutivos de declaraciones.",
+  "applicationCategory":"BusinessApplication",
+  "operatingSystem":"Web",
+  "offers":[
+    {"@type":"Offer","price":"0","priceCurrency":"COP","description":"3 consultas IA por día gratis"},
+    {"@type":"Offer","price":"49900","priceCurrency":"COP","description":"Plan PRO: hasta 50 consultas IA por día"}
+  ],
+  "author":{"@type":"Organization","name":"ExógenaDIAN","url":"https://exogenadian.com"},
+  "audience":{"@type":"Audience","audienceType":"Contadores públicos, asesores tributarios Colombia"}
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-dark: #0B1210;
+  --bg-card: #111C18;
+  --bg-card-hover: #162420;
+  --bg-surface: #0E1915;
+  --accent-900: #064E3B;
+  --accent-800: #065F46;
+  --accent-700: #047857;
+  --accent-600: #059669;
+  --accent-500: #10B981;
+  --accent-400: #34D399;
+  --accent-300: #6EE7B7;
+  --accent-200: #A7F3D0;
+  --accent-100: #D1FAE5;
+  --accent-50: #ECFDF5;
+  --white: #FFFFFF;
+  --gray-50: #F9FAFB;
+  --gray-100: #F3F4F6;
+  --gray-200: #E5E7EB;
+  --gray-300: #D1D5DB;
+  --gray-400: #9CA3AF;
+  --gray-500: #6B7280;
+  --text-primary: #EFF5F2;
+  --text-secondary: #A2B8AE;
+  --text-muted: #6A8278;
+  --border-subtle: rgba(5,150,105,.15);
+  --border-card: rgba(5,150,105,.12);
+  --glow-accent: rgba(5,150,105,.25);
+}
+* { margin:0; padding:0; box-sizing:border-box }
+html{scroll-behavior:smooth;overflow-x:hidden}
+body {
+  font-family:'DM Sans','Outfit',system-ui,sans-serif;
+  background:var(--bg-dark);
+  color:var(--text-primary);
+  overflow-x:hidden;width:100%;max-width:100vw;
+  -webkit-font-smoothing:antialiased;
+}
+/* ── Header ── */
+.ia-header {
+  position:sticky; top:0; z-index:100;
+  background:rgba(11,18,16,.85);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border-subtle);
+  padding:0 24px;
+}
+.ia-header-inner {
+  max-width:1120px; margin:0 auto;
+  display:flex; align-items:center; justify-content:space-between;
+  height:64px;
+}
+.ia-logo {
+  display:flex; align-items:center; gap:10px;
+  text-decoration:none; color:var(--text-primary);
+}
+.ia-logo svg { flex-shrink:0 }
+.ia-logo-text {
+  font-family:'Outfit',sans-serif;
+  font-weight:700; font-size:.95rem;
+  letter-spacing:-.01em;
+}
+.ia-logo-text span { color:var(--accent-400); }
+.ia-header-subtitle {
+  font-size:.78rem; color:var(--text-muted);
+  display:none;
+}
+@media(min-width:640px){ .ia-header-subtitle{display:block} }
+.ia-header-back {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:.85rem; color:var(--text-primary);
+  text-decoration:none; font-weight:600;
+  padding:7px 16px;
+  background:rgba(5,150,105,.1);
+  border:1px solid rgba(5,150,105,.25);
+  border-radius:10px;
+  transition:all .2s;
+}
+.ia-header-back:hover { background:rgba(5,150,105,.2); color:var(--accent-400) }
+/* ── Hero ── */
+.ia-hero {
+  padding:40px 24px 24px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.ia-hero::before {
+  content:'';
+  position:absolute; top:-200px; left:50%; transform:translateX(-50%);
+  width:800px; height:800px;
+  background:radial-gradient(circle,rgba(5,150,105,.12) 0%,transparent 65%);
+  pointer-events:none;
+}
+.ia-hero h1 {
+  font-family:'Outfit',sans-serif;
+  font-size:clamp(1.5rem,3.5vw,2.4rem);
+  font-weight:800;
+  letter-spacing:-.03em;
+  line-height:1.15;
+  margin-bottom:12px;
+  position:relative;
+}
+.ia-hero h1 .gradient-text {
+  background:linear-gradient(135deg,var(--accent-400),var(--accent-300),#A7F3D0);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.ia-hero-sub {
+  color:var(--text-secondary);
+  font-size:clamp(0.88rem,1.5vw,1rem);
+  max-width:520px; margin:0 auto 16px;
+  line-height:1.55;
+  position:relative;
+}
+/* ── Beta badge ── */
+.ia-badge {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(5,150,105,.1);
+  border:1px solid rgba(5,150,105,.25);
+  border-radius:100px;
+  padding:5px 16px;
+  font-size:.75rem;
+  color:var(--accent-300);
+  position:relative;
+}
+.ia-badge-dot {
+  width:8px; height:8px;
+  background:var(--accent-500);
+  border-radius:50%;
+  animation:pulse-dot 2s infinite;
+}
+@keyframes pulse-dot {
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.5;transform:scale(.85)}
+}
+/* ── Tool cards ── */
+.ia-tools {
+  max-width:1080px; margin:0 auto;
+  padding:56px 24px 40px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:24px;
+}
+.ia-card {
+  background:var(--bg-card);
+  border:1px solid var(--border-card);
+  border-radius:20px;
+  padding:36px 32px 32px;
+  text-decoration:none;
+  color:var(--text-primary);
+  transition:all .3s ease;
+  position:relative;
+  overflow:hidden;
+}
+.ia-card::before {
+  content:'';
+  position:absolute; inset:0;
+  background:linear-gradient(160deg,rgba(5,150,105,.06),transparent 60%);
+  opacity:0;
+  transition:opacity .3s;
+}
+.ia-card:hover {
+  border-color:rgba(5,150,105,.3);
+  transform:translateY(-4px);
+  box-shadow:0 8px 40px rgba(5,150,105,.12);
+}
+.ia-card:hover::before { opacity:1 }
+.ia-card-icon {
+  width:52px; height:52px;
+  border-radius:14px;
+  background:rgba(5,150,105,.1);
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:20px;
+  position:relative;
+}
+.ia-card-icon svg { color:var(--accent-400); }
+.ia-card h3 {
+  font-family:'Outfit',sans-serif;
+  font-size:1.18rem; font-weight:700;
+  margin-bottom:10px;
+  letter-spacing:-.01em;
+  position:relative;
+}
+.ia-card p {
+  color:var(--text-secondary);
+  font-size:.9rem;
+  line-height:1.6;
+  margin-bottom:18px;
+  position:relative;
+}
+.ia-card-cta {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:.84rem; font-weight:600;
+  color:var(--accent-400);
+  position:relative;
+  transition:gap .2s;
+}
+.ia-card:hover .ia-card-cta { gap:10px }
+/* ── Why section ── */
+.ia-why {
+  max-width:760px; margin:0 auto;
+  padding:56px 24px 48px;
+}
+.ia-why-header {
+  text-align:center;
+  margin-bottom:36px;
+}
+.ia-why-header h2 {
+  font-family:'Outfit',sans-serif;
+  font-size:clamp(1.3rem,3vw,1.7rem);
+  font-weight:700;
+  letter-spacing:-.02em;
+  margin-bottom:8px;
+}
+.ia-why-header p {
+  color:var(--text-muted);
+  font-size:.9rem;
+}
+.ia-why-list {
+  display:grid; gap:16px;
+}
+.ia-why-item {
+  display:flex; gap:16px;
+  align-items:flex-start;
+  background:var(--bg-card);
+  border:1px solid var(--border-card);
+  border-radius:14px;
+  padding:20px 24px;
+}
+.ia-why-item-icon {
+  flex-shrink:0;
+  width:36px; height:36px;
+  border-radius:10px;
+  background:rgba(5,150,105,.1);
+  display:flex; align-items:center; justify-content:center;
+}
+.ia-why-item-icon svg { color:var(--accent-400); width:18px; height:18px }
+.ia-why-item div { flex:1 }
+.ia-why-item h4 {
+  font-family:'Outfit',sans-serif;
+  font-size:.95rem; font-weight:600;
+  margin-bottom:4px;
+}
+.ia-why-item p {
+  color:var(--text-secondary);
+  font-size:.84rem;
+  line-height:1.55;
+}
+/* ── Warning: validar contra norma ── */
+.ia-warning {
+  max-width:760px; margin:8px auto 0;
+  padding:0 24px;
+}
+.ia-warning-box {
+  background:rgba(245,158,11,.08);
+  border:1px solid rgba(245,158,11,.35);
+  border-left:4px solid #F59E0B;
+  border-radius:14px;
+  padding:18px 22px;
+  display:flex; gap:14px; align-items:flex-start;
+}
+.ia-warning-icon {
+  flex-shrink:0;
+  width:24px; height:24px;
+  display:grid; place-items:center;
+  color:#FBBF24;
+  margin-top:1px;
+}
+.ia-warning-text {
+  font-size:.88rem;
+  line-height:1.6;
+  color:var(--text-secondary);
+}
+.ia-warning-text strong {
+  color:#FBBF24;
+  font-weight:700;
+  display:block;
+  margin-bottom:4px;
+  font-size:.92rem;
+}
+.ia-warning-text em {
+  font-style:normal;
+  color:var(--text-primary);
+  font-weight:600;
+}
+@media(max-width:680px){
+  .ia-warning { padding:0 16px }
+  .ia-warning-box { padding:14px 16px; gap:10px }
+  .ia-warning-text { font-size:.84rem }
+}
+/* ── Rate limit note ── */
+.ia-limit {
+  text-align:center;
+  padding:32px 24px;
+  margin:0 auto;
+  max-width:600px;
+}
+.ia-limit-box {
+  background:rgba(5,150,105,.06);
+  border:1px solid var(--border-subtle);
+  border-radius:14px;
+  padding:20px 28px;
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  flex-wrap:wrap;
+}
+.ia-limit-box p {
+  font-size:.88rem;
+  color:var(--text-secondary);
+}
+.ia-limit-box strong {
+  color:var(--text-primary);
+}
+.ia-limit-box a {
+  color:var(--accent-400);
+  font-weight:600;
+  text-decoration:none;
+}
+.ia-limit-box a:hover { text-decoration:underline }
+/* ── Footer ── */
+.ia-footer {
+  text-align:center;
+  padding:40px 24px 48px;
+  border-top:1px solid var(--border-subtle);
+  margin-top:24px;
+}
+.ia-footer p {
+  color:var(--text-muted);
+  font-size:.84rem;
+  line-height:1.6;
+}
+.ia-footer a {
+  color:var(--accent-400);
+  text-decoration:none;
+  font-weight:500;
+}
+.ia-footer a:hover { text-decoration:underline }
+/* ── Responsive ── */
+@media(max-width:680px){
+  .ia-tools { grid-template-columns:1fr; gap:16px }
+  .ia-card { padding:28px 24px 24px }
+  .ia-hero { padding:24px 16px 16px }
+  .ia-why { padding:40px 20px 36px }
+  .ia-why-item { padding:16px 18px }
+}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<header class="ia-header">
+  <div class="ia-header-inner">
+    <a href="https://exogenadian.com" class="ia-logo" title="Ir a ExógenaDIAN">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <defs><linearGradient id="logoGrad" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse"><stop stop-color="#059669"/><stop offset="1" stop-color="#34D399"/></linearGradient></defs>
+        <rect width="28" height="28" rx="8" fill="url(#logoGrad)"/>
+        <path d="M8 10h12M8 14h8M8 18h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <div class="ia-logo-text">ExógenaDIAN <span>IA</span></div>
+        <div class="ia-header-subtitle">Análisis tributario con inteligencia artificial</div>
+      </div>
+    </a>
+    <a href="index.html" class="ia-header-back"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg> Portal Contable</a>
+  </div>
+</header>
+<section class="ia-hero">
+  <h1>
+    <span class="gradient-text">Inteligencia Artificial</span><br>
+    para tu Contabilidad
+  </h1>
+  <p class="ia-hero-sub">
+    Audita balances, consulta normativa tributaria, responde requerimientos DIAN y genera resúmenes ejecutivos de tus declaraciones. Todo con IA entrenada en el contexto colombiano.
+  </p>
+  <div class="ia-badge">
+    <span class="ia-badge-dot"></span>
+    Inteligencia artificial entrenada en normativa colombiana
+  </div>
+</section>
+<section class="ia-warning">
+  <div class="ia-warning-box">
+    <div class="ia-warning-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+        <line x1="12" y1="9" x2="12" y2="13"/>
+        <line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+    </div>
+    <div class="ia-warning-text">
+      <strong>Verifica siempre contra la norma</strong>
+      La IA puede equivocarse: cita art&iacute;culos del ET con contenido err&oacute;neo, desconoce resoluciones recientes (cutoff: enero 2026) y a veces aplica normas derogadas. Usa esta respuesta como <em>borrador</em>, no como decisi&oacute;n final. Antes de firmar o presentar, abre el Estatuto Tributario o el concepto DIAN citado y conf&iacute;rmalo. <em>Tu firma respalda el resultado.</em>
+    </div>
+  </div>
+</section>
+<section class="ia-tools">
+  <a href="ia-chat-et.html" class="ia-card">
+    <div class="ia-card-icon">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="rgba(5,150,105,.15)"/>
+        <path d="M9 12l2 2 4-4"/>
+      </svg>
+    </div>
+    <h3>Auditor + Chat Tributario</h3>
+    <p>Pega tu balance y la IA lo audita con mirada DIAN, o hazle cualquier consulta sobre el Estatuto Tributario, decretos reglamentarios y normativa vigente. Todo en una sola conversación, con fuente normativa.</p>
+    <span class="ia-card-cta">
+      Consultar ahora
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </span>
+  </a>
+  <a href="ia-asistente.html" class="ia-card">
+    <div class="ia-card-icon">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="3" width="20" height="14" rx="2" fill="rgba(5,150,105,.15)"/>
+        <path d="M8 21h8M12 17v4"/>
+        <path d="M9 10a3 3 0 1 0 6 0M8 7h.01M16 7h.01"/>
+      </svg>
+    </div>
+    <h3>Exa IA — Asistente Contable</h3>
+    <p>Tu contador virtual con IA. Contabilidad NIIF, nómina, laboral, seguridad social, facturación electrónica y más. Respuestas con fuente normativa.</p>
+    <span class="ia-card-cta">
+      Consultar ahora
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </span>
+  </a>
+  <a href="ia-respuesta-requerimiento.html" class="ia-card">
+    <div class="ia-card-icon">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" fill="rgba(5,150,105,.15)"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <path d="M9 15l2 2 4-4"/>
+      </svg>
+    </div>
+    <h3>Responder Requerimiento DIAN</h3>
+    <p>Pega el texto del requerimiento, emplazamiento o pliego de cargos. La IA genera un borrador de respuesta con fundamento normativo del ET.</p>
+    <span class="ia-card-cta">
+      Generar respuesta
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </span>
+  </a>
+</section>
+<section class="ia-why">
+  <div class="ia-why-header">
+    <h2>¿Por qué ExógenaDIAN IA y no ChatGPT?</h2>
+    <p>No es un chatbot genérico. Es IA diseñada para contadores colombianos.</p>
+  </div>
+  <div class="ia-why-list">
+    <div class="ia-why-item">
+      <div class="ia-why-item-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <div>
+        <h4>Entrenado en normativa colombiana vigente</h4>
+        <p>Estatuto Tributario, Ley 2277 de 2022, Res. 000227/2025 mod. Res. 000233 y 000237/2025, y normativa actualizada a 2026.</p>
+      </div>
+    </div>
+    <div class="ia-why-item">
+      <div class="ia-why-item-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </div>
+      <div>
+        <h4>Respuestas con artículos y fuente normativa</h4>
+        <p>Cada respuesta cita los artículos del Estatuto Tributario. Puedes verificar la fuente, no es una "opinión" de IA.</p>
+      </div>
+    </div>
+    <div class="ia-why-item">
+      <div class="ia-why-item-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+      </div>
+      <div>
+        <h4>Diseñado para contadores, no respuestas genéricas</h4>
+        <p>Habla tu idioma: PUC, formatos DIAN, conceptos tributarios colombianos. Sin explicaciones irrelevantes.</p>
+      </div>
+    </div>
+    <div class="ia-why-item">
+      <div class="ia-why-item-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <div>
+        <h4>Integrado con las herramientas de ExógenaDIAN</h4>
+        <p>Funciona con los mismos datos que ya usas en Exógena, Renta, IVA y Estados Financieros.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="ia-limit">
+  <div class="ia-limit-box">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+    <p><strong>Usuarios gratuitos:</strong> 3 consultas IA por día. <strong>Plan PRO:</strong> hasta 30 análisis + 50 mensajes de chat diarios. <a href="precios.html">Ver Plan PRO &rarr;</a></p>
+  </div>
+</section>
+<footer class="ia-footer">
+  <p>
+    Parte de <a href="https://exogenadian.com">ExógenaDIAN</a> — La plataforma #1 de herramientas tributarias gratuitas en Colombia.<br>
+    <a href="precios.html">Conoce el Plan PRO</a>
+  </p>
+</footer>
+<script defer src="shared/pro.js?v=848fbf16"></script>
+<script src="shared/analytics.js?v=b756a0cb"></script>
+</body>
+</html>

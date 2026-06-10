@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="../shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S7SM6ST4CC');
+</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#7C3AED">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutorial: c&oacute;mo armar el F310 (INC) en exogenadian.com | Ex&oacute;genaDIAN</title>
+<meta name="description" content="Tutorial paso a paso: c&oacute;mo generar el borrador del Formulario 310 (Impuesto Nacional al Consumo) desde balance o desde el listado de facturaci&oacute;n electr&oacute;nica del MUISCA. Tarifa 8% restaurantes, 4% telefon&iacute;a, casos especiales bolsas pl&aacute;sticas y veh&iacute;culos.">
+<meta name="keywords" content="tutorial F310 INC, impuesto al consumo paso a paso, restaurantes 8% INC, telefon&iacute;a 4% INC, formulario 310 DIAN, c&oacute;mo declarar INC, Art 512-1 ET">
+<link rel="canonical" href="https://exogenadian.com/tutoriales/f310.html">
+<meta property="og:title" content="Tutorial F310 INC | Ex&oacute;genaDIAN">
+<meta property="og:description" content="C&oacute;mo armar el Formulario 310 del Impuesto al Consumo desde balance o listado MUISCA paso a paso.">
+<meta property="og:url" content="https://exogenadian.com/tutoriales/f310.html">
+<meta property="og:type" content="article"><meta property="og:locale" content="es_CO"><meta property="og:site_name" content="Ex&oacute;genaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png">
+<meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tutorial-mockups.css?v=dccdc93b">
+<style>
+:root{--pri-900:#3B0764;--pri-800:#4C1D95;--pri-700:#5B21B6;--pri-600:#6D28D9;--pri-500:#7C3AED;--pri-400:#A78BFA;--pri-300:#C4B5FD;--pri-200:#DDD6FE;--pri-100:#EDE9FE;--pri-50:#F5F3FF;--white:#FFF;--gray-50:#F9FAFB;--gray-100:#F3F4F6;--gray-200:#E5E7EB;--gray-300:#D1D5DB;--gray-400:#9CA3AF;--gray-500:#6B7280;--gray-600:#4B5563;--gray-700:#374151;--gray-800:#1F2937;--gray-900:#111827;--amber-50:#FFFBEB;--amber-100:#FEF3C7;--amber-500:#F59E0B;--amber-700:#92400E;--amber-800:#78350F;--blue-50:#EFF6FF;--blue-100:#DBEAFE;--blue-500:#3B82F6;--blue-700:#1D4ED8;--green-50:#ECFDF5;--green-100:#D1FAE5;--green-500:#10B981;--green-600:#059669;--green-700:#047857;--green-800:#065F46;--green-300:#6EE7B7;--rose-50:#FFF1F2;--rose-500:#F43F5E;--rose-700:#BE123C}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-900);line-height:1.6}
+.tut-layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh}@media(max-width:900px){.tut-layout{grid-template-columns:1fr}}
+.sidebar{background:#fff;border-right:1px solid var(--gray-200);padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
+.sidebar-header{padding:16px 20px;border-bottom:1px solid var(--gray-100)}
+.sidebar-header a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--gray-800);font-weight:800;font-size:.9rem}
+.sidebar-header a div{width:28px;height:28px;background:linear-gradient(135deg,var(--pri-700),var(--pri-400));border-radius:7px;display:grid;place-items:center;color:#fff;font-size:.7rem;font-weight:900}
+.sidebar-curso{padding:16px 20px;border-bottom:1px solid var(--gray-100)}
+.sidebar-curso h3{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--pri-700);margin-bottom:4px}
+.sidebar-curso p{font-size:.88rem;font-weight:700;color:var(--gray-800)}
+.sidebar-nav{padding:12px 0;flex:1}
+.sidebar-nav a{display:flex;align-items:center;gap:10px;padding:10px 20px;text-decoration:none;color:var(--gray-500);font-size:.85rem;font-weight:500;transition:all .15s;border-left:3px solid transparent}
+.sidebar-nav a:hover{background:var(--pri-50);color:var(--pri-700)}
+.sidebar-nav a.active{background:var(--pri-50);color:var(--pri-700);font-weight:700;border-left-color:var(--pri-600)}
+.sidebar-nav a .num{width:24px;height:24px;border-radius:50%;background:var(--gray-100);color:var(--gray-500);display:grid;place-items:center;font-size:.72rem;font-weight:700;flex-shrink:0}
+.sidebar-nav a.active .num{background:var(--pri-600);color:#fff}
+.sidebar-back{padding:16px 20px;border-top:1px solid var(--gray-100);margin-top:auto}
+.sidebar-back a{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--gray-400);font-size:.82rem;font-weight:500}
+.sidebar-back a:hover{color:var(--gray-700)}
+.main{padding:32px 40px 60px;max-width:880px}@media(max-width:900px){.main{padding:20px 16px 80px}.sidebar{display:none}}
+.breadcrumb{font-size:.78rem;color:var(--gray-400);margin-bottom:8px}
+.breadcrumb a{color:var(--gray-400);text-decoration:none}.breadcrumb a:hover{color:var(--pri-600)}
+.tag{display:inline-flex;align-items:center;gap:6px;background:var(--pri-100);color:var(--pri-700);padding:4px 14px;border-radius:100px;font-size:.74rem;font-weight:700;margin-bottom:14px}
+h1.tut-title{font-family:'Fraunces',serif;font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;letter-spacing:-.02em;margin-bottom:10px;line-height:1.2}
+p.tut-lead{font-size:1.05rem;color:var(--gray-600);max-width:680px;line-height:1.6;margin-bottom:30px}
+.step{margin-bottom:40px;padding-top:20px;border-top:2px solid var(--gray-200)}
+.step:first-of-type{border-top:none;padding-top:0}
+.step-num{display:inline-flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:.9rem;color:var(--pri-700);font-weight:700;margin-bottom:8px}
+.step-num span{display:grid;place-items:center;width:32px;height:32px;background:var(--pri-600);color:#fff;border-radius:50%;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:800}
+.step h2{font-family:'Fraunces',serif;font-size:1.45rem;font-weight:700;margin-bottom:8px;color:var(--gray-900);line-height:1.25}
+.step p{font-size:.95rem;color:var(--gray-700);line-height:1.7;margin-bottom:14px}
+.step ul,.step ol{margin:8px 0 16px 22px;display:flex;flex-direction:column;gap:7px}
+.step li{font-size:.94rem;color:var(--gray-700);line-height:1.6}
+.step h3{font-size:1.05rem;font-weight:700;margin:18px 0 8px;color:var(--gray-800)}
+.step code{font-family:'JetBrains Mono',monospace;font-size:.86rem;background:var(--gray-100);padding:2px 7px;border-radius:5px;color:var(--gray-800)}
+.tip{background:var(--blue-50);border-left:4px solid var(--blue-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:#1E40AF;line-height:1.6}
+.tip strong{color:var(--blue-700)}
+.warn{background:var(--amber-50);border-left:4px solid var(--amber-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:var(--amber-800);line-height:1.6}
+.warn strong{color:var(--amber-700)}
+.err{background:var(--rose-50);border-left:4px solid var(--rose-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:#9F1239;line-height:1.6}
+.err strong{color:var(--rose-700)}
+.tabla{width:100%;border-collapse:collapse;margin:14px 0;border-radius:10px;overflow:hidden;border:1px solid var(--gray-200);font-size:.86rem}
+.tabla th{background:var(--gray-100);padding:9px 13px;text-align:left;font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gray-600)}
+.tabla td{padding:9px 13px;border-top:1px solid var(--gray-100);color:var(--gray-700)}
+.tabla tr:hover{background:var(--pri-50)}
+.tabla code{font-family:'JetBrains Mono',monospace;font-size:.78rem;background:var(--white);padding:1px 5px;border-radius:3px}
+.actions-list{background:#fff;border:1px solid var(--gray-200);border-radius:12px;padding:14px 18px;margin:14px 0}
+.actions-list h4{font-size:.78rem;font-weight:700;color:var(--gray-700);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.actions-list .item{display:flex;gap:10px;padding:6px 0;font-size:.86rem;color:var(--gray-700);border-bottom:1px solid var(--gray-100)}
+.actions-list .item:last-child{border-bottom:none}
+.actions-list .item code{flex-shrink:0;font-size:.78rem;background:var(--pri-50);color:var(--pri-700);padding:2px 8px;border-radius:5px;font-family:'JetBrains Mono',monospace;font-weight:600}
+.cta-end{background:linear-gradient(135deg,var(--pri-50),var(--pri-100));border:2px solid var(--pri-300);border-radius:16px;padding:28px 26px;margin:30px 0 20px;text-align:center}
+.cta-end h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;color:var(--pri-800);margin-bottom:6px}
+.cta-end p{font-size:.92rem;color:var(--pri-700);margin-bottom:16px}
+.cta-end a{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:var(--pri-600);color:#fff;border-radius:12px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 14px rgba(124,58,237,.25);transition:all .2s}
+.cta-end a:hover{background:var(--pri-700);transform:translateY(-2px)}
+.step-nav{display:flex;justify-content:space-between;margin-top:30px;padding-top:20px;border-top:2px solid var(--gray-200);gap:10px;flex-wrap:wrap}
+.step-nav a{display:inline-flex;align-items:center;gap:7px;padding:11px 22px;border-radius:10px;text-decoration:none;font-weight:700;font-size:.88rem;background:var(--gray-100);color:var(--gray-700);transition:all .2s}
+.step-nav a:hover{background:var(--gray-200)}
+.step-nav a.next{background:var(--pri-600);color:#fff;box-shadow:0 4px 12px rgba(124,58,237,.25)}
+.step-nav a.next:hover{background:var(--pri-700)}
+.tarifa-pills{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.tarifa-pill{background:#fff;border:2px solid var(--gray-200);border-radius:12px;padding:12px 16px;text-align:center;min-width:130px;flex:1}
+.tarifa-pill.t8{border-color:#FECACA;background:linear-gradient(180deg,#FEF2F2,#fff)}
+.tarifa-pill.t4{border-color:#BFDBFE;background:linear-gradient(180deg,#EFF6FF,#fff)}
+.tarifa-pill.t16{border-color:#FDE68A;background:linear-gradient(180deg,#FFFBEB,#fff)}
+.tarifa-pill .num{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:700;line-height:1}
+.tarifa-pill.t8 .num{color:#991B1B}.tarifa-pill.t4 .num{color:#1E40AF}.tarifa-pill.t16 .num{color:#92400E}
+.tarifa-pill .lbl{font-size:.74rem;font-weight:700;margin-top:4px;color:var(--gray-700);text-transform:uppercase;letter-spacing:.04em}
+.tarifa-pill .desc{font-size:.74rem;color:var(--gray-500);margin-top:3px;line-height:1.35}
+</style>
+<script async src="../shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div class="tut-layout">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html"><div>E</div>ExógenaDIAN</a>
+    </div>
+    <div class="sidebar-curso">
+      <h3>Tutorial</h3>
+      <p>INC — F310</p>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#intro" class="active"><span class="num">0</span> Antes de empezar</a>
+      <a href="#paso1"><span class="num">1</span> Elegir el origen</a>
+      <a href="#paso2"><span class="num">2</span> Datos del declarante</a>
+      <a href="#paso3"><span class="num">3</span> Modo balance</a>
+      <a href="#paso4"><span class="num">4</span> Modo listado MUISCA</a>
+      <a href="#paso5"><span class="num">5</span> Revisar el borrador</a>
+      <a href="#paso6"><span class="num">6</span> Casos especiales</a>
+      <a href="#paso7"><span class="num">7</span> Descargar Excel</a>
+      <a href="#errores"><span class="num">!</span> Errores comunes</a>
+      <a href="#siguiente"><span class="num">→</span> Siguientes pasos</a>
+    </nav>
+    <div class="sidebar-back"><a href="../tutoriales.html">← Todos los tutoriales</a></div>
+  </aside>
+  <div class="main">
+    <div class="breadcrumb"><a href="../index.html">Inicio</a> › <a href="../tutoriales.html">Tutoriales</a> › F310</div>
+    <span class="tag">Tutorial · ~8 min</span>
+    <h1 class="tut-title">Cómo armar el F310 (Impuesto al Consumo) en exogenadian.com</h1>
+    <p class="tut-lead">Guía paso a paso para usar la herramienta del F310 (<a href="../impuesto-consumo.html">impuesto-consumo.html</a>): elegir si generas el borrador desde el balance del bimestre o desde el listado de facturación electrónica del MUISCA, revisar las casillas oficiales 26-32 (bases) / 33-39 (impuesto) / 40-49 (bolsas plásticas) / 50-52 (liquidación) según tu actividad (restaurantes 8 %, telefonía 4 %, vehículos lujo 16 %, bolsas plásticas) y descargar el Excel listo para presentar.</p>
+    <section id="intro" class="step">
+      <h2>Antes de empezar — qué es el INC y a quién aplica</h2>
+      <p>El <strong>Impuesto Nacional al Consumo (INC)</strong> es un tributo <strong>monofásico</strong> que se cobra una sola vez al consumidor final. A diferencia del IVA, <strong>no es descontable</strong> en la cadena: quien lo paga lo lleva al costo o al gasto. Está regulado por los <strong>artículos 512-1 a 512-22 del Estatuto Tributario</strong> y se declara <strong>bimestralmente</strong> en el Formulario 310.</p>
+      <div class="tarifa-pills">
+        <div class="tarifa-pill t8">
+          <div class="num">8 %</div>
+          <div class="lbl">Restaurantes / bares</div>
+          <div class="desc">Cafeterías, panaderías, heladerías, pastelerías, fruterías, discotecas, catering (Art. 512-1, 512-9 ET).</div>
+        </div>
+        <div class="tarifa-pill t4">
+          <div class="num">4 %</div>
+          <div class="lbl">Telefonía / datos</div>
+          <div class="desc">Servicios de telefonía móvil, datos, internet móvil y navegación (Art. 512-2 ET).</div>
+        </div>
+        <div class="tarifa-pill t16">
+          <div class="num">8 / 16 %</div>
+          <div class="lbl">Vehículos / aerodinos</div>
+          <div class="desc">Automóviles, motocicletas &gt; 200 cc, yates, helicópteros, dirigibles (Arts. 512-3 a 512-5 ET).</div>
+        </div>
+      </div>
+      <p>Lo que necesitas tener a mano:</p>
+      <ul>
+        <li><strong>Balance de prueba del bimestre</strong> (Excel) con la cuenta de ingresos por servicios gravados con INC (normalmente <code>4135</code> para restaurantes o <code>4150</code> para telefonía), la cuenta <code>2495</code> (Impuesto al consumo por pagar) y opcionalmente <code>1355</code> si te practicaron retención INC. <strong>O</strong></li>
+        <li><strong>Listado de FE descargado del MUISCA</strong> (Consulta de documentos electrónicos → exportar). La herramienta detecta automáticamente las facturas con tarifa 8 % y 4 % por la relación IVA/base. <em>Modo PRO</em>.</li>
+        <li><strong>NIT y razón social</strong> del responsable de INC.</li>
+        <li><strong>Año y bimestre</strong> a declarar.</li>
+        <li><strong>Anticipos o retenciones INC del bimestre</strong> si te practicaron (poco común, pero existe en algunos casos puntuales).</li>
+      </ul>
+      <div class="tip">
+        <strong>¿Estás en Régimen Simple (RST) con restaurante?</strong> No declaras F310 separado: el INC del 8 % se paga dentro del <a href="../formato2593.html">F2593</a> bajo el componente INC del RST. La herramienta F310 te sirve igual para conocer la base gravable.
+      </div>
+      <div class="warn">
+        <strong>Régimen NO responsable de INC.</strong> Aplica si en el año anterior tuviste ingresos brutos por la actividad gravada &lt; <strong>3.500 UVT</strong> (≈ $183 M en 2026), tienes <strong>un solo establecimiento</strong> y <strong>no es franquicia</strong>. Si cumples los tres, no tienes que presentar F310 pero tampoco puedes cobrar el INC al cliente.
+      </div>
+    </section>
+    <section id="paso1" class="step">
+      <div class="step-num"><span>1</span> Paso 1</div>
+      <h2>Elegir el origen: balance, listado o ambos</h2>
+      <p>Entra a <a href="../impuesto-consumo.html">exogenadian.com/impuesto-consumo.html</a>. Lo primero es decidir desde dónde generamos el borrador. Hay tres modos:</p>
+      <table class="tabla">
+        <thead><tr><th>Modo</th><th>Cuándo elegirlo</th><th>Requiere</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Desde balance</strong></td><td>Tu sistema contable refleja correctamente la cuenta 2495 (INC por pagar) o las cuentas 4135/4150 de ingresos gravados. Es el caso más común para empresas que llevan contabilidad organizada.</td><td><span style="background:var(--green-100);color:var(--green-700);padding:2px 8px;border-radius:5px;font-size:.74rem;font-weight:700">Gratis</span></td></tr>
+          <tr><td><strong>Desde listado MUISCA</strong></td><td>No tienes balance al día, o quieres comparar con lo que realmente facturaste electrónicamente. La herramienta detecta facturas con ratio IVA/base ≈ 8 % o ≈ 4 %.</td><td><span style="background:var(--amber-100);color:var(--amber-700);padding:2px 8px;border-radius:5px;font-size:.74rem;font-weight:700">PRO</span></td></tr>
+          <tr><td><strong>Balance + listado</strong></td><td>Cuadre 360°: cargas balance y FE, comparamos las bases. Detecta operaciones que se facturaron pero no se contabilizaron (o al revés).</td><td><span style="background:var(--amber-100);color:var(--amber-700);padding:2px 8px;border-radius:5px;font-size:.74rem;font-weight:700">PRO</span></td></tr>
+        </tbody>
+      </table>
+      <div class="tip">
+        <strong>Recomendación:</strong> si llevas contabilidad en Siigo, World Office, Helisa, Alegra o MidaSoft, empieza por modo balance. Es directo y suficiente para el 90 % de los casos. Pasa a Listado MUISCA si quieres validar el cierre contra lo facturado realmente.
+      </div>
+    </section>
+    <section id="paso2" class="step">
+      <div class="step-num"><span>2</span> Paso 2</div>
+      <h2>Datos del declarante y selección de bimestre</h2>
+      <p>Llena los campos básicos en la tarjeta <em>Datos del período</em>:</p>
+      <div class="actions-list">
+        <h4>Campos obligatorios</h4>
+        <div class="item"><code>Año</code> Año gravable. Por defecto 2026.</div>
+        <div class="item"><code>Régimen</code> Común bimestral (F310) o Simple (no usa F310 — se paga vía F2593).</div>
+        <div class="item"><code>Bimestre</code> Períodos 1 a 6. Bimestre 1 = ene–feb, 2 = mar–abr, … , 6 = nov–dic.</div>
+        <div class="item"><code>Actividad principal</code> Restaurante, telefonía, vehículos, bolsas plásticas o mixto. Esto influye en cómo clasificamos cuentas ambiguas (clase 4 sin nombre claro).</div>
+        <div class="item"><code>NIT</code> Si subes un balance Siigo/WO, lo extraemos automáticamente de la cabecera.</div>
+        <div class="item"><code>Razón social</code> Igual: si está en el balance, la auto-completamos.</div>
+      </div>
+      <div class="warn">
+        <strong>¿Cómo se determinan los bimestres del INC?</strong> Son los mismos que los del IVA bimestral pero con menos flexibilidad: para INC <em>no existe</em> periodicidad cuatrimestral. Siempre 6 períodos al año, independientemente del nivel de ingresos.
+      </div>
+    </section>
+    <section id="paso3" class="step">
+      <div class="step-num"><span>3</span> Paso 3</div>
+      <h2>Modo balance: cargar el archivo del bimestre</h2>
+      <p>Arrastra el balance de prueba del bimestre. La herramienta admite Excel (.xlsx, .xls) o CSV exportado de Siigo, World Office, Helisa, Alegra, MidaSoft, Simit, Odoo y formato genérico. Detectamos automáticamente:</p>
+      <ul>
+        <li><strong>Fila de encabezados</strong> (puede haber metadata arriba con nombre de empresa, NIT, período).</li>
+        <li><strong>Columnas obligatorias</strong>: código de cuenta, nombre, débitos, créditos (o saldo final si no hay movimientos).</li>
+        <li><strong>Balance por terceros</strong>: si la columna tercero está poblada, sumamos por código y evitamos doble conteo con las filas resumen.</li>
+        <li><strong>World Office árbol</strong>: el formato &laquo;Total NNNN&raquo; con detalles por tercero también se aplana sin que tengas que tocarlo.</li>
+      </ul>
+      <h3>Cuentas que buscamos en tu balance → casillas oficiales F310</h3>
+      <table class="tabla">
+        <thead><tr><th>Cuenta PUC</th><th>Concepto F310</th><th>Cas. Base</th><th>Cas. Impto</th></tr></thead>
+        <tbody>
+          <tr><td>Clase 4 con keyword <em>telefonía / datos / internet móvil / plan</em></td><td>Servicios gravados 4 %</td><td>26</td><td>33</td></tr>
+          <tr><td><code>4135xx</code>, <code>4150xx</code> con keyword <em>restaurante / bar / comida / bebida / cafetería</em></td><td>Servicios gravados 8 %</td><td>27</td><td>34</td></tr>
+          <tr><td>Clase 4 — venta de bienes gravados al 8 %</td><td>Venta bienes 8 %</td><td>28</td><td>35</td></tr>
+          <tr><td>Clase 4 — importación de bienes gravados al 8 %</td><td>Importación bienes 8 %</td><td>29</td><td>36</td></tr>
+          <tr><td>Clase 4 con keyword <em>vehículo / motocicleta / yate / aerodino</em></td><td>Venta bienes 16 % (lujo)</td><td>30</td><td>37</td></tr>
+          <tr><td>Clase 4 — importación de bienes gravados al 16 %</td><td>Importación bienes 16 %</td><td>31</td><td>38</td></tr>
+          <tr><td>Clase 4 — venta de productos transformados de Cannabis</td><td>Cannabis 16 %</td><td>32</td><td>39</td></tr>
+          <tr><td>Clase 4 con keyword <em>bolsa plástica</em></td><td>Bolsas plásticas (cantidad)</td><td>40-44</td><td>45-49</td></tr>
+          <tr><td><code>2495</code></td><td>Saldo a pagar por impuesto</td><td colspan="2">50</td></tr>
+          <tr><td><code>2368</code> (no estándar)</td><td>Retención INC practicada a terceros</td><td colspan="2">No va al F310 — va al F350</td></tr>
+        </tbody>
+      </table>
+      <div class="tip">
+        <strong>¿Tu PUC no usa las cuentas estándar?</strong> Después del paso de mapeo puedes cambiar manualmente la clasificación de cada cuenta. La herramienta marca por columna y deja un select <em>Concepto F310</em> editable por fila.
+      </div>
+    </section>
+    <section id="paso4" class="step">
+      <div class="step-num"><span>4</span> Paso 4</div>
+      <h2>Modo listado MUISCA (PRO): detección automática por tarifa</h2>
+      <p>Si activaste PRO y elegiste <strong>Desde listado FE MUISCA</strong>, sube el archivo .xlsx que se exporta desde:</p>
+      <p style="text-align:center;font-family:'JetBrains Mono',monospace;background:var(--gray-100);padding:10px 14px;border-radius:8px;font-size:.85rem;color:var(--gray-700);margin:14px 0">Portal DIAN → MUISCA → Facturación → Consulta de documentos electrónicos → Exportar</p>
+      <p>La herramienta lee cada documento. El listado MUISCA 2025+ trae el INC en su propia columna (separada del IVA), así que la clasificación se hace directamente con el ratio <code>INC / total</code> y mapea a las casillas oficiales:</p>
+      <table class="tabla">
+        <thead><tr><th>Detección</th><th>Concepto</th><th>Cas. Base</th><th>Cas. Impuesto</th></tr></thead>
+        <tbody>
+          <tr><td>IVA 19 % (col IVA del listado)</td><td>Va al F300, no al F310</td><td colspan="2">—</td></tr>
+          <tr><td>IVA 5 % (col IVA)</td><td>Va al F300, no al F310</td><td colspan="2">—</td></tr>
+          <tr><td>Col INC, ratio &lt; 6 %</td><td><strong>Servicios 4 %</strong> (telefonía)</td><td>26</td><td>33</td></tr>
+          <tr><td>Col INC, ratio 6-13 %</td><td><strong>Servicios 8 %</strong> (restaurantes/bares)</td><td>27</td><td>34</td></tr>
+          <tr><td>Col INC, ratio ≥ 13 %</td><td><strong>Venta bienes 16 %</strong> (vehículos lujo)</td><td>30</td><td>37</td></tr>
+          <tr><td>Col INC Bolsas</td><td>Bolsas plásticas (No Biodeg.)</td><td>40</td><td>45</td></tr>
+          <tr><td>Sin IVA ni INC</td><td>Ignorada</td><td colspan="2">—</td></tr>
+        </tbody>
+      </table>
+      <h3>Qué hace la herramienta con tu listado</h3>
+      <ol>
+        <li><strong>Filtra por bimestre</strong>: solo entran las facturas con fecha de emisión dentro del bimestre seleccionado.</li>
+        <li><strong>Resta notas crédito</strong>: detectamos NCs por código DIAN (91), por texto (&laquo;nota crédito&raquo;, &laquo;NC&raquo;) o por IVA negativo. Las restamos de la base e IVA del bimestre.</li>
+        <li><strong>Excluye nómina y acuses</strong>: la nómina electrónica y los <em>application response</em> (acuses XML UBL) no son operaciones gravadas con INC.</li>
+        <li><strong>Separa emitidos de recibidos</strong>: solo los emitidos alimentan el F310. Los recibidos se muestran como informativos (compras con INC que tu negocio pagó — no son descontables, van al costo).</li>
+      </ol>
+      <div class="tip">
+        <strong>El listado MUISCA muestra <em>todas</em> las facturas</strong>, incluidas las del IVA 19 % / 5 %. La herramienta solo trae al F310 las que tienen ratio 8 % o 4 %. Las del IVA 19 % las usa la herramienta de <a href="../iva300.html">F300 IVA</a>.
+      </div>
+      <div class="warn">
+        <strong>Tarifa atípica</strong>. Si el ratio IVA/base no encaja en ninguno de los rangos (porque hay propinas mezcladas, redondeos, o ítems facturados con tarifa especial), la herramienta marca la factura como <em>tarifa atípica</em> y la deja por fuera del cálculo. Revísalas en el resumen y, si aplica, ajusta manualmente.
+      </div>
+    </section>
+    <section id="paso5" class="step">
+      <div class="step-num"><span>5</span> Paso 5</div>
+      <h2>Revisar el borrador F310</h2>
+      <p>En el paso 3 ves el borrador completo. La estructura del F310 es más compacta que la del F300:</p>
+      <table class="tabla">
+        <thead><tr><th>Sección</th><th>Casillas</th><th>Qué revisar</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Datos del declarante</strong></td><td>1, 3, 5, 6, 7-10, 11, 12</td><td>Año, período, NIT y DV, apellidos/nombres o razón social, código de la Dirección Seccional. Verifica que coincidan con el RUT.</td></tr>
+          <tr><td><strong>Bases de impuesto</strong></td><td>26 a 32</td><td>Las 7 bases por concepto y tarifa (servicios 4 % / 8 %, venta / importación de bienes 8 % / 16 %, Cannabis 16 %). Si tienes propinas voluntarias separadas, NO van a la base — réstalas manualmente.</td></tr>
+          <tr><td><strong>Impuesto generado</strong></td><td>33 a 39</td><td>Calculadas automáticamente como base × tarifa. Si tu cuenta 2495 dice un valor distinto al total, ajusta cas. 50 manualmente.</td></tr>
+          <tr><td><strong>Bolsas plásticas</strong></td><td>40-44 (cantidad) / 45-49 (impuesto)</td><td>5 niveles de biodegradabilidad. Tarifa 2026: $65 por bolsa × multiplicador del nivel (100 %, 100 %, 25 %, 50 %, 75 %). Por defecto el sistema asume "No Biodegradable".</td></tr>
+          <tr><td><strong>Liquidación privada</strong></td><td>50, 51, 52, 980</td><td>Cas. 50 = suma 33-39 + 45-49 (saldo a pagar por impuesto). Cas. 51 = sanciones (manual). Cas. 52 = 50 + 51 (total). Cas. 980 = pago total al banco.</td></tr>
+        </tbody>
+      </table>
+      <p>Cualquier casilla con valor es <strong>editable</strong>: haz clic, escribe el valor correcto y los totales se recalculan automáticamente. Las casillas editadas quedan marcadas con un icono ✏ para que el contador sepa qué tocó.</p>
+      <div class="warn">
+        <strong>Validación rápida antes de presentar:</strong>
+        <ul style="margin-top:6px">
+          <li>¿La casilla 50 coincide con el saldo crédito de la cuenta 2495 al cierre del bimestre? Si no, revisa NCs y autoconsumo.</li>
+          <li>¿Los ingresos de la casilla 27 (servicios 8 %) cuadran con tu reporte de ventas POS o con el F1007 de exógena del bimestre?</li>
+          <li>¿El bimestre cierra exactamente el último día del mes par? (Bim 3 = 30 de junio, no 30 de mayo).</li>
+          <li>El F310 oficial 2025 <strong>NO tiene casilla de retención INC</strong>; si te practicaron retención, va al F350 del agente retenedor, no aquí.</li>
+        </ul>
+      </div>
+    </section>
+    <section id="paso6" class="step">
+      <div class="step-num"><span>6</span> Paso 6</div>
+      <h2>Casos especiales</h2>
+      <h3>Restaurante franquiciado</h3>
+      <p>Hasta 2018 los restaurantes franquiciados pagaban IVA en vez de INC. Desde la <strong>Ley 1943/2018</strong> (reactivada por la Ley 2010/2019) volvieron al INC al 8 %. La herramienta los trata igual que un restaurante normal — la franquicia <em>no cambia la tarifa</em>, sigue siendo 8 %.</p>
+      <h3>Telefonía móvil — franquicia eliminada</h3>
+      <p>Hasta 2021 había una franquicia mensual de 1,5 UVT por línea (alrededor de $55.000) en la que el plan estaba exento de INC. <strong>La Ley 2155/2021 eliminó esa franquicia</strong>: hoy todo el ingreso por servicios de telefonía móvil, datos e internet móvil paga el 4 % desde el primer peso.</p>
+      <h3>Bolsas plásticas — 5 niveles de biodegradabilidad</h3>
+      <p>Tarifa 2026: <strong>$65 por bolsa</strong> (0,00125 UVT × $52.374). El F310 tiene 5 casillas de cantidad y 5 de impuesto según el nivel de impacto ambiental (Resolución 1481/2018 MinAmbiente):</p>
+      <table class="tabla">
+        <thead><tr><th>Nivel</th><th>Multiplicador</th><th>Cas. Cantidad</th><th>Cas. Impuesto</th></tr></thead>
+        <tbody>
+          <tr><td>No Biodegradable</td><td>100 %</td><td>40</td><td>45</td></tr>
+          <tr><td>Nivel 1</td><td>100 %</td><td>41</td><td>46</td></tr>
+          <tr><td>Nivel 2</td><td>25 %</td><td>42</td><td>47</td></tr>
+          <tr><td>Nivel 3</td><td>50 %</td><td>43</td><td>48</td></tr>
+          <tr><td>Nivel 4</td><td>75 %</td><td>44</td><td>49</td></tr>
+        </tbody>
+      </table>
+      <p>La herramienta por defecto asume "No Biodegradable" (cas. 40 / 45). Si tu inventario maneja bolsas con certificación de biodegradabilidad, mueve la cantidad a la fila del nivel correspondiente y el impuesto se recalcula con el multiplicador adecuado.</p>
+      <h3>Vehículos, aerodinos, embarcaciones</h3>
+      <p>Tarifa 16 % (Arts. 512-3, 512-4 ET) — la herramienta los asume como <strong>venta de bienes 16 %</strong> en la cas. 30 / 37. Si son importados, mueve manualmente a cas. 31 / 38. <strong>Solo declaran INC los importadores y comercializadores</strong>; el consumidor final lo paga incluido en el precio.</p>
+      <h3>¿Y si soy responsable de IVA y de INC a la vez?</h3>
+      <p>Es posible. Un hotel con restaurante, por ejemplo: el hospedaje (excluido de IVA — Art. 476 ET) y el restaurante (8 % INC) van por separado. Declaras <strong>F310 bimestral</strong> por el restaurante y, si el resto de operaciones está gravado con IVA, también F300. La 2408 y la 2495 son cuentas distintas.</p>
+      <div class="tip">
+        <strong>Conciliación con exógena:</strong> los ingresos del F310 se cruzan con el reporte de FE del MUISCA. Si emitiste factura electrónica con código INC, debe aparecer también en el <a href="../exogena-f1647.html">F1647</a> (ingresos por terceros) o en el F1007 con base gravable separada.
+      </div>
+    </section>
+    <section id="paso7" class="step">
+      <div class="step-num"><span>7</span> Paso 7</div>
+      <h2>Descargar Excel y presentar en MUISCA</h2>
+      <p>Pulsa <strong>📥 Descargar Excel</strong>. El archivo trae dos hojas:</p>
+      <div class="actions-list">
+        <h4>Estructura del Excel generado</h4>
+        <div class="item"><code>F310 INC</code> Encabezado con NIT, razón social, año, bimestre + tabla casilla / concepto / valor. Compatible con la estructura del MUISCA para que puedas copiar valores casilla por casilla.</div>
+        <div class="item"><code>Detalle balance</code> Si usaste modo balance, esta hoja muestra cada cuenta con su clasificación F310 y la casilla destino. Sirve como papel de trabajo para soportar la declaración ante cualquier revisión.</div>
+      </div>
+      <p>Para presentar:</p>
+      <ol>
+        <li>Entra al portal MUISCA con la firma electrónica del contribuyente.</li>
+        <li><strong>Diligenciar formularios → Selecciona F310 → Año y período</strong> correctos.</li>
+        <li>Copia los valores del Excel a las casillas correspondientes. La herramienta usa los mismos números de casilla del formulario oficial DIAN.</li>
+        <li>Verifica el total a pagar y firma electrónicamente.</li>
+      </ol>
+      <div class="err">
+        <strong>Antes de firmar:</strong> el INC no se descuenta, no se prorratea y no admite saldo a favor. La cas. 50 (saldo a pagar por impuesto) siempre debe ser ≥ 0. Si tu cálculo da negativo es porque el balance está mal o la tarifa aplicada es incorrecta — revisa.
+      </div>
+    </section>
+    <section id="errores" class="step">
+      <div class="step-num"><span>!</span> Errores comunes</div>
+      <h2>Errores comunes al armar el F310</h2>
+      <div class="err">
+        <strong>1. Restar IVA descontable del INC.</strong> El INC <strong>no</strong> es descontable. No puedes restarle el IVA de tus compras ni el INC que te facturaron en insumos. Todo eso va al costo o gasto deducible.
+      </div>
+      <div class="err">
+        <strong>2. Incluir las propinas en la base gravable de restaurantes.</strong> Las propinas voluntarias separadas del servicio no son base de INC. Sí lo son si están incluidas en la factura como cargo obligatorio.
+      </div>
+      <div class="err">
+        <strong>3. Olvidar las notas crédito del bimestre.</strong> Las NCs emitidas reducen la base gravable. Si tu balance solo refleja ventas brutas, suma manualmente las NCs del período en la cuenta correspondiente.
+      </div>
+      <div class="err">
+        <strong>4. Declarar F310 estando en Régimen Simple.</strong> En RST con restaurante, el INC se paga vía <a href="../formato2593.html">F2593</a> dentro del componente INC. Presentar F310 adicional duplica el impuesto.
+      </div>
+      <div class="err">
+        <strong>5. Usar el saldo de 2495 sin verificar.</strong> La cuenta 2495 acumula INC por pagar. Si tu contabilidad no cierra mensualmente, el saldo puede arrastrar bimestres anteriores. Revisa que el movimiento del bimestre actual sea el correcto.
+      </div>
+      <div class="err">
+        <strong>6. Confundir tarifas 4 % y 8 %.</strong> Telefonía y datos: 4 %. Restaurantes, bares, vehículos: 8 %. Vehículos de lujo y aerodinos: 16 %. El detector automático del listado MUISCA usa el ratio IVA/base — si una factura tiene IVA del 8 % no es 19 %, es INC.
+      </div>
+    </section>
+    <section id="siguiente" class="step">
+      <div class="step-num"><span>→</span> Siguiente</div>
+      <h2>Siguientes pasos</h2>
+      <p>Una vez presentado el F310, normalmente toca:</p>
+      <ul>
+        <li><strong>Revisar el F1007 de exógena anual.</strong> Si emitiste FE con código INC, los ingresos deben aparecer también en el formato 1007 de ingresos por terceros. <a href="../exogena-suite.html">Kit Exógena →</a></li>
+        <li><strong>Conciliar la cuenta 2495.</strong> Después de pagar, la cuenta queda en cero. Si arrastra saldo es porque un bimestre se contabilizó pero no se presentó o pagó.</li>
+        <li><strong>Revisar el F300 IVA del mismo bimestre.</strong> Si también eres responsable de IVA, ambos formularios viven juntos. <a href="../iva300.html">F300 IVA →</a></li>
+        <li><strong>Si te llega un requerimiento de la DIAN</strong> por inconsistencias INC vs FE: <a href="../ia-respuesta-requerimiento.html">Asistente IA de respuesta a requerimientos →</a></li>
+      </ul>
+    </section>
+    <div class="cta-end">
+      <h3>Listo para usar la herramienta</h3>
+      <p>Genera el borrador del F310 desde tu balance o listado MUISCA en menos de 2 minutos.</p>
+      <a href="../impuesto-consumo.html">Ir al F310 INC →</a>
+    </div>
+    <div class="step-nav">
+      <a href="../tutoriales.html">← Todos los tutoriales</a>
+      <a href="../impuesto-consumo.html" class="next">Abrir herramienta F310 →</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

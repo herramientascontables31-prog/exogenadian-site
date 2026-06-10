@@ -1,0 +1,150 @@
+/* ═══ ExógenaDIAN — Estilos compartidos del módulo Certificados ═══
+   Hojas de papel A4 para los 3 generadores (cuenta de cobro, aportes SS,
+   no obligación renta). Optimizado para impresión a PDF vía window.print().
+*/
+
+/* ── Hoja A4 simulada en pantalla y exacta en impresión ── */
+.cert-sheet{
+  --cert-primary:#1B3A5C;
+  --cert-font-family:'DM Sans','Segoe UI',sans-serif;
+  background:#fff;
+  width:210mm;
+  min-height:297mm;
+  margin:24px auto;
+  padding:25mm 22mm;
+  box-shadow:0 4px 24px rgba(0,0,0,.08);
+  border:1px solid #E5E7EB;
+  font-family:var(--cert-font-family);
+  font-size:11pt;
+  line-height:1.55;
+  color:#111;
+  position:relative;
+  box-sizing:border-box;
+}
+.cert-sheet h1{font-size:14pt;font-weight:800;margin:0 0 14pt;text-align:center;letter-spacing:.5px;text-transform:uppercase}
+.cert-sheet h2{font-size:11pt;font-weight:700;margin:18pt 0 6pt}
+.cert-sheet p{margin:0 0 10pt;text-align:justify;hyphens:auto}
+.cert-sheet strong{font-weight:700}
+.cert-sheet .cert-meta{font-size:9.5pt;color:#444;margin-bottom:18pt}
+.cert-sheet .cert-fecha{margin-bottom:18pt}
+.cert-sheet table{width:100%;border-collapse:collapse;margin:8pt 0 12pt;font-size:10.5pt}
+.cert-sheet table th,
+.cert-sheet table td{border:1px solid #888;padding:6pt 8pt;text-align:left;vertical-align:top}
+.cert-sheet table th{background:#F3F4F6;font-weight:700}
+.cert-sheet .num{text-align:right;font-variant-numeric:tabular-nums}
+
+/* ── Membrete (encabezado del contador) ── */
+.cert-membrete{display:flex;align-items:center;gap:14pt;border-bottom:1.5pt solid var(--cert-primary);padding-bottom:10pt;margin-bottom:18pt}
+.cert-membrete-logo{flex:0 0 auto}
+.cert-membrete-logo img{max-height:18mm;max-width:38mm;object-fit:contain}
+.cert-membrete-info{flex:1;min-width:0}
+.cert-membrete-info .nombre{font-weight:800;font-size:12.5pt;letter-spacing:.3px}
+.cert-membrete-info .sub{font-size:9.5pt;color:#444;margin-top:2pt;line-height:1.4}
+
+/* ── Pie con firma ── */
+.cert-firma{margin-top:30pt;padding-top:16pt}
+.cert-firma img{max-height:22mm;display:block;margin-bottom:4pt}
+.cert-firma .firma-linea{display:inline-block;width:70mm;border-top:1pt solid #111;margin-top:14pt;padding-top:4pt;font-weight:700}
+.cert-firma .firma-datos{font-size:10pt;line-height:1.5;margin-top:2pt}
+.cert-firma .firma-datos .label{color:#555}
+
+/* ── Marca de agua (gratis) — fácilmente removible ── */
+.cert-marca-agua{
+  position:absolute;
+  bottom:14mm;
+  left:0;
+  right:0;
+  text-align:center;
+  font-size:8pt;
+  color:#9CA3AF;
+  letter-spacing:.5px;
+}
+.cert-marca-agua a{color:#9CA3AF;text-decoration:none}
+.cert-sheet[data-pro="1"] .cert-marca-agua{display:none}
+
+/* ── Toolbar (no se imprime) ── */
+.cert-toolbar{
+  max-width:210mm;
+  margin:18px auto 0;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+  padding:0 4px;
+}
+.cert-toolbar .btn{padding:9px 18px;border-radius:10px;font-weight:600;font-size:.88rem;border:none;cursor:pointer;font-family:inherit}
+.cert-toolbar .btn-print{background:#1B3A5C;color:#fff}
+.cert-toolbar .btn-print:hover{background:#0F2B47}
+.cert-toolbar .btn-edit{background:#fff;border:1px solid #D1D5DB;color:#374151}
+.cert-toolbar .btn-edit:hover{background:#F9FAFB}
+.cert-toolbar .hint{font-size:.78rem;color:#6B7280;margin-left:auto}
+
+/* ── Form lateral (panel de entrada) ── */
+.cert-layout{display:grid;grid-template-columns:380px 1fr;gap:22px;align-items:start;max-width:1240px;margin:0 auto;padding:18px 16px 80px}
+.cert-form{background:#fff;border:1px solid #E5E7EB;border-radius:14px;padding:20px;position:sticky;top:14px;box-shadow:0 2px 8px rgba(0,0,0,.03);min-width:0;overflow-x:hidden}
+.cert-form *{box-sizing:border-box;max-width:100%}
+.cert-form h2{font-size:1.05rem;font-weight:700;margin-bottom:4px}
+.cert-form .sub{font-size:.82rem;color:#6B7280;margin-bottom:14px}
+.cert-form label{display:block;font-size:.78rem;font-weight:700;color:#374151;margin:10px 0 4px;text-transform:uppercase;letter-spacing:.3px}
+.cert-form input,.cert-form select,.cert-form textarea{
+  width:100%;padding:9px 12px;border:1.5px solid #E5E7EB;border-radius:9px;font-family:inherit;font-size:.92rem;outline:none;transition:border-color .15s;box-sizing:border-box
+}
+.cert-form select{text-overflow:ellipsis}
+.cert-form input:focus,.cert-form select:focus,.cert-form textarea:focus{border-color:#2E75B6;box-shadow:0 0 0 3px rgba(46,117,182,.12)}
+.cert-form textarea{min-height:80px;resize:vertical}
+.cert-form .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cert-form .hint-sm{font-size:.74rem;color:#6B7280;margin-top:3px}
+.cert-form .alerta{background:#FFFBEB;border:1px solid #FCD34D;color:#78350F;padding:8px 12px;border-radius:8px;font-size:.82rem;margin-bottom:10px}
+
+/* ── Vista previa ── */
+.cert-preview-wrap{min-width:0}
+
+/* ── Impresión ── */
+/* Si añades un nuevo widget inyectado al document.body desde shared/*.js,
+   agrega su selector aquí para evitar que aparezca en la impresión. */
+@media print{
+  @page{size:A4;margin:0}
+  body{background:#fff!important;margin:0!important}
+  .cert-toolbar,
+  .cert-form,
+  #nav-container,
+  .exo-disclaimer,
+  .exo-announce,
+  .exo-pro-banner,
+  .pro-status-banner,
+  .nit-banner,
+  .exo-cookie,
+  .exa-fab,
+  .exa-panel,
+  .exa-quick-wrap,
+  .exa-typing,
+  .exo-loading,
+  .exo-breadcrumb,
+  .exo-search-overlay,
+  .exo-search-trigger,
+  .exo-blog-cta,
+  .exo-float-cta,
+  .exa-guide-tip,
+  .fp-modal-bg,
+  .fp-modal,
+  header,
+  footer,
+  nav,
+  script{display:none!important}
+  .cert-layout{display:block;padding:0;margin:0;max-width:none}
+  .cert-sheet{
+    margin:0;
+    box-shadow:none;
+    border:none;
+    width:210mm;
+    min-height:297mm;
+    page-break-after:always;
+  }
+  .cert-preview-wrap{margin:0;padding:0}
+}
+
+@media(max-width:900px){
+  .cert-layout{grid-template-columns:1fr;padding:14px 12px}
+  .cert-form{position:static}
+  .cert-sheet{width:100%;min-height:auto;padding:18mm 14mm;margin:14px auto}
+}

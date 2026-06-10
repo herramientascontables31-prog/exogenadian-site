@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Análisis Vertical y Horizontal | ExógenaDIAN</title>
+<meta name="description" content="Análisis vertical y horizontal de estados financieros. Detecta variaciones materiales año vs año con umbrales configurables. Descarga en Excel.">
+<meta name="keywords" content="análisis vertical, análisis horizontal, variaciones materiales, estados financieros comparativos, EEFF Colombia">
+<link rel="canonical" href="https://exogenadian.com/analisis-vertical-horizontal.html">
+<meta property="og:title" content="Análisis Vertical y Horizontal de EEFF | ExógenaDIAN">
+<meta property="og:description" content="Detecta variaciones materiales en tus EEFF año vs año. Análisis vertical y horizontal con descarga en Excel.">
+<meta property="og:url" content="https://exogenadian.com/analisis-vertical-horizontal.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="ExógenaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png">
+<meta name="robots" content="index, follow">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Análisis Vertical y Horizontal","url":"https://exogenadian.com/analisis-vertical-horizontal.html","description":"Análisis vertical y horizontal de EEFF con detección de variaciones materiales.","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"COP"},"author":{"@type":"Organization","name":"ExógenaDIAN","url":"https://exogenadian.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://exogenadian.com/"},{"@type":"ListItem","position":2,"name":"Análisis Vertical y Horizontal","item":"https://exogenadian.com/analisis-vertical-horizontal.html"}]}
+</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js" integrity="sha384-Pqp51FUN2/qzfxZxBCtF0stpc9ONI6MYZpVqmo8m20SoaQCzf+arZvACkLkirlPz" crossorigin="anonymous"></script>
+<script src="shared/balance-loader.js?v=9347f34a"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--card2:#F3F4F6;--border:#e2e8f0;--text:#1a1a2e;--muted:#6b7280;--green:#22C55E;--green2:#166534;--green3:#ECFDF5;--yellow:#EAB308;--yellow2:#854d0e;--yellow3:#FEF9C3;--red:#EF4444;--red2:#991B1B;--red3:#FEE2E2;--blue:#3B82F6;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--mono:'JetBrains Mono',monospace;--sans:'DM Sans',sans-serif;--radius:12px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.5;min-height:100vh}
+.container{max-width:1280px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#1B3A5C 0%,#2E75B6 100%);padding:28px 32px;border-radius:16px;margin-bottom:24px;color:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.header h1{font-size:1.4rem;font-weight:700;display:flex;align-items:center;gap:10px}
+.header p{opacity:.85;font-size:.83rem;margin-top:4px}
+.header-right{text-align:right;font-size:.78rem;opacity:.8}
+.badge{display:inline-block;background:rgba(16,185,129,.2);color:#6EE7B7;padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:700;margin-top:6px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:20px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.card-title{font-size:1rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;color:var(--pri)}
+.card-sub{font-size:.78rem;color:var(--muted);margin-bottom:14px}
+.field{margin-bottom:10px}
+.field label{display:block;font-size:.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
+.field input{width:100%;padding:8px 12px;background:var(--card);border:1.5px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--mono);font-size:.92rem;transition:.2s;text-align:right}
+.field input:focus{outline:none;border-color:var(--pri2);box-shadow:0 0 0 3px rgba(46,117,182,.15)}
+.field-text input{text-align:left;font-family:var(--sans)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.alert{padding:12px 16px;border-radius:8px;font-size:.82rem;margin-bottom:14px;display:flex;align-items:flex-start;gap:8px}
+.alert-info{background:var(--pri3);color:var(--pri);border:1px solid #B4C6E7}
+.alert-warn{background:var(--yellow3);color:var(--yellow2);border:1px solid #FCD34D}
+.btn{padding:11px 22px;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:.9rem;font-family:var(--sans);transition:.15s;display:inline-flex;align-items:center;gap:6px}
+.btn-pri{background:var(--pri2);color:#fff}.btn-pri:hover{background:var(--pri)}
+.btn-green{background:#059669;color:#fff}.btn-green:hover{background:#047857}
+.btn-out{background:transparent;border:1.5px solid var(--border);color:var(--muted)}.btn-out:hover{border-color:var(--pri2);color:var(--pri2)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+/* Tabla compacta de inputs */
+.input-table{width:100%;border-collapse:collapse;font-size:.85rem}
+.input-table th{background:var(--pri3);color:var(--pri);padding:8px 10px;text-align:left;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;border-bottom:2px solid var(--pri2)}
+.input-table th.num{text-align:right}
+.input-table tr.section td{background:var(--card2);font-weight:700;color:var(--pri);padding:8px 10px;text-transform:uppercase;font-size:.72rem;letter-spacing:.4px;border-top:1px solid var(--border)}
+.input-table tr.section td:first-child{padding-left:10px}
+.input-table td{padding:4px 6px;border-bottom:1px solid var(--border)}
+.input-table td:first-child{padding-left:14px;color:var(--text)}
+.input-table input{width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-family:var(--mono);font-size:.85rem;text-align:right;background:transparent}
+.input-table input:focus{outline:none;border-color:var(--pri2);background:#fafbfc}
+.input-table tr:hover td{background:#fafbfc}
+/* Tabla resultados */
+.result-table{width:100%;border-collapse:collapse;font-size:.83rem;font-family:var(--sans)}
+.result-table th{background:var(--pri);color:#fff;padding:9px 8px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;position:sticky;top:0;z-index:1}
+.result-table th.num{text-align:right}
+.result-table td{padding:6px 8px;border-bottom:1px solid var(--border)}
+.result-table td.num{text-align:right;font-family:var(--mono);font-size:.8rem}
+.result-table tr.section td{background:var(--pri3);font-weight:700;color:var(--pri);text-transform:uppercase;font-size:.72rem;letter-spacing:.4px;padding:8px}
+.result-table tr.total td{background:var(--card2);font-weight:700;border-top:1px solid #666;border-bottom:3px double #666}
+.result-table tr.material td{background:#FFF7ED}
+.result-table tr.material td.flag{color:#9A3412;font-weight:700}
+.result-table tr:hover td{background:#fafbfc}
+.result-table tr.material:hover td{background:#FED7AA}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:middle;margin-right:4px}
+.dot-mat{background:#F97316;box-shadow:0 0 0 2px rgba(249,115,22,.2)}
+.var-pos{color:var(--green2)}
+.var-neg{color:var(--red2)}
+.var-neutral{color:var(--muted)}
+/* Stats */
+.summary-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.stat-pill{background:var(--card2);border-radius:10px;padding:12px;text-align:center;border:1px solid var(--border)}
+.stat-pill .v{font-family:var(--mono);font-size:1.2rem;font-weight:700;color:var(--pri)}
+.stat-pill .l{font-size:.68rem;color:var(--muted);text-transform:uppercase;font-weight:600;margin-top:2px}
+.stat-pill.warn .v{color:#9A3412}
+.tab-bar{display:flex;gap:4px;border-bottom:2px solid var(--border);margin-bottom:14px}
+.tab{padding:10px 18px;font-size:.85rem;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:.15s}
+.tab:hover{color:var(--pri2)}
+.tab.active{color:var(--pri);border-bottom-color:var(--pri2)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.placeholder-msg{text-align:center;color:var(--muted);padding:60px 20px;font-size:.88rem}
+.placeholder-msg .ico{font-size:2.4rem;margin-bottom:8px;display:block;opacity:.5}
+.scroll-x{overflow-x:auto;border-radius:10px;border:1px solid var(--border)}
+.subgroup{font-size:.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin:14px 0 6px}
+.footer{margin-top:32px;padding:16px 20px;border-top:1px solid var(--border);text-align:center;font-size:.76rem;color:var(--muted);line-height:1.6}
+.footer a{color:var(--pri2);text-decoration:none;font-weight:600}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.76rem;color:var(--muted);margin-bottom:10px}
+.legend span{display:inline-flex;align-items:center;gap:4px}
+@media(max-width:900px){
+  .container{padding:12px}
+  .header{flex-direction:column;text-align:center;padding:20px}
+  .header-right{text-align:center}
+  .field-row,.field-row3{grid-template-columns:1fr}
+  .summary-stats{grid-template-columns:repeat(2,1fr)}
+  .input-table{font-size:.78rem}
+}
+@media print{
+  body{background:#fff;margin:0;padding:0}
+  body > *:not(.container){display:none!important}
+  .header{background:#1B3A5C!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .actions,.no-print,.tab-bar{display:none!important}
+  .tab-content{display:block!important;page-break-after:always}
+}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div id="nav-container"></div>
+<script defer src="shared/pro.js?v=848fbf16"></script>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<script defer src="shared/pro-banner.js?v=a5944c54"></script>
+<div class="container">
+<div class="header">
+  <div>
+    <h1>&#128200; Análisis Vertical y Horizontal</h1>
+    <p>Estructura del balance &middot; Variaciones año vs año &middot; Detección de partidas materiales</p>
+    <div class="badge">100% gratis &middot; Sin registro</div>
+  </div>
+  <div class="header-right">100% en tu navegador<br>Tus datos no salen de tu equipo</div>
+</div>
+<div class="alert alert-info">
+  <span>&#128161;</span>
+  <div>Ingresa los saldos del año actual y el año anterior. La herramienta calcula <strong>análisis vertical</strong> (cada cuenta como % del total), <strong>análisis horizontal</strong> (variación absoluta y porcentual) y marca las cuentas con variación material según los umbrales que definas.</div>
+</div>
+<div class="card">
+  <div class="card-title">&#127970; Datos de la sociedad y umbrales</div>
+  <div class="field-row3">
+    <div class="field field-text"><label>Razón social</label><input type="text" id="cfgEmpresa" placeholder="Ej: ABC S.A.S"></div>
+    <div class="field field-text"><label>NIT</label><input type="text" id="cfgNit" placeholder="900.123.456-7"></div>
+    <div class="field-row">
+      <div class="field"><label>Año actual</label><input type="text" id="cfgYearAct" value="2025"></div>
+      <div class="field"><label>Año anterior</label><input type="text" id="cfgYearPrev" value="2024"></div>
+    </div>
+  </div>
+  <div class="subgroup">Umbrales de materialidad</div>
+  <div class="field-row3">
+    <div class="field"><label>Variación porcentual mínima (±%)</label><input type="text" id="cfgUmbralPct" value="25"><div class="card-sub" style="margin:4px 0 0;font-size:.68rem">Default: 25%. Cuentas con |Δ%| ≥ este valor son material.</div></div>
+    <div class="field"><label>Mínimo % sobre total ESF/ERI</label><input type="text" id="cfgUmbralAbs" value="5"><div class="card-sub" style="margin:4px 0 0;font-size:.68rem">Default: 5%. Filtra variaciones porcentuales en cuentas pequeñas.</div></div>
+    <div class="field"><label>Variación máxima admitida (±%)</label><input type="text" id="cfgUmbralAlerta" value="200"><div class="card-sub" style="margin:4px 0 0;font-size:.68rem">Default: 200%. Por encima se reporta como cambio extraordinario.</div></div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">&#128194; Cargar balances <span style="font-weight:400;color:var(--muted);font-size:.78rem">(opcional, autollena la tabla)</span></div>
+  <div class="card-sub">Sube los dos balances de prueba (año actual y año anterior). El PUC clasifica las cuentas y llena las dos columnas. También puedes ingresarlas a mano.</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+    <div>
+      <div style="font-size:.74rem;font-weight:700;color:var(--pri);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px">Año actual <span id="lblYearAct" style="color:var(--muted);font-weight:500"></span></div>
+      <div id="loaderActual"></div>
+    </div>
+    <div>
+      <div style="font-size:.74rem;font-weight:700;color:var(--pri);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px">Año anterior <span id="lblYearPrev" style="color:var(--muted);font-weight:500"></span></div>
+      <div id="loaderPrev"></div>
+    </div>
+  </div>
+  <div id="usePriorBalanceAvh" style="display:none;margin-top:10px;padding:10px 12px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;font-size:.82rem;color:#1E40AF">
+    <span id="usePriorBalanceAvhText"></span>
+    <button type="button" class="btn btn-out" style="margin-left:10px;padding:4px 10px;font-size:.78rem" onclick="aplicarBalanceGuardadoAvh()">Usar este balance</button>
+    <button type="button" class="btn btn-out" style="padding:4px 10px;font-size:.78rem" onclick="descartarBalanceGuardadoAvh()">Descartar</button>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">&#128203; Saldos del balance</div>
+  <div class="card-sub">Ingresa los saldos de las dos vigencias. Las cuentas en cero se omiten del análisis.</div>
+  <div class="tab-bar" style="margin-bottom:16px">
+    <div class="tab active" onclick="switchTab(this,'tabEsf')">Estado de Situación Financiera</div>
+    <div class="tab" onclick="switchTab(this,'tabEri')">Estado de Resultados Integral</div>
+  </div>
+  <div class="tab-content active" id="tabEsf">
+    <div class="scroll-x">
+      <table class="input-table" id="inputEsf"></table>
+    </div>
+  </div>
+  <div class="tab-content" id="tabEri">
+    <div class="scroll-x">
+      <table class="input-table" id="inputEri"></table>
+    </div>
+  </div>
+</div>
+<div class="actions" style="margin-bottom:20px">
+  <button class="btn btn-pri" onclick="calcular()">&#128202; Calcular análisis</button>
+  <button class="btn btn-out" onclick="cargarEjemplo()">&#128221; Cargar ejemplo</button>
+  <button class="btn btn-out" onclick="limpiar()">&#128260; Limpiar</button>
+</div>
+<div class="card" id="resultsCard">
+  <div class="card-title">&#127919; Resultados</div>
+  <div id="resultsContent">
+    <div class="placeholder-msg">
+      <span class="ico">&#128202;</span>
+      Ingresa los datos del balance para los dos años y haz clic en <strong>Calcular análisis</strong>.
+      <br><br>
+      <span style="font-size:.8rem">Verás análisis vertical, horizontal y detección de variaciones materiales.</span>
+    </div>
+  </div>
+</div>
+<div class="card" id="downloadCard" style="display:none">
+  <div class="card-title">&#128190; Descargar</div>
+  <div class="card-sub">Excel con análisis vertical, horizontal y bandera de materialidad. JSON estructurado para usar en otras herramientas.</div>
+  <div class="actions" style="margin-top:0">
+    <button class="btn btn-green" onclick="exportarExcel()">&#128202; Descargar Excel</button>
+    <button class="btn btn-out" onclick="exportarJson()">&#123;&#125; Descargar JSON</button>
+    <button class="btn btn-out" onclick="window.print()">&#128424; Imprimir / PDF</button>
+  </div>
+</div>
+<div class="footer">
+  <a href="index.html">ExógenaDIAN</a> &middot;
+  <a href="estadosfinancieros.html">Estados Financieros</a> &middot;
+  <a href="razones-financieras.html">Razones Financieras</a> &middot;
+  <a href="dashboard.html">Dashboard</a><br>
+  Herramienta orientativa &mdash; el contador interpreta. 100% procesado en tu navegador.
+</div>
+</div>
+<script>
+/* ═══ ESTRUCTURA DE CUENTAS ═══ */
+// Esta lista define el set canónico de líneas que el análisis muestra.
+// Cada item: {key, label, group, subgroup, sign}. sign: 1 normal, -1 si suma negativo (deterioros, depreciaciones).
+var ESF_ROWS = [
+  {key:'efectivo',label:'Efectivo y equivalentes de efectivo',group:'ACTIVOS',sub:'Activo corriente',sign:1},
+  {key:'inv_cp',label:'Inversiones a corto plazo',group:'ACTIVOS',sub:'Activo corriente',sign:1},
+  {key:'cxc',label:'Deudores comerciales y otras CxC',group:'ACTIVOS',sub:'Activo corriente',sign:1},
+  {key:'deterioro',label:'(-) Deterioro de cartera',group:'ACTIVOS',sub:'Activo corriente',sign:-1},
+  {key:'inventarios',label:'Inventarios',group:'ACTIVOS',sub:'Activo corriente',sign:1},
+  {key:'otros_ac',label:'Otros activos corrientes',group:'ACTIVOS',sub:'Activo corriente',sign:1},
+  {key:'ppe',label:'Propiedad, planta y equipo (neto)',group:'ACTIVOS',sub:'Activo no corriente',sign:1},
+  {key:'intangibles',label:'Activos intangibles',group:'ACTIVOS',sub:'Activo no corriente',sign:1},
+  {key:'inv_lp',label:'Inversiones a largo plazo',group:'ACTIVOS',sub:'Activo no corriente',sign:1},
+  {key:'otros_anc',label:'Otros activos no corrientes',group:'ACTIVOS',sub:'Activo no corriente',sign:1},
+  {key:'obl_cp',label:'Obligaciones financieras CP',group:'PASIVOS',sub:'Pasivo corriente',sign:1},
+  {key:'proveedores',label:'Proveedores',group:'PASIVOS',sub:'Pasivo corriente',sign:1},
+  {key:'cxp',label:'Cuentas por pagar',group:'PASIVOS',sub:'Pasivo corriente',sign:1},
+  {key:'imp_cp',label:'Impuestos por pagar',group:'PASIVOS',sub:'Pasivo corriente',sign:1},
+  {key:'laborales',label:'Obligaciones laborales',group:'PASIVOS',sub:'Pasivo corriente',sign:1},
+  {key:'otros_pc',label:'Otros pasivos corrientes',group:'PASIVOS',sub:'Pasivo corriente',sign:1},
+  {key:'obl_lp',label:'Obligaciones financieras LP',group:'PASIVOS',sub:'Pasivo no corriente',sign:1},
+  {key:'otros_pnc',label:'Otros pasivos no corrientes',group:'PASIVOS',sub:'Pasivo no corriente',sign:1},
+  {key:'capital',label:'Capital social',group:'PATRIMONIO',sub:'Patrimonio',sign:1},
+  {key:'reservas',label:'Reservas',group:'PATRIMONIO',sub:'Patrimonio',sign:1},
+  {key:'resultados_ant',label:'Resultados acumulados',group:'PATRIMONIO',sub:'Patrimonio',sign:1},
+  {key:'resultado_ej',label:'Resultado del ejercicio',group:'PATRIMONIO',sub:'Patrimonio',sign:1},
+  {key:'otros_pat',label:'Otros componentes patrimonio',group:'PATRIMONIO',sub:'Patrimonio',sign:1}
+];
+var ERI_ROWS = [
+  {key:'ingresos',label:'Ingresos operacionales',group:'INGRESOS',sign:1},
+  {key:'devoluciones',label:'(-) Devoluciones, rebajas y descuentos',group:'INGRESOS',sign:-1},
+  {key:'costo',label:'(-) Costo de ventas',group:'COSTOS',sign:-1},
+  {key:'gtos_admin',label:'(-) Gastos de administración',group:'GASTOS',sign:-1},
+  {key:'gtos_ventas',label:'(-) Gastos de ventas',group:'GASTOS',sign:-1},
+  {key:'otros_ing',label:'(+) Otros ingresos',group:'NO OPERACIONAL',sign:1},
+  {key:'otros_gtos',label:'(-) Otros gastos no operacionales',group:'NO OPERACIONAL',sign:-1},
+  {key:'gtos_fin',label:'(-) Gastos financieros',group:'NO OPERACIONAL',sign:-1},
+  {key:'imp_renta',label:'(-) Impuesto de renta',group:'IMPUESTOS',sign:-1}
+];
+/* ═══ FORMATO ═══ */
+function fN(n){return Math.round(n||0).toLocaleString('es-CO')}
+function fPct(n,d){d=d===undefined?1:d;if(!isFinite(n))return '—';return n.toLocaleString('es-CO',{minimumFractionDigits:d,maximumFractionDigits:d})+'%'}
+function fSign(n){if(n>0)return '+'+fN(n);return fN(n)}
+// Capa porcentajes con magnitud >=1.000% para evitar lecturas ilegibles tipo 1213179538%
+function fSignPct(n){
+  if(!isFinite(n))return '—';
+  if(Math.abs(n)>=1000)return (n>=0?'>+':'<-')+'1.000%';
+  return (n>=0?'+':'')+fPct(n,1);
+}
+function fAbsPctCapped(n){
+  if(!isFinite(n))return 'nuevo';
+  if(Math.abs(n)>=1000)return '>1.000%';
+  return fPct(Math.abs(n),1);
+}
+function parse(s){if(typeof s==='number')return s;if(!s)return 0;var v=String(s).replace(/[^\d.,\-]/g,'').replace(/\./g,'').replace(',','.');return parseFloat(v)||0}
+function fmtMoneyInput(el){
+  var raw=el.value.replace(/[^\d\-]/g,'');
+  var neg=raw.startsWith('-');
+  raw=raw.replace(/-/g,'');
+  if(!raw){el.value=neg?'-':'';return}
+  el.value=(neg?'-':'')+parseInt(raw).toLocaleString('es-CO');
+}
+/* ═══ RENDER INPUT TABLES ═══ */
+function renderInputTable(rows,tableId,prefix){
+  var year=document.getElementById('cfgYearAct').value||'Actual';
+  var prev=document.getElementById('cfgYearPrev').value||'Anterior';
+  var t=document.getElementById(tableId);
+  var h='<thead><tr><th style="width:48%">Cuenta</th><th class="num">'+year+'</th><th class="num">'+prev+'</th></tr></thead><tbody>';
+  var lastSub='';
+  rows.forEach(function(r){
+    var subKey=r.sub||r.group;
+    if(subKey!==lastSub){
+      h+='<tr class="section"><td colspan="3">'+subKey+'</td></tr>';
+      lastSub=subKey;
+    }
+    h+='<tr><td>'+r.label+'</td>';
+    h+='<td><input type="text" id="'+prefix+'_a_'+r.key+'" data-money></td>';
+    h+='<td><input type="text" id="'+prefix+'_p_'+r.key+'" data-money></td>';
+    h+='</tr>';
+  });
+  h+='</tbody>';
+  t.innerHTML=h;
+  t.querySelectorAll('input[data-money]').forEach(function(el){
+    el.setAttribute('inputmode','numeric');
+    el.setAttribute('autocomplete','off');
+    el.placeholder='0';
+    el.addEventListener('input',function(){fmtMoneyInput(this)});
+  });
+}
+function refreshTableHeaders(){
+  // Solo actualizar el thead sin perder valores
+  var year=document.getElementById('cfgYearAct').value||'Actual';
+  var prev=document.getElementById('cfgYearPrev').value||'Anterior';
+  ['inputEsf','inputEri'].forEach(function(id){
+    var t=document.getElementById(id);
+    var h=t.querySelector('thead');
+    if(h){h.innerHTML='<tr><th style="width:48%">Cuenta</th><th class="num">'+year+'</th><th class="num">'+prev+'</th></tr>'}
+  });
+}
+document.getElementById('cfgYearAct').addEventListener('input',refreshTableHeaders);
+document.getElementById('cfgYearPrev').addEventListener('input',refreshTableHeaders);
+renderInputTable(ESF_ROWS,'inputEsf','esf');
+renderInputTable(ERI_ROWS,'inputEri','eri');
+function switchTab(el,id){
+  el.parentElement.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
+  el.classList.add('active');
+  document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active')});
+  document.getElementById(id).classList.add('active');
+}
+/* ═══ LECTURA DE INPUTS ═══ */
+function readData(){
+  var esfA={},esfP={},eriA={},eriP={};
+  ESF_ROWS.forEach(function(r){
+    esfA[r.key]=r.sign*parse(document.getElementById('esf_a_'+r.key).value);
+    esfP[r.key]=r.sign*parse(document.getElementById('esf_p_'+r.key).value);
+  });
+  ERI_ROWS.forEach(function(r){
+    eriA[r.key]=r.sign*parse(document.getElementById('eri_a_'+r.key).value);
+    eriP[r.key]=r.sign*parse(document.getElementById('eri_p_'+r.key).value);
+  });
+  return {esfA:esfA,esfP:esfP,eriA:eriA,eriP:eriP};
+}
+/* ═══ TOTALES ═══ */
+function totalESF(d){
+  var act=0,pas=0,pat=0;
+  ESF_ROWS.forEach(function(r){
+    if(r.group==='ACTIVOS')act+=d[r.key]||0;
+    else if(r.group==='PASIVOS')pas+=d[r.key]||0;
+    else if(r.group==='PATRIMONIO')pat+=d[r.key]||0;
+  });
+  return {act:act,pas:pas,pat:pat,pasPat:pas+pat};
+}
+function totalERI(d){
+  var ing=(d.ingresos||0)+(d.devoluciones||0); // devoluciones ya viene negativo por sign
+  var cv=d.costo||0;
+  var gop=(d.gtos_admin||0)+(d.gtos_ventas||0);
+  var nop=(d.otros_ing||0)+(d.otros_gtos||0)+(d.gtos_fin||0);
+  var ub=ing+cv;
+  var uo=ub+gop;
+  var uai=uo+nop;
+  var un=uai+(d.imp_renta||0);
+  return {ingNetos:ing,utilBruta:ub,utilOp:uo,utilAntesImp:uai,utilNeta:un};
+}
+/* ═══ ANÁLISIS ═══ */
+function analizar(){
+  var d=readData();
+  var umbralPct=parse(document.getElementById('cfgUmbralPct').value)||25;
+  var umbralAbs=parse(document.getElementById('cfgUmbralAbs').value)||5;
+  var umbralAlerta=parse(document.getElementById('cfgUmbralAlerta').value)||200;
+  var totEsfA=totalESF(d.esfA);
+  var totEsfP=totalESF(d.esfP);
+  var totEriA=totalERI(d.eriA);
+  var totEriP=totalERI(d.eriP);
+  // Total para análisis vertical: ESF usa total activo; ERI usa ingresos netos.
+  var baseEsfA=totEsfA.act||1;
+  var baseEsfP=totEsfP.act||1;
+  var baseEriA=totEriA.ingNetos||1;
+  var baseEriP=totEriP.ingNetos||1;
+  function buildRows(rows,dataA,dataP,baseA,baseP,tipo){
+    var out=[];
+    rows.forEach(function(r){
+      var va=dataA[r.key]||0;
+      var vp=dataP[r.key]||0;
+      if(va===0 && vp===0)return;
+      var pctVa=(va/baseA)*100;
+      var pctVp=(vp/baseP)*100;
+      var deltaAbs=va-vp;
+      var deltaPct=vp!==0?((va-vp)/Math.abs(vp))*100:(va!==0?Infinity:0);
+      // Materialidad: |Δ%| ≥ umbralPct AND (|valor actual| ≥ umbralAbs% del total OR |valor anterior| ≥ umbralAbs% del total)
+      var pesoMax=Math.max(Math.abs(pctVa),Math.abs(pctVp));
+      var material=isFinite(deltaPct) && Math.abs(deltaPct)>=umbralPct && pesoMax>=umbralAbs;
+      // Alerta extraordinaria
+      var alerta=isFinite(deltaPct) && Math.abs(deltaPct)>=umbralAlerta;
+      // Cuentas nuevas (vp=0, va!=0) son siempre materiales si pesan
+      if(vp===0 && va!==0 && Math.abs(pctVa)>=umbralAbs){material=true}
+      out.push({
+        key:r.key,label:r.label,group:r.group,sub:r.sub||null,tipo:tipo,
+        actual:va,anterior:vp,
+        pctVertActual:pctVa,pctVertAnterior:pctVp,
+        deltaAbs:deltaAbs,deltaPct:deltaPct,
+        material:material,alerta:alerta
+      });
+    });
+    return out;
+  }
+  var esfData=buildRows(ESF_ROWS,d.esfA,d.esfP,baseEsfA,baseEsfP,'ESF');
+  var eriData=buildRows(ERI_ROWS,d.eriA,d.eriP,baseEriA,baseEriP,'ERI');
+  return {
+    esfRows:esfData,eriRows:eriData,
+    totEsfA:totEsfA,totEsfP:totEsfP,totEriA:totEriA,totEriP:totEriP,
+    baseEsfA:baseEsfA,baseEsfP:baseEsfP,baseEriA:baseEriA,baseEriP:baseEriP,
+    umbralPct:umbralPct,umbralAbs:umbralAbs,umbralAlerta:umbralAlerta,
+    yearAct:document.getElementById('cfgYearAct').value||'',
+    yearPrev:document.getElementById('cfgYearPrev').value||'',
+    empresa:document.getElementById('cfgEmpresa').value||'EMPRESA S.A.S',
+    nit:document.getElementById('cfgNit').value||''
+  };
+}
+/* ═══ RENDER RESULTADOS ═══ */
+var lastResults=null;
+function calcular(){
+  var d=readData();
+  var anyData=Object.values(d.esfA).some(function(v){return v!==0})||Object.values(d.eriA).some(function(v){return v!==0});
+  if(!anyData){
+    if(typeof exoToast==='function')exoToast('Ingresa al menos algunos saldos del balance.','warning');
+    else alert('Ingresa al menos algunos saldos del balance.');
+    return;
+  }
+  var res=analizar();
+  lastResults=res;
+  renderResults(res);
+  document.getElementById('downloadCard').style.display='block';
+  document.getElementById('resultsCard').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function renderResults(res){
+  var matCount=res.esfRows.filter(function(r){return r.material}).length+res.eriRows.filter(function(r){return r.material}).length;
+  var alertaCount=res.esfRows.filter(function(r){return r.alerta}).length+res.eriRows.filter(function(r){return r.alerta}).length;
+  var allRows=res.esfRows.concat(res.eriRows);
+  var maxUp=allRows.filter(function(r){return isFinite(r.deltaPct) && r.deltaPct>0}).sort(function(a,b){return b.deltaPct-a.deltaPct})[0];
+  var maxDown=allRows.filter(function(r){return isFinite(r.deltaPct) && r.deltaPct<0}).sort(function(a,b){return a.deltaPct-b.deltaPct})[0];
+  var h='<div class="summary-stats">';
+  h+='<div class="stat-pill"><div class="v">'+(res.esfRows.length+res.eriRows.length)+'</div><div class="l">Cuentas con movimiento</div></div>';
+  h+='<div class="stat-pill warn"><div class="v">'+matCount+'</div><div class="l">Variaciones materiales</div></div>';
+  h+='<div class="stat-pill"><div class="v">'+(maxUp?fSignPct(maxUp.deltaPct):'—')+'</div><div class="l">Mayor crecimiento</div></div>';
+  h+='<div class="stat-pill"><div class="v">'+(maxDown?fSignPct(maxDown.deltaPct):'—')+'</div><div class="l">Mayor caída</div></div>';
+  h+='</div>';
+  if(matCount>0){
+    h+='<div class="alert alert-warn"><span>&#9888;</span><div><strong>'+matCount+' cuenta'+(matCount>1?'s':'')+' con variación material</strong> '+(alertaCount>0?'(<strong>'+alertaCount+'</strong> con cambio extraordinario ≥'+res.umbralAlerta+'%) ':'')+'según los umbrales: ±'+res.umbralPct+'% Δ relativa y ≥'+res.umbralAbs+'% del total. Estas son las que el contador debe explicar en el informe de gestión.</div></div>';
+  }
+  h+='<div class="legend"><span><span class="dot dot-mat"></span> Variación material</span><span class="var-pos">▲ aumento</span><span class="var-neg">▼ caída</span></div>';
+  // Tabs ESF/ERI
+  h+='<div class="tab-bar">';
+  h+='<div class="tab active" onclick="switchResTab(this,\'resEsf\')">Estado de Situación Financiera</div>';
+  h+='<div class="tab" onclick="switchResTab(this,\'resEri\')">Estado de Resultados Integral</div>';
+  h+='</div>';
+  h+='<div class="tab-content active" id="resEsf">';
+  h+=renderTable(res.esfRows,res,'esf');
+  h+='</div>';
+  h+='<div class="tab-content" id="resEri">';
+  h+=renderTable(res.eriRows,res,'eri');
+  h+='</div>';
+  document.getElementById('resultsContent').innerHTML=h;
+}
+function switchResTab(el,id){
+  el.parentElement.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
+  el.classList.add('active');
+  el.parentElement.parentElement.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active')});
+  document.getElementById(id).classList.add('active');
+}
+function renderTable(rows,res,tipo){
+  if(rows.length===0)return '<div class="placeholder-msg">Sin datos para este estado.</div>';
+  var h='<div class="scroll-x"><table class="result-table">';
+  h+='<thead><tr>';
+  h+='<th>Cuenta</th>';
+  h+='<th class="num">'+(res.yearAct||'Actual')+'</th>';
+  h+='<th class="num">% V'+(res.yearAct?' '+res.yearAct:'')+'</th>';
+  h+='<th class="num">'+(res.yearPrev||'Anterior')+'</th>';
+  h+='<th class="num">% V'+(res.yearPrev?' '+res.yearPrev:'')+'</th>';
+  h+='<th class="num">Δ Abs</th>';
+  h+='<th class="num">Δ %</th>';
+  h+='<th>Mat.</th>';
+  h+='</tr></thead><tbody>';
+  var lastGroup='',lastSub='';
+  rows.forEach(function(r){
+    if(r.group!==lastGroup){
+      h+='<tr class="section"><td colspan="8">'+r.group+'</td></tr>';
+      lastGroup=r.group;lastSub='';
+    }
+    var dCls=r.deltaAbs>0?'var-pos':r.deltaAbs<0?'var-neg':'var-neutral';
+    var arrow=r.deltaAbs>0?'▲':r.deltaAbs<0?'▼':'—';
+    var matCls=r.material?' class="material"':'';
+    h+='<tr'+matCls+'>';
+    h+='<td>'+r.label+'</td>';
+    h+='<td class="num">'+fN(r.actual)+'</td>';
+    h+='<td class="num">'+fPct(r.pctVertActual,1)+'</td>';
+    h+='<td class="num">'+fN(r.anterior)+'</td>';
+    h+='<td class="num">'+fPct(r.pctVertAnterior,1)+'</td>';
+    h+='<td class="num '+dCls+'">'+(r.deltaAbs!==0?fSign(r.deltaAbs):'—')+'</td>';
+    h+='<td class="num '+dCls+'">'+arrow+' '+fAbsPctCapped(r.deltaPct)+'</td>';
+    h+='<td class="flag">'+(r.material?'<span class="dot dot-mat"></span>'+(r.alerta?'⚠':''):'')+'</td>';
+    h+='</tr>';
+  });
+  // Totales
+  if(tipo==='esf'){
+    var dAct=res.totEsfA.act-res.totEsfP.act;
+    var pctAct=res.totEsfP.act!==0?(dAct/Math.abs(res.totEsfP.act))*100:0;
+    h+='<tr class="total"><td>TOTAL ACTIVO</td><td class="num">'+fN(res.totEsfA.act)+'</td><td class="num">100,0%</td><td class="num">'+fN(res.totEsfP.act)+'</td><td class="num">100,0%</td><td class="num">'+fSign(dAct)+'</td><td class="num">'+fSignPct(pctAct)+'</td><td></td></tr>';
+    var dPasPat=res.totEsfA.pasPat-res.totEsfP.pasPat;
+    var pctPasPat=res.totEsfP.pasPat!==0?(dPasPat/Math.abs(res.totEsfP.pasPat))*100:0;
+    h+='<tr class="total"><td>TOTAL PASIVO + PATRIMONIO</td><td class="num">'+fN(res.totEsfA.pasPat)+'</td><td class="num">'+fPct(res.baseEsfA?(res.totEsfA.pasPat/res.baseEsfA*100):0,1)+'</td><td class="num">'+fN(res.totEsfP.pasPat)+'</td><td class="num">'+fPct(res.baseEsfP?(res.totEsfP.pasPat/res.baseEsfP*100):0,1)+'</td><td class="num">'+fSign(dPasPat)+'</td><td class="num">'+fSignPct(pctPasPat)+'</td><td></td></tr>';
+  }else{
+    var ub=res.totEriA.utilBruta,ubP=res.totEriP.utilBruta;
+    var uo=res.totEriA.utilOp,uoP=res.totEriP.utilOp;
+    var un=res.totEriA.utilNeta,unP=res.totEriP.utilNeta;
+    function totalRow(label,va,vp){
+      var d=va-vp,p=vp!==0?(d/Math.abs(vp))*100:0;
+      var pa=res.baseEriA?(va/res.baseEriA*100):0;
+      var pp=res.baseEriP?(vp/res.baseEriP*100):0;
+      return '<tr class="total"><td>'+label+'</td><td class="num">'+fN(va)+'</td><td class="num">'+fPct(pa,1)+'</td><td class="num">'+fN(vp)+'</td><td class="num">'+fPct(pp,1)+'</td><td class="num">'+fSign(d)+'</td><td class="num">'+fSignPct(p)+'</td><td></td></tr>';
+    }
+    h+=totalRow('UTILIDAD BRUTA',ub,ubP);
+    h+=totalRow('UTILIDAD OPERACIONAL',uo,uoP);
+    h+=totalRow('UTILIDAD NETA',un,unP);
+  }
+  h+='</tbody></table></div>';
+  return h;
+}
+/* ═══ CARGA AUTOMÁTICA DESDE BALANCE ═══ */
+// Construye el objeto {esfKey: monto, eriKey: monto} usando los aggregates del clasificador.
+// Devuelve valores en VALOR ABSOLUTO — el formulario aplica signo internamente vía r.sign.
+function aggregatesToRows(agg){
+  if(!agg)return null;
+  var g=function(k){return agg[k]||0};
+  var esf={
+    efectivo:        Math.abs(g('efectivo')),
+    inv_cp:          Math.abs(g('inv_cp')),
+    cxc:             Math.abs(g('cxc')),
+    deterioro:       Math.abs(g('deterioro_cartera')),
+    inventarios:     Math.abs(g('inventarios')),
+    otros_ac:        Math.abs(g('diferidos_act')+g('otros_act')),
+    ppe:             Math.abs(g('ppe')+g('depreciacion')),
+    intangibles:     Math.abs(g('intangibles')+g('amortizacion')),
+    inv_lp:          Math.abs(g('inv_lp')),
+    otros_anc:       Math.abs(g('otros_act_nc')+g('valorizaciones')),
+    obl_cp:          Math.abs(g('oblig_fin_cp')),
+    proveedores:     Math.abs(g('proveedores')),
+    cxp:             Math.abs(g('cxp')),
+    imp_cp:          Math.abs(g('impuestos')),
+    laborales:       Math.abs(g('laborales')),
+    otros_pc:        Math.abs(g('provisiones')+g('otros_pas_c')),
+    obl_lp:          Math.abs(g('oblig_fin_lp')),
+    otros_pnc:       Math.abs(g('diferidos_pas')+g('otros_pas')),
+    capital:         Math.abs(g('capital')+g('superavit_cap')),
+    reservas:        Math.abs(g('reservas')),
+    resultados_ant:  Math.abs(g('resultados_ant')),
+    resultado_ej:    Math.abs(g('resultado_ej')),
+    otros_pat:       Math.abs(g('revalorizacion')+g('superavit_val')+g('otros_pat'))
+  };
+  var eri={
+    ingresos:    Math.abs(g('ing_operacionales')),
+    devoluciones:Math.abs(g('dev_ventas')),
+    costo:       Math.abs(g('costo_ventas')+g('costo_prod')),
+    gtos_admin:  Math.abs(g('gtos_admin')+g('depam')), // depam se acumula en admin (mayoría son 5160/5260 admin)
+    gtos_ventas: Math.abs(g('gtos_ventas')),
+    otros_ing:   Math.abs(g('ing_no_operacionales')+g('otros_ing')),
+    otros_gtos:  Math.abs(g('gtos_no_op')+g('otros_gtos')),
+    gtos_fin:    Math.abs(g('gtos_fin')),
+    imp_renta:   Math.abs(g('imp_renta'))
+  };
+  return {esf:esf,eri:eri};
+}
+function aplicarRowsAvh(rows,col){ // col = 'a' (actual) o 'p' (anterior)
+  if(!rows)return;
+  ESF_ROWS.forEach(function(r){
+    var el=document.getElementById('esf_'+col+'_'+r.key);
+    if(!el)return;
+    var v=rows.esf[r.key]||0;
+    el.value=v?Math.round(v).toLocaleString('es-CO'):'';
+  });
+  ERI_ROWS.forEach(function(r){
+    var el=document.getElementById('eri_'+col+'_'+r.key);
+    if(!el)return;
+    var v=rows.eri[r.key]||0;
+    el.value=v?Math.round(v).toLocaleString('es-CO'):'';
+  });
+}
+function aplicarBalanceAvh(state,col){
+  if(!state||!state.aggregates)return;
+  var rows=aggregatesToRows(state.aggregates);
+  aplicarRowsAvh(rows,col);
+  if(state.meta){
+    if(state.meta.empresa&&!document.getElementById('cfgEmpresa').value)document.getElementById('cfgEmpresa').value=state.meta.empresa;
+    if(state.meta.nit&&!document.getElementById('cfgNit').value)document.getElementById('cfgNit').value=state.meta.nit;
+  }
+  if(typeof exoToast==='function')exoToast('Columna '+(col==='a'?'actual':'anterior')+' autollenada.','success');
+}
+function aplicarBalanceGuardadoAvh(){
+  var actual=window.BalanceLoader&&(BalanceLoader.recover('avh_actual')||BalanceLoader.recover('eeff_actual')||BalanceLoader.recover('razones_actual'));
+  var prev=window.BalanceLoader&&(BalanceLoader.recover('avh_prev')||BalanceLoader.recover('eeff_prior'));
+  if(actual)aplicarRowsAvh(aggregatesToRows(actual.aggregates),'a');
+  if(prev)aplicarRowsAvh(aggregatesToRows(prev.aggregates),'p');
+  if(actual&&actual.meta){
+    if(actual.meta.empresa&&!document.getElementById('cfgEmpresa').value)document.getElementById('cfgEmpresa').value=actual.meta.empresa;
+    if(actual.meta.nit&&!document.getElementById('cfgNit').value)document.getElementById('cfgNit').value=actual.meta.nit;
+  }
+  document.getElementById('usePriorBalanceAvh').style.display='none';
+}
+function descartarBalanceGuardadoAvh(){
+  document.getElementById('usePriorBalanceAvh').style.display='none';
+}
+(function initBalanceLoaderAvh(){
+  if(!window.BalanceLoader){console.warn('BalanceLoader no cargado');return}
+  function refreshLabels(){
+    document.getElementById('lblYearAct').textContent=document.getElementById('cfgYearAct').value||'';
+    document.getElementById('lblYearPrev').textContent=document.getElementById('cfgYearPrev').value||'';
+  }
+  refreshLabels();
+  document.getElementById('cfgYearAct').addEventListener('input',refreshLabels);
+  document.getElementById('cfgYearPrev').addEventListener('input',refreshLabels);
+  BalanceLoader.mountDropZone(document.getElementById('loaderActual'),{
+    label:'Balance año actual',
+    sublabel:'Excel del cierre del período',
+    storageKey:'avh_actual',
+    onLoad:function(state){aplicarBalanceAvh(state,'a')}
+  });
+  BalanceLoader.mountDropZone(document.getElementById('loaderPrev'),{
+    label:'Balance año anterior',
+    sublabel:'Excel del período comparativo',
+    storageKey:'avh_prev',
+    onLoad:function(state){aplicarBalanceAvh(state,'p')}
+  });
+  // Reutilizar balance ya cargado en otra herramienta (eeff o razones)
+  var saved=BalanceLoader.recover('eeff_actual')||BalanceLoader.recover('razones_actual');
+  var savedPrior=BalanceLoader.recover('eeff_prior');
+  if(saved&&saved.aggregates){
+    var box=document.getElementById('usePriorBalanceAvh');
+    var t=saved.aggregates._totals||{};
+    var msg='Detectamos un balance ya cargado'+(saved.meta&&saved.meta.empresa?(' de <strong>'+saved.meta.empresa+'</strong>'):'')+
+            ' (Activo $'+BalanceLoader.fN(t.activo||0)+').';
+    if(savedPrior)msg+=' También hay un balance comparativo disponible.';
+    msg+=' ¿Lo usamos?';
+    document.getElementById('usePriorBalanceAvhText').innerHTML=msg;
+    box.style.display='block';
+  }
+})();
+/* ═══ EJEMPLO ═══ */
+function cargarEjemplo(){
+  document.getElementById('cfgEmpresa').value='Comercial Ejemplo S.A.S';
+  document.getElementById('cfgNit').value='900.123.456-7';
+  document.getElementById('cfgYearAct').value='2025';
+  document.getElementById('cfgYearPrev').value='2024';
+  var ej={
+    esf:{
+      // [actual, anterior]
+      efectivo:[45000000,30000000],
+      cxc:[120000000,75000000],          // +60% material
+      inventarios:[180000000,140000000],  // +29% material
+      otros_ac:[15000000,12000000],
+      ppe:[320000000,280000000],
+      otros_anc:[20000000,18000000],
+      obl_cp:[80000000,55000000],         // +45% material
+      proveedores:[95000000,80000000],
+      cxp:[10000000,5000000],
+      imp_cp:[15000000,10000000],
+      laborales:[25000000,18000000],      // +39% material
+      obl_lp:[150000000,180000000],       // -16%
+      otros_pnc:[10000000,12000000],
+      capital:[100000000,100000000],
+      reservas:[35000000,30000000],
+      resultados_ant:[120000000,90000000],
+      resultado_ej:[85000000,55000000]    // +55% material
+    },
+    eri:{
+      ingresos:[1200000000,950000000],    // +26% material
+      costo:[780000000,620000000],
+      gtos_admin:[180000000,160000000],
+      gtos_ventas:[80000000,75000000],
+      otros_ing:[5000000,3000000],
+      gtos_fin:[25000000,20000000],
+      imp_renta:[55000000,38000000]
+    }
+  };
+  ESF_ROWS.forEach(function(r){
+    var v=ej.esf[r.key]||[0,0];
+    var elA=document.getElementById('esf_a_'+r.key);
+    var elP=document.getElementById('esf_p_'+r.key);
+    elA.value=Math.abs(v[0]).toLocaleString('es-CO');
+    elP.value=Math.abs(v[1]).toLocaleString('es-CO');
+  });
+  ERI_ROWS.forEach(function(r){
+    var v=ej.eri[r.key]||[0,0];
+    var elA=document.getElementById('eri_a_'+r.key);
+    var elP=document.getElementById('eri_p_'+r.key);
+    elA.value=Math.abs(v[0]).toLocaleString('es-CO');
+    elP.value=Math.abs(v[1]).toLocaleString('es-CO');
+  });
+  if(typeof exoToast==='function')exoToast('Ejemplo cargado. Haz clic en "Calcular análisis".','info');
+}
+function limpiar(){
+  document.querySelectorAll('input[data-money]').forEach(function(el){el.value=''});
+  document.getElementById('resultsContent').innerHTML='<div class="placeholder-msg"><span class="ico">&#128202;</span>Ingresa los datos del balance para los dos años y haz clic en <strong>Calcular análisis</strong>.</div>';
+  document.getElementById('downloadCard').style.display='none';
+  lastResults=null;
+}
+/* ═══ EXPORT EXCEL ═══ */
+async function exportarExcel(){
+  if(!lastResults){if(typeof exoToast==='function')exoToast('Primero calcula el análisis.','warning');return}
+  if(typeof ExcelJS==='undefined'){if(typeof exoToast==='function')exoToast('Cargando ExcelJS… intenta de nuevo.','warning');return}
+  var r=lastResults;
+  var wb=new ExcelJS.Workbook();
+  wb.creator='ExógenaDIAN.com — Análisis Vertical y Horizontal';
+  wb.created=new Date();
+  function addSheet(name,rows,base,baseP,extraTotalRows){
+    var ws=wb.addWorksheet(name);
+    ws.columns=[{width:42},{width:18},{width:12},{width:18},{width:12},{width:18},{width:12},{width:8}];
+    ws.mergeCells('A1:H1');
+    ws.getCell('A1').value=r.empresa;
+    ws.getCell('A1').font={bold:true,size:14,color:{argb:'FF1B3A5C'}};
+    ws.getCell('A1').alignment={horizontal:'center'};
+    ws.mergeCells('A2:H2');
+    ws.getCell('A2').value='NIT: '+r.nit+'  —  '+name;
+    ws.getCell('A2').alignment={horizontal:'center'};
+    ws.getCell('A2').font={size:10,color:{argb:'FF6B7280'}};
+    var hr=ws.getRow(4);
+    ['Cuenta',(r.yearAct||'Actual'),'% V',(r.yearPrev||'Anterior'),'% V','Δ Abs','Δ %','Mat.'].forEach(function(h,i){
+      var c=hr.getCell(i+1);
+      c.value=h;
+      c.font={bold:true,color:{argb:'FFFFFFFF'},size:10};
+      c.fill={type:'pattern',pattern:'solid',fgColor:{argb:'FF1B3A5C'}};
+      c.alignment={horizontal:i===0||i===7?'left':'right',vertical:'middle'};
+    });
+    var rr=5;
+    var lastGroup='';
+    rows.forEach(function(rw){
+      if(rw.group!==lastGroup){
+        var sec=ws.getRow(rr++);
+        sec.getCell(1).value=rw.group;
+        sec.getCell(1).font={bold:true,color:{argb:'FF1B3A5C'},size:10};
+        sec.getCell(1).fill={type:'pattern',pattern:'solid',fgColor:{argb:'FFD6E4F0'}};
+        ws.mergeCells(rr-1,1,rr-1,8);
+        lastGroup=rw.group;
+      }
+      var row=ws.getRow(rr++);
+      row.getCell(1).value=rw.label;
+      row.getCell(2).value=rw.actual;row.getCell(2).numFmt='#,##0';
+      row.getCell(3).value=rw.pctVertActual/100;row.getCell(3).numFmt='0.0%';
+      row.getCell(4).value=rw.anterior;row.getCell(4).numFmt='#,##0';
+      row.getCell(5).value=rw.pctVertAnterior/100;row.getCell(5).numFmt='0.0%';
+      row.getCell(6).value=rw.deltaAbs;row.getCell(6).numFmt='+#,##0;-#,##0;-';
+      if(isFinite(rw.deltaPct)){
+        row.getCell(7).value=rw.deltaPct/100;
+        row.getCell(7).numFmt='+0.0%;-0.0%;-';
+      }else{
+        row.getCell(7).value='nuevo';
+        row.getCell(7).font={italic:true,color:{argb:'FF6B7280'}};
+      }
+      row.getCell(8).value=rw.material?(rw.alerta?'⚠':'●'):'';
+      row.getCell(8).alignment={horizontal:'center'};
+      if(rw.material){
+        ['A','B','C','D','E','F','G','H'].forEach(function(col){
+          var c=row.getCell(col);
+          c.fill={type:'pattern',pattern:'solid',fgColor:{argb:'FFFFF7ED'}};
+        });
+        row.getCell(8).font={bold:true,color:{argb:'FF9A3412'}};
+      }
+      // Color de signo
+      if(rw.deltaAbs>0){row.getCell(6).font={color:{argb:'FF166534'}};row.getCell(7).font=Object.assign({},row.getCell(7).font||{},{color:{argb:'FF166534'}})}
+      else if(rw.deltaAbs<0){row.getCell(6).font={color:{argb:'FF991B1B'}};row.getCell(7).font=Object.assign({},row.getCell(7).font||{},{color:{argb:'FF991B1B'}})}
+    });
+    // Totales adicionales
+    if(extraTotalRows){
+      extraTotalRows.forEach(function(t){
+        var row=ws.getRow(rr++);
+        row.getCell(1).value=t.label;
+        row.getCell(2).value=t.va;row.getCell(2).numFmt='#,##0';
+        row.getCell(3).value=t.pa/100;row.getCell(3).numFmt='0.0%';
+        row.getCell(4).value=t.vp;row.getCell(4).numFmt='#,##0';
+        row.getCell(5).value=t.pp/100;row.getCell(5).numFmt='0.0%';
+        row.getCell(6).value=t.va-t.vp;row.getCell(6).numFmt='+#,##0;-#,##0;-';
+        var p=t.vp!==0?((t.va-t.vp)/Math.abs(t.vp)):0;
+        row.getCell(7).value=p;row.getCell(7).numFmt='+0.0%;-0.0%;-';
+        ['A','B','C','D','E','F','G','H'].forEach(function(col){
+          var c=row.getCell(col);
+          c.font={bold:true};
+          c.fill={type:'pattern',pattern:'solid',fgColor:{argb:'FFF3F4F6'}};
+          c.border={top:{style:'thin',color:{argb:'FF666666'}},bottom:{style:'double',color:{argb:'FF666666'}}};
+        });
+      });
+    }
+    return ws;
+  }
+  // Hoja ESF
+  var esfTotals=[
+    {label:'TOTAL ACTIVO',va:r.totEsfA.act,vp:r.totEsfP.act,pa:100,pp:100},
+    {label:'TOTAL PASIVO + PATRIMONIO',va:r.totEsfA.pasPat,vp:r.totEsfP.pasPat,
+     pa:r.baseEsfA?(r.totEsfA.pasPat/r.baseEsfA*100):0,
+     pp:r.baseEsfP?(r.totEsfP.pasPat/r.baseEsfP*100):0}
+  ];
+  addSheet('Análisis V H — ESF',r.esfRows,r.baseEsfA,r.baseEsfP,esfTotals);
+  // Hoja ERI
+  var eriTotals=[
+    {label:'UTILIDAD BRUTA',va:r.totEriA.utilBruta,vp:r.totEriP.utilBruta,
+     pa:r.baseEriA?(r.totEriA.utilBruta/r.baseEriA*100):0,
+     pp:r.baseEriP?(r.totEriP.utilBruta/r.baseEriP*100):0},
+    {label:'UTILIDAD OPERACIONAL',va:r.totEriA.utilOp,vp:r.totEriP.utilOp,
+     pa:r.baseEriA?(r.totEriA.utilOp/r.baseEriA*100):0,
+     pp:r.baseEriP?(r.totEriP.utilOp/r.baseEriP*100):0},
+    {label:'UTILIDAD NETA',va:r.totEriA.utilNeta,vp:r.totEriP.utilNeta,
+     pa:r.baseEriA?(r.totEriA.utilNeta/r.baseEriA*100):0,
+     pp:r.baseEriP?(r.totEriP.utilNeta/r.baseEriP*100):0}
+  ];
+  addSheet('Análisis V H — ERI',r.eriRows,r.baseEriA,r.baseEriP,eriTotals);
+  // Hoja: Variaciones materiales (resumen)
+  var wsM=wb.addWorksheet('Variaciones materiales');
+  wsM.columns=[{width:14},{width:42},{width:18},{width:18},{width:14},{width:14},{width:8}];
+  wsM.mergeCells('A1:G1');
+  wsM.getCell('A1').value='VARIACIONES MATERIALES — '+r.empresa;
+  wsM.getCell('A1').font={bold:true,size:13,color:{argb:'FF1B3A5C'}};
+  wsM.getCell('A1').alignment={horizontal:'center'};
+  wsM.mergeCells('A2:G2');
+  wsM.getCell('A2').value='Umbrales: ±'+r.umbralPct+'% Δ relativa  ·  ≥'+r.umbralAbs+'% del total  ·  alerta extraordinaria ≥'+r.umbralAlerta+'%';
+  wsM.getCell('A2').font={size:9,color:{argb:'FF6B7280'}};
+  wsM.getCell('A2').alignment={horizontal:'center'};
+  var hrM=wsM.getRow(4);
+  ['Estado','Cuenta',(r.yearAct||'Actual'),(r.yearPrev||'Anterior'),'Δ Abs','Δ %','Alerta'].forEach(function(h,i){
+    var c=hrM.getCell(i+1);
+    c.value=h;c.font={bold:true,color:{argb:'FFFFFFFF'}};
+    c.fill={type:'pattern',pattern:'solid',fgColor:{argb:'FF9A3412'}};
+    c.alignment={horizontal:i<2?'left':'right'};
+  });
+  var rm=5;
+  r.esfRows.concat(r.eriRows).filter(function(rw){return rw.material}).sort(function(a,b){return Math.abs(b.deltaPct||0)-Math.abs(a.deltaPct||0)}).forEach(function(rw){
+    var row=wsM.getRow(rm++);
+    row.getCell(1).value=rw.tipo;
+    row.getCell(2).value=rw.label;
+    row.getCell(3).value=rw.actual;row.getCell(3).numFmt='#,##0';
+    row.getCell(4).value=rw.anterior;row.getCell(4).numFmt='#,##0';
+    row.getCell(5).value=rw.deltaAbs;row.getCell(5).numFmt='+#,##0;-#,##0;-';
+    if(isFinite(rw.deltaPct)){row.getCell(6).value=rw.deltaPct/100;row.getCell(6).numFmt='+0.0%;-0.0%;-'}
+    else{row.getCell(6).value='nuevo'}
+    row.getCell(7).value=rw.alerta?'⚠':'';
+    row.getCell(7).alignment={horizontal:'center'};
+  });
+  // Hoja: Datos crudos (para auditar)
+  var wsD=wb.addWorksheet('Datos crudos');
+  wsD.columns=[{width:42},{width:18},{width:18}];
+  wsD.getCell('A1').value='Cuenta';wsD.getCell('B1').value=r.yearAct||'Actual';wsD.getCell('C1').value=r.yearPrev||'Anterior';
+  ['A1','B1','C1'].forEach(function(c){wsD.getCell(c).font={bold:true,color:{argb:'FFFFFFFF'}};wsD.getCell(c).fill={type:'pattern',pattern:'solid',fgColor:{argb:'FF1B3A5C'}}});
+  var rd=2;
+  r.esfRows.concat(r.eriRows).forEach(function(rw){
+    var row=wsD.getRow(rd++);
+    row.getCell(1).value=rw.label;
+    row.getCell(2).value=rw.actual;row.getCell(2).numFmt='#,##0';
+    row.getCell(3).value=rw.anterior;row.getCell(3).numFmt='#,##0';
+  });
+  var buf=await wb.xlsx.writeBuffer();
+  var blob=new Blob([buf],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  var name='AnalisisVH_'+(r.empresa||'EEFF').replace(/\s+/g,'_').replace(/[^A-Za-z0-9_\-]/g,'')+'_'+(r.yearAct||'')+'_vs_'+(r.yearPrev||'')+'.xlsx';
+  a.href=url;a.download=name;a.click();
+  URL.revokeObjectURL(url);
+  if(typeof exoToast==='function')exoToast('Excel descargado.','success');
+}
+/* ═══ EXPORT JSON ═══ */
+// Schema diseñado para que la Fase 3 (informe-gestion) lo consuma directo.
+function buildJsonOutput(){
+  if(!lastResults)return null;
+  var r=lastResults;
+  function clean(rows){
+    return rows.map(function(rw){
+      return {
+        cuenta_generica:rw.label,grupo:rw.group,tipo:rw.tipo,
+        actual:Math.round(rw.actual),anterior:Math.round(rw.anterior),
+        pct_vertical_actual:+rw.pctVertActual.toFixed(2),
+        pct_vertical_anterior:+rw.pctVertAnterior.toFixed(2),
+        delta_abs:Math.round(rw.deltaAbs),
+        delta_pct:isFinite(rw.deltaPct)?+rw.deltaPct.toFixed(2):null,
+        delta_signo:rw.deltaAbs>0?'positivo':rw.deltaAbs<0?'negativo':'cero',
+        material:rw.material,alerta_extraordinaria:rw.alerta
+      };
+    });
+  }
+  return {
+    schema:'avh-1.0',
+    generado:new Date().toISOString(),
+    empresa:r.empresa,nit:r.nit,
+    periodo:{actual:r.yearAct,anterior:r.yearPrev},
+    umbrales:{pct_relativa:r.umbralPct,pct_total_estado:r.umbralAbs,alerta_extraordinaria:r.umbralAlerta},
+    totales:{
+      activo_actual:r.totEsfA.act,activo_anterior:r.totEsfP.act,
+      pasivo_actual:r.totEsfA.pas,pasivo_anterior:r.totEsfP.pas,
+      patrimonio_actual:r.totEsfA.pat,patrimonio_anterior:r.totEsfP.pat,
+      ingresos_netos_actual:r.totEriA.ingNetos,ingresos_netos_anterior:r.totEriP.ingNetos,
+      utilidad_bruta_actual:r.totEriA.utilBruta,utilidad_bruta_anterior:r.totEriP.utilBruta,
+      utilidad_operacional_actual:r.totEriA.utilOp,utilidad_operacional_anterior:r.totEriP.utilOp,
+      utilidad_neta_actual:r.totEriA.utilNeta,utilidad_neta_anterior:r.totEriP.utilNeta
+    },
+    esf:clean(r.esfRows),
+    eri:clean(r.eriRows),
+    variaciones_materiales:clean(r.esfRows.concat(r.eriRows).filter(function(rw){return rw.material}))
+  };
+}
+function exportarJson(){
+  var data=buildJsonOutput();
+  if(!data){if(typeof exoToast==='function')exoToast('Primero calcula el análisis.','warning');return}
+  // Guardar copia en localStorage para que Fase 3 la lea directamente
+  try{localStorage.setItem('avh_last_result',JSON.stringify(data))}catch(e){}
+  var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  var name='AnalisisVH_'+(data.empresa||'EEFF').replace(/\s+/g,'_').replace(/[^A-Za-z0-9_\-]/g,'')+'_'+(data.periodo.actual||'')+'.json';
+  a.href=url;a.download=name;a.click();
+  URL.revokeObjectURL(url);
+  if(typeof exoToast==='function')exoToast('JSON descargado y guardado para uso en informe de gestión.','success');
+}
+/* Toast fallback */
+if(typeof exoToast!=='function'){
+  window.exoToast=function(msg,type){console.log('['+type+']',msg);if(type==='warning'||type==='error')alert(msg)};
+}
+</script>
+<section style="max-width:1280px;margin:32px auto 0;padding:0 20px 40px">
+  <h3 style="font-size:1rem;font-weight:700;color:#374151;margin-bottom:12px">Herramientas relacionadas</h3>
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <a href="estadosfinancieros.html" style="padding:8px 16px;background:#ECFDF5;color:#047857;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:500">Estados Financieros NIIF</a>
+    <a href="razones-financieras.html" style="padding:8px 16px;background:#ECFDF5;color:#047857;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:500">Razones Financieras</a>
+    <a href="dashboard.html" style="padding:8px 16px;background:#ECFDF5;color:#047857;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:500">Dashboard Financiero</a>
+    <a href="conciliacion.html" style="padding:8px 16px;background:#ECFDF5;color:#047857;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:500">Conciliación contable</a>
+  </div>
+</section>
+<link rel="stylesheet" href="shared/chat.css?v=a52afe72">
+<script defer src="shared/chat.js?v=a45c7cf2"></script>
+</body>
+</html>

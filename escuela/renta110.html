@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="../shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S7SM6ST4CC');
+</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curso Renta 110 &mdash; Escuela Contable IA | Ex&oacute;genaDIAN</title>
+<meta name="description" content="Aprende la Declaraci&oacute;n de Renta de Personas Jur&iacute;dicas (Formulario 110) haciendo. 10 m&oacute;dulos con referencias normativas del Estatuto Tributario, tips pr&aacute;cticos y herramienta real para procesar tu balance.">
+<link rel="canonical" href="https://exogenadian.com/escuela/renta110.html">
+<meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green-900:#064E3B;--green-800:#065F46;--green-700:#047857;--green-600:#059669;--green-500:#10B981;--green-400:#34D399;--green-300:#6EE7B7;--green-200:#A7F3D0;--green-100:#D1FAE5;--green-50:#ECFDF5;
+  --white:#FFF;--gray-50:#F9FAFB;--gray-100:#F3F4F6;--gray-200:#E5E7EB;--gray-300:#D1D5DB;--gray-400:#9CA3AF;--gray-500:#6B7280;--gray-600:#4B5563;--gray-700:#374151;--gray-800:#1F2937;--gray-900:#111827;
+  --amber-50:#FFFBEB;--amber-100:#FEF3C7;--amber-500:#F59E0B;--amber-700:#92400E;--amber-800:#78350F;
+  --blue-50:#EFF6FF;--blue-100:#DBEAFE;--blue-500:#3B82F6;--blue-700:#1D4ED8;
+  --purple-50:#F5F3FF;--purple-100:#EDE9FE;--purple-500:#8B5CF6;--purple-700:#6D28D9;
+  --rose-50:#FFF1F2;--rose-500:#F43F5E;--rose-700:#BE123C;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-900);line-height:1.6}
+/* ===== LAYOUT ===== */
+.curso-layout{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+@media(max-width:900px){.curso-layout{grid-template-columns:1fr}}
+/* ===== SIDEBAR ===== */
+.sidebar{background:var(--white);border-right:1px solid var(--gray-200);padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
+.sidebar-header{padding:16px 20px;border-bottom:1px solid var(--gray-100)}
+.sidebar-header a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--gray-800);font-weight:800;font-size:.9rem}
+.sidebar-header a div{width:28px;height:28px;background:linear-gradient(135deg,#059669,#34D399);border-radius:7px;display:grid;place-items:center;color:#fff;font-size:.7rem;font-weight:900}
+.sidebar-header small{display:block;font-size:.72rem;color:var(--gray-400);font-weight:500;margin-top:2px}
+.sidebar-curso{padding:16px 20px;border-bottom:1px solid var(--gray-100)}
+.sidebar-curso h3{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--purple-700);margin-bottom:4px}
+.sidebar-curso p{font-size:.88rem;font-weight:700;color:var(--gray-800)}
+.sidebar-nav{padding:12px 0;flex:1}
+.sidebar-nav a{display:flex;align-items:center;gap:10px;padding:10px 20px;text-decoration:none;color:var(--gray-500);font-size:.85rem;font-weight:500;transition:all .15s;border-left:3px solid transparent}
+.sidebar-nav a:hover{background:var(--green-50);color:var(--green-700)}
+.sidebar-nav a.active{background:var(--green-50);color:var(--green-700);font-weight:700;border-left-color:var(--green-600)}
+.sidebar-nav a .nav-num{width:24px;height:24px;border-radius:50%;background:var(--gray-100);color:var(--gray-500);display:grid;place-items:center;font-size:.72rem;font-weight:700;flex-shrink:0}
+.sidebar-nav a.active .nav-num{background:var(--green-600);color:#fff}
+.sidebar-nav a.completed .nav-num{background:var(--green-200);color:var(--green-700)}
+.sidebar-back{padding:16px 20px;border-top:1px solid var(--gray-100);margin-top:auto}
+.sidebar-back a{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--gray-400);font-size:.82rem;font-weight:500;transition:color .15s}
+.sidebar-back a:hover{color:var(--gray-700)}
+.sidebar-toggle{display:none;position:fixed;bottom:20px;left:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--green-600);color:#fff;border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 16px rgba(5,150,105,.3)}
+@media(max-width:900px){
+  .sidebar{display:none;position:fixed;top:0;left:0;z-index:199;width:280px;box-shadow:4px 0 20px rgba(0,0,0,.1)}
+  .sidebar.open{display:flex}
+  .sidebar-toggle{display:block}
+  .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:198}
+  .sidebar-overlay.open{display:block}
+}
+/* ===== MAIN CONTENT ===== */
+.curso-main{padding:32px 40px 60px;max-width:860px}
+@media(max-width:900px){.curso-main{padding:20px 16px 80px}}
+/* Module header */
+.mod-header{margin-bottom:32px}
+.mod-breadcrumb{font-size:.78rem;color:var(--gray-400);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.mod-breadcrumb a{color:var(--gray-400);text-decoration:none}
+.mod-breadcrumb a:hover{color:var(--green-600)}
+.mod-num{display:inline-flex;align-items:center;gap:8px;background:var(--purple-100);color:var(--purple-700);padding:4px 14px;border-radius:100px;font-size:.78rem;font-weight:700;margin-bottom:12px}
+.mod-header h1{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;letter-spacing:-.02em;margin-bottom:8px;line-height:1.2}
+.mod-header .mod-desc{font-size:1rem;color:var(--gray-500);max-width:600px;line-height:1.6}
+/* Content blocks */
+.content-block{margin-bottom:28px}
+.content-block h2{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;margin-bottom:12px;color:var(--gray-900);padding-bottom:8px;border-bottom:2px solid var(--green-200)}
+.content-block h3{font-size:1.05rem;font-weight:700;margin:20px 0 8px;color:var(--gray-800)}
+.content-block p{font-size:.92rem;color:var(--gray-600);line-height:1.7;margin-bottom:12px}
+.content-block ul,.content-block ol{margin:8px 0 16px 20px;display:flex;flex-direction:column;gap:6px}
+.content-block li{font-size:.9rem;color:var(--gray-600);line-height:1.6}
+/* Norma card */
+.norma{background:var(--amber-50);border:1.5px solid #FDE68A;border-radius:14px;padding:20px 24px;margin:20px 0}
+.norma-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.norma-icon{width:32px;height:32px;border-radius:8px;background:#FDE68A;display:grid;place-items:center;font-size:.9rem;flex-shrink:0}
+.norma-header h4{font-size:.92rem;font-weight:700;color:var(--amber-800)}
+.norma-header .norma-tag{font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:4px;background:var(--amber-500);color:#fff;text-transform:uppercase;letter-spacing:.04em}
+.norma blockquote{font-size:.88rem;color:#78350F;line-height:1.65;padding:12px 16px;background:rgba(255,255,255,.6);border-radius:8px;border-left:3px solid var(--amber-500);margin:8px 0;font-style:italic}
+.norma blockquote strong{font-style:normal;color:var(--amber-800)}
+.norma p{font-size:.85rem;color:#78350F;line-height:1.6;margin:8px 0}
+.norma .norma-aplicacion{font-size:.82rem;color:var(--green-800);background:var(--green-50);padding:10px 14px;border-radius:8px;border:1px solid var(--green-200);margin-top:12px}
+.norma .norma-aplicacion strong{color:var(--green-700)}
+/* Tip card */
+.tip{background:var(--blue-50);border:1.5px solid #BFDBFE;border-radius:14px;padding:18px 22px;margin:20px 0}
+.tip-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.tip-header h4{font-size:.88rem;font-weight:700;color:var(--blue-700)}
+.tip p{font-size:.88rem;color:#1E40AF;line-height:1.6}
+/* Error com&uacute;n */
+.error-comun{background:var(--rose-50);border:1.5px solid #FECACA;border-radius:14px;padding:18px 22px;margin:20px 0}
+.error-comun-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.error-comun-header h4{font-size:.88rem;font-weight:700;color:var(--rose-700)}
+.error-comun p{font-size:.88rem;color:#9F1239;line-height:1.6}
+/* Tabla normativa */
+.tabla-norm{width:100%;border-collapse:collapse;margin:16px 0;border-radius:10px;overflow:hidden;border:1px solid var(--gray-200)}
+.tabla-norm th{background:var(--gray-100);padding:10px 14px;text-align:left;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-500)}
+.tabla-norm td{padding:10px 14px;font-size:.85rem;border-top:1px solid var(--gray-100);color:var(--gray-700)}
+.tabla-norm tr:hover{background:var(--green-50)}
+.tabla-norm code{font-family:'JetBrains Mono',monospace;font-size:.8rem;background:var(--gray-100);padding:1px 6px;border-radius:4px}
+/* Ejemplo pr&aacute;ctico */
+.ejemplo{background:var(--white);border:1.5px solid var(--gray-200);border-radius:14px;overflow:hidden;margin:20px 0;box-shadow:0 2px 8px rgba(0,0,0,.03)}
+.ejemplo-header{background:var(--gray-50);padding:12px 20px;border-bottom:1px solid var(--gray-200);display:flex;align-items:center;gap:8px}
+.ejemplo-header h4{font-size:.85rem;font-weight:700;color:var(--gray-700)}
+.ejemplo-body{padding:16px 20px}
+.ejemplo-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-100);font-size:.88rem}
+.ejemplo-row:last-child{border-bottom:none}
+.ejemplo-row .label{color:var(--gray-600)}
+.ejemplo-row .value{font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.85rem}
+.ejemplo-row.total{border-top:2px solid var(--green-200);border-bottom:none;padding-top:12px;margin-top:4px}
+.ejemplo-row.total .label{font-weight:700;color:var(--gray-900)}
+.ejemplo-row.total .value{color:var(--green-700);font-size:.95rem}
+.ejemplo-row.subtotal{border-top:1.5px solid var(--gray-200);border-bottom:none;padding-top:10px;margin-top:2px}
+.ejemplo-row.subtotal .label{font-weight:600;color:var(--gray-800)}
+.ejemplo-row.subtotal .value{color:var(--purple-700);font-size:.9rem}
+/* Navigation between modules */
+.mod-nav{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:24px;border-top:2px solid var(--gray-200)}
+.mod-nav a{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:12px;text-decoration:none;font-weight:700;font-size:.92rem;transition:all .2s}
+.mod-nav .prev{background:var(--gray-100);color:var(--gray-700)}
+.mod-nav .prev:hover{background:var(--gray-200)}
+.mod-nav .next{background:var(--green-600);color:#fff;box-shadow:0 4px 12px rgba(5,150,105,.25)}
+.mod-nav .next:hover{background:var(--green-700);transform:translateY(-1px)}
+/* CTA practica */
+.cta-practica{background:linear-gradient(135deg,var(--green-50),#D1FAE5);border:2px solid var(--green-300);border-radius:16px;padding:28px 24px;text-align:center;margin:28px 0}
+.cta-practica h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;color:var(--green-800);margin-bottom:8px}
+.cta-practica p{font-size:.92rem;color:var(--green-700);margin-bottom:16px}
+.cta-practica a{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--green-600);color:#fff;border-radius:12px;font-weight:700;font-size:1rem;text-decoration:none;box-shadow:0 4px 16px rgba(5,150,105,.3);transition:all .2s}
+.cta-practica a:hover{background:var(--green-700);transform:translateY(-2px)}
+/* Progress */
+.progress-bar{height:4px;background:var(--gray-200);border-radius:2px;margin:12px 20px;overflow:hidden}
+.progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--green-500),var(--green-400));border-radius:2px;transition:width .3s}
+/* Expand/collapse */
+.expandible{margin:12px 0}
+.expandible-toggle{display:flex;align-items:center;gap:8px;width:100%;padding:10px 14px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;cursor:pointer;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:600;color:var(--gray-700);transition:all .15s;text-align:left}
+.expandible-toggle:hover{background:var(--gray-100)}
+.expandible-toggle svg{width:16px;height:16px;transition:transform .2s;flex-shrink:0}
+.expandible-content{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.expandible.open .expandible-content{max-height:2000px}
+.expandible.open .expandible-toggle svg{transform:rotate(180deg)}
+</style>
+<script async src="../shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<script defer src="../shared/pro.js?v=848fbf16"></script>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+<div class="curso-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html">
+        <div>E</div>
+        Ex&oacute;genaDIAN
+      </a>
+    </div>
+    <div class="sidebar-curso">
+      <h3>Escuela Contable IA</h3>
+      <p>Formulario 110 &mdash; Renta PJ</p>
+    </div>
+    <div class="progress-bar"><div class="fill" id="progressFill" style="width:10%"></div></div>
+    <nav class="sidebar-nav" id="sidebarNav">
+      <a href="#modulo-1" class="active" onclick="navigateTo(1)">
+        <span class="nav-num">1</span> Patrimonio bruto y l&iacute;quido
+      </a>
+      <a href="#modulo-2" onclick="navigateTo(2)">
+        <span class="nav-num">2</span> Ingresos brutos y netos
+      </a>
+      <a href="#modulo-3" onclick="navigateTo(3)">
+        <span class="nav-num">3</span> Costos y deducciones
+      </a>
+      <a href="#modulo-4" onclick="navigateTo(4)">
+        <span class="nav-num">4</span> Gastos no deducibles
+      </a>
+      <a href="#modulo-5" onclick="navigateTo(5)">
+        <span class="nav-num">5</span> Anticipo y p&eacute;rdidas
+      </a>
+      <a href="#modulo-6" onclick="navigateTo(6)">
+        <span class="nav-num">6</span> Beneficios y reg&iacute;menes
+      </a>
+      <a href="#modulo-7" onclick="navigateTo(7)">
+        <span class="nav-num">7</span> Comparaci&oacute;n patrimonial
+      </a>
+      <a href="#modulo-8" onclick="navigateTo(8)">
+        <span class="nav-num">8</span> Conciliaci&oacute;n fiscal 2516
+      </a>
+      <a href="#modulo-9" onclick="navigateTo(9)">
+        <span class="nav-num">9</span> Renta l&iacute;quida, TTD y tasa
+      </a>
+      <a href="#modulo-10" onclick="navigateTo(10)">
+        <span class="nav-num">10</span> Pr&aacute;ctica con tu balance
+      </a>
+    </nav>
+    <div class="sidebar-back">
+      <a href="../escuela.html">&larr; Volver a la Escuela</a>
+    </div>
+  </aside>
+  <div class="curso-main">
+    <section id="modulo-1" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">Renta 110</a> &rsaquo; M&oacute;dulo 1
+        </div>
+        <div class="mod-num">M&oacute;dulo 1 de 10</div>
+        <h1>Patrimonio bruto y l&iacute;quido &mdash; Arts. 261&ndash;287 ET</h1>
+        <p class="mod-desc">El punto de partida de la declaraci&oacute;n de renta es el patrimonio. Aqu&iacute; se define cu&aacute;nto &ldquo;tiene&rdquo; tu empresa a 31 de diciembre y cu&aacute;nto debe, para obtener el patrimonio l&iacute;quido que la DIAN cruza con la informaci&oacute;n ex&oacute;gena.</p>
+      </div>
+      <div class="content-block">
+        <h2>Patrimonio bruto: todos los activos fiscales</h2>
+        <p>El patrimonio bruto es la suma de todos los bienes y derechos apreciables en dinero que posea el contribuyente a 31 de diciembre del a&ntilde;o gravable, tanto en Colombia como en el exterior.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 261 del Estatuto Tributario</h4>
+            <span class="norma-tag">Obligatorio</span>
+          </div>
+          <blockquote>
+            <strong>&ldquo;El patrimonio bruto est&aacute; constituido por el total de los bienes y derechos</strong> apreciables en dinero, pose&iacute;dos por el contribuyente en el &uacute;ltimo d&iacute;a del a&ntilde;o o per&iacute;odo gravable.&rdquo;
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>En la pr&aacute;ctica:</strong> Incluye absolutamente todo: cuentas bancarias, inversiones, cartera, inventarios, propiedades, veh&iacute;culos, intangibles, activos en el exterior. Si tiene valor econ&oacute;mico y es del contribuyente, va al patrimonio bruto.
+          </div>
+        </div>
+        <h3>Valor patrimonial de los activos</h3>
+        <p>Cada tipo de activo tiene reglas espec&iacute;ficas para determinar su valor fiscal, que no siempre coincide con el valor contable bajo NIIF:</p>
+        <table class="tabla-norm">
+          <thead>
+            <tr><th>Activo</th><th>Regla fiscal</th><th>Art&iacute;culo ET</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Inversiones en acciones</strong></td>
+              <td>Costo fiscal = costo de adquisici&oacute;n (no valor intr&iacute;nseco)</td>
+              <td>Art. 271</td>
+            </tr>
+            <tr>
+              <td><strong>T&iacute;tulos de renta fija</strong></td>
+              <td>Costo de adquisici&oacute;n m&aacute;s intereses causados pendientes</td>
+              <td>Art. 271</td>
+            </tr>
+            <tr>
+              <td><strong>Cuentas por cobrar</strong></td>
+              <td>Valor nominal menos provisiones aceptadas fiscalmente</td>
+              <td>Art. 270</td>
+            </tr>
+            <tr>
+              <td><strong>Inventarios</strong></td>
+              <td>Costo de adquisici&oacute;n o producci&oacute;n, sistema permanente</td>
+              <td>Art. 267</td>
+            </tr>
+            <tr>
+              <td><strong>Activos fijos (PPE)</strong></td>
+              <td>Costo de adquisici&oacute;n menos depreciaci&oacute;n fiscal acumulada</td>
+              <td>Art. 277</td>
+            </tr>
+            <tr>
+              <td><strong>Inmuebles</strong></td>
+              <td>Mayor entre costo fiscal y aval&uacute;o catastral</td>
+              <td>Art. 277</td>
+            </tr>
+            <tr>
+              <td><strong>Intangibles</strong></td>
+              <td>Costo de adquisici&oacute;n menos amortizaci&oacute;n fiscal</td>
+              <td>Art. 279</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p>El <strong>aval&uacute;o catastral</strong> actualizado puede ser mayor al costo fiscal del inmueble. Recuerda que el Art. 277 ET exige reportar el <strong>mayor valor</strong> entre ambos. Verifica siempre el certificado catastral vigente al 31 de diciembre.</p>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n que la DIAN detecta</h4>
+          </div>
+          <p>Reportar inversiones en acciones al <strong>valor intr&iacute;nseco o valor de mercado</strong> en vez del costo de adquisici&oacute;n. La DIAN cruza con la informaci&oacute;n ex&oacute;gena reportada por la sociedad emisora (formato 1010) y detecta inconsistencias.</p>
+        </div>
+        <h3>Pasivos deducibles del patrimonio</h3>
+        <p>No cualquier pasivo reduce el patrimonio bruto. Los pasivos deben cumplir requisitos estrictos para ser aceptados fiscalmente:</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culos 283&ndash;286 ET &mdash; Pasivos aceptados</h4>
+          </div>
+          <blockquote>
+            <strong>Art. 283:</strong> &ldquo;Los contribuyentes podr&aacute;n deducir de su patrimonio bruto las <strong>deudas a cargo</strong> del contribuyente que sean reales, que est&eacute;n debidamente respaldadas y que cumplan los requisitos de ley.&rdquo;
+          </blockquote>
+          <p><strong>Requisitos clave de los pasivos (Art. 283&ndash;286):</strong></p>
+          <ul style="margin:8px 0 12px 18px;list-style:disc">
+            <li>Deben estar respaldados por documentos id&oacute;neos con identificaci&oacute;n del acreedor (NIT o c&eacute;dula)</li>
+            <li>Los intereses no pueden exceder la tasa m&aacute;xima legal</li>
+            <li>Pasivos con vinculados econ&oacute;micos del exterior: regla de subcapitalizaci&oacute;n (Art. 118-1)</li>
+            <li>Pasivos con proveedores ficticios o inexistentes = rechazados + sanci&oacute;n</li>
+          </ul>
+        </div>
+        <h3>Subcapitalizaci&oacute;n: el l&iacute;mite que muchos olvidan</h3>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 118-1 ET &mdash; Subcapitalizaci&oacute;n</h4>
+            <span class="norma-tag">Clave</span>
+          </div>
+          <blockquote>
+            Los intereses de deudas con <strong>vinculados econ&oacute;micos</strong> nacionales o del exterior solo son deducibles en la proporci&oacute;n en que la deuda no exceda el resultado de multiplicar por <strong>2</strong> el patrimonio l&iacute;quido del contribuyente a 31 de diciembre del a&ntilde;o anterior.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>F&oacute;rmula:</strong> Deuda m&aacute;xima deducible = Patrimonio l&iacute;quido a&ntilde;o anterior &times; 2. Si la deuda con vinculados excede ese monto, los intereses del exceso NO son deducibles. La DIAN cruza esto con el formato 1001 de informaci&oacute;n ex&oacute;gena.
+          </div>
+        </div>
+        <h3>Patrimonio l&iacute;quido</h3>
+        <p>La f&oacute;rmula es simple pero sus implicaciones son enormes:</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <h4>Ejemplo: Patrimonio de Distribuidora ABC SAS &mdash; AG 2025</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Efectivo y bancos (Grupo 11)</span><span class="value">$ 180.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Inversiones en acciones (Grupo 12)</span><span class="value">$ 95.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Cuentas por cobrar (Grupo 13)</span><span class="value">$ 420.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Inventarios (Grupo 14)</span><span class="value">$ 310.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Propiedad, planta y equipo neto (Grupo 15)</span><span class="value">$ 580.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Intangibles (Grupo 16)</span><span class="value">$ 45.000.000</span></div>
+            <div class="ejemplo-row subtotal"><span class="label">= Patrimonio bruto</span><span class="value">$ 1.630.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Obligaciones financieras (Grupo 21)</span><span class="value">$ 350.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Proveedores (Grupo 22)</span><span class="value">$ 280.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Cuentas por pagar (Grupo 23)</span><span class="value">$ 120.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Impuestos por pagar (Grupo 24)</span><span class="value">$ 85.000.000</span></div>
+            <div class="ejemplo-row subtotal"><span class="label">= Total pasivos deducibles</span><span class="value">$ 835.000.000</span></div>
+            <div class="ejemplo-row total"><span class="label">= Patrimonio l&iacute;quido fiscal</span><span class="value">$ 795.000.000</span></div>
+          </div>
+        </div>
+        <div class="expandible" onclick="this.classList.toggle('open')">
+          <button class="expandible-toggle">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            Ver: Grupos PUC relacionados con patrimonio (Grupos 1 y 2)
+          </button>
+          <div class="expandible-content" style="padding:12px 14px">
+            <table class="tabla-norm">
+              <thead><tr><th>Cuenta</th><th>Nombre</th><th>Casilla F110</th></tr></thead>
+              <tbody>
+                <tr><td><code>11</code></td><td>Disponible (bancos, caja)</td><td>Patrimonio bruto</td></tr>
+                <tr><td><code>12</code></td><td>Inversiones</td><td>Patrimonio bruto</td></tr>
+                <tr><td><code>13</code></td><td>Deudores (cartera)</td><td>Patrimonio bruto</td></tr>
+                <tr><td><code>14</code></td><td>Inventarios</td><td>Patrimonio bruto</td></tr>
+                <tr><td><code>15</code></td><td>Propiedad, planta y equipo</td><td>Patrimonio bruto</td></tr>
+                <tr><td><code>16</code></td><td>Intangibles</td><td>Patrimonio bruto</td></tr>
+                <tr><td><code>17</code></td><td>Diferidos</td><td>Patrimonio bruto</td></tr>
+                <tr><td><code>21</code></td><td>Obligaciones financieras</td><td>Pasivos</td></tr>
+                <tr><td><code>22</code></td><td>Proveedores</td><td>Pasivos</td></tr>
+                <tr><td><code>23</code></td><td>Cuentas por pagar</td><td>Pasivos</td></tr>
+                <tr><td><code>24</code></td><td>Impuestos, grav&aacute;menes y tasas</td><td>Pasivos</td></tr>
+                <tr><td><code>25</code></td><td>Obligaciones laborales</td><td>Pasivos</td></tr>
+                <tr><td><code>26</code></td><td>Pasivos estimados y provisiones</td><td>Pasivos (si fiscalmente aceptados)</td></tr>
+                <tr><td><code>27</code></td><td>Diferidos (cr&eacute;dito)</td><td>Pasivos</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <span></span>
+        <a href="#modulo-2" class="next" onclick="navigateTo(2)">M&oacute;dulo 2: Ingresos &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-2" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">Renta 110</a> &rsaquo; M&oacute;dulo 2
+        </div>
+        <div class="mod-num">M&oacute;dulo 2 de 10</div>
+        <h1>Ingresos brutos y netos &mdash; Arts. 26&ndash;57-2 ET</h1>
+        <p class="mod-desc">El segundo gran bloque de la renta: cu&aacute;nto recibi&oacute; la empresa, qu&eacute; NO constituye renta, y c&oacute;mo llegar a los ingresos netos que ser&aacute;n la base para la depuraci&oacute;n.</p>
+      </div>
+      <div class="content-block">
+        <h2>Ingresos brutos: el punto de partida</h2>
+        <p>Toda la depuraci&oacute;n de la renta comienza con los ingresos brutos. Para las personas jur&iacute;dicas, incluyen todo ingreso ordinario y extraordinario que sea susceptible de producir un incremento neto del patrimonio.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 26 ET &mdash; Determinaci&oacute;n del impuesto</h4>
+            <span class="norma-tag">Base</span>
+          </div>
+          <blockquote>
+            <strong>&ldquo;La renta l&iacute;quida gravable se determina as&iacute;:</strong> De la suma de todos los ingresos ordinarios y extraordinarios realizados en el a&ntilde;o o per&iacute;odo gravable, se restan las devoluciones, rebajas y descuentos, para obtener los ingresos netos. De los ingresos netos se restan los costos, para obtener la renta bruta. De la renta bruta se restan las deducciones, para obtener la renta l&iacute;quida.&rdquo;
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>La f&oacute;rmula completa:</strong> Ingresos brutos &minus; Devoluciones &minus; INCRNGO = Ingresos netos &minus; Costos = Renta bruta &minus; Deducciones = Renta l&iacute;quida.
+          </div>
+        </div>
+        <h3>Ingresos que NO constituyen renta ni ganancia ocasional (INCRNGO)</h3>
+        <p>Estos ingresos se reciben pero no se gravan. Son taxativos &mdash; solo los que dice la ley. Los m&aacute;s comunes para personas jur&iacute;dicas:</p>
+        <table class="tabla-norm">
+          <thead>
+            <tr><th>INCRNGO</th><th>Descripci&oacute;n</th><th>Art&iacute;culo ET</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Prima en colocaci&oacute;n de acciones</strong></td>
+              <td>El mayor valor recibido sobre el valor nominal al emitir acciones</td>
+              <td>Art. 36</td>
+            </tr>
+            <tr>
+              <td><strong>Utilidad en venta de acciones</strong></td>
+              <td>Utilidad en la enajenaci&oacute;n de acciones inscritas en bolsa (hasta cierto l&iacute;mite)</td>
+              <td>Art. 36-1</td>
+            </tr>
+            <tr>
+              <td><strong>Indemnizaciones por da&ntilde;o emergente</strong></td>
+              <td>Cuando se destinen a reconstruir el activo siniestrado</td>
+              <td>Art. 45</td>
+            </tr>
+            <tr>
+              <td><strong>Dividendos no gravados</strong></td>
+              <td>La parte de dividendos que fue gravada en cabeza de la sociedad que los distribuye</td>
+              <td>Art. 49</td>
+            </tr>
+            <tr>
+              <td><strong>Aportes a fondos de pensiones</strong></td>
+              <td>Aportes del empleador a fondos de pensiones voluntarias</td>
+              <td>Art. 126-1</td>
+            </tr>
+            <tr>
+              <td><strong>Ingresos por reversi&oacute;n de provisiones</strong></td>
+              <td>Cuando la provisi&oacute;n no fue deducible en su momento</td>
+              <td>Art. 195</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 49 ET &mdash; Dividendos no gravados</h4>
+            <span class="norma-tag">Frecuente</span>
+          </div>
+          <blockquote>
+            Cuando la sociedad que distribuye dividendos ha <strong>gravado integralmente sus utilidades</strong>, los dividendos percibidos por el socio no constituyen renta. La sociedad debe certificar la proporci&oacute;n gravada y no gravada de las utilidades distribuidas.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Clave pr&aacute;ctica:</strong> Exige siempre el certificado del Art. 49 ET a la sociedad que distribuye dividendos. Sin ese certificado, la DIAN puede gravar la totalidad del dividendo. El formato 1001 de ex&oacute;gena reporta estos valores.
+          </div>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n que la DIAN detecta</h4>
+          </div>
+          <p>Tratar como INCRNGO los dividendos <strong>sin tener el certificado del Art. 49</strong>. La DIAN cruza la ex&oacute;gena del formato 1001 con las casillas de INCRNGO del formulario 110 y genera requerimiento si no cuadra.</p>
+        </div>
+        <h3>Ganancia ocasional: ingresos separados</h3>
+        <p>Algunos ingresos no van a la renta ordinaria sino a la secci&oacute;n de ganancia ocasional del formulario 110. Se gravan con tarifa diferente (15% general, 20% loter&iacute;as):</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Arts. 299&ndash;317 ET &mdash; Ganancias ocasionales</h4>
+          </div>
+          <table class="tabla-norm">
+            <thead><tr><th>Concepto</th><th>Tarifa</th><th>Art&iacute;culo</th></tr></thead>
+            <tbody>
+              <tr><td>Venta de activos fijos pose&iacute;dos &ge; 2 a&ntilde;os</td><td>15%</td><td>Art. 300</td></tr>
+              <tr><td>Herencias, legados y donaciones</td><td>15%</td><td>Art. 302</td></tr>
+              <tr><td>Loter&iacute;as, rifas, apuestas</td><td>20%</td><td>Art. 304</td></tr>
+              <tr><td>Utilidad en liquidaci&oacute;n de sociedades</td><td>15%</td><td>Art. 301</td></tr>
+            </tbody>
+          </table>
+          <div class="norma-aplicacion">
+            <strong>Recuerda:</strong> La ganancia ocasional por venta de activos fijos se calcula restando el costo fiscal del activo al precio de venta. Solo aplica si el activo se posey&oacute; 2 a&ntilde;os o m&aacute;s; si fue menos, la utilidad va a renta ordinaria.
+          </div>
+        </div>
+        <h3>Ingresos netos: la f&oacute;rmula</h3>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <h4>Ejemplo: Ingresos de Distribuidora ABC SAS &mdash; AG 2025</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Ingresos operacionales (ventas)</span><span class="value">$ 4.200.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Ingresos no operacionales (intereses, otros)</span><span class="value">$ 85.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Dividendos recibidos</span><span class="value">$ 30.000.000</span></div>
+            <div class="ejemplo-row subtotal"><span class="label">= Ingresos brutos</span><span class="value">$ 4.315.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Devoluciones en ventas</span><span class="value">$ 65.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) INCRNGO: Dividendos no gravados (Art. 49)</span><span class="value">$ 30.000.000</span></div>
+            <div class="ejemplo-row total"><span class="label">= Ingresos netos</span><span class="value">$ 4.220.000.000</span></div>
+          </div>
+        </div>
+        <div class="expandible" onclick="this.classList.toggle('open')">
+          <button class="expandible-toggle">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            Ver: Cuentas PUC del Grupo 4 &mdash; Ingresos
+          </button>
+          <div class="expandible-content" style="padding:12px 14px">
+            <table class="tabla-norm">
+              <thead><tr><th>Cuenta</th><th>Nombre</th><th>Uso en Renta</th></tr></thead>
+              <tbody>
+                <tr><td><code>41</code></td><td>Ingresos operacionales</td><td>Ingresos brutos ordinarios</td></tr>
+                <tr><td><code>42</code></td><td>Ingresos no operacionales</td><td>Ingresos extraordinarios</td></tr>
+                <tr><td><code>4210</code></td><td>Financieros (intereses)</td><td>Ingresos brutos</td></tr>
+                <tr><td><code>4215</code></td><td>Dividendos y participaciones</td><td>INCRNGO si Art. 49 aplica</td></tr>
+                <tr><td><code>4220</code></td><td>Arrendamientos</td><td>Ingresos brutos</td></tr>
+                <tr><td><code>4245</code></td><td>Utilidad en venta de activos</td><td>GO si activo fijo &ge;2 a&ntilde;os</td></tr>
+                <tr><td><code>4175</code></td><td>Devoluciones, rebajas y descuentos</td><td>Se restan de ingresos</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p><strong>Diferencia contable vs. fiscal:</strong> En NIIF puedes tener ingresos medidos a valor razonable que fiscalmente no est&aacute;n realizados. El Art. 28 ET establece cu&aacute;ndo se entienden &ldquo;realizados&rdquo; los ingresos para efectos fiscales. Esto genera diferencias temporarias que debes controlar en el formato 2516.</p>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-1" class="prev" onclick="navigateTo(1)">&larr; M&oacute;dulo 1</a>
+        <a href="#modulo-3" class="next" onclick="navigateTo(3)">M&oacute;dulo 3: Costos &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-3" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">Renta 110</a> &rsaquo; M&oacute;dulo 3
+        </div>
+        <div class="mod-num">M&oacute;dulo 3 de 10</div>
+        <h1>Costos y deducciones &mdash; Arts. 58&ndash;177 ET</h1>
+        <p class="mod-desc">Los costos reducen la renta bruta; las deducciones reducen la renta l&iacute;quida. Pero la DIAN exige requisitos estrictos para aceptarlos. Este m&oacute;dulo cubre cada regla que debes dominar.</p>
+      </div>
+      <div class="content-block">
+        <h2>Costos: del ingreso a la renta bruta</h2>
+        <p>Los costos son las erogaciones directamente relacionadas con la generaci&oacute;n del ingreso: costo de la mercanc&iacute;a vendida, costo de los servicios prestados, materia prima, mano de obra directa, CIF.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 58 ET &mdash; Realizaci&oacute;n de los costos</h4>
+            <span class="norma-tag">Base</span>
+          </div>
+          <blockquote>
+            Para los contribuyentes obligados a llevar contabilidad, los costos <strong>se entienden realizados cuando se devenguen contablemente</strong>, siempre que cumplan los requisitos de los art&iacute;culos 107 y 771-2 del Estatuto Tributario.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Dos condiciones simult&aacute;neas:</strong> 1) Que est&eacute; causado contablemente (devengo), y 2) Que tenga soporte en factura electr&oacute;nica o documento equivalente (Art. 771-2).
+          </div>
+        </div>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 771-2 ET &mdash; Soporte de costos y deducciones</h4>
+            <span class="norma-tag">Cr&iacute;tico</span>
+          </div>
+          <blockquote>
+            <strong>&ldquo;Para la procedencia de costos y deducciones en el impuesto sobre la renta,</strong> se requerir&aacute;n facturas con el cumplimiento de los requisitos establecidos en los art&iacute;culos 617 y 618, expedidas por los sujetos obligados a facturar.&rdquo;
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Desde 2024:</strong> La factura electr&oacute;nica de venta es obligatoria como soporte. Sin factura electr&oacute;nica v&aacute;lida = costo rechazado. Excepciones: adquisiciones a no obligados a facturar con documento soporte (Res. 167/2021).
+          </div>
+        </div>
+        <h2>Deducciones: los gastos aceptados fiscalmente</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 107 ET &mdash; Requisito general de las deducciones</h4>
+            <span class="norma-tag">Fundamental</span>
+          </div>
+          <blockquote>
+            <strong>&ldquo;Son deducibles las expensas realizadas durante el a&ntilde;o o per&iacute;odo gravable</strong> que tengan relaci&oacute;n de causalidad con la actividad productora de renta, siempre que sean necesarias y proporcionadas de acuerdo con cada actividad.&rdquo;
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>La triple prueba del Art. 107:</strong> Todo gasto debe superar tres filtros: (1) <strong>Causalidad</strong> &mdash; relaci&oacute;n con la actividad generadora de renta; (2) <strong>Necesidad</strong> &mdash; que sea indispensable; (3) <strong>Proporcionalidad</strong> &mdash; razonable en monto seg&uacute;n la actividad.
+          </div>
+        </div>
+        <h3>Deducciones espec&iacute;ficas m&aacute;s comunes</h3>
+        <table class="tabla-norm">
+          <thead>
+            <tr><th>Deducci&oacute;n</th><th>Regla clave</th><th>Art&iacute;culo ET</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Salarios</strong></td>
+              <td>Deducibles si se pagan aportes a seguridad social y parafiscales</td>
+              <td>Art. 108</td>
+            </tr>
+            <tr>
+              <td><strong>Impuestos pagados</strong></td>
+              <td>Industria y comercio (ICA), predial, veh&iacute;culos = 100% deducibles. GMF = 50%</td>
+              <td>Art. 115</td>
+            </tr>
+            <tr>
+              <td><strong>Depreciaci&oacute;n</strong></td>
+              <td>Por l&iacute;nea recta o m&eacute;todo aceptado. Vidas &uacute;tiles fiscales definidas</td>
+              <td>Arts. 128&ndash;140</td>
+            </tr>
+            <tr>
+              <td><strong>Amortizaci&oacute;n</strong></td>
+              <td>Intangibles y diferidos: t&eacute;cnica contable aceptada fiscalmente</td>
+              <td>Art. 142&ndash;143</td>
+            </tr>
+            <tr>
+              <td><strong>Provisiones de cartera</strong></td>
+              <td>Solo si cumplen requisitos de antig&uuml;edad y m&eacute;todo fiscal autorizado</td>
+              <td>Art. 145</td>
+            </tr>
+            <tr>
+              <td><strong>Arrendamientos</strong></td>
+              <td>Deducibles con causalidad + factura</td>
+              <td>Art. 107</td>
+            </tr>
+            <tr>
+              <td><strong>Intereses</strong></td>
+              <td>Deducibles con l&iacute;mite de subcapitalizaci&oacute;n (vinculados)</td>
+              <td>Arts. 117, 118-1</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Gastos en el exterior</h3>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 122 ET &mdash; L&iacute;mite a gastos en el exterior</h4>
+          </div>
+          <blockquote>
+            Los gastos efectuados en el exterior que tengan relaci&oacute;n de causalidad con rentas de fuente colombiana son deducibles, pero <strong>si no se practic&oacute; retenci&oacute;n en la fuente</strong>, la deducci&oacute;n no puede exceder el <strong>15%</strong> de la renta l&iacute;quida. Salvo excepciones para ciertos conceptos espec&iacute;ficos.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Excepci&oacute;n com&uacute;n:</strong> Se aceptan sin l&iacute;mite los costos y gastos en el exterior por importaci&oacute;n de mercanc&iacute;as, intereses sobre cr&eacute;ditos externos a corto plazo, y otros listados en el Art. 122 ET.
+          </div>
+        </div>
+        <h3>Bancarizaci&oacute;n: el requisito que tumba deducciones</h3>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 771-5 ET &mdash; Medios de pago para aceptaci&oacute;n fiscal</h4>
+            <span class="norma-tag">Cr&iacute;tico</span>
+          </div>
+          <blockquote>
+            Para efectos de su reconocimiento fiscal como costo, deducci&oacute;n o impuesto descontable, los pagos que efect&uacute;en los contribuyentes deber&aacute;n realizarse mediante <strong>dep&oacute;sitos en cuentas bancarias, giros, transferencias bancarias, cheques</strong> o tarjetas de cr&eacute;dito, d&eacute;bito o cualquier otro medio electr&oacute;nico.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>L&iacute;mite en efectivo:</strong> Los pagos individuales que superen <strong>100 UVT</strong> ($5.236.900 en 2026) deben hacerse por canal bancario. Adem&aacute;s, el total de pagos en efectivo del a&ntilde;o no puede superar cierto porcentaje de los costos y deducciones totales (decreciente por a&ntilde;o, hoy pr&aacute;cticamente 0% para montos significativos).
+          </div>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n que la DIAN detecta</h4>
+          </div>
+          <p>Pagos en efectivo a proveedores por valores superiores a 100 UVT registrados como costo deducible. La DIAN cruza con la informaci&oacute;n de movimientos bancarios y la ex&oacute;gena de entidades financieras (formato 1019). <strong>Si no hay soporte bancario, el costo se rechaza.</strong></p>
+        </div>
+        <div class="expandible" onclick="this.classList.toggle('open')">
+          <button class="expandible-toggle">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            Ver: Cuentas PUC de costos y gastos (Grupos 5 y 6)
+          </button>
+          <div class="expandible-content" style="padding:12px 14px">
+            <table class="tabla-norm">
+              <thead><tr><th>Cuenta</th><th>Nombre</th><th>Clasificaci&oacute;n fiscal</th></tr></thead>
+              <tbody>
+                <tr><td><code>51</code></td><td>Gastos de administraci&oacute;n</td><td>Deducciones</td></tr>
+                <tr><td><code>52</code></td><td>Gastos de ventas</td><td>Deducciones</td></tr>
+                <tr><td><code>5305</code></td><td>Gastos financieros &mdash; intereses</td><td>Deducciones (l&iacute;mite subcapitalizaci&oacute;n)</td></tr>
+                <tr><td><code>5310</code></td><td>Gastos financieros &mdash; GMF</td><td>50% deducible (Art. 115)</td></tr>
+                <tr><td><code>61</code></td><td>Costo de ventas</td><td>Costos</td></tr>
+                <tr><td><code>62</code></td><td>Compras</td><td>Costos</td></tr>
+                <tr><td><code>7</code></td><td>Costos de producci&oacute;n</td><td>Costos</td></tr>
+                <tr><td><code>5115</code></td><td>Impuestos asumidos</td><td>Deducibles (Art. 115)</td></tr>
+                <tr><td><code>5105</code></td><td>Gastos de personal</td><td>Deducibles si seguridad social al d&iacute;a</td></tr>
+                <tr><td><code>5160</code></td><td>Depreciaciones</td><td>Deducibles (Arts. 128-140)</td></tr>
+                <tr><td><code>5165</code></td><td>Amortizaciones</td><td>Deducibles (Art. 142)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p><strong>Depreciaci&oacute;n fiscal vs. contable:</strong> Bajo NIIF puedes usar vidas &uacute;tiles basadas en uso real. Pero fiscalmente el Art. 137 ET define tasas m&aacute;ximas: edificaciones 2.22% anual, maquinaria 10%, equipos de computaci&oacute;n 20%, veh&iacute;culos 20%. La diferencia genera partida en el formato 2516.</p>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-2" class="prev" onclick="navigateTo(2)">&larr; M&oacute;dulo 2</a>
+        <a href="#modulo-4" class="next" onclick="navigateTo(4)">M&oacute;dulo 4: No deducibles &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-4" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">Renta 110</a> &rsaquo; M&oacute;dulo 4
+        </div>
+        <div class="mod-num">M&oacute;dulo 4 de 10</div>
+        <h1>Gastos no deducibles &mdash; Las 63 reglas DIAN</h1>
+        <p class="mod-desc">La DIAN tiene al menos 63 reglas de verificaci&oacute;n autom&aacute;tica para rechazar gastos. Aqu&iacute; las 18 m&aacute;s frecuentes con su fundamento legal y c&oacute;mo evitar que te rechacen deducciones.</p>
+      </div>
+      <div class="content-block">
+        <h2>Las reglas que m&aacute;s golpean a las personas jur&iacute;dicas</h2>
+        <p>La DIAN cruza autom&aacute;ticamente la declaraci&oacute;n de renta con la informaci&oacute;n ex&oacute;gena, las declaraciones de IVA, retenci&oacute;n y los soportes electr&oacute;nicos. Estos son los 18 rechazos m&aacute;s comunes:</p>
+        <table class="tabla-norm">
+          <thead>
+            <tr><th>#</th><th>Gasto / Situaci&oacute;n</th><th>Regla</th><th>&iquest;Deducible?</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Gasto sin factura electr&oacute;nica</td><td>Art. 771-2 ET</td><td style="color:#BE123C;font-weight:700">NO</td></tr>
+            <tr><td>2</td><td>Pago en efectivo &gt;100 UVT individual</td><td>Art. 771-5 ET</td><td style="color:#BE123C;font-weight:700">NO</td></tr>
+            <tr><td>3</td><td>Gasto causado pero no pagado (a quien no lleva contabilidad)</td><td>Art. 105 ET</td><td style="color:#BE123C;font-weight:700">NO</td></tr>
+            <tr><td>4</td><td>Salarios sin pago de seguridad social</td><td>Art. 108 ET</td><td style="color:#BE123C;font-weight:700">NO</td></tr>
+            <tr><td>5</td><td>Parafiscales adeudados (SENA, ICBF, CCF)</td><td>Art. 108 par. 1 ET</td><td style="color:#BE123C;font-weight:700">NO</td></tr>
+            <tr><td>6</td><td>GMF (4&times;1000) &mdash; parte no deducible</td><td>Art. 115 ET</td><td style="color:#92400E;font-weight:700">50%</td></tr>
+            <tr><td>7</td><td>Multas, sanciones y penalidades</td><td>Art. 105 num. 2 ET</td><td style="color:#BE123C;font-weight:700">NO</td></tr>
+            <tr><td>8</td><td>Gastos de representaci&oacute;n sin soporte de relaci&oacute;n causal</td><td>Art. 124 ET</td><td style="color:#BE123C;font-weight:700">NO</td></tr>
+            <tr><td>9</td><td>Gastos con proveedores ficticios o inexistentes</td><td>Art. 671 ET</td><td style="color:#BE123C;font-weight:700">NO + sanci&oacute;n</td></tr>
+            <tr><td>10</td><td>Donaciones sin certificaci&oacute;n o a entidades no calificadas</td><td>Art. 125 ET</td><td style="color:#BE123C;font-weight:700">NO</td></tr>
+            <tr><td>11</td><td>Gastos a vinculados sin precios de transferencia</td><td>Art. 260-1 ET</td><td style="color:#BE123C;font-weight:700">Parcial</td></tr>
+            <tr><td>12</td><td>Intereses que exceden subcapitalizaci&oacute;n</td><td>Art. 118-1 ET</td><td style="color:#BE123C;font-weight:700">NO (exceso)</td></tr>
+            <tr><td>13</td><td>Depreciaci&oacute;n que excede tasas m&aacute;ximas fiscales</td><td>Art. 137 ET</td><td style="color:#BE123C;font-weight:700">NO (exceso)</td></tr>
+            <tr><td>14</td><td>Gastos personales del socio como gasto de empresa</td><td>Art. 107 ET</td><td style="color:#BE123C;font-weight:700">NO</td></tr>
+            <tr><td>15</td><td>Gastos sin relaci&oacute;n de causalidad con renta</td><td>Art. 107 ET</td><td style="color:#BE123C;font-weight:700">NO</td></tr>
+            <tr><td>16</td><td>IVA descontable llevado como gasto</td><td>Art. 86 ET</td><td style="color:#BE123C;font-weight:700">NO (doble beneficio)</td></tr>
+            <tr><td>17</td><td>Pagos a pa&iacute;ses no cooperantes sin retenci&oacute;n</td><td>Art. 124-2 ET</td><td style="color:#BE123C;font-weight:700">NO</td></tr>
+            <tr><td>18</td><td>Costos y gastos de a&ntilde;os anteriores</td><td>Art. 105 ET</td><td style="color:#BE123C;font-weight:700">NO</td></tr>
+          </tbody>
+        </table>
+        <h3>Las reglas m&aacute;s cr&iacute;ticas en detalle</h3>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art. 105 ET &mdash; Realizaci&oacute;n fiscal del gasto</h4>
+            <span class="norma-tag">Cr&iacute;tico</span>
+          </div>
+          <blockquote>
+            Para los contribuyentes obligados a llevar contabilidad, los gastos <strong>se entienden realizados cuando se devenguen contablemente</strong>, siempre que el gasto no est&eacute; sujeto a condiciones no controladas por el contribuyente. Adicionalmente, <strong>las multas, sanciones, penalidades, intereses moratorios</strong> y la sanci&oacute;n por no declarar no son deducibles.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Doble requisito:</strong> El gasto debe estar (1) causado contablemente y (2) soportado con factura electr&oacute;nica. Si falta uno de los dos, el gasto no es deducible en ese a&ntilde;o gravable.
+          </div>
+        </div>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art. 108 ET &mdash; Salarios y seguridad social</h4>
+            <span class="norma-tag">Frecuente</span>
+          </div>
+          <blockquote>
+            <strong>&ldquo;Los pagos por salarios son deducibles</strong> siempre que el empleador se encuentre al d&iacute;a en el pago de aportes parafiscales y a seguridad social integral (salud, pensi&oacute;n, riesgos laborales). El incumplimiento implica el <strong>rechazo total</strong> de la deducci&oacute;n por salarios.&rdquo;
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>La DIAN cruza con PILA:</strong> La informaci&oacute;n de aportes a seguridad social la reportan las administradoras en la ex&oacute;gena. Si hay meses sin pago o con pago parcial, los salarios de TODO el a&ntilde;o pueden ser rechazados como deducci&oacute;n.
+          </div>
+        </div>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art. 115 ET &mdash; Deducci&oacute;n de impuestos pagados</h4>
+          </div>
+          <blockquote>
+            Son deducibles el 100% del <strong>impuesto de industria y comercio (ICA)</strong>, el predial y el impuesto de veh&iacute;culos. El <strong>GMF (4&times;1000) es deducible en un 50%</strong>, siempre que se haya optado por tratarlo como deducci&oacute;n y no como descuento tributario.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Importante:</strong> El ICA puede tratarse como deducci&oacute;n (Art. 115) O como descuento tributario (Art. 115 par. 1) &mdash; pero no ambos. La elecci&oacute;n es irrevocable para cada a&ntilde;o gravable. Como descuento tiene un l&iacute;mite del 50% en su utilizaci&oacute;n.
+          </div>
+        </div>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art. 125 ET &mdash; Donaciones</h4>
+          </div>
+          <blockquote>
+            Las donaciones a entidades sin &aacute;nimo de lucro del <strong>R&eacute;gimen Tributario Especial</strong> (calificadas por DIAN) son deducibles. El donante tiene derecho a deducir el <strong>25% del valor donado</strong> del impuesto de renta, siempre que la entidad beneficiaria est&eacute; calificada y certifique la donaci&oacute;n.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Verificaci&oacute;n:</strong> Consulta en la p&aacute;gina de la DIAN si la fundaci&oacute;n o asociaci&oacute;n est&aacute; efectivamente calificada en el R&eacute;gimen Especial. Si no lo est&aacute;, la donaci&oacute;n no es deducible y la DIAN la rechazar&aacute; autom&aacute;ticamente.
+          </div>
+        </div>
+        <h3>Impacto num&eacute;rico: cu&aacute;nto cuesta un gasto rechazado</h3>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <h4>Ejemplo: Impacto de gastos no deducibles</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Gastos de personal sin aportes (3 meses)</span><span class="value">$ 45.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Pagos en efectivo &gt;100 UVT</span><span class="value">$ 22.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Facturas sin facturaci&oacute;n electr&oacute;nica</span><span class="value">$ 18.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">GMF 50% no deducible</span><span class="value">$ 3.200.000</span></div>
+            <div class="ejemplo-row"><span class="label">Multas y sanciones</span><span class="value">$ 5.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Depreciaci&oacute;n exceso vs. tasa fiscal</span><span class="value">$ 8.500.000</span></div>
+            <div class="ejemplo-row subtotal"><span class="label">= Total gastos NO deducibles</span><span class="value">$ 101.700.000</span></div>
+            <div class="ejemplo-row total"><span class="label">= Mayor impuesto (101.7M &times; 35%)</span><span class="value">$ 35.595.000</span></div>
+          </div>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n que la DIAN detecta</h4>
+          </div>
+          <p>Registrar <strong>gastos personales del socio</strong> (viajes familiares, consumos de tarjeta personal, seguros personales) como gasto de la empresa. La DIAN cruza la c&eacute;dula del socio con las facturas electr&oacute;nicas y con el formato 1001. Si el gasto no tiene relaci&oacute;n de causalidad (Art. 107), se rechaza y puede generar sanci&oacute;n por inexactitud (Art. 647 ET).</p>
+        </div>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico: checklist antes de deducir</h4>
+          </div>
+          <p>Para cada gasto significativo, verifica estos 5 puntos: (1) &iquest;Tiene factura electr&oacute;nica? (2) &iquest;Se pag&oacute; por canal bancario si &gt;100 UVT? (3) &iquest;Tiene relaci&oacute;n de causalidad con la renta? (4) &iquest;El proveedor existe y est&aacute; activo en RUT? (5) &iquest;Se practic&oacute; la retenci&oacute;n en la fuente correspondiente? Si falla uno solo, el gasto es vulnerable ante la DIAN.</p>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-3" class="prev" onclick="navigateTo(3)">&larr; M&oacute;dulo 3</a>
+        <a href="#modulo-5" class="next" onclick="navigateTo(5)">M&oacute;dulo 5: Anticipo &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-5" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">Renta 110</a> &rsaquo; M&oacute;dulo 5
+        </div>
+        <div class="mod-num">M&oacute;dulo 5 de 10</div>
+        <h1>Anticipo de renta y compensaci&oacute;n de p&eacute;rdidas &mdash; Arts. 807, 147 ET</h1>
+        <p class="mod-desc">El anticipo impacta directamente el flujo de caja de tu empresa. Las p&eacute;rdidas fiscales pueden ser tu mejor aliado para reducir impuestos futuros. Aqu&iacute; dominar&aacute;s ambos mecanismos con ejemplos reales y los renglones exactos del F110.</p>
+      </div>
+      <div class="content-block">
+        <h2>Anticipo del impuesto de renta</h2>
+        <p>El anticipo es un pago adelantado del impuesto de renta del a&ntilde;o siguiente. Se calcula y paga junto con la declaraci&oacute;n del a&ntilde;o actual. Tiene un impacto enorme en el flujo de caja, especialmente para empresas en crecimiento.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 807 ET &mdash; C&aacute;lculo del anticipo</h4>
+            <span class="norma-tag">Obligatorio</span>
+          </div>
+          <blockquote>
+            <strong>&ldquo;Los contribuyentes del impuesto sobre la renta</strong> est&aacute;n obligados a pagar un <strong>75%</strong> del impuesto neto de renta como anticipo del impuesto del a&ntilde;o gravable siguiente. El contribuyente podr&aacute; calcular su anticipo por cualquiera de los dos m&eacute;todos previstos en la ley y elegir el que arroje el menor valor.&rdquo;
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Dos m&eacute;todos:</strong> M&eacute;todo 1: 75% del impuesto neto de renta del a&ntilde;o actual. M&eacute;todo 2: promedio del impuesto neto de renta del a&ntilde;o actual y el anterior, multiplicado por 75%. Siempre puedes elegir el que d&eacute; menor resultado.
+          </div>
+        </div>
+        <h3>Porcentaje seg&uacute;n antig&uuml;edad del declarante</h3>
+        <table class="tabla-norm">
+          <thead>
+            <tr><th>Situaci&oacute;n</th><th>Porcentaje anticipo</th><th>Fundamento</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Primer a&ntilde;o como declarante</strong></td>
+              <td>25% del impuesto neto de renta</td>
+              <td>Art. 807 par. 1 ET</td>
+            </tr>
+            <tr>
+              <td><strong>Segundo a&ntilde;o como declarante</strong></td>
+              <td>50% del impuesto neto de renta</td>
+              <td>Art. 807 par. 1 ET</td>
+            </tr>
+            <tr>
+              <td><strong>Tercer a&ntilde;o en adelante</strong></td>
+              <td>75% del impuesto neto de renta</td>
+              <td>Art. 807 ET</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 808 ET &mdash; Bases y m&eacute;todos de c&aacute;lculo</h4>
+          </div>
+          <blockquote>
+            <strong>M&eacute;todo 1:</strong> Impuesto neto de renta del a&ntilde;o gravable actual &times; 75%. <strong>M&eacute;todo 2:</strong> Promedio del impuesto neto de renta de los dos &uacute;ltimos a&ntilde;os gravables &times; 75%. Al valor calculado se le <strong>resta el anticipo pagado el a&ntilde;o anterior</strong> para obtener el anticipo neto a incluir en la declaraci&oacute;n.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>C&oacute;mo reduce el impuesto del a&ntilde;o siguiente:</strong> El anticipo pagado este a&ntilde;o se descuenta del impuesto a cargo del a&ntilde;o siguiente (rengl&oacute;n &ldquo;Anticipo renta a&ntilde;o anterior&rdquo; del F110). Si el anticipo supera el impuesto definitivo, se genera un saldo a favor.
+          </div>
+        </div>
+        <h3>Ejemplo pr&aacute;ctico: c&aacute;lculo del anticipo con 2 m&eacute;todos</h3>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <h4>Ejemplo: Anticipo de Distribuidora ABC SAS &mdash; AG 2025</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Impuesto neto de renta AG 2024</span><span class="value">$ 120.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Impuesto neto de renta AG 2025</span><span class="value">$ 151.800.000</span></div>
+            <div class="ejemplo-row"><span class="label">Anticipo pagado a&ntilde;o anterior (en F110 AG 2024)</span><span class="value">$ 35.000.000</span></div>
+            <div class="ejemplo-row subtotal"><span class="label">M&eacute;todo 1: 151.8M &times; 75%</span><span class="value">$ 113.850.000</span></div>
+            <div class="ejemplo-row subtotal"><span class="label">M&eacute;todo 2: (120M + 151.8M) / 2 &times; 75%</span><span class="value">$ 101.925.000</span></div>
+            <div class="ejemplo-row"><span class="label">Se elige el menor (M&eacute;todo 2)</span><span class="value">$ 101.925.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Anticipo pagado a&ntilde;o anterior</span><span class="value">$ 35.000.000</span></div>
+            <div class="ejemplo-row total"><span class="label">= Anticipo neto a incluir en F110 AG 2025</span><span class="value">$ 66.925.000</span></div>
+          </div>
+        </div>
+        <h2>Compensaci&oacute;n de p&eacute;rdidas fiscales</h2>
+        <p>Las p&eacute;rdidas fiscales son uno de los mecanismos m&aacute;s potentes de planeaci&oacute;n tributaria. Permiten reducir la renta l&iacute;quida gravable de per&iacute;odos futuros, disminuyendo el impuesto a pagar.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 147 ET &mdash; Compensaci&oacute;n de p&eacute;rdidas fiscales</h4>
+            <span class="norma-tag">Clave</span>
+          </div>
+          <blockquote>
+            <strong>&ldquo;Las sociedades podr&aacute;n compensar las p&eacute;rdidas fiscales</strong> con las rentas l&iacute;quidas ordinarias que obtuvieren en los per&iacute;odos gravables siguientes, sin l&iacute;mite de tiempo.&rdquo; (Modificado por Ley 1819 de 2016). La compensaci&oacute;n puede ser hasta el <strong>100% de la renta l&iacute;quida</strong> del per&iacute;odo en que se compensa.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Regla importante:</strong> Desde la Ley 1819/2016, las p&eacute;rdidas fiscales generadas a partir del AG 2017 <strong>no tienen l&iacute;mite de tiempo</strong> para su compensaci&oacute;n. Las generadas antes de 2017 mantienen el plazo de 12 per&iacute;odos gravables. La compensaci&oacute;n puede alcanzar el 100% de la renta l&iacute;quida del per&iacute;odo.
+          </div>
+        </div>
+        <h3>P&eacute;rdidas por activos: limitaci&oacute;n especial</h3>
+        <p>Las p&eacute;rdidas originadas en la enajenaci&oacute;n de activos tienen una restricci&oacute;n adicional: solo pueden compensarse contra utilidades de la misma naturaleza de activos. No se pueden cruzar con renta operacional ordinaria.</p>
+        <h3>Escenario pr&aacute;ctico: compensaci&oacute;n en 3 a&ntilde;os</h3>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <h4>Ejemplo: Compensaci&oacute;n de p&eacute;rdidas fiscales &mdash; Empresa XYZ SAS</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">AG 2023: P&eacute;rdida fiscal generada</span><span class="value">-$ 200.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">AG 2024: Renta l&iacute;quida antes de compensaci&oacute;n</span><span class="value">$ 80.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">AG 2024: Compensaci&oacute;n (100% de RL)</span><span class="value">-$ 80.000.000</span></div>
+            <div class="ejemplo-row subtotal"><span class="label">= Renta l&iacute;quida gravable AG 2024</span><span class="value">$ 0</span></div>
+            <div class="ejemplo-row"><span class="label">Saldo p&eacute;rdida pendiente por compensar</span><span class="value">-$ 120.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">AG 2025: Renta l&iacute;quida antes de compensaci&oacute;n</span><span class="value">$ 300.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">AG 2025: Compensaci&oacute;n (saldo pendiente)</span><span class="value">-$ 120.000.000</span></div>
+            <div class="ejemplo-row total"><span class="label">= Renta l&iacute;quida gravable AG 2025</span><span class="value">$ 180.000.000</span></div>
+          </div>
+        </div>
+        <h3>Renglones del F110 relacionados</h3>
+        <table class="tabla-norm">
+          <thead>
+            <tr><th>Concepto</th><th>Rengl&oacute;n F110</th><th>Observaci&oacute;n</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Anticipo renta a&ntilde;o anterior</strong></td>
+              <td>Rengl&oacute;n 80 (se resta del impuesto a cargo)</td>
+              <td>El anticipo pagado en la declaraci&oacute;n del a&ntilde;o anterior</td>
+            </tr>
+            <tr>
+              <td><strong>Anticipo renta a&ntilde;o siguiente</strong></td>
+              <td>Rengl&oacute;n 81 (se suma al saldo a pagar)</td>
+              <td>El anticipo calculado para el pr&oacute;ximo a&ntilde;o</td>
+            </tr>
+            <tr>
+              <td><strong>Compensaci&oacute;n de p&eacute;rdidas</strong></td>
+              <td>Rengl&oacute;n 66 (se resta de la renta l&iacute;quida)</td>
+              <td>P&eacute;rdidas fiscales de a&ntilde;os anteriores compensadas</td>
+            </tr>
+            <tr>
+              <td><strong>P&eacute;rdida l&iacute;quida del ejercicio</strong></td>
+              <td>Rengl&oacute;n 68</td>
+              <td>P&eacute;rdida generada en el a&ntilde;o actual (para compensar en a&ntilde;os futuros)</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p><strong>Planeaci&oacute;n del anticipo:</strong> Si tu empresa tuvo un a&ntilde;o excepcionalmente bueno, el anticipo del 75% puede ser enorme. Siempre calcula ambos m&eacute;todos y elige el menor. Si esperas menores ingresos el a&ntilde;o siguiente, el M&eacute;todo 2 (promedio) suele convenir. Recuerda que el anticipo se puede solicitar como <strong>devoluci&oacute;n si genera saldo a favor</strong>, pero el tr&aacute;mite ante la DIAN puede tardar meses.</p>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n que la DIAN detecta</h4>
+          </div>
+          <p>Compensar p&eacute;rdidas fiscales <strong>sin tener la declaraci&oacute;n del a&ntilde;o de origen presentada y en firme</strong>. La DIAN verifica que la p&eacute;rdida realmente exista en la declaraci&oacute;n original. Si la declaraci&oacute;n del a&ntilde;o de la p&eacute;rdida fue corregida o tiene requerimiento pendiente, la compensaci&oacute;n puede ser rechazada. Tambi&eacute;n es error com&uacute;n olvidar restar el anticipo del a&ntilde;o anterior, pagando de m&aacute;s.</p>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-4" class="prev" onclick="navigateTo(4)">&larr; M&oacute;dulo 4</a>
+        <a href="#modulo-6" class="next" onclick="navigateTo(6)">M&oacute;dulo 6: Beneficios &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-6" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">Renta 110</a> &rsaquo; M&oacute;dulo 6
+        </div>
+        <div class="mod-num">M&oacute;dulo 6 de 10</div>
+        <h1>Beneficios tributarios y reg&iacute;menes especiales</h1>
+        <p class="mod-desc">Colombia ofrece m&uacute;ltiples incentivos tributarios seg&uacute;n el tipo de empresa, la ubicaci&oacute;n o la actividad. Conocerlos puede significar millones en ahorro legal de impuestos &mdash; o sanciones si se aplican incorrectamente.</p>
+      </div>
+      <div class="content-block">
+        <h2>Tarifas diferenciales: no todos pagan 35%</h2>
+        <p>La tarifa general del impuesto de renta para personas jur&iacute;dicas es 35% (Art. 240 ET), pero existen reg&iacute;menes con tarifas reducidas para incentivar inversi&oacute;n, empleo y desarrollo regional.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 240-1 ET &mdash; Zonas Francas</h4>
+            <span class="norma-tag">Tarifa 20%</span>
+          </div>
+          <blockquote>
+            <strong>&ldquo;Los usuarios industriales de bienes y servicios de Zona Franca</strong> que hayan suscrito un plan de internacionalizaci&oacute;n y cumplan con el porcentaje m&iacute;nimo de exportaci&oacute;n establecido, tributar&aacute;n a la tarifa del <strong>20%</strong> sobre la renta gravable.&rdquo;
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Requisito clave:</strong> Desde la Ley 2277/2022, los usuarios de Zona Franca deben exportar al menos el 40% de sus ventas para acceder a la tarifa del 20%. Quienes no cumplan este umbral tributan al 35% general. Los usuarios comerciales de ZF tributan al 35%.
+          </div>
+        </div>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 235-3 ET &mdash; Megainversiones</h4>
+            <span class="norma-tag">Tarifa 27%</span>
+          </div>
+          <blockquote>
+            <strong>&ldquo;Las nuevas inversiones que generen al menos 400 empleos directos</strong> o tengan un valor igual o superior a <strong>30 millones de UVT</strong> ($1.57 billones en 2026) gozar&aacute;n de una tarifa preferencial del <strong>27%</strong> por un per&iacute;odo de 20 a&ntilde;os.&rdquo;
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Beneficios adicionales:</strong> Depreciaci&oacute;n acelerada hasta del 50% del costo del activo en el primer a&ntilde;o, y no estar&aacute;n sujetos al sistema de renta presuntiva ni al impuesto al patrimonio por los activos vinculados al proyecto.
+          </div>
+        </div>
+        <h3>Reg&iacute;menes vigentes y tarifas</h3>
+        <table class="tabla-norm">
+          <thead>
+            <tr><th>R&eacute;gimen / Beneficio</th><th>Tarifa</th><th>Art&iacute;culo ET</th><th>Estado</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Zona Franca (exportadores &ge;40%)</strong></td>
+              <td>20%</td>
+              <td>Art. 240-1</td>
+              <td style="color:#059669;font-weight:700">Vigente</td>
+            </tr>
+            <tr>
+              <td><strong>Megainversiones (&ge;30M UVT)</strong></td>
+              <td>27%</td>
+              <td>Art. 235-3</td>
+              <td style="color:#059669;font-weight:700">Vigente</td>
+            </tr>
+            <tr>
+              <td><strong>Econom&iacute;a naranja (industrias creativas)</strong></td>
+              <td>0% por 7 a&ntilde;os</td>
+              <td>Art. 235-2</td>
+              <td style="color:#92400E;font-weight:700">Cerrado nuevos, vigente aprobados</td>
+            </tr>
+            <tr>
+              <td><strong>ZOMAC (Zonas m&aacute;s afectadas por conflicto)</strong></td>
+              <td>Progresiva: 0%&ndash;50% de tarifa general</td>
+              <td>Art. 236 Ley 1819</td>
+              <td style="color:#059669;font-weight:700">Vigente (hasta 2027)</td>
+            </tr>
+            <tr>
+              <td><strong>ESAL &mdash; R&eacute;gimen Tributario Especial</strong></td>
+              <td>20% sobre excedentes</td>
+              <td>Art. 19 ET</td>
+              <td style="color:#059669;font-weight:700">Vigente</td>
+            </tr>
+            <tr>
+              <td><strong>Hoteles nuevos o remodelados</strong></td>
+              <td>15%</td>
+              <td>Art. 240 par. 2 ET</td>
+              <td style="color:#059669;font-weight:700">Vigente (hasta 2027)</td>
+            </tr>
+            <tr>
+              <td><strong>Sobretasa sector financiero</strong></td>
+              <td>40% (35% + 5 puntos)</td>
+              <td>Art. 240 par. 7 ET</td>
+              <td style="color:#BE123C;font-weight:700">Vigente</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2>Descuentos tributarios: se restan del impuesto</h2>
+        <p>Los descuentos tributarios son mucho m&aacute;s valiosos que una deducci&oacute;n porque se restan directamente del impuesto calculado, no de la base gravable. Un descuento de $1 ahorra $1 de impuesto; una deducci&oacute;n de $1 solo ahorra $0.35.</p>
+        <table class="tabla-norm">
+          <thead>
+            <tr><th>Descuento</th><th>Beneficio</th><th>Art&iacute;culo ET</th><th>L&iacute;mite</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>ICA como descuento</strong></td>
+              <td>50% del ICA pagado se descuenta del impuesto</td>
+              <td>Art. 115</td>
+              <td>No puede generar saldo a favor por s&iacute; solo</td>
+            </tr>
+            <tr>
+              <td><strong>Donaciones a ESAL calificadas</strong></td>
+              <td>25% del valor donado como descuento</td>
+              <td>Art. 257</td>
+              <td>No puede exceder el 25% del impuesto a cargo</td>
+            </tr>
+            <tr>
+              <td><strong>Inversi&oacute;n en C+T+I</strong></td>
+              <td>25% de la inversi&oacute;n en ciencia, tecnolog&iacute;a e innovaci&oacute;n</td>
+              <td>Art. 256</td>
+              <td>Requiere aprobaci&oacute;n de Colciencias/MinCiencias</td>
+            </tr>
+            <tr>
+              <td><strong>IVA en activos fijos productivos</strong></td>
+              <td>IVA pagado en compra de maquinaria y equipo productivo</td>
+              <td>Art. 258-1</td>
+              <td>Solo activos fijos reales productivos</td>
+            </tr>
+            <tr>
+              <td><strong>Impuestos pagados en el exterior</strong></td>
+              <td>Evitar doble tributaci&oacute;n internacional</td>
+              <td>Art. 254</td>
+              <td>L&iacute;mite: impuesto colombiano sobre esa renta</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>ESAL: R&eacute;gimen Tributario Especial</h3>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 19 ET &mdash; R&eacute;gimen Tributario Especial</h4>
+          </div>
+          <blockquote>
+            Las <strong>entidades sin &aacute;nimo de lucro</strong> (asociaciones, fundaciones, corporaciones) que sean calificadas por la DIAN como pertenecientes al R&eacute;gimen Tributario Especial, tributan al <strong>20% sobre el excedente fiscal</strong> (beneficio neto o excedente) cuando este no se reinvierta en su objeto social.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Requisito:</strong> Deben registrarse en el aplicativo web de la DIAN, publicar su informaci&oacute;n anualmente y ser calificadas. Si el excedente se <strong>reinvierte totalmente en el objeto social</strong> dentro de los plazos, la tarifa efectiva puede ser 0%. Si no se califica, tributan al 35% como r&eacute;gimen ordinario.
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico: ICA como descuento vs. deducci&oacute;n</h4>
+          </div>
+          <p>Si pagaste $50M de ICA: como <strong>deducci&oacute;n</strong> ahorras $50M &times; 35% = $17.5M. Como <strong>descuento</strong> ahorras $50M &times; 50% = $25M directo del impuesto. El descuento casi siempre es m&aacute;s favorable, pero verifica que no superes los l&iacute;mites de descuentos totales y recuerda que <strong>la elecci&oacute;n es irrevocable</strong> para cada a&ntilde;o gravable.</p>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n que la DIAN detecta</h4>
+          </div>
+          <p>Aplicar tarifas reducidas de Zona Franca o econom&iacute;a naranja <strong>sin cumplir los requisitos de exportaci&oacute;n o sin tener la calificaci&oacute;n vigente</strong>. La DIAN cruza la declaraci&oacute;n con el registro de calificaci&oacute;n y con las declaraciones de exportaci&oacute;n (DIAN-Aduanas). Si no se cumple el 40% de exportaciones en ZF, se reliquida al 35% con sanci&oacute;n por inexactitud.</p>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-5" class="prev" onclick="navigateTo(5)">&larr; M&oacute;dulo 5</a>
+        <a href="#modulo-7" class="next" onclick="navigateTo(7)">M&oacute;dulo 7: Comparaci&oacute;n patrimonial &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-7" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">Renta 110</a> &rsaquo; M&oacute;dulo 7
+        </div>
+        <div class="mod-num">M&oacute;dulo 7 de 10</div>
+        <h1>Comparaci&oacute;n patrimonial y renta por comparaci&oacute;n &mdash; Arts. 236&ndash;237 ET</h1>
+        <p class="mod-desc">La DIAN tiene ojos en tu patrimonio. Si tu riqueza crece m&aacute;s de lo que declaras como renta, la diferencia se convierte en renta gravable autom&aacute;ticamente. Aqu&iacute; aprendes c&oacute;mo funciona este mecanismo y c&oacute;mo prepararte.</p>
+      </div>
+      <div class="content-block">
+        <h2>Renta por comparaci&oacute;n patrimonial: el mecanismo</h2>
+        <p>La comparaci&oacute;n patrimonial es un sistema presuntivo que la DIAN usa para detectar ingresos no declarados. Compara el patrimonio l&iacute;quido del a&ntilde;o actual con el del a&ntilde;o anterior y analiza si el crecimiento es coherente con la renta declarada.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 236 ET &mdash; Renta por comparaci&oacute;n patrimonial</h4>
+            <span class="norma-tag">Presuntivo</span>
+          </div>
+          <blockquote>
+            <strong>&ldquo;Cuando la suma de la renta gravable, las rentas exentas y la ganancia ocasional neta</strong> resultare inferior a la diferencia entre el patrimonio l&iacute;quido del &uacute;ltimo per&iacute;odo gravable y el patrimonio l&iacute;quido del per&iacute;odo inmediatamente anterior, <strong>dicha diferencia se considera renta gravable</strong>, a menos que el contribuyente demuestre que el aumento patrimonial obedece a causas justificativas.&rdquo;
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>F&oacute;rmula:</strong> Si (Patrimonio l&iacute;quido a&ntilde;o actual &minus; Patrimonio l&iacute;quido a&ntilde;o anterior) &gt; (Renta l&iacute;quida gravable + Ganancia ocasional neta), entonces la diferencia = renta gravable presunta por comparaci&oacute;n patrimonial. A menos que se justifique.
+          </div>
+        </div>
+        <h3>Justificaci&oacute;n del incremento patrimonial</h3>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 237 ET &mdash; Justificaci&oacute;n del incremento patrimonial</h4>
+          </div>
+          <blockquote>
+            <strong>&ldquo;Para efectos de lo dispuesto en el art&iacute;culo anterior,</strong> el contribuyente podr&aacute; justificar el incremento patrimonial con: <strong>herencias, legados, donaciones, premios, cr&eacute;ditos, capitalizaciones, aportes de socios</strong> y dem&aacute;s ingresos no constitutivos de renta ni ganancia ocasional, debidamente probados.&rdquo;
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Pruebas aceptadas:</strong> Escrituras p&uacute;blicas de donaci&oacute;n, certificados de premios, contratos de pr&eacute;stamo con pagos bancarios trazables, actas de asamblea de capitalizaci&oacute;n, extractos bancarios y cualquier documento que demuestre el origen l&iacute;cito de los fondos.
+          </div>
+        </div>
+        <h3>Ejemplo pr&aacute;ctico: detecci&oacute;n de patrimonio injustificado</h3>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <h4>Ejemplo: Comparaci&oacute;n patrimonial de Constructora LMN SAS</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Patrimonio l&iacute;quido AG 2024</span><span class="value">$ 800.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Patrimonio l&iacute;quido AG 2025</span><span class="value">$ 1.300.000.000</span></div>
+            <div class="ejemplo-row subtotal"><span class="label">= Incremento patrimonial</span><span class="value">$ 500.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Renta l&iacute;quida gravable AG 2025</span><span class="value">$ 180.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Ganancia ocasional neta AG 2025</span><span class="value">$ 20.000.000</span></div>
+            <div class="ejemplo-row subtotal"><span class="label">= Total renta + GO declarada</span><span class="value">$ 200.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Diferencia no justificada (500M &minus; 200M)</span><span class="value">$ 300.000.000</span></div>
+            <div class="ejemplo-row total"><span class="label">= Renta presunta por comparaci&oacute;n patrimonial</span><span class="value">$ 300.000.000</span></div>
+          </div>
+        </div>
+        <p>En este ejemplo, los $300M de incremento patrimonial que exceden la renta declarada se convierten en renta gravable adicional, <strong>a menos que</strong> la empresa justifique el aumento con:</p>
+        <ul style="margin:8px 0 16px 20px;list-style:disc">
+          <li>Aportes de socios documentados en acta de asamblea y pago bancario (cruce con ex&oacute;gena formato 1010)</li>
+          <li>Cr&eacute;ditos bancarios formalizados con entidades financieras</li>
+          <li>Valorizaciones de activos aceptadas fiscalmente</li>
+          <li>Capitalizaci&oacute;n de utilidades retenidas</li>
+        </ul>
+        <h3>C&oacute;mo la DIAN detecta patrimonio injustificado</h3>
+        <table class="tabla-norm">
+          <thead>
+            <tr><th>Fuente de cruce</th><th>Qu&eacute; revisa la DIAN</th><th>Formato ex&oacute;gena</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Composici&oacute;n accionaria</strong></td>
+              <td>Aportes de socios vs. patrimonio reportado</td>
+              <td>Formato 1010</td>
+            </tr>
+            <tr>
+              <td><strong>Saldos bancarios</strong></td>
+              <td>Movimientos bancarios vs. ingresos declarados</td>
+              <td>Formato 1019</td>
+            </tr>
+            <tr>
+              <td><strong>Compras de activos</strong></td>
+              <td>Adquisici&oacute;n de inmuebles, veh&iacute;culos, inversiones</td>
+              <td>Formatos 1001, 1007</td>
+            </tr>
+            <tr>
+              <td><strong>Declaraci&oacute;n de renta anterior</strong></td>
+              <td>Patrimonio final del a&ntilde;o anterior = inicial del actual</td>
+              <td>F110 a&ntilde;o anterior</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico: prevenci&oacute;n</h4>
+          </div>
+          <p><strong>Documenta TODOS los movimientos de capital.</strong> Cada aporte de socio necesita: acta de asamblea, comprobante de consignaci&oacute;n bancaria y registro contable. Cada cr&eacute;dito necesita: contrato, desembolso bancario y plan de amortizaci&oacute;n. La clave es que el <strong>origen de cada peso que aumente el patrimonio</strong> sea trazable y demostrable. Prepara un cuadro de movimientos patrimoniales antes de presentar la declaraci&oacute;n.</p>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n que la DIAN detecta</h4>
+          </div>
+          <p>Registrar <strong>pr&eacute;stamos de socios como pasivos</strong> sin respaldo documental (contrato de mutuo, comprobante bancario del desembolso). La DIAN cruza el formato 1010 (composici&oacute;n accionaria y pasivos con socios) con el formato 1001 (pagos a terceros). Si el socio no tiene capacidad econ&oacute;mica para prestar esos fondos (seg&uacute;n su propia declaraci&oacute;n de renta), se presume <strong>ingreso no declarado</strong> tanto para la sociedad como para el socio.</p>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-6" class="prev" onclick="navigateTo(6)">&larr; M&oacute;dulo 6</a>
+        <a href="#modulo-8" class="next" onclick="navigateTo(8)">M&oacute;dulo 8: Formato 2516 &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-8" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">Renta 110</a> &rsaquo; M&oacute;dulo 8
+        </div>
+        <div class="mod-num">M&oacute;dulo 8 de 10</div>
+        <h1>Conciliaci&oacute;n fiscal &mdash; Formato 2516</h1>
+        <p class="mod-desc">El formato 2516 es el puente entre tu contabilidad bajo NIIF y la declaraci&oacute;n de renta fiscal. La DIAN lo cruza con el F110 y es fuente de auditor&iacute;as si hay inconsistencias. Aqu&iacute; aprendes a dominarlo.</p>
+      </div>
+      <div class="content-block">
+        <h2>&iquest;Por qu&eacute; existe la conciliaci&oacute;n fiscal?</h2>
+        <p>Desde la adopci&oacute;n de las NIIF (Normas Internacionales de Informaci&oacute;n Financiera) en Colombia, la contabilidad financiera y la fiscal divergen significativamente. El formato 2516 reconcilia ambas para que la DIAN entienda c&oacute;mo se llega de la utilidad contable a la renta l&iacute;quida fiscal.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 772-1 ET &mdash; Conciliaci&oacute;n fiscal</h4>
+            <span class="norma-tag">Obligatorio</span>
+          </div>
+          <blockquote>
+            <strong>&ldquo;Los contribuyentes obligados a llevar contabilidad</strong> deber&aacute;n llevar un sistema de registro de las <strong>diferencias</strong> que surjan entre la aplicaci&oacute;n de los marcos t&eacute;cnicos normativos contables y las disposiciones del Estatuto Tributario. El formato, especificaciones y plazos ser&aacute;n definidos por el reglamento.&rdquo;
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Obligados:</strong> Todas las personas jur&iacute;dicas del r&eacute;gimen ordinario obligadas a llevar contabilidad. El formato 2516 se presenta en la misma fecha de la declaraci&oacute;n de renta. Resoluciones DIAN 000071/2019 y posteriores definen la estructura.
+          </div>
+        </div>
+        <h3>Principales diferencias NIIF vs. fiscal</h3>
+        <table class="tabla-norm">
+          <thead>
+            <tr><th>Concepto</th><th>Tratamiento NIIF</th><th>Tratamiento fiscal (ET)</th><th>Tipo diferencia</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Depreciaci&oacute;n</strong></td>
+              <td>Vida &uacute;til estimada por la empresa</td>
+              <td>Tasas m&aacute;ximas del Art. 137 ET</td>
+              <td>Temporaria</td>
+            </tr>
+            <tr>
+              <td><strong>Valor razonable de inversiones</strong></td>
+              <td>Se reconoce en resultados</td>
+              <td>No se reconoce hasta realizaci&oacute;n</td>
+              <td>Temporaria</td>
+            </tr>
+            <tr>
+              <td><strong>Provisiones</strong></td>
+              <td>Se reconocen cuando son probables</td>
+              <td>Solo deducibles con requisitos espec&iacute;ficos (Art. 145)</td>
+              <td>Temporaria o Permanente</td>
+            </tr>
+            <tr>
+              <td><strong>Deterioro de activos</strong></td>
+              <td>Se reconoce por NIC 36</td>
+              <td>No deducible fiscalmente (salvo cartera)</td>
+              <td>Temporaria</td>
+            </tr>
+            <tr>
+              <td><strong>Leasing financiero</strong></td>
+              <td>NIIF 16: todo leasing es financiero</td>
+              <td>Fiscal permite deducci&oacute;n del canon</td>
+              <td>Temporaria</td>
+            </tr>
+            <tr>
+              <td><strong>Multas y sanciones</strong></td>
+              <td>Se reconocen como gasto</td>
+              <td>No deducibles (Art. 105)</td>
+              <td>Permanente</td>
+            </tr>
+            <tr>
+              <td><strong>Gastos sin factura</strong></td>
+              <td>Se reconocen contablemente</td>
+              <td>No deducibles (Art. 771-2)</td>
+              <td>Permanente</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Estructura del formato 2516</h3>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Resoluci&oacute;n DIAN &mdash; Estructura del Formato 2516</h4>
+            <span class="norma-tag">Estructura</span>
+          </div>
+          <p>El formato 2516 tiene dos grandes secciones que concilian el ESF y el ERI:</p>
+          <table class="tabla-norm">
+            <thead><tr><th>Secci&oacute;n</th><th>Contenido</th><th>Columnas</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>ESF (Estado de Situaci&oacute;n Financiera)</strong></td>
+                <td>Conciliaci&oacute;n del patrimonio: activos, pasivos y patrimonio</td>
+                <td>Contable &rarr; Dif. permanentes &rarr; Dif. temporarias &rarr; Fiscal</td>
+              </tr>
+              <tr>
+                <td><strong>ERI (Estado de Resultados Integral)</strong></td>
+                <td>Conciliaci&oacute;n de resultados: ingresos, costos, deducciones</td>
+                <td>Contable &rarr; Dif. permanentes &rarr; Dif. temporarias &rarr; Fiscal</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="norma-aplicacion">
+            <strong>Regla de oro:</strong> La columna &ldquo;Fiscal&rdquo; de cada l&iacute;nea del formato 2516 debe coincidir exactamente con los valores reportados en el formulario 110. Si hay diferencia, la DIAN genera alerta autom&aacute;tica.
+          </div>
+        </div>
+        <h3>Diferencias permanentes vs. temporarias</h3>
+        <p>Entender esta distinci&oacute;n es fundamental tanto para el formato 2516 como para el c&aacute;lculo del impuesto diferido (NIC 12):</p>
+        <table class="tabla-norm">
+          <thead>
+            <tr><th>Tipo</th><th>Definici&oacute;n</th><th>Efecto en impuesto diferido</th><th>Ejemplos</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Permanente</strong></td>
+              <td>Diferencia que NUNCA se revierte en per&iacute;odos futuros</td>
+              <td>No genera impuesto diferido</td>
+              <td>Multas, GMF 50%, gastos sin factura</td>
+            </tr>
+            <tr>
+              <td><strong>Temporaria deducible</strong></td>
+              <td>Gasto contable hoy, deducible fiscalmente en el futuro</td>
+              <td>Activo por impuesto diferido</td>
+              <td>Provisiones, deterioro de cartera</td>
+            </tr>
+            <tr>
+              <td><strong>Temporaria imponible</strong></td>
+              <td>Ingreso fiscal hoy, contable en el futuro</td>
+              <td>Pasivo por impuesto diferido</td>
+              <td>Depreciaci&oacute;n acelerada fiscal</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Ejemplo: conciliaci&oacute;n de una partida</h3>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <h4>Ejemplo: Conciliaci&oacute;n de depreciaci&oacute;n &mdash; Maquinaria industrial</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Costo del activo</span><span class="value">$ 500.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Vida &uacute;til NIIF (estimada por empresa)</span><span class="value">15 a&ntilde;os</span></div>
+            <div class="ejemplo-row"><span class="label">Depreciaci&oacute;n contable anual (NIIF)</span><span class="value">$ 33.333.333</span></div>
+            <div class="ejemplo-row"><span class="label">Tasa m&aacute;xima fiscal (Art. 137 ET): 10%</span><span class="value">10 a&ntilde;os</span></div>
+            <div class="ejemplo-row"><span class="label">Depreciaci&oacute;n fiscal anual</span><span class="value">$ 50.000.000</span></div>
+            <div class="ejemplo-row subtotal"><span class="label">= Diferencia temporaria (mayor depreciaci&oacute;n fiscal)</span><span class="value">$ 16.666.667</span></div>
+            <div class="ejemplo-row"><span class="label">En F2516: columna &ldquo;Diferencia temporaria&rdquo;</span><span class="value">$ 16.666.667</span></div>
+            <div class="ejemplo-row total"><span class="label">= Pasivo por impuesto diferido (16.6M &times; 35%)</span><span class="value">$ 5.833.333</span></div>
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p><strong>Plazo del formato 2516:</strong> Se presenta en la misma fecha l&iacute;mite de la declaraci&oacute;n de renta (seg&uacute;n el &uacute;ltimo d&iacute;gito del NIT). No tiene pago asociado, pero su <strong>no presentaci&oacute;n</strong> o presentaci&oacute;n inconsistente con el F110 genera sanci&oacute;n por informaci&oacute;n (Art. 651 ET). La mejor pr&aacute;ctica es preparar el 2516 <strong>antes</strong> de la declaraci&oacute;n de renta, no despu&eacute;s.</p>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n que la DIAN detecta</h4>
+          </div>
+          <p>Que la <strong>columna fiscal del formato 2516 no coincida con los renglones del formulario 110</strong>. Este es el cruce m&aacute;s b&aacute;sico y autom&aacute;tico que hace la DIAN. Tambi&eacute;n es frecuente clasificar incorrectamente las diferencias: tratar una diferencia permanente como temporaria (o viceversa) genera inconsistencia en el impuesto diferido, lo cual la DIAN puede cuestionar en una auditor&iacute;a contable.</p>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-7" class="prev" onclick="navigateTo(7)">&larr; M&oacute;dulo 7</a>
+        <a href="#modulo-9" class="next" onclick="navigateTo(9)">M&oacute;dulo 9: Renta l&iacute;quida &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-9" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">Renta 110</a> &rsaquo; M&oacute;dulo 9
+        </div>
+        <div class="mod-num">M&oacute;dulo 9 de 10</div>
+        <h1>Renta l&iacute;quida, TTD y tasa efectiva &mdash; Arts. 240, 259-1 ET</h1>
+        <p class="mod-desc">Ya tienes ingresos netos, costos y deducciones. Ahora calculamos el impuesto real, aplicamos descuentos y verificamos contra la Tasa de Tributaci&oacute;n Depurada (TTD) m&iacute;nima del 15%.</p>
+      </div>
+      <div class="content-block">
+        <h2>De la renta l&iacute;quida al impuesto neto de renta</h2>
+        <p>La depuraci&oacute;n completa del formulario 110 sigue esta secuencia l&oacute;gica:</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>F&oacute;rmula de depuraci&oacute;n &mdash; Art. 26 ET</h4>
+            <span class="norma-tag">Estructura</span>
+          </div>
+          <table class="tabla-norm">
+            <thead><tr><th>Paso</th><th>Concepto</th><th>Operaci&oacute;n</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Ingresos netos</td><td>Ingresos brutos &minus; Devoluciones &minus; INCRNGO</td></tr>
+              <tr><td>2</td><td>Renta bruta</td><td>Ingresos netos &minus; Costos</td></tr>
+              <tr><td>3</td><td>Renta l&iacute;quida</td><td>Renta bruta &minus; Deducciones</td></tr>
+              <tr><td>4</td><td>Renta l&iacute;quida gravable</td><td>Renta l&iacute;quida &minus; Compensaciones &minus; Rentas exentas</td></tr>
+              <tr><td>5</td><td>Impuesto sobre la renta</td><td>Renta l&iacute;quida gravable &times; Tarifa (35%)</td></tr>
+              <tr><td>6</td><td>Impuesto neto de renta</td><td>Impuesto &minus; Descuentos tributarios</td></tr>
+              <tr><td>7</td><td>Saldo a pagar / a favor</td><td>Impuesto neto &minus; Retenciones &minus; Anticipo a&ntilde;o anterior + Anticipo a&ntilde;o siguiente</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Compensaci&oacute;n de p&eacute;rdidas fiscales</h3>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 147 ET &mdash; Compensaci&oacute;n de p&eacute;rdidas</h4>
+          </div>
+          <blockquote>
+            Las sociedades podr&aacute;n compensar las p&eacute;rdidas fiscales con las rentas l&iacute;quidas ordinarias de los <strong>12 per&iacute;odos gravables siguientes</strong>, sin exceder el l&iacute;mite anual. Las p&eacute;rdidas deben estar debidamente soportadas y su compensaci&oacute;n no puede generar o incrementar p&eacute;rdida fiscal en el a&ntilde;o de compensaci&oacute;n.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Dato clave:</strong> Las p&eacute;rdidas fiscales generadas a partir de 2017 se pueden compensar sin l&iacute;mite de tiempo (Ley 1819/2016). Pero las generadas antes de 2017 mantienen el plazo de 12 a&ntilde;os. La DIAN verifica que la p&eacute;rdida realmente existi&oacute; en el a&ntilde;o de origen.
+          </div>
+        </div>
+        <h3>Tarifa del impuesto: 35%</h3>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 240 ET &mdash; Tarifa general</h4>
+            <span class="norma-tag">Vigente</span>
+          </div>
+          <blockquote>
+            La tarifa general del impuesto sobre la renta para personas jur&iacute;dicas es del <strong>35%</strong> aplicable desde el a&ntilde;o gravable 2022 y vigente para AG 2025.
+          </blockquote>
+          <p><strong>Tarifas especiales:</strong></p>
+          <ul style="margin:8px 0 12px 18px;list-style:disc">
+            <li>Zona Franca (usuarios industriales): 20%</li>
+            <li>Hoteles nuevos/remodelados: 15% (hasta 2027)</li>
+            <li>Editoriales: 15%</li>
+            <li>Empresas de econom&iacute;a naranja (calificadas): 15%</li>
+            <li>Sobretasa financiera: 5 puntos adicionales (total 40%) para entidades financieras</li>
+          </ul>
+        </div>
+        <h3>Descuentos tributarios</h3>
+        <p>Los descuentos se restan directamente del impuesto (no de la base). Son mucho m&aacute;s valiosos que una deducci&oacute;n:</p>
+        <table class="tabla-norm">
+          <thead><tr><th>Descuento</th><th>Descripci&oacute;n</th><th>Art&iacute;culo ET</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>IVA en activos fijos reales productivos</strong></td>
+              <td>IVA pagado en compra de maquinaria, equipo productivo</td>
+              <td>Art. 258-1</td>
+            </tr>
+            <tr>
+              <td><strong>ICA como descuento</strong></td>
+              <td>50% del ICA pagado (si se elige descuento en vez de deducci&oacute;n)</td>
+              <td>Art. 115 par. 1</td>
+            </tr>
+            <tr>
+              <td><strong>Impuestos pagados en el exterior</strong></td>
+              <td>Para evitar doble tributaci&oacute;n, con l&iacute;mite</td>
+              <td>Art. 254</td>
+            </tr>
+            <tr>
+              <td><strong>Donaciones (25% descuento)</strong></td>
+              <td>A entidades calificadas del R&eacute;gimen Especial</td>
+              <td>Art. 257</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip: deducci&oacute;n vs. descuento del ICA</h4>
+          </div>
+          <p>Si tu cliente pag&oacute; $50 millones de ICA: como <strong>deducci&oacute;n</strong> (Art. 115) ahorra $50M &times; 35% = $17.5M de impuesto. Como <strong>descuento</strong> (Art. 115 par. 1) ahorra $50M &times; 50% = $25M directamente del impuesto. <strong>El descuento casi siempre es m&aacute;s conveniente</strong>, pero verifica que no supere los l&iacute;mites de descuentos totales.</p>
+        </div>
+        <h3>Tasa de Tributaci&oacute;n Depurada (TTD) m&iacute;nima: 15%</h3>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 259-1 ET &mdash; Tasa m&iacute;nima (TTD)</h4>
+            <span class="norma-tag">Desde 2023</span>
+          </div>
+          <blockquote>
+            <strong>&ldquo;La tasa de tributaci&oacute;n depurada (TTD)</strong> del contribuyente no podr&aacute; ser inferior al quince por ciento (15%). La TTD se calcula como la relaci&oacute;n entre el <strong>impuesto depurado</strong> y la <strong>utilidad depurada</strong>.&rdquo;
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>&iquest;Qu&eacute; significa?</strong> Aunque apliques deducciones, INCRNGO, rentas exentas y descuentos que reduzcan tu impuesto, al final tu tasa efectiva NO puede bajar del 15%. Si baja, debes pagar un <strong>impuesto adicional</strong> (IAS &mdash; Impuesto Adicional Sobre la Renta) que la lleve al 15%. Es una especie de &ldquo;impuesto m&iacute;nimo&rdquo;.
+          </div>
+        </div>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <h4>Ejemplo: C&aacute;lculo de la TTD</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Utilidad contable antes de impuestos</span><span class="value">$ 500.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(+) Gastos no deducibles (diferencias permanentes)</span><span class="value">$ 80.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) INCRNGO aplicados</span><span class="value">$ 30.000.000</span></div>
+            <div class="ejemplo-row subtotal"><span class="label">= Utilidad depurada (base TTD)</span><span class="value">$ 550.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Impuesto neto de renta (despu&eacute;s de descuentos)</span><span class="value">$ 70.000.000</span></div>
+            <div class="ejemplo-row subtotal"><span class="label">= TTD (70M / 550M)</span><span class="value">12.73%</span></div>
+            <div class="ejemplo-row"><span class="label">TTD m&iacute;nima requerida</span><span class="value">15.00%</span></div>
+            <div class="ejemplo-row"><span class="label">Impuesto m&iacute;nimo (550M &times; 15%)</span><span class="value">$ 82.500.000</span></div>
+            <div class="ejemplo-row total"><span class="label">= IAS &mdash; Impuesto adicional a pagar</span><span class="value">$ 12.500.000</span></div>
+          </div>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n que la DIAN detecta</h4>
+          </div>
+          <p>No calcular la TTD o calcularla incorrectamente. La DIAN valida autom&aacute;ticamente esta casilla del formulario 110. Si la TTD queda por debajo del 15% y no se liquid&oacute; el IAS, se genera <strong>requerimiento por diferencia de impuesto</strong> con sanci&oacute;n por inexactitud.</p>
+        </div>
+        <h3>Anticipo del impuesto de renta</h3>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 807 ET &mdash; C&aacute;lculo del anticipo</h4>
+          </div>
+          <blockquote>
+            El anticipo se calcula como el <strong>75%</strong> del impuesto neto de renta del a&ntilde;o gravable. El contribuyente elige el mayor entre: (a) 75% del impuesto del a&ntilde;o actual, o (b) 75% del promedio de los dos &uacute;ltimos a&ntilde;os. Al anticipo calculado se le resta el anticipo pagado el a&ntilde;o anterior.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>F&oacute;rmula pr&aacute;ctica:</strong> Anticipo = (Impuesto neto de renta &times; 75%) &minus; Anticipo a&ntilde;o anterior. Si la empresa es nueva (primer o segundo a&ntilde;o), el porcentaje es 25% y 50% respectivamente.
+          </div>
+        </div>
+        <h3>Depuraci&oacute;n completa con n&uacute;meros</h3>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <h4>Ejemplo completo: Declaraci&oacute;n Distribuidora ABC SAS &mdash; AG 2025</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Ingresos brutos</span><span class="value">$ 4.315.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Devoluciones</span><span class="value">$ 65.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) INCRNGO</span><span class="value">$ 30.000.000</span></div>
+            <div class="ejemplo-row subtotal"><span class="label">= Ingresos netos</span><span class="value">$ 4.220.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Costos</span><span class="value">$ 2.950.000.000</span></div>
+            <div class="ejemplo-row subtotal"><span class="label">= Renta bruta</span><span class="value">$ 1.270.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Deducciones (gastos aceptados)</span><span class="value">$ 780.000.000</span></div>
+            <div class="ejemplo-row subtotal"><span class="label">= Renta l&iacute;quida</span><span class="value">$ 490.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Compensaci&oacute;n p&eacute;rdidas fiscales</span><span class="value">$ 0</span></div>
+            <div class="ejemplo-row subtotal"><span class="label">= Renta l&iacute;quida gravable</span><span class="value">$ 490.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Impuesto sobre la renta (490M &times; 35%)</span><span class="value">$ 171.500.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Descuento ICA (50% de $28M pagados)</span><span class="value">$ 14.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Descuento IVA activos fijos</span><span class="value">$ 5.700.000</span></div>
+            <div class="ejemplo-row subtotal"><span class="label">= Impuesto neto de renta</span><span class="value">$ 151.800.000</span></div>
+            <div class="ejemplo-row"><span class="label">(+) Ganancia ocasional (venta bodega) &times; 15%</span><span class="value">$ 9.000.000</span></div>
+            <div class="ejemplo-row subtotal"><span class="label">= Total impuesto a cargo</span><span class="value">$ 160.800.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Retenciones en la fuente practicadas</span><span class="value">$ 98.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Anticipo a&ntilde;o anterior</span><span class="value">$ 35.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(+) Anticipo a&ntilde;o siguiente (75% de 151.8M &minus; prev.)</span><span class="value">$ 78.850.000</span></div>
+            <div class="ejemplo-row total"><span class="label">= Saldo a pagar</span><span class="value">$ 106.650.000</span></div>
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p><strong>Planeaci&oacute;n del anticipo:</strong> El anticipo puede representar un flujo de caja enorme. Si la empresa tuvo un a&ntilde;o at&iacute;picamente bueno, el anticipo del 75% puede ser muy alto para el a&ntilde;o siguiente. Considera si conviene optar por el promedio de los 2 &uacute;ltimos a&ntilde;os cuando el resultado es menor.</p>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-8" class="prev" onclick="navigateTo(8)">&larr; M&oacute;dulo 8</a>
+        <a href="#modulo-10" class="next" onclick="navigateTo(10)">M&oacute;dulo 10: Pr&aacute;ctica &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-10" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">Renta 110</a> &rsaquo; M&oacute;dulo 10
+        </div>
+        <div class="mod-num">M&oacute;dulo 10 de 10</div>
+        <h1>Pr&aacute;ctica: del balance a la declaraci&oacute;n</h1>
+        <p class="mod-desc">Ya tienes la teor&iacute;a. Ahora aplica todo con tu balance real. Este m&oacute;dulo te da el checklist de preparaci&oacute;n, los cruces que verifica la DIAN y c&oacute;mo usar la herramienta para generar tu declaraci&oacute;n.</p>
+      </div>
+      <div class="content-block">
+        <h2>Checklist de preparaci&oacute;n del balance</h2>
+        <p>Antes de subir tu balance a la herramienta, verifica estos puntos manualmente. Ning&uacute;n software reemplaza la revisi&oacute;n profesional del contador:</p>
+        <table class="tabla-norm">
+          <thead>
+            <tr><th>#</th><th>Verificaci&oacute;n</th><th>M&oacute;dulo</th><th>Riesgo si falla</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Inmuebles reportados al mayor entre costo fiscal y aval&uacute;o catastral</td><td>M1</td><td>Patrimonio subvalorado</td></tr>
+            <tr><td>2</td><td>Inversiones a costo de adquisici&oacute;n (no valor intr&iacute;nseco)</td><td>M1</td><td>Cruce ex&oacute;gena 1010</td></tr>
+            <tr><td>3</td><td>Pasivos con NIT/c&eacute;dula del acreedor documentados</td><td>M1</td><td>Pasivos rechazados</td></tr>
+            <tr><td>4</td><td>Certificado Art. 49 para dividendos como INCRNGO</td><td>M2</td><td>Dividendos gravados</td></tr>
+            <tr><td>5</td><td>Ganancia ocasional separada de ingresos ordinarios</td><td>M2</td><td>Tarifa incorrecta</td></tr>
+            <tr><td>6</td><td>Todas las facturas de costos son electr&oacute;nicas</td><td>M3</td><td>Costos rechazados</td></tr>
+            <tr><td>7</td><td>Pagos &gt;100 UVT por canal bancario</td><td>M3</td><td>Bancarizaci&oacute;n</td></tr>
+            <tr><td>8</td><td>Aportes seguridad social al d&iacute;a (PILA)</td><td>M4</td><td>N&oacute;mina rechazada</td></tr>
+            <tr><td>9</td><td>GMF registrado al 50% como deducible</td><td>M4</td><td>Rechazo parcial</td></tr>
+            <tr><td>10</td><td>Depreciaci&oacute;n ajustada a tasas fiscales (Art. 137)</td><td>M4</td><td>Exceso rechazado</td></tr>
+            <tr><td>11</td><td>Anticipo calculado con ambos m&eacute;todos (elegir menor)</td><td>M5</td><td>Flujo de caja innecesario</td></tr>
+            <tr><td>12</td><td>P&eacute;rdidas fiscales soportadas con declaraciones en firme</td><td>M5</td><td>Compensaci&oacute;n rechazada</td></tr>
+            <tr><td>13</td><td>Tarifa correcta seg&uacute;n r&eacute;gimen (ZF, ZOMAC, ESAL, etc.)</td><td>M6</td><td>Reliquidaci&oacute;n + sanci&oacute;n</td></tr>
+            <tr><td>14</td><td>Incremento patrimonial justificado documentalmente</td><td>M7</td><td>Renta por comparaci&oacute;n</td></tr>
+            <tr><td>15</td><td>Formato 2516 consistente con F110</td><td>M8</td><td>Sanci&oacute;n Art. 651</td></tr>
+            <tr><td>16</td><td>ICA como descuento (no deducci&oacute;n) si es m&aacute;s favorable</td><td>M9</td><td>Mayor impuesto</td></tr>
+            <tr><td>17</td><td>C&aacute;lculo de TTD &ge; 15%</td><td>M9</td><td>IAS no liquidado</td></tr>
+            <tr><td>18</td><td>Retenciones conciliadas con certificados</td><td>M9</td><td>Saldo incorrecto</td></tr>
+          </tbody>
+        </table>
+        <h2>&iquest;Qu&eacute; hace la herramienta vs. qu&eacute; verificas T&Uacute;?</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Divisi&oacute;n de responsabilidades</h4>
+          </div>
+          <table class="tabla-norm">
+            <thead><tr><th>La herramienta hace</th><th>T&Uacute; verificas</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Calcula patrimonio bruto y l&iacute;quido desde el balance PUC</td>
+                <td>Que los saldos del balance coincidan con la contabilidad real</td>
+              </tr>
+              <tr>
+                <td>Separa INCRNGO de ingresos gravados</td>
+                <td>Que tengas los certificados de soporte (Art. 49, etc.)</td>
+              </tr>
+              <tr>
+                <td>Identifica gastos no deducibles por las 63 reglas DIAN</td>
+                <td>Que el criterio sea correcto para tu caso espec&iacute;fico</td>
+              </tr>
+              <tr>
+                <td>Aplica tarifa 35% y calcula descuentos</td>
+                <td>Que aplique la tarifa correcta si tienes r&eacute;gimen especial</td>
+              </tr>
+              <tr>
+                <td>Calcula TTD y determina si hay IAS</td>
+                <td>Que las partidas de depuraci&oacute;n TTD est&eacute;n completas</td>
+              </tr>
+              <tr>
+                <td>Genera el formato 2516 de conciliaci&oacute;n fiscal</td>
+                <td>Que las diferencias NIIF vs. fiscal est&eacute;n correctamente clasificadas</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="cta-practica">
+          <h3>Procesa tu declaraci&oacute;n de Renta 110 ahora</h3>
+          <p>Sube tu balance de prueba PUC y la herramienta genera la depuraci&oacute;n completa con las 63 reglas de gastos no deducibles, c&aacute;lculo de TTD y formato 2516.</p>
+          <a href="../renta110.html">Ir a la herramienta Renta 110 &rarr;</a>
+        </div>
+        <h2>Cruces DIAN: qu&eacute; compara la DIAN autom&aacute;ticamente</h2>
+        <p>La DIAN no revisa tu declaraci&oacute;n de forma aislada. Cruza m&uacute;ltiples fuentes de informaci&oacute;n. Conocer estos cruces te permite anticipar problemas:</p>
+        <table class="tabla-norm">
+          <thead><tr><th>Cruce</th><th>Qu&eacute; compara</th><th>Riesgo</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Renta vs. Ex&oacute;gena</strong></td>
+              <td>Ingresos del F110 vs. ingresos reportados en formatos 1001, 1007, 1008, 1009</td>
+              <td>Diferencia = requerimiento ordinario</td>
+            </tr>
+            <tr>
+              <td><strong>Renta vs. IVA (F300)</strong></td>
+              <td>Ingresos gravados de renta deben ser coherentes con la base gravable de IVA declarado</td>
+              <td>Ingresos en renta &lt; base IVA = inconsistencia</td>
+            </tr>
+            <tr>
+              <td><strong>Renta vs. Retenci&oacute;n (F350)</strong></td>
+              <td>Retenciones practicadas en F350 deben coincidir con las certificadas y descontadas en renta</td>
+              <td>Retenciones descontadas sin soporte</td>
+            </tr>
+            <tr>
+              <td><strong>Renta vs. Formato 2516</strong></td>
+              <td>La conciliaci&oacute;n fiscal debe explicar cada diferencia entre utilidad contable y renta l&iacute;quida fiscal</td>
+              <td>Formato 2516 inconsistente = auditor&iacute;a</td>
+            </tr>
+            <tr>
+              <td><strong>Patrimonio vs. Ex&oacute;gena bancaria</strong></td>
+              <td>Saldos en bancos del F110 vs. informaci&oacute;n reportada por entidades financieras (formato 1019)</td>
+              <td>Saldos no coinciden = verificaci&oacute;n</td>
+            </tr>
+            <tr>
+              <td><strong>Renta a&ntilde;o actual vs. anterior</strong></td>
+              <td>Patrimonio l&iacute;quido final del a&ntilde;o anterior debe coincidir con el inicial del a&ntilde;o actual</td>
+              <td>Salto patrimonial inexplicado</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n que la DIAN detecta</h4>
+          </div>
+          <p>El cruce m&aacute;s frecuente que genera requerimiento: <strong>ingresos de la declaraci&oacute;n de renta menores que los ingresos reportados en la informaci&oacute;n ex&oacute;gena por terceros</strong>. Si tus clientes o deudores reportaron pagos que no aparecen en tu renta, la DIAN lo detecta autom&aacute;ticamente.</p>
+        </div>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tu siguiente paso</h4>
+          </div>
+          <p>Ahora que dominas la Renta 110, el siguiente curso natural es <strong>Informaci&oacute;n Ex&oacute;gena</strong>. La ex&oacute;gena es la contraparte informativa de la renta: todo lo que declaras en el 110 debe ser coherente con los 30+ formatos de ex&oacute;gena. Aprender ambos juntos es la clave para evitar requerimientos DIAN.</p>
+        </div>
+        <div style="background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border:2px solid #DDD6FE;border-radius:16px;padding:28px 24px;text-align:center;margin:28px 0">
+          <h3 style="font-family:'Fraunces',serif;font-size:1.2rem;font-weight:700;color:#6D28D9;margin-bottom:8px">Siguiente curso: Informaci&oacute;n Ex&oacute;gena</h3>
+          <p style="font-size:.9rem;color:#7C3AED;margin-bottom:16px">Los 30+ formatos que la DIAN cruza con tu renta. Aprende qu&eacute; reportar, cu&aacute;ndo y c&oacute;mo evitar inconsistencias.</p>
+          <a href="exogena.html" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:#7C3AED;color:#fff;border-radius:12px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 16px rgba(124,58,237,.3);transition:all .2s" onmouseover="this.style.background='#6D28D9'" onmouseout="this.style.background='#7C3AED'">Ir al curso de Ex&oacute;gena &rarr;</a>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-9" class="prev" onclick="navigateTo(9)">&larr; M&oacute;dulo 9</a>
+        <a href="../escuela.html" class="next" style="background:var(--gray-800)">Volver a la Escuela &rarr;</a>
+      </div>
+    </section>
+  </div>
+</div>
+<section style="background:linear-gradient(180deg,#F9FAFB,#fff);padding:60px 24px 80px;border-top:1px solid #E5E7EB">
+  <div data-curso-meta="renta110" style="text-align:center;margin-bottom:28px"></div>
+  <div data-cert-widget="renta110"></div>
+</section>
+<script src="../shared/certificado.js?v=383dd956"></script>
+<script src="../shared/cert-emit-widget.js?v=81c77b40"></script>
+<script src="../shared/quiz-banks.js?v=bd69b5f6"></script>
+<script src="../shared/quiz-engine.js?v=faaf346e"></script>
+<script src="../shared/curso-meta.js?v=6b7779f4"></script>
+<button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()" aria-label="Abrir men&uacute;">&#9776;</button>
+<script>
+/* Module navigation */
+var currentModule = 1;
+var totalModules = 10;
+function navigateTo(n) {
+  // Hide all modules
+  document.querySelectorAll('.modulo-section').forEach(function(s){ s.style.display = 'none'; });
+  // Show target
+  var target = document.getElementById('modulo-' + n);
+  if (target) target.style.display = 'block';
+  // Update sidebar
+  var links = document.querySelectorAll('.sidebar-nav a');
+  links.forEach(function(a, i) {
+    a.classList.remove('active');
+    if (i < n - 1) a.classList.add('completed');
+    if (i === n - 1) a.classList.add('active');
+  });
+  // Update progress
+  var pct = Math.round((n / totalModules) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  currentModule = n;
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Close sidebar on mobile
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('open');
+  // Track
+  if (typeof gtag !== 'undefined') gtag('event', 'escuela_modulo', { curso: 'renta110', modulo: n });
+}
+/* Sidebar toggle for mobile */
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('open');
+}
+</script>
+</body>
+</html>

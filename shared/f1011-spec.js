@@ -1,0 +1,291 @@
+/* shared/f1011-spec.js
+   Spec compartida del Formato 1011 — Información de las Declaraciones Tributarias (DIAN AG 2025).
+   Catálogo verificado contra Prevalidador DIAN AG2025 V6. 225 conceptos.
+
+   Expone window.F1011Spec con:
+     - CONCEPTOS_1011: array de [code, nombre]
+     - GRUPOS: helper para agrupar conceptos por sección (patrimonio, exentas, deducciones, IVA)
+     - exportToWorksheet(ws, saldos, cfg): escribe hoja Excel solo con conceptos > 0
+
+   Reusable desde exogena.html (integración inline en step 4) y exogena-f1011.html
+   (standalone, pendiente refactor). Mantener constantes IDÉNTICAS si se modifican. */
+(function(global){
+'use strict';
+
+const CONCEPTOS_1011 = [
+  ['1105','Saldo a 31 de Diciembre en caja'],
+  ['1502','Valor patrimonial de vehiculos, maquinaria y equipo.'],
+  ['1512','Valor patrimonial de activos fijos intangibles'],
+  ['1513','Valor patrimonial de los activos fijos agotables'],
+  ['1519','Valor Patrimonial a 31 de diciembre de Activos Biológicos Plantas'],
+  ['1520','Valor Patrimonial a 31 de diciembre de Activos Biológicos Animales'],
+  ['1521','Valor Patrimonial de la casa o apartamento de habitación (inciso 2 art 295-3ET)'],
+  ['1522','Valor Patrimonial de lotes rurales y fincas'],
+  ['1523','Valor Patrimonial de lotes urbanos'],
+  ['1524','Valor Patrimonial de otros bienes inmuebles. (No relacionados en los conceptos 1512, 1513y 1519)'],
+  ['1525','Valor Patrimonial de otros bienes muebles.'],
+  ['1526','Valor Patrimonial de otros activos. (No relacionados en los artículos 29 y 30 de la presente resolución y en los conceptos de este articulo)'],
+  ['1527','Valor patrimonial del inventario'],
+  ['1528','Valor patrimonial de los activos poseídos a través de contratos de colaboración empresarial'],
+  ['1601','Inversiones Zomac realizadas en el año representadas en inventarios, propiedad planta y equipo y otras inversiones'],
+  ['1602','Inversiones en Megainversiones en el año representadas en propiedad, planta y equipo.'],
+  ['1603','Inversiones realizadas por empresas de economía naranja de que trata el numeral 1 del artículo 235-2 del E.T., en propiedad, planta y equipo, intangibles de que trata el numeral 1 del artículo 74 e in'],
+  ['1604','Inversiones realizadas por empresas dedicas al desarrollo del campo colombiano de que trata el numeral 2 del artículo 235-2 del E.T., en propiedad, planta y equipo y activos biológicos productores'],
+  ['8104','Renta exenta por venta energía eléctrica generada con base en energía eólica, biomasa o residuos agrícolas, solar, geotérmica o de los mares. Art.235-2 numeral 3.'],
+  ['8106','Renta exenta por aprovechamiento de nuevas plantaciones forestales incluida la guadua el caucho y el marañón. Art. 235-2 numeral 5_x000D_, Inciso 1'],
+  ['8109','Renta exenta por prestación de servicio de transporte fluvial con embarcaciones y planchones de bajo calado Art. 235-2 numeral 6.'],
+  ['8111','Rentas exentas por la utilidad en la enajenación de predios destinados a fines de utilidad pública. Num 9 Art. 207-2 E.T. Sentencia C-083 del 2018'],
+  ['8120','Rentas exentas por aplicación de algún convenio para evitar la doble tributación.'],
+  ['8121','Renta exenta por creaciones literarias dela economía naranja contenidas en el artículo 28 de la Ley 98 de 1993. Art. 235-2 numeral 8.'],
+  ['8125','Rentas exentas por Intereses, comisiones y pagos por deuda pública externa, E.T. art. 218 E.T.'],
+  ['8127','Rentas exentas por inversión en nuevos aserríos, plantas de procesamiento y plantaciones de árboles maderables y árboles en producción de frutos. E.T., art. 235-2, numeral 5.Incisos 2 y 3'],
+  ['8133','Rentas exentas por servicios prestados en hoteles nuevos. E.T., Art. 207-2, Num 3 Sentencia C 235 del 29 de mayo de 2019'],
+  ['8134','Rentas exentas por servicios prestados en hoteles remodelado y/o ampliados. E.T., Art. 207-2 E.T, Num. 4. Sentencia C 235 del 29 de mayo de 2019'],
+  ['8140','Rentas exentas por aportes voluntarios a los fondos de pensiones. E.T. art. 126-1, inc. 2'],
+  ['8141','Rentas exentas por los ahorros a largo plazo para el fomento de la construcción. E.T., art. 126-4.'],
+  ['8142','Rentas exentas del beneficio neto o excedente para las entidades sin ánimo de lucro. E.T., art 358 E.T.'],
+  ['8145','Rentas exentas de fondos provenientes de auxilios o donaciones de entidades o gobiernos extranjeros. Convenidos con el Gobierno colombiano, destinados a programas de utilidad común y registrados por l'],
+  ['8156','Rentas exentas prestaciones provenientes de un fondo de pensiones. E.T. art. 207.'],
+  ['8159','Renta exenta pago principal y demás rendimientos generados en actividades financieras por parte de entidades gubernamentales de carácter financiero y de cooperación para el desarrollo. E.T., art. 207-'],
+  ['8160','Rentas exentas de los industriales de la cinematografía, personas naturales. L. 397/1997, art. 46.'],
+  ['8164','Renta exenta por la utilidad en la enajenación de predios destinados al desarrollo de proyectos de vivienda interés social y/o prioritario. Art. 235-2 numeral 4, literal a)'],
+  ['8165','Renta exenta por la utilidad en la primera enajenación de viviendas de interés social y/o prioritario. E.T., art. 235-2, numeral 4, literal b).'],
+  ['8167','Renta exenta de que trata L. 546/1999, art. 16. Modificado. L. 964/2005 asociados a proyectos de vivienda de interés y prioritario. E.T., art. 235-2, numeral 4, literal d).'],
+  ['8168','Renta exenta por rendimientos financieros provenientes de créditos para adquisición de vivienda de interés social y/o prioritario. E.T., art. 235-2, numeral 4 literal e)'],
+  ['8169','Renta exenta por los rendimientos generados por la reserva de estabilización que constituyen las entidades administradoras de fondos de pensiones y cesantías. Art. 101 de la Ley 100 de 1993. Art. 235-'],
+  ['8171','Renta exenta. Incentivo tributario para empresas de economía naranja E.T., Art. 235-2 numeral 1, E.T.'],
+  ['8172','Renta exenta. Incentivo tributario para el desarrollo del campo colombiano E.T., Art. 235-2 numeral 2, E.T.'],
+  ['8173','Renta exenta de capital por dividendos o participaciones distribuidos por no residentes a CHC y por prima en colocación de acciones. Art.895 E.T..'],
+  ['8174','Renta exenta ganancia ocasional derivada de la venta o transmisión de la participación de una CHC en entidades no residentes. Art. 896 E.T'],
+  ['8175','Renta exenta de las sumas destinadas al pago de los seguros de invalidez y de sobrevivientes dentro del mismo régimen de ahorro individual con solidaridad. L. 100/93, art. 135'],
+  ['8176','Rentas exentas provenientes de bienes inmuebles situados en otro país de la CAN. Decisión 578 de 2004, art. 4'],
+  ['8177','Rentas exentas provenientes de la explotación de recursos naturales en otro país de la CAN . Decisión 578 de 2004, art. 5'],
+  ['8178','Rentas exentas por actividades empresariales efectuadas en otro país de la CAN. Decisión 578 de 2004, art. 6'],
+  ['8179','Rentas exentas de empresas de transporte domiciliadas en otro país de la CAN. Decisión 578 de 2004, art. 8'],
+  ['8180','Rentas exentas por regalías de bienes intangibles en un país miembro de la CAN. Decisión 578 de 2004, art. 9'],
+  ['8181','Rentas exentas por intereses y demás rendimientos financieros cuyo pago se registra e imputa en otro país miembro de la CAN. Decisión 578 de 2004, art. 10'],
+  ['8182','Rentas exentas por dividendos y participaciones distribuidos por empresas domiciliadas en otro país miembro de la CAN. Decisión 578 de 2004, art. 11.'],
+  ['8183','Rentas exentas por ganancias de capital obtenidas en la venta de bienes situados en otro país miembro de la CAN. Decisión 578 de 2004, art. 12'],
+  ['8184','Renta exenta generados por la prestación de servicios personales prestados en otro país miembro de la CAN. Decisión 578 de 2004, art. 13.'],
+  ['8185','Rentas exentas por beneficios empresariales en servicios, servicios técnicos, asistencia técnica y consultoría prestados en otro país de la CAN. Decisión 578 de 2004, art. 14'],
+  ['8186','Rentas exentas por pensiones y anualidades obtenidas de fuentes productoras situadas en otro país miembro de la CAN. . Decisión 578 de 2004, art. 15'],
+  ['8187','Rentas exentas provenientes de actividades de entretenimiento público efectuadas en otro país miembro de la CAN. Decisión 578 de 2004, art. 16'],
+  ['8200','Deducción en la declaración de renta por las inversiones realizadas en activos fijos reales productivos. E.T., Art. 158-3.'],
+  ['8207','Costo o deducción por salarios, prestaciones sociales y demás pagos laborales. No debe contener los valores especificados en otros conceptos.'],
+  ['8208','Deducción por pagos efectuados a la casa matriz. E.T., art. 124.'],
+  ['8209','Deducción por gastos en el exterior. E.T., art. 121. No debe contener los valores especificados en el concepto 8282 ni la diferencia en cambio.'],
+  ['8210','Costo en la enajenación de activos fijos poseídos por menos de dos años. E.T., art. 179.'],
+  ['8211','Deducción del gravamen a los movimientos financieros. E.T., art. 115.'],
+  ['8212','Deducción por agotamiento en explotación de hidrocarburos, E.T., art. 161.'],
+  ['8215','Deducción por intereses sobre préstamos educativos del Icetex y para adquisición de vivienda. E.T., art. 119, modificado por L. 2010/2019, art. 89.'],
+  ['8217','Deducción por donación o inversión en producción cinematográfica. L. 814/2003, art. 16.'],
+  ['8218','Deducción por protección, mantenimiento y conservación muebles e inmuebles de interés cultural, L. 1185/2008, art. 14.'],
+  ['8225','Deducción por donaciones del sector privado en la red nacional de bibliotecas públicas y biblioteca nacional. E.T., art 125. Modificado. L. 1819/2016, art. 75.'],
+  ['8228','Costo o deducción por las reparaciones locativas realizadas sobre inmuebles.'],
+  ['8230','Deducción por las inversiones realizadas en librerías. L. 98/1993, art. 30.'],
+  ['8231','Deducción por la inversión realizada en centros de reclusión. L.633/2000, art.98'],
+  ['8233','Deducción de impuestos devengados y pagados. E.T. arts.115 y 115-1. No debe contener los valores especificados en otros conceptos.'],
+  ['8234','Costo o deducción de intereses. E.T., art. 117. No debe contener los valores especificados en el concepto 8236.'],
+  ['8236','Costo o deducción por contratos de leasing. E.T., art. 127-1.'],
+  ['8237','Deducción por costos y gastos por campañas de publicidad de productos extranjeros. E.T., art. 88-1'],
+  ['8238','Deducción de la provisión de cartera de créditos y provisión de coeficiente de riesgo, provisiones realizadas durante el respectivo año gravable sobre bienes recibidos en dación en pago y sobre contra'],
+  ['8239','Deducción por deudas manifiestamente pérdidas o sin valor. E.T., art. 146.'],
+  ['8240','Deducción por pérdida de activos. E.T. art. 148.'],
+  ['8241','Costo o deducción por aportes al Instituto Colombiano de Bienestar Familiar, (ICBF). E.T., art. 114.'],
+  ['8242','Costo o deducción por aportes a Cajas de Compensación Familiar. E.T., art. 115.1.'],
+  ['8243','Costo o deducción por aportes al Servicio Nacional de Aprendizaje, (SENA). E.T., art. 114.'],
+  ['8244','Deducción de contribuciones a fondos de pensiones de jubilación e invalidez y fondos de cesantías. E.T. Art. 126-1, modificado L. 1819/2016, art. 15.'],
+  ['8245','Deducción por concepto de cesantías pagadas, E.T., art. 109. No debe contener los valores especificados en los conceptos 8248, 8250, 8263 y 8271.'],
+  ['8246','Deducción por concepto de aportes a cesantías por los trabajadores independientes. E.T., art- 126-1, inciso 6.'],
+  ['8247','Deducción por concepto de contribuciones parafiscales agropecuarias efectuadas por los productores a los fondos de estabilización de la L. 101/1993. art 29'],
+  ['8248','Deducción por salarios, prestaciones sociales y demás pagos laborales, pagados a viudas y huérfanos de miembros de las Fuerzas Armadas muertos en combate, secuestrados o desaparecidos. Art. 108-1 del '],
+  ['8249','Costo o deducción por apoyo de sostenimiento mensual de los trabajadores contratados como aprendices. L.115/1994, art. 189.'],
+  ['8250','Costo o deducción por salarios pagados, durante el cautiverio, a sus empleados víctimas de secuestros. L. 986/2005, art. 21.'],
+  ['8255','Costo o deducción por pagos a terceros por concepto de alimentación del trabajador y su familia o suministro de alimentación para los mismos.'],
+  ['8256','Costo o deducción por el pago de estudios a trabajadores en instituciones de educación superior. L. 30/1992, art. 124'],
+  ['8257','Deducción por factor especial de agotamiento en explotación de hidrocarburos, E.T. art. 166.'],
+  ['8259','Deducción por tasas y contribuciones fiscales pagadas Art 115 ET'],
+  ['8261','Deducción de la provisión para el pago de futuras pensiones. E.T., art. 112.'],
+  ['8263','Costo o deducción por salarios y prestaciones sociales a trabajadores con discapacidad no inferior al 25%. L.361/1997, art. 31.'],
+  ['8265','Deducción por aumento en la reserva técnica de FOGAFIN Y FOGACOOP. E.T., art. 19-3.'],
+  ['8271','Deducción por salarios y prestaciones sociales pagados a mujeres víctimas de violencia comprobada. L. 1257/2008, art. 23.'],
+  ['8272','Deducción del 100% por inversiones en infraestructura para la realización de espectáculos públicos. Art. 4 L. 1493/11.'],
+  ['8273','Deducción por inversiones en jardines botánicos. L. 299/1996, art. 12'],
+  ['8274','Deducción por inversiones en fuentes de energía no convencional. L.1715/2014, art. 11.'],
+  ['8275','Deducción por depreciación de maquinarias, equipos y obras civiles de proyectos de fuentes de energía no convencionales. Art. 14 L. 1715/2014'],
+  ['8276','Costos y deducciones fiscales no reconocidas contablemente (diferencias temporarias), E.T., art. 59 y 105, num.1.'],
+  ['8277','Deducciones por atenciones a clientes, proveedores y trabajadores. E.T., art. 107-1, inciso 1.'],
+  ['8278','Deducciones por pagos salariales y prestacionales, provenientes de litigios. E.T., art. 107-1, inciso 2.'],
+  ['8279','Deducción de cesantías consolidadas. E.T., art.110. No debe contener los valores especificados en otros conceptos.'],
+  ['8282','Pagos a jurisdicciones no cooperantes, de baja o nula imposición y a entidades con regímenes preferentes. E.T., art. 124-2'],
+  ['8283','Deducción por depreciación. E.T., art. 128.'],
+  ['8284','Costo por depreciación'],
+  ['8285','Costo o deducción por obsolescencia. E.T., art. 129'],
+  ['8286','Deducción de inversiones. E.T., art. 142'],
+  ['8287','Deducción por amortización de activos intangibles. E.T., Art. 143 del E.T. (Modificado por el artículo 85 de la Ley 1819 de 2016)'],
+  ['8288','Amortización inversiones en exploración, desarrollo y construcción de minas, y yacimientos de petróleo y gas. E.T., art. 143-1, modificado L. 1819/2016, art. 86'],
+  ['8290','Pérdidas sufridas en actividades agropecuarias. E.T., art. 150'],
+  ['8292','Deducción por inversiones en evaluación y exploración de recursos naturales no renovables. E.T., Art.159, modificado L. 1819/2016, art. 92.'],
+  ['8293','Deducción por agotamiento en explotación de minas, gases distintos de hidrocarburos y depósitos naturales. E.T., art. 167'],
+  ['8294','Deducción por pago impuesto al carbono, como mayor valor del costo del bien. L. 1819/2016, Art. 222, parágrafo 2. Sujeto pasivo del impuesto'],
+  ['8295','Deducción por pagos efectuados a las empresas promotoras de salud EPS y los aportes al Sistema de Riesgos Laborales.'],
+  ['8296','Deducciones por contribución a educación destinados a programas de becas de estudios totales o parciales. E.T., art. 107-2 literal a)'],
+  ['8297','Deducciones por contribución a educación destinados a programas o centros de atención, estimulación y desarrollo integral. E.T., art. 107-2 literal b)'],
+  ['8298','Deducciones por contribución a educación por aportes a instituciones de educación básica-primaria y secundaria y media reconocidas por el Ministerio de Educación y educación técnica, tecnológica y edu'],
+  ['8299','Deducciones de otros pagos a casas matrices o sucursales 124-1 E.T.'],
+  ['8400','Deducción del 120% de los pagos que el empleador realice por concepto de salario, en relación con los empleados que sean menores de veintiocho (28) años, siempre y cuando se trate del primer empleo de'],
+  ['8401','Deducción de las instituciones prestadoras de salud (IPS) contribuyentes por la cartera, reconocida y certificada por el liquidador, correspondiente a los patrimonios de las Entidades Promotoras de Sa'],
+  ['8402','Deducción por inversiones o donaciones en proyectos de economía creativa del artículo 195 de la Ley 1607 de 2012 (adicionado por la Ley 1955 de 2019 Art. 180).'],
+  ['8403','Deducción por donaciones realizadas por entidades del régimen tributario especial parágrafo 1 del artículo 357 del estatuto Tributario.'],
+  ['8405','Deducción por deterioro (provisión individual) de cartera de dudoso o difícil cobro. E.T.,art.145, DUR 1625 de 2016 arts.1.2.1.18.19 y 1.2.1.18.20.'],
+  ['8406','Deducción por deterioro (provisión general) de cartera de dudoso o difícil cobro. E.T.,art.145, DUR 1625 de 2016 art.1.2.1.18.21.'],
+  ['8407','Deducción por inversiones realizadas en investigación, desarrollo tecnológico e innovación. E.T., art.158-1, inc. 1'],
+  ['8412','Depreciación especial aplicada por contribuyentes del régimen de Mega-inversiones que realicen nuevas inversiones. E.T. art.235-3, num.2.'],
+  ['8413','Deducción por provisiones de cartera hipotecaria de dudoso o difícil cobro. DUR 1625 de 2016 art.1.2.1.18.26.'],
+  ['8414','Deducción deterioro de cartera de Entidades Promotoras de Salud -EPS en liquidación forzosa intervenidas por la Superintendencia Nacional de Salud. L. 1819/2016, art.375,modificado por L. 2010/ 2019, '],
+  ['8415','Deducción deterioro de cartera de dudoso o difícil cobro E.T. art. 145. Par. 1.'],
+  ['8421','Deducción por pérdida en Ia enajenación de activos. E.T., art. 149'],
+  ['8422','Deducción por pérdida en Ia enajenación de plusvalía. E.T., art. 154.'],
+  ['8423','Deducción por perdida en la enajenación de bonos para la seguridad art 4 L 345/1996 derogado por el art 96 L 2277/2022'],
+  ['8424','Deducción por perdida en la enajenación de bonos para la seguridad para la paz art 5 L 487/1998 derogado por el art 96 L 2277/2022'],
+  ['8425','Deducción del 120% de salarios y prestaciones sociales por contratación de adulto mayor sin pensión L 2040/2020 art 2.'],
+  ['8426','Costo en la enajenación de activos fijos poseídos por dos o más años. E.T., art. 300. (Ítem adic. art. 16 Res. DIAN 233/2025)'],
+  ['8427','Deducción por inversiones en proyectos dirigidos a la gestión eficiente de la energía. L. 1715/2014 art. 11, diferente al reportado en el concepto 8274. (Ítem adic. art. 16 Res. DIAN 233/2025)'],
+  ['8428','Deducción por depreciación de maquinarias, equipos y obras civiles de proyectos dirigidos a la gestión eficiente de la energía. L. 1715/2014 art. 14, diferente al reportado en el concepto 8275. (Ítem adic. art. 16 Res. DIAN 233/2025)'],
+  ['8429','Deducción por inversiones en proyectos de hidrógeno verde, azul o blanco. Ley 2099/2021, diferente al reportado en el concepto 8274. (Ítem adic. art. 16 Res. DIAN 233/2025)'],
+  ['8430','Deducción por depreciación de maquinarias, equipos y obras civiles de proyectos de hidrógeno verde, azul o blanco. L. 1715/2014 art. 14, mod. Ley 2099/2021, diferente al reportado en el concepto 8275. (Ítem adic. art. 16 Res. DIAN 233/2025)'],
+  ['9001','Exclusión de IVA por venta de materias primas químicas con destinación específica. E.T., art. 424, num. 1.'],
+  ['9002','Exclusión de IVA por venta de materias primas destinadas a la producción de vacunas. Num 2 Art. 424 E.T.'],
+  ['9003','Exclusión de IVA por venta de computadores personales. E.T., art. 424, num. 3, modificado L.1819/2016, art.175, num. 5.'],
+  ['9004','Exclusión de IVA por venta de anticonceptivos femeninos. E.T., art.424, num.4.'],
+  ['9007','Exclusión de IVA por venta de equipos, entre otros, para construcción, instalación, montaje y operación de sistemas de control y monitoreo ambiental. E.T., art. 424, num. 7.'],
+  ['9008','Exclusión de IVA por venta de dispositivos móviles inteligentes. E.T., art. 424, num.6.'],
+  ['9009','Exclusión de IVA por donaciones de alimentos de consumo humano a Bancos de Alimentos. E.T., art. 424, num.9'],
+  ['9012','Exclusiones de IVA por venta de objetos con interés artístico, cultural e histórico. E.T., art. 424, num. 13, modificado L. 1819/2016, art. 175, num. 11'],
+  ['9013','Exclusiones de IVA por venta de combustible para aviación para el servicio de transporte aéreo nacional con origen y destino a Guainía, Amazonas, Vaupés, San Andrés Islas y Providencia, Arauca y Vicha'],
+  ['9014','Exclusiones de IVA en la venta de pólizas de seguros de carácter individual. E.T., art. 427. E.T.'],
+  ['9015','Exclusión de IVA en la venta de equipos, entre otros, para fuentes de energía no convencionales. Art. 12 Ley 1715 de 2014.'],
+  ['9016','Exclusión de IVA por venta de servicios médicos odontológicos, entre otros. E.T., art. 476, num. 1. Art. 476 E.T.'],
+  ['9017','Exclusión de IVA por venta de servicios de transporte. E.T., art. 476, num. 9.'],
+  ['9018','Exclusión en IVA en intereses y rendimientos financieros por operaciones de crédito, E.T., art. 476, num. 16.'],
+  ['9019','Exclusión de IVA en venta de servicios públicos. E.T., art. 476, numerales 11, 12, 13.'],
+  ['9020','Exclusión de IVA en venta de servicio de arrendamiento. E.T., art. 476, num. 15.'],
+  ['9021','Exclusión de IVA en venta de servicios de educación. E.T., art. 476, num.5'],
+  ['9023','Exclusión de IVA en venta de planes obligatorios de salud, ahorro individual, riesgos laborales y servicios de seguros y reaseguros. E.T., art. 476, num. 3.'],
+  ['9025','Exclusión de IVA en servicios de promoción y fomento deportivo. E.T., art. 476, num. 29.'],
+  ['9026','Exclusión de IVA en cine, en eventos y espectáculos. E.T., art. 476, num. 18, modificado por L 2277/2022 art 76.'],
+  ['9027','Exclusión de IVA en venta de servicios de adecuación de tierras, producción agropecuaria y pesquera. E.T., art. 476, num. 24, modificado por L 2277/2022 art 76.'],
+  ['9028','Exclusión de IVA comisiones pagadas en procesos de titularización de activos. E.T., art. 476, num. 22'],
+  ['9029','Exclusión de IVA en servicios funerarios, cremación, inhumación y exhumación E.T., art. 476, num. 19.'],
+  ['9030','Exclusión de IVA en servicios de conexión y acceso a Internet estrato 3. E.T., art. 476, num 7.'],
+  ['9031','Exclusión de IVA en comisiones por intermediación por la colocación de los planes de salud del sistema general de seguridad social. E.T., art. 476, num. 4'],
+  ['9032','Exclusión de IVA en comisiones percibidas por utilización de tarjetas crédito y débito. E.T., art. 476, num. 28'],
+  ['9033','Exclusión de IVA en servicios de alimentación contratados con recursos públicos y destinados al sistema penitenciario, de asistencia social y escuelas de educación pública. E.T., art. 476, num. 14.'],
+  ['9034','Exclusión de IVA en servicios de transporte aéreo nacional donde no exista transporte terrestre organizado y hacia los demás destinos contemplados. E.T., art. 476, num. 10.'],
+  ['9035','Exclusión de IVA en publicidad a través de periódicos y medios regionales. E.T., art. 476, num. 31'],
+  ['9036','Exclusión de IVA en la venta de productos de soporte nutricional del régimen especial. E.T., art. 424, num. 3, adicionado por L. 1819/2016 art. 175'],
+  ['9037','Exclusión de IVA en la venta de alimentos para propósitos médicos especiales para pacientes que requieren nutrición enteral. E.T., art. 424, num. 3, adicionado por L. 1819/2016 art. 175'],
+  ['9038','Exclusión de IVA en el territorio intendencia de San Andrés y Providencia. E.T., art. 423.'],
+  ['9039','Exclusión de IVA en la venta de alimentos de consumo humano y animales importados de países colindantes de Vichada, Guajira, Guainía y Vaupés, destinados a consumo local en el departamento. E.T., art.'],
+  ['9041','Exclusión de IVA en compraventa de maquinaria y equipos registrados en el registro nacional de reducción de emisiones de gases efecto invernadero. E.T., art. 424, num. 16, adicionado L. 1819/2016, art'],
+  ['9042','Exclusión de IVA en el petróleo crudo recibido por la Agencia Nacional de Hidrocarburos por regalías para su respectiva monetización. E.T., art. 424, parágrafo, adicionado L. 1819/2016, art. 175.'],
+  ['9043','Exclusión de IVA en los servicios de educación virtual para el desarrollo de contenidos digitales. E.T., art. 476, num. 6, adicionado por L. 1819/2016 art. 187.'],
+  ['9044','Exclusión de IVA en suministro de páginas web, servidores, computadora en la nube y mantenimiento a distancia. E.T., art. 476, num. 21, adicionado por L. 1819/2016 art. 187.'],
+  ['9045','Exclusión de IVA en adquisición de licencias de software para el desarrollo comercial de contenidos digitales. E.T., art. 476, num. 20, adicionado por L. 1819/2016 art. 187.'],
+  ['9046','Exclusión de IVA en servicios de reparación y mantenimiento de naves y artefactos marítimos y fluviales. E.T., art. 476, num. 30, adicionado por L. 1819/2016 art. 187.'],
+  ['9047','Exclusión de IVA por servicios de hotelería y turismo prestados en zonas del régimen aduanero especial de Urabá, Tumaco, Guapi, Inírida, Puerto Carreño, La Primavera y Cumaribo, Maicao, Uribía y Manau'],
+  ['9048','Exclusión de IVA por operaciones cambiarias de compra y venta de divisas. E.T., art. 476, num. 27'],
+  ['9049','Exclusión de IVA por servicios de intermediación para el pago de incentivos o transferencias monetarias condicionadas en el marco de los programas sociales. E.T., art. 476, num. 17'],
+  ['9051','Exclusión de IVA en la venta de alimentos consumo humano o animal, destinados a los departamentos de Amazonas, Guainía y Vaupés. E.T., art. 424, num. 13, adicionado L 1819/2016, art. 175, num. 13.'],
+  ['9052','Exclusión de IVA en la venta de elementos de aseo, destinados a los departamentos de Amazonas, Guainía y Vaupés. E.T., art. 424, num. 13, adicionado L 1819/2016, art. 175, num. 13.'],
+  ['9053','Exclusión de IVA en la venta de vestuario, destinado a los departamentos de Amazonas, Guainía y Vaupés. E.T., art. 424, num. 13, adicionado L 1819/2016, art. 175, num. 13.'],
+  ['9054','Exclusión de IVA en la venta de medicamentos de uso humano y veterinario, destinados a los departamentos de Amazonas, Guainía y Vaupés. E.T., art. 424, num. 13, adicionado L 1819/2016, art. 175, num. '],
+  ['9055','Exclusión de IVA en la venta de materiales de construcción destinados a los departamentos de Amazonas, Guainía y Vaupés. E.T., art. 424, num. 13, adicionado L 1819/2016, art. 175, num. 13.'],
+  ['9056','Exclusión de IVA en la venta de bicicletas, bicicletas eléctricas, motos eléctricas, patines, monopatines, monopatines eléctricos, patinetas, y patinetas eléctricas, de hasta 50 UVT. E.T., art. 424, n'],
+  ['9057','Exclusión de IVA en la venta de bienes facturados por los comerciantes definidos en el parágrafo 2 del artículo 34 de la Ley 98 de 1993. E.T., art. 424, num 18'],
+  ['9058','Exclusión de IVA en la venta de productos comprados o introducidos al Amazonas en el marco del convenio Colombo-Peruano y el convenio con la República Federativa del Brasil. E.T., art. 424, num 15'],
+  ['9059','Exclusión de IVA en servicios de administración de fondos del Estado y los servicios vinculados con la seguridad social de acuerdo con lo previsto en la Ley 100 de 1993, E.T., art. 476, num. 2'],
+  ['9060','Exclusión de IVA, primeros trescientos veinticinco (325) minutos mensuales del servicio telefónico local facturado a los usuarios estratos 1, 2 y 3 y servicio prestado desde teléfonos públicos, E.T., '],
+  ['9061','Exclusión de IVA en comisiones percibidas por la administración de fondos de inversión colectiva, E.T., art. 476, num. 23.'],
+  ['9062','Exclusión de IVA en servicios de corretaje de contratos de reaseguros, E.T., art. 476, num.32'],
+  ['9065','Exclusión de IVA en los servicios prestados a la ONU y a las entidades multilaterales de crédito, de acuerdo con los convenios ratificados por Colombia. Reglamentación Dec. 2076/1992, art. 21'],
+  ['9066','Exclusión de IVA en venta de chatarra de las subpartidas 72.04, 74.04 y 76.02. cuando no intervenga como enajenante o adquiriente una siderúrgica. Art.437-4 E.T., Art.1.3.2.1.9. Decreto 1625 de 2016'],
+  ['9067','Exclusión del IVA por la venta de bienes de diferentes partidas arancelarias que inician con la partida 01.03 y termina con la subpartida 96.09.10.00.00, contempladas en el inciso 1 del art. 424 E.T.'],
+  ['9069','Exclusión de IVA por venta de bienes inmuebles numeral 12 Artículo 424 E.T'],
+  ['9070','Exclusión de IVA en comercialización de animales vivos, excepto los animales domésticos de compañía. ET art 476 núm. 25 modificado ley 2277/2020 art 76, art. 1'],
+  ['9072','Exclusión de IVA en el servicio de faenamiento ET art 476 núm. 25 A'],
+  ['9073','Exclusión de IVA en los contratos de Obras Públicas que celebren las personas naturales o jurídicas con las Entidades Territoriales y/o Entidades Descentralizadas del Orden Departamental y Municipal. '],
+  ['9100','Tarifa del 5% venta de servicios de almacenamiento y comisiones productos agrícolas. E.T., art. 468-3, num. 1,'],
+  ['9101','Tarifa del 5% por venta de seguro agropecuario. E.T., art. 468-3, num. 2.'],
+  ['9102','Tarifa del 5% por venta de servicios prestados mediante entidades del Num. 1 Art. 19 E.T., con discapacidad. E.T., art. 468-3, num. 4, modificado por L. 1819/2016, art. 186.'],
+  ['9103','Tarifa de 5% en venta de servicios de medicina prepagada y pólizas relacionadas. E.T., art. 468-3, num. 3,'],
+  ['9105','Tarifa del 5% en venta de bienes sujetos a participación o impuesto al consumo de licores, vinos, aperitivos y similares del art. 202 L. 223/1995. E.T., art. 468-1, num. 2, adicionado L. 1819/2016, ar'],
+  ['9106','Tarifa del 5% en las neveras nuevas para sustitución, sujetas al reglamento técnico de etiquetado (RETIQ). E.T., art. 468-1, num. 3, adicionado L. 1819/2016, art. 185, num.3.'],
+  ['9107','Tarifa del 5%. El ingreso al productor en la venta de Gasolina y ACPM. E.T. Numeral 4 art. 468-1 del Art. 174 Ley 1955 de 2019.'],
+  ['9110','Tarifa del 5% en la venta de bienes de las partidas que inician desde la 09.01. y termina en la partida 90.32., contemplados en el inciso 1 del artículo 468-1 E.T..'],
+  ['9200','Exención de IVA en venta de alcohol carburante. E.T., art. 477, num. 1.'],
+  ['9202','Exención de IVA venta de libros y revistas de carácter científico y cultural. E.T., art. 478.'],
+  ['9203','Exención de IVA por prestación servicios en el país utilizados en el exterior. E.T., art. 481, lit. c.'],
+  ['9204','Exención de IVA por prestación de servicios turísticos a extranjeros en el territorio colombiano. E.T., art. 481, lit. d.'],
+  ['9205','Exención de IVA por cuadernos subpartida 48.20.20.00.00, diarios, publicaciones periódicas, impresos, demás subpartida 49.02. E.T., art. 481, lit. f.'],
+  ['9206','Exención de IVA por servicio de conexión estrato 1 y 2. E.T., art. 481, lit. h.'],
+  ['9207','Exención de IVA en venta de municiones y material de guerra y elementos pertenecientes a Fuerzas Militares y Policía Nacional. E.T., art. 477, num. 3.'],
+  ['9208','Exención de IVA en la venta de vehículos automotores de transporte público de pasajeros completos y el chasis con motor y la carrocería adquiridos individualmente para conformar un vehículo automotor '],
+  ['9209','Exención de IVA en la venta de vehículos automotores de servicio público o particular, de transporte de carga completos y el chasis con motor y la carrocería adquiridos individualmente para conformar '],
+  ['9210','Exención en IVA en la venta de bicicletas y sus partes; motocicletas y sus partes y motocarros y sus partes, que se introduzcan y comercialicen en los departamentos de Amazonas, Guainía, Guaviare, Vau'],
+  ['9211','Exención de IVA en la venta de alimentos consumo humano o animal que se introduzcan y comercialicen al departamento de Amazonas E.T., art. 477, num. 7, adicionado por el art. 12 de la Ley 2010 de 2019'],
+  ['9212','Exención de IVA en la venta de elementos de aseo que se introduzcan y comercialicen al departamento de Amazonas. E.T., art. 477, num. 7, adicionado por el art. 12 de la Ley 2010 de 2019'],
+  ['9213','Exención de IVA en la venta de vestuario, que se introduzcan y comercialicen al departamento de Amazonas. E.T., art. 477, num. 7, adicionado por el art. 12 de la Ley 2010 de 2019'],
+  ['9214','Exención de IVA en la venta de medicamentos de uso humano y veterinario, que se introduzcan y comercialicen al departamento de Amazonas E.T., art. 477, num. 7, adicionado por el art. 12 de la Ley 2010'],
+  ['9215','Exención de IVA en la venta de materiales de construcción que se introduzcan y comercialicen al departamento de Amazonas. E.T., art. 477, num. 7, adicionado por el art. 12 de la Ley 2010 de 2019'],
+  ['9216','Exención por prestación de servicios turísticos a extranjeros en el territorio colombiano. E.T., art. 481, lit. d, inc. 2'],
+  ['9217','Exención de IVA en la venta de bienes que inician desde la partida 01.02, y termina en la partida 96.19. contemplados en el inciso 1 del artículo 477 del E.T. y Sentencia C117 de 2018.'],
+  ['9218','Exención de IVA por uso de recursos de auxilios o donaciones de entidades o gobiernos extranjeros convenidos con el Gobierno colombiano, destinados a realizar programas de utilidad común y registrados'],
+  ['9221','Exención de IVA en compra o donación de vehículos, equipos o elementos nuevos o usados utilizados para la gestión integral del riesgo, preparativos y atención de rescate a la actividad bomberil y la a'],
+  ['9222','Exención de IVA por exportación de servicios relacionados con la producción de obra de cine, televisión, audiovisuales de cualquier género y con el desarrollo de software. Parágrafo del Art. 481 del E'],
+];
+
+/* Grupos por rango numérico (mismo criterio que el standalone). */
+const GRUPOS = {
+  patrimonio: c => { const n=parseInt(c,10); return n>=1000 && n<=1999; },
+  exentas:    c => { const n=parseInt(c,10); return n>=8100 && n<=8199; },
+  deduc:      c => { const n=parseInt(c,10); return n>=8200 && n<=8499; },
+  iva_excl:   c => { const n=parseInt(c,10); return n>=9000 && n<=9099; },
+  iva_otros:  c => { const n=parseInt(c,10); return n>=9100 && n<=9999; }
+};
+
+/* Escribe la hoja Excel '1011' con solo los conceptos con valor > 0, ordenados.
+   Mismo formato que el standalone exogena-f1011.html. */
+function exportToWorksheet(ws, saldos, cfg){
+  if(!ws || !saldos || typeof saldos!=='object') return;
+  const rows = [];
+  for(const [code, nombre] of CONCEPTOS_1011){
+    const v = parseFloat(saldos[code]) || 0;
+    if(v > 0) rows.push({ c: parseInt(code,10), nombre, saldo: Math.round(v) });
+  }
+  if(rows.length === 0) return;
+  rows.sort((a,b)=>a.c - b.c);
+
+  const hdrFill = {type:'pattern',pattern:'solid',fgColor:{argb:'FF1F4E79'}};
+  const hdrFont = {bold:true,color:{argb:'FFFFFFFF'},size:10,name:'Arial'};
+  const thinBorder = {top:{style:'thin',color:{argb:'FF808080'}},bottom:{style:'thin',color:{argb:'FF808080'}},left:{style:'thin',color:{argb:'FF808080'}},right:{style:'thin',color:{argb:'FF808080'}}};
+
+  ws.addRow(['1011','1011(V-6) - Información de las Declaraciones Tributarias']);
+  ws.getRow(1).getCell(1).font = {bold:true,size:12,color:{argb:'FF1F4E79'}};
+  ws.getRow(1).getCell(2).font = {bold:true,size:11,color:{argb:'FF1F4E79'}};
+  ws.addRow([]);
+  const hdr = ws.addRow(['Concepto','Saldos al 31-12']);
+  hdr.eachCell(c=>{c.fill=hdrFill;c.font=hdrFont;c.alignment={horizontal:'center'};c.border=thinBorder});
+  hdr.height = 32;
+  for(const r of rows){
+    const row = ws.addRow([r.c, r.saldo]);
+    row.eachCell((c,ci)=>{
+      c.font={size:10,name:'Arial'};c.border=thinBorder;
+      c.numFmt = ci===1 ? '0' : '#,##0';
+    });
+  }
+  ws.columns = [{width:14},{width:22}];
+}
+
+global.F1011Spec = { CONCEPTOS_1011, GRUPOS, exportToWorksheet };
+})(typeof window!=='undefined'?window:globalThis);

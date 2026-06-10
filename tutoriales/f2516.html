@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="../shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S7SM6ST4CC');
+</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutorial: c&oacute;mo armar el F2516 (conciliaci&oacute;n fiscal NIIF) en exogenadian.com | Ex&oacute;genaDIAN</title>
+<meta name="description" content="Tutorial paso a paso: c&oacute;mo armar el Formato 2516 V9 (conciliaci&oacute;n fiscal NIIF vs fiscal) desde tu balance de prueba. Las 7 hojas del Prevalidador DIAN, diferencias temporarias y permanentes, cruce con F110.">
+<link rel="canonical" href="https://exogenadian.com/tutoriales/f2516.html">
+<meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tutorial-mockups.css?v=dccdc93b">
+<style>
+:root{
+  --green-900:#064E3B;--green-800:#065F46;--green-700:#047857;--green-600:#059669;--green-500:#10B981;--green-400:#34D399;--green-300:#6EE7B7;--green-200:#A7F3D0;--green-100:#D1FAE5;--green-50:#ECFDF5;
+  --white:#FFF;--gray-50:#F9FAFB;--gray-100:#F3F4F6;--gray-200:#E5E7EB;--gray-300:#D1D5DB;--gray-400:#9CA3AF;--gray-500:#6B7280;--gray-600:#4B5563;--gray-700:#374151;--gray-800:#1F2937;--gray-900:#111827;
+  --amber-50:#FFFBEB;--amber-100:#FEF3C7;--amber-500:#F59E0B;--amber-700:#92400E;--amber-800:#78350F;
+  --blue-50:#EFF6FF;--blue-100:#DBEAFE;--blue-500:#3B82F6;--blue-700:#1D4ED8;
+  --purple-50:#F5F3FF;--purple-500:#8B5CF6;--purple-700:#6D28D9;
+  --rose-50:#FFF1F2;--rose-500:#F43F5E;--rose-700:#BE123C;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-900);line-height:1.6}
+.tut-layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+@media(max-width:900px){.tut-layout{grid-template-columns:1fr}}
+.sidebar{background:#fff;border-right:1px solid var(--gray-200);padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
+.sidebar-header{padding:16px 20px;border-bottom:1px solid var(--gray-100)}
+.sidebar-header a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--gray-800);font-weight:800;font-size:.9rem}
+.sidebar-header a div{width:28px;height:28px;background:linear-gradient(135deg,var(--green-600),var(--green-400));border-radius:7px;display:grid;place-items:center;color:#fff;font-size:.7rem;font-weight:900}
+.sidebar-curso{padding:16px 20px;border-bottom:1px solid var(--gray-100)}
+.sidebar-curso h3{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--green-700);margin-bottom:4px}
+.sidebar-curso p{font-size:.88rem;font-weight:700;color:var(--gray-800)}
+.sidebar-nav{padding:12px 0;flex:1}
+.sidebar-nav a{display:flex;align-items:center;gap:10px;padding:10px 20px;text-decoration:none;color:var(--gray-500);font-size:.85rem;font-weight:500;transition:all .15s;border-left:3px solid transparent}
+.sidebar-nav a:hover{background:var(--green-50);color:var(--green-700)}
+.sidebar-nav a.active{background:var(--green-50);color:var(--green-700);font-weight:700;border-left-color:var(--green-600)}
+.sidebar-nav a .num{width:24px;height:24px;border-radius:50%;background:var(--gray-100);color:var(--gray-500);display:grid;place-items:center;font-size:.72rem;font-weight:700;flex-shrink:0}
+.sidebar-nav a.active .num{background:var(--green-600);color:#fff}
+.sidebar-back{padding:16px 20px;border-top:1px solid var(--gray-100);margin-top:auto}
+.sidebar-back a{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--gray-400);font-size:.82rem;font-weight:500}
+.sidebar-back a:hover{color:var(--gray-700)}
+.main{padding:32px 40px 60px;max-width:880px}
+@media(max-width:900px){.main{padding:20px 16px 80px}.sidebar{display:none}}
+.breadcrumb{font-size:.78rem;color:var(--gray-400);margin-bottom:8px}
+.breadcrumb a{color:var(--gray-400);text-decoration:none}
+.breadcrumb a:hover{color:var(--green-600)}
+.tag{display:inline-flex;align-items:center;gap:6px;background:var(--green-100);color:var(--green-700);padding:4px 14px;border-radius:100px;font-size:.74rem;font-weight:700;margin-bottom:14px}
+h1.tut-title{font-family:'Fraunces',serif;font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;letter-spacing:-.02em;margin-bottom:10px;line-height:1.2}
+p.tut-lead{font-size:1.05rem;color:var(--gray-600);max-width:680px;line-height:1.6;margin-bottom:30px}
+.step{margin-bottom:40px;padding-top:20px;border-top:2px solid var(--gray-200)}
+.step:first-of-type{border-top:none;padding-top:0}
+.step-num{display:inline-flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:.9rem;color:var(--green-700);font-weight:700;margin-bottom:8px}
+.step-num span{display:grid;place-items:center;width:32px;height:32px;background:var(--green-600);color:#fff;border-radius:50%;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:800}
+.step h2{font-family:'Fraunces',serif;font-size:1.45rem;font-weight:700;margin-bottom:8px;color:var(--gray-900);line-height:1.25}
+.step p{font-size:.95rem;color:var(--gray-700);line-height:1.7;margin-bottom:14px}
+.step ul,.step ol{margin:8px 0 16px 22px;display:flex;flex-direction:column;gap:7px}
+.step li{font-size:.94rem;color:var(--gray-700);line-height:1.6}
+.step h3{font-size:1.05rem;font-weight:700;margin:18px 0 8px;color:var(--gray-800)}
+.step code{font-family:'JetBrains Mono',monospace;font-size:.86rem;background:var(--gray-100);padding:2px 7px;border-radius:5px;color:var(--gray-800)}
+.capture{background:var(--gray-100);border:2px dashed var(--gray-300);border-radius:12px;padding:30px 20px;margin:18px 0;text-align:center;color:var(--gray-500);font-size:.85rem;line-height:1.55}
+.capture .cap-icon{font-size:2rem;display:block;margin-bottom:10px;opacity:.55}
+.capture .cap-label{font-weight:700;color:var(--gray-700);font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.capture em{font-style:normal;background:#fff;padding:2px 8px;border-radius:5px;font-size:.82rem;color:var(--gray-700);font-weight:600}
+.tip{background:var(--blue-50);border-left:4px solid var(--blue-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:#1E40AF;line-height:1.6}
+.tip strong{color:var(--blue-700)}
+.warn{background:var(--amber-50);border-left:4px solid var(--amber-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:var(--amber-800);line-height:1.6}
+.warn strong{color:var(--amber-700)}
+.err{background:var(--rose-50);border-left:4px solid var(--rose-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:#9F1239;line-height:1.6}
+.err strong{color:var(--rose-700)}
+.tabla{width:100%;border-collapse:collapse;margin:14px 0;border-radius:10px;overflow:hidden;border:1px solid var(--gray-200);font-size:.86rem}
+.tabla th{background:var(--gray-100);padding:9px 13px;text-align:left;font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gray-600)}
+.tabla td{padding:9px 13px;border-top:1px solid var(--gray-100);color:var(--gray-700)}
+.tabla tr:hover{background:var(--green-50)}
+.tabla code{font-family:'JetBrains Mono',monospace;font-size:.78rem;background:var(--white);padding:1px 5px;border-radius:3px}
+.actions-list{background:#fff;border:1px solid var(--gray-200);border-radius:12px;padding:14px 18px;margin:14px 0}
+.actions-list h4{font-size:.78rem;font-weight:700;color:var(--gray-700);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.actions-list .item{display:flex;gap:10px;padding:6px 0;font-size:.86rem;color:var(--gray-700);border-bottom:1px solid var(--gray-100)}
+.actions-list .item:last-child{border-bottom:none}
+.actions-list .item code{flex-shrink:0;font-size:.78rem;background:var(--green-50);color:var(--green-700);padding:2px 8px;border-radius:5px;font-family:'JetBrains Mono',monospace;font-weight:600}
+.cta-end{background:linear-gradient(135deg,var(--green-50),#D1FAE5);border:2px solid var(--green-300);border-radius:16px;padding:28px 26px;margin:30px 0 20px;text-align:center}
+.cta-end h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;color:var(--green-800);margin-bottom:6px}
+.cta-end p{font-size:.92rem;color:var(--green-700);margin-bottom:16px}
+.cta-end a{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:var(--green-600);color:#fff;border-radius:12px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 14px rgba(5,150,105,.25);transition:all .2s}
+.cta-end a:hover{background:var(--green-700);transform:translateY(-2px)}
+.step-nav{display:flex;justify-content:space-between;margin-top:30px;padding-top:20px;border-top:2px solid var(--gray-200);gap:10px;flex-wrap:wrap}
+.step-nav a{display:inline-flex;align-items:center;gap:7px;padding:11px 22px;border-radius:10px;text-decoration:none;font-weight:700;font-size:.88rem;background:var(--gray-100);color:var(--gray-700);transition:all .2s}
+.step-nav a:hover{background:var(--gray-200)}
+.step-nav a.next{background:var(--green-600);color:#fff;box-shadow:0 4px 12px rgba(5,150,105,.25)}
+.step-nav a.next:hover{background:var(--green-700)}
+</style>
+<script async src="../shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div class="tut-layout">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html">
+        <div>E</div>
+        Ex&oacute;genaDIAN
+      </a>
+    </div>
+    <div class="sidebar-curso">
+      <h3>Tutorial</h3>
+      <p>Conciliaci&oacute;n fiscal F2516</p>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#intro" class="active"><span class="num">0</span> Antes de empezar</a>
+      <a href="#paso1"><span class="num">1</span> Subir balance</a>
+      <a href="#paso2"><span class="num">2</span> Datos del declarante</a>
+      <a href="#paso3"><span class="num">3</span> Verificar columnas</a>
+      <a href="#paso4"><span class="num">4</span> Clasificar a las 7 hojas</a>
+      <a href="#paso5"><span class="num">5</span> Diferencias y dif. temporarias</a>
+      <a href="#paso6"><span class="num">6</span> Cruce con F110</a>
+      <a href="#paso7"><span class="num">7</span> Descargar Excel</a>
+      <a href="#errores"><span class="num">!</span> Errores comunes</a>
+      <a href="#siguiente"><span class="num">&rarr;</span> Validaciones DIAN</a>
+    </nav>
+    <div class="sidebar-back">
+      <a href="../tutoriales.html">&larr; Todos los tutoriales</a>
+    </div>
+  </aside>
+  <div class="main">
+    <div class="breadcrumb"><a href="../index.html">Inicio</a> &rsaquo; <a href="../tutoriales.html">Tutoriales</a> &rsaquo; F2516</div>
+    <span class="tag">Tutorial &middot; ~18 min</span>
+    <h1 class="tut-title">C&oacute;mo armar el F2516 (conciliaci&oacute;n fiscal NIIF vs fiscal) en exogenadian.com</h1>
+    <p class="tut-lead">Gu&iacute;a paso a paso para usar la herramienta del Formato 2516 V9 (<a href="../formato2516.html">formato2516.html</a>): cargar el balance, mapear las cuentas a las 7 hojas del Prevalidador DIAN (H1 Car&aacute;tula, H2 ESF, H3 ERI, H4 Impuesto Diferido, H5 Ingresos, H6 Activos Fijos, H7 Resumen), revisar las diferencias temporarias y permanentes, cruzar con el F110 y descargar el Excel para llevarlo al Prevalidador.</p>
+    <section id="intro" class="step">
+      <h2>Antes de empezar &mdash; lista de chequeo</h2>
+      <p>El F2516 es el anexo del F110 que documenta las <strong>diferencias entre la base contable (NIIF) y la base fiscal (ET)</strong>. Lo presentan los obligados a llevar contabilidad (con algunas excepciones por tama&ntilde;o). Antes de abrir la herramienta:</p>
+      <ul>
+        <li><strong>Balance de prueba completo del a&ntilde;o gravable</strong> en Excel/CSV. Idealmente con movimiento (saldo inicial + d&eacute;bitos + cr&eacute;ditos + saldo final) por cuenta y por tercero. Si el balance ya est&aacute; cerrado, exporta los <em>movimientos</em> del a&ntilde;o &mdash;sin movimientos no podemos identificar ingresos, costos ni gastos para H3.</li>
+        <li><strong>F2516 del a&ntilde;o anterior</strong> (si lo tienes), para arrastrar saldos iniciales contables y fiscales, p&eacute;rdidas fiscales acumuladas y excesos de renta presuntiva.</li>
+        <li><strong>F110 del a&ntilde;o actual</strong> ya armado en <a href="../renta110.html">renta110.html</a>: el F2516 cruza contra el F110 y necesitas tenerlo a la mano para el paso 6.</li>
+        <li><strong>NIT y raz&oacute;n social</strong> del cliente y la <strong>tarifa de renta</strong> que aplica (35% general, 9%, 15%, etc.) <em>sin puntos adicionales</em> &mdash;los puntos van manualmente en H3 L541.</li>
+        <li><strong>Maestro de PPE</strong> (propiedad, planta y equipo): valor contable, valor fiscal, depreciaci&oacute;n acumulada contable y fiscal por activo. Sin esto, H6 queda incompleto y los cruces H2&harr;H6 no cuadran.</li>
+      </ul>
+      <div class="warn">
+        <strong>F2516 es PRO.</strong> A diferencia del F110 (que tiene versi&oacute;n gratis con 3 formatos), el F2516 completo es exclusivo del plan PRO ($49.900/mes). El bot&oacute;n <em>"Descargar Excel 2516+F110"</em> abre el modal de suscripci&oacute;n si el usuario no es PRO.
+      </div>
+      <div class="tip">
+        <strong>&iquest;Qui&eacute;nes est&aacute;n obligados a presentar F2516?</strong> Los contribuyentes del impuesto sobre la renta obligados a llevar contabilidad (o quienes la lleven voluntariamente) que declaren en F110. Hay excepciones por tama&ntilde;o &mdash;revisa la Resoluci&oacute;n DIAN vigente. <em>Fuente: Gu&iacute;a del Usuario Prevalidador F2516V9 AG2025 &mdash; DIAN.</em>
+      </div>
+      <div class="mockup">
+        <div class="mockup-bar"><div class="mockup-dots"><span></span><span></span><span></span></div><div class="mockup-url">exogenadian.com/formato2516.html</div></div>
+        <div class="mockup-body">
+          <div class="mockup-h">F2516 &mdash; Conciliaci&oacute;n Fiscal</div>
+          <div style="display:flex;gap:6px;align-items:center;justify-content:center;margin-bottom:10px">
+            <span class="mockup-chip mockup-chip--ok">1 Cargar Balance</span>
+            <span style="color:#9CA3AF">&rarr;</span>
+            <span class="mockup-chip" style="background:#F3F4F6;color:#6B7280">2 Clasificar</span>
+            <span style="color:#9CA3AF">&rarr;</span>
+            <span class="mockup-chip" style="background:#F3F4F6;color:#6B7280">3 Revisar y Descargar</span>
+          </div>
+          <div class="mockup-dropzone"><span class="mockup-dropzone-icon">&#128194;</span>Arrastra el balance del a&ntilde;o gravable<br><span style="font-size:.62rem;color:#9CA3AF">con movimientos &mdash; sin cierre al resultado</span></div>
+        </div>
+      </div>
+    </section>
+    <section id="paso1" class="step">
+      <div class="step-num"><span>1</span> Paso 1</div>
+      <h2>Subir el balance de prueba</h2>
+      <p>Entra a <a href="../formato2516.html">exogenadian.com/formato2516.html</a>. La herramienta acepta los mismos formatos que el F110: Excel (.xlsx/.xls) y CSV. Idealmente <strong>el mismo balance que usaste para el F110</strong> &mdash;as&iacute; el cruce del paso 6 cuadra fila por fila.</p>
+      <div class="mockup">
+        <div class="mockup-body">
+          <div class="mockup-grid-2">
+            <div><div class="mockup-label">Estado inicial</div><div class="mockup-dropzone"><span class="mockup-dropzone-icon">&#128194;</span>Arrastra el balance</div></div>
+            <div><div class="mockup-label">Cargado</div><div class="mockup-dropzone mockup-dropzone--filled"><span class="mockup-dropzone-icon">&#9989;</span>balance_2025.xlsx</div></div>
+          </div>
+        </div>
+      </div>
+      <h3>Archivos que usa la herramienta del F2516</h3>
+      <table class="tabla">
+        <thead><tr><th>Archivo</th><th>D&oacute;nde</th><th>&iquest;Obligatorio?</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Balance de prueba</strong> del a&ntilde;o gravable (con movimientos)</td><td>Paso 1</td><td>S&iacute;</td></tr>
+          <tr><td><strong>F2516 del a&ntilde;o anterior</strong></td><td>Paso 4-5 (saldos iniciales y compensaciones)</td><td>Opcional, recomendado</td></tr>
+          <tr><td><strong>F110 del a&ntilde;o actual</strong> ya diligenciado</td><td>Paso 6 (cruce y validaciones)</td><td>Recomendado &mdash;si trabajas con renta110.html, los datos se traen autom&aacute;ticamente</td></tr>
+          <tr><td><strong>Maestro de PPE</strong> con valor contable y fiscal por activo</td><td>Paso 4 (H6 Activos Fijos)</td><td>Cr&iacute;tico para que H6 quede completo</td></tr>
+        </tbody>
+      </table>
+      <div class="warn">
+        <strong>El balance NO debe estar cerrado contra resultado del ejercicio</strong> sin que hayas guardado los movimientos. Si exportas un balance "post-cierre" donde las cuentas 4xxx-5xxx-6xxx-7xxx quedaron en cero, H3 (ERI Renta L&iacute;quida) no podr&aacute; identificar ingresos, costos ni gastos. Vuelve al software contable y exporta el balance ANTES del cierre, o pide el reporte de movimientos del a&ntilde;o.
+      </div>
+      <div class="step-nav">
+        <span></span>
+        <a href="#paso2" class="next">Paso 2: Datos del declarante &rarr;</a>
+      </div>
+    </section>
+    <section id="paso2" class="step">
+      <div class="step-num"><span>2</span> Paso 2</div>
+      <h2>Llenar los datos del declarante (H1 Car&aacute;tula)</h2>
+      <p>Despu&eacute;s del balance, la herramienta abre la <strong>H1 Car&aacute;tula</strong>: los datos identificativos del declarante que el Prevalidador exige.</p>
+      <div class="mockup">
+        <div class="mockup-body">
+          <div class="mockup-h">H1 Car&aacute;tula del declarante</div>
+          <div class="mockup-form">
+            <div><div class="mockup-label">NIT</div><div class="mockup-input">900.123.456</div></div>
+            <div><div class="mockup-label">Raz&oacute;n social</div><div class="mockup-input">Comercial Andina SAS</div></div>
+            <div><div class="mockup-label">A&ntilde;o gravable</div><div class="mockup-input">2025</div></div>
+            <div><div class="mockup-label">Tarifa renta</div><div class="mockup-input">35% (sin sobretasa)</div></div>
+            <div><div class="mockup-label">Marco contable</div><div class="mockup-input">NIIF PYMES (Grupo 2)</div></div>
+            <div><div class="mockup-label">Fracci&oacute;n de a&ntilde;o</div><div class="mockup-input">No aplica</div></div>
+          </div>
+        </div>
+      </div>
+      <h3>Campos requeridos</h3>
+      <table class="tabla">
+        <thead><tr><th>Campo</th><th>Qu&eacute; va aqu&iacute;</th></tr></thead>
+        <tbody>
+          <tr><td>NIT y raz&oacute;n social</td><td>Del cliente PJ. La herramienta calcula el DV.</td></tr>
+          <tr><td>A&ntilde;o gravable</td><td>2025 por defecto.</td></tr>
+          <tr><td>Tarifa de renta</td><td>35% general, 9% hoteles, 15% zonas francas, etc. <strong>SIN puntos adicionales</strong> &mdash;esos van manualmente en H3 L541.</td></tr>
+          <tr><td>Marco contable</td><td>NIIF Plenas (Grupo 1), NIIF PYMES (Grupo 2) o Microempresas (Grupo 3).</td></tr>
+          <tr><td>Fracci&oacute;n de a&ntilde;o</td><td>Solo si la sociedad inici&oacute; o termin&oacute; operaciones a mitad de a&ntilde;o.</td></tr>
+        </tbody>
+      </table>
+      <div class="tip">
+        <strong>Sobretasas / puntos adicionales</strong> (ej. 5 puntos hoteles, 3 puntos extracci&oacute;n carb&oacute;n): NO se ponen en la tarifa de la car&aacute;tula. Se incluyen manualmente en la celda <code>L541</code> de H3 al final del flujo. El anticipo de puntos adicionales del a&ntilde;o siguiente va en <code>L542</code>.
+      </div>
+      <div class="step-nav">
+        <a href="#paso1">&larr; Paso 1</a>
+        <a href="#paso3" class="next">Paso 3: Verificar columnas &rarr;</a>
+      </div>
+    </section>
+    <section id="paso3" class="step">
+      <div class="step-num"><span>3</span> Paso 3</div>
+      <h2>Verificar las columnas del balance</h2>
+      <p>Igual que el F110 y la ex&oacute;gena: la herramienta detecta autom&aacute;ticamente las columnas del balance y te las muestra para confirmar antes de procesar. <strong>Es el paso donde m&aacute;s usuarios se quedan</strong>; vale la pena tomarse 1 minuto en revisar.</p>
+      <h3>Las 3 columnas obligatorias</h3>
+      <table class="tabla">
+        <thead><tr><th>Columna</th><th>Qu&eacute; busca</th><th>Nombres que reconoce</th></tr></thead>
+        <tbody>
+          <tr><td><strong>C&oacute;digo PUC</strong></td><td>El n&uacute;mero de cuenta</td><td><code>cuenta</code>, <code>codigo</code>, <code>c&oacute;digo</code>, <code>code</code>, <code>account</code></td></tr>
+          <tr><td><strong>Nombre cuenta</strong></td><td>La descripci&oacute;n de la cuenta</td><td><code>nombre</code>, <code>descripcion</code>, <code>nombre cuenta</code>, <code>cuenta contable</code>, <code>description</code></td></tr>
+          <tr><td><strong>Saldo Final</strong></td><td>Saldo neto al cierre del a&ntilde;o gravable</td><td><code>saldo final</code>, <code>saldo total</code>, <code>saldo actual</code>, <code>saldo</code></td></tr>
+          <tr><td>D&eacute;bitos / Cr&eacute;ditos / Saldo Inicial (opcionales)</td><td>Movimientos del a&ntilde;o</td><td>aliases est&aacute;ndar (ver tutoriales de F110/F300)</td></tr>
+        </tbody>
+      </table>
+      <div class="tip">
+        <strong>Para F2516 los movimientos importan m&aacute;s que en F110.</strong> H3 (ERI) y H5 (Ingresos y facturaci&oacute;n) necesitan separar ingresos del a&ntilde;o de los del per&iacute;odo anterior. Si tu balance solo trae saldo final, la H3 va a salir con totales pero sin distinguir <em>devengado</em> vs <em>facturado</em>. Pide los D&eacute;bitos/Cr&eacute;ditos del a&ntilde;o.
+      </div>
+      <p>Para el detalle del mapper amarillo y los casos t&iacute;picos donde se equivoca (doble cabecera, ingl&eacute;s, ambig&uuml;edad de saldos, celdas combinadas, etc.), revisa el <a href="exogena.html#paso3">paso 3 del tutorial de ex&oacute;gena</a> &mdash;es la misma l&oacute;gica.</p>
+      <div class="step-nav">
+        <a href="#paso2">&larr; Paso 2</a>
+        <a href="#paso4" class="next">Paso 4: Clasificar a las 7 hojas &rarr;</a>
+      </div>
+    </section>
+    <section id="paso4" class="step">
+      <div class="step-num"><span>4</span> Paso 4</div>
+      <h2>Clasificar las cuentas a las 7 hojas del 2516</h2>
+      <p>El paso central de la herramienta. Cada cuenta del balance se asigna autom&aacute;ticamente a una de las 7 hojas del Prevalidador DIAN seg&uacute;n su c&oacute;digo PUC. Tu rol como contador: <strong>revisar, corregir y completar</strong>.</p>
+      <div class="mockup">
+        <div class="mockup-body mockup-body--gray">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div class="mockup-h" style="margin:0">Clasificaci&oacute;n por hoja del 2516</div>
+            <span class="mockup-input" style="display:inline-block;width:auto;margin:0">Todas las secciones &#9662;</span>
+          </div>
+          <div class="mockup-stats" style="grid-template-columns:repeat(4,1fr)">
+            <div class="mockup-stat"><div class="mockup-stat-num" style="color:#1E40AF">186</div><div class="mockup-stat-lbl">H2 ESF</div></div>
+            <div class="mockup-stat"><div class="mockup-stat-num" style="color:#92400E">154</div><div class="mockup-stat-lbl">H3 ERI</div></div>
+            <div class="mockup-stat"><div class="mockup-stat-num" style="color:#6D28D9">28</div><div class="mockup-stat-lbl">H4 Imp Dif</div></div>
+            <div class="mockup-stat"><div class="mockup-stat-num" style="color:#92400E">12</div><div class="mockup-stat-lbl">Sin clasif</div></div>
+          </div>
+          <table class="mockup-table">
+            <thead><tr><th>Cuenta</th><th>Nombre</th><th>Saldo</th><th>Hoja</th></tr></thead>
+            <tbody>
+              <tr><td>110505</td><td>Caja general</td><td class="mockup-table-num">2.450.000</td><td><span class="mockup-badge mockup-badge--h2">H2</span></td></tr>
+              <tr><td>413505</td><td>Ingresos por ventas</td><td class="mockup-table-num">385.420.000</td><td><span class="mockup-badge mockup-badge--h3">H3</span></td></tr>
+              <tr><td>510505</td><td>Salarios</td><td class="mockup-table-num">96.800.000</td><td><span class="mockup-badge mockup-badge--h3">H3</span></td></tr>
+              <tr><td>1351</td><td>Imp diferido activo</td><td class="mockup-table-num">8.420.000</td><td><span class="mockup-badge mockup-badge--h4">H4</span></td></tr>
+              <tr><td>1592</td><td>Cuenta no est&aacute;ndar</td><td class="mockup-table-num">125.000</td><td><span class="mockup-badge mockup-badge--warn">Revisar</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <h3>Las 7 hojas del Prevalidador DIAN</h3>
+      <table class="tabla">
+        <thead><tr><th>Hoja</th><th>Qu&eacute; documenta</th><th>Cuentas PUC t&iacute;picas</th></tr></thead>
+        <tbody>
+          <tr><td><strong>H1</strong> Car&aacute;tula</td><td>Datos del declarante (paso 2)</td><td>&mdash;</td></tr>
+          <tr><td><strong>H2</strong> ESF Patrimonio</td><td>Estado de Situaci&oacute;n Financiera: activos, pasivos, patrimonio. Base contable vs fiscal.</td><td><code>1XXX</code> activos, <code>2XXX</code> pasivos, <code>3XXX</code> patrimonio</td></tr>
+          <tr><td><strong>H3</strong> ERI Renta L&iacute;quida</td><td>Estado de Resultados Integral: ingresos, costos, gastos, diferencias temporarias y permanentes.</td><td><code>4XXX</code> ingresos, <code>5XXX</code> gastos, <code>6XXX</code> costos, <code>7XXX</code> costos de producci&oacute;n</td></tr>
+          <tr><td><strong>H4</strong> Impuesto Diferido</td><td>Activos (DTA) y pasivos (DTL) por impuesto diferido. F&oacute;rmulas que cuadran contra H2.</td><td><code>1351</code> imp diferido act, <code>2725</code> imp diferido pas (auto-derivadas de H2)</td></tr>
+          <tr><td><strong>H5</strong> Ingresos y Facturaci&oacute;n</td><td>Conciliaci&oacute;n entre ingreso contable (devengado) y facturaci&oacute;n del a&ntilde;o.</td><td>Subset de <code>4XXX</code> + datos del MUISCA opcionalmente</td></tr>
+          <tr><td><strong>H6</strong> Activos Fijos</td><td>Movimientos de PPE: costo contable, costo fiscal, depreciaci&oacute;n, ajustes.</td><td><code>15XX</code> PPE, <code>16XX</code> intangibles</td></tr>
+          <tr><td><strong>H7</strong> Resumen ESF-ERI</td><td>Resumen consolidado para que el Prevalidador valide los cuadres globales.</td><td>Auto-calculada</td></tr>
+        </tbody>
+      </table>
+      <h3>Cuentas en amarillo (sin clasificar)</h3>
+      <p>Algunas cuentas no tienen mapeo autom&aacute;tico (PUC no est&aacute;ndar, cuentas exclusivas del cliente). Aparecen marcadas en amarillo. Tienes 3 opciones:</p>
+      <ol>
+        <li><strong>Asignarles hoja con el dropdown</strong> (H2, H3, H4, H7) y guardarlas en el F2516.</li>
+        <li><strong>Ignorarlas</strong> si no aplican &mdash;estas no se incluyen en el F2516.</li>
+        <li><strong>"Revisar con IA"</strong>: la herramienta env&iacute;a c&oacute;digo y nombre de la cuenta (sin NITs ni valores) a una IA para que sugiera la hoja. T&uacute; aceptas o cambias.</li>
+      </ol>
+      <div class="warn">
+        <strong>Cambia la secci&oacute;n si est&aacute; mal asignada</strong>: si una cuenta de inversiones (12xx) se clasific&oacute; mal, m&uacute;evela a H2 con el dropdown. El filtro <em>"Todas las secciones"</em> arriba te deja revisar solo las cuentas de una hoja a la vez.
+      </div>
+      <div class="step-nav">
+        <a href="#paso3">&larr; Paso 3</a>
+        <a href="#paso5" class="next">Paso 5: Diferencias &rarr;</a>
+      </div>
+    </section>
+    <section id="paso5" class="step">
+      <div class="step-num"><span>5</span> Paso 5</div>
+      <h2>Revisar diferencias permanentes y temporarias</h2>
+      <p>El coraz&oacute;n del F2516: por cada cuenta clasificada, comparar la <strong>base contable</strong> (lo que dice NIIF) con la <strong>base fiscal</strong> (lo que dice el ET). Las diferencias se separan en dos tipos:</p>
+      <table class="tabla">
+        <thead><tr><th>Tipo</th><th>Definici&oacute;n</th><th>Efecto en impuesto diferido</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Diferencia Permanente</strong></td><td>Diferencia que NUNCA se revertir&aacute;: gasto deducible contable que no es deducible fiscal y nunca lo ser&aacute; (ej. gasto sin soporte, multas, ICA no causalizado).</td><td>NO genera impuesto diferido</td></tr>
+          <tr><td><strong>Diferencia Temporaria</strong></td><td>Diferencia que se revertir&aacute; en el futuro: depreciaci&oacute;n acelerada fiscal, provisiones contables no deducibles a&uacute;n, ingresos diferidos.</td><td>S&iacute; genera DTA o DTL en H4</td></tr>
+        </tbody>
+      </table>
+      <div class="tip">
+        <strong>F&oacute;rmula de diferencia temporaria</strong>: <code>DT = Base Fiscal &minus; Base Contable</code>. Las temporarias deducibles generan DTA (activo por imp diferido); las imponibles generan DTL (pasivo).
+      </div>
+      <div class="mockup">
+        <div class="mockup-body">
+          <div class="mockup-h">Diferencias permanentes y temporarias</div>
+          <div style="background:#DBEAFE;color:#1E40AF;padding:4px 8px;border-radius:5px;font-size:.66rem;font-weight:700;margin:6px 0 4px">DTA &mdash; Diferencias temporarias deducibles</div>
+          <table class="mockup-table">
+            <thead><tr><th>Concepto</th><th>Base contable</th><th>Base fiscal</th><th>Dif temp</th><th>Dif perm</th></tr></thead>
+            <tbody>
+              <tr><td>Provisi&oacute;n CxC dudosa</td><td class="mockup-table-num">12.000.000</td><td class="mockup-table-num">0</td><td class="mockup-table-num" style="color:#1E40AF">+12.000.000</td><td class="mockup-table-num">&mdash;</td></tr>
+              <tr><td>P&eacute;rdidas fiscales acum</td><td class="mockup-table-num">0</td><td class="mockup-table-num">25.300.000</td><td class="mockup-table-num" style="color:#1E40AF">+25.300.000</td><td class="mockup-table-num">&mdash;</td></tr>
+            </tbody>
+          </table>
+          <div style="background:#F5F3FF;color:#6D28D9;padding:4px 8px;border-radius:5px;font-size:.66rem;font-weight:700;margin:8px 0 4px">DTL &mdash; Diferencias temporarias imponibles</div>
+          <table class="mockup-table">
+            <thead><tr><th>Concepto</th><th>Base contable</th><th>Base fiscal</th><th>Dif temp</th><th>Dif perm</th></tr></thead>
+            <tbody>
+              <tr><td>Depreciaci&oacute;n acelerada</td><td class="mockup-table-num">125.000.000</td><td class="mockup-table-num">152.000.000</td><td class="mockup-table-num" style="color:#6D28D9">-27.000.000</td><td class="mockup-table-num">&mdash;</td></tr>
+              <tr><td>Gasto sin soporte FE</td><td class="mockup-table-num">2.350.000</td><td class="mockup-table-num">0</td><td class="mockup-table-num">&mdash;</td><td class="mockup-table-num" style="color:#92400E">2.350.000</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <h3>Diferencias permanentes m&aacute;s comunes</h3>
+      <ul>
+        <li><strong>Gastos sin soporte (Art. 771-2 ET)</strong>: factura electr&oacute;nica o documento equivalente faltante.</li>
+        <li><strong>Pagos &gt; 100 UVT no bancarizados (Art. 771-5 ET)</strong>.</li>
+        <li><strong>ICA no causalizado al a&ntilde;o</strong> (cuando se difiri&oacute; pago).</li>
+        <li><strong>Multas y sanciones</strong> &mdash;no deducibles.</li>
+        <li><strong>Pagos a para&iacute;sos fiscales sin certificado de retenci&oacute;n</strong> (Art. 124-2 ET).</li>
+        <li><strong>Gastos no causales</strong> (Art. 107 ET sin probar relaci&oacute;n con el ingreso).</li>
+      </ul>
+      <h3>Diferencias temporarias m&aacute;s comunes</h3>
+      <ul>
+        <li><strong>Depreciaci&oacute;n acelerada fiscal vs lineal contable</strong> &mdash;la m&aacute;s t&iacute;pica.</li>
+        <li><strong>Provisiones contables (cuentas por cobrar dudosas, garant&iacute;as)</strong>: contables se reconocen al estimar, fiscales al cumplir requisitos del Art. 145.</li>
+        <li><strong>Diferencias en cambio</strong> realizada vs no realizada.</li>
+        <li><strong>Ingresos diferidos</strong> (cobros anticipados): contable los difiere, fiscal puede gravar al cobro.</li>
+        <li><strong>Impuesto diferido sobre P&eacute;rdidas Fiscales</strong> (Art. 147 ET): generan DTA por compensaci&oacute;n futura.</li>
+      </ul>
+      <div class="step-nav">
+        <a href="#paso4">&larr; Paso 4</a>
+        <a href="#paso6" class="next">Paso 6: Cruce con F110 &rarr;</a>
+      </div>
+    </section>
+    <section id="paso6" class="step">
+      <div class="step-num"><span>6</span> Paso 6</div>
+      <h2>Cruce con el F110 y validaciones DIAN</h2>
+      <p>El F2516 es <strong>anexo</strong> del F110. Si hay descuadres entre ambos, la DIAN los detecta y queda activado el riesgo de requerimiento. La herramienta corre 6 cruces autom&aacute;ticos antes de dejar generar el Excel.</p>
+      <div class="mockup">
+        <div class="mockup-body">
+          <div class="mockup-h">Validaciones DIAN antes de generar XML</div>
+          <div class="mockup-row"><span class="mockup-row-lbl">Cuadre patrimonio H2 (fila 206 = 246)</span><span class="mockup-chip mockup-chip--ok">OK</span></div>
+          <div class="mockup-row"><span class="mockup-row-lbl">Renta l&iacute;quida H3 (L343 = L460)</span><span class="mockup-chip mockup-chip--ok">OK</span></div>
+          <div class="mockup-row"><span class="mockup-row-lbl">Tasa M&iacute;nima Tributaci&oacute;n (L545 diligenciada)</span><span class="mockup-chip mockup-chip--err">Vac&iacute;a</span></div>
+          <div class="mockup-row"><span class="mockup-row-lbl">Compensaciones &le; saldo H4</span><span class="mockup-chip mockup-chip--ok">OK</span></div>
+          <div class="mockup-row"><span class="mockup-row-lbl">Imp diferido cruzado H2 &harr; H4</span><span class="mockup-chip mockup-chip--ok">OK</span></div>
+          <div class="mockup-row"><span class="mockup-row-lbl">PPE H2 &harr; H6</span><span class="mockup-chip mockup-chip--warn">Dif 0,3%</span></div>
+        </div>
+      </div>
+      <h3>Los 6 cruces obligatorios del Prevalidador</h3>
+      <table class="tabla">
+        <thead><tr><th>Cruce</th><th>F&oacute;rmula</th><th>Por qu&eacute;</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cuadre patrimonio H2</strong></td><td>fila 206 = fila 246</td><td>Patrimonio contable + efecto conversi&oacute;n debe igualar al fiscal.</td></tr>
+          <tr><td><strong>Renta l&iacute;quida H3</strong></td><td>L343 = L460 (o L461)</td><td>Renta l&iacute;quida del per&iacute;odo debe ser consistente entre dos cap&iacute;tulos de H3.</td></tr>
+          <tr><td><strong>Tasa M&iacute;nima de Tributaci&oacute;n</strong></td><td>L545 diligenciada (admite cero)</td><td>Pargf. 6 Art. 240 ET. Su omisi&oacute;n impide generar XML.</td></tr>
+          <tr><td><strong>Compensaciones</strong></td><td>filas 481-482 H3 &le; saldo H4</td><td>P&eacute;rdidas y excesos no pueden exceder el saldo registrado.</td></tr>
+          <tr><td><strong>Impuesto diferido cruzado</strong></td><td>G83 H2 = H31 H4 (DTA); G173 H2 = H51 H4 (DTL)</td><td>El imp diferido del balance debe coincidir con el de la hoja H4.</td></tr>
+          <tr><td><strong>Cruce H2 &harr; H6 PPE</strong></td><td>G84+G125+G128-... H2 = O31+P31 H6</td><td>El valor de PPE en patrimonio debe coincidir con el de la hoja de activos fijos.</td></tr>
+        </tbody>
+      </table>
+      <div class="warn">
+        <strong>VAL1 + VAL2 - VAL3 &ge; 0</strong>: en H2 y H3, valor contable + efecto conversi&oacute;n - menor valor fiscal NO puede ser negativo. La herramienta lo ilumina rojo si hay error.
+      </div>
+      <h3>Cruce con el F110 ya armado en renta110.html</h3>
+      <p>Si trabajaste el F110 en <a href="../renta110.html">renta110.html</a>, los datos clave se importan autom&aacute;ticamente: <em>casilla 47 ingresos, casilla 67 costos+gastos, casilla 68 renta l&iacute;quida, casilla 73 impuesto neto</em>. La herramienta valida que los totales fiscales del F2516 (VAL5) cuadren con esas casillas. Diferencias menores al 1% son normales por redondeo en miles.</p>
+      <div class="step-nav">
+        <a href="#paso5">&larr; Paso 5</a>
+        <a href="#paso7" class="next">Paso 7: Descargar &rarr;</a>
+      </div>
+    </section>
+    <section id="paso7" class="step">
+      <div class="step-num"><span>7</span> Paso 7</div>
+      <h2>Descargar el Excel del 2516 + F110</h2>
+      <p>Cuando todos los cruces est&aacute;n verdes, click en <strong>"Descargar Excel 2516 + F110"</strong>. La herramienta genera UN solo Excel con las 7 hojas del 2516 + el F110 actualizado en la misma pesta&ntilde;a.</p>
+      <div class="mockup">
+        <div class="mockup-body mockup-body--green">
+          <div class="mockup-overlay"></div>
+          <div class="mockup-modal">
+            <div class="mockup-modal-title">F2516 es exclusivo PRO</div>
+            <div class="mockup-modal-sub">Descarga el Excel con las 7 hojas del Prevalidador + el F110 actualizado</div>
+            <div style="display:flex;gap:6px;justify-content:center"><span class="mockup-btn-secondary">Cancelar</span><span class="mockup-btn-pro">Hacerme PRO &mdash; $49.900/mes</span></div>
+          </div>
+        </div>
+      </div>
+      <h3>Qu&eacute; trae el Excel</h3>
+      <ul>
+        <li>Hoja <strong>H1</strong>: Car&aacute;tula con datos del declarante.</li>
+        <li>Hoja <strong>H2</strong>: ESF Patrimonio &mdash;contable, fiscal, diferencias.</li>
+        <li>Hoja <strong>H3</strong>: ERI Renta L&iacute;quida &mdash;ingresos, costos, gastos, TMT (L545), puntos adicionales (L541).</li>
+        <li>Hoja <strong>H4</strong>: Impuesto Diferido &mdash;DTA, DTL, p&eacute;rdidas fiscales, excesos renta presuntiva.</li>
+        <li>Hoja <strong>H5</strong>: Ingresos y Facturaci&oacute;n &mdash;conciliaci&oacute;n devengado vs facturado.</li>
+        <li>Hoja <strong>H6</strong>: Activos Fijos &mdash;movimiento de PPE.</li>
+        <li>Hoja <strong>H7</strong>: Resumen ESF-ERI.</li>
+        <li>Hoja <strong>F110</strong>: el F110 actualizado con los datos del 2516.</li>
+      </ul>
+      <p>El nombre del archivo es <code>F2516_AG[a&ntilde;o]_[NIT].xlsx</code>. Las celdas tienen f&oacute;rmulas editables &mdash;si necesitas ajustar manualmente, los totales se recalculan.</p>
+      <div class="step-nav">
+        <a href="#paso6">&larr; Paso 6</a>
+        <a href="#errores" class="next">Errores comunes &rarr;</a>
+      </div>
+    </section>
+    <section id="errores" class="step">
+      <h2>Errores comunes y c&oacute;mo resolverlos</h2>
+      <div class="err">
+        <strong>"H3 sin ingresos / sin costos"</strong><br>
+        El balance se export&oacute; despu&eacute;s de cerrar al resultado del ejercicio (4xxx-5xxx-6xxx-7xxx en cero). Pide el balance ANTES del cierre o el reporte de movimientos del a&ntilde;o.
+      </div>
+      <div class="err">
+        <strong>"Patrimonio contable &ne; Patrimonio fiscal" (cuadre H2)</strong><br>
+        El balance no cierra. Para F2516 el balance DEBE cerrar; los ajustes finales (depreciaci&oacute;n, provisiones, diferencias en cambio) deben estar contabilizados antes de exportar.
+      </div>
+      <div class="err">
+        <strong>"L545 (TMT) en blanco impide generar XML"</strong><br>
+        La Tasa M&iacute;nima de Tributaci&oacute;n (15% del Pargf. 6 Art. 240 ET) NO se calcula autom&aacute;ticamente; el contribuyente la determina. Si no aplica, pon 0 &mdash;pero NO puede quedar vac&iacute;a.
+      </div>
+      <div class="err">
+        <strong>"Impuesto diferido H2 &ne; H4"</strong><br>
+        El balance trae imp diferido en cuentas 1351/2725 con valores que no coinciden con el c&aacute;lculo te&oacute;rico de H4. Revisa: (1) tarifa fiscal correcta, (2) diferencias temporarias bien clasificadas, (3) saldo del a&ntilde;o anterior arrastrado correctamente.
+      </div>
+      <div class="err">
+        <strong>"Cruce H2 &harr; H6 PPE descuadrado"</strong><br>
+        El maestro de PPE no es consistente con el balance. Pasa cuando la depreciaci&oacute;n contable del a&ntilde;o no se contabiliz&oacute;, o cuando hay activos en H6 que no aparecen en el balance.
+      </div>
+      <div class="err">
+        <strong>"Compensaciones exceden saldo de H4"</strong><br>
+        Las p&eacute;rdidas fiscales del Art. 147 ET o los excesos de renta presuntiva est&aacute;n agotados. Revisa el saldo arrastrado del F2516 del a&ntilde;o anterior.
+      </div>
+    </section>
+    <section id="siguiente" class="step">
+      <h2>&iquest;Y despu&eacute;s del Excel?</h2>
+      <p>Igual que el F110: tres pasos para llegar al MUISCA.</p>
+      <ol>
+        <li><strong>Pasarlo al Prevalidador F2516 V9 de la DIAN</strong> &mdash;la herramienta oficial que convierte el Excel en XML. La descargas de muisca.dian.gov.co. Si arroja errores de validaci&oacute;n, vuelves al Excel, ajustas y reprocesas.</li>
+        <li><strong>Subir el XML al MUISCA.</strong> Entras con la firma electr&oacute;nica del representante legal, vas a <em>Diligenciar / Presentar &rarr; Informaci&oacute;n por env&iacute;o de archivos</em>, eliges F2516 y cargas el XML.</li>
+        <li><strong>Recibir el acuse</strong> y guardarlo en la carpeta del cliente como soporte.</li>
+      </ol>
+      <div class="cta-end">
+        <h3>Abrir la herramienta del F2516</h3>
+        <p>Listo para arrancar con tu cliente real. Si te perdiste en alg&uacute;n paso, vuelves a este tutorial.</p>
+        <a href="../formato2516.html">Ir a formato2516.html &rarr;</a>
+      </div>
+      <div class="cta-end" style="background:linear-gradient(135deg,#FFFBEB,#FEF3C7);border-color:#FDE68A">
+        <h3 style="color:var(--amber-800)">&iquest;Necesitas profundizar la normativa NIIF vs fiscal?</h3>
+        <p style="color:var(--amber-700)">El Decreto 2483/2018 (DUR), las Secciones de NIIF Plenas/PYMES y los conceptos DIAN sobre conciliaci&oacute;n fiscal son la base. Revisa la Gu&iacute;a del Usuario Prevalidador F2516V9 AG2025 de la DIAN.</p>
+        <a href="../escuela/renta110.html" style="background:#92400E">Ir al curso normativo &rarr;</a>
+      </div>
+      <div class="step-nav">
+        <a href="#errores">&larr; Errores comunes</a>
+        <a href="../tutoriales.html" class="next">Volver a Tutoriales &rarr;</a>
+      </div>
+    </section>
+  </div>
+</div>
+<script>
+(function(){
+  var links = document.querySelectorAll('.sidebar-nav a');
+  var sections = Array.from(links).map(function(a){ var id = a.getAttribute('href').replace('#',''); return document.getElementById(id); }).filter(Boolean);
+  function update(){
+    var y = window.scrollY + 80;
+    var current = sections[0];
+    sections.forEach(function(s){ if(s && s.offsetTop <= y) current = s; });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if(current){
+      var match = document.querySelector('.sidebar-nav a[href="#'+current.id+'"]');
+      if(match) match.classList.add('active');
+    }
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  update();
+})();
+</script>
+</body>
+</html>

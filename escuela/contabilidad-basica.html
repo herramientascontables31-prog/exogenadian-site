@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="../shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());
+gtag('config','G-S7SM6ST4CC');
+</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#14B8A6">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Curso Contabilidad B&aacute;sica &mdash; Escuela Contable IA | Ex&oacute;genaDIAN</title>
+<meta name="description" content="Curso de contabilidad b&aacute;sica para Colombia: partida doble, PUC, ciclo contable, k&aacute;rdex, ajustes, estados financieros e introducci&oacute;n a NIIF. Punto de partida para todo contador.">
+<meta name="keywords" content="contabilidad b&aacute;sica Colombia, partida doble, PUC 2650, ciclo contable, k&aacute;rdex, ajustes contables, estados financieros, NIIF para PYMES, Ley 1314">
+<link rel="canonical" href="https://exogenadian.com/escuela/contabilidad-basica.html">
+<meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal-900:#134E4A;--teal-800:#115E59;--teal-700:#0F766E;--teal-600:#0D9488;--teal-500:#14B8A6;--teal-400:#2DD4BF;--teal-300:#5EEAD4;--teal-200:#99F6E4;--teal-100:#CCFBF1;--teal-50:#F0FDFA;
+  --white:#FFF;--gray-50:#F9FAFB;--gray-100:#F3F4F6;--gray-200:#E5E7EB;--gray-300:#D1D5DB;--gray-400:#9CA3AF;--gray-500:#6B7280;--gray-600:#4B5563;--gray-700:#374151;--gray-800:#1F2937;--gray-900:#111827;
+  --amber-50:#FFFBEB;--amber-100:#FEF3C7;--amber-500:#F59E0B;--amber-700:#92400E;--amber-800:#78350F;
+  --blue-50:#EFF6FF;--blue-100:#DBEAFE;--blue-500:#3B82F6;--blue-700:#1D4ED8;
+  --rose-50:#FFF1F2;--rose-500:#F43F5E;--rose-700:#BE123C;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-900);line-height:1.6}
+.curso-layout{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+@media(max-width:900px){.curso-layout{grid-template-columns:1fr}}
+.sidebar{background:var(--white);border-right:1px solid var(--gray-200);padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
+.sidebar-header{padding:16px 20px;border-bottom:1px solid var(--gray-100)}
+.sidebar-header a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--gray-800);font-weight:800;font-size:.9rem}
+.sidebar-header a div{width:28px;height:28px;background:linear-gradient(135deg,#0D9488,#14B8A6);border-radius:7px;display:grid;place-items:center;color:#fff;font-size:.7rem;font-weight:900}
+.sidebar-curso{padding:16px 20px;border-bottom:1px solid var(--gray-100)}
+.sidebar-curso h3{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--teal-700);margin-bottom:4px}
+.sidebar-curso p{font-size:.88rem;font-weight:700;color:var(--gray-800)}
+.sidebar-nav{padding:12px 0;flex:1}
+.sidebar-nav a{display:flex;align-items:center;gap:10px;padding:10px 20px;text-decoration:none;color:var(--gray-500);font-size:.85rem;font-weight:500;transition:all .15s;border-left:3px solid transparent}
+.sidebar-nav a:hover{background:var(--teal-50);color:var(--teal-700)}
+.sidebar-nav a.active{background:var(--teal-50);color:var(--teal-700);font-weight:700;border-left-color:var(--teal-600)}
+.sidebar-nav a .nav-num{width:24px;height:24px;border-radius:50%;background:var(--gray-100);color:var(--gray-500);display:grid;place-items:center;font-size:.72rem;font-weight:700;flex-shrink:0}
+.sidebar-nav a.active .nav-num{background:var(--teal-600);color:#fff}
+.sidebar-nav a.completed .nav-num{background:var(--teal-200);color:var(--teal-700)}
+.sidebar-back{padding:16px 20px;border-top:1px solid var(--gray-100);margin-top:auto}
+.sidebar-back a{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--gray-400);font-size:.82rem;font-weight:500}
+.sidebar-back a:hover{color:var(--gray-700)}
+.sidebar-toggle{display:none;position:fixed;bottom:20px;left:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--teal-600);color:#fff;border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 16px rgba(13,148,136,.3)}
+@media(max-width:900px){
+  .sidebar{display:none;position:fixed;top:0;left:0;z-index:199;width:280px;box-shadow:4px 0 20px rgba(0,0,0,.1)}
+  .sidebar.open{display:flex}
+  .sidebar-toggle{display:block}
+  .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:198}
+  .sidebar-overlay.open{display:block}
+}
+.curso-main{padding:32px 40px 60px;max-width:860px}
+@media(max-width:900px){.curso-main{padding:20px 16px 80px}}
+.mod-header{margin-bottom:32px}
+.mod-breadcrumb{font-size:.78rem;color:var(--gray-400);margin-bottom:8px}
+.mod-breadcrumb a{color:var(--gray-400);text-decoration:none}
+.mod-breadcrumb a:hover{color:var(--teal-600)}
+.mod-num{display:inline-flex;align-items:center;gap:8px;background:var(--teal-100);color:var(--teal-800);padding:4px 14px;border-radius:100px;font-size:.78rem;font-weight:700;margin-bottom:12px}
+.mod-header h1{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;letter-spacing:-.02em;margin-bottom:8px;line-height:1.2}
+.mod-header .mod-desc{font-size:1rem;color:var(--gray-500);max-width:600px;line-height:1.6}
+.content-block{margin-bottom:28px}
+.content-block h2{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;margin-bottom:12px;color:var(--gray-900);padding-bottom:8px;border-bottom:2px solid var(--teal-200)}
+.content-block h3{font-size:1.05rem;font-weight:700;margin:20px 0 8px;color:var(--gray-800)}
+.content-block p{font-size:.92rem;color:var(--gray-600);line-height:1.7;margin-bottom:12px}
+.content-block ul,.content-block ol{margin:8px 0 16px 20px;display:flex;flex-direction:column;gap:6px}
+.content-block li{font-size:.9rem;color:var(--gray-600);line-height:1.6}
+.norma{background:var(--amber-50);border:1.5px solid #FDE68A;border-radius:14px;padding:20px 24px;margin:20px 0}
+.norma-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.norma-icon{width:32px;height:32px;border-radius:8px;background:#FDE68A;display:grid;place-items:center;font-size:.9rem;flex-shrink:0}
+.norma-header h4{font-size:.92rem;font-weight:700;color:var(--amber-800)}
+.norma-header .norma-tag{font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:4px;background:var(--amber-500);color:#fff;text-transform:uppercase;letter-spacing:.04em}
+.norma p{font-size:.86rem;color:#78350F;line-height:1.65;margin:6px 0}
+.norma .norma-aplicacion{font-size:.82rem;color:var(--teal-800);background:var(--teal-50);padding:10px 14px;border-radius:8px;border:1px solid var(--teal-200);margin-top:12px}
+.norma .norma-aplicacion strong{color:var(--teal-700)}
+.tip{background:var(--blue-50);border:1.5px solid #BFDBFE;border-radius:14px;padding:18px 22px;margin:20px 0}
+.tip-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.tip-header h4{font-size:.88rem;font-weight:700;color:var(--blue-700)}
+.tip p{font-size:.88rem;color:#1E40AF;line-height:1.6}
+.error-comun{background:var(--rose-50);border:1.5px solid #FECACA;border-radius:14px;padding:18px 22px;margin:20px 0}
+.error-comun-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.error-comun-header h4{font-size:.88rem;font-weight:700;color:var(--rose-700)}
+.error-comun p{font-size:.88rem;color:#9F1239;line-height:1.6}
+.tabla-norm{width:100%;border-collapse:collapse;margin:16px 0;border-radius:10px;overflow:hidden;border:1px solid var(--gray-200)}
+.tabla-norm th{background:var(--gray-100);padding:10px 14px;text-align:left;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-500)}
+.tabla-norm td{padding:10px 14px;font-size:.85rem;border-top:1px solid var(--gray-100);color:var(--gray-700)}
+.tabla-norm tr:hover{background:var(--teal-50)}
+.tabla-norm code{font-family:'JetBrains Mono',monospace;font-size:.8rem;background:var(--gray-100);padding:1px 6px;border-radius:4px}
+.ejemplo{background:var(--white);border:1.5px solid var(--gray-200);border-radius:14px;overflow:hidden;margin:20px 0;box-shadow:0 2px 8px rgba(0,0,0,.03)}
+.ejemplo-header{background:var(--gray-50);padding:12px 20px;border-bottom:1px solid var(--gray-200);display:flex;align-items:center;gap:8px}
+.ejemplo-header h4{font-size:.85rem;font-weight:700;color:var(--gray-700)}
+.ejemplo-body{padding:16px 20px}
+.ejemplo-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-100);font-size:.88rem}
+.ejemplo-row:last-child{border-bottom:none}
+.ejemplo-row .label{color:var(--gray-600)}
+.ejemplo-row .value{font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.85rem}
+.ejemplo-row.total{border-top:2px solid var(--teal-200);border-bottom:none;padding-top:12px;margin-top:4px}
+.ejemplo-row.total .label{font-weight:700;color:var(--gray-900)}
+.ejemplo-row.total .value{color:var(--teal-700);font-size:.95rem}
+.mod-nav{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:24px;border-top:2px solid var(--gray-200);flex-wrap:wrap;gap:10px}
+.mod-nav a{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:12px;text-decoration:none;font-weight:700;font-size:.92rem;transition:all .2s}
+.mod-nav .prev{background:var(--gray-100);color:var(--gray-700)}
+.mod-nav .prev:hover{background:var(--gray-200)}
+.mod-nav .next{background:var(--teal-600);color:#fff;box-shadow:0 4px 12px rgba(13,148,136,.25)}
+.mod-nav .next:hover{background:var(--teal-700);transform:translateY(-1px)}
+.cta-practica{background:linear-gradient(135deg,var(--teal-50),#CCFBF1);border:2px solid var(--teal-300);border-radius:16px;padding:28px 24px;text-align:center;margin:28px 0}
+.cta-practica h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;color:var(--teal-800);margin-bottom:8px}
+.cta-practica p{font-size:.92rem;color:var(--teal-700);margin-bottom:16px}
+.cta-practica a{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--teal-600);color:#fff;border-radius:12px;font-weight:700;font-size:1rem;text-decoration:none;box-shadow:0 4px 16px rgba(13,148,136,.3);transition:all .2s}
+.cta-practica a:hover{background:var(--teal-700);transform:translateY(-2px)}
+.progress-bar{height:4px;background:var(--gray-200);border-radius:2px;margin:12px 20px;overflow:hidden}
+.progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--teal-500),var(--teal-400));border-radius:2px;transition:width .3s}
+.modulo-section{display:none}
+.modulo-section.active{display:block}
+</style>
+<script async src="../shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+<div class="curso-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html"><div>E</div>Ex&oacute;genaDIAN</a>
+    </div>
+    <div class="sidebar-curso">
+      <h3>Escuela Contable IA</h3>
+      <p>Contabilidad B&aacute;sica</p>
+    </div>
+    <div class="progress-bar"><div class="fill" id="progressFill" style="width:10%"></div></div>
+    <nav class="sidebar-nav" id="sidebarNav">
+      <a href="#modulo-1" class="active" onclick="navigateTo(1)"><span class="nav-num">1</span> &iquest;Qu&eacute; es la contabilidad?</a>
+      <a href="#modulo-2" onclick="navigateTo(2)"><span class="nav-num">2</span> Cuenta y partida doble</a>
+      <a href="#modulo-3" onclick="navigateTo(3)"><span class="nav-num">3</span> PUC y plan de cuentas</a>
+      <a href="#modulo-4" onclick="navigateTo(4)"><span class="nav-num">4</span> El ciclo contable</a>
+      <a href="#modulo-5" onclick="navigateTo(5)"><span class="nav-num">5</span> Asientos t&iacute;picos</a>
+      <a href="#modulo-6" onclick="navigateTo(6)"><span class="nav-num">6</span> Inventarios y k&aacute;rdex</a>
+      <a href="#modulo-7" onclick="navigateTo(7)"><span class="nav-num">7</span> Ajustes de cierre</a>
+      <a href="#modulo-8" onclick="navigateTo(8)"><span class="nav-num">8</span> Estados financieros</a>
+      <a href="#modulo-9" onclick="navigateTo(9)"><span class="nav-num">9</span> Intro a NIIF</a>
+      <a href="#modulo-10" onclick="navigateTo(10)"><span class="nav-num">10</span> Tu primer balance</a>
+    </nav>
+    <div class="sidebar-back">
+      <a href="../escuela.html">&larr; Volver a la Escuela</a>
+    </div>
+  </aside>
+  <div class="curso-main">
+    <section id="modulo-1" class="modulo-section active">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Contabilidad B&aacute;sica &rsaquo; M&oacute;dulo 1</div>
+        <div class="mod-num">M&oacute;dulo 1 de 10</div>
+        <h1>&iquest;Qu&eacute; es la contabilidad y para qu&eacute; sirve?</h1>
+        <p class="mod-desc">La contabilidad es el lenguaje del negocio. Antes de hacer una sola declaraci&oacute;n DIAN necesitas saber leer y escribir este idioma.</p>
+      </div>
+      <div class="content-block">
+        <h2>Para qu&eacute; sirve la contabilidad</h2>
+        <p>La contabilidad es el sistema que registra, clasifica y reporta lo que pasa econ&oacute;micamente en una organizaci&oacute;n. Su prop&oacute;sito es responder cuatro preguntas b&aacute;sicas:</p>
+        <ul>
+          <li><strong>&iquest;Cu&aacute;nto tengo?</strong> &mdash; activos y pasivos.</li>
+          <li><strong>&iquest;Cu&aacute;nto debo?</strong> &mdash; pasivos.</li>
+          <li><strong>&iquest;Cu&aacute;nto gan&eacute; o perd&iacute; en un periodo?</strong> &mdash; ingresos y gastos.</li>
+          <li><strong>&iquest;De d&oacute;nde sali&oacute; y a d&oacute;nde fue mi dinero?</strong> &mdash; flujo de efectivo.</li>
+        </ul>
+        <h3>Usuarios de la informaci&oacute;n contable</h3>
+        <p>El propietario o socio, la administraci&oacute;n, los empleados, los bancos, los proveedores, los clientes, la DIAN, las superintendencias, los inversionistas potenciales. Cada uno necesita saber algo distinto.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#x1F4DC;</div>
+            <h4>Ley 1314 de 2009</h4>
+            <span class="norma-tag">Marco normativo</span>
+          </div>
+          <p>Estableci&oacute; en Colombia la convergencia a est&aacute;ndares internacionales (NIIF) y dio facultades al Gobierno Nacional para expedir principios y normas de contabilidad e informaci&oacute;n financiera, as&iacute; como las normas de aseguramiento de la informaci&oacute;n.</p>
+          <div class="norma-aplicacion"><strong>Aplicaci&oacute;n:</strong> Desde 2015 todos los obligados a llevar contabilidad en Colombia usan NIIF (Grupo 1: plenas; Grupo 2: para PYMES; Grupo 3: microempresas). El PUC del Decreto 2650/1993 se sigue usando como plan de cuentas operativo en muchas empresas.</div>
+        </div>
+        <div class="tip">
+          <div class="tip-header"><h4>&#128161; Tip pr&aacute;ctico</h4></div>
+          <p>Un contador colombiano debe saber NIIF para preparar estados financieros y el ET para preparar las declaraciones. Son dos cuerpos normativos distintos que conviven. Este curso te da las bases para empezar a leerlos juntos.</p>
+        </div>
+        <h2>El m&eacute;todo: registrar, clasificar, resumir</h2>
+        <p>La contabilidad no es solo "anotar gastos". Es un proceso de tres movimientos que se repite siempre:</p>
+        <ul>
+          <li><strong>Registrar</strong>: capturar cada hecho econ&oacute;mico con su soporte (la factura de compra, el recibo de caja, la nota de la transferencia).</li>
+          <li><strong>Clasificar</strong>: ponerle a cada movimiento la cuenta correcta del plan de cuentas (no es lo mismo "pagar arriendo" que "pagar un pr&eacute;stamo": uno es gasto, el otro baja un pasivo).</li>
+          <li><strong>Resumir</strong>: agrupar todo el periodo en estados financieros que cualquiera pueda leer.</li>
+        </ul>
+        <h3>Ejemplo: c&oacute;mo una venta se vuelve informaci&oacute;n &uacute;til</h3>
+        <p>Una tienda vende un producto en $100.000 de contado. Mira el recorrido completo de ese solo hecho:</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#x1F50E; Del hecho al estado financiero</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">1. Hecho econ&oacute;mico</span><span class="value">Venta $100.000 contado</span></div>
+            <div class="ejemplo-row"><span class="label">2. Soporte</span><span class="value">Factura electr&oacute;nica</span></div>
+            <div class="ejemplo-row"><span class="label">3. Registro</span><span class="value">Caja +$100.000 / Ingreso +$100.000</span></div>
+            <div class="ejemplo-row"><span class="label">4. Clasificaci&oacute;n</span><span class="value">1105 Caja / 4135 Comercio</span></div>
+            <div class="ejemplo-row total"><span class="label">5. Resumen (ERI)</span><span class="value">+$100.000 a ingresos del mes</span></div>
+          </div>
+        </div>
+        <p>Multiplica eso por miles de transacciones al a&ntilde;o y entiendes por qu&eacute; la contabilidad necesita un m&eacute;todo riguroso: sin &eacute;l, al cierre nadie sabr&iacute;a cu&aacute;nto vendi&oacute; ni cu&aacute;nto debe el negocio.</p>
+        <div class="error-comun">
+          <div class="error-comun-header"><h4>&#9888; Error com&uacute;n del que empieza</h4></div>
+          <p>Confundir contabilidad con "cuadrar la caja". La caja es <em>un</em> dato; la contabilidad es el sistema completo que tambi&eacute;n mide cu&aacute;nto te deben, cu&aacute;nto debes, cu&aacute;nto vale tu inventario y si ganaste o perdiste. Un negocio puede tener caja y estar quebrado, o no tener caja y ser rentable. Solo la contabilidad completa te lo dice.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><span></span><a href="#modulo-2" class="next" onclick="navigateTo(2)">M&oacute;dulo 2: Partida doble &rarr;</a></div>
+    </section>
+    <section id="modulo-2" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Contabilidad B&aacute;sica &rsaquo; M&oacute;dulo 2</div>
+        <div class="mod-num">M&oacute;dulo 2 de 10</div>
+        <h1>La cuenta y la partida doble</h1>
+        <p class="mod-desc">La regla m&aacute;s vieja de la contabilidad: cada hecho econ&oacute;mico se registra dos veces. Si entiendes esto, todo lo dem&aacute;s es t&eacute;cnica.</p>
+      </div>
+      <div class="content-block">
+        <h2>La ecuaci&oacute;n contable</h2>
+        <p>Toda contabilidad descansa en una ecuaci&oacute;n simple:</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#x1F4D0; Ecuaci&oacute;n contable</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row total"><span class="label">Activos = Pasivos + Patrimonio</span><span class="value">A = P + Pa</span></div>
+          </div>
+        </div>
+        <p>Cualquier transacci&oacute;n que modifique un lado debe modificar el otro en la misma cuant&iacute;a, para que la ecuaci&oacute;n siga balanceada. Eso es <strong>partida doble</strong>.</p>
+        <h3>Las cuentas: debe y haber</h3>
+        <p>Una cuenta es como una hoja con dos columnas: <strong>Debe</strong> (izquierda) y <strong>Haber</strong> (derecha). Cada tipo de cuenta tiene una naturaleza:</p>
+        <table class="tabla-norm">
+          <thead><tr><th>Tipo de cuenta</th><th>Naturaleza</th><th>Aumenta por</th><th>Disminuye por</th></tr></thead>
+          <tbody>
+            <tr><td>Activos</td><td>Deudora</td><td>Debe</td><td>Haber</td></tr>
+            <tr><td>Pasivos</td><td>Acreedora</td><td>Haber</td><td>Debe</td></tr>
+            <tr><td>Patrimonio</td><td>Acreedora</td><td>Haber</td><td>Debe</td></tr>
+            <tr><td>Ingresos</td><td>Acreedora</td><td>Haber</td><td>Debe</td></tr>
+            <tr><td>Gastos y costos</td><td>Deudora</td><td>Debe</td><td>Haber</td></tr>
+          </tbody>
+        </table>
+        <h3>Ejemplo: compra de un equipo de c&oacute;mputo de $3.000.000 en efectivo</h3>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#128221; Asiento contable</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">DEBE &mdash; 1528 Equipo de c&oacute;mputo y comunicaci&oacute;n</span><span class="value">$3.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">HABER &mdash; 1105 Caja</span><span class="value">$3.000.000</span></div>
+          </div>
+        </div>
+        <p>Un activo (caja) baj&oacute;, otro activo (equipo) subi&oacute;. La ecuaci&oacute;n sigue balanceada.</p>
+        <h3>Ejemplo con tres cuentas: compra de mercanc&iacute;a a cr&eacute;dito con IVA</h3>
+        <p>No todos los asientos son de dos l&iacute;neas. Compras inventario por $1.000.000 + IVA 19%, a 30 d&iacute;as:</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#128221; Asiento de tres cuentas</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">DEBE &mdash; 1435 Inventario (activo &uarr;)</span><span class="value">$1.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">DEBE &mdash; 2408 IVA descontable (activo &uarr;)</span><span class="value">$190.000</span></div>
+            <div class="ejemplo-row"><span class="label">HABER &mdash; 2205 Proveedores (pasivo &uarr;)</span><span class="value">$1.190.000</span></div>
+            <div class="ejemplo-row total"><span class="label">Total Debe = Total Haber</span><span class="value">$1.190.000</span></div>
+          </div>
+        </div>
+        <p>Aqu&iacute; subieron dos activos ($1.190.000) y subi&oacute; un pasivo en el mismo monto. La regla de oro nunca cambia: <strong>la suma de lo registrado en el Debe siempre es igual a la suma de lo registrado en el Haber</strong>. Si un asiento no cuadra, no se puede registrar &mdash; el software ni siquiera te deja guardarlo.</p>
+        <h3>Por qu&eacute; el balance "siempre cuadra"</h3>
+        <p>Si en cada asiento Debe = Haber, entonces al sumar todos los asientos del a&ntilde;o el total de d&eacute;bitos del libro mayor ser&aacute; igual al total de cr&eacute;ditos. Por eso el balance de comprobaci&oacute;n <em>tiene</em> que cuadrar: no es magia, es una consecuencia matem&aacute;tica de la partida doble. Cuando no cuadra, hay un error de digitaci&oacute;n, no un misterio contable.</p>
+        <div class="error-comun">
+          <div class="error-comun-header"><h4>&#9888; Error com&uacute;n</h4></div>
+          <p>Pensar que el "Debe" significa "lo que debes" y el "Haber" significa "lo que tienes". Es enga&ntilde;oso. Son simplemente las dos columnas donde registras movimientos. La naturaleza de cada cuenta &mdash; deudora o acreedora &mdash; es lo que determina si un movimiento la sube o la baja, no la palabra Debe/Haber.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-1" class="prev" onclick="navigateTo(1)">&larr; M&oacute;dulo 1</a><a href="#modulo-3" class="next" onclick="navigateTo(3)">M&oacute;dulo 3: PUC &rarr;</a></div>
+    </section>
+    <section id="modulo-3" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Contabilidad B&aacute;sica &rsaquo; M&oacute;dulo 3</div>
+        <div class="mod-num">M&oacute;dulo 3 de 10</div>
+        <h1>El PUC y el plan de cuentas</h1>
+        <p class="mod-desc">El Plan &Uacute;nico de Cuentas es el catastro contable de Colombia. Cada cuenta tiene un c&oacute;digo y un significado.</p>
+      </div>
+      <div class="content-block">
+        <h2>Estructura del PUC</h2>
+        <p>El PUC original es del Decreto 2650/1993 (modificado por el 2649/1993 y otras normas posteriores). Aunque con NIIF se permite usar plan propio, en la pr&aacute;ctica colombiana la inmensa mayor&iacute;a sigue usando una estructura inspirada en el PUC.</p>
+        <table class="tabla-norm">
+          <thead><tr><th>Clase</th><th>Nombre</th><th>Ejemplos</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Activos</td><td>1105 Caja, 1110 Bancos, 1305 Clientes, 1435 Inventarios, 1524 Equipo de oficina</td></tr>
+            <tr><td>2</td><td>Pasivos</td><td>2205 Proveedores, 2335 Costos y gastos por pagar, 2365 Retenci&oacute;n en la fuente, 2380 Acreedores</td></tr>
+            <tr><td>3</td><td>Patrimonio</td><td>3105 Capital, 3305 Reservas, 3605 Utilidad del ejercicio, 3705 ORI</td></tr>
+            <tr><td>4</td><td>Ingresos</td><td>4135 Comercio, 4175 Servicios, 4210 Financieros</td></tr>
+            <tr><td>5</td><td>Gastos</td><td>5105 Personal, 5110 Honorarios, 5135 Servicios, 5140 Gastos legales</td></tr>
+            <tr><td>6</td><td>Costos de ventas</td><td>6135 Comercio (costo de mercanc&iacute;as vendidas), 6205 Productos manufacturados</td></tr>
+            <tr><td>7</td><td>Costos de producci&oacute;n</td><td>7105 Materia prima, 7115 Mano de obra, 7195 Costos indirectos</td></tr>
+            <tr><td>8 y 9</td><td>Cuentas de orden</td><td>Deudoras y acreedoras de control</td></tr>
+          </tbody>
+        </table>
+        <h3>Niveles jer&aacute;rquicos</h3>
+        <p>El c&oacute;digo tiene 6-8 d&iacute;gitos seg&uacute;n el nivel: 1 (clase), 2 (grupo), 4 (cuenta), 6 (subcuenta), 8 (auxiliar).</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#128194; Desglose: 1105.05.01 Caja general &mdash; Sede Bogot&aacute;</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">1 &mdash; Clase</span><span class="value">Activo</span></div>
+            <div class="ejemplo-row"><span class="label">11 &mdash; Grupo</span><span class="value">Disponible</span></div>
+            <div class="ejemplo-row"><span class="label">1105 &mdash; Cuenta</span><span class="value">Caja</span></div>
+            <div class="ejemplo-row"><span class="label">1105.05 &mdash; Subcuenta</span><span class="value">Caja general</span></div>
+            <div class="ejemplo-row"><span class="label">1105.05.01 &mdash; Auxiliar</span><span class="value">Sede Bogot&aacute;</span></div>
+          </div>
+        </div>
+        <h3>Ejemplo: plan de cuentas m&iacute;nimo de una tienda</h3>
+        <p>Un negocio peque&ntilde;o no necesita las 5.000 cuentas del PUC; necesita las que usa. Un plan inicial razonable para una tienda de barrio cabe en 15 cuentas:</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#128194; Plan m&iacute;nimo operativo</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">1105 Caja &middot; 1110 Bancos &middot; 1305 Clientes</span><span class="value">Activos</span></div>
+            <div class="ejemplo-row"><span class="label">1435 Inventario &middot; 1524 Equipo</span><span class="value">Activos</span></div>
+            <div class="ejemplo-row"><span class="label">2205 Proveedores &middot; 2365 Retefuente &middot; 2408 IVA</span><span class="value">Pasivos</span></div>
+            <div class="ejemplo-row"><span class="label">3105 Capital &middot; 3605 Resultado</span><span class="value">Patrimonio</span></div>
+            <div class="ejemplo-row"><span class="label">4135 Ventas &middot; 6135 Costo &middot; 5105/5135 Gastos</span><span class="value">Resultado</span></div>
+            <div class="ejemplo-row total"><span class="label">Cuentas suficientes para arrancar</span><span class="value">~13</span></div>
+          </div>
+        </div>
+        <p>Se abren m&aacute;s cuentas a medida que el negocio las necesita (n&oacute;mina, pr&eacute;stamos, activos fijos nuevos), nunca antes. Un plan inflado con cuentas vac&iacute;as solo ensucia los reportes.</p>
+        <h3>Por qu&eacute; importan los d&iacute;gitos del c&oacute;digo</h3>
+        <p>El c&oacute;digo no es decorativo: define c&oacute;mo se agrupa la informaci&oacute;n. La DIAN, en la exógena, pide saldos a nivel de cuenta (4 d&iacute;gitos) y a veces de subcuenta. Si registraste un honorario en 5135 (servicios) en vez de 5110 (honorarios), el formato 1001 saldr&aacute; mal y el cruce de la DIAN lo detectar&aacute;. La disciplina del c&oacute;digo correcto en el d&iacute;a a d&iacute;a te evita reprocesos enormes en marzo.</p>
+        <div class="tip">
+          <div class="tip-header"><h4>&#128161; Tip pr&aacute;ctico</h4></div>
+          <p>Cuando armes el plan de cuentas de un cliente nuevo, no inventes c&oacute;digos. Sigue la estructura del PUC para que los reportes a entes externos (DIAN, supersociedades, c&aacute;maras de comercio) sean compatibles sin reasignaciones.</p>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header"><h4>&#9888; Error com&uacute;n</h4></div>
+          <p>Usar una sola cuenta "5195 Diversos" para todo lo que no se sabe d&oacute;nde va. Al cierre esa cuenta tiene un saldo enorme imposible de explicar y la depuraci&oacute;n cuesta d&iacute;as. Cada gasto a su cuenta desde el primer registro.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-2" class="prev" onclick="navigateTo(2)">&larr; M&oacute;dulo 2</a><a href="#modulo-4" class="next" onclick="navigateTo(4)">M&oacute;dulo 4: Ciclo contable &rarr;</a></div>
+    </section>
+    <section id="modulo-4" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Contabilidad B&aacute;sica &rsaquo; M&oacute;dulo 4</div>
+        <div class="mod-num">M&oacute;dulo 4 de 10</div>
+        <h1>El ciclo contable</h1>
+        <p class="mod-desc">De la factura al estado financiero hay un camino con pasos predecibles. Aqu&iacute; los aprendes en orden.</p>
+      </div>
+      <div class="content-block">
+        <h2>Las 7 etapas del ciclo</h2>
+        <ol>
+          <li><strong>Documento soporte</strong>: factura, cuenta de cobro, recibo, nota cr&eacute;dito. Es la prueba del hecho econ&oacute;mico.</li>
+          <li><strong>Asiento contable</strong>: registro de la transacci&oacute;n en partida doble.</li>
+          <li><strong>Libro diario</strong>: cronol&oacute;gico de todos los asientos del periodo.</li>
+          <li><strong>Libro mayor</strong>: agrupa los movimientos por cuenta. Tiene saldo inicial, movimientos y saldo final.</li>
+          <li><strong>Balance de comprobaci&oacute;n</strong> (o de prueba): suma de d&eacute;bitos y cr&eacute;ditos por cuenta. Debe cuadrar.</li>
+          <li><strong>Ajustes de cierre</strong>: depreciaciones, amortizaciones, provisiones, devengos.</li>
+          <li><strong>Estados financieros</strong>: ESF, ERI, flujo de efectivo, cambios en el patrimonio y notas.</li>
+        </ol>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#x1F4DA;</div>
+            <h4>Decreto 2420 de 2015 y normas posteriores</h4>
+            <span class="norma-tag">Marco NIIF</span>
+          </div>
+          <p>Adopta y compila los marcos t&eacute;cnicos normativos de las NIIF para los grupos 1, 2 y 3 en Colombia. El Decreto 2483/2018 actualiz&oacute; muchas referencias y desde entonces ha habido decretos modificatorios anuales que incorporan modificaciones del IASB.</p>
+          <div class="norma-aplicacion"><strong>Aplicaci&oacute;n:</strong> Tu cliente debe estar clasificado en uno de los tres grupos NIIF, y el plan de cuentas, las pol&iacute;ticas y el formato de los estados financieros siguen ese marco.</div>
+        </div>
+        <h3>Recorrido de una factura por las 7 etapas</h3>
+        <p>Sigue una sola compra &mdash; papeler&iacute;a por $200.000 + IVA &mdash; por todo el ciclo, para ver c&oacute;mo cada etapa se conecta con la siguiente:</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#128260; Una factura, siete etapas</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">1. Soporte</span><span class="value">Factura proveedor $238.000</span></div>
+            <div class="ejemplo-row"><span class="label">2. Asiento</span><span class="value">5195 $200k + 2408 $38k / 1110 $238k</span></div>
+            <div class="ejemplo-row"><span class="label">3. Libro diario</span><span class="value">Queda con fecha y consecutivo</span></div>
+            <div class="ejemplo-row"><span class="label">4. Libro mayor</span><span class="value">5195 sube $200k en su saldo</span></div>
+            <div class="ejemplo-row"><span class="label">5. Balance comprob.</span><span class="value">Sigue cuadrando</span></div>
+            <div class="ejemplo-row"><span class="label">6. Ajustes</span><span class="value">No aplica (gasto del periodo)</span></div>
+            <div class="ejemplo-row total"><span class="label">7. Estado financiero</span><span class="value">$200k a gastos del ERI</span></div>
+          </div>
+        </div>
+        <p>La misma factura, sin saltarse pasos, termina afectando la utilidad del periodo. Si alguien "olvida" la etapa 2 (no registra el asiento), la factura existe en el caj&oacute;n pero no en la contabilidad: el gasto no aparece, la utilidad queda inflada y el IVA descontable se pierde. Cada etapa importa.</p>
+        <div class="tip">
+          <div class="tip-header"><h4>&#128161; Tip pr&aacute;ctico</h4></div>
+          <p>Si tu cliente registra el ciclo mes a mes, en diciembre solo hace ajustes finos. Si lo registra todo en marzo, va a estar despeinado todo abril. La disciplina mensual te salva el a&ntilde;o.</p>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header"><h4>&#9888; Error com&uacute;n</h4></div>
+          <p>Hacer ajustes de cierre (etapa 6) <em>antes</em> de tener el balance de comprobaci&oacute;n cuadrado (etapa 5). Si el balance no cuadra, primero se busca el error de digitaci&oacute;n; ajustar sobre datos descuadrados solo esconde el problema y lo arrastra al estado financiero.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-3" class="prev" onclick="navigateTo(3)">&larr; M&oacute;dulo 3</a><a href="#modulo-5" class="next" onclick="navigateTo(5)">M&oacute;dulo 5: Asientos t&iacute;picos &rarr;</a></div>
+    </section>
+    <section id="modulo-5" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Contabilidad B&aacute;sica &rsaquo; M&oacute;dulo 5</div>
+        <div class="mod-num">M&oacute;dulo 5 de 10</div>
+        <h1>Asientos t&iacute;picos</h1>
+        <p class="mod-desc">Las transacciones m&aacute;s comunes que ver&aacute;s en cualquier empresa colombiana, listas para que las copies cuando empieces.</p>
+      </div>
+      <div class="content-block">
+        <h2>Compra a cr&eacute;dito con IVA</h2>
+        <p>Compras mercanc&iacute;a por $1.000.000 + IVA 19% a 30 d&iacute;as.</p>
+        <div class="ejemplo">
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">DEBE &mdash; 1435 Mercanc&iacute;a no fabricada</span><span class="value">$1.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">DEBE &mdash; 2408 IVA descontable</span><span class="value">$190.000</span></div>
+            <div class="ejemplo-row"><span class="label">HABER &mdash; 2205 Proveedores</span><span class="value">$1.190.000</span></div>
+          </div>
+        </div>
+        <h2>Venta de contado con IVA y retenci&oacute;n en la fuente</h2>
+        <p>Vendes $2.000.000 + IVA 19% de contado. El cliente te retiene 2,5% por compras (Art. 401 ET, base &gt; 27 UVT).</p>
+        <div class="ejemplo">
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">DEBE &mdash; 1105 Caja</span><span class="value">$2.330.000</span></div>
+            <div class="ejemplo-row"><span class="label">DEBE &mdash; 1355 Anticipo retenciones en la fuente</span><span class="value">$50.000</span></div>
+            <div class="ejemplo-row"><span class="label">HABER &mdash; 4135 Ingresos por comercio</span><span class="value">$2.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">HABER &mdash; 2408 IVA generado</span><span class="value">$380.000</span></div>
+          </div>
+        </div>
+        <h2>Pago de salario b&aacute;sico con prestaciones</h2>
+        <p>Empleado con salario b&aacute;sico $1.500.000. Aportes seguridad social a cargo del empleado se descuentan de la n&oacute;mina; los del empleador van al gasto.</p>
+        <div class="ejemplo">
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">DEBE &mdash; 5105 Sueldos</span><span class="value">$1.500.000</span></div>
+            <div class="ejemplo-row"><span class="label">HABER &mdash; 2370 Salud y pensi&oacute;n empleado (8%)</span><span class="value">$120.000</span></div>
+            <div class="ejemplo-row"><span class="label">HABER &mdash; 2505 Salarios por pagar</span><span class="value">$1.380.000</span></div>
+          </div>
+        </div>
+        <p>Y por aparte, el aporte patronal:</p>
+        <div class="ejemplo">
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">DEBE &mdash; 5110 Aportes patronales (~21%)</span><span class="value">$315.000</span></div>
+            <div class="ejemplo-row"><span class="label">HABER &mdash; 2370 Aportes por pagar</span><span class="value">$315.000</span></div>
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-header"><h4>&#128161; Tip pr&aacute;ctico</h4></div>
+          <p>El curso completo de N&oacute;mina y Derecho Laboral en la Escuela te lleva paso a paso por el c&aacute;lculo exacto de los aportes seg&uacute;n IBC, tipo de contrato, salario integral, etc.</p>
+        </div>
+        <h2>Devoluci&oacute;n de venta</h2>
+        <p>El cliente devuelve mercanc&iacute;a que pag&oacute; de contado por $500.000 + IVA $95.000. Aplicas nota cr&eacute;dito y devuelves efectivo.</p>
+        <div class="ejemplo">
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">DEBE &mdash; 4175 Devoluciones en ventas</span><span class="value">$500.000</span></div>
+            <div class="ejemplo-row"><span class="label">DEBE &mdash; 2408 IVA generado (reverso)</span><span class="value">$95.000</span></div>
+            <div class="ejemplo-row"><span class="label">HABER &mdash; 1105 Caja</span><span class="value">$595.000</span></div>
+          </div>
+        </div>
+        <h2>Descuento por pronto pago a cliente</h2>
+        <p>Le cobras a un cliente que paga antes de los 30 d&iacute;as una factura de $1.190.000 (con IVA). Le aplicas 3% de descuento condicional ($35.700) sobre el valor base.</p>
+        <div class="ejemplo">
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">DEBE &mdash; 1105 Caja</span><span class="value">$1.154.300</span></div>
+            <div class="ejemplo-row"><span class="label">DEBE &mdash; 5305 Descuentos comerciales condicionados</span><span class="value">$35.700</span></div>
+            <div class="ejemplo-row"><span class="label">HABER &mdash; 1305 Clientes</span><span class="value">$1.190.000</span></div>
+          </div>
+        </div>
+        <h2>Anticipo recibido del cliente (y posterior causaci&oacute;n del ingreso)</h2>
+        <p>Recibes $2.000.000 como anticipo por un servicio que prestar&aacute;s el mes siguiente. NIIF 15 dice que NO es ingreso hasta entregar el servicio.</p>
+        <p>1) Al recibir el anticipo:</p>
+        <div class="ejemplo">
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">DEBE &mdash; 1105 Caja</span><span class="value">$2.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">HABER &mdash; 2805 Anticipos y avances de clientes (pasivo)</span><span class="value">$2.000.000</span></div>
+          </div>
+        </div>
+        <p>2) Al prestar el servicio el mes siguiente:</p>
+        <div class="ejemplo">
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">DEBE &mdash; 2805 Anticipos de clientes (reverso del pasivo)</span><span class="value">$2.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">HABER &mdash; 4175 Ingresos por servicios</span><span class="value">$2.000.000</span></div>
+          </div>
+        </div>
+        <div class="tip"><div class="tip-header"><h4>&#128161; Por qu&eacute; importa</h4></div><p>Confundir anticipo con ingreso es un error t&iacute;pico que infla utilidades del periodo y puede llevar a pagar impuesto sobre ingresos que todav&iacute;a no se han realizado fiscalmente (Art. 28 ET).</p></div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-4" class="prev" onclick="navigateTo(4)">&larr; M&oacute;dulo 4</a><a href="#modulo-6" class="next" onclick="navigateTo(6)">M&oacute;dulo 6: Inventarios &rarr;</a></div>
+    </section>
+    <section id="modulo-6" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Contabilidad B&aacute;sica &rsaquo; M&oacute;dulo 6</div>
+        <div class="mod-num">M&oacute;dulo 6 de 10</div>
+        <h1>Inventarios y k&aacute;rdex</h1>
+        <p class="mod-desc">El inventario es el activo m&aacute;s vivo. Saber d&oacute;nde est&aacute;n las unidades y a qu&eacute; costo es lo que separa una contabilidad organizada de un caos.</p>
+      </div>
+      <div class="content-block">
+        <h2>Sistemas de inventario</h2>
+        <table class="tabla-norm">
+          <thead><tr><th>Sistema</th><th>Funcionamiento</th><th>Cu&aacute;ndo usarlo</th></tr></thead>
+          <tbody>
+            <tr><td>Permanente (perpetuo)</td><td>Cada movimiento (compra/venta) actualiza inventario en tiempo real</td><td>Obligatorio para sociedades obligadas a dictamen de revisor fiscal (Art. 62 ET)</td></tr>
+            <tr><td>Peri&oacute;dico</td><td>Inventario se ajusta solo al cierre del periodo (toma f&iacute;sica)</td><td>Permitido para los dem&aacute;s</td></tr>
+          </tbody>
+        </table>
+        <h3>M&eacute;todos de valuaci&oacute;n del inventario</h3>
+        <p>Cuando una unidad sale del inventario, &iquest;a qu&eacute; costo se descarga? Tres m&eacute;todos aceptados en Colombia:</p>
+        <ul>
+          <li><strong>PEPS</strong> (Primero en Entrar, Primero en Salir): las primeras unidades compradas son las primeras vendidas.</li>
+          <li><strong>Promedio Ponderado</strong>: cada nueva compra recalcula el costo promedio.</li>
+          <li><strong>Identificaci&oacute;n espec&iacute;fica</strong>: cada unidad se identifica con su costo real (carros, joyas, art&iacute;culos &uacute;nicos).</li>
+        </ul>
+        <p>NIIF (NIC 2 / Sec. 13 Pymes) <strong>proh&iacute;be UEPS</strong>. Fiscal lo permit&iacute;a antes pero se alinea con NIIF.</p>
+        <h3>K&aacute;rdex</h3>
+        <p>El k&aacute;rdex es la ficha por art&iacute;culo: entradas, salidas, saldos de unidades y costo. Lo m&aacute;s simple es una tabla por SKU con estas columnas:</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#x1F4D2; K&aacute;rdex promedio ponderado &mdash; SKU 001</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Saldo inicial: 10 unid &times; $5.000</span><span class="value">$50.000</span></div>
+            <div class="ejemplo-row"><span class="label">(+) Compra 5 unid &times; $6.000</span><span class="value">$30.000</span></div>
+            <div class="ejemplo-row"><span class="label">Subtotal: 15 unid</span><span class="value">$80.000</span></div>
+            <div class="ejemplo-row"><span class="label">Costo promedio: $80.000 / 15</span><span class="value">$5.333,33</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Venta 8 unid &times; $5.333,33</span><span class="value">($42.667)</span></div>
+            <div class="ejemplo-row total"><span class="label">Saldo: 7 unid</span><span class="value">$37.333</span></div>
+          </div>
+        </div>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#x1F4D2; K&aacute;rdex PEPS (FIFO) &mdash; mismos datos, distinto resultado</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Saldo inicial: 10 unid &times; $5.000</span><span class="value">$50.000</span></div>
+            <div class="ejemplo-row"><span class="label">(+) Compra 5 unid &times; $6.000</span><span class="value">$30.000</span></div>
+            <div class="ejemplo-row"><span class="label">Subtotal: 15 unid (10 a $5.000 + 5 a $6.000)</span><span class="value">$80.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Venta 8 unid: salen las primeras 8 a $5.000 c/u</span><span class="value">($40.000)</span></div>
+            <div class="ejemplo-row total"><span class="label">Saldo: 7 unid (2 a $5.000 + 5 a $6.000)</span><span class="value">$40.000</span></div>
+          </div>
+        </div>
+        <p>Con los mismos datos, el método cambia el resultado: PEPS deja el inventario valorado en $40.000 (versus $37.333 con promedio). En épocas de alza de precios, PEPS típicamente reporta utilidad mayor y mayor valor de inventario al cierre.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#x1F4D6;</div>
+            <h4>Art. 64 ET &mdash; P&eacute;rdidas en inventarios</h4>
+            <span class="norma-tag">L&iacute;mite fiscal</span>
+          </div>
+          <p>Son deducibles las p&eacute;rdidas por destrucci&oacute;n o caso fortuito de inventarios hasta el 3% de la suma del inventario inicial m&aacute;s las compras del a&ntilde;o, siempre que se cumpla con las pruebas exigidas (acta, conocimiento de la asamblea o junta).</p>
+          <div class="norma-aplicacion"><strong>Aplicaci&oacute;n:</strong> Una baja por obsolescencia contable (NIC 2) solo se deduce fiscalmente cuando se destruye con prueba o cuando se enajena. Esta diferencia se trabaja en F2516 como diferencia temporaria.</div>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-5" class="prev" onclick="navigateTo(5)">&larr; M&oacute;dulo 5</a><a href="#modulo-7" class="next" onclick="navigateTo(7)">M&oacute;dulo 7: Ajustes &rarr;</a></div>
+    </section>
+    <section id="modulo-7" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Contabilidad B&aacute;sica &rsaquo; M&oacute;dulo 7</div>
+        <div class="mod-num">M&oacute;dulo 7 de 10</div>
+        <h1>Ajustes de cierre</h1>
+        <p class="mod-desc">Los ajustes son los retoques finales antes de cerrar el periodo. Son los que separan una contabilidad "v&aacute;lida pero incompleta" de unos estados financieros razonables.</p>
+      </div>
+      <div class="content-block">
+        <h2>Tipos de ajustes</h2>
+        <ul>
+          <li><strong>Depreciaci&oacute;n</strong>: distribuir el costo de un activo fijo a lo largo de su vida &uacute;til. Por ejemplo, una m&aacute;quina de $20.000.000 con vida &uacute;til de 10 a&ntilde;os deprecia $2.000.000 al a&ntilde;o.</li>
+          <li><strong>Amortizaci&oacute;n</strong>: lo mismo pero para activos intangibles (licencias, software).</li>
+          <li><strong>Provisiones</strong>: reconocer obligaciones probables (litigios, garant&iacute;as, cesant&iacute;as).</li>
+          <li><strong>Devengos (acumulaciones)</strong>: reconocer ingresos o gastos del periodo aunque a&uacute;n no se hayan cobrado o pagado (servicios p&uacute;blicos de diciembre que se pagan en enero, intereses, comisiones).</li>
+          <li><strong>Diferidos</strong>: ingresos cobrados por adelantado o gastos pagados por adelantado.</li>
+        </ul>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#x1F527; Ajuste de depreciaci&oacute;n mensual (m&aacute;quina $20M / 10 a&ntilde;os / 120 meses)</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">DEBE &mdash; 5160 Depreciaciones</span><span class="value">$166.667</span></div>
+            <div class="ejemplo-row"><span class="label">HABER &mdash; 1592 Depreciaci&oacute;n acumulada</span><span class="value">$166.667</span></div>
+          </div>
+        </div>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#x1F4D6;</div>
+            <h4>Art. 137 ET y Anexo 2 Dec. 1625/2016</h4>
+            <span class="norma-tag">L&iacute;mites fiscales</span>
+          </div>
+          <p>La deducci&oacute;n por depreciaci&oacute;n est&aacute; limitada a tasas m&aacute;ximas: maquinaria 10% anual, equipo de c&oacute;mputo 20%, construcciones 2,22%, flota 10%. Cuando la depreciaci&oacute;n contable supera la fiscal, la diferencia se difiere (tema central de F2516).</p>
+        </div>
+        <h2>Provisi&oacute;n de cesant&iacute;as</h2>
+        <p>El empleador debe causar mensualmente la cesant&iacute;a del trabajador (8,33% del salario), aunque no se pague hasta febrero del a&ntilde;o siguiente. Es un pasivo cierto.</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#x1F527; Trabajador con salario $2.000.000 / mes</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">DEBE &mdash; 5103 Cesant&iacute;as</span><span class="value">$166.600</span></div>
+            <div class="ejemplo-row"><span class="label">HABER &mdash; 2510 Cesant&iacute;as por pagar</span><span class="value">$166.600</span></div>
+          </div>
+        </div>
+        <p>Más adelante, en intereses sobre cesantías (1% mensual sobre cesantías acumuladas) se hace otro ajuste similar.</p>
+        <h2>Amortizaci&oacute;n de un intangible</h2>
+        <p>Compraste una licencia de software por $12.000.000 con vida &uacute;til estimada de 4 a&ntilde;os. La amortizaci&oacute;n mensual: $12M / 48 meses = $250.000.</p>
+        <div class="ejemplo">
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">DEBE &mdash; 5165 Amortizaciones</span><span class="value">$250.000</span></div>
+            <div class="ejemplo-row"><span class="label">HABER &mdash; 1698 Amortizaci&oacute;n acumulada intangibles</span><span class="value">$250.000</span></div>
+          </div>
+        </div>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#x1F4D6;</div>
+            <h4>NIC 36 (Deterioro) y NIC 37 (Provisiones)</h4>
+            <span class="norma-tag">Marco NIIF</span>
+          </div>
+          <p>NIC 36 obliga a probar deterioro de activos cuando hay indicios (caída de valor de mercado, obsolescencia, baja en flujos esperados). NIC 37 / Sec. 21 NIIF para PYMES regula cuándo reconocer una provisión: cuando exista una obligación presente, sea probable la salida de recursos y se pueda estimar fiablemente.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-6" class="prev" onclick="navigateTo(6)">&larr; M&oacute;dulo 6</a><a href="#modulo-8" class="next" onclick="navigateTo(8)">M&oacute;dulo 8: Estados financieros &rarr;</a></div>
+    </section>
+    <section id="modulo-8" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Contabilidad B&aacute;sica &rsaquo; M&oacute;dulo 8</div>
+        <div class="mod-num">M&oacute;dulo 8 de 10</div>
+        <h1>Los estados financieros b&aacute;sicos</h1>
+        <p class="mod-desc">Son los productos finales del proceso contable. Cinco documentos que cuentan toda la historia.</p>
+      </div>
+      <div class="content-block">
+        <h2>Los 5 estados financieros bajo NIIF</h2>
+        <ol>
+          <li><strong>Estado de Situaci&oacute;n Financiera (ESF)</strong>: la foto a una fecha. Activos, pasivos y patrimonio.</li>
+          <li><strong>Estado de Resultados Integral (ERI)</strong>: la pel&iacute;cula de un periodo. Ingresos, costos, gastos y resultado.</li>
+          <li><strong>Estado de Cambios en el Patrimonio</strong>: c&oacute;mo se movi&oacute; el patrimonio en el periodo (aportes, dividendos, utilidad, ORI).</li>
+          <li><strong>Estado de Flujo de Efectivo</strong>: de d&oacute;nde sali&oacute; y a d&oacute;nde fue la caja, dividido en operaci&oacute;n, inversi&oacute;n y financiaci&oacute;n.</li>
+          <li><strong>Notas a los estados financieros</strong>: el contexto que da sentido a los n&uacute;meros (pol&iacute;ticas, supuestos, desgloses).</li>
+        </ol>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#x1F4C8; Estructura t&iacute;pica del ESF</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Activo corriente (efectivo, cartera, inventarios)</span><span class="value">X</span></div>
+            <div class="ejemplo-row"><span class="label">Activo no corriente (PP&amp;E, intangibles, inversiones)</span><span class="value">X</span></div>
+            <div class="ejemplo-row total"><span class="label">Total Activos</span><span class="value">A</span></div>
+            <div class="ejemplo-row"><span class="label">Pasivo corriente (proveedores, obligaciones c.p.)</span><span class="value">X</span></div>
+            <div class="ejemplo-row"><span class="label">Pasivo no corriente (cr&eacute;ditos l.p., provisiones)</span><span class="value">X</span></div>
+            <div class="ejemplo-row total"><span class="label">Total Pasivos</span><span class="value">P</span></div>
+            <div class="ejemplo-row"><span class="label">Patrimonio (capital, reservas, utilidades, ORI)</span><span class="value">A - P</span></div>
+          </div>
+        </div>
+        <h3>Ejemplo completo: ESF y ERI de una microempresa</h3>
+        <p>Mira c&oacute;mo se ven con n&uacute;meros reales. "Tienda Do&ntilde;a Marta", cierre a 31-dic:</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#x1F4C8; Estado de Situaci&oacute;n Financiera</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Caja y bancos</span><span class="value">$8.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Clientes</span><span class="value">$5.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Inventario</span><span class="value">$12.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Equipo (neto)</span><span class="value">$10.000.000</span></div>
+            <div class="ejemplo-row total"><span class="label">Total Activos</span><span class="value">$35.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Proveedores</span><span class="value">$9.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Obligaci&oacute;n banco</span><span class="value">$6.000.000</span></div>
+            <div class="ejemplo-row total"><span class="label">Total Pasivos</span><span class="value">$15.000.000</span></div>
+            <div class="ejemplo-row total"><span class="label">Patrimonio (35 &minus; 15)</span><span class="value">$20.000.000</span></div>
+          </div>
+        </div>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#x1F4C9; Estado de Resultados del a&ntilde;o</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Ingresos por ventas</span><span class="value">$120.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(&minus;) Costo de ventas</span><span class="value">$78.000.000</span></div>
+            <div class="ejemplo-row total"><span class="label">Utilidad bruta</span><span class="value">$42.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(&minus;) Gastos de operaci&oacute;n</span><span class="value">$33.000.000</span></div>
+            <div class="ejemplo-row total"><span class="label">Utilidad del ejercicio</span><span class="value">$9.000.000</span></div>
+          </div>
+        </div>
+        <p>Los dos estados est&aacute;n conectados: esos $9.000.000 de utilidad entran al patrimonio del ESF (en 3605 Resultado del ejercicio). El ESF y el ERI nunca se leen por separado &mdash; el resultado de uno alimenta al otro.</p>
+        <div class="error-comun">
+          <div class="error-comun-header"><h4>&#9888; Error com&uacute;n</h4></div>
+          <p>Creer que "utilidad de $9.000.000" significa "tengo $9.000.000 en el banco". La utilidad es contable (devengo); la caja es otra cosa. Do&ntilde;a Marta gan&oacute; $9M pero solo tiene $8M en caja porque $5M est&aacute;n en cartera y $12M en inventario. Confundir utilidad con liquidez quiebra negocios rentables.</p>
+        </div>
+        <div class="cta-practica">
+          <h3>&#x1F6E0; Practica con la herramienta de Estados Financieros</h3>
+          <p>Ex&oacute;genaDIAN tiene una herramienta que carga tu balance de prueba y arma autom&aacute;ticamente el ESF y ERI bajo NIIF. La usas en este curso y en el de NIIF.</p>
+          <a href="../estadosfinancieros.html">Abrir herramienta &rarr;</a>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-7" class="prev" onclick="navigateTo(7)">&larr; M&oacute;dulo 7</a><a href="#modulo-9" class="next" onclick="navigateTo(9)">M&oacute;dulo 9: Intro NIIF &rarr;</a></div>
+    </section>
+    <section id="modulo-9" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Contabilidad B&aacute;sica &rsaquo; M&oacute;dulo 9</div>
+        <div class="mod-num">M&oacute;dulo 9 de 10</div>
+        <h1>Introducci&oacute;n a NIIF</h1>
+        <p class="mod-desc">Las NIIF son el lenguaje contable internacional. En Colombia aplican desde 2015 a todos los obligados a llevar contabilidad.</p>
+      </div>
+      <div class="content-block">
+        <h2>Los tres grupos en Colombia</h2>
+        <table class="tabla-norm">
+          <thead><tr><th>Grupo</th><th>Aplica a</th><th>Marco</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Emisores de valores, entidades inter&eacute;s p&uacute;blico, grandes empresas seg&uacute;n criterios cuantitativos</td><td>NIIF Plenas (IFRS Full)</td></tr>
+            <tr><td>2</td><td>Empresas medianas y peque&ntilde;as que no cumplen criterios del Grupo 1 ni 3</td><td>NIIF para PYMES</td></tr>
+            <tr><td>3</td><td>Microempresas (pocos ingresos y activos)</td><td>R&eacute;gimen simplificado (Anexo 3 D. 2420/2015)</td></tr>
+          </tbody>
+        </table>
+        <h3>Principios clave NIIF</h3>
+        <ul>
+          <li><strong>Sustancia sobre forma</strong>: lo que importa es la realidad econ&oacute;mica, no el papel.</li>
+          <li><strong>Devengo</strong>: registra cuando ocurre, no cuando se paga.</li>
+          <li><strong>Materialidad o importancia relativa</strong>: lo peque&ntilde;o que no afecta decisiones, no se reporta separado.</li>
+          <li><strong>Hip&oacute;tesis de negocio en marcha</strong>: se asume que la entidad continuar&aacute;.</li>
+          <li><strong>Comparabilidad</strong>: cifras del periodo actual y anterior, pol&iacute;ticas consistentes.</li>
+        </ul>
+        <h3>Devengo vs. caja: el ejemplo que todo principiante debe ver</h3>
+        <p>El principio de devengo es el que m&aacute;s confunde. Caso concreto: el 28 de diciembre prestas un servicio por $5.000.000 y emites la factura, pero el cliente paga el 15 de enero.</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#x1F4C5; &iquest;En qu&eacute; a&ntilde;o va el ingreso?</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Criterio caja (incorrecto NIIF)</span><span class="value">Ingreso en enero</span></div>
+            <div class="ejemplo-row"><span class="label">Criterio devengo (correcto)</span><span class="value">Ingreso en diciembre</span></div>
+            <div class="ejemplo-row"><span class="label">28-dic: registro</span><span class="value">1305 Clientes / 4175 Ingreso $5M</span></div>
+            <div class="ejemplo-row total"><span class="label">15-ene: registro</span><span class="value">1110 Bancos / 1305 Clientes $5M</span></div>
+          </div>
+        </div>
+        <p>El ingreso se reconoce cuando se <em>presta el servicio</em> (diciembre), no cuando entra la plata (enero). En enero solo se cancela la cuenta por cobrar contra el banco; no hay ingreso nuevo. Aplicar mal esto desplaza utilidades de un a&ntilde;o a otro y distorsiona la renta.</p>
+        <h3>Sustancia sobre forma: un ejemplo</h3>
+        <p>Firmas un "contrato de arrendamiento" de un veh&iacute;culo a 5 a&ntilde;os donde al final lo compras por $1. Aunque el papel diga "arriendo", la <em>sustancia</em> es una compra financiada: el veh&iacute;culo se reconoce como activo, no como gasto de arriendo. NIIF mira la realidad econ&oacute;mica, no el t&iacute;tulo del documento.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#x1F4D8;</div>
+            <h4>NIC 1 / Secci&oacute;n 2 NIIF PYMES</h4>
+            <span class="norma-tag">Marco conceptual</span>
+          </div>
+          <p>Establecen las bases de presentaci&oacute;n: hip&oacute;tesis de negocio en marcha, devengo, materialidad, comparabilidad y el conjunto completo de estados financieros. Es la columna vertebral conceptual sobre la que se apoyan todas las dem&aacute;s normas.</p>
+          <div class="norma-aplicacion"><strong>Aplicaci&oacute;n:</strong> Antes de aplicar cualquier norma espec&iacute;fica (inventarios, PP&amp;E, ingresos) se asumen estos principios. Un estado financiero que los incumple no es NIIF aunque use el formato correcto.</div>
+        </div>
+        <div class="tip">
+          <div class="tip-header"><h4>&#128161; Tip pr&aacute;ctico</h4></div>
+          <p>El curso de NIIF para Contadores de la Escuela profundiza en cada secci&oacute;n. Este m&oacute;dulo te da las bases para entender de qu&eacute; se trata; el curso completo te lleva al detalle por norma.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-8" class="prev" onclick="navigateTo(8)">&larr; M&oacute;dulo 8</a><a href="#modulo-10" class="next" onclick="navigateTo(10)">M&oacute;dulo 10: Tu primer balance &rarr;</a></div>
+    </section>
+    <section id="modulo-10" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Contabilidad B&aacute;sica &rsaquo; M&oacute;dulo 10</div>
+        <div class="mod-num">M&oacute;dulo 10 de 10</div>
+        <h1>Tu primer balance mensual</h1>
+        <p class="mod-desc">Repasamos todo con un mes completo de una microempresa, de la primera transacci&oacute;n a los EEFF.</p>
+      </div>
+      <div class="content-block">
+        <h2>El caso: peluquer&iacute;a "Estilo Andino" &mdash; mes 1</h2>
+        <p>Transacciones del mes:</p>
+        <ol>
+          <li>El dueño aporta $5.000.000 en efectivo como capital.</li>
+          <li>Compra sillones y equipo por $2.500.000 a cr&eacute;dito a 6 meses.</li>
+          <li>Paga arriendo del local $800.000.</li>
+          <li>Compra insumos (shampoo, tintes) por $300.000 de contado.</li>
+          <li>Atiende clientes durante el mes: ingresos totales en caja $4.200.000.</li>
+          <li>Paga salario al estilista $1.200.000 (sin aportes para simplificar).</li>
+        </ol>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#128221; Asientos del mes</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">1) DEBE 1105 Caja / HABER 3105 Capital</span><span class="value">$5.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">2) DEBE 1524 Equipo / HABER 2380 Acreedores</span><span class="value">$2.500.000</span></div>
+            <div class="ejemplo-row"><span class="label">3) DEBE 5120 Arriendos / HABER 1105 Caja</span><span class="value">$800.000</span></div>
+            <div class="ejemplo-row"><span class="label">4) DEBE 1435 Inventarios / HABER 1105 Caja</span><span class="value">$300.000</span></div>
+            <div class="ejemplo-row"><span class="label">5) DEBE 1105 Caja / HABER 4175 Ingresos servicios</span><span class="value">$4.200.000</span></div>
+            <div class="ejemplo-row"><span class="label">6) DEBE 5105 Sueldos / HABER 1105 Caja</span><span class="value">$1.200.000</span></div>
+          </div>
+        </div>
+        <h3>ESF al cierre del mes</h3>
+        <div class="ejemplo">
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Caja (5.000.000 - 800.000 - 300.000 + 4.200.000 - 1.200.000)</span><span class="value">$6.900.000</span></div>
+            <div class="ejemplo-row"><span class="label">Inventarios</span><span class="value">$300.000</span></div>
+            <div class="ejemplo-row"><span class="label">Equipo</span><span class="value">$2.500.000</span></div>
+            <div class="ejemplo-row total"><span class="label">Total Activos</span><span class="value">$9.700.000</span></div>
+            <div class="ejemplo-row"><span class="label">Acreedores</span><span class="value">$2.500.000</span></div>
+            <div class="ejemplo-row"><span class="label">Capital</span><span class="value">$5.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Utilidad del ejercicio (4.200.000 - 800.000 - 1.200.000)</span><span class="value">$2.200.000</span></div>
+            <div class="ejemplo-row total"><span class="label">Total Pasivos + Patrimonio</span><span class="value">$9.700.000</span></div>
+          </div>
+        </div>
+        <p>La ecuaci&oacute;n cuadra: Activos $9.700.000 = Pasivos $2.500.000 + Patrimonio $7.200.000.</p>
+        <h2>Mes 2: cuando el saldo inicial ya no es cero</h2>
+        <p>El segundo mes empieza con los saldos finales del mes 1 como saldos iniciales. Aquí está la diferencia clave con un mes inicial: ya tienes historia.</p>
+        <p>Nuevas transacciones del mes 2:</p>
+        <ol>
+          <li>Cobra $300.000 a un cliente que tenía servicio pendiente (anticipo del mes 1 que se causa).</li>
+          <li>Atiende clientes: ingresos en caja $4.800.000.</li>
+          <li>Compra m&aacute;s insumos $400.000 de contado.</li>
+          <li>Paga el primer abono al cr&eacute;dito del equipo: $416.667 (cuota mensual).</li>
+          <li>Paga arriendo $800.000.</li>
+          <li>Paga salario estilista $1.200.000.</li>
+          <li>Ajuste mensual de depreciaci&oacute;n del equipo: $20.833 ($2.500.000 / 10 a&ntilde;os / 12 meses).</li>
+        </ol>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>ESF al cierre del mes 2</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Caja (6.900.000 + 4.800.000 - 400.000 - 416.667 - 800.000 - 1.200.000)</span><span class="value">$8.883.333</span></div>
+            <div class="ejemplo-row"><span class="label">Inventarios (300.000 + 400.000)</span><span class="value">$700.000</span></div>
+            <div class="ejemplo-row"><span class="label">Equipo (bruto)</span><span class="value">$2.500.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Depreciaci&oacute;n acumulada</span><span class="value">($20.833)</span></div>
+            <div class="ejemplo-row total"><span class="label">Total Activos</span><span class="value">$12.062.500</span></div>
+            <div class="ejemplo-row"><span class="label">Acreedores (2.500.000 - 416.667)</span><span class="value">$2.083.333</span></div>
+            <div class="ejemplo-row"><span class="label">Capital</span><span class="value">$5.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Utilidad mes 1 (acumulada)</span><span class="value">$2.200.000</span></div>
+            <div class="ejemplo-row"><span class="label">Utilidad mes 2 (4.800.000 - 800.000 - 1.200.000 - 20.833)</span><span class="value">$2.779.167</span></div>
+            <div class="ejemplo-row total"><span class="label">Total Pasivos + Patrimonio</span><span class="value">$12.062.500</span></div>
+          </div>
+        </div>
+        <p>Observa tres cosas: (1) la caja y los inventarios crecieron porque el negocio sigue generando flujo; (2) la deuda con el acreedor disminuyó porque se hizo el primer abono; (3) la utilidad del ejercicio empieza a acumularse mes a mes. Esa acumulación, al cierre del año, es lo que se compara contra el patrimonio inicial para verificar consistencia.</p>
+        <div class="tip">
+          <div class="tip-header"><h4>&#128161; Pr&oacute;ximos pasos</h4></div>
+          <p>Si entendiste estos dos meses, est&aacute;s listo para los cursos de la Escuela en cualquier &aacute;rea. La ruta natural si vienes de aqu&iacute; es <strong>NIIF para Contadores</strong> (refuerza el marco normativo) y <strong>Finanzas para No Financieros</strong> (para leer EEFF con criterio), o saltar directo a tributaci&oacute;n con <strong>IVA 300</strong> y <strong>Retenci&oacute;n 350</strong>.</p>
+        </div>
+        <div class="cta-practica">
+          <h3>&#x1F6E0; Sube tu propio balance</h3>
+          <p>Cuando ya tengas un mes en tu sistema contable, la herramienta de Estados Financieros de Ex&oacute;genaDIAN procesa el balance de prueba y arma autom&aacute;ticamente ESF y ERI.</p>
+          <a href="../estadosfinancieros.html">Abrir herramienta &rarr;</a>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-9" class="prev" onclick="navigateTo(9)">&larr; M&oacute;dulo 9</a><a href="../escuela.html" class="next" style="background:var(--gray-800)">Volver a la Escuela &rarr;</a></div>
+    </section>
+  </div>
+</div>
+<section style="background:linear-gradient(180deg,#F9FAFB,#fff);padding:60px 24px 80px;border-top:1px solid #E5E7EB">
+  <div data-curso-meta="contabilidad-basica" style="text-align:center;margin-bottom:28px"></div>
+  <div data-cert-widget="contabilidad-basica"></div>
+</section>
+<script defer src="../shared/pro.js?v=848fbf16"></script>
+<script src="../shared/certificado.js?v=383dd956"></script>
+<script src="../shared/cert-emit-widget.js?v=81c77b40"></script>
+<script src="../shared/quiz-banks.js?v=bd69b5f6"></script>
+<script src="../shared/quiz-engine.js?v=faaf346e"></script>
+<script src="../shared/curso-meta.js?v=6b7779f4"></script>
+<button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()" aria-label="Abrir menú">&#9776;</button>
+<script>
+var currentModule = 1;
+var totalModules = 10;
+function navigateTo(n) {
+  document.querySelectorAll('.modulo-section').forEach(function(s){ s.classList.remove('active'); });
+  var target = document.getElementById('modulo-' + n);
+  if (target) target.classList.add('active');
+  var links = document.querySelectorAll('.sidebar-nav a');
+  links.forEach(function(a, i) {
+    a.classList.remove('active');
+    if (i < n - 1) a.classList.add('completed');
+    if (i === n - 1) a.classList.add('active');
+  });
+  var pct = Math.round((n / totalModules) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  currentModule = n;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('open');
+  if (typeof gtag !== 'undefined') gtag('event', 'escuela_modulo', { curso: 'contabilidad-basica', modulo: n });
+}
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('open');
+}
+</script>
+</body>
+</html>

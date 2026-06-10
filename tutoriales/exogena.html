@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="../shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S7SM6ST4CC');
+</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutorial: c&oacute;mo generar la informaci&oacute;n ex&oacute;gena en exogenadian.com | Ex&oacute;genaDIAN</title>
+<meta name="description" content="Tutorial paso a paso: c&oacute;mo subir tu balance de prueba a exogenadian.com, mapear columnas, clasificar conceptos, completar terceros y descargar el Excel con los 10 formatos DIAN listos para el Prevalidador.">
+<link rel="canonical" href="https://exogenadian.com/tutoriales/exogena.html">
+<meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tutorial-mockups.css?v=dccdc93b">
+<style>
+:root{
+  --green-900:#064E3B;--green-800:#065F46;--green-700:#047857;--green-600:#059669;--green-500:#10B981;--green-400:#34D399;--green-300:#6EE7B7;--green-200:#A7F3D0;--green-100:#D1FAE5;--green-50:#ECFDF5;
+  --white:#FFF;--gray-50:#F9FAFB;--gray-100:#F3F4F6;--gray-200:#E5E7EB;--gray-300:#D1D5DB;--gray-400:#9CA3AF;--gray-500:#6B7280;--gray-600:#4B5563;--gray-700:#374151;--gray-800:#1F2937;--gray-900:#111827;
+  --amber-50:#FFFBEB;--amber-100:#FEF3C7;--amber-500:#F59E0B;--amber-700:#92400E;--amber-800:#78350F;
+  --blue-50:#EFF6FF;--blue-100:#DBEAFE;--blue-500:#3B82F6;--blue-700:#1D4ED8;
+  --purple-50:#F5F3FF;--purple-500:#8B5CF6;--purple-700:#6D28D9;
+  --rose-50:#FFF1F2;--rose-500:#F43F5E;--rose-700:#BE123C;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-900);line-height:1.6}
+.tut-layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+@media(max-width:900px){.tut-layout{grid-template-columns:1fr}}
+.sidebar{background:#fff;border-right:1px solid var(--gray-200);padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
+.sidebar-header{padding:16px 20px;border-bottom:1px solid var(--gray-100)}
+.sidebar-header a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--gray-800);font-weight:800;font-size:.9rem}
+.sidebar-header a div{width:28px;height:28px;background:linear-gradient(135deg,var(--green-600),var(--green-400));border-radius:7px;display:grid;place-items:center;color:#fff;font-size:.7rem;font-weight:900}
+.sidebar-curso{padding:16px 20px;border-bottom:1px solid var(--gray-100)}
+.sidebar-curso h3{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--green-700);margin-bottom:4px}
+.sidebar-curso p{font-size:.88rem;font-weight:700;color:var(--gray-800)}
+.sidebar-nav{padding:12px 0;flex:1}
+.sidebar-nav a{display:flex;align-items:center;gap:10px;padding:10px 20px;text-decoration:none;color:var(--gray-500);font-size:.85rem;font-weight:500;transition:all .15s;border-left:3px solid transparent}
+.sidebar-nav a:hover{background:var(--green-50);color:var(--green-700)}
+.sidebar-nav a.active{background:var(--green-50);color:var(--green-700);font-weight:700;border-left-color:var(--green-600)}
+.sidebar-nav a .num{width:24px;height:24px;border-radius:50%;background:var(--gray-100);color:var(--gray-500);display:grid;place-items:center;font-size:.72rem;font-weight:700;flex-shrink:0}
+.sidebar-nav a.active .num{background:var(--green-600);color:#fff}
+.sidebar-back{padding:16px 20px;border-top:1px solid var(--gray-100);margin-top:auto}
+.sidebar-back a{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--gray-400);font-size:.82rem;font-weight:500}
+.sidebar-back a:hover{color:var(--gray-700)}
+.main{padding:32px 40px 60px;max-width:880px}
+@media(max-width:900px){.main{padding:20px 16px 80px}.sidebar{display:none}}
+.breadcrumb{font-size:.78rem;color:var(--gray-400);margin-bottom:8px}
+.breadcrumb a{color:var(--gray-400);text-decoration:none}
+.breadcrumb a:hover{color:var(--green-600)}
+.tag{display:inline-flex;align-items:center;gap:6px;background:var(--green-100);color:var(--green-700);padding:4px 14px;border-radius:100px;font-size:.74rem;font-weight:700;margin-bottom:14px}
+h1.tut-title{font-family:'Fraunces',serif;font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;letter-spacing:-.02em;margin-bottom:10px;line-height:1.2}
+p.tut-lead{font-size:1.05rem;color:var(--gray-600);max-width:680px;line-height:1.6;margin-bottom:30px}
+/* Pasos */
+.step{margin-bottom:40px;padding-top:20px;border-top:2px solid var(--gray-200)}
+.step:first-of-type{border-top:none;padding-top:0}
+.step-num{display:inline-flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:.9rem;color:var(--green-700);font-weight:700;margin-bottom:8px}
+.step-num span{display:grid;place-items:center;width:32px;height:32px;background:var(--green-600);color:#fff;border-radius:50%;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:800}
+.step h2{font-family:'Fraunces',serif;font-size:1.45rem;font-weight:700;margin-bottom:8px;color:var(--gray-900);line-height:1.25}
+.step p{font-size:.95rem;color:var(--gray-700);line-height:1.7;margin-bottom:14px}
+.step ul,.step ol{margin:8px 0 16px 22px;display:flex;flex-direction:column;gap:7px}
+.step li{font-size:.94rem;color:var(--gray-700);line-height:1.6}
+.step h3{font-size:1.05rem;font-weight:700;margin:18px 0 8px;color:var(--gray-800)}
+.step code{font-family:'JetBrains Mono',monospace;font-size:.86rem;background:var(--gray-100);padding:2px 7px;border-radius:5px;color:var(--gray-800)}
+/* Captura placeholder */
+.capture{background:var(--gray-100);border:2px dashed var(--gray-300);border-radius:12px;padding:30px 20px;margin:18px 0;text-align:center;color:var(--gray-500);font-size:.85rem;line-height:1.55}
+.capture .cap-icon{font-size:2rem;display:block;margin-bottom:10px;opacity:.55}
+.capture .cap-label{font-weight:700;color:var(--gray-700);font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.capture em{font-style:normal;background:#fff;padding:2px 8px;border-radius:5px;font-size:.82rem;color:var(--gray-700);font-weight:600}
+/* Tip / Aviso / Error */
+.tip{background:var(--blue-50);border-left:4px solid var(--blue-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:#1E40AF;line-height:1.6}
+.tip strong{color:var(--blue-700)}
+.warn{background:var(--amber-50);border-left:4px solid var(--amber-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:var(--amber-800);line-height:1.6}
+.warn strong{color:var(--amber-700)}
+.err{background:var(--rose-50);border-left:4px solid var(--rose-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:#9F1239;line-height:1.6}
+.err strong{color:var(--rose-700)}
+/* Tabla compacta */
+.tabla{width:100%;border-collapse:collapse;margin:14px 0;border-radius:10px;overflow:hidden;border:1px solid var(--gray-200);font-size:.86rem}
+.tabla th{background:var(--gray-100);padding:9px 13px;text-align:left;font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gray-600)}
+.tabla td{padding:9px 13px;border-top:1px solid var(--gray-100);color:var(--gray-700)}
+.tabla tr:hover{background:var(--green-50)}
+.tabla code{font-family:'JetBrains Mono',monospace;font-size:.78rem;background:var(--white);padding:1px 5px;border-radius:3px}
+/* Acciones secundarias */
+.actions-list{background:#fff;border:1px solid var(--gray-200);border-radius:12px;padding:14px 18px;margin:14px 0}
+.actions-list h4{font-size:.78rem;font-weight:700;color:var(--gray-700);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.actions-list .item{display:flex;gap:10px;padding:6px 0;font-size:.86rem;color:var(--gray-700);border-bottom:1px solid var(--gray-100)}
+.actions-list .item:last-child{border-bottom:none}
+.actions-list .item code{flex-shrink:0;font-size:.78rem;background:var(--green-50);color:var(--green-700);padding:2px 8px;border-radius:5px;font-family:'JetBrains Mono',monospace;font-weight:600}
+/* CTA al final */
+.cta-end{background:linear-gradient(135deg,var(--green-50),#D1FAE5);border:2px solid var(--green-300);border-radius:16px;padding:28px 26px;margin:30px 0 20px;text-align:center}
+.cta-end h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;color:var(--green-800);margin-bottom:6px}
+.cta-end p{font-size:.92rem;color:var(--green-700);margin-bottom:16px}
+.cta-end a{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:var(--green-600);color:#fff;border-radius:12px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 14px rgba(5,150,105,.25);transition:all .2s}
+.cta-end a:hover{background:var(--green-700);transform:translateY(-2px)}
+/* Nav entre pasos */
+.step-nav{display:flex;justify-content:space-between;margin-top:30px;padding-top:20px;border-top:2px solid var(--gray-200);gap:10px;flex-wrap:wrap}
+.step-nav a{display:inline-flex;align-items:center;gap:7px;padding:11px 22px;border-radius:10px;text-decoration:none;font-weight:700;font-size:.88rem;background:var(--gray-100);color:var(--gray-700);transition:all .2s}
+.step-nav a:hover{background:var(--gray-200)}
+.step-nav a.next{background:var(--green-600);color:#fff;box-shadow:0 4px 12px rgba(5,150,105,.25)}
+.step-nav a.next:hover{background:var(--green-700)}
+</style>
+<script async src="../shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div class="tut-layout">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html">
+        <div>E</div>
+        Ex&oacute;genaDIAN
+      </a>
+    </div>
+    <div class="sidebar-curso">
+      <h3>Tutorial</h3>
+      <p>Generar la ex&oacute;gena</p>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#intro" class="active"><span class="num">0</span> Antes de empezar</a>
+      <a href="#paso1"><span class="num">1</span> Subir balance</a>
+      <a href="#paso2"><span class="num">2</span> Datos del declarante</a>
+      <a href="#paso3"><span class="num">3</span> Verificar columnas</a>
+      <a href="#paso4"><span class="num">4</span> Clasificaci&oacute;n autom&aacute;tica</a>
+      <a href="#paso5"><span class="num">5</span> Completar terceros</a>
+      <a href="#paso6"><span class="num">6</span> Generar y descargar</a>
+      <a href="#errores"><span class="num">!</span> Advertencias y errores</a>
+      <a href="#siguiente"><span class="num">&rarr;</span> Prevalidador y MUISCA</a>
+    </nav>
+    <div class="sidebar-back">
+      <a href="../tutoriales.html">&larr; Todos los tutoriales</a>
+    </div>
+  </aside>
+  <div class="main">
+    <div class="breadcrumb"><a href="../index.html">Inicio</a> &rsaquo; <a href="../tutoriales.html">Tutoriales</a> &rsaquo; Ex&oacute;gena</div>
+    <span class="tag">Tutorial &middot; ~15 min</span>
+    <h1 class="tut-title">C&oacute;mo generar la informaci&oacute;n ex&oacute;gena en exogenadian.com</h1>
+    <p class="tut-lead">Gu&iacute;a paso a paso para usar la herramienta principal del sitio (<a href="../exogena.html">exogena.html</a>): subir el balance de prueba, verificar el mapeo, revisar la clasificaci&oacute;n autom&aacute;tica, completar los datos de terceros y descargar el Excel con los 10 formatos DIAN listos para el Prevalidador.</p>
+    <section id="intro" class="step">
+      <h2>Antes de empezar &mdash; lista de chequeo</h2>
+      <p>Antes de abrir la herramienta, ten estos elementos a la mano. Te ahorran reabrir el balance varias veces:</p>
+      <ul>
+        <li><strong>Balance de prueba completo del a&ntilde;o gravable</strong> en Excel (.xlsx) o CSV. Debe ser <em>por terceros</em> (con NIT y nombre de cada tercero por movimiento), de enero a diciembre. Lo exportas desde tu software contable: Siigo, World Office, Helisa, Alegra, MidaSoft, Odoo, Simit, etc.</li>
+        <li><strong>NIT y raz&oacute;n social</strong> del cliente que vas a reportar.</li>
+        <li><strong>RUT del cliente</strong> para confirmar tipo (PJ / PN / RST), &uacute;ltimos d&iacute;gitos del NIT y dom&iacute;cilio.</li>
+        <li><strong>Maestro de terceros</strong> con direcciones (la DIAN exige direcci&oacute;n por cada tercero reportado). Si no lo tienes, la herramienta te ayuda a armarlo m&aacute;s adelante.</li>
+        <li><strong>Libro de socios o accionistas</strong> con NIT, % de participaci&oacute;n y aporte (para el F1010).</li>
+      </ul>
+      <div class="tip">
+        <strong>Tip:</strong> si tu balance trae celdas combinadas, encabezados decorativos o filas vac&iacute;as entre secciones (formato "para imprimir"), exporta de nuevo desde el software como <em>"Balance plano"</em> o <em>"Balance simplificado"</em>. La herramienta detecta varios formatos pero los aplana mejor cuando vienen sin ese tipo de adorno.
+      </div>
+      <h3>Tama&ntilde;o m&aacute;ximo y formatos aceptados</h3>
+      <table class="tabla">
+        <thead><tr><th>Aspecto</th><th>L&iacute;mite</th></tr></thead>
+        <tbody>
+          <tr><td>Tipo de archivo</td><td>Excel (.xlsx, .xls) o CSV (.csv)</td></tr>
+          <tr><td>Tama&ntilde;o m&aacute;ximo</td><td>20 MB</td></tr>
+          <tr><td>D&oacute;nde se procesa</td><td>En tu navegador. Los datos no salen de tu computador.</td></tr>
+        </tbody>
+      </table>
+      <div class="mockup">
+        <div class="mockup-bar"><div class="mockup-dots"><span></span><span></span><span></span></div><div class="mockup-url">exogenadian.com/exogena.html</div></div>
+        <div class="mockup-body mockup-body--green">
+          <div class="mockup-overlay"></div>
+          <div class="mockup-modal">
+            <div class="mockup-modal-title">&iexcl;Bienvenido a la generaci&oacute;n de ex&oacute;gena!</div>
+            <div class="mockup-modal-sub">5 pasos para tener tu Excel listo</div>
+            <ul class="mockup-steps">
+              <li><span class="mockup-num">1</span> Subir balance + datos del declarante</li>
+              <li><span class="mockup-num">2</span> Verificar columnas del archivo</li>
+              <li><span class="mockup-num">3</span> Revisar clasificaci&oacute;n autom&aacute;tica</li>
+              <li><span class="mockup-num">4</span> Completar terceros con direcciones</li>
+              <li><span class="mockup-num">5</span> Generar y descargar el Excel</li>
+            </ul>
+            <span class="mockup-btn-primary">Entendido, comenzar &rarr;</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="paso1" class="step">
+      <div class="step-num"><span>1</span> Paso 1</div>
+      <h2>Subir el balance de prueba</h2>
+      <p>Entra a <a href="../exogena.html">exogenadian.com/exogena.html</a>. Ver&aacute;s el modal de bienvenida explicando los 5 pasos &mdash;da clic en <strong>"Entendido, comenzar"</strong> para cerrarlo. Llegas al primer paso: <strong>"Subir y mapear"</strong>.</p>
+      <h3>Hay dos maneras de subir el archivo</h3>
+      <ol>
+        <li><strong>Arrastrar y soltar:</strong> abre la carpeta donde tienes el balance, arrastra el archivo a la zona del <em>drop-zone</em> (la caja con borde discontinuo y &iacute;cono de gr&aacute;fico).</li>
+        <li><strong>Clic en la zona:</strong> haz clic en cualquier parte del drop-zone. Se abre el explorador de archivos. Selecciona el balance y dale "Abrir".</li>
+      </ol>
+      <div class="mockup">
+        <div class="mockup-body">
+          <div class="mockup-grid-2">
+            <div>
+              <div class="mockup-label">Estado inicial</div>
+              <div class="mockup-dropzone"><span class="mockup-dropzone-icon">&#128194;</span>Arrastra tu balance aqu&iacute;<br><span style="font-size:.62rem;color:#9CA3AF">o haz clic para seleccionar</span></div>
+            </div>
+            <div>
+              <div class="mockup-label">Al arrastrar</div>
+              <div class="mockup-dropzone mockup-dropzone--active"><span class="mockup-dropzone-icon">&#128229;</span>Suelta el archivo<br><span style="font-size:.62rem">balance.xlsx</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p>Una vez sube el archivo, la herramienta detecta autom&aacute;ticamente el software contable de origen (Siigo, World Office, Helisa, etc.) y aplana el balance si viene en formato &aacute;rbol jer&aacute;rquico.</p>
+      <div class="tip">
+        <strong>&iquest;Primera vez?</strong> Hay un bot&oacute;n <em>"Descargar archivo de ejemplo"</em> debajo del drop-zone que te entrega un Excel con la estructura esperada. Sirve para entender qu&eacute; columnas debe traer el balance y para hacer una primera prueba sin riesgo.
+      </div>
+      <h3>Software contable que la herramienta reconoce</h3>
+      <table class="tabla">
+        <thead><tr><th>Software</th><th>Detecci&oacute;n</th></tr></thead>
+        <tbody>
+          <tr><td>Siigo</td><td>Encabezados "cuenta puc", "auxiliar", "nit tercero"</td></tr>
+          <tr><td>World Office</td><td>Formato &aacute;rbol con "Total NNNN" o columnas est&aacute;ndar</td></tr>
+          <tr><td>Helisa</td><td>"Cod. Cuenta", "Descripci&oacute;n Cuenta"</td></tr>
+          <tr><td>Alegra</td><td>"Cuenta contable" + "Tercero"</td></tr>
+          <tr><td>MidaSoft</td><td>Encabezado "Codigo Cuenta"</td></tr>
+          <tr><td>Simit (Balance clasificado)</td><td>6 columnas jer&aacute;rquicas por nivel PUC</td></tr>
+          <tr><td>Odoo</td><td>Pares D&eacute;bito/Haber detectados</td></tr>
+          <tr><td>Otro / CSV gen&eacute;rico</td><td>La herramienta intenta autodetectar columnas</td></tr>
+        </tbody>
+      </table>
+      <div class="step-nav">
+        <span></span>
+        <a href="#paso2" class="next">Paso 2: Datos del declarante &rarr;</a>
+      </div>
+    </section>
+    <section id="paso2" class="step">
+      <div class="step-num"><span>2</span> Paso 2</div>
+      <h2>Llenar los datos del declarante</h2>
+      <p>En la misma pantalla del paso 1, debajo del drop-zone aparece la secci&oacute;n <strong>"Datos del Declarante"</strong>. Estos son los datos del cliente al que le est&aacute;s armando la ex&oacute;gena (no los tuyos como contador).</p>
+      <div class="mockup">
+        <div class="mockup-body">
+          <div class="mockup-h">Datos del Declarante</div>
+          <div class="mockup-form">
+            <div><div class="mockup-label">NIT (sin DV)</div><div class="mockup-input">900.123.456</div></div>
+            <div><div class="mockup-label">Raz&oacute;n social</div><div class="mockup-input">Comercial Andina SAS</div></div>
+            <div><div class="mockup-label">A&ntilde;o gravable</div><div class="mockup-input">2025</div></div>
+            <div><div class="mockup-label">Tipo de persona</div><div class="mockup-input">Persona Jur&iacute;dica (31)</div></div>
+            <div class="mockup-form-full"><div class="mockup-label">R&eacute;gimen tributario</div><div class="mockup-input">Ordinario</div></div>
+          </div>
+          <div style="margin-top:10px;text-align:right"><span class="mockup-btn-primary">Confirmar y Procesar &rarr;</span></div>
+        </div>
+      </div>
+      <h3>Campos requeridos</h3>
+      <ul>
+        <li><strong>NIT</strong> (sin DV ni puntos). La herramienta calcula el d&iacute;gito de verificaci&oacute;n autom&aacute;ticamente con el algoritmo M&oacute;dulo 11 de la DIAN.</li>
+        <li><strong>Raz&oacute;n social</strong> tal como aparece en el RUT.</li>
+        <li><strong>A&ntilde;o gravable</strong> (por defecto 2025).</li>
+        <li><strong>Tipo de persona</strong>: Persona Jur&iacute;dica (c&oacute;digo 31) o Persona Natural (c&oacute;digo 13).</li>
+        <li><strong>R&eacute;gimen tributario</strong>: Ordinario, R&eacute;gimen Simple (RST) o ESAL.</li>
+      </ul>
+      <div class="warn">
+        <strong>Si tu cliente es R&eacute;gimen Simple:</strong> al elegir "RST", la herramienta marca todos los pagos del F1001 como "no deducible" autom&aacute;ticamente (por Art. 905 ET, los pagos del Simple no se solicitan como costo o deducci&oacute;n en F110).
+      </div>
+      <p>Los campos de departamento y municipio son opcionales y est&aacute;n colapsados al inicio. Llenarlos solo si los necesitas para el Prevalidador (algunos formatos los requieren).</p>
+      <div class="step-nav">
+        <a href="#paso1">&larr; Paso 1</a>
+        <a href="#paso3" class="next">Paso 3: Verificar columnas &rarr;</a>
+      </div>
+    </section>
+    <section id="paso3" class="step">
+      <div class="step-num"><span>3</span> Paso 3</div>
+      <h2>Verificar las columnas del archivo</h2>
+      <p>Despu&eacute;s de llenar los datos del declarante, da clic en <strong>"Confirmar y Procesar"</strong>. Pasas al paso 2 de la herramienta: <em>"Verificar Columnas del Archivo"</em>. Aqu&iacute; te muestra qu&eacute; entendi&oacute; del balance y te pide confirmar el mapeo. <strong>Es el paso donde m&aacute;s usuarios se quedan</strong>; vale la pena tomarse 1 minuto en revisar.</p>
+      <div class="mockup">
+        <div class="mockup-body mockup-body--gray">
+          <div class="mockup-h">Verificar columnas del archivo</div>
+          <div style="display:flex;gap:6px;align-items:center;margin-bottom:8px"><span class="mockup-label" style="margin:0">Fila de header:</span><span class="mockup-input" style="display:inline-block;width:auto">Fila 1 &#9662;</span></div>
+          <table class="mockup-table">
+            <thead><tr><th>C&oacute;digo <span class="mockup-chip mockup-chip--ok">OK</span></th><th>Nombre <span class="mockup-chip mockup-chip--ok">OK</span></th><th>Saldo final <span class="mockup-chip mockup-chip--warn">Revisar</span></th></tr></thead>
+            <tbody>
+              <tr><td>110505</td><td>Caja general</td><td class="mockup-table-num">2.450.000</td></tr>
+              <tr><td>111005</td><td>Bancolombia ahorros</td><td class="mockup-table-num">18.320.450</td></tr>
+              <tr><td>413505</td><td>Ingresos por ventas</td><td class="mockup-table-num">-385.420.000</td></tr>
+              <tr><td>510505</td><td>Salarios y prestaciones</td><td class="mockup-table-num">96.800.000</td></tr>
+            </tbody>
+          </table>
+          <div style="margin-top:10px;text-align:right"><span class="mockup-btn-secondary" style="margin-right:6px">Cancelar</span><span class="mockup-btn-primary">Confirmar y Procesar &rarr;</span></div>
+        </div>
+      </div>
+      <h3>Las 3 columnas obligatorias y los nombres que reconoce</h3>
+      <p>La herramienta detecta autom&aacute;ticamente las columnas usando los nombres del header. Solo necesita 3 columnas <strong>obligatorias</strong>; las dem&aacute;s son opcionales:</p>
+      <table class="tabla">
+        <thead><tr><th>Columna</th><th>Qu&eacute; busca</th><th>Nombres que reconoce</th></tr></thead>
+        <tbody>
+          <tr><td><strong>C&oacute;digo PUC</strong></td><td>El n&uacute;mero de cuenta</td><td><code>cuenta</code>, <code>codigo</code>, <code>c&oacute;digo</code>, <code>code</code>, <code>account</code></td></tr>
+          <tr><td><strong>Nombre cuenta</strong></td><td>La descripci&oacute;n de la cuenta</td><td><code>nombre</code>, <code>descripcion</code>, <code>nombre cuenta</code>, <code>cuenta contable</code>, <code>description</code></td></tr>
+          <tr><td><strong>Saldo Final</strong></td><td>Saldo neto al cierre del per&iacute;odo</td><td><code>saldo final</code>, <code>saldo total</code>, <code>saldo actual</code>, <code>saldo</code>, <code>final</code></td></tr>
+          <tr><td>D&eacute;bitos (opcional)</td><td>Movimiento d&eacute;bito del per&iacute;odo</td><td><code>debito</code>, <code>d&eacute;bito</code>, <code>debit</code>, <code>movimiento debito</code></td></tr>
+          <tr><td>Cr&eacute;ditos (opcional)</td><td>Movimiento cr&eacute;dito del per&iacute;odo</td><td><code>credito</code>, <code>cr&eacute;dito</code>, <code>credit</code>, <code>movimiento credito</code></td></tr>
+          <tr><td>Saldo Inicial (opcional)</td><td>Saldo de apertura</td><td><code>saldo inicial</code>, <code>saldo anterior</code>, <code>inicial</code></td></tr>
+        </tbody>
+      </table>
+      <div class="tip">
+        <strong>&iquest;Tu balance solo trae D&eacute;bitos y Cr&eacute;ditos (sin Saldo Final)?</strong> No es problema. La herramienta calcula el saldo final autom&aacute;ticamente: para activos, gastos y costos (clases 1, 5, 6, 7) usa <code>D&eacute;bitos &minus; Cr&eacute;ditos + Saldo Inicial</code>; para pasivos, patrimonio e ingresos (clases 2, 3, 4) usa <code>Cr&eacute;ditos &minus; D&eacute;bitos + Saldo Inicial</code>. Lo importante es que est&eacute;n D&eacute;bitos y Cr&eacute;ditos.
+      </div>
+      <h3>Cuando una columna sale en amarillo</h3>
+      <p>Si la herramienta no logr&oacute; identificar una de las 3 obligatorias, aparece un <strong>mapper amarillo</strong> con un dropdown por cada columna pendiente. Tu trabajo:</p>
+      <ol>
+        <li>Mira el preview (las 15 primeras filas) para ver qu&eacute; columna del Excel contiene cada dato.</li>
+        <li>Abre el dropdown amarillo y selecciona la columna correcta de la lista.</li>
+        <li>Cuando las 3 quedan en verde, el bot&oacute;n <em>"Confirmar y Procesar"</em> se habilita.</li>
+      </ol>
+      <div class="warn">
+        <strong>Si NINGUNA columna del Excel sirve:</strong> probablemente el balance no trae Saldo Final ni el par D&eacute;bito/Cr&eacute;dito. Vuelve al software contable y exporta de nuevo pidiendo <em>"Balance de prueba est&aacute;ndar"</em> o <em>"Balance plano"</em>. Algunos formatos resumidos no traen los movimientos completos.
+      </div>
+      <h3>Casos t&iacute;picos donde el mapeo se equivoca</h3>
+      <ul>
+        <li><strong>Doble cabecera</strong> (fila 1 con grupos &mdash;"Movimientos", "Saldos"&mdash; y fila 2 con sub-encabezados): el detector elige la fila 1 y queda todo amarillo. <strong>Soluci&oacute;n:</strong> usa el dropdown <em>"Fila de header"</em> y elige manualmente la fila 2.</li>
+        <li><strong>Filas decorativas arriba</strong> (logo de la empresa, t&iacute;tulo "BALANCE DE PRUEBA", per&iacute;odo, NIT): mismo arreglo, mover la fila de header a la l&iacute;nea correcta.</li>
+        <li><strong>Header en ingl&eacute;s</strong> ("Account", "Description", "Balance"): la herramienta los reconoce. Si igual queda amarillo, mapea con el dropdown.</li>
+        <li><strong>Ambig&uuml;edad "Saldo" vs "Saldo Total" vs "Saldo a&ntilde;o anterior"</strong>: revisa el preview y confirma que la columna marcada corresponde al cierre del a&ntilde;o gravable, no del a&ntilde;o anterior.</li>
+        <li><strong>Celdas combinadas en el header</strong>: aparecen como vac&iacute;as al lado. Lo m&aacute;s f&aacute;cil es abrir el Excel, descombinar (Inicio &rarr; Combinar y centrar &rarr; quitar) y volver a subir.</li>
+        <li><strong>Columna vac&iacute;a al inicio</strong> (col A en blanco): la herramienta la ignora. Si por error toma la columna equivocada, mapea con el dropdown.</li>
+      </ul>
+      <h3>Antes de dar "Confirmar y Procesar"</h3>
+      <ul>
+        <li>Las 3 columnas obligatorias est&aacute;n en verde.</li>
+        <li>En el preview, los <strong>n&uacute;meros</strong> est&aacute;n en la columna que la herramienta marc&oacute; como Saldo Final (o D&eacute;bito/Cr&eacute;dito).</li>
+        <li>Los <strong>c&oacute;digos PUC</strong> arrancan con d&iacute;gito (1xxx, 2xxx, ...). Si ves texto donde deber&iacute;a haber c&oacute;digo, la fila de header est&aacute; mal.</li>
+        <li>La cantidad de filas detectadas es similar al balance original (ni el doble ni la mitad).</li>
+      </ul>
+      <p>Cuando todo est&eacute; OK, da clic en <strong>"Confirmar y Procesar &rarr;"</strong>.</p>
+      <div class="step-nav">
+        <a href="#paso2">&larr; Paso 2</a>
+        <a href="#paso4" class="next">Paso 4: Clasificaci&oacute;n &rarr;</a>
+      </div>
+    </section>
+    <section id="paso4" class="step">
+      <div class="step-num"><span>4</span> Paso 4</div>
+      <h2>Revisar la clasificaci&oacute;n autom&aacute;tica</h2>
+      <p>El siguiente paso de la herramienta es <strong>"Clasificaci&oacute;n por Formato"</strong>. La herramienta toma cada cuenta del balance y la clasifica autom&aacute;ticamente en su formato DIAN correspondiente seg&uacute;n el c&oacute;digo PUC. Aqu&iacute; tu rol como contador es <strong>revisar y corregir lo que no haya quedado bien</strong>.</p>
+      <div class="mockup">
+        <div class="mockup-body mockup-body--gray">
+          <div class="mockup-h">Clasificaci&oacute;n autom&aacute;tica por formato DIAN</div>
+          <div class="mockup-stats">
+            <div class="mockup-stat"><div class="mockup-stat-num">428</div><div class="mockup-stat-lbl">Cuentas</div></div>
+            <div class="mockup-stat"><div class="mockup-stat-num" style="color:#047857">412</div><div class="mockup-stat-lbl">Clasificadas</div></div>
+            <div class="mockup-stat"><div class="mockup-stat-num" style="color:#92400E">16</div><div class="mockup-stat-lbl">Sin clasif.</div></div>
+            <div class="mockup-stat"><div class="mockup-stat-num">10</div><div class="mockup-stat-lbl">Formatos</div></div>
+          </div>
+          <table class="mockup-table">
+            <thead><tr><th>Cuenta</th><th>Nombre</th><th>Saldo</th><th>Formato</th></tr></thead>
+            <tbody>
+              <tr><td>413505</td><td>Ingresos ventas</td><td class="mockup-table-num">385.420.000</td><td><span class="mockup-badge">F1007</span></td></tr>
+              <tr><td>510505</td><td>Salarios</td><td class="mockup-table-num">96.800.000</td><td><span class="mockup-badge">F2276</span></td></tr>
+              <tr><td>513505</td><td>Servicios</td><td class="mockup-table-num">42.150.000</td><td><span class="mockup-badge">F1001</span></td></tr>
+              <tr><td>2408</td><td>IVA generado</td><td class="mockup-table-num">73.230.000</td><td><span class="mockup-badge">F1006</span></td></tr>
+              <tr><td>5995</td><td>Cuenta no est&aacute;ndar</td><td class="mockup-table-num">125.000</td><td><span class="mockup-badge mockup-badge--warn">Revisar</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <h3>Mapeo PUC &rarr; Formato DIAN</h3>
+      <table class="tabla">
+        <thead><tr><th>Cuentas PUC</th><th>Formato DIAN</th></tr></thead>
+        <tbody>
+          <tr><td><code>4XXX</code> Ingresos</td><td>F1007 Ingresos</td></tr>
+          <tr><td><code>5XXX</code> Gastos / <code>6XXX</code> Costos</td><td>F1001 Pagos a terceros</td></tr>
+          <tr><td><code>1355XX</code> Anticipo retenciones</td><td>F1003 Retenciones que le practicaron</td></tr>
+          <tr><td><code>2367XX, 2368XX</code> IVA descontable</td><td>F1005 IVA descontable</td></tr>
+          <tr><td><code>2408XX</code> IVA generado</td><td>F1006 IVA generado</td></tr>
+          <tr><td><code>13XX</code> Cartera</td><td>F1008 CxC al 31-12</td></tr>
+          <tr><td><code>22XX, 23XX</code> Proveedores y acreedores</td><td>F1009 CxP al 31-12</td></tr>
+          <tr><td><code>11XX, 12XX</code> Bancos e inversiones</td><td>F1012 Bancos</td></tr>
+          <tr><td><code>31XX, 32XX</code> Capital y reservas</td><td>F1010 Socios</td></tr>
+          <tr><td><code>5105XX</code> Salarios</td><td>F2276 Rentas de trabajo</td></tr>
+        </tbody>
+      </table>
+      <h3>Cuentas sin clasificar</h3>
+      <p>Si la herramienta no logr&oacute; asignar formato a alguna cuenta, aparece en la secci&oacute;n <em>"Sin clasificar"</em>. Tienes dos opciones:</p>
+      <ol>
+        <li><strong>Editar manualmente</strong> en la tabla: cada fila tiene un dropdown donde eliges el formato y concepto DIAN.</li>
+        <li><strong>Descargar Excel offline, clasificar en bloque y volver a subir:</strong> el bot&oacute;n <em>"Descargar Excel offline"</em> te da un archivo con todas las cuentas pendientes; despu&eacute;s lo cargas con <em>"Subir Excel clasificado"</em>.</li>
+      </ol>
+      <div class="tip">
+        <strong>Bot&oacute;n "&#128270; Revisar con IA":</strong> si tienes muchas cuentas dudosas, la herramienta env&iacute;a SOLO el c&oacute;digo y nombre de la cuenta (sin NITs, sin terceros, sin valores) a una IA para que sugiera el formato. Es opcional. La IA no almacena ni entrena con los datos.
+      </div>
+      <div class="step-nav">
+        <a href="#paso3">&larr; Paso 3</a>
+        <a href="#paso5" class="next">Paso 5: Completar terceros &rarr;</a>
+      </div>
+    </section>
+    <section id="paso5" class="step">
+      <div class="step-num"><span>5</span> Paso 5</div>
+      <h2>Completar los datos de terceros</h2>
+      <p>La DIAN exige que cada tercero reportado incluya direcci&oacute;n y separaci&oacute;n entre apellidos y nombres (para personas naturales). La herramienta abre la secci&oacute;n <strong>"Completar Datos de Terceros"</strong> con todos los NITs detectados.</p>
+      <div class="mockup">
+        <div class="mockup-body">
+          <div class="mockup-h">Completar Datos de Terceros</div>
+          <table class="mockup-table">
+            <thead><tr><th>NIT</th><th>Tipo</th><th>Nombre / Raz&oacute;n</th><th>Direcci&oacute;n</th><th>Ciudad</th></tr></thead>
+            <tbody>
+              <tr><td>800197268</td><td><span class="mockup-badge">NIT</span></td><td>DIAN</td><td>CRA 8 #6-64</td><td>BOGOT&Aacute;</td></tr>
+              <tr><td>890903938</td><td><span class="mockup-badge">NIT</span></td><td>Bancolombia S.A.</td><td>CARRERA 48 #26-85</td><td>MEDELL&Iacute;N</td></tr>
+              <tr><td>1023456789</td><td><span class="mockup-badge">CC</span></td><td>P&Eacute;REZ G&Oacute;MEZ JUAN CARLOS</td><td style="color:#9CA3AF">&mdash; faltante &mdash;</td><td style="color:#9CA3AF">&mdash;</td></tr>
+              <tr><td>900456123</td><td><span class="mockup-badge">NIT</span></td><td>Servicios Andinos SAS</td><td>CL 100 #15-23</td><td>BOGOT&Aacute;</td></tr>
+              <tr><td>52345678</td><td><span class="mockup-badge mockup-badge--warn">CC?</span></td><td style="color:#9CA3AF">&mdash; faltante &mdash;</td><td style="color:#9CA3AF">&mdash;</td><td style="color:#9CA3AF">&mdash;</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <h3>Tres maneras de llenar los terceros</h3>
+      <ol>
+        <li><strong>Carga autom&aacute;tica:</strong> la herramienta ya conoce NITs comunes (DIAN 800.197.268, Bancolombia, BBVA, EPS, SENA, etc.) y los autocompleta. No tienes que hacer nada con esos.</li>
+        <li><strong>Subir maestro de terceros:</strong> bot&oacute;n <em>"Subir maestro"</em> &mdash;si tienes un Excel con NIT + apellidos + nombres + direcci&oacute;n, lo cargas y la herramienta los completa de una.</li>
+        <li><strong>Llenar manualmente</strong> los que falten directamente en la tabla.</li>
+      </ol>
+      <div class="actions-list">
+        <h4>Botones &uacute;tiles de esta secci&oacute;n</h4>
+        <div class="item"><code>Descargar plantilla</code> Excel pre-formateado con los NITs detectados, listo para llenar apellidos/nombres y subirlo de vuelta.</div>
+        <div class="item"><code>&#8645; Invertir nombres/apellidos</code> Si tu archivo viene en orden NOMBRES APELLIDOS, este bot&oacute;n los voltea de un click.</div>
+        <div class="item"><code>Exportar lista</code> Descarga CSV con todos los terceros como respaldo.</div>
+      </div>
+      <h3>Tipo de documento del tercero</h3>
+      <p>La herramienta detecta autom&aacute;ticamente si es CC (persona natural colombiana) o NIT (jur&iacute;dica). Si tienes terceros con CE, PEP, PPT o pasaporte, hay un buscador NIT donde los marcas manualmente.</p>
+      <h3>F1010 &mdash; Socios y accionistas</h3>
+      <p>Si el cliente es PJ, hay una secci&oacute;n adicional para llenar la tabla de socios/accionistas: NIT, nombre, % de participaci&oacute;n y aporte. Recuerda que para AG 2025 ya no hay tope de $3M &mdash;debes reportar a TODOS los socios sin importar el monto.</p>
+      <div class="actions-list">
+        <h4>Botones de la tabla F1010</h4>
+        <div class="item"><code>&#10133; A&ntilde;adir socio</code> Agrega una nueva fila.</div>
+        <div class="item"><code>&#9878; Recalcular % proporcional</code> Distribuye el 100% en proporci&oacute;n al aporte.</div>
+        <div class="item"><code>Vaciar tabla</code> Borra todos los socios para empezar de cero.</div>
+      </div>
+      <h3 style="margin-top:28px">F2276 &mdash; Rentas de trabajo (detalle por empleado)</h3>
+      <p>El balance no alcanza para llenar el F2276 completo. Detecta salarios, prestaciones, otros pagos, cesant&iacute;as y retenci&oacute;n en la fuente, pero <strong>no extrae los aportes 4% Salud / 4% Pensi&oacute;n del trabajador</strong> (esos no quedan en el balance, salen del recibo de n&oacute;mina o de la planilla PILA). En la card del F2276 del paso 3 tienes tres v&iacute;as para completar:</p>
+      <div class="actions-list">
+        <h4>3 opciones para llenar el F2276</h4>
+        <div class="item"><code>&#11088; M&aacute;s preciso</code> <strong>Cargar n&oacute;mina anual / liquidaci&oacute;n por empleado.</strong> Cualquier Excel con los headers oficiales DIAN del F2276 (&ldquo;Salarios&rdquo;, &ldquo;Prestaciones&rdquo;, &ldquo;Cesant&iacute;as consignadas&rdquo;, &ldquo;Aporte salud&rdquo;, &ldquo;Aporte pensi&oacute;n&rdquo;, etc.). El parser detecta encabezados autom&aacute;ticamente y reemplaza el c&aacute;lculo del balance con los datos exactos.</div>
+        <div class="item"><code>&#128229; Intermedio</code> <strong>Descargar plantilla con empleados pre-llenados.</strong> Te bajamos un Excel con todos los empleados detectados (salarios, prestaciones, cesant&iacute;as, retfte). Llenas en Excel solo las columnas faltantes (aportes 4% y voluntarios) y la subes con la opci&oacute;n &#11088;.</div>
+        <div class="item"><code>&#129689; Solo cesant&iacute;as</code> <strong>Cargar planilla del fondo (Porvenir, Protecci&oacute;n, Colfondos).</strong> Si el balance tiene la cuenta 2510 sin NIT del trabajador, las cesant&iacute;as del F2276 quedan como estimaci&oacute;n. Esta planilla sobrescribe SOLO las columnas 24/25/26 (Pagadas, Consignadas, R&eacute;gimen tradicional) por NIT &mdash; el resto del F2276 se conserva.</div>
+      </div>
+      <div class="tip">
+        <strong>&#128274; Importante &mdash; flujo conceptual:</strong> el <strong>Certificado de Ingresos y Retenciones (Formulario 220)</strong> que entregas a cada trabajador en marzo se genera <em>a partir de</em> la n&oacute;mina y del F2276, <strong>no al rev&eacute;s</strong>. Si todav&iacute;a no has emitido los F220, no los necesitas como input ac&aacute; &mdash; basta el reporte de n&oacute;mina del a&ntilde;o o la planilla PILA. Para generar los F220 individuales, usa la herramienta dedicada <a href="../formato220.html" style="color:var(--green-700);font-weight:700;text-decoration:underline">Formulario 220</a> despu&eacute;s de cerrar la ex&oacute;gena.
+      </div>
+      <h4 style="margin:18px 0 8px;font-size:.98rem;font-weight:700;color:var(--gray-800)">Regla temporal de cesant&iacute;as (cols 24-26 del F2276)</h4>
+      <p>La forma en que se reportan las cesant&iacute;as confunde porque <strong>la columna depende de qui&eacute;n recibi&oacute; el dinero y cu&aacute;ndo</strong>, no del a&ntilde;o en que se causaron:</p>
+      <table class="tabla">
+        <thead>
+          <tr><th>Columna</th><th>Qu&eacute; va ah&iacute;</th><th>De d&oacute;nde sale</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Col 24</strong><br>Cesant&iacute;as e intereses <strong>PAGADAS</strong></td>
+            <td>Lo que el empleador <em>desembols&oacute; al trabajador en efectivo durante 2025</em>: cesant&iacute;as de 2024 retiradas por anticipo (vivienda/educaci&oacute;n) + <strong>intereses a las cesant&iacute;as de 2024 pagados a m&aacute;s tardar el 31-ene-2025</strong>.</td>
+            <td>Comprobantes de retiro del fondo + n&oacute;mina enero (intereses)</td>
+          </tr>
+          <tr>
+            <td><strong>Col 25</strong><br>Cesant&iacute;as <strong>CONSIGNADAS</strong> al fondo</td>
+            <td>Las causadas durante 2025 que se consignan al fondo (Porvenir, Protecci&oacute;n, Colfondos, Skandia) <strong>a m&aacute;s tardar el 14-feb-2026</strong>. De aqu&iacute; salen las cifras de la <em>planilla del fondo</em>.</td>
+            <td>Planilla de consignaci&oacute;n del fondo</td>
+          </tr>
+          <tr>
+            <td><strong>Col 26</strong><br>R&eacute;gimen tradicional (Ley 1990)</td>
+            <td>Trabajadores que NO se pasaron a Ley 50/1990 (vinculados antes del 1-ene-1991 y firmaron quedarse). Cesant&iacute;as acumuladas sin consignar a fondo. <em>Caso raro.</em></td>
+            <td>Provisi&oacute;n contable del empleador (no se consigna a fondo)</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="warn">
+        <strong>Regla mnemot&eacute;cnica:</strong> si el dinero lo <em>recibi&oacute; el trabajador</em> en 2025 &rarr; col 24. Si el dinero lo <em>consign&oacute; el empleador al fondo</em> (incluye lo de 2025 consignado en feb-2026) &rarr; col 25. El balance suele tener la cuenta 2510 (cesant&iacute;as por pagar) <strong>sin NIT del trabajador</strong>, por eso la planilla del fondo es el input m&aacute;s preciso.
+      </div>
+      <h4 style="margin:18px 0 8px;font-size:.98rem;font-weight:700;color:var(--gray-800)">Tabla de revisi&oacute;n antes de descargar</h4>
+      <p>En el paso 6 (Descargar), arriba del bot&oacute;n del Excel, aparece el card <em>&ldquo;Revisar F2276 antes de descargar&rdquo;</em>. Es una tabla por empleado con columnas agrupadas (pagos, cesant&iacute;as, aportes 4%, retenci&oacute;n, total bruto) y <strong>sem&aacute;foro rojo en las celdas de Aporte 4% Salud o Pensi&oacute;n que est&eacute;n en $0</strong> cuando el empleado s&iacute; tiene salarios &mdash; eso suele ser una omisi&oacute;n.</p>
+      <p>Cada celda num&eacute;rica es editable inline: si encuentras una cifra mal, la corriges directo en la tabla y el cambio se refleja en el Excel descargable. El total bruto (col 28) se recalcula autom&aacute;ticamente.</p>
+      <div class="step-nav">
+        <a href="#paso4">&larr; Paso 4</a>
+        <a href="#paso6" class="next">Paso 6: Generar y descargar &rarr;</a>
+      </div>
+    </section>
+    <section id="paso6" class="step">
+      <div class="step-num"><span>6</span> Paso 6</div>
+      <h2>Generar el Excel y descargar</h2>
+      <p>Cuando tengas todo revisado, da clic en <strong>"Generar y continuar &rarr;"</strong>. Pasas al paso final: <em>"Descargar Formatos"</em>.</p>
+      <div class="mockup">
+        <div class="mockup-body" style="text-align:center;padding:24px 18px">
+          <div class="mockup-h" style="margin-bottom:4px">&#128202; Listo para descargar</div>
+          <div class="mockup-sub">Excel con los 10 formatos DIAN para el Prevalidador</div>
+          <span class="mockup-btn-primary" style="font-size:.82rem;padding:9px 22px">Descargar Excel con los 10 Formatos</span>
+          <div style="margin-top:8px;font-size:.66rem;color:#6B7280">Exogena_900123456_2025.xlsx &middot; ~1.2 MB</div>
+        </div>
+      </div>
+      <h3>Versi&oacute;n gratis vs PRO</h3>
+      <table class="tabla">
+        <thead><tr><th>Versi&oacute;n</th><th>Qu&eacute; descarga</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Gratis</strong></td><td>3 formatos: F1003, F1007 y F2276</td></tr>
+          <tr><td><strong>PRO</strong> ($49.900/mes)</td><td>Excel completo con los 10 formatos: F1001, F1003, F1005, F1006, F1007, F1008, F1009, F1010, F1012, F2276 + portada y validaciones</td></tr>
+        </tbody>
+      </table>
+      <p>El archivo se llama <code>Exogena_[NIT]_[A&ntilde;o].xlsx</code> y trae una hoja por formato. Cada hoja tiene el formato exacto que pide el Prevalidador V9 de la DIAN.</p>
+      <div class="warn">
+        <strong>Antes de transmitir:</strong> el Excel descargado es un <em>borrador</em>. Como contador, abre cada hoja y revisa fila por fila. Especialmente: NITs con DV correcto, terceros con direcci&oacute;n completa, totales que cuadren con el balance, y los cruces (F1003 contra cuenta 1355, F1007 contra ingresos del F110, F1006 contra IVA generado del F300, etc.).
+      </div>
+      <div class="step-nav">
+        <a href="#paso5">&larr; Paso 5</a>
+        <a href="#errores" class="next">Errores comunes &rarr;</a>
+      </div>
+    </section>
+    <section id="errores" class="step">
+      <h2>Qu&eacute; hacer ante cada advertencia o error</h2>
+      <p>Gu&iacute;a completa por momento: al <strong>cargar el balance</strong>, al <strong>mapear y clasificar</strong>, al <strong>completar terceros</strong> y al <strong>generar el Excel</strong>. La advertencia que m&aacute;s confunde &mdash;y la que m&aacute;s rechaza el Prevalidador&mdash; es la de <strong>terceros incompletos</strong>; rev&iacute;sala con calma.</p>
+      <h3>1) Al cargar el balance</h3>
+      <table class="tabla">
+        <thead><tr><th>Mensaje</th><th>Causa</th><th>Qu&eacute; hacer</th></tr></thead>
+        <tbody>
+          <tr><td><strong>&laquo;El archivo parece vac&iacute;o o no contiene datos suficientes&raquo;</strong></td><td>Balance sin filas con c&oacute;digo PUC, o exportado con filtros activos.</td><td>Vuelve al software, quita filtros, expande los grupos jer&aacute;rquicos y exporta de nuevo.</td></tr>
+          <tr><td><strong>&laquo;Formato no soportado: .xlsm&raquo;</strong> (o similar)</td><td>Archivo con macros u otro formato.</td><td>Solo <code>.xlsx</code>, <code>.xls</code>, <code>.csv</code>. Abre en Excel y &laquo;Guardar como&raquo; libro normal.</td></tr>
+          <tr><td><strong>&laquo;El archivo excede 20 MB&raquo;</strong></td><td>Balance muy pesado.</td><td>Exp&oacute;rtalo como CSV (pesa ~70% menos) o div&iacute;delo por periodo.</td></tr>
+          <tr><td><strong>&laquo;Balance del a&ntilde;o incompleto&raquo;</strong></td><td>Trae solo unos meses.</td><td>Necesita el a&ntilde;o gravable completo (enero&ndash;diciembre). Exporta el rango entero.</td></tr>
+          <tr><td><strong>&laquo;Registros en moneda extranjera&raquo;</strong></td><td>Saldos en USD/EUR.</td><td>Convierte a COP con la TRM de cierre del a&ntilde;o gravable antes de exportar.</td></tr>
+        </tbody>
+      </table>
+      <h3>2) Al mapear columnas y clasificar</h3>
+      <table class="tabla">
+        <thead><tr><th>Mensaje</th><th>Causa</th><th>Qu&eacute; hacer</th></tr></thead>
+        <tbody>
+          <tr><td><strong>&laquo;Falta asignar la columna: &hellip;&raquo;</strong></td><td>Una columna obligatoria (Cuenta, NIT, D&eacute;bito, Cr&eacute;dito&hellip;) qued&oacute; sin mapear.</td><td>En el Paso 3, abre el dropdown de esa columna y sel&eacute;ccionala manualmente.</td></tr>
+          <tr><td><strong>Columnas en amarillo</strong></td><td>El header no era est&aacute;ndar; se asign&oacute; por el tipo de datos.</td><td>Verifica esas columnas en el preview. La columna <strong>Saldo Final</strong> es opcional pero recomendada para F1008/1009/1010/1012.</td></tr>
+          <tr><td><strong>Todas las columnas en amarillo / header no detectado</strong></td><td>Celdas combinadas o filas decorativas arriba.</td><td>Elige manualmente la fila de header con el dropdown.</td></tr>
+          <tr><td><strong>Cuentas que &laquo;no aplican&raquo; (clase 3, cuentas de orden)</strong></td><td>Patrimonio y cuentas de orden generalmente no van en exógena.</td><td>Es informativo y correcto. No las fuerces a un formato; rev&iacute;salo solo si esperabas reportar alguna.</td></tr>
+        </tbody>
+      </table>
+      <h3>3) Al completar terceros &mdash; lo m&aacute;s importante</h3>
+      <div class="warn">
+        <strong>&laquo;Terceros sin direcci&oacute;n&raquo; / sin apellidos separados.</strong> La DIAN exige <strong>direcci&oacute;n</strong> para cada tercero en casi todos los formatos, y para personas naturales (c&eacute;dula) exige <strong>apellidos y nombres separados</strong>, no todo en raz&oacute;n social. La herramienta autocompleta los terceros conocidos (bancos, EPS, DIAN, etc.) y te marca los que faltan.
+        <ul style="margin:8px 0 0 20px">
+          <li>Usa el filtro <strong>&laquo;sin direcci&oacute;n&raquo;</strong> para ver solo los pendientes y compl&eacute;talos.</li>
+          <li>Para personas naturales, separa <strong>primer/segundo apellido y nombres</strong> &mdash;no dejes el nombre completo en raz&oacute;n social.</li>
+          <li>Si dejas terceros sin direcci&oacute;n, el Excel se genera igual pero el <strong>Prevalidador de la DIAN lo rechazar&aacute;</strong>.</li>
+        </ul>
+      </div>
+      <table class="tabla">
+        <thead><tr><th>Mensaje</th><th>Qu&eacute; hacer</th></tr></thead>
+        <tbody>
+          <tr><td><strong>&laquo;Ingresa el NIT del tercero&raquo;</strong></td><td>Est&aacute;s agregando un tercero manual sin NIT. Escribe el NIT antes de guardarlo.</td></tr>
+          <tr><td><strong>NITs con &laquo;[VERIFICAR DV]&raquo; en la salida</strong></td><td>El d&iacute;gito de verificaci&oacute;n no cuadra con el M&oacute;dulo 11 de la DIAN. Revisa el NIT en el RUT del tercero y corr&iacute;gelo antes de regenerar.</td></tr>
+        </tbody>
+      </table>
+      <h3>4) Al generar / despu&eacute;s del Excel</h3>
+      <table class="tabla">
+        <thead><tr><th>S&iacute;ntoma</th><th>Qu&eacute; hacer</th></tr></thead>
+        <tbody>
+          <tr><td><strong>&laquo;Error al leer el archivo&raquo;</strong></td><td>Archivo corrupto o protegido. &Aacute;brelo en Excel, qu&iacute;tale la protecci&oacute;n y gu&aacute;rdalo de nuevo.</td></tr>
+          <tr><td><strong>El Prevalidador V9 rechaza el XML</strong></td><td>Casi siempre terceros sin direcci&oacute;n o NIT con DV malo. Vuelve a la tabla de terceros, corrige lo que el Prevalidador indique y reprocesa.</td></tr>
+          <tr><td><strong>&laquo;Exa est&aacute; apagado&raquo;</strong></td><td>El asistente se desactiv&oacute; en ese navegador. Reactívalo agregando <code>?exa=on</code> a la URL.</td></tr>
+        </tbody>
+      </table>
+      <div class="tip">
+        <strong>Regla general:</strong> el orden que evita el 90% de los rechazos del MUISCA es &mdash; (1) balance completo del a&ntilde;o, (2) columnas bien mapeadas, (3) <strong>todos los terceros con direcci&oacute;n y NIT v&aacute;lido</strong>, (4) generar y pasar por el Prevalidador. La mayor&iacute;a de errores del Prevalidador son terceros incompletos, no la clasificaci&oacute;n.
+      </div>
+    </section>
+    <section id="siguiente" class="step">
+      <h2>&iquest;Y despu&eacute;s del Excel?</h2>
+      <p>El Excel descargado es la base. Para llegar al MUISCA hay tres pasos m&aacute;s:</p>
+      <ol>
+        <li><strong>Pas&aacute;rselo al Prevalidador V9 de la DIAN.</strong> Es la herramienta oficial que convierte el Excel en XML. La descargas de muisca.dian.gov.co. Si arroja errores, vuelves al Excel, corriges, y reprocesas.</li>
+        <li><strong>Subir el XML al MUISCA.</strong> Entras al portal con la firma electr&oacute;nica del cliente, vas a <em>Diligenciar / Presentar &rarr; Informaci&oacute;n por env&iacute;o de archivos</em>, eliges el formato y cargas el XML.</li>
+        <li><strong>Recibir el acuse.</strong> El MUISCA te genera un acuse por cada formato presentado. Descarga el PDF y g&uaacute;rdalo en la carpeta del cliente como soporte.</li>
+      </ol>
+      <div class="cta-end">
+        <h3>Abrir la herramienta de ex&oacute;gena</h3>
+        <p>Listo para arrancar con un cliente real. Si te perdiste en alg&uacute;n paso, vuelves a este tutorial.</p>
+        <a href="../exogena.html">Ir a exogena.html &rarr;</a>
+      </div>
+      <div class="cta-end" style="background:linear-gradient(135deg,#FFFBEB,#FEF3C7);border-color:#FDE68A">
+        <h3 style="color:var(--amber-800)">&iquest;Quieres entender la normativa?</h3>
+        <p style="color:var(--amber-700)">Si necesitas profundizar en el Estatuto Tributario, la Resoluci&oacute;n 000227/2025, los conceptos DIAN o las sanciones del Art. 651, ah&iacute; vive el contenido normativo.</p>
+        <a href="../escuela/exogena.html" style="background:#92400E">Ir al curso normativo &rarr;</a>
+      </div>
+      <div class="step-nav">
+        <a href="#errores">&larr; Errores comunes</a>
+        <a href="../tutoriales.html" class="next">Volver a Tutoriales &rarr;</a>
+      </div>
+    </section>
+  </div>
+</div>
+<script>
+// Highlight de la sección activa en sidebar al hacer scroll
+(function(){
+  var links = document.querySelectorAll('.sidebar-nav a');
+  var sections = Array.from(links).map(function(a){ var id = a.getAttribute('href').replace('#',''); return document.getElementById(id); }).filter(Boolean);
+  function update(){
+    var y = window.scrollY + 80;
+    var current = sections[0];
+    sections.forEach(function(s){ if(s && s.offsetTop <= y) current = s; });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if(current){
+      var match = document.querySelector('.sidebar-nav a[href="#'+current.id+'"]');
+      if(match) match.classList.add('active');
+    }
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  update();
+})();
+</script>
+</body>
+</html>

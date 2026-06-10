@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script src="shared/version.js?v=37605021"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S7SM6ST4CC');
+</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#1B3A5C">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditor de Cruces DIAN — Anticipa requerimientos antes de que lleguen | ExógenaDIAN</title>
+<meta name="description" content="Sube tu declaración de renta (F110), IVA (F300), el reporte de terceros, la facturación electrónica y el balance. La herramienta corre los mismos cruces que hace la DIAN y te muestra dónde podrías recibir un requerimiento, con checklist de soportes y borrador de respuesta.">
+<meta name="keywords" content="cruces DIAN, requerimiento DIAN corregir renta, oficio persuasivo, inconsistencias declaración renta, ingresos renta vs IVA, costos no soportados exógena, auditoría tributaria, prevenir requerimiento DIAN">
+<link rel="canonical" href="https://exogenadian.com/auditor-cruces-dian.html">
+<meta property="og:title" content="Auditor de Cruces DIAN — Anticipa el requerimiento | ExógenaDIAN">
+<meta property="og:description" content="Corre los mismos cruces que la DIAN sobre tus declaraciones, exógena y balance. Detecta inconsistencias, te da checklist de soportes y borrador de respuesta.">
+<meta property="og:url" content="https://exogenadian.com/auditor-cruces-dian.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="ExógenaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index, follow">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Auditor de Cruces DIAN","url":"https://exogenadian.com/auditor-cruces-dian.html","description":"Corre los mismos cruces de fiscalización que la DIAN sobre la declaración de renta, IVA, exógena de terceros, facturación electrónica y balance, para anticipar requerimientos.","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"COP"},"author":{"@type":"Organization","name":"ExógenaDIAN","url":"https://exogenadian.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+  {"@type":"Question","name":"¿Qué cruces hace la DIAN para enviar un requerimiento?","acceptedAnswer":{"@type":"Answer","text":"La DIAN compara los ingresos de renta contra los del IVA, contra la facturación electrónica y contra lo que reportan terceros en exógena; los costos contra la facturación electrónica recibida, la nómina y la exógena; las consignaciones bancarias contra los ingresos; las retenciones declaradas contra las reportadas; y el patrimonio contra los activos informados. Esta herramienta corre todos esos cruces sobre tus propios archivos."}},
+  {"@type":"Question","name":"¿Por qué los ingresos de IVA no coinciden con los de renta?","acceptedAnswer":{"@type":"Answer","text":"Hay diferencias legítimas: ingresos no gravados con IVA (financieros, dividendos), exportaciones, diferencias de causación, y casos de base gravable especial AIU donde se reporta mal el valor del contrato como excluido. La herramienta identifica la causa probable de la diferencia."}},
+  {"@type":"Question","name":"¿La herramienta lee el PDF de la declaración?","acceptedAnswer":{"@type":"Answer","text":"Sí. Lee el PDF oficial del formulario 110 y 300 de la DIAN y extrae las casillas automáticamente con un algoritmo, no con IA. Siempre puedes confirmar o corregir las cifras antes de cruzar."}}
+]}
+</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js" integrity="sha384-Pqp51FUN2/qzfxZxBCtF0stpc9ONI6MYZpVqmo8m20SoaQCzf+arZvACkLkirlPz" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--green:#0f766e;--green2:#d1fae5;--red:#b91c1c;--red2:#fee2e2;--amber:#b45309;--amber2:#fef3c7;--border:#e2e8f0;--radius:12px;--shadow:0 2px 12px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+.container{max-width:1080px;margin:0 auto;padding:20px}
+a{color:var(--pri2)}
+.hero{background:linear-gradient(135deg,#0f2235 0%,#1B3A5C 55%,#2E75B6 100%);padding:34px 32px;border-radius:18px;margin-bottom:22px;color:#fff}
+.hero h1{font-size:1.85rem;font-weight:700;line-height:1.2;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.hero .tag{background:rgba(255,255,255,.14);padding:3px 12px;border-radius:8px;font-size:.72rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+.hero p{opacity:.9;font-size:1rem;margin-top:12px;max-width:760px}
+.hero .pro-pill{display:inline-flex;align-items:center;gap:6px;background:#fbbf24;color:#3b2a00;font-weight:700;font-size:.72rem;padding:4px 10px;border-radius:20px;margin-left:6px}
+.intro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:22px}
+.intro-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow)}
+.intro-card .n{font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:600;color:var(--pri2)}
+.intro-card .t{font-size:.82rem;color:var(--muted);margin-top:2px}
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:22px;margin-bottom:18px;box-shadow:var(--shadow)}
+.card-title{font-size:1.1rem;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.card-sub{font-size:.86rem;color:var(--muted);margin-bottom:16px}
+.dz-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:720px){.dz-grid{grid-template-columns:1fr}.hero h1{font-size:1.45rem}}
+.dz{border:2px dashed var(--border);border-radius:var(--radius);padding:18px;cursor:pointer;transition:.25s;position:relative;background:#fafbfc}
+.dz:hover,.dz.drag{border-color:var(--pri2);background:var(--pri3)}
+.dz.loaded{border-color:var(--green);background:var(--green2);border-style:solid}
+.dz.err{border-color:var(--red);background:var(--red2);border-style:solid}
+.dz input{display:none}
+.dz .dz-head{display:flex;align-items:center;gap:10px;font-weight:700;font-size:.95rem;color:var(--pri)}
+.dz .dz-ico{font-size:1.4rem}
+.dz .dz-badge{margin-left:auto;font-size:.66rem;font-weight:700;padding:2px 8px;border-radius:10px;background:var(--pri3);color:var(--pri)}
+.dz .dz-badge.opt{background:#f1f5f9;color:var(--muted)}
+.dz .dz-hint{font-size:.78rem;color:var(--muted);margin-top:6px}
+.dz .dz-file{font-size:.78rem;font-family:'JetBrains Mono',monospace;color:var(--green);font-weight:600;margin-top:8px;word-break:break-all}
+.dz .dz-file.err{color:var(--red)}
+.dz-multi{margin-top:8px;display:flex;flex-direction:column;gap:3px}
+.flags{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.flag{display:flex;align-items:center;gap:8px;background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:8px 12px;font-size:.85rem;cursor:pointer}
+.flag input{width:16px;height:16px;accent-color:var(--pri2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--pri);color:#fff;border:none;border-radius:10px;padding:14px 26px;font-size:1rem;font-weight:700;font-family:inherit;cursor:pointer;transition:.2s}
+.btn:hover{background:#15304d}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn-lg{width:100%;padding:16px;font-size:1.05rem}
+.btn-ghost{background:#fff;color:var(--pri);border:1.5px solid var(--pri3)}
+.btn-ghost:hover{background:var(--pri3)}
+.parsed{margin-top:14px;border-top:1px dashed var(--border);padding-top:12px}
+.parsed table{width:100%;border-collapse:collapse;font-size:.82rem}
+.parsed td{padding:3px 6px}
+.parsed td:first-child{color:var(--muted)}
+.parsed td:last-child{text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600}
+.parsed input{width:130px;text-align:right;font-family:'JetBrains Mono',monospace;font-size:.8rem;border:1px solid var(--border);border-radius:6px;padding:3px 6px}
+.warn{font-size:.78rem;color:var(--amber);background:var(--amber2);border-radius:8px;padding:8px 10px;margin-top:10px}
+/* RESULTS */
+#results{display:none}
+.score-banner{display:flex;align-items:center;gap:18px;border-radius:14px;padding:20px 24px;color:#fff;margin-bottom:18px}
+.score-banner .big{font-size:2.6rem;font-weight:800;font-family:'JetBrains Mono',monospace;line-height:1}
+.score-banner .lbl{font-size:.95rem;opacity:.95}
+.score-ok{background:linear-gradient(135deg,#0f766e,#10b981)}
+.score-warn{background:linear-gradient(135deg,#b45309,#f59e0b)}
+.score-crit{background:linear-gradient(135deg,#991b1b,#ef4444)}
+.cruce{border:1px solid var(--border);border-left:5px solid var(--muted);border-radius:12px;padding:18px;margin-bottom:14px;background:#fff}
+.cruce.ok{border-left-color:var(--green)}
+.cruce.alerta{border-left-color:var(--amber)}
+.cruce.critico{border-left-color:var(--red)}
+.cruce.na{border-left-color:#cbd5e1;opacity:.85}
+.cruce-head{display:flex;align-items:flex-start;gap:12px}
+.cruce-dot{width:14px;height:14px;border-radius:50%;margin-top:5px;flex-shrink:0;background:var(--muted)}
+.cruce.ok .cruce-dot{background:var(--green)}.cruce.alerta .cruce-dot{background:var(--amber)}.cruce.critico .cruce-dot{background:var(--red)}.cruce.na .cruce-dot{background:#cbd5e1}
+.cruce-title{font-weight:700;font-size:1rem}
+.cruce-state{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:2px 8px;border-radius:10px;margin-left:auto;white-space:nowrap}
+.cruce.ok .cruce-state{background:var(--green2);color:var(--green)}
+.cruce.alerta .cruce-state{background:var(--amber2);color:var(--amber)}
+.cruce.critico .cruce-state{background:var(--red2);color:var(--red)}
+.cruce.na .cruce-state{background:#f1f5f9;color:var(--muted)}
+.cruce-fig{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+.fig{background:#f8fafc;border:1px solid var(--border);border-radius:9px;padding:8px 14px;min-width:130px}
+.fig .l{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+.fig .v{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.95rem}
+.fig.diff .v{color:var(--red)}
+.fig.diff.okd .v{color:var(--green)}
+.cruce details{margin-top:8px;border-top:1px dashed var(--border);padding-top:8px}
+.cruce summary{cursor:pointer;font-size:.85rem;font-weight:600;color:var(--pri2);padding:4px 0}
+.cruce ul{margin:8px 0 8px 20px;font-size:.86rem}
+.cruce li{margin-bottom:5px}
+.cruce .src{font-size:.74rem;color:var(--muted);margin-top:4px}
+.pro-lock{background:linear-gradient(135deg,#1B3A5C,#2E75B6);color:#fff;border-radius:12px;padding:20px;text-align:center;margin:16px 0}
+.pro-lock h3{font-size:1.1rem;margin-bottom:6px}
+.pro-lock p{opacity:.9;font-size:.88rem;margin-bottom:12px}
+.borrador{background:#fbfcfe;border:1px solid var(--pri3);border-radius:12px;padding:18px;white-space:pre-wrap;font-size:.86rem;line-height:1.6;font-family:'DM Sans',sans-serif}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+.disclaimer{font-size:.78rem;color:var(--muted);background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-top:18px}
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.muted{color:var(--muted)}
+.kbd{font-family:'JetBrains Mono',monospace;background:#eef2f7;border-radius:4px;padding:1px 5px;font-size:.8em}
+.concil{margin-top:10px;padding:10px 12px;background:#f8fafc;border:1px solid var(--border);border-radius:8px}
+.concil .concil-input{width:170px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.82rem}
+.concil-chip{background:var(--pri3);border:1px solid var(--pri2);color:var(--pri);border-radius:6px;padding:3px 9px;font-size:.74rem;cursor:pointer;font-family:inherit;margin:2px 2px 0 0}
+.concil-chip:hover{background:var(--pri2);color:#fff}
+.cruce.explicada{border-left-color:var(--green)!important}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div class="container">
+  <div class="hero">
+    <h1>🛡️ Auditor de Cruces DIAN <span class="tag">Anticipa el requerimiento</span></h1>
+    <p>Sube tus declaraciones y reportes. La herramienta corre <strong>los mismos cruces que hace la DIAN</strong> en su fiscalización y te muestra dónde podrías recibir un oficio para corregir — con la causa probable, el checklist de soportes y un borrador de respuesta. <span class="pro-pill">★ PRO</span></p>
+  </div>
+  <div class="intro-grid">
+    <div class="intro-card"><div class="n">1</div><div class="t">Ingresos<br>Renta ↔ IVA ↔ FE ↔ terceros</div></div>
+    <div class="intro-card"><div class="n">2</div><div class="t">Consignaciones<br>bancarias ↔ ingresos</div></div>
+    <div class="intro-card"><div class="n">3</div><div class="t">Costos ↔ soportes<br>FE · nómina · exógena</div></div>
+    <div class="intro-card"><div class="n">4</div><div class="t">Retenciones<br>declaradas ↔ reportadas</div></div>
+    <div class="intro-card"><div class="n">5</div><div class="t">Patrimonio<br>declarado ↔ activos</div></div>
+  </div>
+  <div id="caso-banner"></div>
+  <div class="card" style="border:2px solid var(--pri2)">
+    <div class="card-title">📨 ¿Te llegó un oficio de la DIAN? Pégalo aquí</div>
+    <div class="card-sub">Pega el texto del <strong>oficio persuasivo / emplazamiento / requerimiento</strong> (o súbelo en PDF). La herramienta detecta las cifras y conceptos exactos que señaló la DIAN y los <strong>enruta a cada cruce</strong>, para que respondas punto por punto a lo que pidieron.</div>
+    <textarea id="f-oficio-text" placeholder="Pega aquí el texto del oficio… Ej: «se reportaron ingresos en renta por $426.535.000 vs IVA $659.942.000; créditos bancarios $509.509.740; costos superan terceros $140.888.292…»" style="width:100%;min-height:110px;padding:12px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.9rem;resize:vertical"></textarea>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px">
+      <button class="btn btn-ghost" id="btn-leer-oficio">🔎 Leer oficio</button>
+      <label class="btn btn-ghost" style="cursor:pointer">📄 …o subir PDF<input type="file" accept="application/pdf,.pdf" id="f-oficio-pdf" style="display:none"></label>
+      <span id="oficio-status" class="muted" style="font-size:.85rem"></span>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px">
+      <label style="display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted)">📆 Fecha de notificación del acto:
+        <input type="date" id="f-fecha-notif" style="padding:7px 10px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:.85rem">
+      </label>
+      <span class="muted" style="font-size:.78rem">Con ella calculo la fecha límite exacta para responder.</span>
+    </div>
+    <div id="oficio-result" style="display:none;margin-top:12px"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">📥 1. Carga lo que tengas del cliente</div>
+    <div class="card-sub">Mientras más cargues, más cruces se activan. Todo se procesa <strong>en tu navegador</strong>: ningún archivo sale de tu equipo.</div>
+    <div class="dz-grid">
+      <label class="dz" id="dz-renta">
+        <input type="file" accept="application/pdf,.pdf" id="f-renta">
+        <div class="dz-head"><span class="dz-ico">📄</span> Declaración de Renta PJ — F110 <span class="dz-badge">PDF</span></div>
+        <div class="dz-hint">El PDF oficial de la DIAN. Se leen las casillas automáticamente. ¿Persona natural? El diagnóstico del F210 vive en el <a href="formato210-pro.html" style="color:var(--pri2);font-weight:700" onclick="event.stopPropagation()">Liquidador 210 PRO</a>.</div>
+        <div class="dz-file" id="file-renta"></div>
+        <div class="parsed" id="parsed-renta" style="display:none"></div>
+      </label>
+      <label class="dz" id="dz-iva">
+        <input type="file" accept="application/pdf,.pdf" id="f-iva" multiple>
+        <div class="dz-head"><span class="dz-ico">🧾</span> Declaraciones de IVA — F300 <span class="dz-badge">PDF · varios</span></div>
+        <div class="dz-hint">Todos los periodos del año (bimestres o cuatrimestres). Puedes seleccionar varios.</div>
+        <div class="dz-file" id="file-iva"></div>
+        <div class="parsed" id="parsed-iva" style="display:none"></div>
+      </label>
+      <label class="dz" id="dz-terceros">
+        <input type="file" accept=".xlsx,.xls" id="f-terceros">
+        <div class="dz-head"><span class="dz-ico">👥</span> Reportado por terceros <span class="dz-badge opt">Excel · opcional</span></div>
+        <div class="dz-hint">El listado de exógena que descargas del MUISCA (lo que terceros informaron de ti).</div>
+        <div class="dz-file" id="file-terceros"></div>
+        <div class="parsed" id="parsed-terceros" style="display:none"></div>
+      </label>
+      <label class="dz" id="dz-fe">
+        <input type="file" accept=".xlsx,.xls,.csv" id="f-fe">
+        <div class="dz-head"><span class="dz-ico">⚡</span> Documentos electrónicos (FE) <span class="dz-badge opt">Excel · opcional</span></div>
+        <div class="dz-hint">El reporte de facturación electrónica del MUISCA (emitidas y recibidas).</div>
+        <div class="dz-file" id="file-fe"></div>
+        <div class="parsed" id="parsed-fe" style="display:none"></div>
+      </label>
+      <label class="dz" id="dz-balance">
+        <input type="file" accept=".xlsx,.xls,.csv" id="f-balance">
+        <div class="dz-head"><span class="dz-ico">📊</span> Balance de prueba <span class="dz-badge opt">Excel · opcional</span></div>
+        <div class="dz-hint">La columna vertebral contable. Detecta World Office, Siigo, Alegra, Odoo…</div>
+        <div class="dz-file" id="file-balance"></div>
+        <div class="parsed" id="parsed-balance" style="display:none"></div>
+      </label>
+      <div class="dz" id="dz-bancos" style="cursor:default">
+        <div class="dz-head"><span class="dz-ico">🏦</span> Consignaciones del año <span class="dz-badge opt">manual · opcional</span></div>
+        <div class="dz-hint">Total de créditos/consignaciones bancarias del año (del extracto o certificado).</div>
+        <div style="margin-top:10px"><input type="text" id="f-bancos" inputmode="numeric" placeholder="$ 0" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:'JetBrains Mono',monospace"></div>
+      </div>
+    </div>
+    <div style="margin-top:18px">
+      <div class="card-sub" style="margin-bottom:8px"><strong>Marca lo que aplique a esta empresa</strong> (afina los cruces y evita falsas alarmas):</div>
+      <div class="flags">
+        <label class="flag"><input type="checkbox" id="flag-aiu"> Base gravable especial <b>AIU</b> (vigilancia, aseo, temporales, construcción)</label>
+        <label class="flag"><input type="checkbox" id="flag-export"> Exportador / ventas exentas</label>
+        <label class="flag"><input type="checkbox" id="flag-autorret"> Autorretenedor</label>
+        <label class="flag"><input type="checkbox" id="flag-intermediacion"> Intermediación / mandato / recaudo por terceros</label>
+      </div>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:14px">
+        <div style="display:flex;flex-direction:column;gap:4px;min-width:240px;flex:1">
+          <label style="font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.4px">Sector económico (razonabilidad)</label>
+          <select id="sel-sector" style="padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:.9rem">
+            <option value="">— Sin comparación sectorial —</option>
+            <option value="minero">Minero / hidrocarburos / energía</option>
+            <option value="manufactura">Manufactura / industria</option>
+            <option value="comercio">Comercio</option>
+            <option value="agro">Agropecuario</option>
+            <option value="construccion">Construcción / inmobiliario</option>
+            <option value="servicios">Servicios</option>
+          </select>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px;min-width:240px;flex:1">
+          <label style="font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.4px">Patrimonio líquido año anterior (opcional)</label>
+          <input type="text" id="f-patrim-ant" inputmode="numeric" placeholder="$ 0 — habilita comparación patrimonial" style="padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:.9rem">
+        </div>
+      </div>
+      <div style="margin-top:16px;padding:12px 14px;background:#f8fafc;border:1px solid var(--border);border-radius:10px">
+        <div style="font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">⏳ Firmeza de la declaración (opcional — el mejor escudo)</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">
+          <label style="display:flex;flex-direction:column;gap:4px;font-size:.78rem;color:var(--muted)">Fecha de presentación
+            <input type="date" id="f-fecha-present" style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:.85rem"></label>
+          <label style="display:flex;flex-direction:column;gap:4px;font-size:.78rem;color:var(--muted)">Vencimiento del plazo (si presentó a tiempo)
+            <input type="date" id="f-fecha-vencim" style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:.85rem"></label>
+          <label style="display:flex;flex-direction:column;gap:4px;font-size:.78rem;color:var(--muted)">Beneficio de auditoría (689-3)
+            <select id="sel-benef" style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:.85rem">
+              <option value="">No aplicó</option>
+              <option value="6">Sí — impuesto neto +35% (firmeza 6 meses)</option>
+              <option value="12">Sí — impuesto neto +25% (firmeza 12 meses)</option>
+            </select></label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--muted);padding-bottom:8px">
+            <input type="checkbox" id="chk-perdidas" style="width:15px;height:15px"> Declaró o compensó pérdidas fiscales (firmeza 5 años)</label>
+        </div>
+        <div id="firmeza-out" style="display:none;margin-top:10px"></div>
+      </div>
+    </div>
+    <div style="margin-top:20px">
+      <button class="btn btn-lg" id="btn-analizar" disabled>🔎 Analizar cruces</button>
+    </div>
+  </div>
+  <div id="results">
+    <div id="score-banner"></div>
+    <div id="cruces-list"></div>
+    <div id="escenarios-card"></div>
+    <div id="borrador-block"></div>
+    <div class="toolbar">
+      <button class="btn btn-ghost" id="btn-excel">⬇️ Descargar informe en Excel</button>
+      <button class="btn btn-ghost" id="btn-print">🖨️ Imprimir / PDF</button>
+    </div>
+    <div class="disclaimer">
+      ⚠️ Esta herramienta es una <strong>ayuda de auto-diagnóstico con algoritmo</strong> (no IA, no consulta nada en la DIAN). Reproduce los cruces típicos de fiscalización a partir de los archivos que tú cargas. Una diferencia marcada en rojo <strong>no significa</strong> que haya un error: muchas diferencias son legítimas. Verifica cada cruce con los soportes antes de corregir o responder. No reemplaza el criterio del contador.
+    </div>
+  </div>
+  <div class="disclaimer" id="bottom-help">
+    💡 <strong>¿Qué es esto?</strong> Cuando la DIAN cruza tu información y encuentra inconsistencias, te envía un <em>oficio persuasivo</em> invitándote a corregir. Esta herramienta corre esos mismos cruces <em>antes</em>, para que llegues preparado: o corriges a tiempo, o documentas por qué la diferencia es legítima.
+  </div>
+  <div class="card">
+    <div class="card-title">📚 Cómo te fiscaliza la DIAN (y por qué importa anticiparse)</div>
+    <div class="card-sub">En 2024 la DIAN dispuso <strong>8,39 millones de declaraciones sugeridas</strong> y gestionó <strong>$11,8 billones</strong> en fiscalización, cruzando facturación electrónica e información exógena con inteligencia artificial. Hoy la fiscalización empieza <em>antes</em> de que declares.</div>
+    <details>
+      <summary><strong>1. La escalera de la DIAN</strong> — de la invitación a la sanción</summary>
+      <ul>
+        <li><strong>Oficio / acción persuasiva</strong> — invitación informal a corregir. <em>Sin sanción.</em> Es la señal de que ya te cruzaron.</li>
+        <li><strong>Emplazamiento para corregir</strong> (art. 685 E.T.) — invitación formal. Si corriges aquí, la sanción de corrección sube. Suspende la firmeza.</li>
+        <li><strong>Requerimiento especial</strong> (arts. 703-707) — acto obligatorio cuando la DIAN quiere modificar tu declaración. Tienes <strong>3 meses</strong> para responder.</li>
+        <li><strong>Liquidación provisional</strong> (art. 764) — atajo: la DIAN liquida directo con base en exógena/FE.</li>
+        <li><strong>Liquidación oficial de revisión</strong> (arts. 702-715) — acto definitivo: mayor impuesto + sanción.</li>
+      </ul>
+      <div class="src">Corregir <b>antes del emplazamiento</b> casi siempre es lo más barato. Por eso esta herramienta existe.</div>
+    </details>
+    <details>
+      <summary><strong>2. Plazos: ¿hasta cuándo te pueden requerir?</strong></summary>
+      <ul>
+        <li><strong>Firmeza general: 3 años</strong> desde el vencimiento para declarar (art. 714 E.T.). Después, la declaración queda en firme.</li>
+        <li><strong>Saldo a favor:</strong> 3 años desde la solicitud de devolución. <strong>Pérdidas:</strong> 5 años.</li>
+        <li><strong>Beneficio de auditoría</strong> (art. 689-3): si subes el impuesto neto de renta <strong>≥35%</strong> vs el año anterior, firmeza en <strong>6 meses</strong>; <strong>≥25%</strong> → <strong>12 meses</strong>. Aplica AG 2022-2026; no si el impuesto neto es menor a 71 UVT, y exige retenciones reales.</li>
+      </ul>
+    </details>
+    <details>
+      <summary><strong>3. Sanciones según el momento en que corrijas</strong></summary>
+      <ul>
+        <li><strong>Corrección voluntaria</strong> (art. 644): <strong>10%</strong> del mayor valor si corriges <b>antes</b> del emplazamiento; <strong>20%</strong> si corriges después.</li>
+        <li><strong>Inexactitud</strong> (art. 648, la determina la DIAN): <strong>100%</strong> de la diferencia; <strong>200%</strong> por activos omitidos o pasivos inexistentes; <strong>160%</strong> por compras a proveedores ficticios.</li>
+      </ul>
+    </details>
+    <details>
+      <summary><strong>4. Qué formato de exógena alimenta cada cruce</strong></summary>
+      <ul>
+        <li><strong>Ingresos:</strong> formato 1007 (ingresos) y 1001 de terceros (lo que te pagaron) + facturación electrónica emitida (RADIAN).</li>
+        <li><strong>Consignaciones:</strong> formato <strong>1019</strong> (cuentas bancarias) y <strong>1020</strong> (CDT/inversiones), reportados por los bancos.</li>
+        <li><strong>Costos:</strong> FE recibida con eventos RADIAN (acuse 030 + recibo 032 en operaciones a crédito), nómina electrónica (≤10 días), importaciones (DIM) y el cruce 1001↔1007.</li>
+        <li><strong>Retenciones:</strong> formato 1003 (lo que te retuvieron).</li>
+        <li><strong>IVA:</strong> 1006 (generado) y 1005 (descontable). En AIU, la base no puede ser menor al 10% del contrato (art. 462-1).</li>
+        <li><strong>Patrimonio:</strong> renta por comparación patrimonial (arts. 236-239) contra activos reportados por terceros.</li>
+      </ul>
+      <div class="src">Ojo POS: un tiquete POS físico antiguo o una FE con NIT 222222 (consumidor final) <b>no</b> dan derecho a costo ni IVA descontable.</div>
+    </details>
+    <details>
+      <summary><strong>5. Las 26 inconsistencias que más audita la DIAN</strong> (Grandes Contribuyentes)</summary>
+      <div class="card-sub" style="margin:6px 0">Listado oficial de la Dirección Operativa de Grandes Contribuyentes — lo que más detectan en auditorías de renta. Úsalo como checklist preventivo:</div>
+      <ul style="font-size:.82rem">
+        <li>Contratos de colaboración (uniones temporales, consorcios, cuentas en participación) usados para elevar costos o bajar ingresos.</li>
+        <li>Costos/gastos sin documento soporte (factura electrónica / documento equivalente) estando obligado a exigirlo (art. 771-2, 616-1).</li>
+        <li>Depreciación de activos fijos sin la limitación de los arts. 136 y 137 E.T.; o de bienes no usados en la vigencia.</li>
+        <li>Amortización de intangibles sin los parámetros de los arts. 142 y 143 E.T.</li>
+        <li>Incremento de patrimonio sin justa causa → renta gravable (comparación patrimonial).</li>
+        <li>Costos/gastos con <b>proveedores ficticios o insolventes</b> (sanción 160%).</li>
+        <li>Fusiones para trasladar pérdidas y bajar la carga tributaria (art. 147).</li>
+        <li>Pagos al exterior (publicidad, asistencia técnica, regalías, intereses) sin sustancia real, sin retención (art. 408), o sin registrar contratos (art. 123).</li>
+        <li>Rentas pasivas a ECE en países de baja o nula tributación (deslocalización).</li>
+        <li>Préstamos con vinculadas del exterior sin recibir los recursos, para bajar patrimonio o crear gastos por intereses/diferencia en cambio.</li>
+        <li>Pagos laborales sin aportes a seguridad social (verificación UGPP).</li>
+        <li>Pagos no laborales a empleados &gt; 40% de la remuneración no incluidos en el IBC.</li>
+        <li>Utilidad en venta de activos fijos sin el tratamiento de los arts. 90 y 196 E.T.</li>
+        <li>No atribución a establecimientos permanentes (art. 20-2).</li>
+        <li>Donaciones sin requisitos (art. 125-3).</li>
+        <li>Omisión de activos o pasivos inexistentes (art. 239-1, sanción 200%).</li>
+        <li>No calcular el anticipo de renta (art. 807); no incluir intereses presuntivos (art. 35).</li>
+        <li>Costos/deducciones pagados por medios distintos a los del art. 771-5 (bancarización).</li>
+        <li>Actos jurídicos artificiosos sin propósito económico (abuso, art. 869).</li>
+        <li>Llevar como gasto multas, sanciones e intereses moratorios sancionatorios.</li>
+      </ul>
+      <div class="src">Fuente: DIAN, Dirección Operativa de Grandes Contribuyentes — listado de inconsistencias de mayor frecuencia (AG 2024).</div>
+    </details>
+  </div>
+</div>
+<script src="shared/pension-pdf-parser.js?v=95095c2a"></script>
+<script src="shared/dian-decl-parser.js?v=03227168"></script>
+<script src="shared/oficio-dian-parser.js?v=0d97bce1"></script>
+<script src="shared/balance-loader.js?v=9347f34a"></script>
+<script defer src="shared/fe-rst-loader.js?v=54013499"></script>
+<script src="shared/parser-muisca-consultante.js?v=b08ef6fb"></script>
+<script defer src="shared/pro-gate.js?v=c9ccfa6c"></script>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<script>
+'use strict';
+/* ════════════════════════════════════════════════════════════════════
+   Auditor de Cruces DIAN — motor de cruces de fiscalización
+   Reúsa: DianDeclParser (PDF 110/300), FeRstLoader (FE),
+          parserMuiscaConsultante (terceros), BalanceLoader (balance)
+   ════════════════════════════════════════════════════════════════════ */
+var STATE = {
+  renta: null,        // {casillas, derivados, meta}
+  ivaPeriodos: [],    // [{nombre, derivados}]
+  iva: null,          // agregado del año
+  terceros: null,     // {totalReportado, ingresos, retenciones, iva, detalle, nombre, nit}
+  fe: null,           // FeRstLoader result
+  balance: null,      // {aggregates, accounts, meta}
+  oficio: null,       // {tipo, numeroOficio, anioGravable, items:[{cruceId,valorDian,concepto}]}
+  sector: '',         // macrosector para razonabilidad
+  patrimonioAnterior: 0,
+  bancos: 0,
+  flags: { aiu:false, export:false, autorret:false, interm:false },
+  meta: { nit:null, anio:null, nombre:null }
+};
+/* ── helpers ─────────────────────────────────────────────────────── */
+function fmt(n){ n = Math.round(n||0); var s = Math.abs(n).toLocaleString('es-CO'); return (n<0?'-':'')+'$ '+s; }
+function pct(a,b){ if(!b) return 0; return (a/b)*100; }
+function el(id){ return document.getElementById(id); }
+function parseMoneyInput(v){ return parseInt(String(v||'').replace(/[^\d-]/g,''),10)||0; }
+/* ── dropzone visual ─────────────────────────────────────────────── */
+function setDZ(dzId, fileId, txt, kind){
+  var dz = el(dzId), f = el(fileId);
+  dz.classList.remove('loaded','err');
+  if(kind==='ok') dz.classList.add('loaded');
+  if(kind==='err'){ dz.classList.add('err'); f.classList.add('err'); }
+  else f.classList.remove('err');
+  f.innerHTML = txt;
+}
+function dragWire(dzId){
+  var dz = el(dzId);
+  if(!dz) return;
+  ['dragover','dragenter'].forEach(function(e){dz.addEventListener(e,function(ev){ev.preventDefault();dz.classList.add('drag');});});
+  ['dragleave','drop'].forEach(function(e){dz.addEventListener(e,function(){dz.classList.remove('drag');});});
+}
+['dz-renta','dz-iva','dz-terceros','dz-fe','dz-balance'].forEach(dragWire);
+/* ── 1. RENTA (PDF F110 — solo personas jurídicas) ───────────────── */
+el('f-renta').addEventListener('change', function(e){
+  var file = e.target.files[0]; if(!file) return;
+  setDZ('dz-renta','file-renta','<span class="spinner" style="border-top-color:#1B3A5C"></span> Leyendo PDF…');
+  DianDeclParser.parse(file).then(function(res){
+    if(res && res.form==='210'){
+      setDZ('dz-renta','file-renta','✕ Es un F210 (persona natural). Este auditor es para PJ — el diagnóstico de riesgos del 210 está en el <a href="formato210-pro.html" style="color:inherit;font-weight:700;text-decoration:underline">Liquidador 210 PRO</a>.', 'err'); return;
+    }
+    if(!res || (res.form!=='110' && res.form!=='350' && res.form!=='300') || res.error){
+      setDZ('dz-renta','file-renta','✕ No se reconoció como F110. ' + (res && res.error || ''), 'err'); return;
+    }
+    if(res.form==='300'){ setDZ('dz-renta','file-renta','✕ Ese es un IVA (F300). Súbelo en la casilla de IVA.', 'err'); return; }
+    STATE.renta = res;
+    if(res.meta){ STATE.meta.nit = STATE.meta.nit || res.meta.nit; STATE.meta.anio = STATE.meta.anio || res.meta.anio; }
+    var d = res.derivados;
+    setDZ('dz-renta','file-renta','✓ '+file.name+(res.validacion && res.validacion.ok?'':' — ⚠ revisa las casillas'),'ok');
+    renderParsedRenta(d);
+    refreshAnalizar();
+  }).catch(function(err){
+    setDZ('dz-renta','file-renta','✕ '+(err && (err.message||err.code) || 'No se pudo leer el PDF'),'err');
+  });
+});
+function renderParsedRenta(d){
+  var rows = [
+    ['Ingresos brutos (c.58)','rb_ing',d.ingresosBrutos],
+    ['Total costos y deducciones (c.67)','rb_cos',d.totalCostosDeducciones],
+    ['Costos y gastos de nómina (c.33)','rb_nom',d.nomina],
+    ['Patrimonio bruto (c.44)','rb_pat',d.patrimonioBruto],
+    ['Retenciones (c.107)','rb_ret',d.retenciones]
+  ];
+  var h = '<table>';
+  rows.forEach(function(r){ h += '<tr><td>'+r[0]+'</td><td><input id="'+r[1]+'" value="'+(r[2]||0).toLocaleString('es-CO')+'"></td></tr>'; });
+  h += '</table><div class="card-sub" style="margin-top:6px;font-size:.74rem">Confirma o corrige si el PDF tenía un formato distinto.</div>';
+  var p = el('parsed-renta'); p.innerHTML = h; p.style.display='block';
+  ['rb_ing','rb_cos','rb_nom','rb_pat','rb_ret'].forEach(function(id){
+    el(id).addEventListener('click',function(ev){ev.preventDefault();ev.stopPropagation();});
+    el(id).addEventListener('input',function(){
+      var v=parseMoneyInput(this.value);
+      if(id==='rb_ing')STATE.renta.derivados.ingresosBrutos=v;
+      if(id==='rb_cos')STATE.renta.derivados.totalCostosDeducciones=v;
+      if(id==='rb_nom')STATE.renta.derivados.nomina=v;
+      if(id==='rb_pat')STATE.renta.derivados.patrimonioBruto=v;
+      if(id==='rb_ret')STATE.renta.derivados.retenciones=v;
+    });
+  });
+}
+/* ── 2. IVA (PDF F300, varios) ───────────────────────────────────── */
+el('f-iva').addEventListener('change', function(e){
+  var files = Array.from(e.target.files||[]); if(!files.length) return;
+  setDZ('dz-iva','file-iva','<span class="spinner" style="border-top-color:#1B3A5C"></span> Leyendo '+files.length+' PDF…');
+  Promise.all(files.map(function(f){ return DianDeclParser.parse(f).then(function(r){ return {f:f,r:r}; }).catch(function(){ return {f:f,r:null}; }); }))
+  .then(function(arr){
+    STATE.ivaPeriodos = [];
+    var lines = [], okc=0;
+    arr.forEach(function(o){
+      if(o.r && o.r.form==='300'){
+        STATE.ivaPeriodos.push({ nombre:o.f.name, derivados:o.r.derivados, meta:o.r.meta });
+        if(o.r.meta){ STATE.meta.nit = STATE.meta.nit || o.r.meta.nit; STATE.meta.anio = STATE.meta.anio || o.r.meta.anio; }
+        okc++;
+        lines.push('<div>✓ '+o.f.name+' — ingresos '+fmt(o.r.derivados.ingresosBrutos)+'</div>');
+      } else {
+        lines.push('<div style="color:var(--red)">✕ '+o.f.name+' — no es F300</div>');
+      }
+    });
+    aggregarIva();
+    el('dz-iva').classList.toggle('loaded', okc>0);
+    el('file-iva').innerHTML = '<div class="dz-multi">'+lines.join('')+'</div>';
+    renderIvaResumen();
+    refreshAnalizar();
+  });
+});
+function renderIvaResumen(){
+  if(!STATE.iva) return;
+  var p=el('parsed-iva');
+  p.innerHTML = '<table><tr><td>Ingresos brutos IVA del año (Σ c.41)</td><td>'+fmt(STATE.iva.ingresosBrutos)+'</td></tr>'+
+    '<tr><td>· de los cuales AIU base especial (c.29)</td><td>'+fmt(STATE.iva.aiu)+'</td></tr>'+
+    '<tr><td>· excluidas/no gravadas (c.39+c.40)</td><td>'+fmt(STATE.iva.excluidasNoGrav)+'</td></tr>'+
+    '<tr><td>· exportaciones (c.30+c.31)</td><td>'+fmt(STATE.iva.exportaciones)+'</td></tr>'+
+    '<tr><td>IVA generado (Σ c.67)</td><td>'+fmt(STATE.iva.ivaGenerado)+'</td></tr></table>';
+  p.style.display='block';
+}
+function aggregarIva(){
+  if(!STATE.ivaPeriodos.length){ STATE.iva=null; return; }
+  var a = {ingresosBrutos:0,gravadas:0,aiu:0,exportaciones:0,exentas:0,excluidasNoGrav:0,ivaGenerado:0,ivaDescontable:0,retIVA:0,nPeriodos:STATE.ivaPeriodos.length};
+  STATE.ivaPeriodos.forEach(function(p){
+    var d=p.derivados;
+    a.ingresosBrutos += d.ingresosBrutos||0;
+    a.gravadas += d.gravadasGeneral||0;
+    a.aiu += d.aiuGravada||0;
+    a.exportaciones += (d.exportacionBienes||0)+(d.exportacionServicios||0);
+    a.exentas += d.exentas||0;
+    a.excluidasNoGrav += (d.excluidas||0)+(d.noGravadas||0);
+    a.ivaGenerado += d.ivaGenerado||0;
+    a.ivaDescontable += d.ivaDescontable||0;
+    a.retIVA += d.retencionesIvaPracticadas||0;
+  });
+  STATE.iva = a;
+}
+/* ── 3. TERCEROS (Excel MUISCA) ──────────────────────────────────── */
+el('f-terceros').addEventListener('change', function(e){
+  var file = e.target.files[0]; if(!file) return;
+  setDZ('dz-terceros','file-terceros','<span class="spinner" style="border-top-color:#1B3A5C"></span> Leyendo…');
+  if(typeof ExcelJS==='undefined'){ setDZ('dz-terceros','file-terceros','✕ Falta ExcelJS','err'); return; }
+  file.arrayBuffer().then(function(ab){
+    var wb = new ExcelJS.Workbook();
+    return wb.xlsx.load(ab).then(function(){
+      var res = parserMuiscaConsultante.parse(wb);
+      if(!res || !res.detalle || !res.detalle.length){ setDZ('dz-terceros','file-terceros','✕ No parece el reporte de terceros del MUISCA','err'); return; }
+      var t = clasificarTerceros(res);
+      STATE.terceros = t;
+      if(res.metadata){ STATE.meta.nit = STATE.meta.nit || res.metadata.nit; STATE.meta.nombre = STATE.meta.nombre || res.metadata.nombre; STATE.meta.anio = STATE.meta.anio || res.metadata.anio; }
+      setDZ('dz-terceros','file-terceros','✓ '+file.name+' — '+res.detalle.length+' registros','ok');
+      var p=el('parsed-terceros');
+      p.innerHTML='<table><tr><td>Ingresos que terceros reportaron pagarte</td><td>'+fmt(t.ingresos)+'</td></tr>'+
+        '<tr><td>Compras/costos informados por terceros</td><td>'+fmt(t.costos)+'</td></tr>'+
+        '<tr><td>Retenciones que te practicaron</td><td>'+fmt(t.retenciones)+'</td></tr>'+
+        '<tr><td>Total reportado por terceros</td><td>'+fmt(t.totalReportado)+'</td></tr></table>';
+      p.style.display='block';
+      refreshAnalizar();
+    });
+  }).catch(function(err){ setDZ('dz-terceros','file-terceros','✕ '+(err.message||'Error'),'err'); });
+});
+function clasificarTerceros(res){
+  var ingresos=0,costos=0,retenciones=0,iva=0,total=0;
+  res.detalle.forEach(function(d){
+    var v = d.valor||0; total += v;
+    var c = (d.detalle||'').toLowerCase();
+    if(/retenci/.test(c)) retenciones += v;
+    else if(/iva|impuesto sobre las ventas/.test(c)) iva += v;
+    else if(/pago|compra|costo|deduc|abono/.test(c)) costos += v;
+    else if(/ingreso|venta|honorari|servicio|recib/.test(c)) ingresos += v;
+    else ingresos += v; // por defecto, lo reportado por un tercero suele ser un ingreso tuyo
+  });
+  return { totalReportado:total, ingresos:ingresos, costos:costos, retenciones:retenciones, iva:iva, detalle:res.detalle };
+}
+/* ── 4. FE (Excel/CSV documentos electrónicos) ───────────────────── */
+el('f-fe').addEventListener('change', function(e){
+  var file = e.target.files[0]; if(!file) return;
+  setDZ('dz-fe','file-fe','<span class="spinner" style="border-top-color:#1B3A5C"></span> Leyendo…');
+  var nit = (STATE.meta.nit||'').replace(/[^\d]/g,'');
+  FeRstLoader.parseFile(file, { nitDeclarante: nit }).then(function(res){
+    if(!res || !res.ok){ setDZ('dz-fe','file-fe','✕ '+((res&&res.error)||'No se reconoció el reporte FE'),'err'); return; }
+    STATE.fe = res;
+    setDZ('dz-fe','file-fe','✓ '+file.name+' — '+res.total+' documentos','ok');
+    var p=el('parsed-fe');
+    p.innerHTML='<table><tr><td>Ventas FE (emitidas, base sin IVA)</td><td>'+fmt(res.emitidos.base)+'</td></tr>'+
+      '<tr><td>IVA generado en FE</td><td>'+fmt(res.emitidos.iva)+'</td></tr>'+
+      '<tr><td>Compras FE (recibidas, base sin IVA)</td><td>'+fmt(res.recibidos.base)+'</td></tr>'+
+      '<tr><td>IVA descontable en FE</td><td>'+fmt(res.recibidos.iva)+'</td></tr></table>';
+    p.style.display='block';
+    refreshAnalizar();
+  }).catch(function(err){ setDZ('dz-fe','file-fe','✕ '+(err.message||'Error'),'err'); });
+});
+/* ── 5. BALANCE ──────────────────────────────────────────────────── */
+el('f-balance').addEventListener('change', function(e){
+  var file = e.target.files[0]; if(!file) return;
+  setDZ('dz-balance','file-balance','<span class="spinner" style="border-top-color:#1B3A5C"></span> Leyendo…');
+  if(typeof BalanceLoader==='undefined' || !BalanceLoader.processFile){ setDZ('dz-balance','file-balance','✕ Falta balance-loader','err'); return; }
+  BalanceLoader.processFile(file).then(function(st){
+    if(!st || !st.accounts || !st.accounts.length){ setDZ('dz-balance','file-balance','✕ No se pudo leer el balance','err'); return; }
+    STATE.balance = st;
+    var ag = st.aggregates && st.aggregates._totals || {};
+    setDZ('dz-balance','file-balance','✓ '+file.name+' — '+st.accounts.length+' cuentas','ok');
+    var p=el('parsed-balance');
+    p.innerHTML='<table><tr><td>Total ingresos (contables)</td><td>'+fmt(ag.ingresos)+'</td></tr>'+
+      '<tr><td>Total activos</td><td>'+fmt(ag.activo)+'</td></tr>'+
+      '<tr><td>Total costos+gastos</td><td>'+fmt((ag.costos||0)+(ag.gastos||0))+'</td></tr></table>';
+    p.style.display='block';
+    refreshAnalizar();
+  }).catch(function(err){ setDZ('dz-balance','file-balance','✕ '+(err.message||'Error'),'err'); });
+});
+/* ── bancos + flags ──────────────────────────────────────────────── */
+el('f-bancos').addEventListener('input',function(){
+  var n=parseMoneyInput(this.value); STATE.bancos=n;
+  this.value = n? n.toLocaleString('es-CO') : '';
+  refreshAnalizar();
+});
+[['flag-aiu','aiu'],['flag-export','export'],['flag-autorret','autorret'],['flag-intermediacion','interm']].forEach(function(p){
+  el(p[0]).addEventListener('change',function(){ STATE.flags[p[1]]=this.checked; if(typeof snapshotCase==='function')snapshotCase(); });
+});
+el('sel-sector').addEventListener('change',function(){ STATE.sector=this.value; if(typeof snapshotCase==='function')snapshotCase(); });
+el('f-patrim-ant').addEventListener('input',function(){ var n=parseMoneyInput(this.value); STATE.patrimonioAnterior=n; this.value=n?n.toLocaleString('es-CO'):''; if(typeof snapshotCase==='function')snapshotCase(); });
+/* ── OFICIO DIAN ─────────────────────────────────────────────────── */
+var CRUCE_NOMBRE = {1:'Ingresos Renta vs IVA',2:'Ingresos vs FE/terceros',3:'Consignaciones bancarias',4:'Costos vs soportes',5:'Costos vs exógena terceros',6:'Retenciones',7:'Patrimonio',8:'IVA / AIU'};
+/* Procedimiento tributario según el tipo de acto recibido. nivel: info|prep|urgente.
+   meses/dias: plazo legal de respuesta contado desde la notificación (calendario;
+   los plazos en meses vencen el mismo día del mes correspondiente). */
+var TIPO_GUIA = {
+  'Oficio persuasivo': { nivel:'info', obligatorio:false, plazo:'Sin plazo legal — es una invitación, NO un acto administrativo.',
+    queHacer:'Revisa y prepárate. <b>No estás obligado a responder ni a corregir.</b> Si hay un error real, corrige voluntariamente (sanción 644: solo 10%). Si la diferencia tiene explicación, basta reunir y conservar los soportes.',
+    siguiente:'Si la DIAN mantiene el indicio: emplazamiento o requerimiento formal.', norma:'Gestión persuasiva DIAN (Oficio DIAN 8726 de 2024).' },
+  'Emplazamiento para corregir': { nivel:'prep', obligatorio:false, meses:1, plazo:'1 mes (art. 685) — responder es OPCIONAL.',
+    queHacer:'No es obligatorio corregir y <b>no responder no genera sanción</b> (art. 685). Pero si decides corregir tras el emplazamiento, la sanción de corrección sube de 10% a <b>20%</b> (art. 644). Suspende 1 mes la firmeza.',
+    siguiente:'Requerimiento especial si la DIAN persiste.', norma:'Arts. 685, 644 E.T.' },
+  'Emplazamiento por no declarar': { nivel:'urgente', obligatorio:true, meses:1, plazo:'⏰ 1 mes para DECLARAR (art. 715).',
+    queHacer:'Eres omiso: <b>presenta la declaración dentro del mes</b>. Si no declaras, viene sanción por no declarar (art. 643) y liquidación de aforo. Declarar ahora reduce mucho la sanción.',
+    siguiente:'Sanción por no declarar (643) → liquidación de aforo (717).', norma:'Arts. 715, 643 E.T.' },
+  'Requerimiento ordinario de información': { nivel:'urgente', obligatorio:true, dias:15, plazoNota:'15 días es el mínimo legal — usa el plazo que fije TU oficio.', plazo:'⏰ El plazo que fije el oficio (mínimo ~15 días).',
+    queHacer:'Entrega la información solicitada dentro del plazo. No entregar (o con errores) genera <b>sanción por no informar</b> hasta 7.500 UVT (art. 651).',
+    siguiente:'Puede derivar en requerimiento especial.', norma:'Arts. 686, 651 E.T.' },
+  'Requerimiento especial': { nivel:'urgente', obligatorio:true, meses:3, plazo:'⏰ 3 MESES para responder (art. 707) — es tu defensa principal.',
+    queHacer:'Responde formalmente controvirtiendo cada glosa con pruebas. <b>Escalera de descuento:</b> si aceptas al responder, la sanción de inexactitud baja a ¼ (art. 709); si la dejas para el recurso, a ½ (art. 713).',
+    siguiente:'Liquidación oficial de revisión (DIAN: 6 meses, art. 710). Solo puede tocar lo glosado (correspondencia, art. 711).', norma:'Arts. 703, 707, 708, 709, 710, 711 E.T.' },
+  'Liquidación': { nivel:'urgente', obligatorio:true, meses:2, plazo:'⏰ 2 MESES para recurso de reconsideración (art. 720).',
+    queHacer:'Acto que ya determina mayor impuesto/sanción. Interpón <b>recurso de reconsideración</b> en 2 meses; si aceptas, la sanción baja a ½ (art. 713). Si respondiste el requerimiento, puedes ir directo a la justicia (per saltum, 4 meses).',
+    siguiente:'Tras el recurso, la DIAN tiene <b>1 año para resolverlo</b> (art. 732); si no lo resuelve, opera <b>silencio administrativo POSITIVO</b> a tu favor (art. 734). Luego: contencioso administrativo.', norma:'Arts. 712, 713, 720, 732, 734 E.T.' },
+  'Liquidación de aforo': { nivel:'urgente', obligatorio:true, meses:2, plazo:'⏰ 2 MESES para recurso de reconsideración (art. 720).',
+    queHacer:'Determinación para omisos. Recurre en 2 meses o paga. La DIAN puede aforar hasta 5 años después del vencimiento (art. 717). Incluye sanción por no declarar (643).',
+    siguiente:'Cobro coactivo si no se recurre; se inscribe en registros (719-1).', norma:'Arts. 715-719, 643, 720 E.T.' },
+  'Liquidación provisional': { nivel:'urgente', obligatorio:true, meses:1, plazo:'⏰ 1 mes para aceptar, rechazar o pedir modificación (art. 764-1).',
+    queHacer:'Para pequeños contribuyentes (ingresos ≤15.000 UVT o patrimonio ≤30.000 UVT). En 1 mes: acepta (total), rechaza, o pide modificación una sola vez. El rechazo lleva al procedimiento ordinario.',
+    siguiente:'Puede reemplazar requerimiento/pliego/emplazamiento (art. 764-6).', norma:'Arts. 764 a 764-6 E.T.' },
+  'Pliego de cargos': { nivel:'urgente', obligatorio:true, meses:1, plazo:'⏰ 1 mes para responder (art. 638).',
+    queHacer:'Proceso sancionatorio independiente. Responde en 1 mes con argumentos y pruebas. La DIAN profiere la resolución sanción en los 6 meses siguientes.',
+    siguiente:'Resolución sanción → recurso de reconsideración (2 meses, 720).', norma:'Arts. 637, 638 E.T.' }
+};
+/* ── Fecha límite real desde la notificación (Art. 59 CRPACA / Art. 829 ET:
+      plazos de meses vencen el mismo día del mes; de días, días calendario) ── */
+var _plazoActual = null;  // {titulo, fechaISO} para .ics / GCal
+function _addPlazoISO(fechaISO, meses, dias){
+  var p = fechaISO.split('-').map(Number);
+  var d = new Date(p[0], p[1]-1, p[2]);
+  if(meses){ var dia = d.getDate(); d.setMonth(d.getMonth()+meses); if(d.getDate()!==dia) d.setDate(0); }
+  if(dias) d.setDate(d.getDate()+dias);
+  var m=('0'+(d.getMonth()+1)).slice(-2), dd=('0'+d.getDate()).slice(-2);
+  return d.getFullYear()+'-'+m+'-'+dd;
+}
+function _fmtFechaLarga(iso){
+  var p = iso.split('-').map(Number);
+  return new Date(p[0],p[1]-1,p[2]).toLocaleDateString('es-CO',{day:'numeric',month:'long',year:'numeric'});
+}
+function _diasHasta(iso){
+  var hoy = new Date(); hoy.setHours(0,0,0,0);
+  var p = iso.split('-').map(Number);
+  return Math.round((new Date(p[0],p[1]-1,p[2]) - hoy)/864e5);
+}
+function descargarICSPlazo(){
+  if(!_plazoActual) return;
+  var f = _plazoActual.fechaISO.replace(/-/g,'');
+  var ics = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//exogenadian//auditor-cruces//ES\r\nBEGIN:VEVENT\r\n'+
+    'UID:dian-'+f+'@exogenadian.com\r\nDTSTART;VALUE=DATE:'+f+'\r\nDTEND;VALUE=DATE:'+f+'\r\n'+
+    'SUMMARY:'+_plazoActual.titulo+'\r\nDESCRIPTION:Generado por el Auditor de Cruces DIAN — exogenadian.com\r\n'+
+    'BEGIN:VALARM\r\nTRIGGER:-P5D\r\nACTION:DISPLAY\r\nDESCRIPTION:Vence en 5 días\r\nEND:VALARM\r\nEND:VEVENT\r\nEND:VCALENDAR';
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));
+  a.download = 'plazo-dian-'+_plazoActual.fechaISO+'.ics';
+  document.body.appendChild(a); a.click(); a.remove();
+}
+function _plazoHTML(tipo, g, col){
+  var fn = (el('f-fecha-notif')||{}).value;
+  if(!fn || (!g.meses && !g.dias)) return '';
+  var venc = _addPlazoISO(fn, g.meses||0, g.dias||0);
+  var rest = _diasHasta(venc);
+  var titulo = 'Vence respuesta DIAN — '+tipo+(STATE.meta && STATE.meta.nit ? ' (NIT '+STATE.meta.nit+')' : '');
+  _plazoActual = { titulo: titulo, fechaISO: venc };
+  var gcal = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(titulo)+
+    '&dates='+venc.replace(/-/g,'')+'/'+_addPlazoISO(venc,0,1).replace(/-/g,'')+
+    '&details='+encodeURIComponent('Generado por el Auditor de Cruces DIAN — exogenadian.com/auditor-cruces-dian.html');
+  var estado = rest < 0
+    ? '<b style="color:#b91c1c">VENCIÓ hace '+(-rest)+' día(s)</b> — revisa si aún caben recursos.'
+    : (rest<=7 ? '<b style="color:#b91c1c">quedan '+rest+' día(s)</b>' : '<b>quedan '+rest+' días</b>');
+  return '<div style="margin-top:8px;padding:10px 12px;background:#fff;border:1.5px dashed '+col[1]+';border-radius:8px;font-size:.87rem">'+
+    '📆 Notificado el <b>'+_fmtFechaLarga(fn)+'</b> → fecha límite: <b>'+_fmtFechaLarga(venc)+'</b> ('+estado+')'+
+    (g.plazoNota?'<div style="font-size:.76rem;color:'+col[2]+';margin-top:3px">'+g.plazoNota+'</div>':'')+
+    '<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">'+
+    '<button class="btn btn-ghost" style="font-size:.78rem;padding:5px 10px" onclick="descargarICSPlazo()">📅 Recordatorio .ics</button>'+
+    '<a class="btn btn-ghost" style="font-size:.78rem;padding:5px 10px;text-decoration:none" target="_blank" rel="noopener" href="'+gcal+'">📆 Google Calendar</a>'+
+    '</div></div>';
+}
+function guiaProcedimientoHTML(tipo){
+  var g = TIPO_GUIA[tipo];
+  if(!g) return '';
+  var col = g.nivel==='urgente' ? ['#fee2e2','#b91c1c','#991b1b'] : (g.nivel==='prep' ? ['#fef3c7','#b45309','#92400e'] : ['#e0f2fe','#0369a1','#075985']);
+  return '<div style="margin-top:12px;border:1px solid '+col[1]+';border-left:5px solid '+col[1]+';border-radius:10px;padding:14px;background:'+col[0]+'">'+
+    '<div style="font-weight:700;color:'+col[2]+';display:flex;gap:8px;align-items:center;flex-wrap:wrap">📋 Procedimiento — '+tipo+
+    ' <span style="font-size:.72rem;padding:2px 8px;border-radius:10px;background:'+col[1]+';color:#fff">'+(g.obligatorio?'Respuesta OBLIGATORIA':'No obliga a responder')+'</span></div>'+
+    '<div style="font-size:.86rem;margin-top:8px;color:'+col[2]+'"><b>'+g.plazo+'</b></div>'+
+    _plazoHTML(tipo, g, col)+
+    '<div style="font-size:.85rem;margin-top:6px"><b>Qué hacer:</b> '+g.queHacer+'</div>'+
+    '<div style="font-size:.85rem;margin-top:6px"><b>Qué sigue:</b> '+g.siguiente+'</div>'+
+    '<div class="src" style="margin-top:6px">'+g.norma+'</div></div>';
+}
+el('f-fecha-notif').addEventListener('change', function(){
+  if(STATE.oficio && el('f-oficio-text').value.trim()) processOficio(el('f-oficio-text').value);
+  if(typeof snapshotCase==='function') snapshotCase();
+});
+function processOficio(text){
+  if(!text || !text.trim()){ el('oficio-status').textContent='Pega el texto del oficio primero.'; return; }
+  if(typeof OficioDianParser==='undefined'){ el('oficio-status').textContent='Falta el parser de oficios.'; return; }
+  var r = OficioDianParser.parse(text);
+  STATE.oficio = r;
+  el('oficio-status').innerHTML = '<span style="color:var(--green)">✓ '+(r.tipo||'Oficio')+(r.numeroOficio?(' N° '+r.numeroOficio):'')+(r.impuesto?(' · '+r.impuesto):'')+(r.anioGravable?(' · AG '+r.anioGravable):'')+'</span>';
+  var notaJurisd = (r.jurisdiccion==='municipal') ? '<div class="warn">🏛️ Es un acto <b>MUNICIPAL</b> ('+(r.impuesto||'ICA')+'). El motor de cruces de esta herramienta es para impuestos <b>nacionales (renta/IVA)</b>, así que te muestro el procedimiento y las cifras detectadas, pero los cruces específicos de renta/IVA no aplican a un requerimiento de ICA. El procedimiento (plazos, recursos) es análogo al del E.T.</div>' : '';
+  if(!r.items.length){
+    el('oficio-result').style.display='block';
+    el('oficio-result').innerHTML=notaJurisd+'<div class="warn">No detecté conceptos cruzables de renta/IVA en el texto. Pega el cuerpo del oficio donde lista las inconsistencias, o revisa los cruces igual con tus archivos.</div>'+guiaProcedimientoHTML(r.tipo);
+    return;
+  }
+  var h = notaJurisd + '<div class="card-sub" style="font-weight:600;margin-bottom:6px">La DIAN levantó '+r.items.length+' punto(s) — se marcarán en el análisis:</div>';
+  r.items.forEach(function(it){
+    h += '<div style="display:flex;gap:8px;align-items:center;padding:6px 0;border-bottom:1px dashed var(--border)">'+
+      '<span class="dz-badge" style="background:var(--amber2);color:var(--amber)">Cruce '+it.cruceId+'</span>'+
+      '<span style="font-size:.86rem">'+(CRUCE_NOMBRE[it.cruceId]||it.concepto)+'</span>'+
+      (it.valorDian?('<span style="margin-left:auto;font-family:\'JetBrains Mono\',monospace;font-weight:700;font-size:.85rem">'+fmt(it.valorDian)+'</span>'):'')+
+      '</div>';
+  });
+  h += '<div class="card-sub" style="margin-top:8px;font-size:.78rem">Ahora carga las declaraciones/archivos abajo y dale «Analizar»: la herramienta comparará lo que alega la DIAN contra lo que sale de tus soportes.</div>';
+  h += guiaProcedimientoHTML(r.tipo);
+  el('oficio-result').style.display='block';
+  el('oficio-result').innerHTML = h;
+  refreshAnalizar();
+  try{ if(window.exoTrack) exoTrack.tool('auditor-cruces-oficio-leido'); }catch(e){}
+}
+el('btn-leer-oficio').addEventListener('click',function(){ processOficio(el('f-oficio-text').value); });
+el('f-oficio-pdf').addEventListener('change',function(e){
+  var file=e.target.files[0]; if(!file) return;
+  el('oficio-status').innerHTML='<span class="spinner" style="border-top-color:#1B3A5C"></span> Leyendo PDF…';
+  PensionPDFParser.extractText(file).then(function(r){
+    var txt = r.text||'';
+    // Muchos actos DIAN llegan ESCANEADOS (imagen sin capa de texto): pdf.js no
+    // puede extraer nada. Avisar claro en vez del genérico "pega el texto".
+    if(txt.replace(/\s+/g,'').length < 50){
+      el('oficio-status').innerHTML = '<span style="color:var(--amber)">⚠ Este PDF parece <b>escaneado</b> (imagen, sin texto seleccionable) — no se puede leer automáticamente. Extrae el texto con OCR (Google Lens / la cámara del celular / Acrobat) y pégalo arriba.</span>';
+      return;
+    }
+    el('f-oficio-text').value = txt;
+    processOficio(txt);
+  }).catch(function(err){ el('oficio-status').textContent='✕ '+(err && (err.message||err.code)||'No se pudo leer el PDF'); });
+});
+function refreshAnalizar(){
+  var hay = STATE.renta || STATE.iva || STATE.terceros || STATE.fe || STATE.balance || STATE.oficio;
+  el('btn-analizar').disabled = !hay;
+  snapshotCase();
+}
+/* ════════════════════════════════════════════════════════════════
+   FIRMEZA DE LA DECLARACIÓN — Art. 714 (3 años) · 689-3 (6/12 meses)
+   · pérdidas fiscales 5 años (Art. 117 Ley 2010/2019)
+   ════════════════════════════════════════════════════════════════ */
+function renderFirmeza(){
+  var out = el('firmeza-out'); if(!out) return;
+  var fp = el('f-fecha-present').value;
+  if(!fp){ out.style.display='none'; STATE.firmeza=null; return; }
+  var fv = el('f-fecha-vencim').value;
+  var ben = el('sel-benef').value;
+  var perdidas = el('chk-perdidas').checked;
+  var firme, regla, caveat='';
+  if(ben){
+    firme = _addPlazoISO(fp, parseInt(ben,10), 0);
+    regla = 'beneficio de auditoría (Art. 689-3): firmeza en '+ben+' meses desde la presentación';
+    caveat = 'Verifica los requisitos del 689-3: presentación y pago oportunos, impuesto neto ≥71 UVT del año anterior y que el incremento se haya cumplido. Si la DIAN notificó emplazamiento/requerimiento DENTRO del término, el beneficio no opera.';
+  } else if(perdidas){
+    var baseP = (fv && fv > fp) ? fv : fp;
+    firme = _addPlazoISO(baseP, 60, 0);
+    regla = 'declaraciones que determinan o compensan pérdidas fiscales: firmeza de 5 años (Art. 117 Ley 2010/2019)';
+  } else {
+    var base = (fv && fv > fp) ? fv : fp;
+    firme = _addPlazoISO(base, 36, 0);
+    regla = 'firmeza general de 3 años (Art. 714) contados desde '+((fv && fv > fp)?'el vencimiento del plazo para declarar':'la presentación (fue extemporánea)');
+  }
+  var rest = _diasHasta(firme);
+  STATE.firmeza = { fecha: firme, enFirme: rest < 0 };
+  out.style.display='block';
+  if(rest < 0){
+    out.innerHTML = '<div style="padding:12px 14px;background:#dcfce7;border:1.5px solid #16a34a;border-radius:10px;font-size:.9rem;color:#14532d">'+
+      '🛡️ <b>LA DECLARACIÓN YA ESTÁ EN FIRME</b> desde el <b>'+_fmtFechaLarga(firme)+'</b> ('+regla+').'+
+      ' La DIAN <b>ya no puede modificarla</b> — si el requerimiento especial se notificó después de esa fecha, ese es tu primer argumento de defensa (Arts. 705, 714 E.T.).'+
+      '<div style="font-size:.76rem;margin-top:6px;color:#166534">Ojo: el emplazamiento para corregir suspende el término 1 mes (Art. 706) y la inspección tributaria hasta 3 meses — verifica que no hubo suspensiones antes de alegar firmeza.</div>'+
+      (caveat?'<div style="font-size:.76rem;margin-top:4px;color:#166534">'+caveat+'</div>':'')+'</div>';
+  } else {
+    out.innerHTML = '<div style="padding:12px 14px;background:#fef3c7;border:1.5px solid #d97706;border-radius:10px;font-size:.9rem;color:#78350f">'+
+      '⏳ La declaración queda en firme el <b>'+_fmtFechaLarga(firme)+'</b> — faltan <b>'+rest+' días</b> ('+regla+'). Hasta esa fecha la DIAN puede notificar requerimiento especial (Art. 705).'+
+      (caveat?'<div style="font-size:.76rem;margin-top:4px">'+caveat+'</div>':'')+'</div>';
+  }
+}
+['f-fecha-present','f-fecha-vencim','sel-benef','chk-perdidas'].forEach(function(id){
+  el(id).addEventListener('change', function(){ renderFirmeza(); snapshotCase(); });
+});
+/* ════════════════════════════════════════════════════════════════
+   ESCENARIOS ECONÓMICOS — qué cuesta cada camino, en pesos
+   Sanciones: Art. 644 (corrección 10%/20%) · 709 (¼) · 713 (½) ·
+   647-648 (inexactitud 100% / 200% activos omitidos) · 639 (mínima 10 UVT)
+   ════════════════════════════════════════════════════════════════ */
+var UVT_ESC = 52374; // UVT 2026
+function _sancionConMinima(v){ return v>0 ? Math.max(Math.round(v), 10*UVT_ESC) : 0; }
+function renderEscenarios(C){
+  var card = el('escenarios-card'); if(!card) return;
+  var difs = (C||[]).filter(function(c){ return !c.pct && (c.estado==='critico'||c.estado==='alerta'); })
+    .map(function(c){ var f=(c.figs||[]).find(function(x){return x[2];}); return f?Math.abs(f[1]):0; });
+  var sugBase = difs.length ? Math.max.apply(null,difs) : 0;
+  var sugImp = Math.round(sugBase*0.35);
+  if(!sugImp && !(STATE.oficio && STATE.oficio.items.length)){ card.innerHTML=''; return; }
+  card.innerHTML =
+    '<div class="card" style="border-left:4px solid #7C3AED">'+
+    '<div class="card-title">💰 ¿Qué cuesta cada camino?</div>'+
+    '<div class="card-sub">Compara la sanción según el momento en que se corrija. El <b>mayor impuesto</b> es el efecto en renta de la diferencia que prospere — la sugerencia es la mayor diferencia de los cruces × 35% (tarifa Art. 240): <b>ajústala a tu cálculo real</b>.</div>'+
+    '<div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:10px 0">'+
+    '<label style="display:flex;flex-direction:column;gap:4px;font-size:.78rem;color:var(--muted)">Mayor impuesto a pagar en discusión'+
+    '<input type="text" id="esc-imp" inputmode="numeric" value="'+(sugImp?sugImp.toLocaleString('es-CO'):'')+'" style="padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:\'JetBrains Mono\',monospace;font-size:.95rem;width:220px"></label>'+
+    '<label style="display:flex;align-items:center;gap:6px;font-size:.84rem;color:var(--muted)"><input type="checkbox" id="esc-omitidos" style="width:15px;height:15px"> Hay activos omitidos / pasivos inexistentes (sanción 200%)</label>'+
+    '</div>'+
+    '<div id="esc-tabla"></div></div>';
+  el('esc-imp').addEventListener('input', function(){ var n=parseMoneyInput(this.value); this.value=n?n.toLocaleString('es-CO'):''; _escTabla(); });
+  el('esc-omitidos').addEventListener('change', _escTabla);
+  _escTabla();
+}
+function _escTabla(){
+  var out = el('esc-tabla'); if(!out) return;
+  var mi = parseMoneyInput(el('esc-imp').value);
+  if(!mi){ out.innerHTML='<div class="warn">Escribe el mayor impuesto en discusión para ver los escenarios.</div>'; return; }
+  var omit = el('esc-omitidos').checked;
+  var pctInex = omit ? 2.0 : 1.0;
+  var rows = [
+    {k:'corrige', t:'Corregir HOY voluntariamente (antes de emplazamiento)', s:_sancionConMinima(mi*0.10), n:'Art. 644 num. 1 — corrección 10%'},
+    {k:'emplaz',  t:'Corregir después del emplazamiento para corregir',      s:_sancionConMinima(mi*0.20), n:'Art. 644 num. 2 — corrección 20%'},
+    {k:'reqesp',  t:'Aceptar al responder el requerimiento especial',        s:_sancionConMinima(mi*pctInex*0.25), n:'Art. 709 — inexactitud reducida a ¼'},
+    {k:'recurso', t:'Aceptar en el recurso (tras liquidación oficial)',      s:_sancionConMinima(mi*pctInex*0.50), n:'Art. 713 — inexactitud reducida a ½'},
+    {k:'pierde',  t:'Discutir hasta el final y perder',                      s:Math.round(mi*pctInex), n: omit?'Art. 648 — 200% por activos omitidos / pasivos inexistentes':'Art. 648 — inexactitud 100%'}
+  ];
+  var etapa = 'corrige';
+  var tipo = (STATE.oficio && STATE.oficio.tipo) || '';
+  if(/Emplazamiento para corregir/.test(tipo)) etapa='emplaz';
+  else if(/Requerimiento especial/.test(tipo)) etapa='reqesp';
+  else if(/Liquidación/.test(tipo)) etapa='recurso';
+  var h = '<table style="width:100%;border-collapse:collapse;font-size:.84rem"><thead><tr style="border-bottom:2px solid var(--border);text-align:left">'+
+    '<th style="padding:6px 8px">Escenario</th><th style="padding:6px 8px;text-align:right">Sanción</th><th style="padding:6px 8px;text-align:right">Total a pagar*</th><th style="padding:6px 8px">Norma</th></tr></thead><tbody>';
+  rows.forEach(function(r){
+    var es = r.k===etapa;
+    h += '<tr style="border-bottom:1px solid #f1f5f9'+(es?';background:#f5f3ff;font-weight:700':'')+'">'+
+      '<td style="padding:7px 8px">'+r.t+(es?' <span class="dz-badge" style="background:#ede9fe;color:#6d28d9">⬅ tu etapa actual</span>':'')+'</td>'+
+      '<td style="padding:7px 8px;text-align:right;font-family:\'JetBrains Mono\',monospace">'+fmt(r.s)+'</td>'+
+      '<td style="padding:7px 8px;text-align:right;font-family:\'JetBrains Mono\',monospace">'+fmt(mi+r.s)+'</td>'+
+      '<td style="padding:7px 8px;font-size:.76rem;color:var(--muted)">'+r.n+'</td></tr>';
+  });
+  h += '</tbody></table>';
+  h += '<div class="card-sub" style="margin-top:8px;font-size:.76rem">* Mayor impuesto + sanción. <b>Todos los escenarios suman además intereses moratorios</b> (Art. 635: tasa de usura menos 2 puntos — hoy ≈26,8% E.A.) desde el vencimiento hasta el pago: cada mes de espera también cuesta por ahí. Sanción mínima aplicada: 10 UVT = '+fmt(10*UVT_ESC)+' (Art. 639). Si la diferencia tiene explicación legítima y soportes, el escenario correcto puede ser <b>no corregir y defender</b> — esta tabla cuantifica el riesgo, no lo decide.</div>';
+  if(STATE.firmeza && STATE.firmeza.enFirme){
+    h += '<div style="margin-top:8px;padding:10px 12px;background:#dcfce7;border:1.5px solid #16a34a;border-radius:8px;font-size:.84rem;color:#14532d">🛡️ <b>Recuerda:</b> según las fechas que diste, la declaración ya está EN FIRME — antes de pensar en corregir, evalúa alegar firmeza (Arts. 705, 714).</div>';
+  }
+  out.innerHTML = h;
+}
+/* ════════════════════════════════════════════════════════════════
+   RETOMAR CASO — auto-guardado en localStorage
+   Un requerimiento DIAN no se responde en una sesión: se guardan las cifras
+   parseadas (renta/IVA), los campos manuales y el texto del oficio. Los
+   archivos pesados (terceros/FE/balance) NO se persisten — solo se recuerda
+   que estaban cargados para pedir re-subirlos.
+   ════════════════════════════════════════════════════════════════ */
+var CASE_KEY = 'auditor_cruces_caso_v1';
+var _restaurando = false;
+function snapshotCase(){
+  if(_restaurando) return;
+  try{
+    var s = {
+      ts: Date.now(),
+      meta: STATE.meta,
+      renta: STATE.renta ? { derivados: STATE.renta.derivados, meta: STATE.renta.meta||{} } : null,
+      ivaPeriodos: STATE.ivaPeriodos && STATE.ivaPeriodos.length ? STATE.ivaPeriodos : null,
+      bancos: STATE.bancos||0,
+      flags: STATE.flags,
+      sector: STATE.sector||'',
+      patrimonioAnterior: STATE.patrimonioAnterior||0,
+      oficioText: (el('f-oficio-text')||{}).value||'',
+      fechaNotif: (el('f-fecha-notif')||{}).value||'',
+      fechaPresent: (el('f-fecha-present')||{}).value||'',
+      fechaVencim: (el('f-fecha-vencim')||{}).value||'',
+      benef: (el('sel-benef')||{}).value||'',
+      perdidas: !!(el('chk-perdidas')||{}).checked,
+      had: { terceros: !!STATE.terceros, fe: !!STATE.fe, balance: !!STATE.balance }
+    };
+    if(!s.renta && !s.ivaPeriodos && !s.oficioText && !s.bancos && !s.patrimonioAnterior) return;
+    localStorage.setItem(CASE_KEY, JSON.stringify(s));
+  }catch(e){}
+}
+function retomarCaso(){
+  var s; try{ s = JSON.parse(localStorage.getItem(CASE_KEY)||'null'); }catch(e){ s=null; }
+  if(!s) return;
+  _restaurando = true;
+  try{
+    STATE.meta = s.meta || STATE.meta;
+    if(s.renta && s.renta.derivados){
+      STATE.renta = { derivados: s.renta.derivados, meta: s.renta.meta||{}, validacion:{ok:true} };
+      renderParsedRenta(STATE.renta.derivados);
+      setDZ('dz-renta','file-renta','✓ Restaurado del caso guardado','ok');
+    }
+    if(s.ivaPeriodos && s.ivaPeriodos.length){
+      STATE.ivaPeriodos = s.ivaPeriodos;
+      aggregarIva();
+      el('dz-iva').classList.add('loaded');
+      el('file-iva').innerHTML = '<div class="dz-multi"><div>✓ '+s.ivaPeriodos.length+' periodo(s) de IVA restaurado(s)</div></div>';
+      renderIvaResumen();
+    }
+    if(s.bancos){ STATE.bancos=s.bancos; el('f-bancos').value=s.bancos.toLocaleString('es-CO'); }
+    if(s.flags){ STATE.flags=s.flags; el('flag-aiu').checked=!!s.flags.aiu; el('flag-export').checked=!!s.flags.export; el('flag-autorret').checked=!!s.flags.autorret; el('flag-intermediacion').checked=!!s.flags.interm; }
+    if(s.sector){ STATE.sector=s.sector; el('sel-sector').value=s.sector; }
+    if(s.patrimonioAnterior){ STATE.patrimonioAnterior=s.patrimonioAnterior; el('f-patrim-ant').value=s.patrimonioAnterior.toLocaleString('es-CO'); }
+    if(s.fechaNotif) el('f-fecha-notif').value=s.fechaNotif;
+    if(s.fechaPresent) el('f-fecha-present').value=s.fechaPresent;
+    if(s.fechaVencim) el('f-fecha-vencim').value=s.fechaVencim;
+    if(s.benef) el('sel-benef').value=s.benef;
+    if(s.perdidas) el('chk-perdidas').checked=true;
+    if(s.fechaPresent) renderFirmeza();
+    if(s.oficioText){ el('f-oficio-text').value=s.oficioText; if(s.oficioText.trim()) processOficio(s.oficioText); }
+    var faltan=[];
+    if(s.had){ if(s.had.terceros)faltan.push('reportado por terceros'); if(s.had.fe)faltan.push('documentos electrónicos (FE)'); if(s.had.balance)faltan.push('balance de prueba'); }
+    var b=el('caso-banner');
+    b.innerHTML = faltan.length
+      ? '<div class="card" style="border-left:4px solid var(--amber);padding:12px 16px;font-size:.86rem">↺ Caso restaurado. Por seguridad los archivos pesados no se guardan — vuelve a subir: <b>'+faltan.join(' · ')+'</b> y dale «Analizar».</div>'
+      : '';
+  } finally { _restaurando=false; }
+  refreshAnalizar();
+  try{ if(window.exoTrack) exoTrack.tool('auditor-cruces-retomar'); }catch(e){}
+}
+function descartarCaso(){
+  try{ localStorage.removeItem(CASE_KEY); }catch(e){}
+  el('caso-banner').innerHTML='';
+}
+(function(){
+  var s; try{ s = JSON.parse(localStorage.getItem(CASE_KEY)||'null'); }catch(e){ s=null; }
+  if(!s || !s.ts) return;
+  var dias = Math.floor((Date.now()-s.ts)/864e5);
+  var cuando = dias===0 ? 'hoy' : (dias===1 ? 'ayer' : 'hace '+dias+' días');
+  var quien = (s.meta&&s.meta.nit?('NIT '+s.meta.nit):'')+(s.meta&&s.meta.anio?(' · AG '+s.meta.anio):'');
+  el('caso-banner').innerHTML =
+    '<div class="card" style="border-left:4px solid var(--pri2);padding:12px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">'+
+    '<span style="font-size:.9rem">🗂 Tienes un <b>caso guardado</b> '+(quien?('('+quien+') '):'')+'de '+cuando+'.</span>'+
+    '<button class="btn btn-ghost" style="font-size:.82rem;padding:6px 14px" onclick="retomarCaso()">↺ Retomar caso</button>'+
+    '<button class="btn btn-ghost" style="font-size:.82rem;padding:6px 14px;color:var(--muted)" onclick="descartarCaso()">✕ Descartar</button>'+
+    '</div>';
+})();
+/* Marca los cruces que la DIAN levantó en el oficio y los pone primero.
+   Si la DIAN levantó un punto que no se pudo evaluar (falta archivo), agrega placeholder. */
+function annotateOficio(C){
+  if(!STATE.oficio || !STATE.oficio.items.length) return C;
+  STATE.oficio.items.forEach(function(it){
+    var c = C.find(function(x){ return x.id===it.cruceId; });
+    if(c){
+      c.dianRaised = true; c.dianValor = it.valorDian;
+      if(it.valorDian) c.figs.push(['La DIAN alega', it.valorDian]);
+    } else {
+      C.push({
+        id: it.cruceId, titulo: (CRUCE_NOMBRE[it.cruceId]||it.concepto), estado:'na', dianRaised:true, dianValor: it.valorDian,
+        figs: it.valorDian?[['La DIAN alega', it.valorDian]]:[],
+        fuente:'Punto levantado por la DIAN en el oficio.',
+        expl:['La DIAN señaló este punto, pero falta información para evaluarlo en la herramienta. Carga el archivo correspondiente (declaración, FE, balance o terceros) y vuelve a analizar para contrastar la cifra.'],
+        checklist:['Reúne el soporte del concepto que alega la DIAN.','Carga el archivo que permite cruzarlo y re-analiza.']
+      });
+    }
+  });
+  // Cruces levantados por la DIAN primero
+  C.sort(function(a,b){ return (b.dianRaised?1:0)-(a.dianRaised?1:0); });
+  return C;
+}
+/* ════════════════════════════════════════════════════════════════
+   MOTOR DE CRUCES
+   ════════════════════════════════════════════════════════════════ */
+function TOL(base){ return Math.max(base*0.02, 1500000); } // 2% o $1.5M
+function evaluar(declarado, referencia, baseTol){
+  var diff = referencia - declarado;
+  var tol = TOL(baseTol||Math.max(Math.abs(declarado),Math.abs(referencia)));
+  var ad = Math.abs(diff);
+  if(ad <= tol) return {estado:'ok', diff:diff};
+  if(ad <= tol*4) return {estado:'alerta', diff:diff};
+  return {estado:'critico', diff:diff};
+}
+/* Benchmarks de mercado — Supersociedades (GRANDES empresas; ROE 2023 por macrosector,
+   margen neto consolidado 2022 11.3%). Referencia, NO umbral oficial DIAN. */
+var SECTOR_BENCH = {
+  minero:{nombre:'Minero/hidrocarburos',roe:17.0,margen:25.2},
+  manufactura:{nombre:'Manufactura',roe:11.8,margen:11.3},
+  comercio:{nombre:'Comercio',roe:11.7,margen:11.3},
+  agro:{nombre:'Agropecuario',roe:8.5,margen:11.3},
+  construccion:{nombre:'Construcción',roe:7.6,margen:11.3},
+  servicios:{nombre:'Servicios',roe:7.1,margen:11.3}
+};
+function calcularCruces(){
+  var C = [], R = STATE.renta && STATE.renta.derivados, I = STATE.iva, T = STATE.terceros, F = STATE.fe, B = STATE.balance, fl = STATE.flags;
+  /* CRUCE 1 — Ingresos: Renta vs IVA */
+  if(R && I){
+    var ev = evaluar(R.ingresosBrutos, I.ingresosBrutos);
+    var expl = [], note = '';
+    var difAbs = I.ingresosBrutos - R.ingresosBrutos;
+    // Regla AIU / intermediación: IVA infla ingresos con excluidas/no gravadas
+    if(difAbs > 0 && (fl.aiu||fl.interm) && I.excluidasNoGrav > TOL(R.ingresosBrutos)){
+      note = 'Causa probable: en el F300 se reportó como <b>operaciones excluidas/no gravadas</b> '+fmt(I.excluidasNoGrav)+', que en actividades AIU / de intermediación <b>no son ingreso propio</b> (solo lo es el AIU / la comisión). El error está en el diligenciamiento del IVA, no en renta. <b>Acción: corregir el F300</b>, no la declaración de renta.';
+      ev.estado = 'alerta';
+    }
+    expl = [
+      'Ingresos no gravados con IVA que sí van a renta (financieros, dividendos, recuperaciones, método de participación) → renta puede ser <b>mayor</b> que IVA, y es legítimo.',
+      'Exportaciones y ventas exentas: van en renta y en casillas específicas del IVA; verifica que estén bien clasificadas.',
+      'Diferencias de causación (art. 28 vs 429 E.T.): un ingreso puede causarse en IVA en un periodo y reconocerse en renta en otro.',
+      (fl.aiu||fl.interm) ? 'AIU / intermediación: el valor total del contrato/recaudo NO es tu ingreso; solo el AIU o la comisión. No lo reportes como "excluido" inflando el total.' : 'Si manejas base gravable especial (AIU) o intermediación, márcalo arriba para afinar este cruce.'
+    ];
+    C.push({
+      id:1, titulo:'Ingresos: Renta vs IVA', estado:ev.estado,
+      figs:[['Renta (c.58)',R.ingresosBrutos],['IVA año (Σ c.41)',I.ingresosBrutos],['Diferencia',ev.diff,true]],
+      fuente:'F110 casilla 58  vs  suma de F300 casilla 41 del año.',
+      nota:note, expl:expl,
+      checklist:[
+        'Concilia el ingreso contable con renta y con IVA (conciliación fiscal).',
+        'Verifica clasificación de exportaciones, exentos y excluidos en el F300.',
+        'Si hay AIU/intermediación, recalcula el F300 y corrígelo si reportaste el contrato completo.',
+        'Soporta los ingresos no gravados con IVA (certificados financieros, dividendos).'
+      ]
+    });
+  }
+  /* CRUCE 1b — Ingresos: Renta vs FE + terceros */
+  if(R && (F || T)){
+    var ref = (F? F.emitidos.base : 0) || (T? T.ingresos : 0);
+    var fuente = F? 'Facturación electrónica emitida (base sin IVA)' : 'Ingresos reportados por terceros';
+    var ev2 = evaluar(R.ingresosBrutos, ref);
+    // renta debería ser >= FE (FE no captura todo); alarma real si renta < FE
+    var est = ev2.estado;
+    if(R.ingresosBrutos >= ref - TOL(ref)) est = 'ok';
+    else est = (ref - R.ingresosBrutos > TOL(ref)*4)?'critico':'alerta';
+    C.push({
+      id:2, titulo:'Ingresos: Renta vs facturación electrónica / terceros', estado:est,
+      figs:[['Renta (c.58)',R.ingresosBrutos],[F?'FE emitidas':'Terceros',ref],['Diferencia',ref-R.ingresosBrutos,true]],
+      fuente:fuente+'  vs  F110 casilla 58.',
+      expl:[
+        'La renta debe ser <b>igual o mayor</b> que la facturación electrónica emitida. Si es menor, hay ingresos facturados no declarados.',
+        'Ingresos sin FE (algunos servicios, POS antiguos) pueden hacer que renta sea mayor: es normal.',
+        'Notas crédito ya están netas en el cálculo de FE.'
+      ],
+      checklist:[
+        'Cruza factura por factura las FE emitidas contra el libro de ventas.',
+        'Identifica ingresos que no pasaron por FE y confirma que estén en renta.',
+        'Revisa que no falten periodos de FE en el reporte descargado.'
+      ]
+    });
+  }
+  /* CRUCE 2 — Consignaciones bancarias vs ingresos */
+  if(STATE.bancos>0 && R){
+    var ev3 = evaluar(R.ingresosBrutos, STATE.bancos);
+    var est3 = (STATE.bancos - R.ingresosBrutos > TOL(R.ingresosBrutos)*2)?'alerta':'ok';
+    if(STATE.bancos - R.ingresosBrutos > TOL(R.ingresosBrutos)*6) est3='critico';
+    C.push({
+      id:3, titulo:'Consignaciones bancarias vs ingresos', estado:est3,
+      figs:[['Consignaciones',STATE.bancos],['Ingresos renta',R.ingresosBrutos],['Diferencia',STATE.bancos-R.ingresosBrutos,true]],
+      fuente:'Créditos bancarios del año (lo que los bancos reportan en exógena: formato 1019 cuentas y 1020 inversiones)  vs  F110 casilla 58.',
+      expl:[
+        'No toda consignación es ingreso. Son entradas legítimas no gravadas: <b>préstamos recibidos, traslados entre cuentas propias, recaudos por cuenta de terceros, aportes de socios, venta de activos, reintegros y anticipos</b>.',
+        'La DIAN presume ingreso sobre las consignaciones; te corresponde demostrar el origen de las que no lo son.',
+        'Si las consignaciones son MENORES que los ingresos, puede haber ventas en efectivo no bancarizadas (también revisable).'
+      ],
+      checklist:[
+        'Arma una conciliación: consignaciones = ingresos + préstamos + traslados + aportes + recaudos de terceros + otros.',
+        'Documenta cada partida no-ingreso con su soporte (pagaré, acta, contrato de mandato).',
+        'Excluye traslados entre tus propias cuentas para no contar doble.'
+      ]
+    });
+  }
+  /* CRUCE 3 — Costos vs soportes (FE recibidas + nómina) */
+  if(R && (F || T)){
+    var soporte = 0, partes=[];
+    if(F){ soporte += F.recibidos.base; partes.push('FE recibidas '+fmt(F.recibidos.base)); }
+    if(R.nomina){ soporte += R.nomina; partes.push('nómina '+fmt(R.nomina)); }
+    if(!F && T){ soporte += T.costos; partes.push('exógena terceros '+fmt(T.costos)); }
+    var declarado = R.totalCostosDeducciones||0;
+    var est4 = 'ok';
+    var exceso = declarado - soporte;
+    if(exceso > TOL(declarado)) est4 = (exceso > TOL(declarado)*4)?'critico':'alerta';
+    C.push({
+      id:4, titulo:'Costos y deducciones vs soportes', estado:est4,
+      figs:[['Declarado (c.67)',declarado],['Soportado',soporte],['Exceso sin soporte',exceso,true]],
+      fuente:'F110 casilla 67  vs  '+partes.join(' + ')+'.',
+      expl:[
+        'La DIAN rechaza costos que <b>excedan</b> lo facturado electrónicamente + nómina + importaciones + lo informado por terceros.',
+        'Diferencias legítimas: costos con documento soporte de no obligados a facturar, importaciones (DIM), depreciaciones y amortizaciones, provisiones aceptadas fiscalmente, pagos a no residentes.',
+        'Cada factura de proveedor obligado a FE debe tener sus eventos RADIAN para ser soporte válido (art. 616-1 E.T.).'
+      ],
+      checklist:[
+        'Concilia el costo declarado contra el reporte de FE recibidas (RADIAN acusado).',
+        'Suma importaciones y documentos soporte de no obligados a facturar.',
+        'Separa depreciación/amortización (no tienen factura) y déjalas documentadas.',
+        'Revisa facturas de proveedores obligados a FE que llegaron en papel: no son deducibles.'
+      ]
+    });
+  }
+  /* CRUCE 3b — Costos vs exógena terceros */
+  if(R && T && T.costos>0){
+    var ev5 = evaluar(R.totalCostosDeducciones, T.costos);
+    var est5='ok'; var ex5 = R.totalCostosDeducciones - T.costos;
+    if(ex5 > TOL(T.costos)) est5 = (ex5>TOL(T.costos)*4)?'critico':'alerta';
+    C.push({
+      id:5, titulo:'Costos vs exógena de terceros (1001↔1007)', estado:est5,
+      figs:[['Declarado (c.67)',R.totalCostosDeducciones],['Informado por terceros',T.costos],['Exceso',ex5,true]],
+      fuente:'F110 casilla 67  vs  pagos que terceros informaron recibir de ti.',
+      expl:[
+        'Lo que reportas como pago en tu formato 1001 debe coincidir con lo que el proveedor informa como ingreso (formato 1007).',
+        'Diferencias por terceros que no reportaron exógena, o que la presentaron con tu NIT errado.',
+        'Costos sin tercero identificable son los más vulnerables a rechazo.'
+      ],
+      checklist:[
+        'Cruza tu formato 1001 contra el listado de terceros del MUISCA.',
+        'Ubica los costos grandes sin contraparte que los reporte.',
+        'Pide al proveedor corregir su exógena si reportó mal tu NIT.'
+      ]
+    });
+  }
+  /* CRUCE 4 — Retenciones renta vs reportadas */
+  if(R && T && T.retenciones>0){
+    var ev6 = evaluar(R.retenciones, T.retenciones);
+    C.push({
+      id:6, titulo:'Retenciones: declaradas vs reportadas (F1003)', estado:ev6.estado,
+      figs:[['Declaradas (c.107)',R.retenciones],['Reportadas terceros',T.retenciones],['Diferencia',ev6.diff,true]],
+      fuente:'F110 casilla 107  vs  retenciones que terceros informaron practicarte.',
+      expl:[
+        'Solo puedes restar retenciones efectivamente practicadas y certificadas.',
+        'Si declaras MÁS de lo que terceros reportan, debes tener el certificado que lo respalde.',
+        'Diferencias por NIT errado en el agente retenedor o por periodos.'
+      ],
+      checklist:[
+        'Reúne los certificados de retención que soportan la casilla 107.',
+        'Cruza contra el listado de terceros (formato 1003).',
+        'Solicita corrección al agente que reportó mal.'
+      ]
+    });
+  }
+  /* CRUCE 5 — Patrimonio vs activos (balance) */
+  if(R && B){
+    var ag = B.aggregates && B.aggregates._totals || {};
+    var activos = ag.activo||0;
+    var ev7 = evaluar(R.patrimonioBruto, activos);
+    C.push({
+      id:7, titulo:'Patrimonio bruto vs activos contables', estado:ev7.estado,
+      figs:[['Patrimonio bruto (c.44)',R.patrimonioBruto],['Activos balance',activos],['Diferencia',ev7.diff,true]],
+      fuente:'F110 casilla 44  vs  total de activos del balance.',
+      expl:[
+        'El patrimonio bruto fiscal puede diferir del contable por valor patrimonial vs valor razonable, depreciaciones fiscales, y activos medidos distinto.',
+        'Una diferencia patrimonial frente a exógena (saldos bancarios, inversiones, CxC informadas por terceros) es de las causas más frecuentes de requerimiento.',
+        'Activos omitidos en años anteriores se normalizan vía art. 239-1 E.T.'
+      ],
+      checklist:[
+        'Concilia activo por activo el valor fiscal vs el contable.',
+        'Cruza saldos bancarios e inversiones contra lo reportado por las entidades financieras.',
+        'Revisa CxC informadas por terceros que no estén en tu patrimonio.'
+      ]
+    });
+  }
+  /* CRUCE 6 — IVA interno: AIU base mínima + coherencia generado */
+  if(I && (fl.aiu) && I.aiu>0){
+    // base AIU debe ser >= 10% del valor total de operaciones AIU; señal informativa
+    C.push({
+      id:8, titulo:'IVA interno — base AIU', estado:'na',
+      figs:[['AIU gravado (c.29)',I.aiu],['IVA generado AIU est.',Math.round(I.aiu*0.19)]],
+      fuente:'F300 casilla 29 (base gravable especial).',
+      expl:[
+        'La base gravable del AIU no puede ser inferior al 10% del valor total del contrato (art. 462-1 E.T.).',
+        'La tarifa aplicable al AIU es la general (19%), no una reducida.',
+        'Para renta, el ingreso es el valor TOTAL realizado (art. 26-27 E.T.), aunque el IVA solo grave el AIU.'
+      ],
+      checklist:[
+        'Verifica que el AIU declarado sea ≥ 10% del valor del contrato.',
+        'Confirma que en renta declaraste el ingreso total, no solo el AIU.'
+      ]
+    });
+  }
+  /* CRUCE 9 — Razonabilidad sectorial (heurística de mercado + TTD normativa) */
+  if(R && R.ingresosBrutos>0){
+    var ing = R.ingresosBrutos;
+    var rentaLiq = R.rentaLiquidaGravable||0;
+    var patrim = R.patrimonioLiquido||0;
+    var imp = R.totalImpuestoCargo||0;
+    var margenFiscal = (ing - (R.totalCostosDeducciones||0)) / ing * 100; // proxy margen
+    var roeFiscal = patrim>0 ? (rentaLiq/patrim*100) : null;
+    var tasaRenta = rentaLiq/ing*100;
+    var tasaEfectiva = rentaLiq>0 ? (imp/rentaLiq*100) : null;
+    var bench = STATE.sector ? SECTOR_BENCH[STATE.sector] : null;
+    var figs9 = [
+      ['Margen fiscal (ing−costos)÷ing', Math.round(margenFiscal*10)/10],
+      ['Tasa de renta (renta líq÷ing)', Math.round(tasaRenta*10)/10]
+    ];
+    if(roeFiscal!=null) figs9.push(['ROE fiscal (renta líq÷patrim)', Math.round(roeFiscal*10)/10]);
+    if(bench) figs9.push(['Ref. ROE sector '+bench.nombre, bench.roe]);
+    if(tasaEfectiva!=null) figs9.push(['Tasa efectiva (imp÷renta líq)', Math.round(tasaEfectiva*10)/10]);
+    // Estado heurístico: margen muy delgado o ROE muy por debajo del sector = foco de riesgo
+    var est9 = 'na';
+    if(margenFiscal < 3 || (R.totalCostosDeducciones/ing) > 0.97) est9 = 'alerta';
+    if(bench && roeFiscal!=null && roeFiscal < bench.roe*0.4 && est9!=='alerta') est9 = 'alerta';
+    var expl9 = [
+      '<b>Heurística de mercado (NO es regla DIAN publicada):</b> la DIAN tiene un modelo de riesgo que marca a quienes están fuera del comportamiento de su sector. Estos indicadores aproximan ese análisis.',
+      '⚠ Los benchmarks son de <b>empresas grandes</b> (Supersociedades). Una pyme normal puede estar lejos del promedio sin que haya nada irregular — úsalo como guía, no como veredicto.',
+      'Un margen muy delgado o costos casi iguales a los ingresos (con operación activa) es lo que más llama la atención: sugiere ingresos ocultos o costos inflados.',
+      '<b>Con base normativa (esto sí lo mide la DIAN):</b> Tasa de Tributación Depurada mínima del 15% (art. 240 par. 6 E.T.). Si tu impuesto depurado ÷ utilidad depurada queda bajo 15%, se adiciona impuesto (casilla 95). Las pérdidas recurrentes con operación viva también son foco.'
+    ];
+    if(!STATE.sector) expl9.unshift('Selecciona el sector arriba para comparar tu ROE contra el promedio de tu actividad.');
+    C.push({
+      id:9, titulo:'Razonabilidad sectorial — perfil de riesgo', estado:est9,
+      figs: figs9.map(function(f){ return [f[0], f[1], false]; }),
+      fuente:'Indicadores del F110 (c.58/c.67/c.79/c.46/c.99) vs benchmark Supersociedades. Heurística + TTD (art. 240 par. 6).',
+      pct:true,
+      expl: expl9,
+      checklist:[
+        'Si tu margen es atípico para el sector, ten lista la explicación (etapa de inversión, sector de bajo margen, año malo).',
+        'Verifica tu Tasa de Tributación Depurada (≥15%) y la casilla 95 si aplica tarifa general.',
+        'Documenta pérdidas si las hay (no es ilegal, pero es foco de revisión).'
+      ]
+    });
+  }
+  /* CRUCE 10 — Comparación patrimonial (normativa, arts. 236-239 E.T.) */
+  if(R && STATE.patrimonioAnterior>0){
+    var plActual = R.patrimonioLiquido||0;
+    var incremento = plActual - STATE.patrimonioAnterior;
+    var capacidad = (R.rentaLiquidaGravable||0) - (R.totalImpuestoCargo||0); // renta después de impuesto (proxy de lo que puede financiar patrimonio)
+    var noJustificado = incremento - capacidad;
+    var est10 = 'ok';
+    if(noJustificado > TOL(Math.abs(incremento))) est10 = (noJustificado > TOL(Math.abs(incremento))*3)?'critico':'alerta';
+    C.push({
+      id:10, titulo:'Comparación patrimonial (arts. 236-239 E.T.)', estado:est10,
+      figs:[['Δ Patrimonio líquido', incremento, true],['Renta después de impuesto', capacidad],['Incremento sin justificar', noJustificado, true]],
+      fuente:'Patrimonio líquido año actual (c.46) − año anterior  vs  renta gravable − impuesto pagado.',
+      expl:[
+        'Si tu patrimonio creció más de lo que tu renta declarada permite financiar, la diferencia <b>se grava como renta</b> salvo que pruebes el origen (art. 236 E.T.).',
+        'Causas legítimas: herencias/donaciones (declaradas como ganancia ocasional), valorizaciones sin desembolso, préstamos recibidos, aportes de socios, pasivos antes no declarados.',
+        'Este cálculo es una aproximación (no incluye rentas exentas ni ganancias ocasionales). Ajusta con esos valores si aplican.'
+      ],
+      checklist:[
+        'Concilia el incremento patrimonial con tu renta, ganancias ocasionales y rentas exentas del año.',
+        'Documenta el origen de cada activo nuevo grande (cuenta bancaria, inmueble, vehículo, inversión).',
+        'Verifica que no haya activos omitidos en años anteriores (art. 239-1).'
+      ]
+    });
+  }
+  return C;
+}
+/* ── render resultados ───────────────────────────────────────────── */
+function renderResultados(){
+  var C = calcularCruces();
+  C = annotateOficio(C);
+  if(!C.length){ alert('Carga al menos la declaración de renta o de IVA, o pega el oficio de la DIAN, para poder cruzar.'); return; }
+  STATE._cruces = C;
+  var crit = C.filter(function(c){return c.estado==='critico';}).length;
+  var aler = C.filter(function(c){return c.estado==='alerta';}).length;
+  var ok = C.filter(function(c){return c.estado==='ok';}).length;
+  var banner, cls, msg;
+  if(crit>0){ cls='score-crit'; msg = crit+' cruce(s) con diferencia fuerte y '+aler+' por revisar. Alta probabilidad de requerimiento si no se documenta.'; }
+  else if(aler>0){ cls='score-warn'; msg = aler+' cruce(s) para revisar y documentar. Riesgo medio.'; }
+  else { cls='score-ok'; msg = 'Sin diferencias materiales en los cruces evaluados. Riesgo bajo.'; }
+  banner = '<div class="score-banner '+cls+'"><div class="big">'+(crit>0?'🔴':(aler>0?'🟠':'🟢'))+'</div>'+
+    '<div><div class="lbl"><b>'+msg+'</b></div><div class="lbl" style="font-size:.82rem;margin-top:4px">'+ok+' en orden · '+aler+' alerta · '+crit+' crítico — '+C.length+' cruces evaluados'+
+    (STATE.meta.nombre?(' · '+STATE.meta.nombre):'')+(STATE.meta.anio?(' · AG '+STATE.meta.anio):'')+'</div></div></div>';
+  el('score-banner').innerHTML = banner;
+  var html = '';
+  C.forEach(function(c){
+    html += '<div class="cruce '+c.estado+'">';
+    html += '<div class="cruce-head"><div class="cruce-dot"></div><div class="cruce-title">Cruce '+c.id+' · '+c.titulo+
+            (c.dianRaised?' <span class="dz-badge" style="background:#fde68a;color:#92400e">⚠ La DIAN lo levantó</span>':'')+'</div>'+
+            '<div class="cruce-state">'+({ok:'En orden',alerta:'Revisar',critico:'Crítico',na:'Informativo'})[c.estado]+'</div></div>';
+    html += '<div class="cruce-fig">';
+    c.figs.forEach(function(f){
+      var isDiff = f[2];
+      var okd = isDiff && Math.abs(f[1])<=TOL(Math.abs(f[1])+1);
+      var val = c.pct ? (f[1]+'%') : fmt(f[1]);
+      html += '<div class="fig'+(isDiff?(' diff'+(okd?' okd':'')):'')+'"><div class="l">'+f[0]+'</div><div class="v">'+val+'</div></div>';
+    });
+    html += '</div>';
+    if(c.nota) html += '<div class="warn" style="color:var(--amber)">⚠ '+c.nota+'</div>';
+    // Conciliación: registrar lo que ya tiene explicación legítima y ver el residual
+    var diffFig = c.figs.find(function(f){return f[2];});
+    if(diffFig && c.estado!=='na' && !c.pct){
+      var dv = Math.abs(diffFig[1]);
+      var suger = '';
+      if(c.id===1 && STATE.iva){
+        var chips = [];
+        if(STATE.iva.exportaciones>0) chips.push(['Exportaciones',STATE.iva.exportaciones]);
+        if(STATE.iva.exentas>0) chips.push(['Exentas',STATE.iva.exentas]);
+        if(STATE.iva.excluidasNoGrav>0) chips.push(['Excluidas/no gravadas',STATE.iva.excluidasNoGrav]);
+        if(chips.length) suger = '<div style="font-size:.76rem;margin-top:8px;color:var(--muted)">Sugeridas del F300: '+chips.map(function(ch){return '<button type="button" class="concil-chip" data-cruce="'+c.id+'" data-val="'+ch[1]+'">+ '+ch[0]+' '+fmt(ch[1])+'</button>';}).join(' ')+'</div>';
+      }
+      html += '<div class="concil">'+
+        '<div style="font-size:.82rem;font-weight:600">🧩 ¿Parte de esta diferencia ya tiene explicación legítima? Regístrala y mira lo que queda sin explicar:</div>'+
+        '<div style="display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap">'+
+        '<input type="text" class="concil-input" data-cruce="'+c.id+'" data-diff="'+dv+'" data-tol="'+TOL(dv)+'" inputmode="numeric" placeholder="$ explicado">'+
+        '<span class="concil-res" style="font-size:.85rem;font-weight:700"></span></div>'+
+        suger+'</div>';
+    }
+    html += '<div class="src">📌 '+c.fuente+'</div>';
+    html += '<details><summary>¿Por qué puede pasar? (diferencias legítimas)</summary><ul>'+c.expl.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul></details>';
+    html += '<details><summary>✅ Qué debes verificar / soportar</summary><ul>'+c.checklist.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul></details>';
+    html += '</div>';
+  });
+  el('cruces-list').innerHTML = html;
+  try{ renderEscenarios(C); }catch(e){ console.warn('renderEscenarios fallo', e); }
+  // Borrador (PRO)
+  renderBorradorBlock(C);
+  el('results').style.display='block';
+  el('bottom-help').style.display='none';
+  el('results').scrollIntoView({behavior:'smooth'});
+  try{ if(window.exoTrack) exoTrack.tool('auditor-cruces-generado'); }catch(e){}
+}
+function renderBorradorBlock(C){
+  var block = el('borrador-block');
+  var of = STATE.oficio;
+  var guia = of ? '<div class="card">'+guiaProcedimientoHTML(of.tipo)+'</div>' : '';
+  var esPersuasivo = of && of.tipo==='Oficio persuasivo';
+  var relevantes = C.filter(function(c){return c.estado==='alerta'||c.estado==='critico'||c.dianRaised;});
+  if(!relevantes.length){ block.innerHTML = guia + '<div class="card" style="background:var(--green2);border-color:var(--green)"><b>👍 No hay cruces que requieran un escrito de respuesta.</b> Conserva los soportes del checklist por si la DIAN consulta.</div>'; return; }
+  var preludio = esPersuasivo ? '<div class="warn" style="margin-bottom:10px">Es un <b>oficio persuasivo</b>: no estás obligado a radicar respuesta. Lo prioritario es revisar/corregir y conservar soportes. Este borrador es <b>opcional</b>.</div>' : '';
+  var isPro = false;
+  try{ isPro = !!(window.exoPro && exoPro.getSaved && exoPro.getSaved()); }catch(e){}
+  if(isPro){
+    block.innerHTML = guia + '<div class="card">'+preludio+'<div class="card-title">✍️ Borrador de respuesta a la DIAN'+(esPersuasivo?' (opcional)':'')+'</div>'+
+      '<div class="card-sub">Plantilla editable. Ajusta cifras y soportes reales antes de radicar.</div>'+
+      '<div class="borrador" id="borrador-text" contenteditable="true">'+generarBorrador(relevantes)+'</div></div>';
+  } else {
+    block.innerHTML = guia + '<div class="pro-lock"><h3>🔒 Borrador de respuesta + informe en Excel — PRO</h3>'+
+      '<p>Desbloquea el escrito de respuesta a la DIAN (con la causa y los soportes de cada cruce) y la descarga del informe completo.</p>'+
+      '<button class="btn" style="background:#fbbf24;color:#3b2a00" id="btn-unlock">Desbloquear PRO</button></div>';
+    var b=el('btn-unlock'); if(b) b.addEventListener('click',function(){ if(typeof exoProGate==='function') exoProGate('Auditor de Cruces DIAN'); });
+  }
+}
+function generarBorrador(rel){
+  var n = STATE.meta.nombre||'[RAZÓN SOCIAL]';
+  var nit = STATE.meta.nit||'[NIT]';
+  var anio = STATE.meta.anio||'[AÑO GRAVABLE]';
+  var of = STATE.oficio || {};
+  var refOficio = of.numeroOficio ? ((of.tipo||'Oficio')+' N° '+of.numeroOficio) : 'la comunicación de la entidad';
+  var t = 'Señores\nDIRECCIÓN DE IMPUESTOS Y ADUANAS NACIONALES — DIAN\n\n';
+  t += 'Referencia: respuesta a '+refOficio+' — '+n+', NIT '+nit+', año gravable '+anio+'.\n\n';
+  t += 'Respetados señores:\n\nEn atención a '+refOficio+', y con el fin de aclarar las diferencias detectadas en el cruce de información, me permito explicar lo siguiente respecto de cada punto:\n\n';
+  rel.forEach(function(c,i){
+    t += (i+1)+'. '+c.titulo+'.\n';
+    var fd = c.figs.find(function(f){return f[2];});
+    if(fd) t += '   Diferencia observada: '+fmt(fd[1])+'.\n';
+    if(c.nota) t += '   '+c.nota.replace(/<[^>]+>/g,'')+'\n';
+    t += '   Explicación: '+(c.expl[0]||'').replace(/<[^>]+>/g,'')+'\n';
+    t += '   Soportes que se adjuntan: '+(c.checklist[0]||'').replace(/<[^>]+>/g,'')+'\n\n';
+  });
+  t += 'Con lo anterior, las diferencias informadas obedecen a las causas señaladas y se encuentran debidamente soportadas, por lo que solicito tener por aclarada la situación.\n\n';
+  t += 'Cordialmente,\n\n____________________________\nRepresentante Legal — '+n+'\nNIT '+nit;
+  return t;
+}
+/* ── botones ─────────────────────────────────────────────────────── */
+el('btn-analizar').addEventListener('click', renderResultados);
+el('btn-print').addEventListener('click', function(){ window.print(); });
+/* ── Conciliación por cruce: residual sin explicar ───────────────── */
+function updateConcil(input){
+  var dv = parseFloat(input.getAttribute('data-diff'))||0;
+  var tol = parseFloat(input.getAttribute('data-tol'))||0;
+  var exp = parseMoneyInput(input.value);
+  var resid = dv - exp;
+  var span = input.parentNode.querySelector('.concil-res');
+  var card = input.closest ? input.closest('.cruce') : null;
+  if(exp>0 && resid<=tol){
+    if(span) span.innerHTML = '<span style="color:var(--green)">✓ Diferencia explicada — queda sin explicar '+fmt(Math.max(0,resid))+'</span>';
+    if(card) card.classList.add('explicada');
+  } else {
+    if(span) span.innerHTML = exp>0 ? '<span style="color:var(--amber)">Sin explicar: '+fmt(resid)+'</span>' : '';
+    if(card) card.classList.remove('explicada');
+  }
+}
+el('cruces-list').addEventListener('input', function(e){
+  if(e.target.classList && e.target.classList.contains('concil-input')) updateConcil(e.target);
+});
+el('cruces-list').addEventListener('click', function(e){
+  if(e.target.classList && e.target.classList.contains('concil-chip')){
+    var cruce = e.target.getAttribute('data-cruce');
+    var inp = el('cruces-list').querySelector('.concil-input[data-cruce="'+cruce+'"]');
+    if(inp){ var cur = parseMoneyInput(inp.value); inp.value = (cur + parseFloat(e.target.getAttribute('data-val'))).toLocaleString('es-CO'); updateConcil(inp); }
+  }
+});
+el('btn-excel').addEventListener('click', function(){
+  if(typeof exoProGate==='function'){ exoProGate('Auditor de Cruces DIAN').then(function(ok){ if(ok) exportExcel(); }); }
+  else exportExcel();
+});
+function exportExcel(){
+  if(!STATE._cruces){ alert('Primero analiza los cruces.'); return; }
+  if(typeof ExcelJS==='undefined'){ alert('Falta ExcelJS'); return; }
+  var wb = new ExcelJS.Workbook();
+  var ws = wb.addWorksheet('Cruces DIAN');
+  ws.columns = [
+    {header:'Cruce',key:'t',width:46},{header:'Estado',key:'e',width:12},
+    {header:'Declarado',key:'d',width:18},{header:'Referencia',key:'r',width:18},
+    {header:'Diferencia',key:'f',width:18},{header:'Fuente',key:'s',width:55}
+  ];
+  ws.getRow(1).font={bold:true,color:{argb:'FFFFFFFF'}};
+  ws.getRow(1).fill={type:'pattern',pattern:'solid',fgColor:{argb:'FF1B3A5C'}};
+  STATE._cruces.forEach(function(c){
+    var figs=c.figs;
+    ws.addRow({ t:'Cruce '+c.id+' · '+c.titulo, e:({ok:'En orden',alerta:'Revisar',critico:'CRÍTICO',na:'Info'})[c.estado],
+      d:figs[0]?figs[0][1]:'', r:figs[1]?figs[1][1]:'', f:(figs.find(function(x){return x[2];})||['','',0])[1], s:c.fuente });
+  });
+  ws.eachRow(function(row,n){ if(n>1){ ['d','r','f'].forEach(function(k){ row.getCell(k).numFmt='$ #,##0'; }); } });
+  var meta = STATE.meta;
+  wb.xlsx.writeBuffer().then(function(buf){
+    var blob=new Blob([buf],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+    var a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+    a.download='Cruces-DIAN_'+(meta.nit||'')+'_'+(meta.anio||'')+'.xlsx'; a.click();
+  });
+  try{ if(window.exoTrack) exoTrack.tool('auditor-cruces-excel'); }catch(e){}
+}
+</script>
+</body>
+</html>

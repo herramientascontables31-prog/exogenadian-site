@@ -1,0 +1,1383 @@
+{
+  "grupos": {
+    "exogena": {
+      "label": "Exógena",
+      "icon": "📂",
+      "menu": true,
+      "order": 1,
+      "verTodas": "exogena-suite.html"
+    },
+    "renta": {
+      "label": "Renta y declaraciones",
+      "icon": "📑",
+      "menu": true,
+      "order": 2,
+      "verTodas": "sitemap.html"
+    },
+    "iva": {
+      "label": "IVA y Retención",
+      "icon": "📋",
+      "menu": true,
+      "order": 3,
+      "verTodas": "sitemap.html"
+    },
+    "conta": {
+      "label": "Contabilidad y EEFF",
+      "icon": "📊",
+      "menu": true,
+      "order": 4,
+      "verTodas": "eeff-hub.html"
+    },
+    "laboral": {
+      "label": "Laboral y nómina",
+      "icon": "👷",
+      "menu": true,
+      "order": 5,
+      "verTodas": "liquidador.html"
+    },
+    "ia": {
+      "label": "IA Contable",
+      "icon": "✨",
+      "menu": true,
+      "order": 6,
+      "verTodas": "ia.html"
+    },
+    "consultas": {
+      "label": "Consultas y trámites",
+      "icon": "🔍",
+      "menu": true,
+      "order": 7,
+      "verTodas": "sitemap.html"
+    },
+    "sanciones": {
+      "label": "Sanciones y mora",
+      "icon": "⚖️",
+      "menu": true,
+      "order": 8,
+      "verTodas": ""
+    },
+    "docs": {
+      "label": "Documentos y certificados",
+      "icon": "📜",
+      "menu": true,
+      "order": 9,
+      "verTodas": "certificados.html"
+    },
+    "finanzas": {
+      "label": "Finanzas personales",
+      "icon": "💰",
+      "menu": false,
+      "order": 10,
+      "verTodas": "finanzas.html"
+    },
+    "escuela": {
+      "label": "Escuela / carrera",
+      "icon": "🎓",
+      "menu": false,
+      "order": 11,
+      "verTodas": "escuela.html"
+    }
+  },
+  "herramientas": [
+    {
+      "url": "exogena.html",
+      "grupo": "exogena",
+      "titulo": "Exógena desde balance",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "exogena-desde-fe.html",
+      "grupo": "exogena",
+      "titulo": "Exógena desde FE",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "exogena-suite.html",
+      "grupo": "exogena",
+      "titulo": "Kit Exógena",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "exogena-cce.html",
+      "grupo": "exogena",
+      "titulo": "CCE — Consorcios y UT",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "exogenas-distritales.html",
+      "grupo": "exogena",
+      "titulo": "Exógenas distritales (ICA)",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "exogena-f1004.html",
+      "grupo": "exogena",
+      "titulo": "F1004 Descuentos",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "exogena-f1011.html",
+      "grupo": "exogena",
+      "titulo": "F1011 Multi-bloque",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "exogena-f1647.html",
+      "grupo": "exogena",
+      "titulo": "F1647 Ingresos para terceros",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "exogena-f2275.html",
+      "grupo": "exogena",
+      "titulo": "F2275 INCRNGO",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "exogena-f5253.html",
+      "grupo": "exogena",
+      "titulo": "F5253 Beneficiarios efectivos",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "prevalidador.html",
+      "grupo": "exogena",
+      "titulo": "Prevalidador",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "auditor-cruces-dian.html",
+      "grupo": "renta",
+      "titulo": "Auditor de Cruces DIAN",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "formato2516.html",
+      "grupo": "renta",
+      "titulo": "Conciliación Fiscal F2516",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "regimen-simple.html",
+      "grupo": "renta",
+      "titulo": "Régimen Simple (RST)",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "renta-juridica.html",
+      "grupo": "renta",
+      "titulo": "Renta F110",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "renta-personas-naturales.html",
+      "grupo": "renta",
+      "titulo": "Renta PN F210",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "calculadora-regimen.html",
+      "grupo": "renta",
+      "titulo": "Comparador de regímenes",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "formato2593.html",
+      "grupo": "renta",
+      "titulo": "Régimen Simple F2593",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "renta260.html",
+      "grupo": "renta",
+      "titulo": "Régimen Simple F260",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "renta110.html",
+      "grupo": "renta",
+      "titulo": "Renta F110 (motor)",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "formato210-express.html",
+      "grupo": "renta",
+      "titulo": "Renta F210 — Modo Express",
+      "desc": "",
+      "popular": false,
+      "hidden": true,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "formato210-pro.html",
+      "grupo": "renta",
+      "titulo": "Renta F210 — Modo Profesional",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "formato210.html",
+      "grupo": "renta",
+      "titulo": "Renta F210 — Réplica DIAN",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "iva300.html",
+      "grupo": "iva",
+      "titulo": "IVA 300",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "retencion350.html",
+      "grupo": "iva",
+      "titulo": "Retención 350",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "retencion-compras.html",
+      "grupo": "iva",
+      "titulo": "Calculadora retenciones en compras",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "decreto240.html",
+      "grupo": "iva",
+      "titulo": "Decreto 240 — Interés moratorio",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "impuesto-consumo.html",
+      "grupo": "iva",
+      "titulo": "Impuesto al Consumo F310",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "patrimonio420.html",
+      "grupo": "iva",
+      "titulo": "Impuesto al Patrimonio F420",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "retencion-dividendos.html",
+      "grupo": "iva",
+      "titulo": "Retención dividendos",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "retencion-fuente.html",
+      "grupo": "iva",
+      "titulo": "Retención por salarios",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "conciliacion.html",
+      "grupo": "conta",
+      "titulo": "Conciliación Bancaria",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "contabilizar-fe.html",
+      "grupo": "conta",
+      "titulo": "Contabilizar desde FE",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "eeff-hub.html",
+      "grupo": "conta",
+      "titulo": "Kit Estados Financieros",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "analisis-vertical-horizontal.html",
+      "grupo": "conta",
+      "titulo": "Análisis Vertical y Horizontal",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "auditor-deudas.html",
+      "grupo": "conta",
+      "titulo": "Auditor de deudas",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "estadosfinancieros.html",
+      "grupo": "conta",
+      "titulo": "Estados Financieros NIIF",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "mi-contabilidad.html",
+      "grupo": "conta",
+      "titulo": "Mi Contabilidad",
+      "desc": "",
+      "popular": false,
+      "hidden": true,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "micro.html",
+      "grupo": "conta",
+      "titulo": "Mi Contabilidad (alias)",
+      "desc": "",
+      "popular": false,
+      "hidden": true,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "dashboard.html",
+      "grupo": "conta",
+      "titulo": "Panel Financiero",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "razones-financieras.html",
+      "grupo": "conta",
+      "titulo": "Razones Financieras",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "trend-financiero.html",
+      "grupo": "conta",
+      "titulo": "Trend Financiero",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "liquidador.html",
+      "grupo": "laboral",
+      "titulo": "Liquidador Laboral",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 1
+    },
+    {
+      "url": "nomina-masiva.html",
+      "grupo": "laboral",
+      "titulo": "Nómina por Excel",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 2
+    },
+    {
+      "url": "salario-neto.html",
+      "grupo": "laboral",
+      "titulo": "Salario Neto",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 3
+    },
+    {
+      "url": "empleo.html",
+      "grupo": "laboral",
+      "titulo": "Preparación Empleo",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 4
+    },
+    {
+      "url": "formato220.html",
+      "grupo": "laboral",
+      "titulo": "Certificado F220",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "liquidador-prestaciones.html",
+      "grupo": "laboral",
+      "titulo": "Cesantías, prima y vacaciones por separado",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "comparador-laboral-prestacion.html",
+      "grupo": "laboral",
+      "titulo": "Comparador laboral vs prestación de servicios",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "costoreal.html",
+      "grupo": "laboral",
+      "titulo": "Costo Empleado",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "liquidador-horas.html",
+      "grupo": "laboral",
+      "titulo": "Horas extras y recargos",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "liquidador-domestica.html",
+      "grupo": "laboral",
+      "titulo": "Liquidación empleada doméstica",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "liquidador-general.html",
+      "grupo": "laboral",
+      "titulo": "Liquidación laboral general",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "liquidador-pension.html",
+      "grupo": "laboral",
+      "titulo": "Liquidador de pensión Colombia",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "ia-asistente.html",
+      "grupo": "ia",
+      "titulo": "Asistente Contable IA",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 1
+    },
+    {
+      "url": "ia-chat-et.html",
+      "grupo": "ia",
+      "titulo": "Estatuto Tributario (chat)",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 2
+    },
+    {
+      "url": "ia-respuesta-requerimiento.html",
+      "grupo": "ia",
+      "titulo": "Responder requerimiento",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 3
+    },
+    {
+      "url": "prompts.html",
+      "grupo": "ia",
+      "titulo": "Librería de Prompts",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 4
+    },
+    {
+      "url": "ia-analisis-balance.html",
+      "grupo": "ia",
+      "titulo": "Auditor DIAN (balance)",
+      "desc": "",
+      "popular": false,
+      "hidden": true,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "ia-errores-xml.html",
+      "grupo": "ia",
+      "titulo": "Detector de errores XML",
+      "desc": "",
+      "popular": false,
+      "hidden": true,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "ia-inconsistencias.html",
+      "grupo": "ia",
+      "titulo": "Detector de inconsistencias",
+      "desc": "",
+      "popular": false,
+      "hidden": true,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "ia.html",
+      "grupo": "ia",
+      "titulo": "Hub IA",
+      "desc": "",
+      "popular": false,
+      "hidden": true,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "ia-resumen-declaracion.html",
+      "grupo": "ia",
+      "titulo": "Resumen de declaración",
+      "desc": "",
+      "popular": false,
+      "hidden": true,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "oficina.html",
+      "grupo": "consultas",
+      "titulo": "Mi Oficina Contable",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 1
+    },
+    {
+      "url": "consultanit.html",
+      "grupo": "consultas",
+      "titulo": "Consulta NIT DIAN",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 2
+    },
+    {
+      "url": "vencimientos.html",
+      "grupo": "consultas",
+      "titulo": "Calendario Tributario",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 3
+    },
+    {
+      "url": "tablero.html",
+      "grupo": "consultas",
+      "titulo": "Tablero de Equipo",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 4
+    },
+    {
+      "url": "consultamasiva.html",
+      "grupo": "consultas",
+      "titulo": "Consulta NIT masiva",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "uvt.html",
+      "grupo": "consultas",
+      "titulo": "Conversor UVT",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "crear-sas.html",
+      "grupo": "consultas",
+      "titulo": "Crear S.A.S. (wizard)",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "estatutos.html",
+      "grupo": "consultas",
+      "titulo": "Estatutos Municipales",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "intereses.html",
+      "grupo": "sanciones",
+      "titulo": "Intereses de mora",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "sanciones-dian.html",
+      "grupo": "sanciones",
+      "titulo": "Sanciones DIAN",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "sanciones.html",
+      "grupo": "sanciones",
+      "titulo": "Sanciones Exógena",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "certificados.html",
+      "grupo": "docs",
+      "titulo": "Certificados (hub)",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "contrato-laboral.html",
+      "grupo": "docs",
+      "titulo": "Contratos (laboral y servicios)",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "derecho-peticion.html",
+      "grupo": "docs",
+      "titulo": "Derecho de petición",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "acta-asamblea-eeff.html",
+      "grupo": "docs",
+      "titulo": "Acta de asamblea",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "certificado-aceptacion-cargo.html",
+      "grupo": "docs",
+      "titulo": "Cert. Aceptacion Cargo",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "certificado-aportes-empresarial.html",
+      "grupo": "docs",
+      "titulo": "Cert. Aportes Empresarial",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "certificado-aportes-ss.html",
+      "grupo": "docs",
+      "titulo": "Cert. Aportes Ss",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "certificado-capital-sas.html",
+      "grupo": "docs",
+      "titulo": "Cert. Capital Sas",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "certificado-composicion-accionaria.html",
+      "grupo": "docs",
+      "titulo": "Cert. Composicion Accionaria",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "certificado-costos-771-2.html",
+      "grupo": "docs",
+      "titulo": "Cert. Costos 771 2",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "certificado-cuenta-cobro.html",
+      "grupo": "docs",
+      "titulo": "Cert. Cuenta Cobro",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "certificado-dependientes.html",
+      "grupo": "docs",
+      "titulo": "Cert. Dependientes",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "certificado-dictamen-rf.html",
+      "grupo": "docs",
+      "titulo": "Cert. Dictamen Rf",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "certificado-donaciones.html",
+      "grupo": "docs",
+      "titulo": "Cert. Donaciones",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "certificado-eeff.html",
+      "grupo": "docs",
+      "titulo": "Cert. Eeff",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "certificado-hechos-posteriores.html",
+      "grupo": "docs",
+      "titulo": "Cert. Hechos Posteriores",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "certificado-ingresos-pn.html",
+      "grupo": "docs",
+      "titulo": "Cert. Ingresos Pn",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "certificado-laboral.html",
+      "grupo": "docs",
+      "titulo": "Cert. Laboral",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "certificado-negocio-en-marcha.html",
+      "grupo": "docs",
+      "titulo": "Cert. Negocio En Marcha",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "certificado-no-obligacion-renta.html",
+      "grupo": "docs",
+      "titulo": "Cert. No Obligacion Renta",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "certificado-representacion-admin.html",
+      "grupo": "docs",
+      "titulo": "Cert. Representacion Admin",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "certificado-responsabilidades.html",
+      "grupo": "docs",
+      "titulo": "Cert. Responsabilidades",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "certificado-rup.html",
+      "grupo": "docs",
+      "titulo": "Cert. Rup",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "certificado-socios-art49.html",
+      "grupo": "docs",
+      "titulo": "Cert. Socios Art49",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
+      "url": "contrato-prestacion-servicios.html",
+      "grupo": "docs",
+      "titulo": "Contrato prestación de servicios",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "informe-gestion.html",
+      "grupo": "docs",
+      "titulo": "Informe de gestión",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "proyecto-distribucion-utilidades.html",
+      "grupo": "docs",
+      "titulo": "Proyecto distribución utilidades",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "finanzas.html",
+      "grupo": "finanzas",
+      "titulo": "Finanzas Personales (diagnóstico)",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "presupuesto-personal.html",
+      "grupo": "finanzas",
+      "titulo": "Presupuesto personal",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "salud-financiera.html",
+      "grupo": "finanzas",
+      "titulo": "Salud financiera",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "puedo-comprar-carro.html",
+      "grupo": "finanzas",
+      "titulo": "¿Puedo comprar carro?",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "deudas.html",
+      "grupo": "finanzas",
+      "titulo": "Calculadora de deudas",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "capacidad-hipotecaria.html",
+      "grupo": "finanzas",
+      "titulo": "Capacidad hipotecaria",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "costo-oportunidad.html",
+      "grupo": "finanzas",
+      "titulo": "Costo de oportunidad",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "crecimiento.html",
+      "grupo": "finanzas",
+      "titulo": "Crecimiento / metas",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "pareja-finanzas.html",
+      "grupo": "finanzas",
+      "titulo": "Finanzas en pareja",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "fire-colombia.html",
+      "grupo": "finanzas",
+      "titulo": "FIRE Colombia",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "fondo-emergencia.html",
+      "grupo": "finanzas",
+      "titulo": "Fondo de emergencia y desempleo",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "compounding.html",
+      "grupo": "finanzas",
+      "titulo": "Interés compuesto",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "inversion-101.html",
+      "grupo": "finanzas",
+      "titulo": "Inversión 101",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "salir-de-deudas.html",
+      "grupo": "finanzas",
+      "titulo": "Plan salida de deudas",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "pyg-personal.html",
+      "grupo": "finanzas",
+      "titulo": "PyG personal",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "credito.html",
+      "grupo": "finanzas",
+      "titulo": "Simulador de crédito",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "tasas-equivalentes.html",
+      "grupo": "finanzas",
+      "titulo": "Tasas equivalentes (EA/NM/NA)",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "escuela.html",
+      "grupo": "escuela",
+      "titulo": "Escuela Contable",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "hoja-de-vida.html",
+      "grupo": "escuela",
+      "titulo": "Constructor de Hoja de Vida",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "entrevista.html",
+      "grupo": "escuela",
+      "titulo": "Guía de entrevista",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "especializacion-exogena.html",
+      "grupo": "escuela",
+      "titulo": "Ruta: Exógena",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "especializacion-fundamentos.html",
+      "grupo": "escuela",
+      "titulo": "Ruta: Fundamentos",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "especializacion-ia.html",
+      "grupo": "escuela",
+      "titulo": "Ruta: IA contable",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "especializacion-iva-dev.html",
+      "grupo": "escuela",
+      "titulo": "Ruta: IVA y devoluciones",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "especializacion-nomina.html",
+      "grupo": "escuela",
+      "titulo": "Ruta: Nómina",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "especializacion-rst.html",
+      "grupo": "escuela",
+      "titulo": "Ruta: Régimen Simple",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "especializacion-trib-pj.html",
+      "grupo": "escuela",
+      "titulo": "Ruta: Tributaria PJ",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "especializacion-trib-pn.html",
+      "grupo": "escuela",
+      "titulo": "Ruta: Tributaria PN",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
+      "url": "tutoriales.html",
+      "grupo": "escuela",
+      "titulo": "Tutoriales",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    }
+  ]
+}

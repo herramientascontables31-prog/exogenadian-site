@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="../shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="icon" type="image/svg+xml" href="../favicon.svg"><meta name="theme-color" content="#0EA5E9"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Curso Finanzas para No Financieros &mdash; Escuela Contable IA | ExógenaDIAN</title>
+<meta name="description" content="Aprende a leer estados financieros sin ser contador. 10 módulos para administradores, emprendedores, médicos, abogados, ingenieros y todo profesional que necesita entender el balance de su negocio o de su empresa.">
+<meta name="keywords" content="finanzas para no financieros, leer estados financieros, ESF, ERI, flujo de efectivo, indicadores financieros, punto de equilibrio">
+<link rel="canonical" href="https://exogenadian.com/escuela/finanzas-no-financieros.html"><meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--c:#0EA5E9;--c2:#38BDF8;--cb:#F0F9FF;--cbd:#BAE6FD;--cdark:#0369A1;--g50:#F9FAFB;--g100:#F3F4F6;--g200:#E5E7EB;--g300:#D1D5DB;--g400:#9CA3AF;--g500:#6B7280;--g600:#4B5563;--g700:#374151;--g800:#1F2937;--g900:#111827;--amber-50:#FFFBEB;--amber-500:#F59E0B;--amber-800:#78350F;--blue-50:#EFF6FF;--blue-500:#3B82F6;--blue-700:#1D4ED8;--rose-50:#FFF1F2;--rose-500:#F43F5E;--rose-700:#BE123C}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Outfit',sans-serif;background:var(--g50);color:var(--g900);line-height:1.6}
+.curso-layout{display:grid;grid-template-columns:260px 1fr;min-height:100vh}@media(max-width:900px){.curso-layout{grid-template-columns:1fr}}
+.sidebar{background:#fff;border-right:1px solid var(--g200);padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
+.sidebar-header{padding:16px 20px;border-bottom:1px solid var(--g100)}.sidebar-header a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--g800);font-weight:800;font-size:.9rem}.sidebar-header a div{width:28px;height:28px;background:linear-gradient(135deg,#0EA5E9,#38BDF8);border-radius:7px;display:grid;place-items:center;color:#fff;font-size:.7rem;font-weight:900}
+.sidebar-curso{padding:16px 20px;border-bottom:1px solid var(--g100)}.sidebar-curso h3{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--cdark);margin-bottom:4px}.sidebar-curso p{font-size:.88rem;font-weight:700;color:var(--g800)}
+.sidebar-nav{padding:12px 0;flex:1}.sidebar-nav a{display:flex;align-items:center;gap:10px;padding:10px 20px;text-decoration:none;color:var(--g500);font-size:.85rem;font-weight:500;transition:all .15s;border-left:3px solid transparent}.sidebar-nav a:hover{background:var(--cb);color:var(--cdark)}.sidebar-nav a.active{background:var(--cb);color:var(--cdark);font-weight:700;border-left-color:var(--c)}.sidebar-nav a .nav-num{width:24px;height:24px;border-radius:50%;background:var(--g100);color:var(--g500);display:grid;place-items:center;font-size:.72rem;font-weight:700;flex-shrink:0}.sidebar-nav a.active .nav-num{background:var(--c);color:#fff}.sidebar-nav a.completed .nav-num{background:var(--cbd);color:var(--cdark)}
+.sidebar-back{padding:16px 20px;border-top:1px solid var(--g100);margin-top:auto}.sidebar-back a{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--g400);font-size:.82rem;font-weight:500}.sidebar-back a:hover{color:var(--g700)}
+.sidebar-toggle{display:none;position:fixed;bottom:20px;left:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--c);color:#fff;border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 16px rgba(14,165,233,.3)}
+@media(max-width:900px){.sidebar{display:none;position:fixed;top:0;left:0;z-index:199;width:280px;box-shadow:4px 0 20px rgba(0,0,0,.1)}.sidebar.open{display:flex}.sidebar-toggle{display:block}.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:198}.sidebar-overlay.open{display:block}}
+.curso-main{padding:32px 40px 60px;max-width:860px}@media(max-width:900px){.curso-main{padding:20px 16px 80px}}
+.mod-header{margin-bottom:32px}.mod-breadcrumb{font-size:.78rem;color:var(--g400);margin-bottom:8px}.mod-breadcrumb a{color:var(--g400);text-decoration:none}.mod-breadcrumb a:hover{color:var(--c)}
+.mod-num{display:inline-flex;align-items:center;gap:8px;background:var(--cb);color:var(--cdark);padding:4px 14px;border-radius:100px;font-size:.78rem;font-weight:700;margin-bottom:12px}
+.mod-header h1{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;letter-spacing:-.02em;margin-bottom:8px;line-height:1.2}.mod-header .mod-desc{font-size:1rem;color:var(--g500);max-width:600px;line-height:1.6}
+.content-block{margin-bottom:28px}.content-block h2{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;margin-bottom:12px;color:var(--g900);padding-bottom:8px;border-bottom:2px solid var(--cbd)}.content-block h3{font-size:1.05rem;font-weight:700;margin:20px 0 8px;color:var(--g800)}.content-block p{font-size:.92rem;color:var(--g600);line-height:1.7;margin-bottom:12px}.content-block ul,.content-block ol{margin:8px 0 16px 20px;display:flex;flex-direction:column;gap:6px}.content-block li{font-size:.9rem;color:var(--g600);line-height:1.6}
+.tip{background:var(--blue-50);border:1.5px solid #BFDBFE;border-radius:14px;padding:18px 22px;margin:20px 0}.tip-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}.tip-header h4{font-size:.88rem;font-weight:700;color:var(--blue-700)}.tip p{font-size:.88rem;color:#1E40AF;line-height:1.6}
+.error-comun{background:var(--rose-50);border:1.5px solid #FECACA;border-radius:14px;padding:18px 22px;margin:20px 0}.error-comun-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}.error-comun-header h4{font-size:.88rem;font-weight:700;color:var(--rose-700)}.error-comun p{font-size:.88rem;color:#9F1239;line-height:1.6}
+.tabla-norm{width:100%;border-collapse:collapse;margin:16px 0;border-radius:10px;overflow:hidden;border:1px solid var(--g200)}.tabla-norm th{background:var(--g100);padding:10px 14px;text-align:left;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500)}.tabla-norm td{padding:10px 14px;font-size:.85rem;border-top:1px solid var(--g100);color:var(--g700)}.tabla-norm tr:hover{background:var(--cb)}
+.ejemplo{background:#fff;border:1.5px solid var(--g200);border-radius:14px;overflow:hidden;margin:20px 0;box-shadow:0 2px 8px rgba(0,0,0,.03)}.ejemplo-header{background:var(--g50);padding:12px 20px;border-bottom:1px solid var(--g200);display:flex;align-items:center;gap:8px}.ejemplo-header h4{font-size:.85rem;font-weight:700;color:var(--g700)}.ejemplo-body{padding:16px 20px}.ejemplo-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--g100);font-size:.88rem}.ejemplo-row:last-child{border-bottom:none}.ejemplo-row .label{color:var(--g600)}.ejemplo-row .value{font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.85rem}.ejemplo-row.total{border-top:2px solid var(--cbd);border-bottom:none;padding-top:12px;margin-top:4px}.ejemplo-row.total .label{font-weight:700;color:var(--g900)}.ejemplo-row.total .value{color:var(--cdark);font-size:.95rem}
+.mod-nav{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:24px;border-top:2px solid var(--g200);flex-wrap:wrap;gap:10px}.mod-nav a{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:12px;text-decoration:none;font-weight:700;font-size:.92rem;transition:all .2s}.mod-nav .prev{background:var(--g100);color:var(--g700)}.mod-nav .prev:hover{background:var(--g200)}.mod-nav .next{background:var(--c);color:#fff;box-shadow:0 4px 12px rgba(14,165,233,.25)}.mod-nav .next:hover{background:var(--cdark);transform:translateY(-1px)}
+.cta-practica{background:linear-gradient(135deg,var(--cb),#E0F2FE);border:2px solid var(--cbd);border-radius:16px;padding:28px 24px;text-align:center;margin:28px 0}.cta-practica h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;color:var(--cdark);margin-bottom:8px}.cta-practica p{font-size:.92rem;color:var(--cdark);margin-bottom:16px}.cta-practica a{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--c);color:#fff;border-radius:12px;font-weight:700;font-size:1rem;text-decoration:none;box-shadow:0 4px 16px rgba(14,165,233,.3);transition:all .2s}.cta-practica a:hover{background:var(--cdark);transform:translateY(-2px)}
+.progress-bar{height:4px;background:var(--g200);border-radius:2px;margin:12px 20px;overflow:hidden}.progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--c2),var(--c));border-radius:2px;transition:width .3s}
+.modulo-section{display:none}.modulo-section.active{display:block}
+</style>
+<script async src="../shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+<div class="curso-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header"><a href="../index.html"><div>E</div>Ex&oacute;genaDIAN</a></div>
+    <div class="sidebar-curso"><h3>Escuela Contable IA</h3><p>Finanzas para No Financieros</p></div>
+    <div class="progress-bar"><div class="fill" id="progressFill" style="width:10%"></div></div>
+    <nav class="sidebar-nav" id="sidebarNav">
+      <a href="#modulo-1" class="active" onclick="navigateTo(1)"><span class="nav-num">1</span> &iquest;Para qu&eacute; leer un EEFF?</a>
+      <a href="#modulo-2" onclick="navigateTo(2)"><span class="nav-num">2</span> ESF: lo que tienes</a>
+      <a href="#modulo-3" onclick="navigateTo(3)"><span class="nav-num">3</span> ERI: &iquest;gana plata?</a>
+      <a href="#modulo-4" onclick="navigateTo(4)"><span class="nav-num">4</span> Flujo de efectivo</a>
+      <a href="#modulo-5" onclick="navigateTo(5)"><span class="nav-num">5</span> Indicadores b&aacute;sicos</a>
+      <a href="#modulo-6" onclick="navigateTo(6)"><span class="nav-num">6</span> Punto de equilibrio</a>
+      <a href="#modulo-7" onclick="navigateTo(7)"><span class="nav-num">7</span> An&aacute;lisis vert/horiz</a>
+      <a href="#modulo-8" onclick="navigateTo(8)"><span class="nav-num">8</span> Costos vs gastos</a>
+      <a href="#modulo-9" onclick="navigateTo(9)"><span class="nav-num">9</span> Lo que NO ves</a>
+      <a href="#modulo-10" onclick="navigateTo(10)"><span class="nav-num">10</span> Caso integrador</a>
+    </nav>
+    <div class="sidebar-back"><a href="../escuela.html">&larr; Volver a la Escuela</a></div>
+  </aside>
+  <div class="curso-main">
+    <section id="modulo-1" class="modulo-section active">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Finanzas No Financieros &rsaquo; M&oacute;dulo 1</div>
+        <div class="mod-num">M&oacute;dulo 1 de 10</div>
+        <h1>&iquest;Para qu&eacute; leer un estado financiero?</h1>
+        <p class="mod-desc">Tu contador te entrega un balance cada mes. Tú lo guardas en una carpeta. Aquí cambia esa relación: vas a sacar decisiones reales de cada cifra.</p>
+      </div>
+      <div class="content-block">
+        <h2>El problema que resuelve este curso</h2>
+        <p>Eres administrador, emprendedor, médico, abogado, ingeniero, o líder de área. No vas a ser contador, no quieres serlo. Pero te entregan estados financieros y necesitas saber tres cosas básicas: si la empresa tiene caja, si está ganando o perdiendo, y si va a poder pagar las deudas. Este curso te entrena en ese músculo de lectura.</p>
+        <p>No vamos a entrar al detalle de cómo se construye un asiento contable (eso es Contabilidad Básica, el curso vecino). Aquí asumimos que alguien más prepara los EEFF y tú los recibes. Te enseñamos a hacer las preguntas correctas y a detectar las luces rojas.</p>
+        <h3>Los 4 EEFF que te van a entregar</h3>
+        <ul>
+          <li><strong>Estado de Situación Financiera (ESF)</strong> — la foto: qué tiene, qué debe, qué le queda al dueño.</li>
+          <li><strong>Estado de Resultados Integral (ERI)</strong> — la película del periodo: si ganó o perdió plata.</li>
+          <li><strong>Estado de Flujo de Efectivo</strong> — de dónde salió y a dónde fue el efectivo real.</li>
+          <li><strong>Estado de Cambios en el Patrimonio</strong> — cómo se movió la inversión de los socios.</li>
+        </ul>
+        <div class="tip"><div class="tip-header"><h4>&#128161; Tip</h4></div><p>Si tu contador solo te entrega el ESF y el ERI, pídele también el flujo de efectivo. Es donde aparecen los problemas reales (utilidad sin caja es la trampa más vieja del mundo).</p></div>
+        <h2>Una analog&iacute;a para empezar sin miedo</h2>
+        <p>Si te abruma la palabra "estados financieros", piensa en tu vida personal. El <strong>ESF</strong> es tu foto patrimonial: lo que tienes (carro, ahorros, casa) menos lo que debes (cr&eacute;dito del carro, hipoteca) es lo que de verdad es tuyo. El <strong>ERI</strong> es tu mes: cu&aacute;nto te entr&oacute; de sueldo menos cu&aacute;nto gastaste, &iquest;te sobr&oacute; o te falt&oacute;? El <strong>flujo de efectivo</strong> es tu extracto bancario: a d&oacute;nde se fue la plata de verdad. Una empresa es exactamente lo mismo, con m&aacute;s ceros y un orden formal.</p>
+        <h3>Las 3 preguntas que debes poder responder en 5 minutos</h3>
+        <p>Al terminar este curso, frente a cualquier balance deber&iacute;as poder contestar:</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#x2753; El test de 5 minutos</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">1. &iquest;Tiene caja para los pr&oacute;ximos meses?</span><span class="value">Mira flujo + caja</span></div>
+            <div class="ejemplo-row"><span class="label">2. &iquest;Est&aacute; ganando o perdiendo?</span><span class="value">Mira utilidad neta del ERI</span></div>
+            <div class="ejemplo-row total"><span class="label">3. &iquest;Podr&aacute; pagar lo que debe?</span><span class="value">Mira raz&oacute;n corriente</span></div>
+          </div>
+        </div>
+        <p>Si no puedes responder esas tres, no tienes control del negocio &mdash; tienes una carpeta con papeles. Este curso convierte la carpeta en decisiones.</p>
+        <div class="error-comun"><div class="error-comun-header"><h4>&#9888; Error com&uacute;n del due&ntilde;o</h4></div><p>"El negocio va bien porque la cuenta del banco tiene plata". La caja de hoy puede ser un anticipo de un cliente que tendr&aacute;s que devolver, o un cr&eacute;dito que entr&oacute; ayer. Mirar solo el saldo del banco es como medir tu salud por la temperatura: un dato, no el diagn&oacute;stico.</p></div>
+      </div>
+      <div class="mod-nav"><span></span><a href="#modulo-2" class="next" onclick="navigateTo(2)">M&oacute;dulo 2 &rarr;</a></div>
+    </section>
+    <section id="modulo-2" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Finanzas No Financieros &rsaquo; M&oacute;dulo 2</div>
+        <div class="mod-num">M&oacute;dulo 2 de 10</div>
+        <h1>ESF: lo que tienes, lo que debes, lo que es tuyo</h1>
+        <p class="mod-desc">El Estado de Situación Financiera es la foto del negocio a una fecha. Aquí aprendes a leer cada bloque en orden de importancia.</p>
+      </div>
+      <div class="content-block">
+        <h2>La ecuación que nunca falla</h2>
+        <p>Todo ESF responde a la misma fórmula: <strong>Activos = Pasivos + Patrimonio</strong>. Lo que tienes (activos) equivale a lo que debes (pasivos) más lo que de verdad es tuyo (patrimonio). Si la cifra al final no cuadra, hay un error contable, así de simple.</p>
+        <h3>Activos: corrientes vs no corrientes</h3>
+        <ul>
+          <li><strong>Corrientes</strong>: caja, bancos, cuentas por cobrar, inventarios. Se convierten en efectivo en menos de un año.</li>
+          <li><strong>No corrientes</strong>: equipos, edificios, vehículos, intangibles. Se quedan en la empresa más tiempo.</li>
+        </ul>
+        <h3>Pasivos: corto vs largo plazo</h3>
+        <ul>
+          <li><strong>Corrientes</strong>: proveedores, salarios por pagar, IVA por pagar. Se pagan en menos de un año.</li>
+          <li><strong>No corrientes</strong>: créditos bancarios largos, leasings, obligaciones a varios años.</li>
+        </ul>
+        <h3>Patrimonio: la inversión del dueño</h3>
+        <p>Capital social aportado + utilidades retenidas + utilidad del ejercicio. Esto es lo que de verdad le queda al socio si vende todos los activos y paga todas las deudas.</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#x1F4CA; ESF simplificado</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Caja y bancos</span><span class="value">$30.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Cuentas por cobrar</span><span class="value">$45.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Inventarios</span><span class="value">$80.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Equipos (neto)</span><span class="value">$120.000.000</span></div>
+            <div class="ejemplo-row total"><span class="label">Total Activos</span><span class="value">$275.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Proveedores</span><span class="value">$40.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Cr&eacute;dito bancario</span><span class="value">$80.000.000</span></div>
+            <div class="ejemplo-row total"><span class="label">Total Pasivos</span><span class="value">$120.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Capital + utilidades</span><span class="value">$155.000.000</span></div>
+            <div class="ejemplo-row total"><span class="label">Patrimonio</span><span class="value">$155.000.000</span></div>
+          </div>
+        </div>
+        <p>Verificación: $275M activos = $120M pasivos + $155M patrimonio. Cuadra.</p>
+        <h3>Qu&eacute; le dice este ESF al due&ntilde;o</h3>
+        <p>Leer el balance no es verificar que cuadre &mdash; eso lo garantiza el contador. Es sacar conclusiones. De este mismo ejemplo, un due&ntilde;o atento ve:</p>
+        <ul>
+          <li><strong>$80M en inventario</strong> es casi el 30% de todo el activo. &iquest;Se vende r&aacute;pido o es plata dormida en bodega?</li>
+          <li><strong>$45M en cuentas por cobrar</strong>: clientes que ya tienen el producto pero no han pagado. &iquest;Cu&aacute;nto de eso est&aacute; vencido?</li>
+          <li><strong>$120M de deuda</strong> contra $155M de patrimonio: por cada peso del due&ntilde;o, hay 77 centavos de deuda. Manejable, pero hay que vigilarlo.</li>
+        </ul>
+        <p>El mismo balance que "cuadra" puede esconder un negocio con la plata atrapada. Leer es preguntar, no solo sumar.</p>
+        <div class="error-comun"><div class="error-comun-header"><h4>&#9888; Error com&uacute;n</h4></div><p>Creer que "mucho activo = empresa rica". Un activo de $275M con $80M en inventario obsoleto y $45M en cartera incobrable vale, en la realidad, mucho menos. El n&uacute;mero del activo es el punto de partida de las preguntas, no la respuesta.</p></div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-1" class="prev" onclick="navigateTo(1)">&larr; M&oacute;dulo 1</a><a href="#modulo-3" class="next" onclick="navigateTo(3)">M&oacute;dulo 3 &rarr;</a></div>
+    </section>
+    <section id="modulo-3" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Finanzas No Financieros &rsaquo; M&oacute;dulo 3</div>
+        <div class="mod-num">M&oacute;dulo 3 de 10</div>
+        <h1>ERI: &iquest;la empresa gana plata?</h1>
+        <p class="mod-desc">El estado de resultados es la película de un periodo. Aquí aprendes a leerlo de arriba hacia abajo y entender en qué línea se está ganando o perdiendo.</p>
+      </div>
+      <div class="content-block">
+        <h2>El ERI en 5 líneas</h2>
+        <ol>
+          <li><strong>Ingresos operacionales</strong> — Lo que entró por la actividad principal del negocio.</li>
+          <li><strong>(-) Costo de ventas</strong> — Lo que costó producir o adquirir lo vendido.</li>
+          <li><strong>= Utilidad bruta</strong> — Lo que queda después de costos directos.</li>
+          <li><strong>(-) Gastos operacionales</strong> — Administración, ventas, oficina.</li>
+          <li><strong>= Utilidad operacional</strong> — La rentabilidad del negocio en sí.</li>
+        </ol>
+        <p>Después siguen los ingresos y gastos no operacionales (financieros, otros), el impuesto de renta, y al final la <strong>utilidad neta del ejercicio</strong>.</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#x1F4C8; ERI t&iacute;pico</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Ingresos operacionales</span><span class="value">$500.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Costo de ventas</span><span class="value">($300.000.000)</span></div>
+            <div class="ejemplo-row total"><span class="label">Utilidad bruta (40%)</span><span class="value">$200.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Gastos operacionales</span><span class="value">($140.000.000)</span></div>
+            <div class="ejemplo-row total"><span class="label">Utilidad operacional (12%)</span><span class="value">$60.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Gastos financieros</span><span class="value">($15.000.000)</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Impuesto de renta</span><span class="value">($15.750.000)</span></div>
+            <div class="ejemplo-row total"><span class="label">Utilidad neta (5,85%)</span><span class="value">$29.250.000</span></div>
+          </div>
+        </div>
+        <div class="tip"><div class="tip-header"><h4>&#128161; Tip</h4></div><p>Los porcentajes al lado de cada línea (margen bruto, operacional, neto) son clave. Compáralos con tu sector. Si tu margen bruto es 40% pero el sector está en 55%, hay un problema en compras o precios.</p></div>
+        <h3>D&oacute;nde se "pierde" la plata: lee de arriba hacia abajo</h3>
+        <p>El ERI se lee como una escalera que baja. En el ejemplo, de cada $100 que entraron quedaron solo $5,85 de utilidad neta. &iquest;D&oacute;nde se fueron los otros $94?</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#x1F4C9; El recorrido de $100</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Entran por ventas</span><span class="value">$100,00</span></div>
+            <div class="ejemplo-row"><span class="label">Se van en costo del producto</span><span class="value">&minus;$60,00</span></div>
+            <div class="ejemplo-row"><span class="label">Se van en gastos de operar</span><span class="value">&minus;$28,00</span></div>
+            <div class="ejemplo-row"><span class="label">Se van en intereses</span><span class="value">&minus;$3,00</span></div>
+            <div class="ejemplo-row"><span class="label">Se van en impuesto</span><span class="value">&minus;$3,15</span></div>
+            <div class="ejemplo-row total"><span class="label">Le queda al due&ntilde;o</span><span class="value">$5,85</span></div>
+          </div>
+        </div>
+        <p>Cada escal&oacute;n es una palanca de decisi&oacute;n distinta. Si el problema est&aacute; en el primer escal&oacute;n (costo $60), la soluci&oacute;n es negociar compras o subir precio. Si est&aacute; en el segundo (gastos $28), es eficiencia administrativa. Si est&aacute; en intereses, es renegociar deuda. Saber <em>en qu&eacute; escal&oacute;n</em> se pierde el margen te dice exactamente qu&eacute; reuni&oacute;n convocar el lunes.</p>
+        <div class="error-comun"><div class="error-comun-header"><h4>&#9888; Error com&uacute;n</h4></div><p>Atacar los gastos peque&ntilde;os (caf&eacute;, papeler&iacute;a) cuando el problema real est&aacute; en el costo del producto. Recortar $2M de gastos cuando el costo se comi&oacute; $60 de cada $100 es apagar un f&oacute;sforo mientras arde la casa. Lee el ERI de arriba hacia abajo y ataca el escal&oacute;n grande primero.</p></div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-2" class="prev" onclick="navigateTo(2)">&larr; M&oacute;dulo 2</a><a href="#modulo-4" class="next" onclick="navigateTo(4)">M&oacute;dulo 4 &rarr;</a></div>
+    </section>
+    <section id="modulo-4" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Finanzas No Financieros &rsaquo; M&oacute;dulo 4</div>
+        <div class="mod-num">M&oacute;dulo 4 de 10</div>
+        <h1>Flujo de efectivo: la prueba ácida</h1>
+        <p class="mod-desc">Una empresa puede tener utilidad y morirse por falta de caja. El flujo de efectivo es el único estado que no se puede maquillar fácil — porque la plata o está o no está.</p>
+      </div>
+      <div class="content-block">
+        <h2>3 actividades, 3 cajones</h2>
+        <ul>
+          <li><strong>Operación</strong>: caja generada por el negocio principal. Es la más importante: si es negativa de forma sostenida, la empresa está en problemas.</li>
+          <li><strong>Inversión</strong>: compra y venta de activos fijos, inversiones financieras. Una empresa que crece tiene flujo de inversión negativo (está comprando equipo).</li>
+          <li><strong>Financiación</strong>: préstamos recibidos/pagados, aportes de socios, dividendos pagados.</li>
+        </ul>
+        <h3>El test que separa empresas sanas de las que están en problemas</h3>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#x1F4B0; Pregunta clave</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Utilidad neta del a&ntilde;o (ERI)</span><span class="value">$50.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Flujo de caja de operaci&oacute;n</span><span class="value">$8.000.000</span></div>
+            <div class="ejemplo-row total"><span class="label">&iquest;Por qu&eacute; la diferencia?</span><span class="value">$42.000.000</span></div>
+          </div>
+        </div>
+        <p>Esta empresa registra $50M de utilidad pero solo generó $8M de caja real. La diferencia ($42M) está atrapada típicamente en cartera no cobrada, inventarios crecientes, o anticipos que se fueron a proveedores.</p>
+        <div class="error-comun"><div class="error-comun-header"><h4>&#9888; Error com&uacute;n</h4></div><p>Distribuir dividendos basados en la utilidad neta del ERI sin revisar el flujo de operación. La utilidad existe en el papel; la caja para pagar dividendos puede no existir todavía. Empresas se quiebran haciendo eso.</p></div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-3" class="prev" onclick="navigateTo(3)">&larr; M&oacute;dulo 3</a><a href="#modulo-5" class="next" onclick="navigateTo(5)">M&oacute;dulo 5 &rarr;</a></div>
+    </section>
+    <section id="modulo-5" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Finanzas No Financieros &rsaquo; M&oacute;dulo 5</div>
+        <div class="mod-num">M&oacute;dulo 5 de 10</div>
+        <h1>Indicadores financieros básicos</h1>
+        <p class="mod-desc">Cinco indicadores que te dicen rápidamente si la empresa está sana o enferma. Memoriza estos cinco y ya estás 80% por encima del promedio.</p>
+      </div>
+      <div class="content-block">
+        <h2>Liquidez</h2>
+        <ul>
+          <li><strong>Razón corriente</strong> = Activo corriente / Pasivo corriente. Ideal entre 1,5 y 2. Menor a 1 = riesgo de no poder pagar deudas de corto plazo.</li>
+          <li><strong>Prueba ácida</strong> = (Activo corriente − Inventarios) / Pasivo corriente. Mide liquidez sin contar inventarios. Ideal &gt; 1.</li>
+        </ul>
+        <h2>Endeudamiento</h2>
+        <ul>
+          <li><strong>Razón de endeudamiento</strong> = Pasivos / Activos. Mayor al 60-70% suele ser señal de alto riesgo financiero.</li>
+        </ul>
+        <h2>Rentabilidad</h2>
+        <ul>
+          <li><strong>Margen neto</strong> = Utilidad neta / Ingresos. Depende del sector (comercio: 3-8%, servicios: 10-20%).</li>
+          <li><strong>ROE (Rentabilidad del patrimonio)</strong> = Utilidad neta / Patrimonio. Cuánto rinde la plata del dueño.</li>
+        </ul>
+        <h3>Los 5 indicadores aplicados a una empresa real</h3>
+        <p>Tomemos el ESF y ERI de los m&oacute;dulos 2 y 3 (activo corriente $155M, pasivo corriente $80M, inventario $80M, patrimonio $155M, ingresos $500M, utilidad neta $29,25M) y calculemos:</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#x1F4CF; Tablero de los 5 indicadores</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Raz&oacute;n corriente = 155 / 80</span><span class="value">1,94 &mdash; sana</span></div>
+            <div class="ejemplo-row"><span class="label">Prueba &aacute;cida = (155&minus;80) / 80</span><span class="value">0,94 &mdash; atenci&oacute;n</span></div>
+            <div class="ejemplo-row"><span class="label">Endeudamiento = 120 / 275</span><span class="value">44% &mdash; aceptable</span></div>
+            <div class="ejemplo-row"><span class="label">Margen neto = 29,25 / 500</span><span class="value">5,85% &mdash; normal comercio</span></div>
+            <div class="ejemplo-row total"><span class="label">ROE = 29,25 / 155</span><span class="value">18,9% &mdash; bueno</span></div>
+          </div>
+        </div>
+        <p>Lectura para el due&ntilde;o: la empresa <em>parece</em> l&iacute;quida (raz&oacute;n corriente 1,94) pero la prueba &aacute;cida cae a 0,94 &mdash; eso significa que su liquidez depende de vender el inventario. Si ese inventario no rota, podr&iacute;a tener problemas para pagar a corto plazo aunque "el indicador grande" se vea bien. Un solo n&uacute;mero engaña; los cinco juntos cuentan la historia.</p>
+        <div class="tip"><div class="tip-header"><h4>&#128161; Tip</h4></div><p>Un solo indicador no dice nada. Cada uno tiene sentido en contexto: del sector, de la etapa de la empresa, del nivel de competencia. Compara con tu sector y con tu propio histórico.</p></div>
+        <div class="error-comun"><div class="error-comun-header"><h4>&#9888; Error com&uacute;n</h4></div><p>Quedarse tranquilo con una raz&oacute;n corriente de 1,94 sin mirar la prueba &aacute;cida. Si la diferencia entre ambas es grande, toda tu "liquidez" es inventario &mdash; y el inventario no paga la n&oacute;mina del 30, solo la caja lo hace.</p></div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-4" class="prev" onclick="navigateTo(4)">&larr; M&oacute;dulo 4</a><a href="#modulo-6" class="next" onclick="navigateTo(6)">M&oacute;dulo 6 &rarr;</a></div>
+    </section>
+    <section id="modulo-6" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Finanzas No Financieros &rsaquo; M&oacute;dulo 6</div>
+        <div class="mod-num">M&oacute;dulo 6 de 10</div>
+        <h1>Punto de equilibrio</h1>
+        <p class="mod-desc">El nivel de ventas exacto donde la empresa no gana ni pierde. Saberlo te dice cuánto tienes que vender para sobrevivir.</p>
+      </div>
+      <div class="content-block">
+        <h2>La fórmula</h2>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#x1F4D0; Punto de equilibrio en unidades</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">PE (unidades)</span><span class="value">= Costos Fijos / (Precio − Costo Variable)</span></div>
+            <div class="ejemplo-row"><span class="label">PE (pesos)</span><span class="value">= Costos Fijos / Margen de contribuci&oacute;n %</span></div>
+          </div>
+        </div>
+        <h3>Ejemplo: panadería de barrio</h3>
+        <div class="ejemplo">
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Precio promedio por pan</span><span class="value">$800</span></div>
+            <div class="ejemplo-row"><span class="label">Costo variable por pan (harina, levadura, energía)</span><span class="value">$300</span></div>
+            <div class="ejemplo-row"><span class="label">Margen de contribuci&oacute;n por pan</span><span class="value">$500</span></div>
+            <div class="ejemplo-row"><span class="label">Costos fijos mensuales (arriendo, salarios, etc.)</span><span class="value">$4.000.000</span></div>
+            <div class="ejemplo-row total"><span class="label">PE = $4.000.000 / $500 = </span><span class="value">8.000 panes/mes</span></div>
+          </div>
+        </div>
+        <p>Por debajo de 8.000 panes al mes, la panadería pierde. Por encima, gana. Esa cifra debería estar pegada en la pared de toda PYME.</p>
+        <h3>Qu&eacute; haces con el punto de equilibrio (no es solo un n&uacute;mero)</h3>
+        <p>Saber que el PE son 8.000 panes/mes habilita decisiones concretas:</p>
+        <ul>
+          <li><strong>Meta diaria clara</strong>: 8.000 / 26 d&iacute;as &asymp; 308 panes/d&iacute;a solo para no perder. Vender el pan 309 es la primera ganancia del d&iacute;a.</li>
+          <li><strong>Evaluar un gasto nuevo</strong>: si vas a contratar un ayudante por $1.200.000/mes, tu PE sube a ($4.000.000+$1.200.000)/$500 = 10.400 panes. &iquest;Puedes vender 2.400 panes m&aacute;s? Esa es la pregunta antes de contratar.</li>
+          <li><strong>Decidir un descuento</strong>: si bajas el precio a $700, el margen cae a $400 y el PE sube a 10.000 panes. Un descuento no es gratis: mueve tu punto de equilibrio.</li>
+        </ul>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#x1F4A1; El PE cambia con cada decisi&oacute;n</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Escenario base</span><span class="value">8.000 panes</span></div>
+            <div class="ejemplo-row"><span class="label">+ ayudante $1,2M</span><span class="value">10.400 panes</span></div>
+            <div class="ejemplo-row total"><span class="label">+ descuento a $700</span><span class="value">10.000 panes</span></div>
+          </div>
+        </div>
+        <p>El punto de equilibrio no es contabilidad: es la herramienta de decisi&oacute;n m&aacute;s pr&aacute;ctica que tiene un due&ntilde;o. Cada vez que alguien proponga "contratemos", "bajemos el precio", "abramos otra sede", la primera pregunta es: &iquest;c&oacute;mo mueve esto el punto de equilibrio?</p>
+        <div class="error-comun"><div class="error-comun-header"><h4>&#9888; Error com&uacute;n</h4></div><p>Calcular el PE una vez y olvidarlo. El punto de equilibrio cambia cada vez que sube el arriendo, contratas a alguien o cambias precios. Un PE de hace dos a&ntilde;os es un mapa viejo de una ciudad que ya cambi&oacute;.</p></div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-5" class="prev" onclick="navigateTo(5)">&larr; M&oacute;dulo 5</a><a href="#modulo-7" class="next" onclick="navigateTo(7)">M&oacute;dulo 7 &rarr;</a></div>
+    </section>
+    <section id="modulo-7" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Finanzas No Financieros &rsaquo; M&oacute;dulo 7</div>
+        <div class="mod-num">M&oacute;dulo 7 de 10</div>
+        <h1>Análisis vertical y horizontal</h1>
+        <p class="mod-desc">Dos técnicas simples que convierten un balance lleno de números en una historia entendible.</p>
+      </div>
+      <div class="content-block">
+        <h2>Análisis vertical: la radiografía</h2>
+        <p>Cada cifra del ESF se expresa como % del total de activos. Cada cifra del ERI se expresa como % de las ventas. Eso te dice la composición proporcional.</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>An&aacute;lisis vertical del ERI</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Ingresos $500M</span><span class="value">100%</span></div>
+            <div class="ejemplo-row"><span class="label">Costo $300M</span><span class="value">60%</span></div>
+            <div class="ejemplo-row"><span class="label">Utilidad bruta $200M</span><span class="value">40%</span></div>
+            <div class="ejemplo-row"><span class="label">Gastos op. $140M</span><span class="value">28%</span></div>
+            <div class="ejemplo-row total"><span class="label">Utilidad operacional</span><span class="value">12%</span></div>
+          </div>
+        </div>
+        <h2>Análisis horizontal: la evolución</h2>
+        <p>Comparas cada cifra contra el periodo anterior. Calculas la variación absoluta y la variación porcentual. Eso te dice qué se movió, en qué dirección y con qué magnitud.</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>An&aacute;lisis horizontal 2025 vs 2024</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Ingresos 2024</span><span class="value">$420M</span></div>
+            <div class="ejemplo-row"><span class="label">Ingresos 2025</span><span class="value">$500M</span></div>
+            <div class="ejemplo-row total"><span class="label">Variaci&oacute;n: +$80M</span><span class="value">+19%</span></div>
+          </div>
+        </div>
+        <div class="tip"><div class="tip-header"><h4>&#128161; Tip</h4></div><p>Si tus ingresos crecieron 19% pero tus costos crecieron 28%, tu margen se erosionó aunque "vendiste más". El análisis horizontal te muestra eso en 30 segundos. La herramienta de Análisis Vertical y Horizontal de ExógenaDIAN lo hace automático.</p></div>
+        <div class="cta-practica"><h3>&#x1F6E0; Practica con tu propio balance</h3><p>Sube tu ESF y ERI a la herramienta de an&aacute;lisis y obt&eacute;n el vertical/horizontal autom&aacute;tico.</p><a href="../analisis-vertical-horizontal.html">Abrir herramienta &rarr;</a></div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-6" class="prev" onclick="navigateTo(6)">&larr; M&oacute;dulo 6</a><a href="#modulo-8" class="next" onclick="navigateTo(8)">M&oacute;dulo 8 &rarr;</a></div>
+    </section>
+    <section id="modulo-8" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Finanzas No Financieros &rsaquo; M&oacute;dulo 8</div>
+        <div class="mod-num">M&oacute;dulo 8 de 10</div>
+        <h1>Costos vs gastos: por qué importa la diferencia</h1>
+        <p class="mod-desc">Los emprendedores los mezclan. Los contadores los separan. Y la diferencia cambia tu margen bruto, tu impuesto de renta y la decisión de subir precios.</p>
+      </div>
+      <div class="content-block">
+        <h2>Definiciones operativas</h2>
+        <ul>
+          <li><strong>Costo</strong>: desembolso vinculado directamente con la generación del ingreso. Materia prima, mano de obra directa, fletes de compra. Sin estos no hay producto.</li>
+          <li><strong>Gasto</strong>: desembolso para sostener la operación pero no atribuible directamente al producto. Arriendo de oficina, sueldo del contador, papelería, publicidad general.</li>
+        </ul>
+        <h3>Por qué importa</h3>
+        <ul>
+          <li>Los costos van arriba en el ERI (afectan margen bruto). Los gastos van abajo (afectan margen operacional).</li>
+          <li>Para calcular punto de equilibrio necesitas separar bien costos variables de gastos fijos.</li>
+          <li>Para decidir si subir precios miras tu margen bruto: si está bajo, el problema está en costos, no en gastos.</li>
+          <li>Para deducción tributaria ambos pueden deducirse si cumplen Art. 107 ET, pero la clasificación contable correcta facilita la auditoría.</li>
+        </ul>
+        <h3>El mismo desembolso, dos clasificaciones, dos m&aacute;rgenes</h3>
+        <p>Imagina una confecci&oacute;n que vende $100M al a&ntilde;o. Paga $20M a costureras. &iquest;Eso es costo o gasto? Depende de qu&eacute; hacen:</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>&#x1F9F5; $20M de costureras: &iquest;d&oacute;nde van?</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Si cosen el producto &rarr; COSTO</span><span class="value">Afecta margen bruto</span></div>
+            <div class="ejemplo-row"><span class="label">Margen bruto con costo</span><span class="value">($100&minus;$50&minus;$20)/100 = 30%</span></div>
+            <div class="ejemplo-row"><span class="label">Si fueran "gasto" (mal)</span><span class="value">Margen bruto = 50% (inflado)</span></div>
+            <div class="ejemplo-row total"><span class="label">Diferencia en la lectura</span><span class="value">20 puntos de margen</span></div>
+          </div>
+        </div>
+        <p>Clasificar mal no cambia cu&aacute;nta plata sali&oacute; ($20M en ambos casos), pero s&iacute; cambia la <em>historia</em> que cuenta el ERI. Un margen bruto inflado al 50% te hace creer que el problema est&aacute; en los gastos administrativos, cuando en realidad est&aacute; en el costo de producci&oacute;n. Decisiones correctas necesitan clasificaci&oacute;n correcta.</p>
+        <div class="tip"><div class="tip-header"><h4>&#128161; Tip</h4></div><p>Regla pr&aacute;ctica para el no-contador: preg&uacute;ntate "&iquest;este desembolso existir&iacute;a si no produjera/vendiera nada?". Si la respuesta es no (materia prima, mano de obra directa), es costo. Si existir&iacute;a igual (arriendo de oficina, contador), es gasto.</p></div>
+        <div class="error-comun"><div class="error-comun-header"><h4>&#9888; Error com&uacute;n</h4></div><p>Meter todo a "gastos" porque "al final igual se resta". S&iacute; se resta, pero en l&iacute;neas distintas del ERI, y eso cambia el margen bruto &mdash; el indicador con el que decides si subir precios o renegociar con proveedores. Mezclarlos es perder el instrumento de navegaci&oacute;n.</p></div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-7" class="prev" onclick="navigateTo(7)">&larr; M&oacute;dulo 7</a><a href="#modulo-9" class="next" onclick="navigateTo(9)">M&oacute;dulo 9 &rarr;</a></div>
+    </section>
+    <section id="modulo-9" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Finanzas No Financieros &rsaquo; M&oacute;dulo 9</div>
+        <div class="mod-num">M&oacute;dulo 9 de 10</div>
+        <h1>Lo que NO ves en el balance</h1>
+        <p class="mod-desc">Los EEFF tienen limitaciones. Saber qué NO te están contando es tan importante como saber leer lo que sí.</p>
+      </div>
+      <div class="content-block">
+        <h2>Lo invisible más relevante</h2>
+        <ul>
+          <li><strong>Cartera vencida</strong>: en el ESF aparece junto a la cartera al día. Hay que pedir un anexo con edades de cartera (0-30, 31-60, 61-90, +90 días).</li>
+          <li><strong>Concentración de clientes</strong>: si el 70% de tus ingresos viene de un solo cliente, eso no aparece en el balance — pero es el riesgo más grande de la empresa.</li>
+          <li><strong>Litigios y contingencias</strong>: aparecen como notas a los EEFF, no como pasivos formales. Si tu empresa tiene demandas pendientes, la nota lo dice.</li>
+          <li><strong>Calidad del equipo</strong>: los activos fijos están a costo de adquisición menos depreciación, no a valor real de mercado.</li>
+          <li><strong>Marca, reputación, talento</strong>: no aparecen en el balance. Una empresa con marca fuerte vale más de lo que dice el patrimonio.</li>
+          <li><strong>Pasivos con vinculados</strong>: créditos del dueño a la empresa o viceversa, frecuentemente no se reportan en términos de mercado.</li>
+        </ul>
+        <div class="error-comun"><div class="error-comun-header"><h4>&#9888; Error com&uacute;n</h4></div><p>Comprar una empresa basándose solo en sus EEFF sin pedir las notas, el detalle de cartera por edades, la composición de ingresos por cliente y las contingencias legales. Es la fuente clásica de "compré mal".</p></div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-8" class="prev" onclick="navigateTo(8)">&larr; M&oacute;dulo 8</a><a href="#modulo-10" class="next" onclick="navigateTo(10)">M&oacute;dulo 10 &rarr;</a></div>
+    </section>
+    <section id="modulo-10" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Finanzas No Financieros &rsaquo; M&oacute;dulo 10</div>
+        <div class="mod-num">M&oacute;dulo 10 de 10</div>
+        <h1>Caso integrador: la junta del lunes</h1>
+        <p class="mod-desc">Pones todo en práctica con un caso real: te entregan los EEFF de "Distribuciones del Valle SAS" antes de la junta directiva, y tienes 30 minutos para preparar tu intervención.</p>
+      </div>
+      <div class="content-block">
+        <h2>Los datos</h2>
+        <div class="ejemplo">
+          <div class="ejemplo-header"><h4>Distribuciones del Valle SAS &mdash; 2025 vs 2024</h4></div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Ingresos 2025 / 2024</span><span class="value">$1.200M / $1.050M</span></div>
+            <div class="ejemplo-row"><span class="label">Costo de ventas 2025 / 2024</span><span class="value">$760M / $640M</span></div>
+            <div class="ejemplo-row"><span class="label">Gastos operacionales 2025 / 2024</span><span class="value">$320M / $280M</span></div>
+            <div class="ejemplo-row"><span class="label">Utilidad neta 2025 / 2024</span><span class="value">$84M / $98M</span></div>
+            <div class="ejemplo-row"><span class="label">Cartera 2025 / 2024</span><span class="value">$220M / $140M</span></div>
+            <div class="ejemplo-row"><span class="label">Inventarios 2025 / 2024</span><span class="value">$180M / $130M</span></div>
+            <div class="ejemplo-row"><span class="label">Caja 2025 / 2024</span><span class="value">$25M / $80M</span></div>
+            <div class="ejemplo-row"><span class="label">Pasivos corrientes 2025 / 2024</span><span class="value">$190M / $130M</span></div>
+          </div>
+        </div>
+        <h3>Tus conclusiones (las que dirías en la junta)</h3>
+        <ol>
+          <li><strong>Crecimos 14% en ingresos pero la utilidad cayó 14%</strong>. El margen neto pasó de 9,3% a 7%. La empresa creció mal.</li>
+          <li><strong>El costo creció 19% (de $640M a $760M) — más que los ingresos</strong>. Hay que revisar negociación con proveedores o subir precios.</li>
+          <li><strong>La cartera creció 57% mientras los ingresos solo 14%</strong>. Estamos vendiendo a clientes que no nos pagan. Riesgo alto.</li>
+          <li><strong>Los inventarios crecieron 38%</strong>. Compramos más de lo que vendemos. Probable obsolescencia.</li>
+          <li><strong>La caja cayó 69%</strong> ($80M → $25M). Combinado con cartera e inventario crecidos, hay un problema serio de capital de trabajo.</li>
+          <li><strong>La razón corriente sigue siendo positiva</strong> pero la calidad ha caído: más cartera y más inventario, menos efectivo.</li>
+          <li><strong>Recomendación</strong>: pausar crecimiento, cobrar cartera vencida, liquidar inventario obsoleto, renegociar plazos con proveedores. Antes de pensar en nuevos clientes, recuperar caja.</li>
+        </ol>
+        <div class="cta-practica"><h3>&#x1F6E0; Aplica a tu propia empresa</h3><p>Sube los EEFF de tu negocio a la herramienta de Estados Financieros y pr&aacute;ctica los an&aacute;lisis.</p><a href="../estadosfinancieros.html">Abrir herramienta &rarr;</a></div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-9" class="prev" onclick="navigateTo(9)">&larr; M&oacute;dulo 9</a><a href="../escuela.html" class="next" style="background:var(--g800)">Volver a la Escuela &rarr;</a></div>
+    </section>
+  </div>
+</div>
+<section style="background:linear-gradient(180deg,#F9FAFB,#fff);padding:60px 24px 80px;border-top:1px solid #E5E7EB">
+  <div data-curso-meta="finanzas-no-financieros" style="text-align:center;margin-bottom:28px"></div>
+  <div data-cert-widget="finanzas-no-financieros"></div>
+</section>
+<script defer src="../shared/pro.js?v=848fbf16"></script>
+<script src="../shared/certificado.js?v=383dd956"></script>
+<script src="../shared/cert-emit-widget.js?v=81c77b40"></script>
+<script src="../shared/curso-meta.js?v=6b7779f4"></script>
+<button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()" aria-label="Abrir menú">&#9776;</button>
+<script>
+var currentModule=1;var totalModules=10;
+function navigateTo(n){document.querySelectorAll('.modulo-section').forEach(function(s){s.classList.remove('active');});var t=document.getElementById('modulo-'+n);if(t)t.classList.add('active');var links=document.querySelectorAll('.sidebar-nav a');links.forEach(function(a,i){a.classList.remove('active');if(i<n-1)a.classList.add('completed');if(i===n-1)a.classList.add('active');});var pct=Math.round((n/totalModules)*100);document.getElementById('progressFill').style.width=pct+'%';currentModule=n;window.scrollTo({top:0,behavior:'smooth'});document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('open');if(typeof gtag!=='undefined')gtag('event','escuela_modulo',{curso:'finanzas-no-financieros',modulo:n});}
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sidebarOverlay').classList.toggle('open');}
+</script>
+</body>
+</html>

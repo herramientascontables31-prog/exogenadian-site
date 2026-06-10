@@ -1,0 +1,160 @@
+{
+  "trabIngBruto": {
+    "label": "c32 — Ingresos brutos rentas de trabajo",
+    "norma": "Art. 26 ET",
+    "queEs": "Suma de salarios, prestaciones sociales, vacaciones, primas, bonificaciones, comisiones laborales y demás pagos derivados de relación laboral o legal y reglamentaria. Incluye también la totalidad de honorarios cuando el contribuyente cumple condiciones del par. 5 Art. 206 (no vinculó 2+ trabajadores por más de 90 días).",
+    "comoSeCalcula": "Suma del valor anual de todos los conceptos laborales reportados en el certificado de ingresos y retenciones (Form 220) emitido por el empleador. NO descontar aún INCRNGO ni rentas exentas.",
+    "erroresComunes": [
+      "Confundir ingresos brutos con ingresos netos — aquí van los brutos sin restar nada.",
+      "Olvidar incluir las cesantías y sus intereses si fueron pagados durante el año.",
+      "Confundir el concepto 5001 de exógena con la totalidad de la cédula trabajo — exógena puede tener errores u omisiones."
+    ],
+    "soporte": "Certificado de ingresos y retenciones (Formato 220 DIAN) emitido por el empleador, con la totalidad de pagos del año gravable."
+  },
+  "trabIncrngo": {
+    "label": "c33 — Ingresos no constitutivos de renta (INCRNGO)",
+    "norma": "Art. 55 ET",
+    "queEs": "Aportes obligatorios del trabajador a salud (4% del IBC) y pensión (4% del IBC), y al Fondo de Solidaridad Pensional (FSP) cuando aplica. Estos NO constituyen ingreso para el trabajador y se restan de los ingresos brutos antes de calcular la renta líquida.",
+    "comoSeCalcula": "Aproximadamente 8% del ingreso bruto laboral (4% salud + 4% pensión obligatoria). Para honorarios sin relación laboral incluye los aportes que el contribuyente haya hecho como independiente (40% del ingreso × 8% mínimo, según Art. 135 Ley 1753/2015).",
+    "erroresComunes": [
+      "Confundir aportes obligatorios (INCRNGO) con aportes voluntarios AFC/FVP (deducción Art. 126-1).",
+      "Aplicar 8% sobre todo el ingreso cuando el IBC tiene tope (25 SMMLV mensuales = 28 SMMLV año 2024).",
+      "Olvidar el Fondo de Solidaridad Pensional adicional cuando salario > 4 SMMLV."
+    ],
+    "soporte": "Certificado del empleador con desglose de aportes (Form 220) o liquidación PILA en el caso de independientes."
+  },
+  "trabCesantias": {
+    "label": "c36 — Cesantías e intereses (rentas exentas Art. 206 num. 4)",
+    "norma": "Art. 206 num. 4 ET",
+    "queEs": "Cesantías y sus intereses están exentos del impuesto de renta hasta cierto límite, como protección al trabajador. La exención aplica al monto efectivamente recibido por el trabajador en el año (retiro o pago directo), no a las consignadas al fondo.",
+    "comoSeCalcula": "Cesantías exentas: el monto que reciba el trabajador del fondo de cesantías o por pago directo del empleador, dentro del límite del Art. 206 num. 4. Para salarios bajos la exención es total; para salarios altos hay limitación gradual.",
+    "erroresComunes": [
+      "Declarar las cesantías consignadas al fondo durante el año (no son exentas hasta que el trabajador las retira).",
+      "Confundir cesantías efectivamente recibidas con saldo del fondo a fin de año.",
+      "Olvidar que los intereses sobre cesantías también son exentos (Art. 206 num. 4)."
+    ],
+    "soporte": "Certificado del fondo de cesantías con detalle de retiros + comprobantes de pago directo del empleador. Form 220 normalmente las desglosa."
+  },
+  "dedSalud": {
+    "label": "Salud prepagada (Art. 387 ET, tope 192 UVT/año)",
+    "norma": "Art. 387 ET",
+    "queEs": "Pagos por medicina prepagada y seguros de salud que se descuentan de la renta de trabajo. Tope mensual de 16 UVT (= 192 UVT/año = $9.036.480 para AG 2024).",
+    "comoSeCalcula": "Suma del valor anual pagado al ente de medicina prepagada o seguro de salud privado a nombre del trabajador y sus dependientes. Aplicar el menor entre el monto pagado y 192 UVT × valor UVT del año.",
+    "erroresComunes": [
+      "Confundir aportes obligatorios a salud (INCRNGO c33) con medicina prepagada (deducción Art. 387).",
+      "Incluir pagos del empleador a la prepagada — solo cuenta lo pagado por el trabajador con sus propios recursos.",
+      "Aplicar el tope mensual sin convertir a anual cuando el contrato de prepagada es anual."
+    ],
+    "soporte": "Certificado de la EPS o ente de medicina prepagada con detalle de pagos del año + comprobantes de transferencia/pago."
+  },
+  "depArt387Num": {
+    "label": "Dependientes Art. 387 ET (tope 384 UVT/año)",
+    "norma": "Art. 387 ET",
+    "queEs": "Deducción del 10% del ingreso bruto del trabajador por concepto de dependientes económicos, hasta un máximo de 32 UVT mensuales (= 384 UVT/año = $18.072.960 para AG 2024). Aplica si tiene al menos UN dependiente — NO escala con el número.",
+    "comoSeCalcula": "Aplicado = mínimo entre (10% × ingreso bruto laboral) y (384 UVT × valor UVT). Solo se ingresa el NÚMERO de dependientes (mínimo 1 para que aplique). El motor calcula el monto.",
+    "erroresComunes": [
+      "Multiplicar la deducción por el número de dependientes — la regla es 10% UNA vez, no por dependiente.",
+      "Confundir con la deducción adicional Art. 336 num. 3 inc. 2 (72 UVT × dependiente, hasta 4) — esa es FUERA del tope, esta es DENTRO.",
+      "No documentar la condición de dependiente (parentesco + dependencia económica)."
+    ],
+    "soporte": "Certificación notarial o documento privado del declarante con la lista de dependientes, parentesco y condición de dependencia económica. Para hijos de 18-23 años: certificado de estudios."
+  },
+  "dedVivienda": {
+    "label": "Intereses crédito vivienda (Art. 119 ET, tope 1.200 UVT/año)",
+    "norma": "Art. 119 ET",
+    "queEs": "Intereses pagados durante el año por créditos de vivienda (incluyendo corrección monetaria UVR). Tope: 1.200 UVT al año = $56.478.000 para AG 2024.",
+    "comoSeCalcula": "Suma de intereses + corrección monetaria pagados durante el año, según certificación bancaria. Aplicar el menor entre el monto pagado y 1.200 UVT × valor UVT.",
+    "erroresComunes": [
+      "Incluir el abono a capital — solo cuentan intereses + corrección monetaria, no la cuota total.",
+      "Aplicar la deducción cuando el inmueble no es vivienda del declarante (debe ser para vivienda propia, no inversión).",
+      "Confundir crédito vivienda con leasing habitacional (este último también aplica pero con reglas distintas)."
+    ],
+    "soporte": "Certificación del banco con desglose: capital pagado, intereses pagados, corrección monetaria UVR. Documento del crédito (escritura + pagaré) si lo solicita DIAN."
+  },
+  "dedAvcAfc": {
+    "label": "Aportes voluntarios AVC + AFC (Art. 126-1 y 126-4 ET)",
+    "norma": "Art. 126-1, 126-4 ET",
+    "queEs": "Aportes voluntarios a fondos de pensión voluntaria (FVP), cuentas AFC (Ahorro Fomento de la Construcción) y AVC (Ahorro Voluntario Contractual). Tope global: 30% del ingreso laboral, sin exceder 3.800 UVT/año = $178.847.000 para AG 2024.",
+    "comoSeCalcula": "Suma de aportes voluntarios efectivamente realizados en el año. Aplicar el menor entre: (1) monto aportado, (2) 30% del ingreso laboral, (3) 3.800 UVT × valor UVT.",
+    "erroresComunes": [
+      "Confundir aportes voluntarios (deducción Art. 126-1) con obligatorios (INCRNGO Art. 55).",
+      "Olvidar que retiros antes de plazo (10 años / no destinar a vivienda) anulan el beneficio y obligan a reintegrar.",
+      "Aplicar todo el aporte cuando hay capeo por 30% del ingreso laboral."
+    ],
+    "soporte": "Certificado del fondo de pensión voluntaria o del banco (cuenta AFC) con aportes del año + saldo. Tener documentación del destino si se han hecho retiros (vivienda, retiro pensional, etc.)."
+  },
+  "depArt336Num": {
+    "label": "Dependientes Art. 336 num. 3 inc. 2 (72 UVT × dep, máx 4) — FUERA del tope",
+    "norma": "Art. 336 num. 3 inc. 2 ET",
+    "queEs": "Deducción adicional adicionada por Ley 2277/2022. 72 UVT por cada dependiente, hasta máximo 4 dependientes (= 288 UVT máximo = $13.554.720 para AG 2024). VA FUERA del tope del 40% / 1.340 UVT del Art. 336 num. 3 inc. 1. Coexiste con la deducción Art. 387.",
+    "comoSeCalcula": "Cantidad de dependientes (máx 4) × 72 UVT × valor UVT. El motor aplica el cap automáticamente.",
+    "erroresComunes": [
+      "Confundir con la deducción Art. 387 (esa es DENTRO del tope, esta es FUERA).",
+      "Declarar más de 4 dependientes (el motor capea a 4 pero el contador debe verificar la cantidad real).",
+      "Olvidar que esta deducción coexiste con Art. 387 — un dependiente puede contar para ambas."
+    ],
+    "soporte": "Misma certificación del Art. 387: parentesco + dependencia económica de cada uno (máximo 4)."
+  },
+  "ded1PctFE": {
+    "label": "1% factura electrónica (Art. 336 num. 5 ET) — FUERA del tope",
+    "norma": "Art. 336 num. 5 ET",
+    "queEs": "Adicionada por Ley 2277/2022. Deducción del 1% del valor de adquisiciones soportadas con factura electrónica de venta con validación previa, hasta 240 UVT/año = $11.295.600 para AG 2024. VA FUERA del tope del 40% / 1.340 UVT.",
+    "comoSeCalcula": "1% del valor total de las compras del año soportadas con factura electrónica + pago electrónico. Aplicar el menor entre (compras × 1%) y (240 UVT × valor UVT).",
+    "erroresComunes": [
+      "Aplicar la deducción a compras pagadas en efectivo (no califica — debe ser pago por medio electrónico).",
+      "Doble-aprovechamiento: si el bien o servicio ya fue solicitado como costo, deducción, IVA descontable o INCRNGO, NO califica para esta deducción.",
+      "Sumar facturas sin validación previa (deben tener CUDE de la DIAN)."
+    ],
+    "soporte": "Reporte consolidado de facturas electrónicas recibidas por el contribuyente + comprobantes de pago electrónico (tarjeta, transferencia, billetera)."
+  },
+  "patBruto": {
+    "label": "c29 — Patrimonio bruto",
+    "norma": "Art. 261-281 ET",
+    "queEs": "Total de bienes y derechos apreciables en dinero del declarante a 31 de diciembre del año gravable. Incluye inmuebles, vehículos, depósitos bancarios, inversiones, cuentas por cobrar, bienes muebles relevantes, derechos sobre fondos, etc.",
+    "comoSeCalcula": "Suma de los valores fiscales de cada bien según las reglas del Estatuto Tributario (avalúo catastral, costo fiscal, etc.). NO se descuentan deudas — eso es c30.",
+    "erroresComunes": [
+      "Olvidar bienes en el exterior (deben declararse + presentar Formato 160 si supera tope Art. 607).",
+      "Usar valor comercial en lugar de costo fiscal o avalúo catastral.",
+      "No sumar derechos sobre fondos/fiducias (el certificado del fondo lo desglosa).",
+      "Olvidar inventarios o cuentas por cobrar profesionales."
+    ],
+    "soporte": "Certificado de avalúo catastral de inmuebles, certificados bancarios al 31/dic, certificado de aportes societarios, escrituras de vehículos."
+  },
+  "anticipoArt807": {
+    "label": "c133 — Anticipo año siguiente (Art. 807 ET)",
+    "norma": "Art. 807 ET",
+    "queEs": "Anticipo del impuesto del año siguiente. La regla graduada: 25% si es 1ra vez declarando, 50% si es 2da, 75% en adelante. Se descuentan las retenciones del año actual del valor obtenido (si retenciones > anticipo base, c133 = $0).",
+    "comoSeCalcula": "Anticipo base = c126 × tarifa (25%/50%/75% según declaraciones previas). c133 = max(0, anticipo base - c132 retenciones).",
+    "erroresComunes": [
+      "Aplicar 75% siempre sin verificar si es 1ra o 2da declaración del cliente.",
+      "No descontar retenciones del año actual del anticipo base.",
+      "Confundir anticipo del año siguiente (c133) con anticipo del año anterior (c130, que ya se pagó)."
+    ],
+    "soporte": "Estado de declaraciones del declarante en la DIAN (RUT + histórico) — confirma cuántas veces ha declarado."
+  },
+  "descuento254_1": {
+    "label": "c296 — Descuento Art. 254-1 (19% × exceso 1.090 UVT)",
+    "norma": "Art. 254-1 ET (Ley 2277/2022)",
+    "queEs": "Descuento tributario aplicable a personas naturales residentes que perciben dividendos no gravados (Art. 49 num. 3). 19% sobre el exceso de 1.090 UVT (= $51.300.000 para AG 2024). NO genera saldo a favor (Concepto DIAN 100208192-272/2023).",
+    "comoSeCalcula": "Descuento = max(0, c107 - 1.090 UVT × valor UVT) × 19%. El motor lo aplica automáticamente. Se descuenta del impuesto agregado (c121) para llegar a c126.",
+    "erroresComunes": [
+      "Aplicarlo a dividendos GRAVADOS (Art. 49 par. 2, c108) — no aplica, esos tributan separadamente al 35%.",
+      "Esperar saldo a favor cuando el descuento excede el impuesto — el límite es implícito.",
+      "Olvidar que aplica solo a dividendos de sociedades nacionales (los del exterior tienen régimen distinto)."
+    ],
+    "soporte": "Certificación de la sociedad pagadora con clasificación clara como dividendos no gravados Art. 49 num. 3 + monto + año de utilidades distribuidas."
+  },
+  "descargaMUISCA": {
+    "label": "Cómo descargar el reporte exógena del MUISCA",
+    "norma": "DIAN — portal MUISCA",
+    "queEs": "El reporte de información reportada por terceros es el consolidado anual que la DIAN compila a partir de los formatos exógena (1001/1003/1007/1008/etc.) que reportan empleadores, bancos, sociedades, EPS y otros informantes. Es la fuente principal de prefilencia para tu declaración de Renta Persona Natural.",
+    "comoSeCalcula": "Pasos en MUISCA: (1) Ingresa a muisca.dian.gov.co con tu cédula y firma electrónica. (2) Menú Consultas → Información reportada por terceros. (3) Selecciona el año gravable (ej. 2024 si presentas en 2025). (4) Click en 'Descargar reporte detallado' o el ícono de Excel. (5) Se descarga reporteExogena2024_<NIT>.xlsx (o similar). El archivo tiene 1 hoja llamada 'Reporte' con cabecera fila 10 (formato típico) o fila 14 (formato extendido).",
+    "erroresComunes": [
+      "Descargar el resumen impreso (PDF) en lugar del Excel detallado — el resumen agrupa conceptos y pierde el detalle por NIT informante.",
+      "Descargar el reporte sin firmar electrónicamente — algunos años MUISCA exige firma para acceder al detalle.",
+      "Tomar el reporte como verdad absoluta — la DIAN advierte que puede actualizarse después de descargado y refleja solo lo que terceros reportaron, no la realidad económica del cliente.",
+      "Olvidar que faltan: ingresos del exterior, ventas a personas no obligadas a reportar, ingresos en efectivo, dividendos de sociedades cerradas, intereses bancarios pequeños."
+    ],
+    "soporte": "Acceso MUISCA: muisca.dian.gov.co (requiere cédula + firma electrónica). Si el cliente no recuerda su firma, puede recuperarla en el mismo portal con preguntas de seguridad. Para clientes nuevos sin RUT firma, usar el botón 'Saltar carga manual' y digitar conceptos uno por uno."
+  }
+}

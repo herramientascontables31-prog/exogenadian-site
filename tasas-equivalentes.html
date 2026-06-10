@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#1B3A5C">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Convertidor de Tasas Equivalentes — EA, NMV, NMA, EM | ExógenaDIAN</title>
+<meta name="description" content="Convierte entre las 12 modalidades de tasas de interés en Colombia: efectiva anual (EA), nominal mensual vencida (NMV), nominal anticipada (NMA), efectiva mensual (EM) y todas las equivalentes. Gratis, en tu navegador.">
+<meta name="keywords" content="convertidor tasas equivalentes, EA NMV NMA EM, tasa efectiva anual a nominal, conversión tasas Colombia, tasa anticipada vencida, calculadora intereses, equivalencia tasa mensual anual">
+<link rel="canonical" href="https://exogenadian.com/tasas-equivalentes.html">
+<meta property="og:title" content="Convertidor de Tasas Equivalentes | ExógenaDIAN">
+<meta property="og:description" content="Convierte entre las 12 modalidades de tasas de interés en Colombia. Gratis.">
+<meta property="og:url" content="https://exogenadian.com/tasas-equivalentes.html">
+<meta property="og:type" content="website"><meta property="og:locale" content="es_CO"><meta property="og:site_name" content="ExógenaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="robots" content="index, follow">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Convertidor de Tasas Equivalentes","url":"https://exogenadian.com/tasas-equivalentes.html","description":"Convertidor entre 12 modalidades de tasas de interés (efectivas, nominales vencidas y anticipadas) usadas en finanzas y contabilidad en Colombia.","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"COP"},"author":{"@type":"Organization","name":"ExógenaDIAN","url":"https://exogenadian.com"}}</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--green:#059669;--green2:#ECFDF5;--green3:#D1FAE5;--red:#DC2626;--amber:#D97706;--amber2:#FFF8E1;--amber3:#FEF3C7;--border:#e2e8f0;--radius:10px;--shadow:0 2px 12px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+.container{max-width:940px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#1B3A5C 0%,#2E75B6 100%);padding:28px 32px;border-radius:16px;margin-bottom:24px;color:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.header h1{font-size:1.45rem;font-weight:700;display:flex;align-items:center;gap:10px}
+.header h1 span{font-size:1.5rem}
+.header p{opacity:.85;font-size:.83rem;margin-top:4px}
+.header-right{text-align:right;font-size:.78rem;opacity:.75}
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:24px;margin-bottom:20px;box-shadow:var(--shadow)}
+.card-title{font-size:1rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px;color:var(--pri)}
+.form-grid{display:grid;grid-template-columns:1fr 2fr;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:4px}
+.form-group label{font-size:.76rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;display:flex;align-items:center;gap:4px}
+.form-group label .tip{cursor:help;background:var(--pri3);color:var(--pri);width:15px;height:15px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:800;position:relative}
+.form-group label .tip:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--pri);color:#fff;padding:6px 10px;border-radius:6px;font-size:.72rem;max-width:300px;white-space:normal;z-index:10;font-weight:400;text-transform:none;letter-spacing:0;line-height:1.4;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.form-group input,.form-group select{padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:'JetBrains Mono',monospace;transition:.2s}
+.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--pri2);box-shadow:0 0 0 3px rgba(46,117,182,.12)}
+.form-group .hint{font-size:.7rem;color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0}
+.results-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:6px}
+.results-table th{background:var(--pri);color:#fff;padding:9px 12px;text-align:left;font-size:.74rem;text-transform:uppercase;letter-spacing:.3px}
+.results-table th:last-child{text-align:right}
+.results-table td{padding:8px 12px;border-bottom:1px solid var(--border)}
+.results-table td:last-child{text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600}
+.results-table tr.group-header{background:#F9FAFB}
+.results-table tr.group-header td{font-weight:700;color:var(--pri);font-size:.76rem;text-transform:uppercase;letter-spacing:.3px;padding:6px 12px}
+.results-table tr.highlight{background:var(--green2)}
+.results-table tr.highlight td:last-child{color:var(--green)}
+.alert{padding:10px 14px;border-radius:8px;font-size:.8rem;margin:10px 0;display:flex;align-items:flex-start;gap:8px}
+.alert-info{background:var(--pri3);color:var(--pri);border:1px solid #B4C6E7}
+.normativa-list{margin-top:16px;padding:12px 16px;background:#F9FAFB;border:1px solid var(--border);border-radius:8px;font-size:.78rem;color:var(--muted);line-height:1.7}
+.normativa-list summary{font-weight:700;color:var(--text);cursor:pointer}
+.formulas-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;font-size:.78rem}
+.formula-box{background:#FAFBFC;border:1px solid var(--border);border-radius:8px;padding:10px 12px}
+.formula-box .name{font-weight:700;color:var(--pri);margin-bottom:4px}
+.formula-box code{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--text)}
+@media(max-width:768px){
+  .header{flex-direction:column;text-align:center;padding:22px 18px}.header-right{text-align:center}
+  .form-grid{grid-template-columns:1fr}
+  .container{padding:12px}
+  .results-table{font-size:.78rem}.results-table th,.results-table td{padding:6px 8px}
+  .formulas-grid{grid-template-columns:1fr}
+}
+@media print {
+  body{background:#fff!important;color:#000!important}
+  #nav-container,.btn,button{display:none!important}
+  .container{max-width:100%!important;padding:0!important}
+  .card{box-shadow:none!important;border:none!important;padding:8px 0!important}
+  .results-table th{background:#1B3A5C!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  @page{margin:12mm}
+}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div id="nav-container"></div>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<div class="container">
+<div class="header">
+  <div>
+    <h1><span>&#9878;</span> Convertidor de Tasas Equivalentes</h1>
+    <p>Efectivas (EA, EM, ET, ES) &middot; Nominales vencidas (NAV, NSV, NTV, NMV) &middot; Anticipadas (NMA, NTA, NSA, NAA)</p>
+  </div>
+  <div class="header-right">100% en tu navegador<br>C&aacute;lculo en vivo</div>
+</div>
+<div class="card">
+  <div class="card-title">&#128176; Ingresa la tasa que conoces</div>
+  <div class="form-grid">
+    <div class="form-group">
+      <label>Tasa (%) <span class="tip" data-tip="Escribe el porcentaje. Ej: 30 (no 0.30). Acepta hasta 4 decimales.">?</span></label>
+      <input type="number" id="iTasa" value="30" step="0.0001" inputmode="decimal">
+    </div>
+    <div class="form-group">
+      <label>Modalidad <span class="tip" data-tip="EA: efectiva anual. EM/ET/ES: efectiva mensual/trimestral/semestral. NMV/NTV/NSV/NAV: nominal mensual/trimestral/semestral/anual VENCIDA. NMA/NTA/NSA/NAA: nominal ANTICIPADA.">?</span></label>
+      <select id="iMod">
+        <optgroup label="Efectivas">
+          <option value="EA" selected>EA — Efectiva anual</option>
+          <option value="ES">ES — Efectiva semestral</option>
+          <option value="ET">ET — Efectiva trimestral</option>
+          <option value="EM">EM — Efectiva mensual</option>
+        </optgroup>
+        <optgroup label="Nominales vencidas">
+          <option value="NAV">NAV — Nominal anual vencida</option>
+          <option value="NSV">NSV — Nominal anual capitalizable semestral vencida</option>
+          <option value="NTV">NTV — Nominal anual capitalizable trimestral vencida</option>
+          <option value="NMV">NMV — Nominal anual capitalizable mensual vencida</option>
+        </optgroup>
+        <optgroup label="Nominales anticipadas">
+          <option value="NAA">NAA — Nominal anual anticipada</option>
+          <option value="NSA">NSA — Nominal anual capitalizable semestral anticipada</option>
+          <option value="NTA">NTA — Nominal anual capitalizable trimestral anticipada</option>
+          <option value="NMA">NMA — Nominal anual capitalizable mensual anticipada</option>
+        </optgroup>
+      </select>
+    </div>
+  </div>
+  <div id="alertEA" class="alert alert-info">EA equivalente: <strong style="margin-left:6px" id="eaVal">&mdash;</strong></div>
+</div>
+<div class="card">
+  <div class="card-title">&#128202; Tasas equivalentes</div>
+  <table class="results-table" id="results"></table>
+</div>
+<div class="card">
+  <details class="normativa-list" open>
+    <summary>F&oacute;rmulas y conceptos</summary>
+    <div class="formulas-grid" style="margin-top:10px">
+      <div class="formula-box">
+        <div class="name">Efectiva &harr; Efectiva</div>
+        <code>i<sub>2</sub> = (1 + i<sub>1</sub>)<sup>n<sub>1</sub>/n<sub>2</sub></sup> &minus; 1</code>
+        <div style="font-size:.7rem;color:var(--muted);margin-top:4px">donde n es la cantidad de per&iacute;odos por a&ntilde;o (EA n=1, ES n=2, ET n=4, EM n=12).</div>
+      </div>
+      <div class="formula-box">
+        <div class="name">Nominal vencida &harr; Efectiva del per&iacute;odo</div>
+        <code>i<sub>periodica</sub> = NV<sub>anual</sub> / n</code>
+        <div style="font-size:.7rem;color:var(--muted);margin-top:4px">La tasa per&iacute;odica vencida es la efectiva del per&iacute;odo. Luego se compone para llegar a EA.</div>
+      </div>
+      <div class="formula-box">
+        <div class="name">Vencida &rarr; Anticipada</div>
+        <code>i<sub>anticipada</sub> = i<sub>vencida</sub> / (1 + i<sub>vencida</sub>)</code>
+      </div>
+      <div class="formula-box">
+        <div class="name">Anticipada &rarr; Vencida</div>
+        <code>i<sub>vencida</sub> = i<sub>anticipada</sub> / (1 &minus; i<sub>anticipada</sub>)</code>
+      </div>
+    </div>
+    <p style="font-size:.78rem;color:var(--muted);line-height:1.7;margin-top:14px">Fuentes: Decreto 4090/2009 sobre tasas de inter&eacute;s. Modelos est&aacute;ndar de matem&aacute;ticas financieras (V&eacute;lez Pareja, 2012). El Banco de la Rep&uacute;blica publica la DTF como tasa efectiva anual; la mayor&iacute;a de cr&eacute;ditos comerciales en Colombia se pactan en MV (mensual vencida) o EA.</p>
+  </details>
+</div>
+<div style="font-size:.78rem;color:var(--muted);text-align:center;margin-top:8px">
+  <a href="intereses.html" style="color:var(--pri2);text-decoration:none">&larr; Inter&eacute;s moratorio DIAN</a> &middot;
+  <a href="credito.html" style="color:var(--pri2);text-decoration:none">Simulador de cr&eacute;dito &rarr;</a> &middot;
+  <a href="finanzas.html" style="color:var(--pri2);text-decoration:none">Hub finanzas personales</a>
+</div>
+</div>
+<script>
+// === Lógica conversión tasas ===
+// Pivote: EA. Toda conversión pasa por EA.
+// Periodos por año: NMV/EM=12, NTV/ET=4, NSV/ES=2, NAV/EA=1
+var PERIODS={EM:12,ET:4,ES:2,EA:1,NMV:12,NTV:4,NSV:2,NAV:1,NMA:12,NTA:4,NSA:2,NAA:1};
+function toEA(rate, mod){
+  // rate viene en decimal (ej 0.30 para 30%)
+  var n=PERIODS[mod];
+  if(mod==='EA') return rate;
+  if(mod==='EM'||mod==='ET'||mod==='ES'){
+    // efectiva del periodo → EA
+    return Math.pow(1+rate, n) - 1;
+  }
+  if(mod==='NAV') return rate;
+  if(mod==='NMV'||mod==='NTV'||mod==='NSV'){
+    // nominal vencida → tasa periódica vencida → EA
+    var ip=rate/n;
+    return Math.pow(1+ip, n) - 1;
+  }
+  if(mod==='NAA'){
+    // anual anticipada → vencida → EA
+    return rate/(1-rate);
+  }
+  if(mod==='NMA'||mod==='NTA'||mod==='NSA'){
+    // nominal anticipada → tasa periódica anticipada → vencida → EA
+    var ia=rate/n;
+    var iv=ia/(1-ia);
+    return Math.pow(1+iv, n) - 1;
+  }
+  return 0;
+}
+function fromEA(ea, mod){
+  var n=PERIODS[mod];
+  if(mod==='EA') return ea;
+  if(mod==='EM'||mod==='ET'||mod==='ES'){
+    return Math.pow(1+ea, 1/n) - 1;
+  }
+  if(mod==='NAV') return ea;
+  if(mod==='NMV'||mod==='NTV'||mod==='NSV'){
+    var ip=Math.pow(1+ea, 1/n) - 1;
+    return ip*n;
+  }
+  if(mod==='NAA'){
+    return ea/(1+ea);
+  }
+  if(mod==='NMA'||mod==='NTA'||mod==='NSA'){
+    var iv=Math.pow(1+ea, 1/n) - 1;
+    var ia=iv/(1+iv);
+    return ia*n;
+  }
+  return 0;
+}
+var GROUPS=[
+  {label:'Efectivas', mods:[
+    {k:'EA',  d:'Efectiva anual'},
+    {k:'ES',  d:'Efectiva semestral'},
+    {k:'ET',  d:'Efectiva trimestral'},
+    {k:'EM',  d:'Efectiva mensual'}
+  ]},
+  {label:'Nominales vencidas', mods:[
+    {k:'NAV', d:'Nominal anual vencida'},
+    {k:'NSV', d:'Nominal capitalizable semestral vencida'},
+    {k:'NTV', d:'Nominal capitalizable trimestral vencida'},
+    {k:'NMV', d:'Nominal capitalizable mensual vencida'}
+  ]},
+  {label:'Nominales anticipadas', mods:[
+    {k:'NAA', d:'Nominal anual anticipada'},
+    {k:'NSA', d:'Nominal capitalizable semestral anticipada'},
+    {k:'NTA', d:'Nominal capitalizable trimestral anticipada'},
+    {k:'NMA', d:'Nominal capitalizable mensual anticipada'}
+  ]}
+];
+function fmt(v){
+  if(!isFinite(v)) return '—';
+  return (v*100).toFixed(4) + ' %';
+}
+function recalc(){
+  var raw=parseFloat(document.getElementById('iTasa').value);
+  var mod=document.getElementById('iMod').value;
+  if(isNaN(raw)){
+    document.getElementById('eaVal').textContent='—';
+    document.getElementById('results').innerHTML='';
+    return;
+  }
+  var rate=raw/100;
+  // Validación: NAA, NMA/NTA/NSA con tasa periódica anticipada >= 1 son inválidas (división por cero o negativa)
+  if(mod==='NAA' && rate>=1){
+    document.getElementById('eaVal').textContent='Tasa anticipada anual debe ser < 100 %';
+    document.getElementById('results').innerHTML='';
+    return;
+  }
+  if((mod==='NMA'||mod==='NTA'||mod==='NSA') && (rate/PERIODS[mod])>=1){
+    document.getElementById('eaVal').textContent='Tasa periódica anticipada inválida';
+    document.getElementById('results').innerHTML='';
+    return;
+  }
+  var ea=toEA(rate, mod);
+  document.getElementById('eaVal').textContent = fmt(ea);
+  var html='';
+  GROUPS.forEach(function(g){
+    html+='<tr class="group-header"><td colspan="2">'+g.label+'</td></tr>';
+    g.mods.forEach(function(m){
+      var v=fromEA(ea, m.k);
+      var hl=(m.k===mod)?' class="highlight"':'';
+      html+='<tr'+hl+'><td><strong>'+m.k+'</strong> &middot; <span style="color:var(--muted);font-size:.82rem">'+m.d+'</span></td><td>'+fmt(v)+'</td></tr>';
+    });
+  });
+  document.getElementById('results').innerHTML='<thead><tr><th>Modalidad</th><th>Tasa equivalente</th></tr></thead><tbody>'+html+'</tbody>';
+  if(typeof exoTrack!=='undefined')exoTrack.tool('tasas-equivalentes');
+}
+document.getElementById('iTasa').addEventListener('input',recalc);
+document.getElementById('iMod').addEventListener('change',recalc);
+recalc();
+</script>
+<script src="shared/analytics.js?v=b756a0cb"></script>
+<link rel="stylesheet" href="shared/chat.css?v=a52afe72">
+<script defer src="shared/chat.js?v=a45c7cf2"></script>
+</body>
+</html>

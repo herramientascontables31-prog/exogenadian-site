@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Liquidador de Nómina por Excel — Cierre mensual masivo gratis | ExógenaDIAN</title>
+<meta name="description" content="Liquida la nómina mensual de varios empleados subiendo un Excel. Calcula salario, horas extras, recargos, IBC, retención fuente y aportes empresa, y exporta el cierre en Excel y desprendibles imprimibles. Todo en tu navegador, sin registro.">
+<meta name="keywords" content="liquidador de nómina por Excel, cierre nómina mensual masivo, calculadora nómina Colombia, recargos nocturnos, horas extras dominicales, retención fuente salarios, exoneración aportes Art 114-1 ET, IBC, fondo solidaridad pensional, desprendibles de pago">
+<link rel="canonical" href="https://exogenadian.com/nomina-masiva.html">
+<meta property="og:title" content="Liquidador de Nómina por Excel — Cierre mensual masivo gratis | ExógenaDIAN">
+<meta property="og:description" content="Sube un Excel con tus empleados y obtén liquidación completa + desprendibles imprimibles. CST, Ley 100, Ley 797, Art. 114-1 ET, Art. 383 ET. Gratis.">
+<meta property="og:url" content="https://exogenadian.com/nomina-masiva.html">
+<meta property="og:type" content="website"><meta property="og:locale" content="es_CO"><meta property="og:site_name" content="ExógenaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="robots" content="index, follow">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Liquidador de Nómina por Excel","url":"https://exogenadian.com/nomina-masiva.html","description":"Herramienta gratuita para liquidar la nómina mensual masiva subiendo un Excel y descargar desprendibles imprimibles. Basada en CST, Ley 100/1993, Ley 797/2003, Art. 114-1 y Art. 383 ET.","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"COP"},"author":{"@type":"Organization","name":"ExógenaDIAN","url":"https://exogenadian.com"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://exogenadian.com/"},{"@type":"ListItem","position":2,"name":"Liquidador Laboral","item":"https://exogenadian.com/liquidador.html"},{"@type":"ListItem","position":3,"name":"Liquidador de Nómina por Excel","item":"https://exogenadian.com/nomina-masiva.html"}]}</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F9FAFB;--card:#fff;--text:#111827;--muted:#6B7280;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--green:#10B981;--green2:#ECFDF5;--green3:#D1FAE5;--red:#DC2626;--amber:#F59E0B;--amber2:#FFF8E1;--amber3:#FEF3C7;--border:#E5E7EB;--radius:14px;--shadow:0 2px 8px rgba(0,0,0,.03)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5}
+.container{max-width:1100px;margin:0 auto;padding:18px 22px 60px}
+.header{padding:18px 0 14px;margin-bottom:18px;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.header > div:first-child{flex:1;min-width:0}
+.header h1{font-size:1.6rem;font-weight:800;letter-spacing:-.3px;color:var(--text);display:flex;align-items:center;gap:10px}
+.header h1 span{font-size:1.5rem}
+.header p{color:var(--muted);margin-top:6px;font-size:.95rem;line-height:1.55;max-width:720px}
+.header-right{text-align:right;font-size:.78rem;color:var(--muted)}
+.badge-ley{display:inline-block;background:#D1FAE5;color:#065F46;padding:3px 10px;border-radius:999px;font-size:.7rem;font-weight:700;letter-spacing:.3px;margin-top:10px}
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:24px;margin-bottom:20px;box-shadow:var(--shadow)}
+.card-title{font-size:1rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;color:var(--pri)}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;font-weight:700;font-size:.78rem;flex-shrink:0}
+.step-num.todo{background:var(--muted)}
+.btn{padding:11px 24px;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:.9rem;font-family:inherit;transition:.15s;display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#047857}
+.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--text)}.btn-outline:hover{border-color:var(--pri2);color:var(--pri2)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.alert{padding:11px 14px;border-radius:8px;font-size:.83rem;margin-top:12px;display:flex;align-items:flex-start;gap:8px;line-height:1.55}
+.alert-info{background:var(--pri3);color:var(--pri);border:1px solid #B4C6E7}
+.alert-warn{background:var(--amber3);color:#92400E;border:1px solid #FDE68A}
+.alert-success{background:var(--green2);color:#065F46;border:1px solid #A7F3D0}
+.dropzone{border:2px dashed #cbd5e1;border-radius:10px;padding:36px 20px;text-align:center;background:#FAFBFC;color:var(--muted);cursor:pointer;transition:.15s}
+.dropzone:hover{border-color:var(--green);background:var(--green2)}
+.dropzone.dragover{border-color:var(--green);background:var(--green3);color:var(--pri)}
+.dropzone strong{color:var(--text);font-weight:600}
+.data-table{width:100%;border-collapse:collapse;font-size:.82rem;border:1px solid var(--border)}
+.data-table th{background:var(--pri);color:#fff;padding:8px 10px;text-align:left;font-size:.72rem;text-transform:uppercase;letter-spacing:.3px;white-space:nowrap}
+.data-table td{padding:7px 10px;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:.78rem;white-space:nowrap}
+.data-table td.t{font-family:'DM Sans',sans-serif;white-space:normal}
+.data-table tr:nth-child(even) td{background:#FAFBFC}
+.data-table tr.error-row td{background:#FEF2F2}
+.data-table tr.total-row td{background:var(--pri);color:#fff;font-weight:700;font-size:.85rem}
+.data-table tr.subtotal-row td{background:var(--green2);font-weight:700}
+.row-num{color:var(--muted);font-size:.7rem;text-align:center}
+.badge-ok{display:inline-block;background:var(--green3);color:#065F46;font-size:.7rem;font-weight:700;padding:2px 7px;border-radius:10px}
+.badge-err{display:inline-block;background:#FEE2E2;color:#991B1B;font-size:.7rem;font-weight:700;padding:2px 7px;border-radius:10px}
+.error-list{margin-top:12px;padding:12px 14px;background:#FEF2F2;border:1px solid #FECACA;border-radius:8px;font-size:.78rem;color:#991B1B;line-height:1.7}
+.error-list ul{padding-left:20px;margin-top:4px}
+.kpis-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 14px}
+.kpi-card.green{border-left:4px solid var(--green)}
+.kpi-card.blue{border-left:4px solid var(--pri2)}
+.kpi-card.red{border-left:4px solid var(--red)}
+.kpi-card.amber{border-left:4px solid var(--amber)}
+.kpi-card .lbl{font-size:.7rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+.kpi-card .val{font-size:1.05rem;font-weight:700;font-family:'JetBrains Mono',monospace;margin-top:4px}
+.warnings-box{margin-top:16px;padding:12px 14px;background:var(--amber2);border:1px solid #FDE68A;border-radius:8px;font-size:.8rem;color:#92400E;line-height:1.7}
+.warnings-box ul{padding-left:18px;margin-top:6px}
+.norm-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:12px}
+.norm-grid > div{padding:10px 14px;border-bottom:1px solid var(--border);font-size:.82rem}
+.norm-grid > div:nth-child(odd){background:#FAFBFC;font-weight:600;color:var(--pri)}
+.norm-grid > div:nth-child(even){background:#fff;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.78rem;line-height:1.6}
+.norm-grid > div:nth-last-child(-n+2){border-bottom:0}
+.col-list{font-size:.82rem;line-height:1.7;color:var(--text)}
+.col-list code{background:#F3F4F6;padding:1px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--pri)}
+.col-list .obl{color:var(--red);font-weight:700;font-size:.7rem}
+.col-list .opc{color:var(--muted);font-size:.7rem}
+details{margin-top:12px;border:1px solid var(--border);border-radius:8px;background:#FAFBFC}
+details > summary{padding:12px 16px;cursor:pointer;font-weight:600;color:var(--pri);font-size:.88rem;list-style:none}
+details > summary::-webkit-details-marker{display:none}
+details > summary::before{content:'▸ ';color:var(--green);font-weight:700}
+details[open] > summary::before{content:'▾ '}
+details > div{padding:0 16px 16px}
+.disclaimer{margin-top:14px;padding:12px 16px;background:var(--amber2);border:1px solid #FDE68A;border-radius:8px;font-size:.76rem;color:#92400E;line-height:1.6}
+@media(max-width:768px){
+  .header{flex-direction:column;text-align:center;padding:22px 18px}.header-right{text-align:center}
+  .container{padding:12px}
+  .norm-grid{grid-template-columns:1fr}
+  .norm-grid > div:nth-child(odd){border-bottom:0;padding-bottom:4px}
+  .norm-grid > div:nth-child(even){padding-top:4px}
+}
+/* ─── Desprendibles imprimibles ─── */
+#desprendibles-print{display:none}
+.desprendible{font-family:'DM Sans',sans-serif;color:#000;page-break-after:always;padding:24px;font-size:12px}
+.desprendible:last-child{page-break-after:auto}
+.desprendible .head{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #1B3A5C;padding-bottom:10px;margin-bottom:14px}
+.desprendible .head .empresa{font-weight:700;font-size:14px;color:#1B3A5C}
+.desprendible .head .empresa .nit{font-weight:400;font-size:11px;color:#555;margin-top:2px}
+.desprendible .head .titulo{text-align:right;font-size:11px;color:#555}
+.desprendible .head .titulo strong{display:block;color:#1B3A5C;font-size:13px;margin-bottom:2px}
+.desprendible .empleado{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;background:#F5F7FA;padding:10px 14px;border-radius:4px;margin-bottom:12px;font-size:11px}
+.desprendible .empleado .lbl{color:#555;font-weight:600}
+.desprendible h3{font-size:11px;font-weight:700;color:#1B3A5C;text-transform:uppercase;letter-spacing:.5px;margin:10px 0 4px;border-bottom:1px solid #ccc;padding-bottom:2px}
+.desprendible table{width:100%;border-collapse:collapse;font-size:11px}
+.desprendible table td{padding:4px 8px;border-bottom:1px solid #eee}
+.desprendible table td.concepto{color:#333}
+.desprendible table td.valor{text-align:right;font-family:'JetBrains Mono',monospace;white-space:nowrap}
+.desprendible table tr.subtotal td{background:#FAFBFC;font-weight:700;border-top:1px solid #999}
+.desprendible .neto{display:flex;justify-content:space-between;align-items:center;background:#1B3A5C;color:#fff;padding:10px 14px;border-radius:4px;margin-top:12px;font-size:13px;font-weight:700}
+.desprendible .neto .val{font-family:'JetBrains Mono',monospace;font-size:15px}
+.desprendible .firmas{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:36px;font-size:10px;color:#555}
+.desprendible .firmas div{border-top:1px solid #999;padding-top:4px;text-align:center}
+.desprendible .pie{margin-top:18px;font-size:9px;color:#888;text-align:center;line-height:1.4}
+@media print{
+  body *{visibility:hidden}
+  #desprendibles-print, #desprendibles-print *{visibility:visible}
+  #desprendibles-print{display:block;position:absolute;left:0;top:0;width:100%}
+  @page{size:letter;margin:14mm}
+}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div id="nav-container"></div>
+<script defer src="shared/pro.js?v=848fbf16"></script>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<script defer src="shared/pro-banner.js?v=a5944c54"></script>
+<div class="container">
+<div class="header">
+  <div>
+    <h1><span>&#128202;</span> Liquidador de Nómina por Excel</h1>
+    <p>Cierra la nómina mensual de varios empleados subiendo un Excel. Calcula salario, horas extras, recargos, IBC, retención en la fuente y aportes empresa, y descarga el cierre en Excel + desprendibles imprimibles para cada empleado.</p>
+    <div class="badge-ley">CST · Ley 100/93 · Ley 797/03 · Ley 1393/10 · Ley 1819/16 · Ley 2101/21 · Concepto DIAN 956/24 · Art. 383 ET</div>
+  </div>
+  <div class="header-right">100% en tu navegador<br>Tus datos no salen de tu equipo</div>
+</div>
+<div class="card">
+  <div class="card-title">&#128221; ¿Cómo funciona?</div>
+  <div style="font-size:.9rem;line-height:1.7;color:var(--text)">
+    Esta herramienta liquida la <strong>nómina mensual</strong> de uno o varios empleados en relación de dependencia. No requiere instalación ni registro: descarga la plantilla, llénala con tus empleados y novedades del mes, súbela y obtén el cálculo completo con explicación normativa.
+  </div>
+  <div class="alert alert-info" style="margin-top:14px">
+    <span>&#9432;</span>
+    <span><strong>No reemplaza un software de nómina.</strong> Si necesitas emitir <a href="https://exogenadian.com/" style="color:var(--pri);font-weight:600">nómina electrónica DIAN</a>, generar PILA o llevar histórico por empleado, esto es una calculadora — útil para validar, simular o liquidar puntualmente. Para nómina formal usa un software autorizado.</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title"><span class="step-num">1</span> Descarga la plantilla</div>
+  <p style="font-size:.88rem;color:var(--muted);margin-bottom:12px">Excel con las columnas necesarias y dos filas de ejemplo. Tiene <strong>12 columnas base obligatorias</strong> y <strong>13 avanzadas opcionales</strong> (no salariales, dominicales, deducciones especiales).</p>
+  <button class="btn btn-green" onclick="descargarPlantilla()">&#128190; Descargar plantilla Excel</button>
+  <details style="margin-top:16px">
+    <summary>Ver descripción de cada columna</summary>
+    <div>
+      <p style="font-size:.85rem;font-weight:700;color:var(--pri);margin-top:10px;margin-bottom:6px">Columnas base <span class="obl">OBLIGATORIAS</span></p>
+      <ul class="col-list" style="padding-left:18px">
+        <li><code>cédula</code> — Documento de identidad del empleado (texto)</li>
+        <li><code>nombre</code> — Nombre completo</li>
+        <li><code>salarioBase</code> — Salario mensual constitutivo (Art. 127 CST), sin aux. transporte</li>
+        <li><code>diasTrabajados</code> — Días del mes que trabajó (0-30). Mes completo: 30</li>
+        <li><code>auxTransporteModo</code> — <code>AUTO</code> (regla automática), <code>MANUAL</code> (subsidio especial), o <code>NO</code> (no aplica)</li>
+        <li><code>nivelARL</code> — Nivel de riesgo 1 al 5 (Decreto 1295/1994 + 1607/2002)</li>
+        <li><code>tipoEmpleador</code> — 5 valores: <code>SOCIEDAD</code>, <code>PN_2_MAS</code> (PN con 2+ empleados), <code>PN_1</code> (PN con 1 empleado), <code>SIN_ANIMO_LUCRO</code>, <code>OTRO</code>. Solo los dos primeros aplican exoneración Art. 114-1 ET</li>
+        <li><code>heDiurnas</code> — Horas extras diurnas trabajadas en el mes (factor 1.25)</li>
+        <li><code>heNocturnas</code> — Horas extras nocturnas (7 p.m. a 6 a.m. desde el 25-dic-2025, Ley 2466/2025), factor 1.75</li>
+        <li><code>recargoNocturno</code> — Horas en jornada nocturna sin ser extra (factor 0.35)</li>
+        <li><code>diasVacaciones</code> — Días de vacaciones disfrutados en el mes</li>
+        <li><code>otrosDescuentos</code> — Suma de descuentos varios al empleado en pesos</li>
+      </ul>
+      <p style="font-size:.85rem;font-weight:700;color:var(--pri);margin-top:14px;margin-bottom:6px">Columnas avanzadas <span class="opc">OPCIONALES (default 0)</span></p>
+      <ul class="col-list" style="padding-left:18px">
+        <li><code>auxTransporteValor</code> — Solo si <code>auxTransporteModo = MANUAL</code></li>
+        <li><code>heDomDiurnas</code> / <code>heDomNocturnas</code> — Horas extras dominicales o festivas. Factores según el dominical vigente (Ley 2466/2025): hoy 2.05 y 2.55; desde el 1-jul-2026, 2.15 y 2.65</li>
+        <li><code>recargoDomDiurno</code> / <code>recargoDomNocturno</code> — Horas con recargo dominical sin extra. Hoy 0.80 / 1.15; desde el 1-jul-2026, 0.90 / 1.25</li>
+        <li><code>diasIncapacidad</code> — Días de incapacidad por enfermedad general (Decreto 2943/2013)</li>
+        <li><code>bonificaciones</code> / <code>comisiones</code> — <strong>Constitutivas</strong> de salario (Art. 127 CST) — afectan IBC y parafiscales</li>
+        <li><code>noSalarialGravable</code> — Pagos no constitutivos pero gravables para retefuente (Art. 128 CST). Si junto a <code>noSalarialNoGravable</code> superan el 40% de la remuneración → exceso suma al IBC SS (<strong>Art. 30 Ley 1393/2010</strong>)</li>
+        <li><code>noSalarialNoGravable</code> — Pagos no constitutivos y no gravables (alimentación, viáticos no permanentes — Art. 130 CST)</li>
+        <li><code>depDependientes</code> — <code>SI</code> si aplica deducción de dependientes (Art. 387 ET, 10% del ingreso, máx. 32 UVT)</li>
+        <li><code>interesesVivienda</code> / <code>medicinaPrepagada</code> — Topes 100 y 16 UVT/mes (Art. 387 ET)</li>
+        <li><code>aportesAFC</code> / <code>pensionVoluntaria</code> — Topes conjunto 30% del ingreso, máx ~316 UVT/mes (Arts. 126-1 y 126-4 ET)</li>
+        <li><code>libranza</code> / <code>embargo</code> — Descuentos autorizados</li>
+      </ul>
+    </div>
+  </details>
+</div>
+<div class="card">
+  <div class="card-title"><span class="step-num">2</span> Sube la plantilla diligenciada</div>
+  <input type="file" id="fileInput" accept=".xlsx,.xls" style="display:none">
+  <div id="dropzone" class="dropzone" onclick="document.getElementById('fileInput').click()">
+    <p style="font-size:.95rem;margin-bottom:6px">&#128228; Arrastra tu archivo aquí o <strong>haz clic para seleccionar</strong></p>
+    <p style="font-size:.78rem">Formatos aceptados: .xlsx, .xls — leído 100% en tu navegador, no se sube a ningún servidor</p>
+  </div>
+  <div id="uploadStatus" style="display:none"></div>
+</div>
+<div class="card" id="previewCard" style="display:none">
+  <div class="card-title">&#128203; Vista previa</div>
+  <div id="previewSummary"></div>
+  <div style="overflow-x:auto;margin-top:12px">
+    <table id="previewTable" class="data-table"></table>
+  </div>
+  <div id="previewErrors" style="display:none"></div>
+  <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+    <button id="btnCalcular" class="btn btn-green" onclick="calcularLiquidacion()">&#129518; Calcular liquidación</button>
+    <button class="btn btn-outline" onclick="resetTodo()">&#128260; Limpiar y volver a empezar</button>
+  </div>
+</div>
+<div class="card" id="resultsCard" style="display:none">
+  <div class="card-title">&#128181; Liquidación calculada</div>
+  <div id="kpisRow" class="kpis-row"></div>
+  <h3 style="font-size:.95rem;font-weight:700;color:var(--pri);margin:18px 0 8px">Detalle por empleado</h3>
+  <div style="overflow-x:auto">
+    <table id="resultsTable" class="data-table"></table>
+  </div>
+  <h3 style="font-size:.95rem;font-weight:700;color:var(--pri);margin:18px 0 8px">Aportes empresa</h3>
+  <div style="overflow-x:auto">
+    <table id="aportesTable" class="data-table"></table>
+  </div>
+  <div id="warningsBox" style="display:none"></div>
+  <div style="margin-top:18px;padding:14px 16px;background:#FAFBFC;border:1px solid var(--border);border-radius:8px">
+    <div style="font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px">Empresa pagadora (para Excel y desprendibles)</div>
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:10px;margin-bottom:14px">
+      <input id="empNombre" type="text" placeholder="Razón social (ej. Mi Empresa SAS)" style="padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.88rem;font-family:inherit">
+      <input id="empNit" type="text" placeholder="NIT" style="padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.88rem;font-family:inherit">
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn btn-green" onclick="exportarExcelMasiva()">&#128190; Exportar Excel (3 hojas)</button>
+      <button class="btn btn-outline" onclick="imprimirDesprendibles()">&#128424; Imprimir desprendibles (PDF)</button>
+    </div>
+    <p style="font-size:.72rem;color:var(--muted);margin-top:10px;line-height:1.5">
+      El Excel trae 3 hojas: resumen, detalle por empleado y aportes empresa. Los desprendibles abren el diálogo de impresión del navegador con una página por empleado — elige <strong>"Guardar como PDF"</strong> para descargar.
+    </p>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">&#9878; Fundamento legal de cada cálculo</div>
+  <p style="font-size:.84rem;color:var(--muted);margin-bottom:8px">Cada fórmula está sustentada en una norma vigente. La idea de ExógenaDIAN es que aprendas mientras liquidas.</p>
+  <div class="norm-grid">
+    <div>Salario por hora</div>
+    <div>Salario / divisor de la jornada vigente (Ley 2101/2021): <strong>220 h/mes</strong> con 44 h/sem hasta el 14-jul-2026 y <strong>210 h/mes</strong> con 42 h/sem desde el 15-jul-2026. El salario mensual no baja con la jornada — por eso cada hora vale más.</div>
+    <div>Salario por día</div>
+    <div>Salario / 30 — convención CST para liquidación de prestaciones diarias.</div>
+    <div>Auxilio de transporte</div>
+    <div>Aplica si salario ≤ 2 SMLMV. Valor anual fijado por Decreto MinTrabajo. No es factor salarial (Art. 7 Ley 1/1963) pero se incluye para liquidar prima y cesantías.</div>
+    <div>Hora extra diurna (+25%)</div>
+    <div>Art. 168 lit. a) CST — hora ordinaria × 1.25.</div>
+    <div>Hora extra nocturna (+75%)</div>
+    <div>Art. 168 lit. b) CST — hora ordinaria × 1.75. La jornada nocturna empieza a las <strong>7:00 p.m.</strong> desde el 25-dic-2025 (Ley 2466/2025; antes era desde las 9:00 p.m.).</div>
+    <div>Recargo nocturno (+35%)</div>
+    <div>Art. 168 inc. 1 CST — solo recargo (sin ser extra), sobre la hora ordinaria trabajada entre las 7:00 p.m. y las 6:00 a.m.</div>
+    <div>Recargo dominical/festivo diurno (gradual)</div>
+    <div>Art. 179 CST mod. <strong>Ley 2466/2025</strong>: +80% desde jul-2025, <strong>+90% desde el 1-jul-2026</strong>, +100% desde jul-2027. El motor aplica el % vigente a la fecha de liquidación.</div>
+    <div>HE dominical diurna</div>
+    <div>Art. 179 + 180 CST — hora ordinaria × (1 + dominical vigente + 0.25): hoy ×2.05, desde jul-2026 ×2.15.</div>
+    <div>HE dominical nocturna</div>
+    <div>Art. 179 + 180 + 168 CST — hora ordinaria × (1 + dominical vigente + 0.75): hoy ×2.55, desde jul-2026 ×2.65.</div>
+    <div>Vacaciones disfrutadas</div>
+    <div>Arts. 186-189 + 192 CST — salario / 30 × días disfrutados, sin auxilio de transporte.</div>
+    <div>Incapacidad por enfermedad general</div>
+    <div>Decreto 2943/2013: días 1-2 al 100% empresa; del día 3 en adelante al 66.67% (2/3) por la EPS — Art. 227 CST.</div>
+    <div>IBC — Ingreso Base de Cotización</div>
+    <div>Devengado constitutivo (sin aux. transporte ni no salariales). Piso: 1 SMLMV (Art. 18 Ley 100/1993). Techo: 25 SMLMV (Art. 5 Ley 797/2003). Ver regla Ley 1393/2010 abajo.</div>
+    <div>Ley 1393/2010 — Art. 30 (40% no salarial)</div>
+    <div>Si los pagos NO salariales superan el 40% del total remuneración, el exceso suma al IBC <strong>solo para Seguridad Social</strong> (salud, pensión, ARL, fondo solid.). NO aplica a parafiscales (SENA, ICBF, Caja) según Sentencia de Unificación del Consejo de Estado (2022). Aux transporte y alimentación (Art. 128 CST) no se cuentan para el 40%.</div>
+    <div>Salud empleado 4%</div>
+    <div>Art. 204 Ley 100/1993 (modificado Ley 1122/2007).</div>
+    <div>Pensión empleado 4%</div>
+    <div>Art. 20 Ley 797/2003.</div>
+    <div>Fondo solidaridad pensional</div>
+    <div>Art. 20 Ley 797/2003 — progresivo: 4-16 SMLMV → 1%; 16-17 → 1.2%; 17-18 → 1.4%; 18-19 → 1.6%; 19-20 → 1.8%; &gt;20 → 2%.</div>
+    <div>Retención en la fuente — Procedimiento 1</div>
+    <div>Art. 383 ET (mod. Ley 1819/2016). Tabla mensual en UVT con depuración del Art. 388 ET (aportes obligatorios + deducciones Art. 387 + 25% renta exenta Art. 206 num 10).</div>
+    <div>Renta exenta laboral 25%</div>
+    <div>Art. 206 num 10 ET — tope 790 UVT anuales (≈65,83 UVT/mes) tras Ley 2277/2022 art. 7.</div>
+    <div>Salud empresa 8.5% / SENA 2% / ICBF 3%</div>
+    <div>EXONERADOS por empleados que devengan menos de 10 SMLMV — Art. 114-1 ET (Ley 1819/2016 Art. 65). Aplica solo a sociedades y PNs con 2+ empleados. <strong>Concepto DIAN 956 de 2024:</strong> los pagos no constitutivos NO se cuentan al tope de 10 SMLMV — solo el ingreso constitutivo (salario + bonificaciones constitutivas + HE + recargos).</div>
+    <div>Pensión empresa 12%</div>
+    <div>Art. 20 Ley 797/2003 — siempre se paga (no exonerable).</div>
+    <div>ARL</div>
+    <div>Decreto 1295/1994 + Decreto 1607/2002. Niveles 1-5 con tarifas: 0.522% / 1.044% / 2.436% / 4.350% / 6.960%.</div>
+    <div>Caja de Compensación 4%</div>
+    <div>Ley 21/1982 — siempre se paga (no exonerable).</div>
+  </div>
+  <div class="alert alert-info" style="margin-top:14px">
+    <span>&#128218;</span>
+    <span><strong>Quieres profundizar en cada concepto?</strong> Visita la <a href="escuela/nomina.html" style="color:var(--pri);font-weight:600">Escuela de Nómina</a> o la <a href="https://exogenadian.com/ia-asistente.html" style="color:var(--pri);font-weight:600">IA Asistente</a> para resolver dudas puntuales.</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">&#127919; Alcance: qué cubre y qué NO cubre</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:.84rem;line-height:1.65">
+    <div style="padding:14px;background:var(--green2);border:1px solid #A7F3D0;border-radius:8px">
+      <p style="font-weight:700;color:#065F46;margin-bottom:6px">&#10003; Sí cubre (v1)</p>
+      <ul style="padding-left:18px;color:#065F46">
+        <li>Empleado ordinario en relación de dependencia</li>
+        <li>Salario fijo más HE/recargos en 7 categorías estándar</li>
+        <li>Pagos salariales y no salariales (gravables y no gravables)</li>
+        <li>Aplicación Art. 30 Ley 1393/2010 al IBC SS</li>
+        <li>Exoneración 114-1 ET con criterio Concepto DIAN 956/2024</li>
+        <li>Retención fuente Procedimiento 1 con Art. 388 ET</li>
+        <li>Deducciones Art. 387 (dependientes, vivienda, prepagada, AFC, voluntarios)</li>
+        <li>Aviso si se exceden los topes de HE (Art. 22 Ley 50/1990)</li>
+      </ul>
+    </div>
+    <div style="padding:14px;background:var(--amber2);border:1px solid #FDE68A;border-radius:8px">
+      <p style="font-weight:700;color:#92400E;margin-bottom:6px">&#9888; NO cubre — requieren liquidación aparte</p>
+      <ul style="padding-left:18px;color:#92400E">
+        <li>Salario integral (Art. 132 CST) — IBC sobre 70%</li>
+        <li>Trabajadores de dirección, confianza y manejo (Art. 162 CST)</li>
+        <li>Aprendices SENA (Ley 2466/2025)</li>
+        <li>Trabajadores ocasionales (Art. 6 CST)</li>
+        <li>Pensionados que reingresan al mercado laboral</li>
+        <li>Suspensión del contrato (Arts. 51-53 CST)</li>
+        <li>Empleadas domésticas por días → usa <a href="liquidador.html" style="color:#92400E;text-decoration:underline">esta herramienta</a></li>
+        <li>Procedimiento 2 retefuente (Art. 386 ET)</li>
+        <li>Auxilio de conectividad digital (Decreto 771/2020)</li>
+        <li>Licencias de maternidad, paternidad y luto</li>
+        <li>Emisión de nómina electrónica DIAN</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="disclaimer">
+  <strong>&#9888; Importante:</strong> Esta calculadora aplica las reglas generales del CST y la normatividad de seguridad social y tributaria vigente en Colombia. No reemplaza la asesoría de un contador ni la liquidación oficial de una empresa.
+  <br><br>
+  <strong>Suspensión SMLMV 2026:</strong> El Consejo de Estado suspendió provisionalmente el Decreto 1469/2025 que fijó el SMLMV en $1.750.905. Mientras se expide nuevo decreto, las liquidaciones hechas con ese valor son válidas (Auto 12-feb-2026). Si el nuevo decreto define un valor distinto, las liquidaciones futuras deberán recalcularse — las pasadas no se afectan.
+  <br><br>
+  Verifica siempre los parámetros del año (SMLMV, auxilio de transporte y UVT) contra el Decreto y la Resolución DIAN vigentes a la fecha en que liquides.
+</div>
+</div>
+<section style="max-width:1100px;margin:24px auto 0;padding:0 22px 40px">
+  <h3 style="font-size:.95rem;font-weight:700;color:#374151;margin-bottom:12px">Herramientas relacionadas</h3>
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <a href="liquidador.html" style="padding:8px 16px;background:#ECFDF5;color:#047857;border-radius:999px;text-decoration:none;font-size:.85rem;font-weight:500">&larr; Hub Liquidador Laboral</a>
+    <a href="liquidador-general.html" style="padding:8px 16px;background:#ECFDF5;color:#047857;border-radius:999px;text-decoration:none;font-size:.85rem;font-weight:500">Liquidación de contrato</a>
+    <a href="liquidador-prestaciones.html" style="padding:8px 16px;background:#ECFDF5;color:#047857;border-radius:999px;text-decoration:none;font-size:.85rem;font-weight:500">Cesantías, prima y vacaciones</a>
+    <a href="liquidador-horas.html" style="padding:8px 16px;background:#ECFDF5;color:#047857;border-radius:999px;text-decoration:none;font-size:.85rem;font-weight:500">Horas extras y recargos</a>
+    <a href="costoreal.html" style="padding:8px 16px;background:#ECFDF5;color:#047857;border-radius:999px;text-decoration:none;font-size:.85rem;font-weight:500">Costo real empleado</a>
+    <a href="retencion-fuente.html" style="padding:8px 16px;background:#ECFDF5;color:#047857;border-radius:999px;text-decoration:none;font-size:.85rem;font-weight:500">Retención en la fuente</a>
+  </div>
+</section>
+<div id="desprendibles-print" aria-hidden="true"></div>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw" crossorigin="anonymous"></script>
+<script src="shared/jornada-laboral.js?v=a7826f23"></script>
+<script src="shared/nomina-engine.js?v=418b2e8d"></script>
+<script src="shared/nomina-masiva-validator.js?v=9e652fc3"></script>
+<script>
+/* ─── Generación de plantilla Excel descargable ─── */
+function descargarPlantilla() {
+  if (typeof XLSX === 'undefined') {
+    if (typeof exoToast !== 'undefined') exoToast('No se pudo cargar la librería Excel. Recarga la página.', 'error');
+    return;
+  }
+  // Encabezados — 12 base + 13 avanzadas
+  var headers = [
+    // ─── BASE (12) ───
+    'cedula', 'nombre', 'salarioBase', 'diasTrabajados', 'auxTransporteModo',
+    'nivelARL', 'tipoEmpleador', 'heDiurnas', 'heNocturnas', 'recargoNocturno',
+    'diasVacaciones', 'otrosDescuentos',
+    // ─── AVANZADAS (13) ───
+    'auxTransporteValor', 'heDomDiurnas', 'heDomNocturnas', 'recargoDomDiurno',
+    'recargoDomNocturno', 'diasIncapacidad', 'bonificaciones', 'comisiones',
+    'noSalarialGravable', 'noSalarialNoGravable',
+    'depDependientes', 'interesesVivienda', 'medicinaPrepagada',
+  ];
+  // Filas de ejemplo
+  var ejemplos = [
+    {
+      cedula: '1010101010', nombre: 'EJEMPLO 1 — SMLMV mes completo, sociedad',
+      salarioBase: 1750905, diasTrabajados: 30, auxTransporteModo: 'AUTO',
+      nivelARL: 1, tipoEmpleador: 'SOCIEDAD',
+      heDiurnas: 0, heNocturnas: 0, recargoNocturno: 0,
+      diasVacaciones: 0, otrosDescuentos: 0,
+      auxTransporteValor: 0, heDomDiurnas: 0, heDomNocturnas: 0,
+      recargoDomDiurno: 0, recargoDomNocturno: 0,
+      diasIncapacidad: 0, bonificaciones: 0, comisiones: 0,
+      noSalarialGravable: 0, noSalarialNoGravable: 0,
+      depDependientes: 'NO', interesesVivienda: 0, medicinaPrepagada: 0,
+    },
+    {
+      cedula: '2020202020', nombre: 'EJEMPLO 2 — con HE, recargos y bono no salarial',
+      salarioBase: 3500000, diasTrabajados: 30, auxTransporteModo: 'NO',
+      nivelARL: 3, tipoEmpleador: 'SOCIEDAD',
+      heDiurnas: 8, heNocturnas: 4, recargoNocturno: 12,
+      diasVacaciones: 0, otrosDescuentos: 50000,
+      auxTransporteValor: 0, heDomDiurnas: 0, heDomNocturnas: 0,
+      recargoDomDiurno: 8, recargoDomNocturno: 0,
+      diasIncapacidad: 0, bonificaciones: 200000, comisiones: 0,
+      noSalarialGravable: 500000, noSalarialNoGravable: 0,
+      depDependientes: 'SI', interesesVivienda: 0, medicinaPrepagada: 0,
+    },
+  ];
+  // Hoja 1: Empleados
+  var datos = [headers].concat(ejemplos.map(function(e) {
+    return headers.map(function(h) { return e[h] != null ? e[h] : ''; });
+  }));
+  var ws1 = XLSX.utils.aoa_to_sheet(datos);
+  // Anchos de columna razonables
+  ws1['!cols'] = headers.map(function(h) {
+    if (h === 'nombre') return { wch: 42 };
+    if (h === 'cedula' || h === 'salarioBase' || h === 'auxTransporteValor' ||
+        h === 'bonificaciones' || h === 'comisiones' || h === 'otrosDescuentos') return { wch: 14 };
+    if (h.indexOf('he') === 0 || h.indexOf('recargo') === 0) return { wch: 13 };
+    return { wch: 16 };
+  });
+  // Hoja 2: Instrucciones
+  var instrucciones = [
+    ['INSTRUCCIONES — Plantilla de liquidación de nómina mensual'],
+    [''],
+    ['1. Reemplaza las filas de ejemplo con tus empleados.'],
+    ['2. Las primeras 12 columnas son OBLIGATORIAS. Las 13 siguientes son OPCIONALES (déjalas en 0 o vacías si no aplica).'],
+    ['3. No cambies los nombres de columna ni el orden.'],
+    ['4. Sube esta hoja "Empleados" a la herramienta y obtén la liquidación completa.'],
+    [''],
+    ['CONVENCIONES (valores admitidos):'],
+    ['  auxTransporteModo   →  AUTO | MANUAL | NO'],
+    ['  tipoEmpleador       →  SOCIEDAD | PN_2_MAS | PN_1 | SIN_ANIMO_LUCRO | OTRO'],
+    ['                          (Solo SOCIEDAD y PN_2_MAS aplican exoneración Art. 114-1 ET)'],
+    ['  nivelARL            →  1 (mínimo) al 5 (máximo) — Decreto 1295/1994 + Decreto 1607/2002'],
+    ['  depDependientes     →  SI | NO  (Art. 387 ET — deducción 10% del ingreso, máx. 32 UVT)'],
+    [''],
+    ['NOTAS:'],
+    ['  • Si auxTransporteModo = MANUAL, debes diligenciar auxTransporteValor.'],
+    ['  • diasTrabajados: 30 para mes completo; menos si el empleado entró o salió a mitad de mes.'],
+    ['  • Las horas (heDiurnas, heNocturnas, etc.) son las trabajadas EN EL MES, no por día.'],
+    ['  • bonificaciones y comisiones son CONSTITUTIVAS de salario (Art. 127 CST) y suman al IBC.'],
+    ['  • noSalarialGravable: pagos por mera liberalidad gravables para retefuente (Art. 128 CST).'],
+    ['  • noSalarialNoGravable: alimentación, viáticos no permanentes (Art. 130 CST). Ni IBC ni retefuente.'],
+    ['  • Si la suma de no salariales > 40% de la remuneración → exceso suma al IBC SS (Art. 30 Ley 1393/2010).'],
+    ['  • Para 114-1 ET: el tope 10 SMLMV solo cuenta lo CONSTITUTIVO (Concepto DIAN 956/2024).'],
+    ['  • Tope HE legal: 2 h/día y 12 h/semana (Art. 22 Ley 50/1990) — la herramienta avisa si se excede.'],
+    [''],
+    ['PARÁMETROS APLICADOS — AÑO 2026:'],
+    ['  SMLMV: $1.750.905   (Decreto 1469/2025 — bajo suspensión provisional CE; Decreto 0159/2026 transitorio)'],
+    ['  Auxilio transporte: $249.095   (Decreto 1470 de 29-dic-2025)'],
+    ['  UVT: $52.374   (Resolución DIAN 000238 de 15-dic-2025)'],
+    [''],
+    ['ALCANCE: solo cubre empleados ordinarios en relación de dependencia.'],
+    ['NO cubre: salario integral, dirección/confianza/manejo, aprendiz SENA, ocasional,'],
+    ['          pensionado reingresado, suspensión contrato, doméstica por días,'],
+    ['          procedimiento 2 retefuente, auxilio conectividad, licencias.'],
+    [''],
+    ['Generado por exogenadian.com'],
+  ];
+  var ws2 = XLSX.utils.aoa_to_sheet(instrucciones);
+  ws2['!cols'] = [{ wch: 92 }];
+  var wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws1, 'Empleados');
+  XLSX.utils.book_append_sheet(wb, ws2, 'Instrucciones');
+  XLSX.writeFile(wb, 'plantilla_nomina_exogenadian.xlsx');
+  if (typeof exoToast !== 'undefined') {
+    exoToast('Plantilla descargada. Llénala y vuelve para liquidar.', 'success');
+  }
+  if (typeof exoTrack !== 'undefined') exoTrack.generate('nomina-masiva', 'plantilla');
+}
+/* ═══════════════════════════════════════════════════════════════════════════
+   UPLOAD → PARSE → PREVIEW → CALCULAR → RENDER
+   ═══════════════════════════════════════════════════════════════════════════ */
+var ESTADO = {
+  filasProcesadas: null,   // { filas: [...], resumen: {...} } de NominaValidator
+  resultados: null,        // [{...}, ...] de NominaEngine.liquidarNominaMasiva
+};
+function fCOP(n) {
+  if (n == null || isNaN(n)) return '$0';
+  var sign = n < 0 ? '-' : '';
+  return sign + '$' + Math.abs(Math.round(n)).toLocaleString('es-CO');
+}
+/* ─── Drag & drop + click ─── */
+(function setupUpload() {
+  var dz = document.getElementById('dropzone');
+  var fi = document.getElementById('fileInput');
+  if (!dz || !fi) return;
+  fi.addEventListener('change', function(e) {
+    if (e.target.files && e.target.files[0]) procesarArchivo(e.target.files[0]);
+  });
+  dz.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    dz.classList.add('dragover');
+  });
+  dz.addEventListener('dragleave', function(e) {
+    e.preventDefault();
+    dz.classList.remove('dragover');
+  });
+  dz.addEventListener('drop', function(e) {
+    e.preventDefault();
+    dz.classList.remove('dragover');
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) procesarArchivo(e.dataTransfer.files[0]);
+  });
+})();
+function procesarArchivo(file) {
+  if (typeof XLSX === 'undefined') {
+    alert('No se pudo cargar la librería de Excel. Recarga la página.');
+    return;
+  }
+  if (typeof NominaValidator === 'undefined') {
+    alert('No se cargó el validador. Recarga la página.');
+    return;
+  }
+  var nombre = (file.name || '').toLowerCase();
+  if (!/\.(xlsx|xls)$/.test(nombre)) {
+    mostrarStatus('error', 'Archivo no válido. Sube un .xlsx o .xls.');
+    return;
+  }
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      var data = new Uint8Array(e.target.result);
+      var wb = XLSX.read(data, { type: 'array' });
+      // Buscar hoja "Empleados", o usar la primera si no existe
+      var nombreHoja = wb.SheetNames.indexOf('Empleados') >= 0 ? 'Empleados' : wb.SheetNames[0];
+      var ws = wb.Sheets[nombreHoja];
+      var aoa = XLSX.utils.sheet_to_json(ws, { header: 1, defval: null, blankrows: false });
+      var procesado = NominaValidator.procesarAoA(aoa);
+      if (procesado.errorEsquema) {
+        mostrarStatus('error', 'Error en el archivo: ' + procesado.errorEsquema);
+        return;
+      }
+      if (procesado.filas.length === 0) {
+        mostrarStatus('error', 'La plantilla no tiene empleados. Llénala con al menos una fila.');
+        return;
+      }
+      ESTADO.filasProcesadas = procesado;
+      ESTADO.resultados = null;
+      mostrarStatus('success', 'Archivo "' + file.name + '" cargado: ' + procesado.resumen.total +
+                    ' empleados (' + procesado.resumen.validas + ' válidos, ' +
+                    procesado.resumen.conErrores + ' con errores).');
+      renderPreview(procesado);
+      document.getElementById('resultsCard').style.display = 'none';
+      if (typeof exoTrack !== 'undefined') exoTrack.generate('nomina-masiva', 'upload');
+    } catch (err) {
+      console.error(err);
+      mostrarStatus('error', 'No se pudo leer el archivo: ' + err.message);
+    }
+  };
+  reader.onerror = function() { mostrarStatus('error', 'Error leyendo el archivo.'); };
+  reader.readAsArrayBuffer(file);
+}
+function mostrarStatus(tipo, mensaje) {
+  var el = document.getElementById('uploadStatus');
+  el.style.display = 'block';
+  el.className = 'alert alert-' + (tipo === 'error' ? 'warn' : tipo === 'success' ? 'success' : 'info');
+  el.style.marginTop = '12px';
+  el.innerHTML = '<span>' + (tipo === 'error' ? '&#9888;' : '&#10003;') + '</span><span>' + mensaje + '</span>';
+}
+function renderPreview(procesado) {
+  var card = document.getElementById('previewCard');
+  card.style.display = 'block';
+  var resumen = procesado.resumen;
+  var summaryEl = document.getElementById('previewSummary');
+  summaryEl.innerHTML =
+    '<div style="display:flex;gap:16px;flex-wrap:wrap;font-size:.86rem">' +
+      '<div><strong>' + resumen.total + '</strong> empleados</div>' +
+      '<div style="color:#065F46"><strong>' + resumen.validas + '</strong> válidos</div>' +
+      '<div style="color:#991B1B"><strong>' + resumen.conErrores + '</strong> con errores</div>' +
+    '</div>';
+  // ─── Detectar columnas avanzadas con datos ───
+  // (solo se muestran si al menos una fila tiene valor distinto de 0)
+  var anyVal = function(getter) {
+    return procesado.filas.some(function(r) { return (getter(r.fila) || 0) > 0; });
+  };
+  var col = {
+    bono:    anyVal(function(f){ return (f.bonificaciones||0) + (f.comisiones||0); }),
+    noSal:   anyVal(function(f){ return (f.noSalarialGravable||0) + (f.noSalarialNoGravable||0); }),
+    heDig:   anyVal(function(f){ return f.heDiurnas; }),
+    heNoc:   anyVal(function(f){ return f.heNocturnas; }),
+    heDom:   anyVal(function(f){ return (f.heDomDiurnas||0) + (f.heDomNocturnas||0); }),
+    rec:     anyVal(function(f){ return (f.recargoNocturno||0) + (f.recargoDomDiurno||0) + (f.recargoDomNocturno||0); }),
+    vacInc:  anyVal(function(f){ return (f.diasVacaciones||0) + (f.diasIncapacidad||0); }),
+    otros:   anyVal(function(f){ return f.otrosDescuentos; }),
+  };
+  // ─── Construir header ───
+  var headers = ['#', 'Cédula', 'Nombre', 'Salario base', 'Días', 'Aux/mes', 'ARL', 'Exonera 114-1'];
+  if (col.bono)   headers.push('Bono+Com');
+  if (col.noSal)  headers.push('No salarial');
+  if (col.heDig)  headers.push('HE D');
+  if (col.heNoc)  headers.push('HE N');
+  if (col.heDom)  headers.push('HE Dom');
+  if (col.rec)    headers.push('Recargos h');
+  if (col.vacInc) headers.push('Vac/Inc d');
+  if (col.otros)  headers.push('Otros desc');
+  var html = '<thead><tr>' + headers.map(function(h){ return '<th>' + h + '</th>'; }).join('') + '</tr></thead><tbody>';
+  // ─── Helpers para datos derivados ───
+  var ARL_PCT = NominaEngine.CONST_NOMINA.ARL_TARIFAS;
+  var auxValor = function(f) {
+    var modo = f.auxTransporteModo || 'AUTO';
+    return NominaEngine.calcAuxTransporte(f.salarioBase || 0, modo, f.auxTransporteValor || 0, f.anio || 2026);
+  };
+  var arlLabel = function(nivel) {
+    var pct = ARL_PCT[nivel];
+    return pct ? (nivel + ' (' + (pct * 100).toFixed(2).replace('.',',') + '%)') : (nivel || '—');
+  };
+  var exoneraBadge = function(f) {
+    var anio = f.anio || 2026;
+    var smlmv = NominaEngine.PARAMS_NOMINA[anio] ? NominaEngine.PARAMS_NOMINA[anio].SMLMV : 1750905;
+    // chequeo rápido: tipo exonerable + salario base < 10 SMLMV
+    var aprox = NominaEngine.tipoEmpleadorEsExonerable(f.tipoEmpleador) && (f.salarioBase < smlmv * 10);
+    return aprox
+      ? '<span class="badge-ok">SÍ</span>'
+      : '<span class="badge-err">NO</span>';
+  };
+  // ─── Construir filas ───
+  procesado.filas.forEach(function(r, i) {
+    var f = r.fila;
+    html += '<tr' + (r.valido ? '' : ' class="error-row"') + '>'
+      + '<td class="row-num">' + (i + 1) + '</td>'
+      + '<td class="t">' + esc(f.cedula) + '</td>'
+      + '<td class="t">' + esc(f.nombre) + '</td>'
+      + '<td>' + fCOP(f.salarioBase) + '</td>'
+      + '<td>' + (f.diasTrabajados || 0) + '</td>'
+      + '<td>' + fCOP(auxValor(f)) + '</td>'
+      + '<td>' + esc(arlLabel(f.nivelARL)) + '</td>'
+      + '<td>' + exoneraBadge(f) + '</td>';
+    if (col.bono)   html += '<td>' + fCOP((f.bonificaciones||0) + (f.comisiones||0)) + '</td>';
+    if (col.noSal)  html += '<td>' + fCOP((f.noSalarialGravable||0) + (f.noSalarialNoGravable||0)) + '</td>';
+    if (col.heDig)  html += '<td>' + (f.heDiurnas || 0) + '</td>';
+    if (col.heNoc)  html += '<td>' + (f.heNocturnas || 0) + '</td>';
+    if (col.heDom)  html += '<td>' + ((f.heDomDiurnas||0) + (f.heDomNocturnas||0)) + '</td>';
+    if (col.rec)    html += '<td>' + ((f.recargoNocturno||0) + (f.recargoDomDiurno||0) + (f.recargoDomNocturno||0)) + '</td>';
+    if (col.vacInc) html += '<td>' + ((f.diasVacaciones||0) + (f.diasIncapacidad||0)) + '</td>';
+    if (col.otros)  html += '<td>' + fCOP(f.otrosDescuentos) + '</td>';
+    html += '</tr>';
+  });
+  html += '</tbody>';
+  document.getElementById('previewTable').innerHTML = html;
+  // Lista de errores agrupada
+  var errBox = document.getElementById('previewErrors');
+  if (resumen.conErrores > 0) {
+    var todosLosErrores = [];
+    procesado.filas.forEach(function(r) { todosLosErrores = todosLosErrores.concat(r.errores); });
+    errBox.innerHTML = '<div class="error-list"><strong>Errores que debes corregir:</strong><ul>'
+      + todosLosErrores.map(function(e) { return '<li>' + esc(e) + '</li>'; }).join('')
+      + '</ul></div>';
+    errBox.style.display = 'block';
+  } else {
+    errBox.style.display = 'none';
+  }
+  // Habilitar/deshabilitar botón calcular
+  var btn = document.getElementById('btnCalcular');
+  if (resumen.conErrores > 0) {
+    btn.disabled = true;
+    btn.title = 'Corrige los errores en tu Excel y vuelve a subir';
+  } else {
+    btn.disabled = false;
+    btn.title = '';
+  }
+  card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function esc(s) {
+  if (s == null) return '';
+  return String(s).replace(/[<>&"']/g, function(c) {
+    return { '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
+function calcularLiquidacion() {
+  if (!ESTADO.filasProcesadas || ESTADO.filasProcesadas.resumen.conErrores > 0) return;
+  var filas = ESTADO.filasProcesadas.filas.map(function(r) { return r.fila; });
+  ESTADO.resultados = NominaEngine.liquidarNominaMasiva(filas);
+  renderResultados(ESTADO.resultados);
+  if (typeof exoTrack !== 'undefined') exoTrack.generate('nomina-masiva', 'calculo');
+}
+function renderResultados(resultados) {
+  var card = document.getElementById('resultsCard');
+  card.style.display = 'block';
+  // ─── Totales agregados ───
+  var totales = resultados.reduce(function(t, r) {
+    t.devengado += r.totalDevengado;
+    t.ibcSS += r.ibcSS;
+    t.deducciones += r.totalDeducciones;
+    t.neto += r.netoPagar;
+    t.aportes += r.totalAportesEmpresa;
+    t.costoEmp += r.costoTotalEmpresa;
+    t.retefuente += r.retencionFuente;
+    if (r.exoneracion114_1) t.exonerados += 1;
+    return t;
+  }, { devengado: 0, ibcSS: 0, deducciones: 0, neto: 0, aportes: 0, costoEmp: 0, retefuente: 0, exonerados: 0 });
+  // ─── KPIs ───
+  document.getElementById('kpisRow').innerHTML =
+    kpiCard('green', 'Total devengado', fCOP(totales.devengado)) +
+    kpiCard('blue',  'Total IBC seg. social', fCOP(totales.ibcSS)) +
+    kpiCard('red',   'Total deducciones', fCOP(totales.deducciones)) +
+    kpiCard('green', 'Total neto a pagar', fCOP(totales.neto)) +
+    kpiCard('amber', 'Aportes empresa', fCOP(totales.aportes)) +
+    kpiCard('blue',  'Costo total empresa', fCOP(totales.costoEmp)) +
+    kpiCard('amber', 'Retefuente', fCOP(totales.retefuente)) +
+    kpiCard('green', 'Exonerados 114-1', totales.exonerados + ' / ' + resultados.length);
+  // ─── Tabla detalle por empleado ───
+  var html = '<thead><tr>'
+    + '<th>#</th><th>Cédula</th><th>Nombre</th><th>Devengado</th>'
+    + '<th>Aux</th><th>HE+Rec</th><th>IBC SS</th>'
+    + '<th>Salud 4%</th><th>Pens 4%</th><th>F.Solid</th><th>Retefuente</th>'
+    + '<th>Total ded.</th><th>NETO</th>'
+    + '</tr></thead><tbody>';
+  resultados.forEach(function(r, i) {
+    var heRec = r.heDigVal + r.heNocVal + r.heDomDigVal + r.heDomNocVal
+              + r.recNocVal + r.recDomDigVal + r.recDomNocVal;
+    html += '<tr>'
+      + '<td class="row-num">' + (i + 1) + '</td>'
+      + '<td class="t">' + esc(r.cedula) + '</td>'
+      + '<td class="t">' + esc(r.nombre) + '</td>'
+      + '<td>' + fCOP(r.totalDevengado) + '</td>'
+      + '<td>' + fCOP(r.auxTransporte) + '</td>'
+      + '<td>' + fCOP(heRec) + '</td>'
+      + '<td>' + fCOP(r.ibcSS) + '</td>'
+      + '<td>' + fCOP(r.deduccionSalud) + '</td>'
+      + '<td>' + fCOP(r.deduccionPension) + '</td>'
+      + '<td>' + fCOP(r.fondoSolidaridad) + '</td>'
+      + '<td>' + fCOP(r.retencionFuente) + '</td>'
+      + '<td>' + fCOP(r.totalDeducciones) + '</td>'
+      + '<td><strong>' + fCOP(r.netoPagar) + '</strong></td>'
+      + '</tr>';
+  });
+  html += '<tr class="total-row">'
+    + '<td colspan="3">TOTALES (' + resultados.length + ' empleados)</td>'
+    + '<td>' + fCOP(totales.devengado) + '</td>'
+    + '<td colspan="2"></td>'
+    + '<td>' + fCOP(totales.ibcSS) + '</td>'
+    + '<td colspan="3"></td>'
+    + '<td>' + fCOP(totales.retefuente) + '</td>'
+    + '<td>' + fCOP(totales.deducciones) + '</td>'
+    + '<td>' + fCOP(totales.neto) + '</td>'
+    + '</tr></tbody>';
+  document.getElementById('resultsTable').innerHTML = html;
+  // ─── Tabla aportes empresa ───
+  var ahtml = '<thead><tr>'
+    + '<th>#</th><th>Nombre</th><th>Salud 8.5%</th><th>Pensión 12%</th>'
+    + '<th>ARL</th><th>Caja 4%</th><th>SENA 2%</th><th>ICBF 3%</th>'
+    + '<th>Total aportes</th><th>Costo total</th><th>Exon. 114-1</th>'
+    + '</tr></thead><tbody>';
+  resultados.forEach(function(r, i) {
+    ahtml += '<tr>'
+      + '<td class="row-num">' + (i + 1) + '</td>'
+      + '<td class="t">' + esc(r.nombre) + '</td>'
+      + '<td>' + fCOP(r.aporteEmpSalud) + '</td>'
+      + '<td>' + fCOP(r.aporteEmpPension) + '</td>'
+      + '<td>' + fCOP(r.aporteArl) + '</td>'
+      + '<td>' + fCOP(r.aporteCajaComp) + '</td>'
+      + '<td>' + fCOP(r.aporteSena) + '</td>'
+      + '<td>' + fCOP(r.aporteIcbf) + '</td>'
+      + '<td><strong>' + fCOP(r.totalAportesEmpresa) + '</strong></td>'
+      + '<td>' + fCOP(r.costoTotalEmpresa) + '</td>'
+      + '<td>' + (r.exoneracion114_1 ? '<span class="badge-ok">SÍ</span>' : '<span class="badge-err">NO</span>') + '</td>'
+      + '</tr>';
+  });
+  ahtml += '<tr class="total-row">'
+    + '<td colspan="8">TOTALES</td>'
+    + '<td>' + fCOP(totales.aportes) + '</td>'
+    + '<td>' + fCOP(totales.costoEmp) + '</td>'
+    + '<td></td></tr></tbody>';
+  document.getElementById('aportesTable').innerHTML = ahtml;
+  // ─── Warnings (HE excedidas) ───
+  var allWarnings = [];
+  resultados.forEach(function(r, i) {
+    if (r.warnings && r.warnings.length) {
+      r.warnings.forEach(function(w) {
+        allWarnings.push('Fila ' + (i + 1) + ' (' + r.nombre + '): ' + w);
+      });
+    }
+  });
+  var wb = document.getElementById('warningsBox');
+  if (allWarnings.length) {
+    wb.className = 'warnings-box';
+    wb.style.display = 'block';
+    wb.innerHTML = '<strong>&#9888; Advertencias de cumplimiento:</strong><ul>'
+      + allWarnings.map(function(w) { return '<li>' + esc(w) + '</li>'; }).join('')
+      + '</ul>';
+  } else {
+    wb.style.display = 'none';
+  }
+  card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function kpiCard(color, lbl, val) {
+  return '<div class="kpi-card ' + color + '"><div class="lbl">' + esc(lbl) + '</div><div class="val">' + val + '</div></div>';
+}
+function resetTodo() {
+  ESTADO.filasProcesadas = null;
+  ESTADO.resultados = null;
+  document.getElementById('previewCard').style.display = 'none';
+  document.getElementById('resultsCard').style.display = 'none';
+  document.getElementById('uploadStatus').style.display = 'none';
+  document.getElementById('fileInput').value = '';
+  document.getElementById('dropzone').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+/* ─── Empresa pagadora: persistencia en localStorage ─── */
+(function setupEmpresa() {
+  try {
+    var n = localStorage.getItem('exo_nomina_empresa_nombre');
+    var i = localStorage.getItem('exo_nomina_empresa_nit');
+    if (n) { var en = document.getElementById('empNombre'); if (en) en.value = n; }
+    if (i) { var ei = document.getElementById('empNit'); if (ei) ei.value = i; }
+  } catch (e) {}
+  ['empNombre', 'empNit'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('change', function() {
+      try {
+        localStorage.setItem('exo_nomina_empresa_nombre', document.getElementById('empNombre').value || '');
+        localStorage.setItem('exo_nomina_empresa_nit', document.getElementById('empNit').value || '');
+      } catch (e) {}
+    });
+  });
+})();
+function getEmpresaInfo() {
+  return {
+    nombre: (document.getElementById('empNombre') || {}).value || '',
+    nit: (document.getElementById('empNit') || {}).value || '',
+  };
+}
+/* ═══════════════════════════════════════════════════════════════════════════
+   EXPORTAR EXCEL — 3 hojas: Resumen, Detalle empleados, Aportes empresa
+   ═══════════════════════════════════════════════════════════════════════════ */
+function exportarExcelMasiva() {
+  if (!ESTADO.resultados || !ESTADO.resultados.length) {
+    if (typeof exoToast !== 'undefined') exoToast('Calcula la liquidación antes de exportar.', 'warn');
+    return;
+  }
+  if (typeof XLSX === 'undefined') {
+    if (typeof exoToast !== 'undefined') exoToast('No se cargó la librería Excel. Recarga la página.', 'error');
+    return;
+  }
+  var R = ESTADO.resultados;
+  var emp = getEmpresaInfo();
+  var hoy = new Date().toLocaleDateString('es-CO');
+  var periodoMes = new Date().toLocaleString('es-CO', { month: 'long', year: 'numeric' });
+  var tot = R.reduce(function(t, r) {
+    t.devengado += r.totalDevengado; t.aux += r.auxTransporte; t.ibc += r.ibcSS;
+    t.salud += r.deduccionSalud; t.pension += r.deduccionPension;
+    t.fsp += r.fondoSolidaridad; t.rete += r.retencionFuente;
+    t.otros += (r.libranza || 0) + (r.embargo || 0) + (r.otrosDesc || 0);
+    t.deducciones += r.totalDeducciones; t.neto += r.netoPagar;
+    t.aSalud += r.aporteEmpSalud; t.aPension += r.aporteEmpPension;
+    t.aArl += r.aporteArl; t.aCaja += r.aporteCajaComp;
+    t.aSena += r.aporteSena; t.aIcbf += r.aporteIcbf;
+    t.aTotal += r.totalAportesEmpresa; t.costo += r.costoTotalEmpresa;
+    if (r.exoneracion114_1) t.exonerados += 1;
+    return t;
+  }, { devengado:0, aux:0, ibc:0, salud:0, pension:0, fsp:0, rete:0, otros:0, deducciones:0, neto:0,
+       aSalud:0, aPension:0, aArl:0, aCaja:0, aSena:0, aIcbf:0, aTotal:0, costo:0, exonerados:0 });
+  /* ─── Hoja 1: Resumen ─── */
+  var resumen = [
+    ['LIQUIDACIÓN DE NÓMINA — RESUMEN'],
+    [''],
+    ['Empresa', emp.nombre || '(sin nombre)'],
+    ['NIT', emp.nit || ''],
+    ['Período', periodoMes],
+    ['Fecha cálculo', hoy],
+    ['Empleados liquidados', R.length],
+    ['Exonerados Art. 114-1 ET', tot.exonerados + ' / ' + R.length],
+    [''],
+    ['DEVENGADOS'],
+    ['Total devengado', tot.devengado],
+    ['Auxilio de transporte (incl.)', tot.aux],
+    ['IBC seguridad social', tot.ibc],
+    [''],
+    ['DEDUCCIONES EMPLEADO'],
+    ['Salud 4%', tot.salud],
+    ['Pensión 4%', tot.pension],
+    ['Fondo de solidaridad', tot.fsp],
+    ['Retención en la fuente', tot.rete],
+    ['Otros (libranza/embargo/otros)', tot.otros],
+    ['Total deducciones', tot.deducciones],
+    [''],
+    ['NETO A PAGAR', tot.neto],
+    [''],
+    ['APORTES EMPRESA'],
+    ['Salud 8.5%', tot.aSalud],
+    ['Pensión 12%', tot.aPension],
+    ['ARL', tot.aArl],
+    ['Caja de compensación 4%', tot.aCaja],
+    ['SENA 2%', tot.aSena],
+    ['ICBF 3%', tot.aIcbf],
+    ['Total aportes empresa', tot.aTotal],
+    [''],
+    ['COSTO TOTAL EMPRESA', tot.costo],
+    [''],
+    ['Generado por exogenadian.com — herramienta gratuita.'],
+    ['Sustento normativo: CST · Ley 100/93 · Ley 797/03 · Ley 1393/10 · Ley 1819/16 · Ley 2101/21 · Concepto DIAN 956/2024.'],
+  ];
+  var wsResumen = XLSX.utils.aoa_to_sheet(resumen);
+  wsResumen['!cols'] = [{ wch: 38 }, { wch: 22 }];
+  /* ─── Hoja 2: Detalle empleados ─── */
+  var detHeaders = [
+    '#', 'Cédula', 'Nombre', 'Días', 'Salario base', 'Aux. transporte',
+    'HE diurnas', 'HE nocturnas', 'HE dom. diurnas', 'HE dom. nocturnas',
+    'Rec. nocturno', 'Rec. dom. diurno', 'Rec. dom. nocturno',
+    'Vacaciones', 'Incapacidad', 'Bonificaciones', 'Comisiones', 'Otros devengados',
+    'No salarial gravable', 'No salarial no gravable',
+    'Total devengado', 'IBC SS',
+    'Salud 4%', 'Pensión 4%', 'Fondo solidaridad', 'Retención fuente',
+    'Libranza', 'Embargo', 'Otros desc.', 'Total deducciones',
+    'NETO A PAGAR',
+  ];
+  var detFilas = R.map(function(r, i) {
+    return [
+      i + 1, r.cedula || '', r.nombre || '', r.diasTrabajados || 0,
+      r.salarioBase || 0, r.auxTransporte || 0,
+      r.heDigVal || 0, r.heNocVal || 0, r.heDomDigVal || 0, r.heDomNocVal || 0,
+      r.recNocVal || 0, r.recDomDigVal || 0, r.recDomNocVal || 0,
+      r.vacacionesVal || 0, r.incapacidadVal || 0,
+      r.bonificaciones || 0, r.comisiones || 0, r.otrosDevengados || 0,
+      r.noSalarialGravable || 0, r.noSalarialNoGravable || 0,
+      r.totalDevengado || 0, r.ibcSS || 0,
+      r.deduccionSalud || 0, r.deduccionPension || 0, r.fondoSolidaridad || 0, r.retencionFuente || 0,
+      r.libranza || 0, r.embargo || 0, r.otrosDesc || 0, r.totalDeducciones || 0,
+      r.netoPagar || 0,
+    ];
+  });
+  var detTotalRow = ['', '', 'TOTALES (' + R.length + ')', '', '', tot.aux];
+  // Llenar columnas vacías hasta totalDevengado/IBC
+  while (detTotalRow.length < detHeaders.length) detTotalRow.push('');
+  // Setear totales relevantes en sus columnas
+  detTotalRow[20] = tot.devengado; detTotalRow[21] = tot.ibc;
+  detTotalRow[22] = tot.salud; detTotalRow[23] = tot.pension;
+  detTotalRow[24] = tot.fsp; detTotalRow[25] = tot.rete;
+  detTotalRow[29] = tot.deducciones; detTotalRow[30] = tot.neto;
+  var wsDetalle = XLSX.utils.aoa_to_sheet([detHeaders].concat(detFilas).concat([detTotalRow]));
+  wsDetalle['!cols'] = detHeaders.map(function(h, i) {
+    if (i === 0) return { wch: 4 };
+    if (h === 'Cédula') return { wch: 14 };
+    if (h === 'Nombre') return { wch: 32 };
+    if (h === 'Días') return { wch: 6 };
+    return { wch: 16 };
+  });
+  wsDetalle['!freeze'] = { ySplit: 1 };
+  /* ─── Hoja 3: Aportes empresa ─── */
+  var aHeaders = [
+    '#', 'Cédula', 'Nombre', 'IBC parafiscales',
+    'Salud 8.5%', 'Pensión 12%', 'ARL', 'Caja 4%', 'SENA 2%', 'ICBF 3%',
+    'Total aportes', 'Costo total empresa', 'Exoneración 114-1',
+  ];
+  var aFilas = R.map(function(r, i) {
+    return [
+      i + 1, r.cedula || '', r.nombre || '', r.ibcParafiscales || r.ibcSS || 0,
+      r.aporteEmpSalud || 0, r.aporteEmpPension || 0, r.aporteArl || 0,
+      r.aporteCajaComp || 0, r.aporteSena || 0, r.aporteIcbf || 0,
+      r.totalAportesEmpresa || 0, r.costoTotalEmpresa || 0,
+      r.exoneracion114_1 ? 'SÍ' : 'NO',
+    ];
+  });
+  var aTotalRow = ['', '', 'TOTALES', '', tot.aSalud, tot.aPension, tot.aArl, tot.aCaja, tot.aSena, tot.aIcbf, tot.aTotal, tot.costo, ''];
+  var wsAportes = XLSX.utils.aoa_to_sheet([aHeaders].concat(aFilas).concat([aTotalRow]));
+  wsAportes['!cols'] = aHeaders.map(function(h, i) {
+    if (i === 0) return { wch: 4 };
+    if (h === 'Cédula') return { wch: 14 };
+    if (h === 'Nombre') return { wch: 32 };
+    if (h === 'Exoneración 114-1') return { wch: 14 };
+    return { wch: 16 };
+  });
+  wsAportes['!freeze'] = { ySplit: 1 };
+  /* ─── Workbook ─── */
+  var wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, wsResumen, 'Resumen');
+  XLSX.utils.book_append_sheet(wb, wsDetalle, 'Detalle empleados');
+  XLSX.utils.book_append_sheet(wb, wsAportes, 'Aportes empresa');
+  var nombreArchivo = 'nomina_' + (emp.nombre || 'empresa').replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_|_$/g, '').slice(0, 32) + '_' + new Date().toISOString().slice(0, 10) + '.xlsx';
+  XLSX.writeFile(wb, nombreArchivo);
+  if (typeof exoToast !== 'undefined') exoToast('Excel descargado: ' + R.length + ' empleados.', 'success');
+  if (typeof exoTrack !== 'undefined') exoTrack.generate('nomina-masiva', 'export-excel');
+}
+/* ═══════════════════════════════════════════════════════════════════════════
+   IMPRIMIR DESPRENDIBLES — uno por empleado, abre diálogo de impresión
+   ═══════════════════════════════════════════════════════════════════════════ */
+function imprimirDesprendibles() {
+  if (!ESTADO.resultados || !ESTADO.resultados.length) {
+    if (typeof exoToast !== 'undefined') exoToast('Calcula la liquidación antes de imprimir.', 'warn');
+    return;
+  }
+  var emp = getEmpresaInfo();
+  var hoy = new Date().toLocaleDateString('es-CO');
+  var periodoMes = new Date().toLocaleString('es-CO', { month: 'long', year: 'numeric' });
+  periodoMes = periodoMes.charAt(0).toUpperCase() + periodoMes.slice(1);
+  var html = ESTADO.resultados.map(function(r) { return desprendibleHTML(r, emp, hoy, periodoMes); }).join('');
+  var cont = document.getElementById('desprendibles-print');
+  cont.innerHTML = html;
+  setTimeout(function() {
+    window.print();
+    if (typeof exoTrack !== 'undefined') exoTrack.generate('nomina-masiva', 'print-desprendible');
+  }, 80);
+}
+function desprendibleHTML(r, emp, hoy, periodoMes) {
+  var dev = [];
+  if (r.salarioBase > 0) dev.push(['Salario (' + (r.diasTrabajados || 30) + ' días)', r.salarioBase]);
+  if (r.auxTransporte > 0) dev.push(['Auxilio de transporte', r.auxTransporte]);
+  if (r.heDigVal > 0) dev.push(['Horas extras diurnas (Art. 168 a CST)', r.heDigVal]);
+  if (r.heNocVal > 0) dev.push(['Horas extras nocturnas (Art. 168 b CST)', r.heNocVal]);
+  if (r.heDomDigVal > 0) dev.push(['Horas extras dominicales/festivas diurnas', r.heDomDigVal]);
+  if (r.heDomNocVal > 0) dev.push(['Horas extras dominicales/festivas nocturnas', r.heDomNocVal]);
+  if (r.recNocVal > 0) dev.push(['Recargo nocturno (Art. 168 inc. 1 CST)', r.recNocVal]);
+  if (r.recDomDigVal > 0) dev.push(['Recargo dominical/festivo diurno', r.recDomDigVal]);
+  if (r.recDomNocVal > 0) dev.push(['Recargo dominical/festivo nocturno', r.recDomNocVal]);
+  if (r.vacacionesVal > 0) dev.push(['Vacaciones disfrutadas', r.vacacionesVal]);
+  if (r.incapacidadVal > 0) dev.push(['Incapacidad', r.incapacidadVal]);
+  if (r.bonificaciones > 0) dev.push(['Bonificaciones (constitutivas)', r.bonificaciones]);
+  if (r.comisiones > 0) dev.push(['Comisiones', r.comisiones]);
+  if (r.otrosDevengados > 0) dev.push(['Otros devengados', r.otrosDevengados]);
+  if (r.noSalarialGravable > 0) dev.push(['Pagos no salariales gravables (Art. 128 CST)', r.noSalarialGravable]);
+  if (r.noSalarialNoGravable > 0) dev.push(['Pagos no salariales no gravables (Art. 130 CST)', r.noSalarialNoGravable]);
+  var ded = [];
+  if (r.deduccionSalud > 0) ded.push(['Aporte salud 4% (Art. 204 Ley 100/93)', r.deduccionSalud]);
+  if (r.deduccionPension > 0) ded.push(['Aporte pensión 4% (Art. 20 Ley 100/93)', r.deduccionPension]);
+  if (r.fondoSolidaridad > 0) ded.push(['Fondo de solidaridad pensional (Art. 27 Ley 100/93)', r.fondoSolidaridad]);
+  if (r.retencionFuente > 0) ded.push(['Retención en la fuente (Art. 383 ET)', r.retencionFuente]);
+  if (r.libranza > 0) ded.push(['Libranza', r.libranza]);
+  if (r.embargo > 0) ded.push(['Embargo judicial', r.embargo]);
+  if (r.otrosDesc > 0) ded.push(['Otros descuentos', r.otrosDesc]);
+  var devRows = dev.map(function(d) {
+    return '<tr><td class="concepto">' + esc(d[0]) + '</td><td class="valor">' + fCOP(d[1]) + '</td></tr>';
+  }).join('');
+  devRows += '<tr class="subtotal"><td>Total devengado</td><td class="valor">' + fCOP(r.totalDevengado) + '</td></tr>';
+  var dedRows = ded.length
+    ? ded.map(function(d) {
+        return '<tr><td class="concepto">' + esc(d[0]) + '</td><td class="valor">' + fCOP(d[1]) + '</td></tr>';
+      }).join('') + '<tr class="subtotal"><td>Total deducciones</td><td class="valor">' + fCOP(r.totalDeducciones) + '</td></tr>'
+    : '<tr><td class="concepto" colspan="2" style="color:#888;font-style:italic">Sin deducciones</td></tr>';
+  return ''
+    + '<div class="desprendible">'
+    + '<div class="head">'
+    + '<div class="empresa">' + esc(emp.nombre || '(Empresa)') + (emp.nit ? '<div class="nit">NIT ' + esc(emp.nit) + '</div>' : '') + '</div>'
+    + '<div class="titulo"><strong>Desprendible de nómina</strong>Período: ' + esc(periodoMes) + '<br>Fecha: ' + esc(hoy) + '</div>'
+    + '</div>'
+    + '<div class="empleado">'
+    + '<div><span class="lbl">Empleado:</span> ' + esc(r.nombre || '') + '</div>'
+    + '<div><span class="lbl">Cédula:</span> ' + esc(r.cedula || '') + '</div>'
+    + '<div><span class="lbl">Días trabajados:</span> ' + (r.diasTrabajados || 0) + '</div>'
+    + '<div><span class="lbl">IBC seguridad social:</span> ' + fCOP(r.ibcSS) + '</div>'
+    + '</div>'
+    + '<h3>Devengados</h3>'
+    + '<table><tbody>' + devRows + '</tbody></table>'
+    + '<h3>Deducciones</h3>'
+    + '<table><tbody>' + dedRows + '</tbody></table>'
+    + '<div class="neto"><span>NETO A PAGAR</span><span class="val">' + fCOP(r.netoPagar) + '</span></div>'
+    + '<div class="firmas">'
+    + '<div>El empleador<br><small>' + esc(emp.nombre || '') + '</small></div>'
+    + '<div>El trabajador<br><small>' + esc(r.nombre || '') + ' — C.C. ' + esc(r.cedula || '') + '</small></div>'
+    + '</div>'
+    + '<div class="pie">Documento informativo. Sustento legal: CST · Ley 100/93 · Ley 797/03 · Ley 1393/10 · Ley 2101/21. Generado en exogenadian.com.</div>'
+    + '</div>';
+}
+</script>
+<script src="shared/analytics.js?v=b756a0cb"></script>
+<link rel="stylesheet" href="shared/chat.css?v=a52afe72">
+<script defer src="shared/chat.js?v=a45c7cf2"></script>
+</body>
+</html>

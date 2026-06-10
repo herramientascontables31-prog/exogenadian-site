@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>¿Puedo Comprar Carro? Regla 20/4/10 + Costo Total Real | ExógenaDIAN</title>
+<meta name="description" content="¿De verdad puedes pagarte ese carro? Regla 20/4/10 más el TCO completo: cuota, SOAT, tecnomecánica, impuesto, gasolina, mantenimiento y depreciación.">
+<link rel="canonical" href="https://exogenadian.com/puedo-comprar-carro.html">
+<meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.0/jspdf.plugin.autotable.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+<link rel="stylesheet" href="shared/finanzas-wow.css?v=a660abd8">
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--green:#059669;--green2:#ECFDF5;--red:#DC2626;--red2:#FEF2F2;--amber:#D97706;--amber2:#FFF8E1;--amber3:#FEF3C7;--border:#e2e8f0;--radius:10px;--shadow:0 2px 12px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+.container{max-width:980px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#1B3A5C 0%,#2E75B6 100%);padding:26px 32px;border-radius:16px;margin-bottom:22px;color:#fff}
+.header h1{font-size:1.4rem;font-weight:700;display:flex;align-items:center;gap:10px}
+.header p{opacity:.9;font-size:.85rem;margin-top:4px;max-width:560px}
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:22px;margin-bottom:18px;box-shadow:var(--shadow)}
+.card-title{font-size:1rem;font-weight:700;margin-bottom:14px;color:var(--pri)}
+.input-row{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.input-row label{font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase}
+.input-row input,.input-row select{padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:.95rem;font-family:'JetBrains Mono',monospace}
+.input-row select{font-family:'DM Sans'}
+.input-row input:focus,.input-row select:focus{outline:none;border-color:var(--pri2);box-shadow:0 0 0 3px rgba(46,117,182,.12)}
+.input-row .hint{font-size:.7rem;color:var(--muted);font-weight:400}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.btn{padding:11px 22px;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:.9rem;font-family:inherit}
+.btn-pri{background:var(--pri2);color:#fff;width:100%}.btn-pri:hover{background:var(--pri)}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#047857}
+.btn-row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.verdict{padding:24px;border-radius:14px;text-align:center;font-size:1.05rem;font-weight:700;margin-bottom:14px;border:2px solid}
+.verdict.ok{background:linear-gradient(135deg,var(--green2),#D1FAE5);border-color:var(--green);color:#065F46}
+.verdict.warn{background:linear-gradient(135deg,#FFFBEB,#FEF3C7);border-color:var(--amber);color:#92400E}
+.verdict.no{background:linear-gradient(135deg,var(--red2),#FECACA);border-color:var(--red);color:#991B1B}
+.verdict .v-icon{font-size:2.4rem;display:block;margin-bottom:6px}
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+.rule{padding:14px;border-radius:10px;border:1px solid var(--border);text-align:center}
+.rule.pass{background:var(--green2);border-color:#A7F3D0}
+.rule.fail{background:var(--red2);border-color:#FECACA}
+.rule .r-name{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+.rule .r-status{font-size:1.5rem;margin:6px 0}
+.rule .r-detail{font-size:.74rem;color:var(--muted);line-height:1.4}
+.rule.pass .r-detail strong,.rule.pass .r-name{color:#065F46}
+.rule.fail .r-detail strong,.rule.fail .r-name{color:#991B1B}
+.tco-table{width:100%;border-collapse:collapse;font-size:.88rem}
+.tco-table th{background:var(--pri);color:#fff;padding:10px 12px;text-align:left;font-size:.74rem;text-transform:uppercase}
+.tco-table th:last-child{text-align:right}
+.tco-table td{padding:9px 12px;border-bottom:1px solid var(--border)}
+.tco-table td:last-child{text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600}
+.tco-table tr.cat{background:#F9FAFB;font-weight:700}.tco-table tr.cat td{color:var(--pri)}
+.tco-table tr.total{background:linear-gradient(90deg,var(--pri),var(--pri2));color:#fff}
+.tco-table tr.total td{color:#fff!important;padding:14px 12px;font-size:1rem}
+.alert{padding:12px 16px;border-radius:8px;font-size:.86rem;margin-bottom:12px;line-height:1.5}
+.alert-info{background:var(--pri3);color:var(--pri);border:1px solid #B4C6E7}
+.alert-warn{background:var(--amber3);color:#92400E;border:1px solid #FDE68A}
+.cross-links{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.cross-link{display:block;padding:14px 16px;background:#F9FAFB;border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text)}
+.cross-link:hover{border-color:var(--pri2);background:var(--pri3)}
+.cross-link strong{display:block;font-size:.88rem;color:var(--pri)}
+.cross-link small{font-size:.72rem;color:var(--muted)}
+.results{display:none}.results.show{display:block;animation:fadeIn .4s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+.disclaimer{margin-top:14px;padding:12px 16px;background:var(--amber2);border:1px solid #FDE68A;border-radius:8px;font-size:.74rem;color:#92400E;line-height:1.5}
+@media(max-width:768px){.grid2,.grid3,.rules,.cross-links{grid-template-columns:1fr}.rules{grid-template-columns:1fr 1fr 1fr}}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div id="navContainer"></div>
+<div class="container">
+<div class="header">
+  <h1><span>🚗</span> ¿Puedo comprar carro?</h1>
+  <p>Regla 20/4/10 (no es ley, es buena práctica) + Costo Total de Propiedad real. Lo que un concesionario nunca te muestra: cuánto te cuesta de verdad mes a mes y año a año.</p>
+</div>
+<div class="card">
+  <div class="card-title">💼 Tu situación</div>
+  <div class="grid2">
+    <div class="input-row">
+      <label>Tu ingreso mensual neto</label>
+      <input type="text" id="ingreso" placeholder="$5.000.000" inputmode="numeric">
+    </div>
+    <div class="input-row">
+      <label>Plata que tienes para inicial</label>
+      <input type="text" id="inicial" placeholder="$0" inputmode="numeric">
+      <span class="hint">Líquida. No del fondo de emergencia</span>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">🚗 El vehículo que quieres</div>
+  <div class="input-row">
+    <label>O selecciona un modelo típico (autocompleta precio + tipo + depreciación real)</label>
+    <select id="modeloPreset" onchange="aplicarModeloPreset()">
+      <option value="">— Mete tus datos manualmente o elige un modelo —</option>
+      <optgroup label="🚗 Carros populares">
+        <option value="sandero">Renault Sandero / Logan (~$52M, 13% dep)</option>
+        <option value="onix">Chevrolet Onix (~$48M, 14% dep)</option>
+        <option value="picanto">Kia Picanto / Soluto (~$50M, 13% dep)</option>
+        <option value="corolla">Toyota Corolla (~$98M, 10% dep)</option>
+        <option value="corolla-hybrid">Toyota Corolla Cross Hybrid (~$135M, 9% dep)</option>
+        <option value="mazda3">Mazda 3 / CX-30 (~$105M, 11% dep)</option>
+        <option value="cx5">Mazda CX-5 (~$160M, 11% dep)</option>
+        <option value="duster">Renault Duster / Captur (~$88M, 11% dep)</option>
+        <option value="renegade">Jeep Renegade / Compass (~$130M, 12% dep)</option>
+        <option value="hilux">Toyota Hilux / Ford Ranger (~$215M, 9% dep)</option>
+      </optgroup>
+      <optgroup label="⚡ Eléctricos populares">
+        <option value="byd-dolphin">BYD Dolphin (~$115M, 17% dep)</option>
+        <option value="byd-atto">BYD Atto 3 (~$145M, 17% dep)</option>
+        <option value="tesla-3">Tesla Model 3 Standard (~$180M, 20% dep)</option>
+        <option value="kia-niro">Kia Niro EV (~$165M, 18% dep)</option>
+      </optgroup>
+      <optgroup label="🛵 Motos">
+        <option value="cb110">Honda CB 110 / 125 (~$7M, 13% dep)</option>
+        <option value="pulsar">Bajaj Pulsar 150 / NS200 (~$9,5M, 14% dep)</option>
+        <option value="fz25">Yamaha FZ 25 (~$13M, 13% dep)</option>
+        <option value="ninja">Kawasaki Ninja 400 (~$30M, 12% dep)</option>
+        <option value="starker">Auteco Starker (eléctrica, ~$8,5M, 17% dep)</option>
+        <option value="volcan">Volcán Polar (eléctrica, ~$11M, 17% dep)</option>
+      </optgroup>
+    </select>
+    <span class="hint">⚠️ <strong>Precios referenciales 2026</strong> con base en concesionarios oficiales y catálogos públicos del mercado colombiano. <strong>Verifica el precio actual</strong> en el concesionario o cotizador del fabricante antes de decidir — varían por versión, opcional, color, ciudad y promoción del momento. Tras seleccionar puedes editar el monto manualmente.</span>
+  </div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="input-row">
+      <label>Valor del vehículo</label>
+      <input type="text" id="precio" placeholder="$80.000.000" inputmode="numeric">
+    </div>
+    <div class="input-row">
+      <label>Plazo del crédito (años)</label>
+      <select id="plazo">
+        <option value="1">1 año</option>
+        <option value="2">2 años</option>
+        <option value="3">3 años</option>
+        <option value="4" selected>4 años</option>
+        <option value="5">5 años</option>
+        <option value="6">6 años</option>
+        <option value="7">7 años</option>
+      </select>
+    </div>
+  </div>
+  <div class="input-row">
+    <label>Tasa del crédito (E.A.)</label>
+    <input type="text" id="tasa" placeholder="19" inputmode="decimal" value="19">
+    <span class="hint">Promedio mercado 2026 ~19% E.A. — varía por banco y perfil</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">⚙️ Tipo de vehículo</div>
+  <p style="font-size:.82rem;color:var(--muted);margin-bottom:12px">Cambia los costos operativos automáticamente según el tipo. Eléctricos e híbridos tienen <strong>impuesto vehicular reducido</strong> (Ley 1964/2019, Decreto 1077/2023). El comparativo final compara los 6 tipos al mismo uso anual.</p>
+  <div class="grid2">
+    <div class="input-row">
+      <label>Tipo</label>
+      <select id="tipoMotor" onchange="aplicarTipoMotor()">
+        <optgroup label="🚗 Carros">
+          <option value="gasolina" selected>⛽ Carro Gasolina / Diesel</option>
+          <option value="electrico">⚡ Carro Eléctrico (BEV)</option>
+          <option value="hibrido-completo">🔋 Carro Híbrido completo (HEV/PHEV)</option>
+          <option value="hibrido-ligero">🔌 Carro Híbrido ligero (MHEV)</option>
+        </optgroup>
+        <optgroup label="🏍️ Motos">
+          <option value="moto-gasolina">🛵 Moto Gasolina (110-250cc)</option>
+          <option value="moto-electrica">⚡ Moto Eléctrica</option>
+        </optgroup>
+      </select>
+      <span class="hint" id="tipoHint">Carro estándar — impuesto vehicular 1.5-3.5% según valor.</span>
+    </div>
+    <div class="input-row">
+      <label>Km recorridos al año</label>
+      <input type="text" id="kmAnio" placeholder="15.000" inputmode="numeric" value="15.000">
+      <span class="hint">Carro: 15.000-20.000 km/año. Moto urbana: 8.000-12.000.</span>
+    </div>
+  </div>
+  <div class="input-row" style="margin-top:14px">
+    <label>Ciudad (para pico y placa)</label>
+    <select id="ciudad">
+      <option value="bogota" selected>Bogotá (52 días/año pico y placa carros)</option>
+      <option value="medellin">Medellín / AMVA (52 días/año)</option>
+      <option value="cali">Cali (52 días/año)</option>
+      <option value="barranquilla">Barranquilla (26 días/año)</option>
+      <option value="bucaramanga">Bucaramanga (52 días/año)</option>
+      <option value="ninguno">Sin pico y placa</option>
+    </select>
+    <span class="hint">EVs y motos exoneradas en la mayoría de ciudades. El cálculo lo refleja.</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">🔄 ¿Tienes vehículo actual? (opcional)</div>
+  <p style="font-size:.82rem;color:var(--muted);margin-bottom:12px">Si ya tienes un carro o moto y consideras cambiar (carro nuevo, moto a carro, carro a moto, gasolina a eléctrico), te muestro la diferencia mensual real y el impacto a 5 años. <strong>El comparativo más honesto: ¿cómo cambia tu mes?</strong></p>
+  <div class="grid2">
+    <div class="input-row">
+      <label>Vehículo actual</label>
+      <select id="tipoActual">
+        <option value="" selected>— No tengo / no aplica —</option>
+        <optgroup label="🚗 Carros">
+          <option value="gasolina">⛽ Carro gasolina/diesel</option>
+          <option value="electrico">⚡ Carro eléctrico</option>
+          <option value="hibrido-completo">🔋 Carro híbrido completo</option>
+          <option value="hibrido-ligero">🔌 Carro híbrido ligero</option>
+        </optgroup>
+        <optgroup label="🏍️ Motos">
+          <option value="moto-gasolina">🛵 Moto gasolina</option>
+          <option value="moto-electrica">⚡ Moto eléctrica</option>
+        </optgroup>
+      </select>
+      <span class="hint">Para comparar mes a mes con el nuevo.</span>
+    </div>
+    <div class="input-row">
+      <label>Costo total mensual actual</label>
+      <input type="text" id="costoActualMes" placeholder="$1.200.000" inputmode="numeric">
+      <span class="hint">Cuota + SOAT prorrateado + impuesto/12 + seguro/12 + gasolina + mantto. Si ya está pago: solo operativos.</span>
+    </div>
+  </div>
+  <div class="input-row" style="margin-top:14px">
+    <label>Valor de venta del actual (opcional)</label>
+    <input type="text" id="ventaActual" placeholder="$25.000.000" inputmode="numeric">
+    <span class="hint">Lo que te lo pagan hoy. Si vendes, esa plata podría ir como inicial extra del nuevo. Estima en revisar.com.co, MercadoLibre o portales similares.</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">⛽ Costos operativos (estimados anuales)</div>
+  <p style="font-size:.82rem;color:var(--muted);margin-bottom:12px">Auto-calculados según tipo de motor + valor. Ajusta si conoces los tuyos. Estos son los que el concesionario no menciona.</p>
+  <div class="grid3">
+    <div class="input-row"><label>SOAT (anual)</label><input type="text" id="soat" placeholder="$700.000" inputmode="numeric" value="$700.000"></div>
+    <div class="input-row"><label>Impuesto vehicular (anual)</label><input type="text" id="impuesto" placeholder="$1.500.000" inputmode="numeric"><span class="hint" id="impuestoHint">2.0% del valor (gasolina)</span></div>
+    <div class="input-row"><label>Tecnomecánica (anual)</label><input type="text" id="tecno" placeholder="$200.000" inputmode="numeric" value="$200.000"></div>
+    <div class="input-row"><label>Seguro todo riesgo (anual)</label><input type="text" id="seguro" placeholder="$3.500.000" inputmode="numeric"><span class="hint" id="seguroHint">~4% del valor (gasolina)</span></div>
+    <div class="input-row"><label>Mantenimiento (anual)</label><input type="text" id="mantto" placeholder="$2.000.000" inputmode="numeric" value="$2.000.000"></div>
+    <div class="input-row"><label>Combustible/energía (mensual)</label><input type="text" id="gasolina" placeholder="$500.000" inputmode="numeric" value="$500.000"><span class="hint" id="combHint">Gasolina ~$15.500/galón</span></div>
+    <div class="input-row"><label>Parqueadero (mensual)</label><input type="text" id="parqueo" placeholder="$0" inputmode="numeric"></div>
+    <div class="input-row"><label>Depreciación anual (%)</label><input type="text" id="depPct" placeholder="12" inputmode="decimal" value="12"><span class="hint">10-15% típico, EV pierden 15-18% año 1</span></div>
+  </div>
+</div>
+<button class="btn btn-pri" onclick="evaluar()">¿Lo puedo pagar o no?</button>
+<div class="results" id="results">
+  <div id="verdict"></div>
+  <div class="card">
+    <div class="card-title">📐 Las 3 reglas (regla 20/4/10)</div>
+    <div class="rules" id="rulesGrid"></div>
+    <div class="alert alert-info" style="margin-top:12px">
+      <strong>Esta regla NO es ley</strong>, es buena práctica financiera. Te dice: <strong>20</strong>% inicial mínimo, plazo máximo <strong>4</strong> años, costo mensual total ≤ <strong>10</strong>% del ingreso. Si la rompes te puede ir bien igual, pero la deuda apretará y la plata "que ahorras del salario para vivir mejor" se va al carro.
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">💸 Costo Total de Propiedad — año 1</div>
+    <p style="font-size:.84rem;color:var(--muted);margin-bottom:8px">Esto es lo que el carro te cuesta de verdad en 12 meses, no solo la cuota:</p>
+    <table class="tco-table" id="tcoTable"></table>
+  </div>
+  <div class="card">
+    <div class="card-title">📅 Proyección a 4 años</div>
+    <p style="font-size:.84rem;color:var(--muted);margin-bottom:8px">Cuánto te habrá costado, contando depreciación y todo:</p>
+    <table class="tco-table" id="proj4Table"></table>
+    <div class="gancho" id="ganchoCarro"></div>
+    <div class="narrativa" id="narrativaCarro"></div>
+    <div class="aha-grid" id="ahaGridCarro"></div>
+  </div>
+  <div class="card" id="cardCambio" style="display:none">
+    <div class="card-title">🔄 Tu vehículo actual vs el nuevo</div>
+    <p style="font-size:.84rem;color:var(--muted);margin-bottom:12px">El comparativo más honesto: cómo cambia tu mes si haces el cambio. Plus el impacto a 5 años.</p>
+    <div id="cambioVehiculo"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">📅 La trampa del primer año</div>
+    <p style="font-size:.84rem;color:var(--muted);margin-bottom:12px">El año 1 cuesta ~30% más que los siguientes — y casi nadie lo presupuesta. Matrícula (una sola vez), seguro primer año más caro, depreciación más fuerte. Si compras nuevo, prepara este margen.</p>
+    <div id="anio1Trampa"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">🚦 Pico y placa — costo del tiempo sin vehículo</div>
+    <p style="font-size:.84rem;color:var(--muted);margin-bottom:12px">Cada día de pico y placa es un día que pagaste todos los costos fijos (cuota, seguro, impuesto) sin poder usar el carro. EVs y motos están exoneradas en la mayoría de ciudades.</p>
+    <div id="picoYPlaca"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">🚖 ¿Y si en vez de carro usaras Uber o transporte público?</div>
+    <p style="font-size:.84rem;color:var(--muted);margin-bottom:12px">Comparativo honesto: tu costo TOTAL del vehículo (cuota + operativos + depreciación) vs lo que pagarías si usaras Uber o TransMilenio/MIO/Metro al mismo uso anual.</p>
+    <div id="uberComparativo"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">⚖️ Comparativo: tu carro vs los otros 5 tipos</div>
+    <p style="font-size:.84rem;color:var(--muted);margin-bottom:12px">Cada tipo con su precio típico, mismo uso anual. Carros y motos lado a lado. Total 5 años incluye depreciación + operativos. <strong>Los eléctricos e híbridos están subsidiados por Ley 1964/2019 + Decreto 1077/2023</strong> en impuesto vehicular.</p>
+    <div id="comparativoTipos"></div>
+    <div style="margin-top:14px;padding:12px 16px;background:#ECFDF5;border:1px solid #A7F3D0;border-radius:10px;font-size:.82rem;color:#065F46;line-height:1.6">
+      <strong>📜 Beneficios fiscales 2026 (verifica tu municipio):</strong> Eléctricos: <strong>0-50% impuesto vehicular</strong> (Bogotá descuento 60%, Antioquia 50%, Cundinamarca 100% año 1). Híbridos completos: <strong>40-60% descuento</strong>. Pico y placa: eléctricos exonerados Bogotá (Decreto 048/2024) y Medellín. Aranceles 0% importación EVs hasta 2027 (Ley 1964/2019).
+    </div>
+  </div>
+  <div class="wow-actions-card" id="cardActionsCarro" style="display:none">
+    <div class="wow-actions-title">🎯 Antes de firmar</div>
+    <div class="wow-actions-sub">Lo que tu situación dispara, ordenado por impacto en tu bolsillo.</div>
+    <div class="action-ladder" id="actionLadderCarro"></div>
+  </div>
+  <div class="wow-share-card" id="cardShareCarro" style="display:none">
+    <div class="wow-share-title">📸 Compártelo</div>
+    <div class="wow-share-sub">El costo total que el concesionario no muestra.</div>
+    <div class="share-card" id="shareCardCarro"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">🔗 Antes de firmar</div>
+    <div class="cross-links">
+      <a href="costoreal.html" class="cross-link"><strong>💸 Costo real del crédito</strong><small>Pasa el plan por el revisor</small></a>
+      <a href="crecimiento.html#costo" class="cross-link"><strong>📈 ¿Y si no me lo compro?</strong><small>Lo mismo en CDT a 5 años</small></a>
+      <a href="deudas.html" class="cross-link"><strong>🔍 Auditor deudas</strong><small>¿Cuánto más aguantas?</small></a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">⬇️ Descargar</div>
+    <div class="btn-row">
+      <button class="btn btn-green" onclick="exportPDF()">📄 PDF</button>
+      <button class="btn btn-green" onclick="exportExcel()">📊 Excel</button>
+    </div>
+  </div>
+  <div class="disclaimer">
+    Los costos operativos son estimaciones — varían por modelo, ciudad, uso y póliza. El impuesto vehicular en Colombia es 1,5%-3,5% del avalúo según gobernación. La depreciación depende de la marca y el cuidado. <strong>Si vas a comprar, exige al concesionario el costo total mensual que sale en este cálculo.</strong>
+  </div>
+</div>
+</div>
+<script src="shared/parametros-financieros.js?v=e116ea2a"></script>
+<script src="shared/finanzas-export.js?v=abe34dd6"></script>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<script src="shared/finanzas-privacy.js?v=aed97e2f"></script>
+<script>
+(function(){
+  function init(){
+    if (!window.FinanzasPrivacy) return;
+    var c = document.querySelector('.container') || document.body;
+    if (c) {
+      FinanzasPrivacy.autoLoad(c, 'puedo-comprar-carro');
+      FinanzasPrivacy.autoSave(c, 'puedo-comprar-carro', {debounce:800});
+    }
+  }
+  if (document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>
+<script>
+'use strict';
+var ultimoCalc = null;
+function $(id){ return document.getElementById(id); }
+function fmt(n){ if(n==null||isNaN(n))return '$0'; return '$'+Math.round(n).toLocaleString('es-CO'); }
+function num(id){ var v=$(id).value.replace(/[^\d]/g,''); return parseInt(v,10)||0; }
+function numKm(id){ var v=$(id).value.replace(/[^\d]/g,''); return parseInt(v,10)||0; }
+// ─── Tipos de motor — multipliers Colombia 2026 ───
+// Ley 1964/2019 (BEV), Decreto 1077/2023 (HEV/PHEV), tarifas municipales típicas
+var TIPOS_MOTOR = {
+  'gasolina': {
+    nombre: 'Gasolina/Diesel',
+    icon: '⛽',
+    pctImpuesto: 0.020,   // 2% del valor (rango 1.5-3.5%)
+    soatBase: 700000,
+    pctSeguro: 0.040,     // 4% del valor
+    manttoAnio: 2000000,
+    eficiencia: 10,        // km/L
+    precioCombustible: 15500, // $/galón
+    galonAL: 3.785,        // litros por galón
+    label: 'gasolina/diesel',
+    extraTip: ''
+  },
+  'electrico': {
+    nombre: 'Eléctrico (BEV)',
+    icon: '⚡',
+    pctImpuesto: 0.0075,  // 50% descuento típico (Bogotá 60%, Cundinamarca 100%)
+    soatBase: 450000,     // ~35% menos por bajo cilindraje equivalente
+    pctSeguro: 0.045,     // 4.5% — batería más cara
+    manttoAnio: 800000,   // sin cambios aceite, frenos regenerativos
+    eficiencia: 6,         // km/kWh (uso real urbano)
+    precioCombustible: 750, // $/kWh residencial estrato 4
+    galonAL: 1,            // unidad: kWh
+    label: 'eléctrico',
+    extraTip: '+ exonerado pico y placa Bogotá/Medellín'
+  },
+  'hibrido-completo': {
+    nombre: 'Híbrido completo (HEV/PHEV)',
+    icon: '🔋',
+    pctImpuesto: 0.010,   // 50% descuento Decreto 1077/2023
+    soatBase: 550000,     // descuento parcial
+    pctSeguro: 0.040,
+    manttoAnio: 2200000,  // motor + sistema híbrido = un poco más
+    eficiencia: 20,        // km/L (Toyota Corolla Hybrid, Mazda CX-5)
+    precioCombustible: 15500,
+    galonAL: 3.785,
+    label: 'híbrido completo',
+    extraTip: '+ exoneración parcial pico y placa'
+  },
+  'hibrido-ligero': {
+    nombre: 'Híbrido ligero (MHEV)',
+    icon: '🔌',
+    pctImpuesto: 0.017,   // tratado mayormente como gasolina, pequeño descuento
+    soatBase: 700000,
+    pctSeguro: 0.040,
+    manttoAnio: 2000000,
+    eficiencia: 12,        // km/L (mejora 20% sobre gasolina pura)
+    precioCombustible: 15500,
+    galonAL: 3.785,
+    label: 'híbrido ligero',
+    extraTip: '',
+    esMoto: false
+  },
+  'moto-gasolina': {
+    nombre: 'Moto Gasolina (110-250cc)',
+    icon: '🛵',
+    pctImpuesto: 0.015,   // 1.5% típico para motos
+    soatBase: 450000,     // SOAT moto promedio
+    pctSeguro: 0.05,      // 5% del valor (seguro de motos suele ser %, opcional)
+    manttoAnio: 600000,   // cambios aceite, llantas, frenos
+    eficiencia: 40,        // km/L (moto 150cc real)
+    precioCombustible: 15500,
+    galonAL: 3.785,
+    label: 'moto gasolina',
+    extraTip: '+ sin pico y placa, parqueo gratis casi siempre',
+    esMoto: true,
+    precioTipico: 9000000  // moto típica 110-150cc
+  },
+  'moto-electrica': {
+    nombre: 'Moto Eléctrica',
+    icon: '⚡',
+    pctImpuesto: 0.0075,  // 50% descuento, varias gobernaciones llegan a 100%
+    soatBase: 380000,     // SOAT moto eléctrica menor
+    pctSeguro: 0.05,
+    manttoAnio: 300000,   // mínimo: solo llantas y frenos
+    eficiencia: 5,         // km/kWh (Auteco Starker, Volcán típicos)
+    precioCombustible: 750, // $/kWh residencial
+    galonAL: 1,
+    label: 'moto eléctrica',
+    extraTip: '+ exonerada pico y placa, sin emisión, recarga ~$50/100km',
+    esMoto: true,
+    precioTipico: 12000000 // moto eléctrica típica
+  }
+};
+// ─── Modelos típicos Colombia 2026 ───
+var MODELOS_TIPICOS = {
+  'sandero':{p:52000000,t:'gasolina',d:13,n:'Renault Sandero / Logan'},
+  'onix':{p:48000000,t:'gasolina',d:14,n:'Chevrolet Onix'},
+  'picanto':{p:50000000,t:'gasolina',d:13,n:'Kia Picanto / Soluto'},
+  'corolla':{p:98000000,t:'gasolina',d:10,n:'Toyota Corolla'},
+  'corolla-hybrid':{p:135000000,t:'hibrido-completo',d:9,n:'Toyota Corolla Cross Hybrid'},
+  'mazda3':{p:105000000,t:'gasolina',d:11,n:'Mazda 3 / CX-30'},
+  'cx5':{p:160000000,t:'gasolina',d:11,n:'Mazda CX-5'},
+  'duster':{p:88000000,t:'gasolina',d:11,n:'Renault Duster / Captur'},
+  'renegade':{p:130000000,t:'gasolina',d:12,n:'Jeep Renegade / Compass'},
+  'hilux':{p:215000000,t:'gasolina',d:9,n:'Toyota Hilux / Ford Ranger'},
+  'byd-dolphin':{p:115000000,t:'electrico',d:17,n:'BYD Dolphin'},
+  'byd-atto':{p:145000000,t:'electrico',d:17,n:'BYD Atto 3'},
+  'tesla-3':{p:180000000,t:'electrico',d:20,n:'Tesla Model 3 Standard'},
+  'kia-niro':{p:165000000,t:'electrico',d:18,n:'Kia Niro EV'},
+  'cb110':{p:7000000,t:'moto-gasolina',d:13,n:'Honda CB 110/125'},
+  'pulsar':{p:9500000,t:'moto-gasolina',d:14,n:'Bajaj Pulsar 150/NS200'},
+  'fz25':{p:13000000,t:'moto-gasolina',d:13,n:'Yamaha FZ 25'},
+  'ninja':{p:30000000,t:'moto-gasolina',d:12,n:'Kawasaki Ninja 400'},
+  'starker':{p:8500000,t:'moto-electrica',d:17,n:'Auteco Starker'},
+  'volcan':{p:11000000,t:'moto-electrica',d:17,n:'Volcán Polar'}
+};
+// ─── Ciudades y pico y placa Colombia 2026 ───
+var CIUDADES_PYP = {
+  'bogota':{n:'Bogotá',gasolina:52,electrico:0,moto:0,nota:'EVs y motos exoneradas (Decreto 048/2024)'},
+  'medellin':{n:'Medellín / AMVA',gasolina:52,electrico:0,moto:26,nota:'EVs exoneradas. Motos lunes alternos.'},
+  'cali':{n:'Cali',gasolina:52,electrico:26,moto:26,nota:'EVs reducción 50%, motos también pico y placa.'},
+  'barranquilla':{n:'Barranquilla',gasolina:26,electrico:0,moto:0,nota:'Pico y placa solo días específicos.'},
+  'bucaramanga':{n:'Bucaramanga',gasolina:52,electrico:0,moto:0,nota:'EVs y motos exoneradas.'},
+  'ninguno':{n:'Sin pico y placa',gasolina:0,electrico:0,moto:0,nota:'Tu municipio no tiene restricciones de circulación.'}
+};
+function aplicarModeloPreset(){
+  var key = $('modeloPreset').value;
+  if (!key || !MODELOS_TIPICOS[key]) return;
+  var m = MODELOS_TIPICOS[key];
+  $('precio').value = '$'+m.p.toLocaleString('es-CO');
+  $('tipoMotor').value = m.t;
+  $('depPct').value = m.d;
+  aplicarTipoMotor();
+}
+function precioEquivalente(tipo, precioCarro){
+  var t = TIPOS_MOTOR[tipo];
+  if (!t || !t.esMoto) return precioCarro;
+  // Si el user puso un precio de moto realista (<$30M), úsalo. Si no, usa típico.
+  return precioCarro <= 30000000 ? Math.max(precioCarro, t.precioTipico * 0.6) : t.precioTipico;
+}
+function getCombustibleAnio(tipo, kmAnio){
+  var t = TIPOS_MOTOR[tipo];
+  if (!t) return 0;
+  if (tipo === 'electrico') {
+    // km / km/kWh = kWh consumidos
+    var kWh = kmAnio / t.eficiencia;
+    return Math.round(kWh * t.precioCombustible);
+  }
+  // Gasolina/híbridos: km / (km/L) = litros, /3.785 = galones, * precio/galón
+  var litros = kmAnio / t.eficiencia;
+  var galones = litros / t.galonAL;
+  return Math.round(galones * t.precioCombustible);
+}
+function aplicarTipoMotor(){
+  var tipo = $('tipoMotor').value;
+  var t = TIPOS_MOTOR[tipo];
+  if (!t) return;
+  var precio = num('precio');
+  var kmAnio = numKm('kmAnio') || 15000;
+  // Hint del tipo
+  var hintTipo = '';
+  if (tipo === 'electrico') hintTipo = 'BEV — impuesto vehicular 0.75% (Ley 1964/2019). SOAT y mantenimiento más bajos. Combustible eléctrico ~6× más barato que gasolina.';
+  else if (tipo === 'hibrido-completo') hintTipo = 'HEV/PHEV — descuento 50% impuesto vehicular (Dec. 1077/2023). Eficiencia ~20 km/L = 50% ahorro vs gasolina pura.';
+  else if (tipo === 'hibrido-ligero') hintTipo = 'MHEV — sin descuento legal estándar. ~20% más eficiente que gasolina.';
+  else if (tipo === 'moto-gasolina') hintTipo = 'Moto típica $7-15M. Impuesto bajo, SOAT $450K, sin pico y placa, parqueo gratis. ~40 km/L (vs 10 km/L carro).';
+  else if (tipo === 'moto-electrica') hintTipo = 'Moto eléctrica $10-15M. Exonerada pico y placa, sin emisión. Recarga $50-100/100km. Mantenimiento mínimo.';
+  else hintTipo = 'Carro estándar — impuesto vehicular 1.5-3.5% según valor del avalúo.';
+  $('tipoHint').textContent = hintTipo;
+  // Para motos: si el precio es de carro (>$30M), sugerir bajar a precio típico de moto
+  if (t.esMoto && precio > 30000000) {
+    if (confirm('Estás cambiando a '+t.nombre+' pero el valor del vehículo ('+fmt(precio)+') parece de carro.\n\n¿Quieres que actualice a un precio típico de '+t.label+' ('+fmt(t.precioTipico)+')?')) {
+      $('precio').value = '$'+t.precioTipico.toLocaleString('es-CO');
+      precio = t.precioTipico;
+    }
+  }
+  // Auto-fill operativos según tipo + precio
+  if (precio > 0) {
+    $('impuesto').value = '$'+Math.round(precio*t.pctImpuesto).toLocaleString('es-CO');
+    $('seguro').value = '$'+Math.round(precio*t.pctSeguro).toLocaleString('es-CO');
+  }
+  $('soat').value = '$'+t.soatBase.toLocaleString('es-CO');
+  $('mantto').value = '$'+t.manttoAnio.toLocaleString('es-CO');
+  var combMes = Math.round(getCombustibleAnio(tipo, kmAnio) / 12);
+  $('gasolina').value = '$'+combMes.toLocaleString('es-CO');
+  // Hints
+  $('impuestoHint').textContent = (t.pctImpuesto*100).toFixed(2)+'% del valor ('+t.label+(tipo!=='gasolina'?', subsidiado':'')+')';
+  $('seguroHint').textContent = '~'+(t.pctSeguro*100).toFixed(1)+'% del valor ('+t.label+')';
+  if (tipo === 'electrico' || tipo === 'moto-electrica') $('combHint').textContent = 'Electricidad ~$750/kWh × '+t.eficiencia+' km/kWh';
+  else $('combHint').textContent = 'Gasolina ~$15.500/galón × '+t.eficiencia+' km/L';
+}
+['ingreso','inicial','precio','soat','impuesto','tecno','seguro','mantto','gasolina','parqueo','kmAnio','costoActualMes','ventaActual'].forEach(function(id){
+  $(id).addEventListener('input', function(){
+    var raw = this.value.replace(/[^\d]/g,'');
+    this.value = raw ? '$'+parseInt(raw,10).toLocaleString('es-CO') : '';
+  });
+});
+// kmAnio sin signo $
+$('kmAnio').addEventListener('input', function(){
+  var raw = this.value.replace(/[^\d]/g,'');
+  this.value = raw ? parseInt(raw,10).toLocaleString('es-CO') : '';
+});
+// Auto-llenar impuesto y seguro al cambiar precio (según tipo elegido)
+$('precio').addEventListener('blur', function(){
+  if (num('precio') > 0) aplicarTipoMotor();
+});
+$('kmAnio').addEventListener('blur', function(){
+  if (num('precio') > 0) aplicarTipoMotor();
+});
+function cuotaCredito(monto, tasaEa, plazoMeses){
+  var i = Math.pow(1+tasaEa/100, 1/12) - 1;
+  if (i === 0) return monto / plazoMeses;
+  return monto * i / (1 - Math.pow(1+i, -plazoMeses));
+}
+function evaluar(){
+  var ingreso = num('ingreso');
+  var inicial = num('inicial');
+  var precio  = num('precio');
+  var plazoA  = parseInt($('plazo').value, 10);
+  var tasa    = parseFloat(String($('tasa').value||'').replace(',','.')) || 0;
+  if (ingreso === 0 || precio === 0) { exoToast('Mete ingreso y precio del carro', 'warning'); return; }
+  var soat     = num('soat');
+  var impuesto = num('impuesto');
+  var tecno    = num('tecno');
+  var seguro   = num('seguro');
+  var mantto   = num('mantto');
+  var gasolina = num('gasolina');
+  var parqueo  = num('parqueo');
+  var depPct   = parseFloat(String($('depPct').value||'12').replace(',','.')) || 12;
+  var financia = Math.max(precio - inicial, 0);
+  var cuota    = financia > 0 ? Math.round(cuotaCredito(financia, tasa, plazoA*12)) : 0;
+  var totalPagado = cuota * plazoA * 12 + inicial;
+  var interesesTotal = totalPagado - precio;
+  var operativosAnio = soat + impuesto + tecno + seguro + mantto + (gasolina+parqueo)*12;
+  var operativosMes  = Math.round(operativosAnio / 12);
+  var costoMensualTotal = cuota + operativosMes;
+  var pctIng = ingreso > 0 ? costoMensualTotal/ingreso*100 : 0;
+  // Reglas 20/4/10
+  var pctInicial = precio > 0 ? inicial/precio*100 : 0;
+  var r20 = pctInicial >= 20;
+  var r4  = plazoA <= 4;
+  var r10 = pctIng <= 10;
+  var rotos = (r20?0:1) + (r4?0:1) + (r10?0:1);
+  // Depreciación en 4 años
+  var dep4 = precio - precio * Math.pow(1 - depPct/100, 4);
+  var operativos4 = operativosAnio * 4;
+  var costoTotal4 = inicial + (cuota * Math.min(plazoA, 4) * 12) + operativos4;
+  // Si plazo > 4 años, todavía hay saldo de capital — aproximación: agregar saldo capital al costoTotal
+  if (plazoA > 4) {
+    // saldo aproximado después de 4 años
+    var i = Math.pow(1+tasa/100, 1/12) - 1;
+    var saldo = financia;
+    for (var m = 0; m < 48; m++){
+      var int = saldo * i;
+      var princ = cuota - int;
+      saldo = Math.max(saldo - princ, 0);
+    }
+    costoTotal4 += saldo;
+  }
+  var valorRevente4 = precio * Math.pow(1 - depPct/100, 4);
+  var costoNeto4 = costoTotal4 - valorRevente4;
+  ultimoCalc = {
+    ingreso:ingreso, precio:precio, inicial:inicial, plazoA:plazoA, tasa:tasa,
+    cuota:cuota, financia:financia, totalPagado:totalPagado, interesesTotal:interesesTotal,
+    operativosMes:operativosMes, operativosAnio:operativosAnio, costoMensualTotal:costoMensualTotal, pctIng:pctIng,
+    pctInicial:pctInicial, r20:r20, r4:r4, r10:r10, rotos:rotos,
+    dep4:dep4, costoTotal4:costoTotal4, costoNeto4:costoNeto4, valorRevente4:valorRevente4,
+    operativos: { soat:soat, impuesto:impuesto, tecno:tecno, seguro:seguro, mantto:mantto, gasolina:gasolina, parqueo:parqueo, depPct:depPct }
+  };
+  // Verdict
+  var verdictHtml;
+  if (rotos === 0) verdictHtml = '<div class="verdict ok"><span class="v-icon">✅</span>Sí puedes con tranquilidad. Cumples las 3 reglas.</div>';
+  else if (rotos === 1) verdictHtml = '<div class="verdict warn"><span class="v-icon">⚠️</span>Puedes, pero con una regla rota. Apreta. Mira abajo cuál.</div>';
+  else verdictHtml = '<div class="verdict no"><span class="v-icon">❌</span>No te recomiendo. Rompes '+rotos+' de las 3 reglas. Tu carro tiene que ser más barato, el plazo más corto, o la inicial más alta.</div>';
+  $('verdict').innerHTML = verdictHtml;
+  // Reglas
+  $('rulesGrid').innerHTML =
+    '<div class="rule '+(r20?'pass':'fail')+'">'+
+      '<div class="r-name">20% Inicial</div>'+
+      '<div class="r-status">'+(r20?'✅':'❌')+'</div>'+
+      '<div class="r-detail">Tienes <strong>'+pctInicial.toFixed(1)+'%</strong>'+(r20?'':' (faltan '+fmt(precio*0.20-inicial)+')')+'</div>'+
+    '</div>'+
+    '<div class="rule '+(r4?'pass':'fail')+'">'+
+      '<div class="r-name">4 años máx</div>'+
+      '<div class="r-status">'+(r4?'✅':'❌')+'</div>'+
+      '<div class="r-detail">Plazo: <strong>'+plazoA+' años</strong>'+(r4?'':' (acórtalo)')+'</div>'+
+    '</div>'+
+    '<div class="rule '+(r10?'pass':'fail')+'">'+
+      '<div class="r-name">10% del ingreso</div>'+
+      '<div class="r-status">'+(r10?'✅':'❌')+'</div>'+
+      '<div class="r-detail">Costo mensual total: <strong>'+pctIng.toFixed(1)+'%</strong> del ingreso'+(r10?'':' (tope: '+fmt(ingreso*0.1)+')')+'</div>'+
+    '</div>';
+  // TCO año 1
+  $('tcoTable').innerHTML =
+    '<thead><tr><th>Concepto</th><th>Mensual</th><th>Anual</th></tr></thead>'+
+    '<tbody>'+
+    '<tr class="cat"><td>Crédito</td><td></td><td></td></tr>'+
+    '<tr><td>Cuota financiación</td><td>'+fmt(cuota)+'</td><td>'+fmt(cuota*12)+'</td></tr>'+
+    '<tr class="cat"><td>Operativos</td><td></td><td></td></tr>'+
+    '<tr><td>SOAT</td><td>'+fmt(soat/12)+'</td><td>'+fmt(soat)+'</td></tr>'+
+    '<tr><td>Impuesto vehicular</td><td>'+fmt(impuesto/12)+'</td><td>'+fmt(impuesto)+'</td></tr>'+
+    '<tr><td>Tecnomecánica</td><td>'+fmt(tecno/12)+'</td><td>'+fmt(tecno)+'</td></tr>'+
+    '<tr><td>Seguro todo riesgo</td><td>'+fmt(seguro/12)+'</td><td>'+fmt(seguro)+'</td></tr>'+
+    '<tr><td>Mantenimiento</td><td>'+fmt(mantto/12)+'</td><td>'+fmt(mantto)+'</td></tr>'+
+    '<tr><td>Gasolina</td><td>'+fmt(gasolina)+'</td><td>'+fmt(gasolina*12)+'</td></tr>'+
+    '<tr><td>Parqueadero</td><td>'+fmt(parqueo)+'</td><td>'+fmt(parqueo*12)+'</td></tr>'+
+    '<tr class="total"><td>TOTAL TENER EL CARRO</td><td>'+fmt(costoMensualTotal)+'</td><td>'+fmt(costoMensualTotal*12)+'</td></tr>'+
+    '</tbody>';
+  // Proyección 4 años
+  $('proj4Table').innerHTML =
+    '<thead><tr><th>Concepto</th><th>Valor</th></tr></thead><tbody>'+
+    '<tr><td>Cuota inicial pagada</td><td>'+fmt(inicial)+'</td></tr>'+
+    '<tr><td>Cuotas pagadas (4 años)</td><td>'+fmt(cuota * Math.min(plazoA,4) * 12)+'</td></tr>'+
+    (plazoA > 4 ? '<tr><td>Saldo capital pendiente al año 4</td><td>'+fmt(costoTotal4 - inicial - cuota*48 - operativos4)+'</td></tr>' : '')+
+    '<tr><td>Operativos 4 años</td><td>'+fmt(operativos4)+'</td></tr>'+
+    '<tr><td>Total que vas a haber pagado</td><td>'+fmt(costoTotal4)+'</td></tr>'+
+    '<tr><td>Valor de reventa estimado año 4 (depreciación '+depPct+'%/año)</td><td>'+fmt(valorRevente4)+'</td></tr>'+
+    '<tr class="total"><td>COSTO REAL NETO 4 AÑOS</td><td>'+fmt(costoNeto4)+'</td></tr>'+
+    '</tbody>';
+  renderCambioVehiculo();
+  renderAnio1Trampa();
+  renderPicoYPlaca();
+  renderUberComparativo();
+  renderWowFactorCarro();
+  renderComparativoTipos();
+  $('results').classList.add('show');
+  $('results').scrollIntoView({behavior:'smooth',block:'start'});
+}
+// Helper: formato $/mes (primario) con $/año entre paréntesis pequeño
+// Recibe valor ANUAL y muestra mensual destacado, anual secundario
+function fmtMA(anual){
+  if (!anual || isNaN(anual)) return '<strong>$0/m</strong>';
+  var mes = Math.round(anual/12);
+  return '<strong>'+fmt(mes)+'/m</strong> <span style="color:#9CA3AF;font-size:.74em;display:block;margin-top:1px">('+fmt(anual)+'/año)</span>';
+}
+// Helper: total a 5 años en mensual equivalente
+function fmtTotalMes(total5y){
+  if (!total5y || isNaN(total5y)) return '<strong>$0/m</strong>';
+  var mes = Math.round(total5y/60);
+  return '<strong>'+fmt(mes)+'/m equiv.</strong> <span style="color:#9CA3AF;font-size:.74em;display:block;margin-top:1px">('+fmt(total5y)+' total 5y)</span>';
+}
+function renderCambioVehiculo(){
+  if (!ultimoCalc) return;
+  var c = ultimoCalc;
+  var tipoActual = $('tipoActual').value;
+  var costoActualMes = num('costoActualMes');
+  var ventaActual = num('ventaActual');
+  // Si no hay vehículo actual ingresado, ocultar la sección
+  if (!tipoActual && costoActualMes <= 0) {
+    $('cardCambio').style.display = 'none';
+    return;
+  }
+  $('cardCambio').style.display = 'block';
+  var tipoNuevo = $('tipoMotor').value;
+  var tNuevo = TIPOS_MOTOR[tipoNuevo];
+  var tActual = tipoActual ? TIPOS_MOTOR[tipoActual] : null;
+  var costoNuevoMes = c.costoMensualTotal;
+  var diferenciaMes = costoNuevoMes - costoActualMes;
+  var diferencia5Anios = diferenciaMes * 60;
+  // Escenario "vendes el actual y usas para inicial extra"
+  var inicialNueva = c.inicial + ventaActual;
+  var pctInicialNueva = c.precio > 0 ? inicialNueva/c.precio*100 : 0;
+  var financiarNuevo = Math.max(c.precio - inicialNueva, 0);
+  var i = Math.pow(1+c.tasa/100, 1/12) - 1;
+  var cuotaConVenta = financiarNuevo > 0 ? (financiarNuevo * i / (1 - Math.pow(1+i, -c.plazoA*12))) : 0;
+  var costoNuevoMesConVenta = cuotaConVenta + c.operativosMes;
+  var diferenciaMesConVenta = costoNuevoMesConVenta - costoActualMes;
+  var diferencia5AniosConVenta = diferenciaMesConVenta * 60;
+  // Determinar el tipo de cambio
+  var tipoCambio = '';
+  if (tActual && tActual.esMoto && !tNuevo.esMoto) tipoCambio = 'moto-a-carro';
+  else if (tActual && !tActual.esMoto && tNuevo.esMoto) tipoCambio = 'carro-a-moto';
+  else if (tipoActual === 'gasolina' && tipoNuevo === 'electrico') tipoCambio = 'gasolina-a-electrico';
+  else if (tipoActual && tipoActual !== tipoNuevo) tipoCambio = 'cambio-tipo';
+  else tipoCambio = 'mismo-tipo';
+  var html = '<div style="overflow-x:auto"><table class="tco-table" style="width:100%;font-size:.86rem">'+
+    '<thead><tr><th>Escenario</th><th style="text-align:right">Costo mensual</th><th style="text-align:right">Diferencia/mes</th><th style="text-align:right">Impacto 5 años</th></tr></thead>'+
+    '<tbody>';
+  if (tActual) {
+    html += '<tr style="background:#F9FAFB"><td>'+tActual.icon+' Tu actual ('+tActual.nombre+')</td>'+
+      '<td style="text-align:right;font-family:JetBrains Mono,monospace">'+fmt(costoActualMes)+'</td>'+
+      '<td style="text-align:right;color:#9CA3AF">base</td>'+
+      '<td style="text-align:right;color:#9CA3AF">—</td></tr>';
+  } else if (costoActualMes > 0) {
+    html += '<tr style="background:#F9FAFB"><td>Tu actual</td>'+
+      '<td style="text-align:right;font-family:JetBrains Mono,monospace">'+fmt(costoActualMes)+'</td>'+
+      '<td style="text-align:right;color:#9CA3AF">base</td>'+
+      '<td style="text-align:right;color:#9CA3AF">—</td></tr>';
+  }
+  // Escenario A: nuevo SIN vender el actual
+  html += '<tr><td>'+tNuevo.icon+' Nuevo ('+tNuevo.nombre+'), <strong>sin vender</strong> el actual</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace;font-weight:700">'+fmt(costoNuevoMes)+'</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace;font-weight:700;color:'+(diferenciaMes>0?'#DC2626':'#059669')+'">'+(diferenciaMes>0?'+':'')+fmt(diferenciaMes)+'</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace;color:'+(diferencia5Anios>0?'#DC2626':'#059669')+'">'+(diferencia5Anios>0?'+':'')+fmt(diferencia5Anios)+'</td></tr>';
+  // Escenario B: nuevo VENDIENDO el actual (inicial extra)
+  if (ventaActual > 0) {
+    html += '<tr style="background:#ECFDF5"><td>'+tNuevo.icon+' Nuevo, <strong>vendes el actual</strong> ('+fmt(ventaActual)+' como inicial extra)</td>'+
+      '<td style="text-align:right;font-family:JetBrains Mono,monospace;font-weight:700">'+fmt(costoNuevoMesConVenta)+'</td>'+
+      '<td style="text-align:right;font-family:JetBrains Mono,monospace;font-weight:700;color:'+(diferenciaMesConVenta>0?'#DC2626':'#059669')+'">'+(diferenciaMesConVenta>0?'+':'')+fmt(diferenciaMesConVenta)+'</td>'+
+      '<td style="text-align:right;font-family:JetBrains Mono,monospace;color:'+(diferencia5AniosConVenta>0?'#DC2626':'#059669')+'">'+(diferencia5AniosConVenta>0?'+':'')+fmt(diferencia5AniosConVenta)+'</td></tr>';
+  }
+  html += '</tbody></table></div>';
+  // Insight según tipo de cambio
+  var insightHtml = '';
+  if (tipoCambio === 'moto-a-carro') {
+    insightHtml = '<strong>🛵→🚗 De moto a carro:</strong> el cambio te cuesta '+fmt(Math.abs(diferenciaMes))+' adicionales al mes ('+fmt(Math.abs(diferencia5Anios))+' a 5 años). El carro suma comodidad, seguridad, capacidad — pero NO ahorra plata. Si tu uso justifica el costo (familia, clima, distancias largas, zonas inseguras), válido. Si es por estatus, las matemáticas dicen: piénsalo.';
+  } else if (tipoCambio === 'carro-a-moto') {
+    if (diferenciaMes < 0) {
+      insightHtml = '<strong>🚗→🛵 De carro a moto:</strong> ahorras <strong>'+fmt(Math.abs(diferenciaMes))+'/mes</strong> ('+fmt(Math.abs(diferencia5Anios))+' a 5 años). Combustible 4× más barato + cero pico y placa + mantenimiento mínimo. Pero piensa: ¿lluvia frecuente? ¿llevas familia? ¿zona insegura? La cuenta es enorme pero los riesgos no se miden en plata.';
+    } else {
+      insightHtml = '<strong>🚗→🛵 De carro a moto:</strong> sorprendentemente cuesta más al mes en este escenario. Probablemente el carro actual ya está pago y la moto entra con cuota nueva. Si esperas a tener efectivo para comprar la moto sin financiar, la matemática mejora drásticamente.';
+    }
+  } else if (tipoCambio === 'gasolina-a-electrico') {
+    insightHtml = '<strong>⛽→⚡ De gasolina a eléctrico:</strong> el ahorro principal es en combustible (4× menos) + impuesto vehicular (subsidio 60-100%) + cero pico y placa. La cuota financiera puede ser similar o mayor (EVs típicamente cuestan 10-15% más al inicio), pero los operativos te recuperan eso en 2-3 años. Plus: la sostenibilidad y menos visitas al taller.';
+  } else if (diferenciaMes > 500000) {
+    insightHtml = '<strong>⚠️ El cambio te cuesta '+fmt(diferenciaMes)+'/mes</strong> ('+fmt(diferencia5Anios)+' a 5 años). Si esa plata sale de tu cubo de ahorro o la sumas como deuda nueva, evalúa: ¿el upgrade de comodidad/seguridad/imagen vale ese costo? La cuenta es lo que es; la decisión es tuya.';
+  } else if (diferenciaMes < -500000) {
+    insightHtml = '<strong>✅ El cambio te ahorra '+fmt(Math.abs(diferenciaMes))+'/mes</strong> ('+fmt(Math.abs(diferencia5Anios))+' a 5 años). Si los demás factores cuadran (uso, comodidad), las matemáticas favorecen el cambio.';
+  } else {
+    insightHtml = '<strong>📊 Cambio casi neutral:</strong> diferencia mensual menor a $500K. La decisión se basa más en otros factores (preferencia personal, uso, seguridad) que en la plata pura.';
+  }
+  if (ventaActual > 0 && diferenciaMesConVenta < diferenciaMes) {
+    var ahorroVendiendo = diferenciaMes - diferenciaMesConVenta;
+    insightHtml += '<br><br><strong>💡 Si vendes el actual</strong> ('+fmt(ventaActual)+' como inicial extra), bajas la cuota mensual del nuevo en <strong>'+fmt(ahorroVendiendo)+'/mes</strong> ('+fmt(ahorroVendiendo*60)+' a 5 años). Inicial total subiría a '+pctInicialNueva.toFixed(1)+'% del valor.';
+  }
+  html += '<div style="margin-top:14px;padding:14px 18px;background:'+(diferenciaMes>500000?'#FFFBEB':diferenciaMes<-500000?'#ECFDF5':'#EFF6FF')+';border:1px solid '+(diferenciaMes>500000?'#FDE68A':diferenciaMes<-500000?'#A7F3D0':'#BFDBFE')+';border-radius:10px;font-size:.86rem;color:'+(diferenciaMes>500000?'#92400E':diferenciaMes<-500000?'#065F46':'#1E40AF')+';line-height:1.65">'+insightHtml+'</div>';
+  $('cambioVehiculo').innerHTML = html;
+}
+function renderAnio1Trampa(){
+  if (!ultimoCalc) return;
+  var c = ultimoCalc;
+  var tipo = $('tipoMotor').value;
+  var t = TIPOS_MOTOR[tipo];
+  if (!t) return;
+  // One-time fees (matrícula primera vez)
+  // Matrícula promedio Colombia: 1% del valor para carros, 0.5% motos. EVs y motos eléctricas reducción 50%
+  var pctMatricula = t.esMoto ? 0.005 : 0.010;
+  if (tipo === 'electrico' || tipo === 'moto-electrica') pctMatricula *= 0.5;
+  var matriculaInicial = Math.round(c.precio * pctMatricula);
+  var placaImpuesto = t.esMoto ? 80000 : 200000; // entrega de placa, runt
+  var blindaje = 0; // opcional, lo dejamos en 0
+  var oneTimeTotal = matriculaInicial + placaImpuesto + blindaje;
+  // Año 1: seguro +15%, depreciación 15-18%, mantenimiento normal (warranty puede cubrir algunas cosas)
+  var seguroAnio1 = Math.round(c.operativos.seguro * 1.15);
+  var seguroExtraAnio1 = seguroAnio1 - c.operativos.seguro;
+  var depAnio1Pct = tipo === 'electrico' ? 18 : (t.esMoto ? 17 : 15);
+  var depAnio1 = Math.round(c.precio * depAnio1Pct/100);
+  var depAnio1Extra = Math.round(c.precio * (depAnio1Pct - c.operativos.depPct)/100); // diferencia vs años siguientes
+  // Total extra del primer año
+  var totalExtraAnio1 = oneTimeTotal + seguroExtraAnio1 + depAnio1Extra;
+  var html = '<div style="overflow-x:auto"><table class="tco-table" style="width:100%;font-size:.84rem">'+
+    '<thead><tr>'+
+    '<th>Concepto</th>'+
+    '<th style="text-align:right">Año 1</th>'+
+    '<th style="text-align:right">Años 2-5 (cada uno)</th>'+
+    '<th style="text-align:right">Extra año 1</th>'+
+    '</tr></thead><tbody>'+
+    '<tr><td>📋 Matrícula primera vez ('+(pctMatricula*100).toFixed(2)+'% del valor'+(tipo==='electrico'||tipo==='moto-electrica'?', subsidiada':'')+')</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace">'+fmt(matriculaInicial)+'</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace;color:#9CA3AF">—</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace;color:#DC2626">+'+fmt(matriculaInicial)+'</td></tr>'+
+    '<tr><td>🆔 Trámites RUNT/placa (one-time)</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace">'+fmt(placaImpuesto)+'</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace;color:#9CA3AF">—</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace;color:#DC2626">+'+fmt(placaImpuesto)+'</td></tr>'+
+    '<tr><td>🛡️ Seguro todo riesgo (sin historial = +15% año 1)</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace">'+fmt(seguroAnio1)+'</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace">'+fmt(c.operativos.seguro)+'</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace;color:#DC2626">+'+fmt(seguroExtraAnio1)+'</td></tr>'+
+    '<tr><td>📉 Depreciación ('+depAnio1Pct+'% año 1 vs '+c.operativos.depPct+'% años siguientes)</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace">'+fmt(depAnio1)+'</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace">'+fmt(Math.round(c.precio * c.operativos.depPct/100))+'</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace;color:#DC2626">+'+fmt(depAnio1Extra)+'</td></tr>'+
+    '<tr style="background:#FEF3C7;font-weight:700"><td>TOTAL "extra año 1" — lo que casi nadie presupuesta</td>'+
+    '<td style="text-align:right" colspan="2">—</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace;color:#92400E;font-size:1rem">+'+fmt(totalExtraAnio1)+'</td></tr>'+
+    '</tbody></table></div>';
+  // Insight
+  var pctVsPrecio = c.precio > 0 ? (totalExtraAnio1/c.precio*100) : 0;
+  html += '<div style="margin-top:12px;padding:14px 18px;background:'+(pctVsPrecio>20?'#FEF2F2':'#EFF6FF')+';border:1px solid '+(pctVsPrecio>20?'#FECACA':'#BFDBFE')+';border-radius:10px;font-size:.86rem;color:'+(pctVsPrecio>20?'#991B1B':'#1E40AF')+';line-height:1.6">'+
+    '<strong>'+(pctVsPrecio>20?'⚠️':'💡')+' '+pctVsPrecio.toFixed(1)+'% del valor del vehículo en costos extras del año 1.</strong> '+
+    'Concretamente <strong>'+fmt(totalExtraAnio1)+'</strong> que se suman al inicial y la cuota normal. ';
+  if (pctVsPrecio > 20) html += 'Este margen es lo que más sorprende a primerizos. Considera comprar usado de 2-3 años: te ahorras gran parte de esta depreciación + matrícula reducida.';
+  else html += 'Apártalo en el fondo de imprevistos ANTES de firmar. Si lo descubres comprometido, terminás financiando con tarjeta y la cuenta se descontrola.';
+  html += '</div>';
+  document.getElementById('anio1Trampa').innerHTML = html;
+}
+function renderPicoYPlaca(){
+  if (!ultimoCalc) return;
+  var c = ultimoCalc;
+  var ciudad = $('ciudad').value;
+  var cp = CIUDADES_PYP[ciudad];
+  var tipoActual = $('tipoMotor').value;
+  var t = TIPOS_MOTOR[tipoActual];
+  if (!cp || !t) return;
+  var diasPYP;
+  if (t.esMoto) diasPYP = cp.moto;
+  else if (tipoActual === 'electrico') diasPYP = cp.electrico;
+  else diasPYP = cp.gasolina;
+  // Costo fijo diario = (cuota + operativos sin combustible) / 365
+  var operativosFijosAnio = (c.operativosMes - num('gasolina'))*12 + c.cuota*12;
+  var costoFijoDia = operativosFijosAnio / 365;
+  var costoPYPAnio = diasPYP * costoFijoDia;
+  // Comparativo: si fuera EV/moto, 0 días
+  var ahorroSiEV = ciudad === 'bogota' || ciudad === 'medellin' || ciudad === 'bucaramanga' || ciudad === 'barranquilla'
+    ? cp.gasolina * costoFijoDia : 0;
+  var html = '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px">'+
+    '<div style="background:'+(diasPYP>30?'#FEF2F2':diasPYP>0?'#FFFBEB':'#ECFDF5')+';border:1px solid '+(diasPYP>30?'#FECACA':diasPYP>0?'#FDE68A':'#A7F3D0')+';border-radius:10px;padding:14px;text-align:center">'+
+      '<div style="font-family:JetBrains Mono,monospace;font-size:1.6rem;font-weight:800;color:'+(diasPYP>30?'#991B1B':diasPYP>0?'#92400E':'#065F46')+';line-height:1">'+diasPYP+'</div>'+
+      '<div style="font-size:.74rem;color:'+(diasPYP>30?'#991B1B':diasPYP>0?'#92400E':'#065F46')+';font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-top:4px">días/año sin '+(t.esMoto?'moto':'carro')+'</div>'+
+    '</div>'+
+    '<div style="background:#F9FAFB;border:1px solid #E5E7EB;border-radius:10px;padding:14px;text-align:center">'+
+      '<div style="font-family:JetBrains Mono,monospace;font-size:1.6rem;font-weight:800;color:#1B3A5C;line-height:1">'+fmt(costoPYPAnio)+'</div>'+
+      '<div style="font-size:.74rem;color:#6B7280;font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-top:4px">costo año pagado por días sin uso</div>'+
+    '</div>'+
+    '<div style="background:#F9FAFB;border:1px solid #E5E7EB;border-radius:10px;padding:14px;text-align:center">'+
+      '<div style="font-family:JetBrains Mono,monospace;font-size:1.6rem;font-weight:800;color:#1B3A5C;line-height:1">'+fmt(costoFijoDia)+'</div>'+
+      '<div style="font-size:.74rem;color:#6B7280;font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-top:4px">tu costo fijo diario</div>'+
+    '</div>'+
+  '</div>'+
+  '<div style="font-size:.84rem;color:#374151;line-height:1.6;padding:12px 14px;background:#F9FAFB;border-radius:8px"><strong>'+cp.n+':</strong> '+cp.nota+'</div>';
+  // Insight si carro gasolina y EV exoneraría
+  if (!t.esMoto && tipoActual !== 'electrico' && ahorroSiEV > 0) {
+    html += '<div style="margin-top:12px;padding:14px 18px;background:#ECFDF5;border:1px solid #A7F3D0;border-radius:10px;font-size:.86rem;color:#065F46;line-height:1.6">'+
+      '<strong>💡 Si tuvieras un carro eléctrico:</strong> '+cp.gasolina+' días que pagas y no manejas se convierten en <strong>0</strong>. Recuperas <strong>'+fmt(ahorroSiEV)+'/año</strong> en costos fijos pagados sin uso. En 5 años son <strong>'+fmt(ahorroSiEV*5)+'</strong>.'+
+      '</div>';
+  }
+  document.getElementById('picoYPlaca').innerHTML = html;
+}
+function renderUberComparativo(){
+  if (!ultimoCalc) return;
+  var c = ultimoCalc;
+  var kmAnio = numKm('kmAnio') || 15000;
+  // Uber Colombia 2026: ~$1,150/km promedio en zona urbana
+  // (mix horas pico $1,400 + normal $900)
+  var costoKmUber = 1150;
+  var uberAnio = kmAnio * costoKmUber;
+  var uberMes = uberAnio / 12;
+  // Transporte público: TransMilenio + buses promedios
+  // 2 viajes/día × 22 días = 44 pasajes × $3,000 = $132K/mes
+  // En vacaciones / fines de semana: ~20 pasajes adicionales/mes = $60K
+  var pasajeMes = 192000; // realista en Bogotá, ajustable
+  var pasajeAnio = pasajeMes * 12;
+  // Mix: 50% transporte público + 50% Uber para comparar uso real
+  var mixAnio = (uberAnio * 0.5) + pasajeAnio;
+  var mixMes = mixAnio / 12;
+  var costoVehMes = c.costoMensualTotal;
+  var costoVehAnio = costoVehMes * 12;
+  var ahorroVsUber = costoVehAnio - uberAnio;
+  var ahorroVsMix = costoVehAnio - mixAnio;
+  var ahorroVsTM = costoVehAnio - pasajeAnio;
+  var html = '<div style="overflow-x:auto"><table class="tco-table" style="width:100%;font-size:.84rem">'+
+    '<thead><tr>'+
+    '<th>Opción</th>'+
+    '<th style="text-align:right">Costo</th>'+
+    '<th style="text-align:right">Diferencia vs vehículo</th>'+
+    '</tr></thead><tbody>'+
+    '<tr style="background:#FEF3C7;font-weight:700"><td>🚗 Tu vehículo (todo incluido)</td>'+
+    '<td style="text-align:right">'+fmtMA(costoVehAnio)+'</td>'+
+    '<td style="text-align:right">—</td></tr>'+
+    '<tr><td>🚖 Solo Uber ('+kmAnio.toLocaleString('es-CO')+' km × $1.150/km)</td>'+
+    '<td style="text-align:right">'+fmtMA(uberAnio)+'</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace;color:'+(ahorroVsUber>0?'#059669':'#DC2626')+';font-weight:700">'+(ahorroVsUber>0?'−':'+')+fmt(Math.abs(Math.round(ahorroVsUber/12)))+'/m<br><span style="font-size:.7rem;color:#9CA3AF;font-weight:400">('+(ahorroVsUber>0?'−':'+')+fmt(Math.abs(ahorroVsUber))+'/año)</span></td></tr>'+
+    '<tr><td>🚌 Solo transporte público (TransMilenio/MIO/buses)</td>'+
+    '<td style="text-align:right">'+fmtMA(pasajeAnio)+'</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace;color:'+(ahorroVsTM>0?'#059669':'#DC2626')+';font-weight:700">'+(ahorroVsTM>0?'−':'+')+fmt(Math.abs(Math.round(ahorroVsTM/12)))+'/m<br><span style="font-size:.7rem;color:#9CA3AF;font-weight:400">('+(ahorroVsTM>0?'−':'+')+fmt(Math.abs(ahorroVsTM))+'/año)</span></td></tr>'+
+    '<tr><td>🔀 Mix (50% Uber + transporte público)</td>'+
+    '<td style="text-align:right">'+fmtMA(mixAnio)+'</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace;color:'+(ahorroVsMix>0?'#059669':'#DC2626')+';font-weight:700">'+(ahorroVsMix>0?'−':'+')+fmt(Math.abs(Math.round(ahorroVsMix/12)))+'/m<br><span style="font-size:.7rem;color:#9CA3AF;font-weight:400">('+(ahorroVsMix>0?'−':'+')+fmt(Math.abs(ahorroVsMix))+'/año)</span></td></tr>'+
+    '</tbody></table></div>';
+  // Insight según la situación
+  if (ahorroVsMix > 5000000) {
+    html += '<div style="margin-top:14px;padding:14px 18px;background:#FFFBEB;border:1px solid #FDE68A;border-radius:10px;font-size:.88rem;color:#92400E;line-height:1.6">'+
+      '<strong>⚠️ El vehículo te cuesta '+fmt(ahorroVsMix)+'/año más que el mix Uber + transporte público</strong> ('+fmt(Math.round(ahorroVsMix/12))+'/mes). Eso es <strong>'+fmt(ahorroVsMix*5)+' a 5 años</strong>. Si tu uso es urbano-laboral y no necesitas el carro para trabajar (transporte de carga, llevar familia, viajes intermunicipales), las cuentas favorecen el transporte alternativo. NO es para todos: clima, comodidad, hijos, zonas inseguras pesan también.'+
+      '</div>';
+  } else if (ahorroVsMix < -2000000) {
+    html += '<div style="margin-top:14px;padding:14px 18px;background:#ECFDF5;border:1px solid #A7F3D0;border-radius:10px;font-size:.88rem;color:#065F46;line-height:1.6">'+
+      '<strong>🏆 Tu vehículo es más barato que las alternativas</strong> ('+fmt(Math.abs(ahorroVsMix))+'/año vs el mix). Probablemente porque haces muchos km o tu vehículo es de baja gama. La cuenta confirma la decisión.'+
+      '</div>';
+  } else {
+    html += '<div style="margin-top:14px;padding:14px 18px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:10px;font-size:.88rem;color:#1E40AF;line-height:1.6">'+
+      '<strong>📊 Diferencia mínima entre vehículo y alternativas.</strong> La decisión se basa más en comodidad, seguridad, capacidad de carga, viajes — que en la cuenta pura. Pero tener vehículo NO te ahorra plata vs transporte alternativo.'+
+      '</div>';
+  }
+  // Nota sobre supuestos
+  html += '<div style="margin-top:10px;font-size:.74rem;color:#9CA3AF;line-height:1.5;font-style:italic">Supuestos: Uber promedio Colombia urbana $1.150/km (mix pico/normal). Pasaje TransMilenio/MIO $3.000, 2 viajes laborales × 22 días + 20 fines de semana = $192K/mes. Ajusta mentalmente si tu situación es muy distinta (rural, llevas familia, etc).</div>';
+  document.getElementById('uberComparativo').innerHTML = html;
+}
+function renderComparativoTipos(){
+  if (!ultimoCalc) return;
+  var c = ultimoCalc;
+  var precioCarroBase = c.precio;
+  var kmAnio = numKm('kmAnio') || 15000;
+  var tipoActual = $('tipoMotor').value;
+  var anios = 5;
+  var tecno = num('tecno') || 200000;
+  var parqueo = num('parqueo') || 0;
+  var depPct = parseFloat($('depPct').value) || 12;
+  // Calcular costo total a 5 años para cada tipo, usando precio equivalente
+  var resultados = Object.keys(TIPOS_MOTOR).map(function(key){
+    var t = TIPOS_MOTOR[key];
+    var precio = precioEquivalente(key, precioCarroBase);
+    var impuesto = Math.round(precio * t.pctImpuesto);
+    var seguro = Math.round(precio * t.pctSeguro);
+    var combAnio = getCombustibleAnio(key, kmAnio);
+    // Para motos, asumir tecno menor y parqueo 0
+    var tecnoEff = t.esMoto ? Math.round(tecno * 0.6) : tecno;
+    var parqueoEff = t.esMoto ? 0 : parqueo;
+    var operativosAnio = t.soatBase + impuesto + tecnoEff + seguro + t.manttoAnio + combAnio + parqueoEff*12;
+    // Depreciación: eléctricos un poco más año 1, motos también
+    var depEffPct = key === 'electrico' ? Math.max(depPct, 15) : (t.esMoto ? Math.max(depPct, 15) : depPct);
+    var valorAnio5 = precio * Math.pow(1 - depEffPct/100, anios);
+    var depTotal = precio - valorAnio5;
+    var totalOperativos = operativosAnio * anios;
+    var totalCon5y = totalOperativos + depTotal;
+    return {
+      key:key, t:t, isActual:key===tipoActual,
+      precio:precio, operativosAnio:operativosAnio, combAnio:combAnio,
+      impuesto:impuesto, soat:t.soatBase, seguro:seguro, mantto:t.manttoAnio,
+      totalOperativos:totalOperativos, depTotal:depTotal, totalCon5y:totalCon5y,
+      esMoto:t.esMoto
+    };
+  });
+  // Ordenar por costo total ascendente
+  resultados.sort(function(a,b){ return a.totalCon5y - b.totalCon5y; });
+  var ganador = resultados[0];
+  // Render con formato $/mes (primario) — separar carros y motos visualmente
+  var html = '<div style="overflow-x:auto"><table class="tco-table" style="width:100%;font-size:.82rem">'+
+    '<thead><tr>'+
+    '<th style="min-width:180px">Tipo</th>'+
+    '<th style="text-align:right">Precio</th>'+
+    '<th style="text-align:right">Combustible</th>'+
+    '<th style="text-align:right">Operativo</th>'+
+    '<th style="text-align:right">Total mensualizado<br><span style="font-size:.7rem;color:#9CA3AF;font-weight:400">(5 años / 60 meses)</span></th>'+
+    '<th style="text-align:right;min-width:120px">vs ganador</th>'+
+    '</tr></thead><tbody>';
+  // Render filas — carros primero, motos después
+  var carros = resultados.filter(function(r){ return !r.esMoto; });
+  var motos = resultados.filter(function(r){ return r.esMoto; });
+  function renderFila(r){
+    var diff = r.totalCon5y - ganador.totalCon5y;
+    var diffMes = Math.round(diff/60);
+    var bg = r.isActual ? 'background:#FEF3C7;font-weight:700' : (r === ganador ? 'background:#D1FAE5;font-weight:700' : '');
+    var diffStr = diff === 0 ? '<span style="color:#059669;font-weight:800">🏆 Mejor</span>' : '<span style="color:#DC2626">+'+fmt(diffMes)+'/m<br><span style="font-size:.7rem;color:#9CA3AF;font-weight:400">(+'+fmt(diff)+' total)</span></span>';
+    var actualLbl = r.isActual ? '<span style="background:#92400E;color:#fff;font-size:.62rem;padding:1px 6px;border-radius:4px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;margin-left:6px;display:inline-block">Tu elección</span>' : '';
+    return '<tr style="'+bg+'"><td>'+r.t.icon+' '+r.t.nombre+actualLbl+'</td>'+
+      '<td style="text-align:right;font-family:JetBrains Mono,monospace;font-size:.86rem">'+fmt(r.precio)+'</td>'+
+      '<td style="text-align:right">'+fmtMA(r.combAnio)+'</td>'+
+      '<td style="text-align:right">'+fmtMA(r.operativosAnio)+'</td>'+
+      '<td style="text-align:right">'+fmtTotalMes(r.totalCon5y)+'</td>'+
+      '<td style="text-align:right;font-family:JetBrains Mono,monospace">'+diffStr+'</td>'+
+    '</tr>';
+  }
+  // Mantener orden por costo pero dentro del mismo orden
+  resultados.forEach(function(r){ html += renderFila(r); });
+  html += '</tbody></table></div>';
+  // Insight basado en tipo elegido
+  var tuyo = resultados.find(function(r){ return r.isActual; });
+  if (tuyo && tuyo !== ganador) {
+    var ahorro = tuyo.totalCon5y - ganador.totalCon5y;
+    var ahorroMes = Math.round(ahorro/60);
+    html += '<div style="margin-top:14px;padding:14px 18px;background:#FFFBEB;border:1px solid #FDE68A;border-radius:10px;font-size:.88rem;color:#92400E;line-height:1.6">'+
+      '<strong>💡 Diferencia real:</strong> elegiste <strong>'+tuyo.t.nombre+'</strong>. <strong>'+ganador.t.nombre+'</strong> te ahorraría <strong style="font-family:JetBrains Mono,monospace">'+fmt(ahorro)+'</strong> en 5 años (= <strong>'+fmt(ahorroMes)+'/mes</strong>).<br><br>';
+    if (ganador.key === 'electrico') html += 'Un carro eléctrico: combustible 4× más barato + impuesto subsidiado + cero pico y placa en Bogotá. ';
+    else if (ganador.key === 'hibrido-completo') html += 'Un híbrido completo: 50% menos combustible + 50% menos impuesto vehicular. ';
+    else if (ganador.esMoto && !tuyo.esMoto) html += 'Pasar de carro a moto: ahorro masivo en combustible (4× menos), impuestos y seguro. Pero analiza tu uso real: ¿lluvia frecuente? ¿llevas pasajeros? ¿zona insegura?';
+    else if (!ganador.esMoto && tuyo.esMoto) html += 'Pasar de moto a carro: comodidad, seguridad, capacidad. El costo es real pero las personas lo subestiman típicamente en 30-40%.';
+    html += '</div>';
+  } else if (tuyo === ganador) {
+    html += '<div style="margin-top:14px;padding:14px 18px;background:#D1FAE5;border:1px solid #6EE7B7;border-radius:10px;font-size:.88rem;color:#065F46;line-height:1.6">'+
+      '<strong>🏆 Elegiste el más barato a 5 años.</strong> Las cuentas confirman tu elección.'+
+      '</div>';
+  }
+  // Insight especial: si hay diferencia significativa entre carros y motos
+  var carroMasBarato = carros.length > 0 ? carros.reduce(function(a,b){ return a.totalCon5y < b.totalCon5y ? a : b; }) : null;
+  var motoMasBarata = motos.length > 0 ? motos.reduce(function(a,b){ return a.totalCon5y < b.totalCon5y ? a : b; }) : null;
+  if (carroMasBarato && motoMasBarata) {
+    var diffCarroMoto = carroMasBarato.totalCon5y - motoMasBarata.totalCon5y;
+    if (diffCarroMoto > 5000000) {
+      html += '<div style="margin-top:10px;padding:14px 18px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:10px;font-size:.86rem;color:#1E40AF;line-height:1.6">'+
+        '<strong>🚗↔️🏍️ Cambiar de carro a moto:</strong> el carro más barato ('+carroMasBarato.t.nombre+') cuesta <strong>'+fmt(diffCarroMoto)+'</strong> más que la moto más barata ('+motoMasBarata.t.nombre+') a 5 años — '+fmt(Math.round(diffCarroMoto/60))+'/mes. La moto NO es para todos: clima, seguridad vial, capacidad de carga, llevar familia. Pero si tu uso es 90% solo y rutas urbanas, la cuenta cambia decisiones.'+
+        '</div>';
+    }
+  }
+  document.getElementById('comparativoTipos').innerHTML = html;
+}
+function renderWowFactorCarro(){
+  if (!ultimoCalc) return;
+  var c = ultimoCalc;
+  var totalPagado = c.cuota * c.plazoA * 12;
+  var intereses = totalPagado - (c.precio - c.inicial);
+  // Gancho
+  var gancho;
+  if (c.rotos === 0)        gancho = 'Cumples las 3 reglas. <em>Las matemáticas dicen sí.</em>';
+  else if (c.rotos >= 2)    gancho = 'A 7 años el carro vale la mitad <em>y todavía debes el 60%</em>.';
+  else if (c.pctIng > 15)   gancho = '15%+ del ingreso en algo que <em>deprecia 12% al año</em>.';
+  else                       gancho = 'El concesionario te muestra la cuota. <em>La cuenta real es 3× eso.</em>';
+  document.getElementById('ganchoCarro').innerHTML = gancho;
+  // Narrativa
+  var narr = 'El concesionario muestra la cuota: <span class="num">'+fmt(c.cuota)+'</span>. La cuenta REAL es <span class="num">'+fmt(c.costoMensualTotal)+'</span> al mes — porque suma SOAT, tecnomecánica, impuesto, seguro, mantenimiento, gasolina, parqueadero. Eso es <strong>'+c.pctIng.toFixed(1)+'%</strong> de tu ingreso.';
+  narr += '<br><br>En 4 años pagarás <span class="num">'+fmt(totalPagado)+'</span> por algo financiado con <span class="num">'+fmt(c.precio - c.inicial)+'</span>. Eso son <span class="num">'+fmt(intereses)+'</span> en intereses. Sumando depreciación (10-15% año), el costo neto a 4 años es <span class="num">'+fmt(c.costoNeto4)+'</span>.';
+  narr += '<br><br><strong>Regla 20/4/10:</strong><br>';
+  narr += '• 20% inicial: tu inicial es <strong>'+c.pctInicial.toFixed(1)+'%</strong> '+(c.pctInicial >= 20 ? '✓' : '✗')+'<br>';
+  narr += '• 4 años máximo: tu plazo es <strong>'+c.plazoA+' años</strong> '+(c.plazoA <= 4 ? '✓' : '✗')+'<br>';
+  narr += '• 10% del ingreso: tu costo es <strong>'+c.pctIng.toFixed(1)+'%</strong> '+(c.pctIng <= 10 ? '✓' : '✗');
+  document.getElementById('narrativaCarro').innerHTML = narr;
+  // Ahas
+  var ahas = [
+    '<div class="aha-card bad"><span class="aha-tag">real/mes</span><div class="aha-num">'+fmt(c.costoMensualTotal)+'</div><div class="aha-lbl">no la cuota — el costo total</div></div>',
+    '<div class="aha-card '+(c.pctIng > 12 ? 'bad' : c.pctIng > 8 ? '' : 'good')+'"><span class="aha-tag">% ingreso</span><div class="aha-num">'+c.pctIng.toFixed(0)+'%</div><div class="aha-lbl">comprometido en el carro</div></div>',
+    '<div class="aha-card bad"><span class="aha-tag">4 años</span><div class="aha-num">'+fmt(c.costoNeto4)+'</div><div class="aha-lbl">costo neto descontada reventa</div></div>'
+  ];
+  document.getElementById('ahaGridCarro').innerHTML = ahas.join('');
+  // Action ladder
+  var actions = c.rotos === 0 ? [
+    {h:'Cuenta los costos operativos antes de firmar', p:'Pide cotización del seguro todo riesgo (real, no del concesionario), confirma SOAT y mantenimiento programado. La cuota financiada es la mentira pequeña; los operativos son la mentira grande.'},
+    {h:'Reserva colchón para mantenimiento', p:'Aproximadamente <strong>'+fmt(Math.round(c.operativosMes*12))+'/año</strong> en operativos. Si pasas 12 meses sin tocarlo, sabes que la cuenta cuadró.'},
+    {h:'Plan de reventa al año 4-5', p:'El carro vale ~50% al año 4. Si lo necesitas seguir manejando, ya está pago. Estrategia ganadora vs financiar a 7 años.'}
+  ] : [
+    {h:'Vuelve a las cuentas con 20/4/10', p:'(a) inicial mayor (al menos 20%), (b) plazo de 4 años, (c) carro más barato. Una de las tres tiene que ceder.'},
+    {h:'Considera carro usado 2-3 años', p:'Pierde menos depreciación (los carros pierden 20-25% el primer año, 12-15% el segundo). Con 2 mecánicos previos: pagas la mitad por algo que ya tomó el golpe.'},
+    {h:'Si compras igual: prepárate', p:'5-7 años de cuotas, depreciación rápida y posible "deuda con carro vendido" si necesitas salir antes. Es viable, pero conoce el costo.'}
+  ];
+  document.getElementById('cardActionsCarro').style.display = 'block';
+  document.getElementById('actionLadderCarro').innerHTML = actions.map(function(a,i){
+    return '<div class="action-step"><div class="action-num">'+(i+1)+'</div><div class="action-body"><h4>'+a.h+'</h4><p>'+a.p+'</p></div></div>';
+  }).join('');
+  // Share card
+  var shareLine = c.rotos === 0
+    ? 'Cumplo las <em>3 reglas (20/4/10)</em>. Cuentas claras, no me arrepentiré.'
+    : c.rotos >= 2
+      ? 'Rompo <em>'+c.rotos+' de 3 reglas</em>. La trampa de la cuota cómoda a 7 años.'
+      : 'Rompo <em>1 regla</em>. Apretando, viable.';
+  document.getElementById('cardShareCarro').style.display = 'block';
+  document.getElementById('shareCardCarro').innerHTML =
+    '<div class="share-card-label">Mi análisis de carro</div>'+
+    '<div class="share-card-amount">'+fmt(c.costoMensualTotal)+'</div>'+
+    '<div class="share-card-line">'+shareLine+' Costo MENSUAL real ('+c.pctIng.toFixed(1)+'% del ingreso).</div>'+
+    '<div class="share-card-stats">'+
+      '<div class="share-card-stat">Cuota<strong>'+fmt(c.cuota)+'</strong></div>'+
+      '<div class="share-card-stat">Operativos<strong>'+fmt(c.operativosMes)+'</strong></div>'+
+      '<div class="share-card-stat">Costo 4y<strong>'+fmt(c.costoNeto4)+'</strong></div>'+
+    '</div>'+
+    '<div class="share-actions">'+
+      '<button onclick="copiarShareCarro()">📋 Copiar texto</button>'+
+    '</div>'+
+    '<div class="share-card-foot">exogenadian.com/puedo-comprar-carro</div>';
+}
+function copiarShareCarro(){
+  if (!ultimoCalc) return;
+  var c = ultimoCalc;
+  var txt = 'Mi análisis del carro\n';
+  txt += 'Costo mensual real: '+fmt(c.costoMensualTotal)+' ('+c.pctIng.toFixed(1)+'% del ingreso)\n';
+  txt += 'Reglas 20/4/10 cumplidas: '+(3-c.rotos)+' de 3\n';
+  txt += 'Costo neto 4 años: '+fmt(c.costoNeto4)+'\n';
+  txt += 'Calculado en exogenadian.com/puedo-comprar-carro';
+  if (navigator.clipboard) navigator.clipboard.writeText(txt).then(function(){ exoToast('Copiado al portapapeles', 'success'); });
+  if (typeof gtag !== 'undefined') gtag('event','carro_share',{tipo:'copy'});
+}
+function exportPDF(){
+  if (!ultimoCalc) return;
+  var c = ultimoCalc;
+  var totalPagado = c.cuota * c.plazoA * 12;
+  var intereses = totalPagado - (c.precio - c.inicial);
+  // Datos del tipo de motor + ciudad
+  var tipoActual = $('tipoMotor').value;
+  var t = TIPOS_MOTOR[tipoActual];
+  var ciudad = $('ciudad').value;
+  var cp = CIUDADES_PYP[ciudad];
+  var diasPYP = cp ? (t.esMoto ? cp.moto : (tipoActual==='electrico' ? cp.electrico : cp.gasolina)) : 0;
+  // Frase hero — más variantes según tipo
+  var fraseHero;
+  if (t.esMoto && t.label.indexOf('eléctrica')>=0)  fraseHero = { texto:'Moto eléctrica:\ncombustible 30× más barato que carro.', autor:'ExógenaDIAN' };
+  else if (t.esMoto)                                  fraseHero = { texto:'Moto: 4× más eficiente,\nsin pico y placa.', autor:'ExógenaDIAN' };
+  else if (tipoActual === 'electrico')                fraseHero = { texto:'Eléctrico subsidiado +\nexonerado pico y placa.', autor:'ExógenaDIAN' };
+  else if (c.rotos === 0)                             fraseHero = { texto:'Cumples las 3 reglas.\nLas matemáticas dicen sí.', autor:'ExógenaDIAN' };
+  else if (c.rotos >= 2)                              fraseHero = { texto:'A 7 años el carro vale la mitad\ny todavía debes el 60%.', autor:'ExógenaDIAN — sobre la regla 20/4/10' };
+  else if (c.pctIng > 15)                             fraseHero = { texto:'15%+ de tu ingreso en algo\nque deprecia 12% al año.', autor:'ExógenaDIAN' };
+  else                                                fraseHero = { texto:'El concesionario te muestra la cuota.\nLa cuenta real es 3× eso.', autor:'ExógenaDIAN' };
+  // Narrativa
+  var narrativa = 'El concesionario te muestra la cuota: '+fmt(c.cuota)+'. La cuenta REAL del carro mensual es '+fmt(c.costoMensualTotal)+' — porque a la cuota le sumas SOAT, tecnomecánica, impuesto vehicular, seguro todo riesgo, mantenimiento, gasolina, parqueadero. Eso es '+c.pctIng.toFixed(1)+'% de tu ingreso mensual.';
+  narrativa += '\n\nEn 4 años pagarás '+fmt(totalPagado)+' por un activo que financiaste con '+fmt(c.precio - c.inicial)+'. Eso es '+fmt(intereses)+' en intereses. Sumando la depreciación (10-15% al año el carro pierde valor), el costo neto a 4 años (descontando la reventa) es '+fmt(c.costoNeto4)+'.';
+  narrativa += '\n\nLa regla 20/4/10:\n• 20% inicial mínimo: tu inicial es '+c.pctInicial.toFixed(1)+'% '+(c.pctInicial >= 20?'✓':'✗')+'\n• 4 años máximo plazo: tu plazo es '+c.plazoA+' años '+(c.plazoA <= 4?'✓':'✗')+'\n• 10% del ingreso máximo (cuota+seguro+mant.): tu costo es '+c.pctIng.toFixed(1)+'% '+(c.pctIng <= 10?'✓':'✗');
+  if (c.rotos === 0) narrativa += '\n\nLas 3 reglas se cumplen. Si la cuenta cuadra contigo, adelante.';
+  else if (c.rotos === 1) narrativa += '\n\nCumples 2 de 3. Apretando, viable. Considera bajar el precio o subir la inicial.';
+  else narrativa += '\n\nRompes '+c.rotos+' de 3 reglas. Esto es zona de arrepentimiento financiero. La regla práctica que minimiza arrepentimiento existe por algo.';
+  // Ahas
+  var ahas = [
+    { num: fmt(c.costoMensualTotal), label: 'costo MENSUAL real (no la cuota)', tipo: 'bad' },
+    { num: c.pctIng.toFixed(0)+'%', label: 'de tu ingreso comprometido', tipo: c.pctIng > 12 ? 'bad' : c.pctIng > 8 ? 'neutro' : 'good' },
+    { num: fmt(c.costoNeto4), label: 'costo neto a 4 años (descontada reventa)', tipo: 'bad' }
+  ];
+  // Plan
+  var plan = c.rotos === 0 ? {
+    p30: 'Antes de firmar: pide cotización del seguro todo riesgo (real, no del concesionario), confirma SOAT y mantenimiento programado. La cuota financiada es la mentira pequeña; los costos operativos son la mentira grande.',
+    p12m: 'Mantén el fondo de imprevistos para mantenimiento y SOAT — '+fmt(Math.round(c.operativosMes*12))+' al año. Si pasas 12 meses sin tocarlo, sabes que la cuenta cuadró.',
+    p5y: 'Al año 4-5, el carro vale ~50%. Si lo necesitas seguir manejando, ya está pago. Si lo vendes, tienes capital para el próximo. Estrategia ganadora vs financiar a 7 años.'
+  } : {
+    p30: 'Antes de firmar nada: vuelve a hacer las cuentas con (a) inicial mayor (al menos 20%), (b) plazo de 4 años, (c) carro más barato. Una de las tres tiene que ceder. La cuota cómoda a 7 años es la trampa.',
+    p12m: 'Si no puedes ajustar a 20/4/10, considera carro usado de 2-3 años (pierde menos depreciación) o aplazar la compra hasta tener 20-25% de inicial. La diferencia entre comprar bien y mal es la primera financiación.',
+    p5y: 'Si compras igual rompiendo reglas: prepárate para 5-7 años de cuotas, depreciación rápida y posible "deuda con carro vendido" si necesitas salir antes. Es viable, pero conoce el costo.'
+  };
+  // Consejos
+  var consejos = [
+    {
+      titulo: 'Costo total ownership (TCO) ≠ cuota',
+      impacto: 'Visión real',
+      desc: 'Cuota financiación + SOAT + tecnomecánica + impuesto vehicular ('+(1.5).toFixed(1)+'-'+(3.5).toFixed(1)+'% del avalúo/año) + seguro todo riesgo (~4% del valor) + mantenimiento + gasolina + parqueadero + depreciación. Concesionario muestra solo la primera línea.'
+    },
+    {
+      titulo: 'Carro usado 2-3 años: la mejor relación',
+      impacto: '−30% precio · −5% depreciación',
+      desc: 'Los carros pierden 20-25% el primer año, 12-15% el segundo. Comprar con 2-3 años usado, en buen estado y con historia: pagas la mitad por algo que ya tomó el golpe principal de depreciación. Verificar 2 mecánicos antes de cerrar.'
+    },
+    {
+      titulo: 'Inicial alta es la palanca más subestimada',
+      impacto: '−$X intereses totales',
+      desc: 'Cada punto adicional de inicial reduce los intereses totales en una proporción mayor a uno. 30% inicial vs 20% inicial sobre $50M es ~$3M menos en intereses a 4 años. Si puedes esperar 6 meses para juntar más inicial, hazlo.'
+    },
+    {
+      titulo: 'Si te ofrecen 7 años de plazo, di no',
+      impacto: 'Trampa típica',
+      desc: 'A 7 años la cuota se ve cómoda. Pero al año 3 el carro vale ~50% y todavía debes ~60%. Si lo vendes, no alcanza para liquidar. Te quedas con deuda y sin carro. Plazo máximo: 4 años. Si no cabe en 4 años, no cabe.'
+    }
+  ];
+  // Frase nevera
+  var fraseNevera = c.rotos >= 2 ? {
+    texto: 'Nadie se impresiona con tus posesiones\ntanto como tú lo crees.',
+    autor: 'Morgan Housel — La psicología del dinero'
+  } : c.pctIng > 12 ? {
+    texto: 'El precio es lo que pagas.\nEl valor es lo que recibes.',
+    autor: 'Warren Buffett'
+  } : {
+    texto: 'El oro huye del que lo persigue\ncon avaricia, o del que sigue\nconsejos sentimentales.',
+    autor: 'George S. Clason — El hombre más rico de Babilonia'
+  };
+  // Inputs y resultados
+  var inputs = [
+    ['Tipo de vehículo', t.icon+' '+t.nombre],
+    ['Ingreso mensual', fmt(c.ingreso)],
+    ['Valor del vehículo', fmt(c.precio)],
+    ['Inicial', fmt(c.inicial)+' ('+c.pctInicial.toFixed(1)+'%)'],
+    ['Plazo financiación', c.plazoA+' años'],
+    ['Tasa E.A.', c.tasa.toFixed(2)+'%'],
+    ['Ciudad', cp?cp.n:'—'],
+    ['Km/año', (numKm('kmAnio')||15000).toLocaleString('es-CO')]
+  ];
+  var resultados = [
+    ['Cuota financiación mensual', fmt(c.cuota)],
+    ['Operativos mensuales (SOAT, seguro, mant., combustible)', fmt(c.operativosMes)],
+    ['Costo mensual total real', fmt(c.costoMensualTotal)],
+    ['% del ingreso comprometido', c.pctIng.toFixed(1)+'%'],
+    ['Total pagado en '+c.plazoA+' años', fmt(totalPagado)],
+    ['Intereses pagados', fmt(intereses)],
+    ['Costo neto a 4 años (descontada reventa)', fmt(c.costoNeto4)],
+    ['Pico y placa en '+(cp?cp.n:'tu ciudad'), diasPYP+' días/año' + (diasPYP===0?' (exonerado)':'')]
+  ];
+  // Anexo: comparativo entre tipos de motor (calcular aquí porque exportFinanzasReporte lo usa)
+  var anexoItems = [];
+  Object.keys(TIPOS_MOTOR).forEach(function(key){
+    var ti = TIPOS_MOTOR[key];
+    var precioEq = precioEquivalente(key, c.precio);
+    var kmAnio = numKm('kmAnio') || 15000;
+    var combAnio = getCombustibleAnio(key, kmAnio);
+    var operativosAnio = ti.soatBase + Math.round(precioEq*ti.pctImpuesto) + (ti.esMoto?120000:200000) + Math.round(precioEq*ti.pctSeguro) + ti.manttoAnio + combAnio;
+    var depEffPct = key==='electrico'?15:(ti.esMoto?15:c.operativos.depPct);
+    var valor5y = precioEq * Math.pow(1-depEffPct/100,5);
+    var total5y = (precioEq - valor5y) + operativosAnio*5;
+    anexoItems.push([(key===tipoActual?'⭐ ':'')+ti.icon+' '+ti.nombre+' ('+fmt(precioEq)+')', fmt(total5y)+' / 5 años']);
+  });
+  exportFinanzasReporte({
+    titulo: '¿Puedo comprar '+(t.esMoto?'moto':'carro')+'?',
+    slug: 'puedo-comprar-'+(t.esMoto?'moto':'carro'),
+    subtitulo: t.icon+' '+t.nombre+' · Regla 20/4/10 + comparativo entre 6 tipos de vehículo',
+    hero: {
+      label: c.rotos === 0 ? 'Cumples 3 de 3 reglas' : 'Rompes '+c.rotos+' de 3 reglas',
+      valor: fmt(c.costoMensualTotal),
+      subvalor: 'costo MENSUAL real · '+c.pctIng.toFixed(1)+'% del ingreso · '+c.plazoA+' años plazo · '+(diasPYP===0?'sin pico y placa':diasPYP+' días/año pico y placa')
+    },
+    fraseHero: fraseHero,
+    inputs: inputs,
+    resultados: resultados,
+    narrativa: narrativa,
+    ahas: ahas,
+    plan: plan,
+    consejos: consejos,
+    anexo: {
+      titulo: 'Comparativo total 5 años — los 6 tipos de vehículo',
+      items: anexoItems
+    },
+    fraseNevera: fraseNevera,
+    fuente: 'Regla 20/4/10 | Ley 1964/2019 (BEV) | Decreto 1077/2023 (HEV) | Decreto 048/2024 (Bogotá pico y placa) | Impuesto vehicular 0.75-3.5% según tipo'
+  });
+}
+function exportExcel(){
+  if (!ultimoCalc) return;
+  var c = ultimoCalc;
+  exportFinanzasExcel({
+    titulo: 'Compra de carro', slug:'puedo-comprar-carro',
+    inputs: [['Precio', c.precio],['Inicial', c.inicial],['Plazo', c.plazoA+' años'],['Tasa', c.tasa.toFixed(2)+'%']],
+    resultados: [
+      ['Cuota mensual', c.cuota],['Operativos mes', c.operativosMes],
+      ['Costo total mes', c.costoMensualTotal],['% ingreso', c.pctIng.toFixed(1)+'%'],
+      ['Costo neto 4 años', Math.round(c.costoNeto4)]
+    ],
+    destacado: { label:'COSTO MENSUAL', valor: c.costoMensualTotal },
+    interpretacion: c.rotos === 0 ? 'Cumple 20/4/10' : 'Rompe '+c.rotos+' reglas',
+    fuente: 'Compra de carro — '+new Date().toLocaleDateString('es-CO')
+  });
+}
+</script>
+</body>
+</html>

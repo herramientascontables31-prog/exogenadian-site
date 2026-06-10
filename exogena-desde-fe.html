@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#1B3A5C">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Generador Exógena desde Reporte FE del MUISCA — F1001 + F1005 + F1006 + F1007 | ExógenaDIAN</title>
+<meta name="description" content="Sube el reporte de facturación electrónica del MUISCA y genera los formatos F1001 (pagos a terceros), F1005 (IVA descontable), F1006 (IVA generado) y F1007 (ingresos brutos) listos para el Prevalidador DIAN. Sin balance contable. Gratis, en tu navegador.">
+<meta name="keywords" content="exógena desde MUISCA, FE DIAN exógena, F1001 desde facturación electrónica, F1005 F1006 RADIAN, generador exógena 2026">
+<link rel="canonical" href="https://exogenadian.com/exogena-desde-fe.html">
+<meta property="og:title" content="Exógena desde reporte FE del MUISCA | ExógenaDIAN">
+<meta property="og:description" content="Sube el listado FE/RADIAN del MUISCA y obtén F1001 + F1005 + F1006 listos para el Prevalidador DIAN.">
+<meta property="og:url" content="https://exogenadian.com/exogena-desde-fe.html">
+<meta property="og:type" content="website"><meta property="og:locale" content="es_CO"><meta property="og:site_name" content="ExógenaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png">
+<meta name="robots" content="index, follow">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://exogenadian.com/"},{"@type":"ListItem","position":2,"name":"Exógena","item":"https://exogenadian.com/exogena-suite.html"},{"@type":"ListItem","position":3,"name":"Desde reporte FE del MUISCA","item":"https://exogenadian.com/exogena-desde-fe.html"}]}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--green:#059669;--green2:#ECFDF5;--green3:#D1FAE5;--red:#DC2626;--amber:#D97706;--amber2:#FFF8E1;--amber3:#FEF3C7;--border:#e2e8f0;--radius:10px;--shadow:0 2px 12px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+.container{max-width:980px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#1B3A5C 0%,#2E75B6 100%);padding:28px 32px;border-radius:16px;margin-bottom:24px;color:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.header h1{font-size:1.45rem;font-weight:700;display:flex;align-items:center;gap:10px}
+.header h1 span{font-size:1.5rem}
+.header p{opacity:.85;font-size:.83rem;margin-top:4px}
+.header-right{text-align:right;font-size:.78rem;opacity:.75}
+.badge-ley{display:inline-block;background:rgba(16,185,129,.2);color:#6EE7B7;padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:700;margin-top:6px}
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:24px;margin-bottom:20px;box-shadow:var(--shadow)}
+.card-title{font-size:1rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px;color:var(--pri)}
+.section-divider{height:1px;background:var(--border);margin:18px 0}
+.form-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:4px}
+.form-group label{font-size:.76rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+.form-group input,.form-group select{padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.92rem;font-family:'DM Sans',sans-serif;transition:.2s}
+.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--pri2);box-shadow:0 0 0 3px rgba(46,117,182,.12)}
+.form-group .hint{font-size:.68rem;color:var(--muted)}
+.drop-zone{border:2px dashed var(--border);border-radius:var(--radius);padding:36px 24px;text-align:center;cursor:pointer;transition:.2s;display:block;background:#fafbfc}
+.drop-zone:hover,.drop-zone.drag{border-color:var(--pri2);background:var(--pri3)}
+.drop-zone-input{display:none}
+.drop-zone .ico{font-size:2rem;margin-bottom:8px;opacity:.6}
+.drop-zone .ttl{font-weight:700;color:var(--pri);font-size:.92rem;margin-bottom:4px}
+.drop-zone .sub{font-size:.78rem;color:var(--muted)}
+.alert{padding:10px 14px;border-radius:8px;font-size:.82rem;margin:10px 0;display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.alert-info{background:var(--pri3);color:var(--pri);border:1px solid #B4C6E7}
+.alert-warn{background:var(--amber3);color:#92400E;border:1px solid #FDE68A}
+.alert-ok{background:var(--green3);color:#065F46;border:1px solid #6EE7B7}
+.btn{padding:11px 24px;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:.9rem;font-family:inherit;transition:.15s;display:inline-flex;align-items:center;gap:6px}
+.btn-blue{background:var(--pri2);color:#fff}.btn-blue:hover{background:var(--pri)}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#047857}
+.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--text)}.btn-outline:hover{border-color:var(--pri2);color:var(--pri2)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}
+.kpi{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:14px;text-align:center}
+.kpi .val{font-size:1.15rem;font-weight:700;font-family:'JetBrains Mono',monospace}
+.kpi .lbl{font-size:.68rem;color:var(--muted);font-weight:600;text-transform:uppercase;margin-top:4px}
+.kpi.green .val{color:var(--green)}
+.kpi.blue .val{color:var(--pri2)}
+.kpi.red .val{color:var(--red)}
+.preview-table{width:100%;border-collapse:collapse;font-size:.78rem;margin-top:8px}
+.preview-table th{background:var(--pri);color:#fff;padding:6px 10px;text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.3px}
+.preview-table td{padding:6px 10px;border-bottom:1px solid var(--border)}
+.preview-table td.num{text-align:right;font-family:'JetBrains Mono',monospace}
+.disclaimer{margin-top:14px;padding:12px 16px;background:var(--amber2);border:1px solid #FDE68A;border-radius:8px;font-size:.74rem;color:#92400E;line-height:1.6}
+.normativa-list{margin-top:16px;padding:12px 16px;background:#F9FAFB;border:1px solid var(--border);border-radius:8px;font-size:.78rem;color:var(--muted);line-height:1.7}
+.tabs{display:flex;gap:6px;margin-bottom:10px;border-bottom:1px solid var(--border)}
+.tab-btn{padding:8px 14px;border:none;background:transparent;color:var(--muted);font-weight:600;cursor:pointer;font-family:inherit;font-size:.82rem;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tab-btn.active{color:var(--pri);border-bottom-color:var(--pri2)}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+@media(max-width:768px){
+  .header{flex-direction:column;text-align:center;padding:22px 18px}.header-right{text-align:center}
+  .form-grid{grid-template-columns:1fr}
+  .container{padding:12px}
+  .kpis{grid-template-columns:1fr 1fr}
+  .preview-table{font-size:.68rem}.preview-table th,.preview-table td{padding:4px 6px}
+}
+@media print{
+  @page{margin:10mm}
+  body{background:#fff;margin:0;padding:0}
+  body > *:not(.container){display:none!important}
+  .container{max-width:100%;padding:0;margin:0}
+  .actions,.btn,button,.tab-btn,.no-print{display:none!important}
+  .header{background:#1B3A5C!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card{box-shadow:none!important;border:1px solid #ccc!important;page-break-inside:avoid}
+}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div id="nav-container"></div>
+<script defer src="shared/pro.js?v=848fbf16"></script>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<script defer src="shared/pro-banner.js?v=a5944c54"></script>
+<div class="container">
+<a href="exogena-suite.html" style="display:inline-flex;align-items:center;gap:6px;font-size:.85rem;color:var(--muted);text-decoration:none;margin-bottom:10px">&larr; Sitio Exógena</a>
+<div class="header">
+  <div>
+    <h1><span>📥</span> Exógena desde reporte FE del MUISCA</h1>
+    <p>Sube el listado de facturación electrónica del MUISCA y obtén F1001 + F1005 + F1006 + F1007 listos para el Prevalidador DIAN.</p>
+    <div class="badge-ley">Sin balance contable · 100% en tu navegador</div>
+  </div>
+  <div class="header-right">
+    <div id="proBadge"></div>
+    UVT 2026 $52.374<br>AG 2025 v10/v9/v8
+  </div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:10px 18px;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+  <span style="font-size:.83rem;color:var(--muted)" id="proStatus">🔒 Vista en pantalla gratis · Descarga Excel para Prevalidador requiere PRO</span>
+  <div id="proActivation" style="display:flex;align-items:center;gap:6px">
+    <input type="email" id="proKeyInput" placeholder="Email PRO" style="padding:6px 12px;border:1.5px solid #cbd5e1;border-radius:8px;font-size:.82rem;width:160px;background:#f8fafc;font-family:inherit">
+    <button onclick="activarPro()" style="padding:6px 14px;font-size:.8rem;background:#059669;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap">Activar</button>
+    <a href="precios.html" style="font-size:.78rem;color:var(--pri2);text-decoration:none;white-space:nowrap" title="PRO $49.900/mes">¿Sin PRO? Ver planes →</a>
+  </div>
+</div>
+<div style="margin-bottom:16px;padding:16px 18px;background:#FEF2F2;border:2px solid #FCA5A5;border-radius:12px;color:#7F1D1D;font-size:.9rem;line-height:1.6">
+  <div style="font-weight:800;font-size:1.05rem;color:#991B1B;margin-bottom:8px">⚠️ Esta NO es la forma correcta de armar la exógena</div>
+  <p style="margin:0 0 8px"><strong>Solo úsala si:</strong> tu empresa no lleva contabilidad o <strong>perdiste los registros contables</strong> (incendio, robo de equipos, software contable extinto, cierre del proveedor que llevaba los libros) y aun así estás obligado a presentar la información exógena en plazo.</p>
+  <p style="margin:0 0 8px"><strong>Por qué es último recurso:</strong> la exógena se construye desde el <strong>balance contable</strong> con auxiliares por tercero, no desde la facturación electrónica. La FE/MUISCA no incluye nómina, importaciones, dividendos recibidos, retenciones practicadas, anticipos, ni operaciones sin documento electrónico. Este atajo siempre da formatos <strong>incompletos</strong> que el contador debe ajustar manualmente fila por fila.</p>
+  <p style="margin:0;font-weight:700">Si tienes contabilidad, usa el <a href="exogena.html" style="color:#991B1B;text-decoration:underline">generador desde balance</a> (kit completo, F1001/1005/1006/1007/1011/1647/2275/4204/5253 desde un Excel).</p>
+</div>
+<div class="card">
+  <div class="card-title">📋 Datos del declarante</div>
+  <div class="form-grid">
+    <div class="form-group">
+      <label>NIT del declarante (sin DV)</label>
+      <input type="text" id="iNit" placeholder="900123456" inputmode="numeric">
+      <span class="hint">Tu NIT, no el del proveedor</span>
+    </div>
+    <div class="form-group">
+      <label>Razón social del declarante</label>
+      <input type="text" id="iRazon" placeholder="Mi Empresa S.A.S.">
+    </div>
+    <div class="form-group">
+      <label>Año gravable</label>
+      <select id="iAnio">
+        <option value="2025" selected>2025 (vence 2026)</option>
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+      </select>
+    </div>
+  </div>
+  <details style="margin-top:14px;background:#F9FAFB;border:1px solid var(--border);border-radius:8px;padding:10px 14px">
+    <summary style="cursor:pointer;font-weight:600;font-size:.88rem;color:var(--text)">📍 Dirección por defecto para el F1001 (opcional)</summary>
+    <div style="margin-top:10px;font-size:.82rem;color:var(--muted);line-height:1.5;margin-bottom:12px">
+      Si tu maestro de terceros no tiene dirección de algún proveedor, se rellena con esta dirección. Útil para no dejar columnas vacías que el Prevalidador pueda marcar.
+      <div style="margin-top:8px;padding:8px 12px;background:#FEF3C7;border:1px solid #FDE68A;border-radius:6px;color:#92400E;font-size:.78rem">
+        <strong>Aclaración legal:</strong> según el artículo 631-3 ET y las resoluciones anuales de exógena, la dirección del F1001 debe ser la del <strong>tercero</strong> (proveedor), no la del declarante. En la práctica muchos contadores rellenan con una dirección genérica cuando no tienen la real porque el Prevalidador no rechaza el archivo. Si te lo solicita la DIAN en una revisión, debes poder probar la dirección del tercero. <strong>Recomendado:</strong> usa el maestro de terceros con direcciones reales siempre que sea posible y deja este default solo para los casos sin información.
+      </div>
+    </div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Dirección</label>
+        <input type="text" id="iDirDef" placeholder="CL 100 # 15-20" maxlength="100">
+      </div>
+      <div class="form-group">
+        <label>Cód Depto (2 dígitos)</label>
+        <input type="text" id="iDpDef" placeholder="11" inputmode="numeric" maxlength="2">
+        <span class="hint">Ej: 05 Antioquia, 11 Bogotá, 76 Valle</span>
+      </div>
+      <div class="form-group">
+        <label>Cód Municipio (3 dígitos)</label>
+        <input type="text" id="iMpDef" placeholder="001" inputmode="numeric" maxlength="3">
+        <span class="hint">Ej: 001 capital del depto</span>
+      </div>
+    </div>
+  </details>
+</div>
+<div class="card">
+  <div class="card-title">📁 Reporte de facturación electrónica del MUISCA</div>
+  <p style="font-size:.85rem;color:var(--muted);margin-bottom:12px">Descarga del MUISCA: <strong>RADIAN → Reporte de documentos electrónicos → Excel</strong>. El archivo debe traer una columna <em>Grupo</em> (Emitidos / Recibidos) o cárgalos por separado abajo.</p>
+  <input type="file" accept=".xlsx,.xls,.csv" id="fileFE" class="drop-zone-input" onchange="loadFE(event,'unico')">
+  <label class="drop-zone" id="dzFE" for="fileFE">
+    <div class="ico">📥</div>
+    <div class="ttl">Arrastra el reporte FE aquí o haz click para seleccionar</div>
+    <div class="sub">Excel del MUISCA (.xlsx). Se procesa 100% en tu navegador.</div>
+    <div class="sub" id="fileFEStatus" style="margin-top:6px;font-weight:700;color:var(--green)"></div>
+  </label>
+  <div id="parseInfo" style="display:none">
+    <div class="alert alert-ok" id="parseOk"></div>
+    <div class="kpis" id="kpis"></div>
+  </div>
+  <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+    <button class="btn btn-blue" onclick="generarFormatos()" id="btnGen" style="flex:1;justify-content:center;padding:13px;font-size:1rem" disabled>Generar F1001 + F1005 + F1006 + F1007</button>
+    <button class="btn btn-outline" onclick="resetTodo()">Limpiar</button>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">📇 Maestro de terceros (opcional)</div>
+  <p style="font-size:.85rem;color:var(--muted);margin-bottom:12px">El reporte FE del MUISCA <strong>no trae direcciones ni apellidos separados</strong>. Sube tu maestro de terceros para que los formatos generados queden completos y evitar rechazo del Prevalidador.</p>
+  <div style="background:linear-gradient(135deg,#EFF6FF 0%,#E0ECFF 100%);border:2px dashed #3B82F6;border-radius:12px;padding:18px 20px;margin-bottom:12px;text-align:center">
+    <div style="font-size:1.6rem;margin-bottom:4px">📥</div>
+    <input type="file" id="baseTercInput" accept=".xlsx,.xls,.csv" style="display:none" onchange="procesarMaestroTerceros(event)">
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px">
+      <button class="btn btn-blue" onclick="document.getElementById('baseTercInput').click()" style="padding:10px 22px;font-size:.9rem">📂 Subir maestro de terceros</button>
+      <button class="btn btn-outline" onclick="descargarPlantillaTerceros()" title="Plantilla con los NITs del reporte FE ya pre-llenados" style="padding:10px 22px;font-size:.9rem">📥 Descargar plantilla</button>
+    </div>
+    <div id="baseTercStatus" style="margin-top:10px;font-size:.82rem;color:#374151;min-height:1em"></div>
+    <details style="margin-top:8px;text-align:left;font-size:.78rem;background:#fff;border:1px solid #DBEAFE;border-radius:8px;padding:8px 12px;max-width:640px;margin-left:auto;margin-right:auto">
+      <summary style="cursor:pointer;font-weight:600;color:#1E40AF;text-align:center">📖 Formato del archivo</summary>
+      <div style="margin-top:10px;color:#1e3a5f;line-height:1.6">
+        Excel/CSV con columnas (orden libre, se autodetectan):<br><br>
+        &bull; <strong>NIT / Identificación</strong> (obligatoria)<br>
+        &bull; <strong>1er Apellido, 2do Apellido, 1er Nombre, 2do Nombre</strong> — para personas naturales<br>
+        &bull; <strong>Razón Social</strong> — para personas jurídicas<br>
+        &bull; <strong>Dirección</strong><br>
+        &bull; <strong>Cód Depto</strong> (2 dígitos: 05, 11, 76&hellip;)<br>
+        &bull; <strong>Cód Municipio</strong> (3 dígitos: 001, 754&hellip;)<br><br>
+        <em>Tip:</em> usa <strong>📥 Descargar plantilla</strong> — viene con tus NITs del FE ya pre-llenados.<br>
+        <em>Nota:</em> Solo se actualizan los NITs del reporte. Los demás se ignoran.
+      </div>
+    </details>
+  </div>
+</div>
+<div id="resultados" class="card" style="display:none">
+  <div class="card-title">📊 Vista previa de los formatos</div>
+  <div class="tabs" id="tabsBar"></div>
+  <div id="tabsContent"></div>
+  <div style="margin:16px 0;padding:16px 18px;background:linear-gradient(135deg,#FEF2F2,#FFFBEB);border:2px solid #FCA5A5;border-radius:12px;color:#7F1D1D;font-size:.9rem;line-height:1.6">
+    <div style="font-weight:800;font-size:1.05rem;color:#991B1B;margin-bottom:8px">⚠️ De "hacer" a "revisar" — el rol del contador</div>
+    <p style="margin:0 0 10px">La automatización cambia el oficio: lo que antes tomaba días digitar, hoy se calcula en segundos. Tu valor profesional está en lo que la máquina no puede hacer: <strong>aplicar criterio</strong>.</p>
+    <p style="margin:0 0 8px;font-weight:700">Antes de subir estos formatos al Prevalidador:</p>
+    <ul style="margin:0 0 10px 22px;padding:0">
+      <li>Cruza cada NIT y concepto con tus soportes contables</li>
+      <li>Revisa que los <strong>conceptos por defecto</strong> (5004 honorarios en F1001 · 4001 ingresos operacionales en F1007) correspondan a la actividad real de cada operación</li>
+      <li>Recuerda que la FE NO incluye nómina, importaciones, dividendos recibidos, retenciones practicadas — esos formatos van aparte desde tu balance</li>
+      <li>Firma con conocimiento, no por confianza ciega en el algoritmo</li>
+    </ul>
+    <p style="margin:0;font-weight:700;font-style:italic">La responsabilidad legal es del contador, no de la herramienta.</p>
+  </div>
+  <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+    <button class="btn btn-green" onclick="descargarExcel()">⬇️ Descargar Excel para Prevalidador <span style="font-size:.65rem;background:rgba(255,255,255,.3);padding:1px 6px;border-radius:4px;margin-left:4px">PRO</span></button>
+    <button class="btn btn-outline" onclick="window.print()">🖨️ Imprimir vista (Ctrl+P) — gratis</button>
+  </div>
+  <div class="disclaimer">
+    <strong>⚠️ Antes de presentar — revisar conceptos por defecto:</strong> el F1001 trae <code>5004</code> (honorarios y servicios) y el F1007 trae <code>4001</code> (ingresos brutos operacionales). Si tu actividad real es distinta (compras de inventario 5005, arrendamientos 5006, ingresos no operacionales 4002, dividendos 4004, etc.), ajusta la columna <em>Concepto</em> en el Excel o en el Prevalidador.
+  </div>
+</div>
+<div id="formatosFaltantes" class="card" style="display:none;border-left:4px solid #F59E0B">
+  <div class="card-title"><span>📋</span> Formatos básicos que aún debes diligenciar</div>
+  <p style="font-size:.86rem;color:var(--muted);margin-bottom:14px">Estos formatos <strong>no se pueden derivar del reporte FE</strong> porque su información viene de tu balance, libros auxiliares, nómina o certificados externos. Tu obligación con la DIAN exige presentarlos junto con los que esta herramienta ya generó.</p>
+  <div style="overflow-x:auto;max-width:100%">
+    <table class="preview-table">
+      <thead><tr><th>Formato</th><th>Qué reporta</th><th>De dónde sale</th></tr></thead>
+      <tbody>
+        <tr><td><strong>F1003</strong></td><td>Retenciones que te practicaron tus clientes (renta, IVA, ICA)</td><td>Certificados de retención que recibes de tus clientes</td></tr>
+        <tr><td><strong>F1004</strong></td><td>Descuentos tributarios (donaciones, IVA bienes de capital, etc.)</td><td>Tu información — depende de los descuentos que tomaste</td></tr>
+        <tr><td><strong>F1008</strong></td><td>Cuentas por cobrar a 31-dic</td><td>Saldo de las cuentas 13xx del balance</td></tr>
+        <tr><td><strong>F1009</strong></td><td>Cuentas por pagar a 31-dic</td><td>Saldo de las cuentas 22xx, 23xx del balance</td></tr>
+        <tr><td><strong>F1010</strong></td><td>Socios y accionistas con su participación</td><td>Tu libro de accionistas</td></tr>
+        <tr><td><strong>F1011</strong></td><td>Información tributaria adicional (patrimonio, ingresos no constitutivos, etc.)</td><td>Tu información tributaria</td></tr>
+        <tr><td><strong>F1012</strong></td><td>Saldos en bancos, inversiones, patrimonio a 31-dic</td><td>Cuentas 11xx, 12xx, 3xxx del balance</td></tr>
+        <tr><td><strong>F2276</strong></td><td>Ingresos y retenciones de empleados</td><td>Tu nómina del año</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="margin-top:14px;padding:12px 16px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;font-size:.84rem;color:#1e3a5f;line-height:1.6">
+    <strong>💡 Atajo:</strong> el <a href="exogena.html" style="color:#1E40AF;font-weight:700">generador desde balance</a> arma automáticamente F1004, F1008, F1009, F1010, F1011 y F1012 cuando subes tu balance de prueba. F2276 lo hace el <a href="nomina-masiva.html" style="color:#1E40AF;font-weight:700">liquidador de nómina por Excel</a>. El F1003 sí o sí debes armarlo a mano con los certificados de tus clientes.
+  </div>
+</div>
+<div class="card" style="border-left:4px solid #2E75B6">
+  <div class="card-title"><span>📚</span> Cómo se construye cada formato</div>
+  <p style="font-size:.85rem;color:var(--muted);margin-bottom:14px">El reporte MUISCA trae <strong>una fila por documento electrónico</strong> (factura, nota crédito, nota débito, documento soporte) con: tipo de documento, código, folio, fecha, NIT y nombre del emisor, NIT y nombre del receptor, IVA y total. La calculadora detecta automáticamente las columnas y separa así:</p>
+  <ul style="font-size:.85rem;color:var(--text);margin:0 0 14px 22px;line-height:1.7">
+    <li><strong>Facturas Electrónicas emitidas (FE ventas)</strong> → F1006 (IVA generado) + F1007 (ingresos brutos)</li>
+    <li><strong>Facturas Electrónicas recibidas (FE compras)</strong> → F1001 (pagos a terceros) + F1005 (IVA descontable)</li>
+    <li><strong>Documentos Soporte (DS, tipo 05) — compras a no obligados a facturar</strong> → F1001 + F1005 también, aunque MUISCA los marque "Emitidos" porque tú los emites para documentar la compra. <strong>NUNCA</strong> van a F1006/F1007.</li>
+    <li><strong>Nómina electrónica</strong> → se excluye (va al F2276 con tratamiento distinto)</li>
+  </ul>
+  <p style="font-size:.85rem;color:var(--muted);margin-bottom:14px">Las <strong>notas crédito</strong> se detectan por código DIAN 91, texto "NC" o IVA negativo. Las <strong>Notas de Ajuste al DS (tipo 95)</strong> siguen al DS original como compra.</p>
+  <details open style="background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:10px">
+    <summary style="cursor:pointer;font-weight:700;color:var(--pri);outline:none">📑 F1001 — Pagos y abonos en cuenta a terceros</summary>
+    <div style="margin-top:10px;font-size:.84rem;line-height:1.65">
+      <p><strong>Qué incluye desde la FE:</strong> todos los <strong>documentos recibidos</strong> que están en el reporte del MUISCA (Facturas Electrónicas + Documentos Soporte con no obligados + Facturas de contingencia + POS electrónicos + peajes + transporte aéreo). Si el documento está en el listado MUISCA es porque ya es electrónico válido. Agrupa por NIT del proveedor y suma el valor antes de IVA.</p>
+      <p><strong>Qué excluye:</strong> solamente nómina electrónica (va al F2276 con tratamiento distinto).</p>
+      <p><strong>Concepto:</strong> en el panel de resultados puedes <strong>cambiar el concepto por cada NIT</strong> con un dropdown editable (5004 honorarios, 5005 servicios, 5010 compra de inventarios, 5008 activos fijos, 5006 arrendamientos, etc.) y también ajustar el <strong>concepto por defecto</strong> que se aplica a todos. Si un NIT no debe ir a F1001 (anticipos, transferencias internas, pago a la propia empresa) puedes excluirlo con un click.</p>
+      <p><strong>Tope:</strong> se aplica el mínimo de 3 UVT por NIT ($157.122 con UVT 2026). Los proveedores bajo el tope (sin retenciones) se <strong>agrupan automáticamente en el NIT genérico <code>222222222</code> "CUANTIAS MENORES" tipo doc 43</strong>, según cartilla DIAN. Los proveedores con retenciones se reportan siempre con su NIT real.</p>
+      <div style="background:#FEF3C7;border:1px solid #FDE68A;border-radius:8px;padding:10px 12px;margin-top:10px;color:#92400E;font-size:.82rem">
+        <strong>⚠ Lo que NO está en el F1001 derivado de FE:</strong>
+        <ul style="margin:6px 0 0 18px;line-height:1.7">
+          <li>Pagos de nómina al empleado (van al F2276 desde nómina electrónica o balance)</li>
+          <li>GMF (4×1000) — concepto 5101, va al NIT del banco</li>
+          <li>Depreciaciones de activos (5160/5260) — sin tercero ni concepto en cartilla</li>
+          <li>Amortizaciones (5165/5265) — concepto 5019 al NIT del declarante</li>
+          <li>Donaciones, multas, provisiones — no facturadas electrónicamente</li>
+          <li>Gastos del exterior sin DSC ni FE colombiana</li>
+        </ul>
+      </div>
+      <p style="margin-top:10px;font-size:.78rem;color:var(--muted)"><strong>Norma:</strong> Art. 631 lit. b) ET · Res. 000227/2025 sec. 1.3.5.2.1 · Cartilla DIAN AG 2025</p>
+    </div>
+  </details>
+  <details style="background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:10px">
+    <summary style="cursor:pointer;font-weight:700;color:var(--pri);outline:none">💰 F1005 — IVA descontable</summary>
+    <div style="margin-top:10px;font-size:.84rem;line-height:1.65">
+      <p><strong>Qué incluye desde la FE:</strong> IVA pagado en compras del año, agrupado por NIT del proveedor. Se toma del campo "IVA" de cada documento recibido.</p>
+      <p><strong>Notas crédito:</strong> el IVA de las NCs <strong>recibidas</strong> (devoluciones en compras) NO va aquí — es <em>IVA recuperado</em> y se reporta en el <strong>F1006</strong>. En el F1005 solo entra, en la columna <em>"IVA Resultante Devoluciones Ventas Anuladas"</em>, el IVA de las NCs que tú <strong>emitiste</strong> (devoluciones de tus ventas).</p>
+      <p><strong>Lo que NO se cubre:</strong> el <strong>IVA mayor valor del costo o gasto</strong> (Res. 000233/2025 Art. 6, AG 2025) ya no va al F1005, va al F1001 en columnas separadas. Esto solo lo detecta el generador desde balance leyendo cuentas 5115/5215/6115 con "IVA" en el nombre.</p>
+      <div style="background:#DBEAFE;border:1px solid #93C5FD;border-radius:8px;padding:10px 12px;margin-top:10px;color:#1E3A8A;font-size:.82rem">
+        <strong>🔍 Cruce obligatorio:</strong> el total del F1005 debe coincidir con el <strong>IVA descontable acumulado de tus declaraciones F300 del año</strong> (Res. 000227/2025 sec. 1.3.5.5.1). Si hay diferencia mayor a $10.000, revisa antes de presentar.
+      </div>
+      <p style="margin-top:10px;font-size:.78rem;color:var(--muted)"><strong>Norma:</strong> Art. 631 lit. c) ET · Res. 000227/2025 sec. 1.3.5.5.1</p>
+    </div>
+  </details>
+  <details style="background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:10px">
+    <summary style="cursor:pointer;font-weight:700;color:var(--pri);outline:none">📈 F1006 — IVA generado</summary>
+    <div style="margin-top:10px;font-size:.84rem;line-height:1.65">
+      <p><strong>Qué incluye desde la FE:</strong> IVA cobrado en ventas del año, agrupado por NIT del cliente. Se toma del campo "IVA" de cada documento <strong>emitido</strong>.</p>
+      <p><strong>Notas crédito:</strong> en la columna <em>"IVA Recuperado Devoluciones Compras Anuladas"</em> va el IVA de las NCs <strong>recibidas</strong> de tus proveedores (devoluciones en compras: reviertes un descontable y ese IVA "se recupera"). Las NCs que tú <strong>emitiste</strong> a clientes van al <strong>F1005</strong> como IVA resultante por devoluciones en ventas.</p>
+      <p><strong>Impuesto Nacional al Consumo (INC):</strong> si tu reporte MUISCA trae columna INC separada, no se mapea automáticamente — debes ajustarlo manualmente en la columna 10 antes de presentar.</p>
+      <div style="background:#DBEAFE;border:1px solid #93C5FD;border-radius:8px;padding:10px 12px;margin-top:10px;color:#1E3A8A;font-size:.82rem">
+        <strong>🔍 Cruce obligatorio:</strong> el total del F1006 debe coincidir con el <strong>IVA generado acumulado de tus F300 del año</strong>. La DIAN cruza automáticamente F1006 vs F300 vs facturación electrónica emitida.
+      </div>
+      <p style="margin-top:10px;font-size:.78rem;color:var(--muted)"><strong>Norma:</strong> Art. 631 lit. d) ET · Res. 000227/2025 sec. 1.3.5.6.1</p>
+    </div>
+  </details>
+  <details style="background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:12px 14px">
+    <summary style="cursor:pointer;font-weight:700;color:var(--pri);outline:none">💵 F1007 — Ingresos recibidos</summary>
+    <div style="margin-top:10px;font-size:.84rem;line-height:1.65">
+      <p><strong>Qué incluye desde la FE:</strong> ingresos brutos por NIT del cliente. Se toma el valor antes de IVA (Total − IVA) de cada factura emitida y se agrupa por receptor.</p>
+      <p><strong>Devoluciones:</strong> las notas crédito emitidas van a la columna <em>"Devoluciones"</em> separada — <strong>NO se restan</strong> del ingreso bruto. Esto es por petición expresa para que el contador vea por separado el bruto facturado y las anulaciones.</p>
+      <p><strong>Concepto:</strong> se deja en blanco. Debes asignar el concepto correcto antes de prevalidar:</p>
+      <ul style="margin:6px 0 6px 18px;line-height:1.7">
+        <li><strong>4001</strong> — Ingresos operacionales (servicios, ventas) — aplica para la mayoría</li>
+        <li><strong>4002</strong> — Ingresos no operacionales (financieros, otros)</li>
+        <li><strong>4003</strong> — Rendimientos financieros</li>
+        <li><strong>4006</strong> — Intereses hipotecarios</li>
+        <li><strong>4020/4021</strong> — Venta de cuotas o partes de interés social (AG 2025 nuevos)</li>
+      </ul>
+      <div style="background:#FEF3C7;border:1px solid #FDE68A;border-radius:8px;padding:10px 12px;margin-top:10px;color:#92400E;font-size:.82rem">
+        <strong>⚠ Casos especiales:</strong>
+        <ul style="margin:6px 0 0 18px;line-height:1.7">
+          <li><strong>Propiedad horizontal</strong>: NO reporta cuotas de administración ordinarias ni extraordinarias en F1007</li>
+          <li><strong>Venta de activos fijos</strong>: concepto 4002 (valor total, no la utilidad)</li>
+          <li><strong>Ingresos no facturados electrónicamente</strong> (rendimientos de bancos, dividendos, indemnizaciones): NO están en este F1007 — agrégalos manualmente o usa el generador desde balance</li>
+        </ul>
+      </div>
+      <p style="margin-top:10px;font-size:.78rem;color:var(--muted)"><strong>Norma:</strong> Art. 631 lit. a) ET · Res. 000227/2025 sec. 1.3.5.4.1</p>
+    </div>
+  </details>
+</div>
+<div class="card" style="border-left:4px solid #059669">
+  <div class="card-title"><span>🔍</span> Validaciones y cruces antes de presentar</div>
+  <p style="font-size:.85rem;color:var(--muted);margin-bottom:12px">Antes de enviar al MUISCA, revisa que los totales del Excel cuadren con tus fuentes oficiales. La DIAN cruza automáticamente y los desajustes pueden derivar en requerimiento o sanción Art. 651 ET (hasta 7.500 UVT).</p>
+  <div style="display:grid;gap:10px;font-size:.85rem">
+    <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px 14px">
+      <div style="font-weight:700;color:var(--pri);margin-bottom:6px">📊 Vs. Declaraciones de IVA (F300)</div>
+      <ul style="margin:0;padding-left:20px;color:#374151;line-height:1.7">
+        <li><strong>F1005</strong> ≈ IVA descontable acumulado de F300 del año</li>
+        <li><strong>F1006</strong> ≈ IVA generado acumulado de F300 del año</li>
+        <li>Si ambos cruzan, el F1005 y F1006 están bien construidos</li>
+      </ul>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px 14px">
+      <div style="font-weight:700;color:var(--pri);margin-bottom:6px">📄 Vs. Declaración de Renta (F110 o F210)</div>
+      <ul style="margin:0;padding-left:20px;color:#374151;line-height:1.7">
+        <li><strong>F1007</strong> ≈ renglón "Ingresos brutos operacionales y no operacionales" del F110</li>
+        <li><strong>F1001</strong> ≈ Costos + Deducciones del F110 menos lo que va a F2276 (nómina)</li>
+        <li>Diferencias del 5 % o más → revisar antes de presentar</li>
+      </ul>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px 14px">
+      <div style="font-weight:700;color:var(--pri);margin-bottom:6px">⚡ Vs. Otros documentos electrónicos</div>
+      <ul style="margin:0;padding-left:20px;color:#374151;line-height:1.7">
+        <li><strong>F1001</strong> debe contener Facturas Electrónicas recibidas + DSC (este reporte ya las trae unidas)</li>
+        <li><strong>F2276</strong> (no se genera aquí) cruza con Nómina Electrónica del año</li>
+      </ul>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px 14px">
+      <div style="font-weight:700;color:var(--pri);margin-bottom:6px">⚠ Casos especiales para revisar manualmente</div>
+      <ul style="margin:0;padding-left:20px;color:#374151;line-height:1.7">
+        <li><strong>Conceptos genéricos en F1001:</strong> el concepto 5004 por defecto NO siempre aplica. Ajusta cada NIT al concepto real (5005, 5007, 5008, etc.)</li>
+        <li><strong>Conceptos en blanco en F1007:</strong> debes asignar 4001, 4002 o el correcto antes de prevalidar</li>
+        <li><strong>Personas naturales:</strong> verifica que los apellidos y nombres queden separados correctamente</li>
+        <li><strong>Extranjeros:</strong> código país distinto a 169 (Colombia)</li>
+        <li><strong>Tope 3 UVT del F1001:</strong> proveedores con valor total < $157.122 se agrupan en <code>222222222</code> "CUANTIAS MENORES" tipo doc 43 (los que tienen retención se reportan con NIT real)</li>
+        <li><strong>Operaciones no facturadas:</strong> agrega manualmente nómina, GMF, depreciaciones, donaciones, gastos exterior si los tienes</li>
+      </ul>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px 14px">
+      <div style="font-weight:700;color:var(--pri);margin-bottom:6px">🔄 Lo que NO genera esta herramienta (usa el generador desde balance)</div>
+      <ul style="margin:0;padding-left:20px;color:#374151;line-height:1.7">
+        <li><strong>F1003</strong> retenciones que TE practicaron — sale de los certificados Art. 381 ET, no de la FE</li>
+        <li><strong>F1008/F1009</strong> CxC y CxP al 31-dic — saldos contables, no movimiento del año</li>
+        <li><strong>F1010</strong> socios y accionistas — del libro de accionistas / cámara</li>
+        <li><strong>F1012</strong> inversiones y bancos — saldos al cierre</li>
+        <li><strong>F2276</strong> rentas de trabajo / nómina — del balance + nómina electrónica</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<details class="normativa-list" style="margin-top:14px">
+  <summary style="cursor:pointer;font-weight:700;color:var(--text)">Normativa aplicada</summary>
+  <p style="margin-top:10px;font-size:.82rem;line-height:1.7"><strong>UVT 2026:</strong> $52.374 (Resolución DIAN 000238/2025). <strong>Art. 631 ET</strong> deber de informar (lit. a F1007, lit. b F1001, lit. c F1005, lit. d F1006). <strong>Resolución DIAN 000162/2023</strong> formatos exógena AG 2024+ (modificada por Res. 000227/2025 y Res. 000233/2025 para AG 2025). Versiones vigentes: F1001 v10, F1005 v9, F1006 v8, F1007 v9. <strong>Sanción Art. 651 ET</strong> por no presentar / errores: hasta 7.500 UVT ($392.805.000 con UVT 2026).</p>
+</details>
+<div style="font-size:.78rem;color:var(--muted);text-align:center;margin-top:14px">
+  <a href="exogena-suite.html" style="color:var(--pri2);text-decoration:none">← Sitio Exógena</a> &middot;
+  <a href="exogena.html" style="color:var(--pri2);text-decoration:none">Generador desde balance →</a> &middot;
+  <a href="prevalidador.html" style="color:var(--pri2);text-decoration:none">Prevalidador DIAN</a>
+</div>
+</div>
+<script defer src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+<script>
+// ═══════════════════════════════════════════════════════════
+// HELPERS — reutilizados de iva300.html
+// ═══════════════════════════════════════════════════════════
+function norm(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[\n\r\t]+/g,' ').replace(/\s+/g,' ').trim()}
+function toNum(v){if(typeof v==='number')return v;if(!v)return 0;let s=String(v).replace(/[$\s]/g,'');let neg=false;if(/^\(.+\)$/.test(s)){neg=true;s=s.slice(1,-1)}if(s.includes(',')&&s.includes('.')){if(s.lastIndexOf(',')>s.lastIndexOf('.'))s=s.replace(/\./g,'').replace(',','.');else s=s.replace(/,/g,'')}else if(s.includes(',')&&!s.includes('.')){const p=s.split(',');if(p[p.length-1].length<=2)s=s.replace(',','.');else s=s.replace(/,/g,'')}const n=parseFloat(s)||0;return neg?-n:n}
+function cellStr(v){let s=String(v??'').trim();if(s==='undefined'||s==='null'||s==='NaN')return'';if(/^\d+\.\d*$/.test(s))s=s.split('.')[0];return s}
+function parseFlexDate(raw){
+  if(raw==null||raw==='')return null;
+  if(raw instanceof Date)return isNaN(raw.getTime())?null:raw;
+  if(typeof raw==='number'){const d=new Date(Math.round((raw-25569)*86400*1000));return isNaN(d.getTime())?null:d;}
+  const s=String(raw).trim();if(!s)return null;
+  if(/^\d{4}-\d{2}-\d{2}/.test(s)){const d=new Date(s);return isNaN(d.getTime())?null:d;}
+  let m=s.match(/^(\d{1,2})[-\/](\d{1,2})[-\/](\d{4})(?:[ T](\d{1,2}):(\d{1,2})(?::(\d{1,2}))?)?$/);
+  if(m){let dd=parseInt(m[1],10),mm=parseInt(m[2],10),yyyy=parseInt(m[3],10);if(mm>12&&dd<=12){[dd,mm]=[mm,dd];}if(dd<1||dd>31||mm<1||mm>12)return null;const hh=m[4]?parseInt(m[4],10):0,mi=m[5]?parseInt(m[5],10):0,ss=m[6]?parseInt(m[6],10):0;const d=new Date(yyyy,mm-1,dd,hh,mi,ss);return isNaN(d.getTime())?null:d;}
+  const d=new Date(s);return isNaN(d.getTime())?null:d;
+}
+// ═══════════════════════════════════════════════════════════
+// CONSTANTES exógena
+// ═══════════════════════════════════════════════════════════
+var UVT_2026 = 52374;
+var UVT_2025 = 49799;
+// Conceptos F1001 oficiales DIAN (Resolución 000162/2023 y conexas).
+// El usuario selecciona el aplicable a cada NIT — los más comunes arriba.
+// Nota: salarios y demás pagos laborales NO van en F1001, se reportan en F2276.
+var CONCEPTOS_F1001=[
+  ['5002','Honorarios'],
+  ['5003','Comisiones'],
+  ['5004','Servicios'],
+  ['5005','Arrendamientos'],
+  ['5006','Intereses y rendimientos financieros'],
+  ['5007','Compras (inventarios, materia prima, mercancías)'],
+  ['5008','Pagos por compra de activos fijos'],
+  ['5010','Aportes parafiscales SENA, ICBF y cajas'],
+  ['5011','Aportes seguridad social en salud'],
+  ['5012','Aportes seguridad social en pensiones'],
+  ['5013','Aportes ARL'],
+  ['5014','Donaciones a entidades sin ánimo de lucro'],
+  ['5015','Otros pagos sin tope (servicios públicos, viáticos, etc.)'],
+  ['5016','Cargos diferidos / amortizaciones'],
+  ['5018','Pagos por contratos de leasing'],
+  ['5019','Aportes voluntarios pensiones obligatorias / cuentas AFC'],
+  ['5020','Pagos por inversión obras / impuestos ZOMAC'],
+  ['5022','Otros pagos sin tope (impuestos, contribuciones, multas)'],
+  ['5023','Pagos por seguros'],
+  ['5024','Pagos por publicidad y propaganda'],
+  ['5025','Pagos a terceros por concepto de viáticos y movilización'],
+  ['5026','Pagos por contratos de construcción'],
+  ['5027','Pagos al exterior por compras (importaciones)'],
+  ['5028','Pagos al exterior por servicios técnicos / asistencia / consultoría'],
+  ['5029','Pagos al exterior por regalías'],
+  ['5030','Pagos al exterior por intereses'],
+  ['5044','Pagos por servicios de transporte'],
+  ['5046','Pagos por comisiones a comisionistas'],
+  ['5049','Pagos por cesantías e intereses a las cesantías'],
+  ['5055','Otros pagos no clasificados']
+];
+var FMT_HEADERS = {
+  'F1001':['Concepto','Tipo Doc','No ID','Primer Apellido','Segundo Apellido','Primer Nombre','Otros Nombres','Razón Social','Direccion','Cod Depto','Cod Municipio','Pais Residencia','Pago Deducible','Pago No Deducible','IVA Mayor Valor Deducible','IVA Mayor Valor No Deducible','Ret Fte Practicada Renta','Ret Fte Asumida Renta','Ret Fte Practicada IVA Responsables','Ret Fte Practicada IVA No Domiciliados'],
+  'F1005':['Tipo Doc','No ID','DV','Primer Apellido','Segundo Apellido','Primer Nombre','Otros Nombres','Razón Social','Impuesto Descontable','IVA Resultante Devoluciones Ventas Anuladas','IVA Mayor Valor Costo o Gasto (Art.490 ET)'],
+  'F1006':['Tipo Doc','No ID','DV','Primer Apellido','Segundo Apellido','Primer Nombre','Otros Nombres','Razón Social','Impuesto Generado','IVA Recuperado Devoluciones Compras Anuladas','Impuesto Nacional al Consumo'],
+  'F1007':['Concepto','Tipo Doc','No ID','Primer Apellido','Segundo Apellido','Primer Nombre','Otros Nombres','Razón Social','Pais Residencia','Ingresos Brutos','Devoluciones']
+};
+// ═══════════════════════════════════════════════════════════
+// DETECCIÓN tipo doc por NIT (heurística)
+// ═══════════════════════════════════════════════════════════
+function splitNitDv(raw){
+  const s=String(raw||'').trim().replace(/\./g,'').replace(/\s/g,'');
+  const m=s.match(/^(\d+)\s*-\s*(\d)$/);
+  if(m)return{nit:m[1],dv:m[2]};
+  return{nit:s.replace(/[^\d]/g,''),dv:''};
+}
+function calcularDV(nit){
+  // Algoritmo DIAN (Modulo 11)
+  const pesos=[3,7,13,17,19,23,29,37,41,43,47,53,59,67,71];
+  const s=String(nit).replace(/[^\d]/g,'').split('').reverse();
+  let suma=0;
+  for(let i=0;i<s.length;i++){suma+=parseInt(s[i],10)*pesos[i]||0;}
+  const r=suma%11;
+  if(r<2)return r;
+  return 11-r;
+}
+function detectTipoDoc(nit){
+  const s=String(nit||'').replace(/[^\d]/g,'');
+  if(!s)return '';
+  // NITs empresariales empiezan con 8 o 9
+  if(s.startsWith('8')||s.startsWith('9'))return '31';
+  // Cédulas modernas (10 dígitos) empiezan con 1
+  if(s.length>=9&&s.startsWith('1'))return '13';
+  // Cédulas antiguas <10 dígitos
+  if(s.length<=10)return '13';
+  return '31';
+}
+function partirNombre(razon){
+  // PN: intenta separar "Nombre Apellido" en componentes para columnas exógena.
+  const partes=String(razon||'').trim().split(/\s+/);
+  if(partes.length===0)return{pa:'',sa:'',pn:'',on:''};
+  if(partes.length===1)return{pa:partes[0],sa:'',pn:'',on:''};
+  if(partes.length===2)return{pa:partes[0],sa:'',pn:partes[1],on:''};
+  if(partes.length===3)return{pa:partes[0],sa:partes[1],pn:partes[2],on:''};
+  return{pa:partes[0],sa:partes[1],pn:partes[2],on:partes.slice(3).join(' ')};
+}
+// ═══════════════════════════════════════════════════════════
+// MAESTRO DE TERCEROS — opcional, complementa el reporte FE
+// El FE no trae direcciones ni apellidos separados. Si el cliente sube
+// un Excel con NIT + 1er Apellido + 2do Apellido + nombres + dirección +
+// cód depto + cód mpio, esos datos sobrescriben los autodetectados.
+// ═══════════════════════════════════════════════════════════
+var tercerosDatos={};
+function normalizarTexto(s){
+  return String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
+}
+function detectarColumnaMaestro(headers){
+  const map={};
+  const patrones={
+    nit:['nit','identificacion','identificación','cedula','cédula','documento','id','doc'],
+    a1:['1er apellido','primer apellido','apellido 1','apellido1','ape1','apellido paterno'],
+    a2:['2do apellido','segundo apellido','apellido 2','apellido2','ape2','apellido materno'],
+    n1:['1er nombre','primer nombre','nombre 1','nombre1','nom1'],
+    n2:['2do nombre','segundo nombre','nombre 2','nombre2','nom2','otros nombres','demas nombres','demás nombres'],
+    rs:['razon social','razón social','razon','razón','nombre comercial','empresa'],
+    dir:['direccion','dirección','direcc','adress','address'],
+    dpto:['cod depto','cod_depto','codigo depto','código depto','cód depto','depto','dpto'],
+    mpio:['cod mpio','cod_mpio','codigo municipio','código municipio','cód mpio','municipio','mpio']
+  };
+  // Match exacto primero (evita "nombre" se pegue a "1er nombre")
+  headers.forEach((h,i)=>{
+    const n=normalizarTexto(h);
+    for(const[k,keys] of Object.entries(patrones)){
+      if(map[k]!==undefined)continue;
+      if(keys.some(kw=>n===kw)){map[k]=i;break;}
+    }
+  });
+  // Match por inclusión para los que sobraron
+  headers.forEach((h,i)=>{
+    const n=normalizarTexto(h);
+    for(const[k,keys] of Object.entries(patrones)){
+      if(map[k]!==undefined)continue;
+      if(keys.some(kw=>n.includes(kw))){map[k]=i;break;}
+    }
+  });
+  return map;
+}
+function procesarMaestroTerceros(evt){
+  const file=evt.target.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const wb=XLSX.read(new Uint8Array(e.target.result),{type:'array'});
+      let best=wb.SheetNames[0],bestLen=0;
+      for(const n of wb.SheetNames){
+        const rows=XLSX.utils.sheet_to_json(wb.Sheets[n],{header:1,defval:''}).length;
+        if(rows>bestLen){bestLen=rows;best=n;}
+      }
+      const rows=XLSX.utils.sheet_to_json(wb.Sheets[best],{header:1,defval:''});
+      if(rows.length<2){exoToast('Archivo sin datos','error');return;}
+      // Auto-detectar fila de encabezados
+      let hdrRow=0;
+      for(let i=0;i<Math.min(5,rows.length);i++){
+        const txt=normalizarTexto((rows[i]||[]).join(' '));
+        if(/nit|identif|documento/.test(txt) && /apellido|nombre|direcc|razon/.test(txt)){hdrRow=i;break;}
+      }
+      const headers=(rows[hdrRow]||[]).map(String);
+      const map=detectarColumnaMaestro(headers);
+      if(map.nit===undefined){exoToast('No se encontró columna de NIT en el archivo','error');return;}
+      // Conjunto de NITs presentes en el reporte FE
+      const nitsFE=new Set();
+      docs.emitidos.forEach(d=>{const n=splitNitDv(d.nitReceptor).nit;if(n)nitsFE.add(n);});
+      docs.recibidos.forEach(d=>{const n=splitNitDv(d.nitEmisor).nit;if(n)nitsFE.add(n);});
+      let matched=0,sinMatch=0;
+      for(let i=hdrRow+1;i<rows.length;i++){
+        const r=rows[i]||[];
+        const nit=String(r[map.nit]||'').trim().replace(/[^0-9a-zA-Z]/g,'');
+        if(!nit)continue;
+        if(!nitsFE.has(nit)){sinMatch++;continue;}
+        if(!tercerosDatos[nit])tercerosDatos[nit]={};
+        const set=(k,v)=>{const s=String(v||'').trim();if(s)tercerosDatos[nit][k]=s.toUpperCase();};
+        if(map.a1!==undefined)set('a1',r[map.a1]);
+        if(map.a2!==undefined)set('a2',r[map.a2]);
+        if(map.n1!==undefined)set('n1',r[map.n1]);
+        if(map.n2!==undefined)set('n2',r[map.n2]);
+        if(map.rs!==undefined)set('rs',r[map.rs]);
+        if(map.dir!==undefined)set('dir',r[map.dir]);
+        if(map.dpto!==undefined){
+          const v=String(r[map.dpto]||'').trim();
+          if(/^\d{1,2}$/.test(v))tercerosDatos[nit].dp=v.padStart(2,'0');
+        }
+        if(map.mpio!==undefined){
+          const v=String(r[map.mpio]||'').trim();
+          if(/^\d{1,3}$/.test(v))tercerosDatos[nit].mp=v.padStart(3,'0');
+        }
+        matched++;
+      }
+      const status=document.getElementById('baseTercStatus');
+      if(matched>0){
+        status.innerHTML='<span style="display:inline-block;padding:6px 14px;background:#D1FAE5;border:1px solid #6EE7B7;border-radius:20px;color:#065F46;font-weight:600">✓ '+matched+' terceros actualizados desde tu maestro</span>'+
+          (sinMatch>0?'<div style="margin-top:6px;font-size:.76rem;color:#92400E">'+sinMatch+' NIT del archivo no están en el reporte FE (se ignoraron).</div>':'');
+        exoToast(matched+' terceros actualizados','success');
+        // Si ya hay formatos generados, regenerar para reflejar los cambios
+        if(formatos.F1001.length||formatos.F1005.length||formatos.F1006.length||formatos.F1007.length){
+          generarFormatos();
+        }
+      }else{
+        status.innerHTML='<span style="color:#92400E">⚠ Ningún NIT del archivo coincide con el reporte FE</span>';
+        exoToast('Ningún NIT coincide con el reporte FE','warning');
+      }
+      evt.target.value='';
+    }catch(err){
+      exoToast('Error leyendo archivo: '+err.message,'error');
+      console.error(err);
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+function descargarPlantillaTerceros(){
+  const headers=['NIT','1er Apellido','2do Apellido','1er Nombre','2do Nombre','Razón Social','Dirección','Cód Depto','Cód Municipio'];
+  const out=[headers];
+  // Pre-llenar con NITs del reporte FE si ya cargó
+  const nits=new Map();
+  docs.emitidos.forEach(d=>{const n=splitNitDv(d.nitReceptor).nit;if(n&&!nits.has(n))nits.set(n,d.nombreReceptor||'');});
+  docs.recibidos.forEach(d=>{const n=splitNitDv(d.nitEmisor).nit;if(n&&!nits.has(n))nits.set(n,d.nombreEmisor||'');});
+  if(nits.size===0){
+    // Sin FE cargado: ejemplos
+    out.push(['900123456','','','','','EJEMPLO SAS','CL 100 # 15-20','11','001']);
+    out.push(['1020304050','GOMEZ','LOPEZ','JUAN','CARLOS','','CR 7 # 71-52','11','001']);
+  }else{
+    nits.forEach((nombre,nit)=>{
+      const td=detectTipoDoc(nit);
+      out.push([nit,'','','','',td==='31'?nombre:'','','','']);
+    });
+  }
+  const ws=XLSX.utils.aoa_to_sheet(out);
+  ws['!cols']=[{wch:14},{wch:14},{wch:14},{wch:14},{wch:14},{wch:28},{wch:30},{wch:10},{wch:12}];
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,'Terceros');
+  XLSX.writeFile(wb,'Plantilla_Terceros_FE.xlsx');
+  exoToast('Plantilla descargada — llénala y vuelve a subirla','success');
+}
+// Aplica overrides del maestro de terceros (si existen para ese NIT).
+// Para dirección/depto/mpio, si el maestro no tiene → usar los defaults
+// que el declarante haya escrito en "Dirección por defecto para el F1001".
+function aplicarMaestro(g,td){
+  const m=tercerosDatos[g.nit]||{};
+  let pa=m.a1||'',sa=m.a2||'',pn=m.n1||'',on=m.n2||'',rs=m.rs||'';
+  // Si no hay override del maestro, usar lo autodetectado del FE
+  if(!pa&&!sa&&!pn&&!on&&!rs){
+    if(td==='31'){rs=g.nombre;}
+    else{const p=partirNombre(g.nombre);pa=p.pa;sa=p.sa;pn=p.pn;on=p.on;}
+  }
+  // Defaults del declarante para dirección (solo si no vino del maestro)
+  const defDir=(document.getElementById('iDirDef')||{}).value||'';
+  const defDp=((document.getElementById('iDpDef')||{}).value||'').replace(/\D/g,'').padStart(2,'0').slice(0,2);
+  const defMp=((document.getElementById('iMpDef')||{}).value||'').replace(/\D/g,'').padStart(3,'0').slice(0,3);
+  return{
+    pa,sa,pn,on,rs,
+    dir:m.dir||defDir||'',
+    dp:m.dp||(defDp&&defDp!=='00'?defDp:''),
+    mp:m.mp||(defMp&&defMp!=='000'?defMp:'')
+  };
+}
+// ═══════════════════════════════════════════════════════════
+// PARSER MUISCA — adaptado de iva300.html
+// ═══════════════════════════════════════════════════════════
+var rawData=null;
+var docs={emitidos:[],recibidos:[]};
+var formatos={F1001:[],F1005:[],F1006:[],F1007:[]};
+function loadFE(event){
+  const file=event.target.files[0];
+  if(file)processFE(file);
+}
+function processFE(file){
+  if(!file)return;
+  const MAX=20*1024*1024;
+  if(file.size>MAX){exoToast('El archivo excede 20 MB.','warning');return;}
+  const ext=(file.name||'').split('.').pop().toLowerCase();
+  if(['xlsx','xls','csv'].indexOf(ext)===-1){exoToast('Formato no soportado: .'+ext,'error');return;}
+  document.getElementById('fileFEStatus').textContent='✓ '+file.name;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    const wb=XLSX.read(new Uint8Array(e.target.result),{type:'array',cellDates:true});
+    rawData=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,defval:''});
+    parseRaw();
+  };
+  reader.readAsArrayBuffer(file);
+}
+function parseRaw(){
+  if(!rawData||rawData.length<2){exoToast('Archivo vacío o no válido.','error');return;}
+  // Detectar fila de headers (busca palabras clave en primeras 8 filas)
+  let hdr=0;
+  for(let i=0;i<Math.min(8,rawData.length);i++){
+    const row=rawData[i];if(!row)continue;
+    const rn=row.map(c=>norm(cellStr(c)));
+    if(rn.some(h=>h.includes('tipo de documento')||h.includes('cufe')||h.includes('folio')||h.includes('nit emisor'))){hdr=i;break;}
+  }
+  const headers=rawData[hdr].map(c=>norm(cellStr(c)));
+  const findIva=()=>{let i=headers.findIndex(h=>h==='iva');if(i>=0)return i;i=headers.findIndex(h=>/^(valor|total)?\s*iva$/.test(h));if(i>=0)return i;return headers.findIndex(h=>h.includes('iva')&&!h.includes('rete')&&!h.includes('reteiva')&&!h.includes('base'));};
+  const findTotal=()=>{let i=headers.findIndex(h=>h==='total');if(i>=0)return i;return headers.findIndex(h=>h==='total factura'||h==='valor total'||h==='total documento'||h.startsWith('total '));};
+  const col={
+    tipo:headers.findIndex(h=>h.includes('tipo de documento')||h==='tipo'||h.includes('tipo doc')),
+    codTipo:headers.findIndex(h=>h.includes('codigo')&&h.includes('tipo')),
+    folio:headers.findIndex(h=>h.includes('folio')||h.includes('numero')||h==='consecutivo'),
+    fecha:headers.findIndex(h=>h.includes('fecha emision')||h.includes('fecha')),
+    nitEmisor:headers.findIndex(h=>h.includes('nit emisor')),
+    nombreEmisor:headers.findIndex(h=>h.includes('nombre emisor')),
+    nitReceptor:headers.findIndex(h=>h.includes('nit receptor')),
+    nombreReceptor:headers.findIndex(h=>h.includes('nombre receptor')),
+    iva:findIva(),
+    reteIva:headers.findIndex(h=>h.includes('rete iva')||h.includes('reteiva')),
+    reteRenta:headers.findIndex(h=>h.includes('rete renta')||h.includes('reterenta')),
+    reteIca:headers.findIndex(h=>h.includes('rete ica')||h.includes('reteica')),
+    total:findTotal(),
+    grupo:headers.findIndex(h=>h.includes('grupo'))
+  };
+  if(col.nitEmisor<0||col.nitReceptor<0||col.iva<0||col.total<0){
+    exoToast('No se detectaron columnas requeridas (NIT emisor/receptor, IVA, Total). Verifica el archivo.','error');
+    return;
+  }
+  const detectNota=(t,c)=>{
+    const tn=norm(t),cs=String(c||'').trim();
+    if(cs==='91')return{esNota:true,esND:false};
+    if(cs==='92')return{esNota:false,esND:true};
+    if(tn.includes('nota')&&(tn.includes('credit')||/\bnc\b/.test(tn)||/\bcr\b/.test(tn)))return{esNota:true,esND:false};
+    if(tn.includes('nota')&&(tn.includes('debit')||/\bnd\b/.test(tn)))return{esNota:false,esND:true};
+    return{esNota:false,esND:false};
+  };
+  docs={emitidos:[],recibidos:[]};
+  let total=0,emitidos=0,recibidos=0,saltadosDS=0;
+  const nitDeclaranteN=document.getElementById('iNit').value.replace(/[^\d]/g,'');
+  for(let i=hdr+1;i<rawData.length;i++){
+    const row=rawData[i];if(!row||row.length===0)continue;
+    const tipo=cellStr(row[col.tipo]);
+    const tipoN=norm(tipo);
+    if(!tipo&&!cellStr(row[col.nitEmisor]))continue;
+    // Excluir nómina electrónica — va al F2276 con tratamiento distinto.
+    // POS, peajes y demás documentos equivalentes son electrónicos válidos → entran al flujo normal.
+    if(tipoN.includes('nomina'))continue;
+    const codTipo=col.codTipo>=0?cellStr(row[col.codTipo]):'';
+    const codTipoN=String(codTipo||'').trim();
+    const grupoRaw=col.grupo>=0?norm(cellStr(row[col.grupo])):'';
+    const fecha=col.fecha>=0?parseFlexDate(row[col.fecha]):null;
+    const flags=detectNota(tipo,codTipo);
+    const ivaRaw=toNum(row[col.iva]);
+    const totalRaw=toNum(row[col.total]);
+    if(ivaRaw<0&&!flags.esNota&&!flags.esND)flags.esNota=true;
+    // Identificar Documentos Soporte (DS) y Notas de Ajuste al DS.
+    // El MUISCA los marca grupo="Emitido" porque la empresa los emite, pero conceptualmente son COMPRAS
+    // a proveedores no obligados a facturar electrónicamente. Deben ir a F1001/F1005, NO a F1007/F1006.
+    // - codTipo 05 = DS adquisiciones no obligados
+    // - codTipo 95 = Nota Ajuste DS
+    const esDS=codTipoN==='05'||codTipoN==='95'||
+               (tipoN.includes('soporte')&&tipoN.includes('no obligad'))||
+               (tipoN.includes('documento soporte'))||
+               (tipoN.includes('ajuste')&&tipoN.includes('soporte'));
+    const doc={
+      tipo,codTipo,codTipoN,
+      folio:cellStr(row[col.folio]),
+      fecha,
+      nitEmisor:cellStr(row[col.nitEmisor]),
+      nombreEmisor:cellStr(row[col.nombreEmisor]),
+      nitReceptor:cellStr(row[col.nitReceptor]),
+      nombreReceptor:cellStr(row[col.nombreReceptor]),
+      iva:Math.abs(ivaRaw),
+      reteIva:col.reteIva>=0?Math.abs(toNum(row[col.reteIva])):0,
+      reteRenta:col.reteRenta>=0?Math.abs(toNum(row[col.reteRenta])):0,
+      reteIca:col.reteIca>=0?Math.abs(toNum(row[col.reteIca])):0,
+      total:Math.abs(totalRaw),
+      esNota:flags.esNota,esND:flags.esND,
+      esDS:esDS
+    };
+    total++;
+    // Determinar si entra al flujo de RECIBIDOS (compras) o EMITIDOS (ventas).
+    // Regla nueva: un DS es SIEMPRE una compra del declarante, aunque MUISCA lo marque "Emitido".
+    let esEmitido=false;
+    if(esDS){
+      esEmitido=false; // DS = compra. Va a recibidos.
+      saltadosDS++;
+    } else if(grupoRaw){
+      esEmitido=grupoRaw.includes('emit');
+    } else if(nitDeclaranteN){
+      // Fallback sin columna grupo: comparar con NIT del declarante.
+      esEmitido=doc.nitEmisor.replace(/[^\d]/g,'')===nitDeclaranteN;
+    }
+    // Tercero relevante para la exógena (NIT que NO es el declarante):
+    //  - FE recibida (compra normal): emisor = proveedor
+    //  - FE emitida (venta): receptor = cliente
+    //  - DS emitido (compra a no obligado): receptor = proveedor no obligado
+    if(esDS){
+      doc.terceroNit=doc.nitReceptor;
+      doc.terceroNombre=doc.nombreReceptor;
+    } else if(esEmitido){
+      doc.terceroNit=doc.nitReceptor;
+      doc.terceroNombre=doc.nombreReceptor;
+    } else {
+      doc.terceroNit=doc.nitEmisor;
+      doc.terceroNombre=doc.nombreEmisor;
+    }
+    if(esEmitido){docs.emitidos.push(doc);emitidos++;}
+    else{docs.recibidos.push(doc);recibidos++;}
+  }
+  document.getElementById('parseInfo').style.display='block';
+  const dsCount=docs.recibidos.filter(d=>d.esDS).length;
+  const compraFE=docs.recibidos.length-dsCount;
+  document.getElementById('parseOk').innerHTML='✓ Parsed: <strong>'+total+'</strong> documentos detectados.<br>'+
+    '<span style="font-size:.85rem;color:var(--muted)">'+
+    '<strong>'+emitidos+'</strong> facturas emitidas (ventas) · '+
+    '<strong>'+compraFE+'</strong> facturas recibidas (compras FE) · '+
+    '<strong>'+dsCount+'</strong> documentos soporte (compras a no obligados)'+
+    '</span>'+(dsCount>0?'<div style="margin-top:6px;padding:8px 10px;background:#ECFDF5;border:1px solid #A7F3D0;border-radius:6px;color:#065F46;font-size:.78rem">📋 Los <strong>'+dsCount+' Documento(s) Soporte</strong> se clasificaron como COMPRAS (van a F1001 y F1005, no a F1006/F1007).</div>':'');
+  // Validación de año: comparar el año más frecuente en las fechas del reporte
+  // contra el año gravable seleccionado. Si <80% match → toast warning.
+  // Cliente reportó (may-2026) que cargó FE 2026 con año 2025 sin advertencia.
+  validarAnioReporte();
+  // KPIs alineados con las columnas principales de los formatos: descontable y
+  // generado BRUTOS (las NC van cruzadas: recibidas→F1006 recuperado, emitidas→F1005 resultante).
+  const totIvaRec=docs.recibidos.reduce((s,d)=>s+(d.esNota?0:d.iva),0);
+  const totIvaEmi=docs.emitidos.reduce((s,d)=>s+(d.esNota?0:d.iva),0);
+  const totFactRec=docs.recibidos.reduce((s,d)=>s+(d.esNota?-d.total:d.total),0);
+  const totFactEmi=docs.emitidos.reduce((s,d)=>s+(d.esNota?-d.total:d.total),0);
+  document.getElementById('kpis').innerHTML=
+    '<div class="kpi blue"><div class="val">$'+Math.round(totFactRec).toLocaleString('es-CO')+'</div><div class="lbl">Facturas recibidas</div></div>'+
+    '<div class="kpi blue"><div class="val">$'+Math.round(totFactEmi).toLocaleString('es-CO')+'</div><div class="lbl">Facturas emitidas</div></div>'+
+    '<div class="kpi green"><div class="val">$'+Math.round(totIvaRec).toLocaleString('es-CO')+'</div><div class="lbl">IVA descontable (F1005)</div></div>'+
+    '<div class="kpi red"><div class="val">$'+Math.round(totIvaEmi).toLocaleString('es-CO')+'</div><div class="lbl">IVA generado (F1006)</div></div>';
+  document.getElementById('btnGen').disabled=false;
+  if(typeof exoTrack!=='undefined')exoTrack.tool('exogena-desde-fe-parse');
+}
+function validarAnioReporte(){
+  const anioSel=parseInt(document.getElementById('iAnio').value,10);
+  const todos=[].concat(docs.emitidos,docs.recibidos);
+  const conFecha=todos.filter(d=>d.fecha instanceof Date && !isNaN(d.fecha));
+  if(conFecha.length===0)return;
+  const counts={};
+  conFecha.forEach(d=>{const y=d.fecha.getFullYear();counts[y]=(counts[y]||0)+1;});
+  // Cualquier factura con año distinto al gravable → warning. Exógena de un año
+  // no debe traer facturas de otros años; aunque sea 1 puede inflar/desinflar.
+  const otros=Object.entries(counts).filter(([y])=>parseInt(y,10)!==anioSel).sort((a,b)=>b[1]-a[1]);
+  if(otros.length===0)return;
+  const totalOtros=otros.reduce((s,[,c])=>s+c,0);
+  const detalle=otros.map(([y,c])=>c+' del '+y).join(', ');
+  const msg='⚠️ '+totalOtros+' factura'+(totalOtros>1?'s':'')+' con fecha distinta al año gravable '+anioSel+' ('+detalle+'). Verifica antes de presentar — la exógena de '+anioSel+' no debe incluir facturas de otros años.';
+  if(typeof exoToast!=='undefined')exoToast(msg,'warning',{duration:9000});
+  const ok=document.getElementById('parseOk');
+  if(ok)ok.innerHTML+='<div style="margin-top:8px;padding:10px 14px;background:#FEF3C7;border:1px solid #FDE68A;border-radius:8px;color:#92400E;font-weight:600">'+msg+'</div>';
+}
+// ═══════════════════════════════════════════════════════════
+// GENERAR FORMATOS desde docs parseados
+// ═══════════════════════════════════════════════════════════
+function generarFormatos(){
+  const TOPE_F1001=3*UVT_2026;
+  // NIT genérico cuantías menores / consumidor final (cartilla Gil Gómez,
+  // Res. 000227/2025): F1001 sub-3UVT → 222222222 Tipo 43; F1005/F1006/F1007
+  // sin NIT identificable → 222222222 Tipo 43.
+  const NM_FE='222222222', TDM_FE='43';
+  formatos={F1001:[],F1005:[],F1006:[],F1007:[]};
+  // F1001: agrupar TODOS los recibidos (FE compras + DS) por tercero.
+  // El tercero ya fue resuelto en parseRaw: emisor en FE recibida, receptor en DS emitido.
+  // Documentos sin NIT identificable se redirigen al bucket 222222222 (CUANTIAS MENORES).
+  const groupRec={};
+  docs.recibidos.forEach(d=>{
+    const ni=splitNitDv(d.terceroNit);
+    const k=ni.nit||NM_FE;
+    const sinNit=!ni.nit;
+    if(!groupRec[k])groupRec[k]={nit:k,dv:sinNit?'':ni.dv,nombre:sinNit?'CUANTIAS MENORES':(d.terceroNombre||''),sinNit,pago:0,iva:0,reteRenta:0,reteIva:0,fuentes:{fe:0,ds:0}};
+    const sign=d.esNota?-1:1;
+    const subtotal=Math.max(0,d.total-d.iva); // valor antes de IVA
+    groupRec[k].pago+=sign*subtotal;
+    groupRec[k].iva+=sign*d.iva;
+    groupRec[k].reteRenta+=sign*d.reteRenta;
+    groupRec[k].reteIva+=sign*d.reteIva;
+    // Trazabilidad: contar cuántos docs FE vs DS aportan al grupo (para mostrar badge en UI)
+    if(d.esDS)groupRec[k].fuentes.ds+=Math.abs(subtotal);
+    else groupRec[k].fuentes.fe+=Math.abs(subtotal);
+    if(!sinNit && d.terceroNombre && !groupRec[k].nombre)groupRec[k].nombre=d.terceroNombre;
+  });
+  // F1005 / F1006 — Res. 162/2023: las notas crédito van CRUZADAS de formato.
+  //   FE recibida (compra)          → F1005 col "Impuesto Descontable"
+  //   NC recibida (devol. COMPRAS)  → F1006 col "IVA Recuperado Devoluciones Compras"
+  //   FE emitida (venta)            → F1006 col "Impuesto Generado"
+  //   NC emitida (devol. VENTAS)    → F1005 col "IVA Resultante Devoluciones Ventas"
+  // (Fix 2026-06-09: antes la NC quedaba en el mismo formato del documento,
+  //  reporte de usuario: "el IVA recuperado del 1006 me aparece en el 1005".)
+  const groupIva5={}, groupIva6={};
+  const addIva=(group,d,campo)=>{
+    const ni=splitNitDv(d.terceroNit);
+    const k=ni.nit||NM_FE;
+    const sinNit=!ni.nit;
+    if(!group[k])group[k]={nit:k,dv:sinNit?'':ni.dv,nombre:sinNit?'CUANTIAS MENORES':(d.terceroNombre||''),sinNit,iva:0,ivaDev:0};
+    group[k][campo]+=d.iva;
+  };
+  docs.recibidos.forEach(d=>{
+    if(d.iva===0)return;
+    if(d.esNota)addIva(groupIva6,d,'ivaDev'); // devolución en compras → IVA recuperado (F1006)
+    else addIva(groupIva5,d,'iva');           // compra → IVA descontable (F1005)
+  });
+  docs.emitidos.forEach(d=>{
+    if(d.iva===0)return;
+    if(d.esNota)addIva(groupIva5,d,'ivaDev'); // devolución en ventas → IVA resultante (F1005)
+    else addIva(groupIva6,d,'iva');           // venta → IVA generado (F1006)
+  });
+  // F1007: ingresos brutos por NIT cliente — SOLO FE emitidas (no DS).
+  // POS a consumidor final sin NIT → 222222222.
+  const groupIng={};
+  docs.emitidos.forEach(d=>{
+    const ni=splitNitDv(d.terceroNit);
+    const k=ni.nit||NM_FE;
+    const sinNit=!ni.nit;
+    if(!groupIng[k])groupIng[k]={nit:k,dv:sinNit?'':ni.dv,nombre:sinNit?'CUANTIAS MENORES':(d.terceroNombre||''),sinNit,ingresos:0,devoluciones:0};
+    const subtotal=Math.max(0,d.total-d.iva); // ingreso antes de IVA
+    if(d.esNota)groupIng[k].devoluciones+=subtotal;
+    else groupIng[k].ingresos+=subtotal;
+    if(!sinNit && d.terceroNombre && !groupIng[k].nombre)groupIng[k].nombre=d.terceroNombre;
+  });
+  // Construir filas F1001 — concepto por NIT editable por el usuario.
+  // window.conceptoF1001[nit] guarda override; window.excluirF1001[nit]=true para excluir.
+  // Sin override → default global window.conceptoF1001Default (= '5004' al inicio).
+  // Sub-3UVT (sin retenciones) NO se descarta: se agrega al bucket 222222222
+  // "CUANTIAS MENORES" tipo doc 43 según cartilla Gil Gómez.
+  window.conceptoF1001=window.conceptoF1001||{};
+  window.excluirF1001=window.excluirF1001||{};
+  window.f1001Meta=window.f1001Meta||{};
+  if(!window.conceptoF1001Default)window.conceptoF1001Default='5004';
+  // Bucket cuantías menores por concepto. Si la cartilla ya trajo un 222222222
+  // sin NIT en la FE (improbable), se acumula al mismo bucket.
+  const menores1001 = {};
+  Object.values(groupRec).forEach(g=>{
+    if(window.excluirF1001[g.nit])return;
+    const tieneRet = g.reteRenta!==0 || g.reteIva!==0;
+    if(g.nit!==NM_FE && g.pago<TOPE_F1001 && !tieneRet){
+      const concepto=window.conceptoF1001[g.nit]||window.conceptoF1001Default;
+      if(!menores1001[concepto]) menores1001[concepto]={pago:0,iva:0,reteRenta:0,reteIva:0,fuentes:{fe:0,ds:0}};
+      menores1001[concepto].pago += g.pago;
+      menores1001[concepto].iva += g.iva;
+      menores1001[concepto].fuentes.fe += g.fuentes.fe;
+      menores1001[concepto].fuentes.ds += g.fuentes.ds;
+      return;
+    }
+    const td = g.sinNit ? TDM_FE : detectTipoDoc(g.nit);
+    const m=aplicarMaestro(g,td);
+    const concepto=window.conceptoF1001[g.nit]||window.conceptoF1001Default;
+    window.f1001Meta[g.nit]=g.fuentes;
+    // Forzar campos de PN vacíos para el bucket 222222222
+    if(g.sinNit){ m.pa=''; m.sa=''; m.pn=''; m.on=''; m.rs='CUANTIAS MENORES'; m.dir=''; m.dp=''; m.mp=''; }
+    formatos.F1001.push([
+      concepto,
+      td,g.nit,m.pa,m.sa,m.pn,m.on,m.rs,
+      m.dir,m.dp,m.mp,'169',
+      Math.round(g.pago),0,0,0,
+      Math.round(g.reteRenta),0,Math.round(g.reteIva),0
+    ]);
+  });
+  // Volcar buckets de cuantías menores. Si ya hay una fila 222222222 del mismo
+  // concepto, sumarle el bucket; si no, crear fila nueva.
+  Object.entries(menores1001).forEach(([concepto, b])=>{
+    if(b.pago===0 && b.reteRenta===0 && b.reteIva===0) return;
+    const idx = formatos.F1001.findIndex(row => row[0]===concepto && row[2]===NM_FE);
+    if(idx>=0){
+      formatos.F1001[idx][12] = Math.round((formatos.F1001[idx][12]||0) + b.pago);
+    } else {
+      window.f1001Meta[NM_FE] = window.f1001Meta[NM_FE] || {fe:0,ds:0};
+      window.f1001Meta[NM_FE].fe += b.fuentes.fe;
+      window.f1001Meta[NM_FE].ds += b.fuentes.ds;
+      formatos.F1001.push([
+        concepto, TDM_FE, NM_FE, '','','','','CUANTIAS MENORES',
+        '','','','169',
+        Math.round(b.pago),0,0,0,
+        0,0,0,0
+      ]);
+    }
+  });
+  // Construir filas F1005
+  Object.values(groupIva5).forEach(g=>{
+    if(g.iva===0&&g.ivaDev===0)return;
+    const td = g.sinNit ? TDM_FE : detectTipoDoc(g.nit);
+    const dv = g.sinNit ? '' : (g.dv||(td==='31'?String(calcularDV(g.nit)):''));
+    const m=aplicarMaestro(g,td);
+    if(g.sinNit){ m.pa=''; m.sa=''; m.pn=''; m.on=''; m.rs='CUANTIAS MENORES'; }
+    formatos.F1005.push([td,g.nit,dv,m.pa,m.sa,m.pn,m.on,m.rs,Math.round(g.iva),Math.round(g.ivaDev),0]);
+  });
+  // Construir filas F1006
+  Object.values(groupIva6).forEach(g=>{
+    if(g.iva===0&&g.ivaDev===0)return;
+    const td = g.sinNit ? TDM_FE : detectTipoDoc(g.nit);
+    const dv = g.sinNit ? '' : (g.dv||(td==='31'?String(calcularDV(g.nit)):''));
+    const m=aplicarMaestro(g,td);
+    if(g.sinNit){ m.pa=''; m.sa=''; m.pn=''; m.on=''; m.rs='CUANTIAS MENORES'; }
+    formatos.F1006.push([td,g.nit,dv,m.pa,m.sa,m.pn,m.on,m.rs,Math.round(g.iva),Math.round(g.ivaDev),0]);
+  });
+  // Construir filas F1007 (Ingresos brutos por NIT cliente)
+  // Concepto default 4001 (ingresos brutos operacionales). Si la actividad
+  // es no operacional (rendimientos, dividendos, arrendamientos, etc.),
+  // el usuario debe ajustar a 4002+ en el Excel o Prevalidador.
+  Object.values(groupIng).forEach(g=>{
+    if(g.ingresos===0&&g.devoluciones===0)return;
+    const td = g.sinNit ? TDM_FE : detectTipoDoc(g.nit);
+    const m=aplicarMaestro(g,td);
+    if(g.sinNit){ m.pa=''; m.sa=''; m.pn=''; m.on=''; m.rs='CUANTIAS MENORES'; }
+    formatos.F1007.push([
+      '4001',
+      td,g.nit,m.pa,m.sa,m.pn,m.on,m.rs,'169',
+      Math.round(g.ingresos),Math.round(g.devoluciones)
+    ]);
+  });
+  renderResultados();
+  if(typeof exoTrack!=='undefined')exoTrack.tool('exogena-desde-fe-generate');
+}
+// Handlers para edición F1001: concepto por NIT, exclusión, default global.
+function setConceptoF1001(nit,valor){
+  window.conceptoF1001=window.conceptoF1001||{};
+  if(!valor||valor===window.conceptoF1001Default){delete window.conceptoF1001[nit];}
+  else{window.conceptoF1001[nit]=valor;}
+  generarFormatos(); // recalcula y re-renderiza
+}
+function toggleExcluirF1001(nit){
+  window.excluirF1001=window.excluirF1001||{};
+  if(window.excluirF1001[nit])delete window.excluirF1001[nit];
+  else window.excluirF1001[nit]=true;
+  generarFormatos();
+}
+function setConceptoF1001Default(valor){
+  window.conceptoF1001Default=valor||'5004';
+  generarFormatos();
+}
+function renderResultados(){
+  const tabsBar=document.getElementById('tabsBar');
+  const content=document.getElementById('tabsContent');
+  let tabsHtml='',contentHtml='';
+  const tabs=['F1001','F1005','F1006','F1007'];
+  tabs.forEach((f,idx)=>{
+    const cnt=formatos[f].length;
+    tabsHtml+='<button class="tab-btn'+(idx===0?' active':'')+'" onclick="switchTab(\''+f+'\')" id="tab-'+f+'">'+f+' ('+cnt+')</button>';
+    contentHtml+='<div class="tab-pane'+(idx===0?' active':'')+'" id="pane-'+f+'">';
+    if(f==='F1001'){
+      contentHtml+=renderF1001Pane(cnt);
+    } else if(cnt===0){
+      contentHtml+='<div class="alert alert-warn">Sin registros para '+f+'.</div>';
+    } else {
+      const hdrs=FMT_HEADERS[f];
+      contentHtml+='<div style="overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch"><table class="preview-table" style="min-width:max-content"><thead><tr>';
+      hdrs.forEach(h=>{contentHtml+='<th>'+h+'</th>';});
+      contentHtml+='</tr></thead><tbody>';
+      formatos[f].slice(0,30).forEach(row=>{
+        contentHtml+='<tr>';
+        row.forEach((c)=>{const isNum=typeof c==='number';contentHtml+='<td class="'+(isNum?'num':'')+'">'+(isNum?c.toLocaleString('es-CO'):(c||''))+'</td>';});
+        contentHtml+='</tr>';
+      });
+      contentHtml+='</tbody></table></div>';
+      if(cnt>30)contentHtml+='<p style="font-size:.74rem;color:var(--muted);margin-top:6px">Mostrando 30 de '+cnt+' filas. El Excel descargado trae todas.</p>';
+    }
+    contentHtml+='</div>';
+  });
+  tabsBar.innerHTML=tabsHtml;
+  content.innerHTML=contentHtml;
+  document.getElementById('resultados').style.display='block';
+  const ff=document.getElementById('formatosFaltantes');
+  if(ff)ff.style.display='block';
+  document.getElementById('resultados').scrollIntoView({behavior:'smooth',block:'start'});
+}
+// Render del panel F1001 con concepto editable por NIT y badge de origen FE/DS.
+function renderF1001Pane(cnt){
+  const meta=window.f1001Meta||{};
+  // Reconstruir lista de excluidos para mostrarla y permitir reincluir
+  const excl=Object.keys(window.excluirF1001||{}).filter(k=>window.excluirF1001[k]);
+  // Selector de concepto default global
+  const defaultC=window.conceptoF1001Default||'5004';
+  let opts='';
+  CONCEPTOS_F1001.forEach(([c,nom])=>{opts+='<option value="'+c+'"'+(c===defaultC?' selected':'')+'>'+c+' — '+nom+'</option>';});
+  let h='<div style="padding:12px 16px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;margin-bottom:12px;font-size:.85rem;line-height:1.5">'+
+    '<strong>📋 Concepto F1001 por NIT:</strong> el sistema pone el default a todos los proveedores. '+
+    'Cambia el concepto de cada NIT según la operación real (compra de inventario 5010, honorarios 5004, arrendamiento 5006, etc.) '+
+    'o marca <strong>✕ Excluir</strong> si ese pago no corresponde a F1001 (ej. pago a la propia empresa, anticipos, transferencias internas).<br>'+
+    '<div style="margin-top:10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap"><label style="font-weight:600">Concepto por defecto:</label>'+
+    '<select onchange="setConceptoF1001Default(this.value)" style="padding:5px 10px;border:1px solid var(--border);border-radius:4px;font-size:.85rem;min-width:280px">'+opts+'</select>'+
+    '<span style="font-size:.78rem;color:var(--muted)">(se aplica a NITs sin override individual)</span></div>'+
+    '</div>';
+  if(cnt===0&&excl.length===0){
+    h+='<div class="alert alert-warn">Sin registros para F1001. Verifica que hayas cargado el reporte FE con facturas de compras y/o documentos soporte.</div>';
+    return h;
+  }
+  h+='<div style="overflow-x:auto;max-width:100%"><table class="preview-table" style="min-width:max-content;font-size:.78rem"><thead><tr>'+
+    '<th>Concepto</th><th>Origen</th><th>Tipo Doc</th><th>NIT</th><th>Razón Social</th>'+
+    '<th class="num">Pago deducible</th><th class="num">Ret. Renta</th><th class="num">Ret. IVA</th>'+
+    '<th>Acción</th></tr></thead><tbody>';
+  formatos.F1001.slice(0,200).forEach(row=>{
+    const concepto=row[0],td=row[1],nit=row[2];
+    const pa=row[3],sa=row[4],pn=row[5],on=row[6],rs=row[7];
+    const pago=row[12],retR=row[16],retI=row[18];
+    const nombre=(rs||[pa,sa,pn,on].filter(Boolean).join(' '))||'(sin nombre)';
+    const fuente=meta[nit]||{fe:0,ds:0};
+    let badge='';
+    if(fuente.ds>0&&fuente.fe>0)badge='<span style="background:#FEF3C7;color:#92400E;padding:2px 6px;border-radius:4px;font-size:.68rem;font-weight:700" title="Tiene Facturas Electrónicas Y Documentos Soporte">FE+DS</span>';
+    else if(fuente.ds>0)badge='<span style="background:#DBEAFE;color:#1E40AF;padding:2px 6px;border-radius:4px;font-size:.68rem;font-weight:700" title="Documento Soporte (no obligado)">DS</span>';
+    else badge='<span style="background:#ECFDF5;color:#065F46;padding:2px 6px;border-radius:4px;font-size:.68rem;font-weight:700" title="Factura Electrónica de compra">FE</span>';
+    let optsRow='';
+    CONCEPTOS_F1001.forEach(([c,nom])=>{optsRow+='<option value="'+c+'"'+(c===concepto?' selected':'')+'>'+c+' — '+nom.substring(0,40)+'</option>';});
+    h+='<tr><td><select onchange="setConceptoF1001(\''+nit+'\',this.value)" style="padding:2px 4px;border:1px solid var(--border);border-radius:3px;font-size:.74rem;max-width:200px">'+optsRow+'</select></td>'+
+      '<td style="text-align:center">'+badge+'</td>'+
+      '<td>'+td+'</td><td class="num">'+nit+'</td><td>'+nombre+'</td>'+
+      '<td class="num">'+(pago||0).toLocaleString('es-CO')+'</td>'+
+      '<td class="num">'+(retR||0).toLocaleString('es-CO')+'</td>'+
+      '<td class="num">'+(retI||0).toLocaleString('es-CO')+'</td>'+
+      '<td><button onclick="toggleExcluirF1001(\''+nit+'\')" style="padding:3px 8px;border:1px solid var(--red);background:#fff;color:var(--red);border-radius:4px;font-size:.7rem;cursor:pointer" title="Excluir este NIT del F1001 (ej. anticipos, transferencias internas)">✕ Excluir</button></td>'+
+      '</tr>';
+  });
+  h+='</tbody></table></div>';
+  if(cnt>200)h+='<p style="font-size:.74rem;color:var(--muted);margin-top:6px">Mostrando 200 de '+cnt+' filas. El Excel descargado trae todas.</p>';
+  // Sección de NITs excluidos (permite reincluir)
+  if(excl.length){
+    h+='<div style="margin-top:14px;padding:12px 14px;background:#FEF2F2;border:1px solid #FECACA;border-radius:8px">'+
+      '<strong style="color:#991B1B;font-size:.85rem">NITs excluidos del F1001 ('+excl.length+'):</strong>'+
+      '<ul style="margin:6px 0 0 20px;font-size:.78rem">';
+    excl.forEach(n=>{h+='<li>'+n+' <button onclick="toggleExcluirF1001(\''+n+'\')" style="margin-left:6px;padding:1px 6px;font-size:.7rem;border:1px solid var(--green);background:#fff;color:var(--green);border-radius:3px;cursor:pointer">Reincluir</button></li>';});
+    h+='</ul></div>';
+  }
+  return h;
+}
+function switchTab(f){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+f).classList.add('active');
+  document.getElementById('pane-'+f).classList.add('active');
+}
+async function descargarExcel(){
+  // Hard gate: descarga del Excel es PRO. La vista en pantalla y el Ctrl+P son gratis.
+  if(!proUnlocked){
+    try{const valid=await exoPro.check();if(valid){proUnlocked=true;updateProUI();}}catch(e){}
+  }
+  if(!proUnlocked){
+    showProGate();
+    if(typeof exoTrack!=='undefined'&&exoTrack.ctaClick)exoTrack.ctaClick('exogena_desde_fe_gate_shown','precios');
+    return;
+  }
+  const wb=new ExcelJS.Workbook();
+  const hdrFill={type:'pattern',pattern:'solid',fgColor:{argb:'FF1F4E79'}};
+  const hdrFont={bold:true,color:{argb:'FFFFFFFF'},size:10,name:'Arial'};
+  const thinBorder={top:{style:'thin',color:{argb:'FF808080'}},bottom:{style:'thin',color:{argb:'FF808080'}},left:{style:'thin',color:{argb:'FF808080'}},right:{style:'thin',color:{argb:'FF808080'}}};
+  ['F1001','F1005','F1006','F1007'].forEach(f=>{
+    const ws=wb.addWorksheet(f);
+    const hdrs=FMT_HEADERS[f];
+    const hdrRow=ws.addRow(hdrs);
+    hdrRow.eachCell(c=>{c.fill=hdrFill;c.font=hdrFont;c.alignment={horizontal:'center',wrapText:true};c.border=thinBorder;});
+    formatos[f].forEach(rowData=>{
+      const r=ws.addRow(rowData);
+      r.eachCell(c=>{c.font={size:10,name:'Arial'};c.border=thinBorder;});
+    });
+    ws.columns.forEach(col=>{col.width=14;});
+  });
+  // Hoja resumen
+  const wsR=wb.addWorksheet('Resumen');
+  wsR.addRow(['Generado por exogenadian.com - Exógena desde reporte FE del MUISCA']);
+  wsR.addRow(['Declarante NIT',document.getElementById('iNit').value]);
+  wsR.addRow(['Razón social',document.getElementById('iRazon').value]);
+  wsR.addRow(['Año gravable',document.getElementById('iAnio').value]);
+  wsR.addRow(['Fecha generación',new Date().toLocaleString('es-CO')]);
+  wsR.addRow([]);
+  wsR.addRow(['Formato','Registros']).eachCell(c=>{c.fill=hdrFill;c.font=hdrFont;});
+  ['F1001','F1005','F1006','F1007'].forEach(f=>{wsR.addRow([f,formatos[f].length]);});
+  const buf=await wb.xlsx.writeBuffer();
+  const blob=new Blob([buf],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='exogena-desde-FE-'+document.getElementById('iAnio').value+'.xlsx';
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  if(typeof exoTrack!=='undefined')exoTrack.generate('exogena-desde-fe','xlsx');
+}
+function resetTodo(){
+  rawData=null;docs={emitidos:[],recibidos:[]};formatos={F1001:[],F1005:[],F1006:[],F1007:[]};
+  tercerosDatos={};
+  document.getElementById('parseInfo').style.display='none';
+  document.getElementById('resultados').style.display='none';
+  const ff=document.getElementById('formatosFaltantes');if(ff)ff.style.display='none';
+  document.getElementById('fileFEStatus').textContent='';
+  document.getElementById('fileFE').value='';
+  document.getElementById('btnGen').disabled=true;
+  const st=document.getElementById('baseTercStatus');if(st)st.innerHTML='';
+}
+// ═══════════════════════════════════════════════════════════
+// PRO VALIDATION (usa shared/pro.js → window.exoPro)
+// ═══════════════════════════════════════════════════════════
+let proUnlocked=false;
+async function initPro(){
+  // pro.js es defer: si window.exoPro aún no existe, salir y reintentar
+  // en DOMContentLoaded.
+  if(!window.exoPro)return;
+  try{const valid=await exoPro.check();if(valid){proUnlocked=true;updateProUI();}}catch(e){}
+}
+function updateProUI(){
+  const badge=document.getElementById('proBadge');
+  if(badge)badge.innerHTML=proUnlocked?'<span style="background:#059669;color:#fff;padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:700">PRO activo</span>':'';
+  const status=document.getElementById('proStatus');
+  if(status)status.textContent=proUnlocked?'✓ PRO activo — descargas desbloqueadas':'🔒 Vista en pantalla gratis · Descarga Excel para Prevalidador requiere PRO';
+  const a=document.getElementById('proActivation');
+  if(a)a.style.display=proUnlocked?'none':'flex';
+}
+async function activarPro(){
+  const inp=document.getElementById('proKeyInput');
+  const v=inp.value.trim().toLowerCase();
+  if(!v){if(typeof exoToast!=='undefined')exoToast('Ingresa tu email PRO','warning');return;}
+  const btn=inp.parentElement.querySelector('button');
+  if(btn){btn.textContent='Verificando...';btn.disabled=true;}
+  inp.disabled=true;
+  try{
+    const valid=await exoPro.activate(v);
+    if(valid){proUnlocked=true;updateProUI();if(typeof exoToast!=='undefined')exoToast('PRO activado','success');}
+    else if(typeof exoToast!=='undefined')exoToast('No hay suscripción activa para este email','warning');
+  }catch(e){if(typeof exoToast!=='undefined')exoToast('Error de conexión','error');}
+  finally{inp.disabled=false;if(btn){btn.textContent='Activar';btn.disabled=false;}}
+}
+function showProGate(){
+  if(document.getElementById('proGateOverlay'))return;
+  const ov=document.createElement('div');
+  ov.id='proGateOverlay';
+  ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
+  ov.innerHTML=
+    '<div style="background:#fff;border-radius:16px;padding:32px;max-width:460px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.2)">'+
+    '<div style="font-size:2.5rem;margin-bottom:12px">🔒</div>'+
+    '<h3 style="font-size:1.35rem;color:#111827;margin-bottom:8px;font-weight:700">Descarga del Excel requiere PRO</h3>'+
+    '<p style="color:#6B7280;font-size:.9rem;margin-bottom:16px">La vista en pantalla y la impresión Ctrl+P son <strong>gratis</strong>. La generación del Excel con las hojas F1001, F1005, F1006 y F1007 listo para el Prevalidador es una función PRO.</p>'+
+    '<ul style="text-align:left;color:#374151;font-size:.86rem;margin:0 auto 22px;max-width:320px;line-height:1.75">'+
+      '<li>✅ Excel con las 4 hojas + Resumen</li>'+
+      '<li>✅ Acceso a todas las herramientas PRO del sitio</li>'+
+      '<li>✅ Soporte prioritario</li>'+
+    '</ul>'+
+    '<a href="precios.html" style="display:inline-flex;align-items:center;gap:6px;padding:13px 32px;background:#059669;color:#fff;border-radius:12px;font-weight:700;font-size:.95rem;text-decoration:none">Desbloquear con PRO — $49.900/mes</a>'+
+    '<div style="margin-top:18px;padding-top:14px;border-top:1px solid #E5E7EB;font-size:.78rem;color:#9CA3AF">¿Ya tienes PRO? <a href="#" onclick="document.getElementById(\'proGateOverlay\').remove();const i=document.getElementById(\'proKeyInput\');if(i){i.focus();i.scrollIntoView({behavior:\'smooth\',block:\'center\'});}return false" style="color:#059669;font-weight:600">Activar aquí</a></div>'+
+    '</div>';
+  document.body.appendChild(ov);
+  ov.addEventListener('click',function(e){if(e.target===ov)ov.remove();});
+}
+if(window.exoPro){initPro()}else{document.addEventListener('DOMContentLoaded',initPro,{once:true})}
+// Drag & drop sobre dropzone
+window.addEventListener('dragover',e=>e.preventDefault());
+window.addEventListener('drop',e=>e.preventDefault());
+const dz=document.getElementById('dzFE');
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag');});
+dz.addEventListener('dragenter',e=>{e.preventDefault();dz.classList.add('drag');});
+dz.addEventListener('dragleave',e=>{if(e.target===dz)dz.classList.remove('drag');});
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag');if(e.dataTransfer.files[0])processFE(e.dataTransfer.files[0]);});
+</script>
+<script src="shared/analytics.js?v=b756a0cb"></script>
+<link rel="stylesheet" href="shared/chat.css?v=a52afe72">
+<script defer src="shared/chat.js?v=a45c7cf2"></script>
+</body>
+</html>

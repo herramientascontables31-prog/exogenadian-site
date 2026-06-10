@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="../shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S7SM6ST4CC');
+</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutorial: c&oacute;mo armar el F350 retenci&oacute;n en la fuente en exogenadian.com | Ex&oacute;genaDIAN</title>
+<meta name="description" content="Tutorial paso a paso: c&oacute;mo cargar el balance por terceros o auxiliar 2365, mapear retenciones por concepto DIAN, editar tarifas y bases, y descargar el F350 listo.">
+<link rel="canonical" href="https://exogenadian.com/tutoriales/f350.html">
+<meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tutorial-mockups.css?v=dccdc93b">
+<style>
+:root{--green-900:#064E3B;--green-800:#065F46;--green-700:#047857;--green-600:#059669;--green-500:#10B981;--green-400:#34D399;--green-300:#6EE7B7;--green-200:#A7F3D0;--green-100:#D1FAE5;--green-50:#ECFDF5;--white:#FFF;--gray-50:#F9FAFB;--gray-100:#F3F4F6;--gray-200:#E5E7EB;--gray-300:#D1D5DB;--gray-400:#9CA3AF;--gray-500:#6B7280;--gray-600:#4B5563;--gray-700:#374151;--gray-800:#1F2937;--gray-900:#111827;--amber-50:#FFFBEB;--amber-100:#FEF3C7;--amber-500:#F59E0B;--amber-700:#92400E;--amber-800:#78350F;--blue-50:#EFF6FF;--blue-100:#DBEAFE;--blue-500:#3B82F6;--blue-700:#1D4ED8;--purple-50:#F5F3FF;--purple-500:#8B5CF6;--purple-700:#6D28D9;--rose-50:#FFF1F2;--rose-500:#F43F5E;--rose-700:#BE123C}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-900);line-height:1.6}
+.tut-layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh}@media(max-width:900px){.tut-layout{grid-template-columns:1fr}}
+.sidebar{background:#fff;border-right:1px solid var(--gray-200);padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}.sidebar-header{padding:16px 20px;border-bottom:1px solid var(--gray-100)}.sidebar-header a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--gray-800);font-weight:800;font-size:.9rem}.sidebar-header a div{width:28px;height:28px;background:linear-gradient(135deg,var(--green-600),var(--green-400));border-radius:7px;display:grid;place-items:center;color:#fff;font-size:.7rem;font-weight:900}.sidebar-curso{padding:16px 20px;border-bottom:1px solid var(--gray-100)}.sidebar-curso h3{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--green-700);margin-bottom:4px}.sidebar-curso p{font-size:.88rem;font-weight:700;color:var(--gray-800)}
+.sidebar-nav{padding:12px 0;flex:1}.sidebar-nav a{display:flex;align-items:center;gap:10px;padding:10px 20px;text-decoration:none;color:var(--gray-500);font-size:.85rem;font-weight:500;transition:all .15s;border-left:3px solid transparent}.sidebar-nav a:hover{background:var(--green-50);color:var(--green-700)}.sidebar-nav a.active{background:var(--green-50);color:var(--green-700);font-weight:700;border-left-color:var(--green-600)}.sidebar-nav a .num{width:24px;height:24px;border-radius:50%;background:var(--gray-100);color:var(--gray-500);display:grid;place-items:center;font-size:.72rem;font-weight:700;flex-shrink:0}.sidebar-nav a.active .num{background:var(--green-600);color:#fff}
+.sidebar-back{padding:16px 20px;border-top:1px solid var(--gray-100);margin-top:auto}.sidebar-back a{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--gray-400);font-size:.82rem;font-weight:500}.sidebar-back a:hover{color:var(--gray-700)}
+.main{padding:32px 40px 60px;max-width:880px}@media(max-width:900px){.main{padding:20px 16px 80px}.sidebar{display:none}}
+.breadcrumb{font-size:.78rem;color:var(--gray-400);margin-bottom:8px}.breadcrumb a{color:var(--gray-400);text-decoration:none}.breadcrumb a:hover{color:var(--green-600)}
+.tag{display:inline-flex;align-items:center;gap:6px;background:var(--green-100);color:var(--green-700);padding:4px 14px;border-radius:100px;font-size:.74rem;font-weight:700;margin-bottom:14px}
+h1.tut-title{font-family:'Fraunces',serif;font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;letter-spacing:-.02em;margin-bottom:10px;line-height:1.2}p.tut-lead{font-size:1.05rem;color:var(--gray-600);max-width:680px;line-height:1.6;margin-bottom:30px}
+.step{margin-bottom:40px;padding-top:20px;border-top:2px solid var(--gray-200)}.step:first-of-type{border-top:none;padding-top:0}.step-num{display:inline-flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:.9rem;color:var(--green-700);font-weight:700;margin-bottom:8px}.step-num span{display:grid;place-items:center;width:32px;height:32px;background:var(--green-600);color:#fff;border-radius:50%;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:800}.step h2{font-family:'Fraunces',serif;font-size:1.45rem;font-weight:700;margin-bottom:8px;color:var(--gray-900);line-height:1.25}.step p{font-size:.95rem;color:var(--gray-700);line-height:1.7;margin-bottom:14px}.step ul,.step ol{margin:8px 0 16px 22px;display:flex;flex-direction:column;gap:7px}.step li{font-size:.94rem;color:var(--gray-700);line-height:1.6}.step h3{font-size:1.05rem;font-weight:700;margin:18px 0 8px;color:var(--gray-800)}.step code{font-family:'JetBrains Mono',monospace;font-size:.86rem;background:var(--gray-100);padding:2px 7px;border-radius:5px;color:var(--gray-800)}
+.capture{background:var(--gray-100);border:2px dashed var(--gray-300);border-radius:12px;padding:30px 20px;margin:18px 0;text-align:center;color:var(--gray-500);font-size:.85rem;line-height:1.55}.capture .cap-icon{font-size:2rem;display:block;margin-bottom:10px;opacity:.55}.capture .cap-label{font-weight:700;color:var(--gray-700);font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}.capture em{font-style:normal;background:#fff;padding:2px 8px;border-radius:5px;font-size:.82rem;color:var(--gray-700);font-weight:600}
+.tip{background:var(--blue-50);border-left:4px solid var(--blue-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:#1E40AF;line-height:1.6}.tip strong{color:var(--blue-700)}.warn{background:var(--amber-50);border-left:4px solid var(--amber-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:var(--amber-800);line-height:1.6}.warn strong{color:var(--amber-700)}.err{background:var(--rose-50);border-left:4px solid var(--rose-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:#9F1239;line-height:1.6}.err strong{color:var(--rose-700)}
+.tabla{width:100%;border-collapse:collapse;margin:14px 0;border-radius:10px;overflow:hidden;border:1px solid var(--gray-200);font-size:.86rem}.tabla th{background:var(--gray-100);padding:9px 13px;text-align:left;font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gray-600)}.tabla td{padding:9px 13px;border-top:1px solid var(--gray-100);color:var(--gray-700)}.tabla tr:hover{background:var(--green-50)}.tabla code{font-family:'JetBrains Mono',monospace;font-size:.78rem;background:var(--white);padding:1px 5px;border-radius:3px}
+.actions-list{background:#fff;border:1px solid var(--gray-200);border-radius:12px;padding:14px 18px;margin:14px 0}.actions-list h4{font-size:.78rem;font-weight:700;color:var(--gray-700);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}.actions-list .item{display:flex;gap:10px;padding:6px 0;font-size:.86rem;color:var(--gray-700);border-bottom:1px solid var(--gray-100)}.actions-list .item:last-child{border-bottom:none}.actions-list .item code{flex-shrink:0;font-size:.78rem;background:var(--green-50);color:var(--green-700);padding:2px 8px;border-radius:5px;font-family:'JetBrains Mono',monospace;font-weight:600}
+.cta-end{background:linear-gradient(135deg,var(--green-50),#D1FAE5);border:2px solid var(--green-300);border-radius:16px;padding:28px 26px;margin:30px 0 20px;text-align:center}.cta-end h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;color:var(--green-800);margin-bottom:6px}.cta-end p{font-size:.92rem;color:var(--green-700);margin-bottom:16px}.cta-end a{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:var(--green-600);color:#fff;border-radius:12px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 14px rgba(5,150,105,.25);transition:all .2s}.cta-end a:hover{background:var(--green-700);transform:translateY(-2px)}
+.step-nav{display:flex;justify-content:space-between;margin-top:30px;padding-top:20px;border-top:2px solid var(--gray-200);gap:10px;flex-wrap:wrap}.step-nav a{display:inline-flex;align-items:center;gap:7px;padding:11px 22px;border-radius:10px;text-decoration:none;font-weight:700;font-size:.88rem;background:var(--gray-100);color:var(--gray-700);transition:all .2s}.step-nav a:hover{background:var(--gray-200)}.step-nav a.next{background:var(--green-600);color:#fff;box-shadow:0 4px 12px rgba(5,150,105,.25)}.step-nav a.next:hover{background:var(--green-700)}
+</style>
+<script async src="../shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div class="tut-layout">
+  <aside class="sidebar">
+    <div class="sidebar-header"><a href="../index.html"><div>E</div>Ex&oacute;genaDIAN</a></div>
+    <div class="sidebar-curso"><h3>Tutorial</h3><p>Retefuente &mdash; F350</p></div>
+    <nav class="sidebar-nav">
+      <a href="#intro" class="active"><span class="num">0</span> Antes de empezar</a>
+      <a href="#paso1"><span class="num">1</span> Subir archivo</a>
+      <a href="#paso2"><span class="num">2</span> Datos del declarante</a>
+      <a href="#paso3"><span class="num">3</span> Verificar columnas</a>
+      <a href="#paso4"><span class="num">4</span> Mapear retenciones</a>
+      <a href="#paso5"><span class="num">5</span> Tabla de terceros</a>
+      <a href="#paso6"><span class="num">6</span> Descargar Excel</a>
+      <a href="#errores"><span class="num">!</span> Errores comunes</a>
+      <a href="#siguiente"><span class="num">&rarr;</span> Siguientes pasos</a>
+    </nav>
+    <div class="sidebar-back"><a href="../tutoriales.html">&larr; Todos los tutoriales</a></div>
+  </aside>
+  <div class="main">
+    <div class="breadcrumb"><a href="../index.html">Inicio</a> &rsaquo; <a href="../tutoriales.html">Tutoriales</a> &rsaquo; F350</div>
+    <span class="tag">Tutorial &middot; ~10 min</span>
+    <h1 class="tut-title">C&oacute;mo armar el F350 (retenci&oacute;n en la fuente) en exogenadian.com</h1>
+    <p class="tut-lead">Gu&iacute;a paso a paso para usar la herramienta del F350 (<a href="../retencion350.html">retencion350.html</a>): cargar el balance por terceros o el auxiliar de la cuenta 2365, mapear las retenciones practicadas por concepto DIAN, editar bases y tarifas en tabla, y descargar el F350 listo para presentar mensualmente.</p>
+    <section id="intro" class="step">
+      <h2>Antes de empezar &mdash; lista de chequeo</h2>
+      <p>Lo que necesitas:</p>
+      <ul>
+        <li><strong>Balance por terceros del mes a declarar</strong> en Excel/CSV, o el <strong>auxiliar de la cuenta 2365</strong> (retenci&oacute;n en la fuente practicada). Cualquiera de los dos sirve &mdash;la herramienta detecta cu&aacute;l es.</li>
+        <li><strong>NIT y raz&oacute;n social</strong> del cliente (agente retenedor).</li>
+        <li><strong>Casillas 129 y 133</strong> del F350 anterior si aplican (sanciones por extemporaneidad o intereses moratorios) &mdash;la herramienta no las calcula, las llenas manual.</li>
+      </ul>
+      <div class="tip">
+        <strong>El F350 se presenta mensualmente</strong>, antes del 7 al 17 del mes siguiente seg&uacute;n los &uacute;ltimos d&iacute;gitos del NIT. Si tu cliente NO retuvo nada en el mes pero tiene la responsabilidad en el RUT, igual debe presentar el F350 en ceros (Art. 376 ET).
+      </div>
+      <h3>Diferencia entre balance por terceros y auxiliar 2365</h3>
+      <table class="tabla">
+        <thead><tr><th>Tipo</th><th>Cu&aacute;ndo us&aacute;rlo</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Balance por terceros del mes</strong></td><td>Si tu software contable te da el balance del mes con NIT en cada movimiento.</td></tr>
+          <tr><td><strong>Auxiliar de la cuenta 2365</strong></td><td>Si exportas el detalle solo de la cuenta 2365 (retenciones practicadas) con NIT del retenido.</td></tr>
+        </tbody>
+      </table>
+      <div class="mockup">
+        <div class="mockup-bar"><div class="mockup-dots"><span></span><span></span><span></span></div><div class="mockup-url">exogenadian.com/retencion350.html</div></div>
+        <div class="mockup-body">
+          <div class="mockup-h">F350 &mdash; Retenciones en la fuente</div>
+          <div class="mockup-dropzone" style="margin-bottom:10px"><span class="mockup-dropzone-icon">&#128194;</span>Sube el balance o el auxiliar 2365<br><span style="font-size:.62rem;color:#9CA3AF">.xlsx, .xls o .csv</span></div>
+          <div class="mockup-form">
+            <div><div class="mockup-label">NIT del retenedor</div><div class="mockup-input">900.123.456</div></div>
+            <div><div class="mockup-label">Mes a declarar</div><div class="mockup-input">Marzo 2025</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="paso1" class="step">
+      <div class="step-num"><span>1</span> Paso 1</div>
+      <h2>Subir el archivo</h2>
+      <p>Entra a <a href="../retencion350.html">exogenadian.com/retencion350.html</a>. La herramienta acepta Excel (.xlsx/.xls) y CSV. Sube el archivo arrastrando al drop-zone o con clic; la herramienta detecta autom&aacute;ticamente cu&aacute;l de los dos tipos subiste.</p>
+      <h3>Archivos que acepta la herramienta del F350</h3>
+      <table class="tabla">
+        <thead><tr><th>Archivo</th><th>Qu&eacute; trae</th><th>&iquest;Obligatorio?</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Balance de prueba por terceros</strong> del mes declarado.</td><td>Todas las cuentas del PUC con saldo y movimiento. La herramienta extrae las subcuentas <code>2365XX</code> (retenciones practicadas) y <code>2367XX</code> (autorretenciones).</td><td>Una de las dos opciones</td></tr>
+          <tr><td><strong>Auxiliar espec&iacute;fico de la 2365</strong> del mes declarado.</td><td>Solo el detalle de la cuenta 2365: subcuenta, tercero (NIT + nombre), base, tarifa, valor retenido.</td><td>Una de las dos opciones &mdash;m&aacute;s liviano si tu balance es muy grande</td></tr>
+          <tr><td><strong>Certificados de retenci&oacute;n</strong> que recibi&oacute; el cliente</td><td>Para cruzar lo que LE retuvieron vs lo que aparece en F1003 (no en F350).</td><td>NO se sube aqu&iacute; &mdash;ese cruce se hace en la herramienta de ex&oacute;gena (F1003)</td></tr>
+        </tbody>
+      </table>
+      <div class="mockup">
+        <div class="mockup-body">
+          <div class="mockup-grid-2">
+            <div><div class="mockup-label">Estado inicial</div><div class="mockup-dropzone"><span class="mockup-dropzone-icon">&#128194;</span>Arrastra el archivo</div></div>
+            <div><div class="mockup-label">Archivo cargado</div><div class="mockup-dropzone mockup-dropzone--filled"><span class="mockup-dropzone-icon">&#9989;</span>auxiliar_2365_marzo.xlsx<br><span class="mockup-btn-secondary" style="margin-top:4px;font-size:.62rem;padding:2px 8px">Cambiar archivo</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="step-nav"><span></span><a href="#paso2" class="next">Paso 2: Datos del declarante &rarr;</a></div>
+    </section>
+    <section id="paso2" class="step">
+      <div class="step-num"><span>2</span> Paso 2</div>
+      <h2>Llenar los datos del declarante</h2>
+      <table class="tabla">
+        <thead><tr><th>Campo</th><th>Qu&eacute; va aqu&iacute;</th></tr></thead>
+        <tbody>
+          <tr><td>NIT</td><td>NIT del agente retenedor (sin DV).</td></tr>
+          <tr><td>Raz&oacute;n social</td><td>Como aparece en el RUT.</td></tr>
+          <tr><td>A&ntilde;o gravable</td><td>2025 por defecto.</td></tr>
+          <tr><td>Mes</td><td>El mes a declarar (1 a 12).</td></tr>
+          <tr><td>Casilla 129</td><td>Solo si aplica: sanciones del per&iacute;odo (extemporaneidad). Manual.</td></tr>
+          <tr><td>Casilla 133</td><td>Solo si aplica: intereses moratorios. Manual.</td></tr>
+        </tbody>
+      </table>
+      <div class="mockup">
+        <div class="mockup-body">
+          <div class="mockup-h">Datos del declarante</div>
+          <div class="mockup-form">
+            <div><div class="mockup-label">NIT</div><div class="mockup-input">900.123.456</div></div>
+            <div><div class="mockup-label">Raz&oacute;n social</div><div class="mockup-input">Comercial Andina SAS</div></div>
+            <div><div class="mockup-label">A&ntilde;o gravable</div><div class="mockup-input">2025</div></div>
+            <div><div class="mockup-label">Mes</div><div class="mockup-input">Marzo (03)</div></div>
+          </div>
+          <div style="margin-top:10px;padding:6px 10px;background:#F9FAFB;border-radius:5px;font-size:.66rem;color:#6B7280">&#9656; Casillas 129 y 133 (sanciones e intereses) <em>&mdash; colapsadas</em></div>
+        </div>
+      </div>
+      <div class="step-nav"><a href="#paso1">&larr; Paso 1</a><a href="#paso3" class="next">Paso 3: Verificar columnas &rarr;</a></div>
+    </section>
+    <section id="paso3" class="step">
+      <div class="step-num"><span>3</span> Paso 3</div>
+      <h2>Verificar las columnas del archivo</h2>
+      <p>Despu&eacute;s de subir el archivo y llenar los datos del declarante, la herramienta abre la pantalla de <em>verificaci&oacute;n de columnas</em>: te muestra c&oacute;mo entendi&oacute; el archivo y te pide confirmar el mapeo. <strong>Es el paso donde m&aacute;s usuarios se quedan</strong>; vale la pena tomarse 1 minuto en revisar antes de seguir al mapeo de retenciones.</p>
+      <p class="tut-lead" style="font-size:.9rem;color:var(--gray-600);margin-bottom:14px"><em>El F350 acepta dos tipos de archivo</em>: balance de prueba por terceros (todas las cuentas) o auxiliar espec&iacute;fico de la 2365 (solo retenciones practicadas). El mapper de columnas funciona igual en ambos &mdash;solo cambian las cuentas que esperar&aacute;s ver.</p>
+      <div class="mockup">
+        <div class="mockup-body mockup-body--gray">
+          <div class="mockup-h">Verificar columnas del archivo</div>
+          <div style="display:flex;gap:6px;align-items:center;margin-bottom:8px"><span class="mockup-label" style="margin:0">Fila de header:</span><span class="mockup-input" style="display:inline-block;width:auto">Fila 1 &#9662;</span></div>
+          <table class="mockup-table">
+            <thead><tr><th>C&oacute;digo <span class="mockup-chip mockup-chip--ok">OK</span></th><th>Nombre <span class="mockup-chip mockup-chip--ok">OK</span></th><th>Saldo final <span class="mockup-chip mockup-chip--warn">Revisar</span></th></tr></thead>
+            <tbody>
+              <tr><td>236505</td><td>Salarios y pagos lab</td><td class="mockup-table-num">1.245.000</td></tr>
+              <tr><td>236510</td><td>Honorarios</td><td class="mockup-table-num">880.000</td></tr>
+              <tr><td>236515</td><td>Servicios</td><td class="mockup-table-num">420.000</td></tr>
+              <tr><td>236525</td><td>Arrendamientos</td><td class="mockup-table-num">315.000</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <h3>Las 3 columnas obligatorias y los nombres que reconoce</h3>
+      <p>La herramienta detecta autom&aacute;ticamente las columnas usando los nombres del header. Solo necesita 3 columnas <strong>obligatorias</strong>; las dem&aacute;s son opcionales:</p>
+      <table class="tabla">
+        <thead><tr><th>Columna</th><th>Qu&eacute; busca</th><th>Nombres que reconoce</th></tr></thead>
+        <tbody>
+          <tr><td><strong>C&oacute;digo PUC</strong></td><td>El n&uacute;mero de cuenta</td><td><code>cuenta</code>, <code>codigo</code>, <code>c&oacute;digo</code>, <code>code</code>, <code>account</code></td></tr>
+          <tr><td><strong>Nombre cuenta</strong></td><td>La descripci&oacute;n de la cuenta</td><td><code>nombre</code>, <code>descripcion</code>, <code>nombre cuenta</code>, <code>cuenta contable</code>, <code>description</code></td></tr>
+          <tr><td><strong>Saldo Final</strong></td><td>Saldo neto al cierre del mes declarado</td><td><code>saldo final</code>, <code>saldo total</code>, <code>saldo actual</code>, <code>saldo</code>, <code>final</code></td></tr>
+          <tr><td>D&eacute;bitos (opcional)</td><td>Movimiento d&eacute;bito del mes</td><td><code>debito</code>, <code>d&eacute;bito</code>, <code>debit</code>, <code>movimiento debito</code></td></tr>
+          <tr><td>Cr&eacute;ditos (opcional)</td><td>Movimiento cr&eacute;dito del mes</td><td><code>credito</code>, <code>cr&eacute;dito</code>, <code>credit</code>, <code>movimiento credito</code></td></tr>
+          <tr><td>Saldo Inicial (opcional)</td><td>Saldo de apertura del mes</td><td><code>saldo inicial</code>, <code>saldo anterior</code>, <code>inicial</code></td></tr>
+        </tbody>
+      </table>
+      <div class="tip">
+        <strong>&iquest;El archivo solo trae D&eacute;bitos y Cr&eacute;ditos (sin Saldo Final)?</strong> No es problema. La herramienta calcula el saldo final autom&aacute;ticamente: para activos, gastos y costos (clases 1, 5, 6, 7) usa <code>D&eacute;bitos &minus; Cr&eacute;ditos + Saldo Inicial</code>; para pasivos, patrimonio e ingresos (clases 2, 3, 4) usa <code>Cr&eacute;ditos &minus; D&eacute;bitos + Saldo Inicial</code>. Para F350 lo cr&iacute;tico es el lado <strong>cr&eacute;dito de la 2365</strong> (donde se registra la retenci&oacute;n practicada).
+      </div>
+      <h3>Cuando una columna sale en amarillo</h3>
+      <p>Si la herramienta no logr&oacute; identificar una de las 3 obligatorias, aparece un <strong>mapper amarillo</strong> con un dropdown por cada columna pendiente:</p>
+      <ol>
+        <li>Mira el preview (las 15 primeras filas) para ver qu&eacute; columna del Excel contiene cada dato.</li>
+        <li>Abre el dropdown amarillo y selecciona la columna correcta de la lista.</li>
+        <li>Cuando las 3 quedan en verde, el bot&oacute;n <em>"Confirmar y Procesar"</em> se habilita.</li>
+      </ol>
+      <div class="warn">
+        <strong>Si NINGUNA columna del Excel sirve:</strong> probablemente el archivo no trae Saldo Final ni el par D&eacute;bito/Cr&eacute;dito. Vuelve al software contable y exporta de nuevo pidiendo <em>"Auxiliar de cuenta"</em> de la 2365 con saldos por subcuenta y por tercero, o <em>"Balance de prueba por terceros"</em>.
+      </div>
+      <h3>Casos t&iacute;picos donde el mapeo se equivoca</h3>
+      <ul>
+        <li><strong>Doble cabecera</strong> (fila 1 con grupos &mdash;"Movimientos", "Saldos"&mdash; y fila 2 con sub-encabezados): el detector elige la fila 1 y queda todo amarillo. Usa el dropdown <em>"Fila de header"</em> y elige manualmente la fila 2.</li>
+        <li><strong>Filas decorativas arriba</strong> (logo, t&iacute;tulo "AUXILIAR 2365", per&iacute;odo, NIT): mismo arreglo, mover la fila de header.</li>
+        <li><strong>Header en ingl&eacute;s</strong> ("Account", "Description", "Balance"): la herramienta los reconoce. Si igual queda amarillo, mapea con el dropdown.</li>
+        <li><strong>Ambig&uuml;edad "Saldo" vs "Saldo Total" vs "Saldo mes anterior"</strong>: revisa el preview y confirma que la columna marcada corresponde al cierre del mes declarado. Si toma el mes anterior, el F350 va a salir con retenciones de ese per&iacute;odo, no del actual.</li>
+        <li><strong>Celdas combinadas en el header</strong>: aparecen como vac&iacute;as. Lo m&aacute;s f&aacute;cil es abrir el Excel, descombinar (Inicio &rarr; Combinar y centrar &rarr; quitar) y volver a subir.</li>
+        <li><strong>Auxiliar 2365 sin columna NIT del tercero</strong>: si subes el auxiliar pero la columna del NIT no aparece en el preview, el F350 va a quedar sin terceros. Vuelve al software y exporta el auxiliar con <em>"detalle por tercero"</em> activado.</li>
+      </ul>
+      <h3>Antes de dar "Confirmar y Procesar"</h3>
+      <ul>
+        <li>Las 3 columnas obligatorias est&aacute;n en verde.</li>
+        <li>En el preview, los <strong>n&uacute;meros</strong> est&aacute;n en la columna que la herramienta marc&oacute; como Saldo Final (o D&eacute;bito/Cr&eacute;dito).</li>
+        <li>Los <strong>c&oacute;digos PUC</strong> arrancan con d&iacute;gito. Si subiste el auxiliar 2365, ver&aacute;s sub-cuentas <code>2365XX</code> en el preview.</li>
+        <li>La cantidad de filas detectadas es similar al archivo original.</li>
+      </ul>
+      <p>Cuando todo est&eacute; OK, da clic en <strong>"Confirmar y Procesar &rarr;"</strong>.</p>
+      <div class="step-nav"><a href="#paso2">&larr; Paso 2</a><a href="#paso4" class="next">Paso 4: Mapear retenciones &rarr;</a></div>
+    </section>
+    <section id="paso4" class="step">
+      <div class="step-num"><span>4</span> Paso 4</div>
+      <h2>Mapear retenciones por concepto DIAN</h2>
+      <p>La herramienta clasifica autom&aacute;ticamente las subcuentas de la 2365 a su concepto DIAN del F350:</p>
+      <table class="tabla">
+        <thead><tr><th>Subcuenta PUC</th><th>Concepto F350</th><th>Tarifa t&iacute;pica</th></tr></thead>
+        <tbody>
+          <tr><td><code>236505</code> Salarios y pagos laborales</td><td>Cas. 35 Salarios y pagos laborales</td><td>Tabla Art. 383 ET</td></tr>
+          <tr><td><code>236510</code> Honorarios</td><td>Cas. 36 Honorarios</td><td>10% / 11%</td></tr>
+          <tr><td><code>236515</code> Servicios</td><td>Cas. 37 Servicios</td><td>4% / 6%</td></tr>
+          <tr><td><code>236520</code> Comisiones</td><td>Cas. 38 Comisiones</td><td>10% / 11%</td></tr>
+          <tr><td><code>236525</code> Arrendamientos</td><td>Cas. 39 Arrendamientos</td><td>3.5% bienes muebles / 3.5% inmuebles</td></tr>
+          <tr><td><code>236540</code> Compras</td><td>Cas. 41 Compras</td><td>2.5% / 3.5%</td></tr>
+          <tr><td><code>236570</code> Otros conceptos</td><td>Cas. varios</td><td>Variable</td></tr>
+          <tr><td><code>2367XX</code> Autorretenciones</td><td>Cas. autorretenci&oacute;n</td><td>Decreto 0572/2025 espec&iacute;fico</td></tr>
+        </tbody>
+      </table>
+      <div class="mockup">
+        <div class="mockup-body">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div class="mockup-h" style="margin:0">Retenciones detectadas</div><span class="mockup-btn-amber">&#128270; Revisar con IA</span></div>
+          <table class="mockup-table">
+            <thead><tr><th>Subcuenta</th><th>Concepto</th><th>Total</th><th>Casilla F350</th></tr></thead>
+            <tbody>
+              <tr><td>236505</td><td>Salarios y pagos lab</td><td class="mockup-table-num">1.245.000</td><td><span class="mockup-badge">Cas 35</span></td></tr>
+              <tr><td>236510</td><td>Honorarios</td><td class="mockup-table-num">880.000</td><td><span class="mockup-badge">Cas 36</span></td></tr>
+              <tr><td>236515</td><td>Servicios</td><td class="mockup-table-num">420.000</td><td><span class="mockup-badge">Cas 37</span></td></tr>
+              <tr><td>236540</td><td>Compras</td><td class="mockup-table-num">125.000</td><td><span class="mockup-badge">Cas 41</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="warn">
+        <strong>Cambio importante AG 2026 (Decreto 0572/2025):</strong> nuevas bases m&iacute;nimas de retenci&oacute;n para compras (10 UVT) y servicios (2 UVT). Si tu cliente factur&oacute; o pag&oacute; bajo esos l&iacute;mites, NO se debi&oacute; retener. La herramienta valida esto autom&aacute;ticamente.
+      </div>
+      <div class="tip">
+        <strong>Bot&oacute;n "&#128270; Revisar con IA":</strong> si la herramienta detect&oacute; movimientos dudosos (no sabe si es honorario o servicio), la IA evalu&aacute; el nombre de la cuenta y el patr&oacute;n del movimiento, y sugiere el concepto correcto.
+      </div>
+      <div class="step-nav"><a href="#paso3">&larr; Paso 3</a><a href="#paso5" class="next">Paso 5: Tabla de terceros &rarr;</a></div>
+    </section>
+    <section id="paso5" class="step">
+      <div class="step-num"><span>5</span> Paso 5</div>
+      <h2>Revisar la tabla de terceros editable</h2>
+      <p>La herramienta arma una tabla con todos los terceros a quienes el cliente le retuvo en el mes. Cada fila tiene columnas editables:</p>
+      <table class="tabla">
+        <thead><tr><th>Columna</th><th>Editable</th><th>Para qu&eacute;</th></tr></thead>
+        <tbody>
+          <tr><td>NIT</td><td>S&iacute;</td><td>Si la herramienta detect&oacute; un NIT mal escrito.</td></tr>
+          <tr><td>Tercero (nombre/raz&oacute;n)</td><td>S&iacute;</td><td>Para corregir o completar.</td></tr>
+          <tr><td>Concepto F350</td><td>S&iacute;</td><td>Si el mapeo autom&aacute;tico se equivoc&oacute;.</td></tr>
+          <tr><td>Base de retenci&oacute;n</td><td>S&iacute;</td><td>Por si el balance trae base equivocada o incompleta.</td></tr>
+          <tr><td>Tarifa</td><td>S&iacute;</td><td>Si tu cliente aplica una tarifa especial (zona franca, autorretenci&oacute;n, etc.).</td></tr>
+          <tr><td>Valor retenido</td><td>S&iacute; (recalcula)</td><td>Producto de base &times; tarifa.</td></tr>
+        </tbody>
+      </table>
+      <div class="mockup">
+        <div class="mockup-body mockup-body--gray">
+          <div class="mockup-h">Tabla de terceros editable</div>
+          <table class="mockup-table">
+            <thead><tr><th>NIT</th><th>Tercero</th><th>Concepto</th><th>Base</th><th>Tarifa</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>1023456789</td><td>P&Eacute;REZ JUAN</td><td>Honorarios</td><td class="mockup-table-num">8.000.000</td><td class="mockup-table-num">11%</td><td class="mockup-table-num">880.000</td></tr>
+              <tr><td>900456123</td><td>Servicios SAS</td><td>Servicios</td><td class="mockup-table-num">10.500.000</td><td class="mockup-table-num">4%</td><td class="mockup-table-num">420.000</td></tr>
+              <tr style="background:#FEF3C7"><td>52345678</td><td>RAM&Iacute;REZ ANA</td><td>Honorarios</td><td class="mockup-table-num">5.000.000</td><td class="mockup-table-num" style="color:#92400E;font-weight:700">10% &#9998;</td><td class="mockup-table-num">500.000</td></tr>
+              <tr><td>800197268</td><td>Arrend SAS</td><td>Arrendamientos</td><td class="mockup-table-num">9.000.000</td><td class="mockup-table-num">3,5%</td><td class="mockup-table-num">315.000</td></tr>
+            </tbody>
+          </table>
+          <div style="margin-top:6px;font-size:.62rem;color:#92400E"><strong>&#9998;</strong> Tarifa editada manualmente &mdash; el valor recalcula al instante</div>
+        </div>
+      </div>
+      <div class="warn">
+        <strong>Bases m&iacute;nimas (Decreto 0572/2025):</strong>
+        <ul style="margin-top:6px">
+          <li>Compras: base m&iacute;nima 10 UVT (~$497.990 AG 2025)</li>
+          <li>Servicios: base m&iacute;nima 2 UVT (~$99.598 AG 2025)</li>
+          <li>Honorarios: sin base m&iacute;nima</li>
+          <li>Arrendamientos: sin base m&iacute;nima</li>
+          <li>R&eacute;gimen Simple (numeral 9): se le retiene el 100% del IVA si compra a un responsable de IVA, y se autorretiene el SIMPLE.</li>
+        </ul>
+      </div>
+      <div class="step-nav"><a href="#paso4">&larr; Paso 4</a><a href="#paso6" class="next">Paso 6: Descargar &rarr;</a></div>
+    </section>
+    <section id="paso6" class="step">
+      <div class="step-num"><span>6</span> Paso 6</div>
+      <h2>Descargar el Excel</h2>
+      <p>Cuando termines de revisar mapeo y tabla de terceros, click en <strong>"Descargar Excel"</strong>. La descarga del F350 NO requiere PRO &mdash;es gratis.</p>
+      <div class="mockup">
+        <div class="mockup-body" style="text-align:center;padding:20px 18px">
+          <div class="mockup-h" style="margin-bottom:4px">&#128202; Listo para descargar</div>
+          <div class="mockup-sub">F350 borrador con todas las casillas prellenadas</div>
+          <div style="display:flex;gap:8px;align-items:center;justify-content:center"><span class="mockup-btn-primary" style="font-size:.82rem;padding:9px 22px">Descargar Excel</span><span class="mockup-chip mockup-chip--ok">Gratis</span></div>
+          <div style="margin-top:8px;font-size:.66rem;color:#6B7280">F350_AG2025_900123456_marzo.xlsx</div>
+        </div>
+      </div>
+      <h3>Qu&eacute; trae el Excel (5 hojas)</h3>
+      <ul>
+        <li>Hoja <strong>F350 borrador</strong> con las casillas 1 a 145 prellenadas y f&oacute;rmulas editables.</li>
+        <li>Hoja <strong>Tabla de terceros</strong> con NIT, nombre, base, tarifa y valor retenido por cada uno.</li>
+        <li>Hoja <strong>Conciliaci&oacute;n</strong>: cruza el saldo de la cuenta 2365 del balance vs. la suma de retenciones practicadas en la tabla. Cualquier diferencia se muestra explicada.</li>
+        <li>Hoja <strong>Recomendaciones</strong>: lista de revisiones autom&aacute;ticas &mdash;tarifas at&iacute;picas, terceros sin NIT, bases bajo m&iacute;nimo, dobles retenciones, etc. La idea es que el contador la use como checklist antes de firmar.</li>
+        <li>Hoja <strong>Resumen</strong>: totales por concepto DIAN (compras, servicios, honorarios, dividendos&hellip;) listos para copiar al MUISCA o anexar al papel de trabajo.</li>
+      </ul>
+      <div class="tip">
+        <strong>Alert diagn&oacute;stico al cargar el archivo:</strong> si el balance trae anomal&iacute;as (cuentas 2365 con saldo cero pero d&eacute;bitos y cr&eacute;ditos iguales, terceros con NIT vac&iacute;o, tarifas que no coinciden con la base, etc.) la herramienta muestra un panel arriba con la lista exacta de filas a revisar. No bloquea la generaci&oacute;n; sirve como aviso temprano para no descargar un F350 con errores.
+      </div>
+      <p>El nombre del archivo es <code>F350_[A&ntilde;o]_[Mes]_[NIT].xlsx</code>.</p>
+      <div class="step-nav"><a href="#paso5">&larr; Paso 5</a><a href="#errores" class="next">Errores comunes &rarr;</a></div>
+    </section>
+    <section id="errores" class="step">
+      <h2>Errores comunes y c&oacute;mo resolverlos</h2>
+      <div class="err">
+        <strong>"C&oacute;digo de cuenta no detectado"</strong><br>
+        El balance trae un nombre de columna distinto al esperado ("C&oacute;d. cuenta", "Cuenta PUC", "Codigo", etc.). Usa el dropdown de mapeo manual de columnas para indicarle a la herramienta cu&aacute;l es la columna del c&oacute;digo.
+      </div>
+      <div class="err">
+        <strong>"No se encontraron movimientos en cuentas 2365xx"</strong><br>
+        El cliente NO retuvo nada en el mes, o el balance trae las retenciones en una cuenta distinta. Si efectivamente no retuvo, debe presentar el F350 en ceros (igual de obligatorio).
+      </div>
+      <div class="err">
+        <strong>Tarifa autom&aacute;tica diferente a la que esperaba</strong><br>
+        La herramienta aplica las tarifas vigentes del Decreto 0572/2025. Si tu cliente aplica una tarifa especial (zona franca, contribuyente declarante reducido, etc.), edita manualmente la tarifa en la tabla.
+      </div>
+      <div class="err">
+        <strong>Bases bajo el m&iacute;nimo aparecen retenidas</strong><br>
+        Pasa cuando el cliente retuvo a un tercero a quien NO debi&oacute; retener (porque la base era menor a 10 UVT en compras o 2 UVT en servicios). Tu cliente debe ajustar contablemente y devolver la retenci&oacute;n. La herramienta marca esos casos en amarillo.
+      </div>
+      <div class="err">
+        <strong>"Mi balance no tiene columna de tercero"</strong><br>
+        La columna de tercero es <strong>opcional</strong>: la herramienta arma el F350 igual usando solo c&oacute;digo + d&eacute;bitos + cr&eacute;ditos. La tabla de terceros queda vac&iacute;a y el papel de trabajo lo armas a mano. Si tu sistema exporta el detalle, mejor s&uacute;belo con tercero &mdash;la conciliaci&oacute;n y el F1001 al cierre del a&ntilde;o quedan mucho m&aacute;s limpios.
+      </div>
+      <div class="err">
+        <strong>El alert diagn&oacute;stico marca filas en rojo</strong><br>
+        Aparece un panel arriba del borrador con lista de problemas: terceros sin NIT, tarifas que no coinciden con la base contabilizada, dobles retenciones al mismo tercero en el mismo concepto, etc. NO bloquea la generaci&oacute;n. Si el problema es real, vuelve al software contable y arregla; si es falso positivo (tarifa especial, retenci&oacute;n por contrato), ign&oacute;ralo y descarga.
+      </div>
+    </section>
+    <section id="siguiente" class="step">
+      <h2>&iquest;Y despu&eacute;s del F350?</h2>
+      <p>El F350 mensual conecta con dos formatos de ex&oacute;gena al cierre del a&ntilde;o:</p>
+      <ol>
+        <li><strong>F1001 columna "retenci&oacute;n practicada":</strong> la suma de los 12 F350 mensuales (retenciones que TU CLIENTE le practic&oacute; a sus terceros) debe coincidir con la suma de la columna 3 del F1001 de ex&oacute;gena (Art. 631 lit. b).</li>
+        <li><strong>F1003 del tercero retenido:</strong> cada tercero a quien le retuviste en el F350 lo va a reportar en SU F1003 de ex&oacute;gena (con tu cliente como agente retenedor). Es la otra cara de la moneda.</li>
+      </ol>
+      <div class="cta-end">
+        <h3>Abrir la herramienta del F350</h3>
+        <p>Listo para arrancar con el mes en curso.</p>
+        <a href="../retencion350.html">Ir a retencion350.html &rarr;</a>
+      </div>
+      <div class="cta-end" style="background:linear-gradient(135deg,#FFFBEB,#FEF3C7);border-color:#FDE68A">
+        <h3 style="color:var(--amber-800)">&iquest;Quieres profundizar la normativa?</h3>
+        <p style="color:var(--amber-700)">El curso de Retenci&oacute;n 350 (Art. 365-419 ET, Decreto 0572/2025, autorretenciones, R&eacute;gimen Simple num. 9) est&aacute; en la Escuela.</p>
+        <a href="../escuela/retencion350.html" style="background:#92400E">Ir al curso normativo &rarr;</a>
+      </div>
+      <div class="step-nav"><a href="#errores">&larr; Errores comunes</a><a href="../tutoriales.html" class="next">Volver a Tutoriales &rarr;</a></div>
+    </section>
+  </div>
+</div>
+<script>
+(function(){
+  var links = document.querySelectorAll('.sidebar-nav a');
+  var sections = Array.from(links).map(function(a){ var id = a.getAttribute('href').replace('#',''); return document.getElementById(id); }).filter(Boolean);
+  function update(){
+    var y = window.scrollY + 80;
+    var current = sections[0];
+    sections.forEach(function(s){ if(s && s.offsetTop <= y) current = s; });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if(current){ var match = document.querySelector('.sidebar-nav a[href="#'+current.id+'"]'); if(match) match.classList.add('active'); }
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  update();
+})();
+</script>
+</body>
+</html>

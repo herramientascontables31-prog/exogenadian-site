@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="../shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S7SM6ST4CC');
+</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutorial: c&oacute;mo armar el F210 (renta personas naturales) en exogenadian.com | Ex&oacute;genaDIAN</title>
+<meta name="description" content="Tutorial paso a paso: c&oacute;mo armar el Formulario 210 de renta para personas naturales residentes AG 2025. Carga del reporte ex&oacute;gena DIAN, c&eacute;dula general (rentas de trabajo, honorarios, capital, no laborales), pensiones, dividendos y anticipo.">
+<link rel="canonical" href="https://exogenadian.com/tutoriales/f210.html">
+<meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tutorial-mockups.css?v=dccdc93b">
+<style>
+:root{
+  --green-900:#064E3B;--green-800:#065F46;--green-700:#047857;--green-600:#059669;--green-500:#10B981;--green-400:#34D399;--green-300:#6EE7B7;--green-200:#A7F3D0;--green-100:#D1FAE5;--green-50:#ECFDF5;
+  --white:#FFF;--gray-50:#F9FAFB;--gray-100:#F3F4F6;--gray-200:#E5E7EB;--gray-300:#D1D5DB;--gray-400:#9CA3AF;--gray-500:#6B7280;--gray-600:#4B5563;--gray-700:#374151;--gray-800:#1F2937;--gray-900:#111827;
+  --amber-50:#FFFBEB;--amber-100:#FEF3C7;--amber-500:#F59E0B;--amber-700:#92400E;--amber-800:#78350F;
+  --blue-50:#EFF6FF;--blue-100:#DBEAFE;--blue-500:#3B82F6;--blue-700:#1D4ED8;
+  --purple-50:#F5F3FF;--purple-500:#8B5CF6;--purple-700:#6D28D9;
+  --rose-50:#FFF1F2;--rose-500:#F43F5E;--rose-700:#BE123C;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-900);line-height:1.6}
+.tut-layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+@media(max-width:900px){.tut-layout{grid-template-columns:1fr}}
+.sidebar{background:#fff;border-right:1px solid var(--gray-200);padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
+.sidebar-header{padding:16px 20px;border-bottom:1px solid var(--gray-100)}
+.sidebar-header a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--gray-800);font-weight:800;font-size:.9rem}
+.sidebar-header a div{width:28px;height:28px;background:linear-gradient(135deg,var(--green-600),var(--green-400));border-radius:7px;display:grid;place-items:center;color:#fff;font-size:.7rem;font-weight:900}
+.sidebar-curso{padding:16px 20px;border-bottom:1px solid var(--gray-100)}
+.sidebar-curso h3{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--green-700);margin-bottom:4px}
+.sidebar-curso p{font-size:.88rem;font-weight:700;color:var(--gray-800)}
+.sidebar-nav{padding:12px 0;flex:1}
+.sidebar-nav a{display:flex;align-items:center;gap:10px;padding:10px 20px;text-decoration:none;color:var(--gray-500);font-size:.85rem;font-weight:500;transition:all .15s;border-left:3px solid transparent}
+.sidebar-nav a:hover{background:var(--green-50);color:var(--green-700)}
+.sidebar-nav a.active{background:var(--green-50);color:var(--green-700);font-weight:700;border-left-color:var(--green-600)}
+.sidebar-nav a .num{width:24px;height:24px;border-radius:50%;background:var(--gray-100);color:var(--gray-500);display:grid;place-items:center;font-size:.72rem;font-weight:700;flex-shrink:0}
+.sidebar-nav a.active .num{background:var(--green-600);color:#fff}
+.sidebar-back{padding:16px 20px;border-top:1px solid var(--gray-100);margin-top:auto}
+.sidebar-back a{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--gray-400);font-size:.82rem;font-weight:500}
+.sidebar-back a:hover{color:var(--gray-700)}
+.main{padding:32px 40px 60px;max-width:880px}
+@media(max-width:900px){.main{padding:20px 16px 80px}.sidebar{display:none}}
+.breadcrumb{font-size:.78rem;color:var(--gray-400);margin-bottom:8px}
+.breadcrumb a{color:var(--gray-400);text-decoration:none}
+.breadcrumb a:hover{color:var(--green-600)}
+.tag{display:inline-flex;align-items:center;gap:6px;background:var(--green-100);color:var(--green-700);padding:4px 14px;border-radius:100px;font-size:.74rem;font-weight:700;margin-bottom:14px}
+h1.tut-title{font-family:'Fraunces',serif;font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;letter-spacing:-.02em;margin-bottom:10px;line-height:1.2}
+p.tut-lead{font-size:1.05rem;color:var(--gray-600);max-width:680px;line-height:1.6;margin-bottom:30px}
+.step{margin-bottom:40px;padding-top:20px;border-top:2px solid var(--gray-200)}
+.step:first-of-type{border-top:none;padding-top:0}
+.step-num{display:inline-flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:.9rem;color:var(--green-700);font-weight:700;margin-bottom:8px}
+.step-num span{display:grid;place-items:center;width:32px;height:32px;background:var(--green-600);color:#fff;border-radius:50%;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:800}
+.step h2{font-family:'Fraunces',serif;font-size:1.45rem;font-weight:700;margin-bottom:8px;color:var(--gray-900);line-height:1.25}
+.step p{font-size:.95rem;color:var(--gray-700);line-height:1.7;margin-bottom:14px}
+.step ul,.step ol{margin:8px 0 16px 22px;display:flex;flex-direction:column;gap:7px}
+.step li{font-size:.94rem;color:var(--gray-700);line-height:1.6}
+.step h3{font-size:1.05rem;font-weight:700;margin:18px 0 8px;color:var(--gray-800)}
+.step code{font-family:'JetBrains Mono',monospace;font-size:.86rem;background:var(--gray-100);padding:2px 7px;border-radius:5px;color:var(--gray-800)}
+.capture{background:var(--gray-100);border:2px dashed var(--gray-300);border-radius:12px;padding:30px 20px;margin:18px 0;text-align:center;color:var(--gray-500);font-size:.85rem;line-height:1.55}
+.capture .cap-icon{font-size:2rem;display:block;margin-bottom:10px;opacity:.55}
+.capture .cap-label{font-weight:700;color:var(--gray-700);font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.capture em{font-style:normal;background:#fff;padding:2px 8px;border-radius:5px;font-size:.82rem;color:var(--gray-700);font-weight:600}
+.tip{background:var(--blue-50);border-left:4px solid var(--blue-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:#1E40AF;line-height:1.6}
+.tip strong{color:var(--blue-700)}
+.warn{background:var(--amber-50);border-left:4px solid var(--amber-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:var(--amber-800);line-height:1.6}
+.warn strong{color:var(--amber-700)}
+.err{background:var(--rose-50);border-left:4px solid var(--rose-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:#9F1239;line-height:1.6}
+.err strong{color:var(--rose-700)}
+.tabla{width:100%;border-collapse:collapse;margin:14px 0;border-radius:10px;overflow:hidden;border:1px solid var(--gray-200);font-size:.86rem}
+.tabla th{background:var(--gray-100);padding:9px 13px;text-align:left;font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gray-600)}
+.tabla td{padding:9px 13px;border-top:1px solid var(--gray-100);color:var(--gray-700)}
+.tabla tr:hover{background:var(--green-50)}
+.tabla code{font-family:'JetBrains Mono',monospace;font-size:.78rem;background:var(--white);padding:1px 5px;border-radius:3px}
+.actions-list{background:#fff;border:1px solid var(--gray-200);border-radius:12px;padding:14px 18px;margin:14px 0}
+.actions-list h4{font-size:.78rem;font-weight:700;color:var(--gray-700);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.actions-list .item{display:flex;gap:10px;padding:6px 0;font-size:.86rem;color:var(--gray-700);border-bottom:1px solid var(--gray-100)}
+.actions-list .item:last-child{border-bottom:none}
+.actions-list .item code{flex-shrink:0;font-size:.78rem;background:var(--green-50);color:var(--green-700);padding:2px 8px;border-radius:5px;font-family:'JetBrains Mono',monospace;font-weight:600}
+.cta-end{background:linear-gradient(135deg,var(--green-50),#D1FAE5);border:2px solid var(--green-300);border-radius:16px;padding:28px 26px;margin:30px 0 20px;text-align:center}
+.cta-end h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;color:var(--green-800);margin-bottom:6px}
+.cta-end p{font-size:.92rem;color:var(--green-700);margin-bottom:16px}
+.cta-end a{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:var(--green-600);color:#fff;border-radius:12px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 14px rgba(5,150,105,.25);transition:all .2s}
+.cta-end a:hover{background:var(--green-700);transform:translateY(-2px)}
+.step-nav{display:flex;justify-content:space-between;margin-top:30px;padding-top:20px;border-top:2px solid var(--gray-200);gap:10px;flex-wrap:wrap}
+.step-nav a{display:inline-flex;align-items:center;gap:7px;padding:11px 22px;border-radius:10px;text-decoration:none;font-weight:700;font-size:.88rem;background:var(--gray-100);color:var(--gray-700);transition:all .2s}
+.step-nav a:hover{background:var(--gray-200)}
+.step-nav a.next{background:var(--green-600);color:#fff;box-shadow:0 4px 12px rgba(5,150,105,.25)}
+.step-nav a.next:hover{background:var(--green-700)}
+</style>
+<script async src="../shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div class="tut-layout">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html">
+        <div>E</div>
+        Ex&oacute;genaDIAN
+      </a>
+    </div>
+    <div class="sidebar-curso">
+      <h3>Tutorial</h3>
+      <p>F210 renta personas naturales</p>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#intro" class="active"><span class="num">0</span> Antes de empezar</a>
+      <a href="#paso1"><span class="num">1</span> Cargar ex&oacute;gena DIAN</a>
+      <a href="#paso2"><span class="num">2</span> Patrimonio</a>
+      <a href="#paso3"><span class="num">3</span> C&eacute;dula general (4 subc&eacute;dulas)</a>
+      <a href="#paso4"><span class="num">4</span> Pensiones y dividendos</a>
+      <a href="#paso5"><span class="num">5</span> Impuesto, descuentos, anticipo</a>
+      <a href="#paso6"><span class="num">6</span> Descargar Excel</a>
+      <a href="#errores"><span class="num">!</span> Errores comunes</a>
+      <a href="#siguiente"><span class="num">&rarr;</span> Llevar al MUISCA</a>
+    </nav>
+    <div class="sidebar-back">
+      <a href="../tutoriales.html">&larr; Todos los tutoriales</a>
+    </div>
+  </aside>
+  <div class="main">
+    <div class="breadcrumb"><a href="../index.html">Inicio</a> &rsaquo; <a href="../tutoriales.html">Tutoriales</a> &rsaquo; F210</div>
+    <span class="tag">Tutorial &middot; ~20 min</span>
+    <h1 class="tut-title">C&oacute;mo armar el F210 (renta personas naturales) en exogenadian.com</h1>
+    <p class="tut-lead">Gu&iacute;a paso a paso para usar la herramienta del Formulario 210 (<a href="../formato210.html">formato210.html</a>): cargar el reporte de ex&oacute;gena DIAN para pre-clasificar conceptos, llenar las 4 subc&eacute;dulas de la c&eacute;dula general (rentas de trabajo, honorarios, capital, no laborales), pensiones, dividendos, descuentos, anticipo y descargar el Excel borrador del F210.</p>
+    <section id="intro" class="step">
+      <h2>Antes de empezar &mdash; lista de chequeo</h2>
+      <p>El F210 es la declaraci&oacute;n de renta de las <strong>personas naturales residentes</strong>. La herramienta arma un borrador con c&aacute;lculos autom&aacute;ticos por c&eacute;dula. Antes de abrir, ten estos documentos a la mano del cliente:</p>
+      <ul>
+        <li><strong>Reporte de ex&oacute;gena DIAN</strong> del a&ntilde;o gravable. Lo descarga el cliente del MUISCA (<em>Consulta Reporte de Tercero</em>). La herramienta lo usa para pre-clasificar autom&aacute;ticamente los conceptos por c&eacute;dula.</li>
+        <li><strong>Certificados de ingresos y retenciones</strong> de los empleadores (rentas de trabajo, formato 220) y de quienes le pagaron honorarios (formato 220 o equivalente).</li>
+        <li><strong>Certificados de retenci&oacute;n en la fuente</strong> de bancos, fondos de inversi&oacute;n, sociedades que le distribuyeron dividendos, etc.</li>
+        <li><strong>Certificado de aportes a SS, salud, AFP voluntaria, AFC</strong>: dependientes, intereses cr&eacute;dito hipotecario, medicina prepagada (l&iacute;mites Art. 387 ET).</li>
+        <li><strong>Patrimonio del a&ntilde;o anterior</strong> y movimientos del patrimonio durante el a&ntilde;o (compras y ventas de activos, deudas).</li>
+        <li><strong>F210 del a&ntilde;o anterior</strong>: para arrastrar p&eacute;rdidas compensables, anticipo liquidado y saldo a favor.</li>
+      </ul>
+      <div class="tip">
+        <strong>Plazos AG 2025:</strong> personas naturales presentan en una sola cuota entre el <strong>12 de agosto y el 26 de octubre de 2026</strong>, seg&uacute;n los <strong>2 &uacute;ltimos d&iacute;gitos</strong> de la c&eacute;dula o NIT. Verifica el calendario oficial DIAN antes de programar la presentaci&oacute;n.
+      </div>
+      <div class="warn">
+        <strong>&iquest;El cliente est&aacute; obligado a declarar?</strong> Verifica los topes del Decreto vigente (ingresos, patrimonio, consumos con tarjeta, consignaciones bancarias). Si NO est&aacute; obligado, puede emitir el <a href="../certificado-no-obligacion-renta.html">certificado de no obligado</a> &mdash;est&aacute; en el sitio.
+      </div>
+      <div class="mockup">
+        <div class="mockup-bar"><div class="mockup-dots"><span></span><span></span><span></span></div><div class="mockup-url">exogenadian.com/formato210.html</div></div>
+        <div class="mockup-body">
+          <div class="mockup-h">F210 &mdash; Renta personas naturales</div>
+          <div class="mockup-tabs">
+            <span class="mockup-tab">&#128197; Calendario</span>
+            <span class="mockup-tab mockup-tab--active">&#9658; Inicio</span>
+            <span class="mockup-tab">&#128229; Descargar ex&oacute;gena</span>
+          </div>
+          <div class="mockup-dropzone"><span class="mockup-dropzone-icon">&#128194;</span>Cargar Reporte Ex&oacute;gena DIAN<br><span style="font-size:.62rem;color:#9CA3AF">opcional &mdash; pre-clasifica los conceptos</span></div>
+        </div>
+      </div>
+    </section>
+    <section id="paso1" class="step">
+      <div class="step-num"><span>1</span> Paso 1</div>
+      <h2>(Opcional) Cargar el reporte de ex&oacute;gena DIAN</h2>
+      <p>Entra a <a href="../formato210.html">exogenadian.com/formato210.html</a>. La herramienta tiene una pesta&ntilde;a <strong>"Descargar ex&oacute;gena"</strong> con instrucciones para que el cliente lo baje del MUISCA, y una zona <strong>"Cargar Reporte Ex&oacute;gena DIAN (opcional)"</strong> debajo.</p>
+      <div class="mockup">
+        <div class="mockup-body">
+          <div class="mockup-h">Cargar Reporte Ex&oacute;gena DIAN</div>
+          <div class="mockup-dropzone" style="margin-bottom:8px"><span class="mockup-dropzone-icon">&#128229;</span>Arrastra el reporte<br><span style="font-size:.62rem;color:#9CA3AF">descargado del MUISCA</span></div>
+          <div style="background:#EFF6FF;border-left:3px solid #3B82F6;padding:6px 10px;font-size:.66rem;color:#1E40AF;border-radius:0 5px 5px 0">
+            <strong>Pre-clasifica autom&aacute;ticamente:</strong> salarios &rarr; 1a subc&eacute;dula, honorarios &rarr; 2a, intereses/arrendamientos &rarr; 3a, otras rentas &rarr; 4a, pensiones &rarr; c&eacute;dula pensiones, dividendos &rarr; c&eacute;dula dividendos.
+          </div>
+        </div>
+      </div>
+      <h3>Qu&eacute; pre-clasifica autom&aacute;ticamente</h3>
+      <table class="tabla">
+        <thead><tr><th>Concepto en ex&oacute;gena</th><th>C&eacute;dula del F210</th></tr></thead>
+        <tbody>
+          <tr><td>Salarios y prestaciones (F2276)</td><td>1a subc&eacute;dula: Rentas de trabajo</td></tr>
+          <tr><td>Honorarios y servicios (F1001 conceptos espec&iacute;ficos)</td><td>2a subc&eacute;dula: Honorarios y compensaci&oacute;n por servicios personales</td></tr>
+          <tr><td>Arrendamientos, intereses, rendimientos (F1007 conceptos)</td><td>3a subc&eacute;dula: Rentas de capital</td></tr>
+          <tr><td>Otras rentas (F1007)</td><td>4a subc&eacute;dula: Rentas no laborales</td></tr>
+          <tr><td>Pensiones (F2276)</td><td>C&eacute;dula de pensiones</td></tr>
+          <tr><td>Dividendos (F1001 concepto 5060)</td><td>C&eacute;dula de dividendos</td></tr>
+          <tr><td>Retenciones practicadas al cliente (F1003)</td><td>Casillas de retenciones por c&eacute;dula</td></tr>
+        </tbody>
+      </table>
+      <div class="tip">
+        <strong>&iquest;Saltarse este paso?</strong> Si no tienes el reporte de ex&oacute;gena DIAN o el cliente no lo entreg&oacute;, puedes pasar directamente al paso 2 y llenar todo manualmente con los certificados f&iacute;sicos. Pero pre-clasificar ahorra tiempo y evita errores de captura.
+      </div>
+      <p>C&oacute;mo lo descarga el cliente del MUISCA: entra con c&eacute;dula y contrase&ntilde;a a <em>muisca.dian.gov.co</em> &rarr; <em>Consultar Reportes de Tercero</em> &rarr; selecciona el a&ntilde;o gravable &rarr; descarga el Excel. Vuelve aqu&iacute; y s&uacute;belo en el drop-zone.</p>
+      <div class="step-nav">
+        <span></span>
+        <a href="#paso2" class="next">Paso 2: Patrimonio &rarr;</a>
+      </div>
+    </section>
+    <section id="paso2" class="step">
+      <div class="step-num"><span>2</span> Paso 2</div>
+      <h2>Llenar el patrimonio del cliente</h2>
+      <p>Antes de las c&eacute;dulas de renta, el F210 pide el <strong>patrimonio l&iacute;quido al 31-dic</strong>. Son las casillas 29 (patrimonio bruto), 30 (deudas) y 31 (patrimonio l&iacute;quido = bruto - deudas).</p>
+      <div class="mockup">
+        <div class="mockup-body">
+          <div class="mockup-h">Patrimonio al 31-dic</div>
+          <div class="mockup-row"><span class="mockup-row-lbl">Cas 29 &mdash; Patrimonio bruto</span><span class="mockup-row-val">285.420.000</span></div>
+          <div class="mockup-row"><span class="mockup-row-lbl">Cas 30 &mdash; Deudas</span><span class="mockup-row-val">62.300.000</span></div>
+          <div class="mockup-row" style="background:#ECFDF5;border-radius:5px;border-bottom:none;padding:6px 10px"><span class="mockup-row-lbl" style="color:#065F46;font-weight:700">Cas 31 &mdash; Patrimonio l&iacute;quido <em>(auto)</em></span><span class="mockup-row-val" style="color:#065F46">223.120.000</span></div>
+        </div>
+      </div>
+      <h3>Qu&eacute; va en cada casilla</h3>
+      <table class="tabla">
+        <thead><tr><th>Casilla</th><th>Concepto</th><th>Valor</th></tr></thead>
+        <tbody>
+          <tr><td>29</td><td><strong>Patrimonio bruto</strong>: suma de todos los bienes y derechos al 31-dic.</td><td>Inmuebles (avalúo catastral o costo fiscal, el mayor), veh&iacute;culos (Resoluci&oacute;n DIAN), saldos en cuentas bancarias, inversiones, cuentas por cobrar, inventarios de negocio.</td></tr>
+          <tr><td>30</td><td><strong>Deudas</strong>: pasivos al 31-dic.</td><td>Cr&eacute;ditos hipotecarios, de veh&iacute;culo, libre inversi&oacute;n, deudas con personas, tarjetas de cr&eacute;dito (saldo del extracto al 31-dic).</td></tr>
+          <tr><td>31</td><td><strong>Patrimonio l&iacute;quido</strong> = 29 &minus; 30</td><td>Auto-calculada</td></tr>
+        </tbody>
+      </table>
+      <div class="warn">
+        <strong>Conciliaci&oacute;n patrimonial:</strong> el patrimonio del a&ntilde;o actual debe poder explicarse desde el patrimonio del a&ntilde;o anterior + ingresos del a&ntilde;o &minus; gastos personales. Si la diferencia es grande sin explicaci&oacute;n, la DIAN puede iniciar requerimiento de comparaci&oacute;n patrimonial (Art. 236-239 ET). Documenta los movimientos grandes (compra/venta de activos).
+      </div>
+      <div class="step-nav">
+        <a href="#paso1">&larr; Paso 1</a>
+        <a href="#paso3" class="next">Paso 3: C&eacute;dula general &rarr;</a>
+      </div>
+    </section>
+    <section id="paso3" class="step">
+      <div class="step-num"><span>3</span> Paso 3</div>
+      <h2>C&eacute;dula general (4 subc&eacute;dulas)</h2>
+      <p>El coraz&oacute;n del F210 desde la reforma 1819/2016: las rentas se dividen por c&eacute;dulas seg&uacute;n el origen. La c&eacute;dula general agrupa <strong>4 subc&eacute;dulas</strong>; la herramienta presenta una columna por subc&eacute;dula con sus casillas espec&iacute;ficas.</p>
+      <div class="mockup">
+        <div class="mockup-body mockup-body--gray">
+          <div class="mockup-h">C&eacute;dula general &mdash; 4 subc&eacute;dulas</div>
+          <table class="mockup-table">
+            <thead><tr><th></th><th>Trabajo</th><th>Honorarios</th><th>Capital</th><th>No laborales</th></tr></thead>
+            <tbody>
+              <tr><td class="mockup-row-lbl">Ingresos brutos</td><td class="mockup-table-num">120.000.000</td><td class="mockup-table-num">35.000.000</td><td class="mockup-table-num">8.500.000</td><td class="mockup-table-num">2.300.000</td></tr>
+              <tr><td class="mockup-row-lbl">Exentas (25%)</td><td class="mockup-table-num">30.000.000</td><td class="mockup-table-num">&mdash;</td><td class="mockup-table-num">&mdash;</td><td class="mockup-table-num">&mdash;</td></tr>
+              <tr><td class="mockup-row-lbl">Deducciones</td><td class="mockup-table-num">12.500.000</td><td class="mockup-table-num">&mdash;</td><td class="mockup-table-num">&mdash;</td><td class="mockup-table-num">&mdash;</td></tr>
+              <tr><td class="mockup-row-lbl">Costos asociados</td><td class="mockup-table-num">&mdash;</td><td class="mockup-table-num">8.000.000</td><td class="mockup-table-num">1.200.000</td><td class="mockup-table-num">450.000</td></tr>
+              <tr style="background:#ECFDF5"><td class="mockup-row-lbl" style="color:#065F46;font-weight:700">Renta l&iacute;quida</td><td class="mockup-table-num" style="color:#065F46;font-weight:700">77.500.000</td><td class="mockup-table-num" style="color:#065F46;font-weight:700">27.000.000</td><td class="mockup-table-num" style="color:#065F46;font-weight:700">7.300.000</td><td class="mockup-table-num" style="color:#065F46;font-weight:700">1.850.000</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <h3>Las 4 subc&eacute;dulas</h3>
+      <table class="tabla">
+        <thead><tr><th>Subc&eacute;dula</th><th>Qu&eacute; va aqu&iacute;</th><th>Costos/gastos deducibles</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1a Rentas de trabajo</strong></td><td>Salarios, prestaciones, comisiones laborales, viaticos no exentos.</td><td>NO &mdash;solo se restan exentas (25% Art. 206) y deducciones del Art. 387.</td></tr>
+          <tr><td><strong>2a Honorarios y compensaci&oacute;n por servicios personales</strong></td><td>Honorarios, servicios profesionales, comisiones por servicios personales prestados sin v&iacute;nculo laboral.</td><td>S&iacute;, si el cliente declara como ind. y no contrata 2+ trabajadores. Si NO cumple, se trata como rentas de trabajo (sin costos).</td></tr>
+          <tr><td><strong>3a Rentas de capital</strong></td><td>Intereses bancarios, rendimientos financieros, arrendamientos, regal&iacute;as.</td><td>S&iacute; &mdash;costos asociados (Art. 87-1).</td></tr>
+          <tr><td><strong>4a Rentas no laborales</strong></td><td>Cualquier ingreso que no calce en las anteriores: ventas de bienes/servicios sin relaci&oacute;n laboral, rifas, premios.</td><td>S&iacute;.</td></tr>
+        </tbody>
+      </table>
+      <div class="tip">
+        <strong>Renta exenta y deducciones limitadas (cas. 92):</strong> la suma de exentas + deducciones no puede exceder el <strong>40% del ingreso bruto de la c&eacute;dula general</strong>, ni <strong>1.340 UVT</strong> en valor absoluto. La herramienta aplica el l&iacute;mite autom&aacute;ticamente y muestra cu&aacute;l de los dos topes aplic&oacute;.
+      </div>
+      <h3>P&eacute;rdidas y compensaciones entre subc&eacute;dulas</h3>
+      <p>La c&eacute;dula general permite <strong>netear p&eacute;rdidas</strong> entre subc&eacute;dulas (Art. 1.2.1.20.5 DUR). Si una subc&eacute;dula da negativa (p. ej. rentas de capital con muchos costos financieros), la herramienta la resta de las dem&aacute;s antes de calcular la renta l&iacute;quida cedular.</p>
+      <div class="warn">
+        <strong>Cuidado con las restas:</strong> NO se puede restar la subc&eacute;dula 1a (rentas de trabajo) contra otras &mdash;solo se admite el neteo entre 2a, 3a y 4a. Si la 1a da p&eacute;rdida (raro), no neta.
+      </div>
+      <div class="step-nav">
+        <a href="#paso2">&larr; Paso 2</a>
+        <a href="#paso4" class="next">Paso 4: Pensiones y dividendos &rarr;</a>
+      </div>
+    </section>
+    <section id="paso4" class="step">
+      <div class="step-num"><span>4</span> Paso 4</div>
+      <h2>C&eacute;dulas de pensiones y dividendos</h2>
+      <p>Las dos c&eacute;dulas adicionales tienen tratamiento especial. La herramienta las separa en bloques distintos.</p>
+      <h3>C&eacute;dula de pensiones (cas. 100-103)</h3>
+      <p>Pensiones de jubilaci&oacute;n, vejez, invalidez, sobrevivientes y de riesgos laborales. <strong>Exentas hasta 1.000 UVT mensuales</strong> (Art. 206 num. 5 ET). El exceso es renta gravable.</p>
+      <div class="mockup">
+        <div class="mockup-body">
+          <div class="mockup-h">C&eacute;dula de pensiones</div>
+          <div class="mockup-row"><span class="mockup-row-lbl">Cas 100 &mdash; Ingresos brutos</span><span class="mockup-row-val">28.500.000</span></div>
+          <div class="mockup-row"><span class="mockup-row-lbl">Cas 101 &mdash; Exentos (1.000 UVT/mes Art. 206 num 5)</span><span class="mockup-row-val">28.500.000</span></div>
+          <div class="mockup-row"><span class="mockup-row-lbl">Cas 102 &mdash; Gravados</span><span class="mockup-row-val">0</span></div>
+          <div class="mockup-row" style="background:#ECFDF5;border-radius:5px;border-bottom:none;padding:6px 10px"><span class="mockup-row-lbl" style="color:#065F46;font-weight:700">Cas 103 &mdash; Renta l&iacute;quida pensiones</span><span class="mockup-row-val" style="color:#065F46">0</span></div>
+        </div>
+      </div>
+      <h3>C&eacute;dula de dividendos (cas. 105-110)</h3>
+      <p>Aqu&iacute; se separa por &eacute;poca de causaci&oacute;n y subc&eacute;dula:</p>
+      <table class="tabla">
+        <thead><tr><th>Subc&eacute;dula</th><th>Casilla</th><th>Tratamiento</th></tr></thead>
+        <tbody>
+          <tr><td>1a Subc&eacute;dula 2017+ no gravados (num. 3 Art. 49 ET)</td><td>107</td><td>Tabla Art. 242 ET (10% &gt; 300 UVT)</td></tr>
+          <tr><td>2a Subc&eacute;dula 2017+ gravados (par&aacute;grafo 2 Art. 49 ET)</td><td>108</td><td>Tarifa especial 2017+: tabla Art. 242 num. 2 ET (Ley 2277/2022 modific&oacute; las tarifas)</td></tr>
+          <tr><td>Dividendos 2016 y anteriores</td><td>105-106</td><td>Trato preferencial &mdash;pueden quedar exentos seg&uacute;n epoca y tipo</td></tr>
+        </tbody>
+      </table>
+      <div class="tip">
+        <strong>El certificado de dividendos</strong> que entrega la sociedad emisora informa la &eacute;poca y subc&eacute;dula. Si el cliente recibi&oacute; dividendos pero no tiene el certificado, p&iacute;deselo a la sociedad (es obligatorio).
+      </div>
+      <div class="step-nav">
+        <a href="#paso3">&larr; Paso 3</a>
+        <a href="#paso5" class="next">Paso 5: Impuesto y descuentos &rarr;</a>
+      </div>
+    </section>
+    <section id="paso5" class="step">
+      <div class="step-num"><span>5</span> Paso 5</div>
+      <h2>Impuesto, descuentos y anticipo</h2>
+      <p>Despu&eacute;s de las c&eacute;dulas, la herramienta calcula autom&aacute;ticamente el impuesto y te deja revisar los descuentos y el anticipo del a&ntilde;o siguiente.</p>
+      <h3>Renta presuntiva (cas. 98-99)</h3>
+      <p><strong>Atenci&oacute;n:</strong> la renta presuntiva ya NO aplica desde AG 2021 (tarifa 0%, Ley 2010/2019, Art. 188 ET). La casilla queda en cero por defecto. Solo se llena si el a&ntilde;o gravable que est&aacute;s declarando es 2020 o anterior.</p>
+      <h3>Impuesto sobre las rentas l&iacute;quidas cedulares</h3>
+      <p>La herramienta aplica las tablas correspondientes:</p>
+      <ul>
+        <li><strong>C&eacute;dula general + pensiones + dividendos cas. 111</strong>: Tabla Art. 241 ET (progresiva por UVT).</li>
+        <li><strong>Dividendos 2a subc&eacute;dula gravados (cas. 108)</strong>: Tabla Art. 242 num. 2 ET (modificada Ley 2277/2022).</li>
+        <li><strong>Dividendos 1a subc&eacute;dula no gravados (cas. 107)</strong>: 10% sobre el exceso de 300 UVT.</li>
+      </ul>
+      <div class="mockup">
+        <div class="mockup-body mockup-body--gray">
+          <div class="mockup-h">Impuesto sobre rentas l&iacute;quidas</div>
+          <div class="mockup-row"><span class="mockup-row-lbl">Cas 116 &mdash; Imp c&eacute;dula gral + pensiones <em>(Art. 241)</em></span><span class="mockup-row-val">14.250.000</span></div>
+          <div class="mockup-row"><span class="mockup-row-lbl">Cas 117 &mdash; Renta presuntiva (0% desde AG 2021)</span><span class="mockup-row-val">0</span></div>
+          <div class="mockup-row"><span class="mockup-row-lbl">Cas 118 &mdash; Imp dividendos 2a subc&eacute;dula (Art. 242 num 2)</span><span class="mockup-row-val">0</span></div>
+          <div class="mockup-row"><span class="mockup-row-lbl">Cas 119-120 &mdash; Otros</span><span class="mockup-row-val">0</span></div>
+          <div class="mockup-row" style="background:#ECFDF5;border-radius:5px;border-bottom:none;padding:6px 10px"><span class="mockup-row-lbl" style="color:#065F46;font-weight:700">Cas 121 &mdash; Total impuesto rentas cedulares</span><span class="mockup-row-val" style="color:#065F46">14.250.000</span></div>
+        </div>
+      </div>
+      <h3>Descuentos tributarios y retenciones</h3>
+      <ul>
+        <li><strong>Retenciones que le practicaron al cliente</strong>: salarios, honorarios, dividendos, rendimientos, ventas, etc. Se imputan contra el impuesto a pagar.</li>
+        <li><strong>Descuentos por donaciones</strong>: hasta 25% del valor donado a entidades del Art. 257.</li>
+        <li><strong>Descuento por inversi&oacute;n en acciones de sociedades agropecuarias</strong> (Art. 257-1).</li>
+        <li><strong>Descuento por aportes voluntarios a fondo de pensiones</strong> (si supera el 30% del ingreso laboral).</li>
+      </ul>
+      <h3>Anticipo del a&ntilde;o siguiente</h3>
+      <p>El anticipo del Art. 807 ET se calcula sobre el promedio del impuesto neto de los 2 a&ntilde;os anteriores (50% / 75% seg&uacute;n veces). La herramienta lo calcula y lo muestra en la casilla 134. Si el cliente <strong>no tuvo declaraci&oacute;n el a&ntilde;o anterior</strong>, no hay anticipo (primera vez).</p>
+      <div class="warn">
+        <strong>Saldo a favor:</strong> si las retenciones y anticipos del a&ntilde;o anterior superan el impuesto neto + anticipo del a&ntilde;o siguiente, el F210 cierra con saldo a favor (cas. 137). El cliente decide: arrastrarlo, compensarlo o solicitar devoluci&oacute;n.
+      </div>
+      <div class="step-nav">
+        <a href="#paso4">&larr; Paso 4</a>
+        <a href="#paso6" class="next">Paso 6: Descargar &rarr;</a>
+      </div>
+    </section>
+    <section id="paso6" class="step">
+      <div class="step-num"><span>6</span> Paso 6</div>
+      <h2>Descargar el Excel del F210</h2>
+      <p>Cuando termines de revisar todas las casillas, click en <strong>"Descargar Excel"</strong>. La herramienta genera el borrador del F210 con f&oacute;rmulas editables.</p>
+      <div class="mockup">
+        <div class="mockup-body" style="text-align:center;padding:20px 18px">
+          <div class="mockup-h" style="margin-bottom:4px">&#128202; Borrador del F210 listo</div>
+          <div class="mockup-sub">Excel con casillas 1-145, papel de trabajo y conciliaci&oacute;n patrimonial</div>
+          <span class="mockup-btn-primary" style="font-size:.82rem;padding:9px 22px">Descargar Excel</span>
+          <div style="margin-top:8px;font-size:.66rem;color:#6B7280">F210_AG2025_C1023456789.xlsx</div>
+        </div>
+      </div>
+      <h3>Qu&eacute; trae el Excel</h3>
+      <ul>
+        <li>Hoja <strong>F210 borrador</strong> con las casillas 1 a 145 ya prellenadas.</li>
+        <li>Hoja <strong>papel de trabajo</strong> con la depuraci&oacute;n por c&eacute;dula y subc&eacute;dula.</li>
+        <li>Hoja <strong>retenciones</strong> con el detalle por NIT del retenedor.</li>
+        <li>Hoja <strong>conciliaci&oacute;n patrimonial</strong> &mdash;explicaci&oacute;n del incremento o decremento del patrimonio respecto al a&ntilde;o anterior.</li>
+        <li>F&oacute;rmulas editables: si necesitas ajustar manualmente, los totales se recalculan.</li>
+      </ul>
+      <p>El archivo se llama <code>F210_AG[a&ntilde;o]_[c&eacute;dula].xlsx</code>.</p>
+      <div class="warn">
+        <strong>El Excel es un BORRADOR.</strong> Antes de transmitir al MUISCA, abre cada hoja y revisa fila por fila &mdash;especialmente: retenciones que cuadren con los certificados f&iacute;sicos, exentas y deducciones que cumplan los topes Art. 336, dividendos clasificados en la subc&eacute;dula correcta, conciliaci&oacute;n patrimonial sin saltos inexplicados.
+      </div>
+      <div class="step-nav">
+        <a href="#paso5">&larr; Paso 5</a>
+        <a href="#errores" class="next">Errores comunes &rarr;</a>
+      </div>
+    </section>
+    <section id="errores" class="step">
+      <h2>Errores comunes y c&oacute;mo resolverlos</h2>
+      <div class="err">
+        <strong>"L&iacute;mite del 40% / 1.340 UVT excedido"</strong><br>
+        La suma de exentas + deducciones de la c&eacute;dula general supera el l&iacute;mite del Art. 336 ET. Revisa cu&aacute;les se est&aacute;n incluyendo &mdash;p. ej. los aportes a AFC y AFP voluntaria computan en este l&iacute;mite. La herramienta aplica el tope autom&aacute;ticamente, pero si quer&iacute;as deducir todo, no se puede.
+      </div>
+      <div class="err">
+        <strong>"Honorarios mal clasificados como rentas de trabajo"</strong><br>
+        Si el cliente factur&oacute; honorarios pero no contrata 2+ trabajadores ni los declara como ind., DEBE tratarse como rentas de trabajo (subc&eacute;dula 1a, sin costos). La pre-clasificaci&oacute;n autom&aacute;tica desde ex&oacute;gena DIAN decide por concepto, pero verifica caso por caso.
+      </div>
+      <div class="err">
+        <strong>"Patrimonio salt&oacute; sin explicaci&oacute;n"</strong><br>
+        Si el patrimonio del a&ntilde;o aument&oacute; mucho m&aacute;s que el ingreso del a&ntilde;o, la DIAN puede iniciar comparaci&oacute;n patrimonial (Art. 236-239 ET). Documenta: pr&eacute;stamos, herencias, donaciones, ventas de activos. Llena la <em>conciliaci&oacute;n patrimonial</em> en el Excel.
+      </div>
+      <div class="err">
+        <strong>"Retenciones declaradas pero sin certificado"</strong><br>
+        Si imputas una retenci&oacute;n al impuesto pero no tienes certificado f&iacute;sico, la DIAN la rechaza. Pide los certificados de retenci&oacute;n (formato 220 o equivalente) ANTES de presentar.
+      </div>
+      <div class="err">
+        <strong>"Dividendos en subc&eacute;dula incorrecta"</strong><br>
+        Cada dividendo trae &eacute;poca y tipo (gravado/no gravado) en el certificado de la sociedad emisora. Las tarifas son DISTINTAS &mdash;si los pones en la subc&eacute;dula incorrecta, el impuesto sale mal.
+      </div>
+      <div class="err">
+        <strong>"Renta presuntiva calculada por error"</strong><br>
+        Desde AG 2021 la renta presuntiva tiene tarifa 0%. Si la herramienta arrastr&oacute; un valor del a&ntilde;o anterior, p&oacute;n cero en cas. 98.
+      </div>
+    </section>
+    <section id="siguiente" class="step">
+      <h2>&iquest;Y despu&eacute;s del Excel?</h2>
+      <p>El F210 se diligencia <strong>directamente en el formulario web del MUISCA</strong>, no se carga como XML.</p>
+      <ol>
+        <li><strong>Entrar al MUISCA</strong> con la c&eacute;dula y contrase&ntilde;a del cliente. Si no tiene cuenta de usuario, cre&aacute;rsela primero.</li>
+        <li><strong>Diligenciar / Presentar &rarr; Renta personas naturales (210)</strong>. Llenar las casillas con los valores del Excel.</li>
+        <li><strong>Firmar y presentar</strong>. Si tiene saldo a pagar, generar el recibo (490) y pagarlo en el banco autorizado o por PSE.</li>
+      </ol>
+      <div class="cta-end">
+        <h3>Abrir la herramienta del F210</h3>
+        <p>Listo para arrancar con el cliente real. Si te perdiste en alg&uacute;n paso, vuelves a este tutorial.</p>
+        <a href="../formato210.html">Ir a formato210.html &rarr;</a>
+      </div>
+      <div class="cta-end" style="background:linear-gradient(135deg,#FFFBEB,#FEF3C7);border-color:#FDE68A">
+        <h3 style="color:var(--amber-800)">&iquest;Quieres profundizar la normativa?</h3>
+        <p style="color:var(--amber-700)">Las c&eacute;dulas (Art. 330+ ET), los l&iacute;mites de exentas y deducciones (Art. 336), la tabla del Art. 241 y el Art. 242 (dividendos) son la base legal del F210.</p>
+        <a href="../escuela.html" style="background:#92400E">Ir a la Escuela &rarr;</a>
+      </div>
+      <div class="step-nav">
+        <a href="#errores">&larr; Errores comunes</a>
+        <a href="../tutoriales.html" class="next">Volver a Tutoriales &rarr;</a>
+      </div>
+    </section>
+  </div>
+</div>
+<script>
+(function(){
+  var links = document.querySelectorAll('.sidebar-nav a');
+  var sections = Array.from(links).map(function(a){ var id = a.getAttribute('href').replace('#',''); return document.getElementById(id); }).filter(Boolean);
+  function update(){
+    var y = window.scrollY + 80;
+    var current = sections[0];
+    sections.forEach(function(s){ if(s && s.offsetTop <= y) current = s; });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if(current){
+      var match = document.querySelector('.sidebar-nav a[href="#'+current.id+'"]');
+      if(match) match.classList.add('active');
+    }
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  update();
+})();
+</script>
+</body>
+</html>

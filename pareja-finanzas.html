@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Calculadora Finanzas en Pareja Colombia 2026 — 4 modelos de manejo conjunto | ExógenaDIAN</title>
+<meta name="description" content="Calculadora de finanzas en pareja: 4 modelos comparados (todo conjunto, separado, yours/mine/ours, proporcional al ingreso). Detección de desbalance, money date checklist, recomendaciones según tu situación. Privado: todo vive en tu navegador.">
+<meta name="keywords" content="finanzas en pareja, dividir gastos pareja colombia, calculadora gastos conjuntos, cuenta conjunta, money date pareja, presupuesto pareja, dividir cuentas matrimonio">
+<link rel="canonical" href="https://exogenadian.com/pareja-finanzas.html">
+<meta property="og:title" content="Calculadora Finanzas en Pareja — 4 modelos de manejo conjunto">
+<meta property="og:description" content="Cuánto aporta cada uno según el modelo de manejo. Todo conjunto vs separado vs yours/mine/ours vs proporcional al ingreso.">
+<meta property="og:url" content="https://exogenadian.com/pareja-finanzas.html">
+<meta property="og:type" content="website"><meta property="og:locale" content="es_CO"><meta property="og:site_name" content="ExógenaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png">
+<meta name="robots" content="index, follow">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora Finanzas en Pareja","url":"https://exogenadian.com/pareja-finanzas.html","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"COP"}}</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/finanzas-wow.css?v=a660abd8">
+<script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--green:#059669;--green2:#ECFDF5;--green3:#D1FAE5;--red:#DC2626;--amber:#D97706;--rose:#E11D48;--rose2:#FFE4E6;--border:#e2e8f0;--radius:10px;--shadow:0 2px 12px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+.container{max-width:1000px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#831843 0%,#E11D48 60%,#FB7185 100%);padding:30px 32px;border-radius:16px;margin-bottom:24px;color:#fff;position:relative;overflow:hidden}
+.header::before{content:'💑';position:absolute;font-size:8rem;opacity:.08;top:-10px;right:20px;line-height:1}
+.header h1{font-size:1.5rem;font-weight:700;display:flex;align-items:center;gap:10px;position:relative;z-index:1}
+.header p{opacity:.92;font-size:.92rem;margin-top:6px;max-width:640px;position:relative;z-index:1}
+.header .badge{display:inline-block;background:rgba(255,255,255,.2);color:#FFE4E6;padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:700;margin-top:8px;position:relative;z-index:1}
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:24px;margin-bottom:20px;box-shadow:var(--shadow)}
+.card-title{font-size:1.05rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;color:var(--pri)}
+.cot-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cot-block{background:#F9FAFB;border:2px solid var(--border);border-radius:14px;padding:18px}
+.cot-block.c1{border-color:#FB7185;background:linear-gradient(135deg,#FFE4E6,#fff)}
+.cot-block.c2{border-color:#60A5FA;background:linear-gradient(135deg,#DBEAFE,#fff)}
+.cot-block h3{font-size:1rem;font-weight:700;color:var(--pri);margin-bottom:14px;display:flex;align-items:center;gap:6px}
+.cot-block.c1 h3{color:#9F1239}
+.cot-block.c2 h3{color:#1E40AF}
+.input-row{margin-bottom:12px}
+.input-row label{display:block;font-size:.74rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
+.input-row input{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.92rem;font-family:'DM Sans',sans-serif;background:#fff}
+.input-row input.money{font-family:'JetBrains Mono',monospace}
+.input-row input:focus{outline:none;border-color:var(--rose);box-shadow:0 0 0 3px rgba(225,29,72,.12)}
+.input-row .hint{font-size:.7rem;color:var(--muted);margin-top:3px}
+.gastos-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn{padding:12px 24px;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:.95rem;font-family:inherit;transition:.15s;width:100%;background:linear-gradient(135deg,#E11D48,#9F1239);color:#fff;box-shadow:0 4px 14px rgba(225,29,72,.25)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(225,29,72,.35)}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+.kpi{background:var(--card);border-radius:var(--radius);padding:16px;border:1px solid var(--border);text-align:center}
+.kpi .val{font-size:1.3rem;font-weight:800;font-family:'JetBrains Mono',monospace;line-height:1.1}
+.kpi .lbl{font-size:.7rem;color:var(--muted);font-weight:600;text-transform:uppercase;margin-top:4px;letter-spacing:.3px}
+.kpi.rose .val{color:var(--rose)}.kpi.green .val{color:var(--green)}.kpi.amber .val{color:var(--amber)}
+.modelo-card{background:#fff;border:2px solid var(--border);border-radius:14px;padding:20px;margin-bottom:14px;transition:.2s}
+.modelo-card.recom{border-color:var(--green);background:linear-gradient(135deg,#ECFDF5,#fff)}
+.modelo-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:10px}
+.modelo-card h4{font-size:1rem;font-weight:700;color:var(--pri);display:flex;align-items:center;gap:6px}
+.modelo-card .badge-recom{background:#D1FAE5;color:#065F46;font-size:.66rem;font-weight:800;padding:3px 10px;border-radius:100px;letter-spacing:.05em;text-transform:uppercase;flex-shrink:0}
+.modelo-card .desc{font-size:.84rem;color:var(--muted);margin-bottom:12px;line-height:1.55}
+.modelo-tabla{width:100%;border-collapse:collapse;font-size:.85rem}
+.modelo-tabla th{background:#F9FAFB;padding:8px 10px;text-align:left;font-size:.72rem;text-transform:uppercase;color:var(--muted);font-weight:700;letter-spacing:.04em}
+.modelo-tabla td{padding:8px 10px;border-top:1px solid var(--border)}
+.modelo-tabla td:not(:first-child){text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600}
+.modelo-tabla tr.c1 td:first-child{color:#9F1239;font-weight:600}
+.modelo-tabla tr.c2 td:first-child{color:#1E40AF;font-weight:600}
+.checklist{margin-top:12px}
+.check-item{display:flex;gap:10px;padding:10px 14px;background:#F9FAFB;border:1px solid var(--border);border-radius:8px;margin-bottom:8px}
+.check-item input[type=checkbox]{width:18px;height:18px;flex-shrink:0;margin-top:2px;accent-color:var(--rose)}
+.check-item label{flex:1;font-size:.86rem;color:var(--text);line-height:1.5;cursor:pointer}
+.check-item label strong{display:block;color:var(--pri);font-weight:600;margin-bottom:2px}
+.check-item label small{color:var(--muted);font-size:.78rem}
+.cross-links{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}
+.cross-link{display:block;padding:14px 16px;background:#F9FAFB;border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text);transition:.2s}
+.cross-link:hover{border-color:var(--rose);background:var(--rose2)}
+.cross-link strong{display:block;font-size:.88rem;color:var(--pri);margin-bottom:3px}
+.cross-link small{font-size:.72rem;color:var(--muted);line-height:1.4}
+.results{display:none;animation:fadeIn .4s ease-out}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(max-width:768px){.cot-grid,.gastos-grid,.kpis,.cross-links{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}}
+/* ─── Bloque PRO unlocks ─── */
+.pro-unlocks{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pro-unlock{padding:18px;border:1.5px solid #FECDD3;border-radius:12px;background:linear-gradient(135deg,#FFE4E6 0%,#fff 60%);position:relative}
+.pro-unlock h4{font-size:1rem;font-weight:700;color:#9F1239;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.pro-unlock p{font-size:.84rem;color:var(--muted);line-height:1.5;margin-bottom:12px}
+.pro-unlock button{padding:11px 18px;background:linear-gradient(135deg,#831843,#E11D48);color:#fff;border:none;border-radius:10px;font-family:inherit;font-weight:700;cursor:pointer;font-size:.86rem;width:100%}
+.pro-unlock button:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.pro-unlock .pro-tag{position:absolute;top:14px;right:14px;background:#1B3A5C;color:#fff;font-size:.62rem;padding:2px 8px;border-radius:100px;font-weight:800;letter-spacing:.05em}
+@media(max-width:768px){.pro-unlocks{grid-template-columns:1fr}}
+/* ─── Sheet imprimible Money Date (oculto en pantalla, visible al imprimir) ─── */
+#mdSheet{display:none;position:fixed;inset:0;background:#fff;z-index:99999;overflow-y:auto;padding:40px 32px}
+#mdSheet.show{display:block}
+.md-sheet-inner{max-width:780px;margin:0 auto;font-family:'DM Sans',sans-serif;color:#0F172A}
+.md-sheet-header{text-align:center;border-bottom:3px solid #E11D48;padding-bottom:18px;margin-bottom:24px}
+.md-sheet-header h1{font-size:2rem;font-weight:800;color:#9F1239;margin-bottom:4px;letter-spacing:-.02em}
+.md-sheet-header .sub{font-size:.92rem;color:var(--muted)}
+.md-sheet-header .nombres{font-size:1.1rem;font-weight:600;color:#0F172A;margin-top:8px}
+.md-sheet-section{margin-bottom:22px}
+.md-sheet-section h2{font-size:1.05rem;font-weight:700;color:#831843;margin-bottom:12px;padding-bottom:4px;border-bottom:1px solid #FECDD3}
+.md-sheet-checklist .ck-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px dashed #E2E8F0;align-items:flex-start}
+.md-sheet-checklist .ck-box{width:18px;height:18px;border:2px solid #831843;border-radius:4px;flex-shrink:0;margin-top:1px}
+.md-sheet-checklist .ck-text strong{display:block;font-size:.92rem;font-weight:700;color:#0F172A;margin-bottom:2px}
+.md-sheet-checklist .ck-text small{font-size:.78rem;color:var(--muted);line-height:1.4}
+.md-sheet-plan{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.md-sheet-plan .pl-cell{padding:10px;border:1.5px solid #E2E8F0;border-radius:8px;text-align:center}
+.md-sheet-plan .pl-cell .month{font-size:.74rem;color:var(--muted);text-transform:uppercase;font-weight:600;margin-bottom:4px}
+.md-sheet-plan .pl-cell .blanks{height:50px;border-bottom:1px solid #CBD5E1;margin:6px 4px 0}
+.md-sheet-foot{margin-top:32px;padding-top:14px;border-top:1px solid #E2E8F0;text-align:center;font-size:.78rem;color:var(--muted)}
+.md-sheet-actions{position:sticky;top:0;background:#FFE4E6;padding:12px 18px;margin:-40px -32px 24px;display:flex;gap:10px;justify-content:flex-end;border-bottom:1px solid #FECDD3;z-index:10}
+.md-sheet-actions button{padding:9px 18px;border:none;border-radius:8px;font-family:inherit;font-weight:700;cursor:pointer;font-size:.86rem}
+.md-sheet-actions .print{background:#059669;color:#fff}
+.md-sheet-actions .close{background:#fff;color:#831843;border:1.5px solid #FECDD3}
+@media print{
+  body * {visibility:hidden}
+  #mdSheet, #mdSheet *{visibility:visible}
+  #mdSheet{position:absolute;display:block;padding:0}
+  .md-sheet-actions{display:none !important}
+}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div id="nav-container"></div>
+<script defer src="shared/pro.js?v=848fbf16"></script>
+<script src="shared/perfil-contador.js?v=cc60e2c8"></script>
+<script src="shared/asesor-mode.js?v=f2e5d144"></script>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<script src="shared/finanzas-privacy.js?v=aed97e2f"></script>
+<script>
+(function(){
+  function init(){
+    if(!window.FinanzasPrivacy)return;
+    var c=document.querySelector('.container');
+    if(c){FinanzasPrivacy.autoLoad(c,'pareja-finanzas');FinanzasPrivacy.autoSave(c,'pareja-finanzas',{debounce:800});}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<div class="container">
+<div class="header">
+  <div>
+    <h1>💑 Finanzas en Pareja</h1>
+    <p>4 modelos de manejo conjunto comparados con TUS números: todo conjunto vs separado vs yours/mine/ours vs proporcional al ingreso. Detección de desbalance + money date checklist + recomendaciones según tu situación.</p>
+    <span class="badge">El divorce-killer #1 después de infidelidad — pero se entrena</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">👥 Sus ingresos</div>
+  <div class="cot-grid">
+    <div class="cot-block c1">
+      <h3>👤 Cotitular 1</h3>
+      <div class="input-row">
+        <label>Nombre (opcional)</label>
+        <input type="text" id="nombre1" placeholder="Ej: Juan">
+      </div>
+      <div class="input-row">
+        <label>Ingreso neto mensual</label>
+        <input type="text" id="ingreso1" class="money" placeholder="$5.000.000" inputmode="numeric">
+      </div>
+      <div class="input-row">
+        <label>Gastos personales (lo NO compartido)</label>
+        <input type="text" id="personal1" class="money" placeholder="$300.000" inputmode="numeric">
+        <span class="hint">Hobbies, ropa, café, salidas con amigos. Lo que cada uno gasta sin justificar.</span>
+      </div>
+    </div>
+    <div class="cot-block c2">
+      <h3>👤 Cotitular 2</h3>
+      <div class="input-row">
+        <label>Nombre (opcional)</label>
+        <input type="text" id="nombre2" placeholder="Ej: María">
+      </div>
+      <div class="input-row">
+        <label>Ingreso neto mensual</label>
+        <input type="text" id="ingreso2" class="money" placeholder="$3.500.000" inputmode="numeric">
+      </div>
+      <div class="input-row">
+        <label>Gastos personales (lo NO compartido)</label>
+        <input type="text" id="personal2" class="money" placeholder="$300.000" inputmode="numeric">
+        <span class="hint">Igual que el cotitular 1.</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">🏠 Gastos comunes mensuales</div>
+  <p style="font-size:.82rem;color:var(--muted);margin-bottom:12px">Los que pagan juntos: vivienda, mercado, servicios. Si tienen hijos, súmalos a salud y educación.</p>
+  <div class="gastos-grid">
+    <div class="input-row">
+      <label>🏠 Vivienda (arriendo/cuota/admin)</label>
+      <input type="text" id="gVivienda" class="money" placeholder="$1.500.000" inputmode="numeric">
+    </div>
+    <div class="input-row">
+      <label>⚡ Servicios (luz, agua, gas, internet)</label>
+      <input type="text" id="gServicios" class="money" placeholder="$400.000" inputmode="numeric">
+    </div>
+    <div class="input-row">
+      <label>🛒 Mercado (supermercado + plaza)</label>
+      <input type="text" id="gMercado" class="money" placeholder="$1.000.000" inputmode="numeric">
+    </div>
+    <div class="input-row">
+      <label>🚗 Transporte conjunto (carro común, gasolina)</label>
+      <input type="text" id="gTransporte" class="money" placeholder="$500.000" inputmode="numeric">
+    </div>
+    <div class="input-row">
+      <label>🏥 Salud (prepagada conjunta, hijos)</label>
+      <input type="text" id="gSalud" class="money" placeholder="$300.000" inputmode="numeric">
+    </div>
+    <div class="input-row">
+      <label>🎓 Educación (hijos, cursos comunes)</label>
+      <input type="text" id="gEducacion" class="money" placeholder="$0" inputmode="numeric">
+    </div>
+    <div class="input-row">
+      <label>🎉 Salidas y planes en pareja</label>
+      <input type="text" id="gPlanes" class="money" placeholder="$400.000" inputmode="numeric">
+    </div>
+    <div class="input-row">
+      <label>📦 Otros gastos comunes</label>
+      <input type="text" id="gOtros" class="money" placeholder="$0" inputmode="numeric">
+    </div>
+  </div>
+  <div class="input-row" style="margin-top:14px">
+    <label>💰 Ahorro objetivo conjunto mensual (vivienda futura, viajes, fondo)</label>
+    <input type="text" id="ahorroConjunto" class="money" placeholder="$1.000.000" inputmode="numeric">
+    <span class="hint">Lo que quieren guardar juntos cada mes para metas comunes. NO incluye ahorro personal de cada uno.</span>
+  </div>
+</div>
+<button class="btn" onclick="calcular()">💑 Calcular el split</button>
+<div class="results" id="results">
+<div class="card">
+  <div class="card-title">📊 Resumen del hogar</div>
+  <div class="kpis">
+    <div class="kpi rose"><div class="val" id="kIngreso">-</div><div class="lbl">Ingreso conjunto</div></div>
+    <div class="kpi amber"><div class="val" id="kGastosComunes">-</div><div class="lbl">Gastos + ahorro común</div></div>
+    <div class="kpi green"><div class="val" id="kMargen">-</div><div class="lbl">Margen libre</div></div>
+  </div>
+  <div class="gancho" id="gancho"></div>
+  <div class="narrativa" id="narrativa"></div>
+</div>
+<div class="card">
+  <div class="card-title">⚖️ Comparativo de los 4 modelos</div>
+  <p style="font-size:.84rem;color:var(--muted);margin-bottom:12px">Mismos ingresos, mismos gastos. Cambia <em>cómo se reparte</em> entre los dos. El recomendado se resalta en verde según tu situación.</p>
+  <div id="modelos"></div>
+</div>
+<div class="card">
+  <div class="card-title">📋 Money Date — checklist quincenal</div>
+  <p style="font-size:.84rem;color:var(--muted);margin-bottom:12px"><strong>David Bach:</strong> "Las parejas que prosperan tienen una conversación de plata cada semana. Las que fracasan, una al año cuando ya hay un problema." 30 minutos cada 15 días, mismo día y hora. Sin distracciones.</p>
+  <div class="checklist" id="checklist">
+    <div class="check-item"><input type="checkbox" id="c1"><label for="c1"><strong>Saldos exactos hoy</strong><small>Cada uno comparte sus saldos: cuentas, tarjetas, ahorros, deudas. Sin medias verdades.</small></label></div>
+    <div class="check-item"><input type="checkbox" id="c2"><label for="c2"><strong>Gastos del período</strong><small>¿Algún gasto no esperado? ¿Quién pagó qué? ¿Cuadran las cuentas conjuntas?</small></label></div>
+    <div class="check-item"><input type="checkbox" id="c3"><label for="c3"><strong>Avance de metas comunes</strong><small>Fondo de emergencia, cuota inicial vivienda, viaje. ¿Vamos al ritmo o atrasados?</small></label></div>
+    <div class="check-item"><input type="checkbox" id="c4"><label for="c4"><strong>Próximos compromisos grandes</strong><small>Viaje próximo, regalo importante, mantenimiento del carro, prima/cesantías que entran. Anticipar.</small></label></div>
+    <div class="check-item"><input type="checkbox" id="c5"><label for="c5"><strong>Algún gasto > $X requiere consenso</strong><small>Definan el monto. Cualquier compra individual mayor se conversa antes — no para pedir permiso, para alinear.</small></label></div>
+    <div class="check-item"><input type="checkbox" id="c6"><label for="c6"><strong>Cómo nos sentimos con la plata</strong><small>Stress, ansiedad, tranquilidad. El componente emocional es 50%. Si uno se siente mal, hablarlo antes de que se vuelva problema.</small></label></div>
+    <div class="check-item"><input type="checkbox" id="c7"><label for="c7"><strong>Ajustes para el próximo período</strong><small>¿Algún cubo se nos fue de las manos (deseos, restaurantes)? ¿Subir el ahorro porque entró bono?</small></label></div>
+    <div class="check-item"><input type="checkbox" id="c8"><label for="c8"><strong>Algo NO financiero pero conectado</strong><small>Plan de vacaciones, decisión sobre hijos, cambio de carrera, mudanza. Lo que va a impactar las finanzas en 6+ meses.</small></label></div>
+  </div>
+  <p style="font-size:.78rem;color:var(--muted);margin-top:14px;font-style:italic">Tip: imprime esto, ponlo en la nevera, marca al hacerlo. La consistencia importa más que la profundidad.</p>
+</div>
+<div class="card">
+  <div class="card-title">🎯 Recomendaciones para SU situación</div>
+  <div class="action-ladder" id="recom"></div>
+</div>
+<div class="wow-share-card">
+  <div class="wow-share-title">📸 Compártelo</div>
+  <div class="wow-share-sub">El split que ustedes dos hicieron, en formato Insta.</div>
+  <div class="share-card" id="shareCard"></div>
+</div>
+<div class="card" style="border:2px solid #FECDD3;background:linear-gradient(135deg,#FFF5F7,#fff)">
+  <div class="card-title" style="color:#9F1239">🏆 Llévatelo a casa <span style="background:#1B3A5C;color:#fff;font-size:.66rem;padding:3px 10px;border-radius:100px;margin-left:8px;letter-spacing:.05em">PRO</span></div>
+  <p style="font-size:.86rem;color:var(--muted);margin-bottom:14px">Convierte la calculadora en herramienta de uso real:</p>
+  <div class="pro-unlocks">
+    <div class="pro-unlock">
+      <span class="pro-tag">PRO</span>
+      <h4>📋 PDF Money Date imprimible</h4>
+      <p>El checklist arriba en formato pegable a la nevera, con sus nombres + plan de 12 fechas mensuales para que no se les olvide. Listo para Ctrl+P.</p>
+      <button type="button" onclick="generarMoneyDatePDF()">Generar PDF →</button>
+    </div>
+    <div class="pro-unlock">
+      <span class="pro-tag">PRO</span>
+      <h4>📊 Excel histórico 12 meses</h4>
+      <p>Plantilla formulada para llevar el split mensual real durante un año: aporte de cada uno, gastos efectivos, desviación, gráfico anual.</p>
+      <button type="button" onclick="generarExcelHistorico()">Descargar Excel →</button>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">🔗 Herramientas que se complementan</div>
+  <div class="cross-links">
+    <a href="pyg-personal.html" class="cross-link"><strong>📊 PyG personal</strong><small>Cada uno arme el suyo, después júntenlos</small></a>
+    <a href="capacidad-hipotecaria.html" class="cross-link"><strong>🏠 Capacidad hipotecaria</strong><small>Hasta 3 cotitulares — perfecto en pareja</small></a>
+    <a href="escuela/finanzas.html#modulo-15" class="cross-link"><strong>🎓 Curso M15</strong><small>Hablar de plata en pareja — el módulo educativo</small></a>
+  </div>
+</div>
+<div style="padding:16px 20px;background:#FFE4E6;border:1px solid #FECACA;border-radius:8px;font-size:.82rem;color:#9F1239;line-height:1.6;margin-top:12px">
+  <strong>📜 Cita de cierre — David Bach (Smart Couples Finish Rich):</strong> "Las parejas que prosperan financieramente tienen una conversación de plata cada semana. Las que fracasan, una al año — generalmente cuando ya hay un problema."
+</div>
+</div>
+</div>
+<div id="mdSheet"></div>
+<script>
+'use strict';
+function $(id){return document.getElementById(id)}
+function fmt(n){if(n==null||isNaN(n))return'$0';return'$'+Math.round(n).toLocaleString('es-CO')}
+function num(id){var v=$(id).value.replace(/[^\d]/g,'');return parseInt(v,10)||0}
+['ingreso1','ingreso2','personal1','personal2','gVivienda','gServicios','gMercado','gTransporte','gSalud','gEducacion','gPlanes','gOtros','ahorroConjunto'].forEach(function(id){
+  var el=$(id);
+  if(!el)return;
+  el.addEventListener('input',function(){
+    var raw=this.value.replace(/[^\d]/g,'');
+    this.value=raw?'$'+parseInt(raw,10).toLocaleString('es-CO'):'';
+  });
+});
+var ultimoCalc=null;
+function calcular(){
+  var ing1=num('ingreso1'), ing2=num('ingreso2');
+  var per1=num('personal1'), per2=num('personal2');
+  var gv=num('gVivienda'), gs=num('gServicios'), gm=num('gMercado'), gt=num('gTransporte'), gh=num('gSalud'), ge=num('gEducacion'), gp=num('gPlanes'), go=num('gOtros');
+  var ah=num('ahorroConjunto');
+  if(ing1<=0&&ing2<=0){exoToast('Mete al menos un ingreso','warning');return}
+  var ingTotal=ing1+ing2;
+  var gastosComunes=gv+gs+gm+gt+gh+ge+gp+go;
+  var totalConjunto=gastosComunes+ah; // lo que va a la cuenta conjunta o se reparte
+  var margenLibre=ingTotal-totalConjunto-per1-per2;
+  // Ratios
+  var pct1=ingTotal>0?ing1/ingTotal:0.5;
+  var pct2=ingTotal>0?ing2/ingTotal:0.5;
+  var diferenciaIngresoPct=Math.abs(pct1-pct2)*100;
+  // ─── 4 modelos ───
+  // Modelo 1: TODO CONJUNTO. Ambos depositan todo, todo sale de ahí.
+  var m1={
+    n:'1️⃣ Todo conjunto',
+    desc:'Ambos depositan TODO en una sola cuenta. Todos los gastos (comunes y personales) salen de ahí. Máxima transparencia, mínima fricción operativa.',
+    aporte1:ing1, aporte2:ing2,
+    paraComun: gastosComunes+ah,
+    libre1: 0, // su personal sale del fondo común también
+    libre2: 0,
+    margenComun: ingTotal-gastosComunes-per1-per2-ah,
+    pros:'Máxima transparencia. Cero "esto es mío, esto es tuyo". Sentido de unidad.',
+    contras:'Fricción cuando hay desbalance fuerte de ingresos. El que aporta menos puede sentirse "controlado".'
+  };
+  // Modelo 2: TODO SEPARADO 50/50. Cada uno aporta 50% gastos comunes + ahorro/2.
+  var aporteCadaUno=totalConjunto/2;
+  var m2={
+    n:'2️⃣ Todo separado (50/50)',
+    desc:'Cada uno aporta 50% de gastos comunes + ahorro común. El resto se queda en su cuenta personal.',
+    aporte1:aporteCadaUno, aporte2:aporteCadaUno,
+    paraComun:totalConjunto,
+    libre1: ing1-aporteCadaUno-per1,
+    libre2: ing2-aporteCadaUno-per2,
+    pros:'Máxima independencia. Cero discusión sobre "quién pagó qué".',
+    contras:'INJUSTO con desbalance fuerte de ingresos. El que gana menos puede quedar con margen negativo.'
+  };
+  // Modelo 3: YOURS / MINE / OURS. Aporte fijo a cuenta conjunta = gastos+ahorro / 2 (default 50/50, reposo personal)
+  // Es similar al modelo 2, pero conceptualmente cada uno con su cuenta personal antes de aportar a la conjunta.
+  // Para diferenciar, usaré 50/50 default pero subrayaré que el aporte es a UNA cuenta conjunta separada.
+  var m3=m2; // Estructura matemática igual
+  m3 = {
+    n:'3️⃣ Yours / Mine / Ours',
+    desc:'Cada uno con cuenta personal + cuenta CONJUNTA SEPARADA donde depositan el aporte fijo. La conjunta paga gastos comunes + ahorro. El resto queda en cuentas personales sin justificar.',
+    aporte1:aporteCadaUno, aporte2:aporteCadaUno,
+    paraComun:totalConjunto,
+    libre1: ing1-aporteCadaUno-per1,
+    libre2: ing2-aporteCadaUno-per2,
+    pros:'Equilibrio entre transparencia (cuenta conjunta) e independencia (personales). Cada uno tiene "respiro mental".',
+    contras:'Requiere disciplina: si el aporte fijo no alcanza al gasto, hay que renegociar. Si sobra, se queda en la conjunta como ahorro.'
+  };
+  // Modelo 4: HÍBRIDO PROPORCIONAL. Cada uno aporta % proporcional a su ingreso.
+  var aporte1Prop=Math.round(totalConjunto*pct1);
+  var aporte2Prop=Math.round(totalConjunto*pct2);
+  var m4={
+    n:'4️⃣ Híbrido proporcional al ingreso',
+    desc:'Cada uno aporta a la cuenta conjunta el % que representa su ingreso del total. Si C1 gana 70%, aporta 70% del gasto común. Justo cuando hay desbalance.',
+    aporte1:aporte1Prop, aporte2:aporte2Prop,
+    paraComun:totalConjunto,
+    libre1: ing1-aporte1Prop-per1,
+    libre2: ing2-aporte2Prop-per2,
+    pros:'Justo en desbalance fuerte. Cada uno queda con un % similar de margen libre.',
+    contras:'Más complejo de calcular. Requiere actualizar si los ingresos cambian.'
+  };
+  // ─── Determinar modelo recomendado ───
+  var recomendado;
+  if(diferenciaIngresoPct>=30) recomendado='m4'; // diferencia fuerte → proporcional
+  else if(diferenciaIngresoPct>=15) recomendado='m3'; // moderada → yours/mine/ours
+  else recomendado='m2'; // similar → 50/50 funciona
+  ultimoCalc={
+    ing1:ing1,ing2:ing2,per1:per1,per2:per2,ingTotal:ingTotal,
+    gastosComunes:gastosComunes,ahorroConjunto:ah,totalConjunto:totalConjunto,
+    margenLibre:margenLibre,pct1:pct1,pct2:pct2,diferenciaIngresoPct:diferenciaIngresoPct,
+    nombre1:$('nombre1').value||'Cotitular 1',nombre2:$('nombre2').value||'Cotitular 2',
+    m1:m1,m2:m2,m3:m3,m4:m4,recomendado:recomendado
+  };
+  renderResumen();
+  renderModelos();
+  renderRecomendaciones();
+  renderShareCard();
+  $('results').style.display='block';
+  $('results').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function renderResumen(){
+  var c=ultimoCalc;
+  $('kIngreso').textContent=fmt(c.ingTotal);
+  $('kGastosComunes').textContent=fmt(c.totalConjunto);
+  $('kMargen').textContent=fmt(c.margenLibre);
+  // Gancho según situación
+  var gancho;
+  if(c.margenLibre<0) gancho='Sus ingresos no alcanzan. <em>Hay que ajustar antes que escoger modelo.</em>';
+  else if(c.diferenciaIngresoPct>=40) gancho='Diferencia de ingresos del <em>'+c.diferenciaIngresoPct.toFixed(0)+'%</em>. <em>50/50 sería injusto</em>.';
+  else if(c.diferenciaIngresoPct>=20) gancho='Diferencia moderada. <em>Yours/Mine/Ours suele ser el equilibrio.</em>';
+  else gancho='Ingresos similares. <em>Casi cualquier modelo funciona.</em>';
+  $('gancho').innerHTML=gancho;
+  // Narrativa
+  var narr='Entre los dos entran <span class="num">'+fmt(c.ingTotal)+'</span>. ';
+  narr+='<strong>'+c.nombre1+'</strong> aporta '+fmt(c.ing1)+' ('+(c.pct1*100).toFixed(0)+'% del total), <strong>'+c.nombre2+'</strong> aporta '+fmt(c.ing2)+' ('+(c.pct2*100).toFixed(0)+'%).';
+  narr+='<br><br>Gastos comunes mensuales: <span class="num">'+fmt(c.gastosComunes)+'</span>. Ahorro objetivo conjunto: <span class="num">'+fmt(c.ahorroConjunto)+'</span>. Total a cuenta conjunta: <span class="num">'+fmt(c.totalConjunto)+'</span>.';
+  if(c.margenLibre>=0){
+    narr+='<br><br>Margen libre del hogar después de gastos personales: <strong>'+fmt(c.margenLibre)+'</strong>.';
+    if(c.margenLibre<300000) narr+=' <em>Apretado — un imprevisto los descuadra.</em>';
+    else narr+=' <em>Suficiente buffer.</em>';
+  }else{
+    narr+='<br><br><strong>⚠️ Margen NEGATIVO:</strong> los gastos superan los ingresos en '+fmt(Math.abs(c.margenLibre))+'/mes. Antes que elegir modelo: recortar deseos o aumentar ingreso.';
+  }
+  $('narrativa').innerHTML=narr;
+}
+function renderModelos(){
+  var c=ultimoCalc;
+  var modelos=['m1','m2','m3','m4'];
+  var html='';
+  modelos.forEach(function(k){
+    var m=c[k];
+    var isRecom=k===c.recomendado;
+    html+='<div class="modelo-card '+(isRecom?'recom':'')+'">'+
+      '<div class="modelo-card-header">'+
+        '<h4>'+m.n+'</h4>'+
+        (isRecom?'<span class="badge-recom">⭐ Recomendado para ustedes</span>':'')+
+      '</div>'+
+      '<p class="desc">'+m.desc+'</p>'+
+      '<table class="modelo-tabla">'+
+        '<thead><tr><th>Persona</th><th>Aporta a común</th><th>Margen personal libre</th></tr></thead>'+
+        '<tbody>'+
+          '<tr class="c1"><td>'+c.nombre1+'</td>'+
+            '<td>'+fmt(m.aporte1)+(k!=='m1'?' ('+(c.ingTotal>0?(m.aporte1/c.ing1*100).toFixed(0):0)+'% de su ingreso)':'')+'</td>'+
+            '<td style="color:'+(m.libre1<0?'#DC2626':'#059669')+'">'+fmt(m.libre1)+'</td>'+
+          '</tr>'+
+          '<tr class="c2"><td>'+c.nombre2+'</td>'+
+            '<td>'+fmt(m.aporte2)+(k!=='m1'?' ('+(c.ingTotal>0?(m.aporte2/Math.max(c.ing2,1)*100).toFixed(0):0)+'% de su ingreso)':'')+'</td>'+
+            '<td style="color:'+(m.libre2<0?'#DC2626':'#059669')+'">'+fmt(m.libre2)+'</td>'+
+          '</tr>'+
+        '</tbody>'+
+      '</table>'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;font-size:.82rem">'+
+        '<div style="padding:8px 12px;background:#ECFDF5;border-radius:8px;color:#065F46"><strong>✅ Pro:</strong> '+m.pros+'</div>'+
+        '<div style="padding:8px 12px;background:#FEF2F2;border-radius:8px;color:#991B1B"><strong>⚠️ Contra:</strong> '+m.contras+'</div>'+
+      '</div>'+
+    '</div>';
+  });
+  $('modelos').innerHTML=html;
+}
+function renderRecomendaciones(){
+  var c=ultimoCalc;
+  var actions=[];
+  if(c.margenLibre<0){
+    actions.push({h:'URGENTE — gastos > ingresos',p:'Recorten <strong>'+fmt(Math.abs(c.margenLibre))+'/mes</strong> de gastos comunes (deseos: salidas, suscripciones, ocio) ANTES de discutir cualquier modelo. Sin balance positivo no hay plan que sostenga.'});
+  }
+  if(c.diferenciaIngresoPct>=30){
+    actions.push({h:'Diferencia fuerte de ingresos: usen proporcional',p:'Con '+c.diferenciaIngresoPct.toFixed(0)+'% de diferencia, el modelo 50/50 deja al de menor ingreso con poco margen libre. <strong>Modelo 4 (proporcional)</strong> es el justo: cada uno aporta % igual a su % del ingreso conjunto.'});
+  }
+  if(c.totalConjunto>c.ingTotal*0.7 && c.ingTotal>0){
+    actions.push({h:'Más del 70% del ingreso en gastos comunes',p:'Margen apretado. Cualquier ajuste pequeño (subir prima vivienda, embarazo, gasto médico) los descuadra. Subir colchón antes que ahorro de inversión.'});
+  }
+  if(c.ahorroConjunto<c.ingTotal*0.1 && c.margenLibre>=0){
+    actions.push({h:'Ahorro objetivo conjunto bajo el 10%',p:'Su ahorro común es <strong>'+(c.ingTotal>0?(c.ahorroConjunto/c.ingTotal*100).toFixed(1):0)+'%</strong> del ingreso. Para metas comunes (vivienda, viajes, fondo), el mínimo recomendado es 10-15%.'});
+  }
+  actions.push({h:'Money date quincenal — la única costumbre que importa',p:'<strong>30 minutos cada 15 días, mismo día y hora.</strong> Sin TV, sin distracciones. Use el checklist de arriba. Las parejas que sostienen esta costumbre 1 año tienen 60% menos discusiones por plata (Smart Couples Finish Rich, Bach).'});
+  actions.push({h:'Cada uno tiene "plata personal" sin justificar',p:'Aunque sea pequeña. Es respiro mental. Si tienen que reportar el café o el corte de pelo, la fricción crece. <strong>Cuenta personal de cada uno = sanity.</strong>'});
+  actions.push({h:'Hijos: presupuesto explícito y compartido',p:'Útiles, prepagada, ocio infantil, regalos. Sin "me toca a mí porque siempre" o "le dijiste sí sin avisarme". Categorías claras + acuerdo de quién paga qué evitan la mayoría de discusiones por plata.'});
+  $('recom').innerHTML=actions.slice(0,4).map(function(a,i){
+    return '<div class="action-step"><div class="action-num">'+(i+1)+'</div><div class="action-body"><h4>'+a.h+'</h4><p>'+a.p+'</p></div></div>';
+  }).join('');
+}
+function renderShareCard(){
+  var c=ultimoCalc;
+  var shareLine=c.margenLibre<0?'Trabajando para volver a balance positivo.':
+                c.diferenciaIngresoPct>=30?'Modelo proporcional al ingreso. <em>Justo cuando hay desbalance.</em>':
+                c.diferenciaIngresoPct>=15?'Yours/Mine/Ours. <em>Equilibrio.</em>':
+                'Modelo 50/50 nos funciona. <em>Plata clara, pareja sana.</em>';
+  $('shareCard').innerHTML=
+    '<div class="share-card-label">Nuestras finanzas en pareja</div>'+
+    '<div class="share-card-amount">'+fmt(c.ingTotal)+'</div>'+
+    '<div class="share-card-line">'+shareLine+'</div>'+
+    '<div class="share-card-stats">'+
+      '<div class="share-card-stat">'+c.nombre1+'<strong>'+fmt(c.ing1)+'</strong></div>'+
+      '<div class="share-card-stat">'+c.nombre2+'<strong>'+fmt(c.ing2)+'</strong></div>'+
+      '<div class="share-card-stat">Ahorro común<strong>'+fmt(c.ahorroConjunto)+'</strong></div>'+
+    '</div>'+
+    '<div class="share-actions">'+
+      '<button onclick="copiarSharePareja()">📋 Copiar texto</button>'+
+    '</div>'+
+    '<div class="share-card-foot">exogenadian.com/pareja-finanzas</div>';
+}
+// ─── PRO unlocks ───
+function checkProAndDo(callback){
+  if(window.exoPro && window.exoPro.check){
+    window.exoPro.check().then(function(isPro){
+      if(isPro) callback();
+      else mostrarPaywallPareja();
+    });
+  } else {
+    mostrarPaywallPareja();
+  }
+}
+function mostrarPaywallPareja(){
+  if(typeof exoToast!=='undefined' && exoToast.info){
+    exoToast.info('Esta descarga es PRO. Ver planes en /precios');
+  }
+  setTimeout(function(){ window.location.href='precios.html'; }, 1200);
+}
+function generarMoneyDatePDF(){
+  if(!ultimoCalc){ exoToast('Calcula primero el split','warning'); return }
+  if(typeof gtag!=='undefined') gtag('event','pareja_pdf_money_date_attempt');
+  checkProAndDo(function(){
+    if(typeof gtag!=='undefined') gtag('event','pareja_pdf_money_date');
+    armarMoneyDateSheet();
+    document.getElementById('mdSheet').classList.add('show');
+    setTimeout(function(){window.print()}, 250);
+  });
+}
+function armarMoneyDateSheet(){
+  var c=ultimoCalc;
+  var nombres=c.nombre1+' & '+c.nombre2;
+  var hoy=new Date();
+  var meses=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  var planHtml='';
+  for(var i=0;i<12;i++){
+    var m=new Date(hoy.getFullYear(), hoy.getMonth()+i, 15);
+    planHtml+='<div class="pl-cell"><div class="month">'+meses[m.getMonth()]+' '+m.getFullYear()+'</div><div class="blanks"></div></div>';
+  }
+  var checks=[
+    {t:'Saldos exactos hoy',d:'Cuentas, tarjetas, ahorros, deudas. Sin medias verdades.'},
+    {t:'Gastos del período',d:'¿Algún gasto no esperado? ¿Quién pagó qué? ¿Cuadran las cuentas conjuntas?'},
+    {t:'Avance de metas comunes',d:'Fondo de emergencia, cuota inicial vivienda, viaje. ¿Vamos al ritmo?'},
+    {t:'Próximos compromisos grandes',d:'Viaje próximo, mantenimiento del carro, prima/cesantías que entran.'},
+    {t:'Algún gasto > $X requiere consenso',d:'Definan el monto. Compras mayores se conversan antes para alinear.'},
+    {t:'Cómo nos sentimos con la plata',d:'Stress, ansiedad, tranquilidad. El componente emocional es 50%.'},
+    {t:'Ajustes para el próximo período',d:'¿Algún cubo se nos fue de las manos? ¿Subir el ahorro porque entró bono?'},
+    {t:'Algo NO financiero pero conectado',d:'Plan vacaciones, decisión sobre hijos, mudanza. Lo que impactará 6+ meses.'}
+  ];
+  var checksHtml=checks.map(function(ck){
+    return '<div class="ck-item"><div class="ck-box"></div><div class="ck-text"><strong>'+ck.t+'</strong><small>'+ck.d+'</small></div></div>';
+  }).join('');
+  document.getElementById('mdSheet').innerHTML=
+    '<div class="md-sheet-actions">'+
+      '<button class="print" onclick="window.print()">🖨️ Imprimir / PDF</button>'+
+      '<button class="close" onclick="cerrarMoneyDateSheet()">Cerrar</button>'+
+    '</div>'+
+    '<div class="md-sheet-inner">'+
+      '<div class="md-sheet-header">'+
+        '<h1>📋 Money Date</h1>'+
+        '<div class="sub">Conversación quincenal de plata · 30 minutos · sin distracciones</div>'+
+        '<div class="nombres">'+nombres+'</div>'+
+      '</div>'+
+      '<div class="md-sheet-section">'+
+        '<h2>Checklist quincenal</h2>'+
+        '<div class="md-sheet-checklist">'+checksHtml+'</div>'+
+      '</div>'+
+      '<div class="md-sheet-section">'+
+        '<h2>Plan anual — marca cuando hagan la cita</h2>'+
+        '<div class="md-sheet-plan">'+planHtml+'</div>'+
+      '</div>'+
+      '<div class="md-sheet-foot">'+
+        '<strong>"Las parejas que prosperan financieramente tienen una conversación de plata cada semana."</strong> — David Bach<br>'+
+        'Generado en exogenadian.com/pareja-finanzas · '+hoy.toLocaleDateString('es-CO')+
+        (window.asesorMode && window.asesorMode.footerLine() ? '<br><em style="color:#831843;margin-top:6px;display:inline-block">'+window.asesorMode.footerLine()+'</em>' : '')+
+      '</div>'+
+    '</div>';
+}
+function cerrarMoneyDateSheet(){
+  document.getElementById('mdSheet').classList.remove('show');
+}
+function generarExcelHistorico(){
+  if(!ultimoCalc){ exoToast('Calcula primero el split','warning'); return }
+  if(typeof gtag!=='undefined') gtag('event','pareja_excel_historico_attempt');
+  checkProAndDo(function(){
+    if(!window.ExcelJS){ exoToast('Recarga la página','error'); return }
+    if(typeof gtag!=='undefined') gtag('event','pareja_excel_historico');
+    var c=ultimoCalc;
+    var modelos={m1:'Todo conjunto',m2:'50/50',m3:'Yours/Mine/Ours',m4:'Proporcional'};
+    var aporte1Rec=c[c.recomendado].aporte1, aporte2Rec=c[c.recomendado].aporte2;
+    var meses=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    var wb=new ExcelJS.Workbook();
+    wb.creator='ExógenaDIAN';
+    wb.created=new Date();
+    var fNavy={type:'pattern',pattern:'solid',fgColor:{argb:'FF831843'}};
+    var fRose={type:'pattern',pattern:'solid',fgColor:{argb:'FFFFE4E6'}};
+    var fGreen={type:'pattern',pattern:'solid',fgColor:{argb:'FFD1FAE5'}};
+    var fAmber={type:'pattern',pattern:'solid',fgColor:{argb:'FFFEF3C7'}};
+    var fontW={bold:true,color:{argb:'FFFFFFFF'},size:12};
+    var bdr={top:{style:'thin',color:{argb:'FFE2E8F0'}},bottom:{style:'thin',color:{argb:'FFE2E8F0'}},left:{style:'thin',color:{argb:'FFE2E8F0'}},right:{style:'thin',color:{argb:'FFE2E8F0'}}};
+    // Hoja 1: Plan
+    var ws=wb.addWorksheet('💑 Histórico mensual',{properties:{tabColor:{argb:'FFE11D48'}}});
+    ws.columns=[{width:14},{width:18},{width:18},{width:18},{width:18},{width:18},{width:22}];
+    // Membrete asesor (si modo activo)
+    var asesorBranding = window.asesorMode ? window.asesorMode.getBranding() : null;
+    if(asesorBranding){
+      ws.mergeCells('A1:G1');
+      var ma=ws.getCell('A1');
+      ma.value='ASESORÍA PREPARADA POR: '+(asesorBranding.firma||asesorBranding.nombre||'').toUpperCase()+
+        (asesorBranding.tp?(' · TP '+asesorBranding.tp):(asesorBranding.nit?(' · NIT '+asesorBranding.nit):''))+
+        (asesorBranding.ciudad?(' · '+asesorBranding.ciudad):'');
+      ma.fill={type:'pattern',pattern:'solid',fgColor:{argb:'FF1B3A5C'}};
+      ma.font={bold:true,color:{argb:'FFFCD34D'},size:10};
+      ma.alignment={horizontal:'center',vertical:'middle'};
+      ws.getRow(1).height=22;
+      ws.addRow([]);
+    }
+    var titleRow = ws.lastRow ? ws.lastRow.number+1 : 1;
+    ws.mergeCells('A'+titleRow+':G'+titleRow);
+    var t=ws.getCell('A'+titleRow);
+    t.value='HISTÓRICO DE SPLIT EN PAREJA — '+(c.nombre1+' & '+c.nombre2);
+    t.fill=fNavy; t.font=fontW; t.alignment={horizontal:'center',vertical:'middle'};
+    ws.getRow(titleRow).height=28;
+    ws.addRow([]);
+    var rPlan=ws.addRow(['PLAN BASE','Modelo recomendado:',modelos[c.recomendado]||'—','Aporte '+c.nombre1,aporte1Rec,'Aporte '+c.nombre2,aporte2Rec]);
+    rPlan.eachCell(function(cell,i){cell.fill=fAmber;cell.border=bdr;cell.font={bold:i===1||i===2,size:10}});
+    rPlan.getCell(5).numFmt='#,##0';
+    rPlan.getCell(7).numFmt='#,##0';
+    ws.addRow([]);
+    var hdr=ws.addRow(['Mes','Aporte '+c.nombre1,'Aporte '+c.nombre2,'Total aportado','Gasto real común','Desviación','Notas']);
+    hdr.eachCell(function(cell){cell.fill=fNavy;cell.font=fontW;cell.alignment={horizontal:'center'};cell.border=bdr});
+    var startRow=ws.lastRow.number+1;
+    for(var i=0;i<12;i++){
+      var m=meses[i];
+      var r=ws.addRow([m, aporte1Rec, aporte2Rec, null, null, null, '']);
+      r.getCell(2).numFmt='#,##0'; r.getCell(2).fill=fRose;
+      r.getCell(3).numFmt='#,##0'; r.getCell(3).fill=fRose;
+      r.getCell(4).value={formula:'B'+r.number+'+C'+r.number}; r.getCell(4).numFmt='#,##0'; r.getCell(4).fill=fGreen; r.getCell(4).font={bold:true};
+      r.getCell(5).numFmt='#,##0'; r.getCell(5).fill=fAmber;
+      r.getCell(6).value={formula:'D'+r.number+'-E'+r.number}; r.getCell(6).numFmt='#,##0;[Red]-#,##0';
+      r.eachCell(function(cell){cell.border=bdr;cell.alignment=cell.alignment||{horizontal:'right'}});
+      r.getCell(1).alignment={horizontal:'left'};
+      r.getCell(7).alignment={horizontal:'left'};
+    }
+    var endRow=ws.lastRow.number;
+    var rTot=ws.addRow(['TOTALES',
+      {formula:'SUM(B'+startRow+':B'+endRow+')'},
+      {formula:'SUM(C'+startRow+':C'+endRow+')'},
+      {formula:'SUM(D'+startRow+':D'+endRow+')'},
+      {formula:'SUM(E'+startRow+':E'+endRow+')'},
+      {formula:'SUM(F'+startRow+':F'+endRow+')'},
+      ''
+    ]);
+    rTot.eachCell(function(cell,i){cell.fill=fNavy;cell.font=fontW;cell.border=bdr;if(i>=2&&i<=6)cell.numFmt='#,##0'});
+    ws.addRow([]); ws.addRow([]);
+    var rIns=ws.addRow(['INSTRUCCIONES']); rIns.getCell(1).fill=fNavy; rIns.getCell(1).font=fontW; ws.mergeCells('A'+rIns.number+':G'+rIns.number);
+    var instrucciones=[
+      '1. Las celdas en rosa (Aporte cada uno) ya vienen con el plan recomendado. Edítalas si cambian sus ingresos.',
+      '2. Llena la columna E (Gasto real común) cada mes con lo que efectivamente gastaron juntos.',
+      '3. Desviación (F) se calcula sola: positivo = ahorraron sobre lo planeado; negativo = se pasaron.',
+      '4. Reúnanse el día 15 de cada mes para revisar este Excel — es el "money date" en formato Excel.',
+      '5. Al final del año tendrán datos reales sobre cuánto cuesta su vida juntos: planeen el siguiente con base en eso.'
+    ];
+    instrucciones.forEach(function(txt){ var r=ws.addRow([txt]); ws.mergeCells('A'+r.number+':G'+r.number); r.getCell(1).font={size:10}; r.getCell(1).alignment={wrapText:true} });
+    // Hoja 2: Plan vivienda/meta común
+    var ws2=wb.addWorksheet('🎯 Meta común',{properties:{tabColor:{argb:'FF059669'}}});
+    ws2.columns=[{width:30},{width:22},{width:22}];
+    ws2.mergeCells('A1:C1'); var t2=ws2.getCell('A1'); t2.value='META COMÚN — Cuota inicial / Viaje / Fondo'; t2.fill=fNavy; t2.font=fontW; t2.alignment={horizontal:'center'};
+    ws2.getRow(1).height=24;
+    ws2.addRow([]);
+    var inputs=[['Meta (descripción)',''],['Valor objetivo (COP)',0],['Plazo (meses)',12],['Aporte mensual sugerido',{formula:'IF(B4>0,B3/B4,0)'}],['Capital actual (COP)',0]];
+    inputs.forEach(function(row){
+      var r=ws2.addRow(row);
+      r.getCell(1).font={bold:true,size:10}; r.getCell(1).border=bdr;
+      r.getCell(2).fill=fAmber; r.getCell(2).font={bold:true,size:11}; r.getCell(2).border=bdr;
+      if(typeof row[1]==='number') r.getCell(2).numFmt='#,##0';
+      if(row[1]&&row[1].formula) r.getCell(2).numFmt='#,##0';
+    });
+    wb.xlsx.writeBuffer().then(function(buf){
+      var blob=new Blob([buf],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+      var a=document.createElement('a');
+      a.href=URL.createObjectURL(blob);
+      a.download='Pareja-historico-'+c.nombre1.replace(/[^a-zA-Z0-9]/g,'')+'-'+c.nombre2.replace(/[^a-zA-Z0-9]/g,'')+'.xlsx';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(a.href);
+      if(typeof exoToast!=='undefined') exoToast('Excel descargado','success');
+    });
+  });
+}
+function copiarSharePareja(){
+  if(!ultimoCalc)return;
+  var c=ultimoCalc;
+  var modelos={m1:'Todo conjunto',m2:'50/50',m3:'Yours/Mine/Ours',m4:'Proporcional al ingreso'};
+  var txt='Nuestras finanzas en pareja\n';
+  txt+='Ingreso conjunto: '+fmt(c.ingTotal)+' · Ahorro común: '+fmt(c.ahorroConjunto)+'\n';
+  txt+='Modelo recomendado: '+modelos[c.recomendado]+'\n';
+  txt+='Calculado en exogenadian.com/pareja-finanzas';
+  if(navigator.clipboard) navigator.clipboard.writeText(txt).then(function(){exoToast('Copiado al portapapeles','success')});
+  if(typeof gtag!=='undefined') gtag('event','pareja_share',{tipo:'copy'});
+}
+</script>
+</body>
+</html>

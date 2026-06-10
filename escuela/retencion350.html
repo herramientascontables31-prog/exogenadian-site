@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="../shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S7SM6ST4CC');
+</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curso Retenci&oacute;n en la Fuente 350 &mdash; Escuela Contable IA | Ex&oacute;genaDIAN</title>
+<meta name="description" content="Aprende el formulario 350 de Retenci&oacute;n en la Fuente haciendo. 12 m&oacute;dulos con referencias normativas del Estatuto Tributario, tips pr&aacute;cticos, tablas de tarifas y herramienta real.">
+<link rel="canonical" href="https://exogenadian.com/escuela/retencion350.html">
+<meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green-900:#064E3B;--green-800:#065F46;--green-700:#047857;--green-600:#059669;--green-500:#10B981;--green-400:#34D399;--green-300:#6EE7B7;--green-200:#A7F3D0;--green-100:#D1FAE5;--green-50:#ECFDF5;
+  --white:#FFF;--gray-50:#F9FAFB;--gray-100:#F3F4F6;--gray-200:#E5E7EB;--gray-300:#D1D5DB;--gray-400:#9CA3AF;--gray-500:#6B7280;--gray-600:#4B5563;--gray-700:#374151;--gray-800:#1F2937;--gray-900:#111827;
+  --amber-50:#FFFBEB;--amber-100:#FEF3C7;--amber-500:#F59E0B;--amber-700:#92400E;--amber-800:#78350F;
+  --blue-50:#EFF6FF;--blue-100:#DBEAFE;--blue-500:#3B82F6;--blue-700:#1D4ED8;
+  --purple-50:#F5F3FF;--purple-100:#EDE9FE;--purple-500:#8B5CF6;--purple-700:#6D28D9;
+  --rose-50:#FFF1F2;--rose-500:#F43F5E;--rose-700:#BE123C;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-900);line-height:1.6}
+/* ===== LAYOUT ===== */
+.curso-layout{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+@media(max-width:900px){.curso-layout{grid-template-columns:1fr}}
+/* ===== SIDEBAR ===== */
+.sidebar{background:var(--white);border-right:1px solid var(--gray-200);padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
+.sidebar-header{padding:16px 20px;border-bottom:1px solid var(--gray-100)}
+.sidebar-header a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--gray-800);font-weight:800;font-size:.9rem}
+.sidebar-header a div{width:28px;height:28px;background:linear-gradient(135deg,#059669,#34D399);border-radius:7px;display:grid;place-items:center;color:#fff;font-size:.7rem;font-weight:900}
+.sidebar-header small{display:block;font-size:.72rem;color:var(--gray-400);font-weight:500;margin-top:2px}
+.sidebar-curso{padding:16px 20px;border-bottom:1px solid var(--gray-100)}
+.sidebar-curso h3{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--blue-700);margin-bottom:4px}
+.sidebar-curso p{font-size:.88rem;font-weight:700;color:var(--gray-800)}
+.sidebar-nav{padding:12px 0;flex:1}
+.sidebar-nav a{display:flex;align-items:center;gap:10px;padding:10px 20px;text-decoration:none;color:var(--gray-500);font-size:.85rem;font-weight:500;transition:all .15s;border-left:3px solid transparent}
+.sidebar-nav a:hover{background:var(--green-50);color:var(--green-700)}
+.sidebar-nav a.active{background:var(--green-50);color:var(--green-700);font-weight:700;border-left-color:var(--green-600)}
+.sidebar-nav a .nav-num{width:24px;height:24px;border-radius:50%;background:var(--gray-100);color:var(--gray-500);display:grid;place-items:center;font-size:.72rem;font-weight:700;flex-shrink:0}
+.sidebar-nav a.active .nav-num{background:var(--green-600);color:#fff}
+.sidebar-nav a.completed .nav-num{background:var(--green-200);color:var(--green-700)}
+.sidebar-back{padding:16px 20px;border-top:1px solid var(--gray-100);margin-top:auto}
+.sidebar-back a{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--gray-400);font-size:.82rem;font-weight:500;transition:color .15s}
+.sidebar-back a:hover{color:var(--gray-700)}
+.sidebar-toggle{display:none;position:fixed;bottom:20px;left:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--green-600);color:#fff;border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 16px rgba(5,150,105,.3)}
+@media(max-width:900px){
+  .sidebar{display:none;position:fixed;top:0;left:0;z-index:199;width:280px;box-shadow:4px 0 20px rgba(0,0,0,.1)}
+  .sidebar.open{display:flex}
+  .sidebar-toggle{display:block}
+  .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:198}
+  .sidebar-overlay.open{display:block}
+}
+/* ===== MAIN CONTENT ===== */
+.curso-main{padding:32px 40px 60px;max-width:860px}
+@media(max-width:900px){.curso-main{padding:20px 16px 80px}}
+/* Module header */
+.mod-header{margin-bottom:32px}
+.mod-breadcrumb{font-size:.78rem;color:var(--gray-400);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.mod-breadcrumb a{color:var(--gray-400);text-decoration:none}
+.mod-breadcrumb a:hover{color:var(--green-600)}
+.mod-num{display:inline-flex;align-items:center;gap:8px;background:var(--blue-100);color:var(--blue-700);padding:4px 14px;border-radius:100px;font-size:.78rem;font-weight:700;margin-bottom:12px}
+.mod-header h1{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;letter-spacing:-.02em;margin-bottom:8px;line-height:1.2}
+.mod-header .mod-desc{font-size:1rem;color:var(--gray-500);max-width:600px;line-height:1.6}
+/* Content blocks */
+.content-block{margin-bottom:28px}
+.content-block h2{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;margin-bottom:12px;color:var(--gray-900);padding-bottom:8px;border-bottom:2px solid var(--blue-200)}
+.content-block h3{font-size:1.05rem;font-weight:700;margin:20px 0 8px;color:var(--gray-800)}
+.content-block p{font-size:.92rem;color:var(--gray-600);line-height:1.7;margin-bottom:12px}
+.content-block ul,.content-block ol{margin:8px 0 16px 20px;display:flex;flex-direction:column;gap:6px}
+.content-block li{font-size:.9rem;color:var(--gray-600);line-height:1.6}
+/* Norma card */
+.norma{background:var(--amber-50);border:1.5px solid #FDE68A;border-radius:14px;padding:20px 24px;margin:20px 0}
+.norma-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.norma-icon{width:32px;height:32px;border-radius:8px;background:#FDE68A;display:grid;place-items:center;font-size:.9rem;flex-shrink:0}
+.norma-header h4{font-size:.92rem;font-weight:700;color:var(--amber-800)}
+.norma-header .norma-tag{font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:4px;background:var(--amber-500);color:#fff;text-transform:uppercase;letter-spacing:.04em}
+.norma blockquote{font-size:.88rem;color:#78350F;line-height:1.65;padding:12px 16px;background:rgba(255,255,255,.6);border-radius:8px;border-left:3px solid var(--amber-500);margin:8px 0;font-style:italic}
+.norma blockquote strong{font-style:normal;color:var(--amber-800)}
+.norma p{font-size:.85rem;color:#78350F;line-height:1.6;margin:8px 0}
+.norma .norma-aplicacion{font-size:.82rem;color:var(--green-800);background:var(--green-50);padding:10px 14px;border-radius:8px;border:1px solid var(--green-200);margin-top:12px}
+.norma .norma-aplicacion strong{color:var(--green-700)}
+/* Tip card */
+.tip{background:var(--blue-50);border:1.5px solid #BFDBFE;border-radius:14px;padding:18px 22px;margin:20px 0}
+.tip-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.tip-header h4{font-size:.88rem;font-weight:700;color:var(--blue-700)}
+.tip p{font-size:.88rem;color:#1E40AF;line-height:1.6}
+/* Error com&uacute;n */
+.error-comun{background:var(--rose-50);border:1.5px solid #FECACA;border-radius:14px;padding:18px 22px;margin:20px 0}
+.error-comun-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.error-comun-header h4{font-size:.88rem;font-weight:700;color:var(--rose-700)}
+.error-comun p{font-size:.88rem;color:#9F1239;line-height:1.6}
+/* Tabla normativa */
+.tabla-norm{width:100%;border-collapse:collapse;margin:16px 0;border-radius:10px;overflow:hidden;border:1px solid var(--gray-200)}
+.tabla-norm th{background:var(--gray-100);padding:10px 14px;text-align:left;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-500)}
+.tabla-norm td{padding:10px 14px;font-size:.85rem;border-top:1px solid var(--gray-100);color:var(--gray-700)}
+.tabla-norm tr:hover{background:var(--green-50)}
+.tabla-norm code{font-family:'JetBrains Mono',monospace;font-size:.8rem;background:var(--gray-100);padding:1px 6px;border-radius:4px}
+/* Ejemplo pr&aacute;ctico */
+.ejemplo{background:var(--white);border:1.5px solid var(--gray-200);border-radius:14px;overflow:hidden;margin:20px 0;box-shadow:0 2px 8px rgba(0,0,0,.03)}
+.ejemplo-header{background:var(--gray-50);padding:12px 20px;border-bottom:1px solid var(--gray-200);display:flex;align-items:center;gap:8px}
+.ejemplo-header h4{font-size:.85rem;font-weight:700;color:var(--gray-700)}
+.ejemplo-body{padding:16px 20px}
+.ejemplo-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-100);font-size:.88rem}
+.ejemplo-row:last-child{border-bottom:none}
+.ejemplo-row .label{color:var(--gray-600)}
+.ejemplo-row .value{font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.85rem}
+.ejemplo-row.total{border-top:2px solid var(--blue-200);border-bottom:none;padding-top:12px;margin-top:4px}
+.ejemplo-row.total .label{font-weight:700;color:var(--gray-900)}
+.ejemplo-row.total .value{color:var(--blue-700);font-size:.95rem}
+/* Navigation between modules */
+.mod-nav{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:24px;border-top:2px solid var(--gray-200)}
+.mod-nav a{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:12px;text-decoration:none;font-weight:700;font-size:.92rem;transition:all .2s}
+.mod-nav .prev{background:var(--gray-100);color:var(--gray-700)}
+.mod-nav .prev:hover{background:var(--gray-200)}
+.mod-nav .next{background:var(--green-600);color:#fff;box-shadow:0 4px 12px rgba(5,150,105,.25)}
+.mod-nav .next:hover{background:var(--green-700);transform:translateY(-1px)}
+/* CTA practica */
+.cta-practica{background:linear-gradient(135deg,var(--blue-50),#DBEAFE);border:2px solid #93C5FD;border-radius:16px;padding:28px 24px;text-align:center;margin:28px 0}
+.cta-practica h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;color:var(--blue-700);margin-bottom:8px}
+.cta-practica p{font-size:.92rem;color:#1E40AF;margin-bottom:16px}
+.cta-practica a{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--blue-500);color:#fff;border-radius:12px;font-weight:700;font-size:1rem;text-decoration:none;box-shadow:0 4px 16px rgba(59,130,246,.3);transition:all .2s}
+.cta-practica a:hover{background:var(--blue-700);transform:translateY(-2px)}
+/* Progress */
+.progress-bar{height:4px;background:var(--gray-200);border-radius:2px;margin:12px 20px;overflow:hidden}
+.progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--green-500),var(--green-400));border-radius:2px;transition:width .3s}
+/* Expand/collapse */
+.expandible{margin:12px 0}
+.expandible-toggle{display:flex;align-items:center;gap:8px;width:100%;padding:10px 14px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;cursor:pointer;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:600;color:var(--gray-700);transition:all .15s;text-align:left}
+.expandible-toggle:hover{background:var(--gray-100)}
+.expandible-toggle svg{width:16px;height:16px;transition:transform .2s;flex-shrink:0}
+.expandible-content{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.expandible.open .expandible-content{max-height:2000px}
+.expandible.open .expandible-toggle svg{transform:rotate(180deg)}
+</style>
+<script async src="../shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<script defer src="../shared/pro.js?v=848fbf16"></script>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+<div class="curso-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html">
+        <div>E</div>
+        Ex&oacute;genaDIAN
+      </a>
+    </div>
+    <div class="sidebar-curso">
+      <h3>Escuela Contable IA</h3>
+      <p>Formulario 350 &mdash; Retenci&oacute;n</p>
+    </div>
+    <div class="progress-bar"><div class="fill" id="progressFill" style="width:8%"></div></div>
+    <nav class="sidebar-nav" id="sidebarNav">
+      <a href="#modulo-1" class="active" onclick="navigateTo(1)">
+        <span class="nav-num">1</span> Agentes de retenci&oacute;n
+      </a>
+      <a href="#modulo-2" onclick="navigateTo(2)">
+        <span class="nav-num">2</span> Retenci&oacute;n por renta
+      </a>
+      <a href="#modulo-3" onclick="navigateTo(3)">
+        <span class="nav-num">3</span> Retenci&oacute;n de IVA
+      </a>
+      <a href="#modulo-4" onclick="navigateTo(4)">
+        <span class="nav-num">4</span> Rendimientos y otros
+      </a>
+      <a href="#modulo-5" onclick="navigateTo(5)">
+        <span class="nav-num">5</span> Pagos al exterior
+      </a>
+      <a href="#modulo-6" onclick="navigateTo(6)">
+        <span class="nav-num">6</span> Autorretenci&oacute;n
+      </a>
+      <a href="#modulo-7" onclick="navigateTo(7)">
+        <span class="nav-num">7</span> Bases m&iacute;nimas y tarifas
+      </a>
+      <a href="#modulo-8" onclick="navigateTo(8)">
+        <span class="nav-num">8</span> Certificados de retenci&oacute;n
+      </a>
+      <a href="#modulo-9" onclick="navigateTo(9)">
+        <span class="nav-num">9</span> Retenci&oacute;n y R&eacute;gimen Simple
+      </a>
+      <a href="#modulo-10" onclick="navigateTo(10)">
+        <span class="nav-num">10</span> Correcciones del F350
+      </a>
+      <a href="#modulo-11" onclick="navigateTo(11)">
+        <span class="nav-num">11</span> Responsabilidad del agente
+      </a>
+      <a href="#modulo-12" onclick="navigateTo(12)">
+        <span class="nav-num">12</span> Pr&aacute;ctica &mdash; genera tu F350
+      </a>
+    </nav>
+    <div class="sidebar-back">
+      <a href="../escuela.html">&larr; Volver a la Escuela</a>
+    </div>
+  </aside>
+  <div class="curso-main">
+    <section id="modulo-1" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">Retenci&oacute;n 350</a> &rsaquo; M&oacute;dulo 1
+        </div>
+        <div class="mod-num">M&oacute;dulo 1 de 12</div>
+        <h1>Agentes de retenci&oacute;n: &iquest;qui&eacute;n retiene y por qu&eacute;?</h1>
+        <p class="mod-desc">La retenci&oacute;n en la fuente es el mecanismo por el cual el Estado recauda impuestos de forma anticipada. Antes de calcular una sola cifra, necesitas saber qui&eacute;n est&aacute; obligado a retener, qu&eacute; debe hacer y qu&eacute; le pasa si no lo hace.</p>
+      </div>
+      <div class="content-block">
+        <h2>&iquest;Qui&eacute;nes son agentes de retenci&oacute;n?</h2>
+        <p>El agente de retenci&oacute;n es la persona o entidad que, al realizar un pago o abono en cuenta, debe descontar (retener) un porcentaje y consignarlo a la DIAN a nombre del beneficiario del pago. El Estatuto Tributario define con claridad qui&eacute;nes tienen esta obligaci&oacute;n:</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 368 del Estatuto Tributario</h4>
+            <span class="norma-tag">Obligatorio</span>
+          </div>
+          <blockquote>
+            <strong>&ldquo;Son agentes de retenci&oacute;n o de percepci&oacute;n&rdquo;</strong> las entidades de derecho p&uacute;blico, los fondos de inversi&oacute;n, los fondos de valores, los fondos de pensiones de jubilaci&oacute;n e invalidez, los consorcios, las uniones temporales, las comunidades organizadas, las sociedades, las dem&aacute;s personas jur&iacute;dicas, las sucesiones il&iacute;quidas, las personas naturales que tengan la calidad de comerciantes y que en el a&ntilde;o inmediatamente anterior hayan obtenido ingresos brutos superiores a 30.000 UVT, y las personas naturales que sean catalogadas por la DIAN como grandes contribuyentes.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>En la pr&aacute;ctica:</strong> Toda persona jur&iacute;dica (SAS, LTDA, SA, E.U., fundaciones, cooperativas) es agente de retenci&oacute;n. Las personas naturales solo si son comerciantes con ingresos brutos &gt; 30.000 UVT ($1.493.970.000 en 2025) o si la DIAN las cataloga como grandes contribuyentes.
+          </div>
+        </div>
+        <h3>Personas naturales como agentes de retenci&oacute;n</h3>
+        <p>Un punto cr&iacute;tico que muchos contadores pasan por alto: las personas naturales <strong>no comerciantes</strong> (profesionales independientes, asalariados) generalmente NO son agentes de retenci&oacute;n, salvo casos espec&iacute;ficos como pagos laborales a empleados dom&eacute;sticos (Art. 383 ET).</p>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p>Los <strong>consorcios y uniones temporales</strong> son agentes de retenci&oacute;n independientemente de su volumen de ingresos. El consorcio retiene y presenta su propio F350 con su NIT, no con el de los consorciados.</p>
+        </div>
+        <h2>Obligaciones del agente de retenci&oacute;n</h2>
+        <p>Ser agente de retenci&oacute;n no es opcional ni se puede renunciar. Implica estas obligaciones legales:</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Arts. 375, 376 y 378 ET &mdash; Obligaciones formales</h4>
+          </div>
+          <table class="tabla-norm">
+            <thead><tr><th>#</th><th>Obligaci&oacute;n</th><th>Norma</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td><strong>Efectuar la retenci&oacute;n</strong> al momento del pago o abono en cuenta, lo que ocurra primero</td><td>Art. 375 ET</td></tr>
+              <tr><td>2</td><td><strong>Consignar</strong> lo retenido dentro de los plazos establecidos por el Gobierno Nacional</td><td>Art. 376 ET</td></tr>
+              <tr><td>3</td><td><strong>Expedir certificados</strong> de retenci&oacute;n a los beneficiarios del pago</td><td>Art. 378 ET</td></tr>
+              <tr><td>4</td><td><strong>Presentar la declaraci&oacute;n</strong> mensual de retenciones (F350) dentro de los plazos</td><td>Art. 606 ET</td></tr>
+              <tr><td>5</td><td><strong>Conservar soportes</strong> (facturas, contratos, certificados) por el t&eacute;rmino de firmeza</td><td>Art. 632 ET</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n que la DIAN detecta</h4>
+          </div>
+          <p>Practicar retenci&oacute;n al momento del <strong>pago</strong> pero no al momento del <strong>abono en cuenta</strong>. El Art. 375 ET dice &ldquo;pago o abono en cuenta, lo que ocurra primero&rdquo;. Si causas una factura en diciembre pero la pagas en enero, la retenci&oacute;n corresponde a <strong>diciembre</strong> (abono en cuenta). Declarar la retenci&oacute;n en enero genera inconsistencia con la ex&oacute;gena.</p>
+        </div>
+        <h2>Autorretenci&oacute;n: introducci&oacute;n</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Decreto 2201 de 2016 &mdash; Autorretenci&oacute;n especial renta</h4>
+          </div>
+          <blockquote>
+            A partir del 1 de enero de 2017, los contribuyentes del impuesto sobre la renta del Art. 240 ET que sean <strong>sociedades nacionales, establecimientos permanentes de sociedades del exterior, y personas jur&iacute;dicas extranjeras</strong> con presencia en Colombia, deben practicarse <strong>autorretenci&oacute;n a t&iacute;tulo de renta</strong> sobre cada pago o abono en cuenta recibido.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Importante:</strong> Esta autorretenci&oacute;n reemplaz&oacute; la antigua autorretenci&oacute;n del CREE. Se declara en el F350 (conceptos 0010, 0011, 0012) y es diferente de la retenci&oacute;n que te practican terceros. Se ver&aacute; en detalle en el M&oacute;dulo 6.
+          </div>
+        </div>
+        <h2>Sanciones por no retener</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 370 ET &mdash; Responsabilidad solidaria</h4>
+            <span class="norma-tag">Cr&iacute;tico</span>
+          </div>
+          <blockquote>
+            <strong>&ldquo;Los agentes de retenci&oacute;n que no efect&uacute;en la retenci&oacute;n,</strong> son responsables con el contribuyente ante el Estado por las sumas que est&aacute;n obligados a retener. Si el agente retuvo pero no consign&oacute;, responde exclusivamente &eacute;l.&rdquo;
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Consecuencias reales:</strong> Si no retuviste, la DIAN te cobra a ti Y al beneficiario del pago. Si retuviste pero no pagaste a la DIAN, eso es <strong>peculado</strong> (apropiaci&oacute;n de dineros p&uacute;blicos) con consecuencias penales (Art. 402 C&oacute;digo Penal). Adem&aacute;s, sanci&oacute;n del 100% del valor no retenido (Art. 370 ET).
+          </div>
+        </div>
+        <div class="expandible" onclick="this.classList.toggle('open')">
+          <button class="expandible-toggle">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            Ver: Cuentas PUC de retenci&oacute;n en la fuente
+          </button>
+          <div class="expandible-content" style="padding:12px 14px">
+            <table class="tabla-norm">
+              <thead><tr><th>Cuenta</th><th>Nombre</th><th>Uso</th></tr></thead>
+              <tbody>
+                <tr><td><code>2365</code></td><td>Retenci&oacute;n en la fuente</td><td>Pasivo: retenci&oacute;n que practicas a terceros (a pagar a la DIAN)</td></tr>
+                <tr><td><code>236505</code></td><td>Retenci&oacute;n salarios y pagos laborales</td><td>Retenci&oacute;n Art. 383 ET sobre n&oacute;mina</td></tr>
+                <tr><td><code>236515</code></td><td>Retenci&oacute;n honorarios</td><td>Retenci&oacute;n Art. 392 ET 10%-11%</td></tr>
+                <tr><td><code>236520</code></td><td>Retenci&oacute;n comisiones</td><td>Retenci&oacute;n Art. 392 ET</td></tr>
+                <tr><td><code>236525</code></td><td>Retenci&oacute;n servicios</td><td>Retenci&oacute;n Art. 392 ET 4%-6%</td></tr>
+                <tr><td><code>236530</code></td><td>Retenci&oacute;n arrendamientos</td><td>Retenci&oacute;n 3.5% inmuebles, 4% muebles</td></tr>
+                <tr><td><code>236540</code></td><td>Retenci&oacute;n compras</td><td>Retenci&oacute;n Art. 401 ET 2.5%-3.5%</td></tr>
+                <tr><td><code>236575</code></td><td>Autorretenci&oacute;n</td><td>Autorretenci&oacute;n especial renta Dec. 2201/2016</td></tr>
+                <tr><td><code>1355</code></td><td>Anticipo de impuestos &mdash; retenci&oacute;n en la fuente</td><td>Activo: retenci&oacute;n que te practicaron (a descontar en renta)</td></tr>
+                <tr><td><code>135505</code></td><td>Retenci&oacute;n en la fuente a favor</td><td>Retenciones practicadas por clientes sobre tus ingresos</td></tr>
+                <tr><td><code>135515</code></td><td>Autorretenci&oacute;n a favor</td><td>Autorretenci&oacute;n practicada sobre tus ingresos</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <span></span>
+        <a href="#modulo-2" class="next" onclick="navigateTo(2)">M&oacute;dulo 2: Retenci&oacute;n por renta &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-2" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">Retenci&oacute;n 350</a> &rsaquo; M&oacute;dulo 2
+        </div>
+        <div class="mod-num">M&oacute;dulo 2 de 12</div>
+        <h1>Retenci&oacute;n por renta: salarios, servicios, honorarios y compras</h1>
+        <p class="mod-desc">Los cuatro grandes grupos de retenci&oacute;n a t&iacute;tulo de renta. Cada uno tiene su propia tabla de tarifas, base m&iacute;nima y art&iacute;culo del ET. Aqu&iacute; los dominas todos.</p>
+      </div>
+      <div class="content-block">
+        <h2>Retenci&oacute;n sobre salarios &mdash; Art. 383 ET</h2>
+        <p>La retenci&oacute;n sobre pagos laborales es la m&aacute;s compleja del sistema colombiano. Se calcula con una tabla de rangos marginales sobre el ingreso laboral gravado expresado en UVT, despu&eacute;s de depurar deducciones y rentas exentas.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 383 ET &mdash; Tabla de retenci&oacute;n para ingresos laborales</h4>
+            <span class="norma-tag">Cr&iacute;tico</span>
+          </div>
+          <blockquote>
+            La retenci&oacute;n se aplica sobre el pago o abono en cuenta mensualizado, depurado seg&uacute;n el procedimiento 1 o el procedimiento 2 del Art. 386 ET. La tarifa se calcula sobre <strong>rangos marginales</strong> en UVT.
+          </blockquote>
+          <table class="tabla-norm">
+            <thead><tr><th>Rango en UVT</th><th>En pesos AG 2025</th><th>Tarifa marginal</th><th>Instrucci&oacute;n</th></tr></thead>
+            <tbody>
+              <tr><td>&gt; 0 hasta 95</td><td>Hasta $4.730.905</td><td>0%</td><td>0</td></tr>
+              <tr><td>&gt; 95 hasta 150</td><td>$4.730.905 &ndash; $7.469.850</td><td>19%</td><td>(Ingreso laboral gravado en UVT &minus; 95) &times; 19%</td></tr>
+              <tr><td>&gt; 150 hasta 360</td><td>$7.469.850 &ndash; $17.927.640</td><td>28%</td><td>(Ingreso laboral gravado en UVT &minus; 150) &times; 28% + 10 UVT</td></tr>
+              <tr><td>&gt; 360 hasta 640</td><td>$17.927.640 &ndash; $31.871.360</td><td>33%</td><td>(Ingreso laboral gravado en UVT &minus; 360) &times; 33% + 69 UVT</td></tr>
+              <tr><td>&gt; 640 hasta 945</td><td>$31.871.360 &ndash; $47.060.055</td><td>35%</td><td>(Ingreso laboral gravado en UVT &minus; 640) &times; 35% + 162 UVT</td></tr>
+              <tr><td>&gt; 945 hasta 2.300</td><td>$47.060.055 &ndash; $114.537.700</td><td>37%</td><td>(Ingreso laboral gravado en UVT &minus; 945) &times; 37% + 268 UVT</td></tr>
+              <tr><td>&gt; 2.300 en adelante</td><td>M&aacute;s de $114.537.700</td><td>39%</td><td>(Ingreso laboral gravado en UVT &minus; 2.300) &times; 39% + 770 UVT</td></tr>
+            </tbody>
+          </table>
+          <p><strong>UVT 2025:</strong> $49.799 (Dec. 2269/2024). Para pagos realizados en 2026 usar UVT $52.374 (Res. 000238/2025).</p>
+        </div>
+        <h3>Procedimiento 1 vs. Procedimiento 2</h3>
+        <p>El empleador puede elegir entre dos procedimientos para calcular la retenci&oacute;n mensual sobre pagos laborales:</p>
+        <ul>
+          <li><strong>Procedimiento 1 (Art. 385 ET):</strong> Se depura <strong>cada mes</strong> con las deducciones reales de ese mes (aportes, intereses de vivienda, dependientes, medicina prepagada, etc.).</li>
+          <li><strong>Procedimiento 2 (Art. 386 ET):</strong> Se calcula un <strong>porcentaje fijo</strong> en junio y diciembre con base en los ingresos de los 12 meses anteriores. Ese porcentaje se aplica los 6 meses siguientes.</li>
+        </ul>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p>El <strong>procedimiento 2</strong> es m&aacute;s estable para el empleado (la retenci&oacute;n no cambia mes a mes), pero puede generar un saldo a favor o a pagar grande en la declaraci&oacute;n de renta. El <strong>procedimiento 1</strong> se ajusta mejor a la realidad mensual. La mayor&iacute;a de software de n&oacute;mina usa procedimiento 1 por defecto.</p>
+        </div>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <h4>Ejemplo &mdash; Retenci&oacute;n laboral Procedimiento 1 (AG 2025)</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Salario mensual</span><span class="value">$12.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Aportes obligatorios salud y pensi&oacute;n</span><span class="value">$960.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Renta exenta 25% (Art. 206 num. 10 ET)</span><span class="value">$2.760.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Intereses vivienda (Art. 119 ET)</span><span class="value">$500.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Dependientes 10% (Art. 387 ET)</span><span class="value">$1.200.000</span></div>
+            <div class="ejemplo-row"><span class="label">= Ingreso laboral gravado</span><span class="value">$6.580.000</span></div>
+            <div class="ejemplo-row"><span class="label">En UVT ($6.580.000 / $49.799)</span><span class="value">132,13 UVT</span></div>
+            <div class="ejemplo-row"><span class="label">Rango: &gt; 95 hasta 150 UVT &rarr; tarifa 19%</span><span class="value">&mdash;</span></div>
+            <div class="ejemplo-row"><span class="label">Retenci&oacute;n = (132,13 &minus; 95) &times; 19% &times; $49.799</span><span class="value">7,05 UVT</span></div>
+            <div class="ejemplo-row total"><span class="label">Retenci&oacute;n mensual</span><span class="value">$351.129</span></div>
+          </div>
+        </div>
+        <h2>Retenci&oacute;n sobre servicios y honorarios &mdash; Art. 392 ET</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 392 ET &mdash; Servicios y honorarios</h4>
+          </div>
+          <blockquote>
+            La retenci&oacute;n sobre honorarios y comisiones se practica al <strong>11%</strong> cuando el beneficiario es PJ o PN declarante (o cuando la sumatoria de pagos en el a&ntilde;o supera 3.300 UVT), y al <strong>10%</strong> cuando es PN no declarante. La retenci&oacute;n por servicios generales es del <strong>4%</strong> al declarante y <strong>6%</strong> al no declarante (Art. 1.2.4.4.14 DUR 1625/2016).
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Diferencia clave:</strong> &ldquo;Honorarios&rdquo; implica actividad intelectual personal (abogados, contadores, m&eacute;dicos). &ldquo;Servicios&rdquo; es actividad mec&aacute;nica o material (transporte, vigilancia, aseo). La clasificaci&oacute;n determina la tarifa: 10%/11% vs. 4%/6%.
+          </div>
+        </div>
+        <table class="tabla-norm">
+          <thead><tr><th>Concepto</th><th>C&oacute;d. F350</th><th>Declarante</th><th>No declarante</th><th>Base m&iacute;nima</th></tr></thead>
+          <tbody>
+            <tr><td>Honorarios</td><td>0001</td><td>11%</td><td>10%</td><td>0 UVT (sin m&iacute;nimo)</td></tr>
+            <tr><td>Comisiones</td><td>0002</td><td>11%</td><td>10%</td><td>0 UVT (sin m&iacute;nimo)</td></tr>
+            <tr><td>Servicios generales</td><td>0003</td><td>4%</td><td>6%</td><td>4 UVT ($209.000)</td></tr>
+            <tr><td>Servicios de transporte</td><td>0004</td><td>3.5%</td><td>3.5%</td><td>4 UVT ($209.000)</td></tr>
+            <tr><td>Servicios temporales</td><td>0005</td><td>1%</td><td>1%</td><td>4 UVT ($209.000)</td></tr>
+            <tr><td>Emolumentos eclesi&aacute;sticos</td><td>0006</td><td>4%</td><td>4%</td><td>27 UVT ($1.414.000)</td></tr>
+          </tbody>
+        </table>
+        <h2>Retenci&oacute;n sobre compras &mdash; Art. 401 ET</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 401 ET &mdash; Retenci&oacute;n en compras</h4>
+          </div>
+          <blockquote>
+            La retenci&oacute;n por compras de bienes se practica al <strong>2.5%</strong> cuando el beneficiario es declarante de renta y al <strong>3.5%</strong> cuando no lo es. Base m&iacute;nima en transici&oacute;n (hasta 30-jun-2026): <strong>27 UVT</strong> ($1.414.000 a&ntilde;o 2026). El Decreto 572 de 28-may-2025 la redujo a <strong>10 UVT</strong>; ese decreto fue suspendido por el Consejo de Estado el 7-may-2026, pero la <strong>suspensi&oacute;n fue revocada el 2-jun-2026</strong> (exp. 30229), por lo que la base de 10 UVT <strong>vuelve a regir desde el 1-jul-2026</strong> (primer d&iacute;a del mes siguiente a la ejecutoria del auto).
+          </blockquote>
+        </div>
+        <h2>Retenci&oacute;n sobre arrendamientos</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Arts. 395 y 401 ET &mdash; Arrendamientos</h4>
+          </div>
+          <table class="tabla-norm">
+            <thead><tr><th>Tipo</th><th>Tarifa</th><th>Base m&iacute;nima</th><th>En pesos 2026</th></tr></thead>
+            <tbody>
+              <tr><td>Arrendamiento de <strong>bienes inmuebles</strong></td><td>3.5%</td><td>27 UVT</td><td>$1.414.000</td></tr>
+              <tr><td>Arrendamiento de <strong>bienes muebles</strong></td><td>4%</td><td>0 UVT</td><td>Sin m&iacute;nimo</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <h4>Ejemplo &mdash; Retenci&oacute;n por servicios profesionales (honorarios)</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Valor del servicio de consultor&iacute;a</span><span class="value">$8.500.000</span></div>
+            <div class="ejemplo-row"><span class="label">Beneficiario: persona natural declarante</span><span class="value">&mdash;</span></div>
+            <div class="ejemplo-row"><span class="label">Concepto: honorarios (Art. 392 ET)</span><span class="value">&mdash;</span></div>
+            <div class="ejemplo-row"><span class="label">Tarifa: 11% (declarante)</span><span class="value">&mdash;</span></div>
+            <div class="ejemplo-row total"><span class="label">Retenci&oacute;n a practicar</span><span class="value">$935.000</span></div>
+          </div>
+        </div>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <h4>Ejemplo &mdash; Retenci&oacute;n por compra de mercanc&iacute;a</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Valor de la compra (sin IVA)</span><span class="value">$5.200.000</span></div>
+            <div class="ejemplo-row"><span class="label">Base m&iacute;nima en transici&oacute;n: 27 UVT = $1.414.000 (desde 1-jul-2026 baja a 10 UVT — D572/2025 reactivado el 2-jun-2026)</span><span class="value">Supera</span></div>
+            <div class="ejemplo-row"><span class="label">Proveedor: persona jur&iacute;dica (declarante)</span><span class="value">&mdash;</span></div>
+            <div class="ejemplo-row"><span class="label">Tarifa: 2.5% (Art. 401 ET)</span><span class="value">&mdash;</span></div>
+            <div class="ejemplo-row total"><span class="label">Retenci&oacute;n a practicar</span><span class="value">$130.000</span></div>
+          </div>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n que la DIAN detecta</h4>
+          </div>
+          <p>Aplicar la tarifa de <strong>servicios (4%)</strong> cuando deber&iacute;a ser <strong>honorarios (10%/11%)</strong>. Si tu proveedor es un profesional que presta un servicio intelectual (abogado, contador, consultor), la retenci&oacute;n es por honorarios, NO por servicios. La DIAN cruza el concepto de retenci&oacute;n del F350 con la actividad econ&oacute;mica del RUT del proveedor.</p>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-1" class="prev" onclick="navigateTo(1)">&larr; M&oacute;dulo 1</a>
+        <a href="#modulo-3" class="next" onclick="navigateTo(3)">M&oacute;dulo 3: Retenci&oacute;n de IVA &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-3" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">Retenci&oacute;n 350</a> &rsaquo; M&oacute;dulo 3
+        </div>
+        <div class="mod-num">M&oacute;dulo 3 de 12</div>
+        <h1>Retenci&oacute;n de IVA: cu&aacute;ndo retener el impuesto a las ventas</h1>
+        <p class="mod-desc">La retenci&oacute;n de IVA es un mecanismo diferente a la retenci&oacute;n de renta. Se declara en el <strong>mismo F350</strong> pero en casillas separadas. Aqu&iacute; aprendes qui&eacute;n retiene, cu&aacute;nto y c&oacute;mo se registra.</p>
+      </div>
+      <div class="content-block">
+        <h2>&iquest;Qui&eacute;nes retienen IVA? &mdash; Los 5 tipos de agentes</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 437-2 ET &mdash; Agentes de retenci&oacute;n de IVA</h4>
+            <span class="norma-tag">Obligatorio</span>
+          </div>
+          <blockquote>
+            Act&uacute;an como agentes de retenci&oacute;n del impuesto sobre las ventas en la adquisici&oacute;n de bienes y servicios gravados:
+          </blockquote>
+          <table class="tabla-norm">
+            <thead><tr><th>#</th><th>Tipo de agente</th><th>Detalle</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td><strong>Entidades estatales</strong></td><td>Naci&oacute;n, departamentos, municipios, distritos, establecimientos p&uacute;blicos, empresas industriales y comerciales del Estado</td></tr>
+              <tr><td>2</td><td><strong>Grandes Contribuyentes</strong></td><td>Catalogados por la DIAN mediante resoluci&oacute;n. Obligados a retener IVA a todos sus proveedores responsables</td></tr>
+              <tr><td>3</td><td><strong>Responsables del IVA</strong> (al adquirir de no domiciliados)</td><td>Cuando adquieren bienes o servicios de personas <strong>sin residencia o domicilio en Colombia</strong></td></tr>
+              <tr><td>4</td><td><strong>Personas o entidades designadas por la DIAN</strong></td><td>Mediante resoluci&oacute;n especial (ej: contribuyentes de sectores espec&iacute;ficos)</td></tr>
+              <tr><td>5</td><td><strong>Responsables del IVA</strong> que adquieran bienes del Art. 437-4 ET</td><td>Venta de chatarra, tabaco en rama, algod&oacute;n y otros bienes espec&iacute;ficos</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p>No todas las personas jur&iacute;dicas retienen IVA. Solo los <strong>Grandes Contribuyentes</strong> y las <strong>entidades estatales</strong> retienen IVA en compras internas a responsables. Una SAS peque&ntilde;a NO retiene IVA a sus proveedores (salvo que compre servicios del exterior o bienes del Art. 437-4).</p>
+        </div>
+        <h2>Tarifa de retenci&oacute;n de IVA</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 437-1 ET &mdash; Tarifa de retenci&oacute;n de IVA</h4>
+          </div>
+          <table class="tabla-norm">
+            <thead><tr><th>Situaci&oacute;n</th><th>Tarifa</th><th>Base</th></tr></thead>
+            <tbody>
+              <tr><td>Retenci&oacute;n general de IVA (compras internas)</td><td><strong>15%</strong> del IVA</td><td>Sobre el IVA facturado</td></tr>
+              <tr><td>Servicios prestados desde el exterior</td><td><strong>100%</strong> del IVA</td><td>Sobre el IVA asumido</td></tr>
+              <tr><td>Compras de bienes del Art. 437-4 (chatarra, etc.)</td><td><strong>100%</strong> del IVA</td><td>Sobre el IVA te&oacute;rico</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <h4>Ejemplo &mdash; Gran Contribuyente retiene IVA a proveedor</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Compra de servicios gravados al 19%</span><span class="value">$20.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">IVA facturado (19%)</span><span class="value">$3.800.000</span></div>
+            <div class="ejemplo-row"><span class="label">Retenci&oacute;n de IVA (15% del IVA)</span><span class="value">$570.000</span></div>
+            <div class="ejemplo-row"><span class="label">Pago neto al proveedor</span><span class="value">$23.230.000</span></div>
+            <div class="ejemplo-row total"><span class="label">Total a pagar: $20M + $3.8M IVA &minus; $570K Rete IVA</span><span class="value">$23.230.000</span></div>
+          </div>
+        </div>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <h4>Ejemplo &mdash; Retenci&oacute;n 100% IVA servicios del exterior (Google Ads)</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Servicio de publicidad digital (Google LLC)</span><span class="value">$5.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">IVA asumido (19%)</span><span class="value">$950.000</span></div>
+            <div class="ejemplo-row"><span class="label">Retenci&oacute;n de IVA (100% del IVA asumido)</span><span class="value">$950.000</span></div>
+            <div class="ejemplo-row total"><span class="label">A declarar en F350 como retenci&oacute;n de IVA</span><span class="value">$950.000</span></div>
+          </div>
+        </div>
+        <h2>R&eacute;gimen SIMPLE y retenci&oacute;n de IVA</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art. 911 ET &mdash; No retenci&oacute;n a contribuyentes del SIMPLE</h4>
+          </div>
+          <blockquote>
+            A los contribuyentes del R&eacute;gimen Simple de Tributaci&oacute;n <strong>no se les practica retenci&oacute;n en la fuente a t&iacute;tulo de renta</strong> ni de ICA. Sin embargo, <strong>s&iacute; se les practica retenci&oacute;n de IVA</strong> cuando el agente sea Gran Contribuyente o entidad estatal y el contribuyente SIMPLE sea responsable de IVA.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Atenci&oacute;n:</strong> Muchos contadores asumen que a los SIMPLE &ldquo;no se les retiene nada&rdquo;. Eso es incorrecto para la retenci&oacute;n de IVA. Verifica siempre si tu proveedor SIMPLE es responsable de IVA antes de definir si retienes o no.
+          </div>
+          <div class="norma-aplicacion" style="margin-top:8px;border-left-color:#F59E0B">
+            <strong>Otro punto cr&iacute;tico:</strong> el r&eacute;gimen ordinario que le compre a un SIMPLE debe <strong>autoretener</strong> a t&iacute;tulo de renta sobre la compra (Art. 911 inc. 2&deg; ET).
+          </div>
+        </div>
+        <h2>Casillas del F350 para retenci&oacute;n de IVA</h2>
+        <div class="expandible" onclick="this.classList.toggle('open')">
+          <button class="expandible-toggle">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            Ver: Casillas del F350 para IVA retenido y cuentas PUC
+          </button>
+          <div class="expandible-content" style="padding:12px 14px">
+            <table class="tabla-norm">
+              <thead><tr><th>Casilla F350</th><th>Concepto</th><th>Cuenta PUC</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Cas. 73-78</strong></td><td>Retenciones a t&iacute;tulo de IVA practicadas</td><td><code>2367</code> &mdash; Impuesto a las ventas retenido</td></tr>
+                <tr><td><strong>Cas. 73</strong></td><td>IVA retenido &mdash; compras y servicios gravados</td><td><code>236701</code></td></tr>
+                <tr><td><strong>Cas. 75</strong></td><td>IVA retenido &mdash; servicios del exterior</td><td><code>236705</code></td></tr>
+                <tr><td><strong>Cas. 77</strong></td><td>IVA retenido &mdash; venta de bienes Art. 437-4</td><td><code>236710</code></td></tr>
+                <tr><td>&mdash;</td><td>Retenci&oacute;n de IVA que te practicaron (F300)</td><td><code>2365</code> &mdash; Retenci&oacute;n de IVA a favor</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n que la DIAN detecta</h4>
+          </div>
+          <p>Declarar la retenci&oacute;n de IVA por servicios del exterior en el <strong>F300</strong> en vez del <strong>F350</strong>. El IVA asumido (generado y descontable) va en el F300. Pero la <strong>retenci&oacute;n</strong> de ese IVA (100%) se declara y paga en el F350. Si lo pones en el F300, la DIAN detecta la inconsistencia cruzando ambos formularios.</p>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-2" class="prev" onclick="navigateTo(2)">&larr; M&oacute;dulo 2</a>
+        <a href="#modulo-4" class="next" onclick="navigateTo(4)">M&oacute;dulo 4: Rendimientos y otros &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-4" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">Retenci&oacute;n 350</a> &rsaquo; M&oacute;dulo 4
+        </div>
+        <div class="mod-num">M&oacute;dulo 4 de 12</div>
+        <h1>Retenci&oacute;n por rendimientos financieros y otros conceptos</h1>
+        <p class="mod-desc">M&aacute;s all&aacute; de salarios, servicios y compras, existen retenciones por rendimientos financieros, loter&iacute;as, activos fijos, tarjetas de cr&eacute;dito/d&eacute;bito, dividendos e indemnizaciones. Aqu&iacute; dominas cada concepto especial.</p>
+      </div>
+      <div class="content-block">
+        <h2>Retenci&oacute;n por rendimientos financieros &mdash; Art. 395 ET</h2>
+        <p>Los rendimientos financieros (intereses, descuentos, beneficios, ganancias, utilidades, y en general todo lo que constituya rendimiento de capital) est&aacute;n sujetos a retenci&oacute;n en la fuente. Esta retenci&oacute;n recae principalmente sobre las entidades financieras como agentes.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 395 ET &mdash; Retenci&oacute;n por rendimientos financieros</h4>
+            <span class="norma-tag">Obligatorio</span>
+          </div>
+          <blockquote>
+            La retenci&oacute;n en la fuente sobre los <strong>rendimientos financieros</strong> se practica al <strong>7%</strong> sobre el valor del rendimiento, sin base m&iacute;nima. Las entidades financieras act&uacute;an como agentes de retenci&oacute;n sobre intereses pagados a sus clientes (CDT, cuentas de ahorro, dep&oacute;sitos a t&eacute;rmino).
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>En la pr&aacute;ctica:</strong> Cuando una empresa tiene un CDT y el banco le paga intereses, el banco retiene el 7% y lo declara en su F350. Si tu empresa es quien paga intereses (por ejemplo, a un proveedor por pago tard&iacute;o), t&uacute; practicas la retenci&oacute;n del 7%.
+          </div>
+        </div>
+        <h2>Retenci&oacute;n por loter&iacute;as, rifas y apuestas &mdash; Art. 306 ET</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 306 ET &mdash; Ganancia ocasional por loter&iacute;as</h4>
+            <span class="norma-tag">Cr&iacute;tico</span>
+          </div>
+          <blockquote>
+            Se considera ganancia ocasional lo percibido por concepto de <strong>loter&iacute;as, premios, rifas, apuestas y similares</strong>. La retenci&oacute;n es del <strong>20%</strong> sobre el valor del premio cuando supere 48 UVT ($2.390.352 en 2025). El operador de la loter&iacute;a o el organizador de la rifa es el agente retenedor.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Importante:</strong> Si tu empresa organiza una rifa para empleados y el premio supera 48 UVT, debes practicar retenci&oacute;n del 20% y declararla en el F350. El concepto en el formulario es ganancia ocasional.
+          </div>
+        </div>
+        <h2>Retenci&oacute;n por enajenaci&oacute;n de activos fijos de PN &mdash; Art. 398 ET</h2>
+        <p>Cuando una persona natural vende un activo fijo (un inmueble que no es inventario, un veh&iacute;culo de uso personal, etc.), el comprador debe practicar retenci&oacute;n.</p>
+        <table class="tabla-norm">
+          <thead><tr><th>Concepto</th><th>Tarifa</th><th>Base m&iacute;nima</th><th>Norma</th></tr></thead>
+          <tbody>
+            <tr><td>Rendimientos financieros</td><td>7%</td><td>Sin m&iacute;nimo</td><td>Art. 395 ET</td></tr>
+            <tr><td>Loter&iacute;as, rifas, apuestas</td><td>20%</td><td>48 UVT ($2.390.352)</td><td>Art. 306, 317 ET</td></tr>
+            <tr><td>Enajenaci&oacute;n activos fijos PN</td><td>1%</td><td>Sin m&iacute;nimo</td><td>Art. 398 ET</td></tr>
+            <tr><td>Pagos con tarjetas d&eacute;bito/cr&eacute;dito</td><td>1.5%</td><td>Sin m&iacute;nimo</td><td>Art. 401-1 ET, Dec. 406/2001</td></tr>
+            <tr><td>Dividendos gravados (PN residente)</td><td>Tabla Art. 242 ET</td><td>300 UVT ($14.939.700)</td><td>Art. 242 ET</td></tr>
+            <tr><td>Dividendos gravados (PJ nacional)</td><td>10%</td><td>Sin m&iacute;nimo</td><td>Art. 242-1 ET (Ley 2277/2022)</td></tr>
+            <tr><td>Indemnizaciones derivadas de relaci&oacute;n laboral</td><td>Tabla Art. 383 ET</td><td>Sin m&iacute;nimo</td><td>Art. 401-3 ET</td></tr>
+          </tbody>
+        </table>
+        <h2>Retenci&oacute;n por dividendos &mdash; Arts. 242 y 242-1 ET</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Arts. 242 y 242-1 ET &mdash; Retenci&oacute;n sobre dividendos</h4>
+          </div>
+          <blockquote>
+            Los dividendos y participaciones no gravados (INCRNGO) pagados a <strong>personas naturales residentes</strong> est&aacute;n sujetos a retenci&oacute;n del 0% hasta 1.090 UVT y del 15% sobre el exceso de 1.090 UVT (Art. 242 ET, Ley 2277/2022). Los dividendos pagados a <strong>personas jur&iacute;dicas nacionales</strong> est&aacute;n sujetos a retenci&oacute;n del <strong>10%</strong> (Art. 242-1 ET, Ley 2277/2022).
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Doble tarifa:</strong> Si los dividendos provienen de utilidades que <strong>no pagaron impuesto a nivel de la sociedad</strong> (Art. 49 ET), se aplica primero la tarifa general del 35% y sobre el remanente la tarifa de dividendos. Esta &ldquo;doble tributaci&oacute;n&rdquo; es el caso m&aacute;s complejo.
+          </div>
+        </div>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <h4>Ejemplo &mdash; Retenci&oacute;n por rendimientos financieros (CDT)</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Capital invertido en CDT</span><span class="value">$50.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Rendimiento mensual (10% E.A.)</span><span class="value">$416.667</span></div>
+            <div class="ejemplo-row"><span class="label">Tarifa retenci&oacute;n: 7% (Art. 395 ET)</span><span class="value">&mdash;</span></div>
+            <div class="ejemplo-row total"><span class="label">Retenci&oacute;n practicada por el banco</span><span class="value">$29.167</span></div>
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p>La retenci&oacute;n por <strong>pagos con tarjetas de cr&eacute;dito y d&eacute;bito</strong> (1.5%) la practican las <strong>entidades emisoras de tarjetas</strong> (bancos adquirentes), no el comercio. El comercio recibe el pago neto y registra la retenci&oacute;n como anticipo en la cuenta <code>135595</code>. Muchos contadores olvidan contabilizar estas retenciones y luego no cuadran con la renta.</p>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n que la DIAN detecta</h4>
+          </div>
+          <p>No practicar retenci&oacute;n sobre <strong>indemnizaciones laborales</strong>. El Art. 401-3 ET establece que las indemnizaciones por despido sin justa causa est&aacute;n sujetas a retenci&oacute;n seg&uacute;n la tabla del Art. 383 ET. Muchas empresas pagan la indemnizaci&oacute;n sin retener y la DIAN lo detecta al cruzar la ex&oacute;gena (F2276) con el certificado de ingresos y retenciones.</p>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-3" class="prev" onclick="navigateTo(3)">&larr; M&oacute;dulo 3</a>
+        <a href="#modulo-5" class="next" onclick="navigateTo(5)">M&oacute;dulo 5: Pagos al exterior &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-5" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">Retenci&oacute;n 350</a> &rsaquo; M&oacute;dulo 5
+        </div>
+        <div class="mod-num">M&oacute;dulo 5 de 12</div>
+        <h1>Retenci&oacute;n en pagos al exterior &mdash; Arts. 406-411 ET</h1>
+        <p class="mod-desc">Cuando pagas a un proveedor del exterior, la retenci&oacute;n es obligatoria y las tarifas son altas. Conoce las tarifas generales, tarifas especiales, convenios de doble tributaci&oacute;n y las obligaciones formales del agente retenedor.</p>
+      </div>
+      <div class="content-block">
+        <h2>Obligaci&oacute;n de retener en pagos al exterior &mdash; Art. 406 ET</h2>
+        <p>Cualquier pago o abono en cuenta a una persona natural o jur&iacute;dica sin residencia o domicilio en Colombia est&aacute; sujeto a retenci&oacute;n en la fuente. No hay base m&iacute;nima: se retiene desde el primer peso.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 406 ET &mdash; Deber de retener en pagos al exterior</h4>
+            <span class="norma-tag">Obligatorio</span>
+          </div>
+          <blockquote>
+            <strong>&ldquo;Deber&aacute;n retener a t&iacute;tulo de impuesto sobre la renta&rdquo;</strong> quienes hagan pagos o abonos en cuenta a personas naturales o jur&iacute;dicas, sucesiones il&iacute;quidas y asimiladas, sociedades de hecho, y dem&aacute;s entidades, que <strong>no tengan residencia o domicilio en el pa&iacute;s</strong>, por concepto de rentas sujetas a impuesto en Colombia.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Alcance:</strong> Aplica a cualquier agente de retenci&oacute;n (personas jur&iacute;dicas, personas naturales comerciantes con &gt; 30.000 UVT). Si tu SAS contrata un servicio de software con una empresa en EE.UU., debes retener.
+          </div>
+        </div>
+        <h2>Tarifas de retenci&oacute;n para pagos al exterior &mdash; Art. 408 ET</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 408 ET &mdash; Tarifas para beneficiarios del exterior</h4>
+            <span class="norma-tag">Cr&iacute;tico</span>
+          </div>
+          <table class="tabla-norm">
+            <thead><tr><th>Concepto</th><th>Tarifa</th><th>Norma espec&iacute;fica</th></tr></thead>
+            <tbody>
+              <tr><td>Tarifa general (intereses, comisiones, honorarios, regal&iacute;as, arrendamientos, servicios, consultor&iacute;a)</td><td><strong>15%</strong></td><td>Art. 408 inc. 1 ET (tarifa reducida desde Ley 2277/2022)</td></tr>
+              <tr><td>Servicios t&eacute;cnicos, asistencia t&eacute;cnica, consultor&iacute;a</td><td><strong>15%</strong></td><td>Art. 408 inc. 1 ET</td></tr>
+              <tr><td>Regal&iacute;as y explotaci&oacute;n de propiedad intelectual</td><td><strong>15%</strong></td><td>Art. 408 ET</td></tr>
+              <tr><td>Intereses sobre cr&eacute;ditos del exterior</td><td><strong>15%</strong></td><td>Art. 408 ET</td></tr>
+              <tr><td>Dividendos a sociedades del exterior</td><td><strong>10%</strong></td><td>Art. 245 ET (tarifa diferencial)</td></tr>
+              <tr><td>Administraci&oacute;n o direcci&oacute;n</td><td><strong>15%</strong></td><td>Art. 408 ET</td></tr>
+              <tr><td>Software (licencias) sin CDI</td><td><strong>15%</strong></td><td>Art. 408 ET</td></tr>
+              <tr><td>Seguros y reaseguros</td><td><strong>1%</strong></td><td>Art. 408-1 ET</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h2>Convenios de Doble Tributaci&oacute;n (CDI)</h2>
+        <p>Colombia tiene convenios vigentes con m&uacute;ltiples pa&iacute;ses que pueden reducir las tarifas de retenci&oacute;n. Para aplicar un CDI se necesita el <strong>certificado de residencia fiscal</strong> del beneficiario, apostillado y vigente.</p>
+        <table class="tabla-norm">
+          <thead><tr><th>Pa&iacute;s</th><th>Regal&iacute;as (CDI)</th><th>Intereses (CDI)</th><th>Dividendos (CDI)</th></tr></thead>
+          <tbody>
+            <tr><td>Espa&ntilde;a</td><td>10%</td><td>10%</td><td>5% / 0%</td></tr>
+            <tr><td>Chile</td><td>10%</td><td>15%</td><td>7%</td></tr>
+            <tr><td>M&eacute;xico</td><td>10%</td><td>10%</td><td>0%</td></tr>
+            <tr><td>Suiza</td><td>10%</td><td>10%</td><td>0%</td></tr>
+            <tr><td>Reino Unido</td><td>10%</td><td>10%</td><td>5% / 0%</td></tr>
+            <tr><td>Sin CDI (tarifa interna)</td><td>15%</td><td>15%</td><td>10%</td></tr>
+          </tbody>
+        </table>
+        <h2>Formulario 490 y responsabilidad del agente &mdash; Art. 415 ET</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 415 ET &mdash; Responsabilidad del agente retenedor en pagos al exterior</h4>
+          </div>
+          <blockquote>
+            El agente de retenci&oacute;n es <strong>responsable solidario</strong> por el impuesto que ha debido retener y no retuvo. En el caso de pagos al exterior, si no retuvo o retuvo con tarifa inferior sin que aplique un CDI, la DIAN puede cobrar al agente retenedor la totalidad del impuesto m&aacute;s sanciones e intereses.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Formulario 490:</strong> Adem&aacute;s del F350, cuando el beneficiario del exterior aplica un CDI y solicita devoluci&oacute;n, se usa el formulario 490 como recibo de pago. El agente retenedor debe conservar el certificado de residencia fiscal del beneficiario por el t&eacute;rmino de firmeza de la declaraci&oacute;n.
+          </div>
+        </div>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <h4>Ejemplo &mdash; Retenci&oacute;n por pago de servicios t&eacute;cnicos al exterior</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Servicio de consultor&iacute;a t&eacute;cnica (empresa en EE.UU.)</span><span class="value">USD $10.000</span></div>
+            <div class="ejemplo-row"><span class="label">TRM del d&iacute;a del pago</span><span class="value">$4.200</span></div>
+            <div class="ejemplo-row"><span class="label">Base en pesos (USD 10.000 &times; $4.200)</span><span class="value">$42.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">CDI con EE.UU.: No existe</span><span class="value">&mdash;</span></div>
+            <div class="ejemplo-row"><span class="label">Tarifa: 15% (Art. 408 ET)</span><span class="value">&mdash;</span></div>
+            <div class="ejemplo-row total"><span class="label">Retenci&oacute;n a practicar y declarar en F350</span><span class="value">$6.300.000</span></div>
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p>Cuando el contrato establece que el pago al exterior es &ldquo;<strong>libre de impuestos</strong>&rdquo; (net of taxes), la empresa colombiana asume la retenci&oacute;n. En ese caso debes <strong>grossar up</strong> la base: si la tarifa es 15% y el neto es USD 10.000, la base bruta es USD 10.000 / 0.85 = USD 11.764,71 y la retenci&oacute;n es USD 1.764,71. Ese mayor costo NO es deducible en renta.</p>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n que la DIAN detecta</h4>
+          </div>
+          <p>Aplicar la tarifa reducida de un CDI <strong>sin tener el certificado de residencia fiscal</strong> del beneficiario del exterior. La DIAN cruza los pagos al exterior reportados en ex&oacute;gena (F1001 concepto 5XXX) con las retenciones del F350. Si la tarifa es menor al 15% y no hay CDI v&aacute;lido soportado, la DIAN reliquida la retenci&oacute;n al 15% m&aacute;s sanciones (Art. 647 ET).</p>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-4" class="prev" onclick="navigateTo(4)">&larr; M&oacute;dulo 4</a>
+        <a href="#modulo-6" class="next" onclick="navigateTo(6)">M&oacute;dulo 6: Autorretenci&oacute;n &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-6" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">Retenci&oacute;n 350</a> &rsaquo; M&oacute;dulo 6
+        </div>
+        <div class="mod-num">M&oacute;dulo 6 de 12</div>
+        <h1>Autorretenci&oacute;n especial de renta &mdash; Decreto 2201/2016</h1>
+        <p class="mod-desc">Desde 2017, las sociedades nacionales y personas jur&iacute;dicas del Art. 240 ET deben practicarse autorretenci&oacute;n sobre sus ingresos. Aqu&iacute; aprendes las tarifas por actividad CIIU y c&oacute;mo se contabiliza.</p>
+      </div>
+      <div class="content-block">
+        <h2>&iquest;Qui&eacute;nes se autorretinan?</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Decreto 2201 de 2016 &mdash; Sujetos pasivos de autorretenci&oacute;n</h4>
+            <span class="norma-tag">Obligatorio</span>
+          </div>
+          <blockquote>
+            Son sujetos pasivos de esta autorretenci&oacute;n los contribuyentes del impuesto sobre la renta y complementarios se&ntilde;alados en el <strong>Art&iacute;culo 240 del ET</strong>: sociedades nacionales y asimiladas, establecimientos permanentes de entidades del exterior, y personas jur&iacute;dicas extranjeras con o sin presencia f&iacute;sica en Colombia, <strong>excepto</strong> los contribuyentes del R&eacute;gimen Simple, entidades sin &aacute;nimo de lucro, y los exentos del impuesto de renta.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>En la pr&aacute;ctica:</strong> Si tu cliente es una SAS, LTDA, SA o sucursal de sociedad extranjera que tributa al 35% del Art. 240 ET, <strong>est&aacute; obligada</strong> a practicarse autorretenci&oacute;n. Las ESAL del r&eacute;gimen tributario especial (Art. 356 ET) est&aacute;n excluidas. Los contribuyentes del SIMPLE tambi&eacute;n est&aacute;n excluidos.
+          </div>
+        </div>
+        <h2>Tarifas por actividad econ&oacute;mica (CIIU)</h2>
+        <p>Las tarifas de autorretenci&oacute;n var&iacute;an seg&uacute;n la actividad econ&oacute;mica del contribuyente, clasificada por c&oacute;digo CIIU:</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Dec. 2201/2016, Art. 1.2.6.8 DUR 1625/2016 &mdash; Tarifas de autorretenci&oacute;n</h4>
+          </div>
+          <table class="tabla-norm">
+            <thead><tr><th>Tarifa</th><th>Actividades ejemplo (CIIU)</th><th>Concepto F350</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>0.40%</strong></td>
+                <td>Comercio al por mayor y menor, agricultura, ganader&iacute;a, construcci&oacute;n, industria manufacturera, miner&iacute;a, transporte, alojamiento y comidas</td>
+                <td>0010</td>
+              </tr>
+              <tr>
+                <td><strong>0.80%</strong></td>
+                <td>Actividades profesionales, cient&iacute;ficas y t&eacute;cnicas; actividades financieras y de seguros; actividades inmobiliarias; informaci&oacute;n y comunicaciones; educaci&oacute;n; salud</td>
+                <td>0011</td>
+              </tr>
+              <tr>
+                <td><strong>1.60%</strong></td>
+                <td>Explotaci&oacute;n de minas y canteras (petr&oacute;leo, gas); actividades de generaci&oacute;n y distribuci&oacute;n de energ&iacute;a el&eacute;ctrica</td>
+                <td>0012</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <h4>Ejemplo &mdash; Autorretenci&oacute;n mensual de una SAS comercializadora</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Ingresos brutos del mes</span><span class="value">$185.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">(-) Devoluciones y descuentos</span><span class="value">$5.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Base de autorretenci&oacute;n</span><span class="value">$180.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">CIIU: Comercio al por mayor (4690) &rarr; tarifa 0.40%</span><span class="value">&mdash;</span></div>
+            <div class="ejemplo-row total"><span class="label">Autorretenci&oacute;n del mes (concepto 0010)</span><span class="value">$720.000</span></div>
+          </div>
+        </div>
+        <h3>Contabilizaci&oacute;n de la autorretenci&oacute;n</h3>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <h4>Asiento contable &mdash; Autorretenci&oacute;n especial renta</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label"><strong>DB</strong> 135515 &mdash; Autorretenci&oacute;n a favor</span><span class="value">$720.000</span></div>
+            <div class="ejemplo-row"><span class="label"><strong>CR</strong> 236575 &mdash; Autorretenci&oacute;n por pagar</span><span class="value">$720.000</span></div>
+            <div class="ejemplo-row" style="font-size:.82rem;color:var(--gray-400);border-bottom:none"><span class="label">El d&eacute;bito (135515) se lleva a la declaraci&oacute;n de renta como anticipo. El cr&eacute;dito (236575) se paga en el F350.</span><span class="value"></span></div>
+          </div>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n #1 &mdash; No practicar autorretenci&oacute;n</h4>
+          </div>
+          <p>Muchas SAS peque&ntilde;as omiten la autorretenci&oacute;n porque &ldquo;no sab&iacute;an&rdquo;. La DIAN cruza los ingresos del F110 (renta) con la base de autorretenci&oacute;n del F350. Si declaraste ingresos en renta pero no autorretenci&oacute;n en el 350, el sistema genera un auto de requerimiento. La sanci&oacute;n puede ser del <strong>100% del valor no retenido</strong> (Art. 647 ET) m&aacute;s intereses moratorios.</p>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n #2 &mdash; Tarifa incorrecta por CIIU</h4>
+          </div>
+          <p>Aplicar la tarifa del 0.40% cuando la actividad principal del RUT es de servicios profesionales (0.80%). La DIAN cruza el CIIU del RUT con la tarifa reportada en el F350. Verifica siempre la <strong>actividad econ&oacute;mica principal</strong> en el RUT de tu cliente antes de calcular.</p>
+        </div>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p>Si tu cliente tiene <strong>m&uacute;ltiples actividades CIIU</strong> con diferentes tarifas, aplica la tarifa que corresponda a cada ingreso seg&uacute;n su origen. No uses una sola tarifa promedio. Puedes tener los tres conceptos (0010, 0011, 0012) en un mismo F350.</p>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-5" class="prev" onclick="navigateTo(5)">&larr; M&oacute;dulo 5</a>
+        <a href="#modulo-7" class="next" onclick="navigateTo(7)">M&oacute;dulo 7: Bases m&iacute;nimas y tarifas &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-7" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">Retenci&oacute;n 350</a> &rsaquo; M&oacute;dulo 7
+        </div>
+        <div class="mod-num">M&oacute;dulo 7 de 12</div>
+        <h1>Bases m&iacute;nimas y tarifas completas &mdash; La tabla maestra</h1>
+        <p class="mod-desc">La tabla definitiva con todos los conceptos de retenci&oacute;n, bases m&iacute;nimas en UVT y en pesos 2025, tarifas para declarantes y no declarantes, y las normas de pagos al exterior.</p>
+      </div>
+      <div class="content-block">
+        <h2>Tabla maestra de retenci&oacute;n en la fuente &mdash; A&ntilde;o Gravable 2026</h2>
+        <p>UVT 2026 = <strong>$52.374</strong> (Resoluci&oacute;n DIAN 000238/2025). <strong>Periodo de transici&oacute;n (hasta 30-jun-2026):</strong> rigen las bases anteriores al Decreto 0572/2025 (compras 27 UVT, servicios 4 UVT), porque dicho decreto estuvo suspendido entre el 7-may-2026 y el 2-jun-2026 (exp. 30229). <strong>Desde el 1-jul-2026</strong> la suspensi&oacute;n quedó revocada y vuelven a regir las bases del 572 (compras 10 UVT, servicios 2 UVT). Las bases m&iacute;nimas se aplican sobre cada pago o abono en cuenta individual, no sobre acumulados.</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Arts. 383, 392, 395, 401 ET &mdash; Tabla consolidada</h4>
+            <span class="norma-tag">Referencia</span>
+          </div>
+          <table class="tabla-norm">
+            <thead>
+              <tr>
+                <th>Concepto</th>
+                <th>Base UVT</th>
+                <th>Base pesos 2026</th>
+                <th>Declarante</th>
+                <th>No declarante</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Salarios (tabla Art. 383)</td><td>95 UVT</td><td>$4.976.000</td><td colspan="2">Tabla marginal (0%-39%)</td></tr>
+              <tr><td>Honorarios (PJ / PN declarante)</td><td>0 UVT</td><td>Sin m&iacute;nimo</td><td>11%</td><td>10%</td></tr>
+              <tr><td>Comisiones</td><td>0 UVT</td><td>Sin m&iacute;nimo</td><td>11%</td><td>10%</td></tr>
+              <tr><td>Servicios generales</td><td>4 UVT</td><td>$209.000</td><td>4%</td><td>6%</td></tr>
+              <tr><td>Servicios integrales de salud (IPS)</td><td>4 UVT</td><td>$209.000</td><td>2%</td><td>2%</td></tr>
+              <tr><td>Servicios de transporte de carga</td><td>4 UVT</td><td>$209.000</td><td>1%</td><td>1%</td></tr>
+              <tr><td>Servicios de transporte nacional de pasajeros (terrestre)</td><td>27 UVT</td><td>$1.414.000</td><td>3.5%</td><td>3.5%</td></tr>
+              <tr><td>Servicios de transporte nacional de pasajeros (a&eacute;reo/mar&iacute;timo)</td><td>4 UVT</td><td>$209.000</td><td>1%</td><td>1%</td></tr>
+              <tr><td>Servicios temporales (empresas, sobre AIU)</td><td>4 UVT</td><td>$209.000</td><td>1%</td><td>1%</td></tr>
+              <tr><td>Servicios de aseo y vigilancia (sobre AIU)</td><td>4 UVT</td><td>$209.000</td><td>2%</td><td>2%</td></tr>
+              <tr><td>Servicios de s&iacute;smica</td><td>0 UVT</td><td>Sin m&iacute;nimo</td><td>6%</td><td>6%</td></tr>
+              <tr><td>Software / dise&ntilde;o web (declarante)</td><td>0 UVT</td><td>Sin m&iacute;nimo</td><td>3.5%</td><td>3.5%</td></tr>
+              <tr><td>Consultor&iacute;a de obras p&uacute;blicas</td><td>0 UVT</td><td>Sin m&iacute;nimo</td><td>2%</td><td>2%</td></tr>
+              <tr><td>Consultor&iacute;a ingenier&iacute;a de infraestructura</td><td>0 UVT</td><td>Sin m&iacute;nimo</td><td>6%</td><td>10%</td></tr>
+              <tr><td>Emolumentos eclesi&aacute;sticos</td><td>27 UVT</td><td>$1.414.000</td><td>4%</td><td>3.5%</td></tr>
+              <tr><td>Adquisici&oacute;n de bienes ra&iacute;ces (vivienda &le; 20.000 UVT)</td><td>0 UVT</td><td>Sin m&iacute;nimo</td><td>1%</td><td>1%</td></tr>
+              <tr><td>Adquisici&oacute;n de bienes ra&iacute;ces uso diferente a vivienda</td><td>27 UVT</td><td>$1.414.000</td><td>2.5%</td><td>2.5%</td></tr>
+              <tr><td>Adquisici&oacute;n de veh&iacute;culos</td><td>27 UVT</td><td>$1.414.000</td><td>1%</td><td>1%</td></tr>
+              <tr><td>Compras de caf&eacute; pergamino o cereza</td><td>160 UVT</td><td>$8.380.000</td><td>0.5%</td><td>0.5%</td></tr>
+              <tr><td>Compras de bienes agr&iacute;colas o pecuarios sin procesamiento</td><td>92 UVT</td><td>$4.818.000</td><td>1.5%</td><td>1.5%</td></tr>
+              <tr><td>Compras de oro</td><td>0 UVT</td><td>Sin m&iacute;nimo</td><td>1%</td><td>1%</td></tr>
+              <tr><td>Compras generales (bienes muebles)</td><td>27 UVT</td><td>$1.414.000</td><td>2.5%</td><td>3.5%</td></tr>
+              <tr><td>Compras de combustibles derivados del petr&oacute;leo</td><td>0 UVT</td><td>Sin m&iacute;nimo</td><td>0.1%</td><td>0.1%</td></tr>
+              <tr><td>Arrendamiento de bienes inmuebles</td><td>27 UVT</td><td>$1.414.000</td><td>3.5%</td><td>3.5%</td></tr>
+              <tr><td>Arrendamiento de bienes muebles</td><td>0 UVT</td><td>Sin m&iacute;nimo</td><td>4%</td><td>4%</td></tr>
+              <tr><td>Rendimientos financieros</td><td>0 UVT</td><td>Sin m&iacute;nimo</td><td>7%</td><td>7%</td></tr>
+              <tr><td>Loter&iacute;as, rifas, apuestas y similares</td><td>48 UVT</td><td>$2.514.000</td><td>20%</td><td>20%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h2>Pagos al exterior &mdash; Arts. 406, 407 y 408 ET</h2>
+        <p>Los pagos o abonos en cuenta a personas no residentes o no domiciliadas en Colombia tienen tarifas especiales de retenci&oacute;n:</p>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Arts. 406-408 ET &mdash; Retenci&oacute;n pagos al exterior</h4>
+            <span class="norma-tag">Cr&iacute;tico</span>
+          </div>
+          <table class="tabla-norm">
+            <thead><tr><th>Concepto</th><th>Tarifa</th><th>Norma</th></tr></thead>
+            <tbody>
+              <tr><td>Intereses, comisiones, honorarios, regal&iacute;as, arrendamientos, compensaciones, servicios, consultor&iacute;a, asistencia t&eacute;cnica, explotaci&oacute;n de PI</td><td><strong>20%</strong></td><td>Art. 408 inc. 1 ET</td></tr>
+              <tr><td>Servicios t&eacute;cnicos, asistencia t&eacute;cnica y consultor&iacute;a (sin convenio)</td><td><strong>20%</strong></td><td>Art. 408 inc. 1 ET</td></tr>
+              <tr><td>Rendimientos financieros de t&iacute;tulos (corto plazo)</td><td><strong>15%</strong></td><td>Art. 408 inc. 2 ET</td></tr>
+              <tr><td>Administraci&oacute;n o direcci&oacute;n</td><td><strong>20%</strong></td><td>Art. 408 ET</td></tr>
+              <tr><td>Dividendos y participaciones (Art. 245 ET)</td><td><strong>20%</strong></td><td>Art. 245 ET</td></tr>
+              <tr><td>Software (licencias)</td><td><strong>20%</strong></td><td>Art. 408 ET (si no aplica CDI)</td></tr>
+            </tbody>
+          </table>
+          <div class="norma-aplicacion">
+            <strong>Importante:</strong> Si Colombia tiene un <strong>Convenio para Evitar Doble Imposici&oacute;n (CDI)</strong> con el pa&iacute;s del beneficiario (Espa&ntilde;a, Chile, M&eacute;xico, Suiza, Portugal, India, UK, Francia, entre otros), las tarifas pueden ser menores. Verifica siempre si aplica CDI antes de retener.
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p>Los pagos al exterior requieren que el agente de retenci&oacute;n <strong>presente la declaraci&oacute;n de retenci&oacute;n</strong> Y adem&aacute;s un <strong>certificado de residencia fiscal</strong> del beneficiario si se aplica un CDI. Sin el certificado, se retiene al 20%. La DIAN exige estos certificados apostillados y vigentes (m&aacute;ximo del a&ntilde;o anterior o el corriente).</p>
+        </div>
+        <h2>Excepciones del R&eacute;gimen SIMPLE &mdash; Art. 911 ET</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art. 911 ET &mdash; No retenci&oacute;n a contribuyentes del SIMPLE</h4>
+          </div>
+          <blockquote>
+            Los pagos o abonos en cuenta realizados a contribuyentes del R&eacute;gimen Simple <strong>no est&aacute;n sujetos a retenci&oacute;n en la fuente a t&iacute;tulo de renta ni de ICA</strong>. El agente de retenci&oacute;n debe verificar en el <strong>RUT</strong> del proveedor que su r&eacute;gimen sea &ldquo;Simple&rdquo; (responsabilidad 47 en el RUT) antes de omitir la retenci&oacute;n.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Cuidado:</strong> Si no verificas el RUT y dejas de retener a alguien que NO est&aacute; en SIMPLE, eres solidariamente responsable por la retenci&oacute;n omitida (Art. 370 ET). Pide siempre copia del RUT actualizado.
+          </div>
+          <div class="norma-aplicacion" style="margin-top:8px;border-left-color:#F59E0B">
+            <strong>Pero ojo:</strong> aunque NO le retengas al SIMPLE, deb&eacute;s <strong>autoretener</strong> a t&iacute;tulo de renta sobre tu compra (Art. 911 inc. 2&deg; ET). La retenci&oacute;n no desaparece &mdash; cambia de manos al comprador.
+          </div>
+        </div>
+        <h2>Retenci&oacute;n residual &mdash; Art. 401-1 ET</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art. 401-1 ET &mdash; Retenci&oacute;n por otros ingresos tributarios</h4>
+          </div>
+          <blockquote>
+            Para los pagos o abonos en cuenta que <strong>no tengan una tarifa espec&iacute;fica</strong> de retenci&oacute;n en la fuente, se aplica una tarifa residual del <strong>2.5%</strong> para declarantes y <strong>3.5%</strong> para no declarantes. Base m&iacute;nima en transici&oacute;n (hasta 30-jun-2026): <strong>27 UVT</strong> ($1.414.000 a&ntilde;o 2026). El Decreto 572 de 28-may-2025 la redujo a 10 UVT; tras la revocatoria de la suspensi&oacute;n el 2-jun-2026 (exp. 30229), esa base de <strong>10 UVT rige desde el 1-jul-2026</strong>.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>En la pr&aacute;ctica:</strong> Esta es la tarifa &ldquo;comod&iacute;n&rdquo; que aplica cuando no sabes en qu&eacute; concepto clasificar un pago. Sin embargo, la DIAN ha dicho en conceptos que el agente debe hacer el esfuerzo de clasificar correctamente. Usar la tarifa residual sistem&aacute;ticamente puede generar requerimientos.
+          </div>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n que la DIAN detecta</h4>
+          </div>
+          <p>No verificar si el beneficiario del pago es <strong>declarante o no declarante</strong> de renta. La diferencia de tarifa puede ser significativa (2.5% vs. 3.5% en compras, 4% vs. 6% en servicios, 10% vs. 11% en honorarios). La DIAN cruza el RUT del beneficiario con las retenciones reportadas y si la tarifa no corresponde, genera inconsistencia.</p>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-6" class="prev" onclick="navigateTo(6)">&larr; M&oacute;dulo 6</a>
+        <a href="#modulo-8" class="next" onclick="navigateTo(8)">M&oacute;dulo 8: Certificados de retenci&oacute;n &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-8" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">Retenci&oacute;n 350</a> &rsaquo; M&oacute;dulo 8
+        </div>
+        <div class="mod-num">M&oacute;dulo 8 de 12</div>
+        <h1>Certificados de retenci&oacute;n: plazos, obligaciones y cruces</h1>
+        <p class="mod-desc">El agente de retenci&oacute;n debe expedir certificados a los beneficiarios del pago. Conoce los tipos de certificado, sus plazos, su contenido m&iacute;nimo y c&oacute;mo la DIAN los cruza con la ex&oacute;gena y la declaraci&oacute;n de renta.</p>
+      </div>
+      <div class="content-block">
+        <h2>Obligaci&oacute;n de expedir certificados &mdash; Arts. 378-381 ET</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 378 ET &mdash; Obligaci&oacute;n de expedir certificados</h4>
+            <span class="norma-tag">Obligatorio</span>
+          </div>
+          <blockquote>
+            Los agentes de retenci&oacute;n en la fuente deber&aacute;n expedir anualmente a los asalariados un <strong>certificado de ingresos y retenciones</strong> correspondiente al a&ntilde;o gravable inmediatamente anterior, seg&uacute;n el formato que prescriba la DIAN (Formato 220). Para los dem&aacute;s conceptos, se expide <strong>certificado por cada concepto</strong>.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Dos tipos de certificados:</strong> (1) Certificado de ingresos y retenciones (laboral, Formato 220) para empleados. (2) Certificado de retenci&oacute;n por otros conceptos (honorarios, servicios, compras, arrendamientos) para contratistas y proveedores.
+          </div>
+        </div>
+        <h2>Tipos de certificado y plazos</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Arts. 378, 379 y 381 ET &mdash; Plazos para expedir certificados</h4>
+          </div>
+          <table class="tabla-norm">
+            <thead><tr><th>Tipo de certificado</th><th>Beneficiario</th><th>Plazo m&aacute;ximo</th><th>Formato</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Certificado de ingresos y retenciones</strong> (laboral)</td><td>Empleados (pagos laborales Art. 383 ET)</td><td>31 de marzo del a&ntilde;o siguiente</td><td>Formato 220 DIAN</td></tr>
+              <tr><td><strong>Certificado por otros conceptos</strong></td><td>Contratistas, proveedores, arrendadores, etc.</td><td>31 de marzo del a&ntilde;o siguiente</td><td>Libre (con contenido m&iacute;nimo Art. 381 ET)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h2>Contenido m&iacute;nimo del certificado &mdash; Art. 381 ET</h2>
+        <p>El certificado por otros conceptos debe contener como m&iacute;nimo:</p>
+        <table class="tabla-norm">
+          <thead><tr><th>#</th><th>Dato requerido</th><th>Detalle</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>A&ntilde;o gravable y ciudad</td><td>Per&iacute;odo al que corresponde la retenci&oacute;n</td></tr>
+            <tr><td>2</td><td>Nombre o raz&oacute;n social y NIT del agente retenedor</td><td>Quien practic&oacute; la retenci&oacute;n</td></tr>
+            <tr><td>3</td><td>Direcci&oacute;n del agente retenedor</td><td>Domicilio fiscal</td></tr>
+            <tr><td>4</td><td>Nombre o raz&oacute;n social y NIT del beneficiario</td><td>A quien se le retuvo</td></tr>
+            <tr><td>5</td><td>Monto de los pagos o abonos en cuenta</td><td>Base sobre la cual se practic&oacute; retenci&oacute;n</td></tr>
+            <tr><td>6</td><td>Concepto del pago</td><td>Honorarios, servicios, compras, arrendamientos, etc.</td></tr>
+            <tr><td>7</td><td>Monto de las retenciones practicadas</td><td>Valor total retenido en el a&ntilde;o</td></tr>
+            <tr><td>8</td><td>Firma del agente retenedor o quien haga sus veces</td><td>Representante legal o contador</td></tr>
+          </tbody>
+        </table>
+        <h2>Cruces de la DIAN con certificados</h2>
+        <p>La DIAN realiza cruces autom&aacute;ticos entre los certificados de retenci&oacute;n, la ex&oacute;gena y las declaraciones de renta:</p>
+        <table class="tabla-norm">
+          <thead><tr><th>Cruce</th><th>Qu&eacute; compara</th><th>Consecuencia</th></tr></thead>
+          <tbody>
+            <tr><td>Certificado vs. F2276 ex&oacute;gena</td><td>Total retenido en certificados vs. total reportado en formato 2276 (retenciones laborales)</td><td>Requerimiento por inconsistencia si no cuadra</td></tr>
+            <tr><td>Certificado vs. F1001 ex&oacute;gena</td><td>Retenciones por otros conceptos vs. pagos a terceros reportados</td><td>Sanci&oacute;n Art. 651 ET por informaci&oacute;n inexacta</td></tr>
+            <tr><td>Certificado vs. Renta del retenido</td><td>Lo que el retenido declara como retenci&oacute;n a favor vs. lo que el agente certific&oacute;</td><td>Requerimiento al retenido si reclama m&aacute;s de lo certificado</td></tr>
+          </tbody>
+        </table>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p>Si un proveedor te pide el certificado de retenci&oacute;n <strong>antes del 31 de marzo</strong>, es buena pr&aacute;ctica expedirlo tan pronto cierres el a&ntilde;o. As&iacute; el proveedor puede preparar su declaraci&oacute;n de renta sin esperar. La ley establece el 31 de marzo como plazo m&aacute;ximo, no como fecha &uacute;nica.</p>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n que la DIAN detecta</h4>
+          </div>
+          <p>No expedir certificados de retenci&oacute;n o expedirlos con <strong>valores diferentes</strong> a los declarados en el F350. El Art. 667 ET establece una sanci&oacute;n del <strong>5% del valor de las retenciones</strong> por expedir certificados inexactos o no expedirlos. Adem&aacute;s, el retenido no puede usar en su declaraci&oacute;n retenciones que no est&eacute;n certificadas (Art. 381 ET).</p>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-7" class="prev" onclick="navigateTo(7)">&larr; M&oacute;dulo 7</a>
+        <a href="#modulo-9" class="next" onclick="navigateTo(9)">M&oacute;dulo 9: Retenci&oacute;n y R&eacute;gimen Simple &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-9" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">Retenci&oacute;n 350</a> &rsaquo; M&oacute;dulo 9
+        </div>
+        <div class="mod-num">M&oacute;dulo 9 de 12</div>
+        <h1>Retenci&oacute;n en el R&eacute;gimen Simple de Tributaci&oacute;n</h1>
+        <p class="mod-desc">El RST cambi&oacute; las reglas de retenci&oacute;n en la fuente: los contribuyentes del SIMPLE no practican retenci&oacute;n de renta (con excepciones), y los terceros no les retienen renta. Pero hay matices cr&iacute;ticos que debes conocer.</p>
+      </div>
+      <div class="content-block">
+        <h2>&iquest;Los RST son agentes de retenci&oacute;n? &mdash; Art. 911 ET</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 911 ET &mdash; No retenci&oacute;n por contribuyentes del SIMPLE</h4>
+            <span class="norma-tag">Cr&iacute;tico</span>
+          </div>
+          <blockquote>
+            Los contribuyentes del R&eacute;gimen Simple de Tributaci&oacute;n <strong>no son agentes de retenci&oacute;n a t&iacute;tulo de renta</strong>, salvo por retenci&oacute;n sobre pagos laborales (Art. 383 ET). Tampoco practican retenci&oacute;n a t&iacute;tulo de ICA. Sin embargo, <strong>s&iacute; practican retenci&oacute;n de IVA</strong> cuando sean catalogados como Grandes Contribuyentes por la DIAN.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Regla clave:</strong> Si tu cliente est&aacute; en el SIMPLE y tiene empleados, S&Iacute; debe retener a t&iacute;tulo de renta sobre pagos laborales y presentar F350 por ese concepto. Para todos los dem&aacute;s pagos (honorarios, servicios, compras, arrendamientos), NO retiene renta.
+          </div>
+        </div>
+        <h2>Retenci&oacute;n que practican terceros a los RST</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art. 911 ET par. 4 &mdash; No retenci&oacute;n a contribuyentes SIMPLE</h4>
+          </div>
+          <blockquote>
+            Los pagos o abonos en cuenta realizados a contribuyentes del R&eacute;gimen Simple <strong>no est&aacute;n sujetos a retenci&oacute;n en la fuente a t&iacute;tulo de renta</strong> ni a retenci&oacute;n a t&iacute;tulo de ICA. Para que aplique la exenci&oacute;n, el agente retenedor debe <strong>verificar la responsabilidad 47</strong> en el RUT del beneficiario del pago.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Excepci&oacute;n importante:</strong> La retenci&oacute;n de IVA S&Iacute; aplica a los contribuyentes del SIMPLE cuando el agente sea Gran Contribuyente o entidad estatal y el RST sea responsable de IVA.
+          </div>
+          <div class="norma-aplicacion" style="margin-top:8px;border-left-color:#F59E0B">
+            <strong>Reverso del Art. 911 (inc. 2&deg;):</strong> Si vos sos r&eacute;gimen ORDINARIO (agente retenedor) y le compr&aacute;s bienes o servicios a un SIMPLE, deb&eacute;s actuar como <strong>autorretenedor</strong> del impuesto sobre la renta sobre esa compra. El RST est&aacute; exonerado de que se le retenga, pero la retenci&oacute;n no desaparece &mdash; la asume el comprador como autorretenci&oacute;n. (Art. 911 inc. 2&deg; ET, sustituido por Art. 74 Ley 2010/2019).
+          </div>
+        </div>
+        <h2>Resumen: retenci&oacute;n y RST</h2>
+        <table class="tabla-norm">
+          <thead><tr><th>Situaci&oacute;n</th><th>&iquest;Se retiene?</th><th>Norma</th></tr></thead>
+          <tbody>
+            <tr><td>RST recibe pago por servicios de otro agente retenedor</td><td><strong>NO</strong> (no retenci&oacute;n de renta ni ICA)</td><td>Art. 911 par. 4 ET</td></tr>
+            <tr><td>RST recibe pago &mdash; retenci&oacute;n de IVA por Gran Contribuyente</td><td><strong>S&Iacute;</strong> (15% del IVA si es responsable de IVA)</td><td>Art. 437-2 ET</td></tr>
+            <tr><td>RST paga salarios a empleados</td><td><strong>S&Iacute;</strong> (retiene renta sobre pagos laborales)</td><td>Art. 911 ET, Art. 383 ET</td></tr>
+            <tr><td>RST paga honorarios/servicios a terceros</td><td><strong>NO</strong> (no es agente de retenci&oacute;n de renta)</td><td>Art. 911 ET</td></tr>
+            <tr><td>RST paga servicios del exterior</td><td><strong>S&Iacute;</strong> (retiene IVA al 100%)</td><td>Art. 437-2 num. 3 ET</td></tr>
+            <tr><td>Autorretenci&oacute;n especial renta en RST</td><td><strong>NO</strong> (excluidos del r&eacute;gimen de autorretenci&oacute;n especial)</td><td>Dec. 572/2025</td></tr>
+            <tr><td><strong>Comprador del r&eacute;gimen ORDINARIO compra a un SIMPLE</strong></td><td><strong>S&Iacute;</strong> (autorretiene a t&iacute;tulo de renta sobre la compra)</td><td>Art. 911 inc. 2&deg; ET</td></tr>
+          </tbody>
+        </table>
+        <h2>Impacto en el F350</h2>
+        <p>Un contribuyente del SIMPLE que tiene empleados debe presentar el F350 <strong>solo por retenci&oacute;n de pagos laborales</strong> (y por retenci&oacute;n de IVA si es Gran Contribuyente). Las casillas de retenci&oacute;n por honorarios, servicios, compras y arrendamientos quedan en cero o no se reportan.</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <h4>Ejemplo &mdash; F350 de un restaurante en R&eacute;gimen Simple</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Ingresos del mes</span><span class="value">$45.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Pag&oacute; n&oacute;mina a 5 empleados</span><span class="value">$12.500.000</span></div>
+            <div class="ejemplo-row"><span class="label">Retenci&oacute;n sobre salarios (Art. 383 ET)</span><span class="value">$185.000</span></div>
+            <div class="ejemplo-row"><span class="label">Compr&oacute; insumos por $18M a proveedor PJ</span><span class="value">Sin retenci&oacute;n</span></div>
+            <div class="ejemplo-row"><span class="label">Pag&oacute; honorarios contador $2M</span><span class="value">Sin retenci&oacute;n</span></div>
+            <div class="ejemplo-row"><span class="label">Autorretenci&oacute;n especial renta</span><span class="value">No aplica</span></div>
+            <div class="ejemplo-row total"><span class="label">Total F350 del mes</span><span class="value">$185.000</span></div>
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p>Cuando un contribuyente se pasa del r&eacute;gimen ordinario al SIMPLE a mitad de a&ntilde;o, las retenciones que le practicaron durante el r&eacute;gimen ordinario <strong>no se pierden</strong>: se reportan como anticipo en la declaraci&oacute;n del SIMPLE (F2593) del a&ntilde;o. Pero a partir de la inscripci&oacute;n en SIMPLE, los agentes de retenci&oacute;n deben dejar de retenerle renta.</p>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n que la DIAN detecta</h4>
+          </div>
+          <p>Seguir <strong>practicando retenci&oacute;n de renta</strong> a un proveedor que ya est&aacute; inscrito en el R&eacute;gimen Simple. El proveedor no puede usar esas retenciones en su declaraci&oacute;n SIMPLE (F2593), lo que le genera un perjuicio financiero. La DIAN cruza el RUT (responsabilidad 47) con las retenciones del F350 y detecta la inconsistencia. Siempre verifica el RUT actualizado.</p>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-8" class="prev" onclick="navigateTo(8)">&larr; M&oacute;dulo 8</a>
+        <a href="#modulo-10" class="next" onclick="navigateTo(10)">M&oacute;dulo 10: Correcciones del F350 &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-10" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">Retenci&oacute;n 350</a> &rsaquo; M&oacute;dulo 10
+        </div>
+        <div class="mod-num">M&oacute;dulo 10 de 12</div>
+        <h1>Correcciones del F350 y conciliaciones</h1>
+        <p class="mod-desc">Errores en el F350 son comunes: bases mal calculadas, tarifas incorrectas, retenciones omitidas. Aprende c&oacute;mo corregir seg&uacute;n el tipo de error, los plazos y c&oacute;mo conciliar con la contabilidad y la ex&oacute;gena.</p>
+      </div>
+      <div class="content-block">
+        <h2>Correcci&oacute;n que aumenta el valor a pagar &mdash; Art. 588 ET</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 588 ET &mdash; Correcci&oacute;n de declaraciones que aumentan impuesto</h4>
+            <span class="norma-tag">Obligatorio</span>
+          </div>
+          <blockquote>
+            Los contribuyentes, responsables o agentes retenedores podr&aacute;n corregir sus declaraciones tributarias <strong>dentro de los 3 a&ntilde;os</strong> siguientes al vencimiento del plazo para declarar. Si la correcci&oacute;n aumenta el valor a pagar, se debe liquidar y pagar la <strong>sanci&oacute;n por correcci&oacute;n</strong> equivalente al 10% de la mayor retenci&oacute;n a pagar (si se corrige antes de emplazamiento) o el 20% (si se corrige despu&eacute;s del emplazamiento).
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Procedimiento:</strong> Se presenta un nuevo F350 marcando la casilla &ldquo;Correcci&oacute;n&rdquo; e indicando el n&uacute;mero del formulario anterior. Se paga la diferencia de retenci&oacute;n m&aacute;s la sanci&oacute;n por correcci&oacute;n m&aacute;s intereses moratorios desde la fecha del vencimiento original.
+          </div>
+        </div>
+        <h2>Correcci&oacute;n que disminuye el valor a pagar &mdash; Art. 589 ET</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 589 ET &mdash; Correcci&oacute;n que disminuye el valor a pagar</h4>
+            <span class="norma-tag">Cr&iacute;tico</span>
+          </div>
+          <blockquote>
+            Cuando la correcci&oacute;n implique un <strong>menor valor a pagar o un mayor saldo a favor</strong>, el contribuyente debe presentar la declaraci&oacute;n de correcci&oacute;n <strong>dentro del a&ntilde;o siguiente</strong> al vencimiento del plazo para declarar. La correcci&oacute;n que disminuye el valor a pagar <strong>no requiere autorizaci&oacute;n previa de la DIAN</strong> pero s&iacute; debe cumplir el plazo de 1 a&ntilde;o.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Importante:</strong> Despu&eacute;s del a&ntilde;o, la &uacute;nica v&iacute;a es un <strong>procedimiento de correcci&oacute;n provocada</strong> (Art. 589 par. 1 ET) o esperar a que la DIAN practique liquidaci&oacute;n oficial. Controla los plazos de correcci&oacute;n con un calendario.
+          </div>
+        </div>
+        <h2>Resumen de plazos de correcci&oacute;n</h2>
+        <table class="tabla-norm">
+          <thead><tr><th>Tipo de correcci&oacute;n</th><th>Plazo</th><th>Sanci&oacute;n</th><th>Norma</th></tr></thead>
+          <tbody>
+            <tr><td>Aumenta el impuesto (voluntaria)</td><td>3 a&ntilde;os desde vencimiento</td><td>10% de la mayor retenci&oacute;n</td><td>Art. 588 ET</td></tr>
+            <tr><td>Aumenta el impuesto (despu&eacute;s de emplazamiento)</td><td>3 a&ntilde;os desde vencimiento</td><td>20% de la mayor retenci&oacute;n</td><td>Art. 588 ET</td></tr>
+            <tr><td>Disminuye el impuesto</td><td>1 a&ntilde;o desde vencimiento</td><td>Sin sanci&oacute;n</td><td>Art. 589 ET</td></tr>
+            <tr><td>Correcci&oacute;n de inconsistencias (Art. 43 Ley 962/2005)</td><td>Cualquier momento antes de firmeza</td><td>Sin sanci&oacute;n (solo errores aritm&eacute;ticos)</td><td>Art. 43 Ley 962/2005</td></tr>
+          </tbody>
+        </table>
+        <h2>Conciliaci&oacute;n mensual: F350 vs. contabilidad</h2>
+        <p>Cada mes, antes de presentar el F350, debes conciliar las cuentas del pasivo por retenci&oacute;n (grupo 2365 y 2367 PUC) con los valores del formulario:</p>
+        <table class="tabla-norm">
+          <thead><tr><th>Cuenta PUC</th><th>Casilla F350</th><th>Verificaci&oacute;n</th></tr></thead>
+          <tbody>
+            <tr><td><code>236505</code> Retenci&oacute;n salarios</td><td>Casillas concepto salarios</td><td>Saldo cr&eacute;dito del mes = valor F350</td></tr>
+            <tr><td><code>236515</code> Retenci&oacute;n honorarios</td><td>Casillas concepto 0001</td><td>Saldo cr&eacute;dito del mes = valor F350</td></tr>
+            <tr><td><code>236525</code> Retenci&oacute;n servicios</td><td>Casillas concepto 0003-0006</td><td>Saldo cr&eacute;dito del mes = valor F350</td></tr>
+            <tr><td><code>236540</code> Retenci&oacute;n compras</td><td>Casillas concepto compras</td><td>Saldo cr&eacute;dito del mes = valor F350</td></tr>
+            <tr><td><code>236575</code> Autorretenci&oacute;n</td><td>Casillas conceptos 0010-0012</td><td>Saldo cr&eacute;dito del mes = valor F350</td></tr>
+            <tr><td><code>2367xx</code> Retenci&oacute;n IVA</td><td>Casillas 73-78</td><td>Saldo cr&eacute;dito del mes = valor F350</td></tr>
+          </tbody>
+        </table>
+        <h2>Cruce anual: F350 vs. F1001/F1003 ex&oacute;gena</h2>
+        <p>Al cierre del a&ntilde;o gravable, la DIAN cruza la sumatoria de los 12 F350 mensuales con los formatos de ex&oacute;gena:</p>
+        <ul>
+          <li><strong>F1001:</strong> Pagos y abonos en cuenta a terceros. La base total pagada debe coincidir con la base de retenci&oacute;n acumulada en los 12 F350.</li>
+          <li><strong>F1003:</strong> Retenciones en la fuente practicadas. El total por concepto y por tercero debe coincidir con los F350 mensuales.</li>
+          <li><strong>F2276:</strong> Informaci&oacute;n de retenciones laborales. Debe coincidir con los certificados de ingresos y retenciones.</li>
+        </ul>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p>Haz la conciliaci&oacute;n F350 vs. contabilidad <strong>cada mes antes de presentar</strong>. Si acumulas diferencias durante todo el a&ntilde;o, la correcci&oacute;n se vuelve un dolor de cabeza: tendr&iacute;as que corregir m&uacute;ltiples F350 mensuales con sus respectivas sanciones e intereses. Mejor prevenir que corregir.</p>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n que la DIAN detecta</h4>
+          </div>
+          <p>Corregir un F350 que <strong>disminuye</strong> el valor a pagar <strong>despu&eacute;s del a&ntilde;o</strong> desde el vencimiento. La DIAN rechaza la correcci&oacute;n y la declaraci&oacute;n original queda en firme con el mayor valor. El contribuyente pierde el derecho a recuperar el exceso pagado. Controla rigurosamente el plazo de 1 a&ntilde;o del Art. 589 ET.</p>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-9" class="prev" onclick="navigateTo(9)">&larr; M&oacute;dulo 9</a>
+        <a href="#modulo-11" class="next" onclick="navigateTo(11)">M&oacute;dulo 11: Responsabilidad del agente &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-11" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">Retenci&oacute;n 350</a> &rsaquo; M&oacute;dulo 11
+        </div>
+        <div class="mod-num">M&oacute;dulo 11 de 12</div>
+        <h1>Responsabilidad del agente retenedor y consecuencias</h1>
+        <p class="mod-desc">El agente de retenci&oacute;n responde solidariamente con el Estado. No retener tiene consecuencias tributarias. No consignar lo retenido tiene consecuencias penales. Aqu&iacute; conoces el marco completo de responsabilidad.</p>
+      </div>
+      <div class="content-block">
+        <h2>Responsabilidad solidaria &mdash; Art. 370 ET</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 370 ET &mdash; Responsabilidad de los agentes de retenci&oacute;n</h4>
+            <span class="norma-tag">Cr&iacute;tico</span>
+          </div>
+          <blockquote>
+            Los agentes de retenci&oacute;n que no efect&uacute;en la retenci&oacute;n son <strong>responsables solidarios con el contribuyente</strong> ante el Estado por las sumas que est&aacute;n obligados a retener. Cuando el agente s&iacute; retuvo pero <strong>no consign&oacute;</strong> lo retenido, responde <strong>exclusivamente &eacute;l</strong> ante el Estado.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Dos escenarios:</strong> (1) Si NO retuviste: la DIAN puede cobrar al agente Y al beneficiario del pago. (2) Si retuviste pero NO consignaste: solo el agente responde, porque el beneficiario ya sufri&oacute; la retenci&oacute;n y tiene derecho a usarla como anticipo.
+          </div>
+        </div>
+        <h2>Momento de la retenci&oacute;n &mdash; Art. 371 ET</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 371 ET &mdash; Momento de practicar la retenci&oacute;n</h4>
+          </div>
+          <blockquote>
+            La retenci&oacute;n debe practicarse al <strong>momento del pago o abono en cuenta, lo que ocurra primero</strong>. El abono en cuenta se entiende como la causaci&oacute;n contable del gasto o costo a favor del beneficiario.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Regla pr&aacute;ctica:</strong> Si causas una factura (abono en cuenta) en diciembre pero la pagas en enero, la retenci&oacute;n corresponde a diciembre. Si pagas un anticipo en noviembre pero la factura llega en diciembre, la retenci&oacute;n corresponde a noviembre (pago).
+          </div>
+        </div>
+        <h2>Sanciones tributarias por no retener &mdash; Art. 665 ET</h2>
+        <table class="tabla-norm">
+          <thead><tr><th>Infracci&oacute;n</th><th>Sanci&oacute;n</th><th>Norma</th></tr></thead>
+          <tbody>
+            <tr><td>No practicar retenci&oacute;n estando obligado</td><td><strong>100%</strong> del valor no retenido + intereses moratorios</td><td>Art. 647 ET</td></tr>
+            <tr><td>Retener con tarifa inferior a la debida</td><td>100% de la diferencia + intereses</td><td>Art. 647 ET</td></tr>
+            <tr><td>No consignar lo retenido dentro del plazo</td><td>Intereses moratorios (tasa DIAN) + responsabilidad penal</td><td>Art. 634, 665 ET</td></tr>
+            <tr><td>No presentar el F350</td><td>5% del total de retenciones por cada mes de retraso (m&aacute;x. 100%)</td><td>Art. 641 ET</td></tr>
+            <tr><td>Presentar F350 con errores</td><td>10% de las retenciones objeto de la sanci&oacute;n</td><td>Art. 647 ET</td></tr>
+            <tr><td>No expedir certificados de retenci&oacute;n</td><td>5% del valor de las retenciones practicadas</td><td>Art. 667 ET</td></tr>
+          </tbody>
+        </table>
+        <h2>Consecuencias penales &mdash; Art. 402 C&oacute;digo Penal</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Art&iacute;culo 402 C&oacute;digo Penal &mdash; Omisi&oacute;n del agente retenedor</h4>
+            <span class="norma-tag">Cr&iacute;tico</span>
+          </div>
+          <blockquote>
+            El agente retenedor que no consigne las sumas retenidas dentro de los <strong>dos (2) meses</strong> siguientes a la fecha fijada por el Gobierno Nacional para la presentaci&oacute;n y pago de la retenci&oacute;n, incurrir&aacute; en prisi&oacute;n de <strong>48 a 108 meses</strong> y multa equivalente al doble de lo no consignado, <strong>sin que supere los 1.020.000 UVT</strong>.
+          </blockquote>
+          <div class="norma-aplicacion">
+            <strong>Gravedad:</strong> Esto aplica al representante legal de la persona jur&iacute;dica. La DIAN remite a la Fiscal&iacute;a cuando detecta que la empresa retuvo y no consign&oacute;. Es el &uacute;nico delito tributario que tiene pena de prisi&oacute;n en Colombia (junto con el Art. 434A del C.P. sobre facturas falsas).
+          </div>
+        </div>
+        <h2>Intereses moratorios &mdash; Art. 634 ET</h2>
+        <p>Los intereses moratorios se causan desde el d&iacute;a siguiente al vencimiento del plazo para consignar las retenciones hasta la fecha de pago efectivo. La tasa de inter&eacute;s moratorio es la <strong>tasa de usura certificada por la Superintendencia Financiera</strong> vigente al momento del pago.</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <h4>Ejemplo &mdash; Sanci&oacute;n por no retener sobre honorarios</h4>
+          </div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Pago de honorarios a contador (declarante)</span><span class="value">$15.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Retenci&oacute;n que debi&oacute; practicar (10%)</span><span class="value">$1.500.000</span></div>
+            <div class="ejemplo-row"><span class="label">Sanci&oacute;n por no retener (100%)</span><span class="value">$1.500.000</span></div>
+            <div class="ejemplo-row"><span class="label">Intereses moratorios (6 meses, ~2% mensual)</span><span class="value">$180.000</span></div>
+            <div class="ejemplo-row total"><span class="label">Total a pagar a la DIAN</span><span class="value">$3.180.000</span></div>
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tip pr&aacute;ctico</h4>
+          </div>
+          <p>Si detectas que omitiste una retenci&oacute;n, <strong>corrige voluntariamente antes de que la DIAN te emplaze</strong>. La sanci&oacute;n por correcci&oacute;n voluntaria es del 10% (Art. 588 ET), mucho menor que la sanci&oacute;n por inexactitud del 100% (Art. 647 ET) que aplica si la DIAN te detecta primero. Adem&aacute;s, la correcci&oacute;n voluntaria puede evitar la acci&oacute;n penal.</p>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h4>Error com&uacute;n que la DIAN detecta</h4>
+          </div>
+          <p>Creer que la responsabilidad penal del Art. 402 C&oacute;digo Penal solo aplica a &ldquo;grandes evasores&rdquo;. La Fiscal&iacute;a ha abierto investigaciones contra representantes legales de <strong>SAS peque&ntilde;as y microempresas</strong> que retuvieron montos de $5-10 millones mensuales y no los consignaron durante varios meses. No hay umbral m&iacute;nimo: cualquier monto retenido y no consignado configura el delito.</p>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-10" class="prev" onclick="navigateTo(10)">&larr; M&oacute;dulo 10</a>
+        <a href="#modulo-12" class="next" onclick="navigateTo(12)">M&oacute;dulo 12: Pr&aacute;ctica &mdash; genera tu F350 &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-12" class="modulo-section" style="display:none">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">
+          <a href="../escuela.html">Escuela</a> &rsaquo; <a href="#">Retenci&oacute;n 350</a> &rsaquo; M&oacute;dulo 12
+        </div>
+        <div class="mod-num">M&oacute;dulo 12 de 12 &mdash; Pr&aacute;ctica</div>
+        <h1>Genera tu formulario 350 real desde tu balance</h1>
+        <p class="mod-desc">Todo lo que aprendiste en 11 m&oacute;dulos se aplica ahora. Sube tu balance de prueba, genera el borrador del F350 y verifica cada casilla con criterio normativo.</p>
+      </div>
+      <div class="content-block">
+        <h2>Antes de procesar: checklist de 10 puntos</h2>
+        <p>Revisa que tu balance de prueba y tus soportes cumplan con esto antes de generar el formulario:</p>
+        <table class="tabla-norm">
+          <thead><tr><th>#</th><th>Verificaci&oacute;n</th><th>Cuenta PUC / Soporte</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Retenci&oacute;n por salarios separada por procedimiento</td><td><code>236505</code></td></tr>
+            <tr><td>2</td><td>Retenci&oacute;n por honorarios identificada</td><td><code>236515</code></td></tr>
+            <tr><td>3</td><td>Retenci&oacute;n por servicios identificada y separada de honorarios</td><td><code>236525</code></td></tr>
+            <tr><td>4</td><td>Retenci&oacute;n por compras con base m&iacute;nima verificada (27 UVT en transici&oacute;n; 10 UVT desde 1-jul-2026 — D572/2025 reactivado el 2-jun-2026)</td><td><code>236540</code></td></tr>
+            <tr><td>5</td><td>Retenci&oacute;n por arrendamientos separada (inmuebles vs. muebles)</td><td><code>236530</code></td></tr>
+            <tr><td>6</td><td>Autorretenci&oacute;n especial renta calculada sobre ingresos netos</td><td><code>236575</code></td></tr>
+            <tr><td>7</td><td>Retenci&oacute;n de IVA separada por tipo (general 15%, exterior 100%)</td><td><code>2367xx</code></td></tr>
+            <tr><td>8</td><td>Retenci&oacute;n por pagos al exterior con CDI verificado</td><td><code>236560</code> + certificado</td></tr>
+            <tr><td>9</td><td>RUT de proveedores verificado (declarante vs. no declarante, SIMPLE)</td><td>Copia RUT vigente</td></tr>
+            <tr><td>10</td><td>Periodo de la retenci&oacute;n correcto (pago o abono en cuenta, lo primero)</td><td>Auxiliar contable</td></tr>
+          </tbody>
+        </table>
+        <h2>Lo que la herramienta hace autom&aacute;ticamente</h2>
+        <ul>
+          <li>Lee tu balance de prueba Excel (cualquier software contable)</li>
+          <li>Clasifica las cuentas 2365xx y 2367xx por concepto de retenci&oacute;n</li>
+          <li>Identifica autorretenci&oacute;n (236575) y la ubica en los conceptos 0010-0012</li>
+          <li>Mapea cada cuenta a la casilla correspondiente del F350</li>
+          <li>Suma retenciones de renta, IVA y autorretenci&oacute;n en las secciones del formulario</li>
+          <li>Calcula el total a pagar incluyendo sanciones e intereses si aplica</li>
+        </ul>
+        <h2>Lo que T&Uacute; verificas con lo que aprendiste</h2>
+        <ul>
+          <li><strong>M&oacute;dulo 1:</strong> &iquest;Tu cliente es agente de retenci&oacute;n? &iquest;Est&aacute; obligado a presentar F350?</li>
+          <li><strong>M&oacute;dulo 2:</strong> &iquest;Las tarifas de retenci&oacute;n de renta son correctas seg&uacute;n el concepto (honorarios vs. servicios)?</li>
+          <li><strong>M&oacute;dulo 3:</strong> &iquest;Se retuvo IVA correctamente? &iquest;Tu cliente es Gran Contribuyente o entidad estatal?</li>
+          <li><strong>M&oacute;dulo 4:</strong> &iquest;Se retuvieron rendimientos financieros, dividendos y otros conceptos especiales?</li>
+          <li><strong>M&oacute;dulo 5:</strong> &iquest;Los pagos al exterior tienen la tarifa correcta? &iquest;Se verific&oacute; CDI?</li>
+          <li><strong>M&oacute;dulo 6:</strong> &iquest;Se practic&oacute; autorretenci&oacute;n sobre todos los ingresos? &iquest;La tarifa CIIU es correcta?</li>
+          <li><strong>M&oacute;dulo 7:</strong> &iquest;Se respetaron las bases m&iacute;nimas? &iquest;Los proveedores SIMPLE no fueron retenidos?</li>
+          <li><strong>M&oacute;dulo 8:</strong> &iquest;Los certificados de retenci&oacute;n est&aacute;n listos y cuadran con el F350?</li>
+          <li><strong>M&oacute;dulo 9:</strong> &iquest;Los contribuyentes SIMPLE fueron tratados correctamente?</li>
+          <li><strong>M&oacute;dulo 10:</strong> &iquest;Hay correcciones pendientes de meses anteriores?</li>
+          <li><strong>M&oacute;dulo 11:</strong> &iquest;Se conocen las consecuencias de no retener o no consignar?</li>
+        </ul>
+        <div class="cta-practica">
+          <h3>Procesa tu F350 ahora</h3>
+          <p>Sube tu balance de prueba y genera el borrador del formulario 350. Cada casilla ahora tiene un porqu&eacute; normativo.</p>
+          <a href="../retencion350.html" onclick="gtag('event','clic_escuela_practica',{curso:'retencion350'})">Abrir herramienta Retenci&oacute;n 350 &rarr;</a>
+        </div>
+        <h2>Despu&eacute;s de procesar: cruces que la DIAN hace autom&aacute;ticamente</h2>
+        <div class="norma">
+          <div class="norma-header">
+            <div class="norma-icon">&#9878;</div>
+            <h4>Cruces autom&aacute;ticos de la DIAN contra el F350</h4>
+          </div>
+          <table class="tabla-norm">
+            <thead><tr><th>Cruce</th><th>Qu&eacute; compara</th><th>Riesgo si no cuadra</th></tr></thead>
+            <tbody>
+              <tr><td>F350 vs. Ex&oacute;gena F1001</td><td>Retenciones practicadas vs. pagos reportados a terceros</td><td>Requerimiento ordinario + sanci&oacute;n Art. 651 ET</td></tr>
+              <tr><td>F350 vs. F300 (IVA)</td><td>Retenci&oacute;n de IVA practicada vs. IVA retenido declarado en F300</td><td>Requerimiento especial</td></tr>
+              <tr><td>F350 vs. F110 (Renta)</td><td>Autorretenci&oacute;n declarada vs. ingresos brutos de renta</td><td>Investigaci&oacute;n por omisi&oacute;n de autorretenci&oacute;n</td></tr>
+              <tr><td>F350 vs. Facturaci&oacute;n electr&oacute;nica</td><td>Bases de retenci&oacute;n vs. valores de facturas recibidas</td><td>Requerimiento por diferencia en bases</td></tr>
+              <tr><td>F350 vs. RUT del beneficiario</td><td>Tarifa aplicada vs. condici&oacute;n de declarante/no declarante</td><td>Glosa por tarifa incorrecta</td></tr>
+              <tr><td>F350 anual vs. certificados de retenci&oacute;n</td><td>Total retenido en 12 F350 vs. certificados expedidos</td><td>Sanci&oacute;n Art. 667 ET por certificados inexactos</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tip">
+          <div class="tip-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Tu siguiente paso</h4>
+          </div>
+          <p>Ahora que dominas la retenci&oacute;n en la fuente y el F350, el siguiente curso natural es <strong>Renta 110</strong>. Las retenciones que practicaste se cruzan con la renta de tus proveedores, y la autorretenci&oacute;n que te practicaste se descuenta en tu propia declaraci&oacute;n de renta. Todo est&aacute; conectado.</p>
+        </div>
+        <div style="background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border:2px solid #DDD6FE;border-radius:16px;padding:28px 24px;text-align:center;margin:28px 0">
+          <h3 style="font-family:'Fraunces',serif;font-size:1.2rem;font-weight:700;color:#6D28D9;margin-bottom:8px">Siguiente curso: Renta 110</h3>
+          <p style="font-size:.9rem;color:#7C3AED;margin-bottom:16px">De la contabilidad a la declaraci&oacute;n de renta. Cada renglon del F110 con su fundamento en el Estatuto Tributario.</p>
+          <a href="renta110.html" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:#7C3AED;color:#fff;border-radius:12px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 16px rgba(124,58,237,.3);transition:all .2s" onmouseover="this.style.background='#6D28D9'" onmouseout="this.style.background='#7C3AED'">Ir al curso de Renta 110 &rarr;</a>
+        </div>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-11" class="prev" onclick="navigateTo(11)">&larr; M&oacute;dulo 11</a>
+        <a href="../escuela.html" class="next" style="background:var(--gray-800)">Volver a la Escuela &rarr;</a>
+      </div>
+    </section>
+  </div>
+</div>
+<section style="background:linear-gradient(180deg,#F9FAFB,#fff);padding:60px 24px 80px;border-top:1px solid #E5E7EB">
+  <div data-curso-meta="retencion350" style="text-align:center;margin-bottom:28px"></div>
+  <div data-cert-widget="retencion350"></div>
+</section>
+<script src="../shared/certificado.js?v=383dd956"></script>
+<script src="../shared/cert-emit-widget.js?v=81c77b40"></script>
+<script src="../shared/quiz-banks.js?v=bd69b5f6"></script>
+<script src="../shared/quiz-engine.js?v=faaf346e"></script>
+<script src="../shared/curso-meta.js?v=6b7779f4"></script>
+<button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()" aria-label="Abrir men&uacute;">&#9776;</button>
+<script>
+/* Module navigation */
+var currentModule = 1;
+var totalModules = 12;
+function navigateTo(n) {
+  // Hide all modules
+  document.querySelectorAll('.modulo-section').forEach(function(s){ s.style.display = 'none'; });
+  // Show target
+  var target = document.getElementById('modulo-' + n);
+  if (target) target.style.display = 'block';
+  // Update sidebar
+  var links = document.querySelectorAll('.sidebar-nav a');
+  links.forEach(function(a, i) {
+    a.classList.remove('active');
+    if (i < n - 1) a.classList.add('completed');
+    if (i === n - 1) a.classList.add('active');
+  });
+  // Update progress
+  var pct = Math.round((n / totalModules) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  currentModule = n;
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Close sidebar on mobile
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('open');
+  // Track
+  if (typeof gtag !== 'undefined') gtag('event', 'escuela_modulo', { curso: 'retencion350', modulo: n });
+}
+/* Sidebar toggle for mobile */
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('open');
+}
+</script>
+</body>
+</html>

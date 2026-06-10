@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="../shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S7SM6ST4CC');
+</script>
+<meta charset="UTF-8" /><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="apple-touch-icon" href="../og-image.png">
+<meta name="theme-color" content="#10B981">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Desarrollo para Contadores &mdash; Curso gratis para entender software, IA y c&oacute;digo | Ex&oacute;genaDIAN</title>
+<meta name="description" content="Curso gratis para contadores que est&aacute;n construyendo o supervisando software contable con IA. 20 m&oacute;dulos: fundamentos de desarrollo web, Git, terminal, Next.js, React, TypeScript, Prisma, bases de datos, tests, migraciones y c&oacute;mo trabajar con Claude Code. Sin tecnicismos, con analog&iacute;as contables.">
+<meta name="keywords" content="curso desarrollo para contadores, programaci&oacute;n para contadores, Claude Code para contadores, software contable con IA, Next.js para contadores, Git para no devs, desarrollo web contable Colombia">
+<meta name="author" content="ExógenaDIAN">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://exogenadian.com/escuela/desarrollo-contadores.html">
+<meta property="og:title" content="Desarrollo para Contadores — Curso gratis | ExógenaDIAN">
+<meta property="og:description" content="20 módulos para entender el desarrollo de software contable con IA. Git, terminal, Next.js, React, TypeScript, Prisma, tests, migraciones y cómo pedirle bien las cosas a Claude Code. Con analogías contables.">
+<meta property="og:url" content="https://exogenadian.com/escuela/desarrollo-contadores.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="ExógenaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Desarrollo para Contadores — Curso gratis | ExógenaDIAN">
+<meta name="twitter:description" content="20 módulos para entender desarrollo de software contable con IA: Git, terminal, Next.js, Prisma, tests, migraciones y cómo trabajar bien con Claude Code.">
+<meta name="twitter:image" content="https://exogenadian.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Course",
+  "name":"Desarrollo para Contadores — ExógenaDIAN",
+  "description":"Curso gratis de 20 módulos para contadores que están construyendo o supervisando software contable con IA. Cubre fundamentos de desarrollo, Git, terminal, Next.js, React, TypeScript, Prisma, PostgreSQL, Cloudflare R2, tests, migraciones y cómo trabajar con Claude Code. Con analogías contables en cada concepto.",
+  "provider":{"@type":"Organization","name":"ExógenaDIAN","url":"https://exogenadian.com"},
+  "educationalLevel":"Beginner",
+  "inLanguage":"es",
+  "audience":{"@type":"Audience","audienceType":"Contadores públicos que construyen o supervisan software contable con IA"}
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+<style>
+  :root {
+    --sidebar-bg: #1E1B4B;
+    --sidebar-hover: #2D2A5C;
+    --sidebar-active: #10B981;
+    --sidebar-text: #E2E8F0;
+    --sidebar-muted: #94A3B8;
+    --green: #059669;
+    --green-dark: #047857;
+    --green-light: #D1FAE5;
+    --green-tint: #ECFDF5;
+    --gold: #B45309;
+    --gold-bg: #FEF3C7;
+    --gold-border: #FCD34D;
+    --red: #B91C1C;
+    --red-bg: #FEE2E2;
+    --red-border: #FCA5A5;
+    --navy: #0F172A;
+    --slate: #475569;
+    --slate-light: #64748B;
+    --bg: #F8FAFC;
+    --card: #FFFFFF;
+    --border: #E2E8F0;
+    --code-bg: #F1F5F9;
+    --code-text: #0F172A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--navy);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* ==================== LAYOUT ==================== */
+  .app {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    min-height: 100vh;
+  }
+  /* ==================== SIDEBAR ==================== */
+  .sidebar {
+    background: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    padding: 28px 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar::-webkit-scrollbar { width: 6px; }
+  .sidebar::-webkit-scrollbar-track { background: transparent; }
+  .sidebar::-webkit-scrollbar-thumb { background: #3B3875; border-radius: 3px; }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 24px 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    text-decoration: none;
+    color: inherit;
+  }
+  .brand-logo {
+    width: 36px; height: 36px;
+    background: var(--green);
+    border-radius: 8px;
+    display: grid; place-items: center;
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    color: white;
+    font-size: 20px;
+  }
+  .brand-name {
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 14px 24px 0;
+    font-size: 12px;
+    color: var(--sidebar-muted);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.15s ease;
+  }
+  .back-link:hover { color: white; }
+  .course-header {
+    padding: 18px 24px 16px;
+  }
+  .course-category {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .course-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+  }
+  .module-list {
+    list-style: none;
+    padding: 0 12px 24px;
+    flex: 1;
+  }
+  .module-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    margin-bottom: 2px;
+  }
+  .module-item:hover {
+    background: var(--sidebar-hover);
+  }
+  .module-item.active {
+    background: rgba(16, 185, 129, 0.12);
+  }
+  .module-number {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    background: rgba(255,255,255,0.06);
+    color: var(--sidebar-muted);
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+  }
+  .module-item.active .module-number {
+    background: var(--green);
+    color: white;
+  }
+  .module-item.completed .module-number {
+    background: rgba(16, 185, 129, 0.2);
+    color: var(--green);
+  }
+  .module-item.completed .module-number::before {
+    content: '\2713';
+    font-size: 14px;
+  }
+  .module-item.completed .module-number .num { display: none; }
+  .module-title {
+    font-size: 14px;
+    color: var(--sidebar-text);
+    font-weight: 500;
+    line-height: 1.35;
+  }
+  .module-item.active .module-title {
+    color: white;
+    font-weight: 600;
+  }
+  .sidebar-footer {
+    padding: 16px 24px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 12px;
+    color: var(--sidebar-muted);
+  }
+  .progress-bar {
+    height: 4px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--green);
+    transition: width 0.3s ease;
+  }
+  /* ==================== MAIN CONTENT ==================== */
+  .main {
+    padding: 32px 48px 64px;
+    max-width: 1100px;
+  }
+  /* Continue banner */
+  .continue-banner {
+    background: #ECFDF5;
+    border: 1px solid #A7F3D0;
+    border-radius: 14px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  .continue-banner.hidden { display: none; }
+  .continue-icon { font-size: 28px; flex-shrink: 0; }
+  .continue-text { flex: 1; font-size: 15px; color: var(--navy); }
+  .continue-text strong { font-weight: 700; }
+  .btn-primary {
+    background: var(--green);
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s ease;
+  }
+  .btn-primary:hover { background: var(--green-dark); }
+  .btn-link {
+    background: none;
+    border: none;
+    color: var(--green);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 4px 8px;
+  }
+  .btn-link:hover { text-decoration: underline; }
+  /* Breadcrumb */
+  .breadcrumb {
+    font-size: 14px;
+    color: var(--slate-light);
+    margin-bottom: 12px;
+  }
+  .breadcrumb span { margin: 0 6px; color: #CBD5E1; }
+  .breadcrumb a { color: var(--slate-light); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--green); }
+  .module-pill {
+    display: inline-block;
+    background: var(--green-tint);
+    color: var(--green);
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  /* Headings */
+  .module-title-main {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 700;
+    font-size: 54px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--navy);
+    margin-bottom: 20px;
+  }
+  .module-subtitle {
+    font-size: 19px;
+    color: var(--slate);
+    line-height: 1.55;
+    margin-bottom: 28px;
+    max-width: 820px;
+  }
+  /* Certificate banner */
+  .cert-banner {
+    background: #FFFBEB;
+    border: 1px solid var(--gold-border);
+    border-radius: 12px;
+    padding: 16px 22px;
+    margin: 28px 0 40px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 14px;
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .cert-banner .emoji { font-size: 20px; }
+  /* Content typography */
+  .content-body h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 700;
+    font-size: 32px;
+    color: var(--navy);
+    margin: 48px 0 14px;
+    letter-spacing: -0.01em;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--green);
+    display: inline-block;
+  }
+  .content-body h2:first-child { margin-top: 0; }
+  .content-body h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--navy);
+    margin: 32px 0 10px;
+    letter-spacing: -0.005em;
+  }
+  .content-body p {
+    font-size: 16.5px;
+    color: #1E293B;
+    margin-bottom: 16px;
+    line-height: 1.7;
+  }
+  .content-body strong {
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .content-body em { font-style: italic; }
+  .content-body ul, .content-body ol {
+    margin: 12px 0 20px 24px;
+    font-size: 16.5px;
+    color: #1E293B;
+    line-height: 1.75;
+  }
+  .content-body li { margin-bottom: 8px; }
+  .content-body li::marker { color: var(--green); }
+  /* Inline code */
+  .content-body code {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--code-bg);
+    padding: 2px 7px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #1E293B;
+    border: 1px solid #E2E8F0;
+  }
+  /* Code blocks */
+  .code-block {
+    background: #0F172A;
+    color: #E2E8F0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13.5px;
+    padding: 18px 20px;
+    border-radius: 10px;
+    overflow-x: auto;
+    margin: 20px 0;
+    line-height: 1.65;
+  }
+  .code-block .cmt { color: #64748B; font-style: italic; }
+  .code-block .kw { color: #A78BFA; }
+  .code-block .str { color: #6EE7B7; }
+  .code-block .num-lit { color: #FBBF24; }
+  .code-block .fn { color: #60A5FA; }
+  /* Callouts */
+  .callout {
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 28px 0;
+    font-size: 15.5px;
+    line-height: 1.65;
+  }
+  .callout-title {
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .callout.info {
+    background: var(--green-tint);
+    border-left: 4px solid var(--green);
+    color: #064E3B;
+  }
+  .callout.info .callout-title { color: var(--green-dark); }
+  .callout.warn {
+    background: #FFFBEB;
+    border-left: 4px solid var(--gold-border);
+    color: #78350F;
+  }
+  .callout.warn .callout-title { color: var(--gold); }
+  .callout.danger {
+    background: var(--red-bg);
+    border-left: 4px solid var(--red-border);
+    color: #7F1D1D;
+  }
+  .callout.danger .callout-title { color: var(--red); }
+  /* Nav footer */
+  .module-nav {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .nav-btn {
+    flex: 1;
+    max-width: 320px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    transition: all 0.15s ease;
+  }
+  .nav-btn:hover:not(:disabled) {
+    border-color: var(--green);
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.08);
+  }
+  .nav-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .nav-btn-label {
+    font-size: 12px;
+    color: var(--slate-light);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+  .nav-btn-title {
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 15px;
+  }
+  .nav-btn.next { text-align: right; }
+  .nav-btn-arrow { color: var(--green); font-weight: 700; }
+  /* Part divider headings (visual grouping in sidebar) */
+  .part-divider {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--sidebar-muted);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 16px 14px 6px;
+  }
+  /* Mobile */
+  .menu-toggle { display: none; }
+  @media (max-width: 900px) {
+    .app { grid-template-columns: 1fr; }
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 300px;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: 100;
+      box-shadow: 4px 0 20px rgba(0,0,0,0.15);
+    }
+    .sidebar.open { transform: translateX(0); }
+    .main { padding: 72px 20px 48px; }
+    .module-title-main { font-size: 36px; }
+    .module-subtitle { font-size: 17px; }
+    .content-body h2 { font-size: 26px; }
+    .continue-banner { flex-wrap: wrap; }
+    .menu-toggle {
+      display: block;
+      position: fixed;
+      top: 16px; left: 16px;
+      z-index: 101;
+      background: var(--sidebar-bg);
+      color: white;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .module-nav { flex-direction: column; }
+    .nav-btn { max-width: none; }
+  }
+  /* Fade-in on module change */
+  .fade-in { animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+<script async src="../shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776; M&oacute;dulos</button>
+<div class="app">
+  <aside class="sidebar">
+    <a href="../escuela.html" class="brand" title="Volver a la Escuela">
+      <div class="brand-logo">E</div>
+      <div class="brand-name">Ex&oacute;genaDIAN</div>
+    </a>
+    <a href="../escuela.html" class="back-link">&larr; Volver a la Escuela</a>
+    <div class="course-header">
+      <div class="course-category">Escuela Contable IA</div>
+      <div class="course-name">Desarrollo para Contadores</div>
+    </div>
+    <ul class="module-list" id="moduleList"></ul>
+    <div class="sidebar-footer">
+      <div id="progressLabel">0 de 20 m&oacute;dulos</div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 0%"></div></div>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="continue-banner hidden" id="continueBanner">
+      <div class="continue-icon">&#128214;</div>
+      <div class="continue-text">Dejaste el curso en el <strong id="lastModuleLabel">M&oacute;dulo 1</strong>. &iquest;Quieres continuar?</div>
+      <button class="btn-primary" onclick="continueFromLast()">Continuar</button>
+      <button class="btn-link" onclick="goToModule(0)">Empezar desde el inicio</button>
+    </div>
+    <div id="moduleContent"></div>
+    <div class="module-nav">
+      <button class="nav-btn prev" id="prevBtn" onclick="goPrev()">
+        <div class="nav-btn-label"><span class="nav-btn-arrow">&larr;</span> Anterior</div>
+        <div class="nav-btn-title" id="prevTitle">&mdash;</div>
+      </button>
+      <button class="nav-btn next" id="nextBtn" onclick="goNext()">
+        <div class="nav-btn-label">Siguiente <span class="nav-btn-arrow">&rarr;</span></div>
+        <div class="nav-btn-title" id="nextTitle">&mdash;</div>
+      </button>
+    </div>
+  </main>
+</div>
+<script>
+// ============ COURSE DATA ============
+const modules = [
+  {
+    part: 'Parte 1 — Fundamentos',
+    title: '¿Qué es el desarrollo de software?',
+    subtitle: 'Empecemos por lo más básico. Desarrollar software es escribir instrucciones que una computadora sigue paso a paso. Nada mágico.',
+    content: `
+      <h2>Analogía contable</h2>
+      <p>Pensá en una <strong>planeación tributaria</strong> que le armás a un cliente. Vos escribís en un documento: "primero revisar UVT vigente, luego identificar si es persona natural o jurídica, después calcular renta presuntiva si aplica, y finalmente liquidar". Ese documento es un <strong>algoritmo</strong> — una secuencia de pasos que, si se siguen en orden, producen un resultado predecible.</p>
+      <p>Programar es exactamente eso, pero escrito en un lenguaje que la computadora entiende. En vez de "revisar UVT vigente", un programa dice algo como <code>const uvt = 52374</code>. En vez de "si es persona natural", dice <code>if (tipo === 'natural') { ... }</code>. La lógica es la misma, el idioma es distinto.</p>
+      <h2>Por qué existen tantos lenguajes</h2>
+      <p>Cada lenguaje está diseñado para un tipo de problema. Excel con sus fórmulas es un "lenguaje" bueno para tablas financieras. Python es bueno para análisis de datos. JavaScript es el lenguaje de los navegadores web. Tu proyecto GenIA usa JavaScript (en su versión moderna llamada <strong>TypeScript</strong>), porque corre en la web.</p>
+      <div class="callout info">
+        <div class="callout-title">📌 Lo importante</div>
+        <p>No necesitás aprender a programar para seguir usando Claude Code eficientemente. Pero sí necesitás entender QUÉ estás construyendo para supervisarlo. Como cuando contratás un electricista: no tenés que ser electricista, pero sí necesitás saber dónde está el tablero y qué es un breaker.</p>
+      </div>
+    `
+  },
+  {
+    part: 'Parte 1 — Fundamentos',
+    title: 'Las 3 capas de una aplicación web',
+    subtitle: 'Este es quizás el concepto más importante del curso. Una vez que lo entiendas, el 60% de los tecnicismos que te han aparecido cobran sentido.',
+    content: `
+      <p>Toda aplicación web como GenIA tiene <strong>tres capas</strong> que trabajan juntas:</p>
+      <h2>Capa 1 — Frontend ("la cara")</h2>
+      <p>Es lo que <strong>el usuario ve y toca</strong> en el navegador: botones, formularios, tablas, colores, el preview de la factura. Corre <strong>dentro del navegador del usuario</strong> (Chrome, Firefox, Safari). Cuando escribiste en un campo y el preview se actualizó al instante, eso fue el frontend haciendo su trabajo sin pedirle nada a nadie.</p>
+      <p>En GenIA, todo lo que viste en <code>localhost:3000</code> es frontend: la landing, el formulario de registro, el dashboard, los templates de factura.</p>
+      <h2>Capa 2 — Backend ("la cocina")</h2>
+      <p>Es lo que <strong>el usuario NO ve</strong>. Corre en un servidor (una computadora remota que está prendida 24/7). Hace el trabajo pesado: verificar contraseñas, guardar facturas, calcular impuestos, llamar a la DIAN, generar el PDF de la factura.</p>
+      <p>Cuando tu dev server dice "Ready in 2.2s" en la terminal, eso es el backend de GenIA arrancando. El backend no es "lo que se ve"; es "lo que responde cuando el frontend pregunta".</p>
+      <h2>Capa 3 — Base de datos ("el archivo")</h2>
+      <p>Donde se guarda la información de forma permanente: usuarios, empresas, facturas emitidas, asientos contables, empleados de nómina. Si apagás el servidor y lo volvés a prender, todo sigue ahí.</p>
+      <p>En GenIA la base de datos se llama <strong>PostgreSQL</strong> y está alojada en un servicio que se llama <strong>Neon</strong>. (Los veremos en detalle en la Parte 3.)</p>
+      <h2>Analogía contable</h2>
+      <p>Pensá en una firma contable con mostrador al público:</p>
+      <ul>
+        <li><strong>Frontend</strong> = la recepción. Lo que el cliente ve: la sala de espera, los formularios que le entregan, el asesor que lo atiende.</li>
+        <li><strong>Backend</strong> = la oficina atrás. El contador real haciendo los cálculos, llamando a la DIAN, preparando el F110.</li>
+        <li><strong>Base de datos</strong> = el archivador. Donde se guardan todos los expedientes, pólizas, años anteriores.</li>
+      </ul>
+      <p>Cuando un cliente llega al mostrador (frontend) y pide su certificado de retención, el asesor (frontend) va a la oficina atrás (backend), que consulta el archivador (base de datos) y le trae el documento. El cliente nunca ve ni la oficina ni el archivador — solo la recepción.</p>
+      <div class="callout info">
+        <div class="callout-title">📌 Cómo se comunican entre sí</div>
+        <p>Frontend y backend se hablan a través de algo llamado <strong>"API"</strong> (Application Programming Interface). Cuando escribís tu email en el login y apretás "Iniciar sesión", el frontend envía ese email al backend a través de la API. El backend consulta la base de datos, verifica la contraseña, y le responde al frontend "OK, sí es él" o "NO, contraseña incorrecta". Todo eso pasa en milisegundos.</p>
+      </div>
+    `
+  },
+  {
+    part: 'Parte 1 — Fundamentos',
+    title: 'El ciclo de vida de un producto',
+    subtitle: 'Un producto de software pasa por varias etapas desde que se escribe hasta que lo usa un cliente. Entender esto te ayuda a saber "en qué etapa estamos".',
+    content: `
+      <h2>Etapa 1 — Desarrollo (development, o "dev")</h2>
+      <p>El código vive en tu computadora. Corrés <code>npm run dev</code> y el producto funciona en <code>localhost:3000</code>. Acá es donde estuvimos todo el día: probando bugs, viendo páginas, diagnosticando el service worker.</p>
+      <p>En esta etapa nada es real: los datos son de prueba, nadie más ve el sitio, si rompés algo no afectás a clientes.</p>
+      <h2>Etapa 2 — Pruebas (testing)</h2>
+      <p>Antes de que los usuarios vean el producto, corrés <strong>tests automatizados</strong> que verifican que nada esté roto. Cuando Claude Code dijo "133/133 tests pasando", eso significa que 133 verificaciones automáticas confirmaron que el producto funciona como debe.</p>
+      <h2>Etapa 3 — Producción (production, o "prod")</h2>
+      <p>El producto está <strong>desplegado</strong> (publicado) en internet. Alguien puede entrar a tu dominio y usarlo. Los datos son reales. Si rompés algo, afectás clientes reales.</p>
+      <p>GenIA todavía NO está en producción. Está en dev, en tu máquina. Cuando decidiste hacer piloto interno, lo que viene es <strong>desplegarlo a producción</strong> en Vercel (la plataforma que hostea aplicaciones Next.js).</p>
+      <h2>Etapa 4 — Staging (entorno intermedio)</h2>
+      <p>Es una copia idéntica de producción pero que solo vos ves. Sirve para probar cambios con datos reales antes de que los vean los usuarios. GenIA no lo tiene todavía; para el piloto interno podés saltarte este paso. Cuando crezcas, vas a querer uno.</p>
+      <div class="callout warn">
+        <div class="callout-title">📌 Regla de oro</div>
+        <p>Lo que pasa en dev se queda en dev. Lo que toca prod, toca clientes. Por eso cuando hoy vimos bugs en <code>localhost:3000</code>, no era grave — nadie más lo está viendo. El día que despleguemos a prod, los bugs sí son urgentes.</p>
+      </div>
+    `
+  },
+  {
+    part: 'Parte 2 — Herramientas',
+    title: 'Git y el control de versiones',
+    subtitle: 'Git es la herramienta más importante que vas a usar (aparte de Claude Code). Entender Git te saca del miedo a romper cosas, porque te permite volver atrás en el tiempo si algo sale mal.',
+    content: `
+      <h2>Qué es Git</h2>
+      <p>Git es un sistema que lleva un registro <strong>de cada cambio que se hace en el código</strong>. Cada vez que hacés un "commit", Git toma una foto del estado actual del proyecto. Si mañana algo se rompe, podés volver a cualquier foto anterior en segundos.</p>
+      <h2>Analogía contable</h2>
+      <p>Es como los <strong>asientos de reversión</strong> en contabilidad. Cada movimiento queda registrado con fecha, autor y razón. Si descubrís que un asiento está mal, no lo borrás — hacés uno nuevo que lo reversa. Git funciona igual: cada cambio queda en la historia, nunca se "borra" realmente, solo se agregan movimientos nuevos encima.</p>
+      <h2>Conceptos clave</h2>
+      <ul>
+        <li><strong>Repositorio (repo):</strong> la carpeta completa del proyecto con toda su historia. GenIA es un repositorio.</li>
+        <li><strong>Commit:</strong> una foto del estado del proyecto en un momento dado. Cada commit tiene un mensaje que describe qué cambió (ej: "fix: arregla el service worker").</li>
+        <li><strong>Rama (branch):</strong> una línea de trabajo paralela. Podés crear una rama para probar algo sin tocar el código principal. Si funciona, lo unís; si no, borrás la rama y listo.</li>
+        <li><strong>main (o master):</strong> la rama principal, donde vive el código "bueno" del proyecto.</li>
+        <li><strong>merge:</strong> unir una rama con otra. Cuando terminás un fix en una rama aparte, lo hacés merge a main.</li>
+        <li><strong>remote:</strong> una copia del repo en un servidor externo, generalmente GitHub. Tu código local y el remoto se sincronizan.</li>
+        <li><strong>push:</strong> subir tus commits locales al remoto (GitHub).</li>
+        <li><strong>pull:</strong> bajar commits del remoto a tu computadora.</li>
+      </ul>
+      <h2>Por qué es importante GitHub</h2>
+      <p>GitHub es un servicio en la nube que aloja repos de Git. Tres razones para usarlo:</p>
+      <ul>
+        <li><strong>Backup:</strong> si se daña tu disco duro, tu código sigue en GitHub.</li>
+        <li><strong>Colaboración:</strong> si algún día contratás un desarrollador, le das acceso al repo y puede trabajar.</li>
+        <li><strong>Deploy:</strong> servicios como Vercel se conectan a tu GitHub y despliegan automáticamente cada vez que hacés push.</li>
+      </ul>
+      <h2>Comandos que vas a usar</h2>
+      <div class="code-block"><span class="cmt"># Ver el estado actual (qué cambió desde el último commit)</span>
+git status
+<span class="cmt"># Ver los últimos 10 commits</span>
+git log --oneline -10
+<span class="cmt"># Agregar todos los cambios al "staging"</span>
+git add .
+<span class="cmt"># Crear un commit con un mensaje</span>
+git commit -m "fix: arregla bug del login"
+<span class="cmt"># Subir commits a GitHub</span>
+git push
+<span class="cmt"># Crear una nueva rama y cambiarse a ella</span>
+git checkout -b nombre-de-la-rama
+<span class="cmt"># Volver a la rama main</span>
+git checkout main</div>
+      <div class="callout info">
+        <div class="callout-title">📌 Esto es lo que me preguntaste antes</div>
+        <p>Cuando te dije "aprendé 10 comandos de Git y listo", me refería exactamente a los de arriba. Con esos nueve te manejás el 95% del tiempo. No más. No te sientas mal por tener que mirarlos al principio — incluso devs senior los miran cuando están cansados.</p>
+      </div>
+    `
+  },
+  {
+    part: 'Parte 2 — Herramientas',
+    title: 'La terminal (Git Bash)',
+    subtitle: 'La terminal es esa pantalla negra donde escribís comandos. A mucha gente le da miedo, pero es solo una forma de hablarle a la computadora con texto en vez de con clics.',
+    content: `
+      <h2>Por qué usar terminal y no hacer clic</h2>
+      <p>Porque es más rápida para tareas repetitivas y se puede automatizar. Un dev senior prefiere teclear <code>git status</code> que buscar el botón "ver estado" en una interfaz gráfica. Son milisegundos, pero se acumulan.</p>
+      <h2>Git Bash vs PowerShell</h2>
+      <p>Windows trae PowerShell. Git Bash es una terminal adicional que se instala junto con Git y simula el comportamiento de las terminales de Mac/Linux. Para desarrollo web, Git Bash es mejor porque los comandos de tutoriales, documentación y Claude Code asumen sintaxis Unix.</p>
+      <h2>Comandos básicos para moverte</h2>
+      <div class="code-block"><span class="cmt"># Ver en qué carpeta estás</span>
+pwd
+<span class="cmt"># Listar archivos y carpetas</span>
+ls
+<span class="cmt"># Cambiar de carpeta</span>
+cd nombre-carpeta
+<span class="cmt"># Subir una carpeta</span>
+cd ..
+<span class="cmt"># Ir a tu carpeta home</span>
+cd ~
+<span class="cmt"># Limpiar la pantalla</span>
+clear</div>
+      <h2>Atajos que te ahorran tiempo</h2>
+      <ul>
+        <li><strong>Flecha arriba:</strong> repetir el comando anterior (útil cuando corregís un error de tipeo).</li>
+        <li><strong>Tab:</strong> autocompletar nombres de archivos o carpetas.</li>
+        <li><strong>Ctrl + C:</strong> cancelar un comando que está corriendo (ej: detener <code>npm run dev</code>).</li>
+        <li><strong>Ctrl + L:</strong> limpiar pantalla (equivale a <code>clear</code>).</li>
+        <li><strong>Clic derecho:</strong> pegar. NO uses Ctrl+V — en Git Bash eso hace otra cosa.</li>
+      </ul>
+    `
+  },
+  {
+    part: 'Parte 2 — Herramientas',
+    title: 'Node.js, npm y las dependencias',
+    subtitle: 'Para que GenIA pueda correr en tu computadora, necesitás dos cosas instaladas: Node.js y su gestor de paquetes npm.',
+    content: `
+      <h2>Node.js</h2>
+      <p>Node.js es un programa que permite que el código JavaScript corra <strong>fuera del navegador</strong>. Originalmente JavaScript solo corría dentro de Chrome/Firefox, pero Node.js lo "desencadenó" y permitió que se use también en servidores. GenIA usa Node.js para su backend.</p>
+      <h2>npm (Node Package Manager)</h2>
+      <p>npm es como un <strong>almacén gigante de código reutilizable</strong>. Nadie programa todo desde cero. Cuando necesitás algo común (ej: generar PDFs, validar emails, encriptar contraseñas), alguien ya lo escribió y lo publicó en npm como un <strong>paquete</strong> o <strong>dependencia</strong>. Vos lo instalás y lo usás.</p>
+      <h2>Analogía contable</h2>
+      <p>Pensá en los <strong>software DIAN preautorizados</strong>. Vos no programás el motor de validación XML UBL 2.1 desde cero — contratás a MATIAS o Factus que ya lo tienen hecho. En desarrollo web pasa lo mismo: vos no programás un calendario desde cero, usás un paquete de npm que ya hace calendarios. GenIA tiene alrededor de 500 paquetes instalados así, trabajando en equipo.</p>
+      <h2>El archivo package.json</h2>
+      <p>En la raíz de GenIA hay un archivo llamado <code>package.json</code>. Es la "lista de ingredientes" del proyecto: qué paquetes usa, en qué versión, y qué comandos están disponibles. Cuando alguien clona tu proyecto, corre <code>npm install</code> y npm lee ese archivo para descargar todos los ingredientes.</p>
+      <h2>Comandos clave</h2>
+      <div class="code-block"><span class="cmt"># Instalar todas las dependencias del proyecto</span>
+npm install
+<span class="cmt"># Instalar un paquete nuevo</span>
+npm install nombre-del-paquete
+<span class="cmt"># Correr el servidor de desarrollo</span>
+npm run dev
+<span class="cmt"># Correr los tests</span>
+npm test
+<span class="cmt"># Correr tests end-to-end</span>
+npm run test:e2e</div>
+      <div class="callout info">
+        <div class="callout-title">📌 La carpeta node_modules</div>
+        <p>Cuando corrés <code>npm install</code>, npm descarga todas las dependencias en una carpeta llamada <code>node_modules</code>. Esta carpeta puede tener CIENTOS de megas. Por eso NUNCA se sube a GitHub (tu archivo <code>.gitignore</code> ya la excluye). Cualquier dev que clone tu repo puede regenerarla con <code>npm install</code>.</p>
+      </div>
+    `
+  },
+  {
+    part: 'Parte 2 — Herramientas',
+    title: 'Variables de entorno',
+    subtitle: 'Una variable de entorno es un dato de configuración que cambia según el entorno donde corre el proyecto (dev, staging, prod). Las más comunes son: contraseñas, llaves de API, URLs de servicios.',
+    content: `
+      <h2>Por qué existen</h2>
+      <p>Imaginá que GenIA corre en 3 lugares: tu máquina (dev), un entorno de pruebas (staging), y producción (prod). La URL de la base de datos NO es la misma en los tres. Tampoco la llave de acceso a MATIAS. Las variables de entorno permiten que el mismo código funcione en los tres lugares cambiando solo los valores de configuración.</p>
+      <h2>El archivo .env</h2>
+      <p>En la raíz de GenIA hay (o debería haber) un archivo <code>.env</code> con contenido más o menos así:</p>
+      <div class="code-block">DATABASE_URL=postgresql://usuario:contraseña@servidor.neon.tech/genia
+MATIAS_API_KEY=ghp_xxxxxxxxxxxxxx
+NEXTAUTH_SECRET=una-clave-secreta-aleatoria
+NEXTAUTH_URL=http://localhost:3000</div>
+      <div class="callout danger">
+        <div class="callout-title">🚨 CRÍTICO — Seguridad</div>
+        <p>El archivo <code>.env</code> <strong>NUNCA</strong> se sube a GitHub. Tiene contraseñas y llaves que si se filtran comprometen toda tu infraestructura. Tu <code>.gitignore</code> ya lo excluye. Si alguna vez ves que un dev te pide "pasáme tu .env", te tiene que llegar por un canal privado (WhatsApp encriptado, 1Password), nunca por email ni chat público.</p>
+      </div>
+    `
+  },
+  {
+    part: 'Parte 3 — La stack de GenIA',
+    title: 'Next.js y React',
+    subtitle: '"Stack" es el conjunto de tecnologías que usa un proyecto. Empezamos por los dos más importantes del frontend de GenIA.',
+    content: `
+      <p>La stack completa de GenIA es:</p>
+      <ul>
+        <li><strong>Next.js 14</strong> — el framework principal</li>
+        <li><strong>TypeScript</strong> — el lenguaje</li>
+        <li><strong>React</strong> — la librería de interfaces</li>
+        <li><strong>Prisma</strong> — el conector a base de datos</li>
+        <li><strong>PostgreSQL / Neon</strong> — la base de datos</li>
+        <li><strong>Tailwind CSS</strong> — los estilos visuales</li>
+        <li><strong>Vercel</strong> — el hosting (cuando despliegues)</li>
+        <li><strong>Cloudflare R2</strong> — almacenamiento de archivos</li>
+      </ul>
+      <h2>React primero</h2>
+      <p>React es una librería de JavaScript hecha por Facebook para construir interfaces de usuario. La idea central: en vez de manipular HTML directamente con código imperativo ("ahora mové este div, ahora cambiá el color"), describís <strong>cómo debería verse la interfaz</strong> en cada estado, y React se encarga de actualizarla cuando el estado cambia.</p>
+      <h2>Ejemplo concreto</h2>
+      <p>El preview live de la factura en GenIA funciona con React. Cada vez que vos escribís algo en el formulario, el "estado" del componente cambia. React detecta el cambio y re-dibuja el preview automáticamente. Vos no programás "cuando cambie el nombre, actualizá el preview" — solo decís "el preview muestra lo que esté en el estado del nombre". React hace el resto.</p>
+      <h2>Next.js</h2>
+      <p>Next.js es un <strong>framework</strong> construido encima de React, hecho por una empresa llamada Vercel. Le agrega cosas que React no trae: ruteo (cómo manejar URLs), generación de páginas en el servidor, optimización de imágenes, APIs backend integradas.</p>
+      <p>GenIA usa Next.js 14 en modo <strong>App Router</strong> (la versión más nueva). La estructura de carpetas es importante: cada carpeta dentro de <code>src/app/</code> se convierte en una URL:</p>
+      <div class="code-block">src/app/
+├── page.tsx             →  localhost:3000/
+├── layout.tsx           →  plantilla raíz
+├── auth/
+│   ├── login/
+│   │   └── page.tsx     →  /auth/login
+│   └── registro/
+│       └── page.tsx     →  /auth/registro
+├── dashboard/
+│   └── page.tsx         →  /dashboard
+└── facturas/
+    └── nueva/
+        └── page.tsx     →  /facturas/nueva</div>
+      <div class="callout info">
+        <div class="callout-title">📌 Por qué Next.js y no otra cosa</div>
+        <p>Next.js es el estándar de facto para aplicaciones web modernas en 2026. Está bien documentado, tiene comunidad enorme, y funciona perfecto con Vercel (que es de la misma empresa). Si algún día contratás un dev de frontend, 10 de cada 10 conocen Next.js.</p>
+      </div>
+    `
+  },
+  {
+    part: 'Parte 3 — La stack de GenIA',
+    title: 'TypeScript',
+    subtitle: 'TypeScript es JavaScript con superpoderes. Específicamente: le agrega tipos de datos verificados antes de correr el código.',
+    content: `
+      <h2>Por qué importa</h2>
+      <p>En JavaScript normal, podés escribir <code>const nit = "123"</code> y después usar ese NIT como si fuera un número (<code>nit + 100</code>) y el programa se rompe cuando lo corrés. En TypeScript, si declarás que el NIT es texto y después intentás sumarle un número, te tira error <strong>antes</strong> de correr el programa. Te salva de mil bugs tontos.</p>
+      <h2>Analogía contable</h2>
+      <p>Es como usar Excel con <strong>validación de datos</strong> en cada celda. Si vos le decís "esta columna solo acepta fechas" y alguien pega un texto, Excel le avisa. TypeScript hace lo mismo a nivel código: cada variable tiene un tipo (texto, número, fecha, objeto-empresa, factura-dian, etc.) y si alguien intenta usarla mal, el compilador grita.</p>
+      <h2>Qué reconocés como TypeScript</h2>
+      <p>Los archivos <code>.ts</code> y <code>.tsx</code> son TypeScript. Los <code>.js</code> y <code>.jsx</code> son JavaScript normal. GenIA usa 100% TypeScript. Cuando vos leas código de tu proyecto, vas a ver cosas así:</p>
+      <div class="code-block"><span class="kw">interface</span> <span class="fn">Empresa</span> {
+  id: <span class="kw">string</span>;
+  razonSocial: <span class="kw">string</span>;
+  nit: <span class="kw">string</span>;
+  digitoVerificacion: <span class="kw">number</span>;
+  regimen: <span class="str">'ORDINARIO'</span> | <span class="str">'SIMPLE'</span> | <span class="str">'ESPECIAL'</span>;
+}
+<span class="kw">function</span> <span class="fn">crearEmpresa</span>(datos: Empresa) {
+  <span class="cmt">// ...</span>
+}</div>
+      <p>Eso declara qué "forma" tiene una empresa. Si alguien trata de crear una empresa sin NIT, TypeScript le grita antes de correr.</p>
+    `
+  },
+  {
+    part: 'Parte 3 — La stack de GenIA',
+    title: 'Prisma y PostgreSQL',
+    subtitle: 'PostgreSQL es la base de datos. Prisma es el traductor entre tu código TypeScript y la base.',
+    content: `
+      <h2>PostgreSQL</h2>
+      <p>PostgreSQL (a veces llamado "Postgres") es la base de datos. Es una de las más robustas del mundo, usada por miles de empresas (Uber, Instagram, Netflix). Es <strong>relacional</strong> — los datos se organizan en tablas que se relacionan entre sí, como en Excel con hojas vinculadas por VLOOKUP.</p>
+      <h2>Ejemplo de tablas en GenIA</h2>
+      <p>Tu proyecto tiene decenas de tablas. Algunas clave:</p>
+      <ul>
+        <li><strong>Usuarios</strong> — los que se registran y entran al sistema.</li>
+        <li><strong>Empresas</strong> — las razones sociales que el usuario administra.</li>
+        <li><strong>Facturas</strong> — los documentos electrónicos emitidos.</li>
+        <li><strong>Terceros</strong> — clientes y proveedores de cada empresa.</li>
+        <li><strong>Empleados</strong> — para nómina electrónica.</li>
+        <li><strong>AsientosContables</strong> — registros contables automáticos.</li>
+        <li><strong>RadianEvento</strong> — eventos de aceptación/rechazo DIAN (tabla nueva del último sprint).</li>
+      </ul>
+      <h2>Prisma</h2>
+      <p>Prisma es un <strong>ORM</strong> (Object-Relational Mapper). En cristiano: es un traductor entre el código JavaScript/TypeScript y la base de datos SQL. En vez de escribir SQL crudo como <code>SELECT * FROM empresas WHERE id = ?</code>, escribís código TypeScript como:</p>
+      <div class="code-block"><span class="kw">const</span> empresa = <span class="kw">await</span> prisma.empresa.<span class="fn">findUnique</span>({
+  where: { id: empresaId },
+  include: { facturas: <span class="kw">true</span> }
+});</div>
+      <p>Prisma traduce eso a SQL por vos, corre la consulta, y te devuelve el resultado listo para usar. Bonus: te da autocompletado y verificación de tipos (sabe que <code>empresa.nit</code> existe y es texto, que <code>empresa.facturas</code> es un array, etc).</p>
+      <h2>El archivo schema.prisma</h2>
+      <p>La "forma" de cada tabla está definida en <code>prisma/schema.prisma</code>. Es un archivo central que describe todas las tablas y sus relaciones. Cambiás ese archivo, corrés <code>npx prisma migrate dev --name lo-que-cambio</code>, y Prisma genera el SQL necesario para actualizar la base.</p>
+    `
+  },
+  {
+    part: 'Parte 3 — La stack de GenIA',
+    title: 'Neon, Vercel, Cloudflare R2',
+    subtitle: 'Los tres servicios cloud que usa (o usará) GenIA.',
+    content: `
+      <h2>Neon</h2>
+      <p>Es un servicio que hostea bases de datos PostgreSQL en la nube. En vez de tener un servidor propio con Postgres instalado, pagás una suscripción a Neon y ellos te dan una base de datos accesible desde cualquier lado.</p>
+      <p>Hoy estás en plan gratuito ("Free"), con 0.5 GB de storage, 100 horas de compute al mes. Suficiente para desarrollo. Cuando despliegues a prod vas a pasar a "Launch" (~$19 USD/mes base + uso).</p>
+      <h2>Vercel</h2>
+      <p>Servicio de hosting especializado en aplicaciones Next.js (son los creadores). Lo conectás a tu GitHub y cada vez que hacés <code>git push</code>, Vercel automáticamente construye y despliega tu app. Incluye dominios, SSL (el candadito verde), CDN (servidores distribuidos por el mundo para que la app cargue rápido desde cualquier país).</p>
+      <p>Plan gratuito ("Hobby") sirve para proyectos personales. Para comercial necesitás "Pro" ($20 USD/mes).</p>
+      <h2>Cloudflare R2</h2>
+      <p>Servicio de almacenamiento de archivos. Las bases de datos como Postgres son malas guardando archivos grandes (PDFs, imágenes, XMLs). R2 está optimizado para eso. En GenIA lo usás para guardar los PDFs de las facturas emitidas, los XMLs firmados, los certificados de retención.</p>
+      <p>R2 cobra por GB almacenado, pero — y esto es clave — <strong>no cobra por descarga</strong>, a diferencia de AWS S3. Eso lo hace extremadamente barato para aplicaciones web.</p>
+      <h2>Analogía contable</h2>
+      <p>Pensá en tu oficina física:</p>
+      <ul>
+        <li><strong>Neon</strong> es como arrendar un archivador en una oficina compartida donde guardás expedientes estructurados.</li>
+        <li><strong>Vercel</strong> es como arrendar la oficina misma, con todo listo para atender clientes.</li>
+        <li><strong>Cloudflare R2</strong> es el depósito barato donde mandás las cajas de archivos voluminosos que consultás poco pero tenés que conservar.</li>
+      </ul>
+    `
+  },
+  {
+    part: 'Parte 4 — Conceptos que aparecieron hoy',
+    title: 'Service Worker y PWA',
+    subtitle: 'Un Service Worker es un pequeño programa que corre en el navegador del usuario, separado de la página. Su trabajo es interceptar peticiones, cachear archivos y permitir funcionalidad offline.',
+    content: `
+      <h2>Service Worker</h2>
+      <p>Un Service Worker es un pequeño programa que <strong>corre en el navegador del usuario, separado de la página</strong>. Su trabajo es interceptar las peticiones de red, cachear archivos, permitir funcionalidad offline, y mostrar notificaciones push.</p>
+      <h2>Por qué rompió todo hoy</h2>
+      <p>El service worker de GenIA tenía un bug: cuando interceptaba una petición y la red fallaba (cosa común en desarrollo por el "Hot Module Reload"), intentaba buscar en caché. Pero la caché estaba vacía, entonces devolvía <code>undefined</code> ("nada") en vez de una respuesta válida. El navegador esperaba algo y recibía "nada" — lo que causaba el "Cargando..." infinito.</p>
+      <p>Claude Code lo arregló así: si la red falla y la caché está vacía, devolver una respuesta "vacía pero válida" (status 504). Además, desactivó el registro del service worker en desarrollo, porque en dev no aporta nada y solo rompe.</p>
+      <h2>PWA — Progressive Web App</h2>
+      <p>Una PWA es una web que se puede "instalar" en el celular o computadora como si fuera una app nativa, con ícono en pantalla de inicio, funciona offline, recibe notificaciones push. El service worker es lo que hace posible la PWA.</p>
+      <p>En el futuro, si querés que un contador pueda "instalar" GenIA en su celular como una app, el service worker va a ser clave. Por eso Claude Code no lo eliminó, solo lo desactivó en dev.</p>
+    `
+  },
+  {
+    part: 'Parte 4 — Conceptos que aparecieron hoy',
+    title: 'CSP y nonce',
+    subtitle: 'Content Security Policy es una medida de seguridad del navegador contra inyección de código. El nonce es la clave de un solo uso que la hace posible.',
+    content: `
+      <h2>CSP — Content Security Policy</h2>
+      <p>Es una medida de seguridad del navegador. Le dice: "en esta página, solo ejecutá código que venga de estos dominios de confianza". Si alguien inyecta código malicioso (ej: un hacker logra meter un <code>&lt;script&gt;</code> malo en tu página), el CSP lo bloquea automáticamente.</p>
+      <h2>Analogía contable</h2>
+      <p>Es como una <strong>lista blanca de cuentas de terceros autorizadas</strong> en una empresa. Si el tesorero intenta hacer un pago a una cuenta que no está en la lista, el sistema bloquea la transacción automáticamente. CSP hace lo mismo con el código que se ejecuta en la página.</p>
+      <h2>Nonce</h2>
+      <p>Un nonce ("number used once") es un código aleatorio único que se genera para cada carga de página. El CSP dice: "solo ejecuto scripts que lleven este nonce específico". Así, incluso si un atacante logra inyectar un script, no puede saber el nonce (cambia en cada request) y el navegador lo bloquea.</p>
+      <h2>El bug de hoy</h2>
+      <p>El warning "Prop nonce did not match. Server: "" Client: "xxx"" aparecía porque el servidor renderizaba la página sin nonce y el cliente esperaba uno. Problema de sincronización. Claude Code lo arregló eliminando el script inline del layout (el que dependía del nonce) y moviéndolo a un archivo externo.</p>
+    `
+  },
+  {
+    part: 'Parte 4 — Conceptos que aparecieron hoy',
+    title: 'Tests — unitarios y end-to-end',
+    subtitle: 'Los tests son verificaciones automáticas que confirman que el código funciona como debe. Correr tests antes de cada cambio es lo que separa un proyecto profesional de uno amateur.',
+    content: `
+      <h2>Tests unitarios (unit tests)</h2>
+      <p>Prueban piezas pequeñas de código aisladamente. Ejemplo: una función que calcula retención en la fuente. El test le da inputs conocidos y verifica que el output sea el esperado:</p>
+      <div class="code-block"><span class="fn">test</span>(<span class="str">'calcula retención del 11% para servicios'</span>, () => {
+  <span class="kw">const</span> resultado = <span class="fn">calcularRetencion</span>({
+    concepto: <span class="str">'SERVICIOS'</span>,
+    baseGravable: <span class="num-lit">1_000_000</span>,
+    regimen: <span class="str">'ORDINARIO'</span>
+  });
+  <span class="fn">expect</span>(resultado).<span class="fn">toBe</span>(<span class="num-lit">110_000</span>);
+});</div>
+      <p>Si alguien modifica la función <code>calcularRetencion</code> y la rompe por error, el test falla al correr <code>npm test</code> y te avisa antes de que llegue a producción.</p>
+      <p>GenIA tiene 133 tests unitarios que verifican cálculos de facturación, nómina, compras, renta, etc. Cada vez que Claude Code hace cambios, los corre para asegurarse de no romper nada.</p>
+      <h2>Tests end-to-end (e2e)</h2>
+      <p>Prueban <strong>flujos completos</strong> desde el navegador. Simulan un usuario real: abrir la página de login, escribir email y contraseña, apretar botón, verificar que aparezca el dashboard. Son más lentos que los unitarios pero atrapan bugs de integración.</p>
+      <p>GenIA usa <strong>Playwright</strong> para e2e. Son los tests que Claude Code iba a correr al final del sprint.</p>
+      <h2>Analogía contable</h2>
+      <p>Los tests unitarios son como <strong>verificar cada fórmula de una planilla Excel</strong> por separado. Los e2e son como <strong>correr la planilla completa con datos reales y chequear el cierre contable</strong>. Los dos son necesarios.</p>
+      <div class="callout info">
+        <div class="callout-title">📌 Por qué insisto tanto con tests</div>
+        <p>Cuando tu producto tenga 50 empresas clientes y Claude Code haga un cambio que rompa silenciosamente el cálculo de retención en la fuente, los tests son lo único que te avisa. Sin tests, te enterás cuando un cliente llama enojado porque le cobraron mal la retención. Vale la pena la inversión.</p>
+      </div>
+    `
+  },
+  {
+    part: 'Parte 4 — Conceptos que aparecieron hoy',
+    title: 'Migraciones de base de datos',
+    subtitle: 'Una migración es un cambio estructural a la base de datos: crear una tabla nueva, agregar una columna, cambiar un tipo de dato, crear un índice.',
+    content: `
+      <h2>Por qué importan</h2>
+      <p>Tu base de datos evoluciona con el producto. Cuando agregás la funcionalidad de "eventos RADIAN", necesitás una tabla nueva para guardar esos eventos. Esa creación de tabla es una migración.</p>
+      <h2>Analogía contable</h2>
+      <p>Son los <strong>asientos de apertura y ajuste</strong> del archivador. No cambian los datos existentes, cambian la estructura donde viven los datos. "Agregar una columna para el código CIIU" es una migración. "Rellenar ese código CIIU en empresas existentes" es un data migration (otra cosa, más delicada).</p>
+      <h2>Cómo funcionan en Prisma</h2>
+      <p>Cada migración queda guardada como un archivo en <code>prisma/migrations/</code>. El nombre del archivo tiene un <strong>timestamp</strong> (fecha + hora) para que se apliquen en el orden correcto. Ejemplo:</p>
+      <div class="code-block">prisma/migrations/
+├── 20260418100000_radian_cert_eventos/
+├── 20260418110000_dian_software_id_pin/
+├── 20260418152613_certificados_retencion/
+├── 20260418160713_estado_dian_nomina/
+└── 20260418162738_dashboard_indices/</div>
+      <h2>Comandos clave</h2>
+      <div class="code-block"><span class="cmt"># Ver estado de migraciones</span>
+npx prisma migrate status
+<span class="cmt"># Aplicar migraciones pendientes (PROD)</span>
+npx prisma migrate deploy
+<span class="cmt"># Regenerar el cliente Prisma después de migrar</span>
+npx prisma generate
+<span class="cmt"># Crear una migración nueva (en desarrollo)</span>
+npx prisma migrate dev --name descripcion-del-cambio</div>
+      <div class="callout danger">
+        <div class="callout-title">🚨 CRÍTICO: migraciones en prod</div>
+        <p>Las migraciones en producción son una operación delicada. Si algo sale mal, podés corromper la base y afectar a clientes reales. Regla: <strong>nunca, nunca</strong> corras <code>migrate dev</code> en prod. Siempre <code>migrate deploy</code>, y siempre después de hacer backup. Claude Code conoce esto, pero no está de más que vos lo sepas.</p>
+      </div>
+    `
+  },
+  {
+    part: 'Parte 5 — Trabajar con Claude Code',
+    title: 'Cómo pedirle cosas bien',
+    subtitle: 'Son aprendizajes de dev senior condensados en consejos accionables. La parte que más te va a ahorrar tiempo a largo plazo.',
+    content: `
+      <h2>Principio 1 — Contexto antes de la tarea</h2>
+      <p>Claude Code trabaja mejor si entiende <strong>por qué</strong> hacés algo, no solo <strong>qué</strong> querés. Comparalo:</p>
+      <p><strong>Mal:</strong> "Arregla el service worker"</p>
+      <p><strong>Bien:</strong> "El service worker está rompiendo la navegación en dev (después del login queda 'Cargando...' infinito en /empresas). Diagnosticá la causa raíz primero y propóneme un plan antes de tocar código."</p>
+      <p>La segunda versión le dice: (a) cuál es el síntoma, (b) dónde lo viste, (c) cómo querés que trabaje (diagnóstico antes de acción). Claude produce resultados mucho mejores con contexto.</p>
+      <h2>Principio 2 — Pedile que piense, no solo que codee</h2>
+      <p>Si sentís que la tarea es compleja o tiene riesgos, pedíle explícitamente: "antes de tocar código, hacé diagnóstico profundo y mostráme el plan". Eso activa un modo más reflexivo y evita que saque a toda velocidad un fix que rompa otra cosa.</p>
+      <h2>Principio 3 — Una tarea por sesión</h2>
+      <p>Si mezclás tres tareas ("arregla el SW, renombrá las variables y cambiá el color del header"), Claude puede hacer las tres pero el riesgo de que algo salga mal aumenta. Mejor una tarea atómica por sesión. Los commits quedan más limpios, los tests fallan menos, tu cabeza no se satura.</p>
+      <h2>Principio 4 — Usá ramas para trabajos grandes</h2>
+      <p>Antes de un cambio grande, creás una rama:</p>
+      <div class="code-block">git checkout -b experimento/nuevo-dashboard</div>
+      <p>Trabajás ahí con Claude Code. Si el experimento funciona, unís la rama a main. Si no, la borrás y listo:</p>
+      <div class="code-block">git checkout main
+git branch -D experimento/nuevo-dashboard</div>
+      <h2>Principio 5 — Pedile que corra tests</h2>
+      <p>Siempre. Al final de cada sesión de cambios importantes, pedíle: "corré <code>npm test</code> y confirmame que no haya regresiones". Si un test falla, lo arreglás ahí antes de commitear.</p>
+      <h2>Principio 6 — Pedí explicaciones</h2>
+      <p>Si Claude propone algo que no entendés, decile: "explicame esto como si fuera contador, no dev". Lo va a hacer. No es de tontos pedir explicaciones; es de responsables.</p>
+    `
+  },
+  {
+    part: 'Parte 5 — Trabajar con Claude Code',
+    title: 'Qué NO pedirle',
+    subtitle: 'Claude Code escribe código. No decide por vos. Estas son las fronteras.',
+    content: `
+      <h2>1. Decisiones de producto/negocio</h2>
+      <p>Claude Code escribe código. No decide si deberías cobrar $89.000 o $129.000 por tu plan. No decide si tu hero debería ser "hecho por contadores" o "facturación DIAN sin límites". No decide si deberías hacer piloto interno o salir comercial.</p>
+      <p>Para esas cosas, hablá conmigo (Claude.ai) o con un asesor humano. Claude Code ejecuta; nosotros pensamos.</p>
+      <h2>2. Consejos de seguridad crítica</h2>
+      <p>Claude Code te puede ayudar a implementar medidas de seguridad, pero para decisiones críticas (¿cómo manejo datos biométricos? ¿cómo cumplo con HIPAA? ¿qué implica la Ley 1581 para mi caso específico?) necesitás un abogado y/o un ingeniero de seguridad humano.</p>
+      <h2>3. Código que ignora las mejores prácticas</h2>
+      <p>Si le pedís "guardá las contraseñas en texto plano para que pueda verlas", Claude se va a negar. Y hace bien. Lo mismo con cosas como "metele un backdoor para que pueda entrar a cuentas sin contraseña" o "sáltate la validación de los impuestos". No insistas.</p>
+      <h2>4. Cosas fuera del código</h2>
+      <p>Claude Code no puede: firmar contratos con proveedores, llamar por teléfono a soporte de Neon, responder emails de clientes, imprimir facturas físicas. Esas son tareas de humanos. Claude te puede <em>preparar</em> textos, borradores, cálculos, pero ejecutar tareas del mundo físico no.</p>
+    `
+  },
+  {
+    part: 'Parte 5 — Trabajar con Claude Code',
+    title: 'Cómo leer sus reportes',
+    subtitle: 'Los reportes de Claude Code tienen estructura. Aprendé a reconocer las partes para leerlos rápido.',
+    content: `
+      <h2>Diagnóstico</h2>
+      <p>Al principio de una sesión compleja. Dice qué encontró, cuál es la causa raíz, qué riesgos identifica. <strong>Esta es la parte más importante</strong> — más que el código. Un buen diagnóstico te enseña cómo piensa un dev.</p>
+      <h2>Plan</h2>
+      <p>Qué va a hacer, en qué orden, con qué commits. Leelo completo antes de aprobar. Si algo no cuadra, preguntá antes de que ejecute.</p>
+      <h2>Ejecución</h2>
+      <p>Los cambios en archivos. Idealmente los revisás línea por línea, pero si son muchos podés confiar en el diagnóstico y plan previos, y verificar solo los cambios más críticos.</p>
+      <h2>Verificación</h2>
+      <p>Tests corridos, baseline vs final, flujo manual verificado. Si dice "133/133 tests pasando", confíalo. Si dice "129/133, 4 fallando pero no relacionados", preguntá: "¿cómo sabés que no están relacionados?".</p>
+      <h2>Reporte final</h2>
+      <p>Commits nuevos, archivos modificados, pendientes para próximo sprint. Este es el que te sirve para cerrar el ciclo y planear el siguiente.</p>
+      <div class="callout warn">
+        <div class="callout-title">📌 Una señal de alerta</div>
+        <p>Si Claude Code dice "todo funcionó, no hay problemas, perfecto", desconfiá un poco. Un dev experimentado siempre encuentra un cable suelto, una cosa rara, un pendiente. Si Claude no lo dice, preguntá: "¿qué pendientes quedan? ¿qué bugs adicionales detectaste que no arreglaste? ¿qué gotchas debería saber?". Siempre hay algo.</p>
+      </div>
+    `
+  },
+  {
+    part: 'Parte 6 — Referencia rápida',
+    title: 'Glosario de términos',
+    subtitle: 'Diccionario de los términos más comunes que te van a aparecer. Volvé acá cuando veas uno que no recordás.',
+    content: `
+      <div class="content-body">
+      <p style="margin-bottom: 24px;">Organizado alfabéticamente. Cada entrada tiene una definición corta y, cuando aplica, un ejemplo concreto de GenIA.</p>
+      <ul style="list-style: none; margin-left: 0;">
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>API</strong> (Application Programming Interface): canal por el cual un programa le pide cosas a otro. Ej: GenIA le pide a MATIAS que envíe una factura a la DIAN, usando la API de MATIAS.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Backend:</strong> la parte del software que corre en el servidor, no en el navegador del usuario.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Branch (rama):</strong> línea de trabajo paralela en Git.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Bug:</strong> error en el código que hace que el producto funcione mal.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Build:</strong> el proceso de convertir el código fuente en los archivos finales que se ejecutan. Next.js lo hace automáticamente.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Cache (caché):</strong> memoria temporal donde se guardan cosas para acceder rápido.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Client / cliente:</strong> el navegador del usuario (a veces llamado front-end).</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>CLI</strong> (Command Line Interface): interfaz de línea de comandos. La terminal.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Commit:</strong> una foto del estado del proyecto en Git.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Componente:</strong> una pieza reutilizable de interfaz. Un botón, un formulario, una tarjeta de factura. React se basa en componentes.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Console (consola):</strong> la ventana de debug en el navegador (F12). Muestra errores, warnings, logs.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>CSS:</strong> el lenguaje de los estilos visuales. Define colores, tamaños, espaciados.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>CSP</strong> (Content Security Policy): política de seguridad del navegador contra código inyectado.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Dashboard:</strong> panel de control. En GenIA es la vista principal después del login.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Debug:</strong> proceso de encontrar y arreglar bugs.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Dependencia:</strong> paquete de código de terceros que tu proyecto usa.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Deploy:</strong> publicar el código en producción para que los usuarios lo vean.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Dev (development):</strong> entorno de desarrollo, en tu máquina local.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Diff:</strong> diferencia entre dos versiones de un archivo. Lo que cambió.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>DNS:</strong> el sistema que traduce dominios (genia.com.co) a IPs (números).</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>DOM:</strong> representación en memoria de una página HTML. React lo manipula.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Endpoint:</strong> una URL específica de una API.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>End-to-end (e2e):</strong> tipo de test que simula un flujo completo de usuario.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Framework:</strong> conjunto de herramientas que te dan una estructura base. Next.js es un framework.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Frontend:</strong> la parte del software que corre en el navegador del usuario.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Git:</strong> sistema de control de versiones.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>GitHub:</strong> servicio en la nube que aloja repositorios Git.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>HTML:</strong> lenguaje de marcado que define la estructura de una página web.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>HTTP/HTTPS:</strong> protocolo de comunicación web. HTTPS es la versión encriptada (candadito verde).</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Hydration:</strong> proceso donde el navegador "rehidrata" una página renderizada en el servidor, agregándole interactividad.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>IDE:</strong> editor de código con superpoderes. VS Code, Cursor.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>JSON:</strong> formato de datos estructurados. Muy usado en APIs.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>JSX / TSX:</strong> extensión de JavaScript/TypeScript que permite escribir HTML dentro del código. React lo usa.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Layout:</strong> plantilla que se aplica a múltiples páginas.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>localhost:</strong> tu computadora, vista desde tu navegador.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Logs:</strong> mensajes que el programa va escribiendo mientras corre. Útiles para debug.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Merge:</strong> unir dos ramas de Git.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Migración (migration):</strong> cambio estructural en la base de datos.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Module / Módulo:</strong> archivo que exporta código reutilizable.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Node.js:</strong> entorno que permite correr JavaScript fuera del navegador.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>npm:</strong> gestor de paquetes de Node.js.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>ORM:</strong> traductor entre código y base de datos. Prisma es un ORM.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Package (paquete):</strong> código empaquetado y publicado para reutilizar.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>PWA</strong> (Progressive Web App): aplicación web que se comporta como app nativa.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Prod (production):</strong> entorno de producción, donde los usuarios reales usan el producto.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Props:</strong> parámetros que un componente React recibe.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Pull:</strong> bajar cambios desde un repositorio remoto.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Push:</strong> subir cambios a un repositorio remoto.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Query:</strong> consulta a una base de datos.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>React:</strong> librería de JavaScript para construir interfaces.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Refactor:</strong> reescribir código sin cambiar su comportamiento, para que sea más limpio.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Repo (repositorio):</strong> carpeta del proyecto con su historia Git.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Request / response:</strong> petición y respuesta. El frontend hace requests, el backend devuelve responses.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>REST:</strong> estilo de diseño de APIs muy común.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Route / Ruta:</strong> una URL dentro de tu aplicación.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Schema:</strong> estructura de una base de datos o de datos JSON.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Script:</strong> archivo de código. También, un comando corto definido en <code>package.json</code>.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Server:</strong> el backend, la parte que corre en el servidor.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Service Worker:</strong> script que corre en segundo plano en el navegador, permite offline y notificaciones.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>SSR</strong> (Server-Side Rendering): renderizar la página en el servidor antes de enviarla al navegador.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Stack:</strong> conjunto de tecnologías que usa un proyecto.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>State / Estado:</strong> datos que un componente React mantiene y pueden cambiar.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Tailwind CSS:</strong> framework de CSS basado en clases utilitarias. GenIA lo usa.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Terminal:</strong> ventana donde escribís comandos. Git Bash en tu caso.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Test:</strong> verificación automática de que el código funciona.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>TypeScript:</strong> JavaScript con tipos. El lenguaje de GenIA.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>UI</strong> (User Interface): interfaz de usuario.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>UX</strong> (User Experience): experiencia de usuario.</li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--border);"><strong>Variable de entorno:</strong> dato de configuración externo al código, en el archivo <code>.env</code>.</li>
+        <li style="padding: 12px 0;"><strong>Webhook:</strong> URL a la que otro sistema envía datos automáticamente cuando pasa algo.</li>
+      </ul>
+      </div>
+    `
+  },
+  {
+    part: 'Parte 6 — Referencia rápida',
+    title: 'Cheat sheet de comandos',
+    subtitle: 'Los comandos esenciales que vas a usar el 95% del tiempo. Imprimíla y pegala al lado del monitor.',
+    content: `
+      <h2>Git — los 10 esenciales</h2>
+      <div class="code-block">git status                      <span class="cmt"># ver qué cambió</span>
+git log --oneline -10            <span class="cmt"># ver últimos 10 commits</span>
+git add .                        <span class="cmt"># preparar todos los cambios</span>
+git commit -m <span class="str">"mensaje"</span>         <span class="cmt"># crear un commit</span>
+git push                         <span class="cmt"># subir a GitHub</span>
+git pull                         <span class="cmt"># bajar de GitHub</span>
+git checkout -b nueva-rama       <span class="cmt"># crear y cambiar a rama nueva</span>
+git checkout main                <span class="cmt"># volver a main</span>
+git diff                         <span class="cmt"># ver diferencias sin commitear</span>
+git reset --hard HEAD            <span class="cmt"># descartar TODOS los cambios (cuidado)</span></div>
+      <h2>npm — los 6 esenciales</h2>
+      <div class="code-block">npm install                      <span class="cmt"># instalar todas las dependencias</span>
+npm install paquete              <span class="cmt"># instalar un paquete nuevo</span>
+npm run dev                      <span class="cmt"># arrancar servidor de desarrollo</span>
+npm run build                    <span class="cmt"># construir versión de producción</span>
+npm test                         <span class="cmt"># correr tests unitarios</span>
+npm run test:e2e                 <span class="cmt"># correr tests end-to-end</span></div>
+      <h2>Prisma — los 4 esenciales</h2>
+      <div class="code-block">npx prisma migrate status        <span class="cmt"># ver estado de migraciones</span>
+npx prisma migrate deploy        <span class="cmt"># aplicar migraciones (PROD)</span>
+npx prisma migrate dev --name x  <span class="cmt"># crear migración (DEV)</span>
+npx prisma generate              <span class="cmt"># regenerar cliente Prisma</span></div>
+      <h2>Terminal (Git Bash) — navegación</h2>
+      <div class="code-block">pwd                              <span class="cmt"># ¿dónde estoy?</span>
+ls                               <span class="cmt"># listar contenido</span>
+cd carpeta                       <span class="cmt"># entrar a carpeta</span>
+cd ..                            <span class="cmt"># subir una carpeta</span>
+cd ~                             <span class="cmt"># ir a home</span>
+clear                            <span class="cmt"># limpiar pantalla</span>
+Ctrl+C                           <span class="cmt"># cancelar comando en curso</span>
+Flecha arriba                    <span class="cmt"># repetir comando anterior</span>
+Tab                              <span class="cmt"># autocompletar</span></div>
+      <div class="callout info" style="margin-top: 48px;">
+        <div class="callout-title">🎉 Llegaste al final</div>
+        <p>Juan, si leíste todo el curso, ya manejás más conceptos que el 90% de los fundadores no-técnicos construyendo con IA. Lo más importante no es memorizar, es tener esto como referencia y volver cuando algo te haga ruido.</p>
+        <p style="margin-top: 12px;">Tu ventaja competitiva como contador construyendo software contable es enorme: <strong>entendés el dolor del usuario desde adentro</strong>. Un dev puede construir un F110 hermoso técnicamente, pero vos sabés qué casilla causa más errores en la DIAN, qué campo confunde al contador novato, qué integración con exógena salva horas. Eso no se aprende leyendo Next.js.</p>
+        <p style="margin-top: 12px;">Lo técnico lo podés delegar a Claude Code. El <em>producto</em> — ese sigue siendo tuyo. Ese es el activo.</p>
+        <p style="margin-top: 12px;"><strong>Suerte con GenIA. Dale duro.</strong></p>
+      </div>
+    `
+  }
+];
+// ============ STATE ============
+let currentIndex = 0;
+const STORAGE_KEY = 'curso-desarrollo-contadores-v1';
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch (e) {}
+  return { lastIndex: 0, completed: [] };
+}
+function saveState(state) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {}
+}
+let state = loadState();
+// ============ RENDER ============
+function renderSidebar() {
+  const list = document.getElementById('moduleList');
+  list.innerHTML = '';
+  let currentPart = '';
+  modules.forEach((m, i) => {
+    if (m.part !== currentPart) {
+      currentPart = m.part;
+      const divider = document.createElement('li');
+      divider.className = 'part-divider';
+      divider.textContent = m.part;
+      list.appendChild(divider);
+    }
+    const li = document.createElement('li');
+    li.className = 'module-item';
+    if (i === currentIndex) li.classList.add('active');
+    if (state.completed.includes(i)) li.classList.add('completed');
+    li.innerHTML = `
+      <div class="module-number"><span class="num">${i + 1}</span></div>
+      <div class="module-title">${m.title}</div>
+    `;
+    li.onclick = () => goToModule(i);
+    list.appendChild(li);
+  });
+  const pct = Math.round((state.completed.length / modules.length) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `${state.completed.length} de ${modules.length} módulos`;
+}
+function renderModule() {
+  const m = modules[currentIndex];
+  const container = document.getElementById('moduleContent');
+  container.className = 'fade-in';
+  container.innerHTML = `
+    <div class="breadcrumb">
+      <a href="../escuela.html">Escuela</a> <span>›</span> Desarrollo para Contadores <span>›</span> Módulo ${currentIndex + 1}
+    </div>
+    <div class="module-pill">Módulo ${currentIndex + 1} de ${modules.length}</div>
+    <h1 class="module-title-main">${m.title}</h1>
+    <p class="module-subtitle">${m.subtitle}</p>
+    <div class="cert-banner">
+      <span class="emoji">📘</span>
+      <span>Curso gratis · Tu progreso se guarda automáticamente en este navegador</span>
+    </div>
+    <div class="content-body">${m.content}</div>
+  `;
+  // force reflow for animation
+  void container.offsetWidth;
+  // Nav buttons
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  if (currentIndex === 0) {
+    prevBtn.disabled = true;
+    document.getElementById('prevTitle').textContent = '—';
+  } else {
+    prevBtn.disabled = false;
+    document.getElementById('prevTitle').textContent = modules[currentIndex - 1].title;
+  }
+  if (currentIndex === modules.length - 1) {
+    nextBtn.disabled = true;
+    document.getElementById('nextTitle').textContent = '—';
+  } else {
+    nextBtn.disabled = false;
+    document.getElementById('nextTitle').textContent = modules[currentIndex + 1].title;
+  }
+  // Mark as visited when we spend time
+  if (!state.completed.includes(currentIndex)) {
+    state.completed.push(currentIndex);
+  }
+  state.lastIndex = currentIndex;
+  saveState(state);
+  renderSidebar();
+  // Track module view in GA
+  if (typeof gtag === 'function') {
+    gtag('event', 'curso_desarrollo_modulo_visto', {
+      modulo_indice: currentIndex + 1,
+      modulo_titulo: m.title
+    });
+  }
+  // scroll top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // close mobile sidebar
+  document.querySelector('.sidebar').classList.remove('open');
+}
+function goToModule(i) {
+  currentIndex = i;
+  renderModule();
+  hideBanner();
+}
+function goPrev() {
+  if (currentIndex > 0) {
+    currentIndex--;
+    renderModule();
+    hideBanner();
+  }
+}
+function goNext() {
+  if (currentIndex < modules.length - 1) {
+    currentIndex++;
+    renderModule();
+    hideBanner();
+  }
+}
+function continueFromLast() {
+  goToModule(state.lastIndex);
+}
+function hideBanner() {
+  document.getElementById('continueBanner').classList.add('hidden');
+}
+// ============ INIT ============
+function init() {
+  // show continue banner if user has a saved position other than module 1
+  if (state.lastIndex > 0) {
+    const banner = document.getElementById('continueBanner');
+    banner.classList.remove('hidden');
+    document.getElementById('lastModuleLabel').textContent = `Módulo ${state.lastIndex + 1}`;
+    // start at module 1 visually; user clicks to continue
+    currentIndex = 0;
+  } else {
+    currentIndex = 0;
+  }
+  renderModule();
+}
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S7SM6ST4CC');
+</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Changelog — Historial de cambios | ExógenaDIAN</title>
+<meta name="description" content="Registro público de cambios, fixes y actualizaciones de exogenadian.com con timestamps verificables vía GitHub.">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{--green-600:#059669;--green-700:#047857;--green-50:#ECFDF5;--gray-50:#F9FAFB;--gray-100:#F3F4F6;--gray-200:#E5E7EB;--gray-500:#6B7280;--gray-700:#374151;--gray-800:#1F2937;--gray-900:#111827;--amber-50:#FFFBEB;--amber-700:#B45309}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Outfit',sans-serif;color:var(--gray-800);background:var(--gray-50);line-height:1.65}
+  .top-bar{background:var(--green-700);padding:12px 24px;text-align:center}
+  .top-bar a{color:#fff;text-decoration:none;font-weight:600;font-size:.9rem}
+  .container{max-width:820px;margin:0 auto;padding:40px 24px 80px}
+  h1{font-family:'Fraunces',serif;font-size:2rem;margin-bottom:8px;color:var(--gray-900)}
+  .updated{color:var(--gray-500);font-size:.85rem;margin-bottom:24px}
+  h2{font-family:'Fraunces',serif;font-size:1.4rem;color:var(--green-700);margin:32px 0 4px}
+  h3{font-size:.95rem;color:var(--gray-900);margin:16px 0 8px;text-transform:uppercase;letter-spacing:.04em}
+  h3.fix{color:#B45309}
+  h3.feat{color:var(--green-700)}
+  p,li{font-size:.92rem;color:var(--gray-700);margin-bottom:8px}
+  ul{padding-left:22px;margin-bottom:14px}
+  li{margin-bottom:8px;line-height:1.55}
+  a{color:var(--green-600);text-decoration:none}
+  a:hover{text-decoration:underline}
+  code, .sha{font-family:'JetBrains Mono',monospace;font-size:.82rem;background:var(--gray-100);padding:1px 6px;border-radius:4px;color:var(--gray-800)}
+  .sha a{color:var(--gray-800);font-weight:600}
+  .intro{background:var(--green-50);border-left:4px solid var(--green-600);padding:16px 20px;border-radius:0 8px 8px 0;margin:18px 0 28px}
+  .intro p{margin-bottom:8px;color:var(--gray-800);font-size:.92rem}
+  .intro p:last-child{margin-bottom:0}
+  .legal{background:var(--amber-50);border:1px solid #FDE68A;border-radius:8px;padding:16px 20px;margin:32px 0;font-size:.85rem;color:var(--gray-800)}
+  .legal strong{color:var(--amber-700)}
+  .footer{text-align:center;padding:24px;color:var(--gray-500);font-size:.82rem;border-top:1px solid var(--gray-200);margin-top:40px}
+  .date-block{padding:12px 0 4px;border-top:1px solid var(--gray-200);margin-top:24px}
+  .date-block:first-of-type{border-top:none;margin-top:0}
+  @media(max-width:600px){.container{padding:28px 16px 60px}h1{font-size:1.6rem}h2{font-size:1.2rem}}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div class="top-bar"><a href="/">← Volver a ExógenaDIAN</a></div>
+<div class="container">
+  <h1>Changelog</h1>
+  <p class="updated">Última actualización: 12 de mayo de 2026</p>
+  <div class="intro">
+    <p>Registro público de cambios, correcciones de bugs y actualizaciones de la plataforma <strong>exogenadian.com</strong>.</p>
+    <p>Cada cambio referencia un <em>commit</em> de Git con hash criptográfico verificable contra <a href="https://github.com/herramientascontables31-prog/exogena-dian-2025/commits/main" target="_blank" rel="noopener">el repositorio público en GitHub</a>. Los hashes y timestamps son inmutables y constituyen prueba documental electrónica (Ley 527 de 1999).</p>
+  </div>
+  <div class="date-block">
+    <h2>9 de junio de 2026</h2>
+    <h3 class="fix">Corregido</h3>
+    <ul>
+      <li><strong>Exógena desde FE (F1005/F1006) — notas crédito</strong> — En <code>exogena-desde-fe.html</code> el IVA de las notas crédito quedaba en el mismo formato del documento. La Res. 162/2023 las exige <em>cruzadas</em>: NC recibida (devolución en compras) → F1006 columna "IVA Recuperado Devoluciones Compras Anuladas"; NC emitida (devolución en ventas) → F1005 columna "IVA Resultante Devoluciones Ventas Anuladas". <span class="sha"><a href="https://github.com/herramientascontables31-prog/exogena-dian-2025/commit/f2c69d70" target="_blank" rel="noopener">f2c69d70</a></span></li>
+    </ul>
+    <h3 class="feat">Añadido</h3>
+    <ul>
+      <li><strong>Exógena — dotación al concepto 5016</strong> — Los pagos por dotación pasan del concepto 5001 (salarios) al 5016 (otros costos y deducciones) en el F1001, según cartilla AG2025 (no constituye salario, Art. 130 ET). <span class="sha"><a href="https://github.com/herramientascontables31-prog/exogena-dian-2025/commit/54cb7889" target="_blank" rel="noopener">54cb7889</a></span></li>
+      <li><strong>Exógena — auditoría del F1001 por concepto</strong> — Nueva tarjeta en el paso de descarga con el desglose de qué cuentas del balance alimentaron cada concepto del F1001, con IVA mayor valor y no deducibles separados. <span class="sha"><a href="https://github.com/herramientascontables31-prog/exogena-dian-2025/commit/54cb7889" target="_blank" rel="noopener">54cb7889</a></span></li>
+      <li><strong>F210 Pro — asesoría ampliada</strong> — Oportunidades de ahorro cuantificadas (dependientes, factura electrónica 1%, prepagada/vivienda), alerta de umbral de responsable de IVA (3.500 UVT, Art. 437 par. 3 ET), simulador "¿qué pasa si?" del optimizador de aportes voluntarios y sección "Cómo leer tu declaración" en el PDF entregable. <span class="sha"><a href="https://github.com/herramientascontables31-prog/exogena-dian-2025/commit/4b2b13d8" target="_blank" rel="noopener">4b2b13d8</a></span></li>
+    </ul>
+  </div>
+  <div class="date-block">
+    <h2>3 de junio de 2026</h2>
+    <h3 class="fix">Corregido</h3>
+    <ul>
+      <li><strong>Decreto 0572/2025 reactivado</strong> — El Consejo de Estado revocó el 2-jun-2026 la suspensión provisional que había decretado el 7-may-2026 (exp. 30229). El decreto vuelve a regir de forma gradual: las nuevas bases mínimas (compras 10 UVT, servicios 2 UVT) y las tarifas de autorretención por CIIU aplican desde el 1-jul-2026 (primer día del mes siguiente a la ejecutoria). Hasta esa fecha siguen las bases de transición (27/4 UVT). Banner de transición agregado en <code>retencion-compras.html</code>, <code>retencion350.html</code>, <code>escuela/retencion350.html</code> y <code>contabilizar-fe.html</code>.</li>
+    </ul>
+  </div>
+  <div class="date-block">
+    <h2>12 de mayo de 2026</h2>
+    <h3 class="fix">Corregido</h3>
+    <ul>
+      <li><strong>F110 (Renta Personas Jurídicas)</strong> — Mapeo incorrecto entre casillas AG2025 (preview en pantalla) y celdas del template DIAN AG2024 (Excel descargable). Casillas 101 y 103-106 estaban desfasadas un nivel. Ejemplo: el Anticipo del año anterior (casilla 103) se escribía en la celda etiquetada "Casilla 98" del Excel ("Descuento Obras Mod 2"). <span class="sha"><a href="https://github.com/herramientascontables31-prog/exogena-dian-2025/commit/b2a06ad6" target="_blank" rel="noopener">b2a06ad6</a></span></li>
+      <li><strong>F110, F300, F350</strong> — Excel descargable podía mostrar valores divergentes del preview porque las fórmulas residuales de la plantilla recalculaban al abrir el archivo. Solución: todas las celdas se escriben como valor escalar del JS. <span class="sha"><a href="https://github.com/herramientascontables31-prog/exogena-dian-2025/commit/ad945528" target="_blank" rel="noopener">ad945528</a></span> · <span class="sha"><a href="https://github.com/herramientascontables31-prog/exogena-dian-2025/commit/ca6fc98d" target="_blank" rel="noopener">ca6fc98d</a></span></li>
+      <li><strong>Carga de balances</strong> — Headers tipo "Nivel" + "Cuenta contable" (Alegra por tercero) ya no devuelven 0 filas. <span class="sha"><a href="https://github.com/herramientascontables31-prog/exogena-dian-2025/commit/c39fd045" target="_blank" rel="noopener">c39fd045</a></span> · <span class="sha"><a href="https://github.com/herramientascontables31-prog/exogena-dian-2025/commit/b731272b" target="_blank" rel="noopener">b731272b</a></span></li>
+    </ul>
+    <h3 class="feat">Añadido</h3>
+    <ul>
+      <li><strong>Test automatizado de consistencia</strong> — Script <code>audits/test_consistencia_export.js</code> verifica que cada casilla del preview coincida con su celda mapeada en el Excel descargable. <span class="sha"><a href="https://github.com/herramientascontables31-prog/exogena-dian-2025/commit/69e8f3ef" target="_blank" rel="noopener">69e8f3ef</a></span></li>
+      <li><strong>Etiqueta BORRADOR en Excel descargable</strong> — Filename incluye <code>_BORRADOR_</code>, metadata indica "APOYO DE Cálculo — BORRADOR" y banner rojo tenue recuerda verificación contra cartilla DIAN. <span class="sha"><a href="https://github.com/herramientascontables31-prog/exogena-dian-2025/commit/a1db15b9" target="_blank" rel="noopener">a1db15b9</a></span></li>
+      <li><strong>F310 (Impuesto al Consumo)</strong> — Nueva herramienta con balance loader y modo listado MUISCA. <span class="sha"><a href="https://github.com/herramientascontables31-prog/exogena-dian-2025/commit/02abc9f8" target="_blank" rel="noopener">02abc9f8</a></span> · <span class="sha"><a href="https://github.com/herramientascontables31-prog/exogena-dian-2025/commit/7da958af" target="_blank" rel="noopener">7da958af</a></span></li>
+      <li><strong>F300 (IVA)</strong> — Detección de tarifa INC 8%, panel de auditoría automática, checklist de 15 errores comunes, wizard de prorrateo. Múltiples commits.</li>
+      <li><strong>F350 (Retención)</strong> — Tercero opcional, 3 hojas adicionales en Excel. <span class="sha"><a href="https://github.com/herramientascontables31-prog/exogena-dian-2025/commit/9dc072e4" target="_blank" rel="noopener">9dc072e4</a></span></li>
+    </ul>
+  </div>
+  <div class="date-block">
+    <h2>11 de mayo de 2026</h2>
+    <h3 class="fix">Corregido</h3>
+    <ul>
+      <li>F300 (IVA): balance vacío con <code>!ref</code> incompleto ya no causa error; refresco automático del preview al editar IVA manual; selector de período corregido.</li>
+      <li>Exógena: no se usa nombre de cuenta PUC como razón social del tercero.</li>
+    </ul>
+    <h3 class="feat">Añadido</h3>
+    <ul>
+      <li>F300 (IVA): detección de autoconsumo y ruteo a casilla 65; clasificación detallada por tarifa 19/5/0.</li>
+      <li>F2516: selector de tarifa por sector + UI de pérdidas fiscales.</li>
+    </ul>
+  </div>
+  <div class="date-block">
+    <h2>8 de mayo de 2026</h2>
+    <h3 class="fix">Corregido</h3>
+    <ul>
+      <li>Vencimientos: Renta GC 2da cuota corregida; refactor de anticipos RST.</li>
+      <li>F1008: ya no consume cuentas de ahorro PUC 1120.</li>
+      <li>Retenciones: tarifa de servicios invertida corregida; tabla actualizada AG 2026 post-suspensión Decreto 0572.</li>
+    </ul>
+    <h3 class="feat">Añadido</h3>
+    <ul>
+      <li>F110: card de Beneficio de Auditoría (Art. 689-3 ET); panel de ayuda por casilla; pre-llenado desde reporte FE/MUISCA; hoja "Casillas AG 2025" en el Excel.</li>
+    </ul>
+  </div>
+  <p style="margin-top:24px;font-size:.86rem;color:var(--gray-500)">
+    Para ver el historial completo y verificable, visita
+    <a href="https://github.com/herramientascontables31-prog/exogena-dian-2025/commits/main" target="_blank" rel="noopener">el repositorio público en GitHub</a>.
+  </p>
+  <div class="legal">
+    <p style="margin:0"><strong>Sobre la naturaleza de los borradores.</strong> Las herramientas de ExogenaDIAN generan <em>apoyos de cálculo (borradores)</em> a partir de los datos cargados por el usuario. Estos borradores no constituyen una declaración tributaria firmada y su presentación oficial ante la DIAN requiere validación, ajuste y firma por contador público o revisor fiscal responsable. Ver <a href="/terminos.html">términos y condiciones</a> para los detalles.</p>
+  </div>
+</div>
+<div class="footer">
+  <a href="/">ExogenaDIAN</a> · <a href="/terminos.html">Términos</a> · <a href="/politica-privacidad.html">Privacidad</a>
+</div>
+</body>
+</html>

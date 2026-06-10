@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="../shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="icon" type="image/svg+xml" href="../favicon.svg"><meta name="theme-color" content="#15803D"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Curso: Cargar Ex&oacute;gena al MUISCA &mdash; Escuela Contable IA | Ex&oacute;genaDIAN</title>
+<meta name="description" content="Curso paso a paso sobre c&oacute;mo subir los XML al MUISCA para reportar la informaci&oacute;n ex&oacute;gena tributaria del a&ntilde;o gravable 2025 (presentaci&oacute;n en 2026). Basado en la Cartilla DIAN oficial &lsquo;Presentaci&oacute;n de informaci&oacute;n por env&iacute;o de archivos&rsquo; versi&oacute;n 02 de 2026. 10 m&oacute;dulos con capturas reales del portal.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://exogenadian.com/escuela/cargar-exogena-muisca.html">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--c:#15803D;--c2:#22C55E;--cb:#F0FDF4;--cbd:#BBF7D0;--cdark:#14532D;--g50:#F9FAFB;--g100:#F3F4F6;--g200:#E5E7EB;--g300:#D1D5DB;--g400:#9CA3AF;--g500:#6B7280;--g600:#4B5563;--g700:#374151;--g800:#1F2937;--g900:#111827;--amber-50:#FFFBEB;--amber-500:#F59E0B;--amber-800:#78350F;--blue-50:#EFF6FF;--blue-500:#3B82F6;--blue-700:#1D4ED8;--rose-50:#FFF1F2;--rose-500:#F43F5E;--rose-700:#BE123C}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Outfit',sans-serif;background:var(--g50);color:var(--g900);line-height:1.6}
+.curso-layout{display:grid;grid-template-columns:260px 1fr;min-height:100vh}@media(max-width:900px){.curso-layout{grid-template-columns:1fr}}
+.sidebar{background:#fff;border-right:1px solid var(--g200);padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
+.sidebar-header{padding:16px 20px;border-bottom:1px solid var(--g100)}.sidebar-header a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--g800);font-weight:800;font-size:.9rem}.sidebar-header a div{width:28px;height:28px;background:linear-gradient(135deg,#15803D,#22C55E);border-radius:7px;display:grid;place-items:center;color:#fff;font-size:.7rem;font-weight:900}
+.sidebar-curso{padding:16px 20px;border-bottom:1px solid var(--g100)}.sidebar-curso h3{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--cdark);margin-bottom:4px}.sidebar-curso p{font-size:.88rem;font-weight:700;color:var(--g800)}
+.sidebar-nav{padding:12px 0;flex:1}.sidebar-nav a{display:flex;align-items:center;gap:10px;padding:10px 20px;text-decoration:none;color:var(--g500);font-size:.85rem;font-weight:500;transition:all .15s;border-left:3px solid transparent}.sidebar-nav a:hover{background:var(--cb);color:var(--cdark)}.sidebar-nav a.active{background:var(--cb);color:var(--cdark);font-weight:700;border-left-color:var(--c)}.sidebar-nav a .nav-num{width:24px;height:24px;border-radius:50%;background:var(--g100);color:var(--g500);display:grid;place-items:center;font-size:.72rem;font-weight:700;flex-shrink:0}.sidebar-nav a.active .nav-num{background:var(--c);color:#fff}.sidebar-nav a.completed .nav-num{background:var(--cbd);color:var(--cdark)}
+.sidebar-back{padding:16px 20px;border-top:1px solid var(--g100);margin-top:auto}.sidebar-back a{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--g400);font-size:.82rem;font-weight:500}.sidebar-back a:hover{color:var(--g700)}
+.sidebar-toggle{display:none;position:fixed;bottom:20px;left:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--c);color:#fff;border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 16px rgba(21,128,61,.3)}
+@media(max-width:900px){.sidebar{display:none;position:fixed;top:0;left:0;z-index:199;width:280px;box-shadow:4px 0 20px rgba(0,0,0,.1)}.sidebar.open{display:flex}.sidebar-toggle{display:block}.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:198}.sidebar-overlay.open{display:block}}
+.curso-main{padding:32px 40px 60px;max-width:880px}@media(max-width:900px){.curso-main{padding:20px 16px 80px}}
+.mod-header{margin-bottom:32px}.mod-breadcrumb{font-size:.78rem;color:var(--g400);margin-bottom:8px}.mod-num{display:inline-flex;align-items:center;gap:8px;background:var(--cb);color:var(--cdark);padding:4px 14px;border-radius:100px;font-size:.78rem;font-weight:700;margin-bottom:12px}.mod-header h1{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;letter-spacing:-.02em;margin-bottom:8px;line-height:1.2}.mod-header .mod-desc{font-size:1rem;color:var(--g500);max-width:620px;line-height:1.6}
+.content-block{margin-bottom:28px}.content-block h2{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;margin-bottom:12px;color:var(--g900);padding-bottom:8px;border-bottom:2px solid var(--cbd);margin-top:24px}.content-block h3{font-size:1.05rem;font-weight:700;margin:18px 0 8px;color:var(--g800)}.content-block p{font-size:.94rem;color:var(--g600);line-height:1.7;margin-bottom:14px}.content-block ul,.content-block ol{margin:8px 0 18px 22px;display:flex;flex-direction:column;gap:8px}.content-block li{font-size:.92rem;color:var(--g600);line-height:1.65}
+.advertencia{background:#FFFBEB;border:1.5px solid #FDE68A;border-left:4px solid #D97706;border-radius:10px;padding:16px 20px;margin:20px 0}.advertencia h4{font-size:.92rem;font-weight:700;color:#92400E;margin-bottom:6px}.advertencia p{font-size:.88rem;color:#78350F;line-height:1.6;margin:0}
+.tip{background:var(--blue-50);border:1.5px solid #BFDBFE;border-radius:14px;padding:16px 20px;margin:20px 0}.tip h4{font-size:.88rem;font-weight:700;color:var(--blue-700);margin-bottom:6px}.tip p{font-size:.9rem;color:#1E40AF;line-height:1.6;margin:0}
+.error-comun{background:var(--rose-50);border:1.5px solid #FECACA;border-radius:14px;padding:16px 20px;margin:20px 0}.error-comun h4{font-size:.88rem;font-weight:700;color:var(--rose-700);margin-bottom:6px}.error-comun p{font-size:.9rem;color:#9F1239;line-height:1.6;margin:0}
+.norma{background:var(--amber-50);border:1.5px solid #FDE68A;border-radius:14px;padding:18px 22px;margin:20px 0}.norma h4{font-size:.92rem;font-weight:700;color:var(--amber-800);margin-bottom:6px}.norma p{font-size:.88rem;color:#78350F;line-height:1.6;margin:6px 0}
+.captura{margin:20px 0;background:#fff;border:1.5px solid var(--g200);border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.captura img{display:block;width:100%;height:auto}
+.captura figcaption{padding:10px 16px;background:var(--g50);border-top:1px solid var(--g200);font-size:.78rem;color:var(--g500);font-style:italic}
+.fuente{display:inline-block;font-size:.74rem;color:var(--g400);background:var(--g50);padding:4px 10px;border-radius:6px;border:1px solid var(--g200);margin:6px 0}
+.codigo{font-family:'JetBrains Mono',monospace;background:var(--g100);padding:2px 8px;border-radius:4px;font-size:.84rem;color:var(--g800)}
+.mod-nav{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:24px;border-top:2px solid var(--g200);flex-wrap:wrap;gap:10px}.mod-nav a{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:12px;text-decoration:none;font-weight:700;font-size:.92rem;transition:all .2s}.mod-nav .prev{background:var(--g100);color:var(--g700)}.mod-nav .prev:hover{background:var(--g200)}.mod-nav .next{background:var(--c);color:#fff;box-shadow:0 4px 12px rgba(21,128,61,.25)}.mod-nav .next:hover{background:var(--cdark);transform:translateY(-1px)}
+.progress-bar{height:4px;background:var(--g200);border-radius:2px;margin:12px 20px;overflow:hidden}.progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--c2),var(--c));border-radius:2px;transition:width .3s}
+.modulo-section{display:none}.modulo-section.active{display:block}
+</style>
+<script async src="../shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+<div class="curso-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header"><a href="../index.html"><div>E</div>Ex&oacute;genaDIAN</a></div>
+    <div class="sidebar-curso"><h3>Escuela Contable IA</h3><p>Cargar Ex&oacute;gena al MUISCA</p></div>
+    <div class="progress-bar"><div class="fill" id="progressFill" style="width:10%"></div></div>
+    <nav class="sidebar-nav" id="sidebarNav">
+      <a href="#modulo-1" class="active" onclick="navigateTo(1)"><span class="nav-num">1</span> Introducci&oacute;n y mapa</a>
+      <a href="#modulo-2" onclick="navigateTo(2)"><span class="nav-num">2</span> Pre-requisitos</a>
+      <a href="#modulo-3" onclick="navigateTo(3)"><span class="nav-num">3</span> Descargar, instalar y usar el prevalidador</a>
+      <a href="#modulo-4" onclick="navigateTo(4)"><span class="nav-num">4</span> Ingresar al MUISCA</a>
+      <a href="#modulo-5" onclick="navigateTo(5)"><span class="nav-num">5</span> Bandeja de entrada</a>
+      <a href="#modulo-6" onclick="navigateTo(6)"><span class="nav-num">6</span> Diligenciar solicitud</a>
+      <a href="#modulo-7" onclick="navigateTo(7)"><span class="nav-num">7</span> Consultar y descargar</a>
+      <a href="#modulo-8" onclick="navigateTo(8)"><span class="nav-num">8</span> Reemplazar solicitud</a>
+      <a href="#modulo-9" onclick="navigateTo(9)"><span class="nav-num">9</span> Cancelar solicitud</a>
+      <a href="#modulo-10" onclick="navigateTo(10)"><span class="nav-num">10</span> Cierre y sanciones</a>
+    </nav>
+    <div class="sidebar-back"><a href="../escuela.html">&larr; Volver a la Escuela</a></div>
+  </aside>
+  <div class="curso-main">
+    <section id="modulo-1" class="modulo-section active">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">Escuela &rsaquo; Cargar Ex&oacute;gena al MUISCA &rsaquo; M&oacute;dulo 1</div>
+        <div class="mod-num">M&oacute;dulo 1 de 10</div>
+        <h1>Introducci&oacute;n y mapa del proceso completo</h1>
+        <p class="mod-desc">Este curso es el complemento operativo del curso de Ex&oacute;gena. All&iacute; aprendiste qu&eacute; reportar; aqu&iacute; aprendes c&oacute;mo subirlo al portal MUISCA siguiendo el procedimiento oficial de la DIAN para la presentaci&oacute;n del <strong>a&ntilde;o gravable 2025</strong>.</p>
+      </div>
+      <div class="content-block">
+        <span class="fuente">Fuente: Cartilla DIAN &mdash; Presentaci&oacute;n de informaci&oacute;n por env&iacute;o de archivos (versi&oacute;n 02, 2026). Esta cartilla aplica para la presentaci&oacute;n del a&ntilde;o gravable 2025 durante el a&ntilde;o calendario 2026.</span>
+        <div class="advertencia" style="background:#EFF6FF;border-color:#BFDBFE;border-left-color:#3B82F6">
+          <h4 style="color:#1E40AF">&#128197; Aclaraci&oacute;n: AG 2025 vs a&ntilde;o de presentaci&oacute;n 2026</h4>
+          <p style="color:#1E40AF">En ex&oacute;gena tributaria hay dos a&ntilde;os que se mezclan f&aacute;cilmente:</p>
+          <p style="color:#1E40AF;margin-top:6px"><strong>A&ntilde;o gravable (AG) 2025</strong>: el periodo sobre el cual se reportan las operaciones (lo que pas&oacute; en su contabilidad de enero a diciembre de 2025).</p>
+          <p style="color:#1E40AF;margin-top:6px"><strong>A&ntilde;o de presentaci&oacute;n 2026</strong>: el a&ntilde;o calendario en el que se ingresa al MUISCA y se sube la informaci&oacute;n. En este curso, los ejemplos de nombre de archivo XML llevan &laquo;2026&raquo; porque ese es el a&ntilde;o de env&iacute;o, no el a&ntilde;o gravable.</p>
+        </div>
+        <h2>Para qu&eacute; sirve este servicio</h2>
+        <p>El servicio &laquo;Presentaci&oacute;n de informaci&oacute;n por env&iacute;o de archivos&raquo; es el canal oficial DIAN para que los obligados cumplan virtualmente con la presentaci&oacute;n de informaci&oacute;n ex&oacute;gena tributaria. La DIAN destaca cuatro beneficios concretos del servicio:</p>
+        <ol>
+          <li>Transmisi&oacute;n electr&oacute;nica de informaci&oacute;n masiva.</li>
+          <li>Presentaci&oacute;n electr&oacute;nica segura, sin desplazamientos f&iacute;sicos ni intermediarios.</li>
+          <li>Garant&iacute;a de origen: el informante es quien presenta, no otra persona por &eacute;l.</li>
+          <li>Protecci&oacute;n de la informaci&oacute;n contra alteraci&oacute;n o manipulaci&oacute;n de terceros.</li>
+        </ol>
+        <h2>El flujo completo del proceso</h2>
+        <p>El proceso oficial DIAN tiene 7 etapas. Cada m&oacute;dulo de este curso cubre una etapa con detalle, basado en la cartilla oficial:</p>
+        <ol>
+          <li><strong>Pre-requisitos administrativos</strong>: actualizar RUT, habilitar cuenta usuario, generar firma electr&oacute;nica (M&oacute;dulo 2).</li>
+          <li><strong>Descargar el prevalidador</strong> de la DIAN y generar los archivos XML (M&oacute;dulo 3).</li>
+          <li><strong>Ingresar al MUISCA</strong> con cuenta de usuario v&aacute;lida (M&oacute;dulo 4).</li>
+          <li><strong>Colocar los archivos en la bandeja de entrada</strong> del MUISCA (M&oacute;dulo 5).</li>
+          <li><strong>Diligenciar la solicitud de env&iacute;o</strong> con datos del periodo, cantidad de archivos y firma (M&oacute;dulo 6).</li>
+          <li><strong>Consultar el estado</strong> de las solicitudes presentadas y descargar archivos (M&oacute;dulo 7).</li>
+          <li><strong>Reemplazar o cancelar</strong> solicitudes cuando se requiera (M&oacute;dulos 8 y 9).</li>
+        </ol>
+        <div class="tip">
+          <h4>&#128161; Apunte clave</h4>
+          <p>Cada paso del proceso lo hace usted directamente con su cuenta de usuario MUISCA y su firma electr&oacute;nica. La DIAN no permite intermediarios para este servicio: la firma garantiza que el informante es el que efectivamente presenta.</p>
+        </div>
+        <h2>Qu&eacute; este curso NO cubre</h2>
+        <p>Para mantener el foco, este curso NO trata estos temas (que est&aacute;n en el curso de Ex&oacute;gena DIAN o en otros recursos):</p>
+        <ul>
+          <li>C&oacute;mo llenar los formatos F1001&ndash;F2276 (eso est&aacute; en el curso de Ex&oacute;gena).</li>
+          <li>Clasificaci&oacute;n de conceptos contables a formatos (curso de Ex&oacute;gena).</li>
+          <li>Habilitaci&oacute;n y recuperaci&oacute;n de cuenta de usuario (cartilla espec&iacute;fica de la DIAN).</li>
+          <li>Generaci&oacute;n del Instrumento de Firma Electr&oacute;nica IFE (cartilla espec&iacute;fica de la DIAN).</li>
+        </ul>
+        <div class="advertencia">
+          <h4>&#9888; Sobre las capturas de pantalla</h4>
+          <p>Las capturas de pantalla utilizadas en este curso provienen de la <strong>Cartilla DIAN oficial</strong> &laquo;Presentaci&oacute;n de informaci&oacute;n por env&iacute;o de archivos&raquo;, versi&oacute;n 02 del 2026 (publicaci&oacute;n DIAN, dominio p&uacute;blico con cita de fuente). El portal MUISCA puede actualizarse: si la captura no coincide exactamente con lo que ve en el portal vigente, gu&iacute;ese por el procedimiento descrito y consulte la versi&oacute;n m&aacute;s reciente de la cartilla en muisca.dian.gov.co.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><span></span><a href="#modulo-2" class="next" onclick="navigateTo(2)">M&oacute;dulo 2 &rarr;</a></div>
+    </section>
+    <section id="modulo-2" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">Escuela &rsaquo; Cargar Ex&oacute;gena al MUISCA &rsaquo; M&oacute;dulo 2</div>
+        <div class="mod-num">M&oacute;dulo 2 de 10</div>
+        <h1>Pre-requisitos antes de cualquier presentaci&oacute;n</h1>
+        <p class="mod-desc">La DIAN exige siete condiciones previas para que el servicio funcione. Cumplirlas con antelaci&oacute;n evita problemas en pleno cierre.</p>
+      </div>
+      <div class="content-block">
+        <h2>Lista de pre-requisitos seg&uacute;n la cartilla oficial</h2>
+        <p>Estos son los siete puntos que la DIAN exige cumplir <em>antes</em> de iniciar la presentaci&oacute;n. No es opcional, es la base operativa.</p>
+        <h3>1. RUT del informante actualizado con responsabilidad 14</h3>
+        <p>La entidad obligada debe tener vigente en su RUT la responsabilidad <strong>&laquo;14 &ndash; Informante de Ex&oacute;gena&raquo;</strong>. Adem&aacute;s debe incluir el correo electr&oacute;nico y la informaci&oacute;n de los representantes. Si la responsabilidad no est&aacute; activa, la DIAN no permitir&aacute; presentar.</p>
+        <h3>2. RUT de los representantes con responsabilidad 22</h3>
+        <p>Los representantes legales o personas autorizadas para presentar a nombre de la entidad deben tener en su RUT la responsabilidad <strong>&laquo;22 &ndash; Obligados a cumplir deberes formales a nombre de terceros&raquo;</strong> y correo electr&oacute;nico actualizado. Sin esta marca, la firma electr&oacute;nica del representante no puede usarse para firmar la presentaci&oacute;n.</p>
+        <h3>3. Cuenta de usuario habilitada</h3>
+        <p>Tanto la entidad como el representante deben tener cuenta de usuario activa en muisca.dian.gov.co. Si nunca se habilit&oacute;, se hace por primera vez con el documento RUT. Si est&aacute; deshabilitada, hay que recuperarla con &laquo;Habil&iacute;tela aqu&iacute;&raquo;.</p>
+        <h3>4. Instrumento de Firma Electr&oacute;nica (IFE) vigente</h3>
+        <p>El IFE es la firma digital DIAN. Se genera desde la cuenta de usuario. Tiene vigencia limitada (la DIAN avisa cuando va a expirar). Sin IFE vigente del firmante autorizado, la solicitud queda en estado &laquo;En tr&aacute;mite&raquo; (no presentada).</p>
+        <h3>5. Desactivar el bloqueo de ventanas emergentes</h3>
+        <p>El proceso de firma usa ventanas emergentes. Si su navegador (Chrome, Firefox, Edge) bloquea pop-ups, la firma no se completa. Antes de empezar, autorice ventanas emergentes para muisca.dian.gov.co.</p>
+        <h3>6. Limpiar historial, cookies y archivos temporales</h3>
+        <p>La cartilla DIAN recomienda expl&iacute;citamente limpiar cach&eacute; antes de cada sesi&oacute;n cr&iacute;tica. Sesiones anteriores en cach&eacute; pueden generar errores de autenticaci&oacute;n inexplicables.</p>
+        <h3>7. Archivos XML preparados</h3>
+        <p>Los XML deben estar generados desde el prevalidador (M&oacute;dulo 3) con la nomenclatura correcta: <span class="codigo">Dmuisca_ccmmmmmvvaaaacccccccc.xml</span>. Si los archivos no cumplen el formato, el sistema los rechaza al cargar.</p>
+        <div class="error-comun">
+          <h4>&#9888; Error com&uacute;n</h4>
+          <p>Llegar a la v&iacute;spera del plazo sin haber verificado la firma electr&oacute;nica del representante. Si la firma est&aacute; vencida, renovarla toma horas o d&iacute;as. En pleno cierre eso se convierte en sanci&oacute;n por extemporaneidad evitable.</p>
+        </div>
+        <div class="tip">
+          <h4>&#128161; Checklist operativo de la firma contable</h4>
+          <p>Antes de cada temporada de ex&oacute;gena, prepare un checklist por cliente con las 7 condiciones marcadas con fecha de verificaci&oacute;n. Es lo m&aacute;s simple del proceso y lo que m&aacute;s sufre la gente que no lo planea.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-1" class="prev" onclick="navigateTo(1)">&larr; M&oacute;dulo 1</a><a href="#modulo-3" class="next" onclick="navigateTo(3)">M&oacute;dulo 3 &rarr;</a></div>
+    </section>
+    <section id="modulo-3" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">Escuela &rsaquo; Cargar Ex&oacute;gena al MUISCA &rsaquo; M&oacute;dulo 3</div>
+        <div class="mod-num">M&oacute;dulo 3 de 10</div>
+        <h1>Descargar, instalar y usar el Prevalidador</h1>
+        <p class="mod-desc">El Prevalidador es una herramienta Excel oficial DIAN que valida y genera los archivos XML que despu&eacute;s se suben al portal. Sin XML v&aacute;lido no hay presentaci&oacute;n posible. Este m&oacute;dulo cubre las tres fases: descargar, instalar y operar el prevalidador para producir el XML.</p>
+      </div>
+      <div class="content-block">
+        <h2>Dos rutas para descargar el prevalidador</h2>
+        <p>La DIAN ofrece dos puntos de descarga del prevalidador. Cualquiera funciona; suele ser m&aacute;s f&aacute;cil la primera (portal transaccional). Para esta gu&iacute;a usamos esa ruta.</p>
+        <h3>Paso 1. Ingrese al portal de la DIAN</h3>
+        <p>Vaya a <strong>www.dian.gov.co</strong>. En la columna lateral, haga clic en la opci&oacute;n <strong>&laquo;Sitio web institucional&raquo;</strong>. Esto lo lleva a la zona p&uacute;blica del portal (distinta del Portal Transaccional, que es donde m&aacute;s tarde har&aacute; la presentaci&oacute;n).</p>
+        <h3>Paso 2. Navegue por el men&uacute; superior</h3>
+        <p>Una vez dentro del Sitio web institucional, busque en el men&uacute; superior la siguiente ruta:</p>
+        <p class="codigo">Transaccional &rarr; Otros Servicios &rarr; Prevalidadores</p>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p06.jpg" alt="Men&uacute; del portal DIAN: Transaccional / Otros Servicios / Prevalidadores" loading="lazy">
+          <figcaption>Men&uacute; del portal DIAN para acceder a los prevalidadores. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 6.</figcaption>
+        </figure>
+        <h3>Paso 3. Ubique los prevalidadores de Impuestos</h3>
+        <p>Al hacer clic en &laquo;Prevalidadores&raquo;, ve&aacute; el listado completo de prevalidadores DIAN para los distintos procesos. Filtre o navegue hasta la secci&oacute;n <strong>Impuestos</strong>. Ah&iacute; aparecen los prevalidadores tributarios.</p>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p07.jpg" alt="Listado de prevalidadores disponibles por proceso" loading="lazy">
+          <figcaption>Listado de prevalidadores. Para ex&oacute;gena tributaria seleccione la secci&oacute;n &laquo;Impuestos&raquo;. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 7.</figcaption>
+        </figure>
+        <h3>Paso 4. Identifique &laquo;Informaci&oacute;n Tributaria&raquo; por a&ntilde;o</h3>
+        <p>Los prevalidadores de Informaci&oacute;n Ex&oacute;gena Tributaria aparecen con el nombre &laquo;Informaci&oacute;n Tributaria&raquo; seguido del a&ntilde;o de vigencia. <strong>El prevalidador que descargue DEBE corresponder al a&ntilde;o gravable que va a reportar</strong>. Para la temporada actual (AG 2025 presentada en 2026), descargue el prevalidador <strong>&laquo;Informaci&oacute;n Tributaria 2025&raquo;</strong>. Es un error com&uacute;n descargar el del a&ntilde;o anterior por inercia, lo que genera versi&oacute;n de formato incorrecta al cargar.</p>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p08.jpg" alt="Selecci&oacute;n del a&ntilde;o de vigencia del prevalidador" loading="lazy">
+          <figcaption>Selecci&oacute;n del a&ntilde;o de vigencia. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 8.</figcaption>
+        </figure>
+        <h3>Paso 5. Descomprima el ZIP y ejecute el instalador</h3>
+        <p>Al hacer clic en el prevalidador del a&ntilde;o, se descarga un archivo ZIP. Desc&oacute;mpr&iacute;malo en una carpeta espec&iacute;fica de su computador (no en archivos del sistema). Al ejecutar el archivo, inicia el proceso de instalaci&oacute;n.</p>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p09.jpg" alt="Inicio del proceso de descarga e instalaci&oacute;n del prevalidador" loading="lazy">
+          <figcaption>Instalaci&oacute;n del prevalidador descargado. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 9.</figcaption>
+        </figure>
+        <div class="advertencia">
+          <h4>&#9888; No mueva ni elimine archivos del prevalidador</h4>
+          <p>Una vez instalado, la cartilla DIAN advierte expresamente: no mover ni eliminar ninguno de los archivos o carpetas del prevalidador. Eso lo rompe. Si necesita moverlo, mejor reinstalar en la nueva ubicaci&oacute;n.</p>
+        </div>
+        <h3>Ruta alterna: descarga v&iacute;a Micrositio</h3>
+        <p>Si la ruta del portal transaccional falla o cambia, hay una ruta alterna por el Micrositio de Informaci&oacute;n Ex&oacute;gena Tributaria:</p>
+        <p class="codigo">Impuestos &rarr; Sociedades &rarr; Informaci&oacute;n Ex&oacute;gena Tributaria &rarr; Prevalidadores</p>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p12.jpg" alt="Micrositio de Informaci&oacute;n Ex&oacute;gena Tributaria" loading="lazy">
+          <figcaption>Micrositio de Informaci&oacute;n Ex&oacute;gena Tributaria (ruta alterna). Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 12.</figcaption>
+        </figure>
+        <h2>Estructura del nombre del archivo XML</h2>
+        <p>Antes de pasar al m&oacute;dulo siguiente, fije esto en su cabeza: el archivo XML que genera el prevalidador tiene un nombre <strong>de 33 caracteres con significado</strong>:</p>
+        <p class="codigo">Dmuisca_ccmmmmmvvaaaacccccccc.xml</p>
+        <ul>
+          <li><strong>cc</strong> &mdash; Concepto: <span class="codigo">01</span> Inserci&oacute;n inicial, <span class="codigo">02</span> Reemplazo, <span class="codigo">04</span> Cancelaci&oacute;n.</li>
+          <li><strong>mmmmm</strong> &mdash; Formato (ej. <span class="codigo">01001</span> = F1001 pagos y abonos en cuenta).</li>
+          <li><strong>vv</strong> &mdash; Versi&oacute;n del formato.</li>
+          <li><strong>aaaa</strong> &mdash; <strong>A&ntilde;o de env&iacute;o</strong> (a&ntilde;o calendario en que presenta, NO el a&ntilde;o gravable). Para la presentaci&oacute;n del AG 2025 en este 2026, aqu&iacute; va <span class="codigo">2026</span>.</li>
+          <li><strong>cccccccc</strong> &mdash; Consecutivo de env&iacute;o, controlado por la DIAN.</li>
+        </ul>
+        <p>Ejemplo (presentaci&oacute;n del AG 2025): <span class="codigo">Dmuisca_010100110 2026 00000001.xml</span> &rarr; Inserci&oacute;n inicial, formato F1001 versi&oacute;n 10, a&ntilde;o de env&iacute;o 2026 (presentando informaci&oacute;n del AG 2025), consecutivo 1.</p>
+        <div class="tip">
+          <h4>&#128161; Capacidad por archivo</h4>
+          <p>Cada XML acepta m&aacute;ximo 5.000 registros y el prevalidador particiona autom&aacute;ticamente cuando el formato excede esa cifra. Por env&iacute;o (solicitud) el m&aacute;ximo es 50.000 registros o 10 archivos. Si su informante supera esto, divida en varias solicitudes.</p>
+        </div>
+        <h2>C&oacute;mo usar el Prevalidador para validar y generar el XML</h2>
+        <p>Ya tiene el prevalidador descargado e instalado. Esta secci&oacute;n cubre la operaci&oacute;n: abrir el Excel, cargar los datos, validar, leer el reporte de errores y obtener el XML final. Es el paso donde la mayor&iacute;a de contadores se atasca la primera vez que presentan ex&oacute;gena.</p>
+        <p>La cartilla DIAN (vr.02 2026, p&aacute;g. 14) describe cuatro funcionalidades del prevalidador:</p>
+        <ol>
+          <li>Diligenciar o copiar/pegar los datos y <strong>generar los XML</strong> &mdash; quedan guardados en la carpeta <span class="codigo">salida/</span>.</li>
+          <li>Validar XML generados por OTRA herramienta &mdash; verifica esquema, no contenido.</li>
+          <li>Tras descargar un archivo de errores del MUISCA, permite <strong>ubicar los registros err&oacute;neos</strong> dentro del XML original.</li>
+          <li>Aceptar hasta <strong>65.000 registros</strong> de origen &mdash; los particiona autom&aacute;ticamente en XMLs de 5.000.</li>
+        </ol>
+        <h3>Paso 1. Abrir el Prevalidador y habilitar las macros</h3>
+        <p>El prevalidador es un archivo Excel (<span class="codigo">.xlsm</span> o <span class="codigo">.xlam</span>) con macros firmadas por DIAN. Al abrirlo por primera vez, Excel muestra una barra amarilla en la parte superior:</p>
+        <ul>
+          <li>Si aparece <strong>&laquo;Vista protegida&raquo;</strong> &rarr; haga clic en <strong>&laquo;Habilitar edici&oacute;n&raquo;</strong>.</li>
+          <li>Si aparece <strong>&laquo;Advertencia de seguridad: las macros se han deshabilitado&raquo;</strong> &rarr; haga clic en <strong>&laquo;Habilitar contenido&raquo;</strong>.</li>
+          <li>Si Excel bloquea totalmente las macros (versiones empresariales con pol&iacute;ticas restrictivas) &rarr; vaya a <em>Archivo &rarr; Opciones &rarr; Centro de confianza &rarr; Configuraci&oacute;n del Centro de confianza &rarr; Configuraci&oacute;n de macros</em> y seleccione <em>&laquo;Habilitar todas las macros&raquo;</em> (s&oacute;lo mientras usa el prevalidador; vuelva a la opci&oacute;n estricta despu&eacute;s).</li>
+        </ul>
+        <p>Sin macros habilitadas, los botones &laquo;Validar&raquo; y &laquo;Generar XML&raquo; no responden y el alumno suele pensar que el prevalidador est&aacute; roto.</p>
+        <div class="advertencia">
+          <h4>&#9888; No abra dos prevalidadores al mismo tiempo</h4>
+          <p>La cartilla DIAN (p&aacute;g. 11) advierte expresamente: <em>&laquo;Para el correcto funcionamiento se recomienda no abrir m&aacute;s de un prevalidador simult&aacute;neamente.&raquo;</em> Las macros comparten globales en memoria y se pisan entre s&iacute;, generando XMLs corruptos o cuelgues. Cierre uno completamente antes de abrir otro.</p>
+        </div>
+        <h3>Paso 2. Reconocer los elementos instalados</h3>
+        <p>La cartilla DIAN (p&aacute;g. 11, Paso 8) indica que en la carpeta del prevalidador encontrar&aacute;:</p>
+        <ul>
+          <li><strong>El archivo Excel del prevalidador</strong> (<span class="codigo">.xlsm</span> / <span class="codigo">.xlam</span>) &mdash; es el que va a abrir.</li>
+          <li><strong>Manual de uso</strong> en PDF &mdash; gu&iacute;a oficial DIAN de la versi&oacute;n descargada. Vale la pena leerlo la primera vez (10-15 min).</li>
+          <li>Carpeta <span class="codigo">entrada/</span> &mdash; opcional, &uacute;til si quiere validar XMLs ya generados por terceros.</li>
+          <li>Carpeta <span class="codigo">salida/</span> &mdash; <strong>aqu&iacute; van a aparecer los XML generados</strong>. Memorice esta ruta: la va a buscar varias veces.</li>
+          <li>Otros archivos auxiliares de macro y configuraci&oacute;n.</li>
+        </ul>
+        <p>Recordatorio del bloque de instalaci&oacute;n: <strong>no mueva, renombre ni borre</strong> ninguno de esos archivos. Si necesita el prevalidador en otra ubicaci&oacute;n, desinstale y vuelva a instalar all&aacute;.</p>
+        <h3>Paso 3. Seleccionar el formato y diligenciar los datos</h3>
+        <p>Dentro del Excel del prevalidador hay un men&uacute; (normalmente arriba a la izquierda o en una hoja &laquo;Inicio&raquo;) para elegir el formato que va a generar: F1001 Pagos y abonos, F1003 Retenciones que le practicaron, F1005 IVA descontable, F1006 IVA generado, F1007 Ingresos recibidos, F1008/1009/1010/1012 Saldos a cierre, F2276 Certificados de ingresos y retenciones, etc. Cada formato abre una hoja con sus columnas espec&iacute;ficas.</p>
+        <p>Tiene dos formas de cargar los datos:</p>
+        <ul>
+          <li><strong>(a) Diligenciar fila por fila</strong> directamente en la hoja del formato &mdash; v&aacute;lido s&oacute;lo si tiene poqu&iacute;simos registros. Para 50+ registros es impr&aacute;ctico.</li>
+          <li><strong>(b) Copiar/pegar desde su Excel armado</strong> &mdash; el m&eacute;todo recomendado. Arma todo en un Excel propio con las columnas exactas que pide el formato (Concepto, Tipo Doc, NIT, DV, Apellidos, Nombres, Raz&oacute;n Social, Direcci&oacute;n, C&oacute;d Depto, C&oacute;d Mpio, Pa&iacute;s, Cuant&iacute;as por concepto), selecciona el bloque y lo pega sobre la primera celda de datos del prevalidador.</li>
+        </ul>
+        <div class="tip">
+          <h4>&#128161; Flujo recomendado: arma el Excel en exogenadian.com</h4>
+          <p>Use <a href="/exogena.html"><strong>exogenadian.com/exogena.html</strong></a> para procesar su balance de prueba por terceros y generar el Excel con los 10 formatos ya armados, con columnas en el orden EXACTO que pide cada formato DIAN. Despu&eacute;s s&oacute;lo copia y pega cada hoja al prevalidador. Ahorra entre el 70% y el 90% del tiempo vs diligenciar a mano, y reduce errores de mapeo.</p>
+        </div>
+        <h3>Paso 4. Ejecutar la validaci&oacute;n y generar el XML</h3>
+        <p>Con los datos cargados, presione el bot&oacute;n <strong>&laquo;Generar archivo XML&raquo;</strong> (en algunas versiones aparece como &laquo;Validar y Generar&raquo; o &laquo;Conformar&raquo;, seg&uacute;n vigencia). El prevalidador hace tres cosas en una pasada:</p>
+        <ol>
+          <li><strong>Valida estructura y reglas de negocio</strong>: tipos de documento permitidos, d&iacute;gito de verificaci&oacute;n correcto, conceptos v&aacute;lidos para ese formato, c&oacute;digos de municipio/depto existentes, cuant&iacute;as &ge; tope, etc.</li>
+          <li>Si <strong>no</strong> hay errores &rarr; genera el XML y lo deposita en <span class="codigo">salida/</span>. Aparece un di&aacute;logo &laquo;Archivo generado exitosamente&raquo; con el nombre completo.</li>
+          <li>Si <strong>s&iacute;</strong> hay errores &rarr; abre la hoja &laquo;Errores&raquo; (o &laquo;Reporte de validaci&oacute;n&raquo;) con la lista detallada y <strong>no</strong> genera XML. Corrija los errores y vuelva a presionar.</li>
+        </ol>
+        <p>El particionado es autom&aacute;tico: si el formato lleva m&aacute;s de 5.000 registros, el prevalidador genera varios XML con consecutivo correlativo (<span class="codigo">...00000001.xml</span>, <span class="codigo">...00000002.xml</span>, &hellip;).</p>
+        <h3>Paso 5. Leer e interpretar el reporte de errores</h3>
+        <p>La hoja de errores muestra una tabla con tres o cuatro columnas: <strong>fila/registro</strong>, <strong>columna</strong>, <strong>descripci&oacute;n del error</strong> y a veces el <strong>valor encontrado</strong>. Estos son los errores que aparecen el 80% de las veces:</p>
+        <ul>
+          <li><strong>NIT con d&iacute;gito de verificaci&oacute;n incorrecto</strong> &mdash; el DV calculado no coincide con el ingresado. Pasa cuando el contador escribi&oacute; el DV a mano y le erra una cifra.</li>
+          <li><strong>Tercero persona natural sin apellidos/nombres separados</strong> &mdash; en F1001 y similares, las CC deben ir con primer apellido, segundo apellido, primer nombre y segundo nombre en columnas distintas, no todo en raz&oacute;n social.</li>
+          <li><strong>Tercero sin direcci&oacute;n cuando la direcci&oacute;n es obligatoria</strong> &mdash; los formatos exigen direcci&oacute;n para terceros nacionales en la mayor&iacute;a de conceptos.</li>
+          <li><strong>Concepto inv&aacute;lido para ese formato</strong> &mdash; cada formato tiene su propia tabla de conceptos. Un concepto de F1001 no funciona en F1005.</li>
+          <li><strong>Cuant&iacute;a por debajo del tope</strong> &mdash; los formatos tienen un m&iacute;nimo (com&uacute;nmente 3 UVT en F1001, 100 UVT en otros). Registros por debajo no van.</li>
+          <li><strong>C&oacute;digo de municipio o departamento inexistente</strong> &mdash; sucede al usar c&oacute;digos antiguos o transcritos mal. La DIAN usa la tabla DIVIPOLA del DANE.</li>
+          <li><strong>Tipo de documento inv&aacute;lido</strong> &mdash; 13 (CC), 22 (CE), 31 (NIT), 41 (Pasaporte), 42 (TI), 43 (NUIP), etc. Otros valores se rechazan.</li>
+          <li><strong>Suma de conceptos no cuadra con total</strong> &mdash; algunos formatos tienen casillas calculadas; la suma de las partes debe igualar el total reportado.</li>
+        </ul>
+        <p>Despu&eacute;s de corregir, vuelva a presionar &laquo;Generar archivo XML&raquo;. El prevalidador re-valida desde cero (no incrementalmente).</p>
+        <div class="tip">
+          <h4>&#128161; Pre-flight: corra primero nuestra validaci&oacute;n online</h4>
+          <p>Antes de meter su Excel al prevalidador DIAN, p&aacute;selo por <a href="/prevalidador.html"><strong>exogenadian.com/prevalidador.html</strong></a> &mdash; es nuestra validaci&oacute;n gratis, en el navegador, que catchea NIT con DV mal, terceros sin direcci&oacute;n, conceptos inv&aacute;lidos, c&oacute;digos de municipio inexistentes y cuant&iacute;as por debajo del tope. Le evita el ciclo de &laquo;abrir Excel del prevalidador &rarr; pegar &rarr; generar &rarr; error &rarr; cerrar &rarr; corregir &rarr; pegar de nuevo&raquo;. Cuando llega al prevalidador V9, llega con XML limpio al primer intento.</p>
+        </div>
+        <h3>Paso 6. Ubicar el XML generado en la carpeta <span class="codigo">salida/</span></h3>
+        <p>Cuando el prevalidador termina sin errores, el XML aparece en la carpeta <span class="codigo">&lt;ruta-del-prevalidador&gt;/salida/</span>. El nombre sigue la estructura de 33 caracteres que vimos arriba:</p>
+        <p class="codigo">Dmuisca_010100110 2026 00000001.xml</p>
+        <p>Confirme cinco cosas antes de cerrar el prevalidador:</p>
+        <ol>
+          <li><strong>Concepto correcto</strong>: <span class="codigo">01</span> Inserci&oacute;n inicial (presentaci&oacute;n original), <span class="codigo">02</span> Reemplazo (corregir una ya presentada), <span class="codigo">04</span> Cancelaci&oacute;n.</li>
+          <li><strong>Formato correcto</strong>: <span class="codigo">01001</span> = F1001, <span class="codigo">01003</span> = F1003, etc.</li>
+          <li><strong>Versi&oacute;n</strong> coincide con la del prevalidador para ese a&ntilde;o gravable (la versi&oacute;n del formato puede cambiar entre a&ntilde;os).</li>
+          <li><strong>A&ntilde;o de env&iacute;o</strong> = a&ntilde;o calendario en que est&aacute; presentando (NO el a&ntilde;o gravable). Para AG 2025 presentado en 2026, aqu&iacute; debe decir <span class="codigo">2026</span>.</li>
+          <li><strong>Consecutivo</strong>: la DIAN sugiere el consecutivo en el portal. Si est&aacute; presentando por primera vez ese formato, suele ser <span class="codigo">00000001</span>.</li>
+        </ol>
+        <div class="error-comun">
+          <h4>&#9888; Error com&uacute;n: prevalidador del a&ntilde;o equivocado</h4>
+          <p>Por inercia, mucho contador descarga el prevalidador del a&ntilde;o anterior y genera XML con versi&oacute;n de formato incorrecta. La DIAN lo rechaza al cargarlo en MUISCA con un mensaje gen&eacute;rico de &laquo;versi&oacute;n no v&aacute;lida&raquo;. Verifique que el a&ntilde;o del prevalidador descargado en el M&oacute;dulo 3 corresponde al <strong>a&ntilde;o gravable que est&aacute; reportando</strong>, no al actual.</p>
+        </div>
+        <h3>Paso 7. (Opcional) Validar un XML ya generado en una segunda herramienta</h3>
+        <p>Si edit&oacute; el XML a mano (no recomendado) o le entregaron un XML hecho por un tercero y quiere comprobar su estructura, el prevalidador permite cargarlo desde <span class="codigo">entrada/</span> y correr una validaci&oacute;n contra el esquema XSD oficial. Esta ruta detecta errores de estructura (etiquetas mal cerradas, tipos de dato incorrectos) pero <strong>no</strong> revalida el contenido (no recalcula DV, no verifica que el municipio exista). Para revalidar contenido, vuelva a pasarlo por la generaci&oacute;n normal (Paso 4).</p>
+        <h2>Flujo recomendado end-to-end</h2>
+        <p>Junte el M&oacute;dulo 3 completo en una sola tira mental:</p>
+        <ol>
+          <li>Exporta el <strong>balance de prueba por terceros</strong> desde su software contable.</li>
+          <li>S&uacute;balo a <a href="/exogena.html"><strong>exogenadian.com/exogena.html</strong></a> &rarr; descarga el Excel de los 10 formatos.</li>
+          <li>P&aacute;selo por <a href="/prevalidador.html"><strong>exogenadian.com/prevalidador.html</strong></a> &rarr; corrige los errores que detecte (DV, direcciones, conceptos&hellip;).</li>
+          <li>Copie y pegue cada hoja al <strong>Prevalidador V9 DIAN</strong> &rarr; presione &laquo;Generar XML&raquo;.</li>
+          <li>Toma los XML de <span class="codigo">salida/</span> &rarr; siga al M&oacute;dulo 4 para cargarlos en MUISCA.</li>
+        </ol>
+        <div class="tip">
+          <h4>&#128161; Troubleshooting adicional</h4>
+          <p>Si el prevalidador rechaza el XML por motivos m&aacute;s espec&iacute;ficos (terceros con NIT propio de la empresa, ingresos de exterior sin c&oacute;digo de pa&iacute;s, IVA mayor valor, etc.), consulte la secci&oacute;n de <a href="/tutoriales/exogena.html"><strong>troubleshooting en el tutorial de ex&oacute;gena</strong></a>. Cubre los 20+ errores menos comunes que aparecen sobre todo en informantes grandes.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-2" class="prev" onclick="navigateTo(2)">&larr; M&oacute;dulo 2</a><a href="#modulo-4" class="next" onclick="navigateTo(4)">M&oacute;dulo 4 &rarr;</a></div>
+    </section>
+    <section id="modulo-4" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">Escuela &rsaquo; Cargar Ex&oacute;gena al MUISCA &rsaquo; M&oacute;dulo 4</div>
+        <div class="mod-num">M&oacute;dulo 4 de 10</div>
+        <h1>Ingresar a los Servicios Inform&aacute;ticos Electr&oacute;nicos</h1>
+        <p class="mod-desc">Aqu&iacute; entra propiamente al portal MUISCA. Es el primer momento donde se autentica con su firma electr&oacute;nica.</p>
+      </div>
+      <div class="content-block">
+        <h3>Paso 1. Acceso al portal Transaccional</h3>
+        <p>En www.dian.gov.co, ubique la secci&oacute;n del <strong>Portal Transaccional</strong> y haga clic en <strong>&laquo;Usuario Registrado&raquo;</strong>. Esta es la opci&oacute;n para usuarios con cuenta MUISCA habilitada (lo cual ya verific&oacute; en el M&oacute;dulo 2).</p>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p15.jpg" alt="Pantalla de ingreso al portal Transaccional DIAN" loading="lazy">
+          <figcaption>Pantalla de ingreso &laquo;Usuario Registrado&raquo;. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 15.</figcaption>
+        </figure>
+        <h3>Paso 2. Decidir si ingresa a nombre propio o de un tercero</h3>
+        <p>Si usted es contador o asesor y va a presentar a nombre de una sociedad o de otro contribuyente, debe seleccionar <strong>&laquo;A nombre de un tercero&raquo;</strong>. Si presenta su propia obligaci&oacute;n (persona natural), seleccione <strong>&laquo;A nombre propio&raquo;</strong>.</p>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p16.jpg" alt="Selecci&oacute;n a nombre propio o a nombre de tercero" loading="lazy">
+          <figcaption>Selecci&oacute;n del tipo de ingreso. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 16.</figcaption>
+        </figure>
+        <h3>Paso 3. Datos del tercero (si aplica)</h3>
+        <p>Si entra a nombre de un tercero, diligencie:</p>
+        <ul>
+          <li>NIT del tercero (la organizaci&oacute;n por cuya cuenta act&uacute;a).</li>
+          <li>Tipo de documento del representante legal (CC, CE, etc.).</li>
+          <li>N&uacute;mero de documento del representante legal.</li>
+          <li>Contrase&ntilde;a del representante legal (la suya como persona natural, no la de la sociedad).</li>
+        </ul>
+        <p>Es la combinaci&oacute;n NIT-tercero + identificaci&oacute;n del representante lo que la DIAN usa para autenticar.</p>
+        <h3>Paso 4. Tratamiento de datos personales</h3>
+        <p>Marque la casilla de aceptaci&oacute;n de tratamiento de datos personales (Ley 1581/2012). Sin esto la sesi&oacute;n no inicia.</p>
+        <div class="tip">
+          <h4>&#128161; &iquest;Olvid&oacute; la contrase&ntilde;a?</h4>
+          <p>Use <strong>&laquo;&iquest;Olvid&oacute; su contrase&ntilde;a?&raquo;</strong>. El correo de recuperaci&oacute;n llega al e-mail registrado en RUT. Por eso es cr&iacute;tico tener el correo actualizado.</p>
+        </div>
+        <h3>Paso 5. Verifique en qu&eacute; cuenta entr&oacute;</h3>
+        <p>Cuando ingresa, en la parte superior debe aparecer:</p>
+        <ul>
+          <li>Si entr&oacute; a nombre de organizaci&oacute;n: <strong>nombre de la sociedad</strong> y datos del representante legal.</li>
+          <li>Si entr&oacute; a nombre propio: nombres y apellidos del informante.</li>
+        </ul>
+        <p>Verifique que aparece la entidad correcta antes de proseguir. Es f&aacute;cil entrar &laquo;a nombre propio&raquo; cuando ten&iacute;a que ser de un tercero y luego presentar mal.</p>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p17.jpg" alt="Pantalla Mis Actividades del MUISCA" loading="lazy">
+          <figcaption>Pantalla &laquo;Mis Actividades&raquo;. Aqu&iacute; identifica si entr&oacute; a la cuenta correcta. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 17.</figcaption>
+        </figure>
+        <h3>Paso 6. Buscar el servicio de Presentaci&oacute;n de Informaci&oacute;n</h3>
+        <p>En la pantalla &laquo;Mis Actividades&raquo;, en la secci&oacute;n <strong>&laquo;Destacados del Mes&raquo;</strong>, encontrar&aacute; la opci&oacute;n <strong>&laquo;Presentaci&oacute;n de Informaci&oacute;n&raquo;</strong>. Tambi&eacute;n puede acceder por el men&uacute; lateral izquierdo &rarr; &laquo;Presentaci&oacute;n de Informaci&oacute;n por Env&iacute;o de Archivos&raquo;.</p>
+        <h3>Paso 7. Salir correctamente</h3>
+        <p>Cuando termine, haga clic en el &iacute;cono <strong>&laquo;Cerrar&raquo;</strong> de la parte superior. Cerrar el navegador sin hacer esto deja la sesi&oacute;n abierta y puede causar conflictos en pr&oacute;ximos ingresos.</p>
+        <div class="error-comun">
+          <h4>&#9888; Error com&uacute;n</h4>
+          <p>Entrar &laquo;a nombre propio&raquo; siendo contador y presentar la ex&oacute;gena de un cliente sin darse cuenta. La presentaci&oacute;n queda registrada con el NIT del contador, no del cliente. En la cartilla (p&aacute;g. 32) la DIAN aclara que en ese caso hay que <em>cancelar</em> la solicitud y volverla a presentar correctamente.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-3" class="prev" onclick="navigateTo(3)">&larr; M&oacute;dulo 3</a><a href="#modulo-5" class="next" onclick="navigateTo(5)">M&oacute;dulo 5 &rarr;</a></div>
+    </section>
+    <section id="modulo-5" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">Escuela &rsaquo; Cargar Ex&oacute;gena al MUISCA &rsaquo; M&oacute;dulo 5</div>
+        <div class="mod-num">M&oacute;dulo 5 de 10</div>
+        <h1>Colocar los archivos en la Bandeja de Entrada</h1>
+        <p class="mod-desc">La bandeja de entrada es donde el MUISCA recibe sus archivos XML antes de procesarlos. Esta etapa es independiente de la presentaci&oacute;n formal &mdash; aqu&iacute; solo &laquo;deja&raquo; los archivos.</p>
+      </div>
+      <div class="content-block">
+        <h3>Paso 1. Acceder a Presentaci&oacute;n de Informaci&oacute;n por Env&iacute;o de Archivos</h3>
+        <p>Desde &laquo;Mis Actividades&raquo;, haga clic en <strong>&laquo;Presentaci&oacute;n de Informaci&oacute;n por Env&iacute;o de Archivos&raquo;</strong>. Aparece el men&uacute; del servicio con varias opciones: Colocar archivos, Diligenciar solicitud, Consultar env&iacute;os, Reemplazar, Cancelar, etc.</p>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p19.jpg" alt="Men&uacute; principal del servicio de Presentaci&oacute;n de Informaci&oacute;n" loading="lazy">
+          <figcaption>Men&uacute; del servicio. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 19.</figcaption>
+        </figure>
+        <h3>Paso 2. Seleccionar &laquo;Colocar Archivos en su Bandeja de Entrada&raquo;</h3>
+        <p>Es la primera opci&oacute;n del flujo. Aplica tanto para informaci&oacute;n inicial como para reemplazos.</p>
+        <h3>Paso 3. Buscar el formato</h3>
+        <p>Ingrese el <strong>c&oacute;digo o nombre del formato</strong> que va a cargar (ejemplo: 1001 para F1001 Pagos y Abonos en Cuenta). Haga clic en <strong>&laquo;Buscar&raquo;</strong>.</p>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p20.jpg" alt="Buscar formato 1001" loading="lazy">
+          <figcaption>Buscar formato por c&oacute;digo. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 20.</figcaption>
+        </figure>
+        <h3>Paso 4. Seleccionar la versi&oacute;n correcta del formato</h3>
+        <p>El sistema lista todas las versiones del formato (las hay del a&ntilde;o vigente y de a&ntilde;os anteriores). <strong>Seleccione la versi&oacute;n que corresponde al a&ntilde;o gravable que va a reportar</strong> y haga clic en &laquo;Continuar&raquo;. Versiones incorrectas son una causa frecuente de rechazo posterior.</p>
+        <h3>Paso 5. Cargar el archivo XML</h3>
+        <p>La pantalla muestra los datos de identificaci&oacute;n cargados autom&aacute;ticamente desde el RUT. Verifique que est&aacute;n bien (raz&oacute;n social, NIT). Haga clic en <strong>&laquo;Elegir archivos&raquo;</strong> y navegue hasta la carpeta donde el prevalidador guard&oacute; los XML (usualmente la carpeta <span class="codigo">salida</span>).</p>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p21.jpg" alt="Cargar archivo XML en la bandeja" loading="lazy">
+          <figcaption>Pantalla de carga del archivo XML. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 21.</figcaption>
+        </figure>
+        <div class="advertencia">
+          <h4>&#9888; Verifique el consecutivo</h4>
+          <p>El sistema muestra: <strong>&laquo;Su pr&oacute;ximo consecutivo para el env&iacute;o de archivos de esta organizaci&oacute;n es&raquo;</strong> seguido de un n&uacute;mero. El XML que va a cargar debe iniciar con ese consecutivo. Si no coincide, la solicitud ser&aacute; rechazada m&aacute;s adelante.</p>
+        </div>
+        <h3>Paso 6. Confirmar la colocaci&oacute;n</h3>
+        <p>Haga clic en <strong>&laquo;Colocar&raquo;</strong>. Si todo va bien, el archivo aparece listado en la parte inferior de la pantalla.</p>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p22.jpg" alt="Archivo XML colocado en la bandeja de entrada" loading="lazy">
+          <figcaption>XML colocado en bandeja de entrada. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 22.</figcaption>
+        </figure>
+        <h3>Paso 7. Copiar el nombre del primer archivo</h3>
+        <p>De los archivos cargados, seleccione el de <strong>n&uacute;mero consecutivo m&aacute;s bajo (primer archivo)</strong>. Haga clic derecho sobre el nombre y <strong>cop&iacute;elo</strong>. Lo va a necesitar en el m&oacute;dulo siguiente para diligenciar la solicitud.</p>
+        <p>Si necesita remover un archivo cargado por error, m&aacute;rquelo con la casilla a la izquierda y use el bot&oacute;n &laquo;Remover&raquo;.</p>
+        <h2>Reglas de numeraci&oacute;n consecutiva entre formatos</h2>
+        <p>El consecutivo de env&iacute;o es <strong>&uacute;nico por organizaci&oacute;n y por a&ntilde;o</strong>, no se reinicia por formato. La cartilla DIAN da este ejemplo (p&aacute;g. 24-25):</p>
+        <p>Si presenta 3 archivos del F1001:</p>
+        <p class="codigo">Dmuisca_010100110202600000001.xml (consecutivo 1)<br>Dmuisca_010100110202600000002.xml (consecutivo 2)<br>Dmuisca_010100110202600000003.xml (consecutivo 3)</p>
+        <p>Y luego presenta 2 archivos del F1007:</p>
+        <p class="codigo">Dmuisca_010100710202600000004.xml (consecutivo 4)<br>Dmuisca_010100710202600000005.xml (consecutivo 5)</p>
+        <p>Cada cliente tiene su propio contador. El sistema le indica el consecutivo siguiente cada vez que carga.</p>
+        <h2>L&iacute;mites por solicitud</h2>
+        <ul>
+          <li>M&aacute;ximo <strong>5.000 registros</strong> por archivo XML.</li>
+          <li>M&aacute;ximo <strong>10 archivos XML</strong> por solicitud.</li>
+          <li>M&aacute;ximo <strong>50.000 registros</strong> por solicitud.</li>
+        </ul>
+        <p>Si su informante tiene 68.500 registros del F1001, debe hacer dos solicitudes: una de 50.000 y otra de 18.500.</p>
+        <div class="error-comun">
+          <h4>&#9888; Error com&uacute;n</h4>
+          <p>Mezclar archivos de un formato con archivos de otro en la misma bandeja antes de diligenciar la solicitud. La solicitud se hace por formato. Si carga XMLs de dos formatos al tiempo, el segundo va a generar conflicto de consecutivo.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-4" class="prev" onclick="navigateTo(4)">&larr; M&oacute;dulo 4</a><a href="#modulo-6" class="next" onclick="navigateTo(6)">M&oacute;dulo 6 &rarr;</a></div>
+    </section>
+    <section id="modulo-6" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">Escuela &rsaquo; Cargar Ex&oacute;gena al MUISCA &rsaquo; M&oacute;dulo 6</div>
+        <div class="mod-num">M&oacute;dulo 6 de 10</div>
+        <h1>Diligenciar la solicitud de env&iacute;o y firmar</h1>
+        <p class="mod-desc">Este es el m&oacute;dulo m&aacute;s cr&iacute;tico. Aqu&iacute; firma electr&oacute;nicamente y genera el acuse de recibo. Si esta etapa no se completa bien, la informaci&oacute;n NO queda presentada.</p>
+      </div>
+      <div class="content-block">
+        <h3>Paso 1. Acceder a &laquo;Diligenciar Solicitud de Env&iacute;o de Archivos&raquo;</h3>
+        <p>Despu&eacute;s de colocar los archivos en bandeja (M&oacute;dulo 5), regrese al men&uacute; principal del servicio y haga clic en <strong>&laquo;Diligenciar Solicitud de Env&iacute;o de Archivos&raquo;</strong>.</p>
+        <h3>Paso 2. Verificar los datos de Informaci&oacute;n General</h3>
+        <p>La pantalla pre-carga los datos de la organizaci&oacute;n y del interesado seg&uacute;n el inicio de sesi&oacute;n. Verifique:</p>
+        <ul>
+          <li>Nombre de la organizaci&oacute;n correcto.</li>
+          <li>NIT correcto.</li>
+          <li>Datos del representante legal correctos.</li>
+        </ul>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p25.jpg" alt="Diligenciar solicitud - Datos de informaci&oacute;n general" loading="lazy">
+          <figcaption>Diligenciar solicitud, secci&oacute;n &laquo;Informaci&oacute;n General&raquo;. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 25.</figcaption>
+        </figure>
+        <h3>Paso 3. Periodo informado</h3>
+        <p>Seleccione el <strong>Periodo Informado</strong>. Depende de la periodicidad de cada formato (anual t&iacute;picamente para ex&oacute;gena de informaci&oacute;n tributaria).</p>
+        <p>El campo <strong>Concepto</strong> aparece autocompletado como <strong>&laquo;Inserci&oacute;n / Nuevo&raquo;</strong> &mdash; eso indica que es una presentaci&oacute;n inicial. Para reemplazos el concepto ser&iacute;a &laquo;Reemplazo&raquo; (M&oacute;dulo 8).</p>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p26.jpg" alt="Campos de la solicitud de env&iacute;o" loading="lazy">
+          <figcaption>Campos de la solicitud. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 26.</figcaption>
+        </figure>
+        <h3>Paso 4. Diligenciar campos clave</h3>
+        <ul>
+          <li><strong>A&ntilde;o Informado</strong>: el <strong>a&ntilde;o gravable</strong> al que corresponde la informaci&oacute;n (NO el a&ntilde;o de env&iacute;o). Cuatro d&iacute;gitos. Para la temporada actual escriba <span class="codigo">2025</span> (porque est&aacute; reportando el AG 2025 en el a&ntilde;o calendario 2026).</li>
+          <li><strong>Nombre del primer archivo</strong>: pegue (Ctrl+V) el nombre completo del XML con el consecutivo m&aacute;s bajo que copi&oacute; en el M&oacute;dulo 5.</li>
+          <li><strong>Cantidad de archivos</strong>: cu&aacute;ntos XML componen esta solicitud. Si carg&oacute; 3 archivos en bandeja, escribir 3.</li>
+          <li><strong>N&uacute;mero total de registros</strong>: la sumatoria de registros de todos los XML. Por ejemplo, 3 archivos con 5.000 registros cada uno = 15.000 registros.</li>
+        </ul>
+        <div class="advertencia">
+          <h4>&#9888; Coherencia exacta entre lo declarado y los archivos</h4>
+          <p>Si declara &laquo;15.000 registros&raquo; pero los archivos suman 14.999 o 15.001, el sistema rechaza la solicitud con error: &laquo;Cantidad de registros en el(los) archivo(s) no coincide con la digitada en la solicitud de env&iacute;o&raquo;. Verifique los totales antes de hacer clic en Solicitar.</p>
+        </div>
+        <h3>Paso 5. Clic en &laquo;Solicitar&raquo; y confirmaciones</h3>
+        <p>Al hacer clic en <strong>Solicitar</strong>, el sistema despliega un cuadro de di&aacute;logo de confirmaci&oacute;n. Diga &laquo;S&iacute;&raquo; para continuar.</p>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p28.jpg" alt="Cuadro de confirmaci&oacute;n al solicitar" loading="lazy">
+          <figcaption>Confirmaci&oacute;n de la solicitud. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 28.</figcaption>
+        </figure>
+        <h3>Paso 6. Firma electr&oacute;nica (IFE)</h3>
+        <p>Aparece una ventana emergente con el proceso de firma. Aqu&iacute; necesita:</p>
+        <ul>
+          <li>El IFE generado previamente para su firma.</li>
+          <li>Una clave din&aacute;mica nueva (se solicita en este paso).</li>
+        </ul>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p29.jpg" alt="Pantalla de firma electr&oacute;nica" loading="lazy">
+          <figcaption>Pantalla de firma electr&oacute;nica. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 29.</figcaption>
+        </figure>
+        <h3>Paso 7. Solicitar y usar la clave din&aacute;mica</h3>
+        <p>Haga clic en <strong>&laquo;Ver mi bandeja de comunicados&raquo;</strong> para obtener la clave din&aacute;mica. La clave llega al buz&oacute;n DIAN del usuario (NO al correo electr&oacute;nico externo). Tenga en cuenta:</p>
+        <ul>
+          <li>La clave din&aacute;mica tiene <strong>validez de 2 horas</strong>.</li>
+          <li>Es de <strong>uso &uacute;nico</strong>. Si la usa y la firma falla, debe solicitar una nueva.</li>
+          <li>No tiene que abrir otra sesi&oacute;n del navegador para verla.</li>
+        </ul>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p30.jpg" alt="Bandeja de comunicados con clave din&aacute;mica" loading="lazy">
+          <figcaption>Bandeja de comunicados donde llega la clave din&aacute;mica. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 30.</figcaption>
+        </figure>
+        <h3>Paso 8. Firmar</h3>
+        <p>Vuelva a la pantalla de firma. Ingrese la clave din&aacute;mica, digite su contrase&ntilde;a personal y haga clic en <strong>&laquo;Firmar&raquo;</strong>.</p>
+        <h3>Paso 9. Recibir el acuse</h3>
+        <p>Si la firma fue exitosa, aparece la <strong>ventana de Acuse de Recibo</strong>. Descargue y guarde el acuse. Este es su <strong>constancia legal de presentaci&oacute;n</strong>.</p>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p31.jpg" alt="Acuse de recibo de presentaci&oacute;n" loading="lazy">
+          <figcaption>Acuse de recibo de presentaci&oacute;n. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 31.</figcaption>
+        </figure>
+        <h3>Paso 10. Generar el PDF de la solicitud</h3>
+        <p>En la siguiente ventana, confirme la generaci&oacute;n del PDF. Es importante: <strong>antes de generar el PDF debe haber firmado correctamente</strong>. Si la firma fue incompleta, el PDF aparecer&aacute; con marca de agua <strong>&laquo;En Tr&aacute;mite&raquo;</strong> &mdash; eso significa que la informaci&oacute;n NO est&aacute; presentada.</p>
+        <h3>Paso 11. Verificar la marca de agua</h3>
+        <p>Abra el PDF y verifique la marca de agua:</p>
+        <ul>
+          <li><strong>&laquo;Recibido&raquo;</strong> &rarr; presentaci&oacute;n exitosa.</li>
+          <li><strong>&laquo;En Tr&aacute;mite&raquo;</strong> &rarr; firma incompleta. Hay que repetir el proceso de firma.</li>
+        </ul>
+        <div class="error-comun">
+          <h4>&#9888; El error que m&aacute;s genera sanciones por extemporaneidad</h4>
+          <p>El contador cierra el navegador despu&eacute;s del Paso 5 pensando que ya present&oacute;. La realidad: solo se &laquo;cargaron&raquo; los archivos y se inici&oacute; la solicitud. Sin completar la firma (Pasos 6-9), la informaci&oacute;n NO est&aacute; presentada. Cuando vence el plazo, aparece la sanci&oacute;n Art. 651 ET y el contador descubre el error tarde.</p>
+        </div>
+        <div class="tip">
+          <h4>&#128161; Doble verificaci&oacute;n al d&iacute;a siguiente</h4>
+          <p>Despu&eacute;s de presentar, vuelva al MUISCA al d&iacute;a siguiente y use &laquo;Consultar Env&iacute;os de Solicitudes&raquo; (M&oacute;dulo 7) para confirmar que la solicitud aparece como &laquo;Recibida&raquo;. Es 30 segundos de trabajo que confirman el cierre.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-5" class="prev" onclick="navigateTo(5)">&larr; M&oacute;dulo 5</a><a href="#modulo-7" class="next" onclick="navigateTo(7)">M&oacute;dulo 7 &rarr;</a></div>
+    </section>
+    <section id="modulo-7" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">Escuela &rsaquo; Cargar Ex&oacute;gena al MUISCA &rsaquo; M&oacute;dulo 7</div>
+        <div class="mod-num">M&oacute;dulo 7 de 10</div>
+        <h1>Consultar solicitudes y descargar archivos XML</h1>
+        <p class="mod-desc">Despu&eacute;s de presentar, el flujo es seguir el estado. Esta es la pantalla que la DIAN usa para auditar y la que usted debe usar para verificar.</p>
+      </div>
+      <div class="content-block">
+        <h3>Paso 1. Acceder a &laquo;Consultar Env&iacute;os de Solicitudes&raquo;</h3>
+        <p>Desde el men&uacute; del servicio, haga clic en <strong>&laquo;Consultar Env&iacute;os de Solicitudes&raquo;</strong>. Aparecen solo las solicitudes que terminaron correctamente el proceso de presentaci&oacute;n (las que tienen acuse).</p>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p32.jpg" alt="Acceder a Consultar Env&iacute;os de Solicitudes" loading="lazy">
+          <figcaption>Acceso a la consulta de solicitudes. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 32.</figcaption>
+        </figure>
+        <h3>Paso 2. Consulta por formato</h3>
+        <p>Diligencie el c&oacute;digo del formato (1001, 1003, 1005, etc.) y haga clic en <strong>Buscar</strong>. El sistema lista todas las versiones del formato. Seleccione la que corresponda y continue.</p>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p33.jpg" alt="Buscar solicitudes por formato" loading="lazy">
+          <figcaption>Buscar por formato. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 33.</figcaption>
+        </figure>
+        <h3>Paso 3. Consulta por a&ntilde;o gravable</h3>
+        <p>Alternativamente, puede consultar por a&ntilde;o gravable. Haga clic en <strong>&laquo;Limpiar&raquo;</strong>, diligencie el a&ntilde;o, y &laquo;Buscar&raquo;. Aparecen todas las solicitudes presentadas en ese a&ntilde;o, sin importar el formato.</p>
+        <h2>Estados de una solicitud (importante leerlos bien)</h2>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p36.jpg" alt="Estados posibles de una solicitud" loading="lazy">
+          <figcaption>Estados de solicitudes en el sistema. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 36.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Solicitud Recibida</strong>: presentada correctamente. Es el estado deseado.</li>
+          <li><strong>Solicitud con Error</strong>: el sistema encontr&oacute; inconsistencias en la informaci&oacute;n. Hay que generar reemplazo (M&oacute;dulo 8).</li>
+          <li><strong>Solicitud con Error: Cantidad de registros no coincide</strong>: el total declarado en la solicitud no concuerda con los archivos.</li>
+          <li><strong>Solicitud con Error a nivel de archivo(s)</strong>: el nombre del archivo no coincide con la cabecera XML.</li>
+          <li><strong>Solicitud Reemplazada Totalmente</strong>: el contenido fue reemplazado &iacute;ntegramente con otra solicitud posterior.</li>
+          <li><strong>Solicitud Reemplazada Parcialmente</strong>: solo los registros con error fueron corregidos.</li>
+          <li><strong>Solicitud Cancelada</strong>: el informante cancel&oacute; voluntariamente la solicitud (M&oacute;dulo 9).</li>
+          <li><strong>Soporte de solicitud cancelada</strong>: confirmaci&oacute;n de cancelaci&oacute;n.</li>
+        </ul>
+        <h3>Paso 4. Ver detalles de una solicitud</h3>
+        <p>Seleccione el c&iacute;rculo a la izquierda del n&uacute;mero de solicitud y haga clic en <strong>Continuar</strong>. Ve&aacute; los detalles: archivos que la componen, conteo de registros, estado, archivos descargables.</p>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p37.jpg" alt="Detalles de una solicitud presentada" loading="lazy">
+          <figcaption>Detalles de la solicitud y descarga de archivos. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 37.</figcaption>
+        </figure>
+        <h3>Paso 5. Descargar el archivo XML presentado</h3>
+        <p>Desde los detalles puede descargar:</p>
+        <ul>
+          <li>El <strong>archivo XML original presentado</strong>. &Uacute;til para auditor&iacute;a interna o para volver a generar la informaci&oacute;n.</li>
+          <li>El <strong>archivo XML de Errores</strong> (si la solicitud qued&oacute; en estado con error). Este detalla exactamente qu&eacute; registro fall&oacute; y por qu&eacute;.</li>
+        </ul>
+        <div class="tip">
+          <h4>&#128161; Para la correcci&oacute;n</h4>
+          <p>El XML de errores se puede cargar al prevalidador. Use la funci&oacute;n &laquo;Ver archivo de error&raquo;: el prevalidador ubica autom&aacute;ticamente los registros err&oacute;neos en el XML original para que los corrija sin tener que re-encontrarlos manualmente.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-6" class="prev" onclick="navigateTo(6)">&larr; M&oacute;dulo 6</a><a href="#modulo-8" class="next" onclick="navigateTo(8)">M&oacute;dulo 8 &rarr;</a></div>
+    </section>
+    <section id="modulo-8" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">Escuela &rsaquo; Cargar Ex&oacute;gena al MUISCA &rsaquo; M&oacute;dulo 8</div>
+        <div class="mod-num">M&oacute;dulo 8 de 10</div>
+        <h1>Reemplazar una solicitud</h1>
+        <p class="mod-desc">Cuando la solicitud qued&oacute; con error o usted detect&oacute; un error despu&eacute;s de presentar, debe presentar una solicitud de reemplazo. Hay dos tipos: parcial y total.</p>
+      </div>
+      <div class="content-block">
+        <h2>Reemplazo Parcial vs Reemplazo Total</h2>
+        <p>Esta es la distinci&oacute;n m&aacute;s importante de este m&oacute;dulo. La cartilla DIAN (p&aacute;g. 39) las define expl&iacute;citamente:</p>
+        <h3>Reemplazo Parcial</h3>
+        <p>Se usa <strong>solo</strong> cuando el sistema marc&oacute; ciertos registros con error y solo va a corregir esos registros. Genere un XML que incluya <strong>&uacute;nicamente</strong> los registros err&oacute;neos. Es un reemplazo &laquo;quir&uacute;rgico&raquo;.</p>
+        <p><strong>Limitaci&oacute;n cr&iacute;tica</strong>: si un reemplazo parcial sale con error, ya solo puede corregirse con un reemplazo <em>total</em> (que incluye todos los registros, no solo los corregidos).</p>
+        <h3>Reemplazo Total</h3>
+        <p>Genere un XML con <strong>toda la informaci&oacute;n completa</strong> (los registros iniciales m&aacute;s las correcciones). Se usa para:</p>
+        <ul>
+          <li>Error de encabezado en alg&uacute;n archivo presentado.</li>
+          <li>Error en el n&uacute;mero total de registros reportados.</li>
+          <li>Cuando se va a modificar el total de registros.</li>
+          <li>Cuando se desea cambiar el contenido de la informaci&oacute;n.</li>
+        </ul>
+        <p>Si un reemplazo total sale con error, solo puede reemplazarse con otro reemplazo total.</p>
+        <h3>Paso 1. Generar el XML de reemplazo</h3>
+        <p>Vuelva al prevalidador. Corrija los registros y genere un nuevo XML. <strong>El nombre del archivo debe iniciar con concepto 02 (Reemplazo)</strong>:</p>
+        <p class="codigo">Dmuisca_020100110202600001092.xml</p>
+        <p>El prevalidador permite cambiar el concepto al generar el archivo nuevo. La cabecera dentro del XML tambi&eacute;n debe llevar concepto 02.</p>
+        <h3>Paso 2. Colocar el archivo en bandeja</h3>
+        <p>Mismo procedimiento del M&oacute;dulo 5: colocar archivos en bandeja de entrada. Aplica tanto para inicial como para reemplazo.</p>
+        <h3>Paso 3. Acceder a la opci&oacute;n de reemplazo</h3>
+        <p>En el men&uacute; del servicio, despu&eacute;s de colocar, el sistema le ofrece dos opciones de reemplazo (parcial o total). Seleccione la que corresponda.</p>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p39.jpg" alt="Opci&oacute;n de reemplazar solicitud" loading="lazy">
+          <figcaption>Selecci&oacute;n del tipo de reemplazo. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 39.</figcaption>
+        </figure>
+        <h3>Paso 4. Verificar el concepto</h3>
+        <p>En la pantalla siguiente, el campo <strong>Concepto</strong> debe decir <strong>Reemplazo</strong>. Si dice &laquo;Inserci&oacute;n&raquo;, est&aacute; en la opci&oacute;n equivocada y debe regresar.</p>
+        <h3>Paso 5. Asociar a la solicitud original</h3>
+        <p>Diligencie los datos de la solicitud de reemplazo. En el campo <strong>N&uacute;mero de la Solicitud Anterior</strong>, haga clic en &laquo;Buscar&raquo; y seleccione la solicitud que va a reemplazar. Verifique que corresponde al a&ntilde;o de vigencia correcto.</p>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p41.jpg" alt="Asociar el reemplazo a la solicitud anterior" loading="lazy">
+          <figcaption>Asociaci&oacute;n del reemplazo. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 41.</figcaption>
+        </figure>
+        <h3>Paso 6. Solicitar y firmar</h3>
+        <p>Verifique los datos restantes y haga clic en <strong>Solicitar</strong>. El flujo de firma y PDF es id&eacute;ntico al del M&oacute;dulo 6 (pasos 5-12).</p>
+        <h3>Paso 7. Verificar el reemplazo</h3>
+        <p>En &laquo;Consultar Env&iacute;os de Solicitudes&raquo;, la solicitud anterior queda marcada como <strong>&laquo;Reemplazada Total&raquo;</strong> o <strong>&laquo;Reemplazada Parcial&raquo;</strong> y la nueva queda como <strong>&laquo;Recibida&raquo;</strong>.</p>
+        <div class="advertencia">
+          <h4>&#9888; El reemplazo no anula sanciones de extemporaneidad</h4>
+          <p>Si la solicitud original se present&oacute; fuera del plazo de la Resoluci&oacute;n 000227/2024, hacer un reemplazo m&aacute;s tarde no elimina la sanci&oacute;n del Art. 651 ET. El reemplazo solo corrige el contenido, no el momento de presentaci&oacute;n original.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-7" class="prev" onclick="navigateTo(7)">&larr; M&oacute;dulo 7</a><a href="#modulo-9" class="next" onclick="navigateTo(9)">M&oacute;dulo 9 &rarr;</a></div>
+    </section>
+    <section id="modulo-9" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">Escuela &rsaquo; Cargar Ex&oacute;gena al MUISCA &rsaquo; M&oacute;dulo 9</div>
+        <div class="mod-num">M&oacute;dulo 9 de 10</div>
+        <h1>Cancelar una solicitud</h1>
+        <p class="mod-desc">Cuando present&oacute; informaci&oacute;n duplicada, con datos del interesado equivocados o con error en el nombre del archivo, debe cancelar la solicitud por completo. Es distinto al reemplazo.</p>
+      </div>
+      <div class="content-block">
+        <h2>Cu&aacute;ndo cancelar (no reemplazar)</h2>
+        <p>La cancelaci&oacute;n se usa cuando el problema es <strong>estructural y no se puede arreglar con un reemplazo</strong>. La cartilla DIAN lista tres motivos v&aacute;lidos (p&aacute;g. 44):</p>
+        <ul>
+          <li><strong>Presentaci&oacute;n de informaci&oacute;n duplicada</strong>: present&oacute; dos veces la misma informaci&oacute;n por error.</li>
+          <li><strong>Error en la informaci&oacute;n del interesado</strong>: present&oacute; a nombre propio cuando deb&iacute;a ser a nombre de un tercero, o viceversa.</li>
+          <li><strong>Error en el nombre del archivo presentado</strong>: el archivo XML carga con un nombre que no corresponde al formato real (p. ej. F1001 cuando deb&iacute;a ser F1005).</li>
+        </ul>
+        <p>Solo el informante puede cancelar. La DIAN no cancela por iniciativa propia: es un acto de autogesti&oacute;n.</p>
+        <h3>Paso 1. Acceder a &laquo;Cancelaci&oacute;n Solicitud&raquo;</h3>
+        <p>En el men&uacute; del servicio, seleccione <strong>&laquo;Cancelaci&oacute;n Solicitud&raquo;</strong>.</p>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p43.jpg" alt="Pantalla de cancelaci&oacute;n de solicitud" loading="lazy">
+          <figcaption>Pantalla de cancelaci&oacute;n. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 43.</figcaption>
+        </figure>
+        <h3>Paso 2. Buscar el formato</h3>
+        <p>Verifique la informaci&oacute;n del formato a cancelar. Si necesita seleccionar otro, use &laquo;Buscar&raquo;.</p>
+        <h3>Paso 3. Buscar la solicitud espec&iacute;fica</h3>
+        <p>Localice el n&uacute;mero de la solicitud a cancelar usando el bot&oacute;n <strong>Buscar</strong>. Verifique a&ntilde;o, formato y fecha.</p>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p44.jpg" alt="Diligenciar datos de la solicitud a cancelar" loading="lazy">
+          <figcaption>Datos de la solicitud a cancelar. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 44.</figcaption>
+        </figure>
+        <h3>Paso 4. Seleccionar la solicitud y motivo</h3>
+        <p>Marque la solicitud, haga clic en &laquo;Continuar&raquo; y seleccione el <strong>motivo de cancelaci&oacute;n</strong> del listado fijo:</p>
+        <ul>
+          <li>Presentaci&oacute;n de informaci&oacute;n duplicada.</li>
+          <li>Error en la informaci&oacute;n del interesado en la presentaci&oacute;n.</li>
+          <li>Error en los nombres de los archivos presentados.</li>
+        </ul>
+        <figure class="captura">
+          <img src="../shared/img/cartilla-muisca/p45.jpg" alt="Motivos de cancelaci&oacute;n" loading="lazy">
+          <figcaption>Motivos disponibles de cancelaci&oacute;n. Fuente: Cartilla DIAN vr.02 2026, p&aacute;g. 45.</figcaption>
+        </figure>
+        <h3>Paso 5. Solicitar y firmar</h3>
+        <p>Haga clic en <strong>Solicitar</strong>. El flujo de firma electr&oacute;nica es id&eacute;ntico al del M&oacute;dulo 6 (pasos 5-12). El sistema genera un PDF con concepto <strong>&laquo;4 - Cancelaci&oacute;n&raquo;</strong> y marca de agua <strong>&laquo;Recibido&raquo;</strong>.</p>
+        <h3>Paso 6. Verificar la cancelaci&oacute;n</h3>
+        <p>En &laquo;Consultar Env&iacute;os de Solicitudes&raquo;, la solicitud original aparece con estado <strong>&laquo;Cancelada&raquo;</strong> y al lado un <strong>&laquo;Soporte de Solicitud Cancelada&raquo;</strong> descargable en PDF.</p>
+        <div class="error-comun">
+          <h4>&#9888; Despu&eacute;s de cancelar hay que volver a presentar</h4>
+          <p>Cancelar deja la informaci&oacute;n como NO presentada. Si todav&iacute;a tiene obligaci&oacute;n de reportar (porque cancel&oacute; por error de identificaci&oacute;n, p. ej.), debe iniciar el proceso completo de nuevo: bandeja, solicitud, firma. No olvide hacerlo dentro del plazo.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-8" class="prev" onclick="navigateTo(8)">&larr; M&oacute;dulo 8</a><a href="#modulo-10" class="next" onclick="navigateTo(10)">M&oacute;dulo 10 &rarr;</a></div>
+    </section>
+    <section id="modulo-10" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb">Escuela &rsaquo; Cargar Ex&oacute;gena al MUISCA &rsaquo; M&oacute;dulo 10</div>
+        <div class="mod-num">M&oacute;dulo 10 de 10</div>
+        <h1>Plazos, sanciones y cierre profesional</h1>
+        <p class="mod-desc">Cerrar bien la temporada implica conocer los plazos vigentes, las sanciones por incumplimiento y dejar un archivo profesional ordenado del cliente.</p>
+      </div>
+      <div class="content-block">
+        <h2>Plazos vigentes para AG 2025 (presentaci&oacute;n en 2026)</h2>
+        <p>La Resoluci&oacute;n DIAN 000227 de 2024 (modificada por 000233 y 000237 de 2025) fija las fechas de vencimiento por d&iacute;gito del NIT del informante para la presentaci&oacute;n del <strong>a&ntilde;o gravable 2025</strong> durante el 2026. Personas jur&iacute;dicas tienen un calendario; personas naturales otro. Cada a&ntilde;o se publica el calendario actualizado en muisca.dian.gov.co y en el Micrositio de Informaci&oacute;n Ex&oacute;gena Tributaria.</p>
+        <div class="tip">
+          <h4>&#128161; Pol&iacute;tica interna recomendada</h4>
+          <p>Defina en su firma un calendario interno con <strong>al menos 2 semanas de margen</strong> sobre el plazo legal de cada NIT. Eso le da tiempo para errores de validaci&oacute;n, problemas de firma electr&oacute;nica e incidentes del portal MUISCA.</p>
+        </div>
+        <h2>Sanciones por incumplimiento</h2>
+        <div class="norma">
+          <h4>Art. 651 ET (modificado por Ley 2277/2022)</h4>
+          <p><strong>No enviar informaci&oacute;n</strong>: sanci&oacute;n hasta el <strong>4%</strong> del valor de las operaciones no informadas.</p>
+          <p><strong>Enviar informaci&oacute;n err&oacute;nea</strong>: sanci&oacute;n hasta el <strong>5%</strong> del valor de la informaci&oacute;n err&oacute;nea.</p>
+          <p><strong>Enviar informaci&oacute;n extempor&aacute;nea</strong>: sanci&oacute;n hasta el <strong>3%</strong> del valor de la informaci&oacute;n.</p>
+          <p>Tope global de la sanci&oacute;n: <strong>15.000 UVT</strong>. Reducible por gradualidad del Art. 640 ET cuando se corrige voluntariamente.</p>
+        </div>
+        <h2>Buena pr&aacute;ctica de cierre de cliente</h2>
+        <p>Al finalizar el proceso por cada cliente, mantenga en la carpeta del cliente:</p>
+        <ul>
+          <li><strong>Archivos XML presentados</strong> (los originales y los de reemplazo si hubo).</li>
+          <li><strong>PDF de acuse de presentaci&oacute;n</strong> de cada solicitud (con marca de agua &laquo;Recibido&raquo;).</li>
+          <li><strong>Log de errores</strong> de cualquier rechazo anterior (sirve para auditor&iacute;a interna).</li>
+          <li><strong>Hoja de control</strong> con versi&oacute;n del prevalidador usado y consecutivos enviados.</li>
+          <li><strong>Confirmaci&oacute;n al cliente</strong>: env&iacute;o por correo electr&oacute;nico con el acuse adjunto, dejando registro de cumplimiento.</li>
+        </ul>
+        <h2>Verificaci&oacute;n post-presentaci&oacute;n</h2>
+        <p>Al d&iacute;a siguiente de presentar, vuelva al MUISCA y en &laquo;Consultar Env&iacute;os de Solicitudes&raquo;:</p>
+        <ul>
+          <li>Confirme que las solicitudes aparecen como <strong>&laquo;Recibida&raquo;</strong>.</li>
+          <li>Si alguna est&aacute; en estado de error, lea el detalle y prepare el reemplazo (M&oacute;dulo 8).</li>
+          <li>Descargue de nuevo el acuse para confirmar que sigue vigente.</li>
+        </ul>
+        <h2>Lo que ahora sabe hacer</h2>
+        <p>Si lleg&oacute; hasta aqu&iacute; con su cliente real, sabe:</p>
+        <ul>
+          <li>Descargar e instalar el prevalidador del a&ntilde;o gravable correcto.</li>
+          <li>Entrar a MUISCA con la cuenta correcta (a nombre propio o de tercero).</li>
+          <li>Colocar archivos XML con la nomenclatura y consecutivo correctos.</li>
+          <li>Diligenciar la solicitud verificando la coherencia de cantidad de registros.</li>
+          <li>Completar el proceso de firma electr&oacute;nica con clave din&aacute;mica.</li>
+          <li>Verificar el acuse y la marca de agua &laquo;Recibido&raquo;.</li>
+          <li>Consultar el estado de cada solicitud despu&eacute;s.</li>
+          <li>Hacer reemplazo parcial o total seg&uacute;n el caso.</li>
+          <li>Cancelar y volver a presentar cuando hay error estructural.</li>
+        </ul>
+        <p>Ese es el ciclo completo. Combinado con el curso de Ex&oacute;gena DIAN (que cubre la clasificaci&oacute;n y el armado de los formatos), tiene el flujo entero de la temporada.</p>
+        <span class="fuente">Capturas y procedimiento basados en: Cartilla DIAN &mdash; Presentaci&oacute;n de informaci&oacute;n por env&iacute;o de archivos (versi&oacute;n 02, 2026). Documento p&uacute;blico DIAN.</span>
+      </div>
+      <div class="mod-nav"><a href="#modulo-9" class="prev" onclick="navigateTo(9)">&larr; M&oacute;dulo 9</a><a href="../escuela.html" class="next" style="background:var(--g800)">Volver a la Escuela &rarr;</a></div>
+    </section>
+  </div>
+</div>
+<section style="background:linear-gradient(180deg,#F9FAFB,#fff);padding:60px 24px 80px;border-top:1px solid #E5E7EB">
+  <div data-curso-meta="cargar-exogena-muisca" style="text-align:center;margin-bottom:28px"></div>
+  <div data-cert-widget="cargar-exogena-muisca"></div>
+</section>
+<script defer src="../shared/pro.js?v=848fbf16"></script>
+<script src="../shared/certificado.js?v=383dd956"></script>
+<script src="../shared/cert-emit-widget.js?v=81c77b40"></script>
+<script src="../shared/curso-meta.js?v=6b7779f4"></script>
+<button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()" aria-label="Abrir menú">&#9776;</button>
+<script>
+var currentModule=1;var totalModules=10;
+function navigateTo(n){document.querySelectorAll('.modulo-section').forEach(function(s){s.classList.remove('active');});var t=document.getElementById('modulo-'+n);if(t)t.classList.add('active');var links=document.querySelectorAll('.sidebar-nav a');links.forEach(function(a,i){a.classList.remove('active');if(i<n-1)a.classList.add('completed');if(i===n-1)a.classList.add('active');});var pct=Math.round((n/totalModules)*100);document.getElementById('progressFill').style.width=pct+'%';currentModule=n;window.scrollTo({top:0,behavior:'smooth'});document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('open');if(typeof gtag!=='undefined')gtag('event','escuela_modulo',{curso:'cargar-exogena-muisca',modulo:n});}
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sidebarOverlay').classList.toggle('open');}
+</script>
+</body>
+</html>

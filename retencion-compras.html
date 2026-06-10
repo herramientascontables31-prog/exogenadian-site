@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#1B3A5C">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Calculadora de Retenciones en Compras — Renta + IVA + ICA + Autorretención | ExógenaDIAN</title>
+<meta name="description" content="Calcula las 4 retenciones aplicables a una compra en Colombia 2026: retención en la fuente renta (Art. 392 ET — bases vigentes tras suspensión del Decreto 0572/2025 por el Consejo de Estado), reteIVA 15 % (Art. 437-2 ET — incluye num 9 al Régimen Simple), reteICA por mil municipal y autorretención especial de renta. Gratis.">
+<meta name="keywords" content="calculadora retenciones compras, retencion fuente renta IVA ICA, reteIVA 15% Art 437-1, autorretencion renta CIIU Decreto 1123 2024, base minima retefuente UVT, tarifa retencion bienes servicios honorarios, ICA por mil Bogota Medellin">
+<link rel="canonical" href="https://exogenadian.com/retencion-compras.html">
+<meta property="og:title" content="Calculadora de Retenciones en Compras | ExógenaDIAN">
+<meta property="og:description" content="Las 4 retenciones de una compra calculadas en una sola tabla: renta + IVA + ICA + autorret. Gratis.">
+<meta property="og:url" content="https://exogenadian.com/retencion-compras.html">
+<meta property="og:type" content="website"><meta property="og:locale" content="es_CO"><meta property="og:site_name" content="ExógenaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="robots" content="index, follow">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de Retenciones en Compras","url":"https://exogenadian.com/retencion-compras.html","description":"Calcula retención en la fuente, reteIVA, reteICA y autorretención de renta de una compra conforme al Estatuto Tributario y Decreto 1123/2024.","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"COP"},"author":{"@type":"Organization","name":"ExógenaDIAN","url":"https://exogenadian.com"}}</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--green:#059669;--green2:#ECFDF5;--green3:#D1FAE5;--red:#DC2626;--amber:#D97706;--amber2:#FFF8E1;--amber3:#FEF3C7;--border:#e2e8f0;--radius:10px;--shadow:0 2px 12px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+.container{max-width:980px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#1B3A5C 0%,#2E75B6 100%);padding:28px 32px;border-radius:16px;margin-bottom:24px;color:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.header h1{font-size:1.45rem;font-weight:700;display:flex;align-items:center;gap:10px}
+.header h1 span{font-size:1.5rem}
+.header p{opacity:.85;font-size:.83rem;margin-top:4px}
+.header-right{text-align:right;font-size:.78rem;opacity:.75}
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:24px;margin-bottom:20px;box-shadow:var(--shadow)}
+.card-title{font-size:1rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px;color:var(--pri)}
+.section-divider{height:1px;background:var(--border);margin:18px 0}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-grid.cols3{grid-template-columns:1fr 1fr 1fr}
+.form-group{display:flex;flex-direction:column;gap:4px}
+.form-group.full{grid-column:1/-1}
+.form-group label{font-size:.76rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;display:flex;align-items:center;gap:4px}
+.form-group label .tip{cursor:help;background:var(--pri3);color:var(--pri);width:15px;height:15px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:800;position:relative}
+.form-group label .tip:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--pri);color:#fff;padding:6px 10px;border-radius:6px;font-size:.72rem;max-width:300px;white-space:normal;z-index:10;font-weight:400;text-transform:none;letter-spacing:0;line-height:1.4;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.form-group input,.form-group select{padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.92rem;font-family:'DM Sans',sans-serif;transition:.2s}
+.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--pri2);box-shadow:0 0 0 3px rgba(46,117,182,.12)}
+.form-group input.money{font-family:'JetBrains Mono',monospace}
+.form-group .hint{font-size:.68rem;color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0}
+.toggle-box{display:flex;align-items:center;gap:10px;padding:8px 12px;background:#FAFBFC;border:1px solid var(--border);border-radius:10px;cursor:pointer}
+.toggle-box input[type=checkbox]{width:17px;height:17px;accent-color:var(--pri2)}
+.toggle-box span{font-size:.83rem;color:var(--text);font-weight:500}
+.alert{padding:10px 14px;border-radius:8px;font-size:.8rem;margin:10px 0;display:flex;align-items:flex-start;gap:8px}
+.alert-info{background:var(--pri3);color:var(--pri);border:1px solid #B4C6E7}
+.alert-warn{background:var(--amber3);color:#92400E;border:1px solid #FDE68A}
+.matriz{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:6px}
+.matriz th{background:var(--pri);color:#fff;padding:10px 12px;text-align:left;font-size:.74rem;text-transform:uppercase;letter-spacing:.3px}
+.matriz th.num{text-align:right}
+.matriz td{padding:10px 12px;border-bottom:1px solid var(--border)}
+.matriz td.num{text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600}
+.matriz tr.aplica{background:#fff}
+.matriz tr.no-aplica{background:#FAFBFC;color:var(--muted)}
+.matriz tr.no-aplica td.num{color:var(--muted)}
+.matriz tr.total{background:var(--pri);color:#fff;font-weight:700;font-size:.95rem}
+.matriz tr.total td{padding:14px 12px}
+.matriz .badge-aplica{background:#D1FAE5;color:#065F46;padding:2px 7px;border-radius:999px;font-size:.66rem;font-weight:700}
+.matriz .badge-no{background:#F3F4F6;color:var(--muted);padding:2px 7px;border-radius:999px;font-size:.66rem;font-weight:700}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.kpi{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:14px;text-align:center}
+.kpi .val{font-size:1.15rem;font-weight:700;font-family:'JetBrains Mono',monospace}
+.kpi .lbl{font-size:.68rem;color:var(--muted);font-weight:600;text-transform:uppercase;margin-top:4px}
+.kpi.green .val{color:var(--green)}
+.kpi.red .val{color:var(--red)}
+.kpi.blue .val{color:var(--pri2)}
+.btn{padding:11px 24px;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:.9rem;font-family:inherit;transition:.15s;display:inline-flex;align-items:center;gap:6px}
+.btn-blue{background:var(--pri2);color:#fff}.btn-blue:hover{background:var(--pri)}
+.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--text)}.btn-outline:hover{border-color:var(--pri2);color:var(--pri2)}
+.disclaimer{margin-top:14px;padding:12px 16px;background:var(--amber2);border:1px solid #FDE68A;border-radius:8px;font-size:.74rem;color:#92400E;line-height:1.6}
+.normativa-list{margin-top:16px;padding:12px 16px;background:#F9FAFB;border:1px solid var(--border);border-radius:8px;font-size:.78rem;color:var(--muted);line-height:1.7}
+@media(max-width:768px){
+  .header{flex-direction:column;text-align:center;padding:22px 18px}.header-right{text-align:center}
+  .form-grid,.form-grid.cols3{grid-template-columns:1fr}
+  .container{padding:12px}
+  .kpis{grid-template-columns:1fr}
+  .matriz{font-size:.78rem}.matriz th,.matriz td{padding:6px 8px}
+}
+@media print {
+  body{background:#fff!important;color:#000!important;font-size:11pt;margin:0;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body > *:not(.container){display:none!important}
+  .btn,button{display:none!important}
+  .container{max-width:100%!important;padding:0!important}
+  .card{box-shadow:none!important;border:none!important;padding:8px 0!important}
+  .matriz th{background:#1B3A5C!important;color:#fff!important}
+  .matriz tr.total{background:#1B3A5C!important;color:#fff!important}
+  @page{margin:12mm}
+}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div id="nav-container"></div>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<div class="container">
+<div class="header">
+  <div>
+    <h1><span>&#128176;</span> Retenciones en Compras</h1>
+    <p>Renta + IVA + ICA + Autorretenci&oacute;n &middot; Una compra, las 4 retenciones de un click</p>
+  </div>
+  <div class="header-right">UVT 2026 $52.374<br>Tarifas vigentes 2026</div>
+</div>
+<div class="card">
+  <div class="card-title">&#128203; Datos de la compra</div>
+  <div class="form-grid">
+    <div class="form-group">
+      <label>Tipo de operaci&oacute;n</label>
+      <select id="iTipoOp" onchange="actualizarConceptos()">
+        <option value="bien" selected>Compra de bien</option>
+        <option value="servicio">Prestaci&oacute;n de servicio</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Concepto espec&iacute;fico <span class="tip" data-tip="Determina la tarifa de retención en la fuente y la base mínima en UVT.">?</span></label>
+      <select id="iConcepto"></select>
+    </div>
+    <div class="form-group">
+      <label>Valor antes de IVA (COP)</label>
+      <input type="text" id="iBase" class="money" placeholder="1.000.000" value="1.000.000" inputmode="numeric">
+    </div>
+    <div class="form-group">
+      <label>&iquest;Aplica IVA?</label>
+      <select id="iIVA">
+        <option value="0.19" selected>S&iacute; &mdash; 19 %</option>
+        <option value="0.05">S&iacute; &mdash; 5 %</option>
+        <option value="0">No grava (0 %)</option>
+        <option value="exento">Exento (0 % con derecho)</option>
+        <option value="excluido">Excluido</option>
+      </select>
+    </div>
+  </div>
+  <div class="section-divider"></div>
+  <div class="card-title">&#128181; Las dos partes</div>
+  <div class="form-grid">
+    <div class="form-group">
+      <label>Tipo de proveedor (al que le compras) <span class="tip" data-tip="RST: el proveedor está inscrito en el Régimen Simple de Tributación. Recibe reteIVA al 15% por num 9 Art. 437-2 ET cuando el comprador es responsable del IVA, pero NO recibe retefuente renta ni reteICA (Art. 911 ET). Autorretenedor: contribuyente designado para autorretenerse renta — no se le practica retefuente ni reteIVA.">?</span></label>
+      <select id="iProveedor">
+        <option value="pn_no_decl">PN no obligada a declarar renta</option>
+        <option value="pn_decl">PN obligada a declarar / oblig. llevar contabilidad</option>
+        <option value="pj" selected>Persona jur&iacute;dica r&eacute;gimen ordinario</option>
+        <option value="rst">R&eacute;gimen Simple de Tributaci&oacute;n (RST)</option>
+        <option value="no_residente">No residente / del exterior</option>
+        <option value="autorretenedor">Autorretenedor de renta</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Tipo de comprador (t&uacute;) <span class="tip" data-tip="Agente común: responsable del IVA del régimen ordinario, no designado como gran contribuyente. NO practica reteIVA a otros del régimen común (regla general). Sí practica reteIVA al RST (Art. 437-2 num 9). Gran contribuyente / Entidad pública: agentes designados, practican reteIVA del 15% al responsable común. RST: no practica retefuente, reteIVA ni reteICA (Art. 911 ET).">?</span></label>
+      <select id="iComprador">
+        <option value="agente" selected>Responsable IVA r&eacute;gimen ordinario (Art. 368 ET)</option>
+        <option value="gran">Gran contribuyente designado por DIAN</option>
+        <option value="publico">Entidad p&uacute;blica (Estado)</option>
+        <option value="rst_compr">R&eacute;gimen Simple (RST)</option>
+        <option value="no_agente">No agente retenedor (PN sin patrimonio &gt;30.000 UVT)</option>
+      </select>
+    </div>
+  </div>
+  <div class="section-divider"></div>
+  <div class="card-title">&#127960; ICA y autorretenci&oacute;n</div>
+  <div class="form-grid cols3">
+    <div class="form-group">
+      <label>Ciudad de operaci&oacute;n <span class="tip" data-tip="La tarifa de ICA varía por municipio y por actividad. Top 10 ciudades como referencia.">?</span></label>
+      <select id="iCiudad" onchange="prefilICA()">
+        <option value="9.66">Bogot&aacute;</option>
+        <option value="7.00">Medell&iacute;n</option>
+        <option value="11.00">Cali</option>
+        <option value="6.90">Barranquilla</option>
+        <option value="7.00">Bucaramanga</option>
+        <option value="10.00">Cartagena</option>
+        <option value="8.00">Pereira</option>
+        <option value="7.00">Manizales</option>
+        <option value="7.00">Ibagu&eacute;</option>
+        <option value="8.00">Pasto</option>
+        <option value="0">Otra (no aplica)</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Tarifa ICA (por mil) <span class="tip" data-tip="Editable. Verifica la tarifa específica de tu actividad en el municipio.">?</span></label>
+      <input type="number" id="iICA" value="9.66" step="0.01" min="0">
+    </div>
+    <div class="form-group">
+      <label class="toggle-box" style="margin-top:18px">
+        <input type="checkbox" id="iAplicaICA" checked>
+        <span>Aplicar reteICA</span>
+      </label>
+    </div>
+  </div>
+  <div class="form-grid" style="margin-top:10px">
+    <div class="form-group">
+      <label>&iquest;Eres autorretenedor de renta? <span class="tip" data-tip="Solo sociedades nacionales contribuyentes de renta. Aplica autorretención especial Decreto 1123/2024 sobre el ingreso (no IVA), por tarifa CIIU.">?</span></label>
+      <select id="iAutorret">
+        <option value="no" selected>No soy autorretenedor</option>
+        <option value="si">S&iacute;, soy autorretenedor</option>
+      </select>
+    </div>
+    <div class="form-group" id="gCIIU" style="display:none">
+      <label>Actividad / sector (autorret CIIU)</label>
+      <select id="iCIIU">
+        <option value="0.0040">Comercio al por menor (0.40 %)</option>
+        <option value="0.0040">Salud y educaci&oacute;n (0.40 %)</option>
+        <option value="0.0055" selected>Industria manufacturera (0.55 %)</option>
+        <option value="0.0055">Construcci&oacute;n (0.55 %)</option>
+        <option value="0.0055">Comercio al por mayor (0.55 %)</option>
+        <option value="0.0055">Transporte y log&iacute;stica (0.55 %)</option>
+        <option value="0.0055">Alojamiento y restaurantes (0.55 %)</option>
+        <option value="0.0080">Agricultura, pesca y silvicultura (0.80 %)</option>
+        <option value="0.0110">Profesionales, cient&iacute;ficas y t&eacute;cnicas (1.10 %)</option>
+        <option value="0.0110">Administrativas y de apoyo (1.10 %)</option>
+        <option value="0.0110">Inmobiliarias (1.10 %)</option>
+        <option value="0.0110">Informaci&oacute;n y comunicaciones (1.10 %)</option>
+        <option value="0.0110">Suministro electricidad, gas, agua (1.10 %)</option>
+        <option value="0.0160">Actividades financieras (1.60 %)</option>
+      </select>
+    </div>
+  </div>
+  <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+    <button class="btn btn-blue" onclick="calcular()" style="flex:1;justify-content:center;padding:13px;font-size:1rem">Calcular retenciones</button>
+    <button class="btn btn-outline" onclick="window.print()">&#128424; Imprimir / PDF</button>
+  </div>
+</div>
+<div id="resultados" class="card" style="display:none">
+  <div class="card-title">&#128202; Matriz de retenciones</div>
+  <div class="kpis">
+    <div class="kpi blue"><div class="val" id="kpiTotal">&mdash;</div><div class="lbl">Total facturado</div></div>
+    <div class="kpi red"><div class="val" id="kpiRet">&mdash;</div><div class="lbl">Total retenciones</div></div>
+    <div class="kpi green"><div class="val" id="kpiNeto">&mdash;</div><div class="lbl">Neto a pagar al proveedor</div></div>
+  </div>
+  <table class="matriz" id="matriz"></table>
+  <div class="disclaimer" id="notas"></div>
+  <details class="normativa-list" style="margin-top:14px" open>
+    <summary style="cursor:pointer;font-weight:700;color:var(--text)">Normativa aplicada (vigente 2026)</summary>
+    <div style="background:#FEF3C7;border:1px solid #FDE68A;border-radius:8px;padding:10px 12px;margin:8px 0;color:#92400E;font-size:.82rem;line-height:1.6">
+      <strong>⚠ Decreto 0572 de 2025 — REACTIVADO (actualizado 2-jun-2026).</strong> El Consejo de Estado (Secci&oacute;n Cuarta, exp. 30229) <strong>revoc&oacute; el 2 de junio de 2026</strong> la suspensi&oacute;n provisional que hab&iacute;a decretado el 7 de mayo, por lo que el Decreto 0572/2025 <strong>vuelve a regir</strong>. La reactivaci&oacute;n es <strong>gradual</strong>: las nuevas bases m&iacute;nimas (compras 10 UVT, servicios 2 UVT) y las tarifas de autorretenci&oacute;n del 572 aplican <strong>desde el 1 de julio de 2026</strong> (primer d&iacute;a del mes siguiente a la ejecutoria del auto). Hasta esa fecha rigen las bases del periodo de transici&oacute;n: compras generales 27 UVT, servicios 4 UVT, productos agr&iacute;colas 92 UVT. La tarifa CDAT del art. 1 nunca se suspendi&oacute;. <strong>Esta calculadora a&uacute;n refleja las bases de transici&oacute;n (27/4 UVT)</strong>; se actualizar&aacute;n a las del 572 el 1-jul-2026.
+    </div>
+    <ul style="margin-top:8px;padding-left:18px">
+      <li><strong>Retefuente renta:</strong> Art. 392 y siguientes del ET. Bases m&iacute;nimas en el periodo de transici&oacute;n (hasta 30-jun-2026): compras generales 27 UVT, servicios 4 UVT, productos agr&iacute;colas sin proceso industrial 92 UVT (Decreto 1625 de 2016 en su versi&oacute;n previa al D0572/2025). <strong>Desde el 1-jul-2026</strong> rigen las del Decreto 0572/2025 reactivado: compras 10 UVT, servicios 2 UVT.</li>
+      <li><strong>ReteIVA:</strong> Art. 437-2 ET. Solo se practica en los casos taxativos del art&iacute;culo:
+        <ul style="margin-top:4px;padding-left:18px">
+          <li>Num 1 — Entidades estatales &rarr; 15 % al responsable com&uacute;n.</li>
+          <li>Num 2 — Grandes contribuyentes designados &rarr; 15 % al responsable com&uacute;n.</li>
+          <li>Num 3 — Compras al exterior (no residentes) &rarr; 100 % del IVA te&oacute;rico.</li>
+          <li><strong>Num 9 (Ley 2010/2019)</strong> — Cualquier responsable del IVA al adquirir bienes/servicios gravados a contribuyente del <strong>R&eacute;gimen Simple</strong> &rarr; 15 %.</li>
+          <li>Par&aacute;grafo 1 — Operaciones entre agentes de los nums 1, 2 y 5 NO generan reteIVA.</li>
+        </ul>
+        <strong>Operaciones entre responsables del r&eacute;gimen com&uacute;n ordinario NO generan reteIVA</strong> (no encaja en ning&uacute;n numeral).
+      </li>
+      <li><strong>ReteICA:</strong> Acuerdos municipales del Concejo. Tarifa por mil sobre el ingreso. RST exento (Art. 911 ET par&aacute;grafo).</li>
+      <li><strong>Autorretenci&oacute;n especial de renta:</strong> en transici&oacute;n rigen las tarifas por CIIU del Decreto 1123/2024; <strong>desde el 1-jul-2026</strong> aplican las del Decreto 0572/2025 reactivado. Solo sociedades nacionales contribuyentes de renta. RST no es autorretenedor (Art. 911 ET).</li>
+      <li><strong>R&eacute;gimen Simple (Art. 911 ET):</strong> los inscritos en el SIMPLE no est&aacute;n sujetos a retefuente renta ni reteICA, salvo retefuente laboral Art. 383 ET. S&iacute; reciben reteIVA por num 9 Art. 437-2 cuando venden a responsable del IVA.</li>
+    </ul>
+    <p style="margin-top:10px;font-size:.74rem;color:var(--muted)"><strong>UVT 2026:</strong> $52.374 (Resoluci&oacute;n DIAN 000238/2025). <strong>Tarifa general reteIVA:</strong> 15 % del IVA facturado, salvo excepciones del Art. 437-1 ET y reglamentos.</p>
+  </details>
+</div>
+<div style="font-size:.78rem;color:var(--muted);text-align:center;margin-top:8px">
+  <a href="retencion-fuente.html" style="color:var(--pri2);text-decoration:none">&larr; Retefuente laboral Art. 383</a> &middot;
+  <a href="retencion-dividendos.html" style="color:var(--pri2);text-decoration:none">Retenci&oacute;n dividendos &rarr;</a> &middot;
+  <a href="uvt.html" style="color:var(--pri2);text-decoration:none">Conversor UVT</a>
+</div>
+</div>
+<script>
+var UVT=52374;
+// Conceptos: tarifas y base mínima en UVT.
+// HISTORIAL Decreto 0572/2025:
+//   7-may-2026: Consejo de Estado SUSPENDE provisionalmente arts. 2-8 (exp. 30229) → bases viejas (27/4/92 UVT).
+//   2-jun-2026: Consejo de Estado REVOCA la suspensión → el 572 se reactiva de forma gradual.
+// Estas bases (27/4/92 UVT) son las del periodo de TRANSICIÓN, vigentes hasta el 30-jun-2026.
+// TODO 1-jul-2026: cambiar compras_general baseMinUVT 27→10 y serv_* baseMinUVT 4→2 (Decreto 0572/2025),
+//   y revisar tarifas de autorretención CIIU. Cutoff: primer día del mes siguiente a la ejecutoria del auto.
+var CONCEPTOS_BIEN = [
+  {k:'compras_general', label:'Compras generales (no productores)', tarPJ:0.025, tarPN_decl:0.025, tarPN_no_decl:0.035, baseMinUVT:27}, // transición; 1-jul-2026 → 10 UVT (D0572/2025 reactivado)
+  {k:'compras_productores', label:'Compras a productores agropecuarios sin proceso industrial', tarPJ:0.015, tarPN_decl:0.015, tarPN_no_decl:0.015, baseMinUVT:92}, // transición
+  {k:'compras_cafe', label:'Compras de caf&eacute; pergamino o cereza', tarPJ:0.005, tarPN_decl:0.005, tarPN_no_decl:0.005, baseMinUVT:160},
+  {k:'compras_oro', label:'Compras de oro', tarPJ:0.01, tarPN_decl:0.01, tarPN_no_decl:0.01, baseMinUVT:0},
+  {k:'compras_combustible', label:'Combustibles derivados del petr&oacute;leo', tarPJ:0.001, tarPN_decl:0.001, tarPN_no_decl:0.001, baseMinUVT:0},
+  {k:'adquis_vehiculos', label:'Adquisici&oacute;n de veh&iacute;culos', tarPJ:0.01, tarPN_decl:0.01, tarPN_no_decl:0.01, baseMinUVT:27},
+  {k:'adquis_inmueble_no_vivienda', label:'Adquisici&oacute;n bienes ra&iacute;ces uso diferente a vivienda', tarPJ:0.025, tarPN_decl:0.025, tarPN_no_decl:0.025, baseMinUVT:27},
+  {k:'arrend_mueble', label:'Arrendamiento bien mueble', tarPJ:0.04, tarPN_decl:0.04, tarPN_no_decl:0.04, baseMinUVT:0},
+  {k:'transporte_carga', label:'Transporte de carga', tarPJ:0.01, tarPN_decl:0.01, tarPN_no_decl:0.01, baseMinUVT:4}
+];
+var CONCEPTOS_SERV = [
+  {k:'honorarios', label:'Honorarios (intelectuales)', tarPJ:0.11, tarPN_decl:0.11, tarPN_no_decl:0.10, baseMinUVT:0},
+  {k:'comisiones', label:'Comisiones', tarPJ:0.11, tarPN_decl:0.11, tarPN_no_decl:0.10, baseMinUVT:0},
+  {k:'serv_tec_oblig', label:'Servicios t&eacute;cnicos (oblig. llevar contabilidad)', tarPJ:0.06, tarPN_decl:0.06, tarPN_no_decl:0.06, baseMinUVT:4}, // transición; 1-jul-2026 → 2 UVT (D0572/2025 reactivado)
+  // FIX 2026-05-11: tarifas estaban invertidas. PDF Consultor Contable 2026 vigencia 8-mayo:
+  // declarantes 4 %, no declarantes 6 % (Art. 392 ET / Art. 1.2.4.4.14 DUR 1625/2016).
+  {k:'serv_generales', label:'Servicios generales', tarPJ:0.04, tarPN_decl:0.04, tarPN_no_decl:0.06, baseMinUVT:4},
+  {k:'serv_salud_ips', label:'Servicios integrales de salud (IPS)', tarPJ:0.02, tarPN_decl:0.02, tarPN_no_decl:0.02, baseMinUVT:4},
+  {k:'serv_sismica', label:'Servicios de s&iacute;smica', tarPJ:0.06, tarPN_decl:0.06, tarPN_no_decl:0.06, baseMinUVT:0},
+  {k:'serv_software', label:'Software y dise&ntilde;o web (declarante)', tarPJ:0.035, tarPN_decl:0.035, tarPN_no_decl:0.035, baseMinUVT:0},
+  {k:'consultoria_obras', label:'Consultor&iacute;a de obras p&uacute;blicas', tarPJ:0.02, tarPN_decl:0.02, tarPN_no_decl:0.02, baseMinUVT:0},
+  {k:'consultoria_ing', label:'Consultor&iacute;a ingenier&iacute;a de infraestructura', tarPJ:0.06, tarPN_decl:0.06, tarPN_no_decl:0.10, baseMinUVT:0},
+  {k:'rend_financieros', label:'Rendimientos financieros', tarPJ:0.07, tarPN_decl:0.07, tarPN_no_decl:0.07, baseMinUVT:0},
+  {k:'transporte_pas_terrestre', label:'Transporte de pasajeros terrestre', tarPJ:0.035, tarPN_decl:0.035, tarPN_no_decl:0.035, baseMinUVT:27},
+  {k:'transporte_pas_aereo', label:'Transporte de pasajeros a&eacute;reo/mar&iacute;timo', tarPJ:0.01, tarPN_decl:0.01, tarPN_no_decl:0.01, baseMinUVT:4},
+  {k:'arrend_inmueble', label:'Arrendamiento bien ra&iacute;z', tarPJ:0.035, tarPN_decl:0.035, tarPN_no_decl:0.035, baseMinUVT:27},
+  {k:'serv_aseo_vig', label:'Servicios de aseo y vigilancia (sobre AIU)', tarPJ:0.02, tarPN_decl:0.02, tarPN_no_decl:0.02, baseMinUVT:4},
+  {k:'serv_temporal', label:'Servicios de empresa temporal (sobre AIU)', tarPJ:0.01, tarPN_decl:0.01, tarPN_no_decl:0.01, baseMinUVT:4},
+  {k:'restaurante', label:'Restaurantes y hoteles', tarPJ:0.035, tarPN_decl:0.035, tarPN_no_decl:0.035, baseMinUVT:4}
+];
+function actualizarConceptos(){
+  var tipo=document.getElementById('iTipoOp').value;
+  var lista = tipo==='bien' ? CONCEPTOS_BIEN : CONCEPTOS_SERV;
+  var sel=document.getElementById('iConcepto');
+  sel.innerHTML='';
+  lista.forEach(function(c){
+    var op=document.createElement('option');
+    op.value=c.k;
+    op.textContent=c.label;
+    sel.appendChild(op);
+  });
+}
+actualizarConceptos();
+document.getElementById('iAutorret').addEventListener('change',function(){
+  document.getElementById('gCIIU').style.display=this.value==='si'?'flex':'none';
+});
+function prefilICA(){
+  var v=document.getElementById('iCiudad').value;
+  document.getElementById('iICA').value=v;
+}
+document.querySelectorAll('.money').forEach(function(el){
+  el.addEventListener('input',function(){var v=this.value.replace(/\D/g,'');this.value=v?parseInt(v).toLocaleString('es-CO'):'';});
+});
+function parseMoney(id){return parseInt(document.getElementById(id).value.replace(/\./g,'').replace(/,/g,''))||0;}
+function fCOP(v){return '$'+Math.round(v).toLocaleString('es-CO');}
+function fNum(v,dec){return v.toFixed(dec||2);}
+function buscarConcepto(k){
+  var todos = CONCEPTOS_BIEN.concat(CONCEPTOS_SERV);
+  for(var i=0;i<todos.length;i++) if(todos[i].k===k) return todos[i];
+  return null;
+}
+function calcRetefuente(base, concepto, proveedor, comprador){
+  var c=buscarConcepto(concepto);
+  if(!c) return {aplica:false,tarifa:0,valor:0,nota:'Concepto no encontrado'};
+  // Comprador RST no practica retefuente renta general (Art. 911 ET)
+  if(comprador==='rst_compr') return {aplica:false,tarifa:0,valor:0,nota:'Régimen Simple no practica retefuente renta (Art. 911 ET)'};
+  if(comprador==='no_agente') return {aplica:false,tarifa:0,valor:0,nota:'No eres agente de retención (PN sin patrimonio o ingresos brutos > 30.000 UVT)'};
+  // Proveedor autorretenedor o RST: no se le retiene
+  if(proveedor==='autorretenedor') return {aplica:false,tarifa:0,valor:0,nota:'Autorretenedor — el proveedor se autorretiene'};
+  if(proveedor==='rst') return {aplica:false,tarifa:0,valor:0,nota:'Régimen Simple — no sujeto a retefuente renta (Art. 911 ET)'};
+  // No residente: retención según Art. 408 ET, fija 20% (simplificado)
+  if(proveedor==='no_residente') return {aplica:true,tarifa:0.20,valor:Math.round(base*0.20),nota:'No residente — Art. 408 ET (tarifa estándar 20 %)'};
+  // Base mínima (Decreto 0572/2025)
+  var baseMin = c.baseMinUVT * UVT;
+  if(c.baseMinUVT>0 && base < baseMin){
+    return {aplica:false,tarifa:0,valor:0,nota:'Base $'+base.toLocaleString('es-CO')+' inferior al mínimo de '+c.baseMinUVT+' UVT ($'+baseMin.toLocaleString('es-CO')+')'};
+  }
+  // Tarifa según proveedor
+  var tarifa;
+  if(proveedor==='pj') tarifa = c.tarPJ;
+  else if(proveedor==='pn_decl') tarifa = c.tarPN_decl;
+  else if(proveedor==='pn_no_decl') tarifa = c.tarPN_no_decl;
+  else tarifa = c.tarPJ;
+  return {aplica:true,tarifa:tarifa,valor:Math.round(base*tarifa),nota:''};
+}
+function calcReteIVA(base, ivaTar, comprador, proveedor){
+  // 1. Sin IVA gravado en la operación
+  if(ivaTar==='exento'||ivaTar==='excluido'||ivaTar==='0'||ivaTar===0) return {aplica:false,tarifa:0,valor:0,iva:0,nota:'Operación sin IVA gravado — no se practica reteIVA'};
+  var iva = Math.round(base * parseFloat(ivaTar));
+  // 2. Comprador no es responsable del IVA o es RST → no practica reteIVA
+  if(comprador==='no_agente') return {aplica:false,tarifa:0,valor:0,iva:iva,nota:'Comprador no es responsable del IVA — no practica reteIVA'};
+  if(comprador==='rst_compr') return {aplica:false,tarifa:0,valor:0,iva:iva,nota:'Régimen Simple no practica reteIVA (Art. 911 ET)'};
+  // 3. Proveedor del exterior — Art. 437-2 num 3: 100% del IVA teórico
+  if(proveedor==='no_residente') return {aplica:true,tarifa:1.0,valor:iva,iva:iva,nota:'No residente — reteIVA 100 % del IVA teórico (Art. 437-2 num 3 ET)'};
+  // 4. Proveedor autorretenedor — no se le practica reteIVA
+  if(proveedor==='autorretenedor') return {aplica:false,tarifa:0,valor:0,iva:iva,nota:'Autorretenedor — no se le practica reteIVA'};
+  // 5. CLAVE: Proveedor RST y comprador responsable del IVA → 15 % (Art. 437-2 num 9 ET, Ley 2010/2019)
+  if(proveedor==='rst') return {aplica:true,tarifa:0.15,valor:Math.round(iva*0.15),iva:iva,nota:'Compra al Régimen Simple — reteIVA 15 % (Art. 437-2 num 9 ET)'};
+  // 6. Comprador es entidad pública o gran contribuyente → 15 % al responsable común (nums 1 y 2)
+  if(comprador==='gran' || comprador==='publico'){
+    return {aplica:true,tarifa:0.15,valor:Math.round(iva*0.15),iva:iva,nota:'Comprador agente retenedor designado (gran contrib. o entidad pública) — reteIVA 15 % (Art. 437-2 nums 1 y 2 ET)'};
+  }
+  // 7. Régimen común ↔ régimen común normal → NO se practica reteIVA
+  return {aplica:false,tarifa:0,valor:0,iva:iva,nota:'Operación entre responsables del IVA del régimen ordinario — NO se practica reteIVA (no encaja en ningún numeral del Art. 437-2 ET)'};
+}
+function calcReteICA(base, tarifaPorMil, aplica, proveedor, comprador){
+  // RST proveedor: exento de reteICA (Art. 911 ET parágrafo)
+  if(proveedor==='rst') return {aplica:false,tarifa:0,valor:0,nota:'Régimen Simple — no sujeto a reteICA (Art. 911 ET)'};
+  // RST comprador: no practica reteICA
+  if(comprador==='rst_compr') return {aplica:false,tarifa:0,valor:0,nota:'Régimen Simple no practica reteICA (Art. 911 ET)'};
+  if(!aplica||tarifaPorMil<=0) return {aplica:false,tarifa:0,valor:0,nota:'No aplica'};
+  return {aplica:true,tarifa:tarifaPorMil/1000,valor:Math.round(base*tarifaPorMil/1000),nota:''};
+}
+function calcAutorret(base, esAutorret, ciiuTar, comprador){
+  // RST no es autorretenedor de renta especial (Art. 911 ET)
+  if(comprador==='rst_compr') return {aplica:false,tarifa:0,valor:0,nota:'Régimen Simple — no es autorretenedor de renta (Art. 911 ET)'};
+  if(!esAutorret) return {aplica:false,tarifa:0,valor:0,nota:'No eres autorretenedor de renta'};
+  return {aplica:true,tarifa:ciiuTar,valor:Math.round(base*ciiuTar),nota:''};
+}
+function calcular(){
+  var base=parseMoney('iBase');
+  if(base<1){exoToast('Ingresa el valor de la compra.','warning');return;}
+  var concepto=document.getElementById('iConcepto').value;
+  var proveedor=document.getElementById('iProveedor').value;
+  var comprador=document.getElementById('iComprador').value;
+  var ivaTar=document.getElementById('iIVA').value;
+  var ica=parseFloat(document.getElementById('iICA').value)||0;
+  var aplicaICA=document.getElementById('iAplicaICA').checked;
+  var esAutorret=document.getElementById('iAutorret').value==='si';
+  var ciiuTar=parseFloat(document.getElementById('iCIIU').value)||0.0055;
+  var rte = calcRetefuente(base, concepto, proveedor, comprador);
+  var iva = calcReteIVA(base, ivaTar, comprador, proveedor);
+  var rica = calcReteICA(base, ica, aplicaICA, proveedor, comprador);
+  var auto = calcAutorret(base, esAutorret, ciiuTar, comprador);
+  var totalIVA = iva.iva || 0;
+  var bruto = base + totalIVA;
+  var totalRet = rte.valor + iva.valor + rica.valor + auto.valor;
+  var neto = bruto - rte.valor - iva.valor - rica.valor; // autorret la asume el comprador, no descuenta al proveedor
+  document.getElementById('kpiTotal').textContent = fCOP(bruto);
+  document.getElementById('kpiRet').textContent = fCOP(totalRet);
+  document.getElementById('kpiNeto').textContent = fCOP(neto);
+  var rows = '';
+  rows += renderRow('Retefuente renta', rte, base);
+  rows += renderRow('ReteIVA', iva, totalIVA);
+  rows += renderRow('ReteICA', rica, base);
+  rows += renderRow('Autorretenci&oacute;n renta', auto, base);
+  rows += '<tr class="total"><td colspan="4">TOTAL retenido al proveedor (renta + IVA + ICA)</td><td class="num">'+fCOP(rte.valor + iva.valor + rica.valor)+'</td></tr>';
+  if(auto.aplica) rows += '<tr><td colspan="4" style="font-style:italic;color:var(--muted);font-size:.8rem;padding:8px 12px">Autorretenci&oacute;n no se descuenta al proveedor &mdash; el comprador la declara y paga directamente</td><td class="num" style="font-weight:600">'+fCOP(auto.valor)+'</td></tr>';
+  document.getElementById('matriz').innerHTML = '<thead><tr><th>Retenci&oacute;n</th><th class="num">Base</th><th class="num">Tarifa</th><th>Estado / Nota</th><th class="num">Valor</th></tr></thead><tbody>'+rows+'</tbody>';
+  var notas = [];
+  if(!rte.aplica && rte.nota) notas.push('<strong>Retefuente renta:</strong> '+rte.nota);
+  if(!iva.aplica && iva.nota) notas.push('<strong>ReteIVA:</strong> '+iva.nota);
+  if(!rica.aplica) notas.push('<strong>ReteICA:</strong> no se aplic&oacute;.');
+  if(!auto.aplica) notas.push('<strong>Autorretenci&oacute;n:</strong> el contribuyente comprador no es autorretenedor de renta o no aplica.');
+  notas.push('Verifica que el c&oacute;digo CIIU y la tarifa ICA municipal correspondan al sector real de tu compra.');
+  document.getElementById('notas').innerHTML = notas.join('<br>');
+  document.getElementById('resultados').style.display='block';
+  document.getElementById('resultados').scrollIntoView({behavior:'smooth',block:'start'});
+  if(typeof exoTrack!=='undefined')exoTrack.tool('retencion-compras');
+}
+function renderRow(nombre, r, base){
+  var cls = r.aplica ? 'aplica' : 'no-aplica';
+  var badge = r.aplica ? '<span class="badge-aplica">Aplica</span>' : '<span class="badge-no">No aplica</span>';
+  var tarifa = r.aplica ? (r.tarifa>=1 ? '100 %' : (r.tarifa*100).toFixed(2)+' %') : '—';
+  var baseTxt = r.aplica ? fCOP(base) : '—';
+  var nota = r.nota || '';
+  return '<tr class="'+cls+'"><td><strong>'+nombre+'</strong></td><td class="num">'+baseTxt+'</td><td class="num">'+tarifa+'</td><td>'+badge+(nota?'<br><span style="font-size:.74rem;color:var(--muted)">'+nota+'</span>':'')+'</td><td class="num">'+(r.aplica?fCOP(r.valor):'—')+'</td></tr>';
+}
+</script>
+<script src="shared/analytics.js?v=b756a0cb"></script>
+<link rel="stylesheet" href="shared/chat.css?v=a52afe72">
+<script defer src="shared/chat.js?v=a45c7cf2"></script>
+</body>
+</html>

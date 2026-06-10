@@ -1,0 +1,677 @@
+/**
+ * ExogenaDIAN — Motor de calculo Formulario 210 (Renta Personas Naturales)
+ *
+ * Diseno: motor PURO multi-ano. No accede al DOM. Recibe un `estado`
+ * jerarquico y devuelve renglones del 210 + diagnostico del tope Art. 336
+ * + liquidacion final.
+ *
+ * Norma:
+ *   - ET (Estatuto Tributario), Ley 2277/2022, DUR 1625/2016 art. 1.2.1.20.4
+ *   - El tope Art. 336 num. 3 se aplica a nivel CEDULA GENERAL CONSOLIDADA,
+ *     no por subtipo. Las deducciones de Art. 336 num. 3 inc. 2 (72 UVT/dep,
+ *     max 4) y num. 5 (1% factura electronica, max 240 UVT) van FUERA del tope.
+ */
+(function(){
+  'use strict';
+
+  var P; // paramsRentaPN — resuelto en runtime
+  if(typeof require !== 'undefined'){
+    try { P = require('./parametros-renta-pn.js'); } catch(e){ /* navegador */ }
+  }
+  function getP(){
+    return P || (typeof window !== 'undefined' ? window.paramsRentaPN : null);
+  }
+
+  // ═══════════════════════════════════════
+  //  Helpers
+  // ═══════════════════════════════════════
+  function maxZero(n){ return n > 0 ? n : 0; }
+  function r1k(n){ return Math.round(n / 1000) * 1000; }
+
+  function pesosAUvt(pesos, year){ return getP().pesosAUvt(pesos, year); }
+  function uvtAPesos(uvt, year){ return getP().uvtAPesos(uvt, year); }
+  function getParams(year){ return getP().getParams(year); }
+
+  // ═══════════════════════════════════════
+  //  Tarifas
+  // ═══════════════════════════════════════
+
+  /** Impuesto Art. 241 ET sobre base en pesos, segun tabla del ano. */
+  function impuestoArt241(basePesos, year){
+    if(basePesos <= 0) return 0;
+    var p = getParams(year);
+    var rlUvt = pesosAUvt(basePesos, year);
+    for(var i=0; i<p.tabla241.length; i++){
+      var t = p.tabla241[i];
+      if(rlUvt > t.desdeUvt && rlUvt <= t.hastaUvt){
+        var impUvt = (rlUvt - t.desdeUvt) * t.tarifa + t.baseUvt;
+        return r1k(impUvt * p.uvt);
+      }
+    }
+    return 0;
+  }
+
+  /** Impuesto Art. 242 ET — dividendos no gravados (1.090 UVT exento, 15% exceso). */
+  function impuestoArt242(basePesos, year){
+    if(basePesos <= 0) return 0;
+    var p = getParams(year);
+    var baseUvt = pesosAUvt(basePesos, year);
+    if(baseUvt <= p.divNoGravadosExentoUvt) return 0;
+    var imp = (baseUvt - p.divNoGravadosExentoUvt) * p.divNoGravadosTarifaExceso;
+    return r1k(imp * p.uvt);
+  }
+
+  /** Impuesto Art. 242-1 ET — dividendos gravados.
+   *  Paso 1: 35% sobre dividendo bruto.
+   *  Paso 2: sobre el neto (65%) aplica Art. 242. */
+  function impuestoArt242_1(basePesos, year){
+    if(basePesos <= 0) return 0;
+    var p = getParams(year);
+    var imp1 = r1k(basePesos * p.divGravadosTarifaCorporativa);
+    var neto = basePesos - imp1;
+    var imp2 = impuestoArt242(neto, year);
+    return imp1 + imp2;
+  }
+
+  /** Impuesto Art. 314 ET — ganancias ocasionales 15%. */
+  function impuestoArt314(basePesos, year){
+    if(basePesos <= 0) return 0;
+    var p = getParams(year);
+    return r1k(basePesos * p.goTarifa);
+  }
+
+  /** Impuesto Art. 317 ET — loterias, rifas, apuestas 20%. */
+  function impuestoArt317(basePesos, year){
+    if(basePesos <= 0) return 0;
+    var p = getParams(year);
+    return r1k(basePesos * p.goLoteriasTarifa);
+  }
+
+  /** Tarifa marginal del Art. 241 sobre la base en el ultimo peso. */
+  function tarifaMarginal(basePesos, year){
+    if(basePesos <= 0) return 0;
+    var p = getParams(year);
+    var rlUvt = pesosAUvt(basePesos, year);
+    for(var i=0; i<p.tabla241.length; i++){
+      var t = p.tabla241[i];
+      if(rlUvt > t.desdeUvt && rlUvt <= t.hastaUvt) return t.tarifa;
+    }
+    return p.tabla241[p.tabla241.length-1].tarifa;
+  }
+
+  // ═══════════════════════════════════════
+  //  Subcedulas (cedula general)
+  // ═══════════════════════════════════════
+
+  /**
+   * Calculo generico de una subcedula.
+   * Devuelve renta liquida antes de exentas/deducciones y total exentas+deducciones imputadas.
+   *
+   * input = {
+   *   ingresosBrutos, incrngo, costos,
+   *   exenta25Aplica,                          // bool — solo trabajo y honorarios par.5
+   *   cesantiasIntereses,                       // solo trabajo
+   *   otrasRentasExentas,                       // exentas distintas a la 25%
+   *   deduccionesNominales,                     // intereses vivienda, salud prep., AVC+AFC, dep.387
+   *   ingresosECE                               // ingresos por entidad controlada exterior
+   * }
+   */
+  function calcularSubcedula(input, year, opts){
+    opts = opts || {};
+    var p = getParams(year);
+    var ing = input.ingresosBrutos || 0;
+    var incrngo = input.incrngo || 0;
+    var costos = input.costos || 0;
+    var ece = input.ingresosECE || 0;
+    var ces = input.cesantiasIntereses || 0;          // solo trabajo: ingreso adicional
+    var otrasExentas = input.otrasRentasExentas || 0;
+    var dedNominales = input.deduccionesNominales || 0;
+
+    // Ingreso neto = bruto - INCRNGO - costos (capital y no laboral)
+    // Para trabajo: bruto incluye salario + cesantias e intereses. INCRNGO incluye salud y pension.
+    var ingresoNeto = maxZero(ing + ces - incrngo - costos);
+
+    // Renta exenta 25% Art. 206 num. 10 — solo trabajo y honorarios modo trabajo
+    var exenta25 = 0;
+    if(opts.aplicaExenta25 && ingresoNeto > 0){
+      // 25% del ingreso neto, tope 790 UVT/ano
+      exenta25 = Math.min(
+        ingresoNeto * p.exentaTrabajo25Pct,
+        p.exentaTrabajo25MaxUvt * p.uvt
+      );
+      exenta25 = r1k(exenta25);
+    }
+
+    // Total exentas y deducciones imputables a esta subcedula (DENTRO del tope global)
+    var exentasYDeducciones = exenta25 + otrasExentas + dedNominales;
+
+    // Renta liquida ordinaria de la subcedula (antes de aplicar tope global)
+    var rentaLiquidaAntesExentas = maxZero(ingresoNeto + ece);
+    var rentaSinTope = rentaLiquidaAntesExentas - exentasYDeducciones;
+    var perdida = rentaSinTope < 0 ? -rentaSinTope : 0;
+
+    return {
+      ingresosBrutos: ing,
+      incrngo: incrngo,
+      costos: costos,
+      ingresoNeto: ingresoNeto,
+      ingresosECE: ece,
+      exenta25: exenta25,
+      otrasRentasExentas: otrasExentas,
+      deduccionesNominales: dedNominales,
+      exentasYDeducciones: exentasYDeducciones,
+      rentaLiquidaAntesExentas: rentaLiquidaAntesExentas,
+      rentaSubcedula: maxZero(rentaSinTope),
+      perdida: perdida
+    };
+  }
+
+  function calcularSubcedulaTrabajo(input, year){
+    return calcularSubcedula({
+      ingresosBrutos: input.ingresosBrutos,
+      incrngo: input.incrngo,
+      costos: 0,
+      cesantiasIntereses: input.cesantiasIntereses,
+      otrasRentasExentas: input.otrasRentasExentas,
+      deduccionesNominales: input.deduccionesNominales,
+      ingresosECE: 0
+    }, year, { aplicaExenta25: true });
+  }
+
+  function calcularSubcedulaHonorarios(input, year){
+    // Modo 'rentasTrabajo' (par. 5 Art. 206 ET): aplica exenta 25%, no permite costos
+    // Modo 'rentasNoLaborales' (default): no aplica exenta 25%, permite costos
+    var modoTrabajo = input.modo === 'rentasTrabajo';
+    return calcularSubcedula({
+      ingresosBrutos: input.ingresosBrutos,
+      incrngo: input.incrngo,
+      costos: modoTrabajo ? 0 : (input.costos || 0),
+      cesantiasIntereses: 0,
+      otrasRentasExentas: input.otrasRentasExentas,
+      deduccionesNominales: input.deduccionesNominales,
+      ingresosECE: 0
+    }, year, { aplicaExenta25: modoTrabajo });
+  }
+
+  function calcularSubcedulaCapital(input, year){
+    return calcularSubcedula({
+      ingresosBrutos: input.ingresosBrutos,
+      incrngo: input.incrngo,
+      costos: input.costos,
+      otrasRentasExentas: input.otrasRentasExentas,
+      deduccionesNominales: input.deduccionesNominales,
+      ingresosECE: input.ingresosECE
+    }, year, { aplicaExenta25: false });
+  }
+
+  function calcularSubcedulaNoLaboral(input, year){
+    return calcularSubcedula({
+      ingresosBrutos: input.ingresosBrutos,
+      incrngo: input.incrngo,
+      costos: input.costos,
+      otrasRentasExentas: input.otrasRentasExentas,
+      deduccionesNominales: input.deduccionesNominales,
+      ingresosECE: input.ingresosECE
+    }, year, { aplicaExenta25: false });
+  }
+
+  // ═══════════════════════════════════════
+  //  Cedula general consolidada
+  //  Tope Art. 336 num. 3 ET aplicado al CONSOLIDADO (DUR 1625/2016 art. 1.2.1.20.4)
+  // ═══════════════════════════════════════
+
+  function calcularCedulaGeneral(input, year){
+    var p = getParams(year);
+
+    // 1) Calcular subcedulas
+    var trabajo = calcularSubcedulaTrabajo(input.trabajo || {}, year);
+    var honorarios = calcularSubcedulaHonorarios(input.honorarios || { modo:'rentasNoLaborales' }, year);
+    var capital = calcularSubcedulaCapital(input.capital || {}, year);
+    var noLaboral = calcularSubcedulaNoLaboral(input.noLaboral || {}, year);
+
+    // 2) Casilla 91: Renta liquida cedular general (antes de exentas y deducciones limitadas)
+    //    Suma rentas liquidas - perdidas (compensables entre subcedulas, no contra trabajo)
+    var sumRentas = trabajo.rentaLiquidaAntesExentas
+                  + honorarios.rentaLiquidaAntesExentas
+                  + capital.rentaLiquidaAntesExentas
+                  + noLaboral.rentaLiquidaAntesExentas;
+    var sumPerdidas = honorarios.perdida + capital.perdida + noLaboral.perdida;
+    var c91 = maxZero(sumRentas - sumPerdidas);
+
+    // 3) Casilla 92: Total exentas y deducciones imputables, limitadas al tope
+    //    Tope = min(40% × c91, 1340 UVT, c91)
+    var rawDentroTope = trabajo.exentasYDeducciones
+                      + honorarios.exentasYDeducciones
+                      + capital.exentasYDeducciones
+                      + noLaboral.exentasYDeducciones;
+    var limite40 = r1k(c91 * p.topeCedularPct);
+    var limite1340 = r1k(p.topeCedularUvt * p.uvt);
+    var c92 = Math.min(rawDentroTope, limite40, limite1340, c91);
+    var excedeTope = rawDentroTope > Math.min(limite40, limite1340);
+
+    // 4) Deducciones FUERA del tope (Art. 336 num. 3 inc. 2 + num. 5)
+    var depArt336Num = Math.min(
+      input.dependientesArt336Numero || 0,
+      p.dependientesArt336MaxNumero
+    );
+    var depArt336Valor = r1k(depArt336Num * p.dependientesArt336UvtPorDep * p.uvt);
+
+    var fe1Pct = input.facturaElectronica1Pct || 0;
+    var fe1PctMax = r1k(p.facturaElectronica1PctMaxUvt * p.uvt);
+    var fe1PctAplicado = Math.min(fe1Pct, fe1PctMax);
+
+    var deduccionesFueraTope = depArt336Valor + fe1PctAplicado;
+
+    // 5) Casilla 93: Renta liquida ordinaria
+    var c93 = maxZero(c91 - c92 - deduccionesFueraTope);
+
+    // 6) Casilla 97: Renta liquida gravable (con compensaciones)
+    var c97 = maxZero(
+      c93
+      + (input.rentasGravablesAdicionales || 0)
+      - (input.perdidasFiscales || 0)
+      - (input.excesoRentaPresuntiva || 0)
+    );
+
+    return {
+      subcedulas: {
+        trabajo: trabajo,
+        honorarios: honorarios,
+        capital: capital,
+        noLaboral: noLaboral
+      },
+      c91: c91,
+      c92: c92,
+      c93: c93,
+      c97: c97,
+      tope: {
+        rawDentroTope: rawDentroTope,
+        limite40: limite40,
+        limite1340: limite1340,
+        excedeTope: excedeTope,
+        deduccionesAplicadasDentroTope: c92,
+        deduccionesFueraTope: {
+          dependientesArt336: depArt336Valor,
+          facturaElectronica1Pct: fe1PctAplicado,
+          total: deduccionesFueraTope
+        }
+      }
+    };
+  }
+
+  // ═══════════════════════════════════════
+  //  Cedula pensiones (Art. 337 ET + Art. 206 num. 5)
+  //
+  // El Art. 206 num. 5 establece tope MENSUAL de 1.000 UVT por mesada.
+  // Si el caller provee `mesadas` (array de pagos mensuales), se aplica el
+  // tope estricto mensual. Si solo se provee total anual (`ingresosBrutos`),
+  // se aplica modo retrocompatible (tope anual 12.000 UVT) y se marca
+  // `modoAnualFallback: true` para que el validador advierta.
+  // ═══════════════════════════════════════
+
+  function calcularCedulaPensiones(input, year){
+    var p = getParams(year);
+    var ing = input.ingresosBrutos || 0;
+    var incrngo = input.incrngo || 0;
+    var topeMes = p.pensionExentaUvtMes * p.uvt;
+
+    // Casilla 101: Ingresos netos
+    var c101 = maxZero(ing - incrngo);
+
+    var rentaExenta;
+    var modoAnualFallback = false;
+    var detalleMesadas = null;
+
+    if(Array.isArray(input.mesadas) && input.mesadas.length > 0){
+      // Modo correcto: tope mensual estricto Art. 206 num. 5
+      var totalMesadas = 0;
+      var exentaPorMesada = 0;
+      detalleMesadas = input.mesadas.map(function(m){
+        var mesada = Number(m) || 0;
+        totalMesadas += mesada;
+        var exenta = Math.min(mesada, topeMes);
+        exentaPorMesada += exenta;
+        return { mesada: mesada, exenta: exenta, gravable: maxZero(mesada - topeMes) };
+      });
+      // Si el ingreso bruto no incluye los aportes (incrngo aparte), se aplica
+      // proporcionalmente la exencion sobre el neto. Para mantenerlo simple:
+      // exenta = min(c101, suma_exentas_mensuales).
+      rentaExenta = Math.min(c101, exentaPorMesada);
+      rentaExenta = r1k(rentaExenta);
+    } else {
+      // Modo retrocompatible: tope anual (mas generoso de lo legal en mesadas con prima alta)
+      var topeAnual = topeMes * 12;
+      rentaExenta = r1k(Math.min(c101, topeAnual));
+      modoAnualFallback = true;
+    }
+
+    var c103 = maxZero(c101 - rentaExenta);
+
+    return {
+      ingresosBrutos: ing,
+      incrngo: incrngo,
+      c101: c101,
+      rentaExenta: rentaExenta,
+      c103: c103,
+      modoAnualFallback: modoAnualFallback,
+      detalleMesadas: detalleMesadas
+    };
+  }
+
+  // ═══════════════════════════════════════
+  //  Cesantias exentas Art. 206 num. 4 ET — escala decreciente
+  //
+  //  Recibe:
+  //    cesantiasRecibidas (pesos) — total cesantias + intereses recibidos en el ano
+  //    salarioPromedio6mUvt — salario promedio ultimos 6 meses, en UVT/mes
+  //
+  //  Devuelve la PORCION EXENTA (en pesos), redondeada a miles.
+  //  La parte gravable = cesantiasRecibidas - exenta.
+  // ═══════════════════════════════════════
+
+  function cesantiasExentasArt206_4(cesantiasRecibidas, salarioPromedio6mUvt, year){
+    if(!cesantiasRecibidas || cesantiasRecibidas <= 0) return 0;
+    var p = getParams(year);
+    var escala = p.escalaCesantiasArt206_4;
+    if(!escala || escala.length === 0) return cesantiasRecibidas; // retrocompat
+
+    // Si no se conoce el salario promedio, asumir caso conservador (100% exenta)
+    // y dejar al validador advertir. Esto preserva retrocompatibilidad.
+    if(salarioPromedio6mUvt == null || isNaN(salarioPromedio6mUvt)) {
+      return cesantiasRecibidas;
+    }
+
+    for(var i = 0; i < escala.length; i++){
+      var t = escala[i];
+      if(salarioPromedio6mUvt <= t.hastaUvtMes){
+        return r1k(cesantiasRecibidas * t.exentaPct);
+      }
+    }
+    return 0;
+  }
+
+  // ═══════════════════════════════════════
+  //  Cedula dividendos (Art. 343 ET)
+  // ═══════════════════════════════════════
+
+  function calcularCedulaDividendos(input, year){
+    // c104: dividendos 2016 y anteriores brutos
+    // c105: INCRNGO 2016 y anteriores
+    // c106: dividendos 2016 y anteriores netos = max(c104 - c105, 0)
+    // c107: 1a subcedula 2017+ (no gravados Art. 49 num. 3) — tributan Art. 242
+    // c108: 2a subcedula 2017+ (gravados Art. 49 par. 2) — tributan Art. 242-1
+    // c109/c110: dividendos exterior y descuento
+
+    var c104 = input.anteriores2016 || 0;
+    var c105 = input.incrngoAnteriores2016 || 0;
+    var c106 = maxZero(c104 - c105);
+    var c107 = input.noGravados2017 || 0;
+    var c108 = input.gravados2017 || 0;
+    var c109 = input.exterior || 0;
+    var c110 = input.incrngoExterior || 0;
+
+    return {
+      c104: c104, c105: c105, c106: c106,
+      c107: c107, c108: c108,
+      c109: c109, c110: c110
+    };
+  }
+
+  // ═══════════════════════════════════════
+  //  Ganancias ocasionales (Arts. 313 ss. ET)
+  // ═══════════════════════════════════════
+
+  function calcularGananciasOcasionales(input, year){
+    var ing = input.ingresos || 0;
+    var costos = input.costos || 0;
+    var exentas = input.rentasExentas || 0;
+    var loterias = input.loterias || 0;
+
+    // Casilla 112: ingresos brutos GO
+    var c112 = ing + loterias;
+    var c113 = costos;
+    var c114 = exentas;
+    var c115 = maxZero(c112 - c113 - c114);
+
+    return {
+      c112: c112,
+      c113: c113,
+      c114: c114,
+      c115: c115,
+      ingresosNoLoterias: ing,
+      loterias: loterias
+    };
+  }
+
+  // ═══════════════════════════════════════
+  //  Liquidacion final
+  // ═══════════════════════════════════════
+
+  function calcularLiquidacion(estado, cedulas, year){
+    var p = getParams(year);
+    var liq = estado.liquidacion || {};
+    var decl = estado.declarante || {};
+
+    // Casilla 111: Renta liquida gravable total tabla Art. 241
+    //   = max(c97, presuntiva) + c103 + c107
+    //   Art. 331 ET (mod. Ley 2277/2022): las rentas liquidas cedulares de
+    //   trabajo, capital, no laborales, pensiones Y dividendos no gravados
+    //   se SUMAN para aplicar la tabla del Art. 241.
+    //   La 2a subcedula (gravados, c108) tributa Art. 242-1 aparte.
+    //   Los dividendos 2016 y anteriores (c106) tributan Art. 241 aparte (regimen historico).
+    var c98 = (estado.cedulaGeneral && estado.cedulaGeneral.rentaPresuntiva) || 0;
+    var baseConPresuntiva = Math.max(cedulas.general.c97, c98);
+    var c111 = baseConPresuntiva + cedulas.pensiones.c103 + cedulas.dividendos.c107;
+
+    // Casilla 116: Impuesto Art. 241 sobre c111 (general + pensiones + dividendos no gravados)
+    var c116 = impuestoArt241(c111, year);
+
+    // Casilla 117: si renta presuntiva supera cedula general, mismo impuesto (no doble)
+    var c117 = (c98 > cedulas.general.c97) ? c116 : 0;
+
+    // Casilla 118: reservada (Art. 242 ya no aplica directo a c107 — se consolida en c111)
+    var c118 = 0;
+
+    // Casilla 119: Impuesto Art. 242-1 ET sobre 2a subcedula 2017+ (gravados)
+    var c119 = impuestoArt242_1(cedulas.dividendos.c108, year);
+
+    // Casilla 120: Impuesto sobre dividendos 2016 y anteriores + dividendos exterior
+    //   c106 (anteriores 2016): Art. 241 con tabla cedular ordinaria
+    //   c109-c110 (exterior): Art. 241
+    var divExt = maxZero(cedulas.dividendos.c109 - cedulas.dividendos.c110);
+    var c120 = impuestoArt241(cedulas.dividendos.c106, year) + impuestoArt241(divExt, year);
+
+    // Casilla 121: Total impuesto rentas cedulares
+    var c121 = c116 + c118 + c119 + c120;
+
+    // Descuento Art. 254-1 ET (adicionado Ley 2277/2022):
+    //   19% × max(0, c107 - 1.090 UVT). Limite implicito vía max(0, c121-c125)
+    //   para que c126 no quede negativo (DIAN Concepto 100208192-272/2023).
+    var rl1090EnPesos = p.divNoGravadosExentoUvt * p.uvt;
+    var excesoDividendos = maxZero(cedulas.dividendos.c107 - rl1090EnPesos);
+    var descuento254_1 = r1k(excesoDividendos * 0.19);
+
+    // Casilla 125: Total descuentos tributarios (Arts. 254, 254-1, 255, 256)
+    var c125 = (liq.descuentos || 0) + descuento254_1;
+
+    // Casilla 126: Impuesto neto de renta. El max(0,...) limita el descuento
+    // implicitamente: nunca puede dejar c126 negativo.
+    var c126 = maxZero(c121 - c125);
+
+    // Casilla 127: Impuesto ganancias ocasionales
+    //   = 15% × (c115 - loterias) + 20% × loterias
+    var goSinLoterias = maxZero(cedulas.go.c115 - (cedulas.go.loterias || 0));
+    var c127 = impuestoArt314(goSinLoterias, year) + impuestoArt317(cedulas.go.loterias || 0, year);
+
+    // Casilla 128: Descuento por impuestos pagados en exterior por GO
+    var c128 = liq.descuentoExteriorGO || 0;
+
+    // Casilla 129: Total impuesto a cargo
+    var c129 = maxZero(c126 + c127 - c128);
+
+    // Casilla 130: Anticipo del ano anterior pagado
+    var c130 = liq.anticipoPagado || 0;
+    // Casilla 131: Saldo a favor ano anterior
+    var c131 = liq.saldoFavorAnoAnterior || 0;
+    // Casilla 132: Retenciones del ano
+    var c132 = r1k(liq.retencionesAno || 0); // DIAN: aproximar al multiplo de mil
+
+    // Casilla 133: Anticipo ano siguiente (Art. 807 ET)
+    //
+    // Tarifa segun numero de declaraciones previas:
+    //   prev === 0  → 25% (primera declaracion)
+    //   prev === 1  → 50% (segunda declaracion)
+    //   prev >= 2   → 75% (tercera o posterior)
+    //
+    // Base (Art. 807 inc. 2): el contribuyente puede aplicar el menor entre:
+    //   (a) Metodo simple:    tarifa × c126 (impuesto neto actual)
+    //   (b) Metodo promedio:  tarifa × promedio(c126 actual, c126 anterior)
+    //
+    // El motor por defecto usa metodo simple. La opcion de promedio se ofrece
+    // en UI cuando el contribuyente declara por 2da o 3ra+ vez. Para forzar el
+    // calculo por promedio: pasar liq.metodoAnticipo = 'promedio' y
+    // liq.impuestoNetoAnoAnterior. El motor toma el menor de los dos.
+    var prev = decl.declaracionesPrevias || 0;
+    var pctAnticipo = prev === 0 ? p.anticipoPctPrimeraVez
+                    : prev === 1 ? p.anticipoPctSegundaVez
+                    :              p.anticipoPctTerceraOMas;
+
+    var anticipoSimple = r1k(c126 * pctAnticipo);
+    var anticipoPromedio = anticipoSimple;
+    if(prev >= 1 && liq.impuestoNetoAnoAnterior > 0){
+      var promedioImpuesto = (c126 + liq.impuestoNetoAnoAnterior) / 2;
+      anticipoPromedio = r1k(promedioImpuesto * pctAnticipo);
+    }
+    var anticipoBase = (liq.metodoAnticipo === 'simple')
+      ? anticipoSimple
+      : Math.min(anticipoSimple, anticipoPromedio);
+    var c133 = maxZero(anticipoBase - c132);
+
+    // Casilla 134: Saldo a pagar por impuesto
+    var totalPagos = c130 + c131 + c132;
+    var totalCargo = c129 + c133;
+    var saldoImp = totalCargo - totalPagos;
+    var c134 = maxZero(saldoImp);
+
+    // Casilla 135: Sancion
+    var c135 = liq.sancion || 0;
+
+    // Casilla 136: Total saldo a pagar (incluye sancion)
+    var c136 = maxZero(saldoImp + c135);
+
+    // Casilla 137: Total saldo a favor
+    var c137 = maxZero(totalPagos - totalCargo - c135);
+
+    return {
+      c98: c98, c111: c111,
+      c116: c116, c117: c117, c118: c118, c119: c119, c120: c120,
+      c121: c121, c125: c125, c126: c126, c127: c127, c128: c128, c129: c129,
+      c130: c130, c131: c131, c132: c132, c133: c133,
+      c134: c134, c135: c135, c136: c136, c137: c137,
+      descuentos: {
+        externos: liq.descuentos || 0,
+        art254_1: descuento254_1,
+        total: c125
+      },
+      anticipo: {
+        pctAplicado: pctAnticipo,
+        declaracionesPrevias: prev,
+        metodoSimple: anticipoSimple,
+        metodoPromedio: anticipoPromedio,
+        baseAplicada: anticipoBase,
+        valor: c133
+      }
+    };
+  }
+
+  // ═══════════════════════════════════════
+  //  Top-level
+  // ═══════════════════════════════════════
+
+  function calcular210(estado, year){
+    estado = estado || {};
+    var pat = estado.patrimonio || {};
+    var cg = estado.cedulaGeneral || {};
+
+    // Patrimonio
+    var c29 = pat.bruto || 0;
+    var c30 = pat.deudas || 0;
+    var c31 = maxZero(c29 - c30);
+
+    // Cedulas
+    var general = calcularCedulaGeneral(cg, year);
+    var pensiones = calcularCedulaPensiones(estado.cedulaPensiones || {}, year);
+    var dividendos = calcularCedulaDividendos(estado.cedulaDividendos || {}, year);
+    var go = calcularGananciasOcasionales(estado.gananciasOcasionales || {}, year);
+
+    // Liquidacion
+    var liq = calcularLiquidacion(estado, {
+      general: general, pensiones: pensiones, dividendos: dividendos, go: go
+    }, year);
+
+    return {
+      year: year,
+      patrimonio: { c29: c29, c30: c30, c31: c31 },
+      cedulaGeneral: general,
+      cedulaPensiones: pensiones,
+      cedulaDividendos: dividendos,
+      gananciasOcasionales: go,
+      liquidacion: liq,
+      // Renglones planos para conveniencia
+      renglones: {
+        c29: c29, c30: c30, c31: c31,
+        c91: general.c91, c92: general.c92, c93: general.c93, c97: general.c97,
+        c101: pensiones.c101, c103: pensiones.c103,
+        c104: dividendos.c104, c105: dividendos.c105, c106: dividendos.c106,
+        c107: dividendos.c107, c108: dividendos.c108,
+        c112: go.c112, c113: go.c113, c114: go.c114, c115: go.c115,
+        c111: liq.c111,
+        c116: liq.c116, c118: liq.c118, c119: liq.c119, c120: liq.c120,
+        c121: liq.c121, c125: liq.c125, c126: liq.c126, c127: liq.c127, c129: liq.c129,
+        c130: liq.c130, c131: liq.c131, c132: liq.c132, c133: liq.c133,
+        c134: liq.c134, c135: liq.c135, c136: liq.c136, c137: liq.c137,
+        // Casilla específica del descuento Art. 254-1 ET (Ley 2277/2022) — A.3.c
+        // El motor calcula esto en liq.descuentos.art254_1; lo exponemos como
+        // renglón explícito para que el Excel papel de trabajo lo discrimine
+        // del descuento agregado c124 en la Hoja 2.
+        c296: (liq.descuentos && liq.descuentos.art254_1) || 0
+      }
+    };
+  }
+
+  // ═══════════════════════════════════════
+  //  Export UMD
+  // ═══════════════════════════════════════
+  var api = {
+    // Tarifas
+    impuestoArt241: impuestoArt241,
+    impuestoArt242: impuestoArt242,
+    impuestoArt242_1: impuestoArt242_1,
+    impuestoArt314: impuestoArt314,
+    impuestoArt317: impuestoArt317,
+    tarifaMarginal: tarifaMarginal,
+    pesosAUvt: pesosAUvt,
+    uvtAPesos: uvtAPesos,
+    // Subcedulas
+    calcularSubcedulaTrabajo: calcularSubcedulaTrabajo,
+    calcularSubcedulaHonorarios: calcularSubcedulaHonorarios,
+    calcularSubcedulaCapital: calcularSubcedulaCapital,
+    calcularSubcedulaNoLaboral: calcularSubcedulaNoLaboral,
+    // Cedulas
+    calcularCedulaGeneral: calcularCedulaGeneral,
+    calcularCedulaPensiones: calcularCedulaPensiones,
+    calcularCedulaDividendos: calcularCedulaDividendos,
+    calcularGananciasOcasionales: calcularGananciasOcasionales,
+    // Helpers normativos
+    cesantiasExentasArt206_4: cesantiasExentasArt206_4,
+    // Liquidacion y top-level
+    calcularLiquidacion: calcularLiquidacion,
+    calcular210: calcular210
+  };
+
+  if(typeof module !== 'undefined' && module.exports){
+    module.exports = api;
+  } else {
+    window.cal210 = api;
+  }
+})();

@@ -1,0 +1,2931 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#1B3A5C">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Contabilizar desde reporte FE del MUISCA — Libro diario + Plano contable | ExógenaDIAN</title>
+<meta name="description" content="Sube el listado de facturación electrónica del MUISCA y obtén la contabilización completa: libro diario, libro auxiliar, mayor, balance de comprobación y plano CSV listo para importar a Helisa, World Office, Siigo, Loggro o cualquier software. Detecta tu PUC propio y aprende de tu maestro de terceros.">
+<meta name="keywords" content="contabilizar facturación electrónica, contabilización automática DIAN, plano contable desde FE, libro diario MUISCA, asientos automáticos facturas electrónicas">
+<link rel="canonical" href="https://exogenadian.com/contabilizar-fe.html">
+<meta property="og:title" content="Contabilizar facturas electrónicas DIAN — Excel + plano contable | ExógenaDIAN">
+<meta property="og:description" content="Del reporte FE del MUISCA a libro diario + plano contable importable en minutos. Detecta tu PUC, aprende de tu maestro de terceros, calcula retefuente/ReteIVA/ReteICA.">
+<meta property="og:url" content="https://exogenadian.com/contabilizar-fe.html">
+<meta property="og:type" content="website"><meta property="og:locale" content="es_CO"><meta property="og:site_name" content="ExógenaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png">
+<meta name="robots" content="index, follow">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://exogenadian.com/"},{"@type":"ListItem","position":2,"name":"Contabilidad","item":"https://exogenadian.com/conciliacion.html"},{"@type":"ListItem","position":3,"name":"Contabilizar desde FE","item":"https://exogenadian.com/contabilizar-fe.html"}]}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--green:#059669;--green2:#ECFDF5;--green3:#D1FAE5;--red:#DC2626;--amber:#D97706;--amber2:#FFF8E1;--amber3:#FEF3C7;--border:#e2e8f0;--radius:10px;--shadow:0 2px 12px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+.container{max-width:1080px;margin:0 auto;padding:20px}
+.crumb{font-size:.78rem;color:var(--muted);margin-bottom:14px}
+.crumb a{color:var(--pri2);text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.header{background:linear-gradient(135deg,#1B3A5C 0%,#2E75B6 100%);padding:28px 32px;border-radius:16px;margin-bottom:24px;color:#fff;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.header h1{font-size:1.55rem;font-weight:800;display:flex;align-items:center;gap:10px;letter-spacing:-.01em}
+.header h1 span.emo{font-size:1.5rem}
+.header p{opacity:.88;font-size:.86rem;margin-top:6px;max-width:680px}
+.header .badges{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.bg{display:inline-block;background:rgba(255,255,255,.18);color:#fff;padding:3px 10px;border-radius:99px;font-size:.7rem;font-weight:700}
+.bg.gn{background:rgba(16,185,129,.25);color:#A7F3D0}
+.bg.am{background:rgba(217,119,6,.25);color:#FCD34D}
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:22px 24px;margin-bottom:18px;box-shadow:var(--shadow)}
+.card-title{font-size:1.02rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;color:var(--pri)}
+.card-title .step{background:var(--pri);color:#fff;width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700}
+.card-sub{font-size:.85rem;color:var(--muted);margin-top:-8px;margin-bottom:14px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.form-grid.c2{grid-template-columns:1fr 1fr}
+.form-grid.c4{grid-template-columns:repeat(4,1fr)}
+.form-group{display:flex;flex-direction:column;gap:4px}
+.form-group label{font-size:.74rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+.form-group input,.form-group select{padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.92rem;font-family:'DM Sans',sans-serif;transition:.2s;background:#fff}
+.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--pri2);box-shadow:0 0 0 3px rgba(46,117,182,.12)}
+.form-group .hint{font-size:.68rem;color:var(--muted);margin-top:2px}
+.checks{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px}
+.check{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;background:#F8FAFC;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;font-size:.84rem}
+.check input{margin-top:2px;cursor:pointer}
+.check.on{border-color:var(--pri2);background:var(--pri3);color:var(--pri)}
+.check strong{display:block;font-size:.78rem;margin-bottom:2px}
+.check small{font-size:.7rem;color:var(--muted);display:block}
+.check.on small{color:var(--pri2)}
+.drop-zone{border:2px dashed var(--border);border-radius:var(--radius);padding:32px 24px;text-align:center;cursor:pointer;transition:.2s;display:block;background:#fafbfc}
+.drop-zone:hover,.drop-zone.drag{border-color:var(--pri2);background:var(--pri3)}
+.drop-zone-input{display:none}
+.drop-zone .ico{font-size:2rem;margin-bottom:8px;opacity:.6}
+.drop-zone .ttl{font-weight:700;color:var(--pri);font-size:.95rem;margin-bottom:4px}
+.drop-zone .sub{font-size:.78rem;color:var(--muted)}
+.drop-zone.compact{padding:20px 16px}
+.drop-zone.compact .ico{font-size:1.5rem;margin-bottom:4px}
+.drop-zone.compact .ttl{font-size:.86rem}
+.drop-zone.compact .sub{font-size:.72rem}
+.alert{padding:11px 14px;border-radius:8px;font-size:.83rem;margin:10px 0;display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.alert-info{background:var(--pri3);color:var(--pri);border:1px solid #B4C6E7}
+.alert-warn{background:var(--amber3);color:#92400E;border:1px solid #FDE68A}
+.alert-ok{background:var(--green3);color:#065F46;border:1px solid #6EE7B7}
+.alert-soft{background:#F8FAFC;color:var(--text);border:1px solid var(--border);font-size:.82rem}
+.btn{padding:11px 22px;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:.9rem;font-family:inherit;transition:.15s;display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn-blue{background:var(--pri2);color:#fff}.btn-blue:hover:not(:disabled){background:var(--pri)}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover:not(:disabled){background:#047857}
+.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--text)}.btn-outline:hover{border-color:var(--pri2);color:var(--pri2)}
+.btn-ghost{background:transparent;color:var(--pri2);padding:6px 10px;font-weight:600;font-size:.82rem}
+.btn-ghost:hover{background:var(--pri3)}
+.btn-big{padding:14px 22px;font-size:.95rem;border-radius:10px}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.kpi{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:14px;text-align:center}
+.kpi .val{font-size:1.05rem;font-weight:700;font-family:'JetBrains Mono',monospace}
+.kpi .lbl{font-size:.66rem;color:var(--muted);font-weight:700;text-transform:uppercase;margin-top:4px;letter-spacing:.4px}
+.kpi.green .val{color:var(--green)}
+.kpi.blue .val{color:var(--pri2)}
+.kpi.red .val{color:var(--red)}
+.kpi.amber .val{color:var(--amber)}
+.kpi.gray .val{color:var(--muted)}
+.preview-table{width:100%;border-collapse:collapse;font-size:.76rem;margin-top:8px}
+.preview-table th{background:var(--pri);color:#fff;padding:7px 9px;text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.3px;font-weight:700;position:sticky;top:0}
+.preview-table td{padding:6px 9px;border-bottom:1px solid var(--border);vertical-align:top}
+.preview-table td.num{text-align:right;font-family:'JetBrains Mono',monospace}
+.preview-table td.code{font-family:'JetBrains Mono',monospace;color:var(--pri2);font-weight:600}
+.preview-table tr.entry-sep td{border-top:2px solid var(--pri3)}
+.preview-wrap{max-height:520px;overflow:auto;border:1px solid var(--border);border-radius:8px}
+.tabs{display:flex;gap:4px;margin-bottom:10px;border-bottom:1px solid var(--border);overflow-x:auto}
+.tab-btn{padding:9px 16px;border:none;background:transparent;color:var(--muted);font-weight:600;cursor:pointer;font-family:inherit;font-size:.84rem;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.tab-btn.active{color:var(--pri);border-bottom-color:var(--pri2)}
+.tab-btn:hover{color:var(--pri)}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+.disclaimer{margin-top:14px;padding:12px 16px;background:var(--amber2);border:1px solid #FDE68A;border-radius:8px;font-size:.74rem;color:#92400E;line-height:1.6}
+.normativa{margin-top:16px;padding:12px 16px;background:#F9FAFB;border:1px solid var(--border);border-radius:8px;font-size:.78rem;color:var(--muted);line-height:1.7}
+.normativa b{color:var(--pri)}
+.wow{background:linear-gradient(135deg,#ECFDF5 0%,#D6E4F0 100%);border:1px solid #6EE7B7;border-radius:12px;padding:16px 20px;margin:16px 0;display:flex;gap:14px;align-items:center}
+.wow .emo{font-size:1.8rem}
+.wow .txt{font-size:.86rem;color:var(--pri);line-height:1.5}
+.wow .txt b{color:var(--green)}
+.related{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.related a{display:block;padding:10px 12px;background:#F8FAFC;border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--pri);font-size:.84rem;font-weight:600;transition:.15s}
+.related a:hover{border-color:var(--pri2);background:var(--pri3)}
+.related a small{display:block;font-weight:400;color:var(--muted);font-size:.72rem;margin-top:2px}
+.dl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:14px}
+.dl-card{padding:18px 20px;border:1.5px solid var(--border);border-radius:12px;background:#fff;transition:.15s}
+.dl-card:hover{border-color:var(--pri2);box-shadow:0 4px 14px rgba(27,58,92,.08)}
+.dl-card h4{font-size:1rem;font-weight:800;color:var(--pri);display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.dl-card p{font-size:.82rem;color:var(--muted);margin-bottom:12px;line-height:1.5}
+.dl-card .btn{width:100%;justify-content:center}
+.cuenta-edit{padding:3px 6px;border:1px solid var(--border);border-radius:5px;font-family:'JetBrains Mono',monospace;font-size:.74rem;width:90px;background:#fff}
+.cuenta-edit:focus{outline:none;border-color:var(--pri2)}
+.maestro-table{width:100%;border-collapse:collapse;font-size:.78rem}
+.maestro-table th{background:#F8FAFC;color:var(--pri);padding:7px 9px;text-align:left;font-weight:700;font-size:.72rem;text-transform:uppercase;border-bottom:1px solid var(--border)}
+.maestro-table td{padding:5px 9px;border-bottom:1px solid var(--border)}
+.maestro-table .num{text-align:right;font-family:'JetBrains Mono',monospace}
+.foot{margin-top:30px;text-align:center;font-size:.78rem;color:var(--muted);padding:16px}
+.foot a{color:var(--pri2);text-decoration:none}
+@media(max-width:760px){
+  .form-grid,.form-grid.c2,.form-grid.c4{grid-template-columns:1fr}
+  .checks{grid-template-columns:1fr}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .related{grid-template-columns:1fr}
+  .dl-grid{grid-template-columns:1fr}
+  .ecard{flex-direction:column;text-align:center;padding:24px 20px}
+  .ecard-icon{font-size:2.6rem;margin-bottom:8px}
+  .ecard-cta{width:100%;justify-content:center}
+}
+/* ═══ Ecard siguiente paso — aparece tras contabilizar ═══ */
+.ecard{margin-top:24px;border-radius:16px;padding:28px 32px;background:linear-gradient(135deg,#1B3A5C 0%,#2E75B6 100%);color:#fff;display:flex;gap:24px;align-items:center;box-shadow:0 8px 28px rgba(27,58,92,.18);position:relative;overflow:hidden}
+.ecard::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,255,255,.08) 0%,transparent 70%);border-radius:50%}
+.ecard::after{content:'';position:absolute;bottom:-60px;left:-30px;width:140px;height:140px;background:radial-gradient(circle,rgba(110,231,183,.12) 0%,transparent 70%);border-radius:50%}
+.ecard-icon{font-size:3.2rem;line-height:1;flex-shrink:0;position:relative;z-index:1}
+.ecard-body{flex:1;position:relative;z-index:1}
+.ecard-tag{display:inline-block;background:rgba(110,231,183,.22);color:#A7F3D0;padding:3px 11px;border-radius:99px;font-size:.7rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px}
+.ecard-title{font-size:1.4rem;font-weight:800;letter-spacing:-.01em;margin-bottom:6px;line-height:1.2}
+.ecard-desc{font-size:.92rem;opacity:.92;line-height:1.55;max-width:540px;margin-bottom:14px}
+.ecard-checks{display:flex;flex-wrap:wrap;gap:6px 14px;margin-bottom:16px;font-size:.78rem;opacity:.88}
+.ecard-checks span{display:inline-flex;align-items:center;gap:5px}
+.ecard-checks span::before{content:'✓';color:#6EE7B7;font-weight:700}
+.ecard-cta{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#1B3A5C;padding:13px 26px;border-radius:10px;font-weight:800;font-size:.95rem;text-decoration:none;transition:.15s;position:relative;z-index:1;box-shadow:0 4px 14px rgba(0,0,0,.15)}
+.ecard-cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.22);background:#ECFDF5}
+.ecard-cta::after{content:'→';transition:transform .15s}
+.ecard-cta:hover::after{transform:translateX(4px)}
+.ecard-skip{display:inline-block;margin-left:14px;color:rgba(255,255,255,.7);font-size:.82rem;text-decoration:none;font-weight:500}
+.ecard-skip:hover{color:#fff;text-decoration:underline}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div id="nav-container"></div>
+<div class="container">
+  <nav class="crumb" aria-label="Migas">
+    <a href="index.html">Inicio</a> ›
+    <a href="conciliacion.html">Contabilidad</a> ›
+    <strong style="color:var(--text)">Contabilizar desde FE del MUISCA</strong>
+  </nav>
+  <header class="header">
+    <div>
+      <h1><span class="emo">⚡</span> Contabilizar desde reporte FE del MUISCA</h1>
+      <p>Sube el listado de documentos electrónicos del MUISCA y obtén el <strong>libro diario completo</strong> + un <strong>plano CSV</strong> importable a Helisa, World Office, Siigo, Loggro o tu software contable. Las retenciones se leen tal cual vienen en el reporte — no se inventan.</p>
+      <div class="badges">
+        <span class="bg gn">Vista previa gratis</span>
+        <span class="bg am">Descarga PRO</span>
+        <span class="bg">Sin instalar · 100% local</span>
+      </div>
+    </div>
+  </header>
+  <div style="background:linear-gradient(135deg,#FEF3C7,#FDE68A);border:1.5px solid #D97706;border-radius:12px;padding:18px 22px;margin-bottom:20px;display:flex;gap:14px;align-items:flex-start">
+    <div style="font-size:1.8rem;line-height:1;flex-shrink:0">⚠️</div>
+    <div style="flex:1;font-size:.88rem;line-height:1.55;color:#7C2D12">
+      <strong style="display:block;font-size:1rem;margin-bottom:4px;color:#92400E">Esta es una herramienta de emergencia, no la contabilización normal.</strong>
+      La contabilización profesional se hace al día en tu software (Helisa, Siigo, WO, Loggro) con causación documento por documento, conciliación bancaria semanal y políticas contables de la empresa. <strong>Usa esta herramienta cuando:</strong>
+      <ul style="margin:8px 0 0 22px;padding:0">
+        <li>Tu cliente nunca contabilizó y necesitas reconstruir el año desde la FE (cierre tardío)</li>
+        <li>Hay pérdida de información contable y necesitas un punto de partida rápido</li>
+        <li>Quieres validar/cruzar lo que tienes contra el reporte oficial DIAN</li>
+        <li>Vas a estimar declaraciones con datos crudos antes de la causación formal</li>
+      </ul>
+      <div style="margin-top:8px;font-size:.82rem;opacity:.92">El resultado <strong>siempre debe ser revisado y completado</strong> con saldos iniciales, nómina, depreciaciones, ajustes y operaciones que no pasan por FE.</div>
+    </div>
+  </div>
+  <section class="card">
+    <h2 class="card-title"><span class="step">1</span> Sube el reporte FE/RADIAN del MUISCA</h2>
+    <p class="card-sub">Ruta en MUISCA: <strong>RADIAN → Reporte de documentos electrónicos → Excel</strong>. El archivo debe traer columnas: Tipo doc, Folio, Fecha, NIT/Nombre emisor, NIT/Nombre receptor, IVA, Total y (opcional) Grupo Emitido/Recibido. Las columnas Rete IVA/Renta/ICA si vienen, se aprovechan.</p>
+    <label class="drop-zone" id="dropFE">
+      <input type="file" class="drop-zone-input" id="iFE" accept=".xlsx,.xls,.csv">
+      <div class="ico">📥</div>
+      <div class="ttl">Arrastra el Excel del MUISCA o haz click</div>
+      <div class="sub">.xlsx, .xls o .csv — hasta 20 MB</div>
+    </label>
+    <div id="fileFEStatus" style="margin-top:8px;font-size:.85rem;color:var(--green);font-weight:600"></div>
+    <div id="parseInfo" style="display:none">
+      <div class="alert alert-ok" id="parseOk"></div>
+      <div class="kpis" id="kpis"></div>
+    </div>
+  </section>
+  <section class="card" style="border-left:3px solid var(--green)">
+    <h2 class="card-title"><span class="step">2</span> Aprende de tu auxiliar por tercero del mes anterior <span style="font-size:.72rem;color:var(--green);font-weight:700;letter-spacing:.4px;text-transform:uppercase;margin-left:6px;background:var(--green3);padding:2px 8px;border-radius:99px">Recomendado</span></h2>
+    <p class="card-sub">Sube el <strong>balance de comprobación por tercero</strong> (o el auxiliar por tercero) del mes pasado que sale de tu software contable. La herramienta mira para cada NIT qué cuenta de gasto/ingreso usaste antes y aplica la misma clasificación al mes nuevo. <strong>Es opcional</strong> — sin histórico el motor igual clasifica con: (1) tabla de ~80 NITs grandes CO embebida (EPM, Bancolombia, Claro, Servientrega, etc.), (2) heurística por nombre con ~80 patrones (NOTARIA→514005, HOTEL→515505, etc.). El histórico es el "wow": lleva el acierto de ~60% a ~90% en proveedores recurrentes.</p>
+    <label class="drop-zone compact" id="dropAux">
+      <input type="file" class="drop-zone-input" id="iAux" accept=".xlsx,.xls,.csv">
+      <div class="ico">📊</div>
+      <div class="ttl">Sube el balance por tercero (Helisa, World Office, Siigo, Loggro…)</div>
+      <div class="sub">Debe traer columnas: Cuenta, NIT, Tercero, Saldo o Movimiento. Cualquier formato — auto-detectamos.</div>
+    </label>
+    <div id="auxStatus" style="margin-top:10px"></div>
+    <div class="alert alert-info" style="margin-top:10px;font-size:.78rem">
+      💡 <strong>De dónde sale esto:</strong> en Helisa → <em>Informes → Auxiliar por tercero</em>. World Office → <em>Reportes contables → Balance por tercero</em>. Siigo → <em>Informes → Movimiento por tercero</em>. Loggro → <em>Reportes → Libro auxiliar por tercero</em>. Cualquier rango de fechas sirve (3 o 6 meses ideal — más datos = mejor aprendizaje).
+    </div>
+    <div style="height:1px;background:var(--border);margin:18px 0"></div>
+    <h3 style="font-size:.95rem;font-weight:700;color:var(--pri);margin-bottom:6px;display:flex;align-items:center;gap:8px">📒 Balance de apertura <span style="font-size:.72rem;color:var(--muted);font-weight:500;letter-spacing:0;text-transform:none">(opcional — para que el ESF cuadre)</span></h3>
+    <p class="card-sub" style="margin-top:0">Sube el <strong>balance al 31 de diciembre del año anterior</strong> (= saldos iniciales del año actual). El motor suma esos saldos a los movimientos contabilizados desde la FE para que el ESF quede con caja, bancos, capital social, reservas y resultados acumulados completos. Sin este paso, el ESF solo muestra movimientos del periodo.</p>
+    <label class="drop-zone compact" id="dropBal">
+      <input type="file" class="drop-zone-input" id="iBal" accept=".xlsx,.xls,.csv">
+      <div class="ico">📒</div>
+      <div class="ttl">Sube tu balance de apertura (al cierre del año anterior)</div>
+      <div class="sub">Columnas: Cuenta + Saldo Final (o Saldo Débito / Saldo Crédito). Auto-detecta formato.</div>
+    </label>
+    <div id="balStatus" style="margin-top:10px"></div>
+    <div style="height:1px;background:var(--border);margin:18px 0"></div>
+    <h3 style="font-size:.95rem;font-weight:700;color:var(--pri);margin-bottom:6px;display:flex;align-items:center;gap:8px">📋 Plan de cuentas del cliente <span style="font-size:.72rem;color:#7C3AED;font-weight:700;letter-spacing:.4px;text-transform:uppercase;background:#EDE9FE;padding:2px 8px;border-radius:99px">Droguerías / comercio</span></h3>
+    <p class="card-sub" style="margin-top:0">Sube el <strong>balance del cliente del periodo anterior</strong> (o su plan de cuentas) cuando maneja códigos distintos al PUC 2650/93 — típico de clientes que diferencian <strong>gravada / exenta / excluida</strong> en distintas auxiliares (droguerías, productos canasta familiar, RST). El motor detecta los códigos reales de ventas, compras, IVA, proveedores y los aplica al contabilizar y al exportar. <strong>Sin este paso</strong> aplica el default 001 gravada / 002 exenta y el PUC 2650 estándar.</p>
+    <div class="alert alert-info" style="margin-bottom:10px;font-size:.78rem">💡 <strong>Auto-detección:</strong> si tu balance de apertura (campo de arriba) ya trae cuentas con "GRAVADA"/"EXENTA"/"EXCLUIDA", el motor lo usa también como Plan de cuentas — no tienes que subirlo dos veces.</div>
+    <label class="drop-zone compact" id="dropPuc">
+      <input type="file" class="drop-zone-input" id="iPuc" accept=".xlsx,.xls,.csv">
+      <div class="ico">📋</div>
+      <div class="ttl">Sube el plan de cuentas o balance del cliente</div>
+      <div class="sub">Auto-detecta cuentas por nombre: "VENTAS GRAVADAS", "MERCANCIAS EXENTAS", "IVA GENERADO", "PROVEEDORES", etc.</div>
+    </label>
+    <div id="pucStatus" style="margin-top:10px"></div>
+    <div id="pucPolicyBox" style="display:none;margin-top:10px;padding:12px 14px;background:#F8FAFC;border:1px solid var(--border);border-radius:8px">
+      <div style="font-size:.74rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">⚙️ Política para facturas sin IVA</div>
+      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+        <div style="font-size:.86rem;color:var(--text)">Cuando una factura del MUISCA no trae IVA, contabilízala como:</div>
+        <select id="iPolSinIva" style="padding:7px 10px;border:1.5px solid var(--border);border-radius:6px;font-size:.86rem;font-family:'DM Sans',sans-serif;background:#fff">
+          <option value="exenta">Exenta (tarifa 0%, sí da derecho a descontable)</option>
+          <option value="excluida">Excluida (no responsable de IVA)</option>
+        </select>
+      </div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:6px">Desde el reporte FE/MUISCA no se distingue exenta de excluida (las dos llegan con IVA=0). Esta política decide a cuál auxiliar mandar esos documentos en el cliente con PUC personalizado.</div>
+    </div>
+  </section>
+  <section class="card">
+    <h2 class="card-title"><span class="step">3</span> Generar contabilización</h2>
+    <p class="card-sub">La herramienta crea un asiento por cada documento (o uno consolidado por mes, según elijas). Las retenciones se toman tal cual vienen en el reporte MUISCA.</p>
+    <div class="form-grid c2" style="margin-bottom:14px">
+      <div class="form-group">
+        <label for="iModo">Modo de asiento</label>
+        <select id="iModo">
+          <option value="detallado">Detallado — un asiento por documento</option>
+          <option value="mensual">Mensual consolidado — un asiento por mes</option>
+        </select>
+        <span class="hint">Mensual = ideal para archivos de varios meses.</span>
+      </div>
+      <div class="form-group">
+        <label for="iCruce">Contrapartida del dinero</label>
+        <select id="iCruce">
+          <option value="cartera">Cartera / Proveedores (facturación a crédito)</option>
+          <option value="caja">Todo a Caja 110505 (cobro/paga en efectivo)</option>
+          <option value="bancos">Todo a Bancos 111005 (transferencias / Nequi / Daviplata)</option>
+        </select>
+        <span class="hint">Si tu cliente cobra/paga al contado, eliges Caja o Bancos y no se acumulan saldos en CxC/CxP.</span>
+      </div>
+    </div>
+    <div id="cruceWarn" style="display:none;margin-bottom:14px;padding:10px 14px;background:var(--amber3);border:1px solid #FDE68A;border-radius:8px;font-size:.82rem;color:#92400E;line-height:1.5"></div>
+    <div id="periodoInfo" style="display:none;margin-bottom:14px;padding:10px 14px;background:#F8FAFC;border:1px solid var(--border);border-radius:8px;font-size:.86rem;color:var(--text)">
+      <span style="color:var(--muted);font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.4px">Periodo detectado:</span>
+      <strong id="periodoTxt"></strong>
+    </div>
+    <details style="margin-bottom:14px">
+      <summary style="cursor:pointer;font-weight:600;color:var(--muted);padding:6px 0;font-size:.85rem">⚙️ Avanzado: NIT propio + filtrar a un rango más chico</summary>
+      <div class="form-grid" style="margin-top:10px">
+        <div class="form-group">
+          <label for="iNit">NIT propio (sin DV)</label>
+          <input type="text" id="iNit" placeholder="se auto-detecta del archivo" maxlength="11" inputmode="numeric">
+          <span class="hint">Se llena solo. Solo edítalo si la detección es incorrecta.</span>
+        </div>
+        <div class="form-group">
+          <label for="iDesde">Filtrar desde</label>
+          <input type="date" id="iDesde">
+          <span class="hint">Solo si quieres contabilizar un subconjunto.</span>
+        </div>
+        <div class="form-group">
+          <label for="iHasta">Filtrar hasta</label>
+          <input type="date" id="iHasta">
+          <span class="hint">Por defecto se usa todo el archivo.</span>
+        </div>
+      </div>
+    </details>
+    <div class="btn-row">
+      <button class="btn btn-blue btn-big" type="button" id="btnContabilizar" onclick="contabilizar()" disabled>⚡ Contabilizar</button>
+      <span id="contStatus" style="font-size:.84rem;color:var(--muted)"></span>
+    </div>
+    <div id="resultZone" style="display:none;margin-top:18px">
+      <div class="kpis" id="kpisCont"></div>
+      <div id="kpisMes"></div>
+      <div class="tabs" role="tablist">
+        <button class="tab-btn active" data-tab="preview" role="tab">📋 Preview asientos</button>
+        <button class="tab-btn" data-tab="balance" role="tab">⚖️ Balance comprobación</button>
+        <button class="tab-btn" data-tab="auxiliar" role="tab">📊 Auxiliar por cuenta</button>
+      </div>
+      <div class="tab-pane active" id="tab-preview">
+        <div class="alert alert-soft">Primeros 80 renglones del libro diario. Las descargas traen los <strong id="totRenglones">0</strong> renglones completos.</div>
+        <div class="preview-wrap"><table class="preview-table" id="tblPreview"></table></div>
+      </div>
+      <div class="tab-pane" id="tab-balance">
+        <div class="alert alert-soft">Balance de comprobación agregado por cuenta. Muestra movimiento débito, crédito y saldo final.</div>
+        <div class="preview-wrap"><table class="preview-table" id="tblBalance"></table></div>
+      </div>
+      <div class="tab-pane" id="tab-auxiliar">
+        <div class="alert alert-soft">Auxiliar resumido: cuentas con más movimientos primero.</div>
+        <div class="preview-wrap"><table class="preview-table" id="tblAuxiliar"></table></div>
+      </div>
+      <div class="dl-grid">
+        <div class="dl-card">
+          <h4>📗 Excel contable completo <span style="background:#FEF3C7;color:#92400E;padding:2px 8px;border-radius:99px;font-size:.65rem;font-weight:700;letter-spacing:.4px;margin-left:6px">PRO</span></h4>
+          <p>Libro diario + auxiliar por cuenta + balance de comprobación + ESF mínimo + ERI mínimo. 5 hojas estilizadas, formato listo para revisión y archivo.</p>
+          <button class="btn btn-green btn-big" type="button" onclick="descargarExcel()">Descargar .xlsx</button>
+        </div>
+        <div class="dl-card">
+          <h4>📄 Plano CSV universal <span style="background:#FEF3C7;color:#92400E;padding:2px 8px;border-radius:99px;font-size:.65rem;font-weight:700;letter-spacing:.4px;margin-left:6px">PRO</span></h4>
+          <p>CSV con columnas estándar (Fecha, Comprobante, Cuenta, NIT, Detalle, Débito, Crédito) que importas a Helisa, World Office, Siigo, Loggro o cualquier software contable.</p>
+          <button class="btn btn-blue btn-big" type="button" onclick="descargarCSV()">Descargar .csv</button>
+        </div>
+        <div class="dl-card" style="border-color:#A78BFA;background:linear-gradient(135deg,#FAF5FF 0%,#fff 100%)">
+          <h4>📦 Plano Total Innovation <span style="background:#FEF3C7;color:#92400E;padding:2px 8px;border-radius:99px;font-size:.65rem;font-weight:700;letter-spacing:.4px;margin-left:6px">PRO</span></h4>
+          <p><strong>3 hojas en un archivo:</strong> (1) <em>Doc- contabilidad</em> con el formato exacto del template "Importar Archivos Excel — Transacciones Contabilidad" para importar al software; (2) <em>Resumen</em> con conteo de docs por tipo + movimiento por cuenta agrupado por clase; (3) <em>Balance por tercero</em> con débitos/créditos/saldo por cuenta y NIT para conciliar contra el software contable.</p>
+          <p style="font-size:.78rem;color:var(--muted);margin-top:-6px">Ingresos/costos a nivel auxiliar: <code style="font-family:monospace;background:#EDE9FE;padding:1px 6px;border-radius:4px;font-size:.85em">001</code> gravada · <code style="font-family:monospace;background:#EDE9FE;padding:1px 6px;border-radius:4px;font-size:.85em">002</code> exenta. Si subiste el plan de cuentas del cliente, usa sus códigos reales.</p>
+          <button class="btn btn-blue btn-big" type="button" onclick="descargarTotalInnovation()" style="background:#7C3AED">Descargar Total Innovation</button>
+        </div>
+      </div>
+      <p style="text-align:center;font-size:.78rem;color:var(--muted);margin-top:10px">El preview de asientos, el balance de comprobación y el auxiliar quedan <strong>gratis</strong> aquí en pantalla — solo la descarga requiere PRO.</p>
+      <div class="ecard" id="ecardSiguiente">
+        <div class="ecard-icon">🏦</div>
+        <div class="ecard-body">
+          <span class="ecard-tag">Siguiente paso recomendado</span>
+          <div class="ecard-title">Ahora concilia los bancos</div>
+          <div class="ecard-desc" id="ecardDesc">Ya tienes el libro diario causado. El cierre del mes solo está completo cuando cruzas tu extracto bancario contra estos asientos — ahí salen los ingresos no facturados, los gastos sin causar y los pagos que faltan.</div>
+          <div class="ecard-checks">
+            <span>Carga extracto bancario</span>
+            <span>Cruce automático contra auxiliar</span>
+            <span>Detecta partidas conciliatorias</span>
+            <span>Exporta el informe final</span>
+          </div>
+          <a href="conciliacion.html" class="ecard-cta" onclick="if(typeof exoTrack!=='undefined')exoTrack.ctaClick&&exoTrack.ctaClick('ecard_conciliar','contabilizar-fe')">🏦 Abrir conciliación bancaria</a>
+          <a href="estadosfinancieros.html" class="ecard-skip">o ir a estados financieros</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="card">
+    <h2 class="card-title">📖 Cómo se construye cada asiento</h2>
+    <p class="card-sub">Para que sepas exactamente qué hace el motor antes de importar a producción. <strong>Filosofía:</strong> contabilizamos lo que dice el documento real (incluyendo retenciones tal cual vienen en el reporte). El criterio fiscal lo aplicas tú en el software contable.</p>
+    <details style="margin-bottom:10px">
+      <summary style="cursor:pointer;font-weight:700;color:var(--pri);padding:8px 0">Factura electrónica RECIBIDA (compra)</summary>
+      <pre style="background:#F8FAFC;padding:12px;border-radius:8px;font-size:.76rem;margin-top:8px;overflow-x:auto;font-family:'JetBrains Mono',monospace">
+DR Cuenta gasto (auxiliar histórico → heurística → 519590)  subtotal
+DR 240802 IVA descontable                                   iva (si la factura trae IVA)
+CR 220505 Proveedores nacionales                            total − retenciones
+CR 236540 ReteFuente compras                                solo si el reporte trae reteRenta
+CR 236701 ReteIVA practicada                                solo si el reporte trae reteIVA
+CR 236805 ReteICA                                           solo si el reporte trae reteICA</pre>
+    </details>
+    <details style="margin-bottom:10px">
+      <summary style="cursor:pointer;font-weight:700;color:var(--pri);padding:8px 0">Factura electrónica EMITIDA (venta)</summary>
+      <pre style="background:#F8FAFC;padding:12px;border-radius:8px;font-size:.76rem;margin-top:8px;overflow-x:auto;font-family:'JetBrains Mono',monospace">
+DR 130505 Clientes nacionales                  total − retenciones que me practicaron
+DR 135515 Retefuente que me practicaron        solo si el reporte trae reteRenta
+DR 135517 ReteIVA que me practicaron           solo si el reporte trae reteIVA
+DR 135518 ReteICA que me practicaron           solo si el reporte trae reteICA
+CR Cuenta ingreso (auxiliar histórico → 413555)  subtotal
+CR 240801 IVA generado                          iva</pre>
+    </details>
+    <details style="margin-bottom:10px">
+      <summary style="cursor:pointer;font-weight:700;color:var(--pri);padding:8px 0">Documento Soporte (compra a no obligado a facturar)</summary>
+      <pre style="background:#F8FAFC;padding:12px;border-radius:8px;font-size:.76rem;margin-top:8px;overflow-x:auto;font-family:'JetBrains Mono',monospace">
+DR Cuenta gasto (auxiliar histórico → heurística → 519590)  subtotal
+CR 233595 Cuentas por pagar diversos                         total − retenciones
+CR Retenciones                                               solo las que vengan en el reporte</pre>
+    </details>
+    <details style="margin-bottom:10px">
+      <summary style="cursor:pointer;font-weight:700;color:var(--pri);padding:8px 0">Nota crédito recibida o emitida</summary>
+      <pre style="background:#F8FAFC;padding:12px;border-radius:8px;font-size:.76rem;margin-top:8px;overflow-x:auto;font-family:'JetBrains Mono',monospace">
+Mismo asiento que la FE asociada, pero con DR y CR invertidos.
+Las retenciones se devuelven proporcionalmente.</pre>
+    </details>
+    <details>
+      <summary style="cursor:pointer;font-weight:700;color:var(--pri);padding:8px 0">¿Cómo se elige la cuenta de gasto / ingreso? (4 capas en cascada)</summary>
+      <ol style="margin:10px 0 0 22px;font-size:.84rem;line-height:1.7">
+        <li><strong>Auxiliar histórico</strong> (paso 2). Si en meses anteriores ya causaste al NIT contra una cuenta específica, usamos la misma. Es la mejor capa porque aprende tu PUC real.</li>
+        <li><strong>NITs conocidos</strong> (~80 empresas grandes CO). EPM 890904996 → 513525 energía. Bancolombia 890903938 → 513580 servicios bancarios. Servientrega 860350176 → 513545 transporte. Match exacto por NIT, 100% acertado.</li>
+        <li><strong>Heurística por nombre</strong> (~80 patrones). "*ARRIEND*" → arrendamiento, "*NOTARIA*" → 514005 gastos notariales, "*ABOGAD*" → 511025 honorarios jurídicos, "*HOTEL*" → 515505 viaje, "*FERRETER*" → 514515 mantenimiento.</li>
+        <li><strong>Default 519590 Diversos</strong>. Cuando ninguna regla acierta. Filtra por esa cuenta en tu software y corrige las pocas que falten.</li>
+      </ol>
+      <p style="margin-top:10px;font-size:.78rem;color:var(--muted)">Con auxiliar histórico de 3 meses + NITs conocidos + heurística: típicamente <strong>~90% de cuentas correctas</strong>. Solo te quedan ~10% de proveedores nuevos esporádicos para corregir manualmente.</p>
+      <details style="margin-top:10px">
+        <summary style="cursor:pointer;font-size:.8rem;color:var(--muted);font-weight:600">Ver lista de NITs conocidos pre-clasificados</summary>
+        <ul style="margin:8px 0 0 22px;font-size:.76rem;line-height:1.6;color:var(--muted);columns:2;column-gap:18px">
+          <li><b>Servicios públicos:</b> EPM, Codensa, EAAB, Vanti, Surtigas, Emcali, Triple A, Gases del Caribe</li>
+          <li><b>Telcos:</b> Claro, Movistar, Tigo, ETB, DirecTV, WOM</li>
+          <li><b>Courier:</b> Servientrega, Envia, Coordinadora, Interrapidísimo, TCC, DHL, FedEx</li>
+          <li><b>Aerolíneas:</b> Avianca, LATAM, Wingo, Satena, EasyFly</li>
+          <li><b>Combustibles:</b> Terpel, Esso, Biomax, Primax</li>
+          <li><b>Bancos:</b> Bancolombia, Davivienda, Bogotá, BBVA, Occidente, Popular, AV Villas, Scotiabank, Itaú, Caja Social</li>
+          <li><b>Ferreterías:</b> Homecenter, EASY</li>
+          <li><b>Supermercados:</b> Éxito, Jumbo, Metro, Olímpica, D1, Ara, Justo&Bueno, PriceSmart</li>
+          <li><b>Salud/EPS:</b> Sura, Sanitas, Compensar, Coomeva, Salud Total, Famisanar, Nueva EPS</li>
+          <li><b>ARL:</b> Sura ARL, Positiva, Colmena, Liberty</li>
+          <li><b>Pensiones:</b> Porvenir, Protección, Colfondos, Skandia</li>
+          <li><b>Cajas:</b> Colsubsidio, Cafam, Compensar, Comfama, Comfandi</li>
+          <li><b>Software:</b> Microsoft, Google, AWS, Adobe</li>
+          <li><b>Pasarelas:</b> Wompi, ePayco, PayU, Mercado Pago</li>
+          <li><b>Estado:</b> DIAN, SENA, ICBF, Cámaras de Comercio (Bogotá, Medellín, Cali, Barranquilla)</li>
+        </ul>
+      </details>
+    </details>
+  </section>
+  <div class="related">
+    <a href="exogena-desde-fe.html">📥 Exógena desde FE<small>Genera F1001+F1005+F1006+F1007 desde el mismo reporte</small></a>
+    <a href="conciliacion.html">🔄 Conciliación bancaria<small>Cuando ya tengas los asientos, concilia el banco</small></a>
+    <a href="estadosfinancieros.html">📊 Estados financieros<small>Sube tu balance final y genera ESF + ERI</small></a>
+  </div>
+  <div class="disclaimer">
+    <strong>⚠ Esta herramienta es un acelerador, no un sustituto del criterio profesional.</strong> El motor aplica reglas estándar (PUC 2650/93 + Decreto 0572/2025 + Estatuto Tributario), pero <strong>cada empresa tiene políticas contables propias</strong>. Revisa los asientos antes de importarlos. La herramienta corre 100% en tu navegador — los archivos nunca salen de tu computador.
+  </div>
+  <div class="normativa">
+    <b>Marco normativo:</b> Decreto 2650/1993 (PUC para comerciantes) · Estatuto Tributario Arts. 365–401 (retención en la fuente) · Art. 437-2 ET (agentes ReteIVA) · Decreto 0572/2025 (bases mínimas en UVT; suspendido 7-may-2026 y reactivado el 2-jun-2026, rige desde 1-jul-2026) · Decreto 358/2020 y Resolución DIAN 000165/2023 (factura electrónica y documento soporte) · NIIF para PYMES.
+  </div>
+  <div class="foot">
+    <a href="index.html">← Inicio</a> · <a href="changelog.html">Historial de cambios</a> · <a href="privacidad-finanzas.html">Privacidad</a>
+  </div>
+</div>
+<script defer src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
+<script src="shared/analytics.js?v=b756a0cb"></script>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<script src="shared/version.js?v=37605021"></script>
+<script defer src="shared/pro.js?v=848fbf16"></script>
+<script defer src="shared/pro-gate.js?v=c9ccfa6c"></script>
+<script defer src="shared/pro-banner.js?v=a5944c54"></script>
+<script>
+// ═══════════════════════════════════════════════════════════════════════════
+// HELPERS REUTILIZADOS
+// ═══════════════════════════════════════════════════════════════════════════
+function norm(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[\n\r\t]+/g,' ').replace(/\s+/g,' ').trim()}
+function toNum(v){if(typeof v==='number')return v;if(!v)return 0;let s=String(v).replace(/[$\s]/g,'');let neg=false;if(/^\(.+\)$/.test(s)){neg=true;s=s.slice(1,-1)}if(s.includes(',')&&s.includes('.')){if(s.lastIndexOf(',')>s.lastIndexOf('.'))s=s.replace(/\./g,'').replace(',','.');else s=s.replace(/,/g,'')}else if(s.includes(',')&&!s.includes('.')){const p=s.split(',');if(p[p.length-1].length<=2)s=s.replace(',','.');else s=s.replace(/,/g,'')}const n=parseFloat(s)||0;return neg?-n:n}
+function cellStr(v){let s=String(v??'').trim();if(s==='undefined'||s==='null'||s==='NaN')return'';if(/^\d+\.\d*$/.test(s))s=s.split('.')[0];return s}
+function parseFlexDate(raw){
+  if(raw==null||raw==='')return null;
+  if(raw instanceof Date)return isNaN(raw.getTime())?null:raw;
+  if(typeof raw==='number'){const d=new Date(Math.round((raw-25569)*86400*1000));return isNaN(d.getTime())?null:d;}
+  const s=String(raw).trim();if(!s)return null;
+  if(/^\d{4}-\d{2}-\d{2}/.test(s)){const d=new Date(s);return isNaN(d.getTime())?null:d;}
+  let m=s.match(/^(\d{1,2})[-\/](\d{1,2})[-\/](\d{4})(?:[ T](\d{1,2}):(\d{1,2})(?::(\d{1,2}))?)?$/);
+  if(m){let dd=parseInt(m[1],10),mm=parseInt(m[2],10),yyyy=parseInt(m[3],10);if(mm>12&&dd<=12){[dd,mm]=[mm,dd];}if(dd<1||dd>31||mm<1||mm>12)return null;const hh=m[4]?parseInt(m[4],10):0,mi=m[5]?parseInt(m[5],10):0,ss=m[6]?parseInt(m[6],10):0;const d=new Date(yyyy,mm-1,dd,hh,mi,ss);return isNaN(d.getTime())?null:d;}
+  const d=new Date(s);return isNaN(d.getTime())?null:d;
+}
+function fmtDate(d){if(!(d instanceof Date)||isNaN(d.getTime()))return'';return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function fmtCo(n){return Math.round(n||0).toLocaleString('es-CO')}
+function splitNitDv(raw){const s=String(raw||'').trim().replace(/\./g,'').replace(/\s/g,'');const m=s.match(/^(\d+)\s*-\s*(\d)$/);if(m)return{nit:m[1],dv:m[2]};return{nit:s.replace(/[^\d]/g,''),dv:''}}
+// ═══════════════════════════════════════════════════════════════════════════
+// CONSTANTES — UVT, PUC base, datos auxiliares
+// ═══════════════════════════════════════════════════════════════════════════
+var UVT_BY_YEAR={2024:47065,2025:49799,2026:52374,2027:55000};
+function uvt(year){return UVT_BY_YEAR[year]||UVT_BY_YEAR[2026]}
+// PUC 2650/1993 mínimo — cuentas que la herramienta puede usar.
+// PUC 2650/1993 — códigos oficiales. Si tu software usa subcuentas adicionales
+// (220505001 vs 220505), el contador lo remapea en su software al importar.
+var PUC_BASE={
+  // ─── ACTIVO ───
+  '110505':'Caja general',
+  '111005':'Bancos nacionales',
+  '130505':'Clientes nacionales',
+  '135515':'Anticipo retención en la fuente — renta',
+  '135517':'Anticipo retención IVA (ReteIVA)',
+  '135518':'Anticipo retención ICA (ReteICA)',
+  '143505':'Mercancías no fabricadas por la empresa',
+  '152405':'Equipo de oficina',
+  '152805':'Equipo de cómputo y comunicación',
+  '154005':'Flota y equipo de transporte',
+  // ─── PASIVO ───
+  '220505':'Proveedores nacionales',
+  '233525':'Costos y gastos por pagar',
+  '233595':'Otros acreedores',
+  '236505':'Retefuente — salarios y pagos laborales',
+  '236510':'Retefuente — honorarios',
+  '236515':'Retefuente — comisiones',
+  '236520':'Retefuente — servicios',
+  '236525':'Retefuente — arrendamientos',
+  '236530':'Retefuente — rendimientos financieros',
+  '236535':'Retefuente — compras',
+  '236540':'Retefuente — loterías y similares',
+  '236550':'Retefuente — transporte',
+  '236570':'Retefuente — otras retenciones',
+  '236701':'ReteIVA practicada',
+  '236805':'ReteICA practicada',
+  '240801':'IVA generado',
+  '240802':'IVA descontable',
+  '240805':'Impuesto nacional al consumo (INC)',
+  // ─── INGRESOS OPERACIONALES (4135 Comercio, 4155 Servicios) ───
+  '413505':'Comercio — venta de productos manufacturados',
+  '413555':'Comercio al por mayor y al por menor',
+  '415505':'Servicios — actividades hoteleras y restaurantes',
+  '415510':'Servicios — actividades de transporte',
+  '415515':'Servicios — actividades inmobiliarias',
+  '415520':'Servicios — actividades de comunicaciones',
+  '415560':'Servicios — actividades profesionales y técnicas',
+  '417505':'Otros ingresos operacionales — arrendamientos',
+  // ─── INGRESOS NO OPERACIONALES ───
+  '421005':'Financieros — intereses',
+  '421020':'Financieros — diferencia en cambio',
+  '425035':'Recuperaciones — provisiones',
+  '425050':'Aprovechamientos diversos',
+  '429580':'Ingresos diversos',
+  // ─── GASTOS DE ADMINISTRACIÓN ───
+  // 5105 Gastos de personal
+  '510506':'Sueldos',
+  '510527':'Auxilio de transporte',
+  '510530':'Cesantías',
+  '510533':'Intereses sobre cesantías',
+  '510536':'Prima de servicios',
+  '510539':'Vacaciones',
+  '510568':'Aportes a EPS',
+  '510569':'Aportes ARL',
+  '510570':'Aportes a fondos de pensiones',
+  '510572':'Aportes parafiscales — SENA',
+  '510578':'Aportes parafiscales — ICBF',
+  '510584':'Aportes parafiscales — Cajas de compensación',
+  // 5110 Honorarios
+  '511005':'Honorarios — juntas directivas',
+  '511010':'Honorarios — revisoría fiscal',
+  '511015':'Honorarios — auditoría externa',
+  '511025':'Honorarios — asesoría jurídica',
+  '511030':'Honorarios — asesoría financiera',
+  '511035':'Honorarios — asesoría técnica',
+  '511095':'Honorarios — otros',
+  // 5115 Impuestos
+  '511505':'Impuesto de industria y comercio (ICA)',
+  '511515':'Impuesto a la propiedad raíz (predial)',
+  '511520':'Impuesto de vehículos',
+  '511570':'Impuestos asumidos',
+  '511595':'Impuestos — otros',
+  // 5120 Arrendamientos
+  '512005':'Arrendamiento — terrenos',
+  '512010':'Arrendamiento — construcciones y edificios',
+  '512015':'Arrendamiento — maquinaria y equipo',
+  '512020':'Arrendamiento — equipo de oficina',
+  '512025':'Arrendamiento — equipo de cómputo',
+  '512030':'Arrendamiento — equipo de transporte',
+  '512095':'Arrendamiento — otros',
+  // 5125 Contribuciones y afiliaciones
+  '512505':'Contribuciones',
+  '512510':'Afiliaciones y sostenimiento',
+  // 5130 Seguros
+  '513055':'Seguro SOAT y vehículos',
+  '513095':'Seguros — otros',
+  // 5135 Servicios
+  '513505':'Servicios — aseo y vigilancia',
+  '513510':'Servicios — asistencia técnica',
+  '513515':'Servicios — procesamiento electrónico de datos',
+  '513520':'Servicios — acueducto y alcantarillado',
+  '513525':'Servicios — energía eléctrica',
+  '513530':'Servicios — teléfono',
+  '513535':'Servicios — correo, portes y telegramas',
+  '513540':'Servicios — fax y télex',
+  '513545':'Servicios — transporte, fletes y acarreos',
+  '513550':'Servicios — gas',
+  '513555':'Servicios — publicidad, propaganda y promoción',
+  '513560':'Servicios públicos (otros)',
+  '513565':'Servicios — reuniones y conferencias',
+  '513570':'Servicios — temporales',
+  '513580':'Servicios bancarios y financieros',
+  '513595':'Servicios — diversos',
+  // 5140 Gastos legales
+  '514005':'Gastos legales — notariales',
+  '514010':'Gastos legales — registro mercantil',
+  '514015':'Gastos legales — trámites y licencias',
+  '514020':'Gastos legales — aduaneros',
+  '514095':'Gastos legales — otros',
+  // 5145 Mantenimiento y reparaciones
+  '514510':'Mantenimiento — construcciones y edificios',
+  '514515':'Mantenimiento — maquinaria y equipo',
+  '514520':'Mantenimiento — equipo de oficina',
+  '514525':'Mantenimiento — equipo de cómputo y comunicación',
+  '514530':'Mantenimiento — equipo de transporte',
+  '514595':'Mantenimiento — otros',
+  // 5150 Adecuación e instalación
+  '515005':'Instalaciones eléctricas',
+  '515095':'Adecuación e instalación — otros',
+  // 5155 Gastos de viaje
+  '515505':'Gastos de viaje — alojamiento y manutención',
+  '515515':'Gastos de viaje — pasajes aéreos',
+  '515520':'Gastos de viaje — pasajes terrestres',
+  '515525':'Gastos de viaje — pasajes fluviales',
+  '515595':'Gastos de viaje — otros',
+  // 5160 Depreciaciones
+  '516010':'Depreciación maquinaria y equipo',
+  '516015':'Depreciación equipo de oficina',
+  '516020':'Depreciación equipo de cómputo',
+  '516030':'Depreciación equipo de transporte',
+  // 5165 Amortizaciones
+  '516505':'Amortización crédito mercantil',
+  '516525':'Amortización software y licencias',
+  '516595':'Amortizaciones — otros',
+  // 5195 Diversos
+  '519505':'Comisiones',
+  '519510':'Libros, suscripciones, periódicos y revistas',
+  '519525':'Elementos de aseo y cafetería',
+  '519530':'Útiles, papelería y fotocopias',
+  '519535':'Combustibles y lubricantes',
+  '519540':'Envases y empaques',
+  '519545':'Taxis y buses',
+  '519550':'Estampillas',
+  '519560':'Casino y restaurante (gastos representación)',
+  '519565':'Parqueaderos',
+  '519590':'Diversos — otros',
+  // ─── COSTO DE VENTAS Y PRESTACIÓN ───
+  '613555':'Costo de mercancías vendidas — comercio',
+  '614505':'Costo — actividades inmobiliarias',
+  '614560':'Costo — servicios profesionales',
+  '615560':'Costo — servicios diversos'
+};
+function pucName(code){
+  // Si el cliente cargó su plan de cuentas, sus nombres tienen prioridad.
+  if(typeof PUC_CLIENTE!=='undefined'&&PUC_CLIENTE&&PUC_CLIENTE.nombres&&PUC_CLIENTE.nombres[code]){
+    return PUC_CLIENTE.nombres[code];
+  }
+  return PUC_BASE[code]||PUC_BASE[String(code).slice(0,6)]||'';
+}
+// Busca en el plan de cuentas del cliente una auxiliar (9-dig) que empiece
+// con el código base dado. Sirve para traducir 513530 (PUC base) a 513530001
+// (la auxiliar real del cliente) cuando existe.
+function encontrarAuxClientePorBase(ctaBase){
+  if(!PUC_CLIENTE||!PUC_CLIENTE.nombres)return null;
+  const base=String(ctaBase||'');
+  if(base.length<4)return null;
+  for(const k of Object.keys(PUC_CLIENTE.nombres)){
+    if(k.length>=9&&k.startsWith(base))return k;
+  }
+  return null;
+}
+// ═══════════════════════════════════════════════════════════════════════════
+// (Sin data externa: el motor solo lee lo que viene en el reporte MUISCA y
+//  en el auxiliar histórico. No calcula retenciones por cuenta del usuario.)
+// ═══════════════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════════════
+// PARSER REPORTE MUISCA
+// ═══════════════════════════════════════════════════════════════════════════
+var rawData=null;
+var docs={emitidos:[],recibidos:[]};
+document.getElementById('iFE').addEventListener('change',e=>{
+  const f=e.target.files[0];if(f)processFE(f);
+});
+['dragover','dragenter'].forEach(ev=>{
+  document.getElementById('dropFE').addEventListener(ev,e=>{e.preventDefault();e.currentTarget.classList.add('drag')});
+});
+['dragleave','drop'].forEach(ev=>{
+  document.getElementById('dropFE').addEventListener(ev,e=>{e.currentTarget.classList.remove('drag')});
+});
+document.getElementById('dropFE').addEventListener('drop',e=>{
+  e.preventDefault();const f=e.dataTransfer.files[0];if(f){document.getElementById('iFE').files=e.dataTransfer.files;processFE(f);}
+});
+// Reporta errores SIEMPRE visibles en pantalla (independiente de exoToast)
+function showError(msg){
+  console.error('[contabilizar-fe]',msg);
+  const el=document.getElementById('parseInfo');
+  if(el){el.style.display='block';el.innerHTML='<div class="alert alert-warn" style="background:#FEE2E2;border-color:#FCA5A5;color:#991B1B">⚠ '+msg+'</div>';}
+  if(typeof exoToast==='function')exoToast(msg,'error');
+}
+function showInfo(html){
+  const el=document.getElementById('parseInfo');
+  if(el){el.style.display='block';const ok=document.getElementById('parseOk');if(ok)ok.innerHTML=html;}
+}
+function processFE(file){
+  if(!file){showError('No se recibió archivo');return;}
+  console.log('[contabilizar-fe] processFE:',file.name,file.size,'bytes');
+  const MAX=20*1024*1024;
+  if(file.size>MAX){showError('El archivo excede 20 MB.');return;}
+  const ext=(file.name||'').split('.').pop().toLowerCase();
+  if(['xlsx','xls','csv'].indexOf(ext)===-1){showError('Formato no soportado: .'+ext);return;}
+  document.getElementById('fileFEStatus').textContent='✓ '+file.name+' ('+Math.round(file.size/1024)+' KB) — leyendo…';
+  const reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      console.log('[contabilizar-fe] FileReader OK, parseando Excel…');
+      if(typeof XLSX==='undefined'){showError('XLSX no cargado. Verifica conexión a CDN jsdelivr.');return;}
+      const wb=XLSX.read(new Uint8Array(e.target.result),{type:'array',cellDates:true});
+      console.log('[contabilizar-fe] Hojas:',wb.SheetNames);
+      rawData=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,defval:''});
+      console.log('[contabilizar-fe] rawData filas:',rawData.length);
+      parseRaw();
+    }catch(err){
+      showError('Error leyendo Excel: '+err.message);
+      console.error(err);
+    }
+  };
+  reader.onerror=function(){showError('FileReader error');};
+  reader.readAsArrayBuffer(file);
+}
+function parseRaw(){
+  console.log('[contabilizar-fe] parseRaw start, rawData.length=',rawData&&rawData.length);
+  if(!rawData||rawData.length<2){showError('Archivo vacío o no válido.');return;}
+  let hdr=0;
+  for(let i=0;i<Math.min(8,rawData.length);i++){
+    const row=rawData[i];if(!row)continue;
+    const rn=row.map(c=>norm(cellStr(c)));
+    if(rn.some(h=>h.includes('tipo de documento')||h.includes('cufe')||h.includes('folio')||h.includes('nit emisor'))){hdr=i;break;}
+  }
+  const headers=rawData[hdr].map(c=>norm(cellStr(c)));
+  const findIva=()=>{let i=headers.findIndex(h=>h==='iva');if(i>=0)return i;i=headers.findIndex(h=>/^(valor|total)?\s*iva$/.test(h));if(i>=0)return i;return headers.findIndex(h=>h.includes('iva')&&!h.includes('rete')&&!h.includes('reteiva')&&!h.includes('base'));};
+  const findTotal=()=>{let i=headers.findIndex(h=>h==='total');if(i>=0)return i;return headers.findIndex(h=>h==='total factura'||h==='valor total'||h==='total documento'||h.startsWith('total '));};
+  const col={
+    tipo:headers.findIndex(h=>h.includes('tipo de documento')||h==='tipo'||h.includes('tipo doc')),
+    codTipo:headers.findIndex(h=>h.includes('codigo')&&h.includes('tipo')),
+    prefijo:headers.findIndex(h=>h.includes('prefijo')),
+    folio:headers.findIndex(h=>h.includes('folio')||h.includes('numero')||h==='consecutivo'),
+    cufe:headers.findIndex(h=>h.includes('cufe')||h.includes('cude')),
+    fecha:headers.findIndex(h=>h.includes('fecha emision')||h.includes('fecha')),
+    nitEmisor:headers.findIndex(h=>h.includes('nit emisor')),
+    nombreEmisor:headers.findIndex(h=>h.includes('nombre emisor')),
+    nitReceptor:headers.findIndex(h=>h.includes('nit receptor')),
+    nombreReceptor:headers.findIndex(h=>h.includes('nombre receptor')),
+    iva:findIva(),
+    reteIva:headers.findIndex(h=>h.includes('rete iva')||h.includes('reteiva')),
+    reteRenta:headers.findIndex(h=>h.includes('rete renta')||h.includes('reterenta')||h.includes('retencion fuente')),
+    reteIca:headers.findIndex(h=>h.includes('rete ica')||h.includes('reteica')),
+    total:findTotal(),
+    grupo:headers.findIndex(h=>h.includes('grupo'))
+  };
+  console.log('[contabilizar-fe] columnas detectadas:',col);
+  if(col.nitEmisor<0||col.nitReceptor<0||col.iva<0||col.total<0){
+    showError('No se detectaron columnas requeridas en el reporte. Headers vistos: '+headers.slice(0,20).join(' | ')+'. Faltan: '+
+      [col.nitEmisor<0?'NIT emisor':null,col.nitReceptor<0?'NIT receptor':null,col.iva<0?'IVA':null,col.total<0?'Total':null].filter(Boolean).join(', '));
+    return;
+  }
+  const detectNota=(t,c)=>{
+    const tn=norm(t),cs=String(c||'').trim();
+    if(cs==='91')return{esNota:true,esND:false};
+    if(cs==='92')return{esNota:false,esND:true};
+    if(tn.includes('nota')&&(tn.includes('credit')||/\bnc\b/.test(tn)))return{esNota:true,esND:false};
+    if(tn.includes('nota')&&(tn.includes('debit')||/\bnd\b/.test(tn)))return{esNota:false,esND:true};
+    return{esNota:false,esND:false};
+  };
+  docs={emitidos:[],recibidos:[]};
+  let total=0,emitidos=0,recibidos=0,saltadosNomina=0,saltadosAR=0;
+  const iNitEl=document.getElementById('iNit');
+  const nitDeclaranteN=iNitEl?iNitEl.value.replace(/[^\d]/g,''):'';
+  for(let i=hdr+1;i<rawData.length;i++){
+    const row=rawData[i];if(!row||row.length===0)continue;
+    const tipo=cellStr(row[col.tipo]);
+    const tipoN=norm(tipo);
+    if(!tipo&&!cellStr(row[col.nitEmisor]))continue;
+    if(tipoN.includes('nomina')){saltadosNomina++;continue;}
+    // Application response = acuse de recibo (DIAN/cliente confirma recepción).
+    // No es un documento contabilizable. Si lo dejamos pasar, genera asientos vacíos
+    // y ensucia el conteo de "documentos parseados".
+    if(tipoN.includes('application response')||tipoN==='application response'){saltadosAR++;continue;}
+    const codTipo=col.codTipo>=0?cellStr(row[col.codTipo]):'';
+    const codTipoN=String(codTipo||'').trim();
+    const grupoRaw=col.grupo>=0?norm(cellStr(row[col.grupo])):'';
+    const fecha=col.fecha>=0?parseFlexDate(row[col.fecha]):null;
+    const flags=detectNota(tipo,codTipo);
+    const ivaRaw=toNum(row[col.iva]);
+    const totalRaw=toNum(row[col.total]);
+    if(ivaRaw<0&&!flags.esNota&&!flags.esND)flags.esNota=true;
+    const esDS=codTipoN==='05'||codTipoN==='95'||
+               (tipoN.includes('soporte')&&tipoN.includes('no obligad'))||
+               (tipoN.includes('documento soporte'))||
+               (tipoN.includes('ajuste')&&tipoN.includes('soporte'));
+    const doc={
+      tipo,codTipo,codTipoN,
+      prefijo:col.prefijo>=0?cellStr(row[col.prefijo]):'',
+      folio:cellStr(row[col.folio]),
+      cufe:col.cufe>=0?cellStr(row[col.cufe]):'',
+      fecha,
+      nitEmisor:cellStr(row[col.nitEmisor]),
+      nombreEmisor:cellStr(row[col.nombreEmisor]),
+      nitReceptor:cellStr(row[col.nitReceptor]),
+      nombreReceptor:cellStr(row[col.nombreReceptor]),
+      iva:Math.abs(ivaRaw),
+      reteIva:col.reteIva>=0?Math.abs(toNum(row[col.reteIva])):0,
+      reteRenta:col.reteRenta>=0?Math.abs(toNum(row[col.reteRenta])):0,
+      reteIca:col.reteIca>=0?Math.abs(toNum(row[col.reteIca])):0,
+      total:Math.abs(totalRaw),
+      esNota:flags.esNota,esND:flags.esND,
+      esDS:esDS
+    };
+    total++;
+    let esEmitido=false;
+    if(esDS){esEmitido=false;}
+    else if(grupoRaw){esEmitido=grupoRaw.includes('emit');}
+    else if(nitDeclaranteN){esEmitido=doc.nitEmisor.replace(/[^\d]/g,'')===nitDeclaranteN;}
+    if(esDS){doc.terceroNit=doc.nitReceptor;doc.terceroNombre=doc.nombreReceptor;}
+    else if(esEmitido){doc.terceroNit=doc.nitReceptor;doc.terceroNombre=doc.nombreReceptor;}
+    else{doc.terceroNit=doc.nitEmisor;doc.terceroNombre=doc.nombreEmisor;}
+    if(esEmitido){docs.emitidos.push(doc);emitidos++;}
+    else{docs.recibidos.push(doc);recibidos++;}
+  }
+  document.getElementById('parseInfo').style.display='block';
+  const dsCount=docs.recibidos.filter(d=>d.esDS).length;
+  const feRec=docs.recibidos.length-dsCount;
+  // ─── AUTO-DETECCIÓN DEL DECLARANTE ─────────────────────────────────────
+  // En filas "Emitido" → NIT emisor = mi NIT. En filas "Recibido" → NIT receptor = mi NIT.
+  // Tomo el NIT más frecuente en cada contexto: si coinciden → declarante seguro.
+  const contarNits=(arr,campo)=>{const c={};arr.forEach(d=>{const n=String(d[campo]||'').replace(/[^\d]/g,'');if(n)c[n]=(c[n]||0)+1;});return Object.entries(c).sort((a,b)=>b[1]-a[1]);};
+  const topEmi=contarNits(docs.emitidos,'nitEmisor');
+  const topRec=contarNits(docs.recibidos,'nitReceptor');
+  let nitDeclarante='',nombreDeclarante='',confianza='';
+  if(topEmi.length&&topRec.length&&topEmi[0][0]===topRec[0][0]){
+    nitDeclarante=topEmi[0][0];confianza='alta (aparece como emisor en ventas y receptor en compras)';
+  } else if(topEmi.length){
+    nitDeclarante=topEmi[0][0];confianza='alta (NIT emisor dominante en ventas: '+topEmi[0][1]+'/'+docs.emitidos.length+' docs)';
+  } else if(topRec.length){
+    nitDeclarante=topRec[0][0];confianza='alta (NIT receptor dominante en compras: '+topRec[0][1]+'/'+docs.recibidos.length+' docs)';
+  }
+  if(nitDeclarante){
+    // Recuperar nombre del declarante
+    const muestra=docs.emitidos.find(d=>String(d.nitEmisor||'').replace(/[^\d]/g,'')===nitDeclarante);
+    nombreDeclarante=muestra?muestra.nombreEmisor:(docs.recibidos.find(d=>String(d.nitReceptor||'').replace(/[^\d]/g,'')===nitDeclarante)||{}).nombreReceptor||'';
+    // Llenar el campo NIT propio si está vacío
+    const iNitEl=document.getElementById('iNit');
+    if(iNitEl&&!iNitEl.value)iNitEl.value=nitDeclarante;
+    // Exponer globalmente para usar en el Excel
+    window._declaranteNit=nitDeclarante;
+    window._declaranteNombre=nombreDeclarante;
+    // ─── AUTO-CARGAR PUC POR NIT ──────────────────────────────────────────
+    // Si no hay PUC cargado todavía, intentamos cargarlo de 2 fuentes:
+    //  1) localStorage (si el usuario subió balance de este cliente antes)
+    //  2) PUC_HARDCODED_POR_NIT (clientes específicos que conocemos)
+    // El usuario NO tiene que volver a subir el balance del cliente cada vez.
+    if(!PUC_CLIENTE){
+      let pucAuto=null, fuentePuc='';
+      try{
+        const cached=localStorage.getItem('pucCliente_'+nitDeclarante);
+        if(cached){pucAuto=JSON.parse(cached);fuentePuc='localStorage';}
+      }catch(e){}
+      if(!pucAuto&&PUC_HARDCODED_POR_NIT[nitDeclarante]){
+        pucAuto=PUC_HARDCODED_POR_NIT[nitDeclarante];
+        fuentePuc='preset hardcodeado';
+      }
+      if(pucAuto){
+        aplicarPucCliente(pucAuto);
+        const pucStatus=document.getElementById('pucStatus');
+        if(pucStatus){
+          const note=document.createElement('div');
+          note.className='alert alert-info';
+          note.style.marginTop='8px';
+          note.style.fontSize='.82rem';
+          note.innerHTML='✨ <strong>PUC cargado automáticamente</strong> para NIT '+nitDeclarante+
+            ' (desde '+fuentePuc+'). Si los códigos del cliente cambiaron, sube su balance al campo de arriba.';
+          pucStatus.appendChild(note);
+        }
+      }
+    }
+  }
+  const detectado=nitDeclarante?'<div style="margin-bottom:8px;padding:10px 14px;background:var(--green3);border:1px solid #6EE7B7;border-radius:8px;font-size:.86rem;color:#065F46"><strong>🏢 Empresa detectada:</strong> '+(nombreDeclarante||'(sin nombre)')+' — NIT <code style="font-family:monospace;background:#fff;padding:1px 6px;border-radius:4px">'+nitDeclarante+'</code><br><small style="opacity:.8">Confianza '+confianza+'</small></div>':'';
+  document.getElementById('parseOk').innerHTML=detectado+
+    '✓ <strong>'+total+'</strong> documentos parseados — '+
+    '<strong>'+emitidos+'</strong> ventas (FE emitidas), '+
+    '<strong>'+feRec+'</strong> compras FE, '+
+    '<strong>'+dsCount+'</strong> documentos soporte'+
+    (saltadosNomina>0?'. <span style="color:var(--muted)">Excluidos '+saltadosNomina+' nómina electrónica (no se contabilizan aquí).</span>':'')+
+    (saltadosAR>0?' <span style="color:var(--muted)">Excluidos '+saltadosAR+' acuses (application response — no son documentos contabilizables).</span>':'');
+  const totIvaRec=docs.recibidos.reduce((s,d)=>s+(d.esNota?-d.iva:d.iva),0);
+  const totIvaEmi=docs.emitidos.reduce((s,d)=>s+(d.esNota?-d.iva:d.iva),0);
+  const totFactRec=docs.recibidos.reduce((s,d)=>s+(d.esNota?-d.total:d.total),0);
+  const totFactEmi=docs.emitidos.reduce((s,d)=>s+(d.esNota?-d.total:d.total),0);
+  document.getElementById('kpis').innerHTML=
+    '<div class="kpi blue"><div class="val">$'+fmtCo(totFactRec)+'</div><div class="lbl">Compras recibidas</div></div>'+
+    '<div class="kpi blue"><div class="val">$'+fmtCo(totFactEmi)+'</div><div class="lbl">Ventas emitidas</div></div>'+
+    '<div class="kpi green"><div class="val">$'+fmtCo(totIvaRec)+'</div><div class="lbl">IVA descontable</div></div>'+
+    '<div class="kpi red"><div class="val">$'+fmtCo(totIvaEmi)+'</div><div class="lbl">IVA generado</div></div>';
+  document.getElementById('btnContabilizar').disabled=false;
+  // Periodo automático = min / max de fechas
+  const fechas=[].concat(docs.emitidos,docs.recibidos).map(d=>d.fecha).filter(d=>d instanceof Date);
+  if(fechas.length){
+    const min=new Date(Math.min.apply(null,fechas)),max=new Date(Math.max.apply(null,fechas));
+    if(!document.getElementById('iDesde').value)document.getElementById('iDesde').value=fmtDate(min);
+    if(!document.getElementById('iHasta').value)document.getElementById('iHasta').value=fmtDate(max);
+    // Mostrar periodo detectado en formato humano
+    const NM=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+    const sameY=min.getFullYear()===max.getFullYear();
+    const sameM=sameY&&min.getMonth()===max.getMonth();
+    let txt;
+    if(sameM){txt=min.getDate()+' al '+max.getDate()+' de '+NM[min.getMonth()]+' '+min.getFullYear();}
+    else if(sameY){txt=min.getDate()+' '+NM[min.getMonth()]+' al '+max.getDate()+' '+NM[max.getMonth()]+' '+min.getFullYear();}
+    else{txt=fmtDate(min)+' al '+fmtDate(max);}
+    // Calcular meses cubiertos
+    const setMeses=new Set();
+    fechas.forEach(f=>setMeses.add(f.getFullYear()+'-'+String(f.getMonth()+1).padStart(2,'0')));
+    txt+=' <span style="color:var(--muted);font-weight:400">('+setMeses.size+' mes'+(setMeses.size!==1?'es':'')+' · '+fechas.length+' documentos)</span>';
+    const pi=document.getElementById('periodoInfo');
+    if(pi){pi.style.display='block';document.getElementById('periodoTxt').innerHTML=' '+txt;}
+  }
+  if(typeof exoTrack!=='undefined')exoTrack.tool('contabilizar-fe-parse');
+}
+// ═══════════════════════════════════════════════════════════════════════════
+// AUXILIAR HISTÓRICO — aprende qué cuenta usar para cada NIT
+// ═══════════════════════════════════════════════════════════════════════════
+// Estructura: { nit: { gasto: {cuenta: movimiento}, ingreso: {cuenta: movimiento} } }
+// Para cada NIT, contamos qué cuentas de gasto/ingreso aparecen y con qué
+// monto. La cuenta dominante se aplica al nuevo mes.
+var AUX_HIST={};
+document.getElementById('iAux').addEventListener('change',e=>{
+  const f=e.target.files[0];if(f)procesarAuxHist(f);
+});
+['dragover','dragenter'].forEach(ev=>{
+  document.getElementById('dropAux').addEventListener(ev,e=>{e.preventDefault();e.currentTarget.classList.add('drag')});
+});
+['dragleave','drop'].forEach(ev=>{
+  document.getElementById('dropAux').addEventListener(ev,e=>{e.currentTarget.classList.remove('drag')});
+});
+document.getElementById('dropAux').addEventListener('drop',e=>{
+  e.preventDefault();const f=e.dataTransfer.files[0];if(f){document.getElementById('iAux').files=e.dataTransfer.files;procesarAuxHist(f);}
+});
+function procesarAuxHist(file){
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const wb=XLSX.read(new Uint8Array(e.target.result),{type:'array'});
+      // Tomamos la hoja con más filas (los reportes traen portadas)
+      let best=wb.SheetNames[0],bestLen=0;
+      for(const n of wb.SheetNames){
+        const len=XLSX.utils.sheet_to_json(wb.Sheets[n],{header:1,defval:''}).length;
+        if(len>bestLen){bestLen=len;best=n;}
+      }
+      const rows=XLSX.utils.sheet_to_json(wb.Sheets[best],{header:1,defval:''});
+      if(rows.length<2){exoToast('Archivo sin datos','error');return;}
+      // Detectar fila de encabezados (busca "cuenta" + "nit"/"tercero")
+      let hdr=-1;
+      for(let i=0;i<Math.min(15,rows.length);i++){
+        const t=norm((rows[i]||[]).join(' '));
+        if(/cuenta|cta|codig/.test(t) && /nit|identif|tercero/.test(t)){hdr=i;break;}
+      }
+      if(hdr<0){exoToast('No encontré encabezados (Cuenta + NIT/Tercero) en el archivo','error');return;}
+      const heads=(rows[hdr]||[]).map(h=>norm(cellStr(h)));
+      const cCta=heads.findIndex(h=>h.includes('cuenta')||h.includes('cta')||(h.includes('codig')&&!h.includes('terc')));
+      const cNit=heads.findIndex(h=>h==='nit'||h.includes('identif')||(h.includes('codig')&&h.includes('terc')));
+      const cNom=heads.findIndex(h=>h.includes('tercero')||h.includes('nombre')||h.includes('razon'));
+      // Cualquier columna numérica (saldo/débito/crédito/movimiento) → usamos abs(suma de todas)
+      const colsNum=[];
+      heads.forEach((h,i)=>{
+        if(/saldo|debit|credit|movimiento|valor/i.test(h)&&i!==cCta&&i!==cNit)colsNum.push(i);
+      });
+      if(cCta<0||cNit<0){exoToast('Faltan columnas Cuenta o NIT','error');return;}
+      // Inferir cuenta arrastrada desde el grupo padre cuando una fila trae NIT pero no cuenta.
+      // Helisa/WO usualmente listan: 519590 [cabecera] → 900123 fila tercero (cuenta vacía)
+      let cuentaArrastre='';
+      AUX_HIST={};
+      let n=0,terceros=0;
+      for(let i=hdr+1;i<rows.length;i++){
+        const r=rows[i]||[];
+        let cuenta=String(r[cCta]||'').replace(/[^\d]/g,'');
+        const nit=String(r[cNit]||'').replace(/[^\d]/g,'');
+        const nom=cNom>=0?cellStr(r[cNom]):'';
+        if(cuenta.length>=4)cuentaArrastre=cuenta;
+        else cuenta=cuentaArrastre;
+        if(!cuenta||cuenta.length<4||!nit||nit.length<6)continue;
+        let mov=0;
+        colsNum.forEach(ci=>mov+=Math.abs(toNum(r[ci])));
+        if(mov===0)continue;
+        // Clasificar tipo de cuenta por primer dígito (4=ingreso, 5/6/7=gasto/costo, 1=activo, 2=pasivo)
+        const d=cuenta[0];
+        let tipo=null;
+        if(d==='4')tipo='ingreso';
+        else if(d==='5'||d==='6'||d==='7')tipo='gasto';
+        if(!tipo)continue;
+        if(!AUX_HIST[nit])AUX_HIST[nit]={gasto:{},ingreso:{},nombre:nom};
+        if(!AUX_HIST[nit][tipo][cuenta])AUX_HIST[nit][tipo][cuenta]=0;
+        AUX_HIST[nit][tipo][cuenta]+=mov;
+        n++;
+      }
+      terceros=Object.keys(AUX_HIST).length;
+      // Para cada NIT, sacar cuenta dominante (la de mayor movimiento)
+      let totG=0,totI=0;
+      Object.keys(AUX_HIST).forEach(nit=>{
+        const g=AUX_HIST[nit].gasto, i=AUX_HIST[nit].ingreso;
+        let bestG=null,maxG=0;Object.entries(g).forEach(([c,m])=>{if(m>maxG){maxG=m;bestG=c;}});
+        let bestI=null,maxI=0;Object.entries(i).forEach(([c,m])=>{if(m>maxI){maxI=m;bestI=c;}});
+        AUX_HIST[nit].dominanteGasto=bestG;
+        AUX_HIST[nit].dominanteIngreso=bestI;
+        if(bestG)totG++;
+        if(bestI)totI++;
+      });
+      document.getElementById('auxStatus').innerHTML=
+        '<div class="alert alert-ok">✓ <strong>'+terceros+'</strong> terceros aprendidos · '+totG+' con cuenta de gasto dominante · '+totI+' con cuenta de ingreso dominante. '+
+        'El motor usará estos mapeos al contabilizar.</div>';
+      // Auto-detección PUC desde el auxiliar histórico
+      const cNomAux=heads.findIndex(h=>h.includes('nom')||h.includes('descr'));
+      if(cNomAux>=0)intentarAutoDeteccionPuc(rows,hdr,cCta,cNomAux,'auxiliar por tercero');
+      if(typeof exoTrack!=='undefined')exoTrack.tool('contabilizar-fe-aux-historico');
+    }catch(err){
+      document.getElementById('auxStatus').innerHTML='<div class="alert alert-warn">⚠ Error leyendo auxiliar: '+err.message+'</div>';
+      console.error(err);
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+// ═══════════════════════════════════════════════════════════════════════════
+// BALANCE DE APERTURA — saldos iniciales para que el ESF cuadre
+// ═══════════════════════════════════════════════════════════════════════════
+// Estructura: SALDOS_INI[cuenta6] = saldoConSigno
+//   - Activos/Gastos/Costos (clase 1, 5, 6, 7): positivo = débito (natural)
+//   - Pasivos/Patrimonio/Ingresos (clase 2, 3, 4): positivo = crédito (natural)
+// Si el archivo trae 2 cols (débito y crédito), saldo = débito − crédito.
+// Si trae 1 col "Saldo Final", la naturaleza la decide la clase de cuenta.
+var SALDOS_INI={};
+var SALDOS_INI_NOMBRES={};
+document.getElementById('iBal').addEventListener('change',e=>{
+  const f=e.target.files[0];if(f)procesarBalanceInicial(f);
+});
+['dragover','dragenter'].forEach(ev=>{
+  document.getElementById('dropBal').addEventListener(ev,e=>{e.preventDefault();e.currentTarget.classList.add('drag')});
+});
+['dragleave','drop'].forEach(ev=>{
+  document.getElementById('dropBal').addEventListener(ev,e=>{e.currentTarget.classList.remove('drag')});
+});
+document.getElementById('dropBal').addEventListener('drop',e=>{
+  e.preventDefault();const f=e.dataTransfer.files[0];if(f){document.getElementById('iBal').files=e.dataTransfer.files;procesarBalanceInicial(f);}
+});
+function procesarBalanceInicial(file){
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const wb=XLSX.read(new Uint8Array(e.target.result),{type:'array'});
+      // Tomar hoja con más filas
+      let best=wb.SheetNames[0],bestLen=0;
+      for(const n of wb.SheetNames){
+        const len=XLSX.utils.sheet_to_json(wb.Sheets[n],{header:1,defval:''}).length;
+        if(len>bestLen){bestLen=len;best=n;}
+      }
+      const rows=XLSX.utils.sheet_to_json(wb.Sheets[best],{header:1,defval:''});
+      if(rows.length<2){exoToast('Archivo sin datos','error');return;}
+      // Detectar fila de encabezados: busca "cuenta" + alguna columna de saldo
+      let hdr=-1;
+      for(let i=0;i<Math.min(15,rows.length);i++){
+        const t=norm((rows[i]||[]).join(' '));
+        if((/cuenta|cta|codig/.test(t)) && (/saldo|debit|credit/.test(t))){hdr=i;break;}
+      }
+      if(hdr<0){
+        document.getElementById('balStatus').innerHTML='<div class="alert alert-warn">⚠ No encontré encabezados con "Cuenta" y "Saldo/Débito/Crédito" en las primeras 15 filas.</div>';
+        return;
+      }
+      const heads=(rows[hdr]||[]).map(h=>norm(cellStr(h)));
+      const cCta=heads.findIndex(h=>h.includes('cuenta')||h.includes('cta')||(h.includes('codig')&&!h.includes('terc')));
+      // Acepta "nombre", "descripcion", "nomcta" (abreviación común en balances CO),
+      // "nom cta", "nom_cta", etc.
+      const cNom=heads.findIndex(h=>(h.includes('nombre')||h.includes('descripcion')||h.includes('nomcta')||h.includes('nom cta')||h==='nom')&&!h.includes('tercero'));
+      // Saldo: priorizar "saldo final", "saldo neto", o "saldo"
+      let cSaldo=heads.findIndex(h=>h==='saldo final'||h==='saldo neto'||h==='saldo actual');
+      if(cSaldo<0)cSaldo=heads.findIndex(h=>h==='saldo');
+      if(cSaldo<0)cSaldo=heads.findIndex(h=>h.startsWith('saldo')&&!h.includes('inicial')&&!h.includes('anterior'));
+      // Débito y crédito como columnas separadas (común en balances colombianos)
+      let cSaldoDeb=heads.findIndex(h=>(h.includes('saldo')&&h.includes('debit'))||h==='debito'||h==='debitos');
+      let cSaldoCre=heads.findIndex(h=>(h.includes('saldo')&&h.includes('credit'))||h==='credito'||h==='creditos');
+      if(cCta<0){
+        document.getElementById('balStatus').innerHTML='<div class="alert alert-warn">⚠ Falta columna "Cuenta" / "Código".</div>';
+        return;
+      }
+      if(cSaldo<0&&cSaldoDeb<0&&cSaldoCre<0){
+        document.getElementById('balStatus').innerHTML='<div class="alert alert-warn">⚠ No detecté columna de saldo (esperaba "Saldo Final" o "Saldo Débito" + "Saldo Crédito").</div>';
+        return;
+      }
+      SALDOS_INI={};SALDOS_INI_NOMBRES={};
+      // Inferir cuenta arrastrada si fila no la trae (formato árbol)
+      let ctaArrastre='';
+      let cargadas=0;
+      for(let i=hdr+1;i<rows.length;i++){
+        const r=rows[i]||[];
+        let cuenta=String(r[cCta]||'').replace(/[^\d]/g,'');
+        if(cuenta.length>=4)ctaArrastre=cuenta;
+        else cuenta=ctaArrastre;
+        if(!cuenta||cuenta.length<4)continue;
+        // Solo nos quedamos con cuentas de 6+ dígitos (auxiliares), descartamos clases/grupos resumidos
+        if(cuenta.length<6)continue;
+        // Recortar a 6 dígitos (PUC base)
+        const cta6=cuenta.slice(0,6);
+        // Calcular saldo
+        let saldo=0;
+        if(cSaldo>=0){
+          saldo=toNum(r[cSaldo]);
+        } else {
+          const sd=cSaldoDeb>=0?toNum(r[cSaldoDeb]):0;
+          const sc=cSaldoCre>=0?toNum(r[cSaldoCre]):0;
+          saldo=sd-sc;
+        }
+        if(saldo===0)continue;
+        const nombre=cNom>=0?cellStr(r[cNom]):'';
+        // Acumular si la misma cta6 aparece varias veces (varios auxiliares)
+        if(!SALDOS_INI[cta6])SALDOS_INI[cta6]=0;
+        SALDOS_INI[cta6]+=saldo;
+        if(nombre&&!SALDOS_INI_NOMBRES[cta6])SALDOS_INI_NOMBRES[cta6]=nombre;
+        cargadas++;
+      }
+      const totCuentas=Object.keys(SALDOS_INI).length;
+      // Resumen por clase
+      const porClase={};
+      Object.entries(SALDOS_INI).forEach(([c,s])=>{const k=c[0];if(!porClase[k])porClase[k]={n:0,suma:0};porClase[k].n++;porClase[k].suma+=Math.abs(s);});
+      const CLASES_NM={'1':'Activo','2':'Pasivo','3':'Patrimonio','4':'Ingresos','5':'Gastos','6':'Costos','7':'Costos prod.'};
+      const detalle=Object.keys(porClase).sort().map(k=>(CLASES_NM[k]||'Cl'+k)+': '+porClase[k].n).join(' · ');
+      document.getElementById('balStatus').innerHTML=
+        '<div class="alert alert-ok">✓ Balance de apertura cargado: <strong>'+totCuentas+'</strong> cuentas con saldo inicial. <small style="display:block;margin-top:4px;color:var(--muted)">'+detalle+'</small></div>';
+      // Auto-detección PUC personalizado: si este balance trae cuentas tipo
+      // "VENTAS GRAVADAS"/"MERCANCIAS EXENTAS"/etc., lo usamos también como PUC
+      intentarAutoDeteccionPuc(rows,hdr,cCta,cNom,'balance de apertura');
+      if(typeof exoTrack!=='undefined')exoTrack.tool('contabilizar-fe-balance-apertura');
+    }catch(err){
+      document.getElementById('balStatus').innerHTML='<div class="alert alert-warn">⚠ Error leyendo balance: '+err.message+'</div>';
+      console.error(err);
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+// ═══════════════════════════════════════════════════════════════════════════
+// PLAN DE CUENTAS DEL CLIENTE — PUC personalizado
+// ═══════════════════════════════════════════════════════════════════════════
+// PUC pre-cargados por NIT — clientes específicos que el contador maneja con
+// PUC personalizado conocido. El motor los aplica automáticamente cuando detecta
+// el NIT declarante en el reporte FE, sin que el usuario tenga que subir nada.
+// Si los códigos cambian, sube el balance para override.
+var PUC_HARDCODED_POR_NIT={
+  '39759416':{  // DROGUERIA TIERRADENTRO / BLANCA SEPULVEDA CARRASCAL
+    ventaGravada:'413538007', ventaExenta:'413538005', ventaExcluida:'413538004',
+    compraGravada:'620501006', compraExenta:'620501005', compraExcluida:'620501004',
+    ivaGenerado:'240801011', ivaDescontable:'240801012',
+    proveedores:'220501001', clientes:null, caja:'110505001', bancos:'111005001',
+    retefuentePract:null, reteIvaPract:null, reteIcaPract:null,
+    anticipoRtFte:null, anticipoRtIva:null, anticipoRtIca:null,
+    nombres:{
+      '110505001':'CAJA GENERAL',
+      '111005001':'CTA AHORROS DAVIVIENDA 8660',
+      '111005003':'NEQUI',
+      '111005004':'CTA AHORRO BBVA',
+      '143505001':'MERCANCIAS NO FABRICADAS POR LA EMPRESA',
+      '220501001':'PROVEEDORES NACIONALES',
+      '240801011':'IVA GENERADO DEL 19%',
+      '240801012':'IVA DESCONTABLE DEL 19%',
+      '413538004':'VENTAS EXCLUIDAS',
+      '413538005':'VENTAS EXENTAS',
+      '413538007':'VENTAS GRAVADAS DEL 19%',
+      '620501004':'COMPRAS EXCLUIDAS',
+      '620501005':'MERCANCIAS EXENTAS',
+      '620501006':'MERCANCIAS GRAVADAS DEL 19%',
+      '622501001':'DEVOLUCIONES EN COMPRAS',
+      '510506001':'SUELDOS',
+      '513525001':'ACUEDUCTO Y ALCANTARILLADO',
+      '513530001':'ENERGIA ELECTRICA',
+      '530505001':'GASTOS BANCARIOS',
+      '530505002':'GRAVAMEN MOVIMIENTO FINANCIERO'
+    },
+    identidad:'DROGUERIA TIERRADENTRO / BLANCA SEPULVEDA CARRASCAL',
+    fuente:'hardcoded'
+  }
+};
+// Cuando el cliente NO usa el PUC 2650/93 estándar (caso droguerías, comercio
+// de canasta familiar, RST), su balance trae cuentas como:
+//   413538007 VENTAS GRAVADAS DEL 19%
+//   413538005 VENTAS EXENTAS
+//   413538004 VENTAS EXCLUIDAS
+//   620501006 MERCANCIAS GRAVADAS DEL 19%
+//   620501005 MERCANCIAS EXENTAS
+//   620501004 COMPRAS EXCLUIDAS
+//   240801011 IVA GENERADO DEL 19%
+//   240801012 IVA DESCONTABLE DEL 19%
+//   220501001 PROVEEDORES (no 220505)
+// El detector lee el balance y guarda los códigos REALES del cliente para que
+// el motor y el export Total Innovation los usen en lugar del PUC base.
+// Si nunca se carga este archivo, PUC_CLIENTE queda null → comportamiento default.
+var PUC_CLIENTE=null;
+document.getElementById('iPuc').addEventListener('change',e=>{
+  const f=e.target.files[0];if(f)procesarPucCliente(f);
+});
+['dragover','dragenter'].forEach(ev=>{
+  document.getElementById('dropPuc').addEventListener(ev,e=>{e.preventDefault();e.currentTarget.classList.add('drag')});
+});
+['dragleave','drop'].forEach(ev=>{
+  document.getElementById('dropPuc').addEventListener(ev,e=>{e.currentTarget.classList.remove('drag')});
+});
+document.getElementById('dropPuc').addEventListener('drop',e=>{
+  e.preventDefault();const f=e.dataTransfer.files[0];if(f){document.getElementById('iPuc').files=e.dataTransfer.files;procesarPucCliente(f);}
+});
+// Función pura: dadas las filas de un balance, intenta detectar el PUC del cliente.
+// Devuelve null si no hay suficiente info, o el objeto PUC si detectó algo útil.
+// Reusable desde procesarPucCliente, procesarBalanceInicial, procesarAuxHist.
+function detectarPucDesdeRows(rows,hdr,cCta,cNom){
+  if(cCta<0||cNom<0)return null;
+  let baseProveedores=null, baseClientes=null, baseCaja=null, baseBancos=null,
+      baseRetefuente=null, baseReteIva=null, baseReteIca=null,
+      baseAntRtFte=null, baseAntRtIva=null, baseAntRtIca=null;
+  for(let i=hdr+1;i<rows.length;i++){
+    const r=rows[i]||[];
+    const cta=String(r[cCta]||'').replace(/[^\d]/g,'');
+    const nom=norm(cellStr(r[cNom]));
+    if(!cta||cta.length>6)continue;
+    if(/^proveedor/.test(nom)&&!baseProveedores)baseProveedores=cta;
+    else if(/^cliente/.test(nom)&&!baseClientes)baseClientes=cta;
+    else if(/^caja( |$)/.test(nom)&&!baseCaja)baseCaja=cta;
+    else if(/^(banco|moneda nacional)/.test(nom)&&!baseBancos)baseBancos=cta;
+    if(cta.startsWith('2365')&&!baseRetefuente)baseRetefuente=cta;
+    if(cta.startsWith('2367')&&!baseReteIva)baseReteIva=cta;
+    if(cta.startsWith('2368')&&!baseReteIca)baseReteIca=cta;
+    if(cta.startsWith('135515')&&!baseAntRtFte)baseAntRtFte=cta;
+    if(cta.startsWith('135517')&&!baseAntRtIva)baseAntRtIva=cta;
+    if(cta.startsWith('135518')&&!baseAntRtIca)baseAntRtIca=cta;
+  }
+  const puc={
+    ventaGravada:null, ventaExenta:null, ventaExcluida:null,
+    compraGravada:null, compraExenta:null, compraExcluida:null,
+    ivaGenerado:null, ivaDescontable:null,
+    proveedores:null, clientes:null, caja:null, bancos:null,
+    retefuentePract:null, reteIvaPract:null, reteIcaPract:null,
+    anticipoRtFte:null, anticipoRtIva:null, anticipoRtIca:null,
+    nombres:{}, identidad:''
+  };
+  for(let i=0;i<hdr&&i<6;i++){
+    const txt=(rows[i]||[]).map(c=>cellStr(c)).join(' ').trim();
+    if(txt&&!puc.identidad)puc.identidad=txt.slice(0,90);
+  }
+  for(let i=hdr+1;i<rows.length;i++){
+    const r=rows[i]||[];
+    const cta=String(r[cCta]||'').replace(/[^\d]/g,'');
+    const nom=norm(cellStr(r[cNom]));
+    const nomOrig=cellStr(r[cNom]);
+    if(!cta||cta.length<6)continue;
+    if(nomOrig&&!puc.nombres[cta])puc.nombres[cta]=nomOrig;
+    if(cta.length<9)continue;
+    const clase=cta[0];
+    if(/gravad/.test(nom)){
+      if(clase==='4'&&!puc.ventaGravada)puc.ventaGravada=cta;
+      else if((clase==='5'||clase==='6'||clase==='7')&&!puc.compraGravada)puc.compraGravada=cta;
+    }
+    if(/exent/.test(nom)){
+      if(clase==='4'&&!puc.ventaExenta)puc.ventaExenta=cta;
+      else if((clase==='5'||clase==='6'||clase==='7')&&!puc.compraExenta)puc.compraExenta=cta;
+    }
+    if(/exclui/.test(nom)){
+      if(clase==='4'&&!puc.ventaExcluida)puc.ventaExcluida=cta;
+      else if((clase==='5'||clase==='6'||clase==='7')&&!puc.compraExcluida)puc.compraExcluida=cta;
+    }
+    if(/iva generad/.test(nom)&&!puc.ivaGenerado)puc.ivaGenerado=cta;
+    if(/iva descontabl/.test(nom)&&!puc.ivaDescontable)puc.ivaDescontable=cta;
+    if(baseProveedores&&cta.startsWith(baseProveedores)&&!puc.proveedores)puc.proveedores=cta;
+    if(baseClientes&&cta.startsWith(baseClientes)&&!puc.clientes)puc.clientes=cta;
+    if(baseCaja&&cta.startsWith(baseCaja)&&!puc.caja)puc.caja=cta;
+    if(baseBancos&&cta.startsWith(baseBancos)&&!puc.bancos)puc.bancos=cta;
+    if(baseRetefuente&&cta.startsWith(baseRetefuente)&&!puc.retefuentePract)puc.retefuentePract=cta;
+    if(baseReteIva&&cta.startsWith(baseReteIva)&&!puc.reteIvaPract)puc.reteIvaPract=cta;
+    if(baseReteIca&&cta.startsWith(baseReteIca)&&!puc.reteIcaPract)puc.reteIcaPract=cta;
+    if(baseAntRtFte&&cta.startsWith(baseAntRtFte)&&!puc.anticipoRtFte)puc.anticipoRtFte=cta;
+    if(baseAntRtIva&&cta.startsWith(baseAntRtIva)&&!puc.anticipoRtIva)puc.anticipoRtIva=cta;
+    if(baseAntRtIca&&cta.startsWith(baseAntRtIca)&&!puc.anticipoRtIca)puc.anticipoRtIca=cta;
+  }
+  // Mínimo útil: al menos uno de los códigos de venta/compra gravada/exenta/excluida
+  // (los más distintivos de un PUC personalizado).
+  const tienePucEspecial=puc.ventaGravada||puc.ventaExenta||puc.ventaExcluida||
+                          puc.compraGravada||puc.compraExenta||puc.compraExcluida||
+                          puc.ivaGenerado||puc.ivaDescontable;
+  return tienePucEspecial?puc:null;
+}
+function aplicarPucCliente(puc){
+  PUC_CLIENTE=puc;
+  // Persistir en localStorage por NIT del declarante para que la próxima vez
+  // que el mismo cliente se contabilice, el PUC se cargue automáticamente sin
+  // que el usuario tenga que volver a subir el balance.
+  // No persistimos los presets hardcoded (ya están en el código).
+  if(window._declaranteNit&&puc.fuente!=='hardcoded'){
+    try{localStorage.setItem('pucCliente_'+window._declaranteNit,JSON.stringify(puc));}catch(e){}
+  }
+  const detectados=Object.keys(puc).filter(k=>k!=='nombres'&&k!=='identidad'&&k!=='fuente'&&puc[k]).length;
+  const filas=[];
+  const F=(lbl,c)=>filas.push('<tr><td style="padding:3px 8px;color:var(--muted);font-size:.78rem">'+lbl+'</td><td style="padding:3px 8px;font-family:monospace;color:var(--pri);font-weight:600;font-size:.82rem">'+(c||'<span style="color:#9CA3AF">no detectada</span>')+'</td></tr>');
+  F('Venta gravada',puc.ventaGravada);
+  F('Venta exenta',puc.ventaExenta);
+  F('Venta excluida',puc.ventaExcluida);
+  F('Compra gravada',puc.compraGravada);
+  F('Compra exenta',puc.compraExenta);
+  F('Compra excluida',puc.compraExcluida);
+  F('IVA generado',puc.ivaGenerado);
+  F('IVA descontable',puc.ivaDescontable);
+  F('Proveedores',puc.proveedores);
+  F('Clientes',puc.clientes);
+  F('Caja',puc.caja);
+  F('Bancos',puc.bancos);
+  const idLine=puc.identidad?'<div style="font-size:.8rem;color:var(--pri);margin-bottom:6px"><strong>Cliente:</strong> '+puc.identidad+'</div>':'';
+  document.getElementById('pucStatus').innerHTML=
+    '<div class="alert alert-ok">✓ Plan de cuentas del cliente cargado · <strong>'+detectados+'</strong> mapeos detectados · '+
+    Object.keys(puc.nombres).length+' nombres de cuenta capturados</div>'+
+    idLine+
+    '<div style="background:#F8FAFC;border:1px solid var(--border);border-radius:8px;padding:8px;margin-top:8px"><table style="width:100%;border-collapse:collapse">'+filas.join('')+'</table></div>';
+  document.getElementById('pucPolicyBox').style.display='block';
+  if(typeof exoTrack!=='undefined')exoTrack.tool('contabilizar-fe-puc-cliente');
+}
+function procesarPucCliente(file){
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const wb=XLSX.read(new Uint8Array(e.target.result),{type:'array'});
+      let best=wb.SheetNames[0],bestLen=0;
+      for(const n of wb.SheetNames){
+        const len=XLSX.utils.sheet_to_json(wb.Sheets[n],{header:1,defval:''}).length;
+        if(len>bestLen){bestLen=len;best=n;}
+      }
+      const rows=XLSX.utils.sheet_to_json(wb.Sheets[best],{header:1,defval:''});
+      if(rows.length<2){document.getElementById('pucStatus').innerHTML='<div class="alert alert-warn">⚠ Archivo sin datos.</div>';return;}
+      let hdr=-1;
+      for(let i=0;i<Math.min(15,rows.length);i++){
+        const t=norm((rows[i]||[]).join(' '));
+        if(/cuenta|cta|codig/.test(t)&&/nom|descr/.test(t)){hdr=i;break;}
+      }
+      if(hdr<0){
+        document.getElementById('pucStatus').innerHTML='<div class="alert alert-warn">⚠ No encontré encabezados con "Cuenta" + "Nombre/Descripción" en las primeras 15 filas.</div>';
+        return;
+      }
+      const heads=(rows[hdr]||[]).map(h=>norm(cellStr(h)));
+      const cCta=heads.findIndex(h=>h.includes('cuenta')||h.includes('cta')||(h.includes('codig')&&!h.includes('terc')));
+      const cNom=heads.findIndex(h=>h.includes('nom')||h.includes('descr'));
+      const puc=detectarPucDesdeRows(rows,hdr,cCta,cNom);
+      if(!puc){
+        document.getElementById('pucStatus').innerHTML='<div class="alert alert-warn">⚠ No detecté códigos del cliente. Verifica que el balance traiga cuentas auxiliares (9+ dígitos) con nombres como "VENTAS GRAVADAS", "MERCANCIAS EXENTAS", "PROVEEDORES", "IVA GENERADO".</div>';
+        return;
+      }
+      aplicarPucCliente(puc);
+    }catch(err){
+      document.getElementById('pucStatus').innerHTML='<div class="alert alert-warn">⚠ Error leyendo plan de cuentas: '+err.message+'</div>';
+      console.error(err);
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+// Auto-detección: si el balance recién cargado (apertura o auxiliar) tiene cuentas
+// con palabras "GRAVADA"/"EXENTA"/"EXCLUIDA"/"IVA GENERADO", lo usamos también como
+// PUC del cliente (a menos que ya esté cargado uno).
+function intentarAutoDeteccionPuc(rows,hdr,cCta,cNom,fuente){
+  if(PUC_CLIENTE)return;
+  const puc=detectarPucDesdeRows(rows,hdr,cCta,cNom);
+  if(!puc)return;
+  aplicarPucCliente(puc);
+  // Banner adicional explicando que se aprovechó este archivo para 2 roles
+  const note=document.createElement('div');
+  note.className='alert alert-info';
+  note.style.marginTop='8px';
+  note.style.fontSize='.82rem';
+  note.innerHTML='💡 Detecté que tu '+fuente+' trae cuentas con tarifa IVA personalizada — lo usé también como <strong>Plan de cuentas del cliente</strong> automáticamente. Las contabilizaciones usarán los códigos reales del cliente.';
+  const pucStatus=document.getElementById('pucStatus');
+  if(pucStatus)pucStatus.appendChild(note);
+}
+// Helpers para consultar PUC_CLIENTE — fallback al PUC base si null
+function pucClienteVenta(tieneIva){
+  if(!PUC_CLIENTE)return null;
+  if(tieneIva===true)return PUC_CLIENTE.ventaGravada;
+  // tieneIva false o null: según política
+  const pol=(document.getElementById('iPolSinIva')||{}).value||'exenta';
+  if(pol==='excluida'&&PUC_CLIENTE.ventaExcluida)return PUC_CLIENTE.ventaExcluida;
+  return PUC_CLIENTE.ventaExenta||PUC_CLIENTE.ventaExcluida;
+}
+function pucClienteCompra(tieneIva){
+  if(!PUC_CLIENTE)return null;
+  if(tieneIva===true)return PUC_CLIENTE.compraGravada;
+  const pol=(document.getElementById('iPolSinIva')||{}).value||'exenta';
+  if(pol==='excluida'&&PUC_CLIENTE.compraExcluida)return PUC_CLIENTE.compraExcluida;
+  return PUC_CLIENTE.compraExenta||PUC_CLIENTE.compraExcluida;
+}
+// ═══════════════════════════════════════════════════════════════════════════
+// CLASIFICADOR DE CUENTA — 3 capas
+//   1) AUX_HIST (lo que el contador ya usó antes para ese NIT)  ← prioridad
+//   2) NITS_CONOCIDOS (tabla curada de empresas grandes CO)
+//   3) HEURISTICA por nombre (~80 patrones)
+//   Default: 519590 Diversos
+// ═══════════════════════════════════════════════════════════════════════════
+// ─── NITS conocidos: empresas grandes que aparecen en casi toda contabilidad CO ───
+// Solo incluimos NITs que conocemos de fuentes públicas (RUE, sitio oficial, factura
+// real). Si tienes duda de un NIT, NO lo agregues — la heurística por nombre lo cubre.
+var NITS_CONOCIDOS={
+  // ── SERVICIOS PÚBLICOS — ENERGÍA ──
+  '890904996':{cta:'513525',nota:'EPM Empresas Públicas de Medellín — energía/agua/gas'},
+  '830037248':{cta:'513525',nota:'Codensa / Enel Colombia — energía Bogotá'},
+  '890399003':{cta:'513525',nota:'Emcali EICE ESP — Cali servicios públicos'},
+  '800248206':{cta:'513525',nota:'Air-e / Electricaribe — energía Caribe'},
+  '890103064':{cta:'513525',nota:'Electricaribe / Afinia — energía Atlántico'},
+  // ── ACUEDUCTO ──
+  '899999094':{cta:'513520',nota:'EAAB — Acueducto y Alcantarillado de Bogotá'},
+  '802002221':{cta:'513520',nota:'Triple A Barranquilla — acueducto'},
+  // ── GAS ──
+  '800007813':{cta:'513550',nota:'Vanti / Gas Natural Fenosa Distribución'},
+  '806010268':{cta:'513550',nota:'Surtigas — Costa'},
+  '890103644':{cta:'513550',nota:'Gases del Caribe'},
+  // ── TELEFONÍA / DATOS ──
+  '800153993':{cta:'513530',nota:'Claro / Comcel — telecomunicaciones'},
+  '830122566':{cta:'513530',nota:'Colombia Telecomunicaciones (Movistar)'},
+  '830114921':{cta:'513530',nota:'Colombia Móvil / Tigo / UNE'},
+  '899999115':{cta:'513530',nota:'ETB — Empresa de Telecomunicaciones de Bogotá'},
+  '805006014':{cta:'513530',nota:'DirecTV Colombia'},
+  '901354361':{cta:'513530',nota:'WOM Colombia'},
+  // ── COURIER / TRANSPORTE DE CARGA ──
+  '860350176':{cta:'513545',nota:'Servientrega'},
+  '800185306':{cta:'513545',nota:'Envia Colvanes'},
+  '811000231':{cta:'513545',nota:'Coordinadora Mercantil'},
+  '900373016':{cta:'513545',nota:'Interrapidísimo'},
+  '890101138':{cta:'513545',nota:'TCC — Transportes y Carga'},
+  '860005289':{cta:'513545',nota:'DHL Express Colombia'},
+  '860528421':{cta:'513545',nota:'FedEx Colombia'},
+  // ── AEROLÍNEAS (gastos de viaje) ──
+  '890100577':{cta:'515515',nota:'Avianca'},
+  '800240882':{cta:'515515',nota:'LATAM Airlines Colombia'},
+  '900739986':{cta:'515515',nota:'Wingo (Copa)'},
+  '900320612':{cta:'515515',nota:'Viva Air (en liquidación)'},
+  '899999040':{cta:'515515',nota:'Satena'},
+  '860013570':{cta:'515515',nota:'EasyFly'},
+  // ── COMBUSTIBLES ──
+  '830095213':{cta:'519535',nota:'Organización Terpel'},
+  '830122760':{cta:'519535',nota:'Biomax'},
+  '860007660':{cta:'519535',nota:'Exxonmobil / Esso'},
+  '900158546':{cta:'519535',nota:'Primax Colombia'},
+  // ── FERRETERÍAS / HOMECENTER ──
+  '800242106':{cta:'514515',nota:'Sodimac Colombia — Homecenter / Constructor'},
+  '901415666':{cta:'514515',nota:'EASY Colombia (Cencosud)'},
+  // ── SUPERMERCADOS — NO PRE-CLASIFICAR ──
+  // Multi-categoría: cafetería, dotación, mercancía para reventa, electrodomésticos.
+  // Sin contexto adicional NO podemos asumir cuenta — quedan en 519590 default.
+  // Caso real Juan: compra $3.5M Éxito en empresa textil → no es cafetería.
+  // (NITs 890900608 Éxito, 900155107 Cencosud, 890107487 Olímpica, etc. quitados.)
+  // ── BANCOS (gastos bancarios) ──
+  '890903938':{cta:'513580',nota:'Bancolombia — gastos bancarios'},
+  '860034313':{cta:'513580',nota:'Davivienda'},
+  '860002964':{cta:'513580',nota:'Banco de Bogotá'},
+  '860003020':{cta:'513580',nota:'BBVA Colombia'},
+  '890300279':{cta:'513580',nota:'Banco de Occidente'},
+  '860007738':{cta:'513580',nota:'Banco Popular'},
+  '860051135':{cta:'513580',nota:'Banco Caja Social BCSC'},
+  '890903937':{cta:'513580',nota:'Banco AV Villas'},
+  '800144331':{cta:'513580',nota:'Banco Itaú Colombia'},
+  '860007335':{cta:'513580',nota:'Scotiabank Colpatria'},
+  // ── PARAFISCALES / SEGURIDAD SOCIAL ──
+  '899999034':{cta:'510572',nota:'SENA'},
+  '899999239':{cta:'510578',nota:'ICBF'},
+  // ── CAJAS DE COMPENSACIÓN ──
+  '860013570':{cta:'510584',nota:'Caja Colsubsidio (Bogotá)'},
+  '860066346':{cta:'510584',nota:'Cafam'},
+  '860007327':{cta:'510584',nota:'Compensar'},
+  '890900841':{cta:'510584',nota:'Comfama (Antioquia)'},
+  '890303093':{cta:'510584',nota:'Comfandi (Valle)'},
+  // ── ARL ──
+  '860011153':{cta:'510569',nota:'ARL Sura'},
+  '860011570':{cta:'510569',nota:'Positiva Compañía de Seguros — ARL'},
+  '860007538':{cta:'510569',nota:'ARL Colmena (Bolívar)'},
+  '860002400':{cta:'510569',nota:'ARL Liberty Seguros'},
+  // ── FONDOS DE PENSIONES ──
+  '800224808':{cta:'510570',nota:'Porvenir'},
+  '800229739':{cta:'510570',nota:'Protección'},
+  '800253055':{cta:'510570',nota:'Colfondos'},
+  '800253206':{cta:'510570',nota:'Skandia (Old Mutual)'},
+  // ── EPS ──
+  '860066942':{cta:'510568',nota:'Sura EPS'},
+  '800251440':{cta:'510568',nota:'Sanitas EPS'},
+  '860013570':{cta:'510568',nota:'Compensar EPS'},
+  '805000427':{cta:'510568',nota:'Coomeva EPS'},
+  '830003564':{cta:'510568',nota:'Salud Total'},
+  '830074184':{cta:'510568',nota:'Famisanar'},
+  '900156264':{cta:'510568',nota:'Nueva EPS'},
+  // ── CÁMARAS DE COMERCIO (registro mercantil) ──
+  '860007322':{cta:'514010',nota:'Cámara de Comercio de Bogotá'},
+  '890900194':{cta:'514010',nota:'Cámara de Comercio de Medellín para Antioquia'},
+  '890399025':{cta:'514010',nota:'Cámara de Comercio de Cali'},
+  '890101567':{cta:'514010',nota:'Cámara de Comercio de Barranquilla'},
+  // ── DIAN (impuestos) ──
+  '800197268':{cta:'511595',nota:'DIAN — pagos a tesorería'},
+  // ── SOFTWARE / SUSCRIPCIONES SaaS ──
+  '830027900':{cta:'513515',nota:'Microsoft Colombia'},
+  '900058124':{cta:'513515',nota:'Google Colombia'},
+  '900293564':{cta:'513515',nota:'Amazon Web Services Colombia'},
+  '900334066':{cta:'513515',nota:'Adobe Systems Colombia'},
+  // ── PUBLICIDAD ──
+  '900058124':{cta:'513555',nota:'Google Colombia — Google Ads / publicidad'},
+  // ── PASARELAS DE PAGO (comisiones) ──
+  '900862747':{cta:'519505',nota:'Wompi — Bancolombia'},
+  '900421895':{cta:'519505',nota:'ePayco'},
+  '830122398':{cta:'519505',nota:'PayU Colombia'},
+  '900760347':{cta:'519505',nota:'Mercado Pago Colombia'},
+  // ── RETAILERS ELECTRO / TECH ──
+  '900017447':{cta:'152805',nota:'Falabella — equipo'},
+  '811021363':{cta:'152805',nota:'Alkosto'},
+  // ── ASEO Y VIGILANCIA (servicios) ──
+  '860007538':{cta:'513505',nota:'Atlas Seguridad Integral'},
+  '860532151':{cta:'513505',nota:'Seguridad Atlas'},
+  '860005237':{cta:'513505',nota:'Brinks de Colombia'},
+  '860039988':{cta:'513505',nota:'Compañía Andina de Vigilancia'},
+  // ── DISTRIBUIDORES FARMACÉUTICOS / DROGUERÍA ──
+  // Sin PUC personalizado → 143505 (inventario para reventa). Con PUC droguería
+  // cargado, el motor override a compraGravada/Exenta del cliente. Solo agregamos
+  // NITs que confirmamos en reportes reales — otros laboratorios caen por heurística.
+  '860026123':{cta:'143505',nota:'COOPIDROGAS — Cooperativa Nacional de Droguistas Detallistas'},
+  '890300466':{cta:'143505',nota:'TECNOQUIMICAS — laboratorio farmacéutico'}
+};
+// ─── HEURÍSTICA por nombre ─── (más específica primero, más general después)
+var HEURISTICA=[
+  // ─── SERVICIOS PÚBLICOS ─── (más específico que servicios genéricos)
+  {kw:['codensa','enel','electrica','electrific','electrohuila','electricaribe','energia','epm '],cta:'513525',concepto:'servicios'},
+  {kw:['acueducto','aguas de ','triple a','empresas publicas de','aseo cap'],cta:'513520',concepto:'servicios'},
+  {kw:['gas natural','vanti','surtigas','promigas','llanogas','gases del'],cta:'513550',concepto:'servicios'},
+  {kw:['claro','tigo','movistar','telefonica','etb','colombia movil','colombia telecom','directv','wom ','avantel','une telec'],cta:'513530',concepto:'servicios'},
+  {kw:['internet','wifi','fibra optica','banda ancha'],cta:'513530',concepto:'servicios'},
+  // ─── ARRENDAMIENTOS ───
+  {kw:['arriend','inmobiliar','propiedad raiz','administrador edif','administracion edif','copropiedad','conjunto resid','horizontal','ph '],cta:'512010',concepto:'arrendamiento_inmueble'},
+  {kw:['rent a car','renting','leasing operativ','alquiler vehic'],cta:'512030',concepto:'arrendamiento_mueble'},
+  // ─── HONORARIOS ─── (CR/ENTRADAS antes que servicios genéricos)
+  {kw:['abogad','bufete','jurid','consultor jurid','asesor jurid','firma de abogad'],cta:'511025',concepto:'honorarios'},
+  {kw:['revisor fiscal','revisoria fiscal'],cta:'511010',concepto:'honorarios'},
+  {kw:['auditor','auditoria','auditing'],cta:'511015',concepto:'honorarios'},
+  {kw:['contador','contadora','contable','asesoria contable','servicios contables'],cta:'511095',concepto:'honorarios'},
+  {kw:['ingenier','consultor','consulting','asesoria tecnic'],cta:'511035',concepto:'honorarios'},
+  {kw:['arquitect','disenador','diseñ'],cta:'511095',concepto:'honorarios'},
+  // ─── ASEO Y VIGILANCIA ───
+  {kw:['vigilancia','seguridad privada','andiseg','brinks','prosegur','seg ltda','vigilantes','escolta'],cta:'513505',concepto:'servicios'},
+  {kw:['aseo industrial','servicios de aseo','limpieza industrial','asimm'],cta:'513505',concepto:'servicios'},
+  // ─── TEMPORALES ───
+  {kw:['servicios temporales','temporales ','temp emp','adecco','manpower','activos s','servisalud'],cta:'513570',concepto:'servicios'},
+  // ─── TRANSPORTE DE CARGA ───
+  {kw:['servientrega','envia','coordinadora','interrap','rapida del valle','tcc ','dhl','fedex','ups colombia','deprisa','encomienda'],cta:'513545',concepto:'transporte_carga'},
+  {kw:['transport','flete','acarreo','logistic','carga ltda'],cta:'513545',concepto:'transporte_carga'},
+  // ─── MANTENIMIENTO ───
+  {kw:['mantenim','reparacion','taller','servitec','mecanic','electromec'],cta:'514515',concepto:'servicios'},
+  {kw:['repuesto','autopart','llantas','servillanta','tornillo','rodamiento'],cta:'514515',concepto:'compras'},
+  // ─── COMBUSTIBLES ───
+  {kw:['terpel','esso','exxon','mobil ','petrobras','biomax','primax','combustibl','gasolina','estacion de servicio','estación de servicio','eds '],cta:'519535',concepto:'compras'},
+  // ─── PAPELERÍA ───
+  {kw:['papeler','panamericana','librer','tinta','tonner','toner','cartucho','impresion','copias','fotocopia'],cta:'519530',concepto:'compras'},
+  // ─── ASEO / CAFETERÍA ───
+  {kw:['cafeter','cafe ','panaderia','panaderia','pasteleria','bizcocheria'],cta:'519525',concepto:'compras'},
+  {kw:['detergente','jabon','clorox','blanqueador','desinfectante','aseo y limpieza'],cta:'519525',concepto:'compras'},
+  // ─── RESTAURANTES / REPRESENTACIÓN ───
+  {kw:['restaur','asader','pizzer','hamburgues','sandwich','crepes','andres carne','wok ','frisby','el corral','mcdonald','kfc','burger','subway','juan valdez','tostao','starbuck','oma '],cta:'519560',concepto:'compras'},
+  // ─── HOSPEDAJE ───
+  {kw:['hotel','hosped','hostal','marriott','sonesta','estelar','dann ','intercontinental','sheraton','holiday','radisson','wyndham','decameron','airbnb','booking'],cta:'515505',concepto:'servicios'},
+  // ─── AEROLÍNEAS / PASAJES ───
+  {kw:['aerolin','avianca','latam','wingo','viva air','satena','easyfly','copa airlines','aerial'],cta:'515515',concepto:'servicios'},
+  {kw:['expreso','flota ','rapido ochoa','expreso brasilia','copetran','bolivariano','rapido tolima'],cta:'515520',concepto:'transporte_pasajeros'},
+  // ─── BANCOS ───
+  {kw:['banco ','bancolombia','davivienda','bbva','popular','occidente','colpatria','caja social','av villas','scotiabank','itau','citibank','helm bank','gnb sudameris'],cta:'513580',concepto:'sin_retencion'},
+  // ─── PASARELAS / FINTECH ───
+  {kw:['wompi','epayco','payu','mercado pago','stripe','paypal','nequi','daviplata','rappipay'],cta:'519505',concepto:'sin_retencion'},
+  // ─── HOMECENTER / FERRETERÍA ───
+  {kw:['homecenter','sodimac','easy ','constructor','ferreter','ferretodo','depo ferre','toolbox'],cta:'514515',concepto:'compras'},
+  // ─── SUPERMERCADOS — NO SE CLASIFICAN AUTOMÁTICAMENTE ───
+  // Éxito/Jumbo/Metro/Olímpica/D1/Ara venden de todo: cafetería, electrodomésticos,
+  // dotación, papelería, mercancía. Sin contexto NO podemos asumir cuenta — va a 519590
+  // y el contador decide. (Quita falso positivo $3.5M Éxito = cafetería.)
+  //
+  // ─── FARMACIAS — TAMPOCO ───
+  // Pueden ser botiquín (519525), gastos médicos (519585), o reembolsos a empleados.
+  // Va a 519590 y el contador decide.
+  // ─── EQUIPO DE CÓMPUTO ───
+  {kw:['ktronix','alkosto','computador','laptop','equipo de computo','hardware','tecnolog','informatica','hewlett','lenovo','dell ','asus ','acer ','intel '],cta:'152805',concepto:'compras'},
+  // ─── SOFTWARE / SaaS ───
+  {kw:['microsoft','adobe','google ','amazon web','aws ','zoom','slack','figma','dropbox','github','notion','atlassian','jira','autodesk','sap '],cta:'513515',concepto:'servicios'},
+  // ─── PUBLICIDAD / MARKETING ───
+  {kw:['publicidad','propaganda','marketing','agencia ','meta platforms','facebook','google ads','linkedin','tiktok'],cta:'513555',concepto:'servicios'},
+  // ─── PARQUEADEROS ───
+  {kw:['parquead','parking','city parking','epm parqueader'],cta:'519565',concepto:'sin_retencion'},
+  // ─── SEGUROS ───
+  {kw:['seguros bolivar','seguros sura','seguros del estado','aseguradora','seguros mundial','liberty seguros','axa colpatria','allianz','mapfre','generali','positiva compañia','suramericana','soat'],cta:'513055',concepto:'sin_retencion'},
+  // ─── ARL / EPS / PENSIONES (cuando vienen como factura, no como aporte nómina) ───
+  {kw:[' arl ','administradora de riesgos','salud sura','sanitas','famisanar','salud total','nueva eps','coomeva','colmedica','colmedicas'],cta:'510568',concepto:'sin_retencion'},
+  {kw:['porvenir','proteccion ','colfondos','skandia','old mutual'],cta:'510570',concepto:'sin_retencion'},
+  // ─── CONTRIBUCIONES Y AFILIACIONES ───
+  {kw:['camara de comercio','ccb','confecamaras','fenalco','andi','acopi','superintendenc'],cta:'514010',concepto:'sin_retencion'},
+  {kw:['agremiacion','asociacion gremial','colegio de '],cta:'512510',concepto:'sin_retencion'},
+  // ─── IMPUESTOS / TRÁMITES ───
+  {kw:['secretaria de hacienda','tesoreria municipal','impuestos municipales','dian ','direccion de impuestos','registraduria'],cta:'511595',concepto:'sin_retencion'},
+  {kw:['notaria ','notarial','registraduria','superintendencia','runt ','runt s'],cta:'514005',concepto:'sin_retencion'},
+  // ─── CONSTRUCCIONES / ADECUACIONES ───
+  {kw:['construccion','construcciones','obras civiles','contratista'],cta:'515005',concepto:'compras'},
+  // ─── INVENTARIO (mayoristas / distribuidores) ───
+  {kw:['distribuidor','distribuid','mayorista','comercializadora','importadora','exportadora'],cta:'143505',concepto:'compras'},
+  // ─── DROGUERÍA / LABORATORIOS FARMACÉUTICOS ───
+  // Para droguerías Ruth-style: con PUC personalizado se override a mercancía
+  // gravada/exenta; sin PUC al menos cae a inventario en lugar de Diversos.
+  {kw:['drogui','farmaceu','farmacéu','laboratori','quimicofarm','químicofarm','pharma','medicament','genfar','tecnoquim'],cta:'143505',concepto:'compras'},
+  // ─── EDUCACIÓN / CAPACITACIÓN ───
+  {kw:['universidad','politecnico','instituto ','academia','sena ','capacita','formacion'],cta:'511095',concepto:'honorarios'},
+  // ─── LIBROS Y SUSCRIPCIONES ───
+  {kw:['actualicese','legis editor','gerencie','globalcontable','el tiempo','el espectador','semana ','dinero ','suscripcion'],cta:'519510',concepto:'sin_retencion'}
+];
+// Helper: matchea keyword contra nombre con la regla correcta.
+//   - RegExp           → usar .test()
+//   - tiene espacios   → frase exacta, usar includes()
+//   - ≤ 6 caracteres   → palabra corta, exigir word boundary (evita falsos
+//                        positivos como 'andi' matcheando 'SANDIOS')
+//   - ≥ 7 caracteres   → palabra/prefijo larga, includes() OK
+function matchKw(n,k){
+  if(k instanceof RegExp)return k.test(n);
+  if(k.indexOf(' ')>=0)return n.includes(k);
+  if(k.length>=7)return n.includes(k);
+  // Palabra corta sin espacios → word boundary
+  // n ya viene normalizado (sin tildes, lowercase, con espacios envolventes)
+  return new RegExp('(^|[^a-z0-9])'+k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'([^a-z0-9]|$)','i').test(n);
+}
+function clasificarGasto(nit,nombre){
+  // Capa 1: NIT conocido (match exacto)
+  const nitN=String(nit||'').replace(/[^\d]/g,'');
+  if(NITS_CONOCIDOS[nitN])return{cta:NITS_CONOCIDOS[nitN].cta,concepto:'compras',fuente:'nit'};
+  // Capa 2: heurística por nombre (primer match gana)
+  const n=' '+norm(nombre||'')+' ';
+  for(const h of HEURISTICA){
+    if(h.kw.some(k=>matchKw(n,k)))return{cta:h.cta,concepto:h.concepto||'compras',fuente:'heuristica'};
+  }
+  // Capa 3: default
+  return{cta:'519590',concepto:'compras',fuente:'default'};
+}
+// ═══════════════════════════════════════════════════════════════════════════
+// MOTOR DE ASIENTOS CONTABLES — versión simplificada
+//   • Las retenciones se LEEN del reporte MUISCA. No se inventan ni se calculan.
+//   • La cuenta de gasto/ingreso sale del auxiliar histórico → heurística → 519590.
+//   • IVA: si la factura trae IVA y la empresa es responsable, va a 240802/240801.
+//     (Asumimos siempre responsable; si no, el contador reclasifica.)
+// ═══════════════════════════════════════════════════════════════════════════
+var libroDiario=[];
+function add(asiento,cuenta,nit,tercero,detalle,debito,credito,tieneIva){
+  if(!debito&&!credito)return;
+  asiento.push({
+    cuenta:String(cuenta||''),
+    // pucName ya consulta PUC_CLIENTE.nombres primero y PUC_BASE después
+    nombreCta:pucName(cuenta)||'',
+    nit,tercero,detalle,
+    debito:debito||0,credito:credito||0,
+    // tieneIva: true=gravada, false=exenta, null=N/A (cuentas no de P&L).
+    // Lo usa solo el export de Total Innovation para distinguir 001 vs 002.
+    tieneIva: (tieneIva===true||tieneIva===false)?tieneIva:null
+  });
+}
+// Devuelve cuenta de gasto sugerida para un proveedor (nit, nombre).
+// Prioridad:
+//   1) Auxiliar histórico del cliente (lo que ya causaba antes para ese NIT)
+//   2) NITs conocidos / heurística por nombre
+//   3) Si el clasificador no supo (fuente='default') Y hay PUC_CLIENTE cargado
+//      con código de compra de mercancía → usar PUC_CLIENTE.compraGravada/Exenta/Excluida
+//   4) Si supo (NIT/heurística) Y PUC_CLIENTE tiene auxiliar para ese código base
+//      (ej. 513530001 cuando estándar es 513530) → usar la auxiliar del cliente
+//   5) Fallback: cuenta del clasificador (PUC 2650 base)
+function cuentaGastoFor(nit,nombre,tieneIva){
+  const h=AUX_HIST[nit];
+  if(h&&h.dominanteGasto)return h.dominanteGasto;
+  const clas=clasificarGasto(nit,nombre);
+  if(PUC_CLIENTE){
+    const ctaMerc=pucClienteCompra(tieneIva);
+    // Override SI: el clasificador no supo (default 519590), o devolvió clase 1
+    // (inventario / equipos por heurística "distribuidor", "ktronix", etc.).
+    // Para clientes con PUC personalizado (típicamente comerciantes), las compras
+    // que la heurística mete en inventario son en realidad mercancía → 62xx.
+    // Las cuentas clase 5 (servicios públicos, honorarios, arriendos) SÍ respetan
+    // la heurística pero se traducen a la auxiliar del cliente cuando existe.
+    const fueDefault=clas.fuente==='default';
+    const esClase1=clas.cta&&clas.cta[0]==='1';
+    if(ctaMerc&&(fueDefault||esClase1))return ctaMerc;
+    const cta9=encontrarAuxClientePorBase(clas.cta);
+    if(cta9)return cta9;
+  }
+  return clas.cta;
+}
+function cuentaIngresoFor(nit,nombre,tieneIva){
+  // PUC del cliente tiene prioridad MÁXIMA para ventas (típicamente el cliente
+  // maneja varias auxiliares de ingreso para gravada/exenta/excluida que el
+  // motor genérico no conoce).
+  if(PUC_CLIENTE){
+    const ctaVenta=pucClienteVenta(tieneIva);
+    if(ctaVenta)return ctaVenta;
+  }
+  const h=AUX_HIST[nit];
+  if(h&&h.dominanteIngreso)return h.dominanteIngreso;
+  return '413555'; // comercio al por mayor — default
+}
+// Devuelve cuenta de cierre según modo elegido:
+//   'cartera' → CxC clientes / CxP proveedores
+//   'caja'    → caja general (pago contado)
+//   'bancos'  → bancos (transferencia)
+// Respeta los códigos del PUC del cliente si están cargados.
+function cuentaCierre(modo,esVenta,esDS){
+  if(modo==='caja')return (PUC_CLIENTE&&PUC_CLIENTE.caja)||'110505';
+  if(modo==='bancos')return (PUC_CLIENTE&&PUC_CLIENTE.bancos)||'111005';
+  if(esVenta)return (PUC_CLIENTE&&PUC_CLIENTE.clientes)||'130505';
+  if(esDS)return '233595';
+  return (PUC_CLIENTE&&PUC_CLIENTE.proveedores)||'220505';
+}
+function contabilizarDoc(d){
+  const asiento=[];
+  const fecha=d.fecha?fmtDate(d.fecha):'';
+  const tipoCorto=(d.codTipoN==='91')?'NC':(d.codTipoN==='92')?'ND':(d.esDS?'DS':'FE');
+  // tipoInnov: usado solo por el export de Total Innovation, distingue venta/compra.
+  const tipoInnov = d.esEmitido
+    ? ((d.codTipoN==='91')?'NC':(d.codTipoN==='92')?'ND':'FV')
+    : ((d.codTipoN==='91')?'NC':(d.codTipoN==='92')?'ND':(d.esDS?'DS':'FC'));
+  const comprobante=tipoCorto+'-'+(d.prefijo||'')+(d.folio||'').replace(/\s/g,'');
+  const ni=splitNitDv(d.terceroNit);
+  const nitTercero=ni.nit;
+  const tercero=d.terceroNombre||'';
+  const sign=d.esNota?-1:1;
+  const total=d.total*sign;
+  const iva=d.iva*sign;
+  const subtotal=total-iva;
+  // tieneIva = el doc original (antes de signo de NC) tiene IVA > 0 → gravada.
+  const tieneIva = d.iva > 0;
+  const reteRenta=d.reteRenta*sign;
+  const reteIva=d.reteIva*sign;
+  const reteIca=d.reteIca*sign;
+  // Modo cruce contra dinero (cartera | caja | bancos)
+  const modoEl=document.getElementById('iCruce');
+  const modoCruce=modoEl?modoEl.value:'cartera';
+  // Códigos de IVA y retenciones — respetan PUC_CLIENTE si está cargado
+  const ctaIvaGen=(PUC_CLIENTE&&PUC_CLIENTE.ivaGenerado)||'240801';
+  const ctaIvaDes=(PUC_CLIENTE&&PUC_CLIENTE.ivaDescontable)||'240802';
+  const ctaRteFtePract=(PUC_CLIENTE&&PUC_CLIENTE.retefuentePract)||'236540';
+  const ctaRteIvaPract=(PUC_CLIENTE&&PUC_CLIENTE.reteIvaPract)||'236701';
+  const ctaRteIcaPract=(PUC_CLIENTE&&PUC_CLIENTE.reteIcaPract)||'236805';
+  const ctaAntRteFte=(PUC_CLIENTE&&PUC_CLIENTE.anticipoRtFte)||'135515';
+  const ctaAntRteIva=(PUC_CLIENTE&&PUC_CLIENTE.anticipoRtIva)||'135517';
+  const ctaAntRteIca=(PUC_CLIENTE&&PUC_CLIENTE.anticipoRtIca)||'135518';
+  // Tarifa estándar IVA Colombia. Si en el futuro alguien maneja 5% para canasta
+  // familiar, se puede inferir por ratio o agregar columna en el reporte.
+  const TARIFA_IVA=0.19;
+  // Solo partimos venta/compra en gravada + exenta cuando el cliente tiene PUC
+  // personalizado con cuentas DISTINTAS para gravada y exenta. Sino, todo el
+  // subtotal va a una sola cuenta (comportamiento clásico).
+  const partirVenta=PUC_CLIENTE&&PUC_CLIENTE.ventaGravada&&(PUC_CLIENTE.ventaExenta||PUC_CLIENTE.ventaExcluida)&&PUC_CLIENTE.ventaGravada!==PUC_CLIENTE.ventaExenta;
+  const partirCompra=PUC_CLIENTE&&PUC_CLIENTE.compraGravada&&(PUC_CLIENTE.compraExenta||PUC_CLIENTE.compraExcluida)&&PUC_CLIENTE.compraGravada!==PUC_CLIENTE.compraExenta;
+  // ─── VENTA (FE/ND emitida; NC emitida invierte) ───
+  if(d.esEmitido){
+    const ctaCx=cuentaCierre(modoCruce,true,false);
+    const det='Venta '+tipoCorto+' '+(d.folio||'')+' '+tercero;
+    const aRecibir=total-reteRenta-reteIva-reteIca;
+    add(asiento,ctaCx,nitTercero,tercero,det,aRecibir,0);
+    if(reteRenta)add(asiento,ctaAntRteFte,nitTercero,tercero,'Retefuente que me practicó '+tercero,reteRenta,0);
+    if(reteIva) add(asiento,ctaAntRteIva,nitTercero,tercero,'ReteIVA que me practicó '+tercero,reteIva,0);
+    if(reteIca) add(asiento,ctaAntRteIca,nitTercero,tercero,'ReteICA que me practicó '+tercero,reteIca,0);
+    if(d.iva>0&&partirVenta){
+      // Factura mixta: la base gravada es la que cruza con el IVA al 19%.
+      // El resto del subtotal es exento (o excluido según política sin-IVA).
+      // Estrategia de cuadre: redondear la exenta al peso y absorber los centavos
+      // en la gravada — preserva la suma exacta (gravada + exenta + iva = total)
+      // y deja la cuenta exenta con números enteros bonitos.
+      const baseGravIdeal=d.iva/TARIFA_IVA;
+      const subAbs=Math.abs(subtotal);
+      const baseExeAbs=Math.max(0,Math.round(subAbs-baseGravIdeal));
+      const baseGravAbs=subAbs-baseExeAbs;
+      const baseGravUse=baseGravAbs*sign;
+      const baseExeUse=baseExeAbs*sign;
+      add(asiento,PUC_CLIENTE.ventaGravada,nitTercero,tercero,det,0,baseGravUse,true);
+      if(baseExeUse!==0){
+        const ctaIngExe=cuentaIngresoFor(nitTercero,tercero,false);
+        add(asiento,ctaIngExe,nitTercero,tercero,det,0,baseExeUse,false);
+      }
+    } else {
+      const ctaIngreso=cuentaIngresoFor(nitTercero,tercero,tieneIva);
+      add(asiento,ctaIngreso,nitTercero,tercero,det,0,subtotal,tieneIva);
+    }
+    if(iva)add(asiento,ctaIvaGen,nitTercero,tercero,'IVA generado '+(d.folio||''),0,iva);
+    return {asiento,fecha,comprobante,tipoCorto,tipoInnov,detalle:det};
+  }
+  // ─── COMPRA (FE/DS recibido; NC recibida invierte) ───
+  const ctaCx=cuentaCierre(modoCruce,false,d.esDS);
+  const det='Compra '+tipoCorto+' '+(d.folio||'')+' '+tercero;
+  // Solo partimos en gravada + exenta cuando el clasificador ya decidió mandar la
+  // compra a mercancía. Las facturas de servicios públicos, honorarios, arriendos,
+  // etc. siguen en su cuenta específica (513525, 511025, 512010, etc.).
+  const ctaGastoGrav=cuentaGastoFor(nitTercero,tercero,true);
+  const ctaGastoExe=cuentaGastoFor(nitTercero,tercero,false);
+  const esMercancia=partirCompra&&(ctaGastoGrav===PUC_CLIENTE.compraGravada||ctaGastoExe===PUC_CLIENTE.compraExenta||ctaGastoExe===PUC_CLIENTE.compraExcluida);
+  if(d.iva>0&&esMercancia){
+    // Misma estrategia que ventas: exenta al peso entero, gravada absorbe centavos.
+    const baseGravIdeal=d.iva/TARIFA_IVA;
+    const subAbs=Math.abs(subtotal);
+    const baseExeAbs=Math.max(0,Math.round(subAbs-baseGravIdeal));
+    const baseGravAbs=subAbs-baseExeAbs;
+    const baseGravUse=baseGravAbs*sign;
+    const baseExeUse=baseExeAbs*sign;
+    add(asiento,PUC_CLIENTE.compraGravada,nitTercero,tercero,det,baseGravUse,0,true);
+    if(baseExeUse!==0){
+      add(asiento,ctaGastoExe,nitTercero,tercero,det,baseExeUse,0,false);
+    }
+  } else {
+    const ctaGasto=cuentaGastoFor(nitTercero,tercero,tieneIva);
+    add(asiento,ctaGasto,nitTercero,tercero,det,subtotal,0,tieneIva);
+  }
+  if(iva)add(asiento,ctaIvaDes,nitTercero,tercero,'IVA descontable '+(d.folio||''),iva,0);
+  const aPagar=total-reteRenta-reteIva-reteIca;
+  add(asiento,ctaCx,nitTercero,tercero,det,0,aPagar);
+  if(reteRenta)add(asiento,ctaRteFtePract,nitTercero,tercero,'Retefuente practicada a '+tercero,0,reteRenta);
+  if(reteIva) add(asiento,ctaRteIvaPract,nitTercero,tercero,'ReteIVA practicada a '+tercero,0,reteIva);
+  if(reteIca) add(asiento,ctaRteIcaPract,nitTercero,tercero,'ReteICA practicada a '+tercero,0,reteIca);
+  return {asiento,fecha,comprobante,tipoCorto,tipoInnov,detalle:det};
+}
+function marcarEmitidoFlag(){
+  docs.emitidos.forEach(d=>d.esEmitido=true);
+  docs.recibidos.forEach(d=>d.esEmitido=false);
+}
+// Listener del selector de cruce: muestra advertencia clara cuando elige caja/bancos.
+(function(){
+  const sel=document.getElementById('iCruce');
+  const warn=document.getElementById('cruceWarn');
+  if(!sel||!warn)return;
+  function update(){
+    if(sel.value==='caja'){
+      warn.style.display='block';
+      warn.innerHTML='⚠ <strong>Modo Caja:</strong> Todas las ventas se contabilizan como cobradas en efectivo (DR 110505 Caja) y todas las compras como pagadas en efectivo (CR 110505). <strong>No se generan saldos en CxC ni CxP.</strong> Úsalo solo si confirmas con tu cliente que <em>realmente</em> todo se cobra/paga al contado, o ajusta los saldos después manualmente.';
+    } else if(sel.value==='bancos'){
+      warn.style.display='block';
+      warn.innerHTML='⚠ <strong>Modo Bancos:</strong> Todas las ventas como cobradas vía banco (DR 111005) y todas las compras como pagadas vía banco (CR 111005). <strong>No se generan saldos en CxC ni CxP.</strong> Tendrás que conciliar el extracto bancario contra estos asientos — probablemente <em>no cuadrarán</em> si hubo facturas que sí quedaron pendientes de cobro.';
+    } else {
+      warn.style.display='none';warn.innerHTML='';
+    }
+  }
+  sel.addEventListener('change',update);update();
+})();
+// ═══════════════════════════════════════════════════════════════════════════
+// PROCESO PRINCIPAL
+// ═══════════════════════════════════════════════════════════════════════════
+var totalDebitos=0,totalCreditos=0,asientosCount=0,renglonesCount=0;
+var balanceCompro={}; // {cuenta: {nombre, debito, credito}}
+function contabilizar(){
+  try{
+    return contabilizarInner();
+  }catch(e){
+    console.error('Error contabilizando:',e);
+    document.getElementById('contStatus').innerHTML='<span style="color:var(--red);font-weight:600">✗ Error: '+e.message+' — abre DevTools (F12) para más detalle</span>';
+    if(typeof exoToast!=='undefined')exoToast('Error contabilizando: '+e.message,'error');
+  }
+}
+function contabilizarInner(){
+  if(!docs.emitidos.length&&!docs.recibidos.length){exoToast('Primero parsea el reporte MUISCA','warning');return;}
+  marcarEmitidoFlag();
+  const desde=document.getElementById('iDesde').value?new Date(document.getElementById('iDesde').value):null;
+  const hasta=document.getElementById('iHasta').value?new Date(document.getElementById('iHasta').value+'T23:59:59'):null;
+  const modo=document.getElementById('iModo').value||'detallado';
+  libroDiario=[];balanceCompro={};totalDebitos=0;totalCreditos=0;asientosCount=0;renglonesCount=0;
+  document.getElementById('contStatus').textContent='Procesando…';
+  const todos=docs.emitidos.concat(docs.recibidos);
+  todos.sort((a,b)=>{const fa=a.fecha?a.fecha.getTime():0,fb=b.fecha?b.fecha.getTime():0;return fa-fb});
+  // ─── MODO MENSUAL CONSOLIDADO ────────────────────────────────────────────
+  if(modo==='mensual'){
+    contabilizarMensual(todos,desde,hasta);
+  } else {
+    // ─── MODO DETALLADO (un asiento por documento) ─────────────────────────
+    todos.forEach(d=>{
+      if(desde&&d.fecha&&d.fecha<desde)return;
+      if(hasta&&d.fecha&&d.fecha>hasta)return;
+      const r=contabilizarDoc(d);
+      if(!r||!r.asiento.length)return;
+      pushAsientoAlDiario(r);
+    });
+  }
+  // Render
+  renderResultado();
+  document.getElementById('resultZone').style.display='block';
+  document.getElementById('contStatus').textContent='✓ '+asientosCount.toLocaleString('es-CO')+' asientos generados ('+renglonesCount.toLocaleString('es-CO')+' renglones)';
+  ajustarEcardSegunModo();
+  if(typeof exoTrack!=='undefined')exoTrack.tool('contabilizar-fe-go-'+modo);
+}
+// Ajusta el copy de la ecard al modo cruce elegido (cartera/caja/bancos).
+// En modo cartera el wow es conciliar bancos; en caja/bancos lo más útil
+// es validar saldos contra arqueo o extracto real.
+function ajustarEcardSegunModo(){
+  const modo=(document.getElementById('iCruce')||{}).value||'cartera';
+  const desc=document.getElementById('ecardDesc');
+  if(!desc)return;
+  if(modo==='caja'){
+    desc.innerHTML='Causaste todo a <strong>Caja 110505</strong>. El cierre solo está completo cuando haces el <strong>arqueo de caja</strong> y verificas que el saldo contable cuadre con el efectivo físico. Si hubo cobros que en realidad entraron al banco, ajusta primero o vuelve a contabilizar en modo Bancos.';
+  } else if(modo==='bancos'){
+    desc.innerHTML='Causaste todo a <strong>Bancos 111005</strong>. Lo siguiente es subir el <strong>extracto bancario real</strong> y cruzarlo contra estos asientos — ahí salen los ingresos por transferencia que no facturaste y los pagos que pasaron por banco sin causación.';
+  } else {
+    desc.innerHTML='Ya tienes el libro diario causado. El cierre del mes solo está completo cuando cruzas tu <strong>extracto bancario</strong> contra estos asientos — ahí salen los ingresos no facturados, los gastos sin causar y los pagos que faltan.';
+  }
+}
+function pushAsientoAlDiario(r){
+  asientosCount++;
+  r.asiento.forEach((l,idx)=>{
+    libroDiario.push({
+      fecha:r.fecha,comprobante:r.comprobante,
+      cuenta:l.cuenta,nombreCta:l.nombreCta,
+      nit:l.nit,tercero:l.tercero,
+      detalle:l.detalle,
+      debito:l.debito,credito:l.credito,
+      esPrimero:idx===0,
+      tieneIva:l.tieneIva,
+      tipoInnov:r.tipoInnov
+    });
+    totalDebitos+=l.debito;totalCreditos+=l.credito;
+    if(!balanceCompro[l.cuenta])balanceCompro[l.cuenta]={nombre:l.nombreCta,debito:0,credito:0};
+    balanceCompro[l.cuenta].debito+=l.debito;
+    balanceCompro[l.cuenta].credito+=l.credito;
+    renglonesCount++;
+  });
+}
+// ─── MODO MENSUAL CONSOLIDADO ──────────────────────────────────────────────
+// Agrupa todos los documentos del mes en UN solo comprobante por mes.
+// Cada renglón del asiento es: (cuenta, NIT del tercero) — preserva el detalle
+// por tercero pero comprime miles de facturas en un solo asiento mensual.
+function contabilizarMensual(todos,desde,hasta){
+  // Particionar por mes (YYYY-MM)
+  const meses={};
+  todos.forEach(d=>{
+    if(!d.fecha)return;
+    if(desde&&d.fecha<desde)return;
+    if(hasta&&d.fecha>hasta)return;
+    const ym=d.fecha.getFullYear()+'-'+String(d.fecha.getMonth()+1).padStart(2,'0');
+    if(!meses[ym])meses[ym]=[];
+    meses[ym].push(d);
+  });
+  const mesesOrden=Object.keys(meses).sort();
+  mesesOrden.forEach(ym=>{
+    const docsMes=meses[ym];
+    // Generar asiento individual por cada doc para sumar a un acumulador por cuenta+nit
+    const acum={}; // key: cuenta||nit||tipo  → {cuenta, nit, tercero, detalle, debito, credito}
+    docsMes.forEach(d=>{
+      const r=contabilizarDoc(d);
+      if(!r)return;
+      r.asiento.forEach(l=>{
+        // Incluimos tieneIva en el key para que gravadas y exentas se acumulen por separado
+        // (lo aprovecha el export de Total Innovation; en el preview/Excel/CSV son indistinguibles).
+        const ivK=l.tieneIva===true?'I':(l.tieneIva===false?'E':'X');
+        const k=l.cuenta+'||'+(l.nit||'')+'||'+(l.debito>0?'D':'C')+'||'+ivK;
+        if(!acum[k])acum[k]={cuenta:l.cuenta,nombreCta:l.nombreCta,nit:l.nit,tercero:l.tercero,detalle:'',debito:0,credito:0,tieneIva:l.tieneIva};
+        acum[k].debito+=l.debito;
+        acum[k].credito+=l.credito;
+      });
+    });
+    const [y,m]=ym.split('-');
+    const nomMes=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'][parseInt(m,10)-1];
+    const fechaCierre=new Date(parseInt(y,10),parseInt(m,10),0); // último día del mes
+    const fechaStr=fmtDate(fechaCierre);
+    const comprobante='CM-'+ym;
+    const detalleBase='Consolidado FE/DS '+nomMes+' '+y+' ('+docsMes.length+' docs)';
+    const lineas=Object.values(acum);
+    // Cuadre defensivo: redondeos pueden generar diff de centavos
+    const sumD=lineas.reduce((s,l)=>s+l.debito,0);
+    const sumC=lineas.reduce((s,l)=>s+l.credito,0);
+    const diff=Math.round(sumD-sumC);
+    if(Math.abs(diff)>0&&Math.abs(diff)<=lineas.length){
+      // Ajustar el último renglón
+      const last=lineas[lineas.length-1];
+      if(diff>0)last.credito+=diff;else last.debito-=diff;
+    }
+    asientosCount++;
+    lineas.sort((a,b)=>a.cuenta.localeCompare(b.cuenta)).forEach((l,idx)=>{
+      libroDiario.push({
+        fecha:fechaStr,comprobante,
+        cuenta:l.cuenta,nombreCta:l.nombreCta,
+        nit:l.nit,tercero:l.tercero,
+        detalle:detalleBase,
+        debito:l.debito,credito:l.credito,
+        esPrimero:idx===0,
+        mes:ym,
+        tieneIva:l.tieneIva,
+        tipoInnov:'CM'
+      });
+      totalDebitos+=l.debito;totalCreditos+=l.credito;
+      if(!balanceCompro[l.cuenta])balanceCompro[l.cuenta]={nombre:l.nombreCta,debito:0,credito:0};
+      balanceCompro[l.cuenta].debito+=l.debito;
+      balanceCompro[l.cuenta].credito+=l.credito;
+      renglonesCount++;
+    });
+  });
+}
+// Estado del filtro mensual (null = todos los meses)
+var mesFiltro=null;
+// Helper: mes YYYY-MM de un renglón del libro diario
+function mesDe(l){return l.mes||String(l.fecha||'').slice(0,7);}
+// Devuelve libroDiario filtrado al mes activo (o todo si no hay filtro)
+function libroFiltrado(){
+  if(!mesFiltro)return libroDiario;
+  return libroDiario.filter(l=>mesDe(l)===mesFiltro);
+}
+// Setea el filtro y re-renderiza. Llamado desde los chips mensuales.
+function setMesFiltro(ym){
+  mesFiltro=(ym===mesFiltro?null:ym); // toggle: click 2x al mismo mes = limpiar
+  renderResultado();
+}
+function renderResultado(){
+  const cuadre=Math.abs(totalDebitos-totalCreditos)<1;
+  // KPIs SIEMPRE muestran totales globales (la vista del cuadre del documento)
+  document.getElementById('kpisCont').innerHTML=
+    '<div class="kpi blue"><div class="val">'+asientosCount.toLocaleString('es-CO')+'</div><div class="lbl">Asientos generados</div></div>'+
+    '<div class="kpi gray"><div class="val">'+renglonesCount.toLocaleString('es-CO')+'</div><div class="lbl">Renglones libro diario</div></div>'+
+    '<div class="kpi green"><div class="val">$'+fmtCo(totalDebitos)+'</div><div class="lbl">Total débitos</div></div>'+
+    '<div class="kpi '+(cuadre?'green':'red')+'"><div class="val">$'+fmtCo(totalCreditos)+'</div><div class="lbl">Total créditos '+(cuadre?'✓':'⚠')+'</div></div>';
+  // ─── Chips de Distribución mensual (clickeables como filtro) ───
+  const porMes={};
+  libroDiario.forEach(l=>{
+    const ym=mesDe(l);if(!ym)return;
+    if(!porMes[ym])porMes[ym]={debito:0,credito:0,renglones:0};
+    porMes[ym].debito+=l.debito;
+    porMes[ym].credito+=l.credito;
+    porMes[ym].renglones++;
+  });
+  const mesesOrden=Object.keys(porMes).sort();
+  if(mesesOrden.length>1){
+    const NOM=['','ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+    let chips='<div style="margin-top:10px;padding:12px 14px;background:#F8FAFC;border:1px solid var(--border);border-radius:10px">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px">'+
+        '<div style="font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px">Distribución mensual — click para filtrar</div>'+
+        '<button type="button" onclick="setMesFiltro(null)" style="padding:5px 12px;border:1.5px solid '+(mesFiltro?'var(--pri2)':'var(--border)')+';background:'+(mesFiltro?'#fff':'var(--pri3)')+';color:'+(mesFiltro?'var(--pri2)':'var(--pri)')+';font-family:inherit;font-size:.74rem;font-weight:700;border-radius:6px;cursor:pointer">Todos los meses</button>'+
+      '</div>'+
+      '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px">';
+    mesesOrden.forEach(ym=>{
+      const [y,m]=ym.split('-');
+      const mov=Math.max(porMes[ym].debito,porMes[ym].credito);
+      const activo=(mesFiltro===ym);
+      chips+='<button type="button" onclick="setMesFiltro(\''+ym+'\')" style="font-family:inherit;text-align:left;background:'+(activo?'var(--pri)':'#fff')+';color:'+(activo?'#fff':'inherit')+';border:1.5px solid '+(activo?'var(--pri)':'var(--border)')+';border-radius:6px;padding:6px 8px;cursor:pointer;transition:.12s" onmouseover="if(!this.dataset.activo)this.style.borderColor=\'var(--pri2)\'" onmouseout="if(!this.dataset.activo)this.style.borderColor=\'var(--border)\'"'+(activo?' data-activo="1"':'')+'>'+
+        '<div style="font-size:.7rem;color:'+(activo?'rgba(255,255,255,.85)':'var(--muted)')+';font-weight:600">'+NOM[parseInt(m,10)]+' '+y+'</div>'+
+        '<div style="font-family:monospace;font-size:.78rem;font-weight:700;color:'+(activo?'#fff':'var(--pri)')+'">$'+fmtCo(mov)+'</div>'+
+        '<div style="font-size:.66rem;color:'+(activo?'rgba(255,255,255,.75)':'var(--muted)')+'">'+porMes[ym].renglones+' renglones</div>'+
+      '</button>';
+    });
+    chips+='</div></div>';
+    document.getElementById('kpisMes').innerHTML=chips;
+  } else {
+    document.getElementById('kpisMes').innerHTML='';
+  }
+  // ─── Datos filtrados (usados por las 3 tablas y las descargas) ───
+  const filtrados=libroFiltrado();
+  const filtroActivo=mesFiltro!==null;
+  const NOMC=['','enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const labelFiltro=mesFiltro?NOMC[parseInt(mesFiltro.split('-')[1],10)]+' '+mesFiltro.split('-')[0]:'';
+  const filtroBanner=filtroActivo?'<div style="padding:8px 12px;background:#FEF3C7;border:1px solid #FDE68A;border-radius:6px;font-size:.8rem;color:#92400E;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><span><strong>🔎 Filtrando:</strong> '+labelFiltro+' · '+filtrados.length.toLocaleString('es-CO')+' renglones · Las descargas también se filtran</span><button type="button" onclick="setMesFiltro(null)" style="background:transparent;border:1px solid #D97706;color:#92400E;padding:3px 10px;border-radius:4px;font-family:inherit;font-size:.72rem;font-weight:700;cursor:pointer">Limpiar filtro ✕</button></div>':'';
+  document.getElementById('totRenglones').textContent=filtrados.length.toLocaleString('es-CO');
+  // ─── Preview asientos (80 primeros del subset filtrado) ───
+  let html=filtroBanner+'<table class="preview-table"><thead><tr><th>Fecha</th><th>Comprob.</th><th>Cuenta</th><th>Nombre cuenta</th><th>NIT</th><th>Tercero</th><th>Detalle</th><th>Débito</th><th>Crédito</th></tr></thead><tbody>';
+  filtrados.slice(0,80).forEach(l=>{
+    html+='<tr'+(l.esPrimero?' class="entry-sep"':'')+'>'+
+      '<td>'+l.fecha+'</td>'+
+      '<td>'+l.comprobante+'</td>'+
+      '<td class="code">'+l.cuenta+'</td>'+
+      '<td>'+l.nombreCta+'</td>'+
+      '<td class="code">'+l.nit+'</td>'+
+      '<td>'+l.tercero.slice(0,28)+'</td>'+
+      '<td>'+l.detalle.slice(0,40)+'</td>'+
+      '<td class="num">'+(l.debito?fmtCo(l.debito):'')+'</td>'+
+      '<td class="num">'+(l.credito?fmtCo(l.credito):'')+'</td>'+
+      '</tr>';
+  });
+  html+='</tbody></table>';
+  document.getElementById('tblPreview').outerHTML='<div id="tblPreview">'+html+'</div>';
+  // ─── Balance comprobación recalculado sobre filtrados ───
+  const bcFilt={};
+  filtrados.forEach(l=>{
+    if(!bcFilt[l.cuenta])bcFilt[l.cuenta]={nombre:l.nombreCta,debito:0,credito:0};
+    bcFilt[l.cuenta].debito+=l.debito;
+    bcFilt[l.cuenta].credito+=l.credito;
+  });
+  let html2=filtroBanner+'<table class="preview-table"><thead><tr><th>Cuenta</th><th>Nombre</th><th>Débitos</th><th>Créditos</th><th>Saldo</th></tr></thead><tbody>';
+  const cuentas=Object.entries(bcFilt).sort((a,b)=>a[0].localeCompare(b[0]));
+  let sumD=0,sumC=0;
+  cuentas.forEach(([c,v])=>{
+    sumD+=v.debito;sumC+=v.credito;
+    const saldo=v.debito-v.credito;
+    html2+='<tr><td class="code">'+c+'</td><td>'+v.nombre+'</td><td class="num">'+fmtCo(v.debito)+'</td><td class="num">'+fmtCo(v.credito)+'</td><td class="num">'+(saldo>=0?fmtCo(saldo):'('+fmtCo(-saldo)+')')+'</td></tr>';
+  });
+  html2+='<tr style="font-weight:700;background:#F8FAFC"><td colspan="2">TOTAL</td><td class="num">'+fmtCo(sumD)+'</td><td class="num">'+fmtCo(sumC)+'</td><td class="num">'+fmtCo(sumD-sumC)+'</td></tr></tbody></table>';
+  document.getElementById('tblBalance').outerHTML='<div id="tblBalance">'+html2+'</div>';
+  // ─── Auxiliar por cuenta (top 40 del subset filtrado) ───
+  const renglPorCta={};
+  filtrados.forEach(l=>{
+    if(!renglPorCta[l.cuenta])renglPorCta[l.cuenta]={nombre:l.nombreCta,n:0,mov:0};
+    renglPorCta[l.cuenta].n++;
+    renglPorCta[l.cuenta].mov+=l.debito+l.credito;
+  });
+  const top=Object.entries(renglPorCta).sort((a,b)=>b[1].mov-a[1].mov).slice(0,40);
+  let html3=filtroBanner+'<table class="preview-table"><thead><tr><th>Cuenta</th><th>Nombre</th><th>Renglones</th><th>Movimiento total</th></tr></thead><tbody>';
+  top.forEach(([c,v])=>{
+    html3+='<tr><td class="code">'+c+'</td><td>'+v.nombre+'</td><td class="num">'+v.n+'</td><td class="num">'+fmtCo(v.mov)+'</td></tr>';
+  });
+  html3+='</tbody></table>';
+  document.getElementById('tblAuxiliar').outerHTML='<div id="tblAuxiliar">'+html3+'</div>';
+}
+// Tab switcher
+document.querySelectorAll('.tab-btn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    document.getElementById('tab-'+b.dataset.tab).classList.add('active');
+  });
+});
+// ═══════════════════════════════════════════════════════════════════════════
+// DESCARGAS — Excel estilizado con ExcelJS
+// ═══════════════════════════════════════════════════════════════════════════
+// Paleta corporativa ExógenaDIAN
+const XL_THEME={
+  primary:'FF1B3A5C',     // azul oscuro corporativo
+  primarySoft:'FFD6E4F0', // pri3
+  muted:'FF6B7280',
+  textOnDark:'FFFFFFFF',
+  sectionBg:'FFEEF3F8',
+  subSectionBg:'FFF1F5F9',
+  totalBg:'FFE2EFDA',     // verde claro EEFF
+  borderLight:'FFCCCCCC',
+  borderMedium:'FF1B3A5C',
+  alt:'FFFAFBFC',
+  green:'FF166534',
+  red:'FF991B1B',
+  amberBg:'FFFEF3C7',
+  amberText:'FF92400E'
+};
+const XL_FONT='Calibri';
+const XL_NUM='#,##0;[Red](#,##0);-';
+function xlBorder(color){return {top:{style:'thin',color:{argb:color||XL_THEME.borderLight}},bottom:{style:'thin',color:{argb:color||XL_THEME.borderLight}},left:{style:'thin',color:{argb:color||XL_THEME.borderLight}},right:{style:'thin',color:{argb:color||XL_THEME.borderLight}}}}
+function xlBorderBottom(c){return {bottom:{style:'thin',color:{argb:c||XL_THEME.borderLight}}}}
+function xlTotalBorder(){return {top:{style:'medium',color:{argb:XL_THEME.borderMedium}},bottom:{style:'double',color:{argb:XL_THEME.borderMedium}}}}
+function xlFill(argb){return {type:'pattern',pattern:'solid',fgColor:{argb}}}
+async function descargarExcel(){
+  if(!libroDiario.length){exoToast('Primero contabiliza','warning');return;}
+  if(typeof ExcelJS==='undefined'){exoToast('ExcelJS no cargado, intenta recargar la página.','error');return;}
+  if(typeof exoProGate==='function'){
+    if(!(await exoProGate('Contabilizar desde FE — Excel'))) return;
+  }
+  // ─── Si hay filtro mensual activo, el Excel se genera solo con ese mes ───
+  const libroExp=libroFiltrado();
+  const NOMC=['','enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const sufijoMes=mesFiltro?'_'+NOMC[parseInt(mesFiltro.split('-')[1],10)]+'_'+mesFiltro.split('-')[0]:'';
+  const wb=new ExcelJS.Workbook();
+  wb.creator='ExógenaDIAN.com';wb.created=new Date();
+  const nit=(document.getElementById('iNit')||{}).value||'';
+  const empresa=(window._declaranteNombre)||'Empresa';
+  const desde=document.getElementById('iDesde').value||'';
+  const hasta=document.getElementById('iHasta').value||'';
+  const modo=document.getElementById('iModo').value||'detallado';
+  const modoCruce=document.getElementById('iCruce').value||'cartera';
+  const cruceTxt={cartera:'Cartera / Proveedores',caja:'Caja 110505',bancos:'Bancos 111005'}[modoCruce];
+  // Totales del subset exportado (filtrado o no)
+  const expDeb=libroExp.reduce((s,l)=>s+l.debito,0);
+  const expCre=libroExp.reduce((s,l)=>s+l.credito,0);
+  const expAsientos=new Set(libroExp.map(l=>l.comprobante)).size;
+  // ─── HOJA 1: PORTADA ────────────────────────────────────────────────────
+  const wsP=wb.addWorksheet('Portada',{properties:{tabColor:{argb:XL_THEME.primary}}});
+  wsP.columns=[{width:32},{width:55}];
+  // Encabezado banner
+  wsP.mergeCells('A1:B1');
+  wsP.getCell('A1').value=empresa;
+  wsP.getCell('A1').font={name:XL_FONT,bold:true,size:16,color:{argb:XL_THEME.textOnDark}};
+  wsP.getCell('A1').fill=xlFill(XL_THEME.primary);
+  wsP.getCell('A1').alignment={horizontal:'center',vertical:'middle'};
+  wsP.getRow(1).height=32;
+  wsP.mergeCells('A2:B2');
+  wsP.getCell('A2').value='NIT '+(nit||'(no detectado)');
+  wsP.getCell('A2').font={name:XL_FONT,size:10,color:{argb:XL_THEME.textOnDark},italic:true};
+  wsP.getCell('A2').fill=xlFill(XL_THEME.primary);
+  wsP.getCell('A2').alignment={horizontal:'center'};
+  wsP.getRow(2).height=18;
+  wsP.mergeCells('A4:B4');
+  wsP.getCell('A4').value='CONTABILIZACIÓN DESDE REPORTE FE DEL MUISCA';
+  wsP.getCell('A4').font={name:XL_FONT,bold:true,size:13,color:{argb:XL_THEME.primary}};
+  wsP.getCell('A4').alignment={horizontal:'center'};
+  wsP.mergeCells('A5:B5');
+  wsP.getCell('A5').value='Periodo: '+desde+' al '+hasta;
+  wsP.getCell('A5').font={name:XL_FONT,size:10,italic:true,color:{argb:XL_THEME.muted}};
+  wsP.getCell('A5').alignment={horizontal:'center'};
+  // Tabla de metadata (refleja el subset exportado si hay filtro)
+  const filtroLabel=mesFiltro?NOMC[parseInt(mesFiltro.split('-')[1],10)]+' '+mesFiltro.split('-')[0]:'todos los meses del archivo';
+  const meta=[
+    ['Modo de asiento',modo==='mensual'?'Mensual consolidado':'Detallado (uno por documento)'],
+    ['Contrapartida del dinero',cruceTxt],
+    ['Filtro aplicado',filtroLabel],
+    ['Asientos exportados',expAsientos],
+    ['Renglones exportados',libroExp.length],
+    ['Total débitos',expDeb],
+    ['Total créditos',expCre],
+    ['Cuadre',Math.abs(expDeb-expCre)<1?'OK ✓':'⚠ Diferencia: '+(expDeb-expCre).toFixed(2)],
+    ['Terceros aprendidos del auxiliar histórico',Object.keys(AUX_HIST||{}).length],
+    ['Generado por','ExógenaDIAN.com (contabilizar-fe)'],
+    ['Versión',(window.EXOGENA_VERSION||{}).shortHash||'dev'],
+    ['Fecha generación',new Date().toLocaleString('es-CO')]
+  ];
+  let pr=7;
+  meta.forEach(([k,v])=>{
+    const row=wsP.getRow(pr++);
+    row.getCell(1).value=k;
+    row.getCell(1).font={name:XL_FONT,size:10,bold:true,color:{argb:XL_THEME.primary}};
+    row.getCell(1).fill=xlFill(XL_THEME.sectionBg);
+    row.getCell(1).border=xlBorderBottom();
+    row.getCell(2).value=v;
+    row.getCell(2).font={name:XL_FONT,size:10};
+    if(typeof v==='number'){row.getCell(2).numFmt=XL_NUM;row.getCell(2).alignment={horizontal:'right'};}
+    row.getCell(2).border=xlBorderBottom();
+  });
+  // Aviso modo cruce
+  if(modoCruce!=='cartera'){
+    pr++;
+    wsP.mergeCells('A'+pr+':B'+pr);
+    const c=wsP.getCell('A'+pr);
+    c.value='⚠ Modo '+(modoCruce==='caja'?'Caja':'Bancos')+': todas las ventas se contabilizaron como cobradas inmediatamente y todas las compras como pagadas. No quedan saldos en CxC ni CxP. Si en realidad hay facturas pendientes de cobro/pago, ajusta manualmente.';
+    c.font={name:XL_FONT,size:10,bold:true,color:{argb:XL_THEME.amberText}};
+    c.fill=xlFill(XL_THEME.amberBg);
+    c.alignment={wrapText:true,vertical:'middle'};
+    c.border=xlBorder(XL_THEME.amberText);
+    wsP.getRow(pr).height=46;
+    pr+=2;
+  } else pr+=2;
+  // Footer importante
+  wsP.mergeCells('A'+pr+':B'+pr);
+  wsP.getCell('A'+pr).value='IMPORTANTE — antes de importar a tu software:';
+  wsP.getCell('A'+pr).font={name:XL_FONT,bold:true,size:10,color:{argb:XL_THEME.primary}};
+  pr++;
+  ['Revisa que las cuentas de gasto/ingreso sean las que usa tu empresa.','Las retenciones se copiaron tal cual venían en el reporte MUISCA — el motor no las recalcula.','La cuenta de gasto sale del auxiliar histórico → NITs conocidos → heurística → 519590 Diversos.','Las cuentas no encontradas en el PUC 2650 quedan con el código pero sin nombre.'].forEach(t=>{
+    wsP.mergeCells('A'+pr+':B'+pr);
+    wsP.getCell('A'+pr).value='• '+t;
+    wsP.getCell('A'+pr).font={name:XL_FONT,size:9,color:{argb:XL_THEME.muted}};
+    wsP.getCell('A'+pr).alignment={wrapText:true};
+    pr++;
+  });
+  // ─── HOJA 2: LIBRO DIARIO ─────────────────────────────────────────────
+  const wsLD=wb.addWorksheet('Libro diario',{views:[{state:'frozen',ySplit:1}]});
+  wsLD.columns=[
+    {header:'Fecha',width:12},{header:'Comprobante',width:16},{header:'Cuenta',width:11},
+    {header:'Nombre cuenta',width:36},{header:'NIT',width:13},{header:'Tercero',width:32},
+    {header:'Detalle',width:42},{header:'Débito',width:15,style:{numFmt:XL_NUM}},{header:'Crédito',width:15,style:{numFmt:XL_NUM}}
+  ];
+  const headerLD=wsLD.getRow(1);
+  headerLD.eachCell(c=>{
+    c.font={name:XL_FONT,bold:true,size:10,color:{argb:XL_THEME.textOnDark}};
+    c.fill=xlFill(XL_THEME.primary);
+    c.alignment={horizontal:'center',vertical:'middle'};
+    c.border=xlBorder(XL_THEME.primary);
+  });
+  headerLD.height=22;
+  libroExp.forEach((l,idx)=>{
+    const r=wsLD.addRow([l.fecha,l.comprobante,l.cuenta,l.nombreCta,l.nit,l.tercero,l.detalle,l.debito||null,l.credito||null]);
+    r.getCell(3).font={name:'Consolas',size:9};
+    r.getCell(5).font={name:'Consolas',size:9};
+    if(l.esPrimero){
+      // separador entre asientos
+      r.eachCell(c=>{c.border={top:{style:'thin',color:{argb:XL_THEME.primarySoft}}}});
+    }
+    if(idx%2===1){r.eachCell(c=>{c.fill=xlFill(XL_THEME.alt)});}
+  });
+  // Fila TOTAL
+  const tlr=wsLD.addRow(['','','','','','','TOTAL',expDeb,expCre]);
+  tlr.eachCell(c=>{c.font={name:XL_FONT,bold:true,size:10,color:{argb:XL_THEME.primary}};c.fill=xlFill(XL_THEME.totalBg);c.border=xlTotalBorder();});
+  tlr.getCell(8).numFmt=XL_NUM;tlr.getCell(9).numFmt=XL_NUM;
+  wsLD.autoFilter={from:{row:1,column:1},to:{row:1,column:9}};
+  // ─── HOJA 3: BALANCE DE COMPROBACIÓN ──────────────────────────────────
+  const wsBC=wb.addWorksheet('Balance comprobación',{views:[{state:'frozen',ySplit:3}]});
+  wsBC.columns=[{width:11},{width:42},{width:16,style:{numFmt:XL_NUM}},{width:16,style:{numFmt:XL_NUM}},{width:16,style:{numFmt:XL_NUM}},{width:16,style:{numFmt:XL_NUM}}];
+  wsBC.mergeCells('A1:F1');
+  wsBC.getCell('A1').value=empresa+(nit?' — NIT '+nit:'');
+  wsBC.getCell('A1').font={name:XL_FONT,bold:true,size:13,color:{argb:XL_THEME.primary}};
+  wsBC.getCell('A1').alignment={horizontal:'center'};
+  wsBC.mergeCells('A2:F2');
+  wsBC.getCell('A2').value='BALANCE DE COMPROBACIÓN · '+(mesFiltro?filtroLabel:desde+' al '+hasta);
+  wsBC.getCell('A2').font={name:XL_FONT,size:10,italic:true,color:{argb:XL_THEME.muted}};
+  wsBC.getCell('A2').alignment={horizontal:'center'};
+  const bcHead=wsBC.getRow(3);
+  ['Cuenta','Nombre','Movim. débito','Movim. crédito','Saldo débito','Saldo crédito'].forEach((h,i)=>{
+    const c=bcHead.getCell(i+1);
+    c.value=h;c.font={name:XL_FONT,bold:true,size:10,color:{argb:XL_THEME.textOnDark}};
+    c.fill=xlFill(XL_THEME.primary);
+    c.alignment={horizontal:i<2?'left':'center',vertical:'middle'};
+    c.border=xlBorder(XL_THEME.primary);
+  });
+  bcHead.height=22;
+  // Recalcular balance comprobación del subset exportado
+  const bcExp={};
+  libroExp.forEach(l=>{
+    if(!bcExp[l.cuenta])bcExp[l.cuenta]={nombre:l.nombreCta,debito:0,credito:0};
+    bcExp[l.cuenta].debito+=l.debito;bcExp[l.cuenta].credito+=l.credito;
+  });
+  // Agrupar por clase (primer dígito)
+  const CLASES={'1':'ACTIVO','2':'PASIVO','3':'PATRIMONIO','4':'INGRESOS','5':'GASTOS','6':'COSTO DE VENTAS','7':'COSTOS DE PRODUCCIÓN','8':'CUENTAS DE ORDEN','9':'CUENTAS DE ORDEN'};
+  const porClase={};
+  Object.entries(bcExp).forEach(([c,v])=>{const k=c[0];if(!porClase[k])porClase[k]=[];porClase[k].push([c,v]);});
+  let sumD=0,sumC=0,sumSD=0,sumSC=0;
+  Object.keys(porClase).sort().forEach(k=>{
+    // Sección
+    const secR=wsBC.addRow([CLASES[k]||'CLASE '+k,'','','','','']);
+    wsBC.mergeCells(secR.number,1,secR.number,6);
+    secR.getCell(1).value=CLASES[k]||'CLASE '+k;
+    secR.getCell(1).font={name:XL_FONT,bold:true,size:11,color:{argb:XL_THEME.primary}};
+    secR.getCell(1).fill=xlFill(XL_THEME.sectionBg);
+    secR.getCell(1).alignment={horizontal:'left',vertical:'middle'};
+    secR.height=20;
+    let secD=0,secC=0,secSD=0,secSC=0;
+    porClase[k].sort((a,b)=>a[0].localeCompare(b[0])).forEach(([c,v])=>{
+      const s=v.debito-v.credito;
+      const sd=s>0?s:0,sc=s<0?-s:0;
+      const r=wsBC.addRow([c,v.nombre,v.debito,v.credito,sd,sc]);
+      r.getCell(1).font={name:'Consolas',size:9};
+      r.getCell(2).font={name:XL_FONT,size:10};
+      sumD+=v.debito;sumC+=v.credito;sumSD+=sd;sumSC+=sc;
+      secD+=v.debito;secC+=v.credito;secSD+=sd;secSC+=sc;
+    });
+    // Subtotal por clase
+    const subR=wsBC.addRow(['','Subtotal '+(CLASES[k]||k),secD,secC,secSD,secSC]);
+    subR.eachCell(c=>{c.font={name:XL_FONT,bold:true,size:10,color:{argb:XL_THEME.primary}};c.fill=xlFill(XL_THEME.subSectionBg);c.border=xlBorderBottom(XL_THEME.primary);});
+  });
+  // TOTAL GENERAL
+  const totR=wsBC.addRow(['','TOTAL GENERAL',sumD,sumC,sumSD,sumSC]);
+  totR.eachCell(c=>{c.font={name:XL_FONT,bold:true,size:11,color:{argb:XL_THEME.primary}};c.fill=xlFill(XL_THEME.totalBg);c.border=xlTotalBorder();});
+  // ─── HOJA 4: AUXILIAR POR CUENTA ──────────────────────────────────────
+  const wsAux=wb.addWorksheet('Auxiliar por cuenta',{views:[{state:'frozen',ySplit:1}]});
+  wsAux.columns=[
+    {header:'Cuenta',width:11},{header:'Nombre',width:36},{header:'Fecha',width:12},
+    {header:'Comprobante',width:14},{header:'NIT',width:13},{header:'Tercero',width:28},
+    {header:'Detalle',width:36},{header:'Débito',width:14,style:{numFmt:XL_NUM}},{header:'Crédito',width:14,style:{numFmt:XL_NUM}},{header:'Saldo',width:15,style:{numFmt:XL_NUM}}
+  ];
+  const hAux=wsAux.getRow(1);
+  hAux.eachCell(c=>{c.font={name:XL_FONT,bold:true,size:10,color:{argb:XL_THEME.textOnDark}};c.fill=xlFill(XL_THEME.primary);c.alignment={horizontal:'center'};c.border=xlBorder(XL_THEME.primary)});
+  hAux.height=22;
+  const porCta={};
+  libroExp.forEach(l=>{if(!porCta[l.cuenta])porCta[l.cuenta]=[];porCta[l.cuenta].push(l);});
+  Object.entries(porCta).sort((a,b)=>a[0].localeCompare(b[0])).forEach(([c,lineas])=>{
+    // header de cuenta
+    const hR=wsAux.addRow([c,lineas[0].nombreCta,'','','','','','','','']);
+    wsAux.mergeCells(hR.number,2,hR.number,9);
+    hR.getCell(1).font={name:'Consolas',size:10,bold:true,color:{argb:XL_THEME.primary}};
+    hR.getCell(2).value=lineas[0].nombreCta+'  ('+lineas.length+' renglones)';
+    hR.getCell(2).font={name:XL_FONT,bold:true,size:10,color:{argb:XL_THEME.primary}};
+    hR.getCell(2).alignment={horizontal:'left'};
+    hR.eachCell(c2=>{c2.fill=xlFill(XL_THEME.sectionBg)});
+    hR.height=18;
+    let saldo=0;
+    lineas.forEach(l=>{
+      saldo+=l.debito-l.credito;
+      const r=wsAux.addRow(['',l.nombreCta,l.fecha,l.comprobante,l.nit,l.tercero,l.detalle,l.debito||null,l.credito||null,saldo]);
+      r.getCell(5).font={name:'Consolas',size:9};
+    });
+    const sR=wsAux.addRow(['','SALDO FINAL '+c,'','','','','',0,0,saldo]);
+    sR.eachCell(c2=>{c2.font={name:XL_FONT,bold:true,size:10,color:{argb:XL_THEME.primary}};c2.fill=xlFill(XL_THEME.totalBg);c2.border={top:{style:'thin',color:{argb:XL_THEME.borderMedium}},bottom:{style:'thin',color:{argb:XL_THEME.borderMedium}}}});
+    sR.getCell(10).numFmt=XL_NUM;
+    wsAux.addRow([]);
+  });
+  // ─── HOJA 5: ESF + ERI ────────────────────────────────────────────────
+  // Si hay balance de apertura, mostramos 3 columnas (Saldo inicial / Movimiento / Saldo final)
+  const tieneBalanceIni=Object.keys(SALDOS_INI||{}).length>0;
+  const wsE=wb.addWorksheet('ESF + ERI',{views:[{state:'frozen',ySplit:4}]});
+  if(tieneBalanceIni){
+    wsE.columns=[{width:48},{width:16,style:{numFmt:XL_NUM}},{width:16,style:{numFmt:XL_NUM}},{width:16,style:{numFmt:XL_NUM}},{width:36}];
+  } else {
+    wsE.columns=[{width:48},{width:18,style:{numFmt:XL_NUM}},{width:42}];
+  }
+  const lastCol=tieneBalanceIni?'E':'C';
+  wsE.mergeCells('A1:'+lastCol+'1');wsE.getCell('A1').value=empresa+(nit?' — NIT '+nit:'');
+  wsE.getCell('A1').font={name:XL_FONT,bold:true,size:13,color:{argb:XL_THEME.primary}};wsE.getCell('A1').alignment={horizontal:'center'};
+  wsE.mergeCells('A2:'+lastCol+'2');wsE.getCell('A2').value='Estado de Situación Financiera + Estado de Resultados Integral';
+  wsE.getCell('A2').font={name:XL_FONT,bold:true,size:11,color:{argb:XL_THEME.primary}};wsE.getCell('A2').alignment={horizontal:'center'};
+  wsE.mergeCells('A3:'+lastCol+'3');wsE.getCell('A3').value='Al '+hasta+(tieneBalanceIni?' (saldo inicial + movimiento del periodo desde FE)':' (solo movimientos contabilizados desde FE — PRELIMINAR, requiere completarse)');
+  wsE.getCell('A3').font={name:XL_FONT,size:9,italic:true,color:{argb:XL_THEME.muted}};wsE.getCell('A3').alignment={horizontal:'center'};
+  if(tieneBalanceIni){
+    const hr=wsE.getRow(4);
+    hr.getCell(1).value='Cuenta';
+    hr.getCell(2).value='Saldo inicial';
+    hr.getCell(3).value='Movim. periodo';
+    hr.getCell(4).value='Saldo final';
+    hr.getCell(5).value='Notas';
+    [1,2,3,4,5].forEach(i=>{const c=hr.getCell(i);c.font={name:XL_FONT,bold:true,size:9,color:{argb:XL_THEME.textOnDark}};c.fill=xlFill(XL_THEME.primary);c.alignment={horizontal:i===1||i===5?'left':'right',vertical:'middle'};c.border=xlBorder(XL_THEME.primary);});
+    hr.height=20;
+  }
+  // Construir grupos: saldo inicial (balance apertura) + movimiento del periodo (FE)
+  // Para cada clase, signo natural: 1/5/6/7 débito (1), 2/3/4 crédito (-1)
+  const grupos={'1':{n:'ACTIVO',s:1,t:0,ti:0},'2':{n:'PASIVO',s:-1,t:0,ti:0},'3':{n:'PATRIMONIO',s:-1,t:0,ti:0},'4':{n:'INGRESOS',s:-1,t:0,ti:0},'5':{n:'GASTOS',s:1,t:0,ti:0},'6':{n:'COSTO DE VENTAS',s:1,t:0,ti:0},'7':{n:'COSTOS DE PRODUCCIÓN',s:1,t:0,ti:0}};
+  const subt={};
+  // (a) Movimiento del periodo desde la FE
+  Object.entries(bcExp).forEach(([c,v])=>{
+    const k=c[0];if(!grupos[k])return;
+    const cta6=c.slice(0,6);
+    const so=v.debito-v.credito;
+    const s=so*grupos[k].s;  // ajustado a naturaleza
+    grupos[k].t+=s;
+    if(!subt[k])subt[k]={};
+    if(!subt[k][cta6])subt[k][cta6]={n:v.nombre,s:0,sIni:0};
+    subt[k][cta6].s+=s;
+  });
+  // (b) Saldo inicial desde balance de apertura (si se cargó)
+  Object.entries(SALDOS_INI||{}).forEach(([cta6,saldoRaw])=>{
+    const k=cta6[0];if(!grupos[k])return;
+    // saldoRaw viene del balance: si trae débitos − créditos, ya tiene signo natural
+    // para activos/gastos. Para pasivos/patrimonio/ingresos, viene negativo → invertimos.
+    const s=Math.abs(saldoRaw);  // siempre positivo en su naturaleza
+    grupos[k].ti+=s;
+    if(!subt[k])subt[k]={};
+    if(!subt[k][cta6])subt[k][cta6]={n:SALDOS_INI_NOMBRES[cta6]||'',s:0,sIni:0};
+    subt[k][cta6].sIni=s;
+    if(!subt[k][cta6].n&&SALDOS_INI_NOMBRES[cta6])subt[k][cta6].n=SALDOS_INI_NOMBRES[cta6];
+  });
+  const utilidad=grupos['4'].t-grupos['5'].t-grupos['6'].t-grupos['7'].t;
+  let er=tieneBalanceIni?6:5;
+  // ─── BANNER ADVERTENCIA INICIAL ───
+  const totalCols=tieneBalanceIni?5:3;
+  wsE.mergeCells(er,1,er,totalCols);
+  const adv=wsE.getRow(er++);
+  adv.getCell(1).value=tieneBalanceIni?'✓ ESF construido con saldo inicial + movimientos del periodo desde la FE':'⚠ ESTE ESF ESTÁ INCOMPLETO — sube el balance de apertura para que cuadre';
+  adv.getCell(1).font={name:XL_FONT,bold:true,size:11,color:{argb:tieneBalanceIni?XL_THEME.green:XL_THEME.amberText}};
+  adv.getCell(1).fill=xlFill(tieneBalanceIni?XL_THEME.totalBg:XL_THEME.amberBg);
+  adv.getCell(1).alignment={horizontal:'center',vertical:'middle'};
+  adv.height=22;
+  const advTxt=tieneBalanceIni?[
+    'Saldo inicial: del balance al cierre del periodo anterior cargado por el usuario.',
+    'Movimiento del periodo: contabilización generada desde el reporte FE/DS del MUISCA.',
+    'Aún falta sumar: nómina electrónica (F2276) · depreciación del periodo · ajustes y provisiones · gastos no operacionales (intereses, GMF) · operaciones sin FE.'
+  ]:[
+    'Solo refleja movimientos contabilizados desde el reporte FE/DS del MUISCA.',
+    'NO incluye: saldos iniciales del periodo · nómina electrónica (F2276) · depreciaciones · provisiones · ajustes contables · operaciones sin FE.',
+    'El patrimonio mostrado es solo lo que se movió desde la FE; agrega Capital social, Reservas y Resultados acumulados desde tu balance de apertura.'
+  ];
+  advTxt.forEach(t=>{
+    wsE.mergeCells(er,1,er,totalCols);
+    const r=wsE.getRow(er++);
+    r.getCell(1).value='• '+t;
+    r.getCell(1).font={name:XL_FONT,size:9,color:{argb:tieneBalanceIni?XL_THEME.muted:XL_THEME.amberText}};
+    r.getCell(1).fill=xlFill(tieneBalanceIni?'FFF8FAFC':XL_THEME.amberBg);
+    r.getCell(1).alignment={wrapText:true,vertical:'top'};
+    r.height=24;
+  });
+  er++;
+  function addEsfSec(label){
+    const r=wsE.getRow(er++);
+    wsE.mergeCells(r.number,1,r.number,totalCols);
+    r.getCell(1).value=label;r.getCell(1).font={name:XL_FONT,bold:true,size:11,color:{argb:XL_THEME.primary}};
+    r.getCell(1).fill=xlFill(XL_THEME.sectionBg);r.height=20;
+  }
+  // En modo 1 col: addEsfRow(label, val, bold, nota)
+  // En modo 3 cols (con balance inicial): addEsfRow3(label, sIni, mov, bold, nota)
+  function addEsfRow(label,val,bold,nota){
+    const r=wsE.getRow(er++);
+    r.getCell(1).value=(bold?'':'    ')+label;
+    r.getCell(1).font={name:XL_FONT,size:10,bold:!!bold,color:bold?{argb:XL_THEME.primary}:undefined};
+    r.getCell(2).value=val;r.getCell(2).numFmt=XL_NUM;
+    r.getCell(2).font={name:XL_FONT,size:10,bold:!!bold,color:bold?{argb:XL_THEME.primary}:undefined};
+    const notaCell=tieneBalanceIni?5:3;
+    if(nota){r.getCell(notaCell).value=nota;r.getCell(notaCell).font={name:XL_FONT,size:9,italic:true,color:{argb:XL_THEME.muted}};}
+    if(bold){
+      r.getCell(1).fill=xlFill(XL_THEME.totalBg);r.getCell(1).border=xlTotalBorder();
+      r.getCell(2).fill=xlFill(XL_THEME.totalBg);r.getCell(2).border=xlTotalBorder();
+    }
+  }
+  function addEsfRow3(label,sIni,mov,bold,nota){
+    const r=wsE.getRow(er++);
+    const final=(sIni||0)+(mov||0);
+    r.getCell(1).value=(bold?'':'    ')+label;
+    r.getCell(1).font={name:XL_FONT,size:10,bold:!!bold,color:bold?{argb:XL_THEME.primary}:undefined};
+    r.getCell(2).value=sIni||null;r.getCell(2).numFmt=XL_NUM;
+    r.getCell(2).font={name:XL_FONT,size:10,bold:!!bold};
+    r.getCell(3).value=mov||null;r.getCell(3).numFmt=XL_NUM;
+    r.getCell(3).font={name:XL_FONT,size:10,bold:!!bold};
+    r.getCell(4).value=final;r.getCell(4).numFmt=XL_NUM;
+    r.getCell(4).font={name:XL_FONT,size:10,bold:!!bold,color:bold?{argb:XL_THEME.primary}:undefined};
+    if(nota){r.getCell(5).value=nota;r.getCell(5).font={name:XL_FONT,size:9,italic:true,color:{argb:XL_THEME.muted}};}
+    if(bold){
+      for(let i=1;i<=4;i++){r.getCell(i).fill=xlFill(XL_THEME.totalBg);r.getCell(i).border=xlTotalBorder();}
+    }
+  }
+  function addEsfRowPendiente(label,nota){
+    const r=wsE.getRow(er++);
+    r.getCell(1).value='    '+label;
+    r.getCell(1).font={name:XL_FONT,size:10,italic:true,color:{argb:XL_THEME.amberText}};
+    const valCell=tieneBalanceIni?4:2;
+    r.getCell(valCell).value=null;r.getCell(valCell).numFmt=XL_NUM;
+    r.getCell(valCell).font={name:XL_FONT,size:10,italic:true,color:{argb:XL_THEME.amberText}};
+    r.getCell(valCell).fill=xlFill(XL_THEME.amberBg);
+    r.getCell(valCell).border={top:{style:'dotted',color:{argb:XL_THEME.amberText}},bottom:{style:'dotted',color:{argb:XL_THEME.amberText}},left:{style:'dotted',color:{argb:XL_THEME.amberText}},right:{style:'dotted',color:{argb:XL_THEME.amberText}}};
+    const notaCell=tieneBalanceIni?5:3;
+    r.getCell(notaCell).value=nota||'← completa desde tu balance de apertura';
+    r.getCell(notaCell).font={name:XL_FONT,size:9,italic:true,color:{argb:XL_THEME.amberText}};
+  }
+  // Helper unificado: renderiza una cuenta usando 1 o 3 cols según hay balance inicial
+  function addCta(c,v){
+    const label=c+' '+(v.n||'');
+    if(tieneBalanceIni)addEsfRow3(label,v.sIni||0,v.s||0,false);
+    else addEsfRow(label,v.s||0,false);
+  }
+  function addTotal(label,totMov,totIni,nota){
+    if(tieneBalanceIni)addEsfRow3(label,totIni||0,totMov,true,nota);
+    else addEsfRow(label,totMov,true,nota);
+  }
+  // ─── ACTIVO ───
+  addEsfSec('ACTIVO');
+  if(subt['1'])Object.entries(subt['1']).sort().forEach(([c,v])=>addCta(c,v));
+  if(!tieneBalanceIni)addEsfRowPendiente('Saldos iniciales del activo (caja, bancos, inventario, PPE)','agregar desde balance de apertura');
+  addTotal('TOTAL ACTIVO'+(tieneBalanceIni?'':' (preliminar)'),grupos['1'].t,grupos['1'].ti, tieneBalanceIni?'saldo final = inicial + movimiento':'incompleto — falta saldo inicial');
+  er++;
+  // ─── PASIVO ───
+  addEsfSec('PASIVO');
+  if(subt['2'])Object.entries(subt['2']).sort().forEach(([c,v])=>addCta(c,v));
+  if(!tieneBalanceIni)addEsfRowPendiente('Obligaciones laborales, financieras, impuestos por pagar','agregar desde balance de apertura');
+  addTotal('TOTAL PASIVO'+(tieneBalanceIni?'':' (preliminar)'),grupos['2'].t,grupos['2'].ti);
+  er++;
+  // ─── PATRIMONIO (incluye utilidad del ejercicio como cuenta 3605) ───
+  addEsfSec('PATRIMONIO');
+  if(subt['3'])Object.entries(subt['3']).sort().forEach(([c,v])=>addCta(c,v));
+  if(!tieneBalanceIni){
+    addEsfRowPendiente('3105 Capital social','agregar desde balance de apertura');
+    addEsfRowPendiente('3305 Reservas (legal, ocasionales)','agregar desde balance de apertura');
+    addEsfRowPendiente('3705 Resultados acumulados de ejercicios anteriores','agregar desde balance de apertura');
+  }
+  // Utilidad del ejercicio: se calcula del ERI del periodo y va a 3605
+  if(tieneBalanceIni){
+    addEsfRow3('3605 Utilidad / (Pérdida) del ejercicio',0,utilidad,false,'calculada del ERI del periodo (ingresos − costos − gastos)');
+  } else {
+    addEsfRow('3605 Utilidad / (Pérdida) del ejercicio (desde la FE)',utilidad,false,'calculada: ingresos − costos − gastos del periodo');
+  }
+  const totalPatrimonio=grupos['3'].t+utilidad;
+  const totalPatrimonioIni=grupos['3'].ti;
+  addTotal('TOTAL PATRIMONIO'+(tieneBalanceIni?'':' (preliminar)'),totalPatrimonio,totalPatrimonioIni,'incluye utilidad del periodo');
+  er++;
+  // ─── ECUACIÓN CONTABLE ───
+  addEsfSec('ECUACIÓN CONTABLE — verificación');
+  const totalActivoFinal=grupos['1'].t+grupos['1'].ti;
+  const totalPasivoMasPatrimonioFinal=(grupos['2'].t+grupos['2'].ti)+(totalPatrimonio+totalPatrimonioIni);
+  addEsfRow('TOTAL ACTIVO',totalActivoFinal,true);
+  addEsfRow('= TOTAL PASIVO + PATRIMONIO',totalPasivoMasPatrimonioFinal,true);
+  const dif=totalActivoFinal-totalPasivoMasPatrimonioFinal;
+  addEsfRow('Diferencia',dif,true, Math.abs(dif)<1?'✓ Ecuación contable cuadra':'⚠ Diferencia '+(tieneBalanceIni?'— revisa que el balance de apertura traiga TODAS las cuentas':'esperada — faltan saldos iniciales y operaciones sin FE'));
+  er+=2;
+  // ─── ESTADO DE RESULTADOS INTEGRAL ───
+  const r=wsE.getRow(er++);wsE.mergeCells(r.number,1,r.number,3);
+  r.getCell(1).value='ESTADO DE RESULTADOS INTEGRAL';
+  r.getCell(1).font={name:XL_FONT,bold:true,size:12,color:{argb:XL_THEME.textOnDark}};
+  r.getCell(1).fill=xlFill(XL_THEME.primary);r.getCell(1).alignment={horizontal:'center'};r.height=22;
+  ['4','6','7','5'].forEach(k=>{
+    if(!subt[k]&&!grupos[k].t)return;
+    addEsfSec(grupos[k].n);
+    if(subt[k])Object.entries(subt[k]).sort().forEach(([c,v])=>addEsfRow(c+' '+v.n,v.s,false));
+    addEsfRow('TOTAL '+grupos[k].n,grupos[k].t,true);
+    er++;
+  });
+  // Línea "5210/5220 Nómina pendiente"
+  addEsfRowPendiente('5105 Gastos de personal (nómina electrónica)','agregar desde F2276 nómina');
+  addEsfRowPendiente('5160/5165 Depreciaciones y amortizaciones','calcular según activos fijos');
+  addEsfRowPendiente('5305 Gastos no operacionales (intereses, GMF, otros)','agregar desde bancos y otros');
+  er++;
+  const uR=wsE.getRow(er++);
+  wsE.mergeCells(uR.number,1,uR.number,1);
+  uR.getCell(1).value='UTILIDAD / (PÉRDIDA) DEL EJERCICIO (desde la FE)';
+  uR.getCell(2).value=utilidad;uR.getCell(2).numFmt=XL_NUM;
+  uR.getCell(3).value='Esta utilidad ya se sumó al patrimonio arriba (3605)';
+  uR.eachCell(c=>{c.font={name:XL_FONT,bold:true,size:12,color:{argb:utilidad>=0?XL_THEME.green:XL_THEME.red}};c.fill=xlFill(XL_THEME.totalBg);c.border=xlTotalBorder();});
+  uR.getCell(3).font={name:XL_FONT,size:9,italic:true,color:{argb:XL_THEME.muted}};
+  er+=2;
+  // ─── NOTAS FINALES ───
+  const notaH=wsE.getRow(er++);
+  wsE.mergeCells(notaH.number,1,notaH.number,3);
+  notaH.getCell(1).value='📝 CHECKLIST PARA COMPLETAR ESTE ESF';
+  notaH.getCell(1).font={name:XL_FONT,bold:true,size:11,color:{argb:XL_THEME.primary}};
+  notaH.getCell(1).fill=xlFill(XL_THEME.sectionBg);
+  notaH.getCell(1).alignment={horizontal:'left'};notaH.height=20;
+  const checklist=[
+    '☐ Cargar saldos iniciales del balance de apertura (caja, bancos, inventario, PPE, capital, reservas, etc.).',
+    '☐ Agregar nómina electrónica F2276 — sueldos, prestaciones, parafiscales, seguridad social.',
+    '☐ Calcular depreciación y amortización del periodo según activos fijos y software.',
+    '☐ Conciliar bancos para detectar movimientos sin FE (intereses, GMF, comisiones, transferencias).',
+    '☐ Causar gastos no operacionales: intereses financieros, diferencia en cambio, GMF 4×1000.',
+    '☐ Verificar provisiones: cesantías, intereses cesantías, vacaciones (acumulado mes a mes).',
+    '☐ Causar impuestos por pagar al cierre: renta, IVA del último periodo, ICA, ReteFuente.',
+    '☐ Revisar clasificación de cuentas (filtra 519590 Diversos y reclasifica a la cuenta correcta).',
+    '☐ Validar ecuación contable: ACTIVO = PASIVO + PATRIMONIO al cierre. Si no cuadra, falta algo.'
+  ];
+  checklist.forEach(t=>{
+    wsE.mergeCells(er,1,er,3);
+    const r=wsE.getRow(er++);
+    r.getCell(1).value=t;
+    r.getCell(1).font={name:XL_FONT,size:10};
+    r.getCell(1).alignment={wrapText:true,vertical:'top'};
+    r.height=18;
+  });
+  // ─── ESCRIBIR Y DESCARGAR ─────────────────────────────────────────────
+  const buf=await wb.xlsx.writeBuffer();
+  const blob=new Blob([buf],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  const safeName=(empresa||'Contabilizacion').replace(/[^\w]/g,'_').slice(0,30);
+  a.href=url;a.download='Contabilizacion_'+safeName+'_'+desde+'_'+hasta+sufijoMes+'.xlsx';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  if(typeof exoTrack!=='undefined')exoTrack.generate('contabilizar-fe','excel');
+}
+async function descargarCSV(){
+  if(!libroDiario.length){exoToast('Primero contabiliza','warning');return;}
+  if(typeof exoProGate==='function'){
+    if(!(await exoProGate('Contabilizar desde FE — Plano CSV'))) return;
+  }
+  // Si hay filtro mensual activo, exportar solo ese mes
+  const libroExpCsv=libroFiltrado();
+  const NOMC=['','enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const sufijoMes=mesFiltro?'_'+NOMC[parseInt(mesFiltro.split('-')[1],10)]+'_'+mesFiltro.split('-')[0]:'';
+  const empresa='Contabilizacion';
+  const desde=document.getElementById('iDesde').value||'';
+  const hasta=document.getElementById('iHasta').value||'';
+  const head='Fecha;Comprobante;Cuenta;Nombre cuenta;NIT;Tercero;Detalle;Debito;Credito\n';
+  const lines=libroExpCsv.map(l=>[
+    l.fecha,l.comprobante,l.cuenta,
+    (l.nombreCta||'').replace(/;/g,','),
+    l.nit,
+    (l.tercero||'').replace(/;/g,','),
+    (l.detalle||'').replace(/;/g,','),
+    Math.round(l.debito||0),Math.round(l.credito||0)
+  ].join(';')).join('\n');
+  const csv=head+lines+'\n';
+  const blob=new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8'}); // BOM UTF-8 para Excel español
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download='Plano_Contable_'+(empresa.replace(/[^\w]/g,'_').slice(0,20))+'_'+desde+'_'+hasta+sufijoMes+'.csv';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  if(typeof exoTrack!=='undefined')exoTrack.generate('contabilizar-fe','csv');
+}
+// ═══════════════════════════════════════════════════════════════════════════
+// PLANO ESPECÍFICO — TOTAL INNOVATION
+// ═══════════════════════════════════════════════════════════════════════════
+// Formato exacto del template "Importar Archivos Excel - Transacciones Contabilidad".
+// Lógica especial pedida por la usuaria Ruth (mayo 2026):
+//   "todo lo piden a nivel auxiliar, el último dígito; en compras 620505001 gravada,
+//    620505002 exenta". Aplicamos para ingresos (4), gastos (5), costos (6,7).
+// Si la cuenta ya viene a nivel auxiliar (9+ dígitos) desde AUX_HIST, se respeta tal cual.
+function fechaTotalInnov(yyyyMmDd){
+  if(!yyyyMmDd)return '';
+  const m=String(yyyyMmDd).match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if(!m)return yyyyMmDd;
+  return parseInt(m[2],10)+'/'+parseInt(m[3],10)+'/'+m[1];
+}
+function cuentaTotalInnov(cuenta,tieneIva){
+  const cta=String(cuenta||'').replace(/[^\d]/g,'');
+  if(cta.length>=9)return cta;          // ya viene a nivel auxiliar (PUC_CLIENTE / AUX_HIST)
+  if(cta.length<6)return cta;           // cuenta atípica, dejar tal cual
+  const base=cta.slice(0,6);
+  // Si hay PUC_CLIENTE cargado, intenta resolver al primer auxiliar 9-dig que
+  // exista en el plan del cliente (ej. 513530 → 513530001 si el cliente tiene esa).
+  if(PUC_CLIENTE){
+    const cta9=encontrarAuxClientePorBase(base);
+    if(cta9)return cta9;
+    // Cliente con PUC cargado pero sin auxiliar para esta cuenta → todo termina en 001
+    return base+'001';
+  }
+  const claseDig=cta[0];
+  // Default sin PUC_CLIENTE: ingresos/gastos/costos → 001 gravada / 002 exenta.
+  if(claseDig==='4'||claseDig==='5'||claseDig==='6'||claseDig==='7'){
+    if(tieneIva===false)return base+'002';
+    return base+'001';
+  }
+  // Activos (1), Pasivos (2), Patrimonio (3), Cuentas de orden (8,9): aux 001
+  return base+'001';
+}
+async function descargarTotalInnovation(){
+  if(!libroDiario.length){exoToast('Primero contabiliza','warning');return;}
+  if(typeof ExcelJS==='undefined'){exoToast('ExcelJS no cargado, recarga la página','error');return;}
+  if(typeof exoProGate==='function'){
+    if(!(await exoProGate('Contabilizar desde FE — Plano Total Innovation'))) return;
+  }
+  const libroExp=libroFiltrado();
+  const nit=(document.getElementById('iNit')||{}).value||'';
+  const empresa=(window._declaranteNombre)||'Contabilizacion';
+  const desde=document.getElementById('iDesde').value||'';
+  const hasta=document.getElementById('iHasta').value||'';
+  const NOMC=['','enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const sufijoMes=mesFiltro?'_'+NOMC[parseInt(mesFiltro.split('-')[1],10)]+'_'+mesFiltro.split('-')[0]:'';
+  const wb=new ExcelJS.Workbook();
+  wb.creator='ExógenaDIAN.com';wb.created=new Date();
+  // ═══ HOJA 1: Doc- contabilidad (formato Total Innovation, sin estilos) ═══
+  const wsTI=wb.addWorksheet('Doc- contabilidad');
+  wsTI.columns=[
+    {header:'Tipo de Documento',width:14},
+    {header:'Numero de documento',width:14},
+    {header:'Item ',width:7},
+    {header:'Fecha',width:11},
+    {header:'Cuenta Contable',width:13},
+    {header:'Nit',width:13},
+    {header:'Num Cheque',width:11},
+    {header:'Vr Debito',width:13},
+    {header:'Vr Credito',width:13},
+    {header:'Descripcion',width:42},
+    {header:'Base Impuestos',width:13},
+    {header:'Centro de Costo',width:13},
+    {header:'Libro',width:7}
+  ];
+  // Numero de documento secuencial por comprobante
+  const docNumMap={};
+  let docCounter=1;
+  libroExp.forEach(l=>{
+    if(docNumMap[l.comprobante]===undefined)docNumMap[l.comprobante]=docCounter++;
+  });
+  const itemCounter={};
+  libroExp.forEach(l=>{
+    if(itemCounter[l.comprobante]===undefined)itemCounter[l.comprobante]=0;
+    itemCounter[l.comprobante]++;
+    const cta=cuentaTotalInnov(l.cuenta,l.tieneIva);
+    const ctaNum=cta?(parseInt(cta,10)||cta):'';
+    const nitClean=String(l.nit||'').replace(/[^\d]/g,'');
+    const nitVal=nitClean?(parseInt(nitClean,10)||nitClean):'';
+    wsTI.addRow([
+      l.tipoInnov||'FC',
+      docNumMap[l.comprobante],
+      itemCounter[l.comprobante],
+      fechaTotalInnov(l.fecha),
+      ctaNum,
+      nitVal,
+      '',
+      l.debito?Math.round(l.debito):null,
+      l.credito?Math.round(l.credito):null,
+      (l.detalle||'').slice(0,80),
+      '','',''
+    ]);
+  });
+  // ═══ HOJA 2: Resumen — qué se causó en este periodo ═══
+  const wsR=wb.addWorksheet('Resumen',{views:[{state:'frozen',ySplit:3}]});
+  wsR.columns=[{width:14},{width:42},{width:14,style:{numFmt:XL_NUM}},{width:14,style:{numFmt:XL_NUM}},{width:14,style:{numFmt:XL_NUM}},{width:10}];
+  wsR.mergeCells('A1:F1');
+  wsR.getCell('A1').value=empresa+(nit?' — NIT '+nit:'');
+  wsR.getCell('A1').font={name:XL_FONT,bold:true,size:13,color:{argb:XL_THEME.primary}};
+  wsR.getCell('A1').alignment={horizontal:'center'};
+  wsR.mergeCells('A2:F2');
+  wsR.getCell('A2').value='RESUMEN DE CONTABILIZACIÓN · '+desde+' al '+hasta;
+  wsR.getCell('A2').font={name:XL_FONT,size:10,italic:true,color:{argb:XL_THEME.muted}};
+  wsR.getCell('A2').alignment={horizontal:'center'};
+  let rR=4;
+  // Sección: Conteo de documentos por tipo
+  wsR.mergeCells('A'+rR+':F'+rR);
+  wsR.getCell('A'+rR).value='📊 DOCUMENTOS PROCESADOS POR TIPO';
+  wsR.getCell('A'+rR).font={name:XL_FONT,bold:true,size:11,color:{argb:XL_THEME.primary}};
+  wsR.getCell('A'+rR).fill=xlFill(XL_THEME.sectionBg);
+  wsR.getRow(rR).height=20;
+  rR++;
+  const TIPO_NOM={FV:'Factura electrónica emitida (venta)',FC:'Factura electrónica recibida (compra)',NC:'Nota crédito',ND:'Nota débito',DS:'Documento soporte',CM:'Mensual consolidado'};
+  const compsPorTipo={};
+  const compsVistos={};
+  libroExp.forEach(l=>{
+    if(compsVistos[l.comprobante])return;
+    compsVistos[l.comprobante]=true;
+    const t=l.tipoInnov||'FC';
+    compsPorTipo[t]=(compsPorTipo[t]||0)+1;
+  });
+  const hRTipo=wsR.getRow(rR);
+  ['Tipo','Descripción','# Comprobantes'].forEach((h,i)=>{
+    const c=hRTipo.getCell(i+1);
+    c.value=h;c.font={name:XL_FONT,bold:true,size:10,color:{argb:XL_THEME.textOnDark}};
+    c.fill=xlFill(XL_THEME.primary);
+    c.alignment={horizontal:'left'};
+  });
+  rR++;
+  Object.entries(compsPorTipo).sort().forEach(([t,n])=>{
+    const r=wsR.getRow(rR++);
+    r.getCell(1).value=t;
+    r.getCell(1).font={name:'Consolas',size:9,bold:true};
+    r.getCell(2).value=TIPO_NOM[t]||t;
+    r.getCell(3).value=n;
+    r.getCell(3).alignment={horizontal:'right'};
+  });
+  rR+=2;
+  // Sección: Movimiento por cuenta (clase 4/5/6/7 — P&L)
+  wsR.mergeCells('A'+rR+':F'+rR);
+  wsR.getCell('A'+rR).value='💰 MOVIMIENTO POR CUENTA';
+  wsR.getCell('A'+rR).font={name:XL_FONT,bold:true,size:11,color:{argb:XL_THEME.primary}};
+  wsR.getCell('A'+rR).fill=xlFill(XL_THEME.sectionBg);
+  wsR.getRow(rR).height=20;
+  rR++;
+  const hRCta=wsR.getRow(rR);
+  ['Cuenta','Nombre','Débitos','Créditos','Saldo','# Líneas'].forEach((h,i)=>{
+    const c=hRCta.getCell(i+1);
+    c.value=h;c.font={name:XL_FONT,bold:true,size:10,color:{argb:XL_THEME.textOnDark}};
+    c.fill=xlFill(XL_THEME.primary);
+    c.alignment={horizontal:i<2?'left':'right'};
+  });
+  rR++;
+  // Acumular por cuenta
+  const bcExp={};
+  libroExp.forEach(l=>{
+    if(!bcExp[l.cuenta])bcExp[l.cuenta]={nombre:l.nombreCta,debito:0,credito:0,n:0};
+    bcExp[l.cuenta].debito+=l.debito;
+    bcExp[l.cuenta].credito+=l.credito;
+    bcExp[l.cuenta].n++;
+  });
+  const CLASES_RES={'1':'ACTIVO','2':'PASIVO','3':'PATRIMONIO','4':'INGRESOS','5':'GASTOS','6':'COSTO DE VENTAS','7':'COSTOS DE PRODUCCIÓN','8':'CUENTAS DE ORDEN'};
+  const porClaseRes={};
+  Object.entries(bcExp).forEach(([c,v])=>{const k=c[0];if(!porClaseRes[k])porClaseRes[k]=[];porClaseRes[k].push([c,v]);});
+  let totDR=0, totCR=0;
+  Object.keys(porClaseRes).sort().forEach(k=>{
+    // Sección por clase
+    wsR.mergeCells(rR,1,rR,6);
+    const sec=wsR.getCell('A'+rR);
+    sec.value=CLASES_RES[k]||'CLASE '+k;
+    sec.font={name:XL_FONT,bold:true,size:10,color:{argb:XL_THEME.primary}};
+    sec.fill=xlFill(XL_THEME.subSectionBg);
+    rR++;
+    let secD=0,secC=0,secN=0;
+    porClaseRes[k].sort((a,b)=>a[0].localeCompare(b[0])).forEach(([c,v])=>{
+      const r=wsR.getRow(rR++);
+      r.getCell(1).value=c;r.getCell(1).font={name:'Consolas',size:9};
+      r.getCell(2).value=v.nombre;
+      r.getCell(3).value=v.debito||null;
+      r.getCell(4).value=v.credito||null;
+      r.getCell(5).value=v.debito-v.credito;
+      r.getCell(6).value=v.n;
+      r.getCell(6).alignment={horizontal:'right'};
+      secD+=v.debito;secC+=v.credito;secN+=v.n;
+    });
+    const subR=wsR.getRow(rR++);
+    subR.getCell(2).value='Subtotal '+(CLASES_RES[k]||k);
+    subR.getCell(3).value=secD;
+    subR.getCell(4).value=secC;
+    subR.getCell(5).value=secD-secC;
+    subR.getCell(6).value=secN;
+    subR.eachCell(c=>{c.font={name:XL_FONT,bold:true,size:10,color:{argb:XL_THEME.primary}};c.fill=xlFill(XL_THEME.subSectionBg);});
+    totDR+=secD;totCR+=secC;
+  });
+  // Total general
+  const totRRes=wsR.getRow(rR++);
+  totRRes.getCell(2).value='TOTAL GENERAL';
+  totRRes.getCell(3).value=totDR;
+  totRRes.getCell(4).value=totCR;
+  totRRes.getCell(5).value=totDR-totCR;
+  totRRes.eachCell(c=>{c.font={name:XL_FONT,bold:true,size:11,color:{argb:XL_THEME.primary}};c.fill=xlFill(XL_THEME.totalBg);c.border=xlTotalBorder();});
+  // ═══ HOJA 3: Balance por tercero ═══
+  const wsBT=wb.addWorksheet('Balance por tercero',{views:[{state:'frozen',ySplit:4}]});
+  wsBT.columns=[
+    {width:12},{width:36},{width:14},{width:32},
+    {width:14,style:{numFmt:XL_NUM}},{width:14,style:{numFmt:XL_NUM}},{width:14,style:{numFmt:XL_NUM}}
+  ];
+  wsBT.mergeCells('A1:G1');
+  wsBT.getCell('A1').value=empresa+(nit?' — NIT '+nit:'');
+  wsBT.getCell('A1').font={name:XL_FONT,bold:true,size:13,color:{argb:XL_THEME.primary}};
+  wsBT.getCell('A1').alignment={horizontal:'center'};
+  wsBT.mergeCells('A2:G2');
+  wsBT.getCell('A2').value='BALANCE DE PRUEBA POR TERCERO · '+desde+' al '+hasta;
+  wsBT.getCell('A2').font={name:XL_FONT,size:10,italic:true,color:{argb:XL_THEME.muted}};
+  wsBT.getCell('A2').alignment={horizontal:'center'};
+  wsBT.mergeCells('A3:G3');
+  wsBT.getCell('A3').value='Movimiento débito/crédito por cuenta y NIT — ideal para conciliar con balance del software contable';
+  wsBT.getCell('A3').font={name:XL_FONT,size:9,italic:true,color:{argb:XL_THEME.muted}};
+  wsBT.getCell('A3').alignment={horizontal:'center'};
+  const hBT=wsBT.getRow(4);
+  ['Cuenta','Nombre cuenta','NIT','Tercero','Débitos','Créditos','Saldo'].forEach((h,i)=>{
+    const c=hBT.getCell(i+1);
+    c.value=h;c.font={name:XL_FONT,bold:true,size:10,color:{argb:XL_THEME.textOnDark}};
+    c.fill=xlFill(XL_THEME.primary);
+    c.alignment={horizontal:i<4?'left':'right',vertical:'middle'};
+    c.border=xlBorder(XL_THEME.primary);
+  });
+  hBT.height=22;
+  // Agrupar por (cuenta, NIT)
+  const porCtaNit={};
+  libroExp.forEach(l=>{
+    const k=l.cuenta+'||'+(l.nit||'');
+    if(!porCtaNit[k])porCtaNit[k]={cuenta:l.cuenta,nombre:l.nombreCta,nit:l.nit||'',tercero:l.tercero||'',debito:0,credito:0};
+    porCtaNit[k].debito+=l.debito;
+    porCtaNit[k].credito+=l.credito;
+    // Si el tercero llega vacío en una línea y lleno en otra, conservamos el nombre
+    if(!porCtaNit[k].tercero&&l.tercero)porCtaNit[k].tercero=l.tercero;
+  });
+  // Agrupar por cuenta primero, luego dentro por tercero
+  const porCuenta={};
+  Object.values(porCtaNit).forEach(item=>{
+    if(!porCuenta[item.cuenta])porCuenta[item.cuenta]={nombre:item.nombre,items:[],debito:0,credito:0};
+    porCuenta[item.cuenta].items.push(item);
+    porCuenta[item.cuenta].debito+=item.debito;
+    porCuenta[item.cuenta].credito+=item.credito;
+  });
+  let totDBT=0, totCBT=0;
+  Object.keys(porCuenta).sort().forEach(cta=>{
+    const grupo=porCuenta[cta];
+    grupo.items.sort((a,b)=>(a.tercero||'').localeCompare(b.tercero||''));
+    grupo.items.forEach(item=>{
+      const r=wsBT.addRow([item.cuenta,item.nombre,item.nit,item.tercero,item.debito||null,item.credito||null,item.debito-item.credito]);
+      r.getCell(1).font={name:'Consolas',size:9};
+      r.getCell(3).font={name:'Consolas',size:9};
+    });
+    // Subtotal por cuenta
+    const sR=wsBT.addRow(['','── Total '+(grupo.nombre||cta),'','',grupo.debito,grupo.credito,grupo.debito-grupo.credito]);
+    sR.eachCell(c=>{c.font={name:XL_FONT,bold:true,size:10,color:{argb:XL_THEME.primary}};c.fill=xlFill(XL_THEME.subSectionBg);});
+    totDBT+=grupo.debito;totCBT+=grupo.credito;
+  });
+  // Total general
+  const tR=wsBT.addRow(['','TOTAL GENERAL','','',totDBT,totCBT,totDBT-totCBT]);
+  tR.eachCell(c=>{c.font={name:XL_FONT,bold:true,size:11,color:{argb:XL_THEME.primary}};c.fill=xlFill(XL_THEME.totalBg);c.border=xlTotalBorder();});
+  wsBT.autoFilter={from:{row:4,column:1},to:{row:4,column:7}};
+  // ─── Escribir y descargar ─────────────────────────────────────────────
+  const buf=await wb.xlsx.writeBuffer();
+  const blob=new Blob([buf],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  const safeName=(empresa).replace(/[^\w]/g,'_').slice(0,30);
+  a.href=url;a.download='TotalInnovation_'+safeName+'_'+desde+'_'+hasta+sufijoMes+'.xlsx';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  if(typeof exoTrack!=='undefined')exoTrack.generate('contabilizar-fe','total-innovation');
+}
+// (Sin init asíncrono — la herramienta no depende de data externa.)
+</script>
+</body>
+</html>

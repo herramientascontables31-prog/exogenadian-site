@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="../shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S7SM6ST4CC');
+</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0D9488">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutorial: c&oacute;mo armar los formatos CCE (5247–5252) en exogenadian.com | Ex&oacute;genaDIAN</title>
+<meta name="description" content="Tutorial paso a paso de la exógena CCE (Contratos de Colaboración Empresarial): qué es un consorcio, una UT, una cuenta en participación, qué reporta cada formato 5247-5252, y cómo armar el Excel desde el balance del contrato. Con dos ejemplos numéricos completos.">
+<meta name="keywords" content="tutorial CCE, exógena consorcio, exógena unión temporal, exógena mandato, formato 5247, formato 5248, formato 5249, formato 5250, formato 5251, formato 5252, cuentas en participación exógena, joint venture exógena, Res 000227 2025">
+<link rel="canonical" href="https://exogenadian.com/tutoriales/cce.html">
+<meta property="og:title" content="Tutorial Exógena CCE (5247–5252) | ExógenaDIAN">
+<meta property="og:description" content="Cómo armar la exógena de un consorcio, UT, mandato, joint venture o cuenta en participación. Conceptos + paso a paso + ejemplo numérico.">
+<meta property="og:url" content="https://exogenadian.com/tutoriales/cce.html">
+<meta property="og:type" content="article"><meta property="og:locale" content="es_CO"><meta property="og:site_name" content="ExógenaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png">
+<meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tutorial-mockups.css?v=dccdc93b">
+<style>
+:root{--pri-900:#134E4A;--pri-800:#115E59;--pri-700:#0F766E;--pri-600:#0D9488;--pri-500:#14B8A6;--pri-400:#2DD4BF;--pri-300:#5EEAD4;--pri-200:#99F6E4;--pri-100:#CCFBF1;--pri-50:#F0FDFA;--white:#FFF;--gray-50:#F9FAFB;--gray-100:#F3F4F6;--gray-200:#E5E7EB;--gray-300:#D1D5DB;--gray-400:#9CA3AF;--gray-500:#6B7280;--gray-600:#4B5563;--gray-700:#374151;--gray-800:#1F2937;--gray-900:#111827;--amber-50:#FFFBEB;--amber-100:#FEF3C7;--amber-500:#F59E0B;--amber-700:#92400E;--amber-800:#78350F;--blue-50:#EFF6FF;--blue-100:#DBEAFE;--blue-500:#3B82F6;--blue-700:#1D4ED8;--green-50:#ECFDF5;--green-100:#D1FAE5;--green-500:#10B981;--green-600:#059669;--green-700:#047857;--rose-50:#FFF1F2;--rose-500:#F43F5E;--rose-700:#BE123C;--indigo-50:#EEF2FF;--indigo-500:#6366F1;--indigo-700:#4338CA}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-900);line-height:1.6}
+.tut-layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh}@media(max-width:900px){.tut-layout{grid-template-columns:1fr}}
+.sidebar{background:#fff;border-right:1px solid var(--gray-200);padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
+.sidebar-header{padding:16px 20px;border-bottom:1px solid var(--gray-100)}
+.sidebar-header a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--gray-800);font-weight:800;font-size:.9rem}
+.sidebar-header a div{width:28px;height:28px;background:linear-gradient(135deg,var(--pri-700),var(--pri-400));border-radius:7px;display:grid;place-items:center;color:#fff;font-size:.7rem;font-weight:900}
+.sidebar-curso{padding:16px 20px;border-bottom:1px solid var(--gray-100)}
+.sidebar-curso h3{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--pri-700);margin-bottom:4px}
+.sidebar-curso p{font-size:.88rem;font-weight:700;color:var(--gray-800)}
+.sidebar-nav{padding:12px 0;flex:1}
+.sidebar-nav a{display:flex;align-items:center;gap:10px;padding:10px 20px;text-decoration:none;color:var(--gray-500);font-size:.85rem;font-weight:500;transition:all .15s;border-left:3px solid transparent}
+.sidebar-nav a:hover{background:var(--pri-50);color:var(--pri-700)}
+.sidebar-nav a.active{background:var(--pri-50);color:var(--pri-700);font-weight:700;border-left-color:var(--pri-600)}
+.sidebar-nav a .num{width:24px;height:24px;border-radius:50%;background:var(--gray-100);color:var(--gray-500);display:grid;place-items:center;font-size:.72rem;font-weight:700;flex-shrink:0}
+.sidebar-nav a.active .num{background:var(--pri-600);color:#fff}
+.sidebar-back{padding:16px 20px;border-top:1px solid var(--gray-100);margin-top:auto}
+.sidebar-back a{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--gray-400);font-size:.82rem;font-weight:500}
+.sidebar-back a:hover{color:var(--gray-700)}
+.main{padding:32px 40px 60px;max-width:880px}@media(max-width:900px){.main{padding:20px 16px 80px}.sidebar{display:none}}
+.breadcrumb{font-size:.78rem;color:var(--gray-400);margin-bottom:8px}
+.breadcrumb a{color:var(--gray-400);text-decoration:none}.breadcrumb a:hover{color:var(--pri-600)}
+.tag{display:inline-flex;align-items:center;gap:6px;background:var(--pri-100);color:var(--pri-700);padding:4px 14px;border-radius:100px;font-size:.74rem;font-weight:700;margin-bottom:14px}
+h1.tut-title{font-family:'Fraunces',serif;font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;letter-spacing:-.02em;margin-bottom:10px;line-height:1.2}
+p.tut-lead{font-size:1.05rem;color:var(--gray-600);max-width:680px;line-height:1.6;margin-bottom:30px}
+.step{margin-bottom:40px;padding-top:20px;border-top:2px solid var(--gray-200)}
+.step:first-of-type{border-top:none;padding-top:0}
+.step-num{display:inline-flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:.9rem;color:var(--pri-700);font-weight:700;margin-bottom:8px}
+.step-num span{display:grid;place-items:center;width:32px;height:32px;background:var(--pri-600);color:#fff;border-radius:50%;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:800}
+.step h2{font-family:'Fraunces',serif;font-size:1.45rem;font-weight:700;margin-bottom:8px;color:var(--gray-900);line-height:1.25}
+.step p{font-size:.95rem;color:var(--gray-700);line-height:1.7;margin-bottom:14px}
+.step ul,.step ol{margin:8px 0 16px 22px;display:flex;flex-direction:column;gap:7px}
+.step li{font-size:.94rem;color:var(--gray-700);line-height:1.6}
+.step h3{font-size:1.05rem;font-weight:700;margin:18px 0 8px;color:var(--gray-800)}
+.step code{font-family:'JetBrains Mono',monospace;font-size:.86rem;background:var(--gray-100);padding:2px 7px;border-radius:5px;color:var(--gray-800)}
+.tip{background:var(--blue-50);border-left:4px solid var(--blue-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:#1E40AF;line-height:1.6}
+.tip strong{color:var(--blue-700)}
+.warn{background:var(--amber-50);border-left:4px solid var(--amber-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:var(--amber-800);line-height:1.6}
+.warn strong{color:var(--amber-700)}
+.err{background:var(--rose-50);border-left:4px solid var(--rose-500);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.9rem;color:#9F1239;line-height:1.6}
+.err strong{color:var(--rose-700)}
+.tabla{width:100%;border-collapse:collapse;margin:14px 0;border-radius:10px;overflow:hidden;border:1px solid var(--gray-200);font-size:.86rem}
+.tabla th{background:var(--gray-100);padding:9px 13px;text-align:left;font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gray-600)}
+.tabla td{padding:9px 13px;border-top:1px solid var(--gray-100);color:var(--gray-700)}
+.tabla tr:hover{background:var(--pri-50)}
+.tabla code{font-family:'JetBrains Mono',monospace;font-size:.78rem;background:var(--white);padding:1px 5px;border-radius:3px}
+.tabla td.num{font-family:'JetBrains Mono',monospace;text-align:right;color:var(--pri-800);font-weight:600}
+.cta-end{background:linear-gradient(135deg,var(--pri-50),var(--pri-100));border:2px solid var(--pri-300);border-radius:16px;padding:28px 26px;margin:30px 0 20px;text-align:center}
+.cta-end h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;color:var(--pri-800);margin-bottom:6px}
+.cta-end p{font-size:.92rem;color:var(--pri-700);margin-bottom:16px}
+.cta-end a{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:var(--pri-600);color:#fff;border-radius:12px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 14px rgba(13,148,136,.25);transition:all .2s}
+.cta-end a:hover{background:var(--pri-700);transform:translateY(-2px)}
+.step-nav{display:flex;justify-content:space-between;margin-top:30px;padding-top:20px;border-top:2px solid var(--gray-200);gap:10px;flex-wrap:wrap}
+.step-nav a{display:inline-flex;align-items:center;gap:7px;padding:11px 22px;border-radius:10px;text-decoration:none;font-weight:700;font-size:.88rem;background:var(--gray-100);color:var(--gray-700);transition:all .2s}
+.step-nav a:hover{background:var(--gray-200)}
+.step-nav a.next{background:var(--pri-600);color:#fff;box-shadow:0 4px 12px rgba(13,148,136,.25)}
+.step-nav a.next:hover{background:var(--pri-700)}
+.fmt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:14px 0}
+.fmt-pill{background:#fff;border:2px solid var(--gray-200);border-radius:12px;padding:14px 16px;text-align:left}
+.fmt-pill .code{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:700;color:var(--pri-700);line-height:1}
+.fmt-pill .desc{font-size:.78rem;color:var(--gray-600);margin-top:6px;line-height:1.4}
+.fmt-pill .eq{font-size:.7rem;color:var(--gray-400);margin-top:4px;font-weight:600}
+.tipo-card{background:#fff;border:1px solid var(--gray-200);border-radius:10px;padding:12px 16px;margin:8px 0}
+.tipo-card .nombre{font-weight:700;color:var(--pri-700);font-size:.92rem;margin-bottom:4px}
+.tipo-card .nombre code{background:var(--pri-100);color:var(--pri-800);font-family:'JetBrains Mono',monospace;font-size:.74rem;padding:2px 6px;border-radius:4px;margin-right:6px}
+.tipo-card p{font-size:.86rem;color:var(--gray-600);margin:0;line-height:1.55}
+.ejemplo{background:linear-gradient(135deg,var(--indigo-50),#fff);border:1px solid #C7D2FE;border-radius:14px;padding:24px;margin:20px 0}
+.ejemplo h4{font-family:'Fraunces',serif;font-size:1.15rem;color:var(--indigo-700);margin-bottom:6px}
+.ejemplo p.lead-ej{font-size:.9rem;color:var(--gray-700);margin-bottom:14px}
+.ejemplo h5{font-size:.85rem;font-weight:700;color:var(--gray-800);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.05em}
+</style>
+<script async src="../shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div class="tut-layout">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html"><div>E</div>ExógenaDIAN</a>
+    </div>
+    <div class="sidebar-curso">
+      <h3>Tutorial</h3>
+      <p>Exógena CCE — F5247 a F5252</p>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#intro" class="active"><span class="num">0</span> Antes de empezar</a>
+      <a href="#concepto"><span class="num">¿?</span> Qué es un CCE</a>
+      <a href="#formatos"><span class="num">📋</span> Los 6 formatos</a>
+      <a href="#paso1"><span class="num">1</span> Datos del contrato</a>
+      <a href="#paso2"><span class="num">2</span> Partícipes</a>
+      <a href="#paso3"><span class="num">3</span> Cargar auxiliar</a>
+      <a href="#paso4"><span class="num">4</span> Revisar clasificación</a>
+      <a href="#paso5"><span class="num">5</span> Descargar Excel</a>
+      <a href="#ejemplo1"><span class="num">📊</span> Ejemplo: Consorcio</a>
+      <a href="#ejemplo2"><span class="num">📊</span> Ejemplo: Cuentas en participación</a>
+      <a href="#errores"><span class="num">!</span> Errores comunes</a>
+      <a href="#siguiente"><span class="num">→</span> Siguientes pasos</a>
+    </nav>
+    <div class="sidebar-back"><a href="../tutoriales.html">← Todos los tutoriales</a></div>
+  </aside>
+  <div class="main">
+    <div class="breadcrumb"><a href="../index.html">Inicio</a> › <a href="../tutoriales.html">Tutoriales</a> › Exógena CCE</div>
+    <span class="tag">Tutorial + curso · ~20 min</span>
+    <h1 class="tut-title">Cómo armar la exógena de un Contrato de Colaboración Empresarial</h1>
+    <p class="tut-lead">Guía paso a paso de la herramienta de <a href="../exogena-cce.html">Exógena CCE</a> para armar los formatos <strong>5247 a 5252</strong> (V2 según Res. 233/2025) de consorcios, uniones temporales, mandatos, administración delegada, joint ventures, cuentas en participación, exploración de hidrocarburos y convenios públicos. Incluye repaso conceptual breve, descripción de los 6 formatos, los 5 pasos operativos de la herramienta y dos ejemplos numéricos completos.</p>
+    <section id="intro" class="step">
+      <div class="step-num"><span>0</span> Antes de empezar</div>
+      <h2>Qué necesitas tener listo</h2>
+      <p>Antes de abrir la herramienta, asegúrate de tener a mano:</p>
+      <ul>
+        <li>El <strong>balance de prueba por tercero</strong> del contrato (no de tu empresa propia) por el periodo <strong>01-ene a 31-dic-2025</strong>, exportado a Excel.</li>
+        <li>El acta o contrato con los <strong>NITs de los partícipes</strong> y sus porcentajes de participación (deben sumar 100%).</li>
+        <li>El <strong>NIT del contrato</strong> si tiene RUT propio (consorcios y UT típicamente lo tienen).</li>
+        <li>Opcional: tu <strong>directorio de terceros</strong> (Excel con NIT, dirección, departamento, municipio) para autocompletar los formatos F5247, F5251 y F5252.</li>
+      </ul>
+      <div class="tip">
+        <strong>📌 Regla clave del Parágrafo 1 Res. 000227/2025:</strong> las operaciones que reportas en los formatos 5247-5252 <strong>NO</strong> se reportan adicionalmente en los formatos individuales (F1001, F1005, F1006, F1007, F1008, F1009) de cada partícipe ni en el F1647 (intermediarios). Solo el operador/administrador del contrato reporta, una vez, los formatos CCE.
+      </div>
+      <h3>Plazos AG 2025 (presentación en 2026)</h3>
+      <table class="tabla">
+        <thead><tr><th>Tipo de obligado</th><th>Inicio del calendario</th></tr></thead>
+        <tbody>
+          <tr><td>Grandes Contribuyentes</td><td><strong>27 de abril de 2026</strong></td></tr>
+          <tr><td>Personas Jurídicas y Naturales</td><td><strong>14 de mayo de 2026</strong></td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:.85rem;color:var(--gray-500)">El día exacto por último dígito del NIT del operador se publica en el calendario tributario MUISCA. Si llegaste tarde a la presentación, hay sanción por extemporaneidad además de la de no enviar información.</p>
+    </section>
+    <section id="concepto" class="step">
+      <div class="step-num"><span>¿?</span> Concepto</div>
+      <h2>Qué es un Contrato de Colaboración Empresarial</h2>
+      <p>Un <strong>Contrato de Colaboración Empresarial (CCE)</strong> es una figura por la cual dos o más personas o entidades aportan recursos para ejecutar una operación común sin crear una nueva sociedad jurídica. Cada partícipe sigue siendo independiente fiscalmente, pero el operador del contrato consolida las operaciones y las reporta como si el contrato fuera un "informante separado" ante la DIAN.</p>
+      <p>Para efectos de exógena, la DIAN considera <strong>6 tipos</strong> distintos (<code>tipoContrato</code> 1 a 6 en la herramienta):</p>
+      <div class="tipo-card">
+        <div class="nombre"><code>1</code> Mandato y/o Administración Delegada</div>
+        <p>Una persona (mandante) encarga a otra (mandatario) la ejecución de ciertas operaciones. El mandatario factura, paga y cobra a su nombre pero por cuenta del mandante. Típicamente <strong>un solo partícipe al 100%</strong> (el mandante). Ej.: una constructora que actúa como administrador delegado de un proyecto inmobiliario.</p>
+      </div>
+      <div class="tipo-card">
+        <div class="nombre"><code>2</code> Consorcio y/o Unión Temporal</div>
+        <p>Dos o más empresas se asocian para ejecutar un contrato con una entidad estatal. Tienen <strong>RUT propio</strong> y figuran como el contratista frente a la entidad. Diferencia legal: en consorcio responden solidariamente; en UT cada miembro responde por su parte según el % pactado. Para exógena se reportan igual.</p>
+      </div>
+      <div class="tipo-card">
+        <div class="nombre"><code>3</code> Exploración y Explotación (hidrocarburos, gases, minerales)</div>
+        <p>Operador de un bloque que ejecuta la operación a su cargo. Los demás partícipes (non-operators) reciben de él la información para su declaración individual. Norma específica: <strong>Decreto 3050 de 1997</strong>.</p>
+      </div>
+      <div class="tipo-card">
+        <div class="nombre"><code>4</code> Joint Venture</div>
+        <p>Alianza entre empresas para un proyecto específico. A diferencia del consorcio, no requiere RUT propio del JV — el operador puede reportar bajo su propio NIT. Cada socio aporta capital y comparte resultados según contrato.</p>
+      </div>
+      <div class="tipo-card">
+        <div class="nombre"><code>5</code> Cuentas en Participación</div>
+        <p>Contrato regulado por el <strong>Art. 507 del Código de Comercio</strong>: un <strong>gestor</strong> administra recursos de uno o más <strong>partícipes ocultos</strong>. Frente a terceros solo aparece el gestor. Para exógena, el gestor reporta el 100% de las operaciones del negocio en común; los partícipes ocultos NO aparecen como terceros en la exógena del contrato (pero sí en la información interna).</p>
+      </div>
+      <div class="tipo-card">
+        <div class="nombre"><code>6</code> Convenios de Cooperación con Entidades Públicas</div>
+        <p>Acuerdos público-privados o convenios entre entidades estatales y privadas para ejecutar proyectos de interés común (educación, salud, ciencia, infraestructura). Regulados por el <strong>Decreto 092 de 2017</strong> entre otros.</p>
+      </div>
+      <div class="warn">
+        <strong>⚠️ No hay umbral de UVT para los CCE.</strong> La obligación de presentar los formatos 5247-5252 nace por <strong>celebrar el contrato y operarlo</strong>, no por nivel de ingresos. Si tú eres el operador, administrador, mandatario, gestor o representante, reportas — sin importar el monto. <em>Fuente: Art. 1.3.1.1 numeral 8 Res. 000227/2025.</em>
+      </div>
+    </section>
+    <section id="formatos" class="step">
+      <div class="step-num"><span>📋</span> Formatos</div>
+      <h2>Qué reporta cada uno de los 6 formatos CCE</h2>
+      <p>Cada formato del CCE es el "espejo" de un formato individual de exógena, aplicado al contrato. Si dominas los formatos individuales, los CCE son los mismos criterios:</p>
+      <div class="fmt-grid">
+        <div class="fmt-pill">
+          <div class="code">5247</div>
+          <div class="desc">Pagos o abonos en cuenta del contrato y retenciones practicadas</div>
+          <div class="eq">⇆ equivale a F1001</div>
+        </div>
+        <div class="fmt-pill">
+          <div class="code">5248</div>
+          <div class="desc">Ingresos recibidos por el contrato (clientes)</div>
+          <div class="eq">⇆ equivale a F1007</div>
+        </div>
+        <div class="fmt-pill">
+          <div class="code">5249</div>
+          <div class="desc">IVA descontable de las compras del contrato</div>
+          <div class="eq">⇆ equivale a F1005</div>
+        </div>
+        <div class="fmt-pill">
+          <div class="code">5250</div>
+          <div class="desc">IVA generado e INC en las ventas del contrato</div>
+          <div class="eq">⇆ equivale a F1006</div>
+        </div>
+        <div class="fmt-pill">
+          <div class="code">5251</div>
+          <div class="desc">Cuentas por cobrar al 31-12 del contrato</div>
+          <div class="eq">⇆ equivale a F1008</div>
+        </div>
+        <div class="fmt-pill">
+          <div class="code">5252</div>
+          <div class="desc">Cuentas por pagar al 31-12 del contrato</div>
+          <div class="eq">⇆ equivale a F1009</div>
+        </div>
+      </div>
+      <div class="tip">
+        <strong>📌 Todos pasaron de V1 a V2.</strong> Con la <strong>Res. 233/2025 art. 23</strong> (30-oct-2025), las especificaciones técnicas de los 6 formatos CCE se actualizaron a la versión 2. Si descargas plantillas viejas de internet (V1), el prevalidador las rechaza. La herramienta de exogenadian genera siempre la V2 vigente.
+      </div>
+      <h3>Columnas en común de los formatos CCE</h3>
+      <p>Todos los formatos comparten un bloque inicial similar al de los formatos individuales:</p>
+      <ul>
+        <li><strong>Concepto</strong> (variable según el formato — ver criterios paralelos de F1001/F1005/etc).</li>
+        <li><strong>Tipo de Documento</strong> del tercero (11 RC, 12 TI, 13 CC, 21 TE, 22 CE, 31 NIT, 41 Pasaporte, 42 DocExterior, 43 Sin Identif).</li>
+        <li><strong>Identificación</strong> del tercero (NIT/cédula).</li>
+        <li><strong>Apellidos y nombres</strong> si es persona natural, o <strong>razón social</strong> si es empresa.</li>
+        <li><strong>Dirección, Cód. Depto, Cód. Municipio</strong> (opcionales en XSD pero recomendados en F5247, F5251 y F5252).</li>
+        <li><strong>País de residencia</strong> (códigos ISO de país).</li>
+        <li><strong>Valores numéricos</strong> según el formato (pago, IVA, ingreso, saldo).</li>
+      </ul>
+    </section>
+    <section id="paso1" class="step">
+      <div class="step-num"><span>1</span> Paso 1</div>
+      <h2>Datos del Contrato</h2>
+      <p>En el primer paso de la herramienta diligencias la "ficha" del contrato:</p>
+      <ul>
+        <li><strong>Tipo de Contrato (obligatorio)</strong>: dropdown con los 6 valores oficiales. Define qué texto verás en pantalla y qué casos de uso aplican.</li>
+        <li><strong>Año Gravable</strong>: 2024 o 2025 (default 2025 para presentación en 2026).</li>
+        <li><strong>NIT del contrato (opcional)</strong>: si el contrato tiene RUT propio (típico en consorcios y UT), va aquí. En mandato y cuentas en participación generalmente queda vacío y se usa el NIT del operador.</li>
+        <li><strong>Nombre del contrato</strong>: texto libre — "Consorcio Vial del Norte", "JV Energía Verde 2025", "Mandato Construcciones Pereira".</li>
+        <li><strong>ID Fideicomiso</strong>: solo si el contrato canaliza recursos a través de un patrimonio autónomo (fiducia).</li>
+      </ul>
+      <div class="tip">
+        <strong>¿No tienes NIT del contrato?</strong> Si eres mandatario, gestor de cuentas en participación o joint venture sin RUT propio, deja el campo vacío y la herramienta usa tu NIT como informante. El prevalidador DIAN acepta esta modalidad.
+      </div>
+    </section>
+    <section id="paso2" class="step">
+      <div class="step-num"><span>2</span> Paso 2</div>
+      <h2>Partícipes del Contrato</h2>
+      <p>Aquí registras a los <strong>socios del contrato</strong> (no a los terceros externos). En cada fila:</p>
+      <ul>
+        <li><strong>Tipo de documento</strong>: 13 CC (cédula), 31 NIT (empresa), 22 CE (extranjero residente), 42 DocExterior.</li>
+        <li><strong>Identificación</strong>: NIT/cédula del partícipe. El dígito de verificación se calcula automáticamente.</li>
+        <li><strong>Razón social</strong> o nombre completo.</li>
+        <li><strong>% de participación</strong>: según el acta del contrato. La suma de todos debe ser <strong>exactamente 100%</strong>.</li>
+      </ul>
+      <table class="tabla">
+        <thead><tr><th>Tipo de contrato</th><th>Cuántos partícipes</th><th>Distribución típica</th></tr></thead>
+        <tbody>
+          <tr><td>Mandato / Admin. delegada</td><td>1</td><td>100% al mandante</td></tr>
+          <tr><td>Consorcio / UT</td><td>2 o más</td><td>Según acta de licitación (ej. 60/40, 40/30/30)</td></tr>
+          <tr><td>Joint Venture</td><td>2 o más</td><td>Según contrato de JV</td></tr>
+          <tr><td>Cuentas en participación</td><td>1 gestor + N partícipes ocultos</td><td>Según contrato (ej. 70 gestor / 30 partícipes)</td></tr>
+          <tr><td>Hidrocarburos / Minería</td><td>1 operador + N non-operators</td><td>Según contrato JOA</td></tr>
+        </tbody>
+      </table>
+      <div class="warn">
+        <strong>Nota MVP de la herramienta:</strong> el % es solo informativo. La herramienta <strong>no distribuye automáticamente</strong> los valores entre los partícipes según el porcentaje. En el paso 4 cada operación queda asignada a <strong>un solo partícipe</strong> (el primero por defecto). Si necesitas distribución proporcional, ajustas fila por fila — o lo manejas a nivel del Excel descargado.
+      </div>
+    </section>
+    <section id="paso3" class="step">
+      <div class="step-num"><span>3</span> Paso 3</div>
+      <h2>Cargar el Auxiliar o Balance del Contrato</h2>
+      <p>Sube el <strong>balance de prueba por tercero</strong> del CCE. Es importante que sea <strong>solo del contrato</strong>, no de tu contabilidad general — si tu software contable mezcla las dos, primero filtra por el centro de costos o la cuenta del proyecto y exporta solo eso.</p>
+      <h3>Columnas que la herramienta detecta</h3>
+      <ul>
+        <li><strong>Código PUC</strong> (ej. 110505, 130505, 240801).</li>
+        <li><strong>Nombre de cuenta</strong>.</li>
+        <li><strong>NIT del tercero</strong> (cliente, proveedor, deudor, acreedor).</li>
+        <li><strong>Razón social del tercero</strong>.</li>
+        <li><strong>Débitos</strong> y <strong>Créditos</strong> (movimientos del año).</li>
+        <li><strong>Saldo final</strong> (a 31-dic-2025) — para los formatos 5251 y 5252.</li>
+      </ul>
+      <p>El motor reconoce 80+ variantes de nombres de columna de Siigo, World Office, Helisa, Alegra, ContaPyme y otros. Si la autodetección falla, puedes mapear manualmente con dropdowns. La herramienta soporta <strong>balances de árbol</strong> (World Office Método 1) y <strong>balances planos</strong>.</p>
+      <h3>Directorio de terceros (opcional pero recomendado)</h3>
+      <p>El balance contable raramente trae dirección, departamento y municipio de los terceros. Si tienes un Excel maestro con esos datos (NIT + Dirección + CodDpto + CodMpio), súbelo en el panel "📇 Cargar mi directorio". Si no lo cargas, la herramienta usa un directorio embebido con 485 entidades comunes (bancos, EPS, DIAN, grandes empresas) y deja vacíos los demás.</p>
+      <div class="tip">
+        <strong>Tip:</strong> los campos de dirección, departamento y municipio son <strong>opcionales en el XSD</strong> del prevalidador CCE. Si los dejas vacíos el prevalidador no rechaza el XML — pero pierdes trazabilidad para una eventual fiscalización.
+      </div>
+    </section>
+    <section id="paso4" class="step">
+      <div class="step-num"><span>4</span> Paso 4</div>
+      <h2>Revisar la clasificación automática</h2>
+      <p>La herramienta clasifica cada cuenta del balance en uno de los 6 formatos CCE según rangos PUC y palabras clave. Esta es la lógica resumida:</p>
+      <table class="tabla">
+        <thead><tr><th>Clase PUC</th><th>Va a</th><th>Concepto típico</th></tr></thead>
+        <tbody>
+          <tr><td><code>5xxx</code>, <code>6xxx</code> (gastos y costos)</td><td>F5247</td><td>5001 salarios, 5002 honorarios, 5004 servicios, 5005 arriendos…</td></tr>
+          <tr><td><code>4xxx</code> (ingresos)</td><td>F5248</td><td>4001 operacional, 4002 no operacional, 4003 rendimientos</td></tr>
+          <tr><td><code>2408xx</code> con débito &gt; crédito</td><td>F5249</td><td>IVA descontable</td></tr>
+          <tr><td><code>2408xx</code> con crédito &gt; débito</td><td>F5250</td><td>IVA generado</td></tr>
+          <tr><td><code>1xxx</code> con saldo positivo (CxC)</td><td>F5251</td><td>Saldo de cartera a 31-12</td></tr>
+          <tr><td><code>2xxx</code> con saldo positivo (CxP)</td><td>F5252</td><td>Saldo de pasivos a 31-12</td></tr>
+          <tr><td><code>2365xx</code>, <code>2367xx</code></td><td>Se distribuyen en F5247</td><td>Retenciones practicadas por NIT</td></tr>
+        </tbody>
+      </table>
+      <h3>Qué revisar línea por línea</h3>
+      <ul>
+        <li>Filas <strong>sin clasificar</strong> (típicamente clase 3 patrimonio, 7 cuentas de orden, 8-9 cuentas memorando): generalmente no aplican, las omites.</li>
+        <li>Filas <strong>sin NIT del tercero</strong>: la exógena exige tercero identificado. Si no lo tienes, la fila no entra al XML — ajusta tu contabilidad antes de presentar.</li>
+        <li><strong>Concepto del F5247</strong>: el clasificador acierta en el 80-90% de casos. Edítalo inline si una cuenta de "5135 — Servicios" debería ir como honorarios (5002) y no como servicios genéricos (5004).</li>
+        <li><strong>Partícipe asignado</strong>: si una operación corresponde a un partícipe distinto al default (por ejemplo un costo asumido por un solo socio del consorcio), cámbialo con el dropdown de la fila.</li>
+      </ul>
+      <div class="err">
+        <strong>Cuentas que NUNCA deben ir a CCE:</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>Cuentas de patrimonio del operador (capital, reservas, utilidades).</li>
+          <li>Gastos personales del operador que no son del contrato (alquiler de tu oficina principal, salarios de tu personal administrativo no asignado al proyecto).</li>
+          <li>Operaciones que ya están reportadas en los formatos individuales (F1001, F1007, etc.) del operador — sería doble reporte y el prevalidador lo rechaza.</li>
+        </ul>
+      </div>
+    </section>
+    <section id="paso5" class="step">
+      <div class="step-num"><span>5</span> Paso 5</div>
+      <h2>Descargar el Excel con los 6 formatos</h2>
+      <p>El Excel descargado tiene <strong>7 hojas</strong>: una "Control" con los datos del contrato y partícipes + las hojas <strong>F5247, F5248, F5249, F5250, F5251 y F5252</strong> con la estructura exacta de la plantilla DIAN.</p>
+      <h3>Antes de descargar — checks en pantalla</h3>
+      <ul>
+        <li><strong>Suma de % partícipes = 100</strong> ✓</li>
+        <li><strong>Cuentas con NIT vacío</strong>: la herramienta las cuenta y avisa; revísalas antes.</li>
+        <li><strong>Conceptos faltantes en F5247</strong>: si quedó alguna fila sin concepto, no la deja exportar.</li>
+        <li><strong>Direcciones incompletas</strong> en F5247/5251/5252: aviso amber, no bloquea.</li>
+      </ul>
+      <h3>Después de descargar — flujo hacia el MUISCA</h3>
+      <ol>
+        <li>Abre el <strong>Prevalidador Tributario CCE AG 2025</strong> (descárgalo de muisca.dian.gov.co — es un Excel con macros).</li>
+        <li>En cada hoja del Excel descargado de exogenadian (F5247…F5252) copia <strong>solo los datos, sin encabezados</strong>.</li>
+        <li>Pega en la pestaña correspondiente del prevalidador <strong>desde la primera celda azul</strong>.</li>
+        <li>Click en "Generar XML" en el prevalidador. Si hay errores estructurales, corrige y vuelve a generar.</li>
+        <li>Sube los XML al MUISCA por el servicio <strong>"Presentación de Información por Envío de Archivos"</strong>.</li>
+        <li>Guarda los <strong>recibos de presentación</strong> (PDF que emite el MUISCA) como soporte para el archivo del contrato.</li>
+      </ol>
+      <div class="warn">
+        <strong>Descarga del Excel: requiere plan PRO.</strong> La vista previa de los 6 formatos en pantalla es gratis. La descarga del Excel con las 7 hojas es función PRO. Si lo necesitas para un cliente puntual y no quieres suscripción, puedes copiar manualmente cada tabla desde la vista previa.
+      </div>
+    </section>
+    <section id="ejemplo1" class="step">
+      <div class="step-num"><span>📊</span> Ejemplo 1</div>
+      <h2>Caso completo: Consorcio Vial del Norte</h2>
+      <div class="ejemplo">
+        <h4>Datos del contrato</h4>
+        <p class="lead-ej">"Consorcio Vial del Norte" (NIT 901.234.567-8) ejecuta una obra para el INVÍAS. Composición: <strong>Constructora Andina S.A.S. 60%</strong> y <strong>Ingeniería Pereira S.A.S. 40%</strong>.</p>
+        <h5>1. Datos del Contrato (paso 1)</h5>
+        <ul>
+          <li>Tipo de Contrato: <code>2 · Consorcio y/o Unión Temporal</code></li>
+          <li>Año Gravable: 2025</li>
+          <li>NIT del contrato: <code>901234567</code></li>
+          <li>Nombre: <code>Consorcio Vial del Norte</code></li>
+        </ul>
+        <h5>2. Partícipes (paso 2)</h5>
+        <table class="tabla">
+          <thead><tr><th>Tipo</th><th>NIT</th><th>Razón social</th><th>%</th></tr></thead>
+          <tbody>
+            <tr><td>31</td><td>900.111.222</td><td>Constructora Andina S.A.S.</td><td class="num">60</td></tr>
+            <tr><td>31</td><td>900.333.444</td><td>Ingeniería Pereira S.A.S.</td><td class="num">40</td></tr>
+          </tbody>
+        </table>
+        <h5>3. Movimientos del contrato durante 2025 (paso 3 — balance cargado)</h5>
+        <table class="tabla">
+          <thead><tr><th>Naturaleza</th><th>Tercero</th><th>Valor</th></tr></thead>
+          <tbody>
+            <tr><td>Ingreso obra (cliente INVÍAS NIT 800.215.807)</td><td>INVÍAS</td><td class="num">$ 500.000.000</td></tr>
+            <tr><td>IVA generado 19% (incluido en valor anterior)</td><td>INVÍAS</td><td class="num">$ 95.000.000</td></tr>
+            <tr><td>Combustible (proveedor Terpel NIT 830.095.213)</td><td>Terpel S.A.</td><td class="num">$ 80.000.000</td></tr>
+            <tr><td>IVA descontable combustible</td><td>Terpel S.A.</td><td class="num">$ 15.200.000</td></tr>
+            <tr><td>Arriendo de bodega (PN Juan Pérez CC 79.500.000)</td><td>Juan Pérez</td><td class="num">$ 30.000.000</td></tr>
+            <tr><td>Honorarios ingeniero residente (PN Ana Ríos CC 1.088.222.111)</td><td>Ana Ríos</td><td class="num">$ 50.000.000</td></tr>
+            <tr><td>Saldo CxC con INVÍAS al 31-12</td><td>INVÍAS</td><td class="num">$ 100.000.000</td></tr>
+            <tr><td>Saldo CxP con Terpel al 31-12</td><td>Terpel S.A.</td><td class="num">$ 25.000.000</td></tr>
+          </tbody>
+        </table>
+        <h5>4. Resultado en cada formato (paso 4 — clasificación automática)</h5>
+        <table class="tabla">
+          <thead><tr><th>Formato</th><th>Fila generada</th><th>Valor</th></tr></thead>
+          <tbody>
+            <tr><td><strong>F5247</strong></td><td>Concepto 5018 Combustible · Terpel</td><td class="num">$ 80.000.000</td></tr>
+            <tr><td><strong>F5247</strong></td><td>Concepto 5005 Arriendos · Juan Pérez</td><td class="num">$ 30.000.000</td></tr>
+            <tr><td><strong>F5247</strong></td><td>Concepto 5002 Honorarios · Ana Ríos</td><td class="num">$ 50.000.000</td></tr>
+            <tr><td><strong>F5248</strong></td><td>Concepto 4001 Operacional · INVÍAS</td><td class="num">$ 405.000.000</td></tr>
+            <tr><td><strong>F5249</strong></td><td>IVA descontable · Terpel</td><td class="num">$ 15.200.000</td></tr>
+            <tr><td><strong>F5250</strong></td><td>IVA generado · INVÍAS</td><td class="num">$ 95.000.000</td></tr>
+            <tr><td><strong>F5251</strong></td><td>CxC · INVÍAS</td><td class="num">$ 100.000.000</td></tr>
+            <tr><td><strong>F5252</strong></td><td>CxP · Terpel</td><td class="num">$ 25.000.000</td></tr>
+          </tbody>
+        </table>
+        <h5>5. Lo que reporta cada partícipe en SU exógena individual (después)</h5>
+        <p>El operador del consorcio (típicamente Constructora Andina por ser quien tiene la representación) reporta los 6 formatos 5247-5252 a nombre del NIT 901.234.567 (consorcio). Después, en su propia exógena:</p>
+        <ul>
+          <li><strong>Constructora Andina (60%):</strong> reporta en su F1007 el 60% del ingreso del consorcio ($243.000.000 sin IVA), en su F1001 el 60% de los pagos, etc. NO duplica lo del 5247-5252.</li>
+          <li><strong>Ingeniería Pereira (40%):</strong> mismo procedimiento con el 40% de cada cuenta.</li>
+        </ul>
+        <p>Esa distribución entre partícipes se hace <strong>en la exógena individual de cada uno</strong>, no en los formatos CCE. Los CCE reportan el 100% del contrato.</p>
+      </div>
+    </section>
+    <section id="ejemplo2" class="step">
+      <div class="step-num"><span>📊</span> Ejemplo 2</div>
+      <h2>Caso corto: Cuenta en Participación de un restaurante</h2>
+      <div class="ejemplo">
+        <p class="lead-ej">María González (gestora) opera un restaurante. Su tío Carlos González aportó $50.000.000 como capital de trabajo a cambio del 30% de las utilidades. Frente a clientes, proveedores y la DIAN, solo aparece María.</p>
+        <h5>Cómo se reporta</h5>
+        <ul>
+          <li><strong>María (gestora):</strong> es quien presenta los formatos 5247-5252. Tipo de Contrato: <code>5 · Cuentas en participación</code>.</li>
+          <li><strong>Partícipes en el paso 2:</strong> aunque haya 1 gestor + 1 partícipe oculto, en la práctica de la herramienta basta con registrar a María al 100% como informante. El partícipe oculto (Carlos) NO aparece como tercero en la exógena del contrato — eso lo maneja María por separado en el contrato privado.</li>
+          <li><strong>El balance del paso 3</strong> es el del restaurante: ingresos por ventas a clientes, costos de mercancía, salarios, arriendo, IVA generado y descontable, saldo de CxC y CxP al cierre.</li>
+          <li>Al finalizar el ejercicio, María distribuye la utilidad neta: <strong>70% para ella, 30% para Carlos</strong>. Esa distribución se documenta internamente; Carlos declara en su propia renta el ingreso recibido como participación.</li>
+        </ul>
+        <div class="tip">
+          <strong>Atención:</strong> en cuentas en participación las operaciones del restaurante <strong>no se duplican</strong> en la exógena individual de María. María reporta los formatos 5247-5252 a nombre del contrato y eso reemplaza el reporte individual de esos movimientos (Parágrafo 1 Res. 000227/2025).
+        </div>
+      </div>
+    </section>
+    <section id="errores" class="step">
+      <div class="step-num"><span>!</span> Errores</div>
+      <h2>Errores frecuentes que rechaza el prevalidador</h2>
+      <div class="err">
+        <strong>1. Doble reporte CCE + individual.</strong> El consorciado, mandante, partícipe o asociado reportó las mismas operaciones en SU F1001/F1005/F1006/F1007 además de los CCE. El prevalidador lo detecta y rechaza. <em>Solo el operador del contrato reporta los 5247-5252. Los socios reportan en su exógena individual solo su proporción, no las operaciones brutas del contrato.</em>
+      </div>
+      <div class="err">
+        <strong>2. Suma de % partícipes diferente a 100.</strong> En el paso 2 si pones 60% + 30% (=90) o 50% + 60% (=110) la herramienta avisa pero no bloquea — el prevalidador sí lo rechaza al cargar.
+      </div>
+      <div class="err">
+        <strong>3. NIT del contrato no inscrito en RUT como CCE.</strong> Para consorcios y UT debes inscribir el RUT del contrato con la <strong>responsabilidad 22 (Obligado a llevar contabilidad — operador de CCE)</strong> y la responsabilidad correspondiente al impuesto que aplique. Si el RUT no tiene esa responsabilidad activa, el MUISCA no acepta la presentación.
+      </div>
+      <div class="err">
+        <strong>4. Reportar en F1647 lo que ya está en CCE.</strong> Algunos contadores reportan los CCE también en el formato F1647 (Ingresos recibidos para terceros) por costumbre. La cartilla DIAN Art. 1.3.5.9.1 lo excluye expresamente — F1647 es para intermediarios generales, no para operadores de CCE.
+      </div>
+      <div class="err">
+        <strong>5. Versión V1 cuando ya está V2.</strong> Desde <strong>Res. 233/2025 art. 23</strong> todos los CCE pasan a V2. Plantillas antiguas (V1) descargadas de internet o de prevalidadores viejos generan XMLs incompatibles. Verifica la versión en el prevalidador y descarga el más reciente.
+      </div>
+      <div class="err">
+        <strong>6. Falta identificación de país del tercero.</strong> Para terceros del exterior (clientes o proveedores extranjeros), si no traen NIT colombiano usas tipo doc <strong>42</strong> con el país de residencia. Si no tienes identificación fiscal del exterior, usa tipo <strong>43</strong> con consecutivo <code>444444001</code> a <code>444449999</code>. La dirección, dpto y municipio quedan vacíos para terceros del exterior.
+      </div>
+      <div class="warn">
+        <strong>Sanción por errores (Art. 651 ET):</strong> hasta <strong>7.500 UVT</strong> (~$393M con UVT 2026 de $52.374). Se reduce al 50%, 70% u 80% según el momento de subsanación. Aplica al operador / representante del contrato, no a los partícipes individuales.
+      </div>
+    </section>
+    <section id="siguiente" class="step">
+      <div class="step-num"><span>→</span> Siguiente</div>
+      <h2>Después de presentar los CCE</h2>
+      <p>Una vez generes y presentes los XML del contrato, cada partícipe debe seguir con su exógena individual:</p>
+      <ul>
+        <li><strong>Constructora Andina (operador):</strong> presenta el F1001/F1005/F1006/F1007 con todas SUS operaciones <strong>excepto</strong> las del consorcio. Las del consorcio ya están reportadas en los 5247-5252.</li>
+        <li><strong>Ingeniería Pereira (partícipe):</strong> en su F1007 reporta su parte proporcional del ingreso del consorcio (40%) como ingreso. La justificación del por qué no figura como cliente directo de INVÍAS es el contrato del consorcio.</li>
+      </ul>
+      <h3>Otros tutoriales relacionados</h3>
+      <ul>
+        <li><a href="exogena.html">Tutorial Exógena (formatos individuales F1001-F1011)</a> — para entender los formatos espejo.</li>
+        <li><a href="f110.html">Tutorial Renta personas jurídicas (F110)</a> — para declarar la renta del operador o del partícipe.</li>
+        <li><a href="f300.html">Tutorial IVA (F300)</a> — para declarar el IVA del contrato.</li>
+      </ul>
+      <div class="cta-end">
+        <h3>Listos para armar tu CCE</h3>
+        <p>Si ya leíste el tutorial completo, abre la herramienta y arma el Excel paso a paso con tu balance del contrato.</p>
+        <a href="../exogena-cce.html">Ir a la herramienta Exógena CCE →</a>
+      </div>
+      <div class="step-nav">
+        <a href="../tutoriales.html">← Todos los tutoriales</a>
+        <a href="../exogena-cce.html" class="next">Abrir la herramienta →</a>
+      </div>
+    </section>
+  </div>
+</div>
+<script>
+// Sidebar nav highlighting on scroll
+(function(){
+  var links=document.querySelectorAll('.sidebar-nav a');
+  var sections=Array.from(links).map(function(a){var id=a.getAttribute('href').slice(1);return document.getElementById(id);}).filter(Boolean);
+  function setActive(){
+    var y=window.scrollY+120;
+    var current=sections[0];
+    for(var i=0;i<sections.length;i++){if(sections[i].offsetTop<=y)current=sections[i];}
+    links.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+current.id);});
+  }
+  window.addEventListener('scroll',setActive,{passive:true});
+  setActive();
+})();
+</script>
+</body>
+</html>

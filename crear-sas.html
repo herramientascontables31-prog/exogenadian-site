@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S7SM6ST4CC');
+</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#1B3A5C">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crear S.A.S. — Wizard de Constitución | ExógenaDIAN</title>
+<meta name="description" content="Wizard didáctico paso a paso para constituir una S.A.S. en Colombia. Genera estatutos auto-diligenciables y cartas de aceptación de cargos según Ley 1258/2008. Gratis.">
+<meta name="keywords" content="crear sas colombia, wizard constituir sas, estatutos sas plantilla, ley 1258 2008, documento privado constitucion sas, cartas aceptacion cargo">
+<meta name="author" content="ExogenaDIAN">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://exogenadian.com/crear-sas.html">
+<meta property="og:title" content="Crear S.A.S. paso a paso | ExogenaDIAN">
+<meta property="og:description" content="Genera los estatutos y cartas de aceptación para constituir tu SAS según la Ley 1258/2008.">
+<meta property="og:url" content="https://exogenadian.com/crear-sas.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="ExogenaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://exogenadian.com/"},{"@type":"ListItem","position":2,"name":"Certificaciones","item":"https://exogenadian.com/certificados.html"},{"@type":"ListItem","position":3,"name":"Crear S.A.S.","item":"https://exogenadian.com/crear-sas.html"}]}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/certificados.css?v=11951c17">
+<style>
+body{font-family:'DM Sans',sans-serif;background:#F9FAFB;color:#111;margin:0}
+a{color:#2E75B6}
+/* Advertencia legal */
+.legal-warning{max-width:1240px;margin:10px auto 0;padding:0 16px}
+.legal-warning.hidden{display:none}
+.legal-warning-inner{background:#FFFBEB;border:1px solid #FCD34D;border-radius:10px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;font-size:.82rem;color:#78350F;line-height:1.55}
+.legal-warning-icon{font-size:1.1rem;flex:0 0 auto;margin-top:1px}
+.legal-warning-body{flex:1;position:relative;padding-right:24px}
+.legal-warning-body strong{color:#78350F}
+#legalWarningClose{position:absolute;top:-2px;right:0;background:none;border:none;color:#78350F;font-size:1.2rem;cursor:pointer;padding:0 4px;line-height:1;font-family:inherit}
+#legalWarningClose:hover{color:#451A03}
+/* Stepper */
+.wizard-progress{max-width:1240px;margin:14px auto 0;padding:0 16px}
+.steps{list-style:none;display:flex;gap:6px;padding:8px;background:#fff;border:1px solid #E5E7EB;border-radius:12px;overflow-x:auto;scrollbar-width:thin}
+.steps li{flex:1;min-width:110px;padding:9px 10px;border-radius:8px;font-size:.78rem;font-weight:600;color:#6B7280;text-align:center;cursor:pointer;white-space:nowrap;transition:all .15s;user-select:none}
+.steps li:hover:not(.active){background:#F3F4F6;color:#374151}
+.steps li.active{background:#1B3A5C;color:#fff;cursor:default}
+.steps li.done{background:#D1FAE5;color:#065F46}
+.steps li.done::before{content:'✓ '}
+.steps li .num{display:inline-block;font-weight:800;margin-right:4px}
+/* Step nav */
+.step-nav{display:flex;gap:8px;margin-top:18px;padding-top:14px;border-top:1px solid #E5E7EB}
+.step-nav button{flex:1;padding:10px;border-radius:9px;font-weight:600;font-size:.88rem;cursor:pointer;font-family:inherit;border:1px solid transparent;transition:all .15s}
+.btn-prev{background:#fff;border-color:#D1D5DB;color:#374151}
+.btn-prev:hover:not(:disabled){background:#F3F4F6;border-color:#9CA3AF}
+.btn-prev:disabled{opacity:.4;cursor:not-allowed}
+.btn-next{background:#1B3A5C;color:#fff}
+.btn-next:hover{background:#0F2B47}
+.btn-finish{background:#10B981;color:#fff}
+.btn-finish:hover{background:#059669}
+/* Section labels */
+.section-label{font-size:.78rem;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.3px;margin:14px 0 6px;padding-top:6px;border-top:1px solid #E5E7EB}
+.section-label:first-child{padding-top:0;border-top:none;margin-top:0}
+/* Step panel */
+.step-panel{display:none}
+.step-panel.active{display:block}
+.step-title{font-size:1.1rem;font-weight:700;margin-bottom:4px;color:#1B3A5C}
+.step-sub{font-size:.84rem;color:#6B7280;margin-bottom:14px;line-height:1.5}
+/* Didáctica colapsable por paso */
+.didactica{margin-top:12px;border:1px solid #DBEAFE;background:#EFF6FF;border-radius:8px;overflow:hidden}
+.didactica summary{cursor:pointer;padding:9px 12px;font-size:.82rem;font-weight:700;color:#1E3A8A;list-style:none}
+.didactica summary::before{content:'📖 '}
+.didactica[open] summary{border-bottom:1px solid #BFDBFE}
+.didactica .body{padding:10px 12px;font-size:.82rem;color:#1E3A8A;line-height:1.55}
+.didactica .body p{margin:0 0 8px}
+.didactica .body p:last-child{margin-bottom:0}
+.didactica .body strong{color:#1E40AF}
+.didactica .body a{color:#1E40AF;font-weight:700}
+.didactica .body .norma{display:inline-block;background:#FEF3C7;color:#92400E;padding:1px 8px;border-radius:4px;font-size:.74rem;font-weight:700;margin-right:4px}
+/* Tabla socios */
+.socio-row{display:grid;grid-template-columns:1.6fr 1.1fr .9fr 30px;gap:6px;align-items:center;margin-bottom:6px}
+.socio-row input,.socio-row select{padding:7px 8px;font-size:.82rem}
+.socio-row .del{background:#FEF2F2;color:#B91C1C;border:1px solid #FECACA;border-radius:6px;width:30px;height:32px;cursor:pointer;font-size:1rem;line-height:1;padding:0}
+.socio-row .del:hover{background:#FEE2E2}
+.socio-head{display:grid;grid-template-columns:1.6fr 1.1fr .9fr 30px;gap:6px;font-size:.7rem;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.3px;margin-top:4px;padding:0 2px}
+.socio-extra{display:none;background:#F9FAFB;border:1px solid #E5E7EB;border-radius:8px;padding:10px;margin-bottom:10px}
+.socio-extra.open{display:block}
+.add-row{margin-top:8px;background:#fff;border:1.5px dashed #B8D8F8;color:#2E75B6;border-radius:8px;padding:8px 12px;cursor:pointer;font-size:.85rem;font-weight:600;width:100%;font-family:inherit}
+.add-row:hover{background:#EFF6FF}
+/* Toggles para opciones */
+.toggle-card{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid #E5E7EB;border-radius:8px;margin-bottom:8px;cursor:pointer;background:#fff;transition:border-color .15s}
+.toggle-card:hover{border-color:#9CA3AF}
+.toggle-card input{width:auto;margin:3px 0 0;flex:0 0 auto}
+.toggle-card .info{flex:1}
+.toggle-card .info .titulo{font-size:.86rem;font-weight:700;color:#374151;margin-bottom:2px}
+.toggle-card .info .desc{font-size:.78rem;color:#6B7280;line-height:1.45}
+.toggle-card.active{border-color:#1B3A5C;background:#F8FAFC}
+/* Tabs preview */
+.preview-tabs{display:flex;gap:4px;margin-bottom:8px;padding:4px;background:#F3F4F6;border-radius:10px;max-width:max-content}
+.preview-tabs button{padding:6px 14px;border:none;background:transparent;border-radius:7px;font-family:inherit;font-size:.82rem;font-weight:600;color:#6B7280;cursor:pointer;transition:all .15s}
+.preview-tabs button.active{background:#fff;color:#1B3A5C;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.preview-pane{display:none}
+.preview-pane.active{display:block}
+/* Estatutos sheet */
+.cert-sheet h2.art{font-size:11pt;font-weight:700;margin:16pt 0 6pt;color:#1B3A5C;text-transform:none;letter-spacing:0}
+.cert-sheet h2.art .num{display:inline-block;min-width:28pt;color:#2E75B6}
+.cert-sheet .preambulo{font-size:10.5pt;line-height:1.6;text-align:justify;margin-bottom:14pt}
+.cert-sheet ol.estat{padding-left:16pt;margin:6pt 0 12pt}
+.cert-sheet ol.estat li{margin-bottom:4pt}
+/* Cartas múltiples - separator */
+.carta-separator{page-break-before:always;margin-top:18pt;border-top:1pt dashed #999;padding-top:18pt}
+/* Misc */
+.empty-state{padding:14px;text-align:center;color:#9CA3AF;font-size:.85rem;border:1px dashed #E5E7EB;border-radius:8px}
+.borrador-info{display:flex;align-items:center;gap:6px;font-size:.74rem;color:#6B7280;padding:6px 10px;background:#F9FAFB;border-radius:6px;margin-bottom:8px}
+.borrador-info .dot{width:6px;height:6px;border-radius:50%;background:#10B981}
+.warn-paso{background:#FEF3C7;border:1px solid #FCD34D;color:#92400E;padding:8px 12px;border-radius:8px;font-size:.82rem;margin-bottom:10px;line-height:1.45;display:none}
+.warn-paso.show{display:block}
+@media(max-width:900px){
+  .steps li{min-width:90px;font-size:.72rem;padding:8px 6px}
+  .steps li .num{margin-right:2px}
+}
+@media print{
+  /* Imprime ambas pestañas seguidas (estatutos + cartas) */
+  .preview-tabs,.wizard-progress,.cert-toolbar,.cert-form,.legal-warning,#nav-container{display:none!important}
+  .cert-layout{display:block;padding:0;margin:0;max-width:none}
+  .preview-pane{display:block!important}
+  .preview-pane:not(:first-of-type){page-break-before:always}
+  .cert-sheet{margin:0;box-shadow:none;border:none}
+}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div id="nav-container"></div>
+<script defer src="shared/pro.js?v=848fbf16"></script>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<script src="shared/perfil-contador.js?v=cc60e2c8"></script>
+<script src="shared/cert-helpers.js?v=cdfa986d"></script>
+<script src="shared/sas-templates.js?v=909c8304"></script>
+<div class="cert-toolbar">
+  <a href="certificados.html" class="btn btn-edit">← Volver a certificados</a>
+  <button class="btn btn-print" onclick="window.print()">🖨️ Imprimir / PDF</button>
+  <button class="btn btn-edit" onclick="descargarActivo()">📝 Descargar Word</button>
+  <span class="hint">Wizard de constitución S.A.S. — Ley 1258/2008. Llena los 5 pasos y descarga estatutos + cartas.</span>
+</div>
+<div class="wizard-progress">
+  <ol class="steps" id="steps">
+    <li data-step="1" class="active"><span class="num">1.</span>Sociedad</li>
+    <li data-step="2"><span class="num">2.</span>Capital</li>
+    <li data-step="3"><span class="num">3.</span>Accionistas</li>
+    <li data-step="4"><span class="num">4.</span>Administración</li>
+    <li data-step="5"><span class="num">5.</span>Cláusulas y firma</li>
+  </ol>
+</div>
+<div class="legal-warning" id="legalWarning">
+  <div class="legal-warning-inner">
+    <span class="legal-warning-icon">⚖️</span>
+    <div class="legal-warning-body">
+      <strong>Borrador de uso profesional — no constituye asesoría jurídica.</strong>
+      Los documentos generados son una guía. Antes de firmar y radicar en la cámara de comercio,
+      <strong>haz que un abogado o la propia cámara los revisen</strong>: cada caso (objeto regulado,
+      aportes en especie, restricciones especiales, sectores como salud, financiero o vigilancia) puede
+      requerir cláusulas adicionales. La responsabilidad final del documento es del usuario que firma.
+      <button type="button" id="legalWarningClose" aria-label="Ocultar">×</button>
+    </div>
+  </div>
+</div>
+<div class="cert-layout">
+  <aside class="cert-form" id="formPanel">
+    <div class="borrador-info" id="borradorInfo" style="display:none">
+      <span class="dot"></span><span id="borradorTexto">Borrador guardado</span>
+      <button id="btnReset" style="margin-left:auto;background:none;border:none;color:#B91C1C;cursor:pointer;font-size:.74rem;font-weight:700">Empezar de cero</button>
+    </div>
+    <div class="warn-paso" id="warnPaso"></div>
+    <div class="step-panel active" data-panel="1">
+      <h2 class="step-title">Identificación de la sociedad</h2>
+      <p class="step-sub">Define el nombre, domicilio, vigencia y objeto social. Antes de seguir, consulta homonimia en <a href="https://www.rues.org.co/" target="_blank" rel="noopener">RUES</a>.</p>
+      <label for="s_razon">Razón social *</label>
+      <input type="text" id="s_razon" placeholder="Ej: Comercializadora Andina">
+      <div class="hint-sm">Sin la sigla S.A.S. — la añadimos automáticamente.</div>
+      <div class="row2">
+        <div>
+          <label for="s_sigla">Sigla (opcional)</label>
+          <input type="text" id="s_sigla" placeholder="ANDINA" maxlength="20">
+        </div>
+        <div>
+          <label for="s_municipio">Municipio del domicilio *</label>
+          <select id="s_municipio">
+            <option value="">— Selecciona —</option>
+          </select>
+        </div>
+      </div>
+      <label for="s_direccion">Dirección de la sociedad *</label>
+      <input type="text" id="s_direccion" placeholder="Calle 10 # 20-30, oficina 401">
+      <label>Vigencia *</label>
+      <div class="toggle-card">
+        <input type="radio" name="s_vigencia" value="indefinida" id="vig_ind" checked>
+        <label for="vig_ind" class="info" style="margin:0;cursor:pointer;text-transform:none;letter-spacing:0;font-weight:500">
+          <div class="titulo">Indefinida (recomendado)</div>
+          <div class="desc">La SAS se mantiene mientras los accionistas no la disuelvan. Es lo que la mayoría escoge.</div>
+        </label>
+      </div>
+      <div class="toggle-card">
+        <input type="radio" name="s_vigencia" value="definida" id="vig_def">
+        <label for="vig_def" class="info" style="margin:0;cursor:pointer;text-transform:none;letter-spacing:0;font-weight:500">
+          <div class="titulo">Hasta una fecha determinada</div>
+          <div class="desc">La sociedad se disuelve automáticamente al llegar la fecha si no se prorroga.</div>
+        </label>
+      </div>
+      <input type="date" id="s_vigencia_fecha" style="display:none;margin-top:6px">
+      <label>Objeto social *</label>
+      <div class="toggle-card">
+        <input type="radio" name="s_objeto" value="lic" id="obj_lic" checked>
+        <label for="obj_lic" class="info" style="margin:0;cursor:pointer;text-transform:none;letter-spacing:0;font-weight:500">
+          <div class="titulo">Cualquier actividad lícita (Art. 5.5 Ley 1258)</div>
+          <div class="desc">Default legal: la SAS puede dedicarse a cualquier actividad de comercio lícito. No restringe.</div>
+        </label>
+      </div>
+      <div class="toggle-card">
+        <input type="radio" name="s_objeto" value="detallado" id="obj_det">
+        <label for="obj_det" class="info" style="margin:0;cursor:pointer;text-transform:none;letter-spacing:0;font-weight:500">
+          <div class="titulo">Actividades específicas</div>
+          <div class="desc">Detalla las actividades principales. Útil si trabajas en sector regulado o quieres limitar el objeto.</div>
+        </label>
+      </div>
+      <textarea id="s_objeto_detalle" placeholder="Ej: 1) Comercialización al por mayor y al detal de productos agrícolas. 2) Importación y exportación de los mismos. 3) Prestación de servicios de logística asociados." style="display:none;min-height:90px"></textarea>
+      <label for="s_ciiu">Código CIIU principal *</label>
+      <input type="text" id="s_ciiu" placeholder="Ej: 4644" inputmode="numeric" maxlength="4">
+      <div class="hint-sm">4 dígitos. Consulta el código en <a href="https://www.dane.gov.co/index.php/sistema-estadistico-nacional-sen/normas-y-estandares/nomenclaturas-y-clasificaciones/clasificaciones/ciiu" target="_blank" rel="noopener">DANE — CIIU Rev. 4 A.C.</a>.</div>
+      <details class="didactica">
+        <summary>¿Qué es lo importante en este paso?</summary>
+        <div class="body">
+          <p><span class="norma">Art. 5 Ley 1258/2008</span>El nombre debe terminar en "S.A.S." o "Sociedad por Acciones Simplificada". El domicilio principal define la cámara de comercio competente.</p>
+          <p><strong>Homonimia:</strong> antes de pagar, consulta el nombre en <a href="https://www.rues.org.co/" target="_blank" rel="noopener">rues.org.co</a>. La cámara rechaza nombres iguales o muy similares.</p>
+          <p><strong>Vigencia indefinida</strong> es la opción default si no escribes nada (Art. 5 Ley 1258). Si pones fecha, se disuelve automáticamente al llegar.</p>
+          <p><strong>Objeto:</strong> "cualquier actividad lícita" es el default legal y suficiente para 95% de los casos. Solo detalla si vas a trabajar en sector regulado (financiero, salud, vigilancia) o quieres limitar.</p>
+        </div>
+      </details>
+    </div>
+    <div class="step-panel" data-panel="2">
+      <h2 class="step-title">Capital social</h2>
+      <p class="step-sub">Define el capital autorizado, suscrito y pagado. La Ley 1258 no exige capital mínimo; el suscrito puede pagarse en hasta 2 años.</p>
+      <div class="row2">
+        <div>
+          <label for="c_autorizado">Capital autorizado *</label>
+          <input type="text" id="c_autorizado" placeholder="100.000.000" inputmode="numeric">
+        </div>
+        <div>
+          <label for="c_suscrito">Capital suscrito *</label>
+          <input type="text" id="c_suscrito" placeholder="50.000.000" inputmode="numeric">
+        </div>
+      </div>
+      <div class="row2">
+        <div>
+          <label for="c_pagado">Capital pagado *</label>
+          <input type="text" id="c_pagado" placeholder="50.000.000" inputmode="numeric">
+        </div>
+        <div>
+          <label for="c_nominal">Valor nominal por acción *</label>
+          <input type="text" id="c_nominal" placeholder="1.000" inputmode="numeric">
+        </div>
+      </div>
+      <div class="hint-sm" id="c_resumen" style="margin-top:8px;padding:8px 10px;background:#F0F9FF;border:1px solid #BAE6FD;border-radius:6px;color:#0C4A6E"></div>
+      <details class="didactica">
+        <summary>¿Cómo se decide el capital?</summary>
+        <div class="body">
+          <p><span class="norma">Art. 9 Ley 1258/2008</span>Hay tres niveles:</p>
+          <p><strong>Autorizado:</strong> tope máximo que la sociedad puede emitir (no se entrega plata, es solo techo).</p>
+          <p><strong>Suscrito:</strong> el que los accionistas se comprometen a pagar. No requiere mínimo.</p>
+          <p><strong>Pagado:</strong> el que efectivamente se entregó al constituir. Puede ser parcial; el resto se paga en hasta <strong>2 años</strong> desde la suscripción.</p>
+          <p><strong>Tip:</strong> capital simbólico (ej. $1.000.000) es legalmente válido en SAS. No hay mínimo a diferencia de la S.A. ordinaria.</p>
+          <p><strong>Impuesto de registro:</strong> 0.7% del capital suscrito (Ley 223/1995). Si suscribes $50M, pagarás ~$350.000 al departamento.</p>
+        </div>
+      </details>
+    </div>
+    <div class="step-panel" data-panel="3">
+      <h2 class="step-title">Accionistas</h2>
+      <p class="step-sub">Mínimo 1 accionista (SAS unipersonal está permitida). Los aportes pueden ser en dinero o en especie.</p>
+      <div class="socio-head">
+        <div>Nombre / Razón social</div>
+        <div>Documento</div>
+        <div>Acciones</div>
+        <div></div>
+      </div>
+      <div id="sociosList"></div>
+      <button class="add-row" id="btnAddSocio">+ Agregar accionista</button>
+      <div class="hint-sm" style="margin-top:10px;padding:8px 10px;background:#FEF3C7;border:1px solid #FCD34D;border-radius:6px;color:#92400E" id="sociosResumen"></div>
+      <details class="didactica">
+        <summary>Reglas para los aportes</summary>
+        <div class="body">
+          <p><span class="norma">Art. 1 Ley 1258/2008</span>La SAS admite uno o varios accionistas. Pueden ser personas naturales o jurídicas, nacionales o extranjeras.</p>
+          <p><strong>Aportes en dinero:</strong> simple consignación. No requiere avalúo.</p>
+          <p><strong>Aportes en especie</strong> (vehículos, equipos, marcas, créditos): los accionistas acuerdan el valor y son <strong>solidariamente responsables</strong> por dicho avalúo durante 2 años (Art. 7).</p>
+          <p><strong>Aportes en inmuebles:</strong> obligan a constituir la sociedad por <strong>escritura pública</strong> (Art. 5 par. 2). En ese caso este wizard no aplica.</p>
+          <p><strong>Suma de acciones</strong> debe coincidir exactamente con el capital suscrito ÷ valor nominal.</p>
+        </div>
+      </details>
+    </div>
+    <div class="step-panel" data-panel="4">
+      <h2 class="step-title">Administración</h2>
+      <p class="step-sub">Mínimo: un representante legal. Junta directiva y revisor fiscal son opcionales (con condiciones).</p>
+      <div class="section-label">Representante legal *</div>
+      <label for="a_rl_nombre">Nombre completo</label>
+      <input type="text" id="a_rl_nombre" placeholder="Carlos Pérez Gómez">
+      <div class="row2">
+        <div>
+          <label for="a_rl_cc">Cédula</label>
+          <input type="text" id="a_rl_cc" placeholder="79.123.456" inputmode="numeric">
+        </div>
+        <div>
+          <label for="a_rl_email">Correo</label>
+          <input type="email" id="a_rl_email" placeholder="rl@empresa.com">
+        </div>
+      </div>
+      <label class="toggle-card" style="margin-top:14px">
+        <input type="checkbox" id="a_suplente_on">
+        <span class="info">
+          <span class="titulo">Designar suplente del representante legal</span>
+          <span class="desc">Recomendado para evitar parálisis si el RL no puede actuar. Algunas cámaras lo piden por defecto.</span>
+        </span>
+      </label>
+      <div id="a_suplente_block" style="display:none;background:#F9FAFB;border:1px solid #E5E7EB;border-radius:8px;padding:10px;margin-top:6px">
+        <label for="a_sup_nombre" style="margin-top:0">Nombre del suplente</label>
+        <input type="text" id="a_sup_nombre" placeholder="María Rodríguez">
+        <div class="row2">
+          <div>
+            <label for="a_sup_cc">Cédula</label>
+            <input type="text" id="a_sup_cc" placeholder="52.789.123" inputmode="numeric">
+          </div>
+          <div>
+            <label for="a_sup_email">Correo</label>
+            <input type="email" id="a_sup_email" placeholder="suplente@empresa.com">
+          </div>
+        </div>
+      </div>
+      <label class="toggle-card" style="margin-top:14px">
+        <input type="checkbox" id="a_jd_on">
+        <span class="info">
+          <span class="titulo">Junta directiva</span>
+          <span class="desc">Opcional en SAS. Si la incluyes, mínimo 3 principales (con o sin suplentes personales).</span>
+        </span>
+      </label>
+      <div id="a_jd_block" style="display:none;background:#F9FAFB;border:1px solid #E5E7EB;border-radius:8px;padding:10px;margin-top:6px">
+        <div class="hint-sm" style="margin-bottom:8px">Mínimo 3 miembros principales. Agrega los nombres separados por línea.</div>
+        <label for="a_jd_principales" style="margin-top:0">Miembros principales</label>
+        <textarea id="a_jd_principales" placeholder="Ana López, CC 1.045.678.901&#10;Juan Pérez, CC 79.123.456&#10;Carmen Díaz, CC 52.987.654" style="min-height:80px"></textarea>
+        <label for="a_jd_suplentes">Miembros suplentes (opcional)</label>
+        <textarea id="a_jd_suplentes" placeholder="Pedro Ruiz, CC 80.456.789" style="min-height:60px"></textarea>
+      </div>
+      <label class="toggle-card" style="margin-top:14px">
+        <input type="checkbox" id="a_rf_on">
+        <span class="info">
+          <span class="titulo">Revisor fiscal</span>
+          <span class="desc">Solo obligatorio si los activos brutos del año anterior superaron 5.000 SMMLV o los ingresos 3.000 SMMLV. En SAS recién creada NO es obligatorio.</span>
+        </span>
+      </label>
+      <div id="a_rf_block" style="display:none;background:#F9FAFB;border:1px solid #E5E7EB;border-radius:8px;padding:10px;margin-top:6px">
+        <label for="a_rf_nombre" style="margin-top:0">Nombre del revisor fiscal</label>
+        <input type="text" id="a_rf_nombre" placeholder="Ana Martínez (Contador)">
+        <div class="row2">
+          <div>
+            <label for="a_rf_cc">Cédula</label>
+            <input type="text" id="a_rf_cc" placeholder="41.234.567" inputmode="numeric">
+          </div>
+          <div>
+            <label for="a_rf_tp">T.P.</label>
+            <input type="text" id="a_rf_tp" placeholder="123456-T">
+          </div>
+        </div>
+      </div>
+      <details class="didactica">
+        <summary>¿Cuándo necesito revisor fiscal?</summary>
+        <div class="body">
+          <p><span class="norma">Art. 28 Ley 1258 + Decreto 2020/2009 + Art. 13 par. 2 Ley 43/1990</span></p>
+          <p>Una SAS recién constituida <strong>no está obligada</strong> a tener revisor fiscal solo por su tipo. La obligación nace si al cierre del año anterior:</p>
+          <ul style="margin:6px 0 6px 16px">
+            <li>Activos brutos ≥ 5.000 SMMLV (en 2025: ~$7.118 millones)</li>
+            <li>O ingresos brutos ≥ 3.000 SMMLV (en 2025: ~$4.270 millones)</li>
+          </ul>
+          <p>Si la sociedad <strong>se acaba de constituir</strong>, no aplica todavía. Designar uno desde el inicio es opcional.</p>
+          <p><strong>Junta directiva:</strong> totalmente opcional en SAS (<span class="norma">Art. 25 Ley 1258</span>). Si no hay junta, el representante legal asume todas las funciones administrativas.</p>
+        </div>
+      </details>
+    </div>
+    <div class="step-panel" data-panel="5">
+      <h2 class="step-title">Cláusulas opcionales y firma</h2>
+      <p class="step-sub">Activa solo las que apliquen a tu caso. La mayoría de SAS no necesita ninguna.</p>
+      <label class="toggle-card">
+        <input type="checkbox" id="op_preferencia">
+        <span class="info">
+          <span class="titulo">Derecho de preferencia en suscripción</span>
+          <span class="desc">Cuando se emiten nuevas acciones, los actuales socios tienen primer derecho a suscribirlas en proporción a su participación. Art. 38 Ley 1258.</span>
+        </span>
+      </label>
+      <label class="toggle-card">
+        <input type="checkbox" id="op_negociacion">
+        <span class="info">
+          <span class="titulo">Restricciones a la negociación de acciones</span>
+          <span class="desc">Las acciones no pueden venderse durante un período. Máximo 10 años, prorrogable. Art. 13 Ley 1258.</span>
+        </span>
+      </label>
+      <div id="op_negociacion_block" style="display:none;margin-top:6px">
+        <label for="op_negociacion_anos" style="margin-top:0">Plazo de la restricción (años, máx 10)</label>
+        <input type="number" id="op_negociacion_anos" min="1" max="10" value="5">
+      </div>
+      <label class="toggle-card">
+        <input type="checkbox" id="op_arbitraje">
+        <span class="info">
+          <span class="titulo">Cláusula compromisoria (arbitraje)</span>
+          <span class="desc">Las disputas societarias se resuelven en tribunal de arbitramento, no en jueces ordinarios. Más rápido pero más costoso.</span>
+        </span>
+      </label>
+      <label class="toggle-card">
+        <input type="checkbox" id="op_exclusion">
+        <span class="info">
+          <span class="titulo">Causales de exclusión de accionistas</span>
+          <span class="desc">Permite expulsar a un socio por incumplimiento grave (ej. no pagar acciones, competencia desleal). Decisión por mayoría calificada.</span>
+        </span>
+      </label>
+      <div class="section-label">Firma del documento</div>
+      <label for="m_lugar">Lugar de firma</label>
+      <input type="text" id="m_lugar" placeholder="Bogotá D.C.">
+      <label for="m_fecha">Fecha de firma</label>
+      <input type="date" id="m_fecha">
+      <details class="didactica">
+        <summary>Qué pasa después de firmar</summary>
+        <div class="body">
+          <p><strong>1. Autenticación:</strong> los accionistas firman ante notaría (presencial o por reconocimiento).</p>
+          <p><strong>2. Pre-RUT:</strong> tramita en <a href="https://muisca.dian.gov.co/" target="_blank" rel="noopener">DIAN MUISCA</a>. Llega con leyenda "Para trámite en cámara".</p>
+          <p><strong>3. Radicación en cámara de comercio</strong> dentro del mes siguiente a la fecha del documento (<span class="norma">Art. 31 C.Co</span>). Después se duplican los derechos.</p>
+          <p><strong>4. Pagos en cámara:</strong> matrícula mercantil (escala según activos), inscripción del documento (~6 UVB), formulario RUES (~$6.500), e impuesto de registro al departamento (0.7% del capital suscrito).</p>
+          <p><strong>5. RUT definitivo</strong> en DIAN, inscripción de libros (actas y registro de accionistas) en cámara, cuenta bancaria, facturación electrónica, RIT/ICA municipal.</p>
+        </div>
+      </details>
+      <div style="margin-top:14px;background:#FFFBEB;border:1px solid #FCD34D;color:#78350F;padding:12px 14px;border-radius:10px;font-size:.84rem;line-height:1.55">
+        <strong>⚖️ Antes de radicar:</strong> aunque este wizard genera un documento estándar conforme a la Ley 1258/2008, te recomendamos que un <strong>abogado de tu confianza o la misma cámara de comercio</strong> revisen los estatutos antes de la firma y autenticación. Casos especiales (objeto regulado, aportes en especie, sectores con normativa propia, restricciones de capital extranjero) pueden requerir cláusulas adicionales no incluidas aquí.
+      </div>
+    </div>
+    <div class="step-nav">
+      <button class="btn-prev" id="btnPrev" disabled>← Anterior</button>
+      <button class="btn-next" id="btnNext">Siguiente →</button>
+    </div>
+  </aside>
+  <div class="cert-preview-wrap">
+    <div class="preview-tabs">
+      <button data-tab="estatutos" class="active">📜 Estatutos</button>
+      <button data-tab="cartas">✉️ Cartas de aceptación</button>
+    </div>
+    <article class="cert-sheet preview-pane active" id="sheetEstatutos">
+      <div id="vEstatutos"></div>
+      <div class="cert-marca-agua">Generado con <a href="https://exogenadian.com" target="_blank">exogenadian.com</a> — herramienta gratuita para contadores</div>
+    </article>
+    <article class="cert-sheet preview-pane" id="sheetCartas">
+      <div id="vCartas"></div>
+      <div class="cert-marca-agua">Generado con <a href="https://exogenadian.com" target="_blank">exogenadian.com</a> — herramienta gratuita para contadores</div>
+    </article>
+  </div>
+</div>
+<script>
+(function(){
+  'use strict';
+  var $=function(id){return document.getElementById(id);};
+  var H=window.certHelpers;
+  var TPL=window.sasTemplates;
+  var STORAGE_KEY='exogenadian:sas-borrador';
+  var TOTAL_PASOS=5;
+  // ─── Estado central ───
+  var sasState={
+    sociedad:{razon:'', sigla:'', municipio:'', municipio_nombre:'', direccion:'', vigencia:'indefinida', vigencia_fecha:'', objeto:'lic', objeto_detalle:'', ciiu:''},
+    capital:{autorizado:0, suscrito:0, pagado:0, nominal:0},
+    socios:[],
+    admon:{rl:{nombre:'',cc:'',email:''}, suplente:{enabled:false,nombre:'',cc:'',email:''}, jd:{enabled:false,principales:'',suplentes:''}, rf:{enabled:false,nombre:'',cc:'',tp:''}},
+    opciones:{preferencia:false, negociacion:false, negociacion_anos:5, arbitraje:false, exclusion:false},
+    meta:{lugar:'', fecha:'', paso_actual:1}
+  };
+  // ─── Persistencia ───
+  function loadBorrador(){
+    try{
+      var raw=localStorage.getItem(STORAGE_KEY);
+      if(!raw) return false;
+      var saved=JSON.parse(raw);
+      if(!saved||typeof saved!=='object') return false;
+      // Merge defensivo
+      sasState=Object.assign(sasState, saved);
+      sasState.sociedad=Object.assign({razon:'', sigla:'', municipio:'', municipio_nombre:'', direccion:'', vigencia:'indefinida', vigencia_fecha:'', objeto:'lic', objeto_detalle:'', ciiu:''}, saved.sociedad||{});
+      sasState.capital=Object.assign({autorizado:0, suscrito:0, pagado:0, nominal:0}, saved.capital||{});
+      sasState.socios=Array.isArray(saved.socios)?saved.socios:[];
+      sasState.admon=Object.assign({rl:{nombre:'',cc:'',email:''}, suplente:{enabled:false,nombre:'',cc:'',email:''}, jd:{enabled:false,principales:'',suplentes:''}, rf:{enabled:false,nombre:'',cc:'',tp:''}}, saved.admon||{});
+      sasState.opciones=Object.assign({preferencia:false, negociacion:false, negociacion_anos:5, arbitraje:false, exclusion:false}, saved.opciones||{});
+      sasState.meta=Object.assign({lugar:'', fecha:'', paso_actual:1}, saved.meta||{});
+      $('borradorInfo').style.display='flex';
+      $('borradorTexto').textContent='Borrador recuperado';
+      return true;
+    }catch(e){ return false; }
+  }
+  var saveTimer=null;
+  function saveBorrador(){
+    if(saveTimer) clearTimeout(saveTimer);
+    saveTimer=setTimeout(function(){
+      try{
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(sasState));
+        $('borradorInfo').style.display='flex';
+        $('borradorTexto').textContent='Borrador guardado';
+      }catch(e){}
+    }, 800);
+  }
+  $('btnReset').addEventListener('click', function(){
+    if(!confirm('¿Empezar de cero? Se borrará el borrador actual.')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  });
+  // Banner advertencia legal: dismissible, recordamos la decisión
+  var LEGAL_KEY='exogenadian:sas-legal-dismissed';
+  if(localStorage.getItem(LEGAL_KEY)==='1'){ $('legalWarning').classList.add('hidden'); }
+  $('legalWarningClose').addEventListener('click', function(){
+    $('legalWarning').classList.add('hidden');
+    try{ localStorage.setItem(LEGAL_KEY,'1'); }catch(e){}
+  });
+  // ─── Municipios ───
+  fetch('data/municipios.json').then(function(r){return r.ok?r.json():null;}).then(function(data){
+    if(!data) return;
+    var sel=$('s_municipio');
+    var current=sasState.sociedad.municipio;
+    var arr=Object.keys(data).map(function(k){return {code:k, nombre:data[k]};}).sort(function(a,b){return a.nombre.localeCompare(b.nombre);});
+    arr.forEach(function(m){
+      var opt=document.createElement('option');
+      opt.value=m.code;
+      opt.textContent=m.nombre;
+      if(m.code===current) opt.selected=true;
+      sel.appendChild(opt);
+    });
+  }).catch(function(){});
+  // ─── PRO check ───
+  var sasIsPro=false;
+  if(window.exoPro && window.exoPro.check){
+    window.exoPro.check().then(function(p){
+      sasIsPro=!!p;
+      // Marca el sheet como PRO para que downloadAsWord lo permita
+      if(sasIsPro){
+        $('sheetEstatutos').setAttribute('data-pro','1');
+        $('sheetCartas').setAttribute('data-pro','1');
+      }
+      goToStep(sasState.meta.paso_actual||1); // Refrescar texto del botón si cambia
+    });
+  }
+  // ─── Stepper / navegación ───
+  function goToStep(n){
+    n=Math.max(1, Math.min(TOTAL_PASOS, n));
+    sasState.meta.paso_actual=n;
+    document.querySelectorAll('.step-panel').forEach(function(p){
+      p.classList.toggle('active', String(p.dataset.panel)===String(n));
+    });
+    document.querySelectorAll('#steps li').forEach(function(li){
+      var s=parseInt(li.dataset.step,10);
+      li.classList.toggle('active', s===n);
+      li.classList.toggle('done', s<n);
+    });
+    $('btnPrev').disabled = (n===1);
+    if(n===TOTAL_PASOS){
+      $('btnNext').textContent = sasIsPro ? '📝 Descargar Word' : '🖨️ Imprimir como PDF';
+      $('btnNext').className = 'btn-finish';
+    } else {
+      $('btnNext').textContent = 'Siguiente →';
+      $('btnNext').className = 'btn-next';
+    }
+    $('warnPaso').classList.remove('show');
+    saveBorrador();
+    render();
+  }
+  $('btnPrev').addEventListener('click', function(){ goToStep(sasState.meta.paso_actual-1); });
+  $('btnNext').addEventListener('click', function(){
+    var validation=validarPaso(sasState.meta.paso_actual);
+    if(!validation.ok){
+      $('warnPaso').textContent=validation.msg;
+      $('warnPaso').classList.add('show');
+      return;
+    }
+    if(sasState.meta.paso_actual===TOTAL_PASOS){
+      if(sasIsPro){
+        // PRO: descarga ambos documentos en Word
+        var razon=(sasState.sociedad.razon||'sas').replace(/[^a-zA-Z0-9]/g,'-').toLowerCase();
+        H.downloadAsWord($('sheetEstatutos'), 'estatutos-'+razon);
+        setTimeout(function(){
+          H.downloadAsWord($('sheetCartas'), 'cartas-aceptacion-'+razon);
+        }, 400);
+        (window.exoToast||{success:alert}).success('Estatutos y cartas descargados. Revisa tu carpeta de descargas.');
+      } else {
+        // Gratis: imprime PDF (incluye ambos sheets en orden)
+        window.print();
+        (window.exoToast||{info:alert}).info('Imprime como PDF para guardar tus documentos. La descarga en Word es PRO.');
+      }
+      return;
+    }
+    goToStep(sasState.meta.paso_actual+1);
+  });
+  document.querySelectorAll('#steps li').forEach(function(li){
+    li.addEventListener('click', function(){
+      var n=parseInt(li.dataset.step,10);
+      // Solo deja avanzar a pasos previos o al actual; saltar adelante requiere validar
+      if(n<=sasState.meta.paso_actual){ goToStep(n); return; }
+      // Adelante: validar todos los pasos hasta n-1
+      for(var i=sasState.meta.paso_actual; i<n; i++){
+        var v=validarPaso(i);
+        if(!v.ok){ goToStep(i); $('warnPaso').textContent=v.msg; $('warnPaso').classList.add('show'); return; }
+      }
+      goToStep(n);
+    });
+  });
+  // ─── Validación por paso ───
+  function validarPaso(n){
+    var s=sasState;
+    if(n===1){
+      if(!s.sociedad.razon.trim()) return {ok:false, msg:'Falta la razón social.'};
+      if(!s.sociedad.municipio) return {ok:false, msg:'Selecciona el municipio del domicilio.'};
+      if(!s.sociedad.direccion.trim()) return {ok:false, msg:'Falta la dirección.'};
+      if(s.sociedad.vigencia==='definida' && !s.sociedad.vigencia_fecha) return {ok:false, msg:'Indica la fecha límite de la vigencia.'};
+      if(s.sociedad.objeto==='detallado' && !s.sociedad.objeto_detalle.trim()) return {ok:false, msg:'Detalla las actividades del objeto social.'};
+      if(!/^\d{4}$/.test(s.sociedad.ciiu)) return {ok:false, msg:'El código CIIU debe ser 4 dígitos.'};
+    }
+    if(n===2){
+      if(s.capital.autorizado<=0) return {ok:false, msg:'Capital autorizado debe ser mayor a cero.'};
+      if(s.capital.suscrito<=0) return {ok:false, msg:'Capital suscrito debe ser mayor a cero.'};
+      if(s.capital.suscrito>s.capital.autorizado) return {ok:false, msg:'El capital suscrito no puede superar al autorizado.'};
+      if(s.capital.pagado>s.capital.suscrito) return {ok:false, msg:'El capital pagado no puede superar al suscrito.'};
+      if(s.capital.nominal<=0) return {ok:false, msg:'El valor nominal por acción debe ser mayor a cero.'};
+      if(s.capital.suscrito % s.capital.nominal !== 0) return {ok:false, msg:'El capital suscrito debe ser múltiplo del valor nominal.'};
+    }
+    if(n===3){
+      if(s.socios.length===0) return {ok:false, msg:'Agrega al menos un accionista.'};
+      var sumAcciones=s.socios.reduce(function(t,x){return t+(parseInt(x.acciones,10)||0);},0);
+      var totalAcciones=s.capital.nominal>0?Math.round(s.capital.suscrito/s.capital.nominal):0;
+      if(sumAcciones!==totalAcciones) return {ok:false, msg:'La suma de acciones de los socios ('+sumAcciones+') no coincide con el total emitido ('+totalAcciones+').'};
+      for(var i=0;i<s.socios.length;i++){
+        var so=s.socios[i];
+        if(!so.nombre || !so.id) return {ok:false, msg:'Completa nombre y documento del accionista '+(i+1)+'.'};
+      }
+    }
+    if(n===4){
+      if(!s.admon.rl.nombre.trim() || !s.admon.rl.cc.trim()) return {ok:false, msg:'Falta el nombre y cédula del representante legal.'};
+      if(s.admon.suplente.enabled && (!s.admon.suplente.nombre.trim() || !s.admon.suplente.cc.trim())) return {ok:false, msg:'Completa los datos del suplente o desmarca la opción.'};
+      if(s.admon.jd.enabled){
+        var lineas=s.admon.jd.principales.split('\n').filter(function(l){return l.trim();});
+        if(lineas.length<3) return {ok:false, msg:'La junta directiva requiere mínimo 3 miembros principales.'};
+      }
+      if(s.admon.rf.enabled && (!s.admon.rf.nombre.trim() || !s.admon.rf.tp.trim())) return {ok:false, msg:'Completa los datos del revisor fiscal o desmarca la opción.'};
+    }
+    if(n===5){
+      if(!s.meta.lugar.trim()) return {ok:false, msg:'Indica el lugar de firma.'};
+      if(!s.meta.fecha) return {ok:false, msg:'Indica la fecha de firma.'};
+    }
+    return {ok:true};
+  }
+  // ─── Bindings: paso 1 ───
+  $('s_razon').addEventListener('input', function(e){ sasState.sociedad.razon=e.target.value; render(); });
+  $('s_sigla').addEventListener('input', function(e){ sasState.sociedad.sigla=e.target.value; render(); });
+  $('s_municipio').addEventListener('change', function(e){
+    sasState.sociedad.municipio=e.target.value;
+    sasState.sociedad.municipio_nombre=e.target.options[e.target.selectedIndex]?e.target.options[e.target.selectedIndex].textContent:'';
+    render();
+  });
+  $('s_direccion').addEventListener('input', function(e){ sasState.sociedad.direccion=e.target.value; render(); });
+  document.querySelectorAll('input[name="s_vigencia"]').forEach(function(r){
+    r.addEventListener('change', function(){
+      sasState.sociedad.vigencia=r.value;
+      $('s_vigencia_fecha').style.display = (r.value==='definida') ? '' : 'none';
+      render();
+    });
+  });
+  $('s_vigencia_fecha').addEventListener('change', function(e){ sasState.sociedad.vigencia_fecha=e.target.value; render(); });
+  document.querySelectorAll('input[name="s_objeto"]').forEach(function(r){
+    r.addEventListener('change', function(){
+      sasState.sociedad.objeto=r.value;
+      $('s_objeto_detalle').style.display = (r.value==='detallado') ? '' : 'none';
+      render();
+    });
+  });
+  $('s_objeto_detalle').addEventListener('input', function(e){ sasState.sociedad.objeto_detalle=e.target.value; render(); });
+  $('s_ciiu').addEventListener('input', function(e){
+    e.target.value=e.target.value.replace(/[^\d]/g,'').slice(0,4);
+    sasState.sociedad.ciiu=e.target.value;
+    render();
+  });
+  // ─── Bindings: paso 2 ───
+  ['c_autorizado','c_suscrito','c_pagado','c_nominal'].forEach(function(id){
+    H.bindMonedaInput($(id), function(){
+      sasState.capital.autorizado=H.parseCOP($('c_autorizado').value);
+      sasState.capital.suscrito=H.parseCOP($('c_suscrito').value);
+      sasState.capital.pagado=H.parseCOP($('c_pagado').value);
+      sasState.capital.nominal=H.parseCOP($('c_nominal').value);
+      render();
+    });
+  });
+  // ─── Bindings: paso 3 (socios dinámico) ───
+  function renderSocios(){
+    var list=$('sociosList');
+    list.innerHTML='';
+    if(sasState.socios.length===0){
+      list.innerHTML='<div class="empty-state">Aún no has agregado accionistas. Pulsa el botón de abajo.</div>';
+      return;
+    }
+    sasState.socios.forEach(function(so, i){
+      var accionesFmt = (so.acciones && so.acciones>0) ? Number(so.acciones).toLocaleString('es-CO') : '';
+      var row=document.createElement('div');
+      row.className='socio-row';
+      row.dataset.idx=i;
+      row.innerHTML=
+        '<input type="text" data-f="nombre" value="'+H.esc(so.nombre||'')+'" placeholder="Nombre / Razón social">'+
+        '<input type="text" data-f="id" value="'+H.esc(so.id||'')+'" placeholder="CC / NIT" inputmode="numeric">'+
+        '<input type="text" data-f="acciones" value="'+H.esc(accionesFmt)+'" placeholder="N° acciones" inputmode="numeric">'+
+        '<button type="button" class="del" data-act="del">×</button>';
+      list.appendChild(row);
+      // Listeners de input: NO regeneran el DOM (eso pierde el foco). Solo actualizan state + preview.
+      row.querySelector('[data-f="nombre"]').addEventListener('input', function(e){
+        sasState.socios[i].nombre=e.target.value;
+        render();
+      });
+      row.querySelector('[data-f="id"]').addEventListener('input', function(e){
+        var clean=e.target.value.replace(/[^\d]/g,'');
+        if(e.target.value!==clean){
+          // Solo reescribe si cambió tras filtrar; evita romper la posición del cursor
+          var pos=e.target.selectionStart-(e.target.value.length-clean.length);
+          e.target.value=clean;
+          try{ e.target.setSelectionRange(pos, pos); }catch(_){}
+        }
+        sasState.socios[i].id=clean;
+        render();
+      });
+      row.querySelector('[data-f="acciones"]').addEventListener('input', function(e){
+        var raw=e.target.value.replace(/[^\d]/g,'');
+        var formatted=raw?parseInt(raw,10).toLocaleString('es-CO'):'';
+        if(e.target.value!==formatted){
+          var origLen=e.target.value.length;
+          var origPos=e.target.selectionStart;
+          e.target.value=formatted;
+          var newPos=origPos+(formatted.length-origLen);
+          try{ e.target.setSelectionRange(newPos, newPos); }catch(_){}
+        }
+        sasState.socios[i].acciones=parseInt(raw,10)||0;
+        render();
+      });
+      row.querySelector('[data-act="del"]').addEventListener('click', function(){
+        sasState.socios.splice(i,1);
+        renderSocios();
+        render();
+      });
+    });
+  }
+  $('btnAddSocio').addEventListener('click', function(){
+    sasState.socios.push({nombre:'', id:'', acciones:0, tipo:'PN'});
+    renderSocios();
+    render();
+  });
+  // ─── Bindings: paso 4 ───
+  ['a_rl_nombre','a_rl_cc','a_rl_email'].forEach(function(id){
+    var key=id.replace('a_rl_','');
+    $(id).addEventListener('input', function(e){ sasState.admon.rl[key]=e.target.value; render(); });
+  });
+  $('a_suplente_on').addEventListener('change', function(e){
+    sasState.admon.suplente.enabled=e.target.checked;
+    $('a_suplente_block').style.display=e.target.checked?'':'none';
+    render();
+  });
+  ['a_sup_nombre','a_sup_cc','a_sup_email'].forEach(function(id){
+    var key=id.replace('a_sup_','');
+    $(id).addEventListener('input', function(e){ sasState.admon.suplente[key]=e.target.value; render(); });
+  });
+  $('a_jd_on').addEventListener('change', function(e){
+    sasState.admon.jd.enabled=e.target.checked;
+    $('a_jd_block').style.display=e.target.checked?'':'none';
+    render();
+  });
+  $('a_jd_principales').addEventListener('input', function(e){ sasState.admon.jd.principales=e.target.value; render(); });
+  $('a_jd_suplentes').addEventListener('input', function(e){ sasState.admon.jd.suplentes=e.target.value; render(); });
+  $('a_rf_on').addEventListener('change', function(e){
+    sasState.admon.rf.enabled=e.target.checked;
+    $('a_rf_block').style.display=e.target.checked?'':'none';
+    render();
+  });
+  ['a_rf_nombre','a_rf_cc','a_rf_tp'].forEach(function(id){
+    var key=id.replace('a_rf_','');
+    $(id).addEventListener('input', function(e){ sasState.admon.rf[key]=e.target.value; render(); });
+  });
+  // ─── Bindings: paso 5 ───
+  $('op_preferencia').addEventListener('change', function(e){ sasState.opciones.preferencia=e.target.checked; render(); });
+  $('op_negociacion').addEventListener('change', function(e){
+    sasState.opciones.negociacion=e.target.checked;
+    $('op_negociacion_block').style.display=e.target.checked?'':'none';
+    render();
+  });
+  $('op_negociacion_anos').addEventListener('input', function(e){
+    var n=parseInt(e.target.value,10)||5;
+    sasState.opciones.negociacion_anos=Math.max(1, Math.min(10, n));
+    render();
+  });
+  $('op_arbitraje').addEventListener('change', function(e){ sasState.opciones.arbitraje=e.target.checked; render(); });
+  $('op_exclusion').addEventListener('change', function(e){ sasState.opciones.exclusion=e.target.checked; render(); });
+  $('m_lugar').addEventListener('input', function(e){ sasState.meta.lugar=e.target.value; render(); });
+  $('m_fecha').addEventListener('change', function(e){ sasState.meta.fecha=e.target.value; render(); });
+  // ─── Tabs preview ───
+  document.querySelectorAll('.preview-tabs button').forEach(function(b){
+    b.addEventListener('click', function(){
+      var tab=b.dataset.tab;
+      document.querySelectorAll('.preview-tabs button').forEach(function(x){ x.classList.toggle('active', x===b); });
+      document.querySelectorAll('.preview-pane').forEach(function(p){ p.classList.toggle('active', p.id==='sheet'+tab[0].toUpperCase()+tab.slice(1)); });
+    });
+  });
+  // ─── Render ───
+  function render(){
+    // Resumen capital
+    var cap=sasState.capital;
+    var totalAcciones=cap.nominal>0?Math.round(cap.suscrito/cap.nominal):0;
+    var pagadoAcciones=cap.nominal>0?Math.round(cap.pagado/cap.nominal):0;
+    var totalAutAcciones=cap.nominal>0?Math.round(cap.autorizado/cap.nominal):0;
+    if(cap.suscrito>0 && cap.nominal>0){
+      $('c_resumen').textContent='Total acciones autorizadas: '+totalAutAcciones.toLocaleString('es-CO')+' · suscritas: '+totalAcciones.toLocaleString('es-CO')+' · pagadas: '+pagadoAcciones.toLocaleString('es-CO');
+    } else {
+      $('c_resumen').textContent='Llena los campos para ver el cálculo de acciones.';
+    }
+    // Resumen socios
+    var sumAcc=sasState.socios.reduce(function(t,x){return t+(parseInt(x.acciones,10)||0);},0);
+    if(sasState.socios.length>0 && totalAcciones>0){
+      var diff=totalAcciones-sumAcc;
+      var pct=totalAcciones>0?(sumAcc*100/totalAcciones).toFixed(1):0;
+      $('sociosResumen').textContent='Asignadas: '+sumAcc.toLocaleString('es-CO')+' / '+totalAcciones.toLocaleString('es-CO')+' acciones ('+pct+'%). '+(diff===0?'✓ Coincide.':(diff>0?'Faltan '+diff:'Sobran '+Math.abs(diff)));
+    } else {
+      $('sociosResumen').textContent='Define el capital primero (paso 2) para validar la suma de acciones.';
+    }
+    // Templates
+    if(TPL){
+      $('vEstatutos').innerHTML=TPL.estatutos(sasState);
+      $('vCartas').innerHTML=TPL.cartas(sasState);
+    }
+    saveBorrador();
+  }
+  // ─── Init ───
+  function init(){
+    var hadDraft=loadBorrador();
+    // Volcar state al UI
+    var s=sasState;
+    $('s_razon').value=s.sociedad.razon;
+    $('s_sigla').value=s.sociedad.sigla;
+    $('s_direccion').value=s.sociedad.direccion;
+    document.querySelector('input[name="s_vigencia"][value="'+s.sociedad.vigencia+'"]').checked=true;
+    if(s.sociedad.vigencia==='definida'){
+      $('s_vigencia_fecha').style.display='';
+      $('s_vigencia_fecha').value=s.sociedad.vigencia_fecha;
+    }
+    document.querySelector('input[name="s_objeto"][value="'+s.sociedad.objeto+'"]').checked=true;
+    if(s.sociedad.objeto==='detallado'){
+      $('s_objeto_detalle').style.display='';
+      $('s_objeto_detalle').value=s.sociedad.objeto_detalle;
+    }
+    $('s_ciiu').value=s.sociedad.ciiu;
+    if(s.capital.autorizado) $('c_autorizado').value=s.capital.autorizado.toLocaleString('es-CO');
+    if(s.capital.suscrito) $('c_suscrito').value=s.capital.suscrito.toLocaleString('es-CO');
+    if(s.capital.pagado) $('c_pagado').value=s.capital.pagado.toLocaleString('es-CO');
+    if(s.capital.nominal) $('c_nominal').value=s.capital.nominal.toLocaleString('es-CO');
+    $('a_rl_nombre').value=s.admon.rl.nombre;
+    $('a_rl_cc').value=s.admon.rl.cc;
+    $('a_rl_email').value=s.admon.rl.email;
+    $('a_suplente_on').checked=s.admon.suplente.enabled;
+    if(s.admon.suplente.enabled){
+      $('a_suplente_block').style.display='';
+      $('a_sup_nombre').value=s.admon.suplente.nombre;
+      $('a_sup_cc').value=s.admon.suplente.cc;
+      $('a_sup_email').value=s.admon.suplente.email;
+    }
+    $('a_jd_on').checked=s.admon.jd.enabled;
+    if(s.admon.jd.enabled){
+      $('a_jd_block').style.display='';
+      $('a_jd_principales').value=s.admon.jd.principales;
+      $('a_jd_suplentes').value=s.admon.jd.suplentes;
+    }
+    $('a_rf_on').checked=s.admon.rf.enabled;
+    if(s.admon.rf.enabled){
+      $('a_rf_block').style.display='';
+      $('a_rf_nombre').value=s.admon.rf.nombre;
+      $('a_rf_cc').value=s.admon.rf.cc;
+      $('a_rf_tp').value=s.admon.rf.tp;
+    }
+    $('op_preferencia').checked=s.opciones.preferencia;
+    $('op_negociacion').checked=s.opciones.negociacion;
+    if(s.opciones.negociacion) $('op_negociacion_block').style.display='';
+    $('op_negociacion_anos').value=s.opciones.negociacion_anos;
+    $('op_arbitraje').checked=s.opciones.arbitraje;
+    $('op_exclusion').checked=s.opciones.exclusion;
+    $('m_lugar').value=s.meta.lugar;
+    if(!s.meta.fecha){
+      var hoy=new Date();
+      s.meta.fecha=hoy.getFullYear()+'-'+String(hoy.getMonth()+1).padStart(2,'0')+'-'+String(hoy.getDate()).padStart(2,'0');
+    }
+    $('m_fecha').value=s.meta.fecha;
+    renderSocios();
+    goToStep(s.meta.paso_actual||1);
+  }
+  // ─── Descarga del documento de la pestaña activa ───
+  window.descargarActivo=function(){
+    var activeTab=document.querySelector('.preview-tabs button.active').dataset.tab;
+    var sheet=activeTab==='estatutos'?$('sheetEstatutos'):$('sheetCartas');
+    var razon=(sasState.sociedad.razon||'sas').replace(/[^a-zA-Z0-9]/g,'-').toLowerCase();
+    var fname=activeTab==='estatutos'?('estatutos-'+razon):('cartas-aceptacion-'+razon);
+    H.downloadAsWord(sheet, fname);
+  };
+  init();
+})();
+</script>
+</body>
+</html>

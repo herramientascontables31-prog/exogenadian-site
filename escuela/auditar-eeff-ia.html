@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="../shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="icon" type="image/svg+xml" href="../favicon.svg"><meta name="theme-color" content="#7C3AED"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Curso Auditar EEFF con IA &mdash; Escuela Contable IA | ExógenaDIAN</title>
+<meta name="description" content="Aprende a auditar estados financieros con Claude, ChatGPT y Gemini. 10 módulos con casos numéricos trabajados: detección de errores, análisis automatizado, conciliación, hallazgos por sector y redacción de informes con IA generativa.">
+<meta name="keywords" content="auditoría EEFF con IA, auditar estados financieros, prompts contables auditoría, IA para revisor fiscal, automatización auditoría Colombia">
+<link rel="canonical" href="https://exogenadian.com/escuela/auditar-eeff-ia.html"><meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--c:#7C3AED;--c2:#A78BFA;--cb:#F5F3FF;--cbd:#DDD6FE;--cdark:#5B21B6;--g50:#F9FAFB;--g100:#F3F4F6;--g200:#E5E7EB;--g300:#D1D5DB;--g400:#9CA3AF;--g500:#6B7280;--g600:#4B5563;--g700:#374151;--g800:#1F2937;--g900:#111827;--amber-50:#FFFBEB;--amber-500:#F59E0B;--amber-800:#78350F;--blue-50:#EFF6FF;--blue-500:#3B82F6;--blue-700:#1D4ED8;--rose-50:#FFF1F2;--rose-500:#F43F5E;--rose-700:#BE123C}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Outfit',sans-serif;background:var(--g50);color:var(--g900);line-height:1.6}
+.curso-layout{display:grid;grid-template-columns:260px 1fr;min-height:100vh}@media(max-width:900px){.curso-layout{grid-template-columns:1fr}}
+.sidebar{background:#fff;border-right:1px solid var(--g200);padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
+.sidebar-header{padding:16px 20px;border-bottom:1px solid var(--g100)}.sidebar-header a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--g800);font-weight:800;font-size:.9rem}.sidebar-header a div{width:28px;height:28px;background:linear-gradient(135deg,#7C3AED,#A78BFA);border-radius:7px;display:grid;place-items:center;color:#fff;font-size:.7rem;font-weight:900}
+.sidebar-curso{padding:16px 20px;border-bottom:1px solid var(--g100)}.sidebar-curso h3{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--cdark);margin-bottom:4px}.sidebar-curso p{font-size:.88rem;font-weight:700;color:var(--g800)}
+.sidebar-nav{padding:12px 0;flex:1}.sidebar-nav a{display:flex;align-items:center;gap:10px;padding:10px 20px;text-decoration:none;color:var(--g500);font-size:.85rem;font-weight:500;transition:all .15s;border-left:3px solid transparent}.sidebar-nav a:hover{background:var(--cb);color:var(--cdark)}.sidebar-nav a.active{background:var(--cb);color:var(--cdark);font-weight:700;border-left-color:var(--c)}.sidebar-nav a .nav-num{width:24px;height:24px;border-radius:50%;background:var(--g100);color:var(--g500);display:grid;place-items:center;font-size:.72rem;font-weight:700;flex-shrink:0}.sidebar-nav a.active .nav-num{background:var(--c);color:#fff}.sidebar-nav a.completed .nav-num{background:var(--cbd);color:var(--cdark)}
+.sidebar-back{padding:16px 20px;border-top:1px solid var(--g100);margin-top:auto}.sidebar-back a{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--g400);font-size:.82rem;font-weight:500}.sidebar-back a:hover{color:var(--g700)}
+.sidebar-toggle{display:none;position:fixed;bottom:20px;left:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--c);color:#fff;border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 16px rgba(124,58,237,.3)}
+@media(max-width:900px){.sidebar{display:none;position:fixed;top:0;left:0;z-index:199;width:280px;box-shadow:4px 0 20px rgba(0,0,0,.1)}.sidebar.open{display:flex}.sidebar-toggle{display:block}.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:198}.sidebar-overlay.open{display:block}}
+.curso-main{padding:32px 40px 60px;max-width:860px}@media(max-width:900px){.curso-main{padding:20px 16px 80px}}
+.mod-header{margin-bottom:32px}.mod-breadcrumb{font-size:.78rem;color:var(--g400);margin-bottom:8px}.mod-breadcrumb a{color:var(--g400);text-decoration:none}.mod-breadcrumb a:hover{color:var(--c)}
+.mod-num{display:inline-flex;align-items:center;gap:8px;background:var(--cb);color:var(--cdark);padding:4px 14px;border-radius:100px;font-size:.78rem;font-weight:700;margin-bottom:12px}
+.mod-header h1{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;letter-spacing:-.02em;margin-bottom:8px;line-height:1.2}.mod-header .mod-desc{font-size:1rem;color:var(--g500);max-width:600px;line-height:1.6}
+.content-block{margin-bottom:28px}.content-block h2{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;margin-bottom:12px;color:var(--g900);padding-bottom:8px;border-bottom:2px solid var(--cbd)}.content-block h3{font-size:1.05rem;font-weight:700;margin:20px 0 8px;color:var(--g800)}.content-block p{font-size:.92rem;color:var(--g600);line-height:1.7;margin-bottom:12px}.content-block ul,.content-block ol{margin:8px 0 16px 20px;display:flex;flex-direction:column;gap:6px}.content-block li{font-size:.9rem;color:var(--g600);line-height:1.6}
+.tip{background:var(--blue-50);border:1.5px solid #BFDBFE;border-radius:14px;padding:18px 22px;margin:20px 0}.tip-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}.tip-header h4{font-size:.88rem;font-weight:700;color:var(--blue-700)}.tip p{font-size:.88rem;color:#1E40AF;line-height:1.6}
+.error-comun{background:var(--rose-50);border:1.5px solid #FECACA;border-radius:14px;padding:18px 22px;margin:20px 0}.error-comun-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}.error-comun-header h4{font-size:.88rem;font-weight:700;color:var(--rose-700)}.error-comun p{font-size:.88rem;color:#9F1239;line-height:1.6}
+.norma{background:var(--amber-50);border:1.5px solid #FDE68A;border-radius:14px;padding:18px 22px;margin:20px 0}.norma h4{font-size:.92rem;font-weight:700;color:var(--amber-800);margin-bottom:6px}.norma p{font-size:.88rem;color:#78350F;line-height:1.6;margin:6px 0}
+.prompt{background:#1F2937;color:#F3F4F6;border-radius:12px;padding:18px 22px;margin:16px 0;font-family:'JetBrains Mono',monospace;font-size:.84rem;line-height:1.65;white-space:pre-wrap}
+.prompt-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;font-family:'Outfit',sans-serif}.prompt-header h4{font-size:.82rem;color:#9CA3AF;font-weight:700;text-transform:uppercase;letter-spacing:.08em}.prompt-header .ia{font-size:.72rem;background:var(--c);color:#fff;padding:2px 10px;border-radius:100px;font-weight:700}
+.tabla-norm{width:100%;border-collapse:collapse;margin:16px 0;border-radius:10px;overflow:hidden;border:1px solid var(--g200)}.tabla-norm th{background:var(--g100);padding:10px 14px;text-align:left;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500)}.tabla-norm td{padding:10px 14px;font-size:.85rem;border-top:1px solid var(--g100);color:var(--g700)}.tabla-norm tr:hover{background:var(--cb)}
+.ejemplo{background:#fff;border:1.5px solid var(--g200);border-radius:14px;overflow:hidden;margin:20px 0;box-shadow:0 2px 8px rgba(0,0,0,.03)}.ejemplo-header{background:var(--g50);padding:12px 20px;border-bottom:1px solid var(--g200);font-size:.85rem;font-weight:700;color:var(--g700)}.ejemplo-body{padding:16px 20px}.ejemplo-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--g100);font-size:.86rem}.ejemplo-row:last-child{border-bottom:none}.ejemplo-row .label{color:var(--g600)}.ejemplo-row .value{font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.84rem}.ejemplo-row.total{border-top:2px solid var(--cbd);border-bottom:none;padding-top:10px;margin-top:4px}.ejemplo-row.total .label{font-weight:700;color:var(--g900)}.ejemplo-row.total .value{color:var(--cdark)}
+.mod-nav{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:24px;border-top:2px solid var(--g200);flex-wrap:wrap;gap:10px}.mod-nav a{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:12px;text-decoration:none;font-weight:700;font-size:.92rem;transition:all .2s}.mod-nav .prev{background:var(--g100);color:var(--g700)}.mod-nav .prev:hover{background:var(--g200)}.mod-nav .next{background:var(--c);color:#fff;box-shadow:0 4px 12px rgba(124,58,237,.25)}.mod-nav .next:hover{background:var(--cdark);transform:translateY(-1px)}
+.cta-practica{background:linear-gradient(135deg,var(--cb),#EDE9FE);border:2px solid var(--cbd);border-radius:16px;padding:28px 24px;text-align:center;margin:28px 0}.cta-practica h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;color:var(--cdark);margin-bottom:8px}.cta-practica p{font-size:.92rem;color:var(--cdark);margin-bottom:16px}.cta-practica a{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--c);color:#fff;border-radius:12px;font-weight:700;font-size:1rem;text-decoration:none;box-shadow:0 4px 16px rgba(124,58,237,.3);transition:all .2s}.cta-practica a:hover{background:var(--cdark);transform:translateY(-2px)}
+.progress-bar{height:4px;background:var(--g200);border-radius:2px;margin:12px 20px;overflow:hidden}.progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--c2),var(--c));border-radius:2px;transition:width .3s}
+.modulo-section{display:none}.modulo-section.active{display:block}
+</style>
+<script async src="../shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+<div class="curso-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header"><a href="../index.html"><div>E</div>Ex&oacute;genaDIAN</a></div>
+    <div class="sidebar-curso"><h3>Escuela Contable IA</h3><p>Auditar EEFF con IA</p></div>
+    <div class="progress-bar"><div class="fill" id="progressFill" style="width:10%"></div></div>
+    <nav class="sidebar-nav" id="sidebarNav">
+      <a href="#modulo-1" class="active" onclick="navigateTo(1)"><span class="nav-num">1</span> &iquest;Auditar con IA?</a>
+      <a href="#modulo-2" onclick="navigateTo(2)"><span class="nav-num">2</span> Preparar el balance</a>
+      <a href="#modulo-3" onclick="navigateTo(3)"><span class="nav-num">3</span> Detectar errores</a>
+      <a href="#modulo-4" onclick="navigateTo(4)"><span class="nav-num">4</span> Vert/Horiz autom&aacute;tico</a>
+      <a href="#modulo-5" onclick="navigateTo(5)"><span class="nav-num">5</span> Indicadores con IA</a>
+      <a href="#modulo-6" onclick="navigateTo(6)"><span class="nav-num">6</span> Conciliaci&oacute;n bancaria</a>
+      <a href="#modulo-7" onclick="navigateTo(7)"><span class="nav-num">7</span> Hallazgos por sector</a>
+      <a href="#modulo-8" onclick="navigateTo(8)"><span class="nav-num">8</span> Informes asistidos</a>
+      <a href="#modulo-9" onclick="navigateTo(9)"><span class="nav-num">9</span> Cu&aacute;ndo NO confiar</a>
+      <a href="#modulo-10" onclick="navigateTo(10)"><span class="nav-num">10</span> Caso integrador</a>
+    </nav>
+    <div class="sidebar-back"><a href="../escuela.html">&larr; Volver a la Escuela</a></div>
+  </aside>
+  <div class="curso-main">
+    <section id="modulo-1" class="modulo-section active">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Auditar EEFF con IA &rsaquo; M&oacute;dulo 1</div>
+        <div class="mod-num">M&oacute;dulo 1 de 10</div>
+        <h1>&iquest;Qu&eacute; significa auditar EEFF con IA?</h1>
+        <p class="mod-desc">No es reemplazar al revisor fiscal. Es quitarte el 70% del tiempo de pre-revisi&oacute;n mec&aacute;nica para que dediques el 30% restante al juicio profesional, que es lo que de verdad cobra un revisor.</p>
+      </div>
+      <div class="content-block">
+        <h2>El problema que resuelve</h2>
+        <p>Una revisor&iacute;a fiscal de una PYME implica revisar miles de registros: que las sumas cuadren, que las cuentas tengan naturaleza correcta, que los indicadores tengan sentido, que las variaciones entre a&ntilde;os se expliquen, que las deducciones cumplan el ET. Hoy un revisor hace eso a punta de Excel y ojo cl&iacute;nico, y tarda d&iacute;as. La IA generativa hace la parte mec&aacute;nica en minutos &mdash; pero hay que saber qu&eacute; pedirle, c&oacute;mo verificar lo que responde y d&oacute;nde NO confiar.</p>
+        <p>Este curso es un manual operativo: cada m&oacute;dulo te da el prompt exacto, un ejemplo de qu&eacute; deber&iacute;a salir y c&oacute;mo interpretarlo, y la advertencia de d&oacute;nde la IA se equivoca. Es un complemento del curso de IA y Automatizaci&oacute;n: aqu&iacute; lo aplicamos solo a la revisi&oacute;n de estados financieros.</p>
+        <h2>Lo que la IA hace bien (y mal)</h2>
+        <p>Despu&eacute;s de probar Claude, ChatGPT y Gemini con balances colombianos reales, este es el reparto honesto de tareas:</p>
+        <h3>Lo que la IA hace bien</h3>
+        <ul>
+          <li>Detectar inconsistencias matem&aacute;ticas: sumas que no cuadran, la ecuaci&oacute;n A = P + Pa rota, depreciaci&oacute;n acumulada mayor al costo.</li>
+          <li>Calcular indicadores est&aacute;ndar (liquidez, endeudamiento, rentabilidad, rotaci&oacute;n) sin errores aritm&eacute;ticos.</li>
+          <li>An&aacute;lisis vertical y horizontal masivos de cientos de cuentas en segundos.</li>
+          <li>Identificar variaciones inusuales entre periodos (una cuenta que se triplic&oacute; sin explicaci&oacute;n).</li>
+          <li>Redactar borradores estructurados de informe en lenguaje profesional.</li>
+          <li>Cruzar contra normativa: "&iquest;esta deducci&oacute;n cumple los requisitos del Art. 107 ET?"</li>
+        </ul>
+        <h3>Lo que la IA NO hace bien (todav&iacute;a)</h3>
+        <ul>
+          <li>Juicio profesional: decidir si una observaci&oacute;n es <em>material</em> o no.</li>
+          <li>Validar soportes f&iacute;sicos: facturas, contratos, actas.</li>
+          <li>Escepticismo profesional: si t&uacute; afirmas algo falso, te dar&aacute; la raz&oacute;n.</li>
+          <li>Garantizar que los datos que le pasaste son reales (basura entra, basura sale).</li>
+          <li>Negociar con el cliente o el auditado.</li>
+        </ul>
+        <div class="norma">
+          <h4>Marco profesional (Ley 43/1990 y NIA)</h4>
+          <p>La responsabilidad del dictamen sigue siendo del contador o revisor fiscal con su tarjeta profesional. Las Normas Internacionales de Auditor&iacute;a (NIA, Decreto 2420/2015 anexo de aseguramiento) exigen evidencia suficiente y apropiada: la IA acelera la obtenci&oacute;n de evidencia anal&iacute;tica, no la sustituye ni traslada la responsabilidad.</p>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header"><h4>&#9888; Error com&uacute;n</h4></div>
+          <p>Pegar el balance a Claude y firmar el dictamen con lo que responda. La IA es asistente, no revisor fiscal. Si la IA dice "todo OK" pero hay un fraude en soportes f&iacute;sicos que no le pasaste, el responsable ante la JCC sigues siendo t&uacute;.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><span></span><a href="#modulo-2" class="next" onclick="navigateTo(2)">M&oacute;dulo 2 &rarr;</a></div>
+    </section>
+    <section id="modulo-2" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Auditar EEFF con IA &rsaquo; M&oacute;dulo 2</div>
+        <div class="mod-num">M&oacute;dulo 2 de 10</div>
+        <h1>Preparar el balance para an&aacute;lisis con IA</h1>
+        <p class="mod-desc">Lo que pones determina lo que sacas. Un balance mal estructurado o con datos personales mete ruido legal y t&eacute;cnico. Aqu&iacute; aprendes a prepararlo bien.</p>
+      </div>
+      <div class="content-block">
+        <h2>Formato: tabla limpia, no PDF escaneado</h2>
+        <p>Claude y ChatGPT manejan mucho mejor una tabla estructurada (CSV o markdown) que un PDF escaneado o una foto. El primer paso siempre es convertir el balance de comprobaci&oacute;n a una tabla con columnas claras.</p>
+        <h3>Estructura m&iacute;nima recomendada</h3>
+        <ul>
+          <li>C&oacute;digo de cuenta (PUC, 4-8 d&iacute;gitos) y nombre.</li>
+          <li>Saldo inicial del periodo.</li>
+          <li>Movimiento d&eacute;bito y movimiento cr&eacute;dito.</li>
+          <li>Saldo final.</li>
+          <li>La misma estructura para el periodo anterior (comparativo).</li>
+        </ul>
+        <h3>Ejemplo: c&oacute;mo se ve el balance bien preparado</h3>
+        <div class="ejemplo">
+          <div class="ejemplo-header">Balance de comprobaci&oacute;n &mdash; formato apto para IA (CSV)</div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">codigo;nombre;saldo_ini;debito;credito;saldo_fin</span><span class="value"></span></div>
+            <div class="ejemplo-row"><span class="label">1105;Caja;5.000.000;120.000.000;118.000.000;7.000.000</span><span class="value"></span></div>
+            <div class="ejemplo-row"><span class="label">1305;Clientes;40.000.000;380.000.000;355.000.000;65.000.000</span><span class="value"></span></div>
+            <div class="ejemplo-row"><span class="label">2205;Proveedores;30.000.000;290.000.000;305.000.000;45.000.000</span><span class="value"></span></div>
+          </div>
+        </div>
+        <p>Con esa estructura la IA puede verificar por cada fila que <code>saldo_ini + d&eacute;bito &minus; cr&eacute;dito = saldo_fin</code> y detectar de inmediato las que no cuadran.</p>
+        <h3>Lo que NO debes subir</h3>
+        <ul>
+          <li>C&eacute;dulas y nombres completos de personas naturales (Ley 1581/2012 de protecci&oacute;n de datos).</li>
+          <li>NIT completos cuando no son indispensables para el an&aacute;lisis.</li>
+          <li>Contrase&ntilde;as o accesos al MUISCA.</li>
+          <li>Informaci&oacute;n bajo cl&aacute;usula de confidencialidad sin autorizaci&oacute;n del cliente.</li>
+        </ul>
+        <div class="prompt">
+          <div class="prompt-header"><h4>Prompt de preparaci&oacute;n</h4><span class="ia">Claude / ChatGPT</span></div>
+          Te voy a entregar el balance de prueba de un cliente colombiano para revisi&oacute;n.
+Estructura: filas = cuentas del PUC con c&oacute;digo (4-8 d&iacute;gitos) y nombre.
+Columnas: saldo inicial, d&eacute;bito, cr&eacute;dito, saldo final.
+Por favor:
+1. Verifica fila por fila que (saldo inicial + d&eacute;bito - cr&eacute;dito) = saldo final.
+2. Verifica que la sumatoria total de saldos d&eacute;bito = sumatoria total de saldos cr&eacute;dito.
+3. Indica si hay cuentas con naturaleza contraria al PUC (activo con saldo cr&eacute;dito, etc.).
+4. Reporta SOLO las inconsistencias en una tabla. No me hagas resumen general.
+        </div>
+        <div class="tip">
+          <div class="tip-header"><h4>&#128161; Tip pr&aacute;ctico</h4></div>
+          <p>Si el cliente solo te da el balance en PDF, exp&oacute;rtalo a Excel desde el software contable (World Office, Siigo, Helisa exportan a XLS) y de ah&iacute; a CSV. Nunca le pidas a la IA que "lea" un PDF escaneado para auditor&iacute;a: la tasa de error de OCR en n&uacute;meros es inaceptable para un dictamen.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-1" class="prev" onclick="navigateTo(1)">&larr; M&oacute;dulo 1</a><a href="#modulo-3" class="next" onclick="navigateTo(3)">M&oacute;dulo 3 &rarr;</a></div>
+    </section>
+    <section id="modulo-3" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Auditar EEFF con IA &rsaquo; M&oacute;dulo 3</div>
+        <div class="mod-num">M&oacute;dulo 3 de 10</div>
+        <h1>Detectar errores comunes con prompts</h1>
+        <p class="mod-desc">Las 10 categor&iacute;as de errores que la IA detecta en segundos y que a mano toman horas. Cada una con qu&eacute; significa y qu&eacute; prueba pedir.</p>
+      </div>
+      <div class="content-block">
+        <h2>Cat&aacute;logo de errores t&iacute;picos</h2>
+        <ol>
+          <li><strong>Cuenta con naturaleza contraria al PUC</strong>: caja en cr&eacute;dito, proveedores en d&eacute;bito. Casi siempre un mal registro o una partida cruzada.</li>
+          <li><strong>IVA descontable &gt;&gt; IVA generado</strong> sin nota cr&eacute;dito ni saldo a favor solicitado: posible doble registro de descontable.</li>
+          <li><strong>Provisi&oacute;n de cartera &gt; 100%</strong> del valor de la cartera: error de c&aacute;lculo o cartera ya castigada no retirada.</li>
+          <li><strong>Depreciaci&oacute;n acumulada &gt; costo del activo</strong>: imposible; activo sobre-depreciado.</li>
+          <li><strong>Patrimonio l&iacute;quido negativo</strong> sin acta de causal de disoluci&oacute;n (Art. 457 C.Co.).</li>
+          <li><strong>Caja con saldo cr&eacute;dito</strong>: un "descubierto contable" que no existe en la realidad.</li>
+          <li><strong>Inventario negativo</strong> por sistema permanente mal aplicado.</li>
+          <li><strong>Cuentas por cobrar a socios sin documento</strong> ni intereses presuntivos (Art. 35 ET).</li>
+          <li><strong>Movimientos en cuentas de orden</strong> sin contrapartida l&oacute;gica.</li>
+          <li><strong>Diferencias de redondeo acumuladas</strong> que el ojo no ve pero la IA suma.</li>
+        </ol>
+        <h3>Ejemplo trabajado: qu&eacute; encuentra la IA</h3>
+        <p>Le pasas un balance de 320 cuentas. En 20 segundos te devuelve:</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header">Salida t&iacute;pica del prompt detector</div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">1110 Bancos &mdash; saldo cr&eacute;dito $&minus;3.200.000</span><span class="value">&#9888; revisar</span></div>
+            <div class="ejemplo-row"><span class="label">1592 Depreciaci&oacute;n acum. &gt; 1540 Flota (120% del costo)</span><span class="value">&#9888; revisar</span></div>
+            <div class="ejemplo-row"><span class="label">1399 Deterioro cartera = 130% de 1305 Clientes</span><span class="value">&#9888; revisar</span></div>
+            <div class="ejemplo-row total"><span class="label">3 hallazgos cr&iacute;ticos de 320 cuentas</span><span class="value">~20 s</span></div>
+          </div>
+        </div>
+        <p>Tu trabajo ahora NO es buscar esos 3 entre 320 (eso lo hizo la IA): es ir donde el cliente, pedir el extracto bancario que explica el sobregiro, el detalle de la flota que explica la depreciaci&oacute;n y el an&aacute;lisis de cartera por edades. Eso es juicio profesional, y es lo que cobras.</p>
+        <div class="prompt">
+          <div class="prompt-header"><h4>Prompt detector de errores</h4><span class="ia">Claude / ChatGPT</span></div>
+          Eres revisor fiscal colombiano. Revisa el balance que te pas&eacute; y dame TODOS los hallazgos donde:
+1. Una cuenta tenga saldo de naturaleza contraria al PUC (D. 2650/1993).
+2. La depreciaci&oacute;n acumulada exceda el costo bruto del activo.
+3. Una provisi&oacute;n exceda el 100% del valor del activo provisionado.
+4. El patrimonio l&iacute;quido sea negativo (causal Art. 457 C.Co.).
+5. Cuentas de IVA o retenciones con saldos inconsistentes.
+Para cada hallazgo: cita c&oacute;digo y nombre de cuenta, el valor, la naturaleza del problema y la prueba contable a pedir al cliente. No inventes cuentas que no est&eacute;n en el archivo.
+        </div>
+        <div class="tip">
+          <div class="tip-header"><h4>&#128161; Tip pr&aacute;ctico</h4></div>
+          <p>Agrega siempre al final del prompt "no inventes cuentas que no est&eacute;n en el archivo". Sin esa instrucci&oacute;n, la IA a veces "completa" con cuentas plausibles que no existen en el balance real. Es la diferencia entre un hallazgo &uacute;til y un falso positivo que te hace perder tiempo con el cliente.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-2" class="prev" onclick="navigateTo(2)">&larr; M&oacute;dulo 2</a><a href="#modulo-4" class="next" onclick="navigateTo(4)">M&oacute;dulo 4 &rarr;</a></div>
+    </section>
+    <section id="modulo-4" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Auditar EEFF con IA &rsaquo; M&oacute;dulo 4</div>
+        <div class="mod-num">M&oacute;dulo 4 de 10</div>
+        <h1>An&aacute;lisis vertical y horizontal automatizado</h1>
+        <p class="mod-desc">Lo que toma una hora en Excel, la IA lo hace en 30 segundos y, m&aacute;s importante, con interpretaci&oacute;n de las variaciones que importan.</p>
+      </div>
+      <div class="content-block">
+        <h2>Vertical: la radiograf&iacute;a de composici&oacute;n</h2>
+        <p>El an&aacute;lisis vertical expresa cada cuenta como % del total de activos (en el ESF) o del total de ingresos (en el ERI). Te dice <em>en qu&eacute; est&aacute; concentrado</em> el balance. No requiere comparativo: es la foto de un solo periodo.</p>
+        <h2>Horizontal: la pel&iacute;cula de la evoluci&oacute;n</h2>
+        <p>El an&aacute;lisis horizontal compara cada cuenta contra el periodo anterior: variaci&oacute;n absoluta y porcentual. Te dice <em>qu&eacute; se movi&oacute; y cu&aacute;nto</em>. Las variaciones grandes (&gt; 25%) son los puntos donde hay que pedir explicaci&oacute;n.</p>
+        <h3>Ejemplo trabajado: la trampa del "crecimos pero perdimos"</h3>
+        <div class="ejemplo">
+          <div class="ejemplo-header">An&aacute;lisis horizontal ERI 2025 vs 2024 (lo que devuelve la IA)</div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Ingresos 2024 &rarr; 2025</span><span class="value">$1.050M &rarr; $1.200M (+14%)</span></div>
+            <div class="ejemplo-row"><span class="label">Costo de ventas 2024 &rarr; 2025</span><span class="value">$640M &rarr; $760M (+19%) &#9888;</span></div>
+            <div class="ejemplo-row"><span class="label">Cartera 2024 &rarr; 2025</span><span class="value">$140M &rarr; $220M (+57%) &#9888;</span></div>
+            <div class="ejemplo-row total"><span class="label">Lectura de la IA</span><span class="value">margen se erosion&oacute;</span></div>
+          </div>
+        </div>
+        <p>El cliente "vendi&oacute; 14% m&aacute;s" pero el costo subi&oacute; 19% (el margen bruto se comi&oacute;) y la cartera creci&oacute; 57% (le est&aacute; vendiendo a clientes que no pagan). El an&aacute;lisis vertical/horizontal manual te tomar&iacute;a una hora detectar esto en 200 cuentas; la IA lo se&ntilde;ala y lo interpreta en 30 segundos. Tu valor agregado es ir a preguntar <em>por qu&eacute;</em> subi&oacute; el costo y <em>qui&eacute;n</em> es el cliente moroso.</p>
+        <div class="prompt">
+          <div class="prompt-header"><h4>Prompt vertical + horizontal</h4><span class="ia">Claude</span></div>
+          Te paso un ESF y un ERI con datos 2024 y 2025.
+1. An&aacute;lisis vertical de cada periodo: cada cuenta como % del total de activos (ESF) o total ingresos (ERI).
+2. An&aacute;lisis horizontal: variaci&oacute;n absoluta y % de cada cuenta entre 2024 y 2025.
+3. Marca con &#9888; las cuentas con variaci&oacute;n &gt; 25% o &lt; -25%.
+4. Interpretaci&oacute;n breve (3-5 l&iacute;neas): las 3 variaciones m&aacute;s relevantes y posibles causas contables.
+Form&aacute;talo como tabla markdown. Si una cifra no la tienes, dilo, no la estimes.
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header"><h4>&#9888; Error com&uacute;n</h4></div>
+          <p>Quedarse con el "creci&oacute; 14%" del titular sin mirar el detalle. Una empresa puede crecer en ventas y estar destruyendo valor si los costos crecen m&aacute;s r&aacute;pido o si el crecimiento es cartera incobrable. El horizontal lo revela en segundos &mdash; pero solo si lo lees.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-3" class="prev" onclick="navigateTo(3)">&larr; M&oacute;dulo 3</a><a href="#modulo-5" class="next" onclick="navigateTo(5)">M&oacute;dulo 5 &rarr;</a></div>
+    </section>
+    <section id="modulo-5" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Auditar EEFF con IA &rsaquo; M&oacute;dulo 5</div>
+        <div class="mod-num">M&oacute;dulo 5 de 10</div>
+        <h1>Indicadores financieros con IA</h1>
+        <p class="mod-desc">Calcular los indicadores no es lo dif&iacute;cil. Lo dif&iacute;cil es interpretarlos en contexto de sector y de tendencia. La IA acelera ambas cosas si la usas bien.</p>
+      </div>
+      <div class="content-block">
+        <h2>El set est&aacute;ndar de 9 indicadores</h2>
+        <table class="tabla-norm">
+          <thead><tr><th>Categor&iacute;a</th><th>Indicador</th><th>F&oacute;rmula</th><th>Lectura r&aacute;pida</th></tr></thead>
+          <tbody>
+            <tr><td>Liquidez</td><td>Raz&oacute;n corriente</td><td>Activo corr / Pasivo corr</td><td>Ideal 1,5&ndash;2</td></tr>
+            <tr><td>Liquidez</td><td>Prueba &aacute;cida</td><td>(AC &minus; Inv) / PC</td><td>Ideal &gt; 1</td></tr>
+            <tr><td>Endeudamiento</td><td>Endeudamiento total</td><td>Pasivos / Activos</td><td>&gt; 70% = riesgo</td></tr>
+            <tr><td>Endeudamiento</td><td>Apalancamiento</td><td>Pasivos / Patrimonio</td><td>Depende del sector</td></tr>
+            <tr><td>Rentabilidad</td><td>Margen neto</td><td>Utilidad neta / Ingresos</td><td>Comercio 3&ndash;8%</td></tr>
+            <tr><td>Rentabilidad</td><td>ROE</td><td>Utilidad / Patrimonio</td><td>Vs. costo de oportunidad</td></tr>
+            <tr><td>Rentabilidad</td><td>ROA</td><td>Utilidad / Activos</td><td>Eficiencia del activo</td></tr>
+            <tr><td>Actividad</td><td>Rotaci&oacute;n cartera</td><td>Ventas / Cartera prom.</td><td>D&iacute;as = 365/rotaci&oacute;n</td></tr>
+            <tr><td>Actividad</td><td>Rotaci&oacute;n inventario</td><td>Costo / Inv. prom.</td><td>Obsolescencia si baja</td></tr>
+          </tbody>
+        </table>
+        <h3>Ejemplo trabajado: leer la ca&iacute;da de calidad</h3>
+        <p>Una comercializadora muestra estos indicadores que la IA calcula y compara contra el a&ntilde;o anterior:</p>
+        <div class="ejemplo">
+          <div class="ejemplo-header">Salida del prompt de indicadores</div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Raz&oacute;n corriente 2024 &rarr; 2025</span><span class="value">1,8 &rarr; 1,2 (ATENCI&Oacute;N)</span></div>
+            <div class="ejemplo-row"><span class="label">Margen neto 2024 &rarr; 2025</span><span class="value">8% &rarr; 5% (ATENCI&Oacute;N)</span></div>
+            <div class="ejemplo-row"><span class="label">ROE 2024 &rarr; 2025</span><span class="value">18% &rarr; 9% (RIESGO)</span></div>
+            <div class="ejemplo-row"><span class="label">Rotaci&oacute;n cartera (d&iacute;as)</span><span class="value">48 &rarr; 67 d&iacute;as (RIESGO)</span></div>
+            <div class="ejemplo-row total"><span class="label">Diagn&oacute;stico</span><span class="value">deterioro de capital de trabajo</span></div>
+          </div>
+        </div>
+        <p>La empresa sigue siendo "l&iacute;quida" (raz&oacute;n corriente 1,2 &gt; 1) pero la calidad cay&oacute;: menos margen, peor retorno y la cartera tarda 19 d&iacute;as m&aacute;s en cobrarse. La IA te da el diagn&oacute;stico; t&uacute; decides si es material para el dictamen y qu&eacute; recomendaci&oacute;n das.</p>
+        <div class="prompt">
+          <div class="prompt-header"><h4>Prompt indicadores</h4><span class="ia">Claude</span></div>
+          Con los EEFF que te pas&eacute; (ESF y ERI 2025 y 2024):
+1. Calcula los 9 indicadores est&aacute;ndar (liquidez, endeudamiento, rentabilidad, actividad). Muestra rotaci&oacute;n tambi&eacute;n en d&iacute;as.
+2. Muestra valor 2024, 2025 y variaci&oacute;n.
+3. Compara contra rangos pr&aacute;cticos t&iacute;picos del sector [INDICA EL SECTOR] en Colombia.
+4. Para cada indicador di en una palabra: BUENO / ATENCI&Oacute;N / RIESGO.
+5. Cierra con un diagn&oacute;stico de 3 l&iacute;neas.
+        </div>
+        <div class="tip">
+          <div class="tip-header"><h4>&#128161; Tip pr&aacute;ctico</h4></div>
+          <p>Los "benchmarks de sector" que cita la IA son aproximados &mdash; sirven para orientar, no para un dictamen formal. Para auditor&iacute;a contrasta con bases reales: Supersociedades (SIREM), Confec&aacute;maras o el gremio del sector. La IA acelera, no reemplaza la fuente oficial.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-4" class="prev" onclick="navigateTo(4)">&larr; M&oacute;dulo 4</a><a href="#modulo-6" class="next" onclick="navigateTo(6)">M&oacute;dulo 6 &rarr;</a></div>
+    </section>
+    <section id="modulo-6" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Auditar EEFF con IA &rsaquo; M&oacute;dulo 6</div>
+        <div class="mod-num">M&oacute;dulo 6 de 10</div>
+        <h1>Conciliaci&oacute;n bancaria con asistencia</h1>
+        <p class="mod-desc">La conciliaci&oacute;n bancaria es repetitiva y propensa a errores humanos. La IA cruza extractos contra libros en segundos &mdash; con las reglas correctas.</p>
+      </div>
+      <div class="content-block">
+        <h2>El flujo est&aacute;ndar</h2>
+        <ol>
+          <li>Exporta el extracto bancario a CSV (o PDF si la IA lo acepta nativo).</li>
+          <li>Exporta el libro auxiliar de la cuenta contable a CSV.</li>
+          <li>Pide a la IA que cruce por fecha (tolerancia &plusmn;2 d&iacute;as) + monto exacto.</li>
+          <li>Recibe tres listas: partidas conciliadas, solo en banco, solo en libro.</li>
+        </ol>
+        <p>La tolerancia de &plusmn;2 d&iacute;as es clave en Colombia: una transferencia que el cliente registra el viernes el banco la refleja el lunes. Sin esa tolerancia, la IA reporta como "no conciliadas" partidas que s&iacute; corresponden, y te hace perder tiempo.</p>
+        <h3>Ejemplo trabajado: qu&eacute; sale de la conciliaci&oacute;n</h3>
+        <div class="ejemplo">
+          <div class="ejemplo-header">Resultado de cruce banco vs libro</div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Partidas conciliadas (match exacto)</span><span class="value">142</span></div>
+            <div class="ejemplo-row"><span class="label">Solo en banco (faltan en libros)</span><span class="value">5 &mdash; 4xMil, 2 comisiones, 1 ND, 1 rendimiento</span></div>
+            <div class="ejemplo-row"><span class="label">Solo en libro (no en banco)</span><span class="value">3 &mdash; cheques girados no cobrados</span></div>
+            <div class="ejemplo-row total"><span class="label">Tiempo manual estimado</span><span class="value">~2 h &rarr; &lt;1 min IA</span></div>
+          </div>
+        </div>
+        <p>Las 5 partidas "solo en banco" son ajustes que el contador debe registrar (gravamen 4&times;1.000, comisiones, nota d&eacute;bito). Las 3 "solo en libro" son cheques girados que el beneficiario no ha cobrado &mdash; partidas conciliatorias normales. La IA clasific&oacute; cada una con su causa probable; t&uacute; validas y registras.</p>
+        <div class="prompt">
+          <div class="prompt-header"><h4>Prompt conciliaci&oacute;n</h4><span class="ia">Claude / ChatGPT</span></div>
+          Te paso dos archivos.
+EXTRACTO BANCARIO: fecha, descripci&oacute;n, valor (+ cr&eacute;dito / - d&eacute;bito).
+LIBRO AUXILIAR: fecha, descripci&oacute;n, d&eacute;bito, cr&eacute;dito.
+Conc&iacute;lialos:
+1. Cruza por fecha (tolerancia &plusmn;2 d&iacute;as) + monto exacto.
+2. Reporta tres listas: conciliadas, solo en banco, solo en libro.
+3. Para cada partida no conciliada sugiere causa probable (4xMil, comisi&oacute;n, ND, cheque no cobrado, error).
+4. NO inventes partidas. Si una no cuadra, dilo claramente.
+        </div>
+        <div class="cta-practica">
+          <h3>&#x1F6E0; Practica con la herramienta de Conciliaci&oacute;n</h3>
+          <p>Ex&oacute;genaDIAN tiene una herramienta dedicada a conciliaci&oacute;n bancaria. &Uacute;sala como complemento del prompt para auditor&iacute;a y para cuadrar el resultado.</p>
+          <a href="../conciliacion.html">Abrir Conciliaci&oacute;n &rarr;</a>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header"><h4>&#9888; Error com&uacute;n</h4></div>
+          <p>No especificar la tolerancia de fechas. Sin "&plusmn;2 d&iacute;as", la IA exige match de fecha exacta y reporta decenas de falsos no conciliados. Una conciliaci&oacute;n llena de ruido es peor que no hacerla, porque te hace dudar de partidas correctas.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-5" class="prev" onclick="navigateTo(5)">&larr; M&oacute;dulo 5</a><a href="#modulo-7" class="next" onclick="navigateTo(7)">M&oacute;dulo 7 &rarr;</a></div>
+    </section>
+    <section id="modulo-7" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Auditar EEFF con IA &rsaquo; M&oacute;dulo 7</div>
+        <div class="mod-num">M&oacute;dulo 7 de 10</div>
+        <h1>Hallazgos t&iacute;picos por sector</h1>
+        <p class="mod-desc">Cada sector tiene sus "luces rojas" caracter&iacute;sticas. Saber cu&aacute;les buscar enfoca la auditor&iacute;a y le dice a la IA d&oacute;nde mirar.</p>
+      </div>
+      <div class="content-block">
+        <h2>Mapa de hallazgos por sector</h2>
+        <table class="tabla-norm">
+          <thead><tr><th>Sector</th><th>D&oacute;nde mirar primero</th></tr></thead>
+          <tbody>
+            <tr><td>Comercio</td><td>Rotaci&oacute;n de inventario, cartera vencida, margen bruto vs sector, mermas</td></tr>
+            <tr><td>Servicios profesionales</td><td>Honorarios sin soporte, costos personales mezclados, sub-facturaci&oacute;n</td></tr>
+            <tr><td>Construcci&oacute;n</td><td>Contratos en ejecuci&oacute;n, anticipos, garant&iacute;as, NIIF 15 grado de avance</td></tr>
+            <tr><td>Restaurantes / hoteles</td><td>Ventas en efectivo, propinas, AIU, mermas de inventario</td></tr>
+            <tr><td>Transporte</td><td>Mantenimientos, depreciaci&oacute;n de flota, comisiones, peajes</td></tr>
+            <tr><td>Manufactura</td><td>Costos de producci&oacute;n (clase 7), k&aacute;rdex, mermas, contratos laborales</td></tr>
+            <tr><td>ESAL</td><td>Asignaci&oacute;n permanente, RTE, donaciones recibidas, actividad meritoria</td></tr>
+          </tbody>
+        </table>
+        <h3>Ejemplo: c&oacute;mo enfocar el prompt por sector</h3>
+        <p>Si auditas una constructora, no le pidas a la IA "revisa el balance" en gen&eacute;rico. Dale el contexto del sector para que mire donde duele:</p>
+        <div class="prompt">
+          <div class="prompt-header"><h4>Prompt enfocado por sector</h4><span class="ia">Claude</span></div>
+          Estoy auditando una empresa de CONSTRUCCI&Oacute;N (CIIU 4111). Con el balance que te pas&eacute;, rev&iacute;same espec&iacute;ficamente:
+1. Cuentas de contratos en ejecuci&oacute;n y anticipos de clientes: &iquest;el ingreso se reconoce por grado de avance (NIIF 15)?
+2. Provisiones por garant&iacute;as post-venta.
+3. Anticipos a subcontratistas sin legalizar.
+4. Costos indirectos de obra mal clasificados como gasto.
+Para cada punto: di si hay riesgo, el valor involucrado y la prueba a pedir.
+        </div>
+        <p>El mismo balance, con el contexto de sector, produce hallazgos &uacute;tiles en vez de un resumen gen&eacute;rico. La IA no sabe el sector si no se lo dices: el CIIU y la descripci&oacute;n de la actividad son parte del prompt.</p>
+        <div class="tip">
+          <div class="tip-header"><h4>&#128161; Tip pr&aacute;ctico</h4></div>
+          <p>Arma una "plantilla de prompt por sector" para los sectores de tu cartera. La primera vez te toma 10 minutos dise&ntilde;arla; despu&eacute;s la reusas en cada cliente del mismo sector cambiando solo los datos. Es la diferencia entre auditar 5 clientes al mes y auditar 20.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-6" class="prev" onclick="navigateTo(6)">&larr; M&oacute;dulo 6</a><a href="#modulo-8" class="next" onclick="navigateTo(8)">M&oacute;dulo 8 &rarr;</a></div>
+    </section>
+    <section id="modulo-8" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Auditar EEFF con IA &rsaquo; M&oacute;dulo 8</div>
+        <div class="mod-num">M&oacute;dulo 8 de 10</div>
+        <h1>Redacci&oacute;n asistida de informes</h1>
+        <p class="mod-desc">El informe es el entregable que el cliente paga. La IA te da el borrador estructurado en minutos; t&uacute; aportas el juicio, las cifras verificadas y el lenguaje firme.</p>
+      </div>
+      <div class="content-block">
+        <h2>Estructura est&aacute;ndar de un informe de auditor&iacute;a</h2>
+        <ol>
+          <li><strong>Alcance y limitaciones</strong>: periodo, marco (NIIF Grupo 2), qu&eacute; no se revis&oacute;.</li>
+          <li><strong>Procedimientos aplicados</strong>: anal&iacute;ticos, de detalle, conciliaciones.</li>
+          <li><strong>Hallazgos</strong> clasificados en CR&Iacute;TICOS / IMPORTANTES / MENORES, cada uno con norma incumplida y recomendaci&oacute;n.</li>
+          <li><strong>Conclusi&oacute;n general</strong>.</li>
+          <li><strong>Anexos</strong>: papeles de trabajo, c&aacute;lculos.</li>
+        </ol>
+        <h3>Ejemplo: hallazgo bien redactado</h3>
+        <div class="ejemplo">
+          <div class="ejemplo-header">C&oacute;mo queda un hallazgo despu&eacute;s de pasar el borrador IA + tu juicio</div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Clasificaci&oacute;n</span><span class="value">IMPORTANTE</span></div>
+            <div class="ejemplo-row"><span class="label">Hallazgo</span><span class="value">Deterioro cartera 8% vs 3-5% sector</span></div>
+            <div class="ejemplo-row"><span class="label">Cuant&iacute;a</span><span class="value">$24.000.000</span></div>
+            <div class="ejemplo-row"><span class="label">Norma</span><span class="value">NIC 9 / Art. 145 ET</span></div>
+            <div class="ejemplo-row"><span class="label">Recomendaci&oacute;n</span><span class="value">An&aacute;lisis cartera por edades</span></div>
+          </div>
+        </div>
+        <div class="prompt">
+          <div class="prompt-header"><h4>Prompt informe</h4><span class="ia">Claude</span></div>
+          Eres revisor fiscal colombiano. Con los hallazgos que te pas&eacute; (lista en el contexto), red&aacute;ctame el borrador de informe con esta estructura:
+1. ALCANCE: per&iacute;odo, marco NIIF Grupo 2.
+2. PROCEDIMIENTOS APLICADOS: 5-7 bullets.
+3. HALLAZGOS clasificados CR&Iacute;TICOS / IMPORTANTES / MENORES. Cada uno: descripci&oacute;n, cuant&iacute;a, norma incumplida (Art. ET / NIC / decreto), recomendaci&oacute;n.
+4. CONCLUSI&Oacute;N GENERAL: 1 p&aacute;rrafo.
+Lenguaje profesional, sin adjetivos exagerados. M&aacute;ximo 3 p&aacute;ginas. No inventes cifras: usa solo las que te di.
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header"><h4>&#9888; Error com&uacute;n</h4></div>
+          <p>Copiar el borrador de la IA y enviarlo sin verificar las citas normativas. La IA a veces cita "Art. 145 ET" cuando el correcto es 146, o inventa un n&uacute;mero de NIC cercano. Toda cita que vaya en un informe firmado se verifica contra el ET o la norma. El borrador ahorra el 80% del tiempo; el 20% de verificaci&oacute;n es innegociable.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-7" class="prev" onclick="navigateTo(7)">&larr; M&oacute;dulo 7</a><a href="#modulo-9" class="next" onclick="navigateTo(9)">M&oacute;dulo 9 &rarr;</a></div>
+    </section>
+    <section id="modulo-9" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Auditar EEFF con IA &rsaquo; M&oacute;dulo 9</div>
+        <div class="mod-num">M&oacute;dulo 9 de 10</div>
+        <h1>Cu&aacute;ndo NO confiar en la IA</h1>
+        <p class="mod-desc">Las trampas conocidas y c&oacute;mo blindarte. Tu responsabilidad profesional con tu tarjeta sigue siendo tuya, no de la IA.</p>
+      </div>
+      <div class="content-block">
+        <h2>Las cinco trampas</h2>
+        <ol>
+          <li><strong>Citas normativas inventadas</strong>: cita "Art. 145 ET" donde el correcto es 146, o inventa una NIC. Siempre verificar contra fuente.</li>
+          <li><strong>Datos num&eacute;ricos inventados</strong>: si le pasas un balance incompleto, "rellena" con cifras estimadas plausibles. Exig&iacute;rsele que diga "no tengo el dato" en vez de inferir.</li>
+          <li><strong>Sicofancia</strong>: si t&uacute; afirmas "esto es deducible", te dar&aacute; la raz&oacute;n aunque sea falso. Aplica especialmente con normativa: contrasta, no aceptes.</li>
+          <li><strong>P&eacute;rdida de contexto en sesiones largas</strong>: tras muchos mensajes "olvida" el balance inicial. Cuando lo notes, reinicia con el dato completo.</li>
+          <li><strong>Datos personales</strong>: aunque la IA "prometa" privacidad, no subas c&eacute;dulas, NIT completos ni nombres en operaciones sensibles (Ley 1581/2012).</li>
+        </ol>
+        <h3>El protocolo de verificaci&oacute;n (no negociable)</h3>
+        <table class="tabla-norm">
+          <thead><tr><th>Qu&eacute; produjo la IA</th><th>C&oacute;mo lo verificas</th></tr></thead>
+          <tbody>
+            <tr><td>Cita normativa</td><td>Buscar el art&iacute;culo en el ET / la NIC en su fuente</td></tr>
+            <tr><td>Cifra o c&aacute;lculo</td><td>Cuadrar contra el balance original</td></tr>
+            <tr><td>Conclusi&oacute;n / hallazgo</td><td>Pasarla por tu juicio profesional antes del informe</td></tr>
+            <tr><td>"No s&eacute; / no tengo el dato"</td><td>Aceptarlo &mdash; no insistir hasta que invente</td></tr>
+          </tbody>
+        </table>
+        <div class="norma">
+          <h4>Responsabilidad profesional (Ley 43/1990, Art. 10)</h4>
+          <p>La fe p&uacute;blica que otorga el contador con su firma es indelegable. Ninguna herramienta &mdash; ni IA ni software &mdash; traslada esa responsabilidad. Usar IA sin verificar y firmar un dictamen err&oacute;neo puede derivar en sanci&oacute;n de la Junta Central de Contadores (Art. 660 ET para el caso tributario).</p>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header"><h4>&#9888; Error com&uacute;n</h4></div>
+          <p>"La IA me dijo que estaba bien". Eso no es defensa ante la JCC ni ante la DIAN. La IA es una herramienta de productividad; el responsable del dictamen es el profesional que firma. Tr&aacute;tala como tratar&iacute;as a un auxiliar brillante pero junior: &uacute;til, r&aacute;pido, pero todo lo que firma lo revisas t&uacute;.</p>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-8" class="prev" onclick="navigateTo(8)">&larr; M&oacute;dulo 8</a><a href="#modulo-10" class="next" onclick="navigateTo(10)">M&oacute;dulo 10 &rarr;</a></div>
+    </section>
+    <section id="modulo-10" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; Auditar EEFF con IA &rsaquo; M&oacute;dulo 10</div>
+        <div class="mod-num">M&oacute;dulo 10 de 10</div>
+        <h1>Caso integrador: auditor&iacute;a asistida de punta a punta</h1>
+        <p class="mod-desc">Recorrido completo con una empresa real: del balance que recibes a la lista de hallazgos lista para el informe, usando los prompts de los m&oacute;dulos anteriores.</p>
+      </div>
+      <div class="content-block">
+        <h2>El caso: Distribuciones del Valle SAS (comercio)</h2>
+        <p>Comercializadora, grupo 2 NIIF. Te entregan el balance 2025 y comparativo 2024 para revisor&iacute;a fiscal. Tienes medio d&iacute;a. As&iacute; lo haces con IA:</p>
+        <h3>Paso 1 &mdash; Preparaci&oacute;n (M&oacute;dulo 2)</h3>
+        <p>Exportas el balance a CSV con c&oacute;digo, nombre, saldo inicial, d&eacute;bito, cr&eacute;dito, saldo final, para 2024 y 2025. Quitas la columna de c&eacute;dulas de empleados (Ley 1581).</p>
+        <h3>Paso 2 &mdash; Cruces b&aacute;sicos (M&oacute;dulo 3)</h3>
+        <div class="ejemplo">
+          <div class="ejemplo-header">Resultado del prompt detector</div>
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">2 cuentas con naturaleza contraria al PUC</span><span class="value">&#9888;</span></div>
+            <div class="ejemplo-row"><span class="label">Sumatoria d&eacute;bito = cr&eacute;dito</span><span class="value">&#10004; cuadra</span></div>
+            <div class="ejemplo-row"><span class="label">Inventario sin movimiento 60 d&iacute;as por $25M</span><span class="value">&#9888; obsolescencia</span></div>
+          </div>
+        </div>
+        <h3>Paso 3 &mdash; Vertical / horizontal (M&oacute;dulo 4)</h3>
+        <div class="ejemplo">
+          <div class="ejemplo-body">
+            <div class="ejemplo-row"><span class="label">Cartera</span><span class="value">+65%</span></div>
+            <div class="ejemplo-row"><span class="label">Inventarios</span><span class="value">+42%</span></div>
+            <div class="ejemplo-row"><span class="label">Caja</span><span class="value">&minus;70%</span></div>
+            <div class="ejemplo-row"><span class="label">Margen neto</span><span class="value">8% &rarr; 5%</span></div>
+          </div>
+        </div>
+        <h3>Paso 4 &mdash; Indicadores (M&oacute;dulo 5)</h3>
+        <p>Raz&oacute;n corriente 1,8 &rarr; 1,2; apalancamiento +30%; ROE 18% &rarr; 9%. Diagn&oacute;stico de la IA: deterioro de capital de trabajo.</p>
+        <h3>Paso 5 &mdash; Hallazgos finales (tu juicio)</h3>
+        <ol>
+          <li><strong>CR&Iacute;TICO</strong>: deterioro de capital de trabajo &mdash; menos caja, m&aacute;s cartera vieja, m&aacute;s inventario sin rotaci&oacute;n. Riesgo de iliquidez en 2026.</li>
+          <li><strong>IMPORTANTE</strong>: 2 cuentas con naturaleza contraria al PUC, a corregir antes del cierre.</li>
+          <li><strong>IMPORTANTE</strong>: inventario $25M sin movimiento 60 d&iacute;as &mdash; pedir prueba de existencia f&iacute;sica y plan de venta o destrucci&oacute;n (Art. 64 ET).</li>
+          <li><strong>MENOR</strong>: provisi&oacute;n de cartera 8% vs 3-5% del sector &mdash; pedir an&aacute;lisis por edades.</li>
+        </ol>
+        <h3>Paso 6 &mdash; Informe (M&oacute;dulo 8)</h3>
+        <p>El prompt de informe genera el borrador con esos 4 hallazgos en 30 segundos. T&uacute; revisas, verificas que la cita del Art. 64 ET sea correcta, ajustas el lenguaje y firmas. Lo que antes era un d&iacute;a de trabajo se vuelve dos horas &mdash; sin perder rigor, porque el juicio sigue siendo tuyo.</p>
+        <div class="tip">
+          <div class="tip-header"><h4>&#128161; Cierre del curso</h4></div>
+          <p>El flujo es siempre el mismo: preparar &rarr; cruces &rarr; vertical/horizontal &rarr; indicadores &rarr; hallazgos por sector &rarr; informe &rarr; verificar. Lo que cambia entre clientes son los datos. Combinado con el curso de IA y Automatizaci&oacute;n, tienes el set completo para escalar tu cartera sin contratar m&aacute;s equipo.</p>
+        </div>
+        <div class="cta-practica">
+          <h3>&#x1F6E0; Aplica a un balance real</h3>
+          <p>Empieza con un cliente tuyo y sigue los 6 pasos. El Asistente de An&aacute;lisis de Balance de Ex&oacute;genaDIAN te ayuda a procesar el balance antes de pasarlo a la IA.</p>
+          <a href="../ia-analisis-balance.html">Abrir Asistente de An&aacute;lisis Balance &rarr;</a>
+        </div>
+      </div>
+      <div class="mod-nav"><a href="#modulo-9" class="prev" onclick="navigateTo(9)">&larr; M&oacute;dulo 9</a><a href="../escuela.html" class="next" style="background:var(--g800)">Volver a la Escuela &rarr;</a></div>
+    </section>
+  </div>
+</div>
+<section style="background:linear-gradient(180deg,#F9FAFB,#fff);padding:60px 24px 80px;border-top:1px solid #E5E7EB">
+  <div data-curso-meta="auditar-eeff-ia" style="text-align:center;margin-bottom:28px"></div>
+  <div data-cert-widget="auditar-eeff-ia"></div>
+</section>
+<script defer src="../shared/pro.js?v=848fbf16"></script>
+<script src="../shared/certificado.js?v=383dd956"></script>
+<script src="../shared/cert-emit-widget.js?v=81c77b40"></script>
+<script src="../shared/curso-meta.js?v=6b7779f4"></script>
+<button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()" aria-label="Abrir menú">&#9776;</button>
+<script>
+var currentModule=1;var totalModules=10;
+function navigateTo(n){document.querySelectorAll('.modulo-section').forEach(function(s){s.classList.remove('active');});var t=document.getElementById('modulo-'+n);if(t)t.classList.add('active');var links=document.querySelectorAll('.sidebar-nav a');links.forEach(function(a,i){a.classList.remove('active');if(i<n-1)a.classList.add('completed');if(i===n-1)a.classList.add('active');});var pct=Math.round((n/totalModules)*100);document.getElementById('progressFill').style.width=pct+'%';currentModule=n;window.scrollTo({top:0,behavior:'smooth'});document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('open');if(typeof gtag!=='undefined')gtag('event','escuela_modulo',{curso:'auditar-eeff-ia',modulo:n});}
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sidebarOverlay').classList.toggle('open');}
+</script>
+</body>
+</html>

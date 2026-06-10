@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S7SM6ST4CC');
+</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#1B3A5C">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certificación de Composición Accionaria — SAS / SA / Ltda. | ExógenaDIAN</title>
+<meta name="description" content="Genera la certificación de composición accionaria / societaria con tabla dinámica de accionistas, % de participación y verificación contra libro de accionistas. Firma RL + RF/Contador opcional.">
+<meta name="keywords" content="certificacion composicion accionaria, libro accionistas, estructura societaria SAS, composicion societaria, beneficiarios finales RUB">
+<meta name="author" content="ExogenaDIAN">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://exogenadian.com/certificado-composicion-accionaria.html">
+<meta property="og:title" content="Composición Accionaria | ExogenaDIAN">
+<meta property="og:description" content="Certificación de composición accionaria con tabla dinámica y verificación de % participación.">
+<meta property="og:url" content="https://exogenadian.com/certificado-composicion-accionaria.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="ExogenaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://exogenadian.com/"},{"@type":"ListItem","position":2,"name":"Certificados","item":"https://exogenadian.com/certificados.html"},{"@type":"ListItem","position":3,"name":"Composición Accionaria","item":"https://exogenadian.com/certificado-composicion-accionaria.html"}]}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/certificados.css?v=11951c17">
+<style>
+body{font-family:'DM Sans',sans-serif;background:#F9FAFB;color:#111;margin:0}
+a{color:#2E75B6}
+.no-perfil{max-width:760px;margin:30px auto;background:#FFFBEB;border:1px solid #FCD34D;color:#78350F;padding:20px 24px;border-radius:12px;line-height:1.55}
+.no-perfil a{color:#92400E;font-weight:700}
+.section-label{font-size:.78rem;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.3px;margin:14px 0 6px;padding-top:6px;border-top:1px solid #E5E7EB}
+.section-label:first-child{padding-top:0;border-top:none;margin-top:0}
+.firmas-doble{display:grid;grid-template-columns:1fr 1fr;gap:24pt;margin-top:30pt}
+.firmas-doble .firma-bloque{padding-top:14pt}
+.firmas-doble img{max-height:18mm;margin-bottom:4pt}
+.firmas-doble .firma-linea{display:block;width:auto;border-top:1pt solid #111;margin-top:14pt;padding-top:4pt;font-weight:700;font-size:10.5pt}
+.firmas-doble .firma-datos{font-size:9.5pt;line-height:1.5;margin-top:2pt}
+.acc-card{border:1px solid #E5E7EB;border-radius:10px;padding:12px;margin-bottom:10px;background:#FAFBFC}
+.acc-card .top{display:flex;justify-content:space-between;align-items:center}
+.acc-card .top .num{font-weight:700;color:#1B3A5C;font-size:.85rem}
+.del-btn{background:#FEF2F2;border:1px solid #FECACA;color:#B91C1C;border-radius:6px;padding:4px 10px;cursor:pointer;font-weight:700;font-size:.78rem}
+.del-btn:hover{background:#FEE2E2}
+.add-acc-btn{margin-top:6px;background:#fff;border:1px dashed #9CA3AF;color:#374151;padding:10px;border-radius:8px;cursor:pointer;width:100%;font-weight:600;font-size:.88rem}
+.add-acc-btn:hover{border-color:#2E75B6;color:#1B3A5C}
+.totales{margin-top:10px;padding:10px 12px;border-radius:8px;font-size:.85rem;line-height:1.5}
+.totales.ok{background:#D1FAE5;color:#065F46;border:1px solid #6EE7B7}
+.totales.fail{background:#FEE2E2;color:#991B1B;border:1px solid #FCA5A5}
+.totales strong{font-size:.95rem}
+@media print{
+  .firmas-doble{display:grid;grid-template-columns:1fr 1fr;gap:24pt}
+}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div id="nav-container"></div>
+<script defer src="shared/pro.js?v=848fbf16"></script>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<script src="shared/perfil-contador.js?v=cc60e2c8"></script>
+<script src="shared/cert-helpers.js?v=cdfa986d"></script>
+<div class="cert-toolbar">
+  <a href="certificados.html" class="btn btn-edit">← Volver a certificados</a>
+  <button class="btn btn-print" onclick="window.print()">🖨️ Imprimir / PDF</button>
+  <button class="btn btn-edit" onclick="descargarWord()">📝 Descargar Word</button>
+  <span class="hint">Art. 195 C.Co · libro de accionistas / socios.</span>
+</div>
+<div class="cert-layout">
+  <aside class="cert-form" id="formPanel">
+    <h2>Composición Accionaria</h2>
+    <p class="sub">Certificación de la estructura societaria con tabla dinámica de accionistas y % de participación. Firma el Representante Legal con co-firma opcional del Revisor Fiscal o Contador.</p>
+    <div class="section-label">Sociedad</div>
+    <label for="cliSelect">Cliente</label>
+    <select id="cliSelect">
+      <option value="">— Llenar manualmente —</option>
+    </select>
+    <label for="emp_nombre">Razón social</label>
+    <input type="text" id="emp_nombre" placeholder="Comercializadora ABC S.A.S.">
+    <div class="row2">
+      <div>
+        <label for="emp_nit">NIT</label>
+        <input type="text" id="emp_nit" placeholder="900123456" inputmode="numeric">
+      </div>
+      <div>
+        <label for="emp_ciudad">Ciudad</label>
+        <input type="text" id="emp_ciudad" placeholder="Bogotá">
+      </div>
+    </div>
+    <label for="tipo_societario">Tipo societario</label>
+    <select id="tipo_societario">
+      <option>S.A.S. (Sociedad por Acciones Simplificada)</option>
+      <option>S.A. (Sociedad Anónima)</option>
+      <option>Ltda. (Sociedad de Responsabilidad Limitada)</option>
+      <option>E.U. (Empresa Unipersonal)</option>
+      <option>S. en C. (Sociedad en Comandita)</option>
+      <option>S.A.P.I. (Sociedad Anónima Promotora de Inversión)</option>
+      <option>Cooperativa</option>
+    </select>
+    <div class="row2">
+      <div>
+        <label for="fecha_corte">Fecha de corte</label>
+        <input type="date" id="fecha_corte">
+      </div>
+      <div>
+        <label for="folio_libro">Folio Libro de Accionistas</label>
+        <input type="text" id="folio_libro" placeholder="N° 123">
+      </div>
+    </div>
+    <div class="section-label">Capital social</div>
+    <div class="row2">
+      <div>
+        <label for="cap_suscrito">Capital suscrito y pagado</label>
+        <input type="text" id="cap_suscrito" placeholder="50.000.000" inputmode="numeric">
+      </div>
+      <div>
+        <label for="valor_nominal">Valor nominal por acción/cuota</label>
+        <input type="text" id="valor_nominal" placeholder="1.000" inputmode="numeric">
+      </div>
+    </div>
+    <div class="section-label">Accionistas / socios</div>
+    <p class="hint-sm" style="margin:0 0 6px">Llena el N° de acciones; el valor y % se calculan automáticamente.</p>
+    <div id="accList"></div>
+    <button class="add-acc-btn" id="addAcc" type="button">+ Agregar accionista</button>
+    <div class="totales" id="totalesBox">—</div>
+    <div class="section-label">Firma</div>
+    <label for="rl_nombre">Nombre del Representante Legal</label>
+    <input type="text" id="rl_nombre" placeholder="Carlos Gómez">
+    <div class="row2">
+      <div>
+        <label for="rl_cc">Cédula del RL</label>
+        <input type="text" id="rl_cc" placeholder="79.123.456" inputmode="numeric">
+      </div>
+      <div>
+        <label for="rl_cargo">Cargo</label>
+        <input type="text" id="rl_cargo" value="Representante Legal">
+      </div>
+    </div>
+    <label for="cofirma">Co-firma profesional (opcional)</label>
+    <select id="cofirma">
+      <option value="ninguna">Ninguna (solo RL)</option>
+      <option value="rf">Revisor Fiscal (perfil)</option>
+      <option value="contador">Contador Público (perfil)</option>
+    </select>
+    <label for="destinatario" style="margin-top:14px">Destinatario (opcional)</label>
+    <input type="text" id="destinatario" placeholder="Banco / SuperSociedades / DIAN / RUB / Notaría">
+  </aside>
+  <div class="cert-preview-wrap">
+    <article class="cert-sheet" id="sheet">
+      <div class="cert-membrete" id="membrete"></div>
+      <h1>Certificación de Composición Accionaria</h1>
+      <p class="cert-fecha" style="text-align:right"><span id="vCiudadFecha">—</span></p>
+      <p id="vIntroFirmante">—</p>
+      <h2 style="text-align:center;margin-top:14pt;font-size:12pt" id="vEnc">CERTIFICA</h2>
+      <p>Que de conformidad con los registros contenidos en el <strong>Libro de Accionistas / Socios</strong> de la sociedad <strong id="vEmpNombre">[Empresa]</strong>, identificada con NIT <span id="vEmpNit">—</span>, llevado en cumplimiento del <strong>Artículo 195 del Código de Comercio</strong>, con corte al <strong id="vFechaCorte">—</strong><span id="vFolioBlock"></span>, la composición accionaria se encuentra distribuida de la siguiente manera:</p>
+      <p style="margin-top:8pt"><strong>Capital suscrito y pagado:</strong> <span id="vCapTotal">$0</span> · <strong>Valor nominal:</strong> <span id="vNominal">$0</span> por acción/cuota · <strong>Total acciones/cuotas:</strong> <span id="vTotalAcciones">0</span></p>
+      <table>
+        <thead>
+          <tr>
+            <th>Accionista / Socio</th>
+            <th>Identificación</th>
+            <th>Tipo de acción</th>
+            <th class="num">N° acciones</th>
+            <th class="num">Valor</th>
+            <th class="num">%</th>
+          </tr>
+        </thead>
+        <tbody id="vTablaAcc"></tbody>
+        <tfoot>
+          <tr><th colspan="3">TOTAL</th><th class="num" id="vTotAcc">0</th><th class="num" id="vTotValor">$0</th><th class="num" id="vTotPct">0%</th></tr>
+        </tfoot>
+      </table>
+      <p style="margin-top:10pt">La presente certificación se expide con base en el <strong>Libro de Accionistas / Socios</strong> de la sociedad y los documentos societarios vigentes (estatutos, actas de Asamblea / Junta de Socios, registros de cesiones y aportes), y constituye soporte para los efectos legales y tributarios pertinentes — incluyendo, cuando aplique, el reporte de <strong>Beneficiarios Finales (RUB)</strong> previsto en el Artículo 631-5 del Estatuto Tributario y la Resolución DIAN 164 de 2021, así como los reportes ante <strong>SuperSociedades</strong> conforme a la Circular Externa correspondiente.</p>
+      <p style="margin-top:12pt" id="vCierre">Se expide la presente certificación<span id="vDestinatario"></span>, a los <strong id="vDia">—</strong> días del mes de <strong id="vMes">—</strong> de <strong id="vAnoEmision">—</strong>.</p>
+      <div class="cert-firma" id="firmaSimple">
+        <div class="firma-linea"><span id="vFirmaNombre">[RL]</span></div>
+        <div class="firma-datos" id="vFirmaDatos">—</div>
+      </div>
+      <div class="firmas-doble" id="firmaDoble" style="display:none">
+        <div class="firma-bloque">
+          <div class="firma-linea"><span id="vF1Nombre">[RL]</span></div>
+          <div class="firma-datos">
+            <div>C.C. <span id="vF1CC">—</span></div>
+            <div id="vF1Cargo">Representante Legal</div>
+          </div>
+        </div>
+        <div class="firma-bloque">
+          <div id="vF2Img"></div>
+          <div class="firma-linea"><span id="vF2Nombre">[Profesional]</span></div>
+          <div class="firma-datos" id="vF2Datos">—</div>
+        </div>
+      </div>
+      <div class="cert-marca-agua">Generado con <a href="https://exogenadian.com" target="_blank">exogenadian.com</a> — herramienta gratuita para contadores</div>
+    </article>
+  </div>
+</div>
+<script>
+(function(){
+  'use strict';
+  var $=function(id){return document.getElementById(id);};
+  var H=window.certHelpers;
+  var perfil=perfilContador.get()||{};
+  if(!perfil.nombre){
+    var aviso=document.createElement('div');
+    aviso.className='no-perfil';
+    aviso.style.cssText='grid-column:1/-1;margin:0 0 14px;padding:12px 16px;font-size:.9rem';
+    aviso.innerHTML='💡 <strong>Tip:</strong> <a href="certificados.html">guarda tu perfil</a> para autollenar tu nombre, cédula y T.P. También puedes diligenciar manualmente abajo y descargar.';
+    var layout=document.querySelector('.cert-layout');
+    if(layout) layout.insertBefore(aviso, layout.firstChild);
+  }
+  // Defaults
+  $('fecha_corte').value=new Date().toISOString().slice(0,10);
+  H.bindMonedaInput($('cap_suscrito'), function(){ render(); });
+  H.bindMonedaInput($('valor_nominal'), function(){ render(); });
+  // Cargar libreta
+  var clientes=perfilContador.clientes.list();
+  var sel=$('cliSelect');
+  clientes.forEach(function(c){
+    var opt=document.createElement('option');
+    opt.value=c.id;
+    opt.textContent=c.nombre+(c.nit?(' — '+c.nit):'');
+    sel.appendChild(opt);
+  });
+  sel.addEventListener('change', function(){
+    if(!sel.value) return;
+    var c=perfilContador.clientes.get(sel.value);
+    if(!c) return;
+    $('emp_nombre').value=c.nombre||'';
+    $('emp_nit').value=c.nit||'';
+    $('emp_ciudad').value=c.ciudad||'';
+    if(c.rl_nombre) $('rl_nombre').value=c.rl_nombre;
+    if(c.rl_cc) $('rl_cc').value=c.rl_cc;
+    if(c.rl_cargo) $('rl_cargo').value=c.rl_cargo;
+    render();
+  });
+  var TIPOS_ACCION=['Ordinarias','Privilegiadas','Sin derecho a voto','Con dividendo preferencial','Cuotas sociales','Otras'];
+  var accionistas=[
+    {nombre:'', id:'', tipoAccion:'Ordinarias', acciones:0}
+  ];
+  function renderAcc(){
+    var html='';
+    accionistas.forEach(function(a, i){
+      var optsTipo=TIPOS_ACCION.map(function(t){
+        return '<option value="'+H.esc(t)+'"'+(t===a.tipoAccion?' selected':'')+'>'+H.esc(t)+'</option>';
+      }).join('');
+      html+='<div class="acc-card" data-idx="'+i+'">'+
+        '<div class="top"><span class="num">Accionista '+(i+1)+'</span>'+
+        '<button class="del-btn" data-act="del" type="button">Eliminar</button></div>'+
+        '<label style="margin-top:6px">Nombre / Razón social</label>'+
+        '<input type="text" data-f="nombre" value="'+H.esc(a.nombre)+'" placeholder="Juan Pérez Gómez / Inversiones XYZ S.A.S.">'+
+        '<div class="row2">'+
+        '<div><label>CC / NIT</label><input type="text" data-f="id" value="'+H.esc(a.id)+'" placeholder="1.045.678.901" inputmode="numeric"></div>'+
+        '<div><label>Tipo de acción</label><select data-f="tipoAccion">'+optsTipo+'</select></div>'+
+        '</div>'+
+        '<label style="margin-top:6px">N° acciones / cuotas</label>'+
+        '<input type="text" data-f="acciones" value="'+(a.acciones?a.acciones.toLocaleString('es-CO'):'')+'" placeholder="50.000" inputmode="numeric">'+
+        '</div>';
+    });
+    $('accList').innerHTML=html;
+    Array.prototype.forEach.call($('accList').querySelectorAll('.acc-card'), function(card){
+      var i=parseInt(card.dataset.idx,10);
+      card.querySelector('[data-f="nombre"]').addEventListener('input', function(e){
+        accionistas[i].nombre=e.target.value;
+        render();
+      });
+      card.querySelector('[data-f="id"]').addEventListener('input', function(e){
+        accionistas[i].id=e.target.value;
+        render();
+      });
+      card.querySelector('[data-f="tipoAccion"]').addEventListener('change', function(e){
+        accionistas[i].tipoAccion=e.target.value;
+        render();
+      });
+      card.querySelector('[data-f="acciones"]').addEventListener('input', function(e){
+        var raw=e.target.value.replace(/[^\d]/g,'');
+        e.target.value=raw?parseInt(raw,10).toLocaleString('es-CO'):'';
+        accionistas[i].acciones=parseInt(raw,10)||0;
+        render();
+      });
+      card.querySelector('[data-act="del"]').addEventListener('click', function(){
+        if(accionistas.length<=1){
+          (window.exoToast||{error:alert}).error('Debe quedar al menos un accionista');
+          return;
+        }
+        accionistas.splice(i,1);
+        renderAcc();
+        render();
+      });
+    });
+  }
+  $('addAcc').addEventListener('click', function(){
+    accionistas.push({nombre:'', id:'', tipoAccion:'Ordinarias', acciones:0});
+    renderAcc();
+    render();
+  });
+  function render(){
+    var p=perfilContador.get()||{};
+    var empNombre=$('emp_nombre').value.trim()||'[Empresa]';
+    var empNit=$('emp_nit').value.trim()||'—';
+    var empCiudad=$('emp_ciudad').value.trim();
+    var tipoSoc=$('tipo_societario').value;
+    $('membrete').innerHTML='<div class="cert-membrete-info" style="text-align:center;width:100%">'+
+      '<div class="nombre">'+H.esc(empNombre)+'</div>'+
+      '<div class="sub">NIT '+H.esc(empNit)+(empCiudad?(' · '+H.esc(empCiudad)):'')+(tipoSoc?(' · '+H.esc(tipoSoc.split(' ')[0])):'')+'</div></div>';
+    var hoy=new Date();
+    $('vCiudadFecha').textContent=(empCiudad?(empCiudad+', '):'')+hoy.getDate()+' de '+H.MESES[hoy.getMonth()]+' de '+hoy.getFullYear();
+    $('vDia').textContent=hoy.getDate();
+    $('vMes').textContent=H.MESES[hoy.getMonth()];
+    $('vAnoEmision').textContent=hoy.getFullYear();
+    $('vEmpNombre').textContent=empNombre;
+    $('vEmpNit').textContent=empNit;
+    $('vFechaCorte').textContent=$('fecha_corte').value?H.formatFechaLarga($('fecha_corte').value):'—';
+    var folio=$('folio_libro').value.trim();
+    $('vFolioBlock').textContent=folio?(' (folio '+folio+')'):'';
+    var capTotal=H.parseCOP($('cap_suscrito').value);
+    var nominal=H.parseCOP($('valor_nominal').value);
+    var totalAccTeorico=nominal>0?Math.round(capTotal/nominal):0;
+    $('vCapTotal').textContent=H.formatCOP(capTotal);
+    $('vNominal').textContent=H.formatCOP(nominal);
+    $('vTotalAcciones').textContent=totalAccTeorico.toLocaleString('es-CO');
+    // Tabla
+    var sumAcciones=0;
+    accionistas.forEach(function(a){ sumAcciones+=a.acciones||0; });
+    var rows='';
+    accionistas.forEach(function(a){
+      if(!a.nombre && !a.acciones) return;
+      var valor=(a.acciones||0)*nominal;
+      var pct = sumAcciones>0 ? ((a.acciones||0)*100/sumAcciones) : 0;
+      rows+='<tr>'+
+        '<td>'+H.esc(a.nombre||'(sin nombre)')+'</td>'+
+        '<td>'+H.esc(a.id||'—')+'</td>'+
+        '<td>'+H.esc(a.tipoAccion||'—')+'</td>'+
+        '<td class="num">'+(a.acciones||0).toLocaleString('es-CO')+'</td>'+
+        '<td class="num">'+H.formatCOP(valor)+'</td>'+
+        '<td class="num">'+pct.toFixed(2)+'%</td>'+
+      '</tr>';
+    });
+    $('vTablaAcc').innerHTML=rows||'<tr><td colspan="6" style="text-align:center;color:#9CA3AF">— Sin accionistas —</td></tr>';
+    var totValor=sumAcciones*nominal;
+    var totPct = sumAcciones>0 ? 100 : 0;
+    $('vTotAcc').textContent=sumAcciones.toLocaleString('es-CO');
+    $('vTotValor').textContent=H.formatCOP(totValor);
+    $('vTotPct').textContent=totPct.toFixed(2)+'%';
+    // Validación
+    var box=$('totalesBox');
+    var msgs=[];
+    msgs.push('<strong>Suma acciones:</strong> '+sumAcciones.toLocaleString('es-CO')+(totalAccTeorico>0?(' / '+totalAccTeorico.toLocaleString('es-CO')+' teóricas'):''));
+    msgs.push('<strong>Valor pagado:</strong> '+H.formatCOP(totValor)+(capTotal>0?(' / '+H.formatCOP(capTotal)+' suscrito'):''));
+    var match = (totalAccTeorico===0 || sumAcciones===totalAccTeorico) && (capTotal===0 || totValor===capTotal);
+    box.className='totales '+(match?'ok':'fail');
+    if(!match && totalAccTeorico>0){
+      msgs.push('⚠️ La suma de acciones por accionista no coincide con capital suscrito / valor nominal. Verifica las cifras.');
+    }
+    box.innerHTML=msgs.join('<br>');
+    // Intro y firmas
+    var rln=$('rl_nombre').value.trim()||'[RL]';
+    var rlcc=$('rl_cc').value.trim()||'—';
+    var rlcargo=$('rl_cargo').value.trim()||'Representante Legal';
+    var cofirma=$('cofirma').value;
+    var profNombre=p.nombre||'';
+    var profCC=p.cc||'—';
+    var profTP=p.tp||'—';
+    var profCargo = cofirma==='rf' ? 'Revisor Fiscal' : 'Contador Público';
+    var profCargoLargo = cofirma==='rf' ? 'Revisor(a) Fiscal' : 'Contador(a) Público(a)';
+    if(cofirma==='ninguna'){
+      $('vIntroFirmante').innerHTML='El(la) suscrito(a), <strong>'+H.esc(rln)+'</strong>, identificado(a) con cédula de ciudadanía N° '+H.esc(rlcc)+', en calidad de <strong>'+H.esc(rlcargo)+'</strong> de '+H.esc(empNombre)+',';
+      $('vEnc').textContent='CERTIFICA';
+      $('firmaSimple').style.display='';
+      $('firmaDoble').style.display='none';
+      $('vFirmaNombre').textContent=rln;
+      $('vFirmaDatos').innerHTML='<div>C.C. '+H.esc(rlcc)+'</div><div>'+H.esc(rlcargo)+'</div>';
+    } else {
+      $('vIntroFirmante').innerHTML='Los suscritos, <strong>'+H.esc(rln)+'</strong>, identificado(a) con cédula de ciudadanía N° '+H.esc(rlcc)+', en calidad de <strong>'+H.esc(rlcargo)+'</strong>, y <strong>'+H.esc(profNombre)+'</strong>, identificado(a) con cédula de ciudadanía N° '+H.esc(profCC)+', '+profCargoLargo+' con Tarjeta Profesional N° <strong>'+H.esc(profTP)+'</strong> expedida por la Junta Central de Contadores, ambos de '+H.esc(empNombre)+',';
+      $('vEnc').textContent='CERTIFICAN';
+      $('firmaSimple').style.display='none';
+      $('firmaDoble').style.display='';
+      $('vF1Nombre').textContent=rln;
+      $('vF1CC').textContent=rlcc;
+      $('vF1Cargo').textContent=rlcargo;
+      $('vF2Img').innerHTML=p.firma_base64?('<img src="'+p.firma_base64+'" alt="">'):'';
+      $('vF2Nombre').textContent=profNombre;
+      $('vF2Datos').innerHTML='<div>C.C. '+H.esc(profCC)+'</div><div>T.P. '+H.esc(profTP)+' · '+profCargo+'</div>';
+    }
+    var dest=$('destinatario').value.trim();
+    $('vDestinatario').textContent=dest?(', con destino a '+dest):'';
+  }
+  ;['emp_nombre','emp_nit','emp_ciudad','fecha_corte','folio_libro','rl_nombre','rl_cc','rl_cargo','destinatario'].forEach(function(id){
+    $(id).addEventListener('input', render);
+  });
+  ['tipo_societario','cofirma'].forEach(function(id){
+    $(id).addEventListener('change', render);
+  });
+  if(window.exoPro && exoPro.check){
+    exoPro.check().then(function(isPro){
+      if(isPro) $('sheet').setAttribute('data-pro','1');
+    });
+  }
+  window.descargarWord=function(){
+    var emp=$('emp_nombre').value.trim().replace(/[^a-zA-Z0-9]/g,'-')||'sociedad';
+    H.downloadAsWord($('sheet'), 'composicion-accionaria-'+emp);
+  };
+  renderAcc();
+  render();
+})();
+</script>
+</body>
+</html>

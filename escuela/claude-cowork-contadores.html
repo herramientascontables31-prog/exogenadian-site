@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="../shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S7SM6ST4CC');
+</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curso Claude Cowork para Contadores &mdash; Una carpeta por cliente, contexto que no se pierde | Ex&oacute;genaDIAN</title>
+<meta name="description" content="Aprende a usar Claude Cowork (el escritorio de Anthropic) como contador colombiano. 7 m&oacute;dulos: instalar, organizar carpetas por cliente, crear Projects reutilizables, memoria persistente, flujos de cierre/requerimiento/ex&oacute;gena, privacidad y backup.">
+<link rel="canonical" href="https://exogenadian.com/escuela/claude-cowork-contadores.html">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Curso Claude Cowork para Contadores &mdash; Una carpeta por cliente | Ex&oacute;genaDIAN">
+<meta property="og:description" content="Domina Claude Cowork: el escritorio de Anthropic con carpetas-por-cliente, Projects y memoria persistente. 7 m&oacute;dulos pr&aacute;cticos para contadores colombianos.">
+<meta property="og:url" content="https://exogenadian.com/escuela/claude-cowork-contadores.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="Ex&oacute;genaDIAN">
+<meta property="og:image" content="https://exogenadian.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Course","name":"Claude Cowork para Contadores","description":"7 m&oacute;dulos pr&aacute;cticos para usar Claude Cowork como contador colombiano: instalaci&oacute;n, carpetas por cliente, Projects, memoria y flujos de cierre.","provider":{"@type":"Organization","name":"Ex&oacute;genaDIAN","url":"https://exogenadian.com"},"educationalLevel":"Professional","inLanguage":"es","audience":{"@type":"Audience","audienceType":"Contadores p&uacute;blicos colombianos"}}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green-900:#064E3B;--green-800:#065F46;--green-700:#047857;--green-600:#059669;--green-500:#10B981;--green-400:#34D399;--green-300:#6EE7B7;--green-200:#A7F3D0;--green-100:#D1FAE5;--green-50:#ECFDF5;
+  --white:#FFF;--gray-50:#F9FAFB;--gray-100:#F3F4F6;--gray-200:#E5E7EB;--gray-300:#D1D5DB;--gray-400:#9CA3AF;--gray-500:#6B7280;--gray-600:#4B5563;--gray-700:#374151;--gray-800:#1F2937;--gray-900:#111827;
+  --amber-50:#FFFBEB;--amber-100:#FEF3C7;--amber-500:#F59E0B;--amber-700:#92400E;--amber-800:#78350F;
+  --blue-50:#EFF6FF;--blue-100:#DBEAFE;--blue-500:#3B82F6;--blue-700:#1D4ED8;
+  --purple-50:#F5F3FF;--purple-100:#EDE9FE;--purple-500:#8B5CF6;--purple-700:#6D28D9;
+  --rose-50:#FFF1F2;--rose-500:#F43F5E;--rose-700:#BE123C;
+  --claude-50:#FAF7F2;--claude-100:#F5EFE6;--claude-300:#E5D3BE;--claude-500:#D97757;--claude-600:#CC785C;--claude-700:#A85B3F;--claude-900:#3D1F12;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-900);line-height:1.6}
+.curso-layout{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+@media(max-width:900px){.curso-layout{grid-template-columns:1fr}}
+.sidebar{background:var(--white);border-right:1px solid var(--gray-200);padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
+.sidebar-header{padding:16px 20px;border-bottom:1px solid var(--gray-100)}
+.sidebar-header a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--gray-800);font-weight:800;font-size:.9rem}
+.sidebar-header a div{width:28px;height:28px;background:linear-gradient(135deg,#059669,#34D399);border-radius:7px;display:grid;place-items:center;color:#fff;font-size:.7rem;font-weight:900}
+.sidebar-curso{padding:16px 20px;border-bottom:1px solid var(--gray-100)}
+.sidebar-curso h3{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--green-700);margin-bottom:4px}
+.sidebar-curso p{font-size:.88rem;font-weight:700;color:var(--gray-800)}
+.sidebar-curso .claude-pill{display:inline-flex;align-items:center;gap:5px;margin-top:8px;background:var(--claude-100);border:1px solid var(--claude-300);color:var(--claude-700);font-size:.66rem;font-weight:800;padding:3px 9px;border-radius:100px;text-transform:uppercase;letter-spacing:.06em}
+.sidebar-curso .claude-pill::before{content:'';width:6px;height:6px;background:var(--claude-500);border-radius:50%}
+.sidebar-nav{padding:12px 0;flex:1}
+.sidebar-nav a{display:flex;align-items:center;gap:10px;padding:10px 20px;text-decoration:none;color:var(--gray-500);font-size:.82rem;font-weight:500;transition:all .15s;border-left:3px solid transparent}
+.sidebar-nav a:hover{background:var(--green-50);color:var(--green-700)}
+.sidebar-nav a.active{background:var(--green-50);color:var(--green-700);font-weight:700;border-left-color:var(--green-600)}
+.sidebar-nav a .nav-num{width:24px;height:24px;border-radius:50%;background:var(--gray-100);color:var(--gray-500);display:grid;place-items:center;font-size:.72rem;font-weight:700;flex-shrink:0}
+.sidebar-nav a.active .nav-num{background:var(--green-600);color:#fff}
+.sidebar-back{padding:16px 20px;border-top:1px solid var(--gray-100);margin-top:auto}
+.sidebar-back a{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--gray-400);font-size:.82rem;font-weight:500;transition:color .15s}
+.sidebar-back a:hover{color:var(--gray-700)}
+.sidebar-toggle{display:none;position:fixed;bottom:20px;left:20px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--green-600);color:#fff;border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 16px rgba(5,150,105,.3)}
+@media(max-width:900px){
+  .sidebar{display:none;position:fixed;top:0;left:0;z-index:199;width:280px;box-shadow:4px 0 20px rgba(0,0,0,.1)}
+  .sidebar.open{display:flex}
+  .sidebar-toggle{display:block}
+  .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:198}
+  .sidebar-overlay.open{display:block}
+}
+.curso-main{padding:32px 40px 60px;max-width:860px}
+@media(max-width:900px){.curso-main{padding:20px 16px 80px}}
+.mod-header{margin-bottom:32px}
+.mod-breadcrumb{font-size:.78rem;color:var(--gray-400);margin-bottom:8px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.mod-breadcrumb a{color:var(--gray-400);text-decoration:none}
+.mod-breadcrumb a:hover{color:var(--green-600)}
+.mod-num{display:inline-flex;align-items:center;gap:8px;background:var(--green-100);color:var(--green-700);padding:4px 14px;border-radius:100px;font-size:.78rem;font-weight:700;margin-bottom:12px}
+.mod-header h1{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;letter-spacing:-.02em;margin-bottom:8px;line-height:1.2}
+.mod-header .mod-desc{font-size:1rem;color:var(--gray-500);max-width:600px;line-height:1.6}
+.content-block{margin-bottom:28px}
+.content-block h2{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;margin-bottom:12px;color:var(--gray-900);padding-bottom:8px;border-bottom:2px solid var(--green-200)}
+.content-block h3{font-size:1.05rem;font-weight:700;margin:20px 0 8px;color:var(--gray-800)}
+.content-block p{font-size:.92rem;color:var(--gray-600);line-height:1.7;margin-bottom:12px}
+.content-block ul,.content-block ol{margin:8px 0 16px 20px;display:flex;flex-direction:column;gap:6px}
+.content-block li{font-size:.9rem;color:var(--gray-600);line-height:1.6}
+.tip{background:var(--blue-50);border:1.5px solid #BFDBFE;border-radius:14px;padding:18px 22px;margin:20px 0}
+.tip-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.tip-header h4{font-size:.88rem;font-weight:700;color:var(--blue-700)}
+.tip p{font-size:.88rem;color:#1E40AF;line-height:1.6}
+.error-comun{background:var(--rose-50);border:1.5px solid #FECACA;border-radius:14px;padding:18px 22px;margin:20px 0}
+.error-comun-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.error-comun-header h4{font-size:.88rem;font-weight:700;color:var(--rose-700)}
+.error-comun p{font-size:.88rem;color:#9F1239;line-height:1.6}
+.mod-nav{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:24px;border-top:2px solid var(--gray-200);gap:12px;flex-wrap:wrap}
+.mod-nav a{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:12px;text-decoration:none;font-weight:700;font-size:.92rem;transition:all .2s}
+.mod-nav .prev{background:var(--gray-100);color:var(--gray-700)}
+.mod-nav .prev:hover{background:var(--gray-200)}
+.mod-nav .next{background:var(--green-600);color:#fff;box-shadow:0 4px 12px rgba(5,150,105,.25)}
+.mod-nav .next:hover{background:var(--green-700);transform:translateY(-1px)}
+.progress-bar{height:4px;background:var(--gray-200);border-radius:2px;margin:12px 20px;overflow:hidden}
+.progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--green-500),var(--green-400));border-radius:2px;transition:width .3s}
+.objetivos{background:linear-gradient(135deg,#FEFCE8,#FEF9C3);border:1.5px solid #FDE68A;border-radius:12px;padding:16px 20px;margin:16px 0 22px}
+.objetivos-titulo{font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#92400E;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.objetivos-titulo::before{content:'\1F3AF';font-size:1rem}
+.objetivos ul{margin:0;padding-left:22px;list-style:none}
+.objetivos li{font-size:.88rem;color:#78350F;margin:6px 0;line-height:1.55;position:relative;padding-left:6px}
+.objetivos li::before{content:'\2713';position:absolute;left:-18px;color:var(--green-600);font-weight:800}
+.resumen{background:linear-gradient(135deg,#ECFDF5,#D1FAE5);border:1.5px solid var(--green-300);border-radius:12px;padding:18px 22px;margin:24px 0 14px}
+.resumen-titulo{font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--green-800);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.resumen-titulo::before{content:'\1F511';font-size:1rem}
+.resumen ul{margin:0;padding-left:22px;list-style:none}
+.resumen li{font-size:.88rem;color:var(--green-900);margin:6px 0;line-height:1.55;position:relative;padding-left:6px}
+.resumen li::before{content:'\2192';position:absolute;left:-18px;color:var(--green-700);font-weight:800}
+.resumen li strong{color:var(--green-800)}
+.curso-hero{background:linear-gradient(135deg,var(--claude-50) 0%,#fff 60%,var(--green-50) 100%);border:1.5px solid var(--claude-300);border-radius:18px;padding:28px 30px;margin-bottom:28px;position:relative;overflow:hidden}
+.curso-hero::before{content:'';position:absolute;top:-30px;right:-30px;width:160px;height:160px;background:radial-gradient(circle,rgba(217,119,87,.18) 0%,transparent 70%);pointer-events:none}
+.curso-hero .curso-pill{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--claude-300);color:var(--claude-700);font-size:.72rem;font-weight:800;padding:5px 12px;border-radius:100px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px}
+.curso-hero .curso-pill::before{content:'';width:8px;height:8px;background:var(--claude-500);border-radius:50%}
+.curso-hero h2{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700;color:var(--gray-900);margin-bottom:10px;letter-spacing:-.01em;line-height:1.25}
+.curso-hero p{font-size:.96rem;color:var(--gray-600);line-height:1.65;max-width:620px}
+.curso-hero .curso-stats{display:flex;gap:20px;margin-top:18px;flex-wrap:wrap}
+.curso-hero .curso-stats div{font-size:.82rem;color:var(--gray-700)}
+.curso-hero .curso-stats strong{display:block;font-size:1.4rem;color:var(--green-700);font-family:'Fraunces',serif;font-weight:700}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:16px 0}
+.card-mini{background:#fff;border:1.5px solid var(--gray-200);border-radius:12px;padding:16px 18px}
+.card-mini h4{font-family:'Fraunces',serif;font-size:1rem;font-weight:700;color:var(--gray-900);margin-bottom:6px}
+.card-mini p{font-size:.84rem;color:var(--gray-600);line-height:1.55}
+.card-mini.is-claude{border-color:var(--claude-300);background:linear-gradient(135deg,var(--claude-50),#fff)}
+.card-mini.is-green{border-color:var(--green-200);background:linear-gradient(135deg,var(--green-50),#fff)}
+.fs-tree{background:#0F172A;border-radius:12px;padding:18px 22px;margin:18px 0;color:#E2E8F0;font-family:'JetBrains Mono',monospace;font-size:.82rem;line-height:1.7;overflow-x:auto}
+.fs-tree .fs-folder{color:#FBBF24;font-weight:700}
+.fs-tree .fs-file{color:#A7F3D0}
+.fs-tree .fs-comment{color:#64748B;font-style:italic}
+.tabla-norm{width:100%;border-collapse:collapse;margin:16px 0;border-radius:10px;overflow:hidden;border:1px solid var(--gray-200)}
+.tabla-norm th{background:var(--gray-100);padding:10px 14px;text-align:left;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-500)}
+.tabla-norm td{padding:10px 14px;font-size:.85rem;border-top:1px solid var(--gray-100);color:var(--gray-700)}
+.tabla-norm code{font-family:'JetBrains Mono',monospace;font-size:.8rem;background:var(--gray-100);padding:1px 6px;border-radius:4px}
+.modulo-section{display:none}
+.modulo-section.active{display:block;animation:fadeIn .25s ease-out}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.code-block{background:#1E293B;border-radius:10px;padding:14px 18px;margin:14px 0;color:#E2E8F0;font-family:'JetBrains Mono',monospace;font-size:.8rem;line-height:1.6;overflow-x:auto;white-space:pre-wrap}
+.code-block .ck{color:#34D399}
+.code-block .cv{color:#FBBF24}
+.copy-btn{background:#334155;color:#E2E8F0;border:none;padding:5px 12px;border-radius:6px;font-size:.72rem;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;transition:.2s;float:right;margin-top:-4px}
+.copy-btn:hover{background:#475569}
+.copy-btn.copied{background:var(--green-600);color:#fff}
+</style>
+<script async src="../shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<script defer src="../shared/pro.js?v=848fbf16"></script>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+<div class="curso-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html"><div>E</div>Ex&oacute;genaDIAN</a>
+    </div>
+    <div class="sidebar-curso">
+      <h3>Escuela Contable IA</h3>
+      <p>Claude Cowork para Contadores</p>
+      <span class="claude-pill">Nivel 2 &middot; Ruta IA</span>
+    </div>
+    <div class="progress-bar"><div class="fill" id="progressFill" style="width:14%"></div></div>
+    <nav class="sidebar-nav" id="sidebarNav">
+      <a href="#modulo-1" class="active" onclick="navigateTo(1)"><span class="nav-num">1</span> Qu&eacute; es Cowork y por qu&eacute;</a>
+      <a href="#modulo-2" onclick="navigateTo(2)"><span class="nav-num">2</span> Instalar y configurar</a>
+      <a href="#modulo-3" onclick="navigateTo(3)"><span class="nav-num">3</span> Carpeta-por-cliente</a>
+      <a href="#modulo-4" onclick="navigateTo(4)"><span class="nav-num">4</span> Projects: contexto que no se borra</a>
+      <a href="#modulo-5" onclick="navigateTo(5)"><span class="nav-num">5</span> Memoria + slash commands</a>
+      <a href="#modulo-6" onclick="navigateTo(6)"><span class="nav-num">6</span> 3 flujos t&iacute;picos</a>
+      <a href="#modulo-7" onclick="navigateTo(7)"><span class="nav-num">7</span> Privacidad, backup y cierre</a>
+    </nav>
+    <div class="sidebar-back"><a href="../escuela.html">&larr; Volver a la Escuela</a></div>
+  </aside>
+  <div class="curso-main">
+    <section id="modulo-1" class="modulo-section active">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; <a href="../especializacion-ia.html">Ruta IA</a> &rsaquo; M&oacute;dulo 1</div>
+        <div class="mod-num">M&oacute;dulo 1 de 7 &middot; Gratis</div>
+        <h1>Qu&eacute; es Claude Cowork y por qu&eacute; un contador colombiano lo necesita</h1>
+        <p class="mod-desc">Claude Cowork es el escritorio de Anthropic: una app que se instala en tu computador y puede ver tus carpetas, leer tus Excel y recordar al cliente entre sesiones. Para un contador con 15 clientes, eso cambia c&oacute;mo trabajas en cierre y en mayo.</p>
+        <div class="objetivos">
+          <div class="objetivos-titulo">Al finalizar este m&oacute;dulo</div>
+          <ul>
+            <li>Distinguir Claude.ai (web) vs. Claude Cowork (escritorio) vs. Claude Code (CLI)</li>
+            <li>Entender por qu&eacute; Cowork es el frente que m&aacute;s tiempo ahorra a un contador con cartera</li>
+            <li>Saber qu&eacute; vas a producir al final del curso: una carpeta-por-cliente reutilizable</li>
+          </ul>
+        </div>
+      </div>
+      <div class="curso-hero">
+        <span class="curso-pill">Promesa del curso</span>
+        <h2>Al final de los 7 m&oacute;dulos vas a tener una carpeta-por-cliente con Claude Cowork que retoma el contexto sin que tengas que explicarlo cada vez.</h2>
+        <p>Vas a salir con: una estructura de carpetas est&aacute;ndar para tus clientes (PUC, balances hist&oacute;ricos, declaraciones, normativa local), un <strong>Project en Claude</strong> por cliente con sus Custom Instructions, y los 3 flujos m&aacute;s frecuentes &mdash;cierre mensual, respuesta a requerimiento DIAN, temporada de ex&oacute;gena&mdash; corriendo encima.</p>
+        <div class="curso-stats">
+          <div><strong>7</strong>m&oacute;dulos</div>
+          <div><strong>1</strong>plantilla carpeta</div>
+          <div><strong>3</strong>flujos integrados</div>
+          <div><strong>100%</strong>gratis</div>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>Los 3 &ldquo;frentes&rdquo; de Claude (sin confundirse)</h2>
+        <p>Anthropic vende a Claude con varios envases. Saber cu&aacute;l es cu&aacute;l te ahorra plata y tiempo:</p>
+        <div class="cards-grid">
+          <div class="card-mini">
+            <h4>Claude.ai (web)</h4>
+            <p>El chat en el navegador. Lo abres en <code>claude.ai</code>. Bueno para consultas r&aacute;pidas y subir un PDF suelto. <strong>No</strong> ve tus carpetas locales.</p>
+          </div>
+          <div class="card-mini is-claude">
+            <h4>Claude Cowork (escritorio)</h4>
+            <p>App que instalas. Ve tus carpetas, recuerda al cliente entre sesiones, soporta <strong>Projects</strong> y <strong>memory</strong>. Es lo que este curso ense&ntilde;a.</p>
+          </div>
+          <div class="card-mini">
+            <h4>Claude Code (CLI)</h4>
+            <p>Para construir software. Si est&aacute;s armando tu propio liquidador o app, eso va en el curso <a href="desarrollo-contadores.html">Desarrollo para Contadores</a>.</p>
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><h4>Si vienes del curso de IA para Contadores</h4></div>
+          <p>Ya viste <em>c&oacute;mo</em> pedirle cosas a Claude. Este curso es <em>d&oacute;nde</em>: en vez de chatear desde cero cada vez, montas una sola estructura por cliente y trabajas ah&iacute;. La curva real de ahorro empieza el segundo mes.</p>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>Por qu&eacute; Cowork importa m&aacute;s a un contador que a otros profesionales</h2>
+        <p>Un dise&ntilde;ador o un copywriter trabaja en proyectos puntuales. Un contador trabaja con los <strong>mismos 15 clientes todos los meses</strong>. Cada cliente tiene PUC propio, sector propio, hist&oacute;rico de ajustes, costumbres de contabilizaci&oacute;n. Si cada vez que abres Claude tienes que re-explicar &ldquo;mi cliente es una PYME importadora del sector textil con responsabilidades 05-09-42-O-13&rdquo;, est&aacute;s perdiendo tokens y tiempo.</p>
+        <p>Cowork resuelve eso con dos cosas: <strong>carpetas locales</strong> (Claude lee tus Excel sin que los subas a cada chat) y <strong>Projects</strong> (un contenedor con instrucciones permanentes y archivos de referencia). Combinadas son lo que Avora vende como &ldquo;el frente Cowork&rdquo; y es donde un contador realmente cambia c&oacute;mo trabaja.</p>
+      </div>
+      <div class="resumen">
+        <div class="resumen-titulo">Lo clave de este m&oacute;dulo</div>
+        <ul>
+          <li><strong>Cowork = escritorio.</strong> Ve tus carpetas, recuerda al cliente, soporta Projects.</li>
+          <li>Para un contador con cartera, Cowork es el frente que m&aacute;s tiempo libera.</li>
+          <li>Al final del curso tendr&aacute;s una carpeta-por-cliente y un Project funcional.</li>
+        </ul>
+      </div>
+      <div class="mod-nav">
+        <span></span>
+        <a href="#modulo-2" class="next" onclick="navigateTo(2)">M&oacute;dulo 2: Instalar y configurar &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-2" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; <a href="../especializacion-ia.html">Ruta IA</a> &rsaquo; M&oacute;dulo 2</div>
+        <div class="mod-num">M&oacute;dulo 2 de 7</div>
+        <h1>Instalar Claude Cowork y dejarlo viendo tus carpetas</h1>
+        <p class="mod-desc">Descarga, login con la cuenta de Claude Pro que ya usas, y la decisi&oacute;n importante: <strong>qu&eacute; carpeta dejarle ver</strong>. Si le abres todo el disco, est&aacute;s violando privacidad de clientes. Si no le abres nada, no sirve.</p>
+        <div class="objetivos">
+          <div class="objetivos-titulo">Al finalizar este m&oacute;dulo</div>
+          <ul>
+            <li>Tener Claude Cowork instalado en Windows o Mac</li>
+            <li>Saber cu&aacute;l carpeta-ra&iacute;z darle (y por qu&eacute; NO darle el escritorio completo)</li>
+            <li>Haber probado tu primera lectura local de un Excel sin subirlo</li>
+          </ul>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>Paso 1: Descargar Cowork</h2>
+        <p>Cowork viene en la misma cuenta de Claude. Entras a <code>claude.ai/download</code> con tu cuenta Pro o Max y descargas la versi&oacute;n para tu sistema operativo. La instalaci&oacute;n es de doble-clic; no te pregunta nada raro.</p>
+        <table class="tabla-norm">
+          <thead><tr><th>Sistema</th><th>Instalador</th><th>Login</th></tr></thead>
+          <tbody>
+            <tr><td>Windows 10/11</td><td><code>Claude-Setup-x64.exe</code></td><td>Mismo correo de claude.ai</td></tr>
+            <tr><td>macOS 12+</td><td><code>Claude.dmg</code></td><td>Mismo correo de claude.ai</td></tr>
+            <tr><td>Linux</td><td>Solo CLI (Claude Code), no Cowork por ahora</td><td>&mdash;</td></tr>
+          </tbody>
+        </table>
+        <div class="tip">
+          <div class="tip-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><h4>Si no tienes Pro</h4></div>
+          <p>Cowork funciona con cuenta Free pero la utilidad real arranca en Pro (USD ~$20/mes). El curso <a href="exogena-claude.html">Ex&oacute;gena con Claude</a> M&oacute;dulo 3 te ayuda a decidir el plan seg&uacute;n cu&aacute;ntos clientes manejas.</p>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>Paso 2: La decisi&oacute;n importante &mdash; qu&eacute; carpeta darle</h2>
+        <p>En la primera ejecuci&oacute;n Cowork te pregunta: <em>&iquest;a qu&eacute; carpeta quieres darle acceso?</em> NO le des el escritorio completo ni Documentos enteros. Crea una <strong>carpeta dedicada</strong> para Claude.</p>
+        <div class="fs-tree">
+<span class="fs-folder">C:\Users\TuNombre\Claude-Trabajo\</span>
+&nbsp;&nbsp;<span class="fs-folder">clientes\</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-folder">pyme-abc\</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-folder">distribuidora-xyz\</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-folder">cs-quirurgica\</span>
+&nbsp;&nbsp;<span class="fs-folder">normativa-co\</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-file">ET-resumen.md</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-file">Res-227-exogena-2025.pdf</span>
+&nbsp;&nbsp;<span class="fs-folder">plantillas\</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-file">papel-trabajo-iva.xlsx</span>
+        </div>
+        <div class="error-comun">
+          <div class="error-comun-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg><h4>Error com&uacute;n</h4></div>
+          <p>Darle <code>C:\Users\TuNombre\</code> entera. Claude termina viendo fotos personales, OneDrive privado y carpetas de descargas con basura. Cr&eacute;ale su zona y mant&eacute;n ah&iacute; solo lo que es trabajo contable.</p>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>Paso 3: Tu primera lectura local</h2>
+        <p>Con Cowork abierto, escribe en el chat:</p>
+        <div class="code-block">Mira el archivo C:\Users\TuNombre\Claude-Trabajo\clientes\pyme-abc\balance-2025-04.xlsx
+y dime cu&aacute;ntas cuentas tiene a nivel auxiliar y cu&aacute;l es el total del Activo.</div>
+        <p>Claude te va a pedir permiso para abrir el archivo (la primera vez por archivo). Le das aceptar y procesa <strong>sin que subas nada</strong>: lo lee del disco directo. Esa es la diferencia con claude.ai.</p>
+      </div>
+      <div class="resumen">
+        <div class="resumen-titulo">Lo clave de este m&oacute;dulo</div>
+        <ul>
+          <li>Descarga Cowork desde <code>claude.ai/download</code>.</li>
+          <li>Crea una carpeta dedicada (NO le des Documentos completo).</li>
+          <li>Claude lee tus Excel del disco sin que los subas. Permiso por archivo la primera vez.</li>
+        </ul>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-1" class="prev" onclick="navigateTo(1)">&larr; M&oacute;dulo 1</a>
+        <a href="#modulo-3" class="next" onclick="navigateTo(3)">M&oacute;dulo 3: Carpeta-por-cliente &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-3" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; <a href="../especializacion-ia.html">Ruta IA</a> &rsaquo; M&oacute;dulo 3</div>
+        <div class="mod-num">M&oacute;dulo 3 de 7</div>
+        <h1>El modelo carpeta-por-cliente</h1>
+        <p class="mod-desc">Una carpeta = un cliente. Misma estructura para todos. Cuando le digas a Claude &ldquo;trabaja sobre pyme-abc&rdquo; sabr&aacute; ad&oacute;nde mirar sin que se lo deletrees. Esta es la base de todo lo que sigue.</p>
+        <div class="objetivos">
+          <div class="objetivos-titulo">Al finalizar este m&oacute;dulo</div>
+          <ul>
+            <li>Tener la plantilla est&aacute;ndar de carpeta-cliente lista para copiar</li>
+            <li>Entender qu&eacute; archivos viven en cada subcarpeta y por qu&eacute;</li>
+            <li>Saber qu&eacute; <strong>no</strong> meter (datos sensibles, cosas que no son contabilidad)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>La plantilla est&aacute;ndar</h2>
+        <p>Cada cliente sigue exactamente la misma estructura. Esto es lo que pega:</p>
+        <div class="fs-tree">
+<span class="fs-folder">clientes\pyme-abc\</span>
+&nbsp;&nbsp;<span class="fs-file">_cliente.md</span> <span class="fs-comment"># Ficha: NIT, responsabilidades, sector, RUT, contactos</span>
+&nbsp;&nbsp;<span class="fs-folder">balances\</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-file">2025-04.xlsx</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-file">2025-03.xlsx</span>
+&nbsp;&nbsp;<span class="fs-folder">declaraciones\</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-folder">iva-300\</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-folder">retencion-350\</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-folder">renta-110\</span>
+&nbsp;&nbsp;<span class="fs-folder">facturacion-electronica\</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-file">2025-FE-emitidas.csv</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-file">2025-FE-recibidas.csv</span>
+&nbsp;&nbsp;<span class="fs-folder">exogena\</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-file">F1001.csv</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-file">F1005.csv</span>
+&nbsp;&nbsp;<span class="fs-folder">requerimientos-dian\</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-file">2025-05-req-001.pdf</span>
+&nbsp;&nbsp;<span class="fs-folder">papeles-trabajo\</span>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>El archivo <code>_cliente.md</code> &mdash; la ficha que todo lo pega</h2>
+        <p>Es un Markdown corto (~30 l&iacute;neas) que vive en la ra&iacute;z de cada cliente. Claude lo lee primero y entiende inmediatamente con qui&eacute;n trabaja. Plantilla:</p>
+        <div class="code-block">
+<span class="ck"># Cliente: PYME ABC SAS</span>
+<span class="cv">NIT:</span> 900.123.456-7
+<span class="cv">R&eacute;gimen:</span> Ordinario
+<span class="cv">Responsabilidades RUT:</span> 05 - 07 - 09 - 42 - O-13 - 48
+<span class="cv">Sector CIIU:</span> 4641 (Comercio textil)
+<span class="cv">Tama&ntilde;o NIIF:</span> Grupo 2 (PYME)
+<span class="cv">Software contable:</span> World Office
+<span class="cv">Banco principal:</span> Bancolombia 1234-5678
+<span class="cv">Per&iacute;odo fiscal:</span> Enero-Diciembre
+<span class="cv">Cierre mensual:</span> D&iacute;a 15 del mes siguiente
+<span class="ck">## Decisiones contables del cliente</span>
+- Inventario: PEPS perp&eacute;tuo
+- Activos fijos: l&iacute;nea recta, vidas &uacute;tiles fiscales
+- Cuentas por cobrar: provisi&oacute;n general 1% Art. 145 ET
+<span class="ck">## Cosas que repiten cada mes</span>
+- Importaci&oacute;n de mercanc&iacute;a (cuenta 1465 con costos directos del Decreto 1165/2019)
+- Pago de comisiones a agencias internacionales (1.5% retenci&oacute;n por servicios desde el exterior)
+<span class="ck">## Contactos</span>
+- Gerente: Juana P&eacute;rez - juana@pyme-abc.com
+- Auxiliar contable cliente: Pedro G&oacute;mez - pedro@pyme-abc.com
+        </div>
+        <p>Con esa ficha en frente, cualquier pregunta sobre el cliente arranca con contexto. Sin esa ficha, cada chat empieza desde cero.</p>
+      </div>
+      <div class="content-block">
+        <h2>Qu&eacute; NO meter en la carpeta</h2>
+        <ul>
+          <li><strong>Datos del titular real con c&eacute;dula y direcci&oacute;n</strong> sin anonimizar &mdash; viola Ley 1581 si Anthropic indexa con plan equivocado. Si necesitas datos personales para una respuesta a requerimiento, &uacute;salos en el chat de momento, no los persistas.</li>
+          <li><strong>Contrase&ntilde;as, tokens MUISCA, llaves AFC</strong> &mdash; nunca, ni siquiera en .txt.</li>
+          <li><strong>Fotos del personal, RUT esc&aacute;ner del representante</strong> &mdash; no aportan al an&aacute;lisis y son carga de privacidad.</li>
+          <li><strong>Carpetas de OneDrive o Drive sincronizadas</strong> con clientes que no son tuyos &mdash; la carpeta de Claude debe ser local pura.</li>
+        </ul>
+      </div>
+      <div class="resumen">
+        <div class="resumen-titulo">Lo clave de este m&oacute;dulo</div>
+        <ul>
+          <li>Misma estructura para todos los clientes &mdash; <code>_cliente.md + balances + declaraciones + exogena + req-dian + papeles</code>.</li>
+          <li>El archivo <code>_cliente.md</code> es lo que le da contexto a Claude sin que se lo expliques cada vez.</li>
+          <li>Nada de contrase&ntilde;as, c&eacute;dulas crudas ni carpetas compartidas.</li>
+        </ul>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-2" class="prev" onclick="navigateTo(2)">&larr; M&oacute;dulo 2</a>
+        <a href="#modulo-4" class="next" onclick="navigateTo(4)">M&oacute;dulo 4: Projects &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-4" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; <a href="../especializacion-ia.html">Ruta IA</a> &rsaquo; M&oacute;dulo 4</div>
+        <div class="mod-num">M&oacute;dulo 4 de 7</div>
+        <h1>Projects en Claude &mdash; contexto que no se borra</h1>
+        <p class="mod-desc">Un Project en Claude es un contenedor con <strong>Custom Instructions permanentes</strong> y <strong>archivos de referencia</strong> (Knowledge). Cada cliente tendr&aacute; su Project. Cuando entras, Claude ya sabe el PUC, las responsabilidades y c&oacute;mo le gusta al cliente que se contabilicen las cosas.</p>
+        <div class="objetivos">
+          <div class="objetivos-titulo">Al finalizar este m&oacute;dulo</div>
+          <ul>
+            <li>Saber crear un Project en Claude (web o Cowork)</li>
+            <li>Tener una plantilla de Custom Instructions para contador</li>
+            <li>Saber qu&eacute; archivos vale la pena meter al Knowledge y cu&aacute;les no</li>
+          </ul>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>Crear el Project &mdash; 4 clics</h2>
+        <ol>
+          <li>En Cowork (o claude.ai), bot&oacute;n <strong>Projects</strong> en el sidebar.</li>
+          <li>&ldquo;New Project&rdquo; &rarr; nombre: <code>PYME ABC SAS</code></li>
+          <li>Tab <strong>Custom Instructions</strong> &rarr; pega la plantilla de abajo.</li>
+          <li>Tab <strong>Knowledge</strong> &rarr; sube los 3-5 archivos clave del cliente (PUC, &uacute;ltimo balance, RUT, &uacute;ltima renta).</li>
+        </ol>
+        <p>Listo. A partir de ahora, cuando le hagas chat dentro de ese Project, Claude lee tu Custom Instructions y los archivos Knowledge antes de responder. No le tienes que volver a explicar qui&eacute;n es el cliente.</p>
+      </div>
+      <div class="content-block">
+        <h2>Plantilla Custom Instructions (cop&iacute;ala y ad&aacute;ptala)</h2>
+        <button class="copy-btn" onclick="copyBlock(this)">Copiar</button>
+        <div class="code-block">Eres un asistente contable senior trabajando para mi firma con el cliente
+<span class="cv">PYME ABC SAS (NIT 900.123.456-7)</span>, comercio textil, r&eacute;gimen ordinario,
+Grupo 2 NIIF, software World Office.
+REGLAS DE TRABAJO:
+1. Toda cifra de pesos colombianos en formato $1.234.567 (punto como miles).
+2. Toda norma citada debe llevar el art&iacute;culo y la fuente: "Art. 437 ET" o "Res. 000227/2024 DIAN".
+3. Si te pido clasificar cuentas del PUC, usa el Decreto 2650/1993 + adaptaci&oacute;n NIIF Grupo 2 del cliente.
+4. Si te falta un dato (NIT de un tercero, c&oacute;digo CIIU), dilo y NO inventes.
+5. Si una operaci&oacute;n tiene tratamiento contable distinto de fiscal, expl&iacute;came AMBOS y la diferencia para F2516.
+CONTEXTO RECURRENTE:
+- El cliente importa mercanc&iacute;a; los costos directos siguen Decreto 1165/2019.
+- Provisi&oacute;n cartera: general 1% Art. 145 ET (no individual).
+- Comisiones a agentes del exterior: retenci&oacute;n 1.5% por servicios desde el exterior (Art. 408 ET).
+FORMATOS DE SALIDA:
+- Si pides papel de trabajo: tabla en Markdown con columnas Concepto / Valor / Norma.
+- Si pides asiento contable: bloque c&oacute;digo con D&eacute;bito | Cr&eacute;dito | Cuenta PUC | Tercero.
+- Si pides borrador de respuesta DIAN: usa formato &ldquo;Se&ntilde;ores DIAN...&rdquo; en lenguaje formal.</div>
+        <p>La plantilla est&aacute; pensada para un cliente PYME ordinario; para Simple, RST con varios CIIU, ESAL o personas naturales, ajustas las reglas. La estructura sigue siendo la misma.</p>
+      </div>
+      <div class="content-block">
+        <h2>Knowledge &mdash; qu&eacute; subir y qu&eacute; no</h2>
+        <table class="tabla-norm">
+          <thead><tr><th>S&iacute; subir al Knowledge</th><th>NO subir</th></tr></thead>
+          <tbody>
+            <tr><td>RUT actualizado del cliente</td><td>C&eacute;dula del representante en imagen</td></tr>
+            <tr><td>&Uacute;ltima declaraci&oacute;n de renta firmada</td><td>Claves MUISCA, contrase&ntilde;as bancos</td></tr>
+            <tr><td>PUC adaptado del cliente (Excel)</td><td>Todos los movimientos del a&ntilde;o (muy pesado, &uacute;sa lo del filesystem)</td></tr>
+            <tr><td>Memo de pol&iacute;ticas contables NIIF</td><td>Fotos del local, planos, brochures comerciales</td></tr>
+            <tr><td>Resoluci&oacute;n DIAN de facturaci&oacute;n electr&oacute;nica</td><td>Carpeta entera de descargas</td></tr>
+          </tbody>
+        </table>
+        <div class="tip">
+          <div class="tip-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><h4>Knowledge vs. carpeta local</h4></div>
+          <p>El Knowledge se queda en los servidores de Anthropic (privado a tu cuenta). La carpeta local Cowork queda en tu disco. Para datos sensibles, prefiere carpeta local. Para normas, plantillas y referencias gen&eacute;ricas, usa Knowledge.</p>
+        </div>
+      </div>
+      <div class="resumen">
+        <div class="resumen-titulo">Lo clave de este m&oacute;dulo</div>
+        <ul>
+          <li>Un Project por cliente. Custom Instructions + Knowledge.</li>
+          <li>Las Custom Instructions evitan repetir &ldquo;mi cliente es...&rdquo; cada chat.</li>
+          <li>El Knowledge va para referencias estables; el filesystem para datos vivos.</li>
+        </ul>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-3" class="prev" onclick="navigateTo(3)">&larr; M&oacute;dulo 3</a>
+        <a href="#modulo-5" class="next" onclick="navigateTo(5)">M&oacute;dulo 5: Memoria + slash commands &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-5" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; <a href="../especializacion-ia.html">Ruta IA</a> &rsaquo; M&oacute;dulo 5</div>
+        <div class="mod-num">M&oacute;dulo 5 de 7</div>
+        <h1>Memoria persistente y slash commands</h1>
+        <p class="mod-desc">Cowork tiene memoria autom&aacute;tica: si en un chat le ense&ntilde;as algo (&ldquo;mi cliente paga las primas el 15 de junio, no el 30&rdquo;), te lo recuerda en chats siguientes del mismo Project. Y los <strong>slash commands</strong> custom te dejan disparar tareas frecuentes con dos palabras.</p>
+        <div class="objetivos">
+          <div class="objetivos-titulo">Al finalizar este m&oacute;dulo</div>
+          <ul>
+            <li>Entender c&oacute;mo funciona la memoria autom&aacute;tica de Cowork y c&oacute;mo revisarla</li>
+            <li>Tener 3 slash commands listos: <code>/cierre</code>, <code>/req-dian</code>, <code>/exogena</code></li>
+            <li>Saber editar la memoria cuando un cliente cambia de pol&iacute;tica</li>
+          </ul>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>Memoria autom&aacute;tica &mdash; lo que Cowork recuerda solo</h2>
+        <p>Dentro de un Project, Cowork va guardando hechos que t&uacute; le ense&ntilde;as: nombres, decisiones, fechas raras. La pr&oacute;xima vez los usa sin que se lo recuerdes. Lo puedes inspeccionar y editar en <em>Settings &rarr; Memory</em> del Project.</p>
+        <div class="tip">
+          <div class="tip-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><h4>Cu&aacute;ndo borrar memoria</h4></div>
+          <p>Cuando el cliente cambia de pol&iacute;tica contable (ej. pasa de Decreto 2649 a NIIF, o reclasifica una cuenta). Si no la borras, Claude va a seguir aplicando la regla vieja.</p>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>Slash commands custom &mdash; tus 3 atajos</h2>
+        <p>Cowork deja crear <em>commands</em> propios. Vive como archivo Markdown dentro de la carpeta. Cuando escribes <code>/cierre</code> en el chat, Claude carga ese prompt completo y arranca.</p>
+        <h3>Comando <code>/cierre</code> &mdash; cierre mensual de un cliente</h3>
+        <button class="copy-btn" onclick="copyBlock(this)">Copiar</button>
+        <div class="code-block">
+<span class="ck">---</span>
+<span class="cv">name:</span> cierre
+<span class="cv">description:</span> Cierre mensual del cliente activo
+<span class="ck">---</span>
+Hazme el cierre mensual del cliente. Pasos:
+1. Lee balances/{mes-actual}.xlsx
+2. Comp&aacute;ralo contra balances/{mes-anterior}.xlsx (variaci&oacute;n por cuenta)
+3. Detecta saldos inusuales: cuentas con cambio &gt; 30% mes-a-mes
+4. Verifica que el efectivo del balance cuadra con extracto bancario (si est&aacute; en facturacion-electronica\extracto-{mes}.csv)
+5. Lista cuentas por cobrar a m&aacute;s de 90 d&iacute;as para evaluaci&oacute;n de deterioro
+6. Calcula provisi&oacute;n cartera Art. 145 ET y comp&aacute;rala con la que tiene
+7. Genera un papel-trabajo en Markdown y gu&aacute;rdalo como papeles-trabajo/cierre-{mes-actual}.md</div>
+        <h3>Comando <code>/req-dian</code> &mdash; respuesta a requerimiento</h3>
+        <button class="copy-btn" onclick="copyBlock(this)">Copiar</button>
+        <div class="code-block">
+<span class="ck">---</span>
+<span class="cv">name:</span> req-dian
+<span class="cv">description:</span> Borrador de respuesta a requerimiento DIAN
+<span class="ck">---</span>
+Voy a pegarte un requerimiento DIAN. Tu tarea:
+1. Identifica el tipo (ordinario Art. 684 / especial Art. 703 / informativo)
+2. Lista LITERALMENTE qu&eacute; est&aacute; pidiendo (sin interpretar)
+3. Para cada punto, indica qu&eacute; archivo del cliente lo soporta (ru&eacute;dale a balances\, declaraciones\, exogena\)
+4. Redacta el borrador de respuesta en formato formal (&ldquo;Se&ntilde;ores DIAN...&rdquo;)
+5. Cita norma para cada argumento
+6. Guarda como requerimientos-dian/respuesta-{numero-req}.docx (markdown si docx no aplica)</div>
+        <h3>Comando <code>/exogena</code> &mdash; temporada de medios magn&eacute;ticos</h3>
+        <button class="copy-btn" onclick="copyBlock(this)">Copiar</button>
+        <div class="code-block">
+<span class="ck">---</span>
+<span class="cv">name:</span> exogena
+<span class="cv">description:</span> Pre-armado de ex&oacute;gena AG del cliente
+<span class="ck">---</span>
+Vas a pre-armar la ex&oacute;gena AG del cliente. Sigue exactamente la masterclass en escuela/exogena-claude.html.
+1. Carga balances\12.xlsx (cierre de diciembre)
+2. Carga las 6 declaraciones IVA del a&ntilde;o (declaraciones\iva-300\)
+3. Carga renta del a&ntilde;o anterior si existe (declaraciones\renta-110\)
+4. Genera CSV pre-llenados en exogena\:
+   - F1001 pagos a terceros (concepto + 9 columnas)
+   - F1005 IVA descontable / F1006 IVA generado
+   - F1007 ingresos por tercero
+5. Cuadre maestro: que F1001 + F1005 cruce con balance.
+NO inventes NITs. Si te falta uno, l&iacute;stalo en la columna "?".</div>
+      </div>
+      <div class="resumen">
+        <div class="resumen-titulo">Lo clave de este m&oacute;dulo</div>
+        <ul>
+          <li>La memoria del Project guarda hechos solo. Rev&iacute;sala cuando el cliente cambie de pol&iacute;tica.</li>
+          <li>3 slash commands base: <code>/cierre</code>, <code>/req-dian</code>, <code>/exogena</code>. Crea m&aacute;s seg&uacute;n tu pr&aacute;ctica.</li>
+          <li>Cada comando es un Markdown corto &mdash; vers&iacute;onalos en Git si quieres compartir con tu equipo.</li>
+        </ul>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-4" class="prev" onclick="navigateTo(4)">&larr; M&oacute;dulo 4</a>
+        <a href="#modulo-6" class="next" onclick="navigateTo(6)">M&oacute;dulo 6: 3 flujos t&iacute;picos &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-6" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; <a href="../especializacion-ia.html">Ruta IA</a> &rsaquo; M&oacute;dulo 6</div>
+        <div class="mod-num">M&oacute;dulo 6 de 7</div>
+        <h1>3 flujos t&iacute;picos en Cowork</h1>
+        <p class="mod-desc">Los 3 momentos donde la inversi&oacute;n en montar todo lo anterior te paga: cierre mensual (cada mes), respuesta a requerimiento DIAN (a demanda) y temporada de ex&oacute;gena (febrero-abril).</p>
+        <div class="objetivos">
+          <div class="objetivos-titulo">Al finalizar este m&oacute;dulo</div>
+          <ul>
+            <li>Tener un gui&oacute;n paso-a-paso de los 3 flujos</li>
+            <li>Saber cu&aacute;ndo intervenir y cu&aacute;ndo dejar correr el comando</li>
+            <li>Entender qu&eacute; revisi&oacute;n humana es obligatoria</li>
+          </ul>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>Flujo 1 &mdash; Cierre mensual</h2>
+        <ol>
+          <li>Cliente te env&iacute;a el balance de prueba al d&iacute;a 10. Lo guardas en <code>clientes\pyme-abc\balances\2025-04.xlsx</code></li>
+          <li>Abres el Project de PYME ABC en Cowork.</li>
+          <li>Escribes <code>/cierre</code>. Claude lee, compara, detecta inusuales, genera papel de trabajo.</li>
+          <li><strong>T&uacute; revisas</strong> los inusuales en 10 minutos: cu&aacute;les son reales y cu&aacute;les error de digitaci&oacute;n.</li>
+          <li>Le indicas a Claude qu&eacute; ajustes proponer.</li>
+          <li>Apruebas, env&iacute;as ajustes al cliente, firma y archiva.</li>
+        </ol>
+        <p><strong>Tiempo antes:</strong> 3-4 horas por cliente. <strong>Tiempo con Cowork:</strong> 45 min para el cierre del mes con la revisi&oacute;n humana donde corresponde.</p>
+      </div>
+      <div class="content-block">
+        <h2>Flujo 2 &mdash; Requerimiento DIAN</h2>
+        <ol>
+          <li>Llega el requerimiento por correo. Lo guardas como PDF en <code>clientes\pyme-abc\requerimientos-dian\</code></li>
+          <li>En el Project del cliente, escribes <code>/req-dian</code> y pegas el texto.</li>
+          <li>Claude identifica el tipo, lista lo pedido, sugiere d&oacute;nde est&aacute; el soporte y arma borrador.</li>
+          <li><strong>T&uacute; revisas l&iacute;nea por l&iacute;nea</strong>. Aqu&iacute; NO se delega: tu firma va, t&uacute; respondes Art. 402 C.P.</li>
+          <li>Ajustas, verificas que cada cifra coincide con el balance, firmas y radicas.</li>
+        </ol>
+        <div class="error-comun">
+          <div class="error-comun-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg><h4>No deleges la respuesta final</h4></div>
+          <p>El borrador es de Claude, la respuesta es tuya. Si firmas algo que no leiste y lleva un dato falso, el delito penal por declaraci&oacute;n inexacta es tuyo, no de Anthropic. Cowork acelera la redacci&oacute;n; <strong>no</strong> reemplaza el criterio del contador firmante.</p>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>Flujo 3 &mdash; Temporada de ex&oacute;gena</h2>
+        <p>La temporada arranca enero y cierra entre marzo y mayo seg&uacute;n el calendario DIAN. Con la carpeta-por-cliente lista, este flujo es el que m&aacute;s tiempo libera.</p>
+        <ol>
+          <li>Para cada cliente: <code>/exogena</code> en su Project.</li>
+          <li>Claude carga balance de cierre, las 6 declaraciones IVA y la renta del a&ntilde;o anterior.</li>
+          <li>Genera CSVs pre-llenados en <code>exogena\</code> (F1001, F1005, F1006, F1007).</li>
+          <li>T&uacute; abres <a href="../exogena.html">exogena.html</a> en exogenadian.com y cargas el CSV resultante.</li>
+          <li>La herramienta corre validaciones, t&uacute; revisas el log del prevalidador.</li>
+          <li>Si hay errores, vuelves al chat del Project con el log y pides correcci&oacute;n.</li>
+        </ol>
+        <div class="tip">
+          <div class="tip-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><h4>Combinaci&oacute;n con la masterclass</h4></div>
+          <p>Este flujo es el <em>orquestador</em> de la masterclass <a href="exogena-claude.html">Ex&oacute;gena con Claude</a>. Ah&iacute; aprendes el detalle de cada formato; aqu&iacute; lo aplicas sobre 10 clientes seguidos sin re-explicarle a Claude qui&eacute;n es cada uno.</p>
+        </div>
+      </div>
+      <div class="resumen">
+        <div class="resumen-titulo">Lo clave de este m&oacute;dulo</div>
+        <ul>
+          <li>3 flujos, 3 momentos. Cada uno con su slash command.</li>
+          <li>La revisi&oacute;n humana siempre va: cierre (inusuales), DIAN (l&iacute;nea por l&iacute;nea), ex&oacute;gena (log del prevalidador).</li>
+          <li>El ahorro real aparece en el segundo mes &mdash; cuando ya no tienes que armar la estructura.</li>
+        </ul>
+      </div>
+      <div class="mod-nav">
+        <a href="#modulo-5" class="prev" onclick="navigateTo(5)">&larr; M&oacute;dulo 5</a>
+        <a href="#modulo-7" class="next" onclick="navigateTo(7)">M&oacute;dulo 7: Privacidad y cierre &rarr;</a>
+      </div>
+    </section>
+    <section id="modulo-7" class="modulo-section">
+      <div class="mod-header">
+        <div class="mod-breadcrumb"><a href="../escuela.html">Escuela</a> &rsaquo; <a href="../especializacion-ia.html">Ruta IA</a> &rsaquo; M&oacute;dulo 7</div>
+        <div class="mod-num">M&oacute;dulo 7 de 7</div>
+        <h1>Privacidad, backup y plan de adopci&oacute;n</h1>
+        <p class="mod-desc">Cierre del curso: qu&eacute; sale del computador y qu&eacute; no, c&oacute;mo respaldar tu carpeta de Claude sin filtrar al cliente, y un plan de adopci&oacute;n a 30 d&iacute;as para que esto realmente entre en tu pr&aacute;ctica.</p>
+        <div class="objetivos">
+          <div class="objetivos-titulo">Al finalizar este m&oacute;dulo</div>
+          <ul>
+            <li>Saber qu&eacute; sale a Anthropic vs. qu&eacute; queda local</li>
+            <li>Tener una pol&iacute;tica de backup que respete privacidad del cliente</li>
+            <li>Tener tu plan de 30 d&iacute;as para adoptar Cowork con 1 cliente piloto primero</li>
+          </ul>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>Qu&eacute; sale del computador</h2>
+        <table class="tabla-norm">
+          <thead><tr><th>Acci&oacute;n</th><th>D&oacute;nde queda</th></tr></thead>
+          <tbody>
+            <tr><td>Custom Instructions del Project</td><td>Servidores Anthropic (privado a tu cuenta)</td></tr>
+            <tr><td>Archivos del Knowledge</td><td>Servidores Anthropic</td></tr>
+            <tr><td>Chats y memoria autom&aacute;tica</td><td>Servidores Anthropic</td></tr>
+            <tr><td>Archivos que Claude lee del filesystem</td><td>Contenido <strong>s&iacute;</strong> sale en el momento del an&aacute;lisis (va como contexto al modelo). El archivo en s&iacute; sigue local.</td></tr>
+            <tr><td>Slash commands custom (<code>.md</code>)</td><td>Local en tu disco</td></tr>
+          </tbody>
+        </table>
+        <div class="error-comun">
+          <div class="error-comun-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BE123C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg><h4>Plan correcto para no entrenar con tu data</h4></div>
+          <p>Verifica que tu cuenta sea <strong>Claude Pro</strong>, <strong>Team</strong>, <strong>Max</strong> o <strong>Enterprise</strong>. En el plan Free de Claude, Anthropic puede usar tu data para entrenamiento (<em>opt-in</em> seg&uacute;n versi&oacute;n). Confirma en Settings &rarr; Privacy.</p>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>Backup de la carpeta Claude-Trabajo</h2>
+        <p>La carpeta local es valiosa: tiene la <em>configuraci&oacute;n</em> de tu firma (slash commands, plantillas, fichas <code>_cliente.md</code>) y los <em>papeles de trabajo</em>. Si se quema el disco, pierdes meses.</p>
+        <h3>Opci&oacute;n A &mdash; Git privado</h3>
+        <p>Repositorio privado en GitHub o GitLab. Solo lo de configuraci&oacute;n (slash commands, plantillas). Los balances reales <strong>no</strong> van a Git (gitignore <code>balances/</code>, <code>declaraciones/</code>, <code>requerimientos-dian/</code>).</p>
+        <h3>Opci&oacute;n B &mdash; Drive privado</h3>
+        <p>OneDrive personal o Google Drive personal cifrado. Sirve para los datos reales, pero <strong>nunca</strong> un Drive corporativo del cliente.</p>
+        <h3>Opci&oacute;n C &mdash; Disco externo</h3>
+        <p>El m&aacute;s simple. SSD externo cifrado, backup semanal manual. Mantienes todo offline.</p>
+      </div>
+      <div class="content-block">
+        <h2>Plan de adopci&oacute;n &mdash; 30 d&iacute;as</h2>
+        <table class="tabla-norm">
+          <thead><tr><th>Semana</th><th>Acci&oacute;n</th><th>Entregable</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Instalar Cowork + crear carpeta + 1 cliente piloto (el que mejor conozcas)</td><td>1 Project + 1 ficha <code>_cliente.md</code> funcionando</td></tr>
+            <tr><td>2</td><td>Correr <code>/cierre</code> sobre el cliente piloto. Comparar contra cierre manual del mismo mes.</td><td>Papel de trabajo generado vs. el tuyo histo&oacute;rico</td></tr>
+            <tr><td>3</td><td>Replicar la estructura para 3 clientes m&aacute;s. Crear <code>/req-dian</code> y prob&aacute;rselo a un requerimiento real.</td><td>4 Projects activos</td></tr>
+            <tr><td>4</td><td>Onboarding de tu auxiliar (si tienes). Documentar tu Cowork en una sola p&aacute;gina interna.</td><td>Equipo trabajando con la misma estructura</td></tr>
+          </tbody>
+        </table>
+        <div class="tip">
+          <div class="tip-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><h4>Empieza por el cliente que mejor conozcas</h4></div>
+          <p>NO empieces por el cliente m&aacute;s complejo: empieza por el que conoces de memoria. As&iacute; puedes comparar f&aacute;cilmente si Cowork acierta o se desv&iacute;a, sin perder tiempo verificando contra terceros.</p>
+        </div>
+      </div>
+      <div class="content-block">
+        <h2>Siguiente paso en la Ruta IA</h2>
+        <p>Cuando tengas Cowork andando con 3-4 clientes, el siguiente nivel es construir tus propias <strong>Skills de Claude</strong>: recetas reutilizables (clasificador de exo, cuadre IVA, validador del prevalidador) que disparas con un comando. Van al curso <a href="claude-skills-contadores.html">Skills de Claude para Contadores</a>.</p>
+        <p>Y si te interesa la aplicaci&oacute;n m&aacute;s densa &mdash;hacer la ex&oacute;gena AG completa con Claude de A a Z&mdash; vas a la <a href="exogena-claude.html">masterclass de Ex&oacute;gena con Claude</a> (15 m&oacute;dulos).</p>
+      </div>
+      <div class="resumen">
+        <div class="resumen-titulo">Resumen del curso entero</div>
+        <ul>
+          <li><strong>Cowork = escritorio + memoria.</strong> Ve tus carpetas, recuerda al cliente.</li>
+          <li><strong>Carpeta-por-cliente</strong> con misma estructura siempre + ficha <code>_cliente.md</code>.</li>
+          <li><strong>Un Project por cliente</strong> con Custom Instructions + Knowledge.</li>
+          <li><strong>3 slash commands</strong>: <code>/cierre</code>, <code>/req-dian</code>, <code>/exogena</code>.</li>
+          <li><strong>Plan 30 d&iacute;as</strong>: empezar con 1 cliente piloto y escalar.</li>
+        </ul>
+      </div>
+      <div data-cert-course="claude-cowork-contadores"></div>
+      <div class="mod-nav">
+        <a href="#modulo-6" class="prev" onclick="navigateTo(6)">&larr; M&oacute;dulo 6</a>
+        <a href="claude-skills-contadores.html" class="next">Siguiente curso: Skills de Claude &rarr;</a>
+      </div>
+    </section>
+  </div>
+</div>
+<button class="sidebar-toggle" onclick="toggleSidebar()">&#9776;</button>
+<script src="../shared/certificado.js?v=383dd956"></script>
+<script src="../shared/curso-meta.js?v=6b7779f4"></script>
+<script src="../shared/quiz-banks.js?v=bd69b5f6"></script>
+<script src="../shared/quiz-engine.js?v=faaf346e"></script>
+<script src="../shared/cert-emit-widget.js?v=81c77b40"></script>
+<script>
+var TOTAL_MODS = 7;
+var CURSO_SLUG = 'claude-cowork-contadores';
+function toggleSidebar(){
+  var sb = document.getElementById('sidebar');
+  var ov = document.getElementById('sidebarOverlay');
+  sb.classList.toggle('open');
+  ov.classList.toggle('open');
+}
+function navigateTo(n){
+  var secs = document.querySelectorAll('.modulo-section');
+  for (var i=0; i<secs.length; i++) secs[i].classList.remove('active');
+  var target = document.getElementById('modulo-' + n);
+  if (target) target.classList.add('active');
+  var links = document.querySelectorAll('.sidebar-nav a');
+  for (var j=0; j<links.length; j++) links[j].classList.remove('active');
+  var lk = document.querySelector('.sidebar-nav a[href="#modulo-' + n + '"]');
+  if (lk) lk.classList.add('active');
+  var fill = document.getElementById('progressFill');
+  if (fill) fill.style.width = Math.round((n/TOTAL_MODS)*100) + '%';
+  try { localStorage.setItem('exo-curso-' + CURSO_SLUG, String(n)); } catch(e){}
+  window.scrollTo({top:0, behavior:'smooth'});
+  var sb = document.getElementById('sidebar');
+  if (sb && sb.classList.contains('open')) toggleSidebar();
+}
+function copyBlock(btn){
+  var pre = btn.parentElement.querySelector('.code-block');
+  if (!pre) return;
+  var txt = pre.innerText;
+  navigator.clipboard.writeText(txt).then(function(){
+    btn.classList.add('copied');
+    var old = btn.textContent;
+    btn.textContent = 'Copiado';
+    setTimeout(function(){ btn.classList.remove('copied'); btn.textContent = old; }, 1500);
+  });
+}
+(function(){
+  try {
+    var saved = parseInt(localStorage.getItem('exo-curso-' + CURSO_SLUG) || '1', 10);
+    if (saved > 1 && saved <= TOTAL_MODS) navigateTo(saved);
+  } catch(e){}
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Capacidad Hipotecaria 2026 — ¿Cuánto Te Pueden Prestar? | ExógenaDIAN</title>
+<meta name="description" content="Calcula prudentemente cuánto puedes financiar en vivienda. Decreto 583/2025: cuota máx 40% ingreso, financia 80% VIS / 70% No VIS. Comparativo 3 modalidades.">
+<link rel="canonical" href="https://exogenadian.com/capacidad-hipotecaria.html">
+<meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.0/jspdf.plugin.autotable.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+<link rel="stylesheet" href="shared/finanzas-wow.css?v=a660abd8">
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--green:#059669;--green2:#ECFDF5;--red:#DC2626;--red2:#FEF2F2;--amber:#D97706;--amber2:#FFF8E1;--border:#e2e8f0;--radius:10px;--shadow:0 2px 12px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+.container{max-width:980px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#1B3A5C 0%,#059669 100%);padding:26px 32px;border-radius:16px;margin-bottom:22px;color:#fff}
+.header h1{font-size:1.4rem;font-weight:700;display:flex;align-items:center;gap:10px}
+.header p{opacity:.9;font-size:.85rem;margin-top:4px;max-width:600px}
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:22px;margin-bottom:18px;box-shadow:var(--shadow)}
+.card-title{font-size:1rem;font-weight:700;margin-bottom:14px;color:var(--pri)}
+.input-row{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.input-row label{font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase}
+.input-row input,.input-row select{padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:.95rem;font-family:'JetBrains Mono',monospace}
+.input-row select{font-family:'DM Sans'}
+.input-row input:focus{outline:none;border-color:var(--pri2);box-shadow:0 0 0 3px rgba(46,117,182,.12)}
+.input-row .hint{font-size:.7rem;color:var(--muted);font-weight:400}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.btn{padding:11px 22px;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:.9rem;font-family:inherit}
+.btn-pri{background:var(--pri2);color:#fff;width:100%}.btn-pri:hover{background:var(--pri)}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#047857}
+.btn-row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.cot-add{margin-top:8px;padding:9px 18px;background:transparent;border:1.5px dashed var(--border);color:var(--muted);border-radius:8px;font-weight:600;cursor:pointer;font-size:.86rem}
+.cot-add:hover{border-color:var(--pri2);color:var(--pri2);background:var(--pri3)}
+.cot-row{display:grid;grid-template-columns:1fr 1fr 40px;gap:10px;align-items:end;margin-bottom:8px}
+.cot-row .btn-del{background:var(--red2);color:var(--red);border:none;width:36px;height:36px;border-radius:8px;cursor:pointer;font-weight:700;font-size:1.1rem}
+.cot-row .btn-del:hover{background:var(--red);color:#fff}
+.summary{background:linear-gradient(135deg,#1B3A5C,#2E75B6);color:#fff;padding:24px;border-radius:14px;margin-bottom:18px}
+.summary h3{font-size:1rem;margin-bottom:10px;opacity:.9}
+.summary .big-num{font-size:2.4rem;font-weight:800;font-family:'JetBrains Mono',monospace;line-height:1;margin-bottom:4px}
+.summary .small{font-size:.84rem;opacity:.85}
+.classification{display:inline-block;background:rgba(255,255,255,.2);padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:700;margin-top:8px}
+.modalities{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:8px 0}
+.modality{padding:18px;border-radius:14px;border:2px solid var(--border);background:#fff}
+.modality.recommended{border-color:var(--green);box-shadow:0 0 0 3px rgba(5,150,105,.15)}
+.modality h4{font-size:.92rem;font-weight:800;color:var(--pri);margin-bottom:4px}
+.modality .m-sub{font-size:.72rem;color:var(--muted);margin-bottom:12px;line-height:1.4}
+.modality .m-stat{display:flex;justify-content:space-between;padding:5px 0;font-size:.82rem;border-top:1px dashed var(--border)}
+.modality .m-stat:first-of-type{border-top:0}
+.modality .m-stat strong{font-family:'JetBrains Mono',monospace}
+.modality .recommend-tag{display:inline-block;background:var(--green);color:#fff;font-size:.66rem;padding:2px 8px;border-radius:20px;margin-bottom:6px;font-weight:700}
+.alert{padding:12px 16px;border-radius:8px;font-size:.86rem;margin-bottom:12px;line-height:1.5}
+.alert-info{background:var(--pri3);color:var(--pri);border:1px solid #B4C6E7}
+.alert-warn{background:var(--amber2);color:#92400E;border:1px solid #FDE68A}
+.alert-green{background:var(--green2);color:#065F46;border:1px solid #A7F3D0}
+.cross-links{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.cross-link{display:block;padding:14px 16px;background:#F9FAFB;border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text)}
+.cross-link:hover{border-color:var(--pri2);background:var(--pri3)}
+.cross-link strong{display:block;font-size:.88rem;color:var(--pri)}
+.cross-link small{font-size:.72rem;color:var(--muted)}
+.results{display:none}.results.show{display:block;animation:fadeIn .4s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+.disclaimer{margin-top:14px;padding:12px 16px;background:var(--amber2);border:1px solid #FDE68A;border-radius:8px;font-size:.74rem;color:#92400E;line-height:1.5}
+@media(max-width:768px){.modalities,.grid2,.grid3,.cross-links{grid-template-columns:1fr}}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div id="navContainer"></div>
+<div class="container">
+<div class="header">
+  <h1><span>🏠</span> Capacidad Hipotecaria</h1>
+  <p>¿Cuánto te puede prestar el banco para vivienda? Aplicamos el Decreto 583/2025 (cuota máx 40% del ingreso familiar, financiación 80% VIS / 70% No VIS). Y te decimos prudentemente cuánto te conviene pedir.</p>
+</div>
+<div class="card">
+  <div class="card-title">👥 Cotitulares e ingresos</div>
+  <p style="font-size:.84rem;color:var(--muted);margin-bottom:12px">Hasta 3 personas que firman el crédito. Ingreso = neto que llega al bolsillo.</p>
+  <div id="cotitulares"></div>
+  <button class="cot-add" onclick="addCotitular()" id="btnAddCot">+ Agregar cotitular</button>
+</div>
+<div class="card">
+  <div class="card-title">💸 Gastos fijos mensuales</div>
+  <div class="input-row">
+    <label>Total gastos fijos (todos los cotitulares)</label>
+    <input type="text" id="gastosFijos" placeholder="$0" inputmode="numeric">
+    <span class="hint">Cuotas de deudas, arriendo actual (si aplica), gastos esenciales no negociables. NO incluyas gustos.</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">💰 Tu ahorro para inicial</div>
+  <div class="input-row">
+    <label>Plata disponible para cuota inicial</label>
+    <input type="text" id="ahorro" placeholder="$50.000.000" inputmode="numeric">
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">🏘️ Tipo de vivienda y ciudad</div>
+  <div class="input-row">
+    <label>O selecciona un inmueble típico (autocompleta valor según ciudad)</label>
+    <select id="inmueblePreset" onchange="aplicarInmueblePreset()">
+      <option value="">— Mete el valor manualmente o elige un inmueble típico —</option>
+      <optgroup label="🏢 Apartamento VIS (con subsidio Mi Casa Ya)">
+        <option value="vis-bogota-pequeno">Apto VIP Bogotá 1 alcoba (~$140M)</option>
+        <option value="vis-bogota">Apto VIS Bogotá 2 alcobas (~$200M)</option>
+        <option value="vis-medellin">Apto VIS Medellín 2 alcobas (~$170M)</option>
+        <option value="vis-cali">Apto VIS Cali 2 alcobas (~$160M)</option>
+        <option value="vis-barranquilla">Apto VIS Barranquilla 2 alcobas (~$160M)</option>
+        <option value="vis-bucaramanga">Apto VIS Bucaramanga 2 alcobas (~$150M)</option>
+      </optgroup>
+      <optgroup label="🏠 Vivienda No VIS (estrato medio)">
+        <option value="novis-bogota">Apto No VIS Bogotá 3 alcobas (~$340M)</option>
+        <option value="novis-medellin">Apto No VIS Medellín 3 alcobas (~$280M)</option>
+        <option value="novis-cali">Casa No VIS Cali (~$320M)</option>
+        <option value="novis-barranquilla">Apto No VIS Barranquilla (~$260M)</option>
+      </optgroup>
+      <optgroup label="🏛️ Vivienda alta gama">
+        <option value="alta-bogota">Apto alta gama Bogotá zona norte (~$650M)</option>
+        <option value="alta-medellin">Apto alta gama Medellín El Poblado (~$550M)</option>
+        <option value="finca">Finca raíz / casa campestre (~$450M)</option>
+      </optgroup>
+    </select>
+    <span class="hint">⚠️ <strong>Precios referenciales 2026</strong> con base en portales públicos del mercado colombiano. Verifica en Metrocuadrado, Properati o Fincaraíz para datos exactos. Tope VIS = 135 SMLMV (~$236M) general / 150 SMLMV (~$263M) en ciudades grandes.</span>
+  </div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="input-row">
+      <label>Ciudad</label>
+      <select id="ciudadGrande">
+        <option value="false">Otra ciudad (tope VIS 135 SMLMV)</option>
+        <option value="true">Bogotá / Medellín / Cali / Barranquilla / Cartagena / Bucaramanga (tope VIS 150 SMLMV)</option>
+      </select>
+    </div>
+    <div class="input-row">
+      <label>¿Cuánto vale el inmueble que quieres?</label>
+      <input type="text" id="valorInmueble" placeholder="$200.000.000" inputmode="numeric">
+      <span class="hint">Para clasificar VIS/VIP/No VIS</span>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">📊 Crédito hipotecario</div>
+  <div class="grid3">
+    <div class="input-row">
+      <label>Tasa E.A.</label>
+      <input type="text" id="tasa" placeholder="12.5" inputmode="decimal" value="12.47">
+      <span class="hint">VIS ~12.47%, No VIS ~12.26%</span>
+    </div>
+    <div class="input-row">
+      <label>Plazo</label>
+      <select id="plazo">
+        <option value="120">10 años</option>
+        <option value="180">15 años</option>
+        <option value="240" selected>20 años</option>
+        <option value="300">25 años</option>
+      </select>
+    </div>
+    <div class="input-row">
+      <label>Inflación esperada (%)</label>
+      <input type="text" id="inflacion" placeholder="5.5" inputmode="decimal" value="5.5">
+      <span class="hint">Para modalidades UVR</span>
+    </div>
+  </div>
+</div>
+<button class="btn btn-pri" onclick="evaluar()">¿Cuánto puedo financiar?</button>
+<div class="results" id="results">
+  <div class="summary" id="summary"></div>
+  <div class="card">
+    <div class="card-title">📋 La trampa de los gastos de cierre</div>
+    <p style="font-size:.84rem;color:var(--muted);margin-bottom:12px">Notaría, beneficencia, registro, estudio de títulos. Al firmar la escritura se suman <strong>3-5% del valor del inmueble</strong>. Casi nadie los presupuesta y terminan financiando con tarjeta.</p>
+    <div id="gastosCierre"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">⚖️ Comparativo: Banco comercial vs FNA vs Mi Casa Ya</div>
+    <p style="font-size:.84rem;color:var(--muted);margin-bottom:12px">3 caminos para tu hipoteca. Si calificas a VIS, FNA + Mi Casa Ya pueden bajar la tasa entre 5-7 puntos = millones a 20 años. <strong>El que no compara, paga el doble.</strong></p>
+    <div id="bancoVsFNA"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">🤔 ¿Comprar o arrendar?</div>
+    <p style="font-size:.84rem;color:var(--muted);margin-bottom:12px">El debate clásico. Te muestro el <strong>punto de equilibrio</strong>: cuántos años necesitas vivir en ese inmueble para que comprar valga más que arrendar.</p>
+    <div id="comprarVsArrendar"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">⚖️ Comparativo de modalidades</div>
+    <p style="font-size:.84rem;color:var(--muted);margin-bottom:14px">Las 3 formas de pagar la hipoteca en Colombia. Misma plata prestada, distinto perfil de cuota:</p>
+    <div class="modalities" id="modalities"></div>
+    <div class="alert alert-info" style="margin-top:12px" id="modAlert"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">✅ Diagnóstico</div>
+    <div id="diagnostico"></div>
+    <div class="gancho" id="ganchoHip"></div>
+    <div class="narrativa" id="narrativaHip"></div>
+    <div class="aha-grid" id="ahaGridHip"></div>
+  </div>
+  <div class="wow-actions-card" id="cardActionsHip" style="display:none">
+    <div class="wow-actions-title">🎯 Antes de firmar</div>
+    <div class="wow-actions-sub">Pasos prácticos según tu capacidad y perfil de inmueble.</div>
+    <div class="action-ladder" id="actionLadderHip"></div>
+  </div>
+  <div class="wow-share-card" id="cardShareHip" style="display:none">
+    <div class="wow-share-title">📸 Compártelo</div>
+    <div class="wow-share-sub">Tu capacidad de compra en formato Instagram.</div>
+    <div class="share-card" id="shareCardHip"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">🔗 Antes de firmar</div>
+    <div class="cross-links">
+      <a href="costoreal.html" class="cross-link"><strong>💸 Costo real del crédito</strong><small>Pasa la cuota por el revisor</small></a>
+      <a href="pyg-personal.html" class="cross-link"><strong>📊 PyG personal</strong><small>¿Cabe la cuota en tu mes?</small></a>
+      <a href="deudas.html" class="cross-link"><strong>🔍 Auditor deudas</strong><small>El banco lo va a mirar</small></a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">⬇️ Descargar</div>
+    <div class="btn-row">
+      <button class="btn btn-green" onclick="exportPDF()">📄 PDF</button>
+      <button class="btn btn-green" onclick="exportExcel()">📊 Excel</button>
+    </div>
+  </div>
+  <div class="disclaimer">
+    Cálculo de referencia. El banco aplica filtros adicionales (centrales de riesgo, antigüedad laboral, capacidad de respaldo). El Decreto 583/2025 establece <strong>topes legales</strong> (cuota máxima 40%, financiación máxima 70/80%) — son límites superiores, no recomendaciones. Lo prudente suele ser quedarse en 30-35% para tener aire. Las tasas VIS/No VIS son referenciales SuperFin abril 2026; pide cotización formal antes de decidir.
+  </div>
+</div>
+</div>
+<script src="shared/parametros-financieros.js?v=e116ea2a"></script>
+<script src="shared/finanzas-export.js?v=abe34dd6"></script>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<script src="shared/finanzas-privacy.js?v=aed97e2f"></script>
+<script>
+(function(){
+  function init(){
+    if (!window.FinanzasPrivacy) return;
+    var c = document.querySelector('.container') || document.body;
+    if (c) {
+      FinanzasPrivacy.autoLoad(c, 'capacidad-hipotecaria');
+      FinanzasPrivacy.autoSave(c, 'capacidad-hipotecaria', {debounce:800});
+    }
+  }
+  if (document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>
+<script>
+'use strict';
+var ultimoCalc = null;
+function $(id){ return document.getElementById(id); }
+function fmt(n){ if(n==null||isNaN(n))return '$0'; return '$'+Math.round(n).toLocaleString('es-CO'); }
+function fmtMA(anual){ if(!anual||isNaN(anual))return '<strong>$0/m</strong>'; var m=Math.round(anual/12); return '<strong>'+fmt(m)+'/m</strong> <span style="color:#9CA3AF;font-size:.78em">('+fmt(anual)+'/año)</span>'; }
+function num(id){ var v=$(id).value.replace(/[^\d]/g,''); return parseInt(v,10)||0; }
+function parsePct(s){ return parseFloat(String(s||'').replace(/[^\d.,]/g,'').replace(',','.')) || 0; }
+// ─── Inmuebles típicos Colombia 2026 (referenciales) ───
+var INMUEBLES_TIPICOS = {
+  'vis-bogota-pequeno':{p:140000000,c:true,n:'Apto VIP Bogotá 1 alcoba'},
+  'vis-bogota':{p:200000000,c:true,n:'Apto VIS Bogotá 2 alcobas'},
+  'vis-medellin':{p:170000000,c:true,n:'Apto VIS Medellín 2 alcobas'},
+  'vis-cali':{p:160000000,c:true,n:'Apto VIS Cali 2 alcobas'},
+  'vis-barranquilla':{p:160000000,c:true,n:'Apto VIS Barranquilla 2 alcobas'},
+  'vis-bucaramanga':{p:150000000,c:true,n:'Apto VIS Bucaramanga 2 alcobas'},
+  'novis-bogota':{p:340000000,c:true,n:'Apto No VIS Bogotá 3 alcobas'},
+  'novis-medellin':{p:280000000,c:true,n:'Apto No VIS Medellín 3 alcobas'},
+  'novis-cali':{p:320000000,c:true,n:'Casa No VIS Cali'},
+  'novis-barranquilla':{p:260000000,c:true,n:'Apto No VIS Barranquilla'},
+  'alta-bogota':{p:650000000,c:true,n:'Apto alta gama Bogotá zona norte'},
+  'alta-medellin':{p:550000000,c:true,n:'Apto alta gama Medellín El Poblado'},
+  'finca':{p:450000000,c:false,n:'Finca raíz / casa campestre'}
+};
+function aplicarInmueblePreset(){
+  var key = $('inmueblePreset').value;
+  if (!key || !INMUEBLES_TIPICOS[key]) return;
+  var i = INMUEBLES_TIPICOS[key];
+  $('valorInmueble').value = '$'+i.p.toLocaleString('es-CO');
+  $('ciudadGrande').value = i.c ? 'true' : 'false';
+}
+function moneyInput(el){
+  el.addEventListener('input', function(){
+    var raw = this.value.replace(/[^\d]/g,'');
+    this.value = raw ? '$'+parseInt(raw,10).toLocaleString('es-CO') : '';
+  });
+}
+['gastosFijos','ahorro','valorInmueble'].forEach(function(id){ moneyInput($(id)); });
+var cotCount = 0;
+function cotTemplate(idx){
+  return '<div class="cot-row" data-idx="'+idx+'">'+
+    '<div class="input-row" style="margin-bottom:0"><label>Cotitular '+(idx+1)+' — Nombre</label>'+
+      '<input type="text" data-f="nombre" placeholder="Tú / Pareja / Padre" style="font-family:DM Sans"></div>'+
+    '<div class="input-row" style="margin-bottom:0"><label>Ingreso neto mensual</label>'+
+      '<input type="text" data-f="ingreso" placeholder="$0" inputmode="numeric"></div>'+
+    '<button class="btn-del" onclick="delCot(this)" '+(idx===0?'style="visibility:hidden"':'')+'>×</button>'+
+  '</div>';
+}
+function addCotitular(){
+  if (cotCount >= 3) { exoToast('Máximo 3 cotitulares', 'info'); return; }
+  $('cotitulares').insertAdjacentHTML('beforeend', cotTemplate(cotCount));
+  var row = $('cotitulares').lastElementChild;
+  moneyInput(row.querySelector('[data-f="ingreso"]'));
+  cotCount++;
+  if (cotCount >= 3) $('btnAddCot').style.display = 'none';
+}
+function delCot(btn){
+  btn.closest('.cot-row').remove();
+  cotCount--;
+  $('btnAddCot').style.display = 'block';
+}
+function ingresoTotal(){
+  var t = 0;
+  $('cotitulares').querySelectorAll('[data-f="ingreso"]').forEach(function(i){
+    var v = parseInt(i.value.replace(/[^\d]/g,''), 10) || 0;
+    t += v;
+  });
+  return t;
+}
+// Cuota fija pesos (amortización francesa)
+function cuotaFijaPesos(monto, tasaEa, plazoMeses){
+  var i = Math.pow(1+tasaEa/100, 1/12) - 1;
+  if (i === 0) return monto / plazoMeses;
+  return monto * i / (1 - Math.pow(1+i, -plazoMeses));
+}
+// Monto financiable dada una cuota objetivo
+function montoFinanciable(cuota, tasaEa, plazoMeses){
+  var i = Math.pow(1+tasaEa/100, 1/12) - 1;
+  if (i === 0) return cuota * plazoMeses;
+  return cuota * (1 - Math.pow(1+i, -plazoMeses)) / i;
+}
+function evaluar(){
+  var ing = ingresoTotal();
+  if (ing === 0) { exoToast('Mete al menos un cotitular con ingreso', 'warning'); return; }
+  var gastos = num('gastosFijos');
+  var ahorro = num('ahorro');
+  var valorInm = num('valorInmueble');
+  var ciudadGrande = $('ciudadGrande').value === 'true';
+  var tasaEa = parsePct($('tasa').value);
+  var plazoM = parseInt($('plazo').value, 10);
+  var infl   = parsePct($('inflacion').value);
+  var P = ParametrosFinanzas;
+  var clasif = valorInm > 0 ? P.clasificarVivienda(valorInm, ciudadGrande) : 'NO_VIS';
+  var pctMaxFin = P.pctFinanciable(clasif);
+  // Cuota máx legal: 40% del ingreso (Decreto 583/2025)
+  // Para ser realistas y prudentes, descontamos los gastos fijos que ya tenían
+  // (no es regla legal pero sí lo que el banco mira en capacidad de pago)
+  var cuotaMaxLegal = Math.round(ing * 0.40);
+  var cuotaMaxPrudente = Math.max(Math.round(ing * 0.30), cuotaMaxLegal - gastos); // mínimo 30% o (40% - gastos fijos)
+  // Pero matemáticamente, la cuota a usar para máximo del banco es:
+  var cuotaParaCalculo = Math.min(cuotaMaxLegal, ing - gastos); // no mayor a lo que te queda libre
+  // Modalidad 1: cuota fija pesos
+  var monto1 = montoFinanciable(cuotaParaCalculo, tasaEa, plazoM);
+  var inmuebleMax1 = monto1 / (pctMaxFin/100) ;
+  // Modalidad 2: cuota constante UVR — tasa nominal aprox = tasa - inflación. Cuota INICIAL en pesos es menor.
+  // Aproximación didáctica: cuota inicial = cuotaParaCalculo × (1 - infl/tasa) — esto te deja financiar más
+  // Para que la cuota inicial coincida con el tope, el banco te financia más
+  var tasaReal = Math.max(tasaEa - infl, 1); // tasa real
+  var monto2_ifVeryEqual = montoFinanciable(cuotaParaCalculo, tasaReal, plazoM);
+  // Pero en UVR la cuota inicial es la "real", crece con UVR. La cuota inicial en pesos ≈ cuotaParaCalculo
+  // Lo que cambia: el monto financiable a la misma cuota inicial es mayor (porque la tasa real es menor)
+  var monto2 = monto2_ifVeryEqual;
+  var inmuebleMax2 = monto2 / (pctMaxFin/100);
+  // Modalidad 3: capital constante UVR — la cuota INICIAL es más alta. Por eso te financian MENOS si el límite es 40% en cuota inicial.
+  // cuota inicial = capital/N + interés_mes_1 ≈ K/N + K × i_real_mes
+  // Resolver para K dado cuota_inicial = cuotaParaCalculo:
+  // K (1/N + i) = cuotaParaCalculo  →  K = cuotaParaCalculo / (1/N + i)
+  var iRealMes = Math.pow(1+tasaReal/100, 1/12) - 1;
+  var monto3 = cuotaParaCalculo / (1/plazoM + iRealMes);
+  var inmuebleMax3 = monto3 / (pctMaxFin/100);
+  // Pero los 3 montos están limitados por el ahorro inicial: inmueble = financiable + ahorro como mínimo el % no financiable
+  // i.e. valorMaximo = min(financiable / pctMaxFin, ahorro / (1-pctMaxFin))
+  function topeAhorro(monto){
+    if (ahorro <= 0) return 0;
+    return ahorro / (1 - pctMaxFin/100);
+  }
+  function inmuebleReal(monto){
+    var ix = monto / (pctMaxFin/100);
+    var iy = topeAhorro(monto);
+    return Math.min(ix, iy > 0 ? iy : ix);
+  }
+  var inmRealM1 = inmuebleReal(monto1);
+  var inmRealM2 = inmuebleReal(monto2);
+  var inmRealM3 = inmuebleReal(monto3);
+  // ¿Le alcanza para el inmueble que quiere?
+  var alcanzaM1 = valorInm === 0 ? null : inmRealM1 >= valorInm;
+  // Total intereses estimados (modalidad 1 — la más simple)
+  var cuota1 = cuotaFijaPesos(monto1, tasaEa, plazoM);
+  var totalIntereses1 = cuota1 * plazoM - monto1;
+  ultimoCalc = {
+    ing:ing, gastos:gastos, ahorro:ahorro, valorInm:valorInm, clasif:clasif, ciudadGrande:ciudadGrande,
+    tasaEa:tasaEa, plazoM:plazoM, infl:infl, pctMaxFin:pctMaxFin,
+    cuotaMaxLegal:cuotaMaxLegal, cuotaParaCalculo:cuotaParaCalculo, cuotaMaxPrudente:cuotaMaxPrudente,
+    monto1:monto1, monto2:monto2, monto3:monto3,
+    inmRealM1:inmRealM1, inmRealM2:inmRealM2, inmRealM3:inmRealM3,
+    cuota1:cuota1, totalIntereses1:totalIntereses1,
+    alcanzaM1: alcanzaM1
+  };
+  // Summary
+  $('summary').innerHTML =
+    '<h3>Puedes financiar hasta</h3>'+
+    '<div class="big-num">'+fmt(monto1)+'</div>'+
+    '<div class="small">Crédito máximo (cuota fija pesos, '+plazoM/12+' años)<br>'+
+    'Cuota inicial: '+fmt(cuota1)+' / mes — '+(cuota1/ing*100).toFixed(1)+'% de ingreso familiar</div>'+
+    '<div class="classification">'+
+      (clasif==='VIP'?'🏠 VIP — hasta '+ParametrosFinanzas.P.vivienda.topeVipSmlmv+' SMLMV':
+       clasif==='VIS'?'🏠 VIS — '+ParametrosFinanzas.P.vivienda.topeVipSmlmv+'-'+(ciudadGrande?ParametrosFinanzas.P.vivienda.topeVisSmlmvGrandes:ParametrosFinanzas.P.vivienda.topeVisSmlmv)+' SMLMV':
+       '🏠 No VIS — sobre '+(ciudadGrande?ParametrosFinanzas.P.vivienda.topeVisSmlmvGrandes:ParametrosFinanzas.P.vivienda.topeVisSmlmv)+' SMLMV')+
+      ' · Banco financia hasta '+pctMaxFin+'%'+
+    '</div>';
+  // Modalidades
+  $('modalities').innerHTML =
+    '<div class="modality recommended">'+
+      '<div class="recommend-tag">RECOMENDADO PARA EMPEZAR</div>'+
+      '<h4>1. Cuota fija pesos</h4>'+
+      '<div class="m-sub">La cuota mensual no cambia en pesos. Lo que pagas hoy es lo que pagas en 20 años.</div>'+
+      '<div class="m-stat"><span>Crédito</span><strong>'+fmt(monto1)+'</strong></div>'+
+      '<div class="m-stat"><span>Cuota inicial</span><strong>'+fmt(cuota1)+'</strong></div>'+
+      '<div class="m-stat"><span>Cuota a 20 años</span><strong>'+fmt(cuota1)+'</strong></div>'+
+      '<div class="m-stat"><span>Intereses totales</span><strong>'+fmt(totalIntereses1)+'</strong></div>'+
+    '</div>'+
+    '<div class="modality">'+
+      '<h4>2. Cuota constante UVR</h4>'+
+      '<div class="m-sub">Cuota expresada en UVR (real) constante. En pesos sube cada año con inflación. Cuota inicial menor, te financian más.</div>'+
+      '<div class="m-stat"><span>Crédito</span><strong>'+fmt(monto2)+'</strong></div>'+
+      '<div class="m-stat"><span>Cuota inicial</span><strong>'+fmt(cuotaParaCalculo)+'</strong></div>'+
+      '<div class="m-stat"><span>Cuota año 10 (estimada)</span><strong>'+fmt(cuotaParaCalculo*Math.pow(1+infl/100,10))+'</strong></div>'+
+      '<div class="m-stat"><span>Riesgo</span><strong style="color:var(--amber)">Inflación alta</strong></div>'+
+    '</div>'+
+    '<div class="modality">'+
+      '<h4>3. Capital constante UVR</h4>'+
+      '<div class="m-sub">Pagas misma cantidad de capital cada mes; la cuota arranca alta y baja con el tiempo. Menos intereses totales.</div>'+
+      '<div class="m-stat"><span>Crédito</span><strong>'+fmt(monto3)+'</strong></div>'+
+      '<div class="m-stat"><span>Cuota inicial</span><strong>'+fmt(cuotaParaCalculo)+'</strong></div>'+
+      '<div class="m-stat"><span>Cuota final (UVR)</span><strong>~ '+fmt(monto3/plazoM*1.05)+'</strong></div>'+
+      '<div class="m-stat"><span>Apto si</span><strong style="color:var(--green)">Ingreso estable</strong></div>'+
+    '</div>';
+  $('modAlert').innerHTML = '<strong>¿Cómo escoger?</strong> Si esperas que tu salario crezca pareja con la inflación, UVR cuota constante te financia más casa. Si tu ingreso es fijo en pesos, no juegues con UVR — la cuota se sale de control. La modalidad 3 es para quien tiene espalda y quiere pagar menos intereses al final.';
+  // Diagnóstico
+  var diag = [];
+  if (valorInm > 0) {
+    if (alcanzaM1) {
+      diag.push('<div class="alert alert-green"><strong>✅ Alcanzas el inmueble que quieres.</strong> Para '+fmt(valorInm)+' (clasificación '+clasif+'), necesitas inicial mínima de '+fmt(valorInm*(1-pctMaxFin/100))+'. Tienes '+fmt(ahorro)+'.</div>');
+    } else {
+      var faltaInicial = valorInm * (1-pctMaxFin/100) - ahorro;
+      diag.push('<div class="alert alert-warn"><strong>⚠️ Te falta plata para el inmueble que quieres.</strong> '+
+        'Para un '+clasif+' de '+fmt(valorInm)+', necesitas inicial de '+fmt(valorInm*(1-pctMaxFin/100))+
+        (faltaInicial > 0 ? ' (te faltan '+fmt(faltaInicial)+' de ahorro)':'')+
+        '. O bajas la pretensión a '+fmt(inmRealM1)+', o ahorras más.</div>');
+    }
+  }
+  if (cuota1/ing > 0.35) {
+    diag.push('<div class="alert alert-warn"><strong>⚠️ La cuota se va a la mayoría del ingreso libre.</strong> '+
+      'Cuota legal ('+fmt(cuotaMaxLegal)+') está al tope del 40%. Lo prudente es quedarse en 30-32% para tener aire en imprevistos. '+
+      'Considera carro más barato o esperar a tener más ahorro inicial.</div>');
+  }
+  if (gastos / ing > 0.3) {
+    diag.push('<div class="alert alert-warn"><strong>⚠️ Tus gastos fijos ya consumen '+(gastos/ing*100).toFixed(0)+'% del ingreso.</strong> '+
+      'Sumar la cuota hipotecaria del 40% te deja apretado. Limpia primero deudas de consumo (<a href="deudas.html" style="color:#92400E">audítalas</a>) antes de pensar en hipoteca.</div>');
+  }
+  if (clasif === 'VIS' || clasif === 'VIP') {
+    diag.push('<div class="alert alert-info"><strong>💡 Es '+clasif+'.</strong> Te financian hasta el 80% (vs 70% No VIS) y puedes acceder a subsidio Mi Casa Ya / FNA tasa social ('+ParametrosFinanzas.P.tasas.fnaSocial+'% E.A.). Vale la pena explorar antes de firmar con banco comercial.</div>');
+  }
+  $('diagnostico').innerHTML = diag.join('') || '<div class="alert alert-info">Mete el valor del inmueble que quieres para que te diga si te alcanza.</div>';
+  renderGastosCierre();
+  renderBancoVsFNA();
+  renderComprarVsArrendar();
+  renderWowFactorHip();
+  $('results').classList.add('show');
+  $('results').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function renderGastosCierre(){
+  if (!ultimoCalc) return;
+  var c = ultimoCalc;
+  var valor = c.inmRealM1; // valor del inmueble que puede comprar
+  // Gastos de cierre típicos en Colombia 2026:
+  // - Beneficencia + registro: ~1.6% del valor (varía por departamento, Bogotá 1.69%)
+  // - Notaría: ~0.55% del valor + IVA
+  // - Estudio de títulos: $0.5M-$2M plano (mayor para inmuebles más caros)
+  // - Avalúo (si lo pide el banco): $0.4M-$1M
+  // - Seguro arrendatario primer año si existe: opcional
+  // - Comisión de inmobiliaria comprador (a veces): 1-3% (asume 0 ya que normalmente lo paga el vendedor)
+  // - Estampilla / impuesto departamental: depende
+  var beneficencia = Math.round(valor * 0.016);
+  var notaria = Math.round(valor * 0.0055);
+  var iva = Math.round(notaria * 0.19);
+  var estudioTitulos = Math.min(2000000, Math.max(500000, Math.round(valor*0.001)));
+  var avaluo = Math.min(1000000, Math.max(400000, Math.round(valor*0.0008)));
+  var totalCierre = beneficencia + notaria + iva + estudioTitulos + avaluo;
+  var pctCierre = valor > 0 ? totalCierre/valor*100 : 0;
+  // ¿Cuánto te alcanza realmente para el inmueble si reservas para cierre?
+  var ahorroParaInicial = c.ahorro - totalCierre;
+  var inmuebleRealAjustado = ahorroParaInicial > 0 ? ahorroParaInicial / (1 - c.pctMaxFin/100) : 0;
+  var html = '<div style="overflow-x:auto"><table class="tco-table" style="width:100%;font-size:.84rem">'+
+    '<thead><tr><th>Gasto</th><th style="text-align:right">% del valor</th><th style="text-align:right">Monto</th></tr></thead>'+
+    '<tbody>'+
+    '<tr><td>📜 Beneficencia + registro inmobiliario</td><td style="text-align:right">1.6%</td><td style="text-align:right;font-family:JetBrains Mono,monospace">'+fmt(beneficencia)+'</td></tr>'+
+    '<tr><td>✍️ Escritura notaría</td><td style="text-align:right">0.55%</td><td style="text-align:right;font-family:JetBrains Mono,monospace">'+fmt(notaria)+'</td></tr>'+
+    '<tr><td>📊 IVA notaría (19% sobre escritura)</td><td style="text-align:right">—</td><td style="text-align:right;font-family:JetBrains Mono,monospace">'+fmt(iva)+'</td></tr>'+
+    '<tr><td>📑 Estudio de títulos (abogado)</td><td style="text-align:right">~0.1%</td><td style="text-align:right;font-family:JetBrains Mono,monospace">'+fmt(estudioTitulos)+'</td></tr>'+
+    '<tr><td>🏛️ Avalúo comercial (lo pide el banco)</td><td style="text-align:right">~0.08%</td><td style="text-align:right;font-family:JetBrains Mono,monospace">'+fmt(avaluo)+'</td></tr>'+
+    '<tr style="background:#FEF3C7;font-weight:700"><td>TOTAL gastos al firmar</td><td style="text-align:right">'+pctCierre.toFixed(2)+'%</td><td style="text-align:right;font-family:JetBrains Mono,monospace">'+fmt(totalCierre)+'</td></tr>'+
+    '</tbody></table></div>';
+  html += '<div style="margin-top:14px;padding:14px 18px;background:#FEF2F2;border:1px solid #FECACA;border-radius:10px;font-size:.86rem;color:#991B1B;line-height:1.6">'+
+    '<strong>⚠️ La sorpresa que tumba primerizos:</strong> son <strong>'+fmt(totalCierre)+'</strong> ('+pctCierre.toFixed(1)+'% del valor) que pagas <em>el día que firmas</em>, además de la cuota inicial. ';
+  if (c.ahorro > totalCierre + valor*0.20) {
+    html += 'Tienes plata suficiente para inicial + cierre. Bien.';
+  } else if (c.ahorro > 0) {
+    html += '<strong>Si tienes '+fmt(c.ahorro)+' para inicial</strong>, después de pagar gastos de cierre te quedan '+fmt(Math.max(ahorroParaInicial,0))+' reales para inicial. ';
+    html += inmuebleRealAjustado > 0 ? 'El inmueble máximo real con eso es <strong>'+fmt(inmuebleRealAjustado)+'</strong> (no '+fmt(c.inmRealM1)+').' : 'No te alcanza.';
+  }
+  html += '</div>';
+  $('gastosCierre').innerHTML = html;
+}
+function renderBancoVsFNA(){
+  if (!ultimoCalc) return;
+  var c = ultimoCalc;
+  var monto = c.monto1;
+  var plazoM = c.plazoM;
+  if (monto <= 0 || plazoM <= 0) return;
+  // Cuota fija pesos para una tasa dada
+  function cuota(m, tasaEa){
+    var i = Math.pow(1+tasaEa/100, 1/12) - 1;
+    return m * i / (1 - Math.pow(1+i, -plazoM));
+  }
+  // 3 opciones: banco comercial, FNA tasa social, Mi Casa Ya
+  var tasaBanco = c.clasif.toLowerCase().indexOf('vis')>=0 && c.clasif.toLowerCase().indexOf('no')<0 ? 12.47 : 14.50;
+  var cuotaBanco = cuota(monto, tasaBanco);
+  var totalBanco = cuotaBanco * plazoM;
+  var interesesBanco = totalBanco - monto;
+  // FNA tasa social: ~7-8% para VIS si afiliado
+  var calificaFNA = c.clasif.toLowerCase().indexOf('vis')>=0 && c.clasif.toLowerCase().indexOf('no')<0;
+  var tasaFNA = calificaFNA ? 7.0 : 11.5;
+  var cuotaFNA = cuota(monto, tasaFNA);
+  var totalFNA = cuotaFNA * plazoM;
+  var interesesFNA = totalFNA - monto;
+  var ahorroFNA = totalBanco - totalFNA;
+  // Mi Casa Ya: subsidio en cuota + tasa preferencial
+  // Subsidio actual 2026: 20-30 SMLMV (~$35-53M) que reduce el monto financiado
+  var calificaMCY = calificaFNA && c.ing < 4 * 1750905; // Mi Casa Ya hasta 4 SMLMV
+  var subsidioMCY = calificaMCY ? Math.min(20 * 1750905, monto*0.15) : 0; // 20 SMLMV típico VIS
+  var montoMCY = monto - subsidioMCY;
+  var tasaMCY = 11.0; // tasa con subsidio MCY
+  var cuotaMCY = montoMCY > 0 ? cuota(montoMCY, tasaMCY) : 0;
+  var totalMCY = cuotaMCY * plazoM;
+  var interesesMCY = totalMCY - montoMCY;
+  var ahorroMCY = totalBanco - (totalMCY + subsidioMCY); // subsidio se descuenta del total
+  var html = '<div style="overflow-x:auto"><table class="tco-table" style="width:100%;font-size:.84rem">'+
+    '<thead><tr><th>Opción</th><th style="text-align:right">Tasa E.A.</th><th style="text-align:right">Cuota</th><th style="text-align:right">Total intereses</th><th style="text-align:right">Diferencia</th></tr></thead>'+
+    '<tbody>';
+  html += '<tr><td>🏦 Banco comercial (estándar)</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace">'+tasaBanco.toFixed(2)+'%</td>'+
+    '<td style="text-align:right">'+fmtMA(cuotaBanco*12)+'</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace">'+fmt(interesesBanco)+'</td>'+
+    '<td style="text-align:right;color:#9CA3AF">base</td></tr>';
+  html += '<tr style="'+(calificaFNA?'background:#D1FAE5;font-weight:600':'')+'"><td>🏛️ FNA tasa social'+(calificaFNA?' ✅ Calificas':' (solo VIS — no calificas)')+'</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace">'+tasaFNA.toFixed(1)+'%</td>'+
+    '<td style="text-align:right">'+fmtMA(cuotaFNA*12)+'</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace">'+fmt(interesesFNA)+'</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace;color:'+(ahorroFNA>0?'#059669':'#9CA3AF')+';font-weight:700">'+(ahorroFNA>0?'−'+fmt(ahorroFNA):'—')+'</td></tr>';
+  html += '<tr style="'+(calificaMCY?'background:#D1FAE5;font-weight:600':'')+'"><td>🎁 Mi Casa Ya'+(calificaMCY?' ✅ Calificas (subsidio '+fmt(subsidioMCY)+')':' (solo VIS + ingreso < 4 SMLMV)')+'</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace">'+(calificaMCY?tasaMCY.toFixed(1)+'%':'—')+'</td>'+
+    '<td style="text-align:right">'+(calificaMCY?fmtMA(cuotaMCY*12):'—')+'</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace">'+(calificaMCY?fmt(interesesMCY):'—')+'</td>'+
+    '<td style="text-align:right;font-family:JetBrains Mono,monospace;color:'+(ahorroMCY>0?'#059669':'#9CA3AF')+';font-weight:700">'+(calificaMCY && ahorroMCY>0?'−'+fmt(ahorroMCY):'—')+'</td></tr>';
+  html += '</tbody></table></div>';
+  if (calificaFNA) {
+    var maxAhorro = Math.max(ahorroFNA, ahorroMCY);
+    html += '<div style="margin-top:14px;padding:14px 18px;background:#ECFDF5;border:1px solid #A7F3D0;border-radius:10px;font-size:.88rem;color:#065F46;line-height:1.6">'+
+      '<strong>✅ Calificas a tasas subsidiadas.</strong> El ahorro máximo posible vs banco comercial es <strong>'+fmt(maxAhorro)+'</strong> a '+(plazoM/12)+' años — eso es <strong>'+fmt(Math.round(maxAhorro/plazoM))+'/mes</strong> que NO pagas. '+
+      'Requisitos FNA: afiliación previa (cesantías o ahorro voluntario) + cumplir cuotas mínimas. Mi Casa Ya: ingreso familiar < 4 SMLMV + ser primera vivienda + inmueble VIS.'+
+      '</div>';
+  } else {
+    html += '<div style="margin-top:14px;padding:14px 18px;background:#FFFBEB;border:1px solid #FDE68A;border-radius:10px;font-size:.86rem;color:#92400E;line-height:1.6">'+
+      '<strong>💡 Si tu inmueble es No VIS</strong>, FNA y Mi Casa Ya no aplican directamente. Pero <strong>negocia con 2-3 bancos en paralelo</strong>: la diferencia entre la mejor y peor cotización a 20 años puede ser '+fmt(monto*0.12)+' a '+fmt(monto*0.20)+'. Cada 0.5 punto de tasa = ~'+fmt(monto*0.05)+' en intereses totales.'+
+      '</div>';
+  }
+  $('bancoVsFNA').innerHTML = html;
+}
+function renderComprarVsArrendar(){
+  if (!ultimoCalc) return;
+  var c = ultimoCalc;
+  var valor = c.inmRealM1;
+  if (valor <= 0) return;
+  // Estimar arriendo típico: 0.6% del valor del inmueble por mes (rentabilidad típica Colombia)
+  var arriendoMes = Math.round(valor * 0.006);
+  var arriendoAnio = arriendoMes * 12;
+  // Costo mensual de TENER el inmueble (cuota + admin + predial + mantenimiento)
+  var cuotaMes = c.cuota1;
+  var adminMes = Math.round(valor * 0.0008); // 0.08% del valor (típico estrato 4-5)
+  var predialMes = Math.round(valor * 0.008 / 12); // 0.8% anual
+  var manttoMes = Math.round(valor * 0.005 / 12); // 0.5% anual mantenimiento
+  var totalTenerMes = cuotaMes + adminMes + predialMes + manttoMes;
+  var totalTenerAnio = totalTenerMes * 12;
+  // Diferencia mensual (lo que NO pagas si arriendas vs tenerlo)
+  var diferenciaMes = totalTenerMes - arriendoMes;
+  // En N años:
+  // Si compras: capital construido = pago al capital × N + apreciación inmueble (3% anual real)
+  // Si arriendas: capital construido = (diferencia mensual × 12 × N) invertido al 6% real
+  // Punto equilibrio: cuándo el patrimonio comprando > patrimonio arrendando
+  var apreciacionAnio = 0.03; // 3% real anual
+  var rendimientoInversion = 0.06; // 6% real anual
+  function calcular(anios){
+    // Compras: valor inmueble apreciado − saldo capital pendiente
+    var i = Math.pow(1+c.tasaEa/100, 1/12) - 1;
+    var saldo = c.monto1;
+    for (var m = 0; m < anios*12 && saldo > 0; m++){
+      var int = saldo * i;
+      var capital = c.cuota1 - int;
+      saldo = Math.max(saldo - capital, 0);
+    }
+    var valorAnio = valor * Math.pow(1+apreciacionAnio, anios);
+    var patrimonioComprar = valorAnio - saldo - c.ahorro; // resta lo que pusiste de inicial (oportunidad)
+    // Arriendas: inicial + diferencia mensual invertidos al 6% real
+    var saldoArriendo = c.ahorro;
+    for (var m = 0; m < anios*12; m++){
+      saldoArriendo = saldoArriendo * (1 + rendimientoInversion/12) + Math.max(diferenciaMes, 0);
+    }
+    var patrimonioArrendar = saldoArriendo - c.ahorro;
+    return {comprar:patrimonioComprar, arrendar:patrimonioArrendar, valorInm:valorAnio, saldoCap:saldo};
+  }
+  // Buscar punto de equilibrio
+  var equilibrio = null;
+  for (var a = 1; a <= 25 && !equilibrio; a++){
+    var r = calcular(a);
+    if (r.comprar >= r.arrendar) equilibrio = a;
+  }
+  if (!equilibrio) equilibrio = '> 25 años';
+  var r5 = calcular(5);
+  var r10 = calcular(10);
+  var r20 = calcular(20);
+  var html = '<div style="overflow-x:auto"><table class="tco-table" style="width:100%;font-size:.84rem">'+
+    '<thead><tr><th>Concepto</th><th style="text-align:right">Comprar</th><th style="text-align:right">Arrendar</th></tr></thead>'+
+    '<tbody>'+
+    '<tr><td>Costo mensual aprox.</td><td style="text-align:right">'+fmt(totalTenerMes)+' (cuota+admin+predial+mant.)</td><td style="text-align:right">'+fmt(arriendoMes)+' (~0.6% valor)</td></tr>'+
+    '<tr><td>Diferencia mensual</td><td colspan="2" style="text-align:center;font-family:JetBrains Mono,monospace;font-weight:700">'+(diferenciaMes>0?'+'+fmt(diferenciaMes)+' caro mantener':'+'+fmt(Math.abs(diferenciaMes))+' caro arrendar')+'</td></tr>'+
+    '<tr style="background:#F9FAFB;font-weight:700"><td>Patrimonio neto a 5 años</td><td style="text-align:right;font-family:JetBrains Mono,monospace">'+fmt(r5.comprar)+'</td><td style="text-align:right;font-family:JetBrains Mono,monospace">'+fmt(r5.arrendar)+'</td></tr>'+
+    '<tr style="background:#F9FAFB;font-weight:700"><td>Patrimonio neto a 10 años</td><td style="text-align:right;font-family:JetBrains Mono,monospace">'+fmt(r10.comprar)+'</td><td style="text-align:right;font-family:JetBrains Mono,monospace">'+fmt(r10.arrendar)+'</td></tr>'+
+    '<tr style="background:#F9FAFB;font-weight:700"><td>Patrimonio neto a 20 años</td><td style="text-align:right;font-family:JetBrains Mono,monospace">'+fmt(r20.comprar)+'</td><td style="text-align:right;font-family:JetBrains Mono,monospace">'+fmt(r20.arrendar)+'</td></tr>'+
+    '</tbody></table></div>';
+  html += '<div style="margin-top:14px;padding:14px 18px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:10px;font-size:.88rem;color:#1E40AF;line-height:1.6">'+
+    '<strong>📍 Punto de equilibrio:</strong> '+(typeof equilibrio === 'number' ? '<strong>'+equilibrio+' años</strong> viviendo en ese inmueble. Antes de eso, arrendar e invertir la diferencia te deja más patrimonio. Después, comprar gana.' : '<strong>Más de 25 años</strong>. Con tu ingreso, cuota y arriendo equivalente, arrendar + invertir es matemáticamente superior. Eso no significa que arrendar sea mejor — la vivienda propia tiene valor emocional y de seguridad que no se mide en plata.')+
+    '<br><br><strong>Supuestos clave:</strong> arriendo equivalente = 0.6% del valor del inmueble/mes (típico Colombia). Apreciación inmueble = 3% real anual. Inversión alternativa (FIC, AFC, ETFs) = 6% real anual. <strong>Cambia los supuestos y el resultado cambia</strong>: ej. apreciación 5% → comprar gana antes; rendimiento inversión 8% → arrendar gana más.'+
+    '</div>';
+  $('comprarVsArrendar').innerHTML = html;
+}
+function renderWowFactorHip(){
+  if (!ultimoCalc) return;
+  var c = ultimoCalc;
+  var pctCuotaIngreso = c.ing > 0 ? (c.cuota1/c.ing*100) : 0;
+  var totalPagado = c.cuota1 * c.plazoM;
+  var aniosPlazo = c.plazoM/12;
+  var esVIS = c.clasif && c.clasif.toLowerCase().indexOf('vis') >= 0 && c.clasif.toLowerCase().indexOf('no') < 0;
+  // Gancho
+  var gancho;
+  if (pctCuotaIngreso > 35)             gancho = '40% es tope legal. <em>No recomendación.</em>';
+  else if (esVIS)                       gancho = 'VIS abre tasa social FNA, <em>Mi Casa Ya y mejor cuota</em>.';
+  else if (aniosPlazo >= 20)            gancho = 'A 20 años pagas el doble. <em>A 30, casi el triple.</em>';
+  else                                   gancho = 'La única deuda grande que <em>las matemáticas justifican</em>.';
+  document.getElementById('ganchoHip').innerHTML = gancho;
+  // Narrativa
+  var narr = 'Con ingreso familiar de <span class="num">'+fmt(c.ing)+'</span> y ahorro de <span class="num">'+fmt(c.ahorro)+'</span> para inicial, el banco te financia hasta <span class="num">'+fmt(c.monto1)+'</span> a '+aniosPlazo+' años a '+c.tasaEa.toFixed(2)+'%. Inmueble más caro: <span class="num">'+fmt(c.inmRealM1)+'</span> ('+c.clasif+').';
+  narr += '<br><br>Cuota cuota fija pesos: <span class="num">'+fmt(c.cuota1)+'</span>/mes (<strong>'+pctCuotaIngreso.toFixed(1)+'%</strong> del ingreso). Total a pagar en '+aniosPlazo+' años: <span class="num">'+fmt(totalPagado)+'</span>. Intereses totales: <span class="num">'+fmt(c.totalIntereses1)+'</span>.';
+  narr += '<br><br><strong>Decreto 583/2025:</strong> cuota máx 40%, financia 80% VIS / 70% No VIS. <em>Topes legales, no recomendaciones.</em> ';
+  if (pctCuotaIngreso > 32) narr += 'Lo prudente: 30-32%. Si te apretas, un imprevisto te tumba.';
+  else narr += 'Estás dentro de zona prudente. Bien.';
+  if (esVIS) narr += '<br><br><strong>VIS abre beneficios:</strong> FNA tasa social (~7% E.A. vs 14-15%), Mi Casa Ya, leasing habitacional. Aunque puedas pagar más, comprar VIS reduce tasa significativamente.';
+  document.getElementById('narrativaHip').innerHTML = narr;
+  // Ahas
+  var ahas = [
+    '<div class="aha-card '+(pctCuotaIngreso > 35 ? 'bad' : pctCuotaIngreso > 28 ? '' : 'good')+'"><span class="aha-tag">cuota</span><div class="aha-num">'+pctCuotaIngreso.toFixed(0)+'%</div><div class="aha-lbl">del ingreso familiar</div></div>',
+    '<div class="aha-card bad"><span class="aha-tag">'+aniosPlazo+' años</span><div class="aha-num">'+fmt(c.totalIntereses1)+'</div><div class="aha-lbl">intereses totales</div></div>',
+    '<div class="aha-card good"><span class="aha-tag">inmueble máx</span><div class="aha-num">'+fmt(c.inmRealM1)+'</div><div class="aha-lbl">con tu ahorro de inicial</div></div>'
+  ];
+  document.getElementById('ahaGridHip').innerHTML = ahas.join('');
+  // Action ladder
+  var actions = [];
+  actions.push({h:'Pre-aprobación con 2-3 bancos + FNA', p:'Las tasas varían 1-2 puntos = <strong>millones a 15 años</strong>. La mejor tasa la consigue quien negocia con dos cotizaciones en mano.'});
+  if (esVIS) actions.push({h:'Aplica Mi Casa Ya y FNA tasa social', p:'Subsidio Mi Casa Ya hasta <strong>30 SMLMV</strong>. FNA tasa social ~<strong>7% E.A.</strong> vs 14-15% comercial. La diferencia es 50% menos en intereses totales.'});
+  actions.push({h:'Reserva colchón antes de firmar', p:'Apartar <strong>6 meses de cuota</strong> + 3-5% del valor del inmueble (notaría, beneficencia, registro). Margen: cuota + colchón + cierre.'});
+  actions.push({h:'Abonos extra al capital', p:'El truco más rentable. Cada peso abonado se ahorra los intereses futuros. Si te llega prima, devolución DIAN o bono extraordinario, evalúa abonar a hipoteca primero.'});
+  document.getElementById('cardActionsHip').style.display = 'block';
+  document.getElementById('actionLadderHip').innerHTML = actions.slice(0,3).map(function(a,i){
+    return '<div class="action-step"><div class="action-num">'+(i+1)+'</div><div class="action-body"><h4>'+a.h+'</h4><p>'+a.p+'</p></div></div>';
+  }).join('');
+  // Share card
+  var shareLine = pctCuotaIngreso > 35
+    ? '<em>'+pctCuotaIngreso.toFixed(0)+'%</em> del ingreso. Sobre el tope prudente.'
+    : esVIS
+      ? 'VIS — accedo a <em>FNA tasa social</em> y Mi Casa Ya.'
+      : 'Cuota: <em>'+pctCuotaIngreso.toFixed(0)+'%</em> del ingreso. Dentro de zona sana.';
+  document.getElementById('cardShareHip').style.display = 'block';
+  document.getElementById('shareCardHip').innerHTML =
+    '<div class="share-card-label">Mi capacidad hipotecaria — Decreto 583/2025</div>'+
+    '<div class="share-card-amount">'+fmt(c.monto1)+'</div>'+
+    '<div class="share-card-line">'+shareLine+' Inmueble hasta '+fmt(c.inmRealM1)+'.</div>'+
+    '<div class="share-card-stats">'+
+      '<div class="share-card-stat">Cuota<strong>'+fmt(c.cuota1)+'</strong></div>'+
+      '<div class="share-card-stat">Plazo<strong>'+aniosPlazo+' años</strong></div>'+
+      '<div class="share-card-stat">% ingreso<strong>'+pctCuotaIngreso.toFixed(0)+'%</strong></div>'+
+    '</div>'+
+    '<div class="share-actions">'+
+      '<button onclick="copiarShareHip()">📋 Copiar texto</button>'+
+    '</div>'+
+    '<div class="share-card-foot">exogenadian.com/capacidad-hipotecaria</div>';
+}
+function copiarShareHip(){
+  if (!ultimoCalc) return;
+  var c = ultimoCalc;
+  var aniosPlazo = c.plazoM/12;
+  var pctCuotaIngreso = c.ing > 0 ? (c.cuota1/c.ing*100) : 0;
+  var txt = 'Mi capacidad hipotecaria\n';
+  txt += 'Crédito máx: '+fmt(c.monto1)+' a '+aniosPlazo+' años\n';
+  txt += 'Cuota mensual: '+fmt(c.cuota1)+' ('+pctCuotaIngreso.toFixed(0)+'% del ingreso)\n';
+  txt += 'Inmueble hasta '+fmt(c.inmRealM1)+' ('+c.clasif+')\n';
+  txt += 'Calculado en exogenadian.com/capacidad-hipotecaria';
+  if (navigator.clipboard) navigator.clipboard.writeText(txt).then(function(){ exoToast('Copiado al portapapeles', 'success'); });
+  if (typeof gtag !== 'undefined') gtag('event','hip_share',{tipo:'copy'});
+}
+function exportPDF(){
+  if (!ultimoCalc) return;
+  var c = ultimoCalc;
+  var aniosPlazo = c.plazoM/12;
+  var pctCuotaIngreso = c.ing > 0 ? (c.cuota1/c.ing*100) : 0;
+  var totalPagado = c.cuota1 * c.plazoM;
+  var inmuebleMax = c.inmRealM1;
+  var esVIS = c.clasif && c.clasif.toLowerCase().indexOf('vis') >= 0 && c.clasif.toLowerCase().indexOf('no') < 0;
+  // Frase hero
+  var fraseHero;
+  if (pctCuotaIngreso > 35)             fraseHero = { texto:'40% es tope legal,\nno recomendación.', autor:'ExógenaDIAN — sobre Decreto 583/2025' };
+  else if (esVIS)                       fraseHero = { texto:'VIS abre tasa social FNA,\nMi Casa Ya y mejor cuota.', autor:'ExógenaDIAN' };
+  else if (aniosPlazo >= 20)            fraseHero = { texto:'A 20 años pagas el doble.\nA 30, casi el triple.', autor:'ExógenaDIAN' };
+  else                                   fraseHero = { texto:'La única deuda grande\nque las matemáticas justifican.', autor:'ExógenaDIAN — sobre vivienda' };
+  // Narrativa
+  var narrativa = 'Con un ingreso familiar de '+fmt(c.ing)+' y ahorro de '+fmt(c.ahorro)+' para inicial, el banco puede financiarte hasta '+fmt(c.monto1)+' a '+aniosPlazo+' años a '+c.tasaEa.toFixed(2)+'% E.A.';
+  narrativa += ' El inmueble más caro al que llegas (clasificación '+c.clasif+') vale '+fmt(inmuebleMax)+'.';
+  narrativa += '\n\nDesglose de cuota cuota fija pesos:\n• Cuota mensual: '+fmt(c.cuota1)+' ('+pctCuotaIngreso.toFixed(1)+'% del ingreso familiar)\n• Total pagado en '+aniosPlazo+' años: '+fmt(totalPagado)+'\n• Intereses totales: '+fmt(c.totalIntereses1);
+  narrativa += '\n\nDecreto 583/2025 dice: cuota máx 40% del ingreso familiar (mismo tope para VIS y No VIS — antes No VIS era 30%); financia hasta 80% en VIS y 70% en No VIS. Eso son TOPES LEGALES, no recomendaciones.';
+  if (pctCuotaIngreso > 32) narrativa += '\n\nLo prudente sigue siendo 30-32%. Si te apretas al 40%, un mes con un imprevisto (mantenimiento mayor, salud, pérdida temporal de ingreso) te tumba. La hipoteca es a 15-20 años — necesitas margen.';
+  if (esVIS) narrativa += '\n\nVIS ABRE BENEFICIOS: FNA tasa social (~7% E.A. vs 14-15% comercial), subsidios Mi Casa Ya, leasing habitacional. Si tu inmueble está dentro del tope VIS aunque puedas pagar más, comprar VIS reduce tasa significativamente — es plata real.';
+  // Ahas
+  var ahas = [
+    { num: fmt(c.cuota1), label: 'cuota mensual ('+pctCuotaIngreso.toFixed(1)+'% del ingreso familiar)', tipo: pctCuotaIngreso > 35 ? 'bad' : pctCuotaIngreso > 28 ? 'neutro' : 'good' },
+    { num: fmt(c.totalIntereses1), label: 'intereses totales en '+aniosPlazo+' años', tipo: 'bad' },
+    { num: fmt(inmuebleMax), label: 'inmueble más caro al que llegas con tu ahorro', tipo: 'good' }
+  ];
+  // Plan
+  var plan = {
+    p30: 'Pre-aprobación con tu banco principal y al menos 1 banco más + FNA si aplicas a VIS. Las tasas varían 1-2 puntos entre bancos = millones a 15 años. La mejor tasa la consigue quien negocia con dos cotizaciones en mano.',
+    p12m: 'Construye reserva adicional: aparte de la inicial, 6 meses de cuota como colchón antes de firmar. Y los gastos de notaría, beneficencia, registro: ~3-5% adicional del valor del inmueble. Al firmar, tu ahorro debe quedar con margen para: cuota + colchón + gastos cierre.',
+    p5y: 'Si la tasa baja 2+ puntos, refinancia (la portabilidad financiera es ley). Cada abono extra a capital recorta intereses futuros — el truco más rentable en hipoteca larga. A 5 años puedes haber bajado el saldo significativamente con abonos extras.'
+  };
+  // Consejos
+  var consejos = [
+    {
+      titulo: 'Cuota recomendada: 30-32% del ingreso, no 40%',
+      impacto: 'Margen de error',
+      desc: 'El 40% del Decreto 583/2025 es tope legal. Lo prudente: 30-32%. Si quieres dormir tranquilo y absorber imprevistos (mantenimiento mayor, baja temporal de ingreso, gastos médicos), apunta más bajo. La hipoteca es a 15-20 años; el margen es tu seguro.'
+    },
+    {
+      titulo: '3 modalidades — escoge según perfil',
+      impacto: 'Diferencia de cientos de millones',
+      desc: '(1) FIJA PESOS: cuota igual siempre, certidumbre. Default para arrancar. (2) UVR cuota constante: empieza más baja, sube con inflación. Sirve si esperas que tu salario suba con la canasta. (3) UVR capital constante: cuota inicial alta, va bajando; pagas menos intereses totales. Compara las 3 con tu calculadora.'
+    },
+    {
+      titulo: 'Si aplicas a VIS, aprovéchalo',
+      impacto: 'Tasa 7% vs 14-15%',
+      desc: 'VIS hasta 135 SMLMV (~$236M en 2026), 150 en ciudades grandes. Beneficios: FNA tasa social (subsidiada), Mi Casa Ya (subsidio del gobierno hasta 30 SMLMV), leasing habitacional. La diferencia entre comprar VIS al límite vs No VIS levemente arriba puede ser 50% menos en intereses totales.'
+    },
+    {
+      titulo: 'Abonos extra al capital — el truco más rentable',
+      impacto: 'Cada $1M abonado = $X intereses ahorrados',
+      desc: 'Cada peso abonado al capital se ahorra los intereses futuros sobre ese peso. En los primeros años (cuando casi todo va a intereses), un abono extra recorta meses al final del plazo. Si te llega prima, devolución de DIAN o bono extraordinario, evalúa abonar a hipoteca antes que cualquier otro destino.'
+    }
+  ];
+  // Frase nevera
+  var fraseNevera = pctCuotaIngreso > 35 ? {
+    texto: 'El truco no es predecir el futuro.\nEs construir un margen de error que\nsobreviva a tu predicción equivocada.',
+    autor: 'Morgan Housel — La psicología del dinero'
+  } : {
+    texto: 'La deuda hipotecaria es la única\ndeuda grande que la mayoría debería\nconsiderar tomar.',
+    autor: 'Morgan Housel — La psicología del dinero'
+  };
+  // Inputs y resultados
+  var inputs = [
+    ['Ingreso familiar mensual', fmt(c.ing)],
+    ['Gastos fijos mensuales', fmt(c.gastos)],
+    ['Ahorro disponible para inicial', fmt(c.ahorro)],
+    ['Tasa E.A.', c.tasaEa.toFixed(2)+'%'],
+    ['Plazo', aniosPlazo+' años'],
+    ['Clasificación inmueble', c.clasif+' (banco financia '+c.pctMaxFin+'%)']
+  ];
+  var resultados = [
+    ['Cuota máx legal (40% — Decreto 583/2025)', fmt(c.cuotaMaxLegal)],
+    ['Crédito máximo — cuota fija pesos', fmt(c.monto1)],
+    ['Inmueble máximo con tu ahorro', fmt(c.inmRealM1)],
+    ['Cuota mensual estimada', fmt(c.cuota1)+' ('+pctCuotaIngreso.toFixed(1)+'% del ingreso)'],
+    ['Total a pagar en '+aniosPlazo+' años', fmt(totalPagado)],
+    ['Intereses totales', fmt(c.totalIntereses1)]
+  ];
+  exportFinanzasReporte({
+    titulo: 'Capacidad Hipotecaria Colombia 2026',
+    slug: 'capacidad-hipotecaria',
+    subtitulo: 'Decreto 583/2025 · '+c.clasif+' · '+aniosPlazo+' años',
+    hero: {
+      label: 'Crédito máximo aprobable',
+      valor: fmt(c.monto1),
+      subvalor: 'Inmueble hasta '+fmt(inmuebleMax)+' · cuota '+fmt(c.cuota1)+'/mes'
+    },
+    fraseHero: fraseHero,
+    inputs: inputs,
+    resultados: resultados,
+    narrativa: narrativa,
+    ahas: ahas,
+    plan: plan,
+    consejos: consejos,
+    fraseNevera: fraseNevera,
+    fuente: 'Decreto 583/2025 (vigente 28 mayo 2025) — cuota máx 40%, financia 80% VIS / 70% No VIS | Tasas SuperFin abril 2026 | Ley portabilidad hipotecaria'
+  });
+}
+function exportExcel(){
+  if (!ultimoCalc) return;
+  var c = ultimoCalc;
+  exportFinanzasExcel({
+    titulo: 'Capacidad hipotecaria', slug:'capacidad-hipotecaria',
+    inputs: [['Ingreso', c.ing],['Gastos fijos', c.gastos],['Ahorro', c.ahorro],['Tasa', c.tasaEa+'%'],['Plazo años', c.plazoM/12]],
+    resultados: [
+      ['Crédito modalidad 1', Math.round(c.monto1)],
+      ['Crédito modalidad 2 (UVR)', Math.round(c.monto2)],
+      ['Crédito modalidad 3 (cap. const.)', Math.round(c.monto3)],
+      ['Inmueble máx', Math.round(c.inmRealM1)],
+      ['Cuota inicial', Math.round(c.cuota1)],
+      ['Intereses totales', Math.round(c.totalIntereses1)]
+    ],
+    destacado: { label:'CRÉDITO MÁX', valor: Math.round(c.monto1) },
+    interpretacion: 'Clasif '+c.clasif+' — financia '+c.pctMaxFin+'%',
+    fuente: 'Decreto 583/2025'
+  });
+}
+// 1 cotitular por defecto
+addCotitular();
+</script>
+</body>
+</html>

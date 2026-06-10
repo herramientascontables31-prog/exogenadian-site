@@ -1,0 +1,113 @@
+/* Mockups inline para los tutoriales (tutoriales/*.html)
+   Reproducen pantallas del sitio sin necesidad de imágenes.
+   Usa los mismos colores y tipografías del sitio (verde corporativo,
+   Outfit + Fraunces, JetBrains Mono para code). */
+
+.mockup{
+  background:#fff;
+  border:1px solid #E5E7EB;
+  border-radius:10px;
+  overflow:hidden;
+  margin:14px 0;
+  box-shadow:0 6px 18px rgba(0,0,0,.05);
+  font-family:'Outfit',sans-serif;
+}
+
+/* Barra superior tipo navegador (URL bar + 3 dots) */
+.mockup-bar{background:#F3F4F6;padding:6px 12px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #E5E7EB}
+.mockup-dots{display:flex;gap:4px;flex-shrink:0}
+.mockup-dots span{width:8px;height:8px;border-radius:50%;background:#D1D5DB}
+.mockup-dots span:nth-child(1){background:#FCA5A5}
+.mockup-dots span:nth-child(2){background:#FCD34D}
+.mockup-dots span:nth-child(3){background:#86EFAC}
+.mockup-url{flex:1;background:#fff;border:1px solid #E5E7EB;border-radius:5px;padding:3px 8px;font-family:'JetBrains Mono',monospace;font-size:.66rem;color:#6B7280}
+
+/* Body del mockup */
+.mockup-body{padding:14px 18px;background:#fff;font-size:.78rem;color:#374151;position:relative}
+.mockup-body--green{background:linear-gradient(180deg,#F0FDF4,#ECFDF5)}
+.mockup-body--gray{background:#F9FAFB}
+
+/* Tit de sección dentro del body */
+.mockup-h{font-family:'Fraunces',serif;font-size:.92rem;font-weight:700;color:#111827;margin-bottom:8px}
+.mockup-sub{font-size:.7rem;color:#6B7280;margin-bottom:8px}
+
+/* Modal overlay (semitransparente + caja blanca centrada) */
+.mockup-overlay{position:absolute;inset:0;background:rgba(15,23,42,.4);backdrop-filter:blur(1px)}
+.mockup-modal{position:relative;background:#fff;border-radius:10px;padding:14px 16px;max-width:300px;margin:14px auto;box-shadow:0 10px 24px rgba(0,0,0,.18);z-index:1}
+.mockup-modal-title{font-family:'Fraunces',serif;font-size:.9rem;color:#065F46;font-weight:700;margin-bottom:3px}
+.mockup-modal-sub{font-size:.68rem;color:#6B7280;margin-bottom:10px}
+
+/* Lista numerada con chip verde (5 pasos del onboarding, etc) */
+.mockup-steps{list-style:none;margin:0 0 10px 0;padding:0;display:flex;flex-direction:column;gap:4px}
+.mockup-steps li{display:flex;align-items:center;gap:7px;font-size:.7rem;color:#374151;background:#ECFDF5;border-radius:5px;padding:4px 8px}
+.mockup-num{width:16px;height:16px;border-radius:50%;background:#059669;color:#fff;font-size:.6rem;font-weight:800;display:grid;place-items:center;flex-shrink:0}
+
+/* Botones */
+.mockup-btn-primary{display:inline-block;background:#059669;color:#fff;padding:6px 14px;border-radius:6px;font-size:.74rem;font-weight:700;box-shadow:0 3px 8px rgba(5,150,105,.22)}
+.mockup-btn-secondary{display:inline-block;background:#F3F4F6;color:#374151;padding:6px 14px;border-radius:6px;font-size:.74rem;font-weight:600;border:1px solid #E5E7EB}
+.mockup-btn-amber{display:inline-block;background:#F59E0B;color:#fff;padding:6px 14px;border-radius:6px;font-size:.74rem;font-weight:700}
+.mockup-btn-pro{display:inline-block;background:linear-gradient(135deg,#92400E,#B45309);color:#fff;padding:6px 14px;border-radius:6px;font-size:.74rem;font-weight:700}
+
+/* Drop-zone con borde punteado */
+.mockup-dropzone{border:2px dashed #D1D5DB;border-radius:8px;padding:18px 14px;text-align:center;background:#F9FAFB;color:#6B7280;font-size:.72rem}
+.mockup-dropzone--active{border-color:#059669;background:#ECFDF5;color:#047857}
+.mockup-dropzone--filled{border-style:solid;border-color:#10B981;background:#ECFDF5;color:#065F46}
+.mockup-dropzone-icon{font-size:1.4rem;display:block;margin-bottom:4px;opacity:.6}
+
+/* Formulario (label + input ghost) */
+.mockup-form{display:grid;gap:8px;grid-template-columns:1fr 1fr}
+.mockup-form-full{grid-column:1/-1}
+.mockup-input{display:block;background:#F9FAFB;border:1px solid #E5E7EB;border-radius:5px;padding:5px 8px;font-size:.7rem;color:#9CA3AF}
+.mockup-label{display:block;font-size:.62rem;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
+
+/* Tabla compacta */
+.mockup-table{width:100%;border-collapse:collapse;font-size:.7rem;background:#fff;border:1px solid #E5E7EB;border-radius:6px;overflow:hidden}
+.mockup-table th{background:#F3F4F6;color:#6B7280;padding:5px 8px;text-align:left;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.mockup-table td{padding:5px 8px;border-top:1px solid #F3F4F6;color:#374151}
+.mockup-table tr:nth-child(even) td{background:#F9FAFB}
+.mockup-table-num{font-family:'JetBrains Mono',monospace;font-size:.66rem;text-align:right}
+
+/* Cards de estadística */
+.mockup-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+.mockup-stat{background:#F9FAFB;border:1px solid #E5E7EB;border-radius:7px;padding:8px 10px;text-align:center}
+.mockup-stat-num{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:700;color:#065F46;line-height:1}
+.mockup-stat-lbl{font-size:.58rem;color:#6B7280;text-transform:uppercase;letter-spacing:.04em;margin-top:3px}
+
+/* Tabs */
+.mockup-tabs{display:flex;gap:4px;border-bottom:1px solid #E5E7EB;margin-bottom:8px}
+.mockup-tab{padding:5px 11px;font-size:.7rem;color:#6B7280;border-radius:6px 6px 0 0;background:transparent}
+.mockup-tab--active{background:#059669;color:#fff;font-weight:700}
+
+/* Chips de estado */
+.mockup-chip{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:100px;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em}
+.mockup-chip--ok{background:#D1FAE5;color:#065F46}
+.mockup-chip--warn{background:#FEF3C7;color:#92400E}
+.mockup-chip--err{background:#FEE2E2;color:#991B1B}
+.mockup-chip--pro{background:#FEF3C7;color:#78350F;border:1px solid #FCD34D}
+
+/* Badge cuadrado (H2, H3, H4...) */
+.mockup-badge{display:inline-block;padding:1px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:700;background:#ECFDF5;color:#065F46;border:1px solid #A7F3D0}
+.mockup-badge--h2{background:#DBEAFE;color:#1E40AF;border-color:#93C5FD}
+.mockup-badge--h3{background:#FEF3C7;color:#92400E;border-color:#FCD34D}
+.mockup-badge--h4{background:#F5F3FF;color:#6D28D9;border-color:#C4B5FD}
+.mockup-badge--h7{background:#F3F4F6;color:#374151;border-color:#D1D5DB}
+.mockup-badge--warn{background:#FEF3C7;color:#92400E;border-color:#FCD34D}
+
+/* Layouts comunes */
+.mockup-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mockup-row{display:flex;justify-content:space-between;align-items:center;padding:5px 8px;font-size:.72rem;border-bottom:1px solid #F3F4F6}
+.mockup-row:last-child{border-bottom:none}
+.mockup-row-lbl{color:#6B7280;font-size:.66rem}
+.mockup-row-val{font-family:'JetBrains Mono',monospace;color:#111827;font-weight:600}
+
+/* Cursor / spinner */
+.mockup-cursor{display:inline-block;color:#059669}
+.mockup-spinner{display:inline-flex;align-items:center;gap:6px;color:#6B7280;font-size:.72rem}
+.mockup-spinner::before{content:'';width:10px;height:10px;border:2px solid #E5E7EB;border-top-color:#059669;border-radius:50%;display:inline-block}
+
+/* Responsive: en móvil reducir padding */
+@media(max-width:600px){
+  .mockup-body{padding:10px 12px}
+  .mockup-stats{grid-template-columns:repeat(2,1fr)}
+  .mockup-form{grid-template-columns:1fr}
+}

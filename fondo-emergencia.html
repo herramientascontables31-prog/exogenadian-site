@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Fondo de Emergencia y Desempleo — ¿Cuánto Necesitas? | ExógenaDIAN</title>
+<meta name="description" content="Calcula tu fondo de emergencia (imprevistos) y de desempleo. Cuánto necesitas según tu hogar y cuántos meses puedes resistir sin trabajo.">
+<link rel="canonical" href="https://exogenadian.com/fondo-emergencia.html">
+<meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.0/jspdf.plugin.autotable.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+<link rel="stylesheet" href="shared/finanzas-wow.css?v=a660abd8">
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--green:#059669;--green2:#ECFDF5;--green3:#D1FAE5;--red:#DC2626;--red2:#FEF2F2;--amber:#D97706;--amber2:#FFF8E1;--amber3:#FEF3C7;--border:#e2e8f0;--radius:10px;--shadow:0 2px 12px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+.container{max-width:920px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#1B3A5C 0%,#059669 100%);padding:26px 32px;border-radius:16px;margin-bottom:22px;color:#fff}
+.header h1{font-size:1.4rem;font-weight:700;display:flex;align-items:center;gap:10px}
+.header p{opacity:.9;font-size:.85rem;margin-top:4px;max-width:560px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.tab{padding:14px 18px;background:#fff;border:2px solid var(--border);border-radius:12px;cursor:pointer;text-align:center;transition:.2s}
+.tab:hover{border-color:var(--pri2)}
+.tab.active{border-color:var(--pri);background:var(--pri3);box-shadow:0 0 0 3px rgba(46,117,182,.12)}
+.tab strong{display:block;font-size:.95rem;color:var(--pri);margin-bottom:3px}
+.tab small{font-size:.74rem;color:var(--muted)}
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:22px;margin-bottom:18px;box-shadow:var(--shadow)}
+.card-title{font-size:1rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;color:var(--pri)}
+.input-row{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.input-row label{font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.3px}
+.input-row input,.input-row select{padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:.95rem;font-family:'JetBrains Mono',monospace}
+.input-row select{font-family:'DM Sans'}
+.input-row input:focus,.input-row select:focus{outline:none;border-color:var(--pri2);box-shadow:0 0 0 3px rgba(46,117,182,.12)}
+.input-row .hint{font-size:.7rem;color:var(--muted);font-weight:400}
+.factors{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.factor{padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:.15s}
+.factor:hover{border-color:var(--pri2);background:var(--pri3)}
+.factor input{width:18px;height:18px;accent-color:var(--pri2)}
+.factor.active{border-color:var(--pri2);background:var(--pri3)}
+.factor div{font-size:.86rem;font-weight:500}
+.factor div small{display:block;font-size:.7rem;color:var(--muted);font-weight:400}
+.btn{padding:11px 22px;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:.9rem;font-family:inherit;transition:.15s}
+.btn-pri{background:var(--pri2);color:#fff;width:100%}.btn-pri:hover{background:var(--pri)}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#047857}
+.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--text)}.btn-outline:hover{border-color:var(--pri2);color:var(--pri2)}
+.btn-row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+.kpi{background:var(--card);border-radius:var(--radius);padding:14px;border:1px solid var(--border);text-align:center}
+.kpi .val{font-size:1.3rem;font-weight:700;font-family:'JetBrains Mono',monospace}
+.kpi .lbl{font-size:.68rem;color:var(--muted);font-weight:600;text-transform:uppercase;margin-top:4px}
+.kpi.green .val{color:var(--green)}.kpi.blue .val{color:var(--pri2)}.kpi.amber .val{color:var(--amber)}.kpi.red .val{color:var(--red)}
+.alert{padding:12px 16px;border-radius:8px;font-size:.86rem;margin-bottom:12px;line-height:1.5}
+.alert-info{background:var(--pri3);color:var(--pri);border:1px solid #B4C6E7}
+.alert-green{background:var(--green2);color:#065F46;border:1px solid #A7F3D0}
+.alert-warn{background:var(--amber3);color:#92400E;border:1px solid #FDE68A}
+.progress-wrap{margin:18px 0}
+.progress-bar{height:32px;background:#F3F4F6;border-radius:8px;overflow:hidden;position:relative}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--green),#10B981);transition:width .5s ease;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;color:#fff;font-weight:700;font-size:.86rem;font-family:'JetBrains Mono'}
+.progress-bar.over .progress-fill{background:linear-gradient(90deg,#1B3A5C,#2E75B6)}
+.plan-box{background:linear-gradient(135deg,var(--green2),#D1FAE5);border:1px solid #A7F3D0;border-radius:14px;padding:20px 24px;margin-top:14px}
+.plan-box h3{font-size:1rem;color:#065F46;margin-bottom:10px}
+.plan-box .plan-line{display:flex;justify-content:space-between;padding:6px 0;font-size:.92rem}
+.plan-box .plan-line strong{font-family:'JetBrains Mono',monospace;color:#047857}
+.cross-links{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.cross-link{display:block;padding:14px 16px;background:#F9FAFB;border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text);transition:.2s}
+.cross-link:hover{border-color:var(--pri2);background:var(--pri3)}
+.cross-link strong{display:block;font-size:.88rem;color:var(--pri);margin-bottom:3px}
+.cross-link small{font-size:.72rem;color:var(--muted)}
+.results{display:none}.results.show{display:block;animation:fadeIn .4s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.disclaimer{margin-top:14px;padding:12px 16px;background:var(--amber2);border:1px solid #FDE68A;border-radius:8px;font-size:.74rem;color:#92400E;line-height:1.5}
+.range-row{display:grid;grid-template-columns:1fr 60px;gap:10px;align-items:center}
+.range-row input[type=range]{width:100%;accent-color:var(--pri2)}
+.range-row .range-val{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--pri);text-align:right}
+.modo-content{display:none}.modo-content.show{display:block}
+@media(max-width:768px){.tabs,.factors,.kpis,.cross-links{grid-template-columns:1fr}}
+</style>
+<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div id="navContainer"></div>
+<div class="container">
+<div class="header">
+  <h1><span>🛟</span> Fondo de Emergencia y Desempleo</h1>
+  <p>Dos colchones distintos: uno chico para imprevistos diarios, uno grande para que un despido no te tumbe. Calcula cuánto necesitas y cuánto te falta.</p>
+</div>
+<div class="tabs">
+  <div class="tab active" id="tabImprev" onclick="setModo('imprev')">
+    <strong>🚨 Imprevistos</strong>
+    <small>Llanta pinchada, copago, mascota al vet</small>
+  </div>
+  <div class="tab" id="tabDesem" onclick="setModo('desem')">
+    <strong>💼 Desempleo</strong>
+    <small>Sobrevivir 3-12 meses sin sueldo</small>
+  </div>
+</div>
+<div class="modo-content show" id="modoImprev">
+  <div class="card">
+    <div class="card-title">🏠 ¿Cómo es tu hogar?</div>
+    <p style="font-size:.84rem;color:var(--muted);margin-bottom:14px">Mientras más responsabilidades, más posibles imprevistos. Marca lo que aplique:</p>
+    <div class="factors">
+      <label class="factor"><input type="checkbox" id="fHijos" onchange="updImprev()"><div>Tengo hijos<small>+$1.000.000 (escuela, ropa, salud)</small></div></label>
+      <label class="factor"><input type="checkbox" id="fMascotas" onchange="updImprev()"><div>Tengo mascotas<small>+$500.000 (vet de urgencia)</small></div></label>
+      <label class="factor"><input type="checkbox" id="fCarro" onchange="updImprev()"><div>Tengo vehículo<small>+$800.000 (mantenimiento, llantas, SOAT)</small></div></label>
+      <label class="factor"><input type="checkbox" id="fCasa" onchange="updImprev()"><div>Vivienda propia<small>+$700.000 (filtraciones, electrodomésticos)</small></div></label>
+    </div>
+    <div class="alert alert-info">
+      <strong>Base imprevistos solo:</strong> $1.000.000 — cubre el típico mes en que algo falla y no quieres tocar el resto.
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">💰 Tu situación actual</div>
+    <div class="input-row">
+      <label>Lo que YA tienes ahorrado para imprevistos</label>
+      <input type="text" id="actualImprev" placeholder="$0" inputmode="numeric">
+      <span class="hint">Plata líquida (cuenta de ahorros, no inversiones de largo plazo)</span>
+    </div>
+    <div class="input-row">
+      <label>¿Cuánto puedes ahorrar mensualmente?</label>
+      <input type="text" id="capacidadImprev" placeholder="$0" inputmode="numeric">
+      <span class="hint">Lo que te sobra después de gastos y deudas</span>
+    </div>
+  </div>
+  <button class="btn btn-pri" onclick="calcImprev()">Calcular mi fondo</button>
+</div>
+<div class="modo-content" id="modoDesem">
+  <div class="card">
+    <div class="card-title">📋 Gastos esenciales mensuales</div>
+    <p style="font-size:.84rem;color:var(--muted);margin-bottom:14px">Lo MÍNIMO que necesitas para sobrevivir un mes sin sueldo: arriendo/cuota, servicios, mercado, transporte, salud. NO incluyas restaurantes ni suscripciones — eso lo cortarías si quedas sin trabajo.</p>
+    <div class="input-row">
+      <label>Total gastos esenciales mensuales</label>
+      <input type="text" id="gastosEsen" placeholder="$0" inputmode="numeric">
+      <span class="hint"><a href="pyg-personal.html" style="color:var(--pri2)">¿No los tienes calculados? Arma tu PyG</a></span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">⏱️ ¿Cuántos meses quieres resistir?</div>
+    <div class="range-row">
+      <input type="range" id="mesesObj" min="3" max="12" value="6" oninput="$('mesesObjVal').textContent = this.value + ' meses'">
+      <div class="range-val" id="mesesObjVal">6 meses</div>
+    </div>
+    <p style="font-size:.78rem;color:var(--muted);margin-top:8px">Mínimo recomendado: 3 meses. Ideal: 6. Si tu sector es volátil (TI, freelance, comisiones), 9-12.</p>
+  </div>
+  <div class="card">
+    <div class="card-title">💰 Tu situación actual</div>
+    <div class="input-row">
+      <label>Lo que YA tienes ahorrado para desempleo</label>
+      <input type="text" id="actualDesem" placeholder="$0" inputmode="numeric">
+    </div>
+    <div class="input-row">
+      <label>¿Cuánto puedes ahorrar mensualmente?</label>
+      <input type="text" id="capacidadDesem" placeholder="$0" inputmode="numeric">
+    </div>
+  </div>
+  <button class="btn btn-pri" onclick="calcDesem()">Calcular mi fondo de desempleo</button>
+</div>
+<div class="results" id="results">
+  <div class="card" style="margin-top:18px">
+    <div class="card-title">🎯 Tu objetivo</div>
+    <div class="kpis" id="kpis"></div>
+    <div class="progress-wrap">
+      <div style="display:flex;justify-content:space-between;font-size:.82rem;color:var(--muted);margin-bottom:6px">
+        <span>Avance</span><span id="progressLabel"></span>
+      </div>
+      <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+    <div id="alertas"></div>
+    <div class="plan-box" id="planBox"></div>
+    <div class="gancho" id="ganchoFE"></div>
+    <div class="narrativa" id="narrativaFE"></div>
+    <div class="aha-grid" id="ahaGridFE"></div>
+  </div>
+  <div class="wow-actions-card" id="cardActionsFE" style="display:none">
+    <div class="wow-actions-title">🎯 Tu plan accionable</div>
+    <div class="wow-actions-sub">Lo que tu fondo dispara según tu ratio actual.</div>
+    <div class="action-ladder" id="actionLadderFE"></div>
+  </div>
+  <div class="wow-share-card" id="cardShareFE" style="display:none">
+    <div class="wow-share-title">📸 Compártelo</div>
+    <div class="wow-share-sub">Tu colchón financiero, en formato Instagram Stories.</div>
+    <div class="share-card" id="shareCardFE"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">📚 Siguiente</div>
+    <div class="cross-links">
+      <a href="pyg-personal.html" class="cross-link">
+        <strong>📊 PyG personal</strong>
+        <small>De aquí sale el ahorro mensual</small>
+      </a>
+      <a href="deudas.html" class="cross-link">
+        <strong>🔍 Auditor de deudas</strong>
+        <small>Si las deudas comen tu margen</small>
+      </a>
+      <a href="crecimiento.html#costo" class="cross-link">
+        <strong>📈 ¿Y si lo invierto?</strong>
+        <small>El fondo no debe estar en cuenta común</small>
+      </a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">⬇️ Descargar plan</div>
+    <div class="btn-row">
+      <button class="btn btn-green" onclick="exportPDF()">📄 PDF</button>
+      <button class="btn btn-green" onclick="exportExcel()">📊 Excel</button>
+    </div>
+  </div>
+  <div class="disclaimer">
+    Las cifras de imprevistos ($500K-$1M por factor) son referencias didácticas, no obligaciones legales. Tu cifra real depende de tu costo de vida específico y tu aversión al riesgo. Ajusta los inputs.
+  </div>
+</div>
+</div>
+<script src="shared/parametros-financieros.js?v=e116ea2a"></script>
+<script src="shared/finanzas-store.js?v=61d9057f"></script>
+<script src="shared/finanzas-export.js?v=abe34dd6"></script>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
+<script defer src="shared/nav.js?v=bac4c6d3"></script>
+<script src="shared/finanzas-privacy.js?v=aed97e2f"></script>
+<script>
+'use strict';
+var ultimoCalc = null;
+var modoActual = 'imprev';
+function $(id){ return document.getElementById(id); }
+function fmt(n){ if(n==null||isNaN(n))return '$0'; return '$'+Math.round(n).toLocaleString('es-CO'); }
+function num(id){ var v=$(id).value.replace(/[^\d]/g,''); return parseInt(v,10)||0; }
+['actualImprev','capacidadImprev','gastosEsen','actualDesem','capacidadDesem'].forEach(function(id){
+  var el=$(id); if(!el)return;
+  el.addEventListener('input', function(){
+    var raw=this.value.replace(/[^\d]/g,'');
+    this.value = raw ? '$'+parseInt(raw,10).toLocaleString('es-CO') : '';
+  });
+});
+function setModo(m){
+  modoActual = m;
+  $('tabImprev').classList.toggle('active', m==='imprev');
+  $('tabDesem').classList.toggle('active', m==='desem');
+  $('modoImprev').classList.toggle('show', m==='imprev');
+  $('modoDesem').classList.toggle('show', m==='desem');
+  $('results').classList.remove('show');
+}
+function updImprev(){
+  $$('factor').forEach(function(){});  // visual only — handled inline
+}
+// helper
+function $$(cls){
+  return Array.prototype.slice.call(document.querySelectorAll('.'+cls));
+}
+document.querySelectorAll('.factor input[type=checkbox]').forEach(function(cb){
+  cb.addEventListener('change', function(){
+    this.closest('.factor').classList.toggle('active', this.checked);
+  });
+});
+function objetivoImprev(){
+  var base = 1000000;
+  if ($('fHijos').checked)    base += 1000000;
+  if ($('fMascotas').checked) base += 500000;
+  if ($('fCarro').checked)    base += 800000;
+  if ($('fCasa').checked)     base += 700000;
+  return base;
+}
+function calcImprev(){
+  var objetivo = objetivoImprev();
+  var actual   = num('actualImprev');
+  var capac    = num('capacidadImprev');
+  var falta    = Math.max(objetivo - actual, 0);
+  var meses    = capac > 0 && falta > 0 ? Math.ceil(falta / capac) : 0;
+  ultimoCalc = { tipo:'imprev', objetivo:objetivo, actual:actual, falta:falta, capacidad:capac, meses:meses };
+  render();
+}
+function calcDesem(){
+  var gastos   = num('gastosEsen');
+  var nMeses   = parseInt($('mesesObj').value, 10) || 6;
+  var objetivo = gastos * nMeses;
+  var actual   = num('actualDesem');
+  var capac    = num('capacidadDesem');
+  var falta    = Math.max(objetivo - actual, 0);
+  var meses    = capac > 0 && falta > 0 ? Math.ceil(falta / capac) : 0;
+  ultimoCalc = { tipo:'desem', gastos:gastos, mesesObj:nMeses, objetivo:objetivo, actual:actual, falta:falta, capacidad:capac, meses:meses };
+  render();
+}
+function render(){
+  var c = ultimoCalc;
+  var pct = c.objetivo > 0 ? Math.min(c.actual / c.objetivo * 100, 100) : 0;
+  var over = c.actual > c.objetivo;
+  $('kpis').innerHTML =
+    '<div class="kpi blue"><div class="val">'+fmt(c.objetivo)+'</div><div class="lbl">Objetivo</div></div>'+
+    '<div class="kpi '+(over?'green':pct>=50?'amber':'red')+'"><div class="val">'+fmt(c.actual)+'</div><div class="lbl">Tienes</div></div>'+
+    '<div class="kpi '+(c.falta===0?'green':'red')+'"><div class="val">'+fmt(c.falta)+'</div><div class="lbl">Te falta</div></div>';
+  $('progressBar').classList.toggle('over', over);
+  $('progressFill').style.width = pct.toFixed(1)+'%';
+  $('progressFill').textContent = pct.toFixed(0)+'%';
+  $('progressLabel').textContent = pct.toFixed(0)+'% del objetivo';
+  var alertas = [];
+  if (c.falta === 0) {
+    alertas.push('<div class="alert alert-green"><strong>✅ Fondo completo.</strong> Estás cubierto. La plata extra puede ir a otro objetivo: salir de deudas, inversión, fondo de mediano plazo.</div>');
+  } else if (c.capacidad === 0) {
+    alertas.push('<div class="alert alert-warn"><strong>⚠️ No me dijiste cuánto puedes ahorrar.</strong> Sin un aporte mensual no hay plan. Mira tu PyG y libera al menos algo, aunque sean $200.000 al mes.</div>');
+  } else if (c.meses > 36) {
+    alertas.push('<div class="alert alert-warn"><strong>⏳ A este ritmo te toma '+c.meses+' meses ('+(c.meses/12).toFixed(1)+' años).</strong> El fondo de emergencia es protección, no inversión — entre más rápido lo armes, más tranquilo duermes. Considera pausar otros objetivos hasta que esté completo.</div>');
+  }
+  if (c.tipo === 'desem' && c.gastos > 0) {
+    var ratio = c.actual / c.gastos;
+    if (ratio < 1)        alertas.push('<div class="alert alert-red"><strong>🟥 Vulnerable:</strong> no aguantas ni un mes sin sueldo.</div>');
+    else if (ratio < 3)   alertas.push('<div class="alert alert-warn"><strong>🟧 Frágil:</strong> aguantas '+ratio.toFixed(1)+' meses. Mínimo recomendado: 3.</div>');
+    else if (ratio >= 6)  alertas.push('<div class="alert alert-green"><strong>🟩 Sólido:</strong> aguantas '+ratio.toFixed(1)+' meses sin trabajar. Te puedes dar el lujo de buscar bien.</div>');
+  }
+  $('alertas').innerHTML = alertas.join('');
+  // Plan
+  if (c.falta > 0 && c.capacidad > 0) {
+    $('planBox').innerHTML =
+      '<h3>📅 Plan para llegar</h3>'+
+      '<div class="plan-line"><span>Aporte mensual</span><strong>'+fmt(c.capacidad)+'</strong></div>'+
+      '<div class="plan-line"><span>Meses para completar</span><strong>'+c.meses+' meses</strong></div>'+
+      '<div class="plan-line"><span>Fecha estimada</span><strong>'+fechaFutura(c.meses)+'</strong></div>'+
+      (c.tipo === 'imprev'
+        ? '<div class="plan-line" style="margin-top:10px;border-top:1px solid #A7F3D0;padding-top:10px;font-size:.84rem;font-style:italic;color:#047857">El fondo de imprevistos vive en cuenta de ahorros líquida. No CDT, no FIC. Necesitas que esté disponible HOY si pasa algo.</div>'
+        : '<div class="plan-line" style="margin-top:10px;border-top:1px solid #A7F3D0;padding-top:10px;font-size:.84rem;font-style:italic;color:#047857">El fondo de desempleo puede tener parte en CDT corto plazo o cuenta de alta rentabilidad. No tiene que estar 100% líquido — si quedas sin trabajo, los avisas con 30 días.</div>');
+  } else {
+    $('planBox').innerHTML = '<h3>🎉 No hay plan que hacer</h3><div class="plan-line">'+
+      (c.falta === 0 ? 'Ya cumpliste el objetivo. Avanza al siguiente: salir de deudas o inversión.' : 'Define un aporte mensual realista para que pueda calcular el plan.')+
+      '</div>';
+  }
+  renderWowFactorFE();
+  $('results').classList.add('show');
+  $('results').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function renderWowFactorFE(){
+  if (!ultimoCalc) return;
+  var c = ultimoCalc;
+  var pct = c.objetivo > 0 ? (c.actual/c.objetivo*100) : 0;
+  var ratio = c.tipo === 'desem' && c.gastos > 0 ? c.actual / c.gastos : null;
+  var esImprev = c.tipo === 'imprev';
+  // Gancho
+  var gancho;
+  if (c.falta === 0)                         gancho = 'Tu colchón está listo. <em>Ahora puedes elegir, no reaccionar.</em>';
+  else if (ratio !== null && ratio < 1)      gancho = 'No aguantas ni un mes sin sueldo. <em>Esto es vulnerabilidad.</em>';
+  else if (esImprev && pct < 25)             gancho = 'Sin fondo, cualquier daño es <em>deuda nueva</em>.';
+  else if (pct < 50)                         gancho = 'A medio camino. <em>La meta tiene fecha.</em>';
+  else                                        gancho = 'Una emergencia financiera no es un evento. <em>Es ausencia de plan.</em>';
+  document.getElementById('ganchoFE').innerHTML = gancho;
+  // Narrativa
+  var narr = (esImprev
+    ? 'El fondo de IMPREVISTOS cubre lavadora dañada, carro varado, mascota enferma. Objetivo: <span class="num">'+fmt(c.objetivo)+'</span>. Avance: <span class="num">'+pct.toFixed(0)+'%</span>.'
+    : 'El fondo de DESEMPLEO cubre quedarse sin trabajo. Cubre <strong>'+c.mesesObj+' meses</strong> de gastos esenciales (<span class="num">'+fmt(c.gastos)+'</span>/mes). Objetivo: <span class="num">'+fmt(c.objetivo)+'</span>.');
+  if (c.falta > 0) narr += '<br><br>Te falta <span class="num">'+fmt(c.falta)+'</span>.';
+  if (c.capacidad > 0 && c.meses) narr += ' Con <span class="num">'+fmt(c.capacidad)+'</span>/mes llegas en <strong>'+c.meses+' meses</strong> ('+fechaFutura(c.meses)+').';
+  if (esImprev) narr += '<br><br>Donde guardarlo: <strong>cuenta líquida</strong>, no CDT, no FIC. La premisa es disponibilidad inmediata.';
+  else if (ratio !== null) {
+    narr += '<br><br>Tu ratio: aguantas <strong>'+ratio.toFixed(1)+' meses</strong> sin sueldo. ';
+    if (ratio < 1) narr += 'Vulnerable: una semana sin trabajo te tumba a deuda.';
+    else if (ratio < 3) narr += 'Frágil: aguantas algo, pero no es suficiente. Mínimo: 3 meses.';
+    else if (ratio >= 6) narr += 'Sólido: te puedes dar el lujo de buscar bien.';
+    else narr += 'En zona OK: cumples el mínimo. Apunta a 6 meses.';
+  }
+  document.getElementById('narrativaFE').innerHTML = narr;
+  // 3 Aha cards
+  var ahas = [];
+  ahas.push('<div class="aha-card '+(pct >= 100 ? 'good' : pct >= 50 ? '' : 'bad')+'"><span class="aha-tag">avance</span><div class="aha-num">'+pct.toFixed(0)+'%</div><div class="aha-lbl">del objetivo</div></div>');
+  ahas.push('<div class="aha-card '+(c.meses && c.meses < 24 ? 'good' : '')+'"><span class="aha-tag">'+(c.meses ? 'plazo' : 'sin plan')+'</span><div class="aha-num">'+(c.meses ? c.meses+' m' : '—')+'</div><div class="aha-lbl">'+(c.meses ? 'para completar' : 'define aporte')+'</div></div>');
+  if (ratio !== null) ahas.push('<div class="aha-card '+(ratio < 1 ? 'bad' : ratio >= 6 ? 'good' : '')+'"><span class="aha-tag">aguantas</span><div class="aha-num">'+ratio.toFixed(1)+' m</div><div class="aha-lbl">sin sueldo hoy</div></div>');
+  else ahas.push('<div class="aha-card"><span class="aha-tag">objetivo</span><div class="aha-num">'+fmt(c.objetivo)+'</div><div class="aha-lbl">total del fondo</div></div>');
+  document.getElementById('ahaGridFE').innerHTML = ahas.join('');
+  // Action ladder
+  var actions = [];
+  if (c.falta === 0) {
+    actions.push({h:'No tocar el fondo', p:'Es para emergencias, no para "oportunidades". Cualquier exceso ya — avanza al siguiente objetivo: salir de deudas o construir el otro colchón.'});
+    actions.push({h:'Construye el otro colchón', p:esImprev ? 'Fondo de DESEMPLEO (3-6 meses de gastos). Es el siguiente nivel.' : 'Si no tienes el de imprevistos, ese va primero.'});
+  } else if (c.capacidad > 0) {
+    actions.push({h:'Transferencia automática', p:'Programa <strong>'+fmt(c.capacidad)+'/mes</strong> el día que te pagan, a cuenta separada (idealmente otro banco). La fricción protege la plata.'});
+    actions.push({h:'No pauses los aportes', p:'Cada mes pausado retrasa la fecha objetivo. Si tienes deudas malas, esto va EN PARALELO a pagar mínimas — no se pausa.'});
+    actions.push({h:'Alta rentabilidad para el fondo', p:'Cuentas digitales (Lulo, Nu) ofrecen 11-13% E.A. con liquidez total. Mejor que ahorros tradicional al 1%.'});
+  } else {
+    actions.push({h:'Define un aporte mensual realista', p:'Sin un número, no hay plan. Empezar con <strong>$200K-$300K</strong> es válido. La cantidad es secundaria, la consistencia es lo único que importa.'});
+    actions.push({h:'Mira tu PyG personal', p:'De ahí sale el ahorro. Si el cubo de ahorro está al 0%, hay que recortar deseos primero.'});
+  }
+  if (esImprev) actions.push({h:'No mezcles los dos fondos', p:'Imprevistos y desempleo son DIFERENTES. Si los juntas, terminas tocando el de desempleo cada vez que pasa un imprevisto y nunca llegas al colchón real.'});
+  if (actions.length > 0) {
+    document.getElementById('cardActionsFE').style.display = 'block';
+    document.getElementById('actionLadderFE').innerHTML = actions.slice(0,3).map(function(a,i){
+      return '<div class="action-step"><div class="action-num">'+(i+1)+'</div><div class="action-body"><h4>'+a.h+'</h4><p>'+a.p+'</p></div></div>';
+    }).join('');
+  }
+  // Share card
+  var shareLine = c.falta === 0 ? '<em>Colchón completo</em>. Puedo elegir, no reaccionar.' :
+                  ratio !== null && ratio < 1 ? 'Aguanto <em>'+ratio.toFixed(1)+' meses</em> sin sueldo. Trabajando para subir.' :
+                  ratio !== null && ratio >= 6 ? '<em>'+ratio.toFixed(1)+' meses</em> de colchón. Sólido.' :
+                  '<em>'+pct.toFixed(0)+'%</em> del fondo construido. ' + (c.meses ? 'Llego en '+c.meses+' meses.' : '');
+  document.getElementById('cardShareFE').style.display = 'block';
+  document.getElementById('shareCardFE').innerHTML =
+    '<div class="share-card-label">Mi fondo de '+(esImprev?'imprevistos':'desempleo')+' Colombia 2026</div>'+
+    '<div class="share-card-amount">'+fmt(c.actual)+'</div>'+
+    '<div class="share-card-line">'+shareLine+'</div>'+
+    '<div class="share-card-stats">'+
+      '<div class="share-card-stat">Objetivo<strong>'+fmt(c.objetivo)+'</strong></div>'+
+      '<div class="share-card-stat">Avance<strong>'+pct.toFixed(0)+'%</strong></div>'+
+      '<div class="share-card-stat">Falta<strong>'+fmt(c.falta)+'</strong></div>'+
+    '</div>'+
+    '<div class="share-actions">'+
+      '<button onclick="copiarShareFE()">📋 Copiar texto</button>'+
+    '</div>'+
+    '<div class="share-card-foot">exogenadian.com/fondo-emergencia</div>';
+}
+function copiarShareFE(){
+  if (!ultimoCalc) return;
+  var c = ultimoCalc;
+  var pct = c.objetivo > 0 ? (c.actual/c.objetivo*100) : 0;
+  var txt = 'Mi fondo de '+(c.tipo==='imprev'?'imprevistos':'desempleo')+'\n';
+  txt += 'Avance: '+pct.toFixed(0)+'% ('+fmt(c.actual)+' de '+fmt(c.objetivo)+')\n';
+  if (c.meses) txt += 'Llego en '+c.meses+' meses\n';
+  txt += 'Calculado en exogenadian.com/fondo-emergencia';
+  if (navigator.clipboard) navigator.clipboard.writeText(txt).then(function(){ exoToast('Copiado al portapapeles', 'success'); });
+  if (typeof gtag !== 'undefined') gtag('event','fondo_share',{tipo:'copy'});
+}
+function fechaFutura(meses){
+  var d = new Date();
+  d.setMonth(d.getMonth() + meses);
+  var ms = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  return ms[d.getMonth()]+' '+d.getFullYear();
+}
+function exportPDF(){
+  if (!ultimoCalc) return;
+  var c = ultimoCalc;
+  var pct = c.objetivo > 0 ? (c.actual/c.objetivo*100) : 0;
+  var ratio = c.tipo === 'desem' && c.gastos > 0 ? c.actual / c.gastos : null;
+  var esImprev = c.tipo === 'imprev';
+  // Frase hero
+  var fraseHero;
+  if (c.falta === 0)                         fraseHero = { texto:'Tu colchón está listo.\nAhora puedes elegir, no reaccionar.', autor:'ExógenaDIAN' };
+  else if (ratio !== null && ratio < 1)      fraseHero = { texto:'No aguantas ni un mes sin sueldo.\nEsto es vulnerabilidad, no estilo.', autor:'ExógenaDIAN' };
+  else if (esImprev && pct < 25)             fraseHero = { texto:'Sin fondo de imprevistos,\ncualquier daño es deuda nueva.', autor:'ExógenaDIAN' };
+  else if (pct < 50)                         fraseHero = { texto:'A medio camino del colchón.\nLa meta tiene fecha.', autor:'ExógenaDIAN' };
+  else if (pct < 100)                        fraseHero = { texto:'Cerca del objetivo.\nNo aflojes ahora.', autor:'ExógenaDIAN' };
+  else                                        fraseHero = { texto:'Una emergencia financiera no es\nun evento — es ausencia de plan.', autor:'ExógenaDIAN' };
+  // Narrativa
+  var narrativa = esImprev
+    ? 'El fondo de IMPREVISTOS cubre el día que la lavadora se daña, el carro queda varado, la mascota cae enferma. Tu objetivo: '+fmt(c.objetivo)+'. Avance: '+pct.toFixed(0)+'%.'
+    : 'El fondo de DESEMPLEO cubre el escenario de quedarte sin trabajo. Cubre '+c.mesesObj+' meses de gastos esenciales ('+fmt(c.gastos)+'/mes). Tu objetivo: '+fmt(c.objetivo)+'.';
+  if (c.falta > 0) narrativa += '\n\nTe falta '+fmt(c.falta)+' para llegar.';
+  if (c.capacidad > 0 && c.meses) narrativa += ' Con un aporte mensual de '+fmt(c.capacidad)+', llegas en '+c.meses+' meses ('+fechaFutura(c.meses)+').';
+  else if (c.falta > 0) narrativa += ' Sin aporte mensual definido no hay plan — define cuánto puedes apartar antes de seguir.';
+  if (esImprev) {
+    narrativa += '\n\nDónde guardarlo: cuenta de ahorros LÍQUIDA, no CDT, no FIC. La premisa es disponibilidad inmediata — necesitas la plata HOY si pasa algo. Si la pones en un instrumento con plazo, dejas de ser fondo y se convierte en inversión chiquita.';
+  } else {
+    narrativa += '\n\nDónde guardarlo: parte en cuenta de alta rentabilidad o CDTs cortos (60-90 días). Si te despiden, te avisan con 30 días — tienes tiempo de mover plata. No tiene que estar 100% líquido.';
+    if (ratio !== null) {
+      narrativa += '\n\nTu ratio actual: aguantas '+ratio.toFixed(1)+' meses sin sueldo. ';
+      if (ratio < 1)      narrativa += 'VULNERABLE: una semana sin trabajo te tumba a deuda. Prioridad #1.';
+      else if (ratio < 3) narrativa += 'FRÁGIL: aguantas algo, pero no es suficiente. Mínimo recomendado: 3 meses.';
+      else if (ratio >= 6) narrativa += 'SÓLIDO: te puedes dar el lujo de buscar bien. No aceptar el primer trabajo que aparezca.';
+      else                narrativa += 'EN ZONA OK: cumples el mínimo. Apunta a 6 meses para mayor tranquilidad.';
+    }
+  }
+  // Ahas
+  var ahas = [];
+  ahas.push({ num: pct.toFixed(0)+'%', label: 'avance hacia el objetivo', tipo: pct >= 100 ? 'good' : pct >= 50 ? 'neutro' : 'bad' });
+  ahas.push({ num: c.meses ? c.meses+' meses' : 'sin plan', label: c.meses ? 'para completar al ritmo actual' : 'define aporte mensual primero', tipo: c.meses && c.meses < 24 ? 'good' : 'neutro' });
+  if (ratio !== null) ahas.push({ num: ratio.toFixed(1)+' meses', label: 'aguantas hoy sin sueldo', tipo: ratio < 1 ? 'bad' : ratio >= 6 ? 'good' : 'neutro' });
+  else ahas.push({ num: fmt(c.objetivo), label: 'objetivo total del fondo', tipo: 'neutro' });
+  // Plan
+  var plan;
+  if (c.falta === 0) {
+    plan = {
+      p30: 'No tocar el fondo. Es para emergencias, no para "oportunidades". Cualquier exceso ya — avanza al siguiente objetivo: salir de deudas malas o construir el otro colchón.',
+      p12m: esImprev ? 'Construir el fondo de DESEMPLEO (3-6 meses de gastos). Es el siguiente nivel de protección.' : 'Si no tienes el de imprevistos, ese va primero. Si lo tienes, empezar inversión: AFC, pensión voluntaria, FIC.',
+      p5y: 'Mantener el fondo en alta rentabilidad para que no pierda contra la inflación. Revisar que siga cubriendo gastos reales (suben con el tiempo).'
+    };
+  } else if (c.capacidad > 0) {
+    plan = {
+      p30: 'Programa transferencia automática de '+fmt(c.capacidad)+'/mes el día que te pagan, a cuenta separada y de preferencia en otro banco. La fricción protege la plata.',
+      p12m: 'Mantén el aporte sin saltos. Cada mes que pauses retrasa la fecha objetivo. Si tienes deudas malas, esto va EN PARALELO a pagar mínimas — no se pausa el fondo por pagar deudas más rápido.',
+      p5y: 'Una vez completo, ese mismo aporte mensual de '+fmt(c.capacidad)+' se redirige a inversión (AFC, FIC, pensión voluntaria). En 5 años son '+fmt(c.capacidad*60)+' de capital construido.'
+    };
+  } else {
+    plan = {
+      p30: 'Define un aporte mensual realista. Sin un número, no hay plan. Empezar con '+(esImprev?'$200.000-$300.000':'5-10% del ingreso')+' es válido — la cantidad es secundaria, la consistencia es lo único que importa.',
+      p12m: 'Una vez tengas aporte definido y consistente, el fondo se construye solo. Subir el aporte 1 punto cada 2-3 meses según tu PyG.',
+      p5y: 'Fondo completo + cero deudas malas + tasa de ahorro 15-20% = patrimonio real. Es la receta sin glamour pero la única que funciona.'
+    };
+  }
+  // Consejos
+  var consejos = [];
+  consejos.push({
+    titulo: 'No mezcles los dos fondos',
+    impacto: 'Disciplina mental',
+    desc: 'Imprevistos ($1M-$4M) y desempleo (3-12 meses gastos) son DIFERENTES. Si los juntas, terminas tocando el de desempleo cada vez que pasa un imprevisto y nunca llegas al colchón real. Cuentas SEPARADAS, idealmente en bancos distintos.'
+  });
+  if (esImprev) consejos.push({
+    titulo: 'Cuenta de ahorros LÍQUIDA, no CDT ni FIC',
+    impacto: 'Disponibilidad inmediata',
+    desc: 'El fondo de imprevistos pierde sentido si no puedes sacarlo HOY. Las cuentas de alta rentabilidad de bancos digitales (Lulo, Nu, Tpaga) ofrecen 11-13% E.A. con liquidez total. Mejor que ahorros tradicional al 1%.'
+  });
+  else consejos.push({
+    titulo: 'Combina cuenta de alta rentabilidad + CDTs cortos',
+    impacto: 'Mayor rendimiento',
+    desc: '50% en cuenta de alta rentabilidad (líquido) + 50% en CDTs de 60-90 días (mejor tasa). Si te despiden, los 30 días de aviso son tiempo suficiente para sacar el CDT. Aprovechas tasas mejores sin sacrificar mucha liquidez.'
+  });
+  if (ratio !== null && ratio < 3) consejos.push({
+    titulo: 'Antes que cualquier inversión, completa el colchón',
+    impacto: 'Protección',
+    desc: 'Aguantas '+ratio.toFixed(1)+' meses. Una desconexión laboral te tumba a deuda mala (tarjetas al 26-29%). Antes de pensar en AFC, FIC o acciones — completa este fondo. La inversión rinde 11-15% anual; la deuda mala cobra 26-29%. Las matemáticas son claras.'
+  });
+  consejos.push({
+    titulo: 'Reflejo de gasto baja al instalar el colchón',
+    impacto: 'Calma psicológica',
+    desc: 'Quien tiene fondo de emergencia toma mejores decisiones de plata: no acepta el primer trabajo malo, no compra por impulso "porque le hace falta", negocia mejor sus tarifas. La paz mental que da el colchón rinde más que cualquier inversión.'
+  });
+  if (c.falta === 0) consejos.push({
+    titulo: 'Después del fondo: AFC para vivienda',
+    impacto: 'Optimización fiscal',
+    desc: 'Con el colchón completo, el siguiente paso es construir patrimonio. AFC (Art. 126-4 ET) deduce hasta 30% del ingreso o 3.800 UVT/año. Bonus: te baja la retención mensual. Es la mejor combinación de ahorro + sesgo fiscal en Colombia.'
+  });
+  // Frase nevera
+  var fraseNevera = c.falta === 0 ? {
+    texto: 'La libertad financiera no es una\ncantidad de plata. Es la capacidad\nde decir "no".',
+    autor: 'Morgan Housel — La psicología del dinero'
+  } : ratio !== null && ratio < 1 ? {
+    texto: 'El truco no es predecir el futuro.\nEs construir un margen de error que\nsobreviva a tu predicción equivocada.',
+    autor: 'Morgan Housel — La psicología del dinero'
+  } : {
+    texto: 'Vive como nadie hoy,\npara vivir como nadie mañana.',
+    autor: 'Dave Ramsey'
+  };
+  // Inputs y resultados
+  var inputs = esImprev
+    ? [
+        ['Tipo de fondo', 'Imprevistos'],
+        ['Hijos', $('fHijos').checked ? 'Sí':'No'],
+        ['Mascotas', $('fMascotas').checked ? 'Sí':'No'],
+        ['Vehículo', $('fCarro').checked ? 'Sí':'No'],
+        ['Vivienda propia', $('fCasa').checked ? 'Sí':'No']
+      ]
+    : [
+        ['Tipo de fondo', 'Desempleo'],
+        ['Gastos esenciales mensuales', fmt(c.gastos)],
+        ['Meses objetivo', c.mesesObj+' meses']
+      ];
+  inputs.push(['Ahorrado actualmente', fmt(c.actual)]);
+  inputs.push(['Aporte mensual posible', fmt(c.capacidad)]);
+  var resultados = [
+    ['Objetivo', fmt(c.objetivo)],
+    ['Avance', pct.toFixed(0)+'%'],
+    ['Faltante', fmt(c.falta)],
+    ['Meses para completar', c.meses ? c.meses+' meses' : 'Sin aporte definido']
+  ];
+  if (c.meses) resultados.push(['Fecha estimada', fechaFutura(c.meses)]);
+  exportFinanzasReporte({
+    titulo: 'Fondo de '+(esImprev?'Emergencia':'Desempleo'),
+    slug: 'fondo-'+c.tipo,
+    subtitulo: 'Tu plan personal de protección — los dos colchones explicados',
+    hero: {
+      label: c.falta === 0 ? 'Fondo completo' : 'Te falta',
+      valor: fmt(c.falta),
+      subvalor: c.meses ? 'Llegas en '+c.meses+' meses ('+fechaFutura(c.meses)+')' : 'Define aporte mensual para construir el plan'
+    },
+    fraseHero: fraseHero,
+    inputs: inputs,
+    resultados: resultados,
+    narrativa: narrativa,
+    ahas: ahas,
+    plan: plan,
+    consejos: consejos.slice(0, 4),
+    fraseNevera: fraseNevera,
+    fuente: 'Recomendación didáctica · Imprevistos: cuenta líquida · Desempleo: 3-12 meses según volatilidad sectorial'
+  });
+}
+function exportExcel(){
+  if (!ultimoCalc) return;
+  var c = ultimoCalc;
+  exportFinanzasExcel({
+    titulo: 'Fondo '+(c.tipo==='imprev'?'Imprevistos':'Desempleo'),
+    slug: 'fondo-'+c.tipo,
+    inputs: [
+      ['Tipo', c.tipo==='imprev'?'Imprevistos':'Desempleo'],
+      ['Objetivo', c.objetivo],
+      ['Actual', c.actual],
+      ['Aporte mensual', c.capacidad]
+    ],
+    resultados: [
+      ['Faltante', c.falta],
+      ['Meses para completar', c.meses]
+    ],
+    destacado: { label: 'FALTANTE', valor: c.falta },
+    interpretacion: c.meses ? 'Llegas en '+c.meses+' meses' : 'Define aporte para plan',
+    fuente: 'Fondo de emergencia — '+new Date().toLocaleDateString('es-CO')
+  });
+}
+// Auto-llenar gastos esenciales si hay PyG guardado del mes actual
+window.addEventListener('DOMContentLoaded', function(){
+  if (!FinanzasStore.isAvailable()) return;
+  var hoy = new Date();
+  var key = 'pyg:'+hoy.getFullYear()+'-'+String(hoy.getMonth()+1).padStart(2,'0');
+  var pyg = FinanzasStore.get(key);
+  if (pyg) {
+    var esen = (pyg.gArriendo||0)+(pyg.gServicios||0)+(pyg.gMercado||0)+(pyg.gTransporte||0)+(pyg.gSalud||0)+(pyg.gEducacion||0);
+    if (esen > 0) {
+      $('gastosEsen').value = '$'+esen.toLocaleString('es-CO');
+      $('gastosEsen').nextElementSibling.innerHTML = '<span style="color:var(--green)">✅ Pre-llenado desde tu PyG del mes actual: '+fmt(esen)+'</span>';
+    }
+  }
+});
+</script>
+</body>
+</html>

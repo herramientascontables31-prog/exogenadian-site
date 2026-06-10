@@ -1,0 +1,1457 @@
+/* ═══ ExógenaDIAN — Bancos de preguntas para exámenes finales ═══
+   Cada curso con banco tiene >= 15 preguntas MCQ originales.
+   Estructura: { q, opts:[A,B,C,D], correct:0..3, explanation }
+
+   Cursos cubiertos en esta versión:
+     - f2516
+     - iva300
+     - contabilidad-basica
+
+   Los demás cursos heredan banco vacío y el quiz muestra "Próximamente".
+*/
+(function(){
+  'use strict';
+
+  var BANKS = {
+
+    /* ═══ Curso de Ventas Completo ═══ */
+    'ventas': [
+      {
+        q: 'Según el "efecto reflector", ¿cuánto piensa en ti la gente que crees que te juzga al vender?',
+        opts: ['Todo el día, por eso da pena', 'Mucho menos de lo que imaginas', 'Solo si publicas en redes', 'Depende de tu número de seguidores'],
+        correct: 1,
+        explanation: 'El efecto reflector: la gente piensa en ti unos minutos y vuelve a su vida. La audiencia que crees que te juzga no existe tanto como imaginas. Por eso la vergüenza es un freno irracional para vender.'
+      },
+      {
+        q: '¿Cuál NO es uno de los 7 principios de persuasión de Cialdini?',
+        opts: ['Reciprocidad', 'Autoridad', 'Descuento agresivo', 'Escasez'],
+        correct: 2,
+        explanation: 'Los 7 principios de Cialdini son: reciprocidad, compromiso/coherencia, prueba social, autoridad, simpatía, escasez y unidad. "Descuento agresivo" no es uno de ellos; bajar el precio no es persuasión ética.'
+      },
+      {
+        q: 'En el bucle del hábito, "después de servirme el café, mando 3 mensajes" es un ejemplo de:',
+        opts: ['Escasez', 'Habit stacking (enganchar a un hábito existente)', 'Prueba social', 'Cierre por asunción'],
+        correct: 1,
+        explanation: 'El habit stacking engancha un hábito nuevo a uno que ya tienes: el hábito viejo (servirse el café) se convierte en la señal del nuevo (prospectar). Es la forma más confiable de sostener la conducta sin depender de la motivación.'
+      },
+      {
+        q: 'Un cold email efectivo debe tratar principalmente sobre:',
+        opts: ['Tu empresa y tus logros', 'El problema del prospecto', 'Tu lista de precios', 'La historia de tu producto'],
+        correct: 1,
+        explanation: 'La regla de oro del cold email: es sobre ELLOS, no sobre ti. Asunto específico, una primera línea que demuestre que investigaste, un solo problema y una sola llamada a la acción fácil.'
+      },
+      {
+        q: '¿Qué es el ICP en prospección?',
+        opts: ['Un indicador de cierre', 'El perfil de cliente ideal', 'Un tipo de objeción', 'El índice de conversión publicitaria'],
+        correct: 1,
+        explanation: 'ICP = Ideal Customer Profile (perfil de cliente ideal): sector, tamaño, cargo de quien decide y dolor que resuelves. Una lista de 50 prospectos que cumplen el ICP vale más que 5.000 al azar.'
+      },
+      {
+        q: 'En SPIN, ¿cuál es la pregunta que agranda el dolor para que el cliente sienta el costo de no actuar?',
+        opts: ['Situación', 'Problema', 'Implicación', 'Necesidad-beneficio'],
+        correct: 2,
+        explanation: 'La pregunta de Implicación agranda el dolor ("¿y eso cuánto les cuesta al mes? ¿qué pasa si sigue así un año?"). Es donde la mayoría falla al saltar del problema directo a la solución. Sin implicación no hay urgencia.'
+      },
+      {
+        q: 'Gap Selling propone vender:',
+        opts: ['El precio más bajo del mercado', 'La brecha entre el estado actual y el deseado del cliente', 'La mayor cantidad de características posibles', 'Solo a quien ya quiere comprar'],
+        correct: 1,
+        explanation: 'Gap Selling (Keenan): la venta es la brecha (gap) entre el estado actual del cliente y al que quiere llegar, medida con números. Cuanto más grande y consciente sea la brecha, más fácil el cierre.'
+      },
+      {
+        q: 'En la calificación MEDDIC, el "Champion" es:',
+        opts: ['Tu mejor vendedor', 'La persona dentro del cliente que te defiende cuando no estás', 'El competidor principal', 'El presupuesto disponible'],
+        correct: 1,
+        explanation: 'El Champion es quien, dentro de la empresa del cliente, empuja tu solución internamente cuando no estás presente. Sin un champion, las ventas grandes y complejas se mueren en el "lo estamos viendo".'
+      },
+      {
+        q: 'En el método Challenger Sale, los mejores vendedores se caracterizan por:',
+        opts: ['Construir relación y esperar', 'Enseñar algo nuevo, adaptar y tomar el control', 'Ofrecer siempre el descuento más alto', 'Listar todas las características del producto'],
+        correct: 1,
+        explanation: 'El estudio de The Challenger Sale (Dixon y Adamson) encontró que los mejores no son los "constructores de relación" sino los Challengers: enseñan al cliente un insight sobre su propio negocio (Teach), lo adaptan (Tailor) y toman el control de la conversación (Take control).'
+      },
+      {
+        q: '"Te ahorra 6 horas a la semana" es, en la escala característica/beneficio/valor, un:',
+        opts: ['Característica', 'Beneficio', 'Valor', 'Cierre'],
+        correct: 1,
+        explanation: 'Es un beneficio (qué hace por el cliente). La característica sería "genera el reporte en 2 minutos"; el valor sería lo que esas 6 horas significan para su vida ("3 clientes más al mes" o "un sábado libre"). Se vende en el nivel de valor.'
+      },
+      {
+        q: 'Ante la objeción "está muy caro", lo PRIMERO que NO deberías hacer es:',
+        opts: ['Preguntar "¿caro comparado con qué?"', 'Bajar el precio de inmediato', 'Recordar el valor que el cliente cuantificó', 'Separar "caro" de "no es buen momento"'],
+        correct: 1,
+        explanation: 'Bajar el precio de inmediato confirma que estaba inflado y destruye tu margen. Primero reencuadra: pregunta "¿comparado con qué?", divide el precio y recuerda el costo de no actuar que el propio cliente cuantificó.'
+      },
+      {
+        q: 'El "anclaje" en negociación sugiere que conviene presentar primero:',
+        opts: ['La opción más barata', 'La opción de mayor valor', 'Ninguna opción hasta que pregunten', 'Solo el precio sin alcance'],
+        correct: 1,
+        explanation: 'El primer número ancla toda la negociación. Si presentas primero tu opción de mayor valor, las demás parecen razonables a su lado. Mostrar 3 opciones (alta/media/baja) hace que la mayoría elija la del medio.'
+      },
+      {
+        q: 'Al conceder en una negociación, lo correcto es:',
+        opts: ['Regalar el descuento para cerrar rápido', 'Pedir siempre algo a cambio (plazo, pago anticipado, referidos)', 'Bajar el precio en grandes saltos', 'Conceder antes de que lo pidan'],
+        correct: 1,
+        explanation: 'Toda concesión debe ser un intercambio, nunca un regalo: "ajusto el precio si firmamos por un año / si pagas anticipado / si me referís dos colegas". Conceder rápido y mucho enseña que tu precio era mentira.'
+      },
+      {
+        q: 'En TikTok, el alcance de un video depende principalmente de:',
+        opts: ['Tu número de seguidores', 'El rendimiento del contenido', 'La antigüedad de la cuenta', 'Cuántos productos publiques'],
+        correct: 1,
+        explanation: 'En TikTok el alcance depende del rendimiento del contenido, no de los seguidores: una cuenta nueva puede llegar a millones si el video funciona. Esto mata la excusa de "no tengo audiencia" para empezar a vender.'
+      },
+      {
+        q: 'Según el módulo de IA aplicada a ventas, la regla de oro al usar IA es:',
+        opts: ['Creerle todos los datos para ir más rápido', 'La IA propone, tú verificas', 'Dejar que la IA cierre la venta', 'Usarla solo para generar testimonios'],
+        correct: 1,
+        explanation: 'La regla de oro: la IA propone, tú verificas. Nunca mandes a un cliente un dato, cifra o nombre generado por IA sin comprobarlo. La IA te hace 10× más rápido investigando y redactando, pero la confianza (y el cierre) los pones tú.'
+      }
+    ],
+
+    /* ═══ F2516 — Conciliación Fiscal ═══ */
+    'f2516': [
+      {
+        q: '¿Cuál es la norma que obliga a llevar conciliación fiscal en Colombia?',
+        opts: ['Art. 631 ET', 'Art. 772-1 ET', 'Art. 145 ET', 'Decreto 2650/1993'],
+        correct: 1,
+        explanation: 'El Art. 772-1 del ET obliga a los contribuyentes obligados a llevar contabilidad a llevar un sistema de reconocimiento de las diferencias entre NIIF y las reglas del ET. Es la norma marco de toda la conciliación fiscal.'
+      },
+      {
+        q: '¿A partir de qué umbral de ingresos brutos del año gravable anterior se debe reportar el F2516 al MUISCA?',
+        opts: ['16.000 UVT', '33.610 UVT', '45.000 UVT', '100.000 UVT'],
+        correct: 1,
+        explanation: 'El Decreto 1998/2017 mod. 1311/2022 establece el umbral de 33.610 UVT. Para 2024 con UVT $47.065, equivale a $1.581.854.650.'
+      },
+      {
+        q: 'Una multa fiscal pagada a la DIAN, ¿qué tipo de diferencia genera para efectos del F2516?',
+        opts: ['Diferencia temporaria deducible', 'Diferencia temporaria imponible', 'Diferencia permanente que aumenta la renta', 'No es diferencia, es deducible'],
+        correct: 2,
+        explanation: 'El Art. 105 lit. e ET prohibe deducir multas y sanciones. Como nunca será deducible (no se reversa en períodos futuros), es diferencia permanente que aumenta la renta fiscal frente a la contable.'
+      },
+      {
+        q: 'Una provisión de cartera reconocida bajo NIIF (NIC 9, deterioro esperado) que excede el límite del Art. 145 ET, ¿qué genera?',
+        opts: ['Diferencia permanente', 'Diferencia temporaria deducible — DTA', 'Diferencia temporaria imponible — DTL', 'Ningún efecto fiscal'],
+        correct: 1,
+        explanation: 'La provisión NIIF en exceso no es deducible hoy pero lo será cuando se enajene o castigue la cartera. Esa diferencia se revertirá en el futuro, generando una diferencia temporaria deducible que da origen a un activo por impuesto diferido (DTA).'
+      },
+      {
+        q: '¿Cuál es la fórmula básica del impuesto diferido bajo NIC 12 / Sec. 29 NIIF para PYMES?',
+        opts: ['Diferencia permanente × tasa fiscal del periodo actual', 'Diferencia temporaria × tasa fiscal aplicable al periodo de reversión', 'Utilidad antes de impuestos × tasa fiscal', 'Renta líquida × tasa de retención'],
+        correct: 1,
+        explanation: 'El impuesto diferido se mide multiplicando la diferencia temporaria por la tasa fiscal que estará vigente cuando la diferencia se reverse (no la actual). Esto es clave: si hay cambios de tasa aprobados, se usa la nueva.'
+      },
+      {
+        q: 'Los dividendos no gravados recibidos por una PJ de otra sociedad nacional (Art. 49 ET), ¿qué tipo de diferencia generan?',
+        opts: ['Temporaria imponible', 'Temporaria deducible', 'Permanente que disminuye la renta', 'No es diferencia, es ingreso ordinario'],
+        correct: 2,
+        explanation: 'Los dividendos no gravados están reconocidos contablemente como ingreso pero NIIF los reconoce y el ET los excluye permanentemente de la renta. Como nunca tributarán, es diferencia permanente que reduce la renta fiscal frente a la contable.'
+      },
+      {
+        q: 'Bajo NIIF, una empresa revalúa un edificio aumentando su valor en $200 millones (NIC 16). Fiscalmente, ¿qué pasa con esa revaluación?',
+        opts: ['Aumenta el costo fiscal del activo', 'No tiene efecto fiscal — diferencia permanente al patrimonio', 'Genera impuesto diferido pasivo inmediato', 'Se difiere hasta vender el activo'],
+        correct: 1,
+        explanation: 'Fiscalmente el costo de los activos fijos se mantiene al costo histórico (Art. 69 ET). La revaluación NIIF aumenta el patrimonio contable vía ORI pero no afecta el patrimonio fiscal mientras el activo no se enajene. Es diferencia permanente al patrimonio.'
+      },
+      {
+        q: 'Una máquina cuesta $10 millones. NIIF la deprecia en 5 años (vida útil estimada). Fiscalmente, el Anexo 2 del Dec. 1625/2016 permite máximo 10% anual. ¿Qué genera la diferencia en el año 1?',
+        opts: ['Diferencia permanente de $1.000.000', 'Diferencia temporaria imponible de $1.000.000 — DTL', 'Diferencia temporaria deducible de $1.000.000 — DTA', 'Ninguna diferencia, se acepta lo NIIF'],
+        correct: 1,
+        explanation: 'NIIF deprecia $2M (20% de $10M en 5 años), fiscal solo permite $1M (10%). El exceso de $1M NIIF se reversará en años posteriores cuando NIIF ya no tenga gasto y fiscal sí lo siga teniendo. Diferencia temporaria imponible → pasivo por impuesto diferido (DTL).'
+      },
+      {
+        q: 'En el modelo de NIIF 15, ¿cuándo se reconoce el ingreso por venta de un bien?',
+        opts: ['Cuando se factura', 'Cuando se recauda el efectivo', 'Cuando se transfiere el control al cliente', 'Al final del periodo contable'],
+        correct: 2,
+        explanation: 'NIIF 15 reconoce el ingreso al transferir control. Esto puede ser distinto a la fecha de la factura o del pago. Para efectos fiscales, el Art. 28 ET adopta el devengo NIIF con excepciones tasadas.'
+      },
+      {
+        q: '¿Cuál es la principal validación cruzada que NO debe fallar entre el F110 y el F2516?',
+        opts: ['Ingresos brutos contables = ingresos brutos del F110', 'Patrimonio fiscal del F2516 = patrimonio del F110', 'Tasa contable = tasa fiscal', 'Utilidad NIIF = renta líquida'],
+        correct: 1,
+        explanation: 'El patrimonio fiscal reportado en el F2516 debe coincidir con el del F110 dentro de la tolerancia (típicamente 1 UVT). El prevalidador V9 valida cruzadamente esto y si no cuadra, no genera el XML.'
+      },
+      {
+        q: 'Una empresa reconoce DTA por pérdidas fiscales acumuladas de años anteriores. ¿Cuál es el criterio principal para reconocer ese DTA?',
+        opts: ['Solo si la pérdida es mayor a $100 millones', 'Si es probable obtener rentas gravables futuras contra las cuales aplicar la pérdida', 'Si han pasado al menos 3 años desde la pérdida', 'Siempre se reconoce mientras no hayan prescrito'],
+        correct: 1,
+        explanation: 'NIC 12.34 / Sec. 29.21: solo se reconoce DTA por pérdidas o créditos fiscales no utilizados si es probable obtener rentas gravables futuras contra las cuales aplicarlos. Empresas con pérdidas recurrentes y sin proyecciones creíbles no deben reconocer DTA.'
+      },
+      {
+        q: 'El Art. 28 ET establece reglas especiales de realización del ingreso. ¿Cuál de los siguientes ingresos SÍ tiene regla especial fiscal distinta a NIIF?',
+        opts: ['Venta de servicio al contado', 'Dividendos abonados en cuenta en calidad de exigibles', 'Venta de mercancía con entrega inmediata', 'Renta por arrendamiento corriente'],
+        correct: 1,
+        explanation: 'El Art. 28 num. 1 ET dispone que los dividendos se realizan fiscalmente cuando son abonados en cuenta en calidad de exigibles, no cuando se acumulan contablemente. Es una de las excepciones tasadas al devengo NIIF.'
+      },
+      {
+        q: '¿Qué método de valuación de inventarios prohibe NIIF (NIC 2 / Sec. 13) y por tanto no se usa ni contable ni fiscalmente en Colombia?',
+        opts: ['PEPS (FIFO)', 'Promedio ponderado', 'UEPS (LIFO)', 'Identificación específica'],
+        correct: 2,
+        explanation: 'NIC 2.25 / Sec. 13.18 NIIF para PYMES prohibe expresamente el método UEPS (Last In First Out). El Art. 62 ET aceptaba antes UEPS pero el alineamiento con NIIF lo elimina como opción válida en la práctica.'
+      },
+      {
+        q: 'Un deterioro de inventario reconocido bajo NIC 2 (VNR < costo) por $15 millones, ¿qué tratamiento fiscal tiene?',
+        opts: ['Deducible inmediatamente en renta', 'Diferencia permanente — no deducible nunca', 'Diferencia temporaria deducible — DTA hasta enajenación o destrucción probada', 'Aumenta el patrimonio fiscal'],
+        correct: 2,
+        explanation: 'Fiscalmente (Art. 64 ET) la pérdida en inventarios solo se reconoce por destrucción probada (con requisitos del Art. 64) o por enajenación. Hasta ese momento, el deterioro NIIF genera diferencia temporaria deducible y DTA.'
+      },
+      {
+        q: '¿Cuál es la diferencia clave entre llevar conciliación fiscal y reportar el F2516?',
+        opts: ['No hay diferencia, son lo mismo', 'Llevar conciliación es para todos los obligados a llevar contabilidad; reportar F2516 solo para los que superan 33.610 UVT', 'F2516 lo hacen solo las grandes empresas del Grupo 1', 'Solo se reporta F2516 si la DIAN lo solicita expresamente'],
+        correct: 1,
+        explanation: 'Toda PJ obligada a llevar contabilidad debe llevar conciliación fiscal (Art. 772-1 ET) — es documentación interna. Solo las que superan 33.610 UVT de ingresos brutos del año anterior reportan formalmente al MUISCA el F2516 (Dec. 1998/2017 mod. 1311/2022).'
+      }
+    ],
+
+    /* ═══ IVA 300 ═══ */
+    'iva300': [
+      {
+        q: 'Una empresa colombiana realiza una venta de mercancía gravada con IVA del 19%. ¿En qué cuenta del PUC se registra el IVA generado?',
+        opts: ['1305 Clientes', '2365 Retenciones en la fuente', '2408 IVA por pagar', '5135 Servicios'],
+        correct: 2,
+        explanation: 'El IVA generado en ventas es un pasivo de la empresa hacia la DIAN y se registra en la cuenta 2408 IVA por pagar. Cuando se compra con IVA descontable, también va a 2408 pero por el lado deudor (lo neto se paga o queda saldo a favor).'
+      },
+      {
+        q: '¿Cuál es la tarifa general del IVA en Colombia?',
+        opts: ['16%', '18%', '19%', '21%'],
+        correct: 2,
+        explanation: 'El Art. 468 ET fija la tarifa general en 19% desde la Ley 1819/2016. Existen tarifas diferenciales del 5% (Art. 468-1 ET) para bienes/servicios específicos y la tarifa 0% para exentos (Art. 477 ET).'
+      },
+      {
+        q: 'La diferencia entre un bien EXENTO y un bien EXCLUIDO de IVA es:',
+        opts: ['Son sinónimos, no hay diferencia', 'El exento tarifa 0% y permite IVA descontable; el excluido no es responsable y no genera ni descuenta IVA', 'El excluido tarifa 0%; el exento no es responsable', 'Los exentos pagan 5%; los excluidos no pagan nada'],
+        correct: 1,
+        explanation: 'Bienes exentos están gravados a tarifa 0% (Art. 477 ET) — el productor SÍ es responsable, factura IVA al 0% y puede descontar el IVA pagado en insumos. Bienes excluidos no están gravados (Art. 424 ET) — no se cobra IVA y el IVA pagado en insumos se va al costo, no se descuenta.'
+      },
+      {
+        q: 'Una empresa tiene ingresos mixtos: gravados y excluidos. Compra papelería para uso común. ¿Cómo trata el IVA descontable de esa compra?',
+        opts: ['Lo descuenta 100% sin restricciones', 'Aplica regla de proporcionalidad: descuenta solo la proporción que corresponde a ingresos gravados', 'No descuenta nada porque la papelería es gasto', 'Lo lleva al costo del producto excluido'],
+        correct: 1,
+        explanation: 'Cuando hay operaciones gravadas y excluidas, el Art. 490 ET y Dec. 1625/2016 imponen aplicar proporcionalidad: el IVA común se descuenta solo en la proporción que los ingresos gravados representan del total. El resto se va al costo.'
+      },
+      {
+        q: 'En servicios bajo modalidad AIU (Administración, Imprevistos y Utilidad), la base gravable del IVA es:',
+        opts: ['El valor total del contrato', 'Solo el componente A + I + U (no el costo directo)', 'El 16% del valor total', 'Solo la utilidad U'],
+        correct: 1,
+        explanation: 'En contratos AIU (Art. 462-1 ET) la base gravable de IVA es únicamente la suma del componente AIU, no el valor total del contrato. Aplica a servicios de aseo, vigilancia, temporales, construcción, etc.'
+      },
+      {
+        q: 'Una empresa es agente de retención de IVA. Compra un servicio a un responsable de IVA por $1.000.000 + IVA $190.000. ¿Cuánto retiene de IVA?',
+        opts: ['$19.000 (10% del IVA)', '$28.500 (15% del IVA)', '$190.000 (100% del IVA)', '$95.000 (50% del IVA)'],
+        correct: 1,
+        explanation: 'La tarifa general de retención de IVA es 15% sobre el IVA generado (Art. 437-2 ET). 15% de $190.000 = $28.500. Existen casos especiales donde aplica el 100% (servicios prestados por no residentes, por ejemplo).'
+      },
+      {
+        q: 'El INC (Impuesto Nacional al Consumo) y el IVA son:',
+        opts: ['El mismo impuesto con otro nombre', 'Impuestos distintos: el INC grava restaurantes, telefonía móvil, vehículos de alto valor y otros; no se descuenta', 'El INC es solo para bienes importados', 'El INC reemplaza al IVA en el régimen simple'],
+        correct: 1,
+        explanation: 'El INC (Art. 512-1 a 512-22 ET) es un impuesto distinto al IVA que grava servicios de restaurantes y bares (8%), telefonía móvil (4%), ciertos vehículos. A diferencia del IVA, el INC no permite descuento; se lleva al costo o gasto.'
+      },
+      {
+        q: 'La facturación electrónica de venta para responsables de IVA es:',
+        opts: ['Opcional', 'Obligatoria desde 2019 con calendario progresivo (Res. 000042/2020 mod. posteriores)', 'Solo para empresas con ingresos > $5.000 millones', 'Solo para venta a personas jurídicas'],
+        correct: 1,
+        explanation: 'Desde 2019 la facturación electrónica es obligatoria para responsables de IVA y demás contribuyentes, con calendario progresivo según resoluciones DIAN. La 000042/2020 y posteriores definen el modelo de validación previa y el documento soporte para no obligados.'
+      },
+      {
+        q: '¿Cuál es la periodicidad de presentación del IVA en Colombia para la mayoría de los responsables?',
+        opts: ['Mensual', 'Bimestral', 'Trimestral', 'Anual'],
+        correct: 1,
+        explanation: 'La periodicidad general del IVA es bimestral (Art. 600 ET): enero-febrero, marzo-abril, etc. Algunos contribuyentes con ingresos menores tienen periodicidad cuatrimestral. La declaración se presenta en los 17-25 días siguientes según calendario DIAN.'
+      },
+      {
+        q: 'Una empresa importa mercancía gravada con IVA. ¿En qué momento se causa el IVA y quién lo paga?',
+        opts: ['Cuando llega al puerto, lo paga el vendedor extranjero', 'En la nacionalización con la declaración de importación; lo paga el importador a la DIAN', 'Cuando se vende al cliente final', 'Solo si la importación supera USD 1.000'],
+        correct: 1,
+        explanation: 'El IVA en importaciones se causa en la nacionalización (Art. 429 ET). Lo paga el importador junto con los aranceles y se reporta en la declaración de importación. Ese IVA es descontable en la declaración bimestral siguiente.'
+      },
+      {
+        q: 'Una empresa exporta servicios al exterior. ¿Qué tratamiento de IVA aplica?',
+        opts: ['IVA 19% como cualquier servicio', 'IVA 5% por incentivo', 'Exento (tarifa 0%) si cumple Art. 481 ET', 'Excluido sin necesidad de cumplir requisitos'],
+        correct: 2,
+        explanation: 'La exportación de servicios está EXENTA del IVA (tarifa 0%) si cumple los requisitos del Art. 481 ET: prestación a un beneficiario domiciliado en el exterior, sin que el servicio sea utilizado total ni parcialmente en Colombia. Como exento, el prestador puede descontar el IVA de insumos.'
+      },
+      {
+        q: 'Una zona franca permanente vende bienes desde la zona al territorio aduanero nacional (TAN). ¿Cómo aplica el IVA?',
+        opts: ['Sin IVA, son territorio extranjero', 'Con IVA del 19% como cualquier venta nacional, el comprador en TAN nacionaliza', 'Solo si el bien es producido en zona franca', 'IVA 5% reducido'],
+        correct: 1,
+        explanation: 'Las ventas desde zonas francas al TAN se consideran importación: se nacionaliza la mercancía y se paga IVA y aranceles. La zona franca tiene beneficios fiscales (Ley 1004/2005) pero las salidas al TAN tributan como importación normal.'
+      },
+      {
+        q: 'Si una compra que generó IVA descontable se anula (nota crédito) en un periodo posterior, ¿qué se hace en la declaración de IVA?',
+        opts: ['No se hace nada, se ignora', 'Se ajusta el IVA descontable del periodo de la nota crédito', 'Se corrige la declaración del periodo de la compra original', 'Se compensa con otro IVA descontable'],
+        correct: 1,
+        explanation: 'Las notas crédito por anulación o devolución se reflejan en el periodo en que se emiten, ajustando el IVA descontable. No se corrige la declaración del periodo original. Es la regla del Art. 484 ET y normas reglamentarias.'
+      },
+      {
+        q: 'En el F300 (formulario de IVA bimestral), la casilla "Saldo a favor por excesos de descontables" significa:',
+        opts: ['Que el contribuyente debe pagar más impuesto', 'Que el IVA descontable superó al IVA generado en el bimestre y queda saldo a favor', 'Que hay una sanción por exceso', 'Que hay error en la declaración'],
+        correct: 1,
+        explanation: 'Cuando el IVA descontable (compras gravadas) excede al IVA generado (ventas gravadas), el contribuyente queda con saldo a favor que puede imputar al siguiente periodo, compensar con otros impuestos o solicitar devolución si cumple requisitos (Arts. 850-865 ET).'
+      },
+      {
+        q: '¿Quién es el responsable del IVA en una operación entre dos empresas: una vende y otra compra?',
+        opts: ['Solo el comprador', 'Solo el vendedor', 'El vendedor responde por declarar y pagar el IVA a la DIAN; el comprador soporta el IVA en su costo o lo descuenta si es responsable', 'Ambos pagan al 50%'],
+        correct: 2,
+        explanation: 'El responsable del IVA es el vendedor que realiza el hecho generador (Art. 437 ET): él factura el IVA al cliente, lo recauda y lo paga a la DIAN. El comprador, si es responsable de IVA, lo descuenta; si no es responsable, lo lleva al costo.'
+      }
+    ],
+
+    /* ═══ Contabilidad Básica ═══ */
+    'contabilidad-basica': [
+      {
+        q: '¿Cuál es la ecuación fundamental de la contabilidad?',
+        opts: ['Ingresos − Gastos = Utilidad', 'Activos = Pasivos + Patrimonio', 'Caja + Bancos = Disponible', 'Debe = Haber + Saldo'],
+        correct: 1,
+        explanation: 'La ecuación contable Activos = Pasivos + Patrimonio es la base de la partida doble. Todo registro contable debe mantener esta igualdad. De ella se deriva también que Patrimonio = Activos − Pasivos.'
+      },
+      {
+        q: 'Una compra de mercancía a crédito por $1.000.000 + IVA $190.000 se registra:',
+        opts: ['DEBE 1435 $1.190.000 / HABER 2205 $1.190.000', 'DEBE 1435 $1.000.000 + DEBE 2408 $190.000 / HABER 2205 $1.190.000', 'DEBE 1435 $1.000.000 / HABER 2408 $190.000 + HABER 2205 $810.000', 'DEBE 1105 $1.190.000 / HABER 4135 $1.190.000'],
+        correct: 1,
+        explanation: 'En una compra a crédito con IVA: el inventario (1435) entra al costo neto, el IVA descontable (2408) se registra como mayor valor del activo IVA, y la cuenta total queda como pasivo a proveedores (2205) por el valor total incluido IVA.'
+      },
+      {
+        q: 'La cuenta 1305 Clientes tiene naturaleza:',
+        opts: ['Acreedora (aumenta en el Haber)', 'Deudora (aumenta en el Debe)', 'Mixta', 'No tiene naturaleza, depende del saldo'],
+        correct: 1,
+        explanation: 'Clientes es un activo (clase 1 del PUC), y los activos tienen naturaleza deudora. Aumentan por el Debe (cuando se factura) y disminuyen por el Haber (cuando el cliente paga).'
+      },
+      {
+        q: 'En el PUC del Decreto 2650/1993, ¿qué corresponde a la clase 5?',
+        opts: ['Activos', 'Pasivos', 'Ingresos', 'Gastos'],
+        correct: 3,
+        explanation: 'La clase 5 corresponde a los Gastos (operacionales, financieros, no operacionales). La clase 6 es Costo de ventas, la 4 es Ingresos, la 1 Activos, la 2 Pasivos, la 3 Patrimonio.'
+      },
+      {
+        q: 'El ciclo contable en su forma más simple termina con:',
+        opts: ['El cobro de las cuentas por cobrar', 'La presentación de la declaración de renta', 'La emisión de los estados financieros y el cierre', 'El pago de impuestos'],
+        correct: 2,
+        explanation: 'El ciclo contable: documento → asiento → libro diario → libro mayor → balance de comprobación → ajustes → estados financieros → cierre. Los EEFF + cierre son el producto final del proceso contable del periodo.'
+      },
+      {
+        q: 'En NIIF, los activos se clasifican como corrientes si:',
+        opts: ['Su valor es menor a $10 millones', 'Se espera realizarlos o consumirlos en el ciclo normal de operación o dentro de 12 meses', 'Son tangibles', 'Están registrados en la clase 1 del PUC'],
+        correct: 1,
+        explanation: 'NIC 1 / Sec. 4 NIIF para PYMES clasifica un activo como corriente si se espera realizar, vender o consumir en el ciclo normal de operación (típicamente 12 meses) o si se mantiene para negociar. Lo demás es no corriente.'
+      },
+      {
+        q: '¿Qué sistema de inventario es obligatorio para sociedades obligadas a tener revisor fiscal en Colombia?',
+        opts: ['Periódico', 'Permanente (perpetuo)', 'Mixto', 'No hay obligación específica'],
+        correct: 1,
+        explanation: 'El Art. 62 ET y la jurisprudencia exigen sistema permanente (perpetuo) para las sociedades obligadas a tener revisor fiscal. Esto significa actualizar el inventario y costos en cada movimiento de entrada/salida.'
+      },
+      {
+        q: 'El método PEPS (Primero en Entrar, Primero en Salir) asume que:',
+        opts: ['Las últimas unidades compradas son las primeras vendidas', 'Las primeras unidades compradas son las primeras vendidas', 'Se promedia el costo de todas las unidades', 'Se identifica cada unidad individualmente'],
+        correct: 1,
+        explanation: 'PEPS (FIFO en inglés) asume que las primeras unidades en entrar al inventario son las primeras en salir. Bajo este método, en periodos de alza de precios el inventario final queda valorado a los costos más recientes (más altos).'
+      },
+      {
+        q: 'La depreciación de un activo fijo se reconoce contablemente porque:',
+        opts: ['El activo pierde valor de mercado', 'Se debe distribuir el costo del activo a lo largo de su vida útil', 'Es una exigencia tributaria', 'Genera ahorro fiscal'],
+        correct: 1,
+        explanation: 'NIC 16 / Sec. 17 NIIF para PYMES: la depreciación distribuye sistemáticamente el costo depreciable del activo a lo largo de su vida útil. No es un ajuste a valor de mercado (eso sería deterioro), es asignación de costo.'
+      },
+      {
+        q: 'Una empresa paga el arriendo de 6 meses por adelantado el 1 de octubre. Al cierre del año, ¿cómo se registra?',
+        opts: ['Todo va al gasto del año', 'Se difiere: la parte no consumida (enero-marzo del año siguiente) queda en una cuenta de activo "Gastos pagados por anticipado"', 'Se registra solo cuando se consume cada mes', 'Va directo al patrimonio'],
+        correct: 1,
+        explanation: 'El principio de devengo: el gasto se reconoce cuando se consume el servicio (transcurre el tiempo del arriendo), no cuando se paga. Lo no consumido queda como activo en "Gastos pagados por anticipado" (1710) y se irá reconociendo como gasto mes a mes.'
+      },
+      {
+        q: '¿Cuáles son los 5 estados financieros bajo NIIF?',
+        opts: ['ESF, ER, flujo de efectivo, cambios en patrimonio, notas', 'Balance, P&G, IVA, Renta, Exógena', 'Activos, Pasivos, Patrimonio, Ingresos, Gastos', 'ESF, ER, Auxiliar, PUC, Libro diario'],
+        correct: 0,
+        explanation: 'Los 5 estados financieros NIIF (NIC 1 / Sec. 3): (1) Estado de Situación Financiera, (2) Estado de Resultados Integral, (3) Estado de Cambios en el Patrimonio, (4) Estado de Flujos de Efectivo, (5) Notas a los estados financieros.'
+      },
+      {
+        q: 'Una microempresa en Colombia se clasifica en cuál Grupo NIIF?',
+        opts: ['Grupo 1 — NIIF Plenas', 'Grupo 2 — NIIF para PYMES', 'Grupo 3 — Régimen simplificado', 'No aplica NIIF'],
+        correct: 2,
+        explanation: 'Las microempresas en Colombia aplican el Grupo 3 (Anexo 3 D. 2420/2015), que es un régimen simplificado de contabilidad. Los Grupos 1 y 2 aplican NIIF Plenas y NIIF para PYMES respectivamente.'
+      },
+      {
+        q: 'En un balance de comprobación, ¿qué debe cumplirse para que esté correcto?',
+        opts: ['Que todas las cuentas tengan saldo positivo', 'Que la suma de saldos débitos sea igual a la suma de saldos créditos', 'Que el activo sea mayor al pasivo', 'Que tenga al menos 100 cuentas'],
+        correct: 1,
+        explanation: 'El balance de comprobación verifica la igualdad de la partida doble: la suma de todos los saldos débitos debe igualar la suma de todos los saldos créditos. Si no cuadra, hay un error de registro que debe corregirse antes de continuar el ciclo.'
+      },
+      {
+        q: 'El principio NIIF de "sustancia sobre forma" significa:',
+        opts: ['Lo que importa es la apariencia legal del contrato', 'Se reconocen las transacciones según su realidad económica, no solo su forma jurídica', 'Hay que usar formatos estándar siempre', 'Solo aplica a empresas grandes'],
+        correct: 1,
+        explanation: 'Sustancia sobre forma: las transacciones se registran según su realidad económica subyacente, no solo según el contrato firmado. Ejemplo clásico: un leasing operativo que en sustancia transfiere riesgos y beneficios se reconoce como financiero.'
+      },
+      {
+        q: 'Una empresa recibe $5.000.000 como anticipo de un cliente por un servicio que prestará el mes siguiente. ¿Cómo se registra?',
+        opts: ['DEBE 1105 / HABER 4175 (es ingreso)', 'DEBE 1105 / HABER 2815 Ingresos recibidos para terceros', 'DEBE 1105 / HABER 2805 Anticipos y avances de clientes (es un pasivo)', 'DEBE 1105 / HABER 3105 Capital'],
+        correct: 2,
+        explanation: 'Un anticipo recibido NO es ingreso hasta que se preste el servicio (NIIF 15 paso 5, devengo). Se registra como pasivo en 2805 Anticipos y avances de clientes. Cuando se preste el servicio, se causa el ingreso y se descarga el pasivo.'
+      }
+    ],
+
+    /* ═══ Retención en la Fuente 350 ═══ */
+    'retencion350': [
+      {
+        q: '¿Quiénes son agentes de retención en la fuente por renta según el Art. 368 ET?',
+        opts: ['Solo las grandes contribuyentes', 'Las entidades de derecho público, los fondos, los comerciantes con ingresos o patrimonio superior a 30.000 UVT, entre otros', 'Solo las personas jurídicas con revisor fiscal', 'Cualquier persona natural'],
+        correct: 1,
+        explanation: 'El Art. 368 ET enumera los agentes retenedores: entidades de derecho público, fondos de inversión, fondos de pensiones, consorcios, uniones temporales, y personas jurídicas o naturales con patrimonio o ingresos brutos del año anterior superiores a 30.000 UVT. La condición varía según el concepto retenido.'
+      },
+      {
+        q: 'Una empresa compra mercancía gravada por $200.000 a un contribuyente declarante (concepto: compras generales). ¿Aplica retención en la fuente?',
+        opts: ['Sí, retención del 2,5%', 'No, porque la base no supera 27 UVT', 'Sí, retención del 3,5%', 'Sí, retención del 11%'],
+        correct: 1,
+        explanation: 'La retención por compras generales aplica desde 27 UVT (Art. 401 ET y norma reglamentaria). $200.000 está por debajo del umbral (27 UVT × $49.799 = $1.344.573 para 2025), por lo que no se practica retención.'
+      },
+      {
+        q: 'Una empresa paga honorarios a un contador declarante por $5.000.000. ¿Cuál es la tarifa de retención en la fuente por renta?',
+        opts: ['2,5%', '4%', '10% (declarante) u 11% (no declarante)', '15%'],
+        correct: 2,
+        explanation: 'Honorarios a declarantes: 10% (Art. 392 ET y Decreto reglamentario). Si el beneficiario es no declarante: 10%-11% según monto acumulado. La base mínima es 4 UVT.'
+      },
+      {
+        q: 'La autorretención especial por renta (Decreto 2201/2016 y modificaciones) la practican:',
+        opts: ['Solo personas naturales', 'Las personas jurídicas que cumplen condiciones específicas (ej. ser declarantes y no estar en RST), sobre sus ingresos propios', 'Solo entidades sin ánimo de lucro', 'Todas las empresas sin excepción'],
+        correct: 1,
+        explanation: 'El Decreto 2201/2016 (y posteriores) regula la autorretención especial por renta: sociedades nacionales, no clasificadas en RST, declarantes, deben autorretenerse al recibir ingresos según su actividad económica. Las tarifas varían por CIIU.'
+      },
+      {
+        q: 'Una empresa paga arriendo de oficina por $3.000.000 mensuales a una persona natural. ¿Tarifa de retención en la fuente?',
+        opts: ['3,5% (arrendamiento de bien inmueble)', '4%', '10%', 'No aplica retención'],
+        correct: 0,
+        explanation: 'El arrendamiento de bien inmueble tiene retención del 3,5% sobre el valor pagado o abonado (Art. 401 ET, Decreto 0260/2001). Aplica desde 27 UVT.'
+      },
+      {
+        q: 'Una sociedad anónima distribuye dividendos no gravados a una persona natural residente por $50 millones. ¿Aplica retención en la fuente?',
+        opts: ['No, los dividendos no gravados no retienen', 'Sí, según la tabla del Art. 242 ET con tarifas marginales', 'Sí, fijo del 20%', 'Sí, fijo del 35%'],
+        correct: 1,
+        explanation: 'Los dividendos pagados a personas naturales residentes están sujetos a retención según la tabla del Art. 242 ET, con tramos progresivos en UVT. Desde la Ley 2277/2022 la tarifa marginal máxima es 39%.'
+      },
+      {
+        q: 'La declaración de retención en la fuente F350 es:',
+        opts: ['Anual', 'Semestral', 'Mensual', 'Bimestral'],
+        correct: 2,
+        explanation: 'El F350 es mensual (Art. 605 ET). Se presenta dentro de los plazos del calendario tributario DIAN, generalmente entre el día 8 y el 22 del mes siguiente al periodo retenido, según el último dígito del NIT.'
+      },
+      {
+        q: 'Un agente retenedor no presenta el F350 en la fecha límite. ¿Qué sanción aplica?',
+        opts: ['Solo intereses moratorios', 'Sanción por extemporaneidad Art. 641 ET (5% del impuesto a cargo por mes o fracción, máximo 100%)', 'Sanción del 20% del impuesto', 'No hay sanción mientras se pague antes de un año'],
+        correct: 1,
+        explanation: 'La extemporaneidad en la presentación de declaraciones se sanciona conforme al Art. 641 ET: 5% del total del impuesto a cargo por cada mes o fracción de mes de retardo, sin exceder el 100%. Sí o sí también se generan intereses moratorios.'
+      },
+      {
+        q: 'Una empresa colombiana paga un servicio técnico a un no residente del exterior. ¿Tarifa de retención según Art. 408 ET?',
+        opts: ['10%', '15%', '20%', '33%'],
+        correct: 2,
+        explanation: 'El Art. 408 ET establece retención del 20% sobre el valor bruto pagado por servicios técnicos, asistencia técnica, consultoría y licenciamiento de software prestados desde el exterior por no residentes. Existen excepciones por CDI (convenios de doble imposición).'
+      },
+      {
+        q: 'Un agente retenedor debe expedir el certificado de retención por renta a sus beneficiarios:',
+        opts: ['Cada vez que retiene', 'Solo si el beneficiario lo solicita por escrito', 'Anualmente, dentro de los plazos del calendario DIAN (típicamente marzo del año siguiente)', 'No es obligatorio, solo informativo'],
+        correct: 2,
+        explanation: 'El Art. 379 ET y normas reglamentarias obligan a expedir certificados anuales de retención por renta dentro del plazo fijado en el calendario tributario (generalmente marzo del año siguiente al de retención). El beneficiario los usa para imputarse las retenciones en su declaración.'
+      },
+      {
+        q: '¿Una persona natural inscrita en el Régimen Simple de Tributación (RST) puede ser sujeto pasivo de retención en la fuente por renta?',
+        opts: ['No, los RST están exentos de retención', 'Sí, en algunos casos como dividendos, retenciones de IVA, retenciones por servicios al exterior', 'Solo si supera 50.000 UVT', 'Sí, en todas las operaciones'],
+        correct: 1,
+        explanation: 'Los inscritos en RST tienen un régimen especial: en sus operaciones de venta no se les aplica retención por renta (Art. 911 ET) pero sí continúan siendo agentes o sujetos en algunos casos (retención por dividendos, IVA, pagos al exterior). El Decreto 0572/2025 actualiza varias reglas.'
+      },
+      {
+        q: 'Una sociedad anónima paga comisiones a otra sociedad por $10 millones. ¿Tarifa de retención por renta?',
+        opts: ['2,5%', '3,5%', '10% u 11% (igual que honorarios)', '4%'],
+        correct: 2,
+        explanation: 'Las comisiones tienen la misma tarifa que los honorarios (Art. 392 ET): 10% para declarantes, 10%-11% para no declarantes. La base mínima es 4 UVT. No se confunda con compras (2,5%) ni servicios generales (4%).'
+      },
+      {
+        q: 'Una empresa paga un servicio de aseo y vigilancia por $5 millones (AIU). ¿Cuál es la base de retención por renta?',
+        opts: ['El total del contrato $5.000.000', 'Solo el componente AIU (Administración, Imprevistos y Utilidad)', 'El 10% del contrato', 'Cero, los servicios AIU están exentos'],
+        correct: 1,
+        explanation: 'En contratos AIU (aseo, vigilancia, temporales, construcción), la base de retención por renta es solo el componente AIU, no el valor total del contrato. Esto está alineado con la base gravable del IVA (Art. 462-1 ET).'
+      },
+      {
+        q: 'Una empresa de servicios paga a un trabajador independiente que presta servicios de marketing por $2.000.000. ¿Aplica retención por servicios generales?',
+        opts: ['Sí, 4% si la base supera 4 UVT', 'No, todos los servicios son 10% (honorarios)', 'Sí, 11% siempre', 'Depende solo del NIT del prestador'],
+        correct: 0,
+        explanation: 'Servicios generales (no honorarios ni comisiones) tienen tarifa del 4% para declarantes y 6% para no declarantes (Art. 392 ET y reglamentos), con base mínima de 4 UVT. Los honorarios se diferencian de servicios por la naturaleza personal/profesional intelectual.'
+      },
+      {
+        q: 'La retención en la fuente por renta funciona como:',
+        opts: ['Un impuesto adicional', 'Un anticipo del impuesto de renta del beneficiario', 'Una sanción', 'Un descuento tributario'],
+        correct: 1,
+        explanation: 'La retención en la fuente es un mecanismo de recaudo anticipado: el agente retenedor descuenta del pago un porcentaje, lo gira a la DIAN, y el beneficiario imputa esas retenciones contra su impuesto de renta en su declaración anual. Si la retención excede el impuesto, queda saldo a favor.'
+      }
+    ],
+
+    /* ═══ Renta 110 — Personas Jurídicas ═══ */
+    'renta110': [
+      {
+        q: '¿Cuál es la tarifa general del impuesto de renta para personas jurídicas en Colombia desde la Ley 2277/2022?',
+        opts: ['25%', '33%', '35%', '40%'],
+        correct: 2,
+        explanation: 'La Ley 2277/2022 fijó la tarifa general de renta para PJ en 35%. Existen tarifas diferenciales para sector financiero (con sobretasas), zonas francas, hoteles, ESAL del régimen tributario especial, etc.'
+      },
+      {
+        q: 'La Tasa Mínima de Tributación (TTD) del Art. 240 ET parágrafo 6 establece que:',
+        opts: ['Toda PJ debe pagar al menos el 35% sobre la utilidad contable', 'Las PJ deben pagar una tasa efectiva mínima del 15% sobre la utilidad contable ajustada', 'Solo aplica a empresas con ingresos > $100.000 millones', 'Es un descuento del impuesto'],
+        correct: 1,
+        explanation: 'La TTD del Art. 240 ET parágrafo 6 (Ley 2277/2022) establece una tasa efectiva mínima del 15% sobre la utilidad contable ajustada. Si la tasa efectiva resultante de la declaración es menor, se debe pagar un impuesto adicional para alcanzar el 15%.'
+      },
+      {
+        q: 'La renta presuntiva en Colombia desde el año gravable 2021:',
+        opts: ['Es del 3% del patrimonio líquido', 'Es del 0% (eliminada por la Ley 2010/2019)', 'Es del 0,5%', 'Solo aplica si hay pérdidas'],
+        correct: 1,
+        explanation: 'La Ley 2010/2019 dispuso renta presuntiva del 0% a partir del año gravable 2021. Esto significa que en la práctica ya no aplica como base mínima alternativa. Antes era 0,5% y antes 3,5%.'
+      },
+      {
+        q: 'El anticipo de renta del Art. 807 ET se calcula sobre:',
+        opts: ['El patrimonio bruto', 'El impuesto neto del año o el promedio de los dos últimos años, según corresponda', 'Los ingresos brutos del año', 'Las utilidades distribuidas'],
+        correct: 1,
+        explanation: 'El Art. 807 ET: el anticipo para el siguiente año se calcula sobre el impuesto neto del año (primera declaración: 25%) o el promedio de los dos últimos años (segunda y siguientes: 50% sobre el promedio, o 75% sobre el último impuesto neto, menos retenciones).'
+      },
+      {
+        q: 'Los pagos sin documento soporte que cumpla los requisitos del Art. 771-2 ET son:',
+        opts: ['Deducibles con tope', 'No deducibles fiscalmente', 'Diferencia temporaria', 'Solo deducibles si son menores a $10 millones'],
+        correct: 1,
+        explanation: 'El Art. 771-2 ET exige factura de venta o documento soporte para que un costo o gasto sea deducible. Sin ese soporte, el gasto no es deducible — diferencia permanente. Adicionalmente debe cumplir Art. 771-5 (pagos en efectivo limitados).'
+      },
+      {
+        q: 'Las pérdidas fiscales acumuladas pueden compensarse contra rentas líquidas futuras hasta por:',
+        opts: ['5 años', '12 años (Ley 2010/2019 modificó Art. 147 ET)', 'Sin límite temporal', 'Solo el año siguiente'],
+        correct: 1,
+        explanation: 'El Art. 147 ET reformado por la Ley 2010/2019 permite compensar pérdidas fiscales hasta por 12 años siguientes al de su generación. Antes era sin límite, pero con reajuste por inflación. Hoy no se reajustan por inflación pero hay límite de 12 años.'
+      },
+      {
+        q: 'La comparación patrimonial (Art. 236-239 ET) busca:',
+        opts: ['Verificar que el patrimonio crezca', 'Detectar incrementos patrimoniales no justificados con la renta declarada y agregar el saldo a la renta gravable como renta líquida especial', 'Compararse con otras empresas', 'Calcular el GMF'],
+        correct: 1,
+        explanation: 'La comparación patrimonial es un mecanismo del Art. 236-239 ET: si el patrimonio líquido al cierre supera al de inicio más la renta gravable, el exceso no justificado se considera renta líquida especial gravable. Es una herramienta antifraude.'
+      },
+      {
+        q: 'Las multas y sanciones pagadas a la DIAN o entidades públicas son:',
+        opts: ['Deducibles 100%', 'Parcialmente deducibles', 'No deducibles (Art. 105 lit. e ET)', 'Solo deducibles si son menores a 100 UVT'],
+        correct: 2,
+        explanation: 'El Art. 105 ET literal e excluye expresamente la deducción de multas, sanciones, intereses moratorios (excepto los Art. 117 ET sobre obligaciones financieras), litigios derivados de incumplimientos y cuotas a clubes sociales.'
+      },
+      {
+        q: 'El patrimonio bruto de una PJ a 31 de diciembre se determina:',
+        opts: ['Sumando solo los activos en efectivo', 'Sumando todos los activos poseídos (corrientes y no corrientes) valorados según las reglas del ET', 'Restando pasivos', 'Es el patrimonio contable NIIF sin ajustes'],
+        correct: 1,
+        explanation: 'El patrimonio bruto fiscal (Art. 261 ET) suma todos los bienes y derechos apreciables en dinero a 31 de diciembre, valorados según las reglas del ET. El patrimonio líquido es la diferencia entre bruto y los pasivos aceptables fiscalmente (Arts. 283-286 ET).'
+      },
+      {
+        q: 'Los gastos en el exterior tienen como límite general:',
+        opts: ['No tienen límite', 'No deducibles', '15% de la renta líquida (Art. 122 ET), salvo excepciones', '50% de la renta bruta'],
+        correct: 2,
+        explanation: 'El Art. 122 ET limita los gastos en el exterior al 15% de la renta líquida (calculada sin incluir dichos gastos). Hay excepciones: gastos sobre los cuales se practicó retención en la fuente, intereses de créditos del exterior cumpliendo Art. 124-1, etc.'
+      },
+      {
+        q: 'La conciliación fiscal (F2516) la deben preparar:',
+        opts: ['Solo las empresas con ingresos > $100.000 millones', 'Todas las PJ obligadas a llevar contabilidad (Art. 772-1 ET); el reporte F2516 al MUISCA es para las que superen 33.610 UVT en ingresos brutos del año anterior', 'Solo las cotizadas en bolsa', 'Las que decidan voluntariamente'],
+        correct: 1,
+        explanation: 'Llevar conciliación es obligación general (Art. 772-1 ET). El reporte formal F2516 al MUISCA aplica para PJ con ingresos brutos del año anterior ≥ 33.610 UVT (Dec. 1998/2017 mod. 1311/2022).'
+      },
+      {
+        q: 'En el F110, la "renta líquida gravable" es:',
+        opts: ['Lo mismo que la renta bruta', 'La base sobre la cual se aplica la tarifa para calcular el impuesto', 'El patrimonio líquido', 'La utilidad contable NIIF'],
+        correct: 1,
+        explanation: 'La renta líquida gravable es la depuración final: renta bruta (ingresos - costos) menos deducciones, rentas exentas, etc. Es la base sobre la que se aplica la tarifa del 35% (general) o la diferencial según el caso para calcular el impuesto sobre la renta.'
+      },
+      {
+        q: 'Los descuentos tributarios (Art. 254 a 259 ET) se aplican:',
+        opts: ['Sobre la base gravable, antes de la tarifa', 'Sobre el impuesto, después de calcularlo con la tarifa', 'No existen en Colombia', 'Solo en RST'],
+        correct: 1,
+        explanation: 'Los descuentos tributarios reducen el impuesto resultante (no la base). Ejemplos: descuento por inversión en investigación (Art. 256), donaciones a ESAL (Art. 257), ICA pagado (Art. 115 par. 1), descuentos por inversión en obras por impuestos.'
+      },
+      {
+        q: 'El plazo para presentar el F110 está en:',
+        opts: ['La Constitución Política', 'El calendario tributario expedido anualmente por la DIAN, generalmente entre abril y mayo según el último dígito del NIT', 'El Código de Comercio', 'Cada empresa lo define'],
+        correct: 1,
+        explanation: 'El plazo para presentar la declaración de renta lo fija anualmente la DIAN mediante resolución (decreto reglamentario del calendario tributario). Para PJ generalmente cae entre abril y mayo según los dos últimos dígitos del NIT.'
+      },
+      {
+        q: 'Una empresa obtiene una utilidad contable NIIF de $500 millones. Después de la conciliación fiscal, la renta líquida gravable es $600 millones. El impuesto a 35% es $210 millones. ¿La empresa debe verificar la TTD del 15%?',
+        opts: ['No, ya pagó el 35% sobre la renta líquida', 'Sí, la TTD se calcula sobre la utilidad contable ajustada — si la tasa efectiva sobre esa base es menor a 15%, se agrega el faltante', 'Solo si tiene zonas francas', 'No aplica para empresas con utilidad menor a $1.000 millones'],
+        correct: 1,
+        explanation: 'La TTD del Art. 240 ET par. 6 se calcula independientemente sobre la utilidad contable ajustada. Aunque el impuesto del 35% sobre la renta líquida sea alto, si la tasa efectiva resultante (Impuesto / Utilidad contable ajustada) es menor a 15%, hay que pagar un adicional para llegar al 15%. Es un piso, no un techo.'
+      }
+    ],
+
+    /* ═══ Renta PN F210 — Personas Naturales ═══ */
+    'renta-pn-210': [
+      {
+        q: '¿Quiénes deben presentar la declaración de renta de personas naturales (F210)?',
+        opts: ['Todos los ciudadanos colombianos', 'Las PN que superen los topes del Art. 594-3 ET (patrimonio, ingresos, consumos, consignaciones o compras con tarjeta) o las responsables de IVA', 'Solo los asalariados con ingresos > $50 millones', 'Solo los pensionados'],
+        correct: 1,
+        explanation: 'El Art. 594-3 ET fija los topes para estar obligado a declarar PN: patrimonio bruto > 4.500 UVT, ingresos brutos > 1.400 UVT, consumos con tarjeta > 1.400 UVT, compras totales > 1.400 UVT, consignaciones > 1.400 UVT, o ser responsable de IVA. Si supera CUALQUIERA, declara.'
+      },
+      {
+        q: 'El sistema cedular del Art. 330+ ET divide las rentas de las PN en:',
+        opts: ['Una sola cédula', 'Dos cédulas: laboral y no laboral', 'Cinco cédulas: trabajo, capital, no laborales, pensiones, dividendos', 'Cuatro cédulas: laboral, comercial, capital, dividendos'],
+        correct: 2,
+        explanation: 'La Ley 1819/2016 implementó el sistema cedular: rentas se clasifican en 5 cédulas (Art. 335-343 ET): (1) trabajo, (2) capital, (3) no laborales, (4) pensiones, (5) dividendos. Cada cédula tiene su depuración y aplica una tabla de tarifas progresiva común a las tres primeras unificadas.'
+      },
+      {
+        q: 'El tope general del Art. 336 ET para rentas exentas y deducciones en la cédula de trabajo es:',
+        opts: ['El 25% de los ingresos del trabajo', 'El 40% del ingreso neto de la cédula, sin que exceda 1.340 UVT anuales', 'El 50% sin tope', 'Sin límite'],
+        correct: 1,
+        explanation: 'El Art. 336 ET limita el conjunto de rentas exentas y deducciones especiales en la cédula general al 40% del ingreso neto, con tope de 1.340 UVT anuales. Es uno de los topes más relevantes a calcular en la depuración cedular.'
+      },
+      {
+        q: 'La deducción por dependientes (Art. 387 ET) para un trabajador es:',
+        opts: ['$1 millón mensual fijo', 'Hasta el 10% de los ingresos brutos del trabajo, con tope mensual de 32 UVT (anual 384 UVT)', '$300.000 mensuales', 'Solo si el dependiente tiene discapacidad'],
+        correct: 1,
+        explanation: 'El Art. 387 ET permite deducir por dependientes hasta el 10% de los ingresos brutos del trabajo, con tope mensual de 32 UVT (anual 384 UVT). Dependientes: hijos menores de 18, hijos hasta 23 años estudiando, padres, cónyuge sin ingresos, etc.'
+      },
+      {
+        q: 'El valor de la UVT para el año gravable 2025 (Res. DIAN 000193/2024) es:',
+        opts: ['$47.065', '$49.799', '$50.000', '$55.000'],
+        correct: 1,
+        explanation: 'La Resolución DIAN 000193/2024 fijó la UVT para 2025 en $49.799. Cada año se reajusta según la variación del IPC. La UVT 2024 fue $47.065 y la de 2023 $42.412.'
+      },
+      {
+        q: 'La cédula de pensiones tiene una renta exenta de:',
+        opts: ['100% siempre', 'Las primeras 1.000 UVT mensuales (Art. 206 ET num. 5)', 'El 25%', 'Toda pensión está gravada'],
+        correct: 1,
+        explanation: 'El Art. 206 ET numeral 5 exonera las pensiones de jubilación, invalidez, vejez, sobrevivientes y RPDI hasta 1.000 UVT mensuales. El exceso se grava según la tabla del Art. 241 ET.'
+      },
+      {
+        q: 'Los dividendos no gravados (Art. 49 ET) recibidos por una PN residente:',
+        opts: ['Se gravan al 35%', 'Tributan según la tabla del Art. 242 ET con tramos progresivos en UVT', 'No tributan nunca', 'Solo se gravan al 10%'],
+        correct: 1,
+        explanation: 'El Art. 242 ET (modificado por Ley 2277/2022) aplica a dividendos no gravados (procedentes de utilidades que ya tributaron en la sociedad). Se grava progresivamente: 0% hasta 1.090 UVT, 19% en 1.090-1.700, 39% sobre el exceso. Sí tributan, solo que con tabla especial.'
+      },
+      {
+        q: 'Los aportes voluntarios a fondos de pensiones obligatorias (cuenta AFP) y a AFC (Ahorro al Fomento de la Construcción):',
+        opts: ['No tienen beneficio fiscal', 'Son rentas exentas hasta el 30% de los ingresos del trabajo, con tope conjunto de 3.800 UVT anuales (Art. 126-1 y 126-4 ET)', 'Son deducibles 100%', 'Son ingresos no constitutivos de renta sin límite'],
+        correct: 1,
+        explanation: 'Los Arts. 126-1 (AFP voluntarios) y 126-4 (AFC) permiten tratar como renta exenta los aportes hasta el 30% del ingreso laboral o tributario del año, con tope conjunto de 3.800 UVT anuales. Se debe cumplir requisitos de permanencia para mantener el beneficio.'
+      },
+      {
+        q: 'La retención en la fuente por salarios del Art. 383 ET se aplica:',
+        opts: ['Solo al final del año', 'Mensualmente según una procedimiento progresivo (procedimiento 1 o 2 según elección del empleador)', 'Es voluntaria', 'No aplica si el salario es menor a $5 millones'],
+        correct: 1,
+        explanation: 'El Art. 383 ET regula la retención por pagos laborales: el empleador la calcula mensualmente. Procedimiento 1: cada mes con la tabla aplicada al pago del periodo. Procedimiento 2: porcentaje fijo semestral. Ambos generan retenciones que el trabajador imputa al declarar.'
+      },
+      {
+        q: 'En la cédula de capital (Art. 339 ET), los intereses recibidos:',
+        opts: ['Son ingresos no constitutivos de renta', 'Tributan plenamente pero se pueden restar costos y deducciones imputables a esa cédula', 'No se incluyen', 'Solo si superan $5 millones'],
+        correct: 1,
+        explanation: 'La cédula de capital (Art. 339 ET) incluye intereses, rendimientos financieros, arrendamientos, regalías. Se pueden imputar costos y deducciones específicas a esos ingresos. El componente inflacionario podía descontarse antes, ahora con limitaciones desde 2022.'
+      },
+      {
+        q: 'Las costas y costos imputables a la cédula no laboral (honorarios independientes, comisiones, etc.):',
+        opts: ['No son deducibles', 'Son deducibles si están soportados con factura electrónica o documento soporte y cumplen Art. 107 ET (causalidad y proporcionalidad)', 'Son siempre deducibles', 'Solo deducibles si el contribuyente lleva contabilidad'],
+        correct: 1,
+        explanation: 'Las PN que perciben rentas no laborales (Art. 340 ET) pueden imputar costos y deducciones a esa cédula, con los mismos requisitos generales: causalidad, necesidad, proporcionalidad (Art. 107 ET) y soporte documental (Art. 771-2 y 771-5 ET).'
+      },
+      {
+        q: 'La cédula de dividendos para PN se grava:',
+        opts: ['Junto con la cédula de trabajo', 'Por separado, con tabla del Art. 242 ET (no gravados) o Art. 242 par. 1 (gravados)', 'No tributa', 'Al 35% como las PJ'],
+        correct: 1,
+        explanation: 'La cédula de dividendos (5ta cédula) se grava de forma independiente. Para PN residentes, el Art. 242 ET aplica la tabla progresiva para dividendos no gravados, y los gravados se suman a la cédula general antes del cálculo del impuesto correspondiente.'
+      },
+      {
+        q: 'El anticipo de renta para las PN del Art. 807 ET:',
+        opts: ['No aplica para PN', 'Aplica igual que para PJ, calculado sobre el impuesto neto del año', 'Es siempre el 25%', 'Solo aplica para los pensionados'],
+        correct: 1,
+        explanation: 'El Art. 807 ET aplica a todos los obligados a declarar (PN y PJ): primera declaración 25%, siguientes 50% sobre promedio de dos años o 75% sobre el último impuesto neto, menos retenciones. Es un anticipo del año siguiente.'
+      },
+      {
+        q: 'La sanción por presentar el F210 fuera de plazo se calcula:',
+        opts: ['Fija de $500.000', 'Según el Art. 641 ET: 5% del impuesto a cargo por mes o fracción, mínimo 1 UVT, sin pasar de 100%', 'Solo si la DIAN requiere', 'No hay sanción si declara después'],
+        correct: 1,
+        explanation: 'El Art. 641 ET aplica a cualquier declaración tributaria presentada extemporáneamente sin requerimiento: 5% del impuesto a cargo por cada mes o fracción de retardo. Mínimo 1 UVT, máximo 100%. Después del emplazamiento sube al 10% por mes (Art. 642 ET).'
+      },
+      {
+        q: 'Si un asalariado tiene únicamente salarios por $40 millones anuales y no supera los topes de patrimonio ni consumo, ¿está obligado a declarar?',
+        opts: ['Sí, todos los asalariados declaran', 'Sí, porque sus ingresos superan 1.400 UVT (≈$69 millones en 2025 — depende del año)', 'No, si no supera los topes del Art. 594-3 ET', 'Solo si la empresa le practica retención'],
+        correct: 2,
+        explanation: 'El Art. 594-3 ET fija los topes para estar obligado a declarar. Para 2025 con UVT $49.799: ingresos brutos > 1.400 UVT (≈$69.7M), patrimonio > 4.500 UVT, etc. Un asalariado con $40M en ingresos y sin superar otros topes NO está obligado, aunque puede declarar voluntariamente para recuperar retenciones.'
+      }
+    ],
+
+    /* ═══ Exógena DIAN — Medios Magnéticos ═══ */
+    'exogena': [
+      {
+        q: '¿Cuál es la norma marco de la información exógena (medios magnéticos) en Colombia?',
+        opts: ['Art. 631 ET', 'Art. 651 ET', 'Decreto 2650/1993', 'Ley 100 de 1993'],
+        correct: 0,
+        explanation: 'El Art. 631 ET autoriza a la DIAN a solicitar información en medios magnéticos a contribuyentes y terceros, para cruzar contra las declaraciones tributarias. Es la norma que da origen a la exógena DIAN. El Art. 651 ET regula las sanciones por incumplimiento.'
+      },
+      {
+        q: 'La Resolución DIAN que reglamenta la exógena del año gravable 2024 es:',
+        opts: ['Res. 000124/2021', 'Res. 000227/2024 (modificada por Res. 000233/2025 y 000237/2025)', 'Res. 000165/2023', 'Res. 000042/2020'],
+        correct: 1,
+        explanation: 'La Resolución 000227 del 31 de octubre de 2024 fijó los requisitos, plazos y formatos para la exógena del año gravable 2024 (presentación 2025). Fue modificada por las Resoluciones 000233 y 000237 de 2025 para ajustar plazos y conceptos.'
+      },
+      {
+        q: 'El formato 1001 reporta:',
+        opts: ['Retenciones practicadas a terceros', 'Pagos o abonos en cuenta y retenciones practicadas a terceros', 'IVA descontable', 'Cuentas por cobrar'],
+        correct: 1,
+        explanation: 'El formato 1001 es el más usado: reporta los pagos o abonos en cuenta hechos a terceros y las retenciones practicadas sobre esos pagos. Su importancia radica en que la DIAN cruza con las retenciones que el tercero declara haber recibido.'
+      },
+      {
+        q: 'El formato 1005 reporta:',
+        opts: ['IVA descontable', 'IVA generado', 'Pagos al exterior', 'Cuentas por pagar'],
+        correct: 0,
+        explanation: 'El formato 1005 reporta el IVA descontable, es decir, el IVA pagado en compras que la empresa se descontó en sus declaraciones de IVA (F300). La DIAN lo cruza con el F1006 (IVA generado) de los proveedores.'
+      },
+      {
+        q: 'El formato 2276 reporta:',
+        opts: ['Información de socios', 'Información de pagos por rentas de trabajo y otros ingresos a personas naturales (certificados de ingresos y retenciones)', 'Ingresos para terceros', 'Pagos al exterior'],
+        correct: 1,
+        explanation: 'El formato 2276 reporta los pagos por rentas de trabajo y demás conceptos a personas naturales: equivalente al certificado de ingresos y retenciones que el empleador entrega al trabajador. Reemplaza al antiguo 220.'
+      },
+      {
+        q: 'El formato 1003 reporta:',
+        opts: ['Retenciones practicadas por terceros al informante', 'Pagos al exterior', 'IVA generado', 'Cuentas por cobrar'],
+        correct: 0,
+        explanation: 'El formato 1003 reporta las retenciones en la fuente que TERCEROS le practicaron al informante. Es el espejo del 1001: si la empresa A reportó haberle retenido a B en su 1001, B reporta esa misma retención en su 1003.'
+      },
+      {
+        q: 'Las cuentas por cobrar al cierre del año gravable se reportan en el formato:',
+        opts: ['1001', '1008', '1009', '5247'],
+        correct: 1,
+        explanation: 'El formato 1008 reporta los saldos de cuentas por cobrar a 31 de diciembre, por cada tercero deudor. Se reportan saldos superiores al tope fijado en la resolución (típicamente desde $500.000 a $1.000.000 según la cuantía mínima del año).'
+      },
+      {
+        q: 'Las cuentas por pagar al cierre del año se reportan en el formato:',
+        opts: ['1001', '1008', '1009', '2516'],
+        correct: 2,
+        explanation: 'El formato 1009 reporta los saldos de cuentas por pagar a 31 de diciembre, por tercero acreedor. Junto al 1008, permite a la DIAN cruzar patrimonios y partidas entre contribuyentes.'
+      },
+      {
+        q: 'El umbral de ingresos brutos del año anterior para que una persona jurídica esté obligada a presentar exógena (según las resoluciones recientes) es típicamente:',
+        opts: ['1.000 UVT', '5.000 UVT', '100 millones de pesos', 'Definido cada año en la resolución; en años recientes los obligados se determinan por superar ciertos topes de ingresos o patrimonio (generalmente > $100 millones de ingresos o ser declarante con ciertas actividades)'],
+        correct: 3,
+        explanation: 'Las resoluciones anuales (000227/2024 y modificatorias) definen los obligados a presentar exógena: personas jurídicas con ingresos brutos del año anterior > tope (típicamente $100 millones), declarantes de renta con ciertas actividades, entidades especiales, retenedores. Cada año puede variar el umbral.'
+      },
+      {
+        q: 'La sanción por NO presentar la información exógena en los plazos del Art. 651 ET es (texto vigente Ley 2277/2022):',
+        opts: ['1% de la información no entregada', 'Hasta el 4% del valor de las operaciones no informadas, con tope de 15.000 UVT', 'Multa fija de 100 UVT', 'No hay sanción si se presenta antes de un año'],
+        correct: 1,
+        explanation: 'El Art. 651 ET (modificado por Ley 2277/2022) gradúa la sanción por no enviar información, enviarla errónea o extemporánea: hasta el 4% del valor de las operaciones no informadas, hasta el 5% por información errónea, etc., con tope global de 15.000 UVT. Aplican reducciones del Art. 651 par. y Art. 640 (gradualidad).'
+      },
+      {
+        q: 'El prevalidador exógena de la DIAN es:',
+        opts: ['Una página web', 'Un archivo Excel oficial descargable del MUISCA que valida los datos y genera el XML para cargar a la DIAN', 'Un software de terceros', 'Una app móvil'],
+        correct: 1,
+        explanation: 'El prevalidador es un archivo Excel macro publicado oficialmente por la DIAN en MUISCA por cada formato. Valida la estructura de los datos, las cuantías mínimas y reglas de negocio. Genera el XML que se carga al MUISCA para presentar la exógena.'
+      },
+      {
+        q: 'Si una empresa identifica un error en la exógena ya presentada, ¿qué debe hacer?',
+        opts: ['Esperar al año siguiente', 'Presentar una corrección dentro del plazo y reducir la sanción del Art. 651 según gradualidad del Art. 640 ET', 'Pagar la sanción máxima inmediatamente', 'Notificar por correo a la DIAN'],
+        correct: 1,
+        explanation: 'Las correcciones de exógena se presentan por el mismo medio (MUISCA) corrigiendo los datos. La sanción del Art. 651 se reduce por aplicar la gradualidad del Art. 640 ET (mitad si corrige voluntariamente antes del pliego de cargos, etc.).'
+      },
+      {
+        q: 'Los pagos a beneficiarios del exterior se reportan en:',
+        opts: ['1001 igual que pagos nacionales', '1647 / 5247 (pagos al exterior y conceptos relacionados)', 'No se reportan', 'Solo si superan USD 100.000'],
+        correct: 1,
+        explanation: 'Los pagos a no residentes del exterior tienen formato propio (tradicionalmente 1647 o variantes según el año). Reportan beneficiario en el exterior, país de residencia, concepto, monto, y retención practicada según Art. 408 ET o CDI aplicable.'
+      },
+      {
+        q: 'Las Entidades Sin Ánimo de Lucro (ESAL) del Régimen Tributario Especial:',
+        opts: ['Están exentas de presentar exógena', 'Deben presentar exógena especial (formato 2530 y otros) reportando ingresos, donaciones, ejecución de programas', 'Solo presentan formato 1001', 'Es opcional'],
+        correct: 1,
+        explanation: 'Las ESAL del Régimen Tributario Especial (Arts. 19, 356-364 ET) tienen obligaciones de información especial: además de los formatos generales, deben reportar ingresos, donaciones recibidas, ejecución de actividad meritoria, asignaciones permanentes, etc. Los formatos específicos los fija la resolución anual.'
+      },
+      {
+        q: 'Cuando un cliente pequeño (consumidor final) compra sin RUT y la operación es menor al tope mínimo del año, ¿se reporta en exógena?',
+        opts: ['Sí, siempre', 'No, las operaciones bajo la cuantía mínima por tercero y por concepto del año (típicamente $500.000 a $1 millón según el año/concepto) no se reportan, pero pueden reportarse agrupadas bajo el seudoNIT 222222222', 'Solo si supera $1 millón', 'Se reporta con el NIT del establecimiento'],
+        correct: 1,
+        explanation: 'La resolución anual fija cuantías mínimas por tercero y por concepto. Operaciones bajo el tope no se reportan individualizadas, pero la sumatoria de ellas se incluye agrupada bajo el seudoNIT 222222222 (cuantías menores). Si superan el tope individualmente, sí se reporta el tercero por su NIT/cédula.'
+      }
+    ],
+
+    /* ═══ Procedimiento Tributario ═══ */
+    'procedimiento': [
+      {
+        q: '¿Cuál es el término general de firmeza de una declaración tributaria según el Art. 714 ET?',
+        opts: ['1 año desde el vencimiento', '2 años desde el vencimiento del plazo para declarar (3 si genera o aumenta pérdida fiscal)', '5 años', '4 años en todos los casos'],
+        correct: 1,
+        explanation: 'El Art. 714 ET (modificado por Ley 1819/2016 y posteriores) fija la firmeza general en 3 años desde el vencimiento del plazo para declarar; cuando hay precios de transferencia o se compensan pérdidas el plazo se extiende. La Ley 2010/2019 ajustó algunos términos.'
+      },
+      {
+        q: 'La DIAN inicia una fiscalización con un requerimiento ordinario de información. El contribuyente tiene plazo para responder de:',
+        opts: ['10 días hábiles', '15 días hábiles a partir de la notificación (Art. 261 ET / Art. 686 ET)', '30 días calendario', '60 días'],
+        correct: 1,
+        explanation: 'El requerimiento ordinario otorga generalmente 15 días hábiles para que el contribuyente entregue la información solicitada. Si no responde, la DIAN puede aplicar sanción del Art. 651 ET. Es distinto del requerimiento especial del Art. 703 ET.'
+      },
+      {
+        q: 'El requerimiento especial del Art. 703 ET tiene un plazo de respuesta de:',
+        opts: ['1 mes', '3 meses contados desde la fecha de notificación (Art. 707 ET)', '6 meses', 'No hay plazo'],
+        correct: 1,
+        explanation: 'El Art. 707 ET fija 3 meses para responder un requerimiento especial. La respuesta del contribuyente puede aceptar, controvertir o solicitar pruebas. Es la última oportunidad antes de la liquidación oficial.'
+      },
+      {
+        q: 'Si la DIAN profiere una liquidación oficial de revisión sin haber notificado previamente requerimiento especial, esa liquidación es:',
+        opts: ['Válida si está motivada', 'Nula por violación del debido proceso (Art. 730 ET)', 'Discrecional de la DIAN', 'Sujeta solo a recurso de reposición'],
+        correct: 1,
+        explanation: 'El Art. 730 ET establece causales de nulidad. La omisión del requerimiento especial previo viola el debido proceso. La liquidación oficial debe estar precedida por requerimiento especial salvo casos del Art. 715 ET (liquidación de aforo por no declarantes).'
+      },
+      {
+        q: 'El recurso de reconsideración contra una liquidación oficial se interpone ante:',
+        opts: ['El juez administrativo', 'La misma DIAN, dentro de los 2 meses siguientes a la notificación (Art. 720 ET)', 'La Procuraduría', 'El Consejo de Estado directamente'],
+        correct: 1,
+        explanation: 'El Art. 720 ET establece el recurso de reconsideración: se interpone ante la misma DIAN dentro de los 2 meses siguientes a la notificación. Es el recurso administrativo previo al contencioso administrativo (acción de nulidad y restablecimiento).'
+      },
+      {
+        q: 'Si el contribuyente no presenta declaración aunque está obligado, la DIAN puede proferir:',
+        opts: ['Solo una multa', 'Liquidación oficial de aforo (Art. 715 ET) tras emplazamiento previo (Art. 715-2 ET)', 'No puede hacer nada hasta que declare', 'Solo sanción del Art. 643 ET'],
+        correct: 1,
+        explanation: 'El Art. 715 ET autoriza la liquidación oficial de aforo cuando el contribuyente no cumple su obligación de declarar. Previamente se notifica emplazamiento para declarar (Art. 715-2 ET). Si aún así no declara, la DIAN aforra los ingresos y determina el impuesto.'
+      },
+      {
+        q: 'Una facilidad de pago concedida por la DIAN según el Art. 814 ET puede otorgarse hasta por:',
+        opts: ['12 meses', '36 meses con plazos especiales hasta 5 años en algunos casos', '6 meses', '24 meses inflexibles'],
+        correct: 1,
+        explanation: 'El Art. 814 ET permite facilidades de pago de hasta 36 meses, con plazos especiales hasta 5 años en casos puntuales. Requiere garantías y aceptación del plan por la DIAN. Los intereses moratorios se siguen causando.'
+      },
+      {
+        q: 'La prescripción de la acción de cobro de la DIAN según el Art. 817 ET es de:',
+        opts: ['3 años', '5 años desde la exigibilidad de la obligación', '10 años', 'No prescribe'],
+        correct: 1,
+        explanation: 'El Art. 817 ET fija la prescripción de la acción de cobro en 5 años contados desde la exigibilidad de la obligación tributaria. La prescripción se interrumpe con el mandamiento de pago, embargo, secuestro o reconocimiento de la deuda.'
+      },
+      {
+        q: 'La declaración de retención en la fuente presentada sin pago se considera:',
+        opts: ['Válida y se paga después', 'Ineficaz desde la fecha de presentación (Art. 580-1 ET) salvo casos excepcionales', 'Sujeta solo a intereses moratorios', 'Sujeta solo a sanción por extemporaneidad'],
+        correct: 1,
+        explanation: 'El Art. 580-1 ET sanciona como INEFICAZ la declaración de retención presentada sin pago total. Esto significa que se tiene como no presentada. Aplica con excepciones para saldos a favor compensables o cuando el contribuyente tiene saldo a favor del periodo.'
+      },
+      {
+        q: 'El cobro coactivo administrativo de la DIAN se inicia mediante:',
+        opts: ['Una citación', 'Mandamiento de pago notificado al deudor (Arts. 826 y siguientes ET)', 'Una conciliación previa', 'Una demanda ante juez ordinario'],
+        correct: 1,
+        explanation: 'El cobro coactivo se inicia con el mandamiento de pago (Art. 826 ET). El deudor tiene 15 días para pagar o presentar excepciones (Art. 830 ET). De no hacerlo, la DIAN procede con embargo y remate de bienes en proceso administrativo, sin acudir a juez.'
+      },
+      {
+        q: 'Las pruebas en el procedimiento tributario se rigen principalmente por:',
+        opts: ['Solo el ET', 'Las normas del ET (Arts. 742-789 ET) con remisión supletoria al CGP y CPACA', 'Solo el Código General del Proceso', 'Costumbre comercial'],
+        correct: 1,
+        explanation: 'El procedimiento probatorio se rige por Arts. 742-789 ET (pruebas en general, indicios, presunciones, etc.) y supletoriamente por el Código General del Proceso y la Ley 1437/2011 (CPACA). El contribuyente tiene derecho a aportar y solicitar pruebas durante la actuación.'
+      },
+      {
+        q: 'Una corrección voluntaria de una declaración antes del emplazamiento se sanciona conforme al Art. 644 ET con:',
+        opts: ['El 5% del mayor valor a pagar', '10% del mayor valor a pagar o menor saldo a favor', '20% del mayor valor', 'No tiene sanción'],
+        correct: 1,
+        explanation: 'El Art. 644 ET establece la sanción por corrección: 10% del mayor valor a pagar o menor saldo a favor si se corrige antes del emplazamiento para corregir. Aumenta a 20% si se corrige después del emplazamiento. Se reduce con Art. 640 (gradualidad).'
+      },
+      {
+        q: 'La conciliación contencioso-administrativa con la DIAN (regulada en leyes especiales sucesivas) permite:',
+        opts: ['Eliminar el impuesto', 'Reducir sanciones e intereses para procesos en curso, según los términos de la ley de conciliación vigente', 'Diferir hasta 10 años', 'Solo se aplica a sociedades'],
+        correct: 1,
+        explanation: 'Las leyes sucesivas (Ley 1819/2016, Ley 2010/2019, Ley 2155/2021, Ley 2277/2022 con sus parágrafos) ofrecen mecanismos transitorios de conciliación: reducción de sanciones e intereses para procesos pendientes de fallo, sujeta a condiciones (pago total, desistimiento, plazos).'
+      },
+      {
+        q: 'La firmeza especial de las declaraciones del impuesto sobre la renta cuando se compensan pérdidas fiscales se extiende a:',
+        opts: ['2 años', '5 años (Art. 147 ET párrafo 2 / Art. 714 ET)', '12 años', 'No hay firmeza'],
+        correct: 1,
+        explanation: 'Cuando el contribuyente compensa pérdidas fiscales contra renta líquida, la firmeza de la declaración del año en que se aplica la compensación se extiende a 5 años (Art. 147 ET par. 2 y Art. 714 ET). Esto permite a la DIAN cuestionar el origen y el cálculo de la pérdida.'
+      },
+      {
+        q: 'La devolución de saldos a favor por concepto de IVA o renta se rige principalmente por:',
+        opts: ['Solo políticas internas DIAN', 'Arts. 850-865 ET y Decreto 963/2020 modificado por Decreto 176/2024, además de Res. 151/2012 y 117/2024', 'Discrecionalidad', 'Código Civil'],
+        correct: 1,
+        explanation: 'El proceso de devolución está regulado en los Arts. 850-865 ET (régimen general, automático, con garantía, devolución de oficio). El Decreto 963/2020 (mod. 176/2024) y las Res. DIAN 151/2012 y 117/2024 establecen requisitos, formatos y plazos operativos.'
+      }
+    ],
+
+    /* ═══ Sanciones DIAN ═══ */
+    'sanciones': [
+      {
+        q: 'Una sociedad presenta su declaración de renta 30 días tarde sin emplazamiento. ¿Cuál es la sanción aplicable del Art. 641 ET?',
+        opts: ['1% del impuesto a cargo', '5% por mes o fracción del impuesto a cargo, máximo 100%', '20% fijo', '10% fijo'],
+        correct: 1,
+        explanation: 'El Art. 641 ET sanciona la extemporaneidad sin emplazamiento con el 5% del impuesto a cargo por cada mes o fracción de mes de retardo, sin exceder el 100%. La sanción mínima son 10 UVT (Art. 639 ET). Aplica gradualidad del Art. 640.'
+      },
+      {
+        q: 'La sanción por inexactitud del Art. 647 ET es:',
+        opts: ['100% del menor valor a pagar o mayor saldo a favor (con casos del 200% si hay omisión activos / inclusión pasivos)', '50% siempre', '20%', '10%'],
+        correct: 0,
+        explanation: 'El Art. 647 ET sanciona con el 100% del menor valor a pagar o mayor saldo a favor determinado en la liquidación oficial. Sube al 200% en casos de omisión de activos o inclusión de pasivos inexistentes (Art. 648 ET). Reducible al 50% si acepta y paga.'
+      },
+      {
+        q: 'La sanción mínima en cualquier acto sancionatorio de la DIAN según el Art. 639 ET es:',
+        opts: ['1 UVT', '10 UVT', '100 UVT', '50 UVT'],
+        correct: 1,
+        explanation: 'El Art. 639 ET fija la sanción mínima en 10 UVT (para 2025 con UVT $49.799 son $497.990) salvo las del Art. 651 ET (información) y otros casos especiales con piso propio. Aplica cuando el cálculo de la sanción específica resulte menor.'
+      },
+      {
+        q: 'La gradualidad del Art. 640 ET permite reducir sanciones a:',
+        opts: ['Solo al 50%', '50% si la sanción la impone DIAN y el contribuyente paga en plazo; 75% si se corrige voluntariamente', 'No se puede reducir', '10% siempre'],
+        correct: 1,
+        explanation: 'El Art. 640 ET introduce gradualidad: 50% si la sanción la propone DIAN y el contribuyente la acepta y paga dentro de los plazos; 75% si el contribuyente corrige voluntariamente antes de emplazamiento, sin existir actos previos. Requiere antecedentes limpios (sin sanciones firmes en últimos 2 o 4 años según el caso).'
+      },
+      {
+        q: 'La sanción del Art. 651 ET por NO enviar información exógena se gradúa hasta:',
+        opts: ['1% sobre las sumas no informadas', 'Hasta el 4% del valor de las operaciones no informadas, con tope global de 15.000 UVT (modificación Ley 2277/2022)', '20%', '50%'],
+        correct: 1,
+        explanation: 'El Art. 651 ET (mod. Ley 2277/2022): hasta 4% del valor de la información no enviada por NO enviar, hasta 5% por información errónea, y hasta 3% por extemporaneidad. Tope global 15.000 UVT. Reducible por gradualidad del Art. 640 si se subsana.'
+      },
+      {
+        q: 'La sanción por extemporaneidad cuando ya se notificó emplazamiento para declarar (Art. 642 ET) sube a:',
+        opts: ['5% por mes', '10% por mes o fracción, máximo 200%', '20% por mes', 'No se duplica'],
+        correct: 1,
+        explanation: 'El Art. 642 ET: si la declaración se presenta tras emplazamiento (Art. 715-2), la sanción es el 10% del impuesto a cargo por cada mes o fracción, sin exceder 200%. Es el doble de la del Art. 641 (sin emplazamiento).'
+      },
+      {
+        q: 'Una empresa corrige voluntariamente su declaración aumentando el impuesto en $10 millones, antes del emplazamiento. ¿Sanción del Art. 644 ET?',
+        opts: ['$2 millones (20%)', '$1 millón (10%)', '$500.000 (5%)', 'No tiene sanción'],
+        correct: 1,
+        explanation: 'Art. 644 ET: corrección voluntaria antes del emplazamiento se sanciona con el 10% del mayor valor a pagar = $1.000.000. Si aplica gradualidad del Art. 640 (75% reducción si cumple), bajaría a $250.000. Sube al 20% si la corrección es posterior al emplazamiento.'
+      },
+      {
+        q: 'La sanción a contadores y revisores fiscales por firmar declaraciones con omisiones se regula en el:',
+        opts: ['Art. 651 ET', 'Art. 658 ET (sanción por irregularidades en contabilidad) y Art. 660 ET (suspensión facultad de firmar)', 'Art. 647 ET', 'Solo en el código penal'],
+        correct: 1,
+        explanation: 'El Art. 658 ET sanciona al contador/RF por inscribir asientos falsos o no inscribir asientos. El Art. 660 ET permite a la DIAN suspender la facultad del contador o RF de firmar declaraciones por hasta 5 años, e incluso reportar a la JCC (Junta Central de Contadores).'
+      },
+      {
+        q: 'Los intereses moratorios del Art. 634 ET se calculan con la tasa:',
+        opts: ['DTF', 'Tasa de usura certificada por la Superfinanciera (la del crédito de consumo y ordinario)', 'Fija del 12% anual', 'IPC'],
+        correct: 1,
+        explanation: 'El Art. 634 ET (modificado por Ley 1819/2016) usa la tasa de interés de usura certificada por la Superfinanciera (crédito de consumo y ordinario). Es una tasa variable y alta, lo que vuelve costoso atrasarse con la DIAN. No es la tasa de mora civil.'
+      },
+      {
+        q: 'La sanción de clausura del establecimiento del Art. 657 ET aplica por:',
+        opts: ['Cualquier irregularidad', 'No expedir factura, no facturar electrónicamente, no llevar libros, transgredir el régimen sancionatorio en facturación', 'Solo por evasión', 'Solo si la DIAN lo decide caprichosamente'],
+        correct: 1,
+        explanation: 'El Art. 657 ET autoriza la clausura del establecimiento por 3 días generalmente (hasta 10 con reincidencia) por no facturar, facturar irregularmente, no exhibir libros, no entregar información cuando se reincide. Sustituible por sanción pecuniaria en algunos casos.'
+      },
+      {
+        q: 'Para personas naturales que no presentan la declaración estando obligadas, la sanción del Art. 643 ET es:',
+        opts: ['10 UVT fija', 'Equivalente al 20% del valor de las consignaciones o ingresos brutos, o el 20% de los ingresos brutos del periodo (la mayor)', '50% del impuesto', 'No tiene sanción'],
+        correct: 1,
+        explanation: 'El Art. 643 ET sanciona la NO presentación con el 20% del valor de las consignaciones bancarias o ingresos brutos determinados por la DIAN, o el 20% de los ingresos brutos del periodo, lo que sea mayor. Para PJ: 20% del valor de los ingresos brutos. Reducible por gradualidad.'
+      },
+      {
+        q: 'Cuando el contribuyente acepta los hechos del requerimiento especial y paga, la sanción por inexactitud se reduce a:',
+        opts: ['100%', '50% (Art. 709 ET)', '25%', 'No se reduce'],
+        correct: 1,
+        explanation: 'El Art. 709 ET permite reducir la sanción por inexactitud al 50% si el contribuyente acepta los hechos del requerimiento especial, corrige, paga el mayor impuesto, intereses y la sanción reducida. Es la oportunidad de cerrar el proceso temprano.'
+      },
+      {
+        q: 'Si tras la liquidación oficial el contribuyente acepta y paga durante el plazo del recurso de reconsideración, la sanción por inexactitud se reduce a:',
+        opts: ['100%', '70% (Art. 713 ET)', '50%', '25%'],
+        correct: 1,
+        explanation: 'El Art. 713 ET permite reducir la sanción por inexactitud al 70% si el contribuyente, dentro del plazo para interponer recurso de reconsideración, acepta y paga la liquidación oficial y la sanción reducida. Es la última oportunidad administrativa antes del contencioso.'
+      },
+      {
+        q: 'La sanción por extemporaneidad en información exógena se gradúa según Art. 651 ET hasta:',
+        opts: ['1% por mes', 'Hasta 3% del valor de las operaciones informadas extemporáneamente, con tope', '5%', '10%'],
+        correct: 1,
+        explanation: 'Art. 651 ET (Ley 2277/2022): por presentar exógena extemporáneamente sin requerimiento, sanción hasta 3% del valor de la información no informada en plazo. Con la gradualidad del Art. 640 ET, puede reducirse si se subsana voluntariamente antes del emplazamiento.'
+      },
+      {
+        q: 'Una sanción se considera firme cuando:',
+        opts: ['Se notifica', 'No se interpusieron recursos en tiempo o se agotaron y fue confirmada (Art. 829 ET)', 'Pasan 5 años', 'El contribuyente quiere'],
+        correct: 1,
+        explanation: 'Una sanción queda firme cuando no se interpusieron los recursos en los plazos legales o cuando, habiéndose interpuesto, fueron resueltos en última instancia. La firmeza es requisito para que sea ejecutable (Art. 829 ET). Sin firmeza no se puede cobrar coactivamente.'
+      }
+    ],
+
+    /* ═══ Régimen Simple de Tributación ═══ */
+    'regimen-simple': [
+      {
+        q: '¿Cuál es el umbral máximo de ingresos brutos anuales para mantenerse en RST (Régimen Simple)?',
+        opts: ['1.400 UVT', '100.000 UVT (ingresos brutos del año anterior, según Art. 905 ET con modificaciones)', '500.000 UVT', '50.000 UVT'],
+        correct: 1,
+        explanation: 'El Art. 905 ET (mod. Ley 2277/2022) fija el tope general de ingresos brutos del año anterior en 100.000 UVT para mantenerse en RST. Hay topes específicos por actividad (educación, salud, profesiones liberales tienen 12.000 UVT). Superado el tope se debe migrar al ordinario.'
+      },
+      {
+        q: 'El Régimen Simple integra los siguientes impuestos en uno solo:',
+        opts: ['Solo renta', 'Renta, INC (8% para algunos), ICA consolidado y aportes parafiscales (Art. 907 ET)', 'Solo renta e IVA', 'Renta, IVA, retenciones'],
+        correct: 1,
+        explanation: 'El Art. 907 ET dispone que el RST integra: impuesto sobre la renta, impuesto nacional al consumo INC (algunas actividades), impuesto de industria y comercio consolidado (ICA con los municipios participantes), avisos y tableros, sobretasa bomberil, y aportes parafiscales. NO integra IVA.'
+      },
+      {
+        q: 'Los 4 grupos de actividades del Art. 908 ET para tarifas RST son:',
+        opts: ['Comercio, servicios, mixto, agro', 'Grupo 1: tiendas/comercios básicos; Grupo 2: comercio al por mayor; Grupo 3: servicios profesionales y consultoría; Grupo 4: educación y salud', 'Solo 2 grupos', 'No hay grupos, una sola tarifa'],
+        correct: 1,
+        explanation: 'El Art. 908 ET clasifica las actividades en 4 grupos con tarifas progresivas distintas según ingresos. Grupo 1: tiendas, peluquerías, panaderías (más bajo). Grupo 3 y 4 (servicios profesionales, educación, salud) tienen tarifas distintas. Cada grupo tiene tabla con tramos en UVT.'
+      },
+      {
+        q: 'La declaración anual del Régimen Simple se presenta en el formulario:',
+        opts: ['F110', 'F260 (Declaración Anual Consolidada del Régimen Simple)', 'F210', 'F300'],
+        correct: 1,
+        explanation: 'El F260 es la declaración anual del RST (Art. 913 ET). Se presenta en plazos del calendario tributario DIAN. El F2593 es el anticipo bimestral del impuesto (Art. 910 ET) que se imputa al F260 anual.'
+      },
+      {
+        q: 'El anticipo bimestral del Régimen Simple se presenta en:',
+        opts: ['F210', 'F2593 (cada bimestre) — Art. 910 ET', 'F300', 'F260'],
+        correct: 1,
+        explanation: 'El F2593 es el formulario de anticipo bimestral RST. Se presenta 6 veces al año (enero-febrero, marzo-abril, etc.) con plazos según calendario tributario. El anticipo pagado bimestralmente se imputa al impuesto definitivo del F260 anual.'
+      },
+      {
+        q: '¿Una persona natural empleada que también recibe honorarios puede acogerse al Régimen Simple?',
+        opts: ['Sí, todos pueden', 'Las personas naturales pueden acogerse si cumplen los requisitos del Art. 905 ET; las rentas de trabajo siguen su régimen propio en el F210', 'No, solo PJ', 'Solo si gana menos de $5 millones'],
+        correct: 1,
+        explanation: 'Las PN pueden acogerse al RST por sus actividades empresariales/comerciales/de servicios. Si tienen también rentas de trabajo como empleados, esas rentas declararían bajo F210. En la práctica, muchas PN comerciantes/independientes con actividad económica usan el RST por la simplicidad.'
+      },
+      {
+        q: '¿Quiénes están EXCLUIDOS del Régimen Simple según el Art. 906 ET?',
+        opts: ['Solo extranjeros', 'Las personas jurídicas con accionistas socios de S.A. nacionales, los corredores, agencias de viaje (algunas), aseguradoras, instituciones financieras, factoring, entre otras', 'Solo grandes contribuyentes', 'Solo profesiones liberales'],
+        correct: 1,
+        explanation: 'El Art. 906 ET excluye expresamente: PJ con accionistas extranjeros sin domicilio, sociedades fiduciarias, corredores, comisionistas, aseguradoras, instituciones financieras, fondos, factoring (algunos), administradoras de fondos, sociedades de inversión, intermediarios bursátiles, importadores en algunos casos.'
+      },
+      {
+        q: 'En el Régimen Simple, el ICA aplicable se paga:',
+        opts: ['Al municipio directamente cada bimestre', 'Consolidado dentro del impuesto RST, transferido por la DIAN a los municipios participantes', 'Solo anualmente', 'No se paga ICA en RST'],
+        correct: 1,
+        explanation: 'El RST consolida el ICA dentro del impuesto integrado. La DIAN recibe el pago y luego transfiere a los municipios que participan. Los municipios que NO participan obligan al RST a declarar ICA por separado. La consulta de municipios participantes está en el portal DIAN.'
+      },
+      {
+        q: 'En el RST, las retenciones en la fuente que aplican son (Art. 911 ET):',
+        opts: ['Ninguna, los RST no son sujetos pasivos', 'Retención sobre dividendos, retención de IVA, retención sobre pagos al exterior, y otras tasadas en el Art. 911', 'Todas las del régimen ordinario', 'Solo retención de IVA'],
+        correct: 1,
+        explanation: 'El Art. 911 ET regula las retenciones aplicables a inscritos en RST: en sus pagos como agente sí retiene cuando aplica (IVA, dividendos, pagos al exterior). Como sujeto pasivo no se le practica retención de renta sobre sus ingresos por actividad económica, pero sí en dividendos recibidos.'
+      },
+      {
+        q: '¿En qué fecha se inscribe una persona o sociedad al Régimen Simple para que aplique?',
+        opts: ['En cualquier momento del año', 'Antes del 31 de enero del año gravable a aplicar (Art. 909 ET)', 'Al inicio de cualquier bimestre', 'En cualquier fecha del primer trimestre'],
+        correct: 1,
+        explanation: 'El Art. 909 ET dispone que la inscripción al RST se debe hacer antes del 31 de enero del año al que se quiere aplicar. Quien se constituya en el año puede acogerse al RST al momento de obtener el RUT. Para volver al ordinario hay procedimiento de exclusión.'
+      },
+      {
+        q: 'La salida del Régimen Simple por superar topes de ingresos:',
+        opts: ['Es automática y aplica al mismo año', 'Aplica al año gravable siguiente; el año del exceso se sigue tributando en RST (Art. 914 ET)', 'Tiene efecto retroactivo', 'Es voluntaria solo'],
+        correct: 1,
+        explanation: 'Cuando un inscrito supera los topes durante un año, el efecto de exclusión aplica al año siguiente. El año del exceso se cierra en RST. Esto da previsibilidad al contribuyente. Hay también causales de exclusión inmediata (incumplir requisitos del Art. 906 sobrevenidos).'
+      },
+      {
+        q: 'Una empresa en RST factura. ¿Está obligada a facturación electrónica?',
+        opts: ['No, solo por excepción', 'Sí, los responsables en RST están obligados a facturación electrónica como cualquier responsable', 'Solo si supera $1.000 millones', 'Opcional'],
+        correct: 1,
+        explanation: 'Los inscritos al RST son responsables de factura de venta o documento equivalente y están obligados a facturación electrónica según resoluciones DIAN. La obligación es general para responsables de impuestos en Colombia, sin importar el régimen.'
+      },
+      {
+        q: 'Una sociedad acogida al RST en 2024 con ingresos brutos $1.500 millones (≈30.000 UVT) está en qué grupo del Art. 908 ET?',
+        opts: ['Depende solo del CIIU', 'Depende del grupo de actividad económica según el CIIU principal (no del monto de ingresos)', 'Grupo 4 por monto', 'Grupo 1 por ser PJ'],
+        correct: 1,
+        explanation: 'Los grupos del Art. 908 ET se definen por la actividad económica (CIIU principal), NO por el monto. El monto define el TRAMO de la tabla dentro del grupo (a más ingresos, mayor tarifa progresiva). Errar el grupo es uno de los problemas frecuentes en la inscripción.'
+      },
+      {
+        q: 'La declaración anual F260 del RST tiene como tarifa final:',
+        opts: ['35% siempre', 'La tarifa progresiva del grupo según ingresos del año, menos anticipos pagados y créditos del Art. 912 ET', '5%', '8%'],
+        correct: 1,
+        explanation: 'El F260 calcula el impuesto definitivo aplicando la tarifa del grupo (Art. 908 ET) a los ingresos del año. Se restan los anticipos pagados bimestralmente (F2593) y los créditos del Art. 912 ET (4xMil pagado, aportes parafiscales pagados). El saldo es lo que se paga o queda a favor.'
+      },
+      {
+        q: 'Si el inscrito en RST no presenta su F2593 bimestral en plazo, la sanción es:',
+        opts: ['10 UVT fija', 'La del Art. 641 ET (extemporaneidad) o Art. 642 ET si hubo emplazamiento, aplicada al impuesto del bimestre', 'No hay sanción', 'Pierde el régimen automáticamente'],
+        correct: 1,
+        explanation: 'Las sanciones generales del Estatuto Tributario aplican al RST. La extemporaneidad del F2593 se sanciona con 5% del impuesto a cargo por mes o fracción (Art. 641 ET) sin emplazamiento. Reducible por gradualidad del Art. 640. No conlleva exclusión inmediata del régimen.'
+      }
+    ],
+
+    /* ═══ ICA — Industria y Comercio ═══ */
+    'ica': [
+      {
+        q: '¿Cuál es la norma marco general del impuesto de Industria y Comercio (ICA) en Colombia?',
+        opts: ['Estatuto Tributario nacional', 'Ley 14 de 1983 (con modificaciones de la Ley 1819/2016 y otras)', 'Decreto 2649/1993', 'Solo los acuerdos municipales'],
+        correct: 1,
+        explanation: 'La Ley 14 de 1983 es la norma marco del ICA. Faculta a los municipios a gravar las actividades industriales, comerciales y de servicios. La Ley 1819/2016 (Arts. 343-345) modificó las reglas de territorialidad. Cada municipio expide su estatuto tributario con tarifas y procedimientos específicos.'
+      },
+      {
+        q: 'El sujeto pasivo del ICA es:',
+        opts: ['Solo personas jurídicas', 'Toda persona natural o jurídica que realiza actividades industriales, comerciales o de servicios en jurisdicción de un municipio', 'Solo comerciantes inscritos', 'Solo empresas con ingresos > $1.000 millones'],
+        correct: 1,
+        explanation: 'Sujeto pasivo del ICA es toda persona (natural o jurídica) que realiza actividades industriales, comerciales o de servicios en la jurisdicción de un municipio. La obligación nace independientemente de la inscripción en cámara de comercio o el régimen tributario.'
+      },
+      {
+        q: 'Las tarifas del ICA en Colombia:',
+        opts: ['Son nacionales y uniformes', 'Cada municipio las fija dentro de los rangos de la Ley 14/1983 (industrial 2 a 7 por mil, comercial y servicios 2 a 10 por mil)', 'Son del 1% en todos los municipios', 'Las fija la DIAN'],
+        correct: 1,
+        explanation: 'La Ley 14/1983 establece rangos: actividades industriales entre 2 y 7 por mil; comerciales y de servicios entre 2 y 10 por mil. Cada municipio fija dentro de esos rangos las tarifas específicas por CIIU. Esto crea variaciones importantes entre ciudades.'
+      },
+      {
+        q: 'La territorialidad del ICA en servicios (regulada por Ley 1819/2016 Art. 343) define que se causa en:',
+        opts: ['El municipio del prestador', 'El municipio donde se ejecuta el servicio, según reglas específicas por tipo de servicio', 'Solo en Bogotá', 'En cualquier municipio elegido por el contribuyente'],
+        correct: 1,
+        explanation: 'La Ley 1819/2016 Art. 343 fijó reglas de territorialidad: para servicios profesionales, donde se ejecute. Para arrendamientos, donde está el bien. Para transporte, donde se inicia el despacho. Para servicios de telecomunicaciones móviles, donde está el suscriptor. Cada modalidad tiene su regla.'
+      },
+      {
+        q: 'La autorretención de ICA aplica:',
+        opts: ['Nunca', 'En municipios donde el estatuto local lo establece (Bogotá, Medellín, Cali, etc.) — el contribuyente se autorretiene sobre sus propios ingresos', 'Solo si lo solicita el contribuyente', 'Para todas las empresas en todo el país'],
+        correct: 1,
+        explanation: 'La autorretención de ICA depende del estatuto tributario municipal. Ciudades grandes como Bogotá, Medellín, Cali tienen autorretención obligatoria para ciertos sujetos. El sujeto se autorretiene mensualmente sobre los ingresos del periodo y declara con su periodicidad propia.'
+      },
+      {
+        q: 'El ICA pagado durante el año por una sociedad ¿se puede descontar del impuesto de renta?',
+        opts: ['Sí, 100% como descuento tributario', 'El 50% del ICA efectivamente pagado se puede descontar de la renta o el 100% como deducción (Art. 115 ET par. 1)', 'No, no se descuenta', 'Solo si la empresa es grande contribuyente'],
+        correct: 1,
+        explanation: 'El Art. 115 ET (modificado por Ley 2010/2019 y Ley 2277/2022) permite al contribuyente OPTAR: tomar el 50% del ICA pagado como descuento tributario directo del impuesto de renta, o tomar el 100% como deducción de la base. La elección suele depender de la rentabilidad de la empresa.'
+      },
+      {
+        q: 'Una empresa con ventas en 4 municipios (multimunicipal) en régimen ordinario:',
+        opts: ['Declara solo en uno', 'Declara ICA en cada municipio donde se causa el hecho generador según reglas de territorialidad', 'Solo donde tenga sede', 'Solo en Bogotá'],
+        correct: 1,
+        explanation: 'En régimen ordinario una empresa multimunicipal debe declarar ICA por cada municipio donde realice el hecho generador según las reglas de territorialidad de la Ley 14/1983 modificada por Ley 1819/2016. Cada municipio tiene su declaración y su periodicidad. En RST el ICA se consolida.'
+      },
+      {
+        q: 'La base gravable del ICA son:',
+        opts: ['Los activos', 'Los ingresos brutos del periodo, con las depuraciones especiales que admite el estatuto municipal (devoluciones, ingresos no operacionales en algunos municipios, etc.)', 'La utilidad', 'El patrimonio'],
+        correct: 1,
+        explanation: 'La base gravable del ICA son los ingresos brutos del bimestre/cuatrimestre/año (según periodicidad municipal), menos devoluciones, rebajas y descuentos, ingresos no constitutivos de actividad gravada, e ingresos correspondientes a actividades exentas/no sujetas. Cada municipio detalla las depuraciones aceptadas.'
+      },
+      {
+        q: 'En Bogotá, la periodicidad de declaración del ICA para los grandes contribuyentes es:',
+        opts: ['Anual', 'Bimestral (Decreto 411/2019 y normas distritales)', 'Mensual', 'Trimestral'],
+        correct: 1,
+        explanation: 'Bogotá tiene periodicidad bimestral para grandes contribuyentes y régimen común (Decreto Distrital 411/2019 y modificaciones). Otros sujetos tienen periodicidad anual. Cada distrito/municipio define su propia periodicidad. Cali, Medellín y otros varían.'
+      },
+      {
+        q: 'Las plataformas digitales y prestadores remotos están sujetas al ICA en Colombia:',
+        opts: ['No, son extranjeras', 'Sí, las leyes 1819/2016 y 2277/2022 con desarrollos distritales gravan los servicios prestados desde el exterior cuando hay consumidor en el municipio (jurisdicción)', 'Solo si tienen sucursal', 'Solo en Bogotá'],
+        correct: 1,
+        explanation: 'La Ley 1819/2016 y la Ley 2277/2022 incorporaron reglas para gravar servicios digitales prestados a consumidores en Colombia. A nivel municipal, distritos como Bogotá tienen estatutos que gravan plataformas digitales con consumidor en su jurisdicción. Es área en evolución.'
+      },
+      {
+        q: 'Las actividades exentas del ICA generalmente son:',
+        opts: ['Cualquier actividad lucrativa', 'Las definidas por la Constitución (gobierno, justicia, educación pública), por leyes especiales, y por cada estatuto municipal (algunas culturales, agropecuarias primarias, etc.)', 'Todas las profesionales', 'Las del sector salud sin excepción'],
+        correct: 1,
+        explanation: 'Las exenciones provienen de la Constitución (Art. 32 sobre bienes de uso público), leyes especiales (Ley 14/1983 que exonera actividades primarias agrícolas en algunos casos), y los acuerdos municipales que pueden conceder beneficios temporales. La aplicación es estricta y debe constar en norma vigente.'
+      },
+      {
+        q: 'La sanción por no presentar la declaración de ICA municipal se rige por:',
+        opts: ['El Estatuto Tributario nacional', 'El estatuto tributario de cada municipio, que generalmente replica el régimen sancionatorio nacional con algunos ajustes', 'Solo intereses', 'No hay sanción'],
+        correct: 1,
+        explanation: 'Cada municipio tiene su propio régimen sancionatorio en su estatuto tributario. Bogotá, Medellín, Cali tienen regímenes detallados que generalmente replican (con ajustes) el Estatuto Tributario nacional. El procedimiento (recursos, plazos) también es municipal.'
+      },
+      {
+        q: 'El régimen de avisos y tableros municipales:',
+        opts: ['Es independiente del ICA', 'Es un complemento del ICA: se cobra como % del ICA causado por contribuyentes que usan avisos en lugar visible (típicamente 15% del ICA)', 'Solo aplica a publicidad', 'Está derogado'],
+        correct: 1,
+        explanation: 'El impuesto de avisos y tableros se cobra junto con el ICA (Ley 84/1915 modificada). Es un % del ICA causado (típicamente 15%) y aplica a contribuyentes que utilicen avisos, tableros, vallas, en establecimiento o vehículos. En RST está incluido en el impuesto consolidado.'
+      },
+      {
+        q: 'Una empresa con CIIU 4711 (comercio al por menor en establecimientos no especializados) opera en Medellín. ¿Dónde encuentra su tarifa específica de ICA?',
+        opts: ['Estatuto Tributario nacional', 'Acuerdo Municipal de Medellín / Estatuto Tributario Municipal de Medellín, en la tabla de tarifas por CIIU', 'No tiene tarifa específica', 'Decreto 2650/1993'],
+        correct: 1,
+        explanation: 'Cada municipio tiene su Acuerdo Municipal o Estatuto Tributario Municipal donde aparece la tabla de tarifas por CIIU. Para Medellín se consulta en el portal Hacienda de Medellín. Las tarifas son distintas en cada ciudad, lo que vuelve esencial revisar el estatuto local específicamente.'
+      },
+      {
+        q: 'El ICA causado en un municipio donde el inscrito está en RST y ese municipio NO participa del Régimen Simple:',
+        opts: ['No se paga', 'Se debe declarar y pagar separadamente al municipio según su régimen', 'Se transfiere a otro municipio', 'Lo paga la DIAN'],
+        correct: 1,
+        explanation: 'Los municipios no participantes del RST deben recibir el ICA por declaración separada del contribuyente directamente con ellos, según su periodicidad y reglas. Esto representa un caso de doble cumplimiento que el contribuyente debe gestionar. La consulta de participantes está en portal DIAN actualizado.'
+      }
+    ],
+
+    /* ═══ NIIF para Contadores ═══ */
+    'niif': [
+      {
+        q: 'Las NIIF aplicables en Colombia se establecen principalmente en:',
+        opts: ['Solo el ET', 'Decreto 2420/2015 con sus modificatorios anuales (compendio de NIIF/PYMES/Régimen Simplificado adoptados)', 'Solo Decreto 2649/1993', 'Únicamente acuerdos de la JCC'],
+        correct: 1,
+        explanation: 'El Decreto 2420/2015 es el compendio normativo que adopta NIIF en Colombia. Sus anexos: Anexo 1 (NIIF Plenas para Grupo 1), Anexo 2 (NIIF para PYMES para Grupo 2), Anexo 3 (Régimen simplificado para Grupo 3). Se actualiza cada año con decretos modificatorios que incorporan los cambios IASB.'
+      },
+      {
+        q: '¿Cuál es la diferencia conceptual entre Grupo 1 y Grupo 2 NIIF?',
+        opts: ['Solo el tamaño de la empresa', 'Grupo 1 aplica NIIF Plenas (entidades de interés público, emisores de valores, cumplen criterios cuantitativos). Grupo 2 aplica NIIF para PYMES (las demás medianas y pequeñas)', 'Grupo 1 es para empresas pequeñas', 'Son lo mismo'],
+        correct: 1,
+        explanation: 'Grupo 1 (NIIF Plenas / IFRS Full) aplica a entidades de interés público, emisores de valores, y entidades con ciertos umbrales de tamaño. Grupo 2 (NIIF para PYMES / IFRS for SMEs) aplica a las demás medianas/pequeñas. Grupo 3 (régimen simplificado) a microempresas.'
+      },
+      {
+        q: 'La NIC 1 / Sec. 3 NIIF para PYMES regula:',
+        opts: ['Impuestos', 'Presentación de estados financieros: estructura, componentes, principios (negocio en marcha, devengo, materialidad, comparabilidad)', 'Inventarios', 'Activos fijos'],
+        correct: 1,
+        explanation: 'NIC 1 (NIIF Plenas) y Sec. 3 NIIF para PYMES establecen el marco general de presentación de EEFF: los 4 estados básicos + notas, principios subyacentes (negocio en marcha, devengo, materialidad, presentación razonable), y reglas mínimas de presentación.'
+      },
+      {
+        q: 'Los inventarios bajo NIC 2 / Sec. 13 NIIF para PYMES se miden:',
+        opts: ['Al costo de mercado', 'Al menor entre costo y valor neto realizable (VNR)', 'Al costo histórico solamente', 'A valor razonable siempre'],
+        correct: 1,
+        explanation: 'NIC 2 / Sec. 13 establece la medición al MENOR entre costo y valor neto realizable (VNR = precio estimado de venta − costos de terminación y venta). Cuando VNR < costo, se reconoce pérdida por deterioro. Esta es una diferencia importante con la regla fiscal del Art. 62 ET que es al costo.'
+      },
+      {
+        q: 'El impuesto diferido bajo NIC 12 / Sec. 29 NIIF para PYMES se reconoce sobre:',
+        opts: ['Diferencias permanentes', 'Diferencias temporarias (entre valor en libros y base fiscal), aplicando la tasa fiscal de reversión', 'La utilidad neta', 'Solo en empresas grandes'],
+        correct: 1,
+        explanation: 'NIC 12 / Sec. 29 reconoce impuesto diferido sobre diferencias temporarias. Diferencias permanentes NO generan impuesto diferido. La tasa aplicable es la que estará vigente cuando la diferencia se reverse. Genera DTA (activo) o DTL (pasivo) según el sentido de la diferencia.'
+      },
+      {
+        q: 'NIC 16 / Sec. 17 (Propiedad, planta y equipo) permite dos modelos de medición posterior:',
+        opts: ['Solo costo histórico', 'Modelo de costo y modelo de revaluación (valor razonable con cambios en ORI)', 'Solo valor razonable', 'A elección del auditor'],
+        correct: 1,
+        explanation: 'NIC 16 permite (1) modelo de costo: PP&E al costo menos depreciación y deterioro; (2) modelo de revaluación: valor razonable a la fecha de revaluación menos depreciación posterior y deterioro. El modelo escogido aplica a toda la clase de activos. NIIF para PYMES Sec. 17 limita más el modelo de revaluación.'
+      },
+      {
+        q: 'NIIF 15 / Sec. 23 reconoce ingresos cuando:',
+        opts: ['Se factura', 'Se transfiere control al cliente, siguiendo un modelo de 5 pasos', 'Se cobra el efectivo', 'A elección de la entidad'],
+        correct: 1,
+        explanation: 'NIIF 15 (modelo de 5 pasos: identificar contrato, identificar obligaciones, determinar precio, asignar precio a obligaciones, reconocer al satisfacer la obligación). Sec. 23 NIIF para PYMES tiene un modelo similar más simple. La transferencia de CONTROL es el momento clave, no la facturación ni el cobro.'
+      },
+      {
+        q: 'NIIF 16 (arrendamientos, vigente desde 2019) cambió el tratamiento contable:',
+        opts: ['No cambió nada', 'El arrendatario reconoce un activo por derecho de uso y un pasivo por la obligación de pagos de la mayoría de arrendamientos (operativos y financieros) en el balance', 'Solo aplica a arrendamientos financieros', 'Solo arrendamientos > $1.000 millones'],
+        correct: 1,
+        explanation: 'NIIF 16 (sustituye a NIC 17 para arrendatarios) elimina la distinción operativo/financiero para el arrendatario: prácticamente todos los arrendamientos se reconocen como derecho de uso (activo) y pasivo por arrendamiento. Excepciones: arrendamientos cortos (<12 meses) y de bajo valor. NIIF para PYMES Sec. 20 sigue con modelo dual.'
+      },
+      {
+        q: 'NIC 36 regula:',
+        opts: ['Inventarios', 'Deterioro del valor de los activos (cuándo y cómo reconocer pérdidas por deterioro)', 'Impuesto sobre la renta', 'Estados financieros'],
+        correct: 1,
+        explanation: 'NIC 36 establece cuándo hay indicios de deterioro, cómo calcular el importe recuperable (mayor entre valor razonable menos costos de venta y valor en uso), cómo reconocer la pérdida (al ERI generalmente) y cuándo reversar (en algunos casos). NIIF para PYMES Sec. 27 simplifica.'
+      },
+      {
+        q: 'NIC 37 / Sec. 21 regula las provisiones, pasivos contingentes y activos contingentes. ¿Cuándo se reconoce una provisión?',
+        opts: ['Cuando se quiere', 'Cuando hay obligación presente (legal o implícita) por hecho pasado, probable salida de recursos y estimación fiable del monto', 'Solo si supera $10 millones', 'Cuando hay litigio'],
+        correct: 1,
+        explanation: 'NIC 37 / Sec. 21: una provisión se reconoce SOLO si se cumplen las 3 condiciones: (1) obligación presente derivada de un hecho pasado, (2) salida probable de recursos económicos, (3) monto fiablemente estimable. Si falla alguna, no es provisión sino pasivo contingente (solo se revela) o no se reconoce.'
+      },
+      {
+        q: 'La hipótesis de negocio en marcha (NIC 1 / Sec. 3.8) significa que los EEFF se preparan asumiendo:',
+        opts: ['Que la empresa cerrará', 'Que la entidad continuará operando en el futuro previsible (al menos 12 meses desde la fecha de los EEFF), salvo que la gerencia tenga intención o necesidad de liquidarla o cesar operaciones', 'Que crecerá siempre', 'Que tendrá utilidades'],
+        correct: 1,
+        explanation: 'La hipótesis de negocio en marcha es fundamental. Si hay incertidumbre material sobre la capacidad de continuar, debe revelarse en notas. Si la entidad va a liquidarse, los EEFF se preparan con base de liquidación (valor neto realizable), no NIIF de negocio en marcha.'
+      },
+      {
+        q: 'NIIF 9 / Sec. 11 trata sobre:',
+        opts: ['Estados financieros', 'Instrumentos financieros (clasificación, medición, deterioro y baja en cuentas)', 'Inventarios', 'PP&E'],
+        correct: 1,
+        explanation: 'NIIF 9 (sustituye a NIC 39 para Grupos 1 desde 2018) regula instrumentos financieros: clasificación (costo amortizado / valor razonable con cambios en resultados / valor razonable con cambios en ORI), modelo de deterioro esperado (3 etapas), y baja en cuentas. NIIF para PYMES Sec. 11 y 12 son más simples.'
+      },
+      {
+        q: 'NIC 41 regula:',
+        opts: ['Construcciones', 'Activos biológicos y productos agrícolas: medición al valor razonable menos costos de venta (con excepciones)', 'Joint ventures', 'Marcas'],
+        correct: 1,
+        explanation: 'NIC 41 (activos biológicos: ganado, plantaciones, cultivos): medición al valor razonable menos costos de venta al final de cada periodo, con cambios reconocidos en el ERI. Excepción para plantas productoras (NIC 16) tras la modificación 2014. Importante en Colombia por el sector agropecuario.'
+      },
+      {
+        q: 'El concepto de "materialidad o importancia relativa" en NIIF significa:',
+        opts: ['Solo aplicar normas si el monto es grande', 'La información es material si su omisión o expresión inadecuada puede influir en las decisiones económicas de los usuarios. Es relativa al tamaño y naturaleza de la partida.', 'Aplica solo a empresas grandes', 'Es un valor fijo'],
+        correct: 1,
+        explanation: 'Materialidad (Marco Conceptual / NIC 1.7) es un concepto fundamental: una partida es material si su omisión o presentación errónea podría influir en las decisiones económicas de los usuarios. Permite no aplicar requisitos NIIF a información inmaterial, simplificando la preparación.'
+      },
+      {
+        q: 'Las estimaciones contables (NIC 8 / Sec. 10) se ajustan:',
+        opts: ['Retroactivamente siempre', 'Prospectivamente: el cambio afecta el periodo del cambio y los futuros, no se reexpresan estados anteriores. Distinto de la corrección de errores (que sí es retroactiva)', 'Solo al final del año', 'Nunca cambian'],
+        correct: 1,
+        explanation: 'NIC 8 / Sec. 10 distingue: (1) cambio de política contable: retroactivo, reexpresando EEFF comparativos; (2) cambio de estimación contable (vida útil, deterioro, provisiones): prospectivo, afecta solo periodo actual y futuros; (3) corrección de errores materiales: retroactiva. Es de los temas que más se equivocan en la práctica.'
+      }
+    ],
+    /* ═══ Devoluciones y compensaciones ═══ */
+    'devoluciones': [
+      { q: '¿Cuál es el término general que tiene la DIAN para devolver o compensar un saldo a favor?', opts: ['Quince (15) días', 'Cincuenta (50) días siguientes a la solicitud en debida forma', 'Treinta (30) días', 'Seis (6) meses'], correct: 1, explanation: 'El Art. 855 ET fija el término general en 50 días siguientes a la fecha de solicitud presentada en debida forma. Hay términos especiales más cortos (p. ej. con garantía).' },
+      { q: 'Si el contribuyente presenta garantía a favor de la Nación con la solicitud de devolución, el término de la DIAN se reduce a:', opts: ['10 días', 'Veinte (20) días', '30 días', 'No cambia'], correct: 1, explanation: 'El Art. 860 ET establece que con garantía idónea (bancaria o de compañía de seguros) la DIAN devuelve dentro de los 20 días siguientes.' },
+      { q: 'El saldo a favor que se quiere devolver debe haberse originado y solicitado dentro de:', opts: ['El mes siguiente', 'Los dos (2) años siguientes al vencimiento del plazo para declarar', 'Cinco (5) años', 'Sin límite de tiempo'], correct: 1, explanation: 'El Art. 854 ET exige que la solicitud se presente a más tardar dos años después del vencimiento del término para declarar.' },
+      { q: 'La diferencia entre devolución y compensación es:', opts: ['Son sinónimos', 'En la devolución la DIAN entrega el dinero; en la compensación el saldo a favor se imputa a otras deudas fiscales del contribuyente', 'La compensación solo aplica a IVA', 'La devolución solo aplica a renta'], correct: 1, explanation: 'Compensar (Art. 815 ET) es aplicar el saldo a favor a otras obligaciones fiscales; devolver (Art. 850 ET) es el reintegro efectivo del dinero al contribuyente.' },
+      { q: 'Cuando la DIAN encuentra inconsistencias, puede suspender el término y proferir:', opts: ['Liquidación oficial inmediata', 'Auto inadmisorio o requerimiento, y eventualmente investigación previa que suspende el término hasta 90 días (Art. 857-1 ET)', 'Cierre del establecimiento', 'Sanción de clausura'], correct: 1, explanation: 'El Art. 857-1 ET permite la investigación previa a la devolución, suspendiendo el término hasta por 90 días para verificar la procedencia del saldo.' },
+      { q: 'Un saldo a favor en IVA del productor de bienes exentos (Art. 477 ET) se solicita:', opts: ['No tiene derecho a devolución', 'Bimestralmente, por ser responsable con derecho a devolución de saldos a favor', 'Solo al final del año', 'Únicamente por compensación'], correct: 1, explanation: 'Los productores de bienes exentos del Art. 477 ET son responsables de IVA con periodo bimestral y derecho a solicitar la devolución del saldo a favor.' },
+      { q: 'El rechazo definitivo de una solicitud de devolución procede, entre otros, cuando:', opts: ['El contribuyente no contesta el teléfono', 'El saldo a favor ya fue objeto de devolución, compensación o imputación anterior (Art. 857 ET)', 'El contribuyente cambió de dirección', 'Han pasado 10 días'], correct: 1, explanation: 'El Art. 857 ET lista las causales de rechazo e inadmisión; entre ellas que el saldo ya se devolvió/compensó/imputó, o que se compensó o imputó previamente.' },
+      { q: 'Para solicitar devolución, el saldo a favor primero debe estar:', opts: ['Pagado en efectivo', 'Reflejado en una declaración tributaria presentada (y no imputado al periodo siguiente si se va a pedir)', 'Aprobado por un juez', 'Certificado por revisor fiscal siempre'], correct: 1, explanation: 'El saldo a favor nace de la declaración. Si se imputa al periodo siguiente ya no se puede pedir en devolución por ese periodo: son vías excluyentes.' },
+      { q: 'La devolución automática (Art. 855 par. 5 ET) aplica para contribuyentes que:', opts: ['Tengan cualquier saldo', 'No representen riesgo y cuyos proveedores en buena parte facturen electrónicamente, con porcentaje de soportes que cumplan requisitos', 'Sean personas naturales únicamente', 'Tengan más de 100 empleados'], correct: 1, explanation: 'La devolución automática exige bajo riesgo y un porcentaje alto de costos/gastos soportados en factura electrónica, permitiendo devolver en término reducido.' },
+      { q: 'Sobre las sumas devueltas en exceso o improcedentes, la DIAN puede exigir su reintegro más:', opts: ['Nada adicional', 'Intereses y la sanción por devolución improcedente (Art. 670 ET)', 'Solo una multa fija', 'El doble siempre'], correct: 1, explanation: 'El Art. 670 ET sanciona la devolución/compensación improcedente: reintegro de lo devuelto más intereses incrementados y sanción (10% o 20% según el caso).' },
+      { q: 'El término para que la DIAN devuelva empieza a contarse desde:', opts: ['La fecha de la declaración', 'La fecha de presentación de la solicitud en debida forma', 'El 1 de enero', 'La fecha de pago del impuesto'], correct: 1, explanation: 'El Art. 855 ET cuenta el término desde la solicitud presentada en debida forma; una solicitud incompleta no hace correr el término hasta subsanarse.' },
+      { q: 'La solicitud de devolución de IVA por exportaciones se sustenta en que la exportación está:', opts: ['Gravada al 19%', 'Exenta de IVA con derecho a devolución del IVA pagado en la adquisición de bienes y servicios (Art. 479 ET)', 'Excluida sin derecho', 'No declarada'], correct: 1, explanation: 'Las exportaciones son exentas (Art. 479 ET): el exportador no genera IVA pero recupera vía devolución el IVA descontable de sus compras.' },
+      { q: 'Si la DIAN no devuelve dentro del término legal, el contribuyente:', opts: ['Pierde el saldo', 'Tiene derecho a intereses corrientes y moratorios sobre la suma a devolver (Art. 863 y 864 ET)', 'Debe volver a solicitar', 'No puede reclamar'], correct: 1, explanation: 'Los Arts. 863-864 ET reconocen intereses a favor del contribuyente cuando la administración no devuelve oportunamente.' },
+      { q: 'La imputación del saldo a favor consiste en:', opts: ['Pedir el dinero', 'Arrastrar el saldo a favor a la declaración del periodo siguiente del mismo impuesto', 'Pagarlo a un tercero', 'Donarlo'], correct: 1, explanation: 'Imputar es llevar el saldo a favor como menor valor a pagar (o mayor saldo a favor) del periodo siguiente del mismo tributo; excluye pedir devolución por ese saldo.' },
+      { q: 'El proyecto de devolución/compensación lo resuelve la DIAN mediante:', opts: ['Una llamada', 'Acto administrativo (resolución) que ordena la devolución, compensación o el rechazo', 'Un correo informal', 'Silencio siempre'], correct: 1, explanation: 'La decisión se formaliza en resolución motivada susceptible de recursos; el silencio puede generar consecuencias a favor del contribuyente según el caso.' }
+    ],
+
+    /* ═══ Ingresos para terceros / mandato ═══ */
+    'ingresos-para-terceros': [
+      { q: 'En un contrato de mandato, ¿quién practica las retenciones de la operación principal?', opts: ['El mandante directamente', 'El mandatario, teniendo en cuenta la calidad del mandante (Art. 1.2.4.11 DUR 1625/2016)', 'El cliente final', 'Nadie'], correct: 1, explanation: 'El Art. 1.2.4.11 DUR 1625/2016 ordena que el mandatario practique las retenciones según la calidad del mandante, no la suya.' },
+      { q: 'El IVA generado sobre la operación principal del mandato pertenece a:', opts: ['El mandatario', 'El mandante; el mandatario solo lo recauda y se lo certifica', 'Se reparte 50/50', 'La DIAN directamente'], correct: 1, explanation: 'El IVA de la operación principal es del mandante. El mandatario solo declara el IVA sobre su comisión en su formulario 300.' },
+      { q: 'La base gravable de ICA del mandatario es:', opts: ['El total recaudado por cuenta del mandante', 'Únicamente su comisión / contraprestación por la gestión', 'El valor de la mercancía ajena', 'Cero, está exento'], correct: 1, explanation: 'El ICA grava la actividad propia: la base es la comisión del intermediario, no las sumas que recauda para terceros (doctrina y C. de E. Sent. 18350/2012).' },
+      { q: 'La cuenta contable típica para registrar el recaudo por cuenta del mandante es:', opts: ['4135 Ingresos propios', '2815 Ingresos recibidos para terceros', '1105 Caja propia', '5195 Gastos diversos'], correct: 1, explanation: 'El recaudo ajeno no es ingreso propio: se registra como pasivo a favor del mandante (cuenta 2815 / auxiliares de ingresos para terceros).' },
+      { q: 'En operaciones de mandato, la factura electrónica al cliente final la expide:', opts: ['El mandante', 'El mandatario, identificando que actúa por cuenta del mandante (D. 358/2020)', 'El cliente', 'No se factura'], correct: 1, explanation: 'El Art. 1.6.1.4.9 DUR (D. 358/2020) ordena que en todos los casos la factura la expida el mandatario.' },
+      { q: 'El formato de información exógena que reporta el mandatario por los ingresos recibidos para terceros es:', opts: ['Formato 1001', 'Formato 5247', 'Formato 1647', 'Formato 2516'], correct: 1, explanation: 'El mandatario reporta en el Formato 5247 los ingresos recibidos para terceros; el mandante reporta el valor total en sus formatos 1007/1001.' },
+      { q: 'Consignaciones en cuentas del intermediario sin contrato de mandato ni soporte pueden derivar en:', opts: ['Nada', 'Renta líquida gravable por presunción del Art. 755-3 ET', 'Devolución automática', 'Exención'], correct: 1, explanation: 'El Art. 755-3 ET presume renta (e IVA) sobre consignaciones no soportadas; el soporte documental del mandato es la defensa.' },
+      { q: 'La retención que el mandante practica al mandatario recae sobre:', opts: ['El total recaudado', 'La comisión u honorario del mandatario', 'El IVA del mandante', 'Las retenciones a terceros'], correct: 1, explanation: 'El mandante retiene al mandatario solo sobre la contraprestación (comisión/honorario), típicamente renta y, si aplica, IVA.' },
+      { q: 'Facturar como ingreso propio una operación de mandato (sin identificar al mandante) puede acarrear sanción por:', opts: ['Inexactitud únicamente', 'Expedir factura sin requisitos (Art. 652 ET)', 'Extemporaneidad', 'Ninguna'], correct: 1, explanation: 'No identificar la operación de mandato incumple requisitos de facturación: sanción del Art. 652 ET (1% de las operaciones con incumplimiento).' },
+      { q: 'Saldos antiguos sin movimiento ni soporte en la cuenta 2815 pueden ser tratados por la DIAN como:', opts: ['Ingreso diferido', 'Pasivos inexistentes adicionables a la renta con sanción por inexactitud (Art. 647 ET)', 'Patrimonio', 'Reserva legal'], correct: 1, explanation: 'Pasivos sin soporte se tratan como inexistentes (renta gravable) con sanción por inexactitud del Art. 647 ET.' },
+      { q: 'En el cruce DIAN, el valor total de la operación de mandato debe empatar entre:', opts: ['F5247 del mandatario y F1007 del mandante', 'F2516 y F110', 'F300 y F350', 'No se cruza'], correct: 0, explanation: 'El F5247 del mandatario y el F1007 del mandante deben coincidir al peso; una diferencia activa requerimiento automático.' },
+      { q: 'El IVA descontable de las compras hechas en cumplimiento del mandato:', opts: ['Lo aprovecha el mandatario', 'Lo certifica el mandatario y lo descuenta el mandante', 'Se pierde', 'Lo descuenta el cliente'], correct: 1, explanation: 'El mandatario certifica el IVA descontable de las compras del mandato para que sea el mandante quien lo descuente en su declaración.' },
+      { q: 'Cuando el "intermediario" compra y revende bajo riesgo propio (concesión distributiva):', opts: ['Sigue siendo mandato', 'El ingreso es propio y la base de ICA/renta es la venta total, no la diferencia', 'No declara', 'Solo declara IVA'], correct: 1, explanation: 'Si asume el riesgo de la mercancía, no hay mandato: el ingreso es propio y tributa sobre la venta total (excepción reconocida por el C. de E.).' },
+      { q: 'La sanción máxima por información exógena inconsistente puede llegar a:', opts: ['100 UVT', '7.500 UVT (Art. 651 ET)', '10 UVT', 'Sin tope'], correct: 1, explanation: 'El Art. 651 ET fija la sanción por no enviar o enviar con errores información, con tope de 7.500 UVT.' },
+      { q: 'La mejor práctica para soportar la operación de mandato es:', opts: ['Acuerdo verbal', 'Contrato de mandato + certificación periódica al mandante + conciliación mensual de la 2815 + exógena consistente', 'Solo la factura', 'Solo el extracto bancario'], correct: 1, explanation: 'La defensa documental se construye antes de la auditoría: contrato, certificaciones, conciliación bancaria y exógena coherente.' }
+    ],
+    /* ═══ Nómina ═══ */
+    'nomina': [
+      { q: 'El porcentaje de cesantías que se provisiona mensualmente sobre el salario base es:', opts: ['4,17%', '8,33% (un mes de salario por año)', '12%', '1%'], correct: 1, explanation: 'Las cesantías equivalen a 30 días de salario por año = 8,33% mensual del salario base de liquidación.' },
+      { q: 'Los intereses sobre cesantías equivalen a:', opts: ['8,33% anual', '12% anual sobre el saldo de cesantías (1% mensual)', '4,17%', '0,5%'], correct: 1, explanation: 'El empleador paga al trabajador el 12% anual de intereses sobre el valor de las cesantías (Ley 52/1975), a más tardar el 31 de enero.' },
+      { q: 'La provisión de prima de servicios es:', opts: ['4,17%', '8,33% (un mes de salario por año, pagado en dos contados)', '12%', '2%'], correct: 1, explanation: 'La prima de servicios es 30 días de salario por año (8,33% mensual), pagada mitad en junio y mitad en diciembre.' },
+      { q: 'El aporte a salud sobre el salario se distribuye así:', opts: ['Todo el trabajador', '12,5% total: 8,5% empleador y 4% trabajador', '16% total', 'Solo ARL'], correct: 1, explanation: 'El aporte a salud es 12,5%: 8,5% a cargo del empleador y 4% a cargo del trabajador. (El empleador puede estar exonerado del 8,5% por Art. 114-1 ET en ciertos casos).' },
+      { q: 'El aporte total a pensión es:', opts: ['12,5%', '16%: 12% empleador y 4% trabajador', '8,33%', '4%'], correct: 1, explanation: 'El aporte a pensión es 16% del IBC: 12% empleador y 4% trabajador (más fondo de solidaridad si el salario supera 4 SMMLV).' },
+      { q: 'La exoneración de aportes (salud 8,5%, SENA, ICBF) del Art. 114-1 ET aplica a:', opts: ['Todas las empresas siempre', 'Sociedades y personas naturales empleadoras, por trabajadores que devenguen menos de 10 SMMLV', 'Solo grandes contribuyentes', 'Nadie'], correct: 1, explanation: 'El Art. 114-1 ET exonera de SENA, ICBF y salud (8,5%) sobre los trabajadores que devenguen individualmente menos de 10 SMMLV, para sujetos del impuesto de renta que cumplen requisitos.' },
+      { q: 'Los parafiscales son:', opts: ['Solo SENA', 'SENA 2%, ICBF 3% y Caja de Compensación 4%', 'Salud y pensión', 'ARL'], correct: 1, explanation: 'Parafiscales: SENA 2%, ICBF 3% y Cajas de Compensación 4% (9% en total sobre la nómina), con la exoneración parcial del Art. 114-1 ET.' },
+      { q: 'El auxilio de transporte se paga a quienes devengan hasta:', opts: ['1 SMMLV', '2 SMMLV', '4 SMMLV', 'Sin límite'], correct: 1, explanation: 'El auxilio de transporte se reconoce a trabajadores que devengan hasta 2 SMMLV; se incluye como base de prestaciones sociales pero no de seguridad social.' },
+      { q: 'En el salario integral, el factor prestacional mínimo es:', opts: ['10%', '30% del salario integral', '50%', '8,33%'], correct: 1, explanation: 'El salario integral (≥10 SMMLV + 30%) incluye un factor prestacional mínimo del 30% que cubre prestaciones, recargos y beneficios, salvo vacaciones.' },
+      { q: 'La base de aportes a seguridad social (IBC) no puede ser inferior a:', opts: ['0,5 SMMLV', '1 SMMLV ni superior a 25 SMMLV', '2 SMMLV', 'No tiene límite'], correct: 1, explanation: 'El IBC tiene piso de 1 SMMLV y techo de 25 SMMLV. Para salario integral la base es el 70% del total.' },
+      { q: 'La provisión mensual de vacaciones corresponde a:', opts: ['8,33%', '4,17% (15 días hábiles por año)', '12%', '1%'], correct: 1, explanation: 'Las vacaciones son 15 días hábiles por año = 4,17% mensual. No son prestación social sino descanso remunerado, y no constituyen base de seguridad social.' },
+      { q: 'La dotación (calzado y vestido de labor) se entrega a quienes devengan hasta 2 SMMLV:', opts: ['Una vez al año', 'Tres veces al año (30 abril, 31 agosto, 20 diciembre)', 'Mensual', 'Nunca'], correct: 1, explanation: 'La dotación se entrega 3 veces al año a trabajadores que devengan hasta 2 SMMLV con más de 4 meses de servicio (Art. 230 CST).' },
+      { q: 'La entidad que fiscaliza el correcto pago de aportes a seguridad social es:', opts: ['La DIAN', 'La UGPP', 'El Ministerio de Hacienda', 'La Superfinanciera'], correct: 1, explanation: 'La UGPP (Unidad de Gestión Pensional y Parafiscales) fiscaliza la adecuada liquidación y pago de aportes al Sistema de Protección Social.' },
+      { q: 'La nómina electrónica ante la DIAN es soporte de:', opts: ['El IVA', 'Costos y deducciones por pagos laborales para el empleador', 'La prima', 'Las vacaciones'], correct: 1, explanation: 'El documento soporte de nómina electrónica respalda la deducibilidad de los pagos laborales en renta; sin él, la DIAN puede rechazar el costo/gasto.' },
+      { q: 'Un pago que NO constituye salario por acuerdo (Art. 128 CST) implica que:', opts: ['Igual paga todas las prestaciones', 'No se incluye en la base de prestaciones, pero existe tope (40%) para efectos de seguridad social (Art. 30 Ley 1393/2010)', 'Es ilegal', 'Solo aplica a directivos'], correct: 1, explanation: 'Los pagos no constitutivos de salario se excluyen de prestaciones, pero la Ley 1393/2010 limita su proporción para no erosionar la base de aportes (no pueden exceder el 40%).' }
+    ],
+
+    /* ═══ Derecho laboral ═══ */
+    'derecho-laboral': [
+      { q: 'El periodo de prueba en un contrato a término indefinido no puede exceder:', opts: ['1 mes', 'Dos (2) meses', '6 meses', '1 año'], correct: 1, explanation: 'El periodo de prueba máximo es de 2 meses (Art. 78 CST); en contratos a término fijo inferiores a 1 año no puede superar la quinta parte del término pactado, máximo 2 meses.' },
+      { q: 'Con la Ley 2101 de 2021, la jornada laboral máxima semanal se reduce gradualmente a:', opts: ['48 horas', '42 horas', '40 horas', '36 horas'], correct: 1, explanation: 'La Ley 2101/2021 reduce progresivamente la jornada de 48 a 42 horas semanales, sin disminución salarial.' },
+      { q: 'El recargo por trabajo nocturno (entre las 9:00 p.m. y 6:00 a.m.) es:', opts: ['25%', '35% sobre el valor ordinario', '75%', '100%'], correct: 1, explanation: 'El trabajo nocturno se remunera con recargo del 35% sobre el valor del trabajo ordinario diurno (Art. 168 CST).' },
+      { q: 'La hora extra diurna se paga con un recargo del:', opts: ['25% sobre el valor ordinario', '35%', '75%', '100%'], correct: 0, explanation: 'La hora extra diurna tiene recargo del 25%; la hora extra nocturna, 75% (Art. 168 CST).' },
+      { q: 'El trabajo en dominical o festivo se remunera con recargo del:', opts: ['35%', '75% sobre el salario ordinario en proporción a las horas laboradas', '100%', '25%'], correct: 1, explanation: 'El trabajo dominical/festivo tiene recargo del 75% (Art. 179 CST), además del descanso compensatorio o el pago según corresponda.' },
+      { q: 'La indemnización por despido sin justa causa en contrato a término indefinido (salario < 10 SMMLV) es:', opts: ['Un mes siempre', '30 días por el primer año y 20 días por cada año adicional (y proporcional)', '15 días por año', 'No hay indemnización'], correct: 1, explanation: 'Art. 64 CST: para salarios inferiores a 10 SMMLV, 30 días de salario por el primer año y 20 días por cada año subsiguiente; para ≥10 SMMLV, 20 y 15 días respectivamente.' },
+      { q: 'El contrato de obra o labor termina:', opts: ['Cada mes', 'Cuando se concluye la obra o labor contratada', 'A los 2 años máximo', 'Nunca'], correct: 1, explanation: 'El contrato por duración de obra o labor termina con la finalización de la obra; su terminación anticipada sin justa causa genera indemnización (lo que falte para terminar, mínimo 15 días).' },
+      { q: 'La estabilidad laboral reforzada protege, entre otros, a:', opts: ['Todos los trabajadores por igual', 'Mujeres en embarazo/lactancia, personas con discapacidad o en condición de debilidad manifiesta, y aforados sindicales', 'Solo a los directivos', 'A nadie'], correct: 1, explanation: 'La estabilidad reforzada (jurisprudencia constitucional y CST) exige permiso del inspector/juez para desvincular a sujetos de especial protección; el despido sin él es ineficaz.' },
+      { q: 'El contrato a término fijo debe constar:', opts: ['Verbalmente', 'Siempre por escrito', 'En video', 'No requiere forma'], correct: 1, explanation: 'El contrato a término fijo debe ser por escrito (Art. 46 CST); de lo contrario se entiende a término indefinido.' },
+      { q: 'La renovación de un contrato a término fijo inferior a un año:', opts: ['Es indefinida automáticamente', 'Puede prorrogarse hasta 3 veces por periodos iguales o inferiores; la 4ª renovación no puede ser inferior a un año', 'No se puede renovar', 'Máximo 5 años'], correct: 1, explanation: 'Art. 46 CST: los fijos inferiores a un año se prorrogan hasta por 3 periodos iguales o inferiores; a partir de la 4ª prórroga el término no puede ser inferior a un año.' },
+      { q: 'El preaviso para no prorrogar un contrato a término fijo es de:', opts: ['15 días', '30 días de anticipación al vencimiento', '60 días', 'No se requiere'], correct: 1, explanation: 'Para que un contrato a término fijo no se prorrogue, debe darse preaviso escrito con no menos de 30 días de anticipación (Art. 46 CST).' },
+      { q: 'La terminación del contrato por mutuo acuerdo:', opts: ['Genera indemnización siempre', 'Es una causa legal de terminación sin indemnización (Art. 61 CST)', 'Es ilegal', 'Requiere autorización judicial'], correct: 1, explanation: 'El mutuo consentimiento es causal legal de terminación (Art. 61 CST) y no genera indemnización; conviene documentarlo (acta de conciliación o acuerdo).' },
+      { q: 'El acoso laboral está regulado por:', opts: ['El Código Civil', 'La Ley 1010 de 2006', 'El Estatuto Tributario', 'La Ley 100'], correct: 1, explanation: 'La Ley 1010/2006 define y sanciona el acoso laboral y obliga a contar con comité de convivencia laboral.' },
+      { q: 'La liquidación definitiva de prestaciones al terminar el contrato incluye:', opts: ['Solo el último sueldo', 'Cesantías, intereses, prima proporcional, vacaciones proporcionales y salarios pendientes', 'Solo cesantías', 'Solo vacaciones'], correct: 1, explanation: 'La liquidación final comprende salarios pendientes, cesantías e intereses, prima y vacaciones proporcionales, más indemnizaciones si aplican.' },
+      { q: 'La sanción por no pago de salarios y prestaciones a la terminación (salario moratorio, Art. 65 CST) consiste en:', opts: ['Una multa fija', 'Un día de salario por cada día de retardo (con reglas según vigencia y cuantía)', 'Nada', 'El doble de la liquidación'], correct: 1, explanation: 'El Art. 65 CST establece la indemnización moratoria: un día de salario por cada día de retardo en el pago, con un régimen especial pasados 24 meses (intereses).' }
+    ],
+    /* ═══ Finanzas para no financieros ═══ */
+    'finanzas-no-financieros': [
+      { q: 'La ecuación contable fundamental es:', opts: ['Ingresos = Gastos', 'Activos = Pasivos + Patrimonio', 'Activo = Ingreso − Gasto', 'Caja = Utilidad'], correct: 1, explanation: 'Lo que la empresa tiene (activos) equivale a lo que debe (pasivos) más lo que es del dueño (patrimonio). Si no cuadra, hay un error contable.' },
+      { q: 'El Estado de Situación Financiera (ESF) muestra:', opts: ['La película de un periodo', 'La foto del negocio a una fecha: activos, pasivos y patrimonio', 'Solo la caja', 'Las ventas del mes'], correct: 1, explanation: 'El ESF (balance) es una fotografía a una fecha de corte; el ERI es la película de lo ocurrido en el periodo.' },
+      { q: 'La razón corriente se calcula como:', opts: ['Pasivo / Activo', 'Activo corriente / Pasivo corriente', 'Utilidad / Ventas', 'Caja / Deuda'], correct: 1, explanation: 'La razón corriente mide capacidad de pago de corto plazo; un valor ideal suele estar entre 1,5 y 2.' },
+      { q: 'La prueba ácida se diferencia de la razón corriente en que:', opts: ['Suma los inventarios', 'Excluye los inventarios del activo corriente', 'Solo usa la caja', 'Es lo mismo'], correct: 1, explanation: 'La prueba ácida = (Activo corriente − Inventarios) / Pasivo corriente; mide liquidez sin depender de vender inventario.' },
+      { q: 'Una empresa con utilidad contable alta pero caja negativa probablemente tiene la plata atrapada en:', opts: ['El patrimonio', 'Cartera por cobrar e inventarios crecientes', 'La reserva legal', 'Los gastos financieros'], correct: 1, explanation: 'Utilidad no es caja (principio de devengo): el efectivo puede estar en cuentas por cobrar no recaudadas o inventario sin rotar.' },
+      { q: 'El margen neto se calcula como:', opts: ['Utilidad bruta / Activos', 'Utilidad neta / Ingresos', 'Ingresos / Patrimonio', 'Costo / Ventas'], correct: 1, explanation: 'El margen neto indica cuánto queda de utilidad por cada peso vendido; debe compararse con el sector.' },
+      { q: 'El ROE (rentabilidad del patrimonio) mide:', opts: ['Cuánto rinde la deuda', 'Cuánto rinde la inversión de los dueños (Utilidad / Patrimonio)', 'La liquidez', 'El endeudamiento'], correct: 1, explanation: 'ROE = Utilidad neta / Patrimonio; se compara contra el costo de oportunidad del socio.' },
+      { q: 'El punto de equilibrio en unidades es:', opts: ['Ventas / Costos', 'Costos fijos / (Precio − Costo variable unitario)', 'Utilidad / Precio', 'Costos / Margen neto'], correct: 1, explanation: 'El PE es el nivel de ventas donde no se gana ni se pierde: costos fijos divididos por el margen de contribución unitario.' },
+      { q: 'La diferencia entre costo y gasto es:', opts: ['Son iguales', 'El costo está ligado directamente a generar el ingreso (afecta margen bruto); el gasto sostiene la operación (afecta margen operacional)', 'El gasto siempre es mayor', 'El costo no se deduce'], correct: 1, explanation: 'Costo: materia prima, mano de obra directa. Gasto: arriendo de oficina, contador. La clasificación cambia el margen bruto y las decisiones de precio.' },
+      { q: 'El principio de devengo significa que el ingreso se reconoce:', opts: ['Cuando entra la plata', 'Cuando se presta el servicio o se vende, aunque el pago sea posterior', 'Al final del año', 'Cuando lo decide el dueño'], correct: 1, explanation: 'Bajo devengo, el ingreso se registra cuando se gana (se entrega/presta), no cuando se cobra; la diferencia es cartera.' },
+      { q: 'Un endeudamiento total (Pasivos/Activos) superior al 70% generalmente indica:', opts: ['Empresa muy sana', 'Alto riesgo financiero', 'Exceso de caja', 'Nada relevante'], correct: 1, explanation: 'Un endeudamiento alto compromete la capacidad de pago; debe leerse junto al sector y al flujo de operación.' },
+      { q: 'El flujo de efectivo de operación negativo de forma sostenida indica:', opts: ['Buena señal', 'Que el negocio principal no genera caja: alerta seria', 'Que hay mucha utilidad', 'Que se pagaron dividendos'], correct: 1, explanation: 'El flujo de operación es el más importante: si el corazón del negocio no produce caja de forma sostenida, hay un problema estructural.' },
+      { q: 'Distribuir dividendos mirando solo la utilidad neta sin revisar el flujo de caja puede:', opts: ['Aumentar la utilidad', 'Descapitalizar y quebrar una empresa rentable en el papel', 'Bajar impuestos', 'No tener efecto'], correct: 1, explanation: 'La utilidad puede existir sin caja; repartir dividendos sin caja disponible es una causa clásica de iliquidez.' },
+      { q: 'El análisis horizontal compara:', opts: ['Cada cuenta como % del total', 'La variación de cada cuenta frente al periodo anterior', 'Solo el ESF', 'Indicadores entre empresas'], correct: 1, explanation: 'El horizontal mide la evolución (variación absoluta y %) entre periodos; el vertical mide composición proporcional.' },
+      { q: 'Lo que NO aparece en el balance pero es un riesgo clave es, por ejemplo:', opts: ['El capital social', 'La concentración de ingresos en un solo cliente', 'La utilidad del ejercicio', 'El total de activos'], correct: 1, explanation: 'Concentración de clientes, cartera por edades, contingencias legales y valor real de activos no se ven en el balance: hay que pedir las notas y anexos.' }
+    ],
+
+    /* ═══ Finanzas personales ═══ */
+    'finanzas': [
+      { q: 'Un fondo de emergencia recomendable equivale aproximadamente a:', opts: ['1 día de gastos', '3 a 6 meses de gastos esenciales', '10 años de ingresos', 'No es necesario'], correct: 1, explanation: 'El colchón de emergencia (3–6 meses de gastos esenciales) evita endeudarse ante imprevistos como desempleo o salud.' },
+      { q: 'El interés compuesto se caracteriza por:', opts: ['Generar intereses solo sobre el capital inicial', 'Generar intereses sobre el capital y sobre los intereses ya acumulados', 'Ser siempre negativo', 'Aplicar solo a deudas'], correct: 1, explanation: 'El interés compuesto reinvierte los intereses: el crecimiento se acelera con el tiempo. Es la fuerza central del ahorro a largo plazo.' },
+      { q: 'La regla de presupuesto 50/30/20 sugiere destinar:', opts: ['50% ahorro, 30% lujos, 20% necesidades', '50% necesidades, 30% gustos, 20% ahorro/deudas', 'Todo a deudas', '20% necesidades'], correct: 1, explanation: 'Una guía práctica: 50% gastos esenciales, 30% estilo de vida, 20% ahorro e inversión / abono a deudas.' },
+      { q: 'Una "deuda mala" típica es:', opts: ['Un crédito educativo a tasa baja', 'Consumo a tarjeta de crédito con altas tasas para gastos que no generan valor', 'Una hipoteca razonable', 'Un préstamo productivo'], correct: 1, explanation: 'La deuda mala financia consumo que no genera retorno y cobra tasas altas; la deuda buena financia activos que generan valor o ingresos.' },
+      { q: 'La diferencia entre tasa nominal y tasa efectiva es:', opts: ['Son iguales', 'La efectiva incorpora la capitalización de intereses en el periodo; refleja el costo/rendimiento real', 'La nominal siempre es mayor', 'La efectiva no existe'], correct: 1, explanation: 'La tasa efectiva anual considera cuántas veces se capitaliza el interés; es la que permite comparar productos en igualdad de condiciones.' },
+      { q: 'Diversificar una inversión busca principalmente:', opts: ['Maximizar el riesgo', 'Reducir el riesgo al no concentrar todo en un solo activo', 'Eliminar impuestos', 'Garantizar ganancias'], correct: 1, explanation: 'La diversificación reduce el riesgo no sistemático: si un activo cae, otros pueden compensar. No garantiza ganancias.' },
+      { q: 'El primer paso antes de invertir suele ser:', opts: ['Pedir un préstamo', 'Tener fondo de emergencia y deudas caras bajo control', 'Comprar criptomonedas', 'Gastar más'], correct: 1, explanation: 'Invertir con deudas de tarjeta al 30% E.A. mientras una inversión rinde 10% es perder dinero: primero el colchón y las deudas caras.' },
+      { q: 'La inflación afecta tus ahorros porque:', opts: ['Los aumenta', 'Reduce el poder adquisitivo del dinero guardado sin rendimiento', 'No tiene efecto', 'Solo afecta a las empresas'], correct: 1, explanation: 'Dinero quieto pierde valor real frente a la inflación; por eso el ahorro debe al menos buscar rendimientos que la superen.' },
+      { q: 'El "pago a ti mismo primero" significa:', opts: ['Gastar primero y ahorrar lo que sobre', 'Apartar el ahorro apenas recibes el ingreso, antes de gastar', 'No pagar deudas', 'Comprar lujos primero'], correct: 1, explanation: 'Automatizar el ahorro al inicio del mes evita que "lo que sobra" (casi siempre nada) sea la base del ahorro.' },
+      { q: 'Una tasa de ahorro saludable como punto de partida es al menos:', opts: ['0%', 'Alrededor del 10–20% del ingreso', '90%', 'Todo el ingreso'], correct: 1, explanation: 'Ahorrar 10–20% del ingreso de forma sostenida, combinado con interés compuesto, construye patrimonio en el largo plazo.' },
+      { q: 'El costo de oportunidad de una compra es:', opts: ['Su precio en la tienda', 'Lo que dejas de hacer con ese dinero (p. ej. invertirlo)', 'El IVA', 'Cero'], correct: 1, explanation: 'Cada peso gastado es un peso que no se invierte ni se destina a otra meta; pensar en costo de oportunidad mejora las decisiones.' },
+      { q: 'Antes de tomar un crédito de consumo conviene mirar:', opts: ['Solo la cuota mensual', 'La tasa efectiva anual y el costo total del crédito (no solo la cuota)', 'El color de la tarjeta', 'Nada'], correct: 1, explanation: 'Una cuota baja con plazo largo puede esconder un costo total enorme; siempre comparar tasa efectiva y total a pagar.' },
+      { q: 'Un seguro tiene sentido principalmente para:', opts: ['Ganar dinero rápido', 'Transferir riesgos de alto impacto y baja probabilidad que no podrías cubrir solo', 'Reemplazar el ahorro', 'Evadir impuestos'], correct: 1, explanation: 'El seguro protege ante eventos catastróficos (salud grave, incendio, accidente) cuyo costo arruinaría tus finanzas: es gestión de riesgo, no inversión.' },
+      { q: 'Para metas de corto plazo (menos de 1–2 años) lo razonable es:', opts: ['Invertir en acciones volátiles', 'Usar instrumentos de bajo riesgo y liquidez', 'Endeudarse', 'No planear'], correct: 1, explanation: 'El dinero que necesitas pronto no debe estar expuesto a volatilidad: la prioridad es preservar capital y liquidez, no maximizar retorno.' },
+      { q: 'El mayor aliado del inversionista de largo plazo es:', opts: ['El miedo', 'El tiempo, por el efecto del interés compuesto', 'El gasto impulsivo', 'La deuda'], correct: 1, explanation: 'Cuanto antes y más constante se invierte, más trabaja el interés compuesto; el tiempo en el mercado supera al intento de adivinar el momento.' }
+    ],
+    /* ═══ IA y Automatización para contadores ═══ */
+    'ia-automatizacion': [
+      { q: '¿Cuál es el reparto correcto de responsabilidad al usar IA en un trabajo contable?', opts: ['La IA asume la responsabilidad del resultado', 'La IA acelera tareas mecánicas; el juicio y la responsabilidad profesional siguen siendo del contador', 'Si la IA falla, responde el proveedor del modelo', 'No hay responsabilidad'], correct: 1, explanation: 'La fe pública y la responsabilidad (Ley 43/1990) son indelegables. La IA es asistente; el profesional que firma responde ante la JCC y la DIAN.' },
+      { q: 'Una "alucinación" de la IA en contexto contable es:', opts: ['Un error de conexión', 'Generar información que parece correcta pero es inventada (una norma, una cifra, un artículo inexistente)', 'Un cálculo lento', 'Un mensaje de error'], correct: 1, explanation: 'La IA puede producir citas normativas o cifras plausibles pero falsas; toda salida que vaya a un documento firmado debe verificarse contra la fuente.' },
+      { q: 'La "sicofancia" de un modelo de IA significa que:', opts: ['Es muy preciso', 'Tiende a darte la razón si afirmas algo, aunque sea incorrecto', 'Se niega a responder', 'Solo cita el ET'], correct: 1, explanation: 'Si afirmas "esto es deducible", el modelo puede confirmarlo aunque sea falso. Por eso no se le debe inducir la respuesta y se debe contrastar con norma.' },
+      { q: 'Antes de subir el balance de un cliente a una herramienta de IA, lo correcto es:', opts: ['Subirlo completo con cédulas y NIT', 'Anonimizar/retirar datos personales sensibles (Ley 1581/2012) y no compartir credenciales', 'Subir también las claves del MUISCA', 'No importa, es privado'], correct: 1, explanation: 'La Ley 1581/2012 protege datos personales; nombres, cédulas y credenciales no deben exponerse a servicios externos sin base legal y cuidado.' },
+      { q: 'El mejor uso de la IA en automatización contable es:', opts: ['Firmar declaraciones', 'Tareas repetitivas de alto volumen y baja ambigüedad (clasificar, conciliar, redactar borradores) con revisión humana', 'Decidir la materialidad de un hallazgo', 'Reemplazar al revisor fiscal'], correct: 1, explanation: 'La IA brilla en lo mecánico y masivo; el juicio (materialidad, escepticismo, decisiones) sigue siendo humano.' },
+      { q: 'Un buen prompt para una tarea contable debe incluir:', opts: ['Solo "ayúdame con esto"', 'Contexto (país, norma, sector), el dato exacto, el formato de salida y la instrucción de no inventar', 'Una sola palabra', 'Insultos para que se esfuerce'], correct: 1, explanation: 'La calidad de la salida depende del prompt: contexto colombiano, datos precisos, formato esperado y la regla explícita "si no tienes el dato, dilo, no lo estimes".' },
+      { q: 'Si la IA dice "no tengo ese dato" o "no estoy seguro", lo correcto es:', opts: ['Insistir hasta que invente una respuesta', 'Aceptarlo como respuesta válida y buscar el dato en la fuente oficial', 'Cambiar de modelo hasta que responda', 'Ignorar la tarea'], correct: 1, explanation: 'Forzar una respuesta induce alucinaciones. Que el modelo reconozca el límite es deseable: se complementa con la fuente real.' },
+      { q: 'En sesiones largas con IA puede ocurrir que:', opts: ['Mejora siempre', 'Pierda contexto y "olvide" datos iniciales; conviene reiniciar con el dato completo', 'Se vuelva infalible', 'Cambie la norma'], correct: 1, explanation: 'La pérdida de contexto en conversaciones largas es real; cuando se detecta inconsistencia, lo correcto es re-suministrar el dato completo.' },
+      { q: 'Para que la IA cite normativa colombiana confiable conviene:', opts: ['Confiar ciegamente', 'Pedir la cita y verificarla contra el ET / DUR / resolución; tratar la cita como hipótesis a comprobar', 'Asumir que el ET no cambia', 'No citar normas'], correct: 1, explanation: 'Una cita de IA es un punto de partida, no evidencia. Se confirma en la fuente antes de usarla en un concepto o declaración.' },
+      { q: 'Automatizar un proceso con IA sin documentar ni controlar el resultado genera el riesgo de:', opts: ['Mayor precisión', 'Errores sistemáticos a escala difíciles de detectar (un sesgo se replica en miles de registros)', 'Menos trabajo siempre sin costo', 'Cumplimiento automático'], correct: 1, explanation: 'Un error humano afecta un registro; un error automatizado mal validado se propaga a todo el lote. La validación de control es obligatoria.' },
+      { q: 'La IA es especialmente útil para detectar:', opts: ['Fraudes en soportes físicos', 'Inconsistencias matemáticas y patrones anómalos en grandes volúmenes de datos', 'La intención del cliente', 'La materialidad'], correct: 1, explanation: 'Sumas que no cuadran, naturalezas contrarias, variaciones atípicas: la IA las encuentra rápido. Validar soportes físicos y juzgar materialidad es humano.' },
+      { q: 'Frente a una recomendación de la IA que contradice tu conocimiento de la norma, debes:', opts: ['Aceptar la de la IA siempre', 'Detenerte, verificar la norma en la fuente y decidir con criterio profesional', 'Aceptar la tuya sin verificar', 'Eliminar el trabajo'], correct: 1, explanation: 'Ni la IA ni la memoria propia son infalibles: ante conflicto, gana la fuente normativa verificada, aplicada con juicio profesional.' },
+      { q: 'El valor diferencial del contador frente a la IA está en:', opts: ['Calcular más rápido', 'El juicio profesional, el escepticismo, la relación con el cliente y la responsabilidad legal', 'Memorizar el ET', 'Digitar facturas'], correct: 1, explanation: 'La IA hace lo mecánico; el profesional aporta criterio, escepticismo, contexto del cliente y asume la fe pública.' },
+      { q: 'Una práctica segura al integrar IA en el flujo de trabajo es:', opts: ['Eliminar toda revisión humana', 'Definir un punto de control humano antes de que cualquier salida llegue a un documento oficial', 'Confiar en el 100% de las salidas', 'No registrar qué se automatizó'], correct: 1, explanation: 'El "humano en el bucle" antes del entregable oficial es la salvaguarda básica; además conviene documentar qué se automatizó y cómo se valida.' },
+      { q: '"La IA me dijo que estaba bien" como defensa ante la DIAN o la JCC es:', opts: ['Una defensa válida', 'No es defensa: la responsabilidad del profesional que firma es indelegable', 'Suficiente con un pantallazo', 'Válida si es un modelo pago'], correct: 1, explanation: 'Ninguna herramienta traslada la responsabilidad. El uso de IA sin verificación no exime de sanciones (p. ej. Art. 660 ET / régimen disciplinario contable).' }
+    ],
+
+    /* ═══ Exógena con Claude ═══ */
+    'exogena-claude': [
+      { q: 'La norma marco que regula la información exógena del año gravable en curso es:', opts: ['El Código de Comercio', 'La resolución anual de la DIAN sobre información exógena (p. ej. Res. 162/2023 y modificatorias)', 'La Ley 100', 'El Decreto 2650/1993'], correct: 1, explanation: 'Cada año la DIAN expide una resolución que fija sujetos obligados, formatos, plazos y especificaciones técnicas de la exógena.' },
+      { q: 'Al usar Claude para preparar exógena, los datos sensibles del cliente:', opts: ['Se suben completos sin restricción', 'Deben manejarse con cuidado (Ley 1581/2012); no se comparten credenciales del MUISCA', 'Se publican', 'No importan'], correct: 1, explanation: 'La protección de datos aplica también con IA: minimizar exposición de datos personales y nunca compartir accesos al MUISCA.' },
+      { q: 'El formato que reporta pagos o abonos en cuenta (terceros — costos y gastos) es típicamente:', opts: ['Formato 1001', 'Formato 5247', 'Formato 2516', 'Formato 350'], correct: 0, explanation: 'El Formato 1001 reporta pagos o abonos en cuenta y retenciones practicadas; el 1007 reporta ingresos recibidos.' },
+      { q: 'El formato que reporta los ingresos recibidos por el informante es:', opts: ['Formato 1001', 'Formato 1007', 'Formato 1004', 'Formato 1647'], correct: 1, explanation: 'El Formato 1007 reporta los ingresos recibidos, identificando al tercero del que provienen.' },
+      { q: 'La salida de Claude para un formato exógeno debe, antes de cargarse:', opts: ['Subirse directo al MUISCA sin revisar', 'Verificarse contra el balance/auxiliares y la especificación técnica de la resolución', 'Firmarse sin leer', 'Enviarse al cliente sin control'], correct: 1, explanation: 'La IA acelera el armado pero el contador concilia contra la contabilidad y valida la estructura antes de presentar; el responsable es quien firma.' },
+      { q: 'Los formatos 1008 (cuentas por cobrar) y 1009 (cuentas por pagar) se reportan con corte a:', opts: ['Cualquier fecha', '31 de diciembre del año gravable', '30 de junio', 'La fecha de la solicitud'], correct: 1, explanation: 'Los saldos de CxC (1008) y CxP (1009) se informan con el saldo al cierre del 31 de diciembre del año gravable.' },
+      { q: 'Un cruce típico que hace la DIAN con la exógena es:', opts: ['Ninguno', 'Confrontar lo que un tercero reporta haberte pagado contra lo que tú declaras como ingreso', 'Solo revisar el RUT', 'Comparar logos'], correct: 1, explanation: 'La exógena permite cruces masivos: si un tercero te reporta un pago y tú no lo declaras como ingreso, salta una inconsistencia.' },
+      { q: 'Si Claude propone una clasificación de cuenta dudosa para un formato, lo correcto es:', opts: ['Aceptarla siempre', 'Validar la naturaleza de la cuenta y el concepto exigido por la resolución antes de aceptarla', 'Inventar un concepto', 'Dejar el campo vacío'], correct: 1, explanation: 'La clasificación errónea genera sanción por información (Art. 651 ET). La propuesta de la IA se valida contra el PUC y la especificación oficial.' },
+      { q: 'La sanción por no enviar exógena o enviarla con errores está en:', opts: ['Art. 580 ET', 'Art. 651 ET (hasta 7.500 UVT, con reducciones por corrección)', 'Art. 107 ET', 'No hay sanción'], correct: 1, explanation: 'El Art. 651 ET sanciona no informar, informar con errores o extemporáneamente; corregir antes de requerimiento reduce la sanción.' },
+      { q: 'Los topes que obligan a presentar exógena dependen principalmente de:', opts: ['El color del RUT', 'Ingresos, patrimonio y/o el tipo de operaciones del año, según la resolución vigente', 'El número de empleados solamente', 'La ciudad'], correct: 1, explanation: 'La resolución anual fija los umbrales (ingresos brutos, patrimonio) y supuestos que obligan a reportar; cambian cada año.' },
+      { q: 'Pedirle a Claude que "complete" datos faltantes de un formato es riesgoso porque:', opts: ['Es más rápido', 'Puede inventar valores plausibles; los datos exógenos deben salir de la contabilidad real', 'Mejora el cruce', 'La DIAN no revisa'], correct: 1, explanation: 'La exógena debe reflejar la contabilidad. Datos "rellenados" por IA no soportados generan inconsistencias y sanción.' },
+      { q: 'El uso correcto de Claude en exógena es como:', opts: ['Sustituto del contador', 'Acelerador de armado, depuración y detección de inconsistencias, con conciliación y firma del profesional', 'Firmante del reporte', 'Reemplazo del MUISCA'], correct: 1, explanation: 'Claude ayuda a estructurar, detectar errores y redactar; presentar y responder ante la DIAN es del contador.' },
+      { q: 'Una buena práctica antes de generar el XML final es:', opts: ['No revisar nada', 'Pasar el archivo por el prevalidador de la DIAN para detectar errores de estructura', 'Subirlo dos veces', 'Cambiar el NIT'], correct: 1, explanation: 'El prevalidador valida la estructura y reglas mínimas; corregir allí evita rechazos y sanciones por presentación con errores.' },
+      { q: 'Si el tercero no tiene identificación completa, en exógena se debe:', opts: ['Inventar un NIT', 'Aplicar las reglas de la resolución para terceros (p. ej. cuantías menores con tercero 222222222) sin falsear datos', 'Omitir el registro', 'Usar tu propio NIT'], correct: 1, explanation: 'La resolución prevé reglas para identificación de terceros y acumulados de menor cuantía; nunca se inventan identificaciones.' },
+      { q: 'Frente a una afirmación del cliente que contradice la resolución de exógena, el contador debe:', opts: ['Hacer lo que diga el cliente', 'Verificar la resolución vigente y actuar conforme a la norma, explicándolo', 'Preguntarle a otro cliente', 'Omitir el reporte'], correct: 1, explanation: 'La norma prima sobre la instrucción del cliente; el profesional verifica la resolución y documenta su criterio.' }
+    ],
+
+    /* ═══ Auditar EEFF con IA ═══ */
+    'auditar-eeff-ia': [
+      { q: 'El marco que rige la auditoría/aseguramiento en Colombia es:', opts: ['El PUC', 'Las Normas Internacionales de Auditoría (NIA), anexo del Decreto 2420/2015', 'La Ley 100', 'El Código Civil'], correct: 1, explanation: 'Las NIA exigen evidencia suficiente y apropiada; la IA acelera la evidencia analítica pero no sustituye el marco ni la responsabilidad.' },
+      { q: 'El formato ideal para pasar un balance a la IA en auditoría es:', opts: ['Un PDF escaneado', 'Una tabla estructurada (CSV/markdown) con código, nombre, saldos y comparativo', 'Una foto del monitor', 'Un audio'], correct: 1, explanation: 'El OCR de PDF escaneados tiene tasa de error inaceptable en cifras; la tabla estructurada permite verificaciones exactas.' },
+      { q: 'Una depreciación acumulada mayor al costo del activo es:', opts: ['Normal', 'Un hallazgo: activo sobre-depreciado, imposible contablemente', 'Una diferencia temporaria', 'Un ingreso'], correct: 1, explanation: 'La depreciación acumulada nunca puede exceder el costo del activo; es una inconsistencia que la IA detecta y el auditor debe investigar.' },
+      { q: 'El juicio sobre si un hallazgo es "material" corresponde a:', opts: ['La IA', 'El auditor (juicio profesional, no delegable)', 'El software', 'El cliente'], correct: 1, explanation: 'La materialidad es juicio profesional según NIA; la IA cuantifica y señala, pero la decisión de materialidad es del auditor.' },
+      { q: 'Para conciliación bancaria con IA en Colombia, la tolerancia de fechas razonable es:', opts: ['Fecha exacta obligatoria', '±2 días (una transferencia del viernes se refleja el lunes)', '±30 días', 'No importa la fecha'], correct: 1, explanation: 'Sin tolerancia de ±2 días la IA reporta como no conciliadas partidas que sí corresponden, generando ruido inútil.' },
+      { q: 'Antes de subir EEFF a la IA, los datos personales (cédulas, nombres) deben:', opts: ['Subirse íntegros', 'Retirarse o anonimizarse (Ley 1581/2012)', 'Publicarse', 'Enviarse al cliente'], correct: 1, explanation: 'La protección de datos aplica también en auditoría asistida por IA; lo sensible no se expone a servicios externos sin cuidado.' },
+      { q: 'Un patrimonio líquido negativo sin acta puede ser indicio de:', opts: ['Buena salud', 'Causal de disolución (Art. 457 C.Co.) que debe investigarse y revelarse', 'Un ingreso diferido', 'Nada'], correct: 1, explanation: 'El patrimonio negativo puede configurar causal de disolución; es un hallazgo que el auditor debe profundizar y, si aplica, revelar.' },
+      { q: 'Las citas normativas que produce la IA en un informe de auditoría deben:', opts: ['Usarse tal cual', 'Verificarse contra el ET/NIC antes de incluirlas en un documento firmado', 'Eliminarse siempre', 'Citarse sin número'], correct: 1, explanation: 'La IA puede equivocar el número de artículo o NIC; toda cita en un informe firmado se confirma en la fuente.' },
+      { q: 'El análisis horizontal con IA es valioso porque revela en segundos:', opts: ['El color del balance', 'Variaciones atípicas entre periodos (una cuenta que se triplicó sin explicación)', 'La intención del gerente', 'La materialidad'], correct: 1, explanation: 'La IA marca variaciones grandes (>25%) que orientan dónde pedir explicación; interpretarlas y decidir es del auditor.' },
+      { q: 'Pedirle a la IA que "no invente cuentas que no están en el archivo" sirve para:', opts: ['Hacerla más lenta', 'Evitar falsos positivos por cuentas plausibles pero inexistentes', 'Que cite más normas', 'Nada'], correct: 1, explanation: 'Sin esa instrucción la IA puede "completar" con cuentas verosímiles; la restricción reduce hallazgos falsos.' },
+      { q: 'Un IVA descontable muy superior al generado, sin nota crédito ni saldo a favor solicitado, es:', opts: ['Normal', 'Una señal a investigar (posible doble registro de descontable)', 'Una diferencia permanente', 'Un ingreso'], correct: 1, explanation: 'Es una inconsistencia típica que la IA detecta; el auditor pide el detalle y los soportes para concluir.' },
+      { q: 'Los benchmarks de sector que cita la IA deben tratarse como:', opts: ['Fuente oficial', 'Orientación aproximada; para dictamen se contrasta con fuentes reales (Supersociedades, gremios)', 'Verdad absoluta', 'Irrelevantes'], correct: 1, explanation: 'Los rangos sectoriales de la IA orientan, no sustituyen datos oficiales para un dictamen formal.' },
+      { q: 'El escepticismo profesional en auditoría implica que:', opts: ['Creer todo lo que dice el cliente', 'Mantener una actitud crítica; la IA no reemplaza el escepticismo del auditor', 'Confiar 100% en la IA', 'No revisar soportes'], correct: 1, explanation: 'Las NIA exigen escepticismo profesional: ni la afirmación del cliente ni la salida de la IA se aceptan sin evidencia.' },
+      { q: 'El flujo recomendado de auditoría asistida es:', opts: ['Pegar el balance y firmar', 'Preparar → cruces → vertical/horizontal → indicadores → hallazgos por sector → informe → verificar', 'Solo calcular indicadores', 'Pedir la opinión final a la IA'], correct: 1, explanation: 'El curso propone un flujo estructurado donde la IA acelera cada etapa y el auditor valida y concluye.' },
+      { q: '"La IA validó el balance" como sustento del dictamen es:', opts: ['Suficiente', 'Insuficiente: la responsabilidad del dictamen es del revisor fiscal/contador (Ley 43/1990)', 'Válido con captura de pantalla', 'Válido si es modelo pago'], correct: 1, explanation: 'La fe pública es indelegable; usar IA sin evidencia y verificación no exime de responsabilidad ante la JCC.' }
+    ],
+
+    /* ═══ Cargar exógena al MUISCA ═══ */
+    'cargar-exogena-muisca': [
+      { q: 'Antes de cargar la información al MUISCA, el archivo debe validarse con:', opts: ['Excel', 'El Prevalidador de la DIAN, que genera el XML', 'Un PDF', 'El correo'], correct: 1, explanation: 'El Prevalidador valida la estructura según la especificación y produce el archivo XML que se carga al MUISCA.' },
+      { q: 'El formato del archivo que se sube al MUISCA para exógena es:', opts: ['XLSX', 'XML conforme a la especificación técnica de la resolución', 'CSV', 'PDF'], correct: 1, explanation: 'El sistema recibe XML generado por el prevalidador o herramienta compatible; otros formatos son rechazados.' },
+      { q: 'Para firmar/presentar la información se requiere:', opts: ['Solo usuario y contraseña genéricos', 'El instrumento de firma electrónica (IFE) vigente del declarante o autorizado', 'Una firma manuscrita escaneada', 'Nada'], correct: 1, explanation: 'La presentación exige el instrumento de firma electrónica vigente; conviene renovarlo antes de la temporada para no fallar el último día.' },
+      { q: 'La cartilla vr.02 de 2026 que se usó como referencia corresponde al año gravable:', opts: ['2026', '2025 (se presenta en 2026)', '2024', '2027'], correct: 1, explanation: 'La información del año gravable 2025 se presenta durante 2026; la cartilla vr.02/2026 documenta ese proceso.' },
+      { q: 'Si el prevalidador arroja errores de estructura, lo correcto es:', opts: ['Subir igual al MUISCA', 'Corregir en el origen (datos/plantilla) y volver a prevalidar hasta que quede limpio', 'Cambiar el NIT', 'Esperar al otro año'], correct: 1, explanation: 'Un XML con errores será rechazado o generará sanción; se corrige el dato de origen y se reprocesa antes de cargar.' },
+      { q: 'El cargue de la información en el MUISCA se hace por:', opts: ['Correo a la DIAN', 'La opción de "Presentación de información por envío de archivos" en el portal transaccional', 'WhatsApp', 'Ventanilla física'], correct: 1, explanation: 'Se ingresa al portal transaccional, opción de envío de archivos, se carga el XML y se confirma la presentación.' },
+      { q: 'Tras cargar el archivo, el contribuyente debe conservar:', opts: ['Nada', 'El acuse/formulario que confirma la presentación exitosa', 'Solo el Excel', 'La cédula'], correct: 1, explanation: 'El acuse de recibo / formulario de presentación es la prueba de que se presentó en término; debe archivarse.' },
+      { q: 'Presentar la exógena después del plazo genera:', opts: ['Ningún efecto', 'Sanción por extemporaneidad/errores (Art. 651 ET), reducible si se corrige antes de requerimiento', 'Un premio', 'Bloqueo del RUT permanente'], correct: 1, explanation: 'El Art. 651 ET sanciona la presentación tardía o con errores; presentar/corregir voluntariamente reduce el valor.' },
+      { q: 'Un error común al generar el XML es:', opts: ['Usar el prevalidador', 'Conceptos o naturalezas de cuenta mal clasificados que el prevalidador no siempre detecta', 'Guardar el acuse', 'Renovar la firma'], correct: 1, explanation: 'El prevalidador valida estructura, no necesariamente la correcta clasificación contable; la conciliación previa con la contabilidad es clave.' },
+      { q: 'Si el portal del MUISCA falla el último día, la mejor práctica es:', opts: ['No presentar y olvidarlo', 'Haber presentado con anticipación; documentar la contingencia (capturas, radicados) si ocurre sobre el plazo', 'Inventar otro NIT', 'Enviar por correo'], correct: 1, explanation: 'La defensa ante fallas se basa en presentar con anticipación y, si hay caída sobre el plazo, documentar la contingencia para soportar el caso.' },
+      { q: 'El tercero con cuantías menores acumuladas se reporta, según la resolución, típicamente con:', opts: ['El NIT del contador', 'La identificación genérica prevista en la resolución (p. ej. 222222222) y razón social "cuantías menores"', 'Sin identificación', 'Un NIT inventado'], correct: 1, explanation: 'La resolución define cómo acumular y reportar terceros de menor cuantía; nunca se inventan identificaciones.' },
+      { q: 'Antes de generar el archivo conviene conciliar las cifras contra:', opts: ['La intuición', 'El balance, los auxiliares y, cuando aplica, la facturación electrónica', 'El año anterior solamente', 'Nada'], correct: 1, explanation: 'La exógena debe reflejar la contabilidad real; conciliarla evita inconsistencias en los cruces de la DIAN.' },
+      { q: 'La obligación de presentar y los formatos exigidos para el año gravable se consultan en:', opts: ['Un blog cualquiera', 'La resolución de exógena vigente para ese año gravable', 'El PUC', 'El Código de Comercio'], correct: 1, explanation: 'Los sujetos obligados, formatos y plazos cambian cada año; la fuente es la resolución DIAN del año gravable correspondiente.' },
+      { q: 'Si un dato no está en la contabilidad, al armar el archivo se debe:', opts: ['Inventarlo para que cuadre', 'Investigar y corregir el origen contable; no falsear el reporte', 'Dejarlo en cero sin analizar', 'Copiar el del año pasado'], correct: 1, explanation: 'Falsear datos para "cuadrar" el reporte genera inexactitud y sanción; el reporte debe reflejar la realidad contable depurada.' },
+      { q: 'La presentación se considera válida cuando:', opts: ['Se sube el Excel', 'El XML es aceptado por el sistema y se obtiene el acuse de presentación', 'Se imprime la cartilla', 'Se envía un correo'], correct: 1, explanation: 'Solo el XML aceptado con su acuse acredita la presentación; un archivo cargado con errores no equivale a presentado.' }
+    ],
+
+    /* ═══ IA sin Miedo — alfabetización en IA (público general) ═══ */
+    'ia-sin-miedo': [
+      { q: 'Herramientas como ChatGPT, Claude o Gemini son, en esencia:', opts: ['Robots físicos con conciencia', 'Modelos de lenguaje que predicen texto útil a partir de lo que les escribes', 'Buscadores de internet tradicionales', 'Hojas de cálculo avanzadas'], correct: 1, explanation: 'Son modelos de lenguaje: aprendieron de millones de textos a responder de forma útil. No son robots conscientes ni buscadores clásicos.' },
+      { q: '¿Qué se necesita para usar una IA conversacional básica?', opts: ['Saber programar', 'Saber inglés y matemáticas', 'Saber escribir en tu idioma, como un mensaje normal', 'Un computador muy potente'], correct: 2, explanation: 'La IA aprendió tu idioma; se le habla en español normal. No requiere programar ni equipos potentes para el uso básico.' },
+      { q: 'Sobre las versiones gratuitas de las IA principales:', opts: ['No existen', 'Existen y alcanzan de sobra para aprender y el uso diario', 'Solo duran un día', 'Requieren tarjeta de crédito'], correct: 1, explanation: 'ChatGPT, Claude, Gemini y otras tienen plan gratis suficiente para aprender. Conviene dominar el gratis antes de pagar.' },
+      { q: 'Para elegir herramienta, la pregunta correcta es:', opts: ['¿Cuál es la mejor del mundo?', '¿Cuál me sirve mejor para lo que necesito hoy?', '¿Cuál es la más cara?', '¿Cuál usa mi vecino?'], correct: 1, explanation: 'Casi todas hacen de todo; la decisión correcta depende de tu necesidad puntual, no de un ranking absoluto.' },
+      { q: 'Claude tiene tres modos. ¿Cuál usa la mayoría de personas?', opts: ['Claude Code', 'Claude Cowork', 'Claude.ai (el chat)', 'Ninguno, todos son técnicos'], correct: 2, explanation: 'El chat (claude.ai) cubre al 95% de los usuarios. Code y Cowork son para tareas técnicas o de varios pasos, más adelante.' },
+      { q: 'La ventaja principal de Gemini es:', opts: ['Ser la única con IA', 'Estar integrado donde ya trabajas (Gmail, Docs, Android)', 'No tener versión gratis', 'No necesitar cuenta'], correct: 1, explanation: 'Gemini brilla por su integración con el ecosistema Google; te ahorra copiar y pegar si ya vives en Gmail/Docs.' },
+      { q: 'Pedirle a la IA una fórmula de Excel es un ejemplo de:', opts: ['Algo imposible para no técnicos', 'Usar IA para una tarea técnica sin saber programar', 'Hackear la herramienta', 'Un uso prohibido'], correct: 1, explanation: 'Es justamente la idea del Módulo 6: tareas "técnicas" se resuelven pidiéndole bien, sin ser ingeniero.' },
+      { q: 'La receta R-C-T-F para preguntar bien significa:', opts: ['Rápido-Corto-Texto-Final', 'Rol-Contexto-Tarea-Formato', 'Repetir-Copiar-Traducir-Firmar', 'Revisar-Calcular-Total-Fin'], correct: 1, explanation: 'Rol, Contexto, Tarea y Formato: entre más de estos incluyas, mejor la respuesta. Es la única "técnica" necesaria.' },
+      { q: 'Si una respuesta no te gustó, lo mejor es:', opts: ['Empezar de cero en otra herramienta', 'Decirle qué cambiar (más corto, más simple, otro tono)', 'Rendirse', 'Aceptarla como está'], correct: 1, explanation: 'Conversar y corregir ("resúmelo", "más sencillo", "ejemplos colombianos") es donde está el verdadero poder de la IA.' },
+      { q: 'Que la IA "alucine" significa que:', opts: ['Se apaga sola', 'Puede inventar datos y presentarlos con total seguridad', 'Te ve', 'Funciona mejor de noche'], correct: 1, explanation: 'Predice lo que suena correcto; a veces inventa datos, fechas o leyes. Por eso todo dato importante se verifica en fuente oficial.' },
+      { q: '¿Qué NO debes pegarle a una IA?', opts: ['Una pregunta general', 'Un texto público', 'Cédulas, contraseñas, datos bancarios o información confidencial', 'Una receta de cocina'], correct: 2, explanation: 'Regla de privacidad: si no se lo dirías a un desconocido, no se lo des a la IA. Lo que pegas sale de tu control.' },
+      { q: 'Frente a un dato legal, médico o financiero que da la IA, debes:', opts: ['Usarlo tal cual', 'Verificarlo en una fuente oficial antes de usarlo', 'Publicarlo de inmediato', 'Asumir que siempre acierta'], correct: 1, explanation: 'La IA es un borrador brillante, no la última palabra. Los datos sensibles se confirman antes de actuar sobre ellos.' },
+      { q: 'En la relación contigo y la IA, ¿quién decide y responde?', opts: ['La IA', 'El fabricante', 'Tú: ella propone, tú decides y firmas', 'Nadie'], correct: 2, explanation: 'La IA propone; la decisión, la firma y la responsabilidad siguen siendo tuyas. Ese criterio es lo que te hace valioso.' },
+      { q: 'El error que más caro cuesta al usar IA es:', opts: ['Hacerle muchas preguntas', 'Copiar y pegar su respuesta sin leerla ni verificarla', 'Usar la versión gratis', 'Pedirle ejemplos'], correct: 1, explanation: 'Han ocurrido citas legales y cifras inventadas por copiar sin revisar. La IA prediligencia; tú revisas, siempre.' },
+      { q: 'La mejor forma de perderle el miedo a la IA es:', opts: ['Leer mucho sobre ella sin tocarla', 'Esperar a ser experto', 'Usarla un poco todos los días en tareas reales', 'Evitarla hasta que sea obligatoria'], correct: 2, explanation: 'La fluidez se construye con práctica corta y constante (el plan de 30/60 días). El miedo se va usándola, no leyendo sobre ella.' },
+      { q: 'Para usar IA en Excel sin pagar ningún complemento, el método universal es:', opts: ['Es imposible sin complemento', 'Copiar los datos, pedirle la fórmula a la IA y pegar la respuesta de vuelta', 'Reinstalar Office', 'Solo funciona con Copilot'], correct: 1, explanation: 'El camino universal y gratis: copiar datos → pedir fórmula/macro a Claude o ChatGPT → pegar de vuelta. No requiere ningún complemento.' },
+      { q: 'Microsoft 365 Copilot dentro de Word/Excel/PowerPoint es:', opts: ['Gratis para todos', 'Un complemento de pago que se suma a la suscripción Microsoft 365', 'Parte de Windows', 'Un virus'], correct: 1, explanation: 'Copilot integrado en Office es una licencia de pago adicional a Microsoft 365; a veces la activa la empresa. El método universal (copiar/pegar a una IA) es la alternativa gratis.' },
+      { q: 'En Google Sheets, ¿por dónde se abre Google Apps Script para automatizar?', opts: ['Archivo → Imprimir', 'Extensiones → Apps Script', 'Insertar → Imagen', 'No se puede'], correct: 1, explanation: 'Menú Extensiones → Apps Script abre el editor. No necesitas escribir el código: se lo pides a la IA, lo pegas, autorizas y ejecutas.' },
+      { q: 'La forma más sencilla de publicar gratis tu página (index.html) es:', opts: ['Comprar un servidor caro', 'Arrastrar la carpeta a un servicio de despliegue gratuito tipo Netlify Drop', 'Enviarla por correo', 'No se puede publicar gratis'], correct: 1, explanation: 'Servicios como Netlify Drop o GitHub Pages publican gratis: arrastras la carpeta con el index.html y obtienes una dirección pública en segundos/minutos.' },
+      { q: 'Una "app de una sola página" que hace cálculos es, en esencia:', opts: ['Una app que solo está en Play Store', 'Una página web (un index.html) con campos y botones que calculan', 'Un documento de Word', 'Imposible sin ser ingeniero'], correct: 1, explanation: 'Un único index.html con HTML+JS, generado por la IA, ya es una app útil que abres en el navegador y publicas igual que una web.' },
+      { q: 'Al pedirle a la IA que corrija un texto, la instrucción clave para no perder tu estilo es:', opts: ['Que lo reescriba todo libremente', 'Pedir "corrige sin cambiar el sentido ni mi voz"', 'No darle contexto', 'Pedir que lo haga más largo'], correct: 1, explanation: 'Sin esa instrucción la IA puede "mejorarlo" tanto que cambia el sentido o tu voz. Tú mandas; la IA pule.' },
+      { q: 'Al crear un logo con IA, lo más recomendable con el texto/nombre es:', opts: ['Dejar que la IA escriba el nombre dentro del logo', 'Pedir solo el ícono sin texto y agregar el nombre tú después', 'No usar nombre', 'Escribirlo a mano sobre papel'], correct: 1, explanation: 'La IA aún escribe mal letras dentro de imágenes; conviene pedir el símbolo sin texto y poner el nombre después (Canva, PowerPoint o Ideogram).' },
+      { q: 'Para que un logo hecho con IA quede usable sobre cualquier fondo conviene:', opts: ['Pedirlo con fondo blanco siempre', 'Pedirlo con fondo transparente (PNG) o quitarle el fondo después', 'Imprimirlo y escanearlo', 'No se puede'], correct: 1, explanation: 'Un logo con fondo transparente se puede poner sobre cualquier color o foto; se pide explícito o se le quita el fondo con una herramienta gratuita.' },
+      { q: 'La mentalidad correcta sobre la IA es:', opts: ['Es solo un chatbot que responde preguntas', 'Es un constructor: ayuda a crear páginas y aplicaciones reales, no solo a responder', 'Solo sirve para redactar', 'Reemplaza tu criterio'], correct: 1, explanation: 'El salto de valor es pasar de "le pregunto y copio" a "me construye una herramienta y la publico". La IA construye, no solo conversa.' },
+      { q: 'En el reto de la app de nómina, ¿de dónde deben salir los porcentajes de ley?', opts: ['De lo que la IA recuerde', 'Tú los verificas en fuente oficial y se los das; la app es referencial', 'No importan', 'Se inventan'], correct: 1, explanation: 'Las reglas de nómina cambian por ley/año; la IA puede usar valores desactualizados. Tú aportas los vigentes verificados y tratas la app como referencial.' },
+      { q: '"Preparar tus impuestos con IA" significa correctamente:', opts: ['Que la IA llene y presente tu declaración sola', 'Usar IA para entender, organizar soportes y preparar preguntas; verificar cifras y presentar con herramienta validada o profesional', 'No declarar', 'Copiar cifras de la IA a la DIAN'], correct: 1, explanation: 'La IA prepara y enseña; el diligenciamiento exacto va con herramienta validada o profesional, y tú verificas. Nunca se presenta una cifra de IA sin revisar.' }
+    ]
+  };
+
+  window.exoQuizBanks = BANKS;
+})();
