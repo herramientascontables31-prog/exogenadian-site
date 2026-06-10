@@ -414,9 +414,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
     </div>
     <div class="f210-tabs" id="f210Tabs">
       <button class="f210-tab active" data-tab="t210" onclick="cambiarTabF210('t210')">&#128203; Formulario 210</button>
-      <button class="f210-tab" data-tab="texogena" onclick="cambiarTabF210('texogena')">&#128229; Exógena</button>
-      <button class="f210-tab" data-tab="trentas" onclick="cambiarTabF210('trentas')">&#128188; Rentas <span class="tab-dot"></span></button>
-      <button class="f210-tab" data-tab="tpatrimonio" onclick="cambiarTabF210('tpatrimonio')">&#129534; Deducciones y patrimonio</button>
+      <button class="f210-tab" data-tab="texogena" onclick="cambiarTabF210('texogena')">&#128229; Reconciliación</button>
+      <button class="f210-tab" data-tab="trentas" onclick="cambiarTabF210('trentas')">&#128188; Rentas por cédula <span class="tab-dot"></span></button>
+      <button class="f210-tab" data-tab="tpatrimonio" onclick="cambiarTabF210('tpatrimonio')">&#129534; Declarante y patrimonio</button>
       <button class="f210-tab" data-tab="trevision" onclick="cambiarTabF210('trevision')">&#9878;&#65039; Revisión y descarga</button>
     </div>
     <div class="express-grid">
@@ -697,7 +697,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
               <li><em>Si pensión + sueldo:</em> verificar que ambas se declaren en cédulas distintas (consolidan en c111 vía Art. 331)</li>
             </ul>
           </details>
-          <div style="font-size:.82rem;color:var(--muted)">Si recibió pensión durante el año, expanda esta sección. Auto-expandirá si exógena reporta concepto de pensión.</div>
+          <div class="field-grid">
+            <div class="field"><label>Ingresos brutos por pensiones <span class="hint">(c99)</span></label><input id="pensIngBruto" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
+            <div class="field"><label>Aportes a salud sobre la pensión (INCRNGO) <span class="hint">(c100)</span></label><input id="pensIncrngo" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
+          </div>
+          <div style="font-size:.74rem;color:var(--muted);margin-top:6px">El motor aplica la exención del Art. 206 num. 5 (1.000 UVT/mes). La parte exenta y la gravable (c103) se calculan solas.</div>
         </div>
         <div class="card" id="cardDividendos" data-expandible="true" data-expanded="false">
           <div class="section-title"><span class="num">10</span> Cédula de dividendos y participaciones <span class="hint" style="font-weight:400;color:var(--muted);font-size:.78rem">(opcional)</span></div>
@@ -716,7 +720,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
             </ul>
             <div class="nota">⚠ La distinción entre gravados (c108) y no gravados (c107) es crítica: c108 NO consolida a c111, tributa al 35% Art. 240 + Art. 242-1 separadamente.</div>
           </details>
-          <div style="font-size:.82rem;color:var(--muted)">Si recibió dividendos durante el año (concepto 5010 / 5011 en exógena), expanda esta sección.</div>
+          <div class="field-grid">
+            <div class="field"><label>Dividendos 2016 y anteriores <span class="hint">(c104)</span></label><input id="divAnt2016" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
+            <div class="field"><label>2017+ NO gravados <span class="hint">(c107 · Art. 49 num. 3)</span></label><input id="divNoGrav2017" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
+            <div class="field"><label>2017+ gravados <span class="hint">(c108 · Art. 49 par. 2 · 35%)</span></label><input id="divGrav2017" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
+            <div class="field"><label>Dividendos del exterior <span class="hint">(c109)</span></label><input id="divExterior" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
+          </div>
+          <div style="font-size:.74rem;color:#92400E;background:#FFFBEB;padding:6px 9px;border-radius:6px;margin-top:6px">⚠ Los NO gravados (c107) consolidan con las demás cédulas (Art. 331). Los gravados (c108) tributan aparte al 35%. Distínguelos con la certificación de la sociedad.</div>
         </div>
         <div class="card" id="cardGO" data-expandible="true" data-expanded="false">
           <div class="section-title"><span class="num">11</span> Ganancias ocasionales <span class="hint" style="font-weight:400;color:var(--muted);font-size:.78rem">(opcional)</span></div>
@@ -731,7 +741,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
               <li><em>Si premios / loterías:</em> verificar que la <strong>retención del pagador</strong> esté correcta (15-20% según evento)</li>
             </ul>
           </details>
-          <div style="font-size:.82rem;color:var(--muted)">Venta de activos fijos, herencias, premios, loterías, etc.</div>
+          <div class="field-grid">
+            <div class="field"><label>Ingresos por ganancias ocasionales <span class="hint">(c112 · venta activos &gt;2 años, herencias)</span></label><input id="goIngresos" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
+            <div class="field"><label>Costos / costo fiscal <span class="hint">(c113)</span></label><input id="goCostos" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
+            <div class="field"><label>GO no gravadas y exentas <span class="hint">(c114 · ej. vivienda 7.500 UVT)</span></label><input id="goExentas" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
+            <div class="field"><label>Loterías, rifas y apuestas <span class="hint">(tarifa 20% Art. 317)</span></label><input id="goLoterias" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
+          </div>
+          <div style="font-size:.74rem;color:var(--muted);margin-top:6px">GO gravable (c115) = ingresos − costos − exentas. Tributa al 15% (20% loterías). Para activos de menos de 2 años, no es GO: va a renta no laboral.</div>
         </div>
         <div class="card" id="cardLiquidacion" style="text-align:center;background:linear-gradient(135deg,#ECFDF5 0%,#D1FAE5 100%);border:1px solid var(--green2)">
           <div class="section-title" style="justify-content:center;margin-bottom:14px"><span class="num">12</span> Liquidación final y descarga</div>
@@ -1501,10 +1517,10 @@ var CEDULAS_OPCIONES = [
   { value: 'incrngo_nolaboral',    label: 'No laborales (INCRNGO — daño emergente Art. 45 ET)', implementada: true, inputId: 'nlIncrngo' },
   { value: 'deduccion_avc',        label: 'Deducción AVC + AFC',              implementada: true,  inputId: 'dedAvcAfc' },
   { value: 'deduccion_vivienda',   label: 'Deducción vivienda',               implementada: true,  inputId: 'dedVivienda' },
-  { value: 'pensiones',            label: 'Pensiones (card 9 — pendiente)',   implementada: false },
-  { value: 'dividendos_no_grav',   label: 'Dividendos no gravados (card 10)', implementada: false },
-  { value: 'dividendos_grav',      label: 'Dividendos gravados (card 10)',    implementada: false },
-  { value: 'gananciasOcasionales', label: 'Ganancias ocasionales (card 11)',  implementada: false },
+  { value: 'pensiones',            label: 'Pensiones',                        implementada: true,  inputId: 'pensIngBruto' },
+  { value: 'dividendos_no_grav',   label: 'Dividendos no gravados (2017+)',   implementada: true,  inputId: 'divNoGrav2017' },
+  { value: 'dividendos_grav',      label: 'Dividendos gravados (2017+)',      implementada: true,  inputId: 'divGrav2017' },
+  { value: 'gananciasOcasionales', label: 'Ganancias ocasionales',           implementada: true,  inputId: 'goIngresos' },
   { value: 'informativo',          label: 'Informativo (consignaciones — no va al 210)', implementada: true },
   { value: 'excluir',              label: '— Excluir de la declaración —',    implementada: true }
 ];
@@ -2239,9 +2255,22 @@ function construirEstado(){
       dependientesArt336Numero: parseInt(document.getElementById('depArt336Num').value) || 0,
       facturaElectronica1Pct: v('ded1PctFE')
     },
-    cedulaPensiones: { ingresosBrutos: 0, incrngo: 0 },
-    cedulaDividendos: {},
-    gananciasOcasionales: {},
+    cedulaPensiones: {
+      ingresosBrutos: v('pensIngBruto'),
+      incrngo: v('pensIncrngo')
+    },
+    cedulaDividendos: {
+      anteriores2016: v('divAnt2016'),
+      noGravados2017: v('divNoGrav2017'),
+      gravados2017: v('divGrav2017'),
+      exterior: v('divExterior')
+    },
+    gananciasOcasionales: {
+      ingresos: v('goIngresos'),
+      costos: v('goCostos'),
+      rentasExentas: v('goExentas'),
+      loterias: v('goLoterias')
+    },
     liquidacion: {
       retencionesAno: v('retenciones'),
       descuentos: 0
@@ -2538,6 +2567,8 @@ function guardarBorrador(silencioso){
     'honIngBruto','honIncrngo','honCostos',
     'capIngBruto','capIncrngo','capCostos','capGMFTotal',
     'nlIngBruto','nlIncrngo','nlCostos',
+    'pensIngBruto','pensIncrngo','divAnt2016','divNoGrav2017','divGrav2017','divExterior',
+    'goIngresos','goCostos','goExentas','goLoterias',
     'dedSalud','depArt387Num','dedVivienda','dedViviendaImputarA',
     'dedAvcAfc','dedAvcAfcImputarA','depArt336Num','ded1PctFE',
     'patBruto','patDeudas','patLiqAnt','prevDecl',
@@ -2871,10 +2902,10 @@ function toggleReplica210(){
 // No se mueve el HTML: solo se muestra/oculta cada card según la pestaña activa
 // (con .tab-off, que respeta la lógica de .hidden propia de cada card).
 var TABS_F210 = {
-  t210:        ['cardReplica210'],
-  texogena:    ['cardAnio', 'cardExogena', 'cardReconciliacion', 'cardCertificado'],
+  t210:        ['cardAnio', 'cardExogena', 'cardReplica210'],
+  texogena:    ['cardReconciliacion', 'cardCertificado'],
   trentas:     ['cardCedulaGeneral', 'cardPensiones', 'cardDividendos', 'cardGO'],
-  tpatrimonio: ['cardDeclarante', 'cardF160', 'cardPatrimonio', 'cardReajusteFiscal', 'cardComparativoAGAnterior', 'cardPagosPrevios'],
+  tpatrimonio: ['cardDeclarante', 'cardComparativoAGAnterior', 'cardPatrimonio', 'cardReajusteFiscal', 'cardF160', 'cardPagosPrevios'],
   trevision:   ['cardSugerida', 'cardLiquidacion']
 };
 function cambiarTabF210(tab){
@@ -2902,6 +2933,9 @@ var CASILLA_INPUT_210 = {
   43:'honIngBruto', 44:'honIncrngo', 45:'honCostos',
   58:'capIngBruto', 59:'capIncrngo', 60:'capCostos',
   74:'nlIngBruto', 76:'nlIncrngo', 77:'nlCostos',
+  99:'pensIngBruto', 100:'pensIncrngo',
+  104:'divAnt2016', 107:'divNoGrav2017', 108:'divGrav2017', 109:'divExterior',
+  112:'goIngresos', 113:'goCostos', 114:'goExentas',
   28:'ded1PctFE', 131:'saldoFavorAnt', 132:'retenciones'
 };
 function replica210Edit(el){
