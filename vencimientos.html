@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es-CO">
 <head>
-<script src="shared/cookie-consent.js?v=9fc53d44"></script>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
@@ -349,9 +349,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--f50);color:var(--f900);mi
 </script></head>
 <body>
 <div id="nav-container"></div>
-<script defer src="shared/pro.js?v=994665f5"></script>
-<script defer src="shared/toast.js?v=825749bc"></script>
-<script defer src="shared/nav.js?v=6b392fe3"></script>
+<script defer src="shared/pro.js?v=848fbf16"></script>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
+<script defer src="shared/nav.js?v=0dbe1c46"></script>
 <script defer src="shared/pro-banner.js?v=a5944c54"></script>
 <div class="container">
 <div class="header">
@@ -443,6 +443,7 @@ updateOficinaCta();
         <div class="ica-opt" data-ica="bog" onclick="setIca(this)">Bogotá</div>
         <div class="ica-opt" data-ica="cali" onclick="setIca(this)">Cali</div>
         <div class="ica-opt" data-ica="ctg" onclick="setIca(this)">Cartagena</div>
+        <div class="ica-opt" data-ica="vup" onclick="setIca(this)">Valledupar</div>
       </div>
     </div>
   </div>
@@ -566,6 +567,7 @@ updateOficinaCta();
             <div class="ica-opt" data-ica="bog" onclick="setEditIca(this)">Bogotá</div>
             <div class="ica-opt" data-ica="cali" onclick="setEditIca(this)">Cali</div>
             <div class="ica-opt" data-ica="ctg" onclick="setEditIca(this)">Cartagena</div>
+            <div class="ica-opt" data-ica="vup" onclick="setEditIca(this)">Valledupar</div>
           </div>
         </div>
       </div>
@@ -739,6 +741,13 @@ var ICA_CALI = [
 // 40% de 2026, vence 29-may-2026, fecha única). Lo bimestral es ReteICA / pago voluntario.
 var ICA_CTG_ANUAL = '2026-05-29';
 var RETEICA_CTG   = ['2026-03-26','2026-05-27','2026-07-29','2026-09-24','2026-11-26','2027-01-28'];
+// VALLEDUPAR — Decreto 1244 del 31-dic-2025. Consolidada anual AG2025 (27-feb) + ICA
+// bimestral fechas ÚNICAS (régimen común y GC; el preferencial paga semestral, no
+// modelado) + ReteICA MENSUAL fechas únicas (GC y demás agentes de retención, Arts. 4-5).
+var ICA_VUP_ANUAL = '2026-02-27';
+var ICA_VUP     = ['2026-03-31','2026-05-29','2026-07-30','2026-09-29','2026-11-27','2027-01-29'];
+var RETEICA_VUP = ['2026-02-27','2026-03-27','2026-04-30','2026-05-29','2026-06-26','2026-07-30','2026-08-27','2026-09-29','2026-10-29','2026-11-27','2026-12-29','2027-01-29'];
+var RETEICA_VUP_MESES = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
 // Obligation metadata
 var OBL_META = {
   renta:     {label:'Renta', color:'#3B82F6', short:'R'},
@@ -754,7 +763,8 @@ var OBL_META = {
   rst_bim:   {label:'SI-2593 RST Bim.', color:'#A78BFA', short:'2593'},
   ica_bog:   {label:'ICA Bogotá', color:'#EC4899', short:'ICA'},
   ica_cali:  {label:'ICA Cali', color:'#EC4899', short:'ICA'},
-  ica_ctg:   {label:'ICA Cartagena', color:'#EC4899', short:'ICA'}
+  ica_ctg:   {label:'ICA Cartagena', color:'#EC4899', short:'ICA'},
+  ica_vup:   {label:'ICA Valledupar', color:'#EC4899', short:'ICA'}
 };
 var MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 var DIAS_SEM = ['L','M','X','J','V','S','D'];
@@ -1059,6 +1069,12 @@ function computeVencimientos(emp) {
       out.push({oblId:oblId,label:meta.label,periodo:'ICA Anual (vig.2025 + ant.40%)',fecha:ICA_CTG_ANUAL,color:meta.color});
       RETEICA_CTG.forEach(function(f,i){out.push({oblId:oblId,label:meta.label,periodo:'ReteICA '+ICA_BIMS[i],fecha:f,color:meta.color})});
     }
+    else if(oblId === 'ica_vup') {
+      // Valledupar: consolidada anual AG2025 (27-feb) + ICA bimestral + ReteICA MENSUAL (Decreto 1244/2025).
+      out.push({oblId:oblId,label:meta.label,periodo:'ICA Anual consolidada AG2025',fecha:ICA_VUP_ANUAL,color:meta.color});
+      ICA_VUP.forEach(function(f,i){out.push({oblId:oblId,label:meta.label,periodo:'ICA '+ICA_BIMS[i],fecha:f,color:meta.color})});
+      RETEICA_VUP.forEach(function(f,i){out.push({oblId:oblId,label:meta.label,periodo:'ReteICA '+RETEICA_VUP_MESES[i],fecha:f,color:meta.color})});
+    }
   });
   return out;
 }
@@ -1178,6 +1194,7 @@ function getSelectedObls(){
   if(icaMode==='bog') obls.push('ica_bog');
   else if(icaMode==='cali') obls.push('ica_cali');
   else if(icaMode==='ctg') obls.push('ica_ctg');
+  else if(icaMode==='vup') obls.push('ica_vup');
   return obls;
 }
 var nitInput=document.getElementById('sNit');
@@ -1253,6 +1270,7 @@ function editEmpresa(i){
   var icaSel = obs.indexOf('ica_bog')!==-1 ? 'bog'
              : obs.indexOf('ica_cali')!==-1 ? 'cali'
              : obs.indexOf('ica_ctg')!==-1 ? 'ctg'
+             : obs.indexOf('ica_vup')!==-1 ? 'vup'
              : 'none';
   document.querySelectorAll('#editIcaGroup .ica-opt').forEach(function(o){
     o.classList.toggle('selected', o.getAttribute('data-ica')===icaSel);
@@ -1288,6 +1306,7 @@ function saveEdit(){
   if(icaMode2 === 'bog') newObs.push('ica_bog');
   else if(icaMode2 === 'cali') newObs.push('ica_cali');
   else if(icaMode2 === 'ctg') newObs.push('ica_ctg');
+  else if(icaMode2 === 'vup') newObs.push('ica_vup');
   empresas[editingIdx].tipo = document.getElementById('editTipo').value;
   empresas[editingIdx].obligaciones = newObs;
   saveEmpresas();
@@ -1987,7 +2006,7 @@ if(empresas.length){
 }
 </script>
 <div id="main"></div>
-<link rel="stylesheet" href="shared/calendario-dian-2026.css?v=a7ac3ca4">
+<link rel="stylesheet" href="shared/calendario-dian-2026.css?v=52305536">
 <section style="max-width:1200px;margin:32px auto 0;padding:0 20px">
   <details id="calDianDropdown" style="background:#fff;border:1px solid #E5E7EB;border-radius:12px;overflow:hidden">
     <summary style="padding:16px 20px;cursor:pointer;font-weight:600;color:#374151;display:flex;align-items:center;justify-content:space-between;list-style:none;font-size:.95rem">
@@ -1999,7 +2018,7 @@ if(empresas.length){
     </div>
   </details>
 </section>
-<script src="shared/calendario-dian-2026.js?v=f1880d02"></script>
+<script src="shared/calendario-dian-2026.js?v=f0e49917"></script>
 <script>
   (function(){
     var dropdown=document.getElementById('calDianDropdown');
@@ -2022,7 +2041,7 @@ if(empresas.length){
     <a href="sanciones-dian.html" style="padding:8px 16px;background:#ECFDF5;color:#047857;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:500;transition:background .2s">Sanciones DIAN</a>
   </div>
 </section>
-<link rel="stylesheet" href="shared/chat.css?v=e0bd0881">
-<script defer src="shared/chat.js?v=1f33efba"></script>
+<link rel="stylesheet" href="shared/chat.css?v=a52afe72">
+<script defer src="shared/chat.js?v=4f7aa34d"></script>
 </body>
 </html>

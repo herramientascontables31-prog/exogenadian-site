@@ -62,6 +62,13 @@
   ];
   var ICA_CTG_ANUAL = new Date('2026-05-29T00:00:00');
   var RETEICA_CTG   = _dts(['2026-03-26','2026-05-27','2026-07-29','2026-09-24','2026-11-26','2027-01-28']);
+  // VALLEDUPAR — Decreto 1244 del 31-dic-2025. Consolidada anual AG2025 (27-feb) +
+  // ICA bimestral fechas únicas (régimen común y GC; el preferencial paga semestral,
+  // no modelado) + ReteICA MENSUAL fechas únicas (GC y demás agentes, Arts. 4-5).
+  var ICA_VUP_ANUAL = new Date('2026-02-27T00:00:00');
+  var ICA_VUP     = _dts(['2026-03-31','2026-05-29','2026-07-30','2026-09-29','2026-11-27','2027-01-29']);
+  var RETEICA_VUP = _dts(['2026-02-27','2026-03-27','2026-04-30','2026-05-29','2026-06-26','2026-07-30','2026-08-27','2026-09-29','2026-10-29','2026-11-27','2026-12-29','2027-01-29']);
+  var RETEICA_VUP_MESES = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
 
   var RET_ALL = [
     {label:'Ene',d:D_RENTA_GC_1},{label:'Feb',d:D_IVA_B1},{label:'Mar',d:D_RENTA_GC_2},
@@ -263,6 +270,10 @@
       } else if (icaM === 'ctg') {
         obls.push({id:'ica_ctg_anual',group:'ica',label:'ICA Anual (vig.2025 + ant.40%)',date:ICA_CTG_ANUAL,link:null,linkText:'Cartagena'});
         RETEICA_CTG.forEach(function (d, i) { obls.push({id:'reteica_ctg_'+i,group:'ica',label:'ReteICA '+ICA_BIMS[i],date:d,link:null,linkText:'Cartagena'}); });
+      } else if (icaM === 'vup') {
+        obls.push({id:'ica_vup_anual',group:'ica',label:'ICA Anual consolidada AG2025',date:ICA_VUP_ANUAL,link:null,linkText:'Valledupar'});
+        ICA_VUP.forEach(function (d, i) { obls.push({id:'ica_vup_'+i,group:'ica',label:'ICA '+ICA_BIMS[i],date:d,link:null,linkText:'Valledupar'}); });
+        RETEICA_VUP.forEach(function (d, i) { obls.push({id:'reteica_vup_'+i,group:'ica',label:'ReteICA '+RETEICA_VUP_MESES[i],date:d,link:null,linkText:'Valledupar'}); });
       } else {
         obls.push({id:'ica',group:'ica',label:'ICA',date:null,link:null,linkText:'Manual'});
       }
