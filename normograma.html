@@ -7,7 +7,7 @@
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="og-image.png">
-<meta name="theme-color" content="#1E3A8A">
+<meta name="theme-color" content="#059669">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Normograma Tributario DIAN 2026 — Normas explicadas con filtros por impuesto, sector y perfil | ExógenaDIAN</title>
 <meta name="description" content="El normograma DIAN, pero fácil: leyes, decretos, resoluciones, conceptos y sentencias tributarias explicadas en lenguaje claro, con buscador y filtros por tipo de impuesto, sector económico, perfil y vigencia. Enlace al texto oficial de cada norma.">
@@ -54,7 +54,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'DM Sans',sans-serif;background:var(--f50);color:var(--f900);min-height:100vh}
 .container{max-width:1100px;margin:0 auto;padding:28px 24px}
-.header{background:linear-gradient(135deg,#1E3A8A 0%,#4F46E5 100%);padding:30px 32px;border-radius:16px;margin-bottom:20px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.header{background:linear-gradient(135deg,#064E3B 0%,#059669 100%);padding:30px 32px;border-radius:16px;margin-bottom:20px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .header h1{font-size:1.45rem;font-weight:700;display:flex;align-items:center;gap:12px}
 .header h1 span{font-size:2rem}
 .header p{opacity:.85;font-size:.88rem;margin-top:6px;max-width:560px;line-height:1.55}
@@ -66,7 +66,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--f50);color:var(--f900);mi
 .search-row{display:flex;gap:10px;align-items:center}
 .search-box{flex:1;position:relative}
 .search-box input{width:100%;padding:14px 18px 14px 46px;border:2px solid var(--f200);border-radius:12px;font-family:inherit;font-size:1rem;outline:none;transition:.2s}
-.search-box input:focus{border-color:var(--indigo);box-shadow:0 0 0 4px rgba(79,70,229,.12)}
+.search-box input:focus{border-color:var(--g600);box-shadow:0 0 0 4px rgba(5,150,105,.15)}
 .search-box input::placeholder{color:var(--f400)}
 .search-box .lupa{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:1.1rem;opacity:.5}
 .stats-row{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px}
@@ -74,8 +74,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--f50);color:var(--f900);mi
 .stat b{color:var(--f800);font-size:.95rem;font-weight:700}
 .rutas{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 .ruta-chip{padding:8px 14px;border:1.5px solid var(--f200);border-radius:20px;background:var(--w);cursor:pointer;font-family:inherit;font-size:.82rem;font-weight:600;color:var(--f600);transition:.15s}
-.ruta-chip:hover{border-color:var(--indigo);color:var(--navy);background:#EEF2FF}
-.ruta-chip.on{border-color:var(--indigo);background:#EEF2FF;color:var(--navy)}
+.ruta-chip:hover{border-color:var(--g500);color:var(--g800);background:var(--g50)}
+.ruta-chip.on{border-color:var(--g600);background:var(--g50);color:var(--g800)}
 .fil-group{margin-bottom:14px}
 .fil-label{font-size:.72rem;font-weight:700;color:var(--f500);text-transform:uppercase;letter-spacing:.4px;margin-bottom:7px;display:flex;align-items:center;gap:8px}
 .fil-chips{display:flex;gap:6px;flex-wrap:wrap}
@@ -85,17 +85,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--f50);color:var(--f900);mi
 .fchip .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .fil-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 .fil-row select{padding:8px 12px;border:1.5px solid var(--f200);border-radius:9px;font-family:inherit;font-size:.83rem;outline:none;background:var(--w);color:var(--f700)}
-.fil-row select:focus{border-color:var(--indigo)}
+.fil-row select:focus{border-color:var(--g500)}
 .toggle-clave{display:inline-flex;align-items:center;gap:7px;font-size:.83rem;font-weight:600;color:var(--f600);cursor:pointer;user-select:none}
-.toggle-clave input{accent-color:var(--indigo);width:16px;height:16px;cursor:pointer}
-.limpiar{margin-left:auto;background:none;border:none;color:var(--indigo);font-family:inherit;font-size:.8rem;font-weight:700;cursor:pointer;padding:6px 10px;border-radius:8px}
-.limpiar:hover{background:#EEF2FF}
+.toggle-clave input{accent-color:var(--g600);width:16px;height:16px;cursor:pointer}
+.limpiar{margin-left:auto;background:none;border:none;color:var(--g700);font-family:inherit;font-size:.8rem;font-weight:700;cursor:pointer;padding:6px 10px;border-radius:8px}
+.limpiar:hover{background:var(--g50)}
 .fil-toggle{display:none}
 .res-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 0 12px;flex-wrap:wrap}
 .res-count{font-size:.9rem;color:var(--f600)}
-.res-count b{color:var(--navy);font-size:1.05rem}
+.res-count b{color:var(--g800);font-size:1.05rem}
 .norma{background:var(--w);border:1px solid var(--f200);border-left:4px solid var(--f300);border-radius:12px;padding:18px 20px;margin-bottom:12px;box-shadow:var(--shadow);transition:.15s}
-.norma:hover{border-color:var(--f300);border-left-color:var(--indigo);transform:translateY(-1px)}
+.norma:hover{border-color:var(--g300);transform:translateY(-1px)}
 .n-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
 .badge{font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:6px;letter-spacing:.3px;text-transform:uppercase}
 .b-anio{font-size:.72rem;font-weight:700;color:var(--f400);margin-left:auto;font-family:'JetBrains Mono',monospace}
@@ -107,15 +107,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--f50);color:var(--f900);mi
 .n-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
 .tag{font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:12px;background:var(--f100);color:var(--f600)}
 .tag.imp{color:#fff}
-.tag.sec{background:#EEF2FF;color:var(--navy)}
+.tag.sec{background:var(--g50);color:var(--g700)}
 .n-links{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-.n-links a{font-size:.8rem;font-weight:700;color:var(--indigo);text-decoration:none}
+.n-links a{font-size:.8rem;font-weight:700;color:var(--g700);text-decoration:none}
 .n-links a:hover{text-decoration:underline}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:12px;font-family:inherit;font-weight:600;font-size:.9rem;transition:all .2s;cursor:pointer;border:none;text-decoration:none}
-.btn-primary{background:var(--navy);color:#fff}
-.btn-primary:hover{background:var(--navy2);transform:translateY(-1px);box-shadow:0 4px 14px rgba(30,58,138,.25)}
+.btn-primary{background:var(--g700);color:#fff}
+.btn-primary:hover{background:var(--g800);transform:translateY(-1px);box-shadow:0 4px 14px rgba(4,120,87,.3)}
 .btn-outline{background:transparent;color:var(--f700);border:1.5px solid var(--f200)}
-.btn-outline:hover{border-color:var(--indigo);color:var(--navy)}
+.btn-outline:hover{border-color:var(--g500);color:var(--g800)}
 .btn-sm{padding:7px 14px;font-size:.8rem;border-radius:8px}
 .mas-wrap{text-align:center;margin:20px 0}
 .vacio{text-align:center;padding:50px 20px;color:var(--f400)}
@@ -130,8 +130,8 @@ details.dcard .dbody p{margin-bottom:10px}
 details.dcard .dbody table{width:100%;border-collapse:collapse;font-size:.82rem;margin:8px 0}
 details.dcard .dbody th,details.dcard .dbody td{padding:8px 10px;border:1px solid var(--f200);text-align:left}
 details.dcard .dbody th{background:var(--f50);font-weight:700;color:var(--f700)}
-.disclaimer{background:#EEF2FF;border:1px solid #C7D2FE;border-radius:12px;padding:14px 20px;font-size:.8rem;color:#3730A3;line-height:1.6;margin:18px 0}
-.matriz-card{background:linear-gradient(135deg,#1E3A8A 0%,#4F46E5 100%);border-radius:16px;padding:26px 28px;color:#fff;margin:24px 0}
+.disclaimer{background:var(--g50);border:1px solid var(--g200);border-radius:12px;padding:14px 20px;font-size:.8rem;color:var(--g900);line-height:1.6;margin:18px 0}
+.matriz-card{background:linear-gradient(135deg,#022C22 0%,#065F46 55%,#047857 100%);border-radius:16px;padding:26px 28px;color:#fff;margin:24px 0}
 .matriz-card h2{font-size:1.15rem;font-weight:700;margin:0}
 .matriz-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin:16px 0}
 .matriz-item{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:12px 14px;font-size:.8rem;line-height:1.55;opacity:.95}
@@ -149,22 +149,22 @@ details.dcard .dbody th{background:var(--f50);font-weight:700;color:var(--f700)}
 .xl-top i{width:9px;height:9px;border-radius:50%;display:inline-block}
 .xl-body{overflow-x:auto;max-height:250px;overflow-y:auto}
 .xl-body table{width:100%;border-collapse:collapse;font-size:.72rem;min-width:680px}
-.xl-body th{background:#1E3A8A;color:#fff;padding:6px 9px;text-align:left;font-weight:700;position:sticky;top:0;white-space:nowrap}
+.xl-body th{background:#065F46;color:#fff;padding:6px 9px;text-align:left;font-weight:700;position:sticky;top:0;white-space:nowrap}
 .xl-body td{padding:6px 9px;border-bottom:1px solid #F3F4F6;color:#374151;vertical-align:top;line-height:1.45}
 .xl-sel{border:1px solid #D1D5DB;border-radius:4px;padding:1px 7px;background:#fff;display:inline-block;font-size:.68rem;color:#374151;white-space:nowrap}
 .xl-leeme{padding:14px 16px;font-size:.74rem;line-height:1.75;color:#374151}
 .xl-tabs{display:flex;gap:3px;background:#E5E7EB;padding:5px 8px 0;overflow-x:auto}
 .xl-tab{padding:5px 12px;font-size:.7rem;font-weight:600;background:#F3F4F6;color:#4B5563;border-radius:6px 6px 0 0;cursor:pointer;white-space:nowrap;border:1px solid #D1D5DB;border-bottom:none;font-family:inherit}
-.xl-tab.on{background:#fff;color:#1E3A8A;font-weight:700}
+.xl-tab.on{background:#fff;color:#065F46;font-weight:700}
 /* Vista matriz web (PRO) */
 .mtable-wrap{position:relative;background:var(--w);border:1px solid var(--f200);border-radius:12px;overflow:auto;box-shadow:var(--shadow);max-height:680px}
 .mtable{width:100%;border-collapse:collapse;font-size:.78rem;min-width:920px}
-.mtable th{position:sticky;top:0;background:#1E3A8A;color:#fff;padding:9px 10px;text-align:left;font-size:.7rem;white-space:nowrap;z-index:2}
+.mtable th{position:sticky;top:0;background:#065F46;color:#fff;padding:9px 10px;text-align:left;font-size:.7rem;white-space:nowrap;z-index:2}
 .mtable th[data-s]{cursor:pointer;user-select:none}
-.mtable th[data-s]:hover{background:#312E81}
+.mtable th[data-s]:hover{background:#064E3B}
 .mtable td{padding:8px 10px;border-bottom:1px solid var(--f100);vertical-align:top;color:var(--f700);line-height:1.45}
-.mtable tbody tr:hover td{background:#F8FAFF}
-.mtable a{color:var(--indigo);font-weight:700;text-decoration:none}
+.mtable tbody tr:hover td{background:#F0FDF4}
+.mtable a{color:var(--g700);font-weight:700;text-decoration:none}
 tr.mblur td{filter:blur(4px);user-select:none;pointer-events:none}
 .mlock{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.65) 22%,rgba(255,255,255,.94) 55%);z-index:3;text-align:center;font-size:.92rem;color:var(--f700);padding:20px;line-height:1.7}
 .rel-links{display:flex;gap:10px;flex-wrap:wrap}
@@ -263,8 +263,8 @@ tr.mblur td{filter:blur(4px);user-select:none;pointer-events:none}
 <div class="res-head">
   <div class="res-count" id="resCount"></div>
   <div style="display:flex;gap:8px;flex-wrap:wrap">
-    <button class="btn btn-outline" id="btnVista" style="font-size:.82rem;padding:8px 16px">🧮 Vista matriz <span style="background:#1E3A8A;color:#fff;font-size:.62rem;padding:2px 7px;border-radius:5px;font-weight:700">PRO</span></button>
-    <button class="btn btn-outline" id="btnExcel" style="font-size:.82rem;padding:8px 16px">📥 Matriz Excel <span style="background:#1E3A8A;color:#fff;font-size:.62rem;padding:2px 7px;border-radius:5px;font-weight:700">PRO</span></button>
+    <button class="btn btn-outline" id="btnVista" style="font-size:.82rem;padding:8px 16px">🧮 Vista matriz <span style="background:#F59E0B;color:#fff;font-size:.62rem;padding:2px 7px;border-radius:5px;font-weight:800">PRO</span></button>
+    <button class="btn btn-outline" id="btnExcel" style="font-size:.82rem;padding:8px 16px">📥 Matriz Excel <span style="background:#F59E0B;color:#fff;font-size:.62rem;padding:2px 7px;border-radius:5px;font-weight:800">PRO</span></button>
   </div>
 </div>
 <div id="lista"></div>
@@ -296,7 +296,7 @@ tr.mblur td{filter:blur(4px);user-select:none;pointer-events:none}
   <p style="font-size:.72rem;opacity:.65;margin-top:12px">Se regenera con cada corte del normograma (la fecha la ves arriba): descárgala de nuevo cuando cambie. Tu PRO también desbloquea los Excel de exógena, renta, IVA y nómina en todo el sitio.</p>
 </div>
 <div class="disclaimer">
-  <b>Transparencia:</b> este normograma es una curaduría educativa con corte a la fecha indicada arriba. Los resúmenes son nuestros, no texto oficial. La normativa tributaria cambia con frecuencia: antes de decidir, confirma el texto vigente en el enlace oficial de cada norma o en el <a href="https://normograma.dian.gov.co/dian/" target="_blank" rel="noopener" style="color:#3730A3;font-weight:700">normograma oficial de la DIAN ↗</a>. No constituye asesoría tributaria.
+  <b>Transparencia:</b> este normograma es una curaduría educativa con corte a la fecha indicada arriba. Los resúmenes son nuestros, no texto oficial. La normativa tributaria cambia con frecuencia: antes de decidir, confirma el texto vigente en el enlace oficial de cada norma o en el <a href="https://normograma.dian.gov.co/dian/" target="_blank" rel="noopener" style="color:#047857;font-weight:700">normograma oficial de la DIAN ↗</a>. No constituye asesoría tributaria.
 </div>
 <h2 style="font-size:1.05rem;font-weight:700;margin:26px 0 12px">📖 Entiende el normograma en 3 minutos</h2>
 <details class="dcard">
@@ -341,7 +341,7 @@ tr.mblur td{filter:blur(4px);user-select:none;pointer-events:none}
   <div class="dbody">
     <p><b>¿Esto reemplaza al normograma de la DIAN?</b> No: lo complementa. El oficial tiene el texto completo de miles de documentos; este es el mapa curado para encontrar rápido la norma que te aplica y entenderla antes de leerla en la fuente oficial.</p>
     <p><b>¿Cada cuánto se actualiza?</b> La fecha de corte aparece en la esquina superior. Cuando sale una reforma, un decreto de plazos o una resolución estructural, actualizamos el dataset completo.</p>
-    <p><b>¿Por qué no está el ICA de mi municipio?</b> Este normograma cubre el orden nacional (DIAN). Para ICA y exógenas municipales tenemos <a href="estatutos.html" style="color:#4F46E5;font-weight:700">Estatutos Municipales</a> y <a href="exogenas-distritales.html" style="color:#4F46E5;font-weight:700">Exógenas distritales</a>.</p>
+    <p><b>¿Por qué no está el ICA de mi municipio?</b> Este normograma cubre el orden nacional (DIAN). Para ICA y exógenas municipales tenemos <a href="estatutos.html" style="color:#047857;font-weight:700">Estatutos Municipales</a> y <a href="exogenas-distritales.html" style="color:#047857;font-weight:700">Exógenas distritales</a>.</p>
     <p><b>¿Qué es la Matriz Normativa?</b> Un Excel PRO de 5 hojas: el normograma completo con vigencia semaforizada y enlaces clicables al texto oficial, tu selección filtrada, papeles de trabajo editables con listas desplegables (¿aplica?, riesgo, responsable, fecha, avance), resumen ejecutivo y hoja léeme. Se genera con los filtros que tengas activos en la página.</p>
   </div>
 </details>
@@ -525,8 +525,8 @@ function chipHTML(key,label,on,color){
 function renderChips(){
  $('fImp').innerHTML=Object.keys(IMP).map(function(k){return chipHTML(k,IMP[k].l,S.impuestos.indexOf(k)>=0,IMP[k].c)}).join('');
  $('fTipo').innerHTML=Object.keys(TIPO).map(function(k){return chipHTML(k,TIPO[k].l,S.tipos.indexOf(k)>=0,TIPO[k].c)}).join('');
- $('fPerf').innerHTML=Object.keys(PERF).map(function(k){return chipHTML(k,PERF[k],S.perfiles.indexOf(k)>=0,'#1E3A8A')}).join('');
- $('fSect').innerHTML=Object.keys(SECT).map(function(k){return chipHTML(k,SECT[k],S.sectores.indexOf(k)>=0,'#4F46E5')}).join('');
+ $('fPerf').innerHTML=Object.keys(PERF).map(function(k){return chipHTML(k,PERF[k],S.perfiles.indexOf(k)>=0,'#065F46')}).join('');
+ $('fSect').innerHTML=Object.keys(SECT).map(function(k){return chipHTML(k,SECT[k],S.sectores.indexOf(k)>=0,'#059669')}).join('');
  var rh='';RUTAS.forEach(function(r,i){rh+='<button class="ruta-chip'+(S.ruta===i?' on':'')+'" data-r="'+i+'">'+r.l+'</button>'});
  $('rutas').innerHTML=rh;
 }
@@ -604,7 +604,7 @@ function xlSel(t){return '<span class="xl-sel">'+esc(t)+' ▾</span>'}
 function xlMasFila(cols,txt){return '<tr><td colspan="'+cols+'" style="color:#9CA3AF;font-style:italic">'+esc(txt)+'</td></tr>'}
 function xlPreviewHTML(tab){
  if(tab==='leeme'){
-  return '<div class="xl-leeme"><b style="color:#1E3A8A;font-size:.85rem">MATRIZ NORMATIVA TRIBUTARIA — ExógenaDIAN PRO</b><br>Fecha de corte: <b>'+esc(CORTE)+'</b> · Normas en la base: <b>'+DATA.length+'</b><br><br><b style="color:#4F46E5">QUÉ CONTIENE CADA HOJA</b><br>📚 Normograma completo · 🎯 Mi selección (tus filtros) · 📋 Papeles de trabajo · 📊 Resumen<br><br><b style="color:#4F46E5">FUENTES</b><br>Verificada contra normograma.dian.gov.co, suin-juriscol, funcionpublica y corteconstitucional.gov.co.</div>';
+  return '<div class="xl-leeme"><b style="color:#065F46;font-size:.85rem">MATRIZ NORMATIVA TRIBUTARIA — ExógenaDIAN PRO</b><br>Fecha de corte: <b>'+esc(CORTE)+'</b> · Normas en la base: <b>'+DATA.length+'</b><br><br><b style="color:#047857">QUÉ CONTIENE CADA HOJA</b><br>📚 Normograma completo · 🎯 Mi selección (tus filtros) · 📋 Papeles de trabajo · 📊 Resumen<br><br><b style="color:#047857">FUENTES</b><br>Verificada contra normograma.dian.gov.co, suin-juriscol, funcionpublica y corteconstitucional.gov.co.</div>';
  }
  if(tab==='resumen'){
   var tops=Object.keys(IMP).map(function(k){
@@ -619,7 +619,7 @@ function xlPreviewHTML(tab){
  }
  var items=tab==='sel'?DATA.filter(function(n){return(n.impuestos||[]).indexOf('exogena')>=0}).slice(0,3):xlClaves();
  var nota=tab==='sel'?xlMasFila(6,'Ejemplo con filtro "Exógena" activo — esta hoja se arma con TUS filtros al momento de descargar'):xlMasFila(6,'… y '+(DATA.length-3)+' normas más, cada una con 14 columnas de detalle');
- return '<table><thead><tr><th>Norma</th><th>Tipo</th><th>Año</th><th>Estado</th><th>Impuestos</th><th>Texto oficial</th></tr></thead><tbody>'+items.map(function(n){return '<tr><td><b>'+esc(n.titulo)+'</b></td><td>'+esc((TIPO[n.tipo]||{}).l||n.tipo)+'</td><td>'+n.anio+'</td><td>'+xlEstChip(n)+'</td><td>'+esc(impLabel(n.impuestos))+'</td><td><span style="color:#4F46E5;text-decoration:underline">Abrir norma</span></td></tr>'}).join('')+nota+'</tbody></table>';
+ return '<table><thead><tr><th>Norma</th><th>Tipo</th><th>Año</th><th>Estado</th><th>Impuestos</th><th>Texto oficial</th></tr></thead><tbody>'+items.map(function(n){return '<tr><td><b>'+esc(n.titulo)+'</b></td><td>'+esc((TIPO[n.tipo]||{}).l||n.tipo)+'</td><td>'+n.anio+'</td><td>'+xlEstChip(n)+'</td><td>'+esc(impLabel(n.impuestos))+'</td><td><span style="color:#047857;text-decoration:underline">Abrir norma</span></td></tr>'}).join('')+nota+'</tbody></table>';
 }
 function xlRender(){
  var TABS=[{k:'leeme',l:'📖 Léeme'},{k:'resumen',l:'📊 Resumen'},{k:'completo',l:'📚 Normograma completo'},{k:'sel',l:'🎯 Mi selección'},{k:'papeles',l:'📋 Papeles de trabajo'}];
@@ -648,7 +648,7 @@ var ESTXL={
 function xlHead(ws,nCols){
  var r=ws.getRow(1);
  r.font={bold:true,color:{argb:'FFFFFFFF'},size:10};
- r.fill={type:'pattern',pattern:'solid',fgColor:{argb:'FF1E3A8A'}};
+ r.fill={type:'pattern',pattern:'solid',fgColor:{argb:'FF065F46'}};
  r.height=24;r.alignment={vertical:'middle'};
  ws.views=[{state:'frozen',ySplit:1}];
  ws.autoFilter={from:{row:1,column:1},to:{row:1,column:nCols}};
@@ -674,7 +674,7 @@ function hojaNormas(wb,nombre,items,tabColor){
   var ec=row.getCell('e'),st=ESTXL[n.estado];
   if(st){ec.fill={type:'pattern',pattern:'solid',fgColor:{argb:st.bg}};ec.font={bold:true,color:{argb:st.c},size:10}}
   var url=n.url_dian||n.url_alt;
-  if(url){var uc=row.getCell('u');uc.value={text:'Abrir norma',hyperlink:url};uc.font={color:{argb:'FF4F46E5'},underline:true,size:10}}
+  if(url){var uc=row.getCell('u');uc.value={text:'Abrir norma',hyperlink:url};uc.font={color:{argb:'FF047857'},underline:true,size:10}}
  });
  xlHead(ws,14);
  return ws;
@@ -707,7 +707,7 @@ function descargarMatriz(origen){
  wb.creator='ExógenaDIAN';
  // ── Hoja 1: Léeme ──
  var wl=wb.addWorksheet('📖 Léeme');
- wl.properties.tabColor={argb:'FF1E3A8A'};
+ wl.properties.tabColor={argb:'FF065F46'};
  wl.getColumn(1).width=118;
  wl.getColumn(1).alignment={wrapText:true,vertical:'top'};
  var leeme=[
@@ -730,8 +730,8 @@ function descargarMatriz(origen){
  ];
  leeme.forEach(function(par){
   var row=wl.addRow([par[0]]);
-  if(par[1]==='titulo'){row.font={bold:true,size:15,color:{argb:'FF1E3A8A'}};row.height=26}
-  else if(par[1]==='sub'){row.font={bold:true,size:11,color:{argb:'FF4F46E5'}}}
+  if(par[1]==='titulo'){row.font={bold:true,size:15,color:{argb:'FF065F46'}};row.height=26}
+  else if(par[1]==='sub'){row.font={bold:true,size:11,color:{argb:'FF047857'}}}
   else if(par[1]==='b'){row.font={bold:true,size:10}}
   else{row.font={size:10}}
  });
@@ -740,7 +740,7 @@ function descargarMatriz(origen){
  wr.properties.tabColor={argb:'FF0E7490'};
  wr.columns=[{width:34},{width:10},{width:10},{width:10}];
  function bloque(titulo,head,filas){
-  var tr=wr.addRow([titulo]);tr.font={bold:true,size:11,color:{argb:'FF1E3A8A'}};
+  var tr=wr.addRow([titulo]);tr.font={bold:true,size:11,color:{argb:'FF065F46'}};
   var hr=wr.addRow(head);hr.font={bold:true,size:10};hr.fill={type:'pattern',pattern:'solid',fgColor:{argb:'FFEEF2FF'}};
   filas.forEach(function(f){wr.addRow(f).font={size:10}});
   wr.addRow([]);
@@ -756,7 +756,7 @@ function descargarMatriz(origen){
   return[EST[k].l,DATA.filter(function(n){return n.estado===k}).length];
  }));
  // ── Hoja 3: Normograma completo ──
- hojaNormas(wb,'📚 Normograma completo',DATA,'FF4F46E5');
+ hojaNormas(wb,'📚 Normograma completo',DATA,'FF059669');
  // ── Hoja 4: Mi selección (solo si hay filtros) ──
  if(hayFiltro&&sel.length){
   var wsSel=hojaNormas(wb,'🎯 Mi selección',sel,'FFF59E0B');
