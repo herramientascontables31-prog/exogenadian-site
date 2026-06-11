@@ -262,18 +262,26 @@
     if (client.obligaciones.activosExt) obls.push({id:'activos_ext',group:'activos',label:'Activos Ext.',date:getActivosExtDate(client),link:null,linkText:'F160'});
     if (client.obligaciones.ica) {
       var icaM = client.icaMunicipio || 'none';
+      // icaDecl/icaRete separan declaración ICA y ReteICA: no a todos los clientes
+      // les aplican ambas. Clientes guardados antes del split no traen los campos → ambas.
+      var icaDecl = client.icaDecl !== false;
+      var icaRete = client.icaRete !== false;
       if (icaM === 'bog') {
-        ICA_BOG.forEach(function (d, i) { obls.push({id:'ica_bog_'+i,group:'ica',label:'ICA '+ICA_BIMS[i],date:d,link:null,linkText:'Bogotá'}); });
-        RETEICA_BOG.forEach(function (d, i) { obls.push({id:'reteica_bog_'+i,group:'ica',label:'ReteICA '+ICA_BIMS[i],date:d,link:null,linkText:'Bogotá'}); });
+        if (icaDecl) ICA_BOG.forEach(function (d, i) { obls.push({id:'ica_bog_'+i,group:'ica',label:'ICA '+ICA_BIMS[i],date:d,link:null,linkText:'Bogotá'}); });
+        if (icaRete) RETEICA_BOG.forEach(function (d, i) { obls.push({id:'reteica_bog_'+i,group:'ica',label:'ReteICA '+ICA_BIMS[i],date:d,link:null,linkText:'Bogotá'}); });
       } else if (icaM === 'cali') {
-        ICA_CALI.forEach(function (m, i) { obls.push({id:'ica_cali_'+i,group:'ica',label:'ICA/ReteICA '+ICA_BIMS[i],date:getDateByLastDigit(m,client.nit),link:null,linkText:'Cali'}); });
+        // Cali comparte fecha para ambas; la etiqueta refleja cuáles aplican al cliente.
+        var caliLbl = icaDecl && icaRete ? 'ICA/ReteICA ' : icaDecl ? 'ICA ' : 'ReteICA ';
+        if (icaDecl || icaRete) ICA_CALI.forEach(function (m, i) { obls.push({id:'ica_cali_'+i,group:'ica',label:caliLbl+ICA_BIMS[i],date:getDateByLastDigit(m,client.nit),link:null,linkText:'Cali'}); });
       } else if (icaM === 'ctg') {
-        obls.push({id:'ica_ctg_anual',group:'ica',label:'ICA Anual (vig.2025 + ant.40%)',date:ICA_CTG_ANUAL,link:null,linkText:'Cartagena'});
-        RETEICA_CTG.forEach(function (d, i) { obls.push({id:'reteica_ctg_'+i,group:'ica',label:'ReteICA '+ICA_BIMS[i],date:d,link:null,linkText:'Cartagena'}); });
+        if (icaDecl) obls.push({id:'ica_ctg_anual',group:'ica',label:'ICA Anual (vig.2025 + ant.40%)',date:ICA_CTG_ANUAL,link:null,linkText:'Cartagena'});
+        if (icaRete) RETEICA_CTG.forEach(function (d, i) { obls.push({id:'reteica_ctg_'+i,group:'ica',label:'ReteICA '+ICA_BIMS[i],date:d,link:null,linkText:'Cartagena'}); });
       } else if (icaM === 'vup') {
-        obls.push({id:'ica_vup_anual',group:'ica',label:'ICA Anual consolidada AG2025',date:ICA_VUP_ANUAL,link:null,linkText:'Valledupar'});
-        ICA_VUP.forEach(function (d, i) { obls.push({id:'ica_vup_'+i,group:'ica',label:'ICA '+ICA_BIMS[i],date:d,link:null,linkText:'Valledupar'}); });
-        RETEICA_VUP.forEach(function (d, i) { obls.push({id:'reteica_vup_'+i,group:'ica',label:'ReteICA '+RETEICA_VUP_MESES[i],date:d,link:null,linkText:'Valledupar'}); });
+        if (icaDecl) {
+          obls.push({id:'ica_vup_anual',group:'ica',label:'ICA Anual consolidada AG2025',date:ICA_VUP_ANUAL,link:null,linkText:'Valledupar'});
+          ICA_VUP.forEach(function (d, i) { obls.push({id:'ica_vup_'+i,group:'ica',label:'ICA '+ICA_BIMS[i],date:d,link:null,linkText:'Valledupar'}); });
+        }
+        if (icaRete) RETEICA_VUP.forEach(function (d, i) { obls.push({id:'reteica_vup_'+i,group:'ica',label:'ReteICA '+RETEICA_VUP_MESES[i],date:d,link:null,linkText:'Valledupar'}); });
       } else {
         obls.push({id:'ica',group:'ica',label:'ICA',date:null,link:null,linkText:'Manual'});
       }
