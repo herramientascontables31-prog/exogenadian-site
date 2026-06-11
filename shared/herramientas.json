@@ -690,6 +690,16 @@
       "orden": 99
     },
     {
+      "url": "normograma.html",
+      "grupo": "consultas",
+      "titulo": "Normograma Tributario",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 1
+    },
+    {
       "url": "oficina.html",
       "grupo": "consultas",
       "titulo": "Mi Oficina Contable",
@@ -697,7 +707,7 @@
       "popular": true,
       "hidden": false,
       "sub": false,
-      "orden": 1
+      "orden": 2
     },
     {
       "url": "consultanit.html",
@@ -707,7 +717,7 @@
       "popular": true,
       "hidden": false,
       "sub": false,
-      "orden": 2
+      "orden": 3
     },
     {
       "url": "vencimientos.html",
@@ -717,22 +727,12 @@
       "popular": true,
       "hidden": false,
       "sub": false,
-      "orden": 3
+      "orden": 4
     },
     {
       "url": "tablero.html",
       "grupo": "consultas",
       "titulo": "Tablero de Equipo",
-      "desc": "",
-      "popular": true,
-      "hidden": false,
-      "sub": false,
-      "orden": 4
-    },
-    {
-      "url": "normograma.html",
-      "grupo": "consultas",
-      "titulo": "Normograma Tributario",
       "desc": "",
       "popular": true,
       "hidden": false,
