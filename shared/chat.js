@@ -1030,6 +1030,7 @@
     if (fullText && !isError) {
       messages.push({ role: 'assistant', content: fullText });
       saveHistory();
+      verifyArticles(fullText, bubble);
     } else if (isError) {
       messages.pop();
       saveHistory();
@@ -1038,6 +1039,33 @@
     isStreaming = false;
     sendBtn.disabled = !inputEl.value.trim();
     abortCtrl = null;
+  }
+
+  // ─── Verificación de artículos citados ───
+  // Tras cada respuesta, los artículos del ET que cite se contrastan contra el
+  // índice real (lookup determinista, sin IA ni rate limit). Badge ✓ si todos
+  // existen; ⚠ si citó alguno que no está en el ET (posible alucinación).
+  function verifyArticles(text, bubble) {
+    if (!/(?:Art[íi]culo|Art)\.?\s*\d/i.test(text)) return; // no citó artículos
+    fetch(CFG.apiUrl + '/api/ia/verificar-articulos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ texto: text.slice(0, 10000) })
+    }).then(function (r) { return r.json(); }).then(function (d) {
+      if (!d || !d.rag_disponible || !d.total_citados) return;
+      var badge = document.createElement('div');
+      badge.className = 'exa-verify';
+      if (d.no_verificados === 0) {
+        badge.innerHTML = '✓ ' + d.total_citados + ' artículo' + (d.total_citados !== 1 ? 's' : '') + ' del ET verificado' + (d.total_citados !== 1 ? 's' : '') + ' contra el texto oficial';
+        badge.classList.add('ok');
+      } else {
+        var malos = (d.articulos || []).filter(function (a) { return !a.verificado; }).map(function (a) { return 'Art. ' + a.numero; }).join(', ');
+        badge.innerHTML = '⚠ No pude verificar ' + malos + ' en el ET — confírmalo antes de usarlo';
+        badge.classList.add('warn');
+      }
+      bubble.appendChild(badge);
+      scrollToBottom();
+    }).catch(function () { /* verificación es best-effort, nunca rompe el chat */ });
   }
 
   // ─── Toggle apagar/encender ───
