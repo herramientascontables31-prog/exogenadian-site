@@ -131,6 +131,15 @@ details.dcard .dbody table{width:100%;border-collapse:collapse;font-size:.82rem;
 details.dcard .dbody th,details.dcard .dbody td{padding:8px 10px;border:1px solid var(--f200);text-align:left}
 details.dcard .dbody th{background:var(--f50);font-weight:700;color:var(--f700)}
 .disclaimer{background:#EEF2FF;border:1px solid #C7D2FE;border-radius:12px;padding:14px 20px;font-size:.8rem;color:#3730A3;line-height:1.6;margin:18px 0}
+.matriz-card{background:linear-gradient(135deg,#1E3A8A 0%,#4F46E5 100%);border-radius:16px;padding:26px 28px;color:#fff;margin:24px 0}
+.matriz-card h2{font-size:1.15rem;font-weight:700;margin:0}
+.matriz-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin:16px 0}
+.matriz-item{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:12px 14px;font-size:.8rem;line-height:1.55;opacity:.95}
+.matriz-item b{display:block;font-size:.84rem;margin-bottom:4px}
+.btn-amber{background:linear-gradient(135deg,#F59E0B,#EAB308);color:#fff;font-weight:700}
+.btn-amber:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(245,158,11,.4)}
+.matriz-card.flash{animation:mflash 1.4s ease}
+@keyframes mflash{0%,100%{box-shadow:none}35%{box-shadow:0 0 0 7px rgba(245,158,11,.5)}}
 .rel-links{display:flex;gap:10px;flex-wrap:wrap}
 .rel-links a{padding:8px 16px;background:var(--g50);color:var(--g700);border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:500}
 @media(max-width:720px){
@@ -230,6 +239,25 @@ details.dcard .dbody th{background:var(--f50);font-weight:700;color:var(--f700)}
 </div>
 <div id="lista"></div>
 <div class="mas-wrap"><button class="btn btn-primary" id="btnMas" style="display:none">Mostrar más normas</button></div>
+<div class="matriz-card" id="matrizCard">
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+    <h2>📥 Matriz Normativa</h2>
+    <span style="background:#F59E0B;color:#fff;font-size:.66rem;padding:3px 9px;border-radius:6px;font-weight:800;letter-spacing:.5px">PRO</span>
+  </div>
+  <p style="opacity:.92;font-size:.88rem;margin-top:8px;max-width:780px;line-height:1.6">No es un listado: es el <b>expediente normativo de tu cliente</b>. Un solo Excel de 5 hojas que se genera con los filtros que tengas aplicados en esta página, listo para anexar a tus papeles de trabajo o presentar en una junta.</p>
+  <div class="matriz-grid">
+    <div class="matriz-item"><b>📚 Normograma completo</b>Toda la base verificada con el estado de vigencia semaforizado (verde / ámbar / rojo), clasificación por impuesto, perfil y sector, y enlace clicable al texto oficial de cada norma.</div>
+    <div class="matriz-item"><b>🎯 Mi selección</b>Solo las normas de tu búsqueda y filtros: el marco normativo exacto del cliente o caso que estás trabajando, sin ruido.</div>
+    <div class="matriz-item"><b>📋 Papeles de trabajo</b>Checklist editable por norma con listas desplegables: ¿aplica al cliente?, riesgo, acción requerida, responsable, fecha límite y avance. Llega lista para diligenciar.</div>
+    <div class="matriz-item"><b>📊 Resumen ejecutivo</b>Conteos por impuesto, tipo de norma y estado de vigencia: la foto del universo normativo para tu planeación.</div>
+    <div class="matriz-item"><b>📖 Léeme</b>Fecha de corte, fuentes oficiales consultadas y cómo usar cada hoja.</div>
+  </div>
+  <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:6px">
+    <button class="btn btn-amber" id="btnExcel2">📥 Descargar la Matriz (Excel)</button>
+    <a href="precios.html" style="color:#FDE68A;font-size:.85rem;font-weight:700;text-decoration:none">¿Aún no eres PRO? Conoce los planes →</a>
+  </div>
+  <p style="font-size:.72rem;opacity:.65;margin-top:12px">Se regenera con cada corte del normograma (la fecha la ves arriba): descárgala de nuevo cuando cambie. Tu PRO también desbloquea los Excel de exógena, renta, IVA y nómina en todo el sitio.</p>
+</div>
 <div class="disclaimer">
   <b>Transparencia:</b> este normograma es una curaduría educativa con corte a la fecha indicada arriba. Los resúmenes son nuestros, no texto oficial. La normativa tributaria cambia con frecuencia: antes de decidir, confirma el texto vigente en el enlace oficial de cada norma o en el <a href="https://normograma.dian.gov.co/dian/" target="_blank" rel="noopener" style="color:#3730A3;font-weight:700">normograma oficial de la DIAN ↗</a>. No constituye asesoría tributaria.
 </div>
@@ -277,7 +305,7 @@ details.dcard .dbody th{background:var(--f50);font-weight:700;color:var(--f700)}
     <p><b>¿Esto reemplaza al normograma de la DIAN?</b> No: lo complementa. El oficial tiene el texto completo de miles de documentos; este es el mapa curado para encontrar rápido la norma que te aplica y entenderla antes de leerla en la fuente oficial.</p>
     <p><b>¿Cada cuánto se actualiza?</b> La fecha de corte aparece en la esquina superior. Cuando sale una reforma, un decreto de plazos o una resolución estructural, actualizamos el dataset completo.</p>
     <p><b>¿Por qué no está el ICA de mi municipio?</b> Este normograma cubre el orden nacional (DIAN). Para ICA y exógenas municipales tenemos <a href="estatutos.html" style="color:#4F46E5;font-weight:700">Estatutos Municipales</a> y <a href="exogenas-distritales.html" style="color:#4F46E5;font-weight:700">Exógenas distritales</a>.</p>
-    <p><b>¿Qué es la matriz Excel?</b> La base completa (norma, estado, a quién aplica, resumen, enlace oficial) en una hoja filtrable, lista para anexar a tus papeles de trabajo. Es una función PRO.</p>
+    <p><b>¿Qué es la Matriz Normativa?</b> Un Excel PRO de 5 hojas: el normograma completo con vigencia semaforizada y enlaces clicables al texto oficial, tu selección filtrada, papeles de trabajo editables con listas desplegables (¿aplica?, riesgo, responsable, fecha, avance), resumen ejecutivo y hoja léeme. Se genera con los filtros que tengas activos en la página.</p>
   </div>
 </details>
 <section style="margin:30px 0 10px">
@@ -498,37 +526,164 @@ var proUnlocked=false;
  if(exoPro.getSaved()!==null)proUnlocked=true; // arranque optimista
  exoPro.check().then(function(isPro){proUnlocked=isPro});
 })();
-$('btnExcel').addEventListener('click',function(){
+window.__ngForcePro=function(v){proUnlocked=!!v}; // hook de pruebas e2e
+var ESTXL={
+ 'vigente':{bg:'FFD1FAE5',c:'FF047857'},
+ 'modificada':{bg:'FFFEF3C7',c:'FFB45309'},
+ 'derogada':{bg:'FFFEE2E2',c:'FFB91C1C'},
+ 'sustituida':{bg:'FFE5E7EB',c:'FF4B5563'}
+};
+function xlHead(ws,nCols){
+ var r=ws.getRow(1);
+ r.font={bold:true,color:{argb:'FFFFFFFF'},size:10};
+ r.fill={type:'pattern',pattern:'solid',fgColor:{argb:'FF1E3A8A'}};
+ r.height=24;r.alignment={vertical:'middle'};
+ ws.views=[{state:'frozen',ySplit:1}];
+ ws.autoFilter={from:{row:1,column:1},to:{row:1,column:nCols}};
+}
+function impLabel(arr){return(arr||[]).map(function(i){return(IMP[i]||{}).l||i}).join(', ')}
+function hojaNormas(wb,nombre,items,tabColor){
+ var ws=wb.addWorksheet(nombre);
+ ws.properties.tabColor={argb:tabColor};
+ ws.columns=[
+  {header:'#',key:'n',width:5},{header:'Norma',key:'t',width:52},{header:'Tipo',key:'tp',width:13},
+  {header:'Año',key:'a',width:7},{header:'Estado',key:'e',width:19},{header:'Clave',key:'c',width:7},
+  {header:'Impuestos',key:'i',width:28},{header:'Perfiles',key:'pf',width:26},{header:'Sectores',key:'s',width:20},
+  {header:'Temas',key:'tm',width:24},{header:'A quién aplica',key:'ap',width:46},{header:'Qué dice',key:'r',width:64},
+  {header:'Nota de vigencia',key:'nv',width:42},{header:'Texto oficial',key:'u',width:16}
+ ];
+ ['t','ap','r','nv'].forEach(function(k){ws.getColumn(k).alignment={wrapText:true,vertical:'top'}});
+ items.forEach(function(n,ix){
+  var row=ws.addRow({n:ix+1,t:n.titulo,tp:(TIPO[n.tipo]||{}).l||n.tipo,a:n.anio,
+   e:(EST[n.estado]||{}).l||n.estado,c:n.importancia==='clave'?'⭐':'',
+   i:impLabel(n.impuestos),pf:(n.perfiles||[]).map(function(p){return(PERF[p]||p).replace(/^[^ ]+ /,'')}).join(', '),
+   s:(n.sectores||[]).map(function(x){return(SECT[x]||x).replace(/^[^ ]+ /,'')}).join(', '),
+   tm:(n.temas||[]).join(', '),ap:n.aplica||'',r:n.resumen||'',nv:n.nota_vigencia||''});
+  var ec=row.getCell('e'),st=ESTXL[n.estado];
+  if(st){ec.fill={type:'pattern',pattern:'solid',fgColor:{argb:st.bg}};ec.font={bold:true,color:{argb:st.c},size:10}}
+  var url=n.url_dian||n.url_alt;
+  if(url){var uc=row.getCell('u');uc.value={text:'Abrir norma',hyperlink:url};uc.font={color:{argb:'FF4F46E5'},underline:true,size:10}}
+ });
+ xlHead(ws,14);
+ return ws;
+}
+function descargarMatriz(origen){
  if(!proUnlocked){
-  if(typeof toast==='function')toast('La matriz Excel es una función PRO. Activa tu clave en el menú o conoce los planes.','warn');
-  setTimeout(function(){window.location.href='precios.html'},1400);
+  if(origen==='top'){
+   var mc=$('matrizCard');mc.scrollIntoView({behavior:'smooth',block:'center'});
+   mc.classList.remove('flash');void mc.offsetWidth;mc.classList.add('flash');
+   if(typeof gtag==='function')gtag('event','normograma_matriz_vitrina');
+   return;
+  }
+  if(typeof toast==='function')toast('La Matriz Normativa es una función PRO. Activa tu clave en el menú o conoce los planes.','warn');
+  setTimeout(function(){window.location.href='precios.html'},1300);
   return;
  }
  if(typeof ExcelJS==='undefined'){if(typeof toast==='function')toast('La librería de Excel aún está cargando, intenta de nuevo en unos segundos.','warn');return}
+ var sel=filtrar();
+ var hayFiltro=sel.length<DATA.length;
+ var filtrosTxt=[];
+ if(S.q)filtrosTxt.push('Búsqueda: "'+S.q+'"');
+ if(S.impuestos.length)filtrosTxt.push('Impuestos: '+impLabel(S.impuestos));
+ if(S.tipos.length)filtrosTxt.push('Tipos: '+S.tipos.map(function(t){return(TIPO[t]||{}).l||t}).join(', '));
+ if(S.perfiles.length)filtrosTxt.push('Perfiles: '+S.perfiles.map(function(p){return(PERF[p]||p).replace(/^[^ ]+ /,'')}).join(', '));
+ if(S.sectores.length)filtrosTxt.push('Sectores: '+S.sectores.map(function(x){return(SECT[x]||x).replace(/^[^ ]+ /,'')}).join(', '));
+ if(S.estado)filtrosTxt.push('Estado: '+((EST[S.estado]||{}).l||S.estado));
+ if(S.anio)filtrosTxt.push('Año: '+S.anio);
+ if(S.clave)filtrosTxt.push('Solo normas clave');
  var wb=new ExcelJS.Workbook();
- var ws=wb.addWorksheet('Normograma');
- ws.columns=[
-  {header:'Norma',key:'t',width:50},{header:'Tipo',key:'tp',width:13},{header:'Año',key:'a',width:8},
-  {header:'Estado',key:'e',width:18},{header:'Impuestos',key:'i',width:30},{header:'A quién aplica',key:'ap',width:45},
-  {header:'Qué dice',key:'r',width:70},{header:'Nota de vigencia',key:'nv',width:45},{header:'Texto oficial',key:'u',width:55}
+ wb.creator='ExógenaDIAN';
+ // ── Hoja 1: Léeme ──
+ var wl=wb.addWorksheet('📖 Léeme');
+ wl.properties.tabColor={argb:'FF1E3A8A'};
+ wl.getColumn(1).width=118;
+ wl.getColumn(1).alignment={wrapText:true,vertical:'top'};
+ var leeme=[
+  ['MATRIZ NORMATIVA TRIBUTARIA — ExógenaDIAN PRO','titulo'],
+  ['',''],
+  ['Fecha de corte del normograma: '+(CORTE||'ver normograma.html'),'b'],
+  ['Normas en la base: '+DATA.length+' · Normas en tu selección: '+sel.length,'b'],
+  ['',''],
+  ['QUÉ CONTIENE CADA HOJA','sub'],
+  ['📚 Normograma completo — Toda la base verificada: cada norma con tipo, año, estado de vigencia semaforizado, clasificación por impuesto/perfil/sector, a quién aplica, qué dice, nota de vigencia y enlace clicable al texto oficial.',''],
+  ['🎯 Mi selección — Las normas que cumplían los filtros y la búsqueda activos al momento de descargar. Si no aplicaste filtros, esta hoja no se incluye.',''],
+  ['📋 Papeles de trabajo — Checklist editable sobre tu selección: marca por norma si aplica al cliente, el riesgo, la acción requerida, el responsable, la fecha límite y el avance. Las columnas con lista desplegable ya vienen configuradas.',''],
+  ['📊 Resumen — Conteos por impuesto, tipo de norma y estado de vigencia.',''],
+  ['',''],
+  ['FUENTES','sub'],
+  ['Compilación verificada contra fuentes oficiales: normograma.dian.gov.co, suin-juriscol.gov.co, funcionpublica.gov.co y corteconstitucional.gov.co. Los resúmenes son redacción propia de ExógenaDIAN, no texto oficial.',''],
+  ['',''],
+  ['ADVERTENCIA','sub'],
+  ['Documento de apoyo profesional, no asesoría tributaria. La normativa cambia con frecuencia: antes de decidir, confirma el texto vigente en el enlace oficial de cada norma. Genera una matriz nueva cuando cambie la fecha de corte en exogenadian.com/normograma.html.','']
  ];
- ws.getRow(1).font={bold:true,color:{argb:'FFFFFFFF'}};
- ws.getRow(1).fill={type:'pattern',pattern:'solid',fgColor:{argb:'FF1E3A8A'}};
- filtrar().forEach(function(n){
-  ws.addRow({t:n.titulo,tp:(TIPO[n.tipo]||{}).l||n.tipo,a:n.anio,e:(EST[n.estado]||{}).l||n.estado,
-   i:(n.impuestos||[]).map(function(i){return(IMP[i]||{}).l||i}).join(', '),
-   ap:n.aplica||'',r:n.resumen||'',nv:n.nota_vigencia||'',u:n.url_dian||n.url_alt||''});
+ leeme.forEach(function(par){
+  var row=wl.addRow([par[0]]);
+  if(par[1]==='titulo'){row.font={bold:true,size:15,color:{argb:'FF1E3A8A'}};row.height=26}
+  else if(par[1]==='sub'){row.font={bold:true,size:11,color:{argb:'FF4F46E5'}}}
+  else if(par[1]==='b'){row.font={bold:true,size:10}}
+  else{row.font={size:10}}
  });
- ws.views=[{state:'frozen',ySplit:1}];
- ws.autoFilter={from:'A1',to:'I1'};
+ // ── Hoja 2: Resumen ──
+ var wr=wb.addWorksheet('📊 Resumen');
+ wr.properties.tabColor={argb:'FF0E7490'};
+ wr.columns=[{width:34},{width:10},{width:10},{width:10}];
+ function bloque(titulo,head,filas){
+  var tr=wr.addRow([titulo]);tr.font={bold:true,size:11,color:{argb:'FF1E3A8A'}};
+  var hr=wr.addRow(head);hr.font={bold:true,size:10};hr.fill={type:'pattern',pattern:'solid',fgColor:{argb:'FFEEF2FF'}};
+  filas.forEach(function(f){wr.addRow(f).font={size:10}});
+  wr.addRow([]);
+ }
+ bloque('Por impuesto u obligación',['Impuesto','Normas','Vigentes','Clave'],Object.keys(IMP).map(function(k){
+  var ns=DATA.filter(function(n){return(n.impuestos||[]).indexOf(k)>=0});
+  return[IMP[k].l,ns.length,ns.filter(function(n){return n.estado==='vigente'||n.estado==='modificada'}).length,ns.filter(function(n){return n.importancia==='clave'}).length];
+ }));
+ bloque('Por tipo de norma',['Tipo','Normas'],Object.keys(TIPO).map(function(k){
+  return[TIPO[k].l,DATA.filter(function(n){return n.tipo===k}).length];
+ }));
+ bloque('Por estado de vigencia',['Estado','Normas'],Object.keys(EST).map(function(k){
+  return[EST[k].l,DATA.filter(function(n){return n.estado===k}).length];
+ }));
+ // ── Hoja 3: Normograma completo ──
+ hojaNormas(wb,'📚 Normograma completo',DATA,'FF4F46E5');
+ // ── Hoja 4: Mi selección (solo si hay filtros) ──
+ if(hayFiltro&&sel.length){
+  var wsSel=hojaNormas(wb,'🎯 Mi selección',sel,'FFF59E0B');
+  wsSel.addRow([]);
+  var fr=wsSel.addRow(['','Filtros aplicados: '+(filtrosTxt.join(' · ')||'—')]);
+  fr.font={italic:true,size:9,color:{argb:'FF6B7280'}};
+ }
+ // ── Hoja 5: Papeles de trabajo ──
+ var wp=wb.addWorksheet('📋 Papeles de trabajo');
+ wp.properties.tabColor={argb:'FF047857'};
+ wp.columns=[
+  {header:'#',key:'n',width:5},{header:'Norma',key:'t',width:52},{header:'Año',key:'a',width:7},
+  {header:'Estado',key:'e',width:19},{header:'¿Aplica al cliente?',key:'ap',width:18},{header:'Riesgo',key:'ri',width:11},
+  {header:'Acción requerida',key:'ac',width:40},{header:'Responsable',key:'re',width:18},
+  {header:'Fecha límite',key:'f',width:13},{header:'Avance',key:'av',width:12},{header:'Notas',key:'no',width:40}
+ ];
+ wp.getColumn('t').alignment={wrapText:true,vertical:'top'};
+ var base=sel.length?sel:DATA;
+ base.forEach(function(n,ix){
+  var row=wp.addRow({n:ix+1,t:n.titulo,a:n.anio,e:(EST[n.estado]||{}).l||n.estado,ap:'Por revisar',av:'Pendiente'});
+  var r=row.number;
+  wp.getCell('E'+r).dataValidation={type:'list',allowBlank:true,formulae:['"Sí,No,Por revisar"']};
+  wp.getCell('F'+r).dataValidation={type:'list',allowBlank:true,formulae:['"Alto,Medio,Bajo,N/A"']};
+  wp.getCell('J'+r).dataValidation={type:'list',allowBlank:true,formulae:['"Pendiente,En curso,Cerrado"']};
+  var ec=row.getCell('e'),st=ESTXL[n.estado];
+  if(st){ec.fill={type:'pattern',pattern:'solid',fgColor:{argb:st.bg}};ec.font={bold:true,color:{argb:st.c},size:10}}
+ });
+ xlHead(wp,11);
  wb.xlsx.writeBuffer().then(function(buf){
   var blob=new Blob([buf],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
   var a=document.createElement('a');a.href=URL.createObjectURL(blob);
-  a.download='normograma_tributario_exogenadian.xlsx';a.click();
+  a.download='matriz_normativa_exogenadian.xlsx';a.click();
   setTimeout(function(){URL.revokeObjectURL(a.href)},4000);
-  if(typeof gtag==='function')gtag('event','normograma_excel');
+  if(typeof toast==='function')toast('Matriz generada: '+(hayFiltro?'5':'4')+' hojas, '+sel.length+' normas en tu selección.','ok');
+  if(typeof gtag==='function')gtag('event','normograma_excel',{normas:sel.length,filtrada:hayFiltro});
  });
-});
+}
+$('btnExcel').addEventListener('click',function(){descargarMatriz('top')});
+$('btnExcel2').addEventListener('click',function(){descargarMatriz('card')});
 // ─── Parámetros de URL (?q=, ?impuesto=, ?ruta=) ───
 (function(){
  try{
