@@ -388,7 +388,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 <script src="shared/reajuste-fiscal.js?v=761bd775"></script>
 <script src="shared/decl-prev-210.js?v=a03c70c1"></script>
 <script src="shared/validaciones210.js?v=a6bc1c89"></script>
-<script src="shared/parser-exogena-pn.js?v=20e6b0db"></script>
+<script src="shared/parser-exogena-pn.js?v=dd8cdecd"></script>
 <script src="shared/parser-muisca-consultante.js?v=a427c9ed"></script>
 <script src="shared/sugerida-parser-210.js?v=f53a18af"></script>
 <script src="shared/canonicalize-inputs.js?v=8e51ce11"></script>
@@ -1384,7 +1384,7 @@ function renderizarResumenExogena(result, fileName){
       ['Tope 1 · Ingresos', tp.ingresos],
       ['Tope 2 · Patrimonio (declarado año anterior)', tp.patrimonio],
       ['Tope 3 · Consumos TC', tp.consumoTC],
-      ['Tope 4 · Consignaciones', tp.movimientos],
+      ['Tope 4 · Movimientos en cuentas', tp.movimientos],
       ['Tope 5 · Compras', tp.compras]
     ].filter(function(x){ return x[1] > 0; });
     if(topeItems.length){
@@ -1394,7 +1394,7 @@ function renderizarResumenExogena(result, fileName){
           topeItems.map(function(x){
             return '<div style="display:flex;justify-content:space-between;padding:1px 0"><span>' + x[0] + '</span><strong>' + fCOPshort(x[1]) + '</strong></div>';
           }).join('') +
-          '<div style="font-size:.7rem;color:var(--muted);margin-top:4px">Basta superar 1.400 UVT en ingresos, consignaciones o consumos TC — o 4.500 UVT en patrimonio — para estar obligado a declarar.</div>' +
+          '<div style="font-size:.7rem;color:var(--muted);margin-top:4px">Basta superar 1.400 UVT en ingresos, consignaciones o consumos TC — o 4.500 UVT en patrimonio — para estar obligado a declarar. <strong>El Tope 4 es el total de movimientos reportados</strong> (créditos y débitos): puede incluir traslados entre cuentas propias, préstamos y recaudos de terceros — no equivale a consignaciones netas. Cruza con los extractos.</div>' +
         '</div>';
     }
   }
@@ -1869,29 +1869,39 @@ function _renderChecklistCertificados(filas){
   if(!window.certificadosRentaPN) return '';
   if(!filas || filas.length === 0) return '';
   var an = certificadosRentaPN.analizarReconciliacion(filas);
-  // Sección 1: por cada registro cargado con info conocida
+  // Sección 1: AGRUPADO por informante + tipo de certificado. Un mismo tercero (ej. ISAGEN)
+  // emite UN solo certificado (F220) que reúne todos sus conceptos — no se repite por cada uno.
   var porRegistroHtml = '';
   if(an.porRegistro.length > 0){
-    porRegistroHtml = '<div class="cc-section-title">📄 Por cada registro cargado — cruza contra el original</div>' +
+    var grupos = {};
+    an.porRegistro.forEach(function(r){
+      var key = (r.informante || '—') + '||' + (r.certificado || '');
+      if(!grupos[key]) grupos[key] = { certificado: r.certificado, informante: r.informante, emisor: r.emisor, norma: r.norma, verificar: r.verificar, omisionesComunes: r.omisionesComunes, conceptos: [], total: 0 };
+      grupos[key].conceptos.push({ concepto: r.concepto, valor: r.valor });
+      grupos[key].total += (r.valor || 0);
+    });
+    var lista = Object.keys(grupos).map(function(k){ return grupos[k]; });
+    porRegistroHtml = '<div class="cc-section-title">📄 Certificados a pedir — uno por tercero (cruza contra el original)</div>' +
       '<div class="cc-list">' +
-      an.porRegistro.map(function(r){
-        var verifyHtml = r.verificar
-          ? '<div class="cc-verify"><strong>Qué verificar:</strong> ' + escHtml(r.verificar) + '</div>'
-          : '';
-        var omisionHtml = r.omisionesComunes
-          ? '<div class="cc-omision"><strong>Omisiones comunes:</strong> ' + escHtml(r.omisionesComunes) + '</div>'
-          : '';
-        var valorTxt = r.valor ? '$' + Math.round(r.valor).toLocaleString('es-CO') : '—';
+      lista.map(function(g){
+        var verifyHtml = g.verificar ? '<div class="cc-verify"><strong>Qué verificar:</strong> ' + escHtml(g.verificar) + '</div>' : '';
+        var omisionHtml = g.omisionesComunes ? '<div class="cc-omision"><strong>Omisiones comunes:</strong> ' + escHtml(g.omisionesComunes) + '</div>' : '';
+        // Lista de conceptos que reúne ese certificado (con su valor)
+        var conceptosHtml = g.conceptos.length > 1
+          ? '<div class="cc-meta" style="margin-top:4px">Reúne <strong>' + g.conceptos.length + ' conceptos</strong> en un solo certificado:<ul style="margin:4px 0 0 16px;padding:0">' +
+              g.conceptos.map(function(c){ return '<li>' + escHtml(c.concepto) + (c.valor ? ' — $' + Math.round(c.valor).toLocaleString('es-CO') : '') + '</li>'; }).join('') +
+            '</ul></div>'
+          : '<div class="cc-meta">Concepto <code style="background:#f3f4f6;padding:1px 5px;border-radius:3px;font-size:.74rem">' + escHtml(g.conceptos[0].concepto) + '</code></div>';
         return '<div class="cc-item">' +
-          '<strong>' + escHtml(r.certificado) + '</strong>' +
-          '<div class="cc-meta">Concepto <code style="background:#f3f4f6;padding:1px 5px;border-radius:3px;font-size:.74rem">' + escHtml(r.concepto) + '</code> · ' +
-            escHtml(r.informante || '—') + ' · ' + valorTxt + '</div>' +
-          '<div class="cc-meta"><strong style="color:var(--pri)">Emisor:</strong> ' + escHtml(r.emisor) + '</div>' +
+          '<strong>' + escHtml(g.certificado) + '</strong>' +
+          '<div class="cc-meta"><strong style="color:var(--pri)">' + escHtml(g.informante || g.emisor || '—') + '</strong> · total $' + Math.round(g.total).toLocaleString('es-CO') + '</div>' +
+          conceptosHtml +
           verifyHtml + omisionHtml +
-          '<span class="cc-norma">' + escHtml(r.norma) + '</span>' +
+          '<span class="cc-norma">' + escHtml(g.norma) + '</span>' +
         '</div>';
       }).join('') +
       '</div>';
+    an._gruposCount = lista.length;
   }
   // Sección 2: faltantes sistémicos (siempre)
   var faltantesHtml = '<div class="cc-section-title">⚠ Posibles faltantes — el reporte exógena casi nunca los trae completos</div>' +
@@ -1907,7 +1917,7 @@ function _renderChecklistCertificados(filas){
     }).join('') +
     '</div>';
   return '<details class="checklist-cert" id="checklistCerts">' +
-    '<summary>📋 Checklist de certificados — qué cruzar contra el original (' + an.porRegistro.length + ' registros · ' + an.faltantesSistemicos.length + ' posibles faltantes)</summary>' +
+    '<summary>📋 Checklist de certificados — qué cruzar contra el original (' + (an._gruposCount || an.porRegistro.length) + ' certificado(s) · ' + an.faltantesSistemicos.length + ' posibles faltantes)</summary>' +
     '<div class="cc-body">' +
       '<div class="cc-intro"><strong>El reporte exógena es punto de partida, no la verdad.</strong>' +
         ' La propia DIAN advierte que puede actualizarse durante el año. Antes de "Aceptar todo", verifica cada cifra contra el certificado original que emite el tercero pagador y pregunta al cliente por los faltantes sistémicos.' +
