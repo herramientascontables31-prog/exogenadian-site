@@ -140,6 +140,33 @@ details.dcard .dbody th{background:var(--f50);font-weight:700;color:var(--f700)}
 .btn-amber:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(245,158,11,.4)}
 .matriz-card.flash{animation:mflash 1.4s ease}
 @keyframes mflash{0%,100%{box-shadow:none}35%{box-shadow:0 0 0 7px rgba(245,158,11,.5)}}
+.btn-ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.35)}
+.btn-ghost:hover{background:rgba(255,255,255,.22)}
+.est{font-size:.66rem;font-weight:700;padding:2px 8px;border-radius:6px;white-space:nowrap;display:inline-block}
+/* Preview del Excel (vitrina) */
+.xl-prev{background:#fff;border-radius:10px;margin:16px 0 6px;overflow:hidden;color:#111827;box-shadow:0 12px 32px rgba(0,0,0,.28)}
+.xl-top{background:#F3F4F6;padding:7px 12px;font-size:.7rem;color:#6B7280;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:6px;border-bottom:1px solid #E5E7EB}
+.xl-top i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.xl-body{overflow-x:auto;max-height:250px;overflow-y:auto}
+.xl-body table{width:100%;border-collapse:collapse;font-size:.72rem;min-width:680px}
+.xl-body th{background:#1E3A8A;color:#fff;padding:6px 9px;text-align:left;font-weight:700;position:sticky;top:0;white-space:nowrap}
+.xl-body td{padding:6px 9px;border-bottom:1px solid #F3F4F6;color:#374151;vertical-align:top;line-height:1.45}
+.xl-sel{border:1px solid #D1D5DB;border-radius:4px;padding:1px 7px;background:#fff;display:inline-block;font-size:.68rem;color:#374151;white-space:nowrap}
+.xl-leeme{padding:14px 16px;font-size:.74rem;line-height:1.75;color:#374151}
+.xl-tabs{display:flex;gap:3px;background:#E5E7EB;padding:5px 8px 0;overflow-x:auto}
+.xl-tab{padding:5px 12px;font-size:.7rem;font-weight:600;background:#F3F4F6;color:#4B5563;border-radius:6px 6px 0 0;cursor:pointer;white-space:nowrap;border:1px solid #D1D5DB;border-bottom:none;font-family:inherit}
+.xl-tab.on{background:#fff;color:#1E3A8A;font-weight:700}
+/* Vista matriz web (PRO) */
+.mtable-wrap{position:relative;background:var(--w);border:1px solid var(--f200);border-radius:12px;overflow:auto;box-shadow:var(--shadow);max-height:680px}
+.mtable{width:100%;border-collapse:collapse;font-size:.78rem;min-width:920px}
+.mtable th{position:sticky;top:0;background:#1E3A8A;color:#fff;padding:9px 10px;text-align:left;font-size:.7rem;white-space:nowrap;z-index:2}
+.mtable th[data-s]{cursor:pointer;user-select:none}
+.mtable th[data-s]:hover{background:#312E81}
+.mtable td{padding:8px 10px;border-bottom:1px solid var(--f100);vertical-align:top;color:var(--f700);line-height:1.45}
+.mtable tbody tr:hover td{background:#F8FAFF}
+.mtable a{color:var(--indigo);font-weight:700;text-decoration:none}
+tr.mblur td{filter:blur(4px);user-select:none;pointer-events:none}
+.mlock{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.65) 22%,rgba(255,255,255,.94) 55%);z-index:3;text-align:center;font-size:.92rem;color:var(--f700);padding:20px;line-height:1.7}
 .rel-links{display:flex;gap:10px;flex-wrap:wrap}
 .rel-links a{padding:8px 16px;background:var(--g50);color:var(--g700);border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:500}
 @media(max-width:720px){
@@ -235,7 +262,10 @@ details.dcard .dbody th{background:var(--f50);font-weight:700;color:var(--f700)}
 </div>
 <div class="res-head">
   <div class="res-count" id="resCount"></div>
-  <button class="btn btn-outline" id="btnExcel" style="font-size:.82rem;padding:8px 16px">📥 Descargar matriz Excel <span style="background:#1E3A8A;color:#fff;font-size:.62rem;padding:2px 7px;border-radius:5px;font-weight:700">PRO</span></button>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <button class="btn btn-outline" id="btnVista" style="font-size:.82rem;padding:8px 16px">🧮 Vista matriz <span style="background:#1E3A8A;color:#fff;font-size:.62rem;padding:2px 7px;border-radius:5px;font-weight:700">PRO</span></button>
+    <button class="btn btn-outline" id="btnExcel" style="font-size:.82rem;padding:8px 16px">📥 Matriz Excel <span style="background:#1E3A8A;color:#fff;font-size:.62rem;padding:2px 7px;border-radius:5px;font-weight:700">PRO</span></button>
+  </div>
 </div>
 <div id="lista"></div>
 <div class="mas-wrap"><button class="btn btn-primary" id="btnMas" style="display:none">Mostrar más normas</button></div>
@@ -252,8 +282,15 @@ details.dcard .dbody th{background:var(--f50);font-weight:700;color:var(--f700)}
     <div class="matriz-item"><b>📊 Resumen ejecutivo</b>Conteos por impuesto, tipo de norma y estado de vigencia: la foto del universo normativo para tu planeación.</div>
     <div class="matriz-item"><b>📖 Léeme</b>Fecha de corte, fuentes oficiales consultadas y cómo usar cada hoja.</div>
   </div>
-  <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:6px">
+  <p style="font-size:.78rem;opacity:.85;margin:2px 0 0">👇 Así se ve por dentro — navega las pestañas (datos reales de la base):</p>
+  <div class="xl-prev" id="xlPrev">
+    <div class="xl-top"><i style="background:#F87171"></i><i style="background:#FBBF24"></i><i style="background:#34D399"></i>&nbsp;matriz_normativa_exogenadian.xlsx</div>
+    <div class="xl-body" id="xlBody"></div>
+    <div class="xl-tabs" id="xlTabs"></div>
+  </div>
+  <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:14px">
     <button class="btn btn-amber" id="btnExcel2">📥 Descargar la Matriz (Excel)</button>
+    <button class="btn btn-ghost" id="btnVerVista">🧮 Probar la vista matriz web</button>
     <a href="precios.html" style="color:#FDE68A;font-size:.85rem;font-weight:700;text-decoration:none">¿Aún no eres PRO? Conoce los planes →</a>
   </div>
   <p style="font-size:.72rem;opacity:.65;margin-top:12px">Se regenera con cada corte del normograma (la fecha la ves arriba): descárgala de nuevo cuando cambie. Tu PRO también desbloquea los Excel de exógena, renta, IVA y nómina en todo el sitio.</p>
@@ -384,7 +421,7 @@ var DATA=(window.NORMOGRAMA&&window.NORMOGRAMA.normas)||[];
 var CORTE=(window.NORMOGRAMA&&window.NORMOGRAMA.corte)||'';
 var PAGE=40;
 // ─── Estado ───
-var S={q:'',impuestos:[],tipos:[],perfiles:[],sectores:[],estado:'',anio:'',orden:'relevancia',clave:false,shown:PAGE,ruta:-1};
+var S={q:'',impuestos:[],tipos:[],perfiles:[],sectores:[],estado:'',anio:'',orden:'relevancia',clave:false,shown:PAGE,ruta:-1,vista:'cards',tsort:'',tdir:1};
 // ─── Utilidades ───
 function $(id){return document.getElementById(id)}
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
@@ -452,10 +489,32 @@ function cardHTML(n){
  h+='</div></article>';
  return h;
 }
+function tablaHTML(items){
+ function arrow(k){return S.tsort===k?(S.tdir>0?' ↑':' ↓'):' ⇅'}
+ var head='<thead><tr><th style="width:34px">#</th><th data-s="titulo">Norma'+arrow('titulo')+'</th><th data-s="tipo">Tipo'+arrow('tipo')+'</th><th data-s="anio">Año'+arrow('anio')+'</th><th data-s="estado">Estado'+arrow('estado')+'</th><th>Impuestos</th><th>A quién aplica</th><th style="width:40px">🔗</th></tr></thead>';
+ var rows=items.map(function(n,ix){
+  var e=EST[n.estado]||{l:n.estado,bg:'#F3F4F6',c:'#4B5563'};
+  var url=n.url_dian||n.url_alt;
+  return '<tr'+((!proUnlocked&&ix>=3)?' class="mblur"':'')+'><td>'+(ix+1)+'</td><td><b>'+(n.importancia==='clave'?'⭐ ':'')+esc(n.titulo)+'</b></td><td>'+esc((TIPO[n.tipo]||{}).l||n.tipo)+'</td><td>'+n.anio+'</td><td><span class="est" style="background:'+e.bg+';color:'+e.c+'">'+esc(e.l)+'</span></td><td>'+esc(impLabel(n.impuestos))+'</td><td>'+esc(n.aplica||'')+'</td><td>'+(url?'<a href="'+esc(url)+'" target="_blank" rel="noopener">↗</a>':'')+'</td></tr>';
+ }).join('');
+ var lock=proUnlocked?'':'<div class="mlock"><div>🔒 <b>La vista matriz completa es PRO</b><br>La misma base, en formato de trabajo: ordenable, semaforizada y exportable a Excel de 5 hojas.<br><a class="btn btn-amber btn-sm" href="precios.html" style="margin-top:10px">Conocer planes →</a></div></div>';
+ return '<div class="mtable-wrap">'+lock+'<table class="mtable">'+head+'<tbody>'+rows+'</tbody></table></div>';
+}
 function render(){
  var r=filtrar();
+ if(S.vista==='tabla'&&S.tsort){
+  var k=S.tsort,d=S.tdir;
+  var ordEst={vigente:0,modificada:1,sustituida:2,derogada:3};
+  r=r.slice().sort(function(a,b){
+   if(k==='anio')return d*(a.anio-b.anio);
+   if(k==='estado')return d*((ordEst[a.estado]||9)-(ordEst[b.estado]||9));
+   if(k==='tipo')return d*String(a.tipo).localeCompare(String(b.tipo));
+   return d*fold(a.titulo).localeCompare(fold(b.titulo));
+  });
+ }
  var vis=r.slice(0,S.shown);
- $('lista').innerHTML=vis.length?vis.map(cardHTML).join(''):'<div class="vacio"><span>🔎</span>No encontramos normas con esos filtros.<br>Prueba quitando alguno o usa otra palabra.</div>';
+ var vacio='<div class="vacio"><span>🔎</span>No encontramos normas con esos filtros.<br>Prueba quitando alguno o usa otra palabra.</div>';
+ $('lista').innerHTML=vis.length?(S.vista==='tabla'?tablaHTML(vis):vis.map(cardHTML).join('')):vacio;
  $('resCount').innerHTML='<b>'+r.length+'</b> norma'+(r.length===1?'':'s')+(r.length!==DATA.length?' (de '+DATA.length+')':'')+(S.shown<r.length?' — mostrando '+vis.length:'');
  $('btnMas').style.display=S.shown<r.length?'inline-flex':'none';
  renderChips();
@@ -519,14 +578,67 @@ $('fClave').addEventListener('change',function(){S.clave=this.checked;S.shown=PA
 $('btnLimpiar').addEventListener('click',function(){reset(false);render()});
 $('btnMas').addEventListener('click',function(){S.shown+=PAGE;render()});
 $('filToggle').addEventListener('click',function(){$('filtrosBody').classList.toggle('colapsado')});
+$('lista').addEventListener('click',function(e){
+ var th=e.target.closest('th[data-s]');if(!th)return;
+ var k=th.dataset.s;
+ if(S.tsort===k)S.tdir=-S.tdir;else{S.tsort=k;S.tdir=1}
+ render();
+});
+function setVista(v,origen){
+ S.vista=v;
+ $('btnVista').classList.toggle('btn-primary',v==='tabla');
+ $('btnVista').classList.toggle('btn-outline',v!=='tabla');
+ render();
+ if(typeof gtag==='function')gtag('event','normograma_vista',{vista:v,pro:proUnlocked,origen:origen||''});
+}
+$('btnVista').addEventListener('click',function(){setVista(S.vista==='tabla'?'cards':'tabla','toggle')});
+$('btnVerVista').addEventListener('click',function(){
+ setVista('tabla','vitrina');
+ document.querySelector('.res-head').scrollIntoView({behavior:'smooth',block:'start'});
+});
+// ─── Preview del Excel en la vitrina ───
+var XL_TAB='papeles';
+function xlClaves(){return DATA.filter(function(n){return n.importancia==='clave'}).slice(0,3)}
+function xlEstChip(n){var e=EST[n.estado]||{l:n.estado,bg:'#F3F4F6',c:'#4B5563'};return '<span class="est" style="background:'+e.bg+';color:'+e.c+'">'+esc(e.l)+'</span>'}
+function xlSel(t){return '<span class="xl-sel">'+esc(t)+' ▾</span>'}
+function xlMasFila(cols,txt){return '<tr><td colspan="'+cols+'" style="color:#9CA3AF;font-style:italic">'+esc(txt)+'</td></tr>'}
+function xlPreviewHTML(tab){
+ if(tab==='leeme'){
+  return '<div class="xl-leeme"><b style="color:#1E3A8A;font-size:.85rem">MATRIZ NORMATIVA TRIBUTARIA — ExógenaDIAN PRO</b><br>Fecha de corte: <b>'+esc(CORTE)+'</b> · Normas en la base: <b>'+DATA.length+'</b><br><br><b style="color:#4F46E5">QUÉ CONTIENE CADA HOJA</b><br>📚 Normograma completo · 🎯 Mi selección (tus filtros) · 📋 Papeles de trabajo · 📊 Resumen<br><br><b style="color:#4F46E5">FUENTES</b><br>Verificada contra normograma.dian.gov.co, suin-juriscol, funcionpublica y corteconstitucional.gov.co.</div>';
+ }
+ if(tab==='resumen'){
+  var tops=Object.keys(IMP).map(function(k){
+   var ns=DATA.filter(function(n){return(n.impuestos||[]).indexOf(k)>=0});
+   return {l:IMP[k].l,t:ns.length,v:ns.filter(function(n){return n.estado==='vigente'||n.estado==='modificada'}).length,c:ns.filter(function(n){return n.importancia==='clave'}).length};
+  }).sort(function(a,b){return b.t-a.t}).slice(0,5);
+  return '<table><thead><tr><th>Impuesto u obligación</th><th>Normas</th><th>Vigentes</th><th>Clave ⭐</th></tr></thead><tbody>'+tops.map(function(x){return '<tr><td><b>'+esc(x.l)+'</b></td><td>'+x.t+'</td><td>'+x.v+'</td><td>'+x.c+'</td></tr>'}).join('')+xlMasFila(4,'… y los demás impuestos, más conteos por tipo de norma y por estado de vigencia')+'</tbody></table>';
+ }
+ if(tab==='papeles'){
+  var riesgos=['Alto','Medio','Bajo'];
+  return '<table><thead><tr><th>Norma</th><th>Estado</th><th>¿Aplica al cliente?</th><th>Riesgo</th><th>Acción requerida</th><th>Responsable</th><th>Avance</th></tr></thead><tbody>'+xlClaves().map(function(n,i){return '<tr><td><b>'+esc(n.titulo)+'</b></td><td>'+xlEstChip(n)+'</td><td>'+xlSel('Por revisar')+'</td><td>'+xlSel(riesgos[i%3])+'</td><td style="color:#9CA3AF">— tu texto —</td><td style="color:#9CA3AF">—</td><td>'+xlSel('Pendiente')+'</td></tr>'}).join('')+xlMasFila(7,'… una fila editable por cada norma de tu selección, con listas desplegables ya configuradas')+'</tbody></table>';
+ }
+ var items=tab==='sel'?DATA.filter(function(n){return(n.impuestos||[]).indexOf('exogena')>=0}).slice(0,3):xlClaves();
+ var nota=tab==='sel'?xlMasFila(6,'Ejemplo con filtro "Exógena" activo — esta hoja se arma con TUS filtros al momento de descargar'):xlMasFila(6,'… y '+(DATA.length-3)+' normas más, cada una con 14 columnas de detalle');
+ return '<table><thead><tr><th>Norma</th><th>Tipo</th><th>Año</th><th>Estado</th><th>Impuestos</th><th>Texto oficial</th></tr></thead><tbody>'+items.map(function(n){return '<tr><td><b>'+esc(n.titulo)+'</b></td><td>'+esc((TIPO[n.tipo]||{}).l||n.tipo)+'</td><td>'+n.anio+'</td><td>'+xlEstChip(n)+'</td><td>'+esc(impLabel(n.impuestos))+'</td><td><span style="color:#4F46E5;text-decoration:underline">Abrir norma</span></td></tr>'}).join('')+nota+'</tbody></table>';
+}
+function xlRender(){
+ var TABS=[{k:'leeme',l:'📖 Léeme'},{k:'resumen',l:'📊 Resumen'},{k:'completo',l:'📚 Normograma completo'},{k:'sel',l:'🎯 Mi selección'},{k:'papeles',l:'📋 Papeles de trabajo'}];
+ $('xlTabs').innerHTML=TABS.map(function(t){return '<button class="xl-tab'+(XL_TAB===t.k?' on':'')+'" data-t="'+t.k+'">'+t.l+'</button>'}).join('');
+ $('xlBody').innerHTML=xlPreviewHTML(XL_TAB);
+}
+$('xlTabs').addEventListener('click',function(e){
+ var b=e.target.closest('.xl-tab');if(!b)return;
+ XL_TAB=b.dataset.t;xlRender();
+ if(typeof gtag==='function')gtag('event','normograma_preview_tab',{tab:XL_TAB});
+});
 // ─── Excel (PRO) ───
 var proUnlocked=false;
 (function initPro(){
  if(typeof exoPro==='undefined'){setTimeout(initPro,50);return}
  if(exoPro.getSaved()!==null)proUnlocked=true; // arranque optimista
- exoPro.check().then(function(isPro){proUnlocked=isPro});
+ exoPro.check().then(function(isPro){proUnlocked=isPro;if(S.vista==='tabla')render()});
 })();
-window.__ngForcePro=function(v){proUnlocked=!!v}; // hook de pruebas e2e
+window.__ngForcePro=function(v){proUnlocked=!!v;render()}; // hook de pruebas e2e
 var ESTXL={
  'vigente':{bg:'FFD1FAE5',c:'FF047857'},
  'modificada':{bg:'FFFEF3C7',c:'FFB45309'},
@@ -698,7 +810,7 @@ if(!DATA.length){
  $('lista').innerHTML='<div class="vacio"><span>⚠️</span>No pudimos cargar la base de normas. Recarga la página o inténtalo más tarde.</div>';
  $('hdrBadge').textContent='Sin datos';
 }else{
- fillAnios();renderStats();render();
+ fillAnios();renderStats();render();xlRender();
 }
 })();
 </script>
