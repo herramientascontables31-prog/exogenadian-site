@@ -216,7 +216,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 <div id="nav-container"></div>
 <script defer src="shared/pro.js?v=994665f5"></script>
 <script defer src="shared/toast.js?v=825749bc"></script>
-<script defer src="shared/nav.js?v=4a352311"></script>
+<script defer src="shared/nav.js?v=6b392fe3"></script>
 <script defer src="shared/pro-banner.js?v=a5944c54"></script>
 <div class="container">
 <div class="header">
@@ -868,6 +868,30 @@ function limpiar() {
    ═══════════════════════════════════════════ */
 actualizarUVT();
 actualizarTarifasCaso();
+/* Pre-llenado desde el Liquidador F210 (?impuesto=&ingresos=&patrimonio=&anio=&from=210).
+   El contador termina el 210, ve que es tardío y llega con las 3 bases ya cargadas. */
+(function(){
+  try {
+    var q = new URLSearchParams(location.search);
+    if(!q.has('impuesto') && !q.has('ingresos') && !q.has('patrimonio') && !q.has('anio')) return;
+    function set(id, v){ var el = document.getElementById(id); if(el && v){ el.value = Number(v).toLocaleString('es-CO'); } }
+    var anio = q.get('anio');
+    if(anio){
+      var sg = document.getElementById('anioGravable'); if(sg && [].some.call(sg.options, function(o){ return o.value === anio; })) sg.value = anio;
+      actualizarUVT();
+    }
+    set('iImpuesto', q.get('impuesto'));
+    set('iIngresos', q.get('ingresos'));
+    set('iPatrimonio', q.get('patrimonio'));
+    if(q.get('from') === '210'){
+      var aviso = document.createElement('div');
+      aviso.style.cssText = 'max-width:1200px;margin:10px auto 0;padding:10px 16px;background:#ECFDF5;border:1px solid #6EE7B7;border-radius:8px;color:#065F46;font-size:.85rem';
+      aviso.innerHTML = '✓ Bases traídas del <strong>Liquidador F210</strong> (impuesto a cargo, ingresos y patrimonio). Indica la fecha de presentación y si hubo emplazamiento, y liquida la sanción.';
+      var main = document.querySelector('.container') || document.body;
+      if(main) main.insertBefore(aviso, main.firstChild);
+    }
+  } catch(e){}
+})();
 </script>
 <div id="main"></div>
 <section style="max-width:1200px;margin:32px auto 0;padding:0 20px 40px">

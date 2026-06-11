@@ -182,7 +182,7 @@
     // SALDOS y adquisiciones = patrimonio (c29) o movimientos del año (Tope 4), NO ingreso.
     // Van antes que capital porque el informante suele ser un banco (matchea 'capital' por
     // nombre) y "Saldo cuentas/CDT/inversión" o "Inversiones realizadas" no es renta.
-    { re: /^saldo\b|inversion(es)?.*(realizad|efectuad)|avaluo|adquisicion de bienes|bienes (o derechos|raices|inmuebles)|cuenta por cobrar|aporte.*derecho social/, cedula: 'informativo' },
+    { re: /^saldo\b|saldo a favor|inversion(es)?.*(realizad|efectuad)|avaluo|adquisicion de bienes|bienes (o derechos|raices|inmuebles)|cuenta por cobrar|aporte.*derecho social/, cedula: 'informativo' },
     { re: /credito de vivienda|hipotecari|intereses (de )?vivienda/,                   cedula: 'deduccion_vivienda' },
     { re: /\bafc\b|\bavc\b|aporte(s)? voluntari|fondo.*pension.*voluntari|fvp\b/,      cedula: 'deduccion_avc' },
     { re: /prepagada|medicina prepagada|poliza de salud/,                              cedula: 'deduccion_salud_prepag' },
@@ -198,7 +198,7 @@
   // Patrones del "uso sugerido" que NUNCA son ingreso de cédula (van a 'informativo').
   // Cubren tanto el formato con rótulo ("Tope 4. Consignaciones…") como el formato que
   // trae el concepto literal en esa columna ("Valor total de los movimientos…", "Saldo…").
-  var RE_USO_NO_INGRESO = /^tope\s*[234]\b|consumos?\s*tc|total adquisiciones consumos|gastos? tarjeta cr[eé]dito|tarjeta\s*cr[eé]dito\s*o\s*d[eé]bito|consignaciones\s*e\s*inversiones|valor total de (los )?movimientos|^saldo\b|inversion(es)?.*(realizad|efectuad)|^cdt\b|avaluo|adquisicion de bienes|cuenta por cobrar|aporte.*derecho social|se usa en renglones como/;
+  var RE_USO_NO_INGRESO = /^tope\s*[234]\b|consumos?\s*tc|total adquisiciones consumos|gastos? tarjeta cr[eé]dito|tarjeta\s*cr[eé]dito\s*o\s*d[eé]bito|consignaciones\s*e\s*inversiones|valor total de (los )?movimientos|^saldo\b|saldo a favor|inversion(es)?.*(realizad|efectuad)|^cdt\b|avaluo|adquisicion de bienes|cuenta por cobrar|aporte.*derecho social|se usa en renglones como/;
 
   function clasificarPorHeuristica(detalle, informante){
     var texto = normalizar((detalle || '') + ' ' + (informante || ''));
@@ -639,6 +639,8 @@
       return '→ SÍ va a la declaración: es un ACTIVO del PATRIMONIO (casilla 29, ya prellenada). Verifica el saldo a 31-dic.';
     if(/\br30\b|deuda|pasivo/.test(u))
       return '→ SÍ va a la declaración: es una DEUDA (casilla 30, ya prellenada con el patrimonio). Verifica el saldo a 31-dic.';
+    if(/saldo a favor/.test(u))
+      return '→ SÍ va a la declaración: es el SALDO A FAVOR del año anterior (casilla 131, ya prellenada). Confírmalo contra la declaración del año pasado.';
     if(/\br132\b|retencion/.test(u))
       return '→ SÍ va a la declaración: es una RETENCIÓN (casilla 132, ya prellenada). Confirma contra el certificado.';
     if(/\br28\b|factura electr[oó]nica|susceptible de beneficio/.test(u))
