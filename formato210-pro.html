@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script src="shared/cookie-consent.js?v=9fc53d44"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -372,30 +372,30 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
   <div id="ayudaContent">Cargando...</div>
 </aside>
 <div id="nav-container"></div>
-<script defer src="shared/pro.js?v=848fbf16"></script>
-<script defer src="shared/toast.js?v=9d7a298c"></script>
-<script defer src="shared/nav.js?v=0dbe1c46"></script>
+<script defer src="shared/pro.js?v=994665f5"></script>
+<script defer src="shared/toast.js?v=825749bc"></script>
+<script defer src="shared/nav.js?v=4a352311"></script>
 <script defer src="shared/pro-banner.js?v=a5944c54"></script>
 <script src="shared/parametros-renta-pn.js?v=a63bcba7"></script>
 <script src="shared/calculo210.js?v=e1be36dd"></script>
-<script src="shared/optimizer-210.js?v=658b477d"></script>
-<script src="shared/advisor-210.js?v=1765cc66"></script>
-<script src="shared/cert-parser-210.js?v=5815a414"></script>
-<script src="shared/pdf-lines.js?v=8c015d26"></script>
-<script src="shared/cert-ui-210.js?v=5ce69261"></script>
-<script src="shared/vencimientos-pn.js?v=bdc3d119"></script>
-<script src="shared/beneficio-auditoria.js?v=645ed289"></script>
-<script src="shared/reajuste-fiscal.js?v=761bd775"></script>
-<script src="shared/decl-prev-210.js?v=a03c70c1"></script>
-<script src="shared/validaciones210.js?v=a6bc1c89"></script>
-<script src="shared/parser-exogena-pn.js?v=dd8cdecd"></script>
-<script src="shared/parser-muisca-consultante.js?v=a427c9ed"></script>
+<script src="shared/optimizer-210.js?v=67cfbd2e"></script>
+<script src="shared/advisor-210.js?v=a3e6b4c2"></script>
+<script src="shared/cert-parser-210.js?v=ddb0ec13"></script>
+<script src="shared/pdf-lines.js?v=a23f791c"></script>
+<script src="shared/cert-ui-210.js?v=f0e16dce"></script>
+<script src="shared/vencimientos-pn.js?v=0023b05e"></script>
+<script src="shared/beneficio-auditoria.js?v=ae5ebe84"></script>
+<script src="shared/reajuste-fiscal.js?v=a59bf01e"></script>
+<script src="shared/decl-prev-210.js?v=151de12f"></script>
+<script src="shared/validaciones210.js?v=bb2f6ae9"></script>
+<script src="shared/parser-exogena-pn.js?v=ea2cd8a9"></script>
+<script src="shared/parser-muisca-consultante.js?v=34622a26"></script>
 <script src="shared/sugerida-parser-210.js?v=f53a18af"></script>
-<script src="shared/canonicalize-inputs.js?v=8e51ce11"></script>
-<script src="shared/excel-papel-trabajo.js?v=d25c4c92"></script>
+<script src="shared/canonicalize-inputs.js?v=63199095"></script>
+<script src="shared/excel-papel-trabajo.js?v=ec93d426"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="shared/agente-preclasificador-pn.js?v=bc18fed4"></script>
-<script src="shared/certificados-renta-pn.js?v=a47ae843"></script>
+<script src="shared/agente-preclasificador-pn.js?v=ef64096a"></script>
+<script src="shared/certificados-renta-pn.js?v=666c1b89"></script>
 <div class="container">
   <div class="header">
     <div>
@@ -813,10 +813,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
           <button onclick="exportarExcelAsesor()" class="btn btn-success">&#128202; Calcular y descargar Excel (borrador 210 oficial + papel de trabajo)</button>
           <button onclick="exportarEntregablePDF()" class="btn" style="background:var(--pri,#1B3A5C);color:#fff;margin-left:8px;margin-top:8px">&#128196; Entregable para el cliente (PDF)</button>
           <div style="font-size:.78rem;color:var(--muted);margin-top:10px">Un solo Excel: la <strong>réplica oficial del 210</strong> (casillas pobladas, lista para transcribir al MUISCA) + el <strong>papel de trabajo</strong> de 8 hojas. El entregable PDF trae el borrador + diagnóstico de riesgos + planeación. Atajos: <kbd>Ctrl+S</kbd> guardar &middot; <kbd>Ctrl+E</kbd> exportar Excel</div>
-          <div style="margin-top:14px;padding-top:12px;border-top:1px dashed var(--border)">
-            <div style="font-size:.82rem;color:#92400E;margin-bottom:8px">⏰ ¿La declaración se presenta <strong>después del vencimiento</strong>? Calcula la sanción por extemporaneidad (Art. 641/642) con el impuesto, ingresos y patrimonio ya cargados.</div>
-            <button onclick="irASancionExtemporaneidad()" class="btn" style="background:#B45309;color:#fff">&#9878;&#65039; Liquidar sanción por extemporaneidad →</button>
-          </div>
         </div>
         <div class="card" id="cardReplica210" style="border:2px solid var(--pri,#1B3A5C)">
           <h3 onclick="toggleReplica210()" style="cursor:pointer;user-select:none">&#128203; Formulario 210 — réplica oficial editable <span style="font-size:.74rem;color:var(--muted);font-weight:400" id="replica210Hint">(clic para contraer)</span></h3>
@@ -1388,7 +1384,7 @@ function renderizarResumenExogena(result, fileName){
       ['Tope 1 · Ingresos', tp.ingresos],
       ['Tope 2 · Patrimonio (declarado año anterior)', tp.patrimonio],
       ['Tope 3 · Consumos TC', tp.consumoTC],
-      ['Tope 4 · Movimientos en cuentas', tp.movimientos],
+      ['Tope 4 · Consignaciones', tp.movimientos],
       ['Tope 5 · Compras', tp.compras]
     ].filter(function(x){ return x[1] > 0; });
     if(topeItems.length){
@@ -1398,7 +1394,7 @@ function renderizarResumenExogena(result, fileName){
           topeItems.map(function(x){
             return '<div style="display:flex;justify-content:space-between;padding:1px 0"><span>' + x[0] + '</span><strong>' + fCOPshort(x[1]) + '</strong></div>';
           }).join('') +
-          '<div style="font-size:.7rem;color:var(--muted);margin-top:4px">Basta superar 1.400 UVT en ingresos, consignaciones o consumos TC — o 4.500 UVT en patrimonio — para estar obligado a declarar. <strong>El Tope 4 es el total de movimientos reportados</strong> (créditos y débitos): puede incluir traslados entre cuentas propias, préstamos y recaudos de terceros — no equivale a consignaciones netas. Cruza con los extractos.</div>' +
+          '<div style="font-size:.7rem;color:var(--muted);margin-top:4px">Basta superar 1.400 UVT en ingresos, consignaciones o consumos TC — o 4.500 UVT en patrimonio — para estar obligado a declarar.</div>' +
         '</div>';
     }
   }
@@ -1873,39 +1869,29 @@ function _renderChecklistCertificados(filas){
   if(!window.certificadosRentaPN) return '';
   if(!filas || filas.length === 0) return '';
   var an = certificadosRentaPN.analizarReconciliacion(filas);
-  // Sección 1: AGRUPADO por informante + tipo de certificado. Un mismo tercero (ej. ISAGEN)
-  // emite UN solo certificado (F220) que reúne todos sus conceptos — no se repite por cada uno.
+  // Sección 1: por cada registro cargado con info conocida
   var porRegistroHtml = '';
   if(an.porRegistro.length > 0){
-    var grupos = {};
-    an.porRegistro.forEach(function(r){
-      var key = (r.informante || '—') + '||' + (r.certificado || '');
-      if(!grupos[key]) grupos[key] = { certificado: r.certificado, informante: r.informante, emisor: r.emisor, norma: r.norma, verificar: r.verificar, omisionesComunes: r.omisionesComunes, conceptos: [], total: 0 };
-      grupos[key].conceptos.push({ concepto: r.concepto, valor: r.valor });
-      grupos[key].total += (r.valor || 0);
-    });
-    var lista = Object.keys(grupos).map(function(k){ return grupos[k]; });
-    porRegistroHtml = '<div class="cc-section-title">📄 Certificados a pedir — uno por tercero (cruza contra el original)</div>' +
+    porRegistroHtml = '<div class="cc-section-title">📄 Por cada registro cargado — cruza contra el original</div>' +
       '<div class="cc-list">' +
-      lista.map(function(g){
-        var verifyHtml = g.verificar ? '<div class="cc-verify"><strong>Qué verificar:</strong> ' + escHtml(g.verificar) + '</div>' : '';
-        var omisionHtml = g.omisionesComunes ? '<div class="cc-omision"><strong>Omisiones comunes:</strong> ' + escHtml(g.omisionesComunes) + '</div>' : '';
-        // Lista de conceptos que reúne ese certificado (con su valor)
-        var conceptosHtml = g.conceptos.length > 1
-          ? '<div class="cc-meta" style="margin-top:4px">Reúne <strong>' + g.conceptos.length + ' conceptos</strong> en un solo certificado:<ul style="margin:4px 0 0 16px;padding:0">' +
-              g.conceptos.map(function(c){ return '<li>' + escHtml(c.concepto) + (c.valor ? ' — $' + Math.round(c.valor).toLocaleString('es-CO') : '') + '</li>'; }).join('') +
-            '</ul></div>'
-          : '<div class="cc-meta">Concepto <code style="background:#f3f4f6;padding:1px 5px;border-radius:3px;font-size:.74rem">' + escHtml(g.conceptos[0].concepto) + '</code></div>';
+      an.porRegistro.map(function(r){
+        var verifyHtml = r.verificar
+          ? '<div class="cc-verify"><strong>Qué verificar:</strong> ' + escHtml(r.verificar) + '</div>'
+          : '';
+        var omisionHtml = r.omisionesComunes
+          ? '<div class="cc-omision"><strong>Omisiones comunes:</strong> ' + escHtml(r.omisionesComunes) + '</div>'
+          : '';
+        var valorTxt = r.valor ? '$' + Math.round(r.valor).toLocaleString('es-CO') : '—';
         return '<div class="cc-item">' +
-          '<strong>' + escHtml(g.certificado) + '</strong>' +
-          '<div class="cc-meta"><strong style="color:var(--pri)">' + escHtml(g.informante || g.emisor || '—') + '</strong> · total $' + Math.round(g.total).toLocaleString('es-CO') + '</div>' +
-          conceptosHtml +
+          '<strong>' + escHtml(r.certificado) + '</strong>' +
+          '<div class="cc-meta">Concepto <code style="background:#f3f4f6;padding:1px 5px;border-radius:3px;font-size:.74rem">' + escHtml(r.concepto) + '</code> · ' +
+            escHtml(r.informante || '—') + ' · ' + valorTxt + '</div>' +
+          '<div class="cc-meta"><strong style="color:var(--pri)">Emisor:</strong> ' + escHtml(r.emisor) + '</div>' +
           verifyHtml + omisionHtml +
-          '<span class="cc-norma">' + escHtml(g.norma) + '</span>' +
+          '<span class="cc-norma">' + escHtml(r.norma) + '</span>' +
         '</div>';
       }).join('') +
       '</div>';
-    an._gruposCount = lista.length;
   }
   // Sección 2: faltantes sistémicos (siempre)
   var faltantesHtml = '<div class="cc-section-title">⚠ Posibles faltantes — el reporte exógena casi nunca los trae completos</div>' +
@@ -1921,7 +1907,7 @@ function _renderChecklistCertificados(filas){
     }).join('') +
     '</div>';
   return '<details class="checklist-cert" id="checklistCerts">' +
-    '<summary>📋 Checklist de certificados — qué cruzar contra el original (' + (an._gruposCount || an.porRegistro.length) + ' certificado(s) · ' + an.faltantesSistemicos.length + ' posibles faltantes)</summary>' +
+    '<summary>📋 Checklist de certificados — qué cruzar contra el original (' + an.porRegistro.length + ' registros · ' + an.faltantesSistemicos.length + ' posibles faltantes)</summary>' +
     '<div class="cc-body">' +
       '<div class="cc-intro"><strong>El reporte exógena es punto de partida, no la verdad.</strong>' +
         ' La propia DIAN advierte que puede actualizarse durante el año. Antes de "Aceptar todo", verifica cada cifra contra el certificado original que emite el tercero pagador y pregunta al cliente por los faltantes sistémicos.' +
@@ -3190,27 +3176,6 @@ function mostrarOrigenCasilla(cas){
   if(typeof gtag !== 'undefined') gtag('event','f210_pro_origen_casilla', { casilla: cas });
 }
 function cerrarOrigen(){ document.getElementById('origenModal').classList.remove('show'); }
-// Abre el Liquidador de Sanciones DIAN con las 3 bases del 210 ya cargadas.
-function irASancionExtemporaneidad(){
-  var R = (ultimoResultado && ultimoResultado.renglones) || {};
-  var sc = (ultimoResultado && ultimoResultado.cedulaGeneral && ultimoResultado.cedulaGeneral.subcedulas) || {};
-  var impuesto = Math.round(R.c129 || R.c126 || 0); // impuesto a cargo (base preferida)
-  var ingresos = Math.round(
-    ((sc.trabajo && sc.trabajo.ingresosBrutos) || 0) + ((sc.honorarios && sc.honorarios.ingresosBrutos) || 0) +
-    ((sc.capital && sc.capital.ingresosBrutos) || 0) + ((sc.noLaboral && sc.noLaboral.ingresosBrutos) || 0) +
-    ((ultimoResultado && ultimoResultado.cedulaPensiones && ultimoResultado.cedulaPensiones.ingresosBrutos) || 0)
-  );
-  var patrimonio = Math.round(R.c31 || 0);
-  var anio = (ultimoEstado && ultimoEstado.year) || getYear();
-  var p = new URLSearchParams();
-  if(impuesto > 0) p.set('impuesto', impuesto);
-  if(ingresos > 0) p.set('ingresos', ingresos);
-  if(patrimonio > 0) p.set('patrimonio', patrimonio);
-  p.set('anio', anio);
-  p.set('from', '210');
-  if(typeof gtag !== 'undefined') gtag('event','f210_pro_ir_sancion');
-  window.open('sanciones-dian.html?' + p.toString(), '_blank');
-}
 // Casillas editables del 210 → input real del wizard que alimenta el motor.
 // Editar una casilla en la réplica escribe en ese input y recalcula todo.
 var CASILLA_INPUT_210 = {
@@ -3468,6 +3433,6 @@ function exportarEntregablePDF(){
   if(typeof exoToast!=='undefined') exoToast('Entregable generado','success');
 }
 </script>
-<script src="shared/nota-auditor.js?v=c2019bf6"></script>
+<script src="shared/nota-auditor.js?v=b8f0a327"></script>
 </body>
 </html>

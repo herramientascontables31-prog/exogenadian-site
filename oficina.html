@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es-CO">
 <head>
-<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script src="shared/cookie-consent.js?v=9fc53d44"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
@@ -265,6 +265,21 @@ body{font-family:var(--font);background:var(--f50);color:var(--f900);min-height:
   .col-group-exogena,.col-group-renta,.col-group-iva,.col-group-ret,.col-group-f2516,.col-group-rst,.col-group-patrimonio,.col-group-activos,.col-group-ica,.col-group-inc{background:#f0f0f0!important;color:#000!important}
   a{color:#000!important;text-decoration:none}
 }
+/* ═══ Responsable (auxiliar) ═══ */
+.resp-badge{background:#EEF2FF;color:#4338CA;padding:1px 6px;border-radius:4px;font-size:.65rem;font-weight:700;white-space:nowrap}
+.resp-summary{display:none;flex-wrap:wrap;gap:8px;align-items:center;margin:-4px 2px 14px}
+.resp-summary .resp-sum-label{font-size:.74rem;font-weight:700;color:var(--f500);text-transform:uppercase;letter-spacing:.04em}
+.resp-chip{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:8px;border:1px solid var(--f200);background:#fff;cursor:pointer;font-family:var(--font);font-size:.78rem;font-weight:600;color:var(--f700);transition:all .15s}
+.resp-chip:hover{border-color:#6366F1;color:#4338CA}
+.resp-chip.active{background:#4F46E5;border-color:#4F46E5;color:#fff}
+.resp-chip .rc-count{font-size:.7rem;font-weight:700;padding:1px 6px;border-radius:6px}
+.resp-chip .rc-overdue{background:#FEE2E2;color:#991B1B}
+.resp-chip .rc-urgent{background:#FFEDD5;color:#9A3412}
+.resp-chip .rc-pending{background:#FEF3C7;color:#92400E}
+.resp-chip .rc-clear{background:#ECFDF5;color:#065F46}
+.resp-chip.active .rc-count{background:rgba(255,255,255,.22);color:#fff}
+.resp-group-row td{background:var(--f50);border-top:2px solid #C7D2FE;padding:7px 12px;font-size:.78rem;font-weight:700;color:#4338CA}
+@media print{.resp-summary{display:none!important}}
 </style>
 <script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
 #exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
@@ -383,7 +398,12 @@ body{font-family:var(--font);background:var(--f50);color:var(--f900);min-height:
       <option value="ica">ICA</option>
       <option value="inc">Imp. al Consumo</option>
     </select>
+    <select class="filter-select" id="filterResp" onchange="applyFilters()" style="display:none">
+      <option value="">Todos los responsables</option>
+    </select>
+    <button class="filter-pill" id="groupRespBtn" onclick="toggleGroupResp()" style="display:none" title="Mostrar la tabla agrupada por auxiliar responsable">Agrupar por responsable</button>
   </div>
+  <div class="resp-summary no-print" id="respSummary"></div>
   <div class="no-print" id="semLegend" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin:-6px 2px 14px;font-size:.74rem;color:var(--f500);font-weight:600">
     <span><span class="dot dot-green" style="display:inline-block;width:9px;height:9px;border-radius:50%;vertical-align:middle;margin-right:4px"></span>Presentada</span>
     <span><span class="dot dot-yellow" style="display:inline-block;width:9px;height:9px;border-radius:50%;vertical-align:middle;margin-right:4px"></span>Pendiente</span>
@@ -493,7 +513,7 @@ body{font-family:var(--font);background:var(--f50);color:var(--f900);min-height:
       });
     })();
   </script>
-  <link rel="stylesheet" href="shared/calendario-dian-2026.css?v=52305536">
+  <link rel="stylesheet" href="shared/calendario-dian-2026.css?v=a7ac3ca4">
   <details class="calendario-dropdown" id="calDianDropdown" style="margin-top:32px;background:var(--white);border:1px solid var(--f200);border-radius:12px;overflow:hidden">
     <summary style="padding:16px 20px;cursor:pointer;font-weight:600;color:var(--f700);display:flex;align-items:center;justify-content:space-between;list-style:none;font-size:.95rem">
       <span>📅 Calendario Tributario DIAN 2026 completo</span>
@@ -503,7 +523,7 @@ body{font-family:var(--font);background:var(--f50);color:var(--f900);min-height:
       <div id="cal-dian-2026"></div>
     </div>
   </details>
-  <script src="shared/calendario-dian-2026.js?v=f0e49917"></script>
+  <script src="shared/calendario-dian-2026.js?v=f1880d02"></script>
   <script>
     (function(){
       var dropdown=document.getElementById('calDianDropdown');
@@ -684,6 +704,7 @@ body{font-family:var(--font);background:var(--f50);color:var(--f900);min-height:
               nit: nit,
               label: o.label || '',
               group: o.group || '',
+              responsable: (c.responsable||'').trim(),
               presentada: !!estado[key]
             });
           });
@@ -903,6 +924,12 @@ body{font-family:var(--font);background:var(--f50);color:var(--f900);min-height:
         </select>
       </div>
       <div class="form-group">
+        <label for="cResponsable">Responsable / auxiliar (opcional)</label>
+        <input type="text" id="cResponsable" list="respDatalist" placeholder="Ej: Marcela" autocomplete="off" maxlength="40">
+        <datalist id="respDatalist"></datalist>
+        <div class="hint">Asigna qui&eacute;n lleva este cliente y podr&aacute;s filtrar y agrupar los vencimientos por auxiliar</div>
+      </div>
+      <div class="form-group">
         <div class="checkbox-group">
           <label class="checkbox-item"><input type="checkbox" id="cGC"> Gran Contribuyente</label>
         </div>
@@ -962,6 +989,7 @@ body{font-family:var(--font);background:var(--f50);color:var(--f900);min-height:
             <option value="cuatrimestral">IVA Cuatrimestral</option>
             <option value="no">No responsable IVA</option>
           </select>
+          <input type="text" id="bulkResponsable" list="respDatalist" placeholder="Responsable / auxiliar (opcional)" autocomplete="off" maxlength="40" style="grid-column:1/-1;padding:8px 10px;border:1.5px solid var(--f200);border-radius:8px;font-size:.85rem;font-family:var(--font)">
         </div>
       </div>
       <div class="form-group">
@@ -1035,11 +1063,11 @@ body{font-family:var(--font);background:var(--f50);color:var(--f900);min-height:
     </div>
   </div>
 </div>
-<script defer src="shared/nav.js?v=0dbe1c46"></script>
-<script defer src="shared/pro.js?v=848fbf16"></script>
-<script defer src="shared/toast.js?v=9d7a298c"></script>
-<script src="shared/drive-sync.js?v=c75d94d3"></script>
-<script src="shared/drive-sync-ui.js?v=507439ea"></script>
+<script defer src="shared/nav.js?v=4a352311"></script>
+<script defer src="shared/pro.js?v=994665f5"></script>
+<script defer src="shared/toast.js?v=825749bc"></script>
+<script src="shared/drive-sync.js?v=23f606f3"></script>
+<script src="shared/drive-sync-ui.js?v=02da0e13"></script>
 <script>
 (function(){
 'use strict';
@@ -1480,16 +1508,94 @@ function saveFilters(){
     currentFilter:currentFilter,
     filterClient:filterClient,
     filterObl:filterObl,
+    filterResp:filterResp,
+    groupResp:groupResp,
     searchQuery:searchQuery,
     sortKey:sortKey,
     sortDir:sortDir
   }));
 }
 function normalize(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
+/* ═══ RESPONSABLE (AUXILIAR) ═══ */
+function respName(c){return c&&c.responsable?String(c.responsable).trim():''}
+// Nombres distintos (case/acento-insensible), conservando la primera grafía usada.
+function distinctResponsables(clients){
+  var seen={},out=[];
+  clients.forEach(function(c){
+    var r=respName(c);if(!r)return;
+    var k=normalize(r);
+    if(!seen[k]){seen[k]=true;out.push(r)}
+  });
+  out.sort(function(a,b){return a.localeCompare(b,'es',{sensitivity:'base'})});
+  return out;
+}
+function clientPassesResp(c){
+  if(!filterResp)return true;
+  if(filterResp==='__none')return !respName(c);
+  return normalize(respName(c))===normalize(filterResp);
+}
+function refreshRespDatalist(){
+  var dl=document.getElementById('respDatalist');
+  if(!dl)return;
+  dl.innerHTML=distinctResponsables(loadClients()).map(function(r){
+    return '<option value="'+escapeHTML(r)+'">';
+  }).join('');
+}
+window.respFilter=function(val){
+  filterResp=(filterResp===val)?'':val;
+  var fr=document.getElementById('filterResp');if(fr)fr.value=filterResp;
+  saveFilters();
+  if(typeof gtag==='function')gtag('event','oficina_filtro_resp',{active:!!filterResp});
+  render();
+};
+window.toggleGroupResp=function(){
+  groupResp=!groupResp;
+  saveFilters();
+  if(typeof gtag==='function')gtag('event','oficina_agrupar_resp',{on:groupResp});
+  render();
+};
+// Chips de carga por auxiliar: vencidas / urgentes / pendientes de cada responsable.
+function renderRespSummary(clients){
+  var wrap=document.getElementById('respSummary');
+  if(!wrap)return;
+  var resps=distinctResponsables(clients);
+  if(!resps.length){wrap.style.display='none';wrap.innerHTML='';return}
+  var keys=resps.slice();
+  if(clients.some(function(c){return !respName(c)}))keys.push('__none');
+  var html='<span class="resp-sum-label">Carga por auxiliar:</span>';
+  keys.forEach(function(r){
+    var label=r==='__none'?'Sin asignar':r;
+    var overdue=0,urgent=0,pending=0;
+    clients.forEach(function(c){
+      var cr=respName(c);
+      var match=r==='__none'?!cr:normalize(cr)===normalize(r);
+      if(!match)return;
+      buildObligations(c).forEach(function(o){
+        if(!o.date)return;
+        var s=getSemaforo(o.date,c.nit,o.id);
+        if(s.status==='vencida')overdue++;
+        else if(s.status==='urgente')urgent++;
+        else if(s.status==='pendiente')pending++;
+      });
+    });
+    var active=filterResp===r?' active':'';
+    html+='<button class="resp-chip'+active+'" onclick="respFilter(\''+escapeHTML(r).replace(/'/g,'&#39;')+'\')" title="Clic para ver solo los clientes de '+escapeHTML(label)+'">';
+    html+=escapeHTML(label);
+    if(overdue)html+='<span class="rc-count rc-overdue">'+overdue+' vencida'+(overdue!==1?'s':'')+'</span>';
+    if(urgent)html+='<span class="rc-count rc-urgent">'+urgent+' urgente'+(urgent!==1?'s':'')+'</span>';
+    if(pending)html+='<span class="rc-count rc-pending">'+pending+' pend.</span>';
+    if(!overdue&&!urgent&&!pending)html+='<span class="rc-count rc-clear">al d&iacute;a</span>';
+    html+='</button>';
+  });
+  wrap.innerHTML=html;
+  wrap.style.display='flex';
+}
 /* ═══ RENDER ═══ */
 var currentFilter='all';
 var filterClient='';
 var filterObl='';
+var filterResp='';
+var groupResp=false;
 var searchQuery='';
 var sortKey='cliente'; // default alfabético; click en otra columna lo cambia y persiste
 var sortDir='asc';    // 'asc' | 'desc'
@@ -1540,9 +1646,11 @@ function syncFilterUI(){
   if(done)done.classList.toggle('active',currentFilter==='done'||currentFilter==='pending');
   var dh=document.getElementById('statDoneHint');
   if(dh)dh.textContent=currentFilter==='done'?'clic: ver pendientes':currentFilter==='pending'?'clic: quitar filtro':'clic: ver presentadas';
-  var anyFilter=currentFilter!=='all'||!!filterClient||!!filterObl||!!(searchQuery&&searchQuery.length);
+  var anyFilter=currentFilter!=='all'||!!filterClient||!!filterObl||!!filterResp||!!(searchQuery&&searchQuery.length);
   var cb=document.getElementById('clearFiltersBtn');
   if(cb)cb.style.display=anyFilter?'':'none';
+  var gb=document.getElementById('groupRespBtn');
+  if(gb)gb.classList.toggle('active',groupResp);
 }
 window.setFilter=function(f,el){
   currentFilter=f;
@@ -1569,9 +1677,10 @@ var lastNextNit=null;
 window.jumpToNext=function(){
   if(!lastNextNit)return;
   currentFilter='all';
-  filterClient='';filterObl='';searchQuery='';
+  filterClient='';filterObl='';filterResp='';searchQuery='';
   var fc=document.getElementById('filterClient');if(fc)fc.value='';
   var fo=document.getElementById('filterObl');if(fo)fo.value='';
+  var fr=document.getElementById('filterResp');if(fr)fr.value='';
   var fs=document.getElementById('filterSearch');if(fs)fs.value='';
   saveFilters();
   render();
@@ -1585,9 +1694,10 @@ window.jumpToNext=function(){
 };
 window.clearAllFilters=function(){
   currentFilter='all';
-  filterClient='';filterObl='';searchQuery='';
+  filterClient='';filterObl='';filterResp='';searchQuery='';
   var fc=document.getElementById('filterClient');if(fc)fc.value='';
   var fo=document.getElementById('filterObl');if(fo)fo.value='';
+  var fr=document.getElementById('filterResp');if(fr)fr.value='';
   var fs=document.getElementById('filterSearch');if(fs)fs.value='';
   saveFilters();
   render();
@@ -1595,6 +1705,8 @@ window.clearAllFilters=function(){
 window.applyFilters=function(){
   filterClient=document.getElementById('filterClient').value;
   filterObl=document.getElementById('filterObl').value;
+  var fr=document.getElementById('filterResp');
+  if(fr)filterResp=fr.value;
   saveFilters();
   render();
 };
@@ -1614,11 +1726,12 @@ function render(){
   // Contador de resultados visibles (solo cuando hay filtros)
   var fcEl=document.getElementById('filterCount');
   if(fcEl){
-    var anyFilter=currentFilter!=='all'||!!filterClient||!!filterObl||!!(searchQuery&&searchQuery.length);
+    var anyFilter=currentFilter!=='all'||!!filterClient||!!filterObl||!!filterResp||!!(searchQuery&&searchQuery.length);
     if(anyFilter&&clients.length){
       // Calcula cuántos clientes pasan el filtro de nombre/NIT (no el de estado celda a celda)
       var visibles=clients;
       if(filterClient)visibles=visibles.filter(function(c){return c.nit===filterClient});
+      if(filterResp)visibles=visibles.filter(clientPassesResp);
       if(searchQuery){
         var qq=normalize(searchQuery);
         visibles=visibles.filter(function(c){
@@ -1634,7 +1747,7 @@ function render(){
   }
   // Client dropdown
   var sel=document.getElementById('filterClient');
-  var curVal=sel.value;
+  var curVal=sel.value||filterClient; // fallback al filtro persistido (1er render: el select aún no tiene options)
   sel.innerHTML='<option value="">Todos los clientes</option>';
   var sortedForDropdown=clients.slice().sort(function(a,b){
     return (a.nombre||'').localeCompare(b.nombre||'','es',{sensitivity:'base'});
@@ -1645,6 +1758,27 @@ function render(){
   });
   sel.value=curVal;
   filterClient=sel.value;
+  // Responsable dropdown + botón agrupar (solo visibles si hay responsables asignados)
+  var respSel=document.getElementById('filterResp');
+  var respList=distinctResponsables(clients);
+  if(respSel){
+    respSel.innerHTML='<option value="">Todos los responsables</option>';
+    respList.forEach(function(r){
+      var o=document.createElement('option');o.value=r;o.textContent=r;
+      respSel.appendChild(o);
+    });
+    if(clients.some(function(c){return !respName(c)})&&respList.length){
+      var oN=document.createElement('option');oN.value='__none';oN.textContent='Sin asignar';
+      respSel.appendChild(oN);
+    }
+    respSel.value=filterResp;
+    if(respSel.value!==filterResp)filterResp=''; // el responsable guardado ya no existe
+    respSel.style.display=respList.length?'':'none';
+  }
+  var grpBtn=document.getElementById('groupRespBtn');
+  if(grpBtn)grpBtn.style.display=respList.length?'':'none';
+  renderRespSummary(clients);
+  refreshRespDatalist();
   if(!clients.length){
     emptyEl.style.display='';
     tableWrapEl.style.display='none';
@@ -1666,6 +1800,9 @@ function render(){
   var filtered=clients;
   if(filterClient){
     filtered=filtered.filter(function(c){return c.nit===filterClient});
+  }
+  if(filterResp){
+    filtered=filtered.filter(clientPassesResp);
   }
   if(searchQuery){
     var q=normalize(searchQuery);
@@ -1692,6 +1829,18 @@ function render(){
         return (da-db)*dir;
       });
     }
+  }
+  // Agrupar por responsable: reordena estable por auxiliar (sin asignar al final),
+  // conservando el orden interno del sort anterior. Activa filas separadoras abajo.
+  var grouping=groupResp&&respList.length>0;
+  if(grouping){
+    filtered=filtered.map(function(c,i){return{c:c,i:i}}).sort(function(a,b){
+      var ra=normalize(respName(a.c)),rb=normalize(respName(b.c));
+      if(ra===rb)return a.i-b.i;
+      if(!ra)return 1;
+      if(!rb)return -1;
+      return ra<rb?-1:1;
+    }).map(function(x){return x.c});
   }
   // Build columns from ALL clients (so table is consistent)
   var columns=getAllColumns(clients);
@@ -1726,6 +1875,15 @@ function render(){
   document.getElementById('oblHead').innerHTML=groupRow+subRow;
   // Render rows
   var bodyHTML='';
+  var lastRespGroup=null;
+  // Cuenta clientes por grupo (sobre los filtrados) para el rótulo del separador
+  var respGroupCount={};
+  if(grouping){
+    filtered.forEach(function(c){
+      var k=normalize(respName(c))||'__none';
+      respGroupCount[k]=(respGroupCount[k]||0)+1;
+    });
+  }
   filtered.forEach(function(client){
     var clientObls=buildObligations(client);
     var oblMap={};
@@ -1743,10 +1901,20 @@ function render(){
     });
     if(currentFilter!=='all'&&!hasVisible)showRow=false;
     if(!showRow)return;
+    if(grouping){
+      var gKey=normalize(respName(client))||'__none';
+      if(gKey!==lastRespGroup){
+        lastRespGroup=gKey;
+        var gLabel=respName(client)||'Sin asignar';
+        var gN=respGroupCount[gKey]||0;
+        bodyHTML+='<tr class="resp-group-row"><td colspan="'+(columns.length+1)+'">&#128100; '+escapeHTML(gLabel)+' &middot; '+gN+' cliente'+(gN!==1?'s':'')+'</td></tr>';
+      }
+    }
     bodyHTML+='<tr data-nit="'+escapeHTML(client.nit)+'"'+(rowOverdue?' class="row-overdue"':'')+'>';
     bodyHTML+='<td><div style="font-weight:700;font-size:.85rem">'+escapeHTML(client.nombre)+'</div>';
     bodyHTML+='<div style="font-size:.72rem;color:var(--f400)">'+escapeHTML(client.nitFormatted||client.nit);
     if(client.granContribuyente)bodyHTML+=' <span style="background:#FEF3C7;color:#92400E;padding:1px 5px;border-radius:4px;font-size:.65rem;font-weight:700">GC</span>';
+    if(!grouping&&respName(client))bodyHTML+=' <span class="resp-badge">'+escapeHTML(respName(client))+'</span>';
     bodyHTML+='</div>';
     bodyHTML+='<div class="client-actions">';
     bodyHTML+='<button onclick="editClient('+clients.indexOf(client)+')" title="Editar">&#9998;</button>';
@@ -1784,13 +1952,14 @@ function render(){
     });
     bodyHTML+='</tr>';
   });
-  if(!bodyHTML&&(searchQuery||filterClient||currentFilter!=='all')){
+  if(!bodyHTML&&(searchQuery||filterClient||filterResp||currentFilter!=='all')){
     var colspan=columns.length+1;
     bodyHTML='<tr><td colspan="'+colspan+'" style="text-align:center;padding:32px 16px;color:var(--f400);font-size:.88rem">Sin resultados con los filtros actuales.</td></tr>';
   }
   document.getElementById('oblBody').innerHTML=bodyHTML;
   // Mobile cards (same data, different layout)
   var cardsHTML='';
+  var lastRespCardGroup=null;
   filtered.forEach(function(client){
     var clientObls=buildObligations(client);
     var oblMap={};
@@ -1812,11 +1981,19 @@ function render(){
       }
     });
     if(!visibleObls.length&&currentFilter!=='all')return;
+    if(grouping){
+      var gk=normalize(respName(client))||'__none';
+      if(gk!==lastRespCardGroup){
+        lastRespCardGroup=gk;
+        cardsHTML+='<div style="margin:14px 0 8px;font-size:.8rem;font-weight:700;color:#4338CA">&#128100; '+escapeHTML(respName(client)||'Sin asignar')+'</div>';
+      }
+    }
     var idx=clients.indexOf(client);
     cardsHTML+='<div class="client-card">';
     cardsHTML+='<div class="card-head"><div><div class="card-title">'+escapeHTML(client.nombre)+'</div>';
     cardsHTML+='<div class="card-sub">'+escapeHTML(client.nitFormatted||client.nit);
     if(client.granContribuyente)cardsHTML+=' <span class="gc-badge">GC</span>';
+    if(!grouping&&respName(client))cardsHTML+=' <span class="resp-badge">'+escapeHTML(respName(client))+'</span>';
     cardsHTML+='</div></div>';
     cardsHTML+='<div class="card-actions">';
     cardsHTML+='<button onclick="editClient('+idx+')" title="Editar">&#9998;</button>';
@@ -1842,7 +2019,7 @@ function render(){
     }
     cardsHTML+='</div>';
   });
-  if(!cardsHTML&&(searchQuery||filterClient||currentFilter!=='all')){
+  if(!cardsHTML&&(searchQuery||filterClient||filterResp||currentFilter!=='all')){
     cardsHTML='<div style="text-align:center;padding:32px 16px;color:var(--f400);font-size:.88rem;background:#fff;border:1px solid var(--f200);border-radius:var(--r)">Sin resultados con los filtros actuales.</div>';
   }
   document.getElementById('oblCards').innerHTML=cardsHTML;
@@ -2007,6 +2184,7 @@ window.openModal=function(idx){
     document.getElementById('cNIT').value='';
     document.getElementById('cTipo').value='PJ';
     document.getElementById('cRegimen').value='bimestral';
+    document.getElementById('cResponsable').value='';
     document.getElementById('cGC').checked=false;
     document.getElementById('oblExogena').checked=true;
     document.getElementById('oblRenta').checked=true;
@@ -2027,6 +2205,7 @@ window.openModal=function(idx){
     document.getElementById('cNIT').value=c.nitFormatted||c.nit;
     document.getElementById('cTipo').value=c.tipo;
     document.getElementById('cRegimen').value=c.regimen;
+    document.getElementById('cResponsable').value=respName(c);
     document.getElementById('cGC').checked=!!c.granContribuyente;
     document.getElementById('oblExogena').checked=!!c.obligaciones.exogena;
     document.getElementById('oblRenta').checked=!!c.obligaciones.renta;
@@ -2164,6 +2343,7 @@ window.saveClient=function(){
     nitFormatted:nitFormatted,
     tipo:tipo,
     regimen:regimen,
+    responsable:document.getElementById('cResponsable').value.trim(),
     granContribuyente:gc,
     obligaciones:obligaciones,
     icaMunicipio:document.getElementById('cIcaMunicipio').value
@@ -2281,7 +2461,7 @@ window.exportCSV=function(){
     if(typeof exoToast==='function')exoToast('No hay clientes para exportar','warning');
     return;
   }
-  var rows=[['Cliente','NIT','Tipo','Regimen IVA','GC','Obligacion','Vencimiento','Dias para vencer','Estado']];
+  var rows=[['Cliente','NIT','Tipo','Regimen IVA','GC','Responsable','Obligacion','Vencimiento','Dias para vencer','Estado']];
   var now=today().getTime();
   clients.forEach(function(c){
     var obls=buildObligations(c);
@@ -2297,6 +2477,7 @@ window.exportCSV=function(){
         c.tipo==='PJ'?'Persona Juridica':'Persona Natural',
         c.regimen==='no'?'No responsable':(c.regimen==='cuatrimestral'?'Cuatrimestral':'Bimestral'),
         c.granContribuyente?'Si':'No',
+        respName(c),
         o.label,
         fmtDateCSV(dd),
         diff,
@@ -2340,6 +2521,7 @@ window.exportICS=function(){
       var uid=(c.nit.replace(/\D/g,''))+'_'+o.id+'@exogenadian.com';
       var summary='Vence '+o.label+' - '+c.nombre;
       var desc='NIT '+(c.nitFormatted||c.nit);
+      if(respName(c))desc+='\\nResponsable: '+respName(c);
       if(o.link)desc+='\\nGenerar en: https://exogenadian.com/'+o.link;
       lines.push('BEGIN:VEVENT');
       lines.push('UID:'+uid);
@@ -2577,6 +2759,7 @@ window.bulkImport=function(){
     ica:document.getElementById('bulkIca').checked,
     inc:document.getElementById('bulkInc').checked
   };
+  var bulkResp=(document.getElementById('bulkResponsable')||{value:''}).value.trim();
   toAdd.forEach(function(r){
     clients.push({
       nombre:r.nombre,
@@ -2584,6 +2767,7 @@ window.bulkImport=function(){
       nitFormatted:r.nitFormatted,
       tipo:tipo,
       regimen:regimen,
+      responsable:bulkResp,
       granContribuyente:gc,
       obligaciones:obligaciones,
       icaMunicipio:'none'
@@ -2641,6 +2825,8 @@ document.getElementById('filterSearch').addEventListener('input',function(e){
     filterObl=saved.filterObl;
     document.getElementById('filterObl').value=filterObl;
   }
+  if(saved.filterResp)filterResp=saved.filterResp; // el select se puebla y sincroniza en render()
+  if(saved.groupResp)groupResp=true;
   if(saved.searchQuery){
     searchQuery=saved.searchQuery;
     document.getElementById('filterSearch').value=searchQuery;
