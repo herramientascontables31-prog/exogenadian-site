@@ -813,6 +813,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
           <button onclick="exportarExcelAsesor()" class="btn btn-success">&#128202; Calcular y descargar Excel (borrador 210 oficial + papel de trabajo)</button>
           <button onclick="exportarEntregablePDF()" class="btn" style="background:var(--pri,#1B3A5C);color:#fff;margin-left:8px;margin-top:8px">&#128196; Entregable para el cliente (PDF)</button>
           <div style="font-size:.78rem;color:var(--muted);margin-top:10px">Un solo Excel: la <strong>réplica oficial del 210</strong> (casillas pobladas, lista para transcribir al MUISCA) + el <strong>papel de trabajo</strong> de 8 hojas. El entregable PDF trae el borrador + diagnóstico de riesgos + planeación. Atajos: <kbd>Ctrl+S</kbd> guardar &middot; <kbd>Ctrl+E</kbd> exportar Excel</div>
+          <div style="margin-top:14px;padding-top:12px;border-top:1px dashed var(--border)">
+            <div style="font-size:.82rem;color:#92400E;margin-bottom:8px">⏰ ¿La declaración se presenta <strong>después del vencimiento</strong>? Calcula la sanción por extemporaneidad (Art. 641/642) con el impuesto, ingresos y patrimonio ya cargados.</div>
+            <button onclick="irASancionExtemporaneidad()" class="btn" style="background:#B45309;color:#fff">&#9878;&#65039; Liquidar sanción por extemporaneidad →</button>
+          </div>
         </div>
         <div class="card" id="cardReplica210" style="border:2px solid var(--pri,#1B3A5C)">
           <h3 onclick="toggleReplica210()" style="cursor:pointer;user-select:none">&#128203; Formulario 210 — réplica oficial editable <span style="font-size:.74rem;color:var(--muted);font-weight:400" id="replica210Hint">(clic para contraer)</span></h3>
@@ -3186,6 +3190,27 @@ function mostrarOrigenCasilla(cas){
   if(typeof gtag !== 'undefined') gtag('event','f210_pro_origen_casilla', { casilla: cas });
 }
 function cerrarOrigen(){ document.getElementById('origenModal').classList.remove('show'); }
+// Abre el Liquidador de Sanciones DIAN con las 3 bases del 210 ya cargadas.
+function irASancionExtemporaneidad(){
+  var R = (ultimoResultado && ultimoResultado.renglones) || {};
+  var sc = (ultimoResultado && ultimoResultado.cedulaGeneral && ultimoResultado.cedulaGeneral.subcedulas) || {};
+  var impuesto = Math.round(R.c129 || R.c126 || 0); // impuesto a cargo (base preferida)
+  var ingresos = Math.round(
+    ((sc.trabajo && sc.trabajo.ingresosBrutos) || 0) + ((sc.honorarios && sc.honorarios.ingresosBrutos) || 0) +
+    ((sc.capital && sc.capital.ingresosBrutos) || 0) + ((sc.noLaboral && sc.noLaboral.ingresosBrutos) || 0) +
+    ((ultimoResultado && ultimoResultado.cedulaPensiones && ultimoResultado.cedulaPensiones.ingresosBrutos) || 0)
+  );
+  var patrimonio = Math.round(R.c31 || 0);
+  var anio = (ultimoEstado && ultimoEstado.year) || getYear();
+  var p = new URLSearchParams();
+  if(impuesto > 0) p.set('impuesto', impuesto);
+  if(ingresos > 0) p.set('ingresos', ingresos);
+  if(patrimonio > 0) p.set('patrimonio', patrimonio);
+  p.set('anio', anio);
+  p.set('from', '210');
+  if(typeof gtag !== 'undefined') gtag('event','f210_pro_ir_sancion');
+  window.open('sanciones-dian.html?' + p.toString(), '_blank');
+}
 // Casillas editables del 210 → input real del wizard que alimenta el motor.
 // Editar una casilla en la réplica escribe en ese input y recalcula todo.
 var CASILLA_INPUT_210 = {
