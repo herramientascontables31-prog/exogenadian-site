@@ -88,25 +88,25 @@ mark{background:#FDE68A;color:inherit;border-radius:3px;padding:0 1px}
 .ruta-chip{padding:8px 14px;border:1.5px solid var(--f200);border-radius:20px;background:var(--w);cursor:pointer;font-family:inherit;font-size:.82rem;font-weight:600;color:var(--f600);transition:.15s}
 .ruta-chip:hover{border-color:var(--g500);color:var(--g800);background:var(--g50)}
 .ruta-chip.on{border-color:var(--g600);background:var(--g50);color:var(--g800)}
-.fil-group{margin-bottom:8px}
+.fil-group{margin-bottom:8px;background:var(--f50);border:1px solid var(--f100);border-radius:12px;overflow:hidden;transition:border-color .15s}
 .fil-group:last-of-type{margin-bottom:0}
-.fil-label{font-size:.72rem;font-weight:700;color:var(--f500);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;display:flex;align-items:center;gap:8px;width:100%;background:none;border:none;cursor:pointer;font-family:inherit;padding:9px 12px;text-align:left;border-radius:10px;transition:.15s}
-.fil-label:hover{background:var(--g50);color:var(--g800)}
+.fil-group:has(.fil-count:not([hidden])){border-color:var(--g300);background:var(--g50)}
+.fil-label{font-size:.72rem;font-weight:700;color:var(--f600);text-transform:uppercase;letter-spacing:.4px;display:flex;align-items:center;gap:8px;width:100%;background:none;border:none;cursor:pointer;font-family:inherit;padding:11px 14px;text-align:left;transition:.15s}
+.fil-label:hover{background:var(--g100);color:var(--g800)}
 .fil-label:hover .fil-caret{color:var(--g600)}
 .fil-caret{margin-left:auto;color:var(--f400);transition:.2s;font-size:.8rem}
 .fil-group.cerrado .fil-chips{display:none}
 .fil-group.cerrado .fil-caret{transform:rotate(-90deg)}
-.fil-group.cerrado .fil-label{margin-bottom:0}
 .fil-count{background:var(--g600);color:#fff;border-radius:10px;padding:1px 8px;font-size:.66rem;font-weight:700;box-shadow:0 1px 3px rgba(5,150,105,.3)}
 .activos{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px}
 .afil{display:inline-flex;align-items:center;gap:6px;background:var(--g50);border:1px solid var(--g200);color:var(--g800);border-radius:16px;padding:4px 11px;font-size:.76rem;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s}
 .afil:hover{border-color:#FCA5A5;color:#B91C1C;background:#FEF2F2}
-.fil-chips{display:flex;gap:7px;flex-wrap:wrap;padding:4px 12px 12px}
+.fil-chips{display:flex;gap:7px;flex-wrap:wrap;padding:2px 14px 14px}
 .fchip{--cc:var(--g600);padding:7px 14px;border:1.5px solid var(--f200);border-radius:20px;background:var(--w);cursor:pointer;font-family:inherit;font-size:.8rem;font-weight:600;color:var(--f600);transition:all .15s;display:inline-flex;align-items:center;gap:7px;box-shadow:0 1px 2px rgba(17,24,39,.04)}
 .fchip:hover{border-color:var(--cc);color:var(--f800);background:color-mix(in srgb,var(--cc) 7%,#fff);transform:translateY(-1px);box-shadow:0 3px 8px color-mix(in srgb,var(--cc) 18%,transparent)}
 .fchip.on{font-weight:700;color:#fff;background:var(--cc);border-color:var(--cc);box-shadow:0 2px 8px color-mix(in srgb,var(--cc) 35%,transparent)}
 .fchip .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)}
-.fil-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--f50);border:1px solid var(--f100);border-radius:12px;padding:12px 14px;margin-top:4px}
+.fil-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:12px 14px}
 .fil-row select{appearance:none;-webkit-appearance:none;padding:9px 32px 9px 14px;border:1.5px solid var(--f200);border-radius:10px;font-family:inherit;font-size:.83rem;font-weight:600;outline:none;background:var(--w) url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236B7280' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 12px center;color:var(--f700);cursor:pointer;transition:.15s}
 .fil-row select:hover{border-color:var(--g400)}
 .fil-row select:focus{border-color:var(--g600);box-shadow:0 0 0 3px var(--g100)}
