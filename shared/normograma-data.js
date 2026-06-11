@@ -2818,7 +2818,7 @@ window.NORMOGRAMA = {
    "nota_vigencia": "Declarado inexequible en su totalidad por la Sentencia C-079 del 15 de abril de 2026, tras la caída de la emergencia económica (Sentencia C-075 de 2026 sobre el Decreto 1390 de 2025); la Corte ordenó a la DIAN devolver lo recaudado durante su vigencia.",
    "importancia": "alta",
    "url_dian": "",
-   "url_alt": ""
+   "url_alt": "https://dapre.presidencia.gov.co/normativa/normativa/DECRETO%201474%20DEL%2029%20DE%20DICIEMBRE%20DE%202025.pdf"
   },
   {
    "id": "resolucion_dian_000202_2025",
@@ -2993,7 +2993,7 @@ window.NORMOGRAMA = {
    "estado": "vigente",
    "nota_vigencia": "Providencia del 3 de julio de 2025; es una medida cautelar mientras se decide de fondo la nulidad del concepto.",
    "importancia": "alta",
-   "url_dian": "",
+   "url_dian": "https://normograma.dian.gov.co/dian/compilacion/docs/11001-03-27-000-2024-00037-00(28920)_20250703.htm",
    "url_alt": ""
   },
   {
@@ -3687,7 +3687,7 @@ window.NORMOGRAMA = {
    "estado": "vigente",
    "nota_vigencia": "Sección Cuarta, sentencia del 9 de marzo de 2023; retomó la doctrina anterior a 2016 sobre errores no lesivos.",
    "importancia": "alta",
-   "url_dian": "",
+   "url_dian": "https://normograma.dian.gov.co/dian/compilacion/docs/25000-23-37-000-2019-00801-01(26924)_20230309.htm",
    "url_alt": ""
   },
   {
@@ -6371,7 +6371,7 @@ window.NORMOGRAMA = {
    "nota_vigencia": "",
    "importancia": "media",
    "url_dian": "",
-   "url_alt": ""
+   "url_alt": "https://cijuf.org.co/normatividad/concepto/2024/concepto-823006999.html"
   },
   {
    "id": "concepto_dian_978_2024",
@@ -6854,7 +6854,7 @@ window.NORMOGRAMA = {
    "nota_vigencia": "El plazo original de acogimiento era de 3 años (hasta julio de 2025), pero el art. 96 de la Ley 2277 de 2022 lo limitó al 31 de diciembre de 2024. Quienes ingresaron conservan el beneficio por su término de 10 años.",
    "importancia": "media",
    "url_dian": "",
-   "url_alt": ""
+   "url_alt": "http://www.secretariasenado.gov.co/senado/basedoc/ley_2238_2022.html"
   },
   {
    "id": "resolucion_dian_001092_2022",

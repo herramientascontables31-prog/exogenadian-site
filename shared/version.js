@@ -1,8 +1,8 @@
 // AUTOGENERADO por build.js - NO EDITAR MANUALMENTE
 window.EXOGENA_VERSION = {
-  commit: "a30c1351cb6844a998fca54826a181473c71be28",
-  shortHash: "a30c1351",
-  commitDate: "2026-06-11T11:28:58-05:00",
-  buildDate: "2026-06-11T16:29:11.297Z",
+  commit: "edd4e33a2938b27ddfbb437e6b230d3c705108bc",
+  shortHash: "edd4e33a",
+  commitDate: "2026-06-11T12:25:43-05:00",
+  buildDate: "2026-06-11T17:26:04.054Z",
   repoUrl: "https://github.com/herramientascontables31-prog/exogena-dian-2025"
 };
