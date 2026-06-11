@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es-CO">
 <head>
-<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script src="shared/cookie-consent.js?v=9fc53d44"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
@@ -88,29 +88,34 @@ mark{background:#FDE68A;color:inherit;border-radius:3px;padding:0 1px}
 .ruta-chip{padding:8px 14px;border:1.5px solid var(--f200);border-radius:20px;background:var(--w);cursor:pointer;font-family:inherit;font-size:.82rem;font-weight:600;color:var(--f600);transition:.15s}
 .ruta-chip:hover{border-color:var(--g500);color:var(--g800);background:var(--g50)}
 .ruta-chip.on{border-color:var(--g600);background:var(--g50);color:var(--g800)}
-.fil-group{margin-bottom:12px;border-bottom:1px solid var(--f100);padding-bottom:10px}
-.fil-group:last-of-type{border-bottom:none;padding-bottom:0}
-.fil-label{font-size:.72rem;font-weight:700;color:var(--f500);text-transform:uppercase;letter-spacing:.4px;margin-bottom:7px;display:flex;align-items:center;gap:8px;width:100%;background:none;border:none;cursor:pointer;font-family:inherit;padding:0;text-align:left}
+.fil-group{margin-bottom:8px}
+.fil-group:last-of-type{margin-bottom:0}
+.fil-label{font-size:.72rem;font-weight:700;color:var(--f500);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;display:flex;align-items:center;gap:8px;width:100%;background:none;border:none;cursor:pointer;font-family:inherit;padding:9px 12px;text-align:left;border-radius:10px;transition:.15s}
+.fil-label:hover{background:var(--g50);color:var(--g800)}
+.fil-label:hover .fil-caret{color:var(--g600)}
 .fil-caret{margin-left:auto;color:var(--f400);transition:.2s;font-size:.8rem}
 .fil-group.cerrado .fil-chips{display:none}
 .fil-group.cerrado .fil-caret{transform:rotate(-90deg)}
-.fil-group.cerrado{padding-bottom:6px}
-.fil-count{background:var(--g600);color:#fff;border-radius:10px;padding:1px 8px;font-size:.66rem;font-weight:700}
+.fil-group.cerrado .fil-label{margin-bottom:0}
+.fil-count{background:var(--g600);color:#fff;border-radius:10px;padding:1px 8px;font-size:.66rem;font-weight:700;box-shadow:0 1px 3px rgba(5,150,105,.3)}
 .activos{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px}
-.afil{display:inline-flex;align-items:center;gap:6px;background:var(--g50);border:1px solid var(--g200);color:var(--g800);border-radius:16px;padding:4px 11px;font-size:.76rem;font-weight:600;cursor:pointer;font-family:inherit}
+.afil{display:inline-flex;align-items:center;gap:6px;background:var(--g50);border:1px solid var(--g200);color:var(--g800);border-radius:16px;padding:4px 11px;font-size:.76rem;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s}
 .afil:hover{border-color:#FCA5A5;color:#B91C1C;background:#FEF2F2}
-.fil-chips{display:flex;gap:6px;flex-wrap:wrap}
-.fchip{padding:6px 12px;border:1.5px solid var(--f200);border-radius:9px;background:var(--w);cursor:pointer;font-family:inherit;font-size:.8rem;font-weight:500;color:var(--f600);transition:.15s;display:inline-flex;align-items:center;gap:6px}
-.fchip:hover{border-color:var(--f400)}
-.fchip.on{font-weight:700;color:#fff}
-.fchip .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.fil-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-.fil-row select{padding:8px 12px;border:1.5px solid var(--f200);border-radius:9px;font-family:inherit;font-size:.83rem;outline:none;background:var(--w);color:var(--f700)}
-.fil-row select:focus{border-color:var(--g500)}
-.toggle-clave{display:inline-flex;align-items:center;gap:7px;font-size:.83rem;font-weight:600;color:var(--f600);cursor:pointer;user-select:none}
-.toggle-clave input{accent-color:var(--g600);width:16px;height:16px;cursor:pointer}
-.limpiar{margin-left:auto;background:none;border:none;color:var(--g700);font-family:inherit;font-size:.8rem;font-weight:700;cursor:pointer;padding:6px 10px;border-radius:8px}
-.limpiar:hover{background:var(--g50)}
+.fil-chips{display:flex;gap:7px;flex-wrap:wrap;padding:4px 12px 12px}
+.fchip{--cc:var(--g600);padding:7px 14px;border:1.5px solid var(--f200);border-radius:20px;background:var(--w);cursor:pointer;font-family:inherit;font-size:.8rem;font-weight:600;color:var(--f600);transition:all .15s;display:inline-flex;align-items:center;gap:7px;box-shadow:0 1px 2px rgba(17,24,39,.04)}
+.fchip:hover{border-color:var(--cc);color:var(--f800);background:color-mix(in srgb,var(--cc) 7%,#fff);transform:translateY(-1px);box-shadow:0 3px 8px color-mix(in srgb,var(--cc) 18%,transparent)}
+.fchip.on{font-weight:700;color:#fff;background:var(--cc);border-color:var(--cc);box-shadow:0 2px 8px color-mix(in srgb,var(--cc) 35%,transparent)}
+.fchip .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)}
+.fil-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--f50);border:1px solid var(--f100);border-radius:12px;padding:12px 14px;margin-top:4px}
+.fil-row select{appearance:none;-webkit-appearance:none;padding:9px 32px 9px 14px;border:1.5px solid var(--f200);border-radius:10px;font-family:inherit;font-size:.83rem;font-weight:600;outline:none;background:var(--w) url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236B7280' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 12px center;color:var(--f700);cursor:pointer;transition:.15s}
+.fil-row select:hover{border-color:var(--g400)}
+.fil-row select:focus{border-color:var(--g600);box-shadow:0 0 0 3px var(--g100)}
+.toggle-clave{display:inline-flex;align-items:center;gap:7px;font-size:.82rem;font-weight:600;color:var(--f600);cursor:pointer;user-select:none;border:1.5px solid var(--f200);border-radius:20px;padding:8px 14px;background:var(--w);transition:.15s}
+.toggle-clave:hover{border-color:var(--amber);background:var(--amber50)}
+.toggle-clave:has(input:checked){border-color:var(--amber);background:var(--amber50);color:#92400E;box-shadow:0 1px 4px rgba(245,158,11,.25)}
+.toggle-clave input{accent-color:var(--amber);width:15px;height:15px;cursor:pointer}
+.limpiar{margin-left:auto;background:none;border:1.5px solid transparent;color:var(--g700);font-family:inherit;font-size:.8rem;font-weight:700;cursor:pointer;padding:7px 12px;border-radius:10px;transition:.15s}
+.limpiar:hover{background:var(--red50);border-color:#FCA5A5;color:#B91C1C}
 .fil-toggle{display:none}
 .res-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 0 12px;flex-wrap:wrap}
 .res-count{font-size:.9rem;color:var(--f600)}
@@ -237,9 +242,9 @@ tr.mblur td{filter:blur(4px);user-select:none;pointer-events:none}
 </script></head>
 <body>
 <div id="nav-container"></div>
-<script defer src="shared/pro.js?v=848fbf16"></script>
-<script defer src="shared/toast.js?v=9d7a298c"></script>
-<script defer src="shared/nav.js?v=0dbe1c46"></script>
+<script defer src="shared/pro.js?v=994665f5"></script>
+<script defer src="shared/toast.js?v=825749bc"></script>
+<script defer src="shared/nav.js?v=6b392fe3"></script>
 <script defer src="shared/pro-banner.js?v=a5944c54"></script>
 <div class="container">
 <div class="header">
@@ -382,7 +387,7 @@ tr.mblur td{filter:blur(4px);user-select:none;pointer-events:none}
   </div>
 </section>
 </div>
-<script src="shared/normograma-data.js?v=a3bc38b4"></script>
+<script src="shared/normograma-data.js?v=4b144b59"></script>
 <script>
 (function(){
 'use strict';
@@ -632,7 +637,8 @@ function render(){
  renderActivos();
 }
 function chipHTML(key,label,on,color){
- return '<button class="fchip'+(on?' on':'')+'" data-k="'+esc(key)+'"'+(on?' style="background:'+color+';border-color:'+color+'"':'')+'>'+(color&&!on?'<span class="dot" style="background:'+color+'"></span>':'')+esc(label)+'</button>';
+ // --cc alimenta hover/activo en CSS: cada chip tinta con el color de su categoría
+ return '<button class="fchip'+(on?' on':'')+'" data-k="'+esc(key)+'" style="--cc:'+(color||'#059669')+'">'+(color&&!on?'<span class="dot" style="background:'+color+'"></span>':'')+esc(label)+'</button>';
 }
 function renderChips(){
  $('fImp').innerHTML=Object.keys(IMP).map(function(k){return chipHTML(k,IMP[k].l,S.impuestos.indexOf(k)>=0,IMP[k].c)}).join('');
@@ -1013,7 +1019,7 @@ if(!DATA.length){
 }
 })();
 </script>
-<link rel="stylesheet" href="shared/chat.css?v=a52afe72">
-<script defer src="shared/chat.js?v=4f7aa34d"></script>
+<link rel="stylesheet" href="shared/chat.css?v=e0bd0881">
+<script defer src="shared/chat.js?v=1f33efba"></script>
 </body>
 </html>
