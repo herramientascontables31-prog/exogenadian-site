@@ -730,6 +730,16 @@
       "orden": 4
     },
     {
+      "url": "normograma.html",
+      "grupo": "consultas",
+      "titulo": "Normograma Tributario",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 5
+    },
+    {
       "url": "consultamasiva.html",
       "grupo": "consultas",
       "titulo": "Consulta NIT masiva",

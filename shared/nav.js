@@ -283,6 +283,7 @@
   '        <a href="'+P+'certificados.html">📜 Certificados</a>'+
   '        <a href="'+P+'crear-sas.html">🏛️ Crear S.A.S. — Wizard</a>'+
   '        <a href="'+P+'vencimientos.html">📅 Calendario Tributario</a>'+
+  '        <a href="'+P+'normograma.html">📚 Normograma Tributario</a>'+
   '        <a href="'+P+'uvt.html">🔢 Conversor UVT</a>'+
   '        <a href="'+P+'estatutos.html">🏛️ Estatutos Municipales</a>'+
   '      </div>'+
@@ -656,6 +657,7 @@ var MEGA_MENU_HTML='<div class="mega-grid"><div class="mega-group"><h6>📂 Exó
     /* 'mi-contabilidad.html' (antes micro.html) oculto hasta lanzamiento oficial */
     'vencimientos.html':{title:'Calendario Tributario',cat:'Auxiliares',tags:'calendario vencimientos plazos DIAN renta IVA retención'},
     'estatutos.html':{title:'Estatutos Municipales',cat:'Auxiliares',tags:'ICA municipios estatutos tarifa'},
+    'normograma.html':{title:'Normograma Tributario',cat:'Auxiliares',tags:'normograma normas leyes decretos resoluciones conceptos sentencias vigencia DIAN'},
     'costoreal.html':{title:'Costo Empleado',cat:'Auxiliares',tags:'costo empleado real laboral nómina prestaciones'},
     'liquidador.html':{title:'Liquidador Laboral — Hub',cat:'Auxiliares',tags:'liquidación laboral hub calculadoras documentos cursos nómina'},
     'liquidador-domestica.html':{title:'Liquidación empleada doméstica',cat:'Auxiliares',tags:'liquidación empleada doméstica servicio doméstico por días jornal Ley 1788 2016 Sentencia C-871 2014 Decreto 824 prima cesantías vacaciones indemnización'},
