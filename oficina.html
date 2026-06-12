@@ -340,7 +340,7 @@ body{font-family:var(--font);background:var(--f50);color:var(--f900);min-height:
       &iquest;No usas Google Drive? Si eres PRO, tu lista se respalda sola al usar Mi Oficina — <a href="#" onclick="toggleRestoreMail(event)" style="color:#1D4ED8;font-weight:600">recupera tus clientes con tu correo</a>.
       <span id="restoreMailForm" style="display:none;margin-left:4px">
         <input id="restoreMailInput" type="email" placeholder="tu correo PRO" style="padding:5px 8px;border:1px solid #CBD5E1;border-radius:6px;font-size:.8rem;width:190px">
-        <button class="btn btn-primary btn-sm" onclick="solicitarRestore()" id="restoreMailBtn">Enviarme el enlace</button>
+        <button class="btn btn-primary btn-sm" onclick="solicitarRestore()" id="restoreMailBtn">Restaurar mis clientes</button>
       </span>
       <span id="restoreMailMsg" style="display:block;margin-top:4px"></span>
     </div>
@@ -3066,28 +3066,40 @@ function restoreMsg(html,color){
   var m=document.getElementById('restoreMailMsg');
   if(m)m.innerHTML=html?'<span style="color:'+(color||'#475569')+'">'+html+'</span>':'';
 }
+function aplicarRespaldo(j){
+  localStorage.setItem('oficina_clientes',JSON.stringify(j.clientes));
+  if(j.estado)localStorage.setItem('oficina_estado',JSON.stringify(j.estado));
+  localStorage.setItem('oficina_last_save',String(Date.now()));
+  render();
+  renderVencImportBanner();
+  if(typeof exoToast==='function')exoToast('✅ '+j.clientes.length+' cliente'+(j.clientes.length!==1?'s':'')+' restaurado'+(j.clientes.length!==1?'s':'')+' desde el servidor','success');
+}
 window.solicitarRestore=function(){
   var inp=document.getElementById('restoreMailInput');
   var btn=document.getElementById('restoreMailBtn');
   var email=(inp&&inp.value||'').trim().toLowerCase();
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){restoreMsg('Escribe un correo v&aacute;lido.','#991B1B');return}
-  if(btn){btn.disabled=true;btn.textContent='Enviando…'}
-  fetch(OFICINA_API+'/api/oficina/restore-request',{
+  var locales=loadClients();
+  if(locales.length&&!confirm('Este navegador ya tiene '+locales.length+' cliente(s). El respaldo del servidor los REEMPLAZARÁ. ¿Continuar?'))return;
+  if(btn){btn.disabled=true;btn.textContent='Restaurando…'}
+  fetch(OFICINA_API+'/api/oficina/restore',{
     method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({email:email})
   }).then(function(r){return r.json().then(function(j){return{status:r.status,j:j}})})
     .then(function(res){
       if(res.status===200){
-        restoreMsg('&#128236; Listo. Revisa <strong>'+email+'</strong> (y la carpeta spam): te enviamos un enlace que funciona una sola vez y expira en 30 minutos.','#166534');
+        restoreMsg('');
+        aplicarRespaldo(res.j);
+        if(typeof gtag==='function')gtag('event','oficina_restore_aplicado',{clientes:res.j.clientes.length,via:'directo'});
       }else if(res.status===404){
         restoreMsg('No hay respaldo para ese correo. Siendo PRO, abre <strong>Mi Oficina</strong> en el navegador donde tienes tus clientes (el respaldo se crea solo) y vuelve a intentar aqu&iacute;.','#92400E');
       }else if(res.status===429){
         restoreMsg('Demasiados intentos. Espera '+Math.ceil((res.j.retryAfterSeconds||3600)/60)+' minutos y vuelve a intentar.','#92400E');
       }else{
-        restoreMsg('No pude enviar el correo ('+(res.j.error||res.status)+'). Intenta de nuevo en unos minutos.','#991B1B');
+        restoreMsg('No se pudo restaurar ('+(res.j.error||res.status)+'). Intenta de nuevo en unos minutos.','#991B1B');
       }
     }).catch(function(){restoreMsg('Sin conexi&oacute;n con el servidor. Intenta de nuevo.','#991B1B')})
-    .finally(function(){if(btn){btn.disabled=false;btn.textContent='Enviarme el enlace'}});
+    .finally(function(){if(btn){btn.disabled=false;btn.textContent='Restaurar mis clientes'}});
   if(typeof gtag==='function')gtag('event','oficina_restore_request');
 };
 function handleRestoreParam(){
@@ -3115,13 +3127,8 @@ function handleRestoreParam(){
         alert('No se pudo restaurar: '+msg);
         return;
       }
-      localStorage.setItem('oficina_clientes',JSON.stringify(j.clientes));
-      if(j.estado)localStorage.setItem('oficina_estado',JSON.stringify(j.estado));
-      localStorage.setItem('oficina_last_save',String(Date.now()));
-      render();
-      renderVencImportBanner();
-      if(typeof exoToast==='function')exoToast('✅ '+j.clientes.length+' cliente'+(j.clientes.length!==1?'s':'')+' restaurado'+(j.clientes.length!==1?'s':'')+' desde el servidor','success');
-      if(typeof gtag==='function')gtag('event','oficina_restore_aplicado',{clientes:j.clientes.length});
+      aplicarRespaldo(j);
+      if(typeof gtag==='function')gtag('event','oficina_restore_aplicado',{clientes:j.clientes.length,via:'enlace'});
     }).catch(function(){alert('No pude conectar con el servidor para restaurar. Revisa tu internet y vuelve a abrir el enlace del correo.')});
 }
 handleRestoreParam();
