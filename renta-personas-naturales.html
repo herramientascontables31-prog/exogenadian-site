@@ -283,6 +283,7 @@ body{background:radial-gradient(1100px 560px at 72% -12%, #e7eef8 0%, #f0f2f5 46
 <script defer src="shared/toast.js?v=9d7a298c"></script>
 <script defer src="shared/nav.js?v=32646ce2"></script>
 <script src="shared/vencimientos-pn.js?v=bdc3d119"></script>
+<script src="shared/perfil-contador.js?v=cc60e2c8"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js" integrity="sha384-Pqp51FUN2/qzfxZxBCtF0stpc9ONI6MYZpVqmo8m20SoaQCzf+arZvACkLkirlPz" crossorigin="anonymous"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -617,8 +618,24 @@ body{background:radial-gradient(1100px 560px at 72% -12%, #e7eef8 0%, #f0f2f5 46
             <input type="text" id="cartaPlazo" placeholder="ej. 31 de julio" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:.9rem;margin-top:6px"></div>
         </div>
         <div>
-          <label style="font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px">Tu nombre / firma</label>
+          <label style="font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px">Quién firma la carta</label>
+          <div id="cartaPerfilBox" style="margin-top:6px;font-size:.8rem;line-height:1.5"></div>
           <input type="text" id="cartaFirma" placeholder="Contador(a) — T.P. 12345-T" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:.9rem;margin-top:6px">
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:8px">
+            <label style="display:flex;gap:8px;align-items:center;font-size:.82rem;cursor:pointer"><input type="checkbox" id="cartaInclTP" checked> Mostrar profesi&oacute;n y T.P. bajo la firma</label>
+            <label style="display:flex;gap:8px;align-items:center;font-size:.82rem;cursor:pointer"><input type="checkbox" id="cartaInclFirmaImg"> Incluir firma escaneada <span id="cartaFirmaImgHint" style="font-size:.72rem;color:var(--muted)"></span></label>
+            <label style="display:flex;gap:8px;align-items:center;font-size:.82rem;cursor:pointer"><input type="checkbox" id="cartaInclMembrete"> Membrete con logo y datos de contacto <span id="cartaLogoHint" style="font-size:.72rem;color:var(--muted)"></span></label>
+          </div>
+        </div>
+        <div>
+          <label style="font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px">Dise&ntilde;o</label>
+          <div style="display:flex;gap:10px;margin-top:6px;align-items:center">
+            <select id="cartaFuente" style="flex:1;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:.88rem">
+              <option value="sans">Tipograf&iacute;a moderna (Sans)</option>
+              <option value="serif">Tipograf&iacute;a cl&aacute;sica (Serif)</option>
+            </select>
+            <div id="cartaColores" style="display:flex;gap:6px"></div>
+          </div>
         </div>
         <div>
           <div style="display:flex;justify-content:space-between;align-items:center">
@@ -825,7 +842,52 @@ document.querySelectorAll('.tab').forEach(function(t){
   ];
   var DOC_ITEMS = DEFAULT.map(function(t){ return {t:t,on:true}; });
   var $cli=el('cartaCliente'), $anio=el('cartaAnio'), $plazo=el('cartaPlazo'), $firma=el('cartaFirma'),
-      $items=el('cartaItems'), $extra=el('cartaExtra'), $prev=el('cartaPreview'), $info=el('cartaInfo');
+      $items=el('cartaItems'), $extra=el('cartaExtra'), $prev=el('cartaPreview'), $info=el('cartaInfo'),
+      $inclTP=el('cartaInclTP'), $inclFirmaImg=el('cartaInclFirmaImg'), $inclMembrete=el('cartaInclMembrete'),
+      $fuente=el('cartaFuente');
+  // ── Perfil del contador (compartido con el módulo Certificados) ──
+  var PERFIL=(window.perfilContador&&perfilContador.get())||{};
+  var DESIGN_KEY='renta_pn_carta_design';
+  var COLORES=[['#1B3A5C','Azul'],['#047857','Verde'],['#7C2D12','Vinotinto'],['#111827','Negro']];
+  var design={fuente:'sans',color:'#1B3A5C',tp:true,firmaImg:!!PERFIL.firma_base64,membrete:!!PERFIL.logo_base64};
+  try{ var saved=JSON.parse(localStorage.getItem(DESIGN_KEY)||'null'); if(saved) design=Object.assign(design,saved); }catch(_){}
+  if(!PERFIL.firma_base64) design.firmaImg=false;
+  // Pre-cargar dimensiones de logo/firma para el PDF
+  var IMGS={};
+  ['logo_base64','firma_base64'].forEach(function(k){
+    if(!PERFIL[k]) return;
+    var im=new Image();
+    im.onload=function(){ IMGS[k]={el:im,w:im.naturalWidth,h:im.naturalHeight}; preview(); };
+    im.src=PERFIL[k];
+  });
+  function initDesignUI(){
+    var box=el('cartaPerfilBox');
+    if(PERFIL.nombre){
+      box.innerHTML='<span style="color:var(--green);font-weight:600">✓ Firmando como '+esc(PERFIL.nombre)+(PERFIL.tp?(' — T.P. '+esc(PERFIL.tp)):'')+'</span> · <a href="certificados.html" style="color:var(--pri2)">editar perfil</a>';
+      $firma.placeholder='Deja vacío para usar tu perfil, o escribe otro nombre';
+    } else {
+      box.innerHTML='💡 <a href="certificados.html" style="color:var(--pri2);font-weight:600">Guarda tu perfil de contador</a> (nombre, T.P., logo y firma escaneada) y la carta se arma sola.';
+    }
+    el('cartaFirmaImgHint').textContent=PERFIL.firma_base64?'':'(súbela en tu perfil)';
+    el('cartaLogoHint').textContent=PERFIL.logo_base64?'':'(súbelo en tu perfil)';
+    if(!PERFIL.firma_base64) $inclFirmaImg.disabled=true;
+    $inclTP.checked=design.tp!==false;
+    $inclFirmaImg.checked=!!design.firmaImg;
+    $inclMembrete.checked=!!design.membrete;
+    $fuente.value=design.fuente;
+    var cont=el('cartaColores');
+    COLORES.forEach(function(c){
+      var b=document.createElement('button');
+      b.type='button'; b.title=c[1]; b.dataset.color=c[0];
+      b.style.cssText='width:22px;height:22px;border-radius:50%;cursor:pointer;background:'+c[0]+';border:2px solid '+(design.color===c[0]?'var(--amber)':'transparent')+';outline:1px solid var(--border)';
+      b.addEventListener('click',function(){ design.color=c[0]; saveDesign(); cont.querySelectorAll('button').forEach(function(x){x.style.borderColor=x.dataset.color===design.color?'var(--amber)':'transparent';}); preview(); });
+      cont.appendChild(b);
+    });
+  }
+  function saveDesign(){ try{ localStorage.setItem(DESIGN_KEY,JSON.stringify(design)); }catch(_){} }
+  function fontFamily(){ return design.fuente==='serif'?"Georgia,'Times New Roman',serif":"'DM Sans','Segoe UI',Arial,sans-serif"; }
+  function firmaNombre(){ return $firma.value.trim()||PERFIL.nombre||''; }
+  function fechaHoy(){ return new Date().toLocaleDateString('es-CO',{day:'numeric',month:'long',year:'numeric'}); }
   function getClientesPN(){ try{ var arr=JSON.parse(localStorage.getItem('oficina_clientes')||'[]'); return arr.filter(function(c){return c.tipo==='PN' && c.obligaciones && c.obligaciones.renta;}); }catch(_){ return []; } }
   function fillClientes(){ getClientesPN().forEach(function(c){ var o=document.createElement('option'); o.value=c.nit; o.textContent=(c.nombre||c.nit); $cli.appendChild(o); }); }
   function renderItems(){ $items.innerHTML=''; DOC_ITEMS.forEach(function(it,i){ var row=document.createElement('label'); row.style.cssText='display:flex;gap:8px;align-items:flex-start;font-size:.82rem;cursor:pointer'; row.innerHTML='<input type="checkbox" '+(it.on?'checked':'')+' data-i="'+i+'" style="margin-top:3px"><span>'+(it.rec?'<b style="color:var(--amber)">★ </b>':'')+esc(it.t)+'</span>'; $items.appendChild(row); }); }
@@ -836,29 +898,91 @@ document.querySelectorAll('.tab').forEach(function(t){
   function selectedItems(){ return DOC_ITEMS.filter(function(x){return x.on;}).map(function(x){return x.t;}); }
   function clienteNombre(){ var v=$cli.value; var manual=el('cartaNombreManual')?el('cartaNombreManual').value.trim():''; if(v==='__todos__')return '__todos__'; if(v==='__generica__') return manual||null; var c=getClientesPN().find(function(x){return x.nit===v;}); return c?(c.nombre||v):v; }
   function clienteNit(){ return el('cartaNitManual')?el('cartaNitManual').value.trim():''; }
+  function membreteHTML(){
+    if(!design.membrete||!PERFIL.nombre) return '';
+    var logo=PERFIL.logo_base64?('<img src="'+PERFIL.logo_base64+'" alt="" style="max-height:52px;max-width:120px;object-fit:contain;flex:0 0 auto">'):'';
+    var sub=[];
+    if(PERFIL.tp) sub.push('Contador(a) P&uacute;blico(a) · T.P. '+esc(PERFIL.tp));
+    if(PERFIL.ciudad) sub.push(esc(PERFIL.ciudad));
+    var contacto=[PERFIL.telefono?('Tel: '+esc(PERFIL.telefono)):'',esc(PERFIL.email||'')].filter(Boolean).join(' · ');
+    return '<div style="display:flex;align-items:center;gap:14px;border-bottom:2px solid '+design.color+';padding-bottom:10px;margin-bottom:18px">'+logo+
+      '<div><div style="font-weight:800;font-size:1.02rem;letter-spacing:.3px;color:'+design.color+'">'+esc(PERFIL.nombre)+'</div>'+
+      '<div style="font-size:.76rem;color:#555;line-height:1.45">'+sub.join(' · ')+(contacto?('<br>'+contacto):'')+'</div></div></div>';
+  }
+  function firmaHTML(){
+    var nombre=firmaNombre();
+    if(!nombre) return '';
+    var img=(design.firmaImg&&PERFIL.firma_base64)?('<img src="'+PERFIL.firma_base64+'" alt="" style="max-height:58px;max-width:180px;object-fit:contain;display:block;margin:8px 0 2px">'):'<br><br>';
+    var sub=[];
+    if(design.tp){
+      if(PERFIL.tp&&!$firma.value.trim()) sub.push('Contador(a) P&uacute;blico(a) — T.P. '+esc(PERFIL.tp));
+      var con=[PERFIL.telefono?esc(PERFIL.telefono):'',esc(PERFIL.email||'')].filter(Boolean).join(' · ');
+      if(con&&!$firma.value.trim()) sub.push(con);
+    }
+    return '<p style="margin-top:26px;margin-bottom:0">Cordialmente,</p>'+img+
+      '<div style="font-weight:700">'+esc(nombre)+'</div>'+
+      (sub.length?('<div style="font-size:.8rem;color:#555">'+sub.join('<br>')+'</div>'):'');
+  }
   function letterHTML(nombre, nit){
     var saludo = nombre ? ('Estimado(a) '+esc(nombre)+',') : 'Estimado(a) cliente,';
     if(nit) saludo += '<span style="font-size:.82rem;color:#6b7280"> &nbsp;·&nbsp; NIT/C.C. '+esc(nit)+'</span>';
     var plazo = $plazo.value.trim() ? ('<p>Te agradezco enviarlos a más tardar el <b>'+esc($plazo.value.trim())+'</b>.</p>') : '';
     var lis = selectedItems().map(function(t){return '<li style="margin-bottom:4px">'+esc(t)+'</li>';}).join('');
-    var firma = $firma.value.trim() ? ('<p style="margin-top:26px">Cordialmente,<br><br><b>'+esc($firma.value.trim())+'</b></p>') : '';
-    return '<p>'+saludo+'</p>'+
+    var fechaLinea='<p style="font-size:.84rem;color:#6b7280;margin-bottom:14px">'+(PERFIL.ciudad?(esc(PERFIL.ciudad)+', '):'')+fechaHoy()+'</p>';
+    var titulo='<div style="font-weight:800;font-size:1.05rem;color:'+design.color+';margin-bottom:2px">Documentos para tu declaración de renta</div>'+
+      '<div style="font-size:.8rem;color:#6b7280;margin-bottom:14px">Año gravable '+esc($anio.value||'')+'</div>';
+    return '<div style="font-family:'+fontFamily()+'">'+membreteHTML()+fechaLinea+titulo+
+      '<p>'+saludo+'</p>'+
       '<p>Para preparar tu <b>declaración de renta del año gravable '+esc($anio.value||'')+'</b>, por favor reúne y envíame los siguientes documentos. Si alguno no aplica a tu caso, indícamelo:</p>'+
       '<ol style="margin:10px 0 10px 18px">'+lis+'</ol>'+plazo+
-      '<p style="font-size:.82rem;color:#6b7280">Esta información es el punto de partida; la cruzaré con el reporte de terceros de la DIAN para elaborar tu declaración.</p>'+firma;
+      '<p style="font-size:.82rem;color:#6b7280">Esta información es el punto de partida; la cruzaré con el reporte de terceros de la DIAN para elaborar tu declaración.</p>'+firmaHTML()+'</div>';
   }
   function preview(){ var n=clienteNombre(); var nit=(n==='__todos__')?'':clienteNit(); $prev.innerHTML = letterHTML(n==='__todos__'?null:n, nit); $info.textContent = (n==='__todos__')?(getClientesPN().length+' cartas (una por cliente)'):''; }
-  function pdfPage(doc,nombre,nit){ var M=64, W=doc.internal.pageSize.getWidth(), y=72;
-    doc.setFont('helvetica','bold'); doc.setFontSize(15); doc.setTextColor(27,58,92); doc.text('Documentos para tu declaración de renta', M, y); y+=18;
-    doc.setFontSize(10); doc.setFont('helvetica','normal'); doc.setTextColor(110,110,110); doc.text('Año gravable '+($anio.value||''), M, y); y+=30;
+  function hexRGB(h){ return [parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)]; }
+  function imgFmt(b64){ return /image\/png/i.test(b64||'')?'PNG':'JPEG'; }
+  function pdfImgDims(key,maxH,maxW){ var im=IMGS[key]; if(!im||!im.w) return null; var r=Math.min(maxH/im.h,maxW/im.w,1); return {w:im.w*r,h:im.h*r}; }
+  function pdfPage(doc,nombre,nit){ var M=64, W=doc.internal.pageSize.getWidth(), y=64;
+    var F=design.fuente==='serif'?'times':'helvetica', AC=hexRGB(design.color);
+    // Membrete con logo y datos del perfil
+    if(design.membrete&&PERFIL.nombre){
+      var x=M, lg=pdfImgDims('logo_base64',38,90);
+      if(lg){ try{ doc.addImage(PERFIL.logo_base64,imgFmt(PERFIL.logo_base64),M,y-8,lg.w,lg.h); x=M+lg.w+14; }catch(_){ } }
+      doc.setFont(F,'bold'); doc.setFontSize(12); doc.setTextColor(AC[0],AC[1],AC[2]); doc.text(PERFIL.nombre, x, y+4);
+      doc.setFont(F,'normal'); doc.setFontSize(8); doc.setTextColor(90,90,90);
+      var sub=[]; if(PERFIL.tp) sub.push('Contador(a) Público(a) · T.P. '+PERFIL.tp); if(PERFIL.ciudad) sub.push(PERFIL.ciudad);
+      var con=[PERFIL.telefono?('Tel: '+PERFIL.telefono):'',PERFIL.email||''].filter(Boolean).join(' · ');
+      if(sub.length) doc.text(sub.join(' · '), x, y+16);
+      if(con) doc.text(con, x, y+27);
+      var bot=Math.max(y+30, lg?(y-8+lg.h+6):0);
+      doc.setDrawColor(AC[0],AC[1],AC[2]); doc.setLineWidth(1.4); doc.line(M,bot,W-M,bot);
+      y=bot+24;
+    }
+    doc.setFont(F,'normal'); doc.setFontSize(9); doc.setTextColor(110,110,110);
+    doc.text((PERFIL.ciudad?(PERFIL.ciudad+', '):'')+fechaHoy(), M, y); y+=24;
+    doc.setFont(F,'bold'); doc.setFontSize(15); doc.setTextColor(AC[0],AC[1],AC[2]); doc.text('Documentos para tu declaración de renta', M, y); y+=18;
+    doc.setFontSize(10); doc.setFont(F,'normal'); doc.setTextColor(110,110,110); doc.text('Año gravable '+($anio.value||''), M, y); y+=30;
     doc.setTextColor(26,26,46); doc.setFontSize(11);
     doc.text((nombre?('Estimado(a) '+nombre+','):'Estimado(a) cliente,'), M, y); y+=20;
     if(nit){ doc.setFontSize(9); doc.setTextColor(110,110,110); doc.text('NIT / C.C.: '+nit, M, y); doc.setTextColor(26,26,46); doc.setFontSize(11); y+=18; } else { y+=2; }
     var intro=doc.splitTextToSize('Para preparar tu declaración de renta del año gravable '+($anio.value||'')+', por favor reúne y envíame los siguientes documentos. Si alguno no aplica, indícamelo:', W-M*2);
     doc.text(intro,M,y); y+=intro.length*15+10;
-    selectedItems().forEach(function(t){ var lines=doc.splitTextToSize(t, W-M*2-24); if(y+lines.length*15>730){ doc.addPage(); y=72; } doc.rect(M, y-9, 10,10); doc.text(lines, M+22, y); y+=lines.length*15+5; });
-    if($plazo.value.trim()){ y+=8; doc.setFont('helvetica','bold'); doc.text(doc.splitTextToSize('Fecha límite: '+$plazo.value.trim(), W-M*2),M,y); doc.setFont('helvetica','normal'); y+=22; }
-    if($firma.value.trim()){ y+=22; doc.text('Cordialmente,',M,y); y+=28; doc.setFont('helvetica','bold'); doc.text($firma.value.trim(),M,y); doc.setFont('helvetica','normal'); }
+    selectedItems().forEach(function(t){ var lines=doc.splitTextToSize(t, W-M*2-24); if(y+lines.length*15>730){ doc.addPage(); y=72; doc.setFont(F,'normal'); doc.setFontSize(11); doc.setTextColor(26,26,46); } doc.rect(M, y-9, 10,10); doc.text(lines, M+22, y); y+=lines.length*15+5; });
+    if($plazo.value.trim()){ y+=8; doc.setFont(F,'bold'); doc.text(doc.splitTextToSize('Fecha límite: '+$plazo.value.trim(), W-M*2),M,y); doc.setFont(F,'normal'); y+=22; }
+    var fn=firmaNombre();
+    if(fn){
+      y+=22; if(y>640){ doc.addPage(); y=72; doc.setFont(F,'normal'); doc.setFontSize(11); doc.setTextColor(26,26,46); }
+      doc.text('Cordialmente,',M,y);
+      var fi=design.firmaImg?pdfImgDims('firma_base64',42,140):null;
+      if(fi){ try{ doc.addImage(PERFIL.firma_base64,imgFmt(PERFIL.firma_base64),M,y+8,fi.w,fi.h); }catch(_){ fi=null; } }
+      y+=(fi?fi.h+20:28);
+      doc.setFont(F,'bold'); doc.text(fn,M,y); doc.setFont(F,'normal');
+      if(design.tp&&!$firma.value.trim()){
+        doc.setFontSize(9); doc.setTextColor(90,90,90); var fy=y+13;
+        if(PERFIL.tp){ doc.text('Contador(a) Público(a) — T.P. '+PERFIL.tp,M,fy); fy+=12; }
+        var fcon=[PERFIL.telefono||'',PERFIL.email||''].filter(Boolean).join(' · ');
+        if(fcon) doc.text(fcon,M,fy);
+      }
+    }
   }
   function buildPDF(){ var jsPDF=window.jspdf.jsPDF; var doc=new jsPDF({unit:'pt',format:'letter'}); var n=clienteNombre();
     var lista=(n==='__todos__')? getClientesPN().map(function(c){return c.nombre||c.nit;}) : [ (n==='__todos__'?null:n) ];
@@ -879,6 +1003,11 @@ document.querySelectorAll('.tab').forEach(function(t){
   el('cartaTodos').addEventListener('click',function(){ var all=DOC_ITEMS.every(function(x){return x.on;}); DOC_ITEMS.forEach(function(x){x.on=!all;}); renderItems(); preview(); });
   $extra.addEventListener('keydown',function(e){ if(e.key==='Enter' && this.value.trim()){ DOC_ITEMS.push({t:this.value.trim(),on:true}); this.value=''; renderItems(); preview(); } });
   [$cli,$anio,$plazo,$firma,el('cartaNombreManual'),el('cartaNitManual')].forEach(function(e){ if(e) e.addEventListener('input',preview); });
+  $inclTP.addEventListener('change',function(){ design.tp=this.checked; saveDesign(); preview(); });
+  $inclFirmaImg.addEventListener('change',function(){ design.firmaImg=this.checked; saveDesign(); preview(); });
+  $inclMembrete.addEventListener('change',function(){ design.membrete=this.checked; saveDesign(); preview(); });
+  $fuente.addEventListener('change',function(){ design.fuente=this.value; saveDesign(); preview(); });
+  initDesignUI();
   el('btnCartaPDF').addEventListener('click',function(){ gate(function(){ buildPDF().save('solicitud-documentos-renta.pdf'); if(typeof gtag!=='undefined')gtag('event','renta_pn_carta',{fmt:'pdf'}); }); });
   el('btnCartaWord').addEventListener('click',function(){ gate(function(){ dl(buildWordBlob(),'solicitud-documentos-renta.doc'); if(typeof gtag!=='undefined')gtag('event','renta_pn_carta',{fmt:'word'}); }); });
   // ── Carta específica a partir del reporte MUISCA ──────────────────
