@@ -340,6 +340,15 @@ body{background:radial-gradient(1100px 560px at 72% -12%, #e7eef8 0%, #f0f2f5 46
         <div class="stat-card ok"><div class="stat-label">Presentadas</div><div class="stat-value" id="stPresentadas">0</div></div>
         <div class="stat-card"><div class="stat-label">Por cobrar</div><div class="stat-value" id="stPorCobrar">$0</div></div>
       </div>
+      <div id="progresoWrap" style="margin:4px 0 16px">
+        <div style="display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);margin-bottom:5px">
+          <span>📊 Progreso de la temporada</span>
+          <span id="progresoTxt" style="font-weight:700;color:var(--pri)">0 de 0 presentadas</span>
+        </div>
+        <div style="height:10px;background:#E5E7EB;border-radius:6px;overflow:hidden">
+          <div id="progresoFill" style="height:100%;width:0%;background:linear-gradient(90deg,#10B981,#047857);border-radius:6px;transition:width .4s"></div>
+        </div>
+      </div>
       <div class="toolbar">
         <button class="add-btn" onclick="abrirModalNuevo()" type="button">+ Agregar cliente</button>
         <button class="io-btn" onclick="abrirModalImportar()" type="button" title="Importar desde Excel o descargar plantilla">📤 Importar</button>
@@ -617,6 +626,12 @@ body{background:radial-gradient(1100px 560px at 72% -12%, #e7eef8 0%, #f0f2f5 46
           <div style="flex:1"><label style="font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px">Fecha límite (opcional)</label>
             <input type="text" id="cartaPlazo" placeholder="ej. 31 de julio" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:.9rem;margin-top:6px"></div>
         </div>
+        <div style="display:flex;gap:10px">
+          <div style="flex:1"><label style="font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px">Ciudad</label>
+            <input type="text" id="cartaCiudad" placeholder="ej. Medellín" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:.9rem;margin-top:6px"></div>
+          <div style="flex:1"><label style="font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px">Fecha de la carta</label>
+            <input type="date" id="cartaFecha" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:.9rem;margin-top:6px"></div>
+        </div>
         <div>
           <label style="font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px">Quién firma la carta</label>
           <div id="cartaPerfilBox" style="margin-top:6px;font-size:.8rem;line-height:1.5"></div>
@@ -755,6 +770,13 @@ document.querySelectorAll('.tab').forEach(function(t){
     if(typeof gtag !== 'undefined') gtag('event','renta_pn_hub_tab', { tab: key });
   });
 });
+// Deep-link: renta-personas-naturales.html#cli abre directo un tab (lo usa el liquidador)
+(function(){
+  var h = (location.hash || '').replace('#','');
+  if(!h) return;
+  var btn = document.querySelector('.tab[data-tab="' + h + '"]');
+  if(btn) btn.click();
+})();
 // ════════════════════════════════════════════════════════════════════
 //  Tab 4: Tarjeta para redes (canvas → PNG)
 // ════════════════════════════════════════════════════════════════════
@@ -887,7 +909,15 @@ document.querySelectorAll('.tab').forEach(function(t){
   function saveDesign(){ try{ localStorage.setItem(DESIGN_KEY,JSON.stringify(design)); }catch(_){} }
   function fontFamily(){ return design.fuente==='serif'?"Georgia,'Times New Roman',serif":"'DM Sans','Segoe UI',Arial,sans-serif"; }
   function firmaNombre(){ return $firma.value.trim()||PERFIL.nombre||''; }
-  function fechaHoy(){ return new Date().toLocaleDateString('es-CO',{day:'numeric',month:'long',year:'numeric'}); }
+  var $ciudad=el('cartaCiudad'), $fecha=el('cartaFecha');
+  $ciudad.value=PERFIL.ciudad||'';
+  (function(){ var d=new Date(); $fecha.value=d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2); })();
+  function cartaCiudad(){ return $ciudad.value.trim(); }
+  function fechaHoy(){
+    var v=$fecha.value;
+    var d=v?new Date(v+'T12:00:00'):new Date();
+    return d.toLocaleDateString('es-CO',{day:'numeric',month:'long',year:'numeric'});
+  }
   function getClientesPN(){ try{ var arr=JSON.parse(localStorage.getItem('oficina_clientes')||'[]'); return arr.filter(function(c){return c.tipo==='PN' && c.obligaciones && c.obligaciones.renta;}); }catch(_){ return []; } }
   function fillClientes(){ getClientesPN().forEach(function(c){ var o=document.createElement('option'); o.value=c.nit; o.textContent=(c.nombre||c.nit); $cli.appendChild(o); }); }
   function renderItems(){ $items.innerHTML=''; DOC_ITEMS.forEach(function(it,i){ var row=document.createElement('label'); row.style.cssText='display:flex;gap:8px;align-items:flex-start;font-size:.82rem;cursor:pointer'; row.innerHTML='<input type="checkbox" '+(it.on?'checked':'')+' data-i="'+i+'" style="margin-top:3px"><span>'+(it.rec?'<b style="color:var(--amber)">★ </b>':'')+esc(it.t)+'</span>'; $items.appendChild(row); }); }
@@ -928,7 +958,7 @@ document.querySelectorAll('.tab').forEach(function(t){
     if(nit) saludo += '<span style="font-size:.82rem;color:#6b7280"> &nbsp;·&nbsp; NIT/C.C. '+esc(nit)+'</span>';
     var plazo = $plazo.value.trim() ? ('<p>Te agradezco enviarlos a más tardar el <b>'+esc($plazo.value.trim())+'</b>.</p>') : '';
     var lis = selectedItems().map(function(t){return '<li style="margin-bottom:4px">'+esc(t)+'</li>';}).join('');
-    var fechaLinea='<p style="font-size:.84rem;color:#6b7280;margin-bottom:14px">'+(PERFIL.ciudad?(esc(PERFIL.ciudad)+', '):'')+fechaHoy()+'</p>';
+    var fechaLinea='<p style="font-size:.84rem;color:#6b7280;margin-bottom:14px">'+(cartaCiudad()?(esc(cartaCiudad())+', '):'')+fechaHoy()+'</p>';
     var titulo='<div style="font-weight:800;font-size:1.05rem;color:'+design.color+';margin-bottom:2px">Documentos para tu declaración de renta</div>'+
       '<div style="font-size:.8rem;color:#6b7280;margin-bottom:14px">Año gravable '+esc($anio.value||'')+'</div>';
     return '<div style="font-family:'+fontFamily()+'">'+membreteHTML()+fechaLinea+titulo+
@@ -958,7 +988,7 @@ document.querySelectorAll('.tab').forEach(function(t){
       y=bot+24;
     }
     doc.setFont(F,'normal'); doc.setFontSize(9); doc.setTextColor(110,110,110);
-    doc.text((PERFIL.ciudad?(PERFIL.ciudad+', '):'')+fechaHoy(), M, y); y+=24;
+    doc.text((cartaCiudad()?(cartaCiudad()+', '):'')+fechaHoy(), M, y); y+=24;
     doc.setFont(F,'bold'); doc.setFontSize(15); doc.setTextColor(AC[0],AC[1],AC[2]); doc.text('Documentos para tu declaración de renta', M, y); y+=18;
     doc.setFontSize(10); doc.setFont(F,'normal'); doc.setTextColor(110,110,110); doc.text('Año gravable '+($anio.value||''), M, y); y+=30;
     doc.setTextColor(26,26,46); doc.setFontSize(11);
@@ -1002,7 +1032,7 @@ document.querySelectorAll('.tab').forEach(function(t){
   $items.addEventListener('change',function(e){ var i=e.target.getAttribute('data-i'); if(i!=null){ DOC_ITEMS[i].on=e.target.checked; preview(); } });
   el('cartaTodos').addEventListener('click',function(){ var all=DOC_ITEMS.every(function(x){return x.on;}); DOC_ITEMS.forEach(function(x){x.on=!all;}); renderItems(); preview(); });
   $extra.addEventListener('keydown',function(e){ if(e.key==='Enter' && this.value.trim()){ DOC_ITEMS.push({t:this.value.trim(),on:true}); this.value=''; renderItems(); preview(); } });
-  [$cli,$anio,$plazo,$firma,el('cartaNombreManual'),el('cartaNitManual')].forEach(function(e){ if(e) e.addEventListener('input',preview); });
+  [$cli,$anio,$plazo,$firma,$ciudad,$fecha,el('cartaNombreManual'),el('cartaNitManual')].forEach(function(e){ if(e) e.addEventListener('input',preview); });
   $inclTP.addEventListener('change',function(){ design.tp=this.checked; saveDesign(); preview(); });
   $inclFirmaImg.addEventListener('change',function(){ design.firmaImg=this.checked; saveDesign(); preview(); });
   $inclMembrete.addEventListener('change',function(){ design.membrete=this.checked; saveDesign(); preview(); });
@@ -1036,6 +1066,14 @@ document.querySelectorAll('.tab').forEach(function(t){
     'RUT actualizado y copia de la declaración de renta del año anterior',
     'Documentos de los dependientes que vaya a incluir (registro civil, certificado de estudios, etc.)'
   ];
+  // El reporte DIAN trae "APELLIDO1 APELLIDO2 NOMBRES" → voltear a "Nombres Apellidos"
+  function nombreNatural(raw){
+    if(!raw) return '';
+    var t=String(raw).trim().split(/\s+/);
+    if(t.length>=3) t=t.slice(2).concat(t.slice(0,2));
+    else if(t.length===2) t=[t[1],t[0]];
+    return tcEntidad(t.join(' '));
+  }
   function tcEntidad(raw){
     if(!raw) return '';
     var KNOWN={SA:1,SAS:1,SCA:1,LTDA:1,BIC:1,ESP:1,EPS:1,ARL:1,AFP:1,IPS:1,CDT:1,ND:1,SAESP:1};
@@ -1114,13 +1152,13 @@ document.querySelectorAll('.tab').forEach(function(t){
       try{ if(typeof XLSX!=='undefined'){ var swb=XLSX.read(new Uint8Array(ab),{type:'array'}); swb.SheetNames.forEach(function(n){ var ws=swb.Sheets[n],mr=0,mc=0,hay=false; Object.keys(ws).forEach(function(k){ if(k[0]==='!')return; hay=true; var c=XLSX.utils.decode_cell(k); if(c.r>mr)mr=c.r; if(c.c>mc)mc=c.c; }); if(hay) ws['!ref']='A1:'+XLSX.utils.encode_cell({r:mr,c:mc}); }); ab=XLSX.write(swb,{type:'array',bookType:'xlsx'}); } }catch(_){}
       var wb=new ExcelJS.Workbook(); return wb.xlsx.load(ab).then(function(){
       var r=parserMuiscaConsultante.parse(wb);
-      if(r.metadata){ if(r.metadata.nombre){ $cli.value='__generica__'; el('cartaNombreManual').value=r.metadata.nombre; } if(r.metadata.nit) el('cartaNitManual').value=r.metadata.nit; if(r.metadata.anio && !$anio.value) $anio.value=r.metadata.anio; }
+      if(r.metadata){ if(r.metadata.nombre){ $cli.value='__generica__'; el('cartaNombreManual').value=nombreNatural(r.metadata.nombre); } if(r.metadata.nit) el('cartaNitManual').value=r.metadata.nit; if(r.metadata.anio && !$anio.value) $anio.value=r.metadata.anio; }
       var res=itemsDesdeReporte(r.detalle, r.metadata&&r.metadata.nit);
       if(!res.items.length){ el('cartaDropMsg').style.color='var(--red)'; el('cartaDropMsg').textContent='No reconocí terceros en el reporte. Descarga del MUISCA el "reportado por terceros" en Excel.'; return; }
       DOC_ITEMS = BASE_CARTA.concat(res.items).map(function(t){ return {t:t,on:true}; });
       renderItems(); preview();
       el('cartaDropMsg').style.color='var(--green)';
-      el('cartaDropMsg').innerHTML='✓ '+(r.metadata&&r.metadata.nombre?(esc(tcEntidad(r.metadata.nombre))+' — '):'')+'armé la lista específica: '+res.items.length+' documentos de '+res.terceros+' terceros. Revísala y ajústala antes de enviar.';
+      el('cartaDropMsg').innerHTML='✓ '+(r.metadata&&r.metadata.nombre?(esc(nombreNatural(r.metadata.nombre))+' — '):'')+'armé la lista específica: '+res.items.length+' documentos de '+res.terceros+' terceros. Revísala y ajústala antes de enviar.';
     }); }).catch(function(err){ el('cartaDropMsg').style.color='var(--red)'; var m=(err&&err.message)||''; el('cartaDropMsg').textContent= /sheets|zip|corrupt|invalid|central directory|end of/i.test(m) ? '✕ No pude leer este Excel. Ábrelo en Excel y guárdalo como “Libro de Excel (.xlsx)”, o verifica que sea el reporte del MUISCA.' : ('✕ '+(m||'No se pudo leer el archivo')); });
   }
   el('cartaFile').addEventListener('change',function(e){ var f=e.target.files[0]; if(f) loadCartaReport(f); });
@@ -1311,6 +1349,12 @@ function renderEstadisticas(){
   document.getElementById('stUrgentes').textContent = urgentes;
   document.getElementById('stPresentadas').textContent = presentadas;
   document.getElementById('stPorCobrar').textContent = fmtCOP(porCobrar);
+  // Barra de progreso de la temporada
+  var pTxt = document.getElementById('progresoTxt'), pFill = document.getElementById('progresoFill');
+  if(pTxt && pFill){
+    pTxt.textContent = presentadas + ' de ' + total + ' presentadas' + (total ? (' (' + Math.round(presentadas / total * 100) + '%)') : '');
+    pFill.style.width = (total ? Math.round(presentadas / total * 100) : 0) + '%';
+  }
 }
 // ════════════════════════════════════════════════════════════════════
 //  Filtros
@@ -1404,6 +1448,7 @@ function renderTabla(){
         (porCobrar > 0 ? fmtCOP(porCobrar) : (meta.honorariosCobrado && meta.honorariosPorCobrar ? '✓ cobrado' : '—')) +
       '</td>' +
       '<td style="white-space:nowrap">' +
+        '<a class="acc-btn" style="background:#EDE9FE;color:#5B21B6;border-color:#C4B5FD;text-decoration:none;font-weight:700" href="formato210-pro.html?nit=' + encodeURIComponent(c.nit) + '&nombre=' + encodeURIComponent(c.nombre || '') + '" title="Abrir el liquidador 210 con este cliente">210 →</a> ' +
         '<button class="acc-btn" onclick="abrirModal(\'' + escHtml(c.nit) + '\')" title="Editar">Editar</button>' +
         '<button class="acc-btn danger" onclick="eliminarCliente(\'' + escHtml(c.nit) + '\')" title="Eliminar">×</button>' +
       '</td>' +

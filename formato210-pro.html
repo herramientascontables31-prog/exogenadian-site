@@ -408,6 +408,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
       <div style="font-size:.7rem;margin-top:4px;opacity:.85">100% en navegador</div>
     </div>
   </div>
+  <div id="clienteContextBar" style="background:#fff;border:1px solid #e5e7eb;border-left:4px solid #1B3A5C;border-radius:12px;padding:10px 16px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.04);font-size:.88rem"></div>
   <div id="proGate" class="card" style="padding:0;overflow:hidden">
     <div class="pro-gate">
       <div style="font-size:2.5rem;margin-bottom:12px">&#128274;</div>
@@ -446,10 +447,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
       </div>
     </div>
     <div class="f210-tabs" id="f210Tabs">
-      <button class="f210-tab active" data-tab="t210" onclick="cambiarTabF210('t210')">&#128203; Formulario 210, declarante y patrimonio</button>
-      <button class="f210-tab" data-tab="texogena" onclick="cambiarTabF210('texogena')">&#128229; Reconciliación</button>
-      <button class="f210-tab" data-tab="trentas" onclick="cambiarTabF210('trentas')">&#128188; Rentas por cédula <span class="tab-dot"></span></button>
-      <button class="f210-tab" data-tab="trevision" onclick="cambiarTabF210('trevision')">&#9878;&#65039; Revisión y descarga</button>
+      <button class="f210-tab active" data-tab="t210" onclick="cambiarTabF210('t210')">1&#xFE0F;&#x20E3; Cliente, ex&oacute;gena y patrimonio</button>
+      <button class="f210-tab" data-tab="texogena" onclick="cambiarTabF210('texogena')">2&#xFE0F;&#x20E3; Reconciliaci&oacute;n</button>
+      <button class="f210-tab" data-tab="trentas" onclick="cambiarTabF210('trentas')">3&#xFE0F;&#x20E3; Rentas por c&eacute;dula <span class="tab-dot"></span></button>
+      <button class="f210-tab" data-tab="trevision" onclick="cambiarTabF210('trevision')">4&#xFE0F;&#x20E3; Formulario 210 y descarga</button>
     </div>
     <div class="express-grid">
       <div id="colFormulario">
@@ -905,7 +906,9 @@ function validarProGate(){
       inicializarSugerida();
       verificarBienvenida(); // B.1 — muestra panel educativo si es primer acceso
       recalcular();
-      cambiarTabF210('t210'); // arrancar en la hoja principal (Formulario 210)
+      cambiarTabF210('t210'); // arrancar en el paso 1 (cliente y exógena)
+      prefillClienteActivo();
+      renderClienteBar();
     } else {
       errEl.style.color='#FCA5A5';
       errEl.textContent='Email no encontrado o suscripción inactiva.';
@@ -916,6 +919,7 @@ function validarProGate(){
   }).finally(function(){input.disabled=false});
 }
 document.addEventListener('DOMContentLoaded', function(){
+  renderClienteBar();
   exoPro.check().then(function(ok){
     if(ok){
       document.getElementById('proGate').classList.add('hidden');
@@ -927,8 +931,10 @@ document.addEventListener('DOMContentLoaded', function(){
       inicializarSugerida();
       verificarBienvenida(); // B.1 — muestra panel educativo si es primer acceso
       recalcular();
-      cambiarTabF210('t210'); // arrancar en la hoja principal (Formulario 210)
+      cambiarTabF210('t210'); // arrancar en el paso 1 (cliente y exógena)
+      prefillClienteActivo();
     }
+    renderClienteBar();
   });
   // Pills (radio activa)
   document.querySelectorAll('.radio-pill input').forEach(function(r){
@@ -1286,9 +1292,11 @@ function procesarArchivoExogena(file){
       }
       var nReg = result.metadata.totalRegistros;
       if(typeof exoToast !== 'undefined'){
-        if(nReg > 0) exoToast('Exógena cargada: ' + nReg + ' registros (' + nivel + ' ' + result.metadata.confianza + '%)', 'success');
+        if(nReg > 0) exoToast('Exógena cargada: ' + nReg + ' registros (' + nivel + ' ' + result.metadata.confianza + '%) → Paso 2: revisa la reconciliación', 'success');
         else exoToast('Archivo leído pero sin registros válidos. Revisa los avisos.', 'warning');
       }
+      // Guiar el flujo: con la exógena cargada, el siguiente paso es la reconciliación
+      if(nReg > 0) setTimeout(function(){ cambiarTabF210('texogena'); }, 900);
       if(typeof gtag !== 'undefined') gtag('event','f210_pro_exogena_cargada', { registros: nReg, nivel: nivel });
     }).catch(function(err){
       console.error(err);
@@ -2745,8 +2753,88 @@ function setText(id, txt){
    V1 (express) usaba un radio "tipo" único. V2 (pro) tiene 4 subcédulas separadas
    + selectores de imputación de deducciones. migrarV1aV2() preserva el trabajo
    previo del contador mapeando los campos genéricos a la subcédula correcta. */
-var BORRADOR_KEY    = 'f210_pro_borrador_v2';
+/* ── CLIENTE ACTIVO (integración con el hub renta-personas-naturales) ──
+   El hub abre el liquidador con ?nit=&nombre=. Con cliente activo, el borrador
+   se guarda POR CLIENTE (clave con sufijo ::nit) y el estado de la declaración
+   se sincroniza con renta_pn_meta (la misma del tab Clientes del hub). */
+var CLIENTE_ACTIVO = (function(){
+  try{
+    var p = new URLSearchParams(location.search);
+    var nit = (p.get('nit') || '').replace(/[^0-9]/g, '');
+    if(nit) return { nit: nit, nombre: (p.get('nombre') || '').trim() };
+  }catch(_){}
+  return null;
+})();
+var BORRADOR_KEY    = CLIENTE_ACTIVO ? ('f210_pro_borrador_v2::' + CLIENTE_ACTIVO.nit) : 'f210_pro_borrador_v2';
 var BORRADOR_KEY_V1 = 'f210_express_borrador';
+function leerMetaPN(){ try{ return JSON.parse(localStorage.getItem('renta_pn_meta') || '{}'); }catch(_){ return {}; } }
+function escribirEstadoPN(estado){
+  if(!CLIENTE_ACTIVO) return;
+  var m = leerMetaPN(); m[CLIENTE_ACTIVO.nit] = m[CLIENTE_ACTIVO.nit] || {};
+  m[CLIENTE_ACTIVO.nit].estado = estado; m[CLIENTE_ACTIVO.nit].actualizado = Date.now();
+  try{ localStorage.setItem('renta_pn_meta', JSON.stringify(m)); }catch(_){}
+}
+function progresoPN(){
+  try{
+    var cls = (JSON.parse(localStorage.getItem('oficina_clientes') || '[]')).filter(function(c){ return c.tipo === 'PN' && c.obligaciones && c.obligaciones.renta; });
+    var meta = leerMetaPN();
+    var hechas = cls.filter(function(c){ var e = (meta[c.nit] || {}).estado; return e === 'presentada' || e === 'pagada'; }).length;
+    return { total: cls.length, hechas: hechas };
+  }catch(_){ return { total: 0, hechas: 0 }; }
+}
+var ESTADOS_PN = [
+  ['por_presentar', '🔴 Por presentar'],
+  ['borrador', '🟡 En borrador'],
+  ['pendiente_cliente', '🟠 Esperando al cliente'],
+  ['presentada', '🟢 Presentada'],
+  ['pagada', '✅ Presentada y pagada']
+];
+function renderClienteBar(){
+  var bar = document.getElementById('clienteContextBar');
+  if(!bar) return;
+  var pr = progresoPN();
+  if(!CLIENTE_ACTIVO){
+    bar.innerHTML = '<a href="renta-personas-naturales.html#cli" style="color:#1B3A5C;font-weight:600;text-decoration:none">👥 Hub Renta PN: gestiona tus clientes, cartas y calendario' + (pr.total ? (' — <b>' + pr.hechas + ' de ' + pr.total + ' presentadas</b>') : '') + ' →</a>';
+    return;
+  }
+  var meta = leerMetaPN()[CLIENTE_ACTIVO.nit] || {};
+  var estado = meta.estado || 'por_presentar';
+  var venc = '';
+  try{
+    if(window.vencimientosPN){
+      var v = vencimientosPN.getVencimientoPN(CLIENTE_ACTIVO.nit);
+      if(v && v.fechaFmt) venc = '📅 Vence: <b>' + v.fechaFmt + '</b>' + (typeof v.diasRestantes === 'number' ? (v.diasRestantes >= 0 ? (' · faltan ' + v.diasRestantes + ' días') : ' · <b style="color:#DC2626">VENCIDA</b>') : '');
+    }
+  }catch(_){}
+  var opts = ESTADOS_PN.map(function(e){ return '<option value="' + e[0] + '"' + (e[0] === estado ? ' selected' : '') + '>' + e[1] + '</option>'; }).join('');
+  bar.innerHTML =
+    '<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">' +
+      '<a href="renta-personas-naturales.html#cli" style="color:#1B3A5C;font-weight:700;text-decoration:none;white-space:nowrap">← Mis clientes</a>' +
+      '<span style="font-weight:700;color:#1B3A5C">👤 ' + escHtml(CLIENTE_ACTIVO.nombre || ('NIT ' + CLIENTE_ACTIVO.nit)) + '</span>' +
+      (CLIENTE_ACTIVO.nombre ? ('<span style="font-size:.8rem;color:#6b7280">C.C./NIT ' + CLIENTE_ACTIVO.nit + '</span>') : '') +
+      (venc ? ('<span style="font-size:.82rem;color:#374151">' + venc + '</span>') : '') +
+      '<label style="margin-left:auto;display:flex;align-items:center;gap:6px;font-size:.8rem;color:#6b7280">Estado: ' +
+        '<select id="clienteEstadoSel" style="padding:5px 8px;border:1px solid #d1d5db;border-radius:8px;font-family:inherit;font-size:.82rem;cursor:pointer">' + opts + '</select>' +
+      '</label>' +
+      (pr.total ? ('<span style="font-size:.8rem;color:#6b7280;white-space:nowrap">📊 ' + pr.hechas + ' de ' + pr.total + ' presentadas</span>') : '') +
+    '</div>';
+  var sel = document.getElementById('clienteEstadoSel');
+  if(sel) sel.addEventListener('change', function(){
+    escribirEstadoPN(this.value);
+    if(typeof exoToast !== 'undefined') exoToast('Estado del cliente actualizado en tu panel', 'success');
+    renderClienteBar();
+  });
+}
+// Prefill declarante con el cliente del hub (solo si los campos están vacíos)
+function prefillClienteActivo(){
+  if(!CLIENTE_ACTIVO) return;
+  var changed = false;
+  var cc = document.getElementById('cc');
+  if(cc && !cc.value.trim()){ cc.value = CLIENTE_ACTIVO.nit; changed = true; }
+  var nm = document.getElementById('nombre');
+  if(nm && !nm.value.trim() && CLIENTE_ACTIVO.nombre){ nm.value = CLIENTE_ACTIVO.nombre; changed = true; }
+  if(changed && typeof recalcular === 'function') recalcular();
+}
 /* ── REINICIAR: borra todo y empieza una declaración nueva (otro cliente) ── */
 function reiniciarTodo(){
   if(!confirm('¿Borrar todos los datos y empezar una declaración nueva?\n\nSe eliminará la información del cliente actual de este navegador. Esta acción no se puede deshacer.')) return;
@@ -2807,6 +2895,11 @@ function guardarBorrador(silencioso){
     if(el) data['_exp_'+id] = el.getAttribute('data-expanded') === 'true';
   });
   try { localStorage.setItem(BORRADOR_KEY, JSON.stringify(data)); } catch(e){}
+  // Con cliente activo del hub: al empezar a trabajar, su estado pasa a "borrador"
+  if(CLIENTE_ACTIVO){
+    var _est = (leerMetaPN()[CLIENTE_ACTIVO.nit] || {}).estado;
+    if(!_est || _est === 'por_presentar'){ escribirEstadoPN('borrador'); renderClienteBar(); }
+  }
   if(!silencioso && typeof exoToast !== 'undefined') exoToast('Borrador guardado', 'success');
 }
 // Auto-guardado: cualquier recálculo persiste el borrador (debounce 1.5s) y
@@ -3118,10 +3211,10 @@ function toggleReplica210(){
 // No se mueve el HTML: solo se muestra/oculta cada card según la pestaña activa
 // (con .tab-off, que respeta la lógica de .hidden propia de cada card).
 var TABS_F210 = {
-  t210:        ['cardAnio', 'cardExogena', 'cardReplica210', 'cardDeclarante', 'cardComparativoAGAnterior', 'cardPatrimonio', 'cardReajusteFiscal', 'cardF160', 'cardPagosPrevios'],
+  t210:        ['cardAnio', 'cardExogena', 'cardDeclarante', 'cardComparativoAGAnterior', 'cardPatrimonio', 'cardReajusteFiscal', 'cardF160', 'cardPagosPrevios'],
   texogena:    ['cardReconciliacion', 'cardCertificado'],
   trentas:     ['cardCedulaGeneral', 'cardPensiones', 'cardDividendos', 'cardGO'],
-  trevision:   ['cardSugerida', 'cardLiquidacion']
+  trevision:   ['cardReplica210', 'cardSugerida', 'cardLiquidacion']
 };
 function cambiarTabF210(tab){
   Object.keys(TABS_F210).forEach(function(t){
@@ -3132,7 +3225,7 @@ function cambiarTabF210(tab){
   });
   var tabs = document.querySelectorAll('.f210-tab');
   for(var i = 0; i < tabs.length; i++){ tabs[i].classList.toggle('active', tabs[i].getAttribute('data-tab') === tab); }
-  if(tab === 't210'){
+  if(tab === 'trevision'){
     var b = document.getElementById('replica210Body');
     if(b){ b.style.display = ''; document.getElementById('replica210Hint').textContent = ''; }
     if(typeof renderizarReplica210 === 'function') renderizarReplica210();
