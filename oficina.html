@@ -3049,7 +3049,18 @@ var OFICINA_API=(location.hostname==='localhost'||location.hostname==='127.0.0.1
 window.toggleRestoreMail=function(e){
   if(e)e.preventDefault();
   var f=document.getElementById('restoreMailForm');
-  if(f)f.style.display=(f.style.display==='none')?'':'none';
+  if(!f)return;
+  var abrir=(f.style.display==='none');
+  f.style.display=abrir?'':'none';
+  if(abrir){
+    // En móvil el despliegue pasa desapercibido: llevarlo a la vista y abrir
+    // el teclado hace evidente que el tap funcionó (caso real 2026-06-12).
+    var inp=document.getElementById('restoreMailInput');
+    if(inp){
+      try{inp.scrollIntoView({behavior:'smooth',block:'center'})}catch(_){inp.scrollIntoView()}
+      setTimeout(function(){try{inp.focus()}catch(_){}} ,250);
+    }
+  }
 };
 function restoreMsg(html,color){
   var m=document.getElementById('restoreMailMsg');
