@@ -336,6 +336,14 @@ body{font-family:var(--font);background:var(--f50);color:var(--f900);min-height:
     <span style="flex:1;min-width:220px;font-size:.9rem;color:#1E293B">&iquest;Ya usabas <strong>Mi Oficina</strong> en otro navegador o equipo? Conecta tu Google Drive y tus clientes se recuperan solos. De paso quedan respaldados en tu cuenta para la pr&oacute;xima vez.</span>
     <button class="btn btn-primary btn-sm" onclick="driveRestoreConnect()">&#9729;&#65039; Conectar Drive</button>
     <button class="btn btn-outline btn-sm" onclick="dismissDriveRestore()">Ahora no</button>
+    <div style="flex-basis:100%;font-size:.8rem;color:#475569;line-height:1.6">
+      &iquest;No usas Google Drive? Si eres PRO y ten&iacute;as activo el correo diario, <a href="#" onclick="toggleRestoreMail(event)" style="color:#1D4ED8;font-weight:600">recupera tus clientes con tu correo</a>.
+      <span id="restoreMailForm" style="display:none;margin-left:4px">
+        <input id="restoreMailInput" type="email" placeholder="tu correo PRO" style="padding:5px 8px;border:1px solid #CBD5E1;border-radius:6px;font-size:.8rem;width:190px">
+        <button class="btn btn-primary btn-sm" onclick="solicitarRestore()" id="restoreMailBtn">Enviarme el enlace</button>
+      </span>
+      <span id="restoreMailMsg" style="display:block;margin-top:4px"></span>
+    </div>
   </div>
   <div class="page-header">
     <h1><span>&#128188;</span> Mi Oficina Contable</h1>
@@ -583,7 +591,7 @@ body{font-family:var(--font);background:var(--f50);color:var(--f900);min-height:
     <div id="digestEmailChangeWarn" style="display:none;margin-top:8px;padding:8px 10px;background:#FEF3C7;border-radius:6px;font-size:.78rem;color:#78350F;line-height:1.5"></div>
     <details style="margin-top:14px">
       <summary style="cursor:pointer;font-size:.78rem;color:#6B7280">¿Qué se guarda en el servidor?</summary>
-      <p style="margin:8px 0 0;font-size:.78rem;color:#6B7280;line-height:1.5">Para mandarte el correo diario necesitamos guardar en nuestro servidor: tu correo, NIT y nombre de tus clientes, y las fechas de cada obligación. Nada más. No compartimos esto con terceros. Si desactivas, borramos todo de inmediato. La suscripción caduca sola si no abres oficina.html por 60 días.</p>
+      <p style="margin:8px 0 0;font-size:.78rem;color:#6B7280;line-height:1.5">Para mandarte el correo diario necesitamos guardar en nuestro servidor: tu correo, NIT y nombre de tus clientes, y las fechas de cada obligación. También guardamos una copia completa de tu lista (incluye teléfono, correo y notas de cada cliente si los registraste) para que puedas <strong>restaurarla en otro navegador</strong> con un enlace que se envía a tu correo. No compartimos esto con terceros. Si desactivas, borramos todo de inmediato (incluida la copia). La suscripción caduca sola si no abres oficina.html por 60 días.</p>
     </details>
   </section>
   <div id="digestWarnModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;align-items:center;justify-content:center;padding:20px">
@@ -3032,6 +3040,80 @@ window.dismissDriveRestore=function(){
 };
 // Si conecta (aunque su Drive esté vacío) o desconecta, re-evaluar el banner.
 if(typeof ExoDrive!=='undefined')ExoDrive.onStatusChange(function(){renderDriveRestoreBanner()});
+/* ═══ RESTAURAR DESDE EL SERVIDOR (correo PRO + magic link) ═══
+   Para PRO con el correo diario activo: el servidor guarda copia completa de
+   la lista (api/oficina/subscribe). Aquí: pedir el enlace por correo y, si la
+   URL trae ?restore_email&restore_token, descargar y aplicar el respaldo. */
+var OFICINA_API=(location.hostname==='localhost'||location.hostname==='127.0.0.1')
+  ?'http://localhost:3000':'https://api.exogenadian.com';
+window.toggleRestoreMail=function(e){
+  if(e)e.preventDefault();
+  var f=document.getElementById('restoreMailForm');
+  if(f)f.style.display=(f.style.display==='none')?'':'none';
+};
+function restoreMsg(html,color){
+  var m=document.getElementById('restoreMailMsg');
+  if(m)m.innerHTML=html?'<span style="color:'+(color||'#475569')+'">'+html+'</span>':'';
+}
+window.solicitarRestore=function(){
+  var inp=document.getElementById('restoreMailInput');
+  var btn=document.getElementById('restoreMailBtn');
+  var email=(inp&&inp.value||'').trim().toLowerCase();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){restoreMsg('Escribe un correo v&aacute;lido.','#991B1B');return}
+  if(btn){btn.disabled=true;btn.textContent='Enviando…'}
+  fetch(OFICINA_API+'/api/oficina/restore-request',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({email:email})
+  }).then(function(r){return r.json().then(function(j){return{status:r.status,j:j}})})
+    .then(function(res){
+      if(res.status===200){
+        restoreMsg('&#128236; Listo. Revisa <strong>'+email+'</strong> (y la carpeta spam): te enviamos un enlace que funciona una sola vez y expira en 30 minutos.','#166534');
+      }else if(res.status===404){
+        restoreMsg('No hay respaldo para ese correo. El respaldo se crea al activar el <strong>correo diario</strong> en oficina.html desde el navegador donde tienes tus clientes (requiere PRO).','#92400E');
+      }else if(res.status===429){
+        restoreMsg('Demasiados intentos. Espera '+Math.ceil((res.j.retryAfterSeconds||3600)/60)+' minutos y vuelve a intentar.','#92400E');
+      }else{
+        restoreMsg('No pude enviar el correo ('+(res.j.error||res.status)+'). Intenta de nuevo en unos minutos.','#991B1B');
+      }
+    }).catch(function(){restoreMsg('Sin conexi&oacute;n con el servidor. Intenta de nuevo.','#991B1B')})
+    .finally(function(){if(btn){btn.disabled=false;btn.textContent='Enviarme el enlace'}});
+  if(typeof gtag==='function')gtag('event','oficina_restore_request');
+};
+function handleRestoreParam(){
+  var p=new URLSearchParams(location.search);
+  var em=(p.get('restore_email')||'').trim().toLowerCase();
+  var tk=(p.get('restore_token')||'').trim();
+  if(!em||!tk)return;
+  // Limpiar la URL de una vez: el token es sensible y de un solo uso.
+  try{history.replaceState(null,'',location.pathname)}catch(e){}
+  // Confirmar ANTES del fetch: el token se quema en el servidor al usarlo, y
+  // un confirm rechazado después dejaría al usuario sin enlace.
+  var locales=loadClients();
+  if(locales.length&&!confirm('Este navegador ya tiene '+locales.length+' cliente(s). El respaldo del servidor los REEMPLAZARÁ. ¿Continuar?'))return;
+  fetch(OFICINA_API+'/api/oficina/restore',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({email:em,token:tk})
+  }).then(function(r){return r.json().then(function(j){return{status:r.status,j:j}})})
+    .then(function(res){
+      var j=res.j;
+      if(res.status!==200){
+        var msg=res.status===410?'Este enlace ya se usó. Pide uno nuevo desde el banner de recuperación.'
+          :(j&&j.reason==='expired')?'El enlace expiró (dura 30 minutos). Pide uno nuevo.'
+          :res.status===404?'El respaldo ya no existe en el servidor.'
+          :'Enlace inválido. Pide uno nuevo desde el banner de recuperación.';
+        alert('No se pudo restaurar: '+msg);
+        return;
+      }
+      localStorage.setItem('oficina_clientes',JSON.stringify(j.clientes));
+      if(j.estado)localStorage.setItem('oficina_estado',JSON.stringify(j.estado));
+      localStorage.setItem('oficina_last_save',String(Date.now()));
+      render();
+      renderVencImportBanner();
+      if(typeof exoToast==='function')exoToast('✅ '+j.clientes.length+' cliente'+(j.clientes.length!==1?'s':'')+' restaurado'+(j.clientes.length!==1?'s':'')+' desde el servidor','success');
+      if(typeof gtag==='function')gtag('event','oficina_restore_aplicado',{clientes:j.clientes.length});
+    }).catch(function(){alert('No pude conectar con el servidor para restaurar. Revisa tu internet y vuelve a abrir el enlace del correo.')});
+}
+handleRestoreParam();
 /* ═══ INIT ═══ */
 checkPro(function(){
   // filterClient restoration must happen after render builds the dropdown
