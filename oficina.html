@@ -331,6 +331,12 @@ body{font-family:var(--font);background:var(--f50);color:var(--f900);min-height:
     <button class="btn btn-primary btn-sm" onclick="importVencEmpresas()">Importar a Mi Oficina</button>
     <button class="btn btn-outline btn-sm" onclick="dismissVencImport()">Ahora no</button>
   </div>
+  <div class="no-print" id="driveRestoreBanner" style="display:none;align-items:center;gap:12px;flex-wrap:wrap;background:linear-gradient(90deg,#EFF6FF,#EEF2FF);border:1px solid #BFDBFE;border-radius:10px;padding:12px 16px;margin:0 0 14px">
+    <span style="font-size:1.3rem">&#9729;&#65039;</span>
+    <span style="flex:1;min-width:220px;font-size:.9rem;color:#1E293B">&iquest;Ya usabas <strong>Mi Oficina</strong> en otro navegador o equipo? Conecta tu Google Drive y tus clientes se recuperan solos. De paso quedan respaldados en tu cuenta para la pr&oacute;xima vez.</span>
+    <button class="btn btn-primary btn-sm" onclick="driveRestoreConnect()">&#9729;&#65039; Conectar Drive</button>
+    <button class="btn btn-outline btn-sm" onclick="dismissDriveRestore()">Ahora no</button>
+  </div>
   <div class="page-header">
     <h1><span>&#128188;</span> Mi Oficina Contable</h1>
     <div class="header-actions" id="headerActions">
@@ -1741,6 +1747,7 @@ function render(){
   var proLimitEl=document.getElementById('proLimit');
   // Backup banner
   renderBackupBanner();
+  renderDriveRestoreBanner();
   // Counter
   var counterEl=document.getElementById('clientCounter');
   var n=clients.length;
@@ -2985,6 +2992,36 @@ window.dismissVencImport=function(){
   localStorage.setItem('oficina_venc_import_dismissed','1');
   var b=document.getElementById('vencImportBanner');if(b)b.style.display='none';
 };
+/* ═══ BANNER "RECUPERA TUS CLIENTES DESDE DRIVE" ═══
+   Navegador/equipo nuevo = localStorage vacío. Si el usuario ya respaldaba en
+   Drive, conectarlo restaura todo solo (drive-sync-ui resuelve por timestamp).
+   Solo se muestra con 0 clientes, Drive desconectado y sin banner de
+   vencimientos activo (ese implica que SÍ hay datos en este navegador). */
+function renderDriveRestoreBanner(){
+  var banner=document.getElementById('driveRestoreBanner');
+  if(!banner)return;
+  var show=loadClients().length===0
+    && localStorage.getItem('oficina_drive_restore_dismissed')!=='1'
+    && typeof ExoDrive!=='undefined' && !ExoDrive.isConnected()
+    && !vencImportables().length;
+  banner.style.display=show?'flex':'none';
+}
+window.driveRestoreConnect=function(){
+  var btn=document.getElementById('exoDriveBtn');
+  if(btn){
+    btn.click();
+  }else if(typeof exoToast==='function'){
+    exoToast('Google Drive aún está cargando. Intenta de nuevo en unos segundos.','info');
+  }
+  if(typeof gtag==='function')gtag('event','oficina_drive_banner',{action:'connect'});
+};
+window.dismissDriveRestore=function(){
+  localStorage.setItem('oficina_drive_restore_dismissed','1');
+  var b=document.getElementById('driveRestoreBanner');if(b)b.style.display='none';
+  if(typeof gtag==='function')gtag('event','oficina_drive_banner',{action:'dismiss'});
+};
+// Si conecta (aunque su Drive esté vacío) o desconecta, re-evaluar el banner.
+if(typeof ExoDrive!=='undefined')ExoDrive.onStatusChange(function(){renderDriveRestoreBanner()});
 /* ═══ INIT ═══ */
 checkPro(function(){
   // filterClient restoration must happen after render builds the dropdown
