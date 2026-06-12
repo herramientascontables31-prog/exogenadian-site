@@ -1,7 +1,8 @@
 /* ═══ ExógenaDIAN — Frase Ecard flotante ═══
-   Modal verde icónico que aparece tras descargas (XML/Excel/PDF) con una frase
-   para contadores colombianos. 1 por sesión, sin repetir frase entre sesiones,
-   con botón para guardar la imagen lista para Instagram/WhatsApp.
+   Modal verde icónico con frases para contadores colombianos, con botón para
+   guardar la imagen lista para Instagram/WhatsApp. Se abre solo bajo demanda
+   (escuela/frases-contadores.html); el auto-disparo tras descargas se retiró
+   en jun-2026.
 
    API:
      window.exoFrase.trigger()       — Dispara con frase aleatoria respetando dedupe.
@@ -271,11 +272,4 @@
   }
 
   window.exoFrase={trigger:trigger,show:show,close:close,_pool:activePool};
-
-  /* ─── Auto-hook: clicks en <a download> ─── */
-  document.addEventListener('click',function(e){
-    var a=e.target.closest&&e.target.closest('a[download]');
-    if(!a)return;
-    trigger();
-  },true);
 })();

@@ -13,7 +13,7 @@
 
   /* ═══ Banner unificado: vencimientos + disclaimer en una sola barra ═══ */
   (function(){
-    if(localStorage.getItem('exo_banner_modulos_2026_05')) return;
+    if(localStorage.getItem('exo_banner_renta_pn_2026_06')) return;
     var bannerCSS=document.createElement('style');
     bannerCSS.textContent=`
       .exo-announce{position:relative;top:0;left:0;right:0;z-index:50;background:#0A0F1E;color:#E2E8F0;font-family:'Outfit',sans-serif;padding:9px 20px 7px;border-bottom:2px solid #22C55E}
@@ -35,11 +35,11 @@
     banner.setAttribute('aria-label','Anuncio y disclaimer');
     banner.innerHTML=
       '<div class="exo-announce-row">'+
-        '<span class="exo-announce-text">🎉 Nuevo: <strong>20 documentos contables</strong> + <strong>35 prompts IA</strong> — gratis</span>'+
-        '<a href="'+P+'certificados.html" class="exo-announce-cta" onclick="if(typeof exoTrack!==\'undefined\')exoTrack.ctaClick(\'banner_modulos\',\'certificados\')">Ver herramientas →</a>'+
-        '<button class="exo-announce-x" aria-label="Cerrar anuncio" onclick="this.parentElement.parentElement.remove();localStorage.setItem(\'exo_banner_modulos_2026_05\',\'1\')">&times;</button>'+
+        '<span class="exo-announce-text">📊 Se viene renta de personas naturales AG 2025 — vencimientos desde el <strong>12 de agosto de 2026</strong></span>'+
+        '<a href="'+P+'renta-personas-naturales.html" class="exo-announce-cta" onclick="if(typeof exoTrack!==\'undefined\')exoTrack.ctaClick(\'banner_renta_pn\',\'renta_pn\')">Preparar renta →</a>'+
+        '<button class="exo-announce-x" aria-label="Cerrar anuncio" onclick="this.parentElement.parentElement.remove();localStorage.setItem(\'exo_banner_renta_pn_2026_06\',\'1\')">&times;</button>'+
       '</div>'+
-      '<div class="exo-announce-sub">Cuenta de cobro · ingresos PN · no obligación renta · aportes SS · laboral · EEFF · capital SAS · RUP · NIA 210 — con descarga PDF y Word. <a href="'+P+'prompts.html">Ver prompts →</a> · <strong>Borrador prediligenciado por algoritmos</strong> — el contador verifica y firma.</div>';
+      '<div class="exo-announce-sub">El F210 se prediligencia desde la exógena del cliente · control de cartera con estados · calendario por NIT · <a href="'+P+'escuela/renta-pn-210.html">curso gratis de 14 módulos →</a> · <strong>Borrador prediligenciado por algoritmos</strong> — el contador verifica y firma.</div>';
     document.body.insertAdjacentElement('afterbegin',banner);
   })();
 
@@ -912,18 +912,6 @@ var MEGA_MENU_HTML='<div class="mega-grid"><div class="mega-group"><h6>📂 Exó
   }
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',_injectSearch)}
   else{_injectSearch()}
-
-  /* ═══ Frase ecard — carga diferida del script global ═══ */
-  (function(){
-    if(window.exoFrase||window.__exoFraseLoading)return;
-    window.__exoFraseLoading=true;
-    var ns=document.querySelector('script[src*="nav.js"]');
-    var base=ns?ns.getAttribute('src').replace(/nav\.js.*$/,''):'shared/';
-    var s=document.createElement('script');
-    s.src=base+'frase-ecard.js';
-    s.async=true;
-    document.head.appendChild(s);
-  })();
 
   /* ═══ Auto-tracking de uso (GA4) ═══
      Captura por delegación clicks en botones de descarga/generación en TODAS las
