@@ -2997,12 +2997,22 @@ window.dismissVencImport=function(){
    Drive, conectarlo restaura todo solo (drive-sync-ui resuelve por timestamp).
    Solo se muestra con 0 clientes, Drive desconectado y sin banner de
    vencimientos activo (ese implica que SÍ hay datos en este navegador). */
+// Mira el token directo en localStorage (misma clave que shared/drive-sync.js):
+// ExoDrive.isConnected() solo es true cuando termina su init() asíncrono, y
+// esperar eso haría parpadear el banner a quien ya tiene Drive conectado.
+function driveTokenVigente(){
+  try{
+    var t=JSON.parse(localStorage.getItem('exo_drive_token_v1'));
+    return !!(t&&t.token&&(!t.exp||t.exp>Date.now()));
+  }catch(e){return false}
+}
 function renderDriveRestoreBanner(){
   var banner=document.getElementById('driveRestoreBanner');
   if(!banner)return;
+  var conectado=driveTokenVigente()||(typeof ExoDrive!=='undefined'&&ExoDrive.isConnected());
   var show=loadClients().length===0
     && localStorage.getItem('oficina_drive_restore_dismissed')!=='1'
-    && typeof ExoDrive!=='undefined' && !ExoDrive.isConnected()
+    && !conectado
     && !vencImportables().length;
   banner.style.display=show?'flex':'none';
 }
