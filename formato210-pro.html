@@ -1294,6 +1294,8 @@ function procesarArchivoExogena(file){
           if(typeof renderBienesPatrimonio === 'function') renderBienesPatrimonio(rm.resumen.bienes);
           renderizarTablaReconciliacion();
           recalcular();
+          // Vincular el reporte con el cliente del panel (o detectar archivo equivocado)
+          try{ ofrecerVinculoCliente(rm.metadata); }catch(_){}
         }catch(_){}
       }
       var nReg = result.metadata.totalRegistros;
@@ -2798,6 +2800,81 @@ var ESTADOS_PN = [
 function clientesPNlista(){
   try{ return (JSON.parse(localStorage.getItem('oficina_clientes') || '[]')).filter(function(c){ return c.tipo === 'PN' && c.obligaciones && c.obligaciones.renta; }); }
   catch(_){ return []; }
+}
+/* ── VÍNCULO EXÓGENA ↔ CLIENTE ──
+   El reporte de exógena trae NIT y nombre del contribuyente (fila 7/8). Al
+   cargarlo: si coincide con el cliente activo, confirmamos; si es OTRO NIT,
+   advertimos (archivo equivocado es el error clásico con 30 declaraciones);
+   sin cliente activo, ofrecemos enlazar con el del panel o crearlo. */
+function nombreNaturalDIAN(raw){
+  // DIAN reporta "APELLIDO1 APELLIDO2 NOMBRES" → "Nombres Apellidos", capitalizado
+  if(!raw) return '';
+  var t = String(raw).trim().split(/\s+/);
+  if(t.length >= 3) t = t.slice(2).concat(t.slice(0, 2));
+  else if(t.length === 2) t = [t[1], t[0]];
+  return t.map(function(w){ return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase(); }).join(' ');
+}
+function vincularClienteActivo(nit, nombre){
+  CLIENTE_ACTIVO = { nit: nit, nombre: nombre || '' };
+  BORRADOR_KEY = 'f210_pro_borrador_v2::' + nit;
+  try{ history.replaceState(null, '', 'formato210-pro.html?nit=' + encodeURIComponent(nit) + '&nombre=' + encodeURIComponent(nombre || '')); }catch(_){}
+  var cc = document.getElementById('cc'); if(cc && !cc.value.trim()) cc.value = nit;
+  var nm = document.getElementById('nombre'); if(nm && !nm.value.trim() && nombre) nm.value = nombre;
+  guardarBorrador(true); // crea el borrador bajo su clave y pasa el estado a 'borrador'
+  renderClienteBar();
+  ocultarVinculoBox();
+  if(typeof exoToast !== 'undefined') exoToast('👤 Trabajando con ' + (nombre || nit) + ' — su borrador se guarda aparte', 'success');
+}
+function crearClienteEnPanel(nit, nombre){
+  try{
+    var arr = JSON.parse(localStorage.getItem('oficina_clientes') || '[]');
+    if(!arr.some(function(c){ return c.nit === nit; })){
+      arr.push({
+        nit: nit, nitFormatted: nit, nombre: nombre || ('NIT ' + nit), tipo: 'PN',
+        regimen: 'no', granContribuyente: false,
+        obligaciones: { exogena: false, renta: true, iva: false, retefte: false, f2516: false, rst: false, patrimonio: false, activosExt: false, ica: false, inc: false }
+      });
+      localStorage.setItem('oficina_clientes', JSON.stringify(arr));
+    }
+  }catch(_){}
+  if(typeof gtag !== 'undefined') gtag('event','f210_pro_cliente_creado_desde_exogena');
+  vincularClienteActivo(nit, nombre);
+}
+function ocultarVinculoBox(){ var b = document.getElementById('vinculoClienteBox'); if(b) b.style.display = 'none'; }
+function ofrecerVinculoCliente(meta){
+  var box = document.getElementById('vinculoClienteBox');
+  if(!box || !meta) return;
+  var nit = String(meta.nit || '').replace(/\D/g, '');
+  if(!nit || nit.length < 5){ ocultarVinculoBox(); return; }
+  var nombre = nombreNaturalDIAN(meta.nombre || '');
+  var BTN = 'border:none;border-radius:8px;padding:7px 16px;font-family:inherit;font-size:.83rem;font-weight:700;cursor:pointer';
+  function show(bg, border, html){ box.style.background = bg; box.style.borderColor = border; box.innerHTML = html; box.style.display = 'flex'; }
+  function bind(fn){ var b = document.getElementById('vincBtn'); if(b) b.addEventListener('click', fn); }
+  var enPanel = null;
+  try{ enPanel = (JSON.parse(localStorage.getItem('oficina_clientes') || '[]')).find(function(c){ return c.nit === nit; }) || null; }catch(_){}
+  if(CLIENTE_ACTIVO){
+    if(nit === CLIENTE_ACTIVO.nit){
+      show('#ECFDF5', '#A7F3D0', '<span style="color:#065F46">✓ El reporte coincide con el cliente activo (<b>' + escHtml(CLIENTE_ACTIVO.nombre || nit) + '</b>).</span>');
+      setTimeout(ocultarVinculoBox, 7000);
+    } else {
+      show('#FEF2F2', '#FCA5A5',
+        '<span style="color:#7F1D1D">⚠️ <b>Ojo:</b> este reporte es de <b>' + escHtml(nombre || ('NIT ' + nit)) + '</b> (NIT ' + nit + '), pero estás trabajando con <b>' + escHtml(CLIENTE_ACTIVO.nombre || CLIENTE_ACTIVO.nit) + '</b>. ¿Archivo equivocado?</span>' +
+        '<button id="vincBtn" style="' + BTN + ';background:#DC2626;color:#fff">Era para ' + escHtml(nombre || nit) + ' — cambiar →</button>');
+      bind(function(){ enPanel ? vincularClienteActivo(enPanel.nit, enPanel.nombre) : crearClienteEnPanel(nit, nombre); });
+    }
+    return;
+  }
+  if(enPanel){
+    show('#F5F3FF', '#C4B5FD',
+      '<span style="color:#1B3A5C">👤 Este reporte es de <b>' + escHtml(enPanel.nombre || nit) + '</b>, que ya está en tu panel de clientes.</span>' +
+      '<button id="vincBtn" style="' + BTN + ';background:#7C3AED;color:#fff">Trabajar con este cliente →</button>');
+    bind(function(){ vincularClienteActivo(enPanel.nit, enPanel.nombre); });
+  } else {
+    show('#F5F3FF', '#C4B5FD',
+      '<span style="color:#1B3A5C">👤 Reporte de <b>' + escHtml(nombre || ('NIT ' + nit)) + '</b> · NIT ' + nit + '. ¿Lo agrego a tu panel para llevarle el control y guardar su borrador aparte?</span>' +
+      '<button id="vincBtn" style="' + BTN + ';background:#7C3AED;color:#fff">+ Crear cliente y enlazar →</button>');
+    bind(function(){ crearClienteEnPanel(nit, nombre); });
+  }
 }
 // Selector para cambiar de cliente sin volver al hub (recarga con ?nit= y el
 // borrador del cliente anterior queda guardado en su propia clave).
