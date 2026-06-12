@@ -813,6 +813,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
           </div>
           <button onclick="exportarExcelAsesor()" class="btn btn-success">&#128202; Calcular y descargar Excel (borrador 210 oficial + papel de trabajo)</button>
           <button onclick="exportarEntregablePDF()" class="btn" style="background:var(--pri,#1B3A5C);color:#fff;margin-left:8px;margin-top:8px">&#128196; Entregable para el cliente (PDF)</button>
+          <div id="postDescargaEstado" class="hidden" style="margin-top:14px;padding:12px 16px;background:#ECFDF5;border:1.5px solid #A7F3D0;border-radius:10px;max-width:560px;margin-left:auto;margin-right:auto;text-align:left">
+            <div style="font-size:.86rem;color:#065F46;margin-bottom:8px">✅ Borrador descargado. Cuando la presentes en el MUISCA, márcala en tu panel de clientes:</div>
+            <button onclick="marcarPresentadaDesdeDescarga()" class="btn" style="background:#059669;color:#fff;font-size:.85rem;padding:8px 18px">🟢 Marcar como presentada</button>
+            <button onclick="document.getElementById('postDescargaEstado').classList.add('hidden')" class="btn" style="background:transparent;color:#065F46;font-size:.82rem;padding:8px 12px;border:none">Aún no</button>
+          </div>
           <div style="font-size:.78rem;color:var(--muted);margin-top:10px">Un solo Excel: la <strong>réplica oficial del 210</strong> (casillas pobladas, lista para transcribir al MUISCA) + el <strong>papel de trabajo</strong> de 8 hojas. El entregable PDF trae el borrador + diagnóstico de riesgos + planeación. Atajos: <kbd>Ctrl+S</kbd> guardar &middot; <kbd>Ctrl+E</kbd> exportar Excel</div>
           <div style="margin-top:14px;padding-top:12px;border-top:1px dashed var(--border)">
             <div style="font-size:.82rem;color:#92400E;margin-bottom:8px">⏰ ¿La declaración se presenta <strong>después del vencimiento</strong>? Calcula la sanción por extemporaneidad (Art. 641/642) con el impuesto, ingresos y patrimonio ya cargados.</div>
@@ -2789,12 +2794,48 @@ var ESTADOS_PN = [
   ['presentada', '🟢 Presentada'],
   ['pagada', '✅ Presentada y pagada']
 ];
+function clientesPNlista(){
+  try{ return (JSON.parse(localStorage.getItem('oficina_clientes') || '[]')).filter(function(c){ return c.tipo === 'PN' && c.obligaciones && c.obligaciones.renta; }); }
+  catch(_){ return []; }
+}
+// Selector para cambiar de cliente sin volver al hub (recarga con ?nit= y el
+// borrador del cliente anterior queda guardado en su propia clave).
+function selectorClientesHTML(){
+  var cls = clientesPNlista();
+  if(!cls.length) return '';
+  var meta = leerMetaPN();
+  var EMO = { por_presentar:'🔴', borrador:'🟡', pendiente_cliente:'🟠', presentada:'🟢', pagada:'✅' };
+  var cur = CLIENTE_ACTIVO ? CLIENTE_ACTIVO.nit : '';
+  var enLista = cls.some(function(c){ return c.nit === cur; });
+  var opts = ((cur && enLista) ? '' : ('<option value="" selected>' + (cur ? ('👤 ' + escHtml(CLIENTE_ACTIVO.nombre || CLIENTE_ACTIVO.nit)) : '👤 Elegir cliente del panel…') + '</option>')) + cls.map(function(c){
+    var e = (meta[c.nit] || {}).estado || 'por_presentar';
+    return '<option value="' + escHtml(c.nit) + '"' + (c.nit === cur ? ' selected' : '') + '>' + (EMO[e] || '') + ' ' + escHtml(c.nombre || c.nit) + '</option>';
+  }).join('');
+  return '<select id="clienteSwitchSel" title="Cambiar de cliente (el borrador de cada uno se guarda por separado)" style="padding:5px 8px;border:1px solid #C4B5FD;background:#F5F3FF;color:#1B3A5C;font-weight:700;border-radius:8px;font-family:inherit;font-size:.84rem;cursor:pointer;max-width:240px">' + opts + '</select>';
+}
+function bindClienteSwitch(){
+  var sw = document.getElementById('clienteSwitchSel');
+  if(!sw) return;
+  sw.addEventListener('change', function(){
+    if(!this.value || (CLIENTE_ACTIVO && this.value === CLIENTE_ACTIVO.nit)) return;
+    var c = clientesPNlista().find(function(x){ return x.nit === sw.value; });
+    if(!c) return;
+    try{ guardarBorrador(true); }catch(_){}
+    location.href = 'formato210-pro.html?nit=' + encodeURIComponent(c.nit) + '&nombre=' + encodeURIComponent(c.nombre || '');
+  });
+}
 function renderClienteBar(){
   var bar = document.getElementById('clienteContextBar');
   if(!bar) return;
   var pr = progresoPN();
+  var selCli = selectorClientesHTML();
   if(!CLIENTE_ACTIVO){
-    bar.innerHTML = '<a href="renta-personas-naturales.html#cli" style="color:#1B3A5C;font-weight:600;text-decoration:none">👥 Hub Renta PN: gestiona tus clientes, cartas y calendario' + (pr.total ? (' — <b>' + pr.hechas + ' de ' + pr.total + ' presentadas</b>') : '') + ' →</a>';
+    bar.innerHTML =
+      '<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">' +
+        '<a href="renta-personas-naturales.html#cli" style="color:#1B3A5C;font-weight:600;text-decoration:none">👥 Hub Renta PN: clientes, cartas y calendario' + (pr.total ? (' — <b>' + pr.hechas + ' de ' + pr.total + ' presentadas</b>') : '') + ' →</a>' +
+        (selCli ? ('<span style="margin-left:auto">' + selCli + '</span>') : '') +
+      '</div>';
+    bindClienteSwitch();
     return;
   }
   var meta = leerMetaPN()[CLIENTE_ACTIVO.nit] || {};
@@ -2810,14 +2851,15 @@ function renderClienteBar(){
   bar.innerHTML =
     '<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">' +
       '<a href="renta-personas-naturales.html#cli" style="color:#1B3A5C;font-weight:700;text-decoration:none;white-space:nowrap">← Mis clientes</a>' +
-      '<span style="font-weight:700;color:#1B3A5C">👤 ' + escHtml(CLIENTE_ACTIVO.nombre || ('NIT ' + CLIENTE_ACTIVO.nit)) + '</span>' +
-      (CLIENTE_ACTIVO.nombre ? ('<span style="font-size:.8rem;color:#6b7280">C.C./NIT ' + CLIENTE_ACTIVO.nit + '</span>') : '') +
+      (selCli || ('<span style="font-weight:700;color:#1B3A5C">👤 ' + escHtml(CLIENTE_ACTIVO.nombre || ('NIT ' + CLIENTE_ACTIVO.nit)) + '</span>')) +
+      '<span style="font-size:.8rem;color:#6b7280">C.C./NIT ' + CLIENTE_ACTIVO.nit + '</span>' +
       (venc ? ('<span style="font-size:.82rem;color:#374151">' + venc + '</span>') : '') +
       '<label style="margin-left:auto;display:flex;align-items:center;gap:6px;font-size:.8rem;color:#6b7280">Estado: ' +
         '<select id="clienteEstadoSel" style="padding:5px 8px;border:1px solid #d1d5db;border-radius:8px;font-family:inherit;font-size:.82rem;cursor:pointer">' + opts + '</select>' +
       '</label>' +
       (pr.total ? ('<span style="font-size:.8rem;color:#6b7280;white-space:nowrap">📊 ' + pr.hechas + ' de ' + pr.total + ' presentadas</span>') : '') +
     '</div>';
+  bindClienteSwitch();
   var sel = document.getElementById('clienteEstadoSel');
   if(sel) sel.addEventListener('change', function(){
     escribirEstadoPN(this.value);
@@ -3055,6 +3097,23 @@ async function generarExcelYDescargar(){
     gtag('event','f210_pro_borrador_oficial_descargado');
   }
   if(typeof exoToast !== 'undefined') exoToast(conReplica ? 'Excel descargado: borrador 210 oficial + papel de trabajo' : 'Excel papel de trabajo descargado', 'success');
+  // Cierre del ciclo: ofrecer marcar el cliente como presentada
+  if(CLIENTE_ACTIVO){
+    var _e = (leerMetaPN()[CLIENTE_ACTIVO.nit] || {}).estado;
+    if(_e !== 'presentada' && _e !== 'pagada'){
+      var pd = document.getElementById('postDescargaEstado');
+      if(pd) pd.classList.remove('hidden');
+    }
+  }
+}
+function marcarPresentadaDesdeDescarga(){
+  escribirEstadoPN('presentada');
+  renderClienteBar();
+  var pd = document.getElementById('postDescargaEstado');
+  if(pd) pd.classList.add('hidden');
+  var pr = progresoPN();
+  if(typeof exoToast !== 'undefined') exoToast('🟢 ' + (CLIENTE_ACTIVO.nombre || CLIENTE_ACTIVO.nit) + ' marcada como presentada' + (pr.total ? (' — ' + pr.hechas + ' de ' + pr.total) : ''), 'success');
+  if(typeof gtag !== 'undefined') gtag('event','f210_pro_marcar_presentada');
 }
 /* Puebla la hoja "210" (plantilla oficial DIAN) con los valores del motor. */
 function poblarHoja210Oficial(ws, r, ctx){
