@@ -337,7 +337,7 @@ body{font-family:var(--font);background:var(--f50);color:var(--f900);min-height:
     <button class="btn btn-primary btn-sm" onclick="driveRestoreConnect()">&#9729;&#65039; Conectar Drive</button>
     <button class="btn btn-outline btn-sm" onclick="dismissDriveRestore()">Ahora no</button>
     <div style="flex-basis:100%;font-size:.8rem;color:#475569;line-height:1.6">
-      &iquest;No usas Google Drive? Si eres PRO y ten&iacute;as activo el correo diario, <a href="#" onclick="toggleRestoreMail(event)" style="color:#1D4ED8;font-weight:600">recupera tus clientes con tu correo</a>.
+      &iquest;No usas Google Drive? Si eres PRO, tu lista se respalda sola al usar Mi Oficina — <a href="#" onclick="toggleRestoreMail(event)" style="color:#1D4ED8;font-weight:600">recupera tus clientes con tu correo</a>.
       <span id="restoreMailForm" style="display:none;margin-left:4px">
         <input id="restoreMailInput" type="email" placeholder="tu correo PRO" style="padding:5px 8px;border:1px solid #CBD5E1;border-radius:6px;font-size:.8rem;width:190px">
         <button class="btn btn-primary btn-sm" onclick="solicitarRestore()" id="restoreMailBtn">Enviarme el enlace</button>
@@ -3080,7 +3080,7 @@ window.solicitarRestore=function(){
       if(res.status===200){
         restoreMsg('&#128236; Listo. Revisa <strong>'+email+'</strong> (y la carpeta spam): te enviamos un enlace que funciona una sola vez y expira en 30 minutos.','#166534');
       }else if(res.status===404){
-        restoreMsg('No hay respaldo para ese correo. El respaldo se crea al activar el <strong>correo diario</strong> en oficina.html desde el navegador donde tienes tus clientes (requiere PRO).','#92400E');
+        restoreMsg('No hay respaldo para ese correo. Siendo PRO, abre <strong>Mi Oficina</strong> en el navegador donde tienes tus clientes (el respaldo se crea solo) y vuelve a intentar aqu&iacute;.','#92400E');
       }else if(res.status===429){
         restoreMsg('Demasiados intentos. Espera '+Math.ceil((res.j.retryAfterSeconds||3600)/60)+' minutos y vuelve a intentar.','#92400E');
       }else{
@@ -3125,6 +3125,29 @@ function handleRestoreParam(){
     }).catch(function(){alert('No pude conectar con el servidor para restaurar. Revisa tu internet y vuelve a abrir el enlace del correo.')});
 }
 handleRestoreParam();
+/* ═══ RESPALDO AUTOMÁTICO EN LA NUBE (todo PRO, sin requerir el correo diario) ═══
+   Decisión Juan 2026-06-12: ser PRO basta. Push silencioso debounced del
+   respaldo completo en cada render con cambios (el evento se dispara en cada
+   render; el dedupe por JSON evita subir lo mismo). Si falla, no molesta: el
+   digest y Drive siguen siendo vías de respaldo independientes. */
+var cloudBackupTimer=null,cloudBackupLastJson=null;
+function doCloudBackup(){
+  if(!isPro)return;
+  var email=((typeof exoPro!=='undefined'&&exoPro.getSaved&&exoPro.getSaved())||'').trim().toLowerCase();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return;
+  var clients=loadClients();
+  if(!clients.length)return; // nunca pisar un respaldo bueno con una foto vacía
+  var payload=JSON.stringify({email:email,clients:clients,estado:loadEstado()});
+  if(payload===cloudBackupLastJson)return;
+  fetch(OFICINA_API+'/api/oficina/backup',{
+    method:'POST',headers:{'Content-Type':'application/json'},body:payload
+  }).then(function(r){if(r.ok)cloudBackupLastJson=payload})
+    .catch(function(){});
+}
+document.addEventListener('oficinaClientesUpdated',function(){
+  clearTimeout(cloudBackupTimer);
+  cloudBackupTimer=setTimeout(doCloudBackup,4000);
+});
 /* ═══ INIT ═══ */
 checkPro(function(){
   // filterClient restoration must happen after render builds the dropdown
