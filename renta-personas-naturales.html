@@ -1422,6 +1422,10 @@ function clasificarDias(venc, estadoMeta){
   if(venc.diasRestantes <= 30) return { tag: 'proximo', label: venc.diasRestantes + ' días' };
   return { tag: 'tranquilo', label: venc.diasRestantes + ' días' };
 }
+// #4 ¿este cliente ya tiene un borrador del 210 guardado por su NIT?
+function tieneBorrador210(nit){
+  try{ return !!localStorage.getItem('f210_pro_borrador_v2::' + String(nit).replace(/\D/g,'')); }catch(_){ return false; }
+}
 function renderTabla(){
   var filas = clientesFiltrados();
   var tbody = document.getElementById('cliTbody');
@@ -1438,7 +1442,7 @@ function renderTabla(){
     var porCobrar = meta.honorariosCobrado ? 0 : (Number(meta.honorariosPorCobrar) || 0);
     return '<tr data-estado="' + escHtml(meta.estado) + '">' +
       '<td class="nit-cell">' + escHtml(c.nitFormatted || c.nit) + '</td>' +
-      '<td class="nombre-cell">' + escHtml(c.nombre) + '</td>' +
+      '<td class="nombre-cell">' + escHtml(c.nombre) + (tieneBorrador210(c.nit) ? ' <span title="Ya tiene un borrador del 210 guardado" style="cursor:default">✏️</span>' : '') + '</td>' +
       '<td class="fecha-cell">' + escHtml(fechaTxt) + '</td>' +
       '<td><span class="dias-tag ' + cls.tag + '">' + cls.label + '</span></td>' +
       '<td><span class="estado-tag ' + meta.estado + '">' + estadoLabel(meta.estado) + '</span></td>' +

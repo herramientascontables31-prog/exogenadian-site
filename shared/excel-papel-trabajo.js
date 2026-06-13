@@ -913,10 +913,39 @@
       rwE2.getCell(5).font = { name:FONT_BASE, size:8, italic:true, color:{argb:COLORS.alertText} };
     }
     ws.addRow([]);
+    // Deducciones FUERA del tope (incluida la del vehículo eléctrico/híbrido Ley 1715)
+    var ft = (t.deduccionesFueraTope) || {};
+    if((ft.total || 0) > 0){
+      var ftRows = [
+        ['Dependientes Art. 336 num. 3 inc. 2 (72 UVT c/u)', ft.dependientesArt336 || 0, 'Art. 336 num. 3 inc. 2 ET'],
+        ['1% compras factura electrónica', ft.facturaElectronica1Pct || 0, 'Art. 336 num. 5 ET']
+      ];
+      if((ft.vehiculoElectrico || 0) > 0 || (t.vehiculoElectrico && t.vehiculoElectrico.solicitado > 0)){
+        var ve = t.vehiculoElectrico || {};
+        ftRows.push(['Deducción vehículo eléctrico/híbrido (50%) — aplicada este año', ft.vehiculoElectrico || 0, 'Ley 1715/2014 art. 11 (mod. Ley 2099/2021)']);
+      }
+      ftRows.forEach(function(row){
+        if(!row[1]) return;
+        var rw = ws.addRow(['', '(-) ' + row[0], -row[1], '', row[2]]);
+        rw.getCell(2).font = fontBody(10);
+        rw.getCell(3).numFmt = '"$"#,##0'; rw.getCell(3).font = fontMono(10); rw.getCell(3).alignment = { horizontal:'right' };
+        rw.getCell(5).font = { name:FONT_BASE, size:8, italic:true, color:{argb:COLORS.muted} };
+      });
+      // Detalle del tope/diferido del vehículo, si aplica
+      if(t.vehiculoElectrico && t.vehiculoElectrico.solicitado > 0){
+        var v = t.vehiculoElectrico;
+        notaLinea(ws,
+          'Vehículo eléctrico/híbrido (Ley 1715/2014 art. 11, mod. Ley 2099/2021): solicitado ' + fmtCOP(v.solicitado) +
+          ' · tope anual 50% de la renta líquida = ' + fmtCOP(v.tope50RentaLiquida) +
+          ' · aplicado este año ' + fmtCOP(v.aplicado) +
+          (v.diferibleProximosAnios > 0 ? (' · saldo a diferir (hasta 15 años) ' + fmtCOP(v.diferibleProximosAnios)) : '') +
+          '. Requiere certificación UPME; no aplica en RST; inicia el año gravable siguiente a la entrada en operación. El contador verifica y firma.');
+      }
+    }
     notaLinea(ws,
       'NOTA: El tope se aplica a CÉDULA GENERAL CONSOLIDADA, no por subcédula. ' +
-      'Las deducciones c28 (1% factura electrónica) y c139 (dependientes Art. 336 num. 3 inc. 2) ' +
-      'van FUERA del tope y se restan adicionalmente.');
+      'Las deducciones c28 (1% factura electrónica), c139 (dependientes Art. 336 num. 3 inc. 2) ' +
+      'y la deducción del vehículo eléctrico/híbrido (Ley 1715) van FUERA del tope y se restan adicionalmente.');
 
     // ─ BLOQUE C: pensiones / dividendos / GO ─
     var huboPens = r.cedulaPensiones && r.cedulaPensiones.c103 > 0;

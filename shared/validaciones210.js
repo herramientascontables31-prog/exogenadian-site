@@ -108,6 +108,30 @@
       });
     }
 
+    // 4b) Retenciones cargadas pero SIN ingresos: típico cuando se procesó la
+    //     exógena (patrimonio/retenciones) pero no se trasladaron las cédulas de
+    //     ingreso. Señal proactiva de "falta cargar ingresos de la exógena".
+    if(ingresoBrutoTotal === 0 && ret > 0){
+      advertencias.push({
+        codigo: 'RETENCIONES_SIN_INGRESOS',
+        norma: 'Art. 26 ET',
+        mensaje: 'Hay retenciones cargadas ($' + Math.round(ret).toLocaleString('es-CO') + ') pero ningún ingreso en las cédulas. ¿Falta trasladar los ingresos de la exógena a su cédula (trabajo, honorarios, capital o no laborales)?',
+        severidad: 'alta'
+      });
+    }
+
+    // 4c) Retenciones mayores al impuesto a cargo: genera saldo a favor — verificar
+    //     que no haya error de digitación y considerar solicitud de devolución.
+    var impCargo = resultado.renglones.c129 || resultado.renglones.c126 || 0;
+    if(ret > 0 && impCargo >= 0 && ret > impCargo && ingresoBrutoTotal > 0){
+      advertencias.push({
+        codigo: 'RETENCIONES_MAYORES_IMPUESTO',
+        norma: 'Arts. 815, 850 ET',
+        mensaje: 'Las retenciones ($' + Math.round(ret).toLocaleString('es-CO') + ') superan el impuesto a cargo ($' + Math.round(impCargo).toLocaleString('es-CO') + '): la declaración arroja saldo a favor. Verifica los certificados y evalúa solicitar devolución/compensación.',
+        severidad: 'media'
+      });
+    }
+
     // 5) Dependientes Art. 387: si declara mas de los permitidos por ingreso bruto
     if(estado.cedulaGeneral && estado.cedulaGeneral.trabajo){
       var dedNomTrabajo = estado.cedulaGeneral.trabajo.deduccionesNominales || 0;

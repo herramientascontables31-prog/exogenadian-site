@@ -387,12 +387,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 <script src="shared/beneficio-auditoria.js?v=645ed289"></script>
 <script src="shared/reajuste-fiscal.js?v=761bd775"></script>
 <script src="shared/decl-prev-210.js?v=a03c70c1"></script>
-<script src="shared/validaciones210.js?v=a6bc1c89"></script>
+<script src="shared/validaciones210.js?v=83ea5821"></script>
 <script src="shared/parser-exogena-pn.js?v=dd8cdecd"></script>
 <script src="shared/parser-muisca-consultante.js?v=a427c9ed"></script>
 <script src="shared/sugerida-parser-210.js?v=f53a18af"></script>
 <script src="shared/canonicalize-inputs.js?v=8e51ce11"></script>
-<script src="shared/excel-papel-trabajo.js?v=d25c4c92"></script>
+<script src="shared/excel-papel-trabajo.js?v=7f9e5c66"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="shared/agente-preclasificador-pn.js?v=bc18fed4"></script>
 <script src="shared/certificados-renta-pn.js?v=a47ae843"></script>
@@ -406,6 +406,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
       <span id="proBadgeHeader" style="display:none;background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:.7rem;font-weight:700">PRO</span>
       <button id="btnNuevoCliente" onclick="reiniciarTodo()" title="Borra todo y empieza una declaración nueva" style="display:none;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#fff;padding:5px 12px;border-radius:8px;font-size:.74rem;font-weight:600;cursor:pointer;font-family:inherit;margin-left:8px">&#128260; Nuevo cliente / Reiniciar</button>
       <div style="font-size:.7rem;margin-top:4px;opacity:.85">100% en navegador</div>
+      <div id="selloGuardado" style="font-size:.7rem;margin-top:2px;opacity:.9;min-height:14px"></div>
     </div>
   </div>
   <div id="clienteContextBar" style="background:#fff;border:1px solid #e5e7eb;border-left:4px solid #1B3A5C;border-radius:12px;padding:10px 16px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.04);font-size:.88rem"></div>
@@ -933,12 +934,13 @@ document.addEventListener('DOMContentLoaded', function(){
       document.getElementById('proContent').classList.remove('hidden');
       var b=document.getElementById('proBadgeHeader');if(b)b.style.display='inline-block';
       var bn=document.getElementById('btnNuevoCliente');if(bn)bn.style.display='inline-block';
+      migrarBorradorHuerfanoSiAplica();   // #3 adopta borrador sin cliente
       restaurarBorrador();
       inicializarDropZone();
       inicializarSugerida();
       verificarBienvenida(); // B.1 — muestra panel educativo si es primer acceso
       recalcular();
-      cambiarTabF210('t210'); // arrancar en el paso 1 (cliente y exógena)
+      cambiarTabF210(tabGuardadoOInicial()); // #7 retomar el último paso editado
       prefillClienteActivo();
     }
     renderClienteBar();
@@ -2789,6 +2791,20 @@ var CLIENTE_ACTIVO = (function(){
 })();
 var BORRADOR_KEY    = CLIENTE_ACTIVO ? ('f210_pro_borrador_v2::' + CLIENTE_ACTIVO.nit) : 'f210_pro_borrador_v2';
 var BORRADOR_KEY_V1 = 'f210_express_borrador';
+var BORRADOR_GLOBAL = 'f210_pro_borrador_v2';
+// #3 Borrador huérfano: si había trabajo guardado "sin cliente" y este cliente
+// aún no tiene su propio borrador, adoptarlo bajo su clave (no se pierde nada).
+function migrarBorradorHuerfanoSiAplica(){
+  if(!CLIENTE_ACTIVO) return;
+  try{
+    if(localStorage.getItem(BORRADOR_KEY)) return;        // el cliente ya tiene borrador
+    var huerfano = localStorage.getItem(BORRADOR_GLOBAL);
+    if(!huerfano) return;
+    localStorage.setItem(BORRADOR_KEY, huerfano);
+    localStorage.removeItem(BORRADOR_GLOBAL);             // evita que reaparezca con otro cliente
+    if(typeof exoToast !== 'undefined') exoToast('Recuperé el borrador en curso y lo asocié a ' + (CLIENTE_ACTIVO.nombre || CLIENTE_ACTIVO.nit), 'success');
+  }catch(_){}
+}
 function leerMetaPN(){ try{ return JSON.parse(localStorage.getItem('renta_pn_meta') || '{}'); }catch(_){ return {}; } }
 function escribirEstadoPN(estado){
   if(!CLIENTE_ACTIVO) return;
@@ -2996,6 +3012,29 @@ function reiniciarTodo(){
   if(typeof exoToast !== 'undefined') exoToast('Listo: declaración nueva, empieza de cero.', 'success');
   if(typeof gtag !== 'undefined') gtag('event','f210_pro_reiniciar');
 }
+// #7/#8 helpers de borrador
+function nowTs(){ return new Date().getTime(); }
+var TABS_VALIDOS = { t210:1, texogena:1, trentas:1, trevision:1 };
+function tabGuardadoOInicial(){
+  try{
+    var raw = localStorage.getItem(BORRADOR_KEY);
+    if(raw){ var d = JSON.parse(raw); if(d && TABS_VALIDOS[d._tab]) return d._tab; }
+  }catch(_){}
+  return 't210';
+}
+function marcarSelloGuardado(ts){
+  var el = document.getElementById('selloGuardado');
+  if(!el) return;
+  if(!ts){ el.textContent = ''; return; }
+  function pinta(){
+    var s = Math.max(0, Math.round((nowTs() - ts) / 1000));
+    var txt = s < 10 ? 'Guardado ahora' : s < 60 ? ('Guardado hace ' + s + 's') : ('Guardado hace ' + Math.round(s/60) + ' min');
+    el.textContent = '💾 ' + txt;
+  }
+  pinta();
+  clearTimeout(marcarSelloGuardado._t);
+  marcarSelloGuardado._t = setTimeout(function(){ marcarSelloGuardado(ts); }, 20000);
+}
 function guardarBorrador(silencioso){
   var ids = [
     'cc','nombre','retenciones','saldoFavorAnt','anticipoPrevPagado',
@@ -3028,7 +3067,10 @@ function guardarBorrador(silencioso){
     var el = document.getElementById(id);
     if(el) data['_exp_'+id] = el.getAttribute('data-expanded') === 'true';
   });
+  data._tab = (document.querySelector('.f210-tab.active') || {}).getAttribute ? document.querySelector('.f210-tab.active').getAttribute('data-tab') : null; // #7
+  data._guardado = nowTs(); // #8 sello de guardado
   try { localStorage.setItem(BORRADOR_KEY, JSON.stringify(data)); } catch(e){}
+  marcarSelloGuardado(data._guardado);
   // Con cliente activo del hub: al empezar a trabajar, su estado pasa a "borrador"
   if(CLIENTE_ACTIVO){
     var _est = (leerMetaPN()[CLIENTE_ACTIVO.nit] || {}).estado;
@@ -3126,13 +3168,14 @@ function restaurarBorrador(){
         if(el && el.getAttribute('data-expandible') === 'true'){
           el.setAttribute('data-expanded', data[k] ? 'true' : 'false');
         }
-      } else if(k === '_pendientePensionV1'){
-        // Información de pensión migrada de V1 — disponible en paso 5
+      } else if(k === '_pendientePensionV1' || k === '_tab' || k === '_guardado'){
+        // metadatos del borrador, no son inputs
       } else {
         var el = document.getElementById(k);
         if(el) el.value = data[k];
       }
     });
+    if(data._guardado) marcarSelloGuardado(data._guardado); // #8
     if(migrado && typeof exoToast !== 'undefined') exoToast('Borrador migrado a formato multi-cédula', 'info');
   } catch(e){}
 }
@@ -3190,13 +3233,16 @@ async function generarExcelYDescargar(){
   }
   if(typeof exoToast !== 'undefined') exoToast(conReplica ? 'Excel descargado: borrador 210 oficial + papel de trabajo' : 'Excel papel de trabajo descargado', 'success');
   // Cierre del ciclo: ofrecer marcar el cliente como presentada
-  if(CLIENTE_ACTIVO){
-    var _e = (leerMetaPN()[CLIENTE_ACTIVO.nit] || {}).estado;
-    if(_e !== 'presentada' && _e !== 'pagada'){
-      var pd = document.getElementById('postDescargaEstado');
-      if(pd) pd.classList.remove('hidden');
-    }
-  }
+  ofrecerMarcarPresentada();
+}
+// Banner para marcar presentada tras descargar (Excel o PDF). Solo con cliente
+// activo cuyo estado aún no sea presentada/pagada.
+function ofrecerMarcarPresentada(){
+  if(!CLIENTE_ACTIVO) return;
+  var _e = (leerMetaPN()[CLIENTE_ACTIVO.nit] || {}).estado;
+  if(_e === 'presentada' || _e === 'pagada') return;
+  var pd = document.getElementById('postDescargaEstado');
+  if(pd) pd.classList.remove('hidden');
 }
 function marcarPresentadaDesdeDescarga(){
   escribirEstadoPN('presentada');
@@ -3710,6 +3756,7 @@ function exportarEntregablePDF(){
   doc.save('Declaracion-renta-'+(((E.declarante&&E.declarante.cc)||'cliente')+'').replace(/\s+/g,'')+'-'+year+'.pdf');
   if(typeof gtag!=='undefined') gtag('event','f210_pro_entregable_pdf');
   if(typeof exoToast!=='undefined') exoToast('Entregable generado','success');
+  ofrecerMarcarPresentada();
 }
 </script>
 <script src="shared/nota-auditor.js?v=c2019bf6"></script>
