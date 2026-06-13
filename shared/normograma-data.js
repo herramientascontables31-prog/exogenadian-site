@@ -114,7 +114,7 @@ window.NORMOGRAMA = {
    "numero": "0572",
    "anio": 2025,
    "titulo": "Decreto 0572 de 2025 — Rebaja de bases mínimas y alza de autorretenciones (suspensión provisional revocada)",
-   "resumen": "Desde junio de 2025 redujo las bases mínimas de retención (compras: de 27 a 10 UVT; servicios: de 4 a 2 UVT) y elevó tarifas de autorretención por actividad económica para acelerar recaudo. El Consejo de Estado suspendió provisionalmente sus arts. 2 a 8 en mayo de 2026 y regresaron transitoriamente las bases anteriores, pero en junio de 2026 revocó esa suspensión: el decreto recupera vigencia plena y sus bases y tari",
+   "resumen": "Desde junio de 2025 redujo las bases mínimas de retención (compras: de 27 a 10 UVT; servicios: de 4 a 2 UVT) y elevó tarifas de autorretención por actividad económica para acelerar recaudo. El Consejo de Estado suspendió provisionalmente sus arts. 2 a 8 en mayo de 2026 y regresaron transitoriamente las bases anteriores, pero en junio de 2026 revocó esa suspensión: el decreto recupera vigencia plena y sus bases…",
    "aplica": "Agentes de retención y autorretenedores: durante junio de 2026 siguen operando las bases previas (27 UVT compras, 4 UVT servicios); desde julio de 2026 vuelven a regir las bases reducidas y las tarifas de autorretención del decreto.",
    "impuestos": [
     "retefuente",
@@ -2638,7 +2638,7 @@ window.NORMOGRAMA = {
    "numero": "Arts. 9-10",
    "anio": 1989,
    "titulo": "Estatuto Tributario, arts. 9 y 10 — Residencia fiscal de las personas naturales",
-   "resumen": "Define quién es residente fiscal: permanencia de más de 183 días (continuos o discontinuos) en cualquier lapso de 365, criterio que aplica a nacionales y extranjeros. Para nacionales colombianos hay criterios adicionales: cónyuge o hijos dependientes residentes en el país, o el 50% de sus ingresos, activos o bienes en Colombia. El residente tributa sobre renta mundial y patrimonio global; el no residente, solo sobre ",
+   "resumen": "Define quién es residente fiscal: permanencia de más de 183 días (continuos o discontinuos) en cualquier lapso de 365, criterio que aplica a nacionales y extranjeros. Para nacionales colombianos hay criterios adicionales: cónyuge o hijos dependientes residentes en el país, o el 50% de sus ingresos, activos o bienes en Colombia. El residente tributa sobre renta mundial y patrimonio global; el no residente, solo…",
    "aplica": "Colombianos en el exterior, extranjeros que pasan temporadas largas en el país y cualquier persona que deba definir si declara renta mundial.",
    "impuestos": [
     "renta-pn",
@@ -2826,7 +2826,7 @@ window.NORMOGRAMA = {
    "numero": "000202",
    "anio": 2025,
    "titulo": "Resolución DIAN 000202 de 2025 - Datos del comprador y facturación en sitio de servicios públicos",
-   "resumen": "Modificación de la Resolución 000165 de 2023: limita los datos exigibles al comprador que pide factura a su nombre (nombre o razón social, tipo y número de identificación y correo electrónico), da hasta 48 horas a las empresas de servicios públicos domiciliarios para generar y transmitir el documento equivalente electrónico cuando facturan en sitio con dificultades técnicas, y restringe el documento equivalente de se",
+   "resumen": "Modificación de la Resolución 000165 de 2023: limita los datos exigibles al comprador que pide factura a su nombre (nombre o razón social, tipo y número de identificación y correo electrónico), da hasta 48 horas a las empresas de servicios públicos domiciliarios para generar y transmitir el documento equivalente electrónico cuando facturan en sitio con dificultades técnicas, y restringe el documento equivalente…",
    "aplica": "Todos los facturadores electrónicos en cuanto a los datos que el cajero puede pedirle al cliente; las reglas de facturación en sitio y de cobros aplican a las empresas de servicios públicos domiciliarios.",
    "impuestos": [
     "facturacion-electronica",
@@ -3033,7 +3033,7 @@ window.NORMOGRAMA = {
    "numero": "016291 (int. 713)",
    "anio": 2024,
    "titulo": "Concepto DIAN 016291 de 2024 – Presencia económica significativa (15ª adición al Concepto General de renta PJ)",
-   "resumen": "Adición dedicada a la presencia económica significativa (PES): qué significa mostrar precios en pesos colombianos en plataformas digitales (sitios web o aplicaciones visibles para clientes en Colombia) y cómo se suman los umbrales de ingresos y de clientes entre vinculados ('de manera agregada') para establecer si un no residente queda sujeto al impuesto sobre la renta por PES, evitando la fragmentación de operacione",
+   "resumen": "Adición dedicada a la presencia económica significativa (PES): qué significa mostrar precios en pesos colombianos en plataformas digitales (sitios web o aplicaciones visibles para clientes en Colombia) y cómo se suman los umbrales de ingresos y de clientes entre vinculados ('de manera agregada') para establecer si un no residente queda sujeto al impuesto sobre la renta por PES, evitando la fragmentación…",
    "aplica": "Plataformas y vendedores del exterior con clientes en Colombia, y asesores que evalúan si un no residente quedó cubierto por PES.",
    "impuestos": [
     "renta-pj",
@@ -5195,7 +5195,7 @@ window.NORMOGRAMA = {
    "numero": "Art. 580-1",
    "anio": 1989,
    "titulo": "Estatuto Tributario, Art. 580-1 — Ineficacia de la declaración de retención presentada sin pago total",
-   "resumen": "La declaración de retención en la fuente presentada sin pago total no produce efecto legal alguno, sin necesidad de acto que lo declare. Produce efectos si el pago total se hace a más tardar dentro de los 2 meses siguientes al vencimiento, o si el agente es titular de un saldo a favor compensable igual o superior a dos veces el valor de la retención a cargo, generado antes de presentar la declaración, solicitando la ",
+   "resumen": "La declaración de retención en la fuente presentada sin pago total no produce efecto legal alguno, sin necesidad de acto que lo declare. Produce efectos si el pago total se hace a más tardar dentro de los 2 meses siguientes al vencimiento, o si el agente es titular de un saldo a favor compensable igual o superior a dos veces el valor de la retención a cargo, generado antes de presentar la declaración, solicitando…",
    "aplica": "Agentes de retención (renta, IVA, timbre): empresas, empleadores y demás obligados a retener. Una retención 'presentada' sin pago es como no presentada.",
    "impuestos": [
     "retefuente",
@@ -5940,7 +5940,7 @@ window.NORMOGRAMA = {
    "numero": "Arts. 689-2 y 689-3",
    "anio": 1989,
    "titulo": "Beneficio de auditoría: firmeza anticipada de la declaración de renta",
-   "resumen": "La declaración de renta queda en firme en solo 6 meses si el impuesto neto crece al menos 35% frente al año anterior, o en 12 meses si crece 25%, siempre que el impuesto del año previo sea de mínimo 71 UVT y la declaración se presente y pague oportunamente. No aplica a quienes gocen de beneficios tributarios por su ubicación en zona geográfica y se pierde si se usan retenciones inexistentes; si se liquidan pérdidas f",
+   "resumen": "La declaración de renta queda en firme en solo 6 meses si el impuesto neto crece al menos 35% frente al año anterior, o en 12 meses si crece 25%, siempre que el impuesto del año previo sea de mínimo 71 UVT y la declaración se presente y pague oportunamente. No aplica a quienes gocen de beneficios tributarios por su ubicación en zona geográfica y se pierde si se usan retenciones inexistentes; si se liquidan pérdidas…",
    "aplica": "Declarantes de renta (PJ y PN) que puedan aumentar el impuesto neto y quieran blindar su declaración contra revisión de la DIAN.",
    "impuestos": [
     "procedimiento",
@@ -6061,7 +6061,7 @@ window.NORMOGRAMA = {
    "numero": "C-006",
    "anio": 2026,
    "titulo": "Sentencia C-006 de 2026 — Exclusiones de los impuestos saludables ajustadas a la Constitución",
-   "resumen": "Declaró exequibles, por decisión unánime (7 votos), los apartes demandados de los arts. 513-1 y 513-6 ET (impuestos saludables de la Ley 2277 sobre bebidas ultraprocesadas azucaradas y comestibles ultraprocesados), frente a una demanda que alegaba trato inequitativo por las exclusiones de ciertos productos de origen animal. La Corte concluyó que las exclusiones obedecen a criterios técnicos objetivos y que el fin leg",
+   "resumen": "Declaró exequibles, por decisión unánime (7 votos), los apartes demandados de los arts. 513-1 y 513-6 ET (impuestos saludables de la Ley 2277 sobre bebidas ultraprocesadas azucaradas y comestibles ultraprocesados), frente a una demanda que alegaba trato inequitativo por las exclusiones de ciertos productos de origen animal. La Corte concluyó que las exclusiones obedecen a criterios técnicos objetivos y que el fin…",
    "aplica": "Productores e importadores de bebidas azucaradas y ultraprocesados: refuerza la solidez constitucional de estos impuestos y de sus exclusiones.",
    "impuestos": [
     "saludables"
@@ -7014,7 +7014,7 @@ window.NORMOGRAMA = {
    "numero": "0278",
    "anio": 2021,
    "titulo": "Decreto 278 de 2021 — Modernización del régimen de zonas francas (zonas francas 4.0)",
-   "resumen": "Modificó el Decreto 2147 de 2016 para flexibilizar el régimen (zonas francas 4.0): habilita el reconocimiento de activos intangibles como parte de los compromisos de inversión, permite acreditar el cumplimiento con inversiones ejecutadas desde la solicitud de declaratoria (hasta el 20% del compromiso), abre la figura a concesiones aeroportuarias y férreas, autoriza comercio electrónico y teletrabajo parcial en usuari",
+   "resumen": "Modificó el Decreto 2147 de 2016 para flexibilizar el régimen (zonas francas 4.0): habilita el reconocimiento de activos intangibles como parte de los compromisos de inversión, permite acreditar el cumplimiento con inversiones ejecutadas desde la solicitud de declaratoria (hasta el 20% del compromiso), abre la figura a concesiones aeroportuarias y férreas, autoriza comercio electrónico y teletrabajo parcial…",
    "aplica": "Empresas que tramitan declaratorias o prórrogas de zonas francas y usuarios que acreditan compromisos de inversión y empleo.",
    "impuestos": [
     "aduanero",
@@ -7485,7 +7485,7 @@ window.NORMOGRAMA = {
    "numero": "30909",
    "anio": 2018,
    "titulo": "Oficio DIAN 30909 de 2018: adición al Concepto Unificado de ESAL",
-   "resumen": "Resuelve una solicitud de reconsideración del Concepto Unificado 0481 de 2018: confirma la doctrina sobre ONG extranjeras, actualización anual de directivos, límite del 30% del gasto anual para remunerar directivos, inversiones a más de un año y el carácter de descuento (25%) de las donaciones, y adiciona el descriptor 3.4.1 sobre personas jurídicas eclesiásticas con actividades meritorias, que deben cumplir los requ",
+   "resumen": "Resuelve una solicitud de reconsideración del Concepto Unificado 0481 de 2018: confirma la doctrina sobre ONG extranjeras, actualización anual de directivos, límite del 30% del gasto anual para remunerar directivos, inversiones a más de un año y el carácter de descuento (25%) de las donaciones, y adiciona el descriptor 3.4.1 sobre personas jurídicas eclesiásticas con actividades meritorias, que deben cumplir…",
    "aplica": "ESAL con dudas puntuales sobre remuneración de directivos, organizaciones religiosas, inversiones patrimoniales o donaciones.",
    "impuestos": [
     "renta-pj"
@@ -8347,7 +8347,7 @@ window.NORMOGRAMA = {
    "numero": "Art. 911",
    "anio": 1989,
    "titulo": "Estatuto Tributario, Art. 911 — Retención en la fuente y régimen SIMPLE",
-   "resumen": "Los contribuyentes del régimen simple de tributación no están sujetos a retención en la fuente ni obligados a practicar retenciones ni autorretenciones, con excepción de las correspondientes a pagos laborales. Cuando un contribuyente del SIMPLE paga compras de bienes o servicios, el tercero receptor del pago que sea contribuyente del régimen ordinario y agente retenedor de renta debe actuar como autorretenedor del im",
+   "resumen": "Los contribuyentes del régimen simple de tributación no están sujetos a retención en la fuente ni obligados a practicar retenciones ni autorretenciones, con excepción de las correspondientes a pagos laborales. Cuando un contribuyente del SIMPLE paga compras de bienes o servicios, el tercero receptor del pago que sea contribuyente del régimen ordinario y agente retenedor de renta debe actuar como autorretenedor…",
    "aplica": "Inscritos en el SIMPLE y sus proveedores del régimen ordinario: cuando un SIMPLE les paga, el vendedor del régimen ordinario se autorretiene a título de renta en lugar de que el SIMPLE le practique retención.",
    "impuestos": [
     "rst",
@@ -8487,7 +8487,7 @@ window.NORMOGRAMA = {
    "numero": "Arts. 869 a 869-2",
    "anio": 1989,
    "titulo": "Abuso en materia tributaria (cláusula general antiabuso)",
-   "resumen": "El art. 869 faculta a la DIAN para recaracterizar o desconocer los efectos de operaciones que, sin razón o propósito económico aparente, busquen un provecho tributario (eliminar, reducir o diferir impuestos). El art. 869-1 fija el procedimiento especial con emplazamiento previo y 3 meses para responder, y el 869-2 le da la facultad adicional de desconocer el velo corporativo de las entidades usadas en la conducta abu",
+   "resumen": "El art. 869 faculta a la DIAN para recaracterizar o desconocer los efectos de operaciones que, sin razón o propósito económico aparente, busquen un provecho tributario (eliminar, reducir o diferir impuestos). El art. 869-1 fija el procedimiento especial con emplazamiento previo y 3 meses para responder, y el 869-2 le da la facultad adicional de desconocer el velo corporativo de las entidades usadas en la conducta…",
    "aplica": "Reorganizaciones, ventas entre vinculados y estructuras cuyo único sentido sea el ahorro fiscal; la DIAN debe seguir el procedimiento especial para aplicarla.",
    "impuestos": [
     "procedimiento",

@@ -107,6 +107,20 @@
     ],
     "soporte": "Reporte consolidado de facturas electrónicas recibidas por el contribuyente + comprobantes de pago electrónico (tarjeta, transferencia, billetera)."
   },
+  "dedVehElec": {
+    "label": "Deducción vehículo eléctrico/híbrido (Ley 1715/2014, art. 11) — FUERA del tope",
+    "norma": "Ley 1715/2014 arts. 11 y 12, mod. Ley 2099/2021 · DIAN Concepto 673 de 2026",
+    "queEs": "Deducción especial en renta del 50% del valor de adquisición de un vehículo eléctrico o híbrido (PHEV/HEV). La DIAN (Concepto 673/2026) confirmó que las personas naturales de uso personal SÍ acceden, por ser una medida de Gestión Eficiente de la Energía. Se difiere hasta en 15 años y va FUERA del tope cedular del 40%/1.340 UVT.",
+    "comoSeCalcula": "El 50% del valor del vehículo es el monto total deducible, repartible en hasta 15 años. Cada año el monto a deducir NO puede exceder el 50% de la renta líquida del contribuyente; el saldo se difiere a años siguientes. Ingresa aquí el valor que pretendes deducir este año gravable; la herramienta aplica el tope del 50% de la renta líquida y te muestra cuánto queda para diferir.",
+    "erroresComunes": [
+      "Aplicarla SIN el certificado de la UPME: sin ese documento la deducción no procede, sin importar los demás soportes.",
+      "Tomarla el mismo año de compra: el beneficio empieza el año gravable SIGUIENTE a aquel en que la inversión entró en operación.",
+      "Usarla estando en el Régimen Simple (RST): no es procedente.",
+      "Deducir el 100% del valor: el beneficio es el 50% del valor de adquisición.",
+      "Exceder el tope anual del 50% de la renta líquida en lugar de diferir el saldo."
+    ],
+    "soporte": "Certificado expedido por la UPME (Unidad de Planeación Minero Energética), factura de compra del vehículo, comprobantes de pago y acreditación de la fecha de entrada en operación. El contador verifica y firma."
+  },
   "patBruto": {
     "label": "c29 — Patrimonio bruto",
     "norma": "Art. 261-281 ET",

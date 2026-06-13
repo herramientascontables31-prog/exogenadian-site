@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<script src="shared/cookie-consent.js?v=9fc53d44"></script>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -372,30 +372,30 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
   <div id="ayudaContent">Cargando...</div>
 </aside>
 <div id="nav-container"></div>
-<script defer src="shared/pro.js?v=994665f5"></script>
-<script defer src="shared/toast.js?v=825749bc"></script>
+<script defer src="shared/pro.js?v=848fbf16"></script>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
 <script defer src="shared/nav.js?v=32646ce2"></script>
 <script defer src="shared/pro-banner.js?v=a5944c54"></script>
 <script src="shared/parametros-renta-pn.js?v=a63bcba7"></script>
-<script src="shared/calculo210.js?v=e1be36dd"></script>
-<script src="shared/optimizer-210.js?v=67cfbd2e"></script>
-<script src="shared/advisor-210.js?v=a3e6b4c2"></script>
-<script src="shared/cert-parser-210.js?v=ddb0ec13"></script>
-<script src="shared/pdf-lines.js?v=a23f791c"></script>
-<script src="shared/cert-ui-210.js?v=f0e16dce"></script>
-<script src="shared/vencimientos-pn.js?v=0023b05e"></script>
-<script src="shared/beneficio-auditoria.js?v=ae5ebe84"></script>
-<script src="shared/reajuste-fiscal.js?v=a59bf01e"></script>
-<script src="shared/decl-prev-210.js?v=151de12f"></script>
-<script src="shared/validaciones210.js?v=bb2f6ae9"></script>
-<script src="shared/parser-exogena-pn.js?v=100281e3"></script>
-<script src="shared/parser-muisca-consultante.js?v=34622a26"></script>
+<script src="shared/calculo210.js?v=44cf1eb2"></script>
+<script src="shared/optimizer-210.js?v=658b477d"></script>
+<script src="shared/advisor-210.js?v=1765cc66"></script>
+<script src="shared/cert-parser-210.js?v=5815a414"></script>
+<script src="shared/pdf-lines.js?v=8c015d26"></script>
+<script src="shared/cert-ui-210.js?v=5ce69261"></script>
+<script src="shared/vencimientos-pn.js?v=bdc3d119"></script>
+<script src="shared/beneficio-auditoria.js?v=645ed289"></script>
+<script src="shared/reajuste-fiscal.js?v=761bd775"></script>
+<script src="shared/decl-prev-210.js?v=a03c70c1"></script>
+<script src="shared/validaciones210.js?v=a6bc1c89"></script>
+<script src="shared/parser-exogena-pn.js?v=dd8cdecd"></script>
+<script src="shared/parser-muisca-consultante.js?v=a427c9ed"></script>
 <script src="shared/sugerida-parser-210.js?v=f53a18af"></script>
-<script src="shared/canonicalize-inputs.js?v=63199095"></script>
-<script src="shared/excel-papel-trabajo.js?v=ec93d426"></script>
+<script src="shared/canonicalize-inputs.js?v=8e51ce11"></script>
+<script src="shared/excel-papel-trabajo.js?v=d25c4c92"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="shared/agente-preclasificador-pn.js?v=ef64096a"></script>
-<script src="shared/certificados-renta-pn.js?v=666c1b89"></script>
+<script src="shared/agente-preclasificador-pn.js?v=bc18fed4"></script>
+<script src="shared/certificados-renta-pn.js?v=a47ae843"></script>
 <div class="container">
   <div class="header">
     <div>
@@ -725,6 +725,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
           <div class="field-grid">
             <div class="field"><label>Deducción por dependientes <span class="hint">(automática)</span></label><div style="font-size:.74rem;color:var(--muted);line-height:1.45;padding:6px 0">Según el <strong>Concepto DIAN 416/2025</strong>: el <strong>1er dependiente</strong> da el <strong>10% de la renta de trabajo</strong> (Art. 387, dentro del tope); del <strong>2° al 5°</strong> dan <strong>72 UVT cada uno</strong> (Art. 336, fuera del tope). Necesitas <strong>≥2 dependientes</strong> para usar ambas. <strong>Solo aplica si hay rentas de trabajo (salarios)</strong> — el Decreto 2231/2025 excluye honorarios.</div><input type="hidden" id="depArt336Num" value="0"></div>
             <div class="field"><label>1% compras factura electrónica <span class="hint">(cap 240 UVT)</span> <button class="icon-ayuda" onclick="mostrarAyuda('ded1PctFE')" title="Ver ayuda">ⓘ</button></label><input id="ded1PctFE" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
+            <div class="field"><label>Deducción vehículo eléctrico/híbrido <span class="hint">(Ley 1715 · 50% · req. UPME)</span> <button class="icon-ayuda" onclick="mostrarAyuda('dedVehElec')" title="Ver ayuda">ⓘ</button></label><input id="dedVehElec" type="text" oninput="formatNum(this);recalcular()" placeholder="0"><div id="vehElecAviso" style="font-size:.72rem;line-height:1.4;margin-top:4px"></div></div>
           </div>
         </div>
         <div class="card" id="cardPensiones" data-expandible="true" data-expanded="false">
@@ -2407,7 +2408,8 @@ function construirEstado(){
       // (salarios), excluye honorarios → sin rentas de trabajo no aplica.
       dependientesArt336Numero: ((year >= 2025 && trabIngBruto <= 0) ? 0
         : (year >= 2025 ? Math.max(depArt387Num - 1, 0) : depArt387Num)),
-      facturaElectronica1Pct: v('ded1PctFE')
+      facturaElectronica1Pct: v('ded1PctFE'),
+      deduccionVehiculoElectrico: v('dedVehElec')
     },
     cedulaPensiones: {
       ingresosBrutos: v('pensIngBruto'),
@@ -2463,6 +2465,18 @@ function recalcular(){
   setText('lvC92', fCOP(r.renglones.c92));
   var fueraTope = r.cedulaGeneral.tope.deduccionesFueraTope.total;
   setText('lvDedFuera', fCOP(fueraTope));
+  // Aviso de la deducción de vehículo eléctrico/híbrido (Ley 1715): tope y saldo a diferir
+  var veh = r.cedulaGeneral.tope.vehiculoElectrico;
+  var vehAv = document.getElementById('vehElecAviso');
+  if(vehAv){
+    if(!veh || !veh.solicitado){
+      vehAv.innerHTML = '<span style="color:var(--muted)">Solo con certificación UPME · empieza el año siguiente a la operación · no aplica en RST.</span>';
+    } else if(veh.diferibleProximosAnios > 0){
+      vehAv.innerHTML = '<span style="color:#92400E">⚠️ Tope anual 50% de la renta líquida ('+fCOP(veh.tope50RentaLiquida)+'). Se aplica '+fCOP(veh.aplicado)+' este año; quedan <b>'+fCOP(veh.diferibleProximosAnios)+'</b> para diferir (máx. 15 años).</span>';
+    } else {
+      vehAv.innerHTML = '<span style="color:#047857">✓ Se aplica '+fCOP(veh.aplicado)+' (dentro del tope del 50% de la renta líquida). Verifica el certificado UPME.</span>';
+    }
+  }
   setText('lvC97', fCOP(r.renglones.c97));
   setText('lvC116', fCOP(r.renglones.c116));
   setText('lvDesc254', fCOP(r.liquidacion.descuentos.art254_1));
@@ -2994,7 +3008,7 @@ function guardarBorrador(silencioso){
     'pensIngBruto','pensIncrngo','divAnt2016','divNoGrav2017','divGrav2017','divExterior',
     'goIngresos','goCostos','goExentas','goLoterias',
     'dedSalud','depArt387Num','dedVivienda','dedViviendaImputarA',
-    'dedAvcAfc','dedAvcAfcImputarA','depArt336Num','ded1PctFE',
+    'dedAvcAfc','dedAvcAfcImputarA','depArt336Num','ded1PctFE','dedVehElec',
     'patBruto','patDeudas','patLiqAnt','prevDecl',
     // Datos comparativos AG-1
     'agAntPatBruto','agAntDeudas','agAntRentaCedularGen','agAntRentaPensiones',
@@ -3698,6 +3712,6 @@ function exportarEntregablePDF(){
   if(typeof exoToast!=='undefined') exoToast('Entregable generado','success');
 }
 </script>
-<script src="shared/nota-auditor.js?v=b8f0a327"></script>
+<script src="shared/nota-auditor.js?v=c2019bf6"></script>
 </body>
 </html>

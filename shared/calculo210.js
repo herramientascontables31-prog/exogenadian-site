@@ -260,7 +260,18 @@
     var fe1PctMax = r1k(p.facturaElectronica1PctMaxUvt * p.uvt);
     var fe1PctAplicado = Math.min(fe1Pct, fe1PctMax);
 
-    var deduccionesFueraTope = depArt336Valor + fe1PctAplicado;
+    // Deducción especial Ley 1715/2014 art. 11 (mod. Ley 2099/2021): 50% del valor
+    // de inversión en vehículo eléctrico/híbrido, diferible hasta 15 años, con tope
+    // anual del 50% de la renta líquida determinada antes de restar esta deducción.
+    // Requiere certificación UPME (lo valida el contador). El usuario ingresa el
+    // monto que pretende deducir ESTE año (50% del valor, o el saldo pendiente).
+    var vehElecSolicitado = input.deduccionVehiculoElectrico || 0;
+    var baseRentaLiquida = maxZero(c91 - c92 - depArt336Valor - fe1PctAplicado);
+    var vehElecTope = r1k(baseRentaLiquida * 0.5); // art. 11: máx 50% de la renta líquida
+    var vehElecAplicado = Math.min(vehElecSolicitado, vehElecTope);
+    var vehElecDiferible = maxZero(vehElecSolicitado - vehElecAplicado);
+
+    var deduccionesFueraTope = depArt336Valor + fe1PctAplicado + vehElecAplicado;
 
     // 5) Casilla 93: Renta liquida ordinaria
     var c93 = maxZero(c91 - c92 - deduccionesFueraTope);
@@ -293,7 +304,14 @@
         deduccionesFueraTope: {
           dependientesArt336: depArt336Valor,
           facturaElectronica1Pct: fe1PctAplicado,
+          vehiculoElectrico: vehElecAplicado,
           total: deduccionesFueraTope
+        },
+        vehiculoElectrico: {
+          solicitado: vehElecSolicitado,
+          aplicado: vehElecAplicado,
+          tope50RentaLiquida: vehElecTope,
+          diferibleProximosAnios: vehElecDiferible
         }
       }
     };

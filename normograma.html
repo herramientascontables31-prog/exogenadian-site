@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es-CO">
 <head>
-<script src="shared/cookie-consent.js?v=9fc53d44"></script>
+<script src="shared/cookie-consent.js?v=dc60b695"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
@@ -193,6 +193,23 @@ details.dcard .dbody th{background:var(--f50);font-weight:700;color:var(--f700)}
 .mtable a{color:var(--g700);font-weight:700;text-decoration:none}
 tr.mblur td{filter:blur(4px);user-select:none;pointer-events:none}
 .mlock{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.65) 22%,rgba(255,255,255,.94) 55%);z-index:3;text-align:center;font-size:.92rem;color:var(--f700);padding:20px;line-height:1.7}
+/* Lead escaneable de la tarjeta */
+.n-lead{color:var(--f900);font-weight:700}
+/* Barra de filtros de la vista matriz (PRO) */
+#matrixBar{position:sticky;top:8px;z-index:6;display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--w);border:1px solid var(--g200);border-radius:12px;padding:10px 14px;margin-bottom:12px;box-shadow:0 4px 14px rgba(5,150,105,.12)}
+#matrixBar .mb-search{position:relative;flex:1 1 240px;min-width:200px}
+#matrixBar .mb-search input{width:100%;padding:9px 14px 9px 36px;border:1.5px solid var(--f200);border-radius:10px;font-family:inherit;font-size:.85rem;outline:none;color:var(--f900)}
+#matrixBar .mb-search input:focus{border-color:var(--g600);box-shadow:0 0 0 3px var(--g100)}
+#matrixBar .mb-search .lupa{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:.92rem;opacity:.5}
+.mb-lbl{font-size:.7rem;font-weight:700;color:var(--f500);text-transform:uppercase;letter-spacing:.4px}
+#mCols{display:inline-flex;gap:6px;flex-wrap:wrap}
+.mb-col{padding:5px 11px;border:1.5px solid var(--f200);border-radius:16px;background:var(--w);cursor:pointer;font-family:inherit;font-size:.75rem;font-weight:600;color:var(--f500);transition:.15s}
+.mb-col.on{border-color:var(--g500);background:var(--g50);color:var(--g800)}
+.mb-col:hover{border-color:var(--g400)}
+#mFiltros{background:var(--g700);color:#fff;border:none;border-radius:10px;padding:9px 14px;font-family:inherit;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s}
+#mFiltros:hover{background:var(--g800)}
+#mCount{font-size:.8rem;color:var(--f600);font-weight:700;margin-left:auto;white-space:nowrap}
+@media(max-width:720px){#matrixBar{position:static}#mCount{margin-left:0}}
 .rel-links{display:flex;gap:10px;flex-wrap:wrap}
 .rel-links a{padding:8px 16px;background:var(--g50);color:var(--g700);border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:500}
 @media(max-width:720px){
@@ -242,8 +259,8 @@ tr.mblur td{filter:blur(4px);user-select:none;pointer-events:none}
 </script></head>
 <body>
 <div id="nav-container"></div>
-<script defer src="shared/pro.js?v=994665f5"></script>
-<script defer src="shared/toast.js?v=825749bc"></script>
+<script defer src="shared/pro.js?v=848fbf16"></script>
+<script defer src="shared/toast.js?v=9d7a298c"></script>
 <script defer src="shared/nav.js?v=32646ce2"></script>
 <script defer src="shared/pro-banner.js?v=a5944c54"></script>
 <div class="container">
@@ -270,7 +287,7 @@ tr.mblur td{filter:blur(4px);user-select:none;pointer-events:none}
   <div class="rutas" id="rutas" style="margin-top:6px"></div>
   <div class="stats-row" id="stats"></div>
 </div>
-<div class="card">
+<div class="card" id="filtrosCard">
   <div class="card-title" style="margin-bottom:10px">🎛️ Filtros
     <button class="btn btn-outline btn-sm fil-toggle" id="filToggle" style="margin-left:auto">Mostrar / ocultar</button>
   </div>
@@ -297,6 +314,12 @@ tr.mblur td{filter:blur(4px);user-select:none;pointer-events:none}
     <button class="btn btn-outline" id="btnVista" style="font-size:.82rem;padding:8px 16px">🧮 Vista matriz <span style="background:#F59E0B;color:#fff;font-size:.62rem;padding:2px 7px;border-radius:5px;font-weight:800">PRO</span></button>
     <button class="btn btn-outline" id="btnExcel" style="font-size:.82rem;padding:8px 16px">📥 Matriz Excel <span style="background:#F59E0B;color:#fff;font-size:.62rem;padding:2px 7px;border-radius:5px;font-weight:800">PRO</span></button>
   </div>
+</div>
+<div id="matrixBar" hidden>
+  <div class="mb-search"><span class="lupa">🔍</span><input type="text" id="mSearch" placeholder="Filtra la matriz: ley 2277, exógena, dividendos…" autocomplete="off"></div>
+  <button id="mFiltros">🎛️ Filtros avanzados</button>
+  <span class="mb-lbl">Columnas</span><span id="mCols"></span>
+  <span id="mCount"></span>
 </div>
 <div id="lista"></div>
 <div class="mas-wrap"><button class="btn btn-primary" id="btnMas" style="display:none">Mostrar más normas</button></div>
@@ -376,6 +399,26 @@ tr.mblur td{filter:blur(4px);user-select:none;pointer-events:none}
     <p><b>¿Qué es la Matriz Normativa?</b> Un Excel PRO de 5 hojas: el normograma completo con vigencia semaforizada y enlaces clicables al texto oficial, tu selección filtrada, papeles de trabajo editables con listas desplegables (¿aplica?, riesgo, responsable, fecha, avance), resumen ejecutivo y hoja léeme. Se genera con los filtros que tengas activos en la página.</p>
   </div>
 </details>
+<details class="dcard">
+  <summary>🔤 Glosario express de siglas</summary>
+  <div class="dbody">
+    <p>Las siglas que más se cruzan en este normograma, en una línea:</p>
+    <table>
+      <tr><th>Sigla</th><th>Qué significa</th></tr>
+      <tr><td><b>ET</b></td><td>Estatuto Tributario (Decreto 624 de 1989): la compilación madre de los impuestos nacionales.</td></tr>
+      <tr><td><b>DUR</b></td><td>Decreto Único Reglamentario (1625 de 2016): compila casi toda la reglamentación tributaria.</td></tr>
+      <tr><td><b>UVT</b></td><td>Unidad de Valor Tributario: referencia anual en pesos para topes, sanciones y bases.</td></tr>
+      <tr><td><b>RST / Simple</b></td><td>Régimen Simple de Tributación: paga varios impuestos en un solo recibo (Art. 903 y ss. ET).</td></tr>
+      <tr><td><b>GMF</b></td><td>Gravamen a los Movimientos Financieros, el conocido <b>4×1000</b>.</td></tr>
+      <tr><td><b>INC</b></td><td>Impuesto Nacional al Consumo (restaurantes, bolsas, vehículos, entre otros).</td></tr>
+      <tr><td><b>AIU</b></td><td>Administración, Imprevistos y Utilidad: base gravable especial en ciertos servicios (vigilancia, aseo, construcción).</td></tr>
+      <tr><td><b>ESAL</b></td><td>Entidad Sin Ánimo de Lucro (Régimen Tributario Especial si califica).</td></tr>
+      <tr><td><b>FE</b></td><td>Facturación Electrónica; el <b>documento equivalente</b> (p. ej. tiquete POS) la sustituye en ciertos casos.</td></tr>
+      <tr><td><b>RUT</b></td><td>Registro Único Tributario: la cédula fiscal del contribuyente ante la DIAN.</td></tr>
+      <tr><td><b>Exógena</b></td><td>Información exógena: reportes de terceros que la DIAN cruza para fiscalizar.</td></tr>
+    </table>
+  </div>
+</details>
 <section style="margin:30px 0 10px">
   <h3 style="font-size:1rem;font-weight:700;color:#374151;margin-bottom:12px">Herramientas relacionadas</h3>
   <div class="rel-links">
@@ -387,7 +430,7 @@ tr.mblur td{filter:blur(4px);user-select:none;pointer-events:none}
   </div>
 </section>
 </div>
-<script src="shared/normograma-data.js?v=4b144b59"></script>
+<script src="shared/normograma-data.js?v=5f297846"></script>
 <script>
 (function(){
 'use strict';
@@ -476,7 +519,8 @@ var SYN={
 var POPULAR=['ley 2277','sanción exógena','plazos 2026','4x1000','POS','dividendos','zonas francas','AIU'];
 var QTERMS=[],HI=[],FUZZY='';
 // ─── Estado ───
-var S={q:'',impuestos:[],tipos:[],perfiles:[],sectores:[],estado:'',anio:'',orden:'relevancia',clave:false,shown:PAGE,ruta:-1,vista:'cards',tsort:'',tdir:1};
+var S={q:'',impuestos:[],tipos:[],perfiles:[],sectores:[],estado:'',anio:'',orden:'relevancia',clave:false,shown:PAGE,ruta:-1,vista:'cards',tsort:'',tdir:1,cols:{tipo:true,anio:true,estado:true,imp:true,aplica:true}};
+var MCOLS=[{k:'tipo',l:'Tipo'},{k:'anio',l:'Año'},{k:'estado',l:'Estado'},{k:'imp',l:'Impuestos'},{k:'aplica',l:'A quién aplica'}];
 // ─── Utilidades ───
 function $(id){return document.getElementById(id)}
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
@@ -568,6 +612,22 @@ function filtrar(){
 // ─── Render ───
 function badge(txt,bg,col){return '<span class="badge" style="background:'+bg+';color:'+col+'">'+esc(txt)+'</span>'}
 function hexA(c,a){return c+a}
+// Quita temas equivalentes salvo por tildes (conciliacion/conciliación), prefiriendo la versión con tilde
+function dedupTemas(arr){
+ var seen={},out=[];
+ (arr||[]).forEach(function(t){var f=fold(t),acc=/[áéíóúñü]/i.test(t);
+  if(!(f in seen)){seen[f]=out.length;out.push(t)}
+  else if(acc&&!/[áéíóúñü]/i.test(out[seen[f]]))out[seen[f]]=t;
+ });
+ return out;
+}
+// Parte el resumen en su primera frase (lead) y el resto, sin cortar abreviaturas (art., núm.) ni decimales
+function splitLead(res){
+ res=String(res||'');
+ var m=res.match(/^(.{40,180}?(?:[a-záéíóúñ]{3,}|\d{4})[.;])\s+(?=[A-ZÁÉÍÓÚ¿«])/);
+ if(!m)return null;
+ return {lead:m[1],rest:res.slice(m[0].length)};
+}
 function cardHTML(n){
  var imp0=(n.impuestos||[])[0],color=(IMP[imp0]||{}).c||'#9CA3AF';
  var t=TIPO[n.tipo]||{l:n.tipo,c:'#6B7280'};
@@ -577,13 +637,15 @@ function cardHTML(n){
  if(n.importancia==='clave')h+=badge('⭐ Clave','#FEF3C7','#92400E');
  h+='<span class="b-anio">'+esc(n.anio)+'</span></div>';
  h+='<h3 class="n-tit">'+hi(n.titulo)+'</h3>';
- h+='<p class="n-res">'+hi(n.resumen)+'</p>';
+ var sl=splitLead(n.resumen);
+ if(sl)h+='<p class="n-res"><span class="n-lead">'+hi(sl.lead)+'</span> '+hi(sl.rest)+'</p>';
+ else h+='<p class="n-res">'+hi(n.resumen)+'</p>';
  if(n.aplica)h+='<div class="n-aplica"><b>A quién aplica:</b> '+hi(n.aplica)+'</div>';
  if(n.nota_vigencia)h+='<div class="n-nota">📌 '+esc(n.nota_vigencia)+'</div>';
  h+='<div class="n-tags">';
  (n.impuestos||[]).forEach(function(i){var m=IMP[i];if(m)h+='<span class="tag imp" style="background:'+m.c+'">'+esc(m.l)+'</span>'});
  (n.sectores||[]).forEach(function(s){var m=SECT[s];if(m)h+='<span class="tag sec">'+esc(m)+'</span>'});
- (n.temas||[]).slice(0,5).forEach(function(tg){h+='<span class="tag">'+esc(tg)+'</span>'});
+ dedupTemas(n.temas).slice(0,5).forEach(function(tg){h+='<span class="tag">'+esc(tg)+'</span>'});
  h+='</div><div class="n-links">';
  if(n.url_dian)h+='<a href="'+esc(n.url_dian)+'" target="_blank" rel="noopener">📜 Texto oficial (DIAN) ↗</a>';
  if(n.url_alt)h+='<a href="'+esc(n.url_alt)+'" target="_blank" rel="noopener">🏛️ Fuente oficial alterna ↗</a>';
@@ -592,12 +654,26 @@ function cardHTML(n){
  return h;
 }
 function tablaHTML(items){
+ var C=S.cols;
  function arrow(k){return S.tsort===k?(S.tdir>0?' ↑':' ↓'):' ⇅'}
- var head='<thead><tr><th style="width:34px">#</th><th data-s="titulo">Norma'+arrow('titulo')+'</th><th data-s="tipo">Tipo'+arrow('tipo')+'</th><th data-s="anio">Año'+arrow('anio')+'</th><th data-s="estado">Estado'+arrow('estado')+'</th><th>Impuestos</th><th>A quién aplica</th><th style="width:40px">🔗</th></tr></thead>';
+ var head='<thead><tr><th style="width:34px">#</th><th data-s="titulo">Norma'+arrow('titulo')+'</th>';
+ if(C.tipo)head+='<th data-s="tipo">Tipo'+arrow('tipo')+'</th>';
+ if(C.anio)head+='<th data-s="anio">Año'+arrow('anio')+'</th>';
+ if(C.estado)head+='<th data-s="estado">Estado'+arrow('estado')+'</th>';
+ if(C.imp)head+='<th>Impuestos</th>';
+ if(C.aplica)head+='<th>A quién aplica</th>';
+ head+='<th style="width:40px">🔗</th></tr></thead>';
  var rows=items.map(function(n,ix){
   var e=EST[n.estado]||{l:n.estado,bg:'#F3F4F6',c:'#4B5563'};
   var url=n.url_dian||n.url_alt;
-  return '<tr'+((!proUnlocked&&ix>=3)?' class="mblur"':'')+'><td>'+(ix+1)+'</td><td><b>'+(n.importancia==='clave'?'⭐ ':'')+hi(n.titulo)+'</b></td><td>'+esc((TIPO[n.tipo]||{}).l||n.tipo)+'</td><td>'+n.anio+'</td><td><span class="est" style="background:'+e.bg+';color:'+e.c+'">'+esc(e.l)+'</span></td><td>'+esc(impLabel(n.impuestos))+'</td><td>'+esc(n.aplica||'')+'</td><td>'+(url?'<a href="'+esc(url)+'" target="_blank" rel="noopener">↗</a>':'')+'</td></tr>';
+  var tr='<tr'+((!proUnlocked&&ix>=3)?' class="mblur"':'')+'><td>'+(ix+1)+'</td><td><b>'+(n.importancia==='clave'?'⭐ ':'')+hi(n.titulo)+'</b></td>';
+  if(C.tipo)tr+='<td>'+esc((TIPO[n.tipo]||{}).l||n.tipo)+'</td>';
+  if(C.anio)tr+='<td>'+n.anio+'</td>';
+  if(C.estado)tr+='<td><span class="est" style="background:'+e.bg+';color:'+e.c+'">'+esc(e.l)+'</span></td>';
+  if(C.imp)tr+='<td>'+esc(impLabel(n.impuestos))+'</td>';
+  if(C.aplica)tr+='<td>'+esc(n.aplica||'')+'</td>';
+  tr+='<td>'+(url?'<a href="'+esc(url)+'" target="_blank" rel="noopener">↗</a>':'')+'</td></tr>';
+  return tr;
  }).join('');
  var lock=proUnlocked?'':'<div class="mlock"><div>🔒 <b>La vista matriz completa es PRO</b><br>La misma base, en formato de trabajo: ordenable, semaforizada y exportable a Excel de 5 hojas.<br><a class="btn btn-amber btn-sm" href="precios.html" style="margin-top:10px">Conocer planes →</a></div></div>';
  return '<div class="mtable-wrap">'+lock+'<table class="mtable">'+head+'<tbody>'+rows+'</tbody></table></div>';
@@ -635,6 +711,15 @@ function render(){
  $('btnMas').style.display=S.shown<r.length?'inline-flex':'none';
  renderChips();
  renderActivos();
+ renderMatrixBar(r.length);
+}
+function renderMatrixBar(total){
+ var bar=$('matrixBar');
+ if(S.vista!=='tabla'){bar.hidden=true;return}
+ bar.hidden=false;
+ $('mCols').innerHTML=MCOLS.map(function(c){return '<button class="mb-col'+(S.cols[c.k]?' on':'')+'" data-c="'+esc(c.k)+'">'+esc(c.l)+'</button>'}).join('');
+ $('mCount').textContent=total+' norma'+(total===1?'':'s');
+ if(document.activeElement!==$('mSearch')&&$('mSearch').value!==S.q)$('mSearch').value=S.q;
 }
 function chipHTML(key,label,on,color){
  // --cc alimenta hover/activo en CSS: cada chip tinta con el color de su categoría
@@ -800,6 +885,20 @@ $('btnVista').addEventListener('click',function(){setVista(S.vista==='tabla'?'ca
 $('btnVerVista').addEventListener('click',function(){
  setVista('tabla','vitrina');
  document.querySelector('.res-head').scrollIntoView({behavior:'smooth',block:'start'});
+});
+// ─── Barra de filtros de la vista matriz ───
+$('mSearch').addEventListener('input',function(){
+ clearTimeout(qTimer);var v=this.value;
+ qTimer=setTimeout(function(){S.q=v.trim();$('q').value=v;S.shown=PAGE;render()},160);
+});
+$('mCols').addEventListener('click',function(e){
+ var b=e.target.closest('.mb-col');if(!b)return;
+ S.cols[b.dataset.c]=!S.cols[b.dataset.c];render();
+});
+$('mFiltros').addEventListener('click',function(){
+ Array.prototype.forEach.call(document.querySelectorAll('.fil-group[data-fg]'),function(g){g.classList.remove('cerrado')});
+ $('filtrosBody').classList.remove('colapsado');
+ $('filtrosCard').scrollIntoView({behavior:'smooth',block:'start'});
 });
 // ─── Preview del Excel en la vitrina ───
 var XL_TAB='papeles';
@@ -1019,7 +1118,7 @@ if(!DATA.length){
 }
 })();
 </script>
-<link rel="stylesheet" href="shared/chat.css?v=a34ef973">
+<link rel="stylesheet" href="shared/chat.css?v=cc8955a1">
 <script defer src="shared/chat.js?v=f6fef44c"></script>
 </body>
 </html>
