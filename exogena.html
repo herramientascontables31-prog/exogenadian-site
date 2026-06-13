@@ -520,6 +520,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
       <div class="raw-preview" id="rawPreview"></div>
       <div style="margin:20px 0 8px;font-weight:700;font-size:.9rem;color:var(--pri)">📋 Asignación de columnas <span style="font-weight:400;color:var(--muted);font-size:.8rem">(<span style="color:var(--red)">*</span> = obligatoria)</span></div>
       <div class="col-mapper" id="colMapper"></div>
+      <div id="balanceEmptyAlert" class="hidden" style="margin-top:14px"></div>
       <div class="actions">
         <button class="btn btn-primary" onclick="confirmColumns()">Confirmar y Procesar →</button>
       </div>
@@ -1895,6 +1896,7 @@ function quitarArchivo(){
   document.getElementById('fileInput').value='';
   document.getElementById('step2').classList.add('hidden');
   const step3=document.getElementById('step3');if(step3)step3.classList.add('hidden');
+  const _alertEl=document.getElementById('balanceEmptyAlert');if(_alertEl){_alertEl.classList.add('hidden');_alertEl.innerHTML='';}
   exoToast('Archivo quitado. Carga otro balance para continuar.','info');
 }
 // Reset total: borra el balance, la clasificación (incluida la caché de la IA) y los datos que el
@@ -2188,9 +2190,23 @@ function processData(){
     }
     for(const[name,nits] of nameToNits)if(nits.size>=2)nombresCompartidos.add(name);
   }
+  // Diagnóstico "balance sin códigos": cuenta filas que traen saldo/movimiento
+  // pero la celda de Código está vacía. Caso real: export de Alegra "por tercero"
+  // de una empresa cuyo Plan de cuentas no tiene códigos PUC asignados (solo
+  // nombres). Sin código no se puede clasificar a un formato DIAN → al usuario
+  // le quedaba la pantalla en blanco con un toast genérico. Si parsedData queda
+  // vacío y este contador es alto, mostramos un aviso específico y accionable.
+  let sinCodigoConDato=0;
   for(const row of dataRows){
     const code=norm(row[colMap.code]).replace(/[.\-\s]/g,'');
-    if(!code||!/^\d{4,}/.test(code)){skipped++;continue}
+    if(!code||!/^\d{4,}/.test(code)){
+      if(!code){
+        const _d=toNum(row[colMap.deb]),_c=toNum(row[colMap.cre]);
+        const _s='saldo' in colMap?toNum(row[colMap.saldo]):0;
+        if(_d!==0||_c!==0||_s!==0)sinCodigoConDato++;
+      }
+      skipped++;continue;
+    }
     const deb=toNum(row[colMap.deb]);
     const cre=toNum(row[colMap.cre]);
     // FIX SALDO FINAL: leer columna saldo si está mapeada. Necesario para
@@ -2277,9 +2293,29 @@ function processData(){
   // las primeras 50 filas del balance — ruido sin acción posible).
   // Toast con resumen para que el usuario sepa que se procesó OK.
   if (parsedData.length === 0) {
-    exoToast('No se encontraron registros válidos en el balance. Verifica que tenga código PUC, NIT, débitos y créditos.','warning');
+    const _alertEl=document.getElementById('balanceEmptyAlert');
+    if (sinCodigoConDato >= 3) {
+      // Balance con saldos pero sin código PUC en la columna de Código.
+      const _msg='Tu balance se cargó, pero la columna de Código de cuenta está vacía: hay '+sinCodigoConDato+' cuentas con saldos pero sin código PUC. La herramienta clasifica cada cuenta por su código PUC, así que sin códigos no puede armar la exógena.';
+      exoToast(_msg+' Revisa el aviso en pantalla para saber cómo resolverlo.','error');
+      if (_alertEl) {
+        _alertEl.innerHTML='<div style="background:#FEE2E2;border-left:4px solid #DC2626;border-radius:8px;padding:14px 16px;font-size:.86rem;color:#991B1B;line-height:1.5">'+
+          '<div style="font-weight:700;margin-bottom:6px">⚠️ El balance vino sin códigos de cuenta</div>'+
+          'Detectamos <strong>'+sinCodigoConDato+' cuentas con saldos pero con la columna «Código» vacía</strong>. La exógena se arma a partir del <strong>código PUC</strong> de cada cuenta (ej. 1105, 5105, 2408), no del nombre, así que sin códigos no hay nada que clasificar.'+
+          '<div style="margin-top:10px;font-weight:600">Cómo resolverlo:</div>'+
+          '<ul style="margin:4px 0 0;padding-left:18px">'+
+            '<li>Si exportaste desde <strong>Alegra</strong>: entra al <strong>Plan de cuentas</strong> de ese cliente y asígnale el código PUC a cada cuenta; luego vuelve a exportar el «Balance de prueba por tercero». (Las demás empresas con código sí cargan bien.)</li>'+
+            '<li>O verifica en la tabla de arriba que la columna <strong>«Código»</strong> esté apuntando a la columna correcta y no a una vacía.</li>'+
+          '</ul></div>';
+        _alertEl.classList.remove('hidden');
+      }
+    } else {
+      if (_alertEl) { _alertEl.classList.add('hidden'); _alertEl.innerHTML=''; }
+      exoToast('No se encontraron registros válidos en el balance. Verifica que tenga código PUC, NIT, débitos y créditos.','warning');
+    }
     return;
   }
+  { const _alertEl=document.getElementById('balanceEmptyAlert'); if(_alertEl){_alertEl.classList.add('hidden');_alertEl.innerHTML='';} }
   // B6: validar balance del año. Si el balance trae cuentas clase 4 (ingresos)
   // o clase 5 (gastos) listadas pero la suma Db+Cr de esas cuentas es ~0,
   // el balance está cerrado contra ganancias/pérdidas y no tiene movimientos
