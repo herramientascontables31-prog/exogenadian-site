@@ -264,12 +264,12 @@
 
     // Deducción especial Ley 1715/2014 art. 11 (mod. Ley 2099/2021): 50% del valor
     // de inversión en vehículo eléctrico/híbrido, diferible hasta 15 años, con tope
-    // anual del 50% de la renta líquida determinada antes de restar esta deducción.
-    // Requiere certificación UPME (lo valida el contador). El usuario ingresa el
-    // monto que pretende deducir ESTE año (50% del valor, o el saldo pendiente).
+    // anual del 50% de la RENTA LÍQUIDA CEDULAR (c91), determinada antes de las
+    // deducciones especiales y del límite del Art. 336 (Concepto DIAN 013853/2025;
+    // "renta líquida" del Art. 26 ET, antes de rentas exentas). Requiere certificación
+    // UPME (lo valida el contador). El usuario ingresa el monto a deducir ESTE año.
     var vehElecSolicitado = input.deduccionVehiculoElectrico || 0;
-    var baseRentaLiquida = maxZero(c91 - c92 - depArt336Valor - fe1PctAplicado);
-    var vehElecTope = r1k(baseRentaLiquida * 0.5); // art. 11: máx 50% de la renta líquida
+    var vehElecTope = r1k(c91 * 0.5);   // art. 11: máx 50% de la renta líquida cedular (c91)
     var vehElecAplicado = Math.min(vehElecSolicitado, vehElecTope);
     var vehElecDiferible = maxZero(vehElecSolicitado - vehElecAplicado);
 

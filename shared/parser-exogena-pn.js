@@ -47,6 +47,10 @@
     'capital - arrendamientos':                     'capital',
     'rentas no laborales':                          'noLaboral',
     'no laborales':                                 'noLaboral',
+    // Ventas del declarante a quien le emite documento soporte (no obligado a
+    // facturar). Es INGRESO del declarante → rentas no laborales. Substring que
+    // matchea "Ingresos documentos soporte de adquisiciones no obligados a facturar".
+    'soporte de adquisic':                          'noLaboral',
     'rentas de pensiones':                          'pensiones',
     'pensiones':                                    'pensiones',
     'dividendos y participaciones no gravados':     'dividendos_no_grav',
@@ -183,6 +187,9 @@
     // Van antes que capital porque el informante suele ser un banco (matchea 'capital' por
     // nombre) y "Saldo cuentas/CDT/inversión" o "Inversiones realizadas" no es renta.
     { re: /^saldo\b|saldo a favor|inversion(es)?.*(realizad|efectuad)|avaluo|adquisicion de bienes|bienes (o derechos|raices|inmuebles)|cuenta por cobrar|aporte.*derecho social/, cedula: 'informativo' },
+    // Ingresos por ventas soportadas en documento soporte (comprador no obligado a
+    // facturar reporta su compra) = ingreso del declarante → rentas no laborales.
+    { re: /soporte de adquisic|documento.{0,3}soporte.*adquisic|venta.*documento soporte/, cedula: 'noLaboral' },
     { re: /credito de vivienda|hipotecari|intereses (de )?vivienda/,                   cedula: 'deduccion_vivienda' },
     { re: /\bafc\b|\bavc\b|aporte(s)? voluntari|fondo.*pension.*voluntari|fvp\b/,      cedula: 'deduccion_avc' },
     { re: /prepagada|medicina prepagada|poliza de salud/,                              cedula: 'deduccion_salud_prepag' },
@@ -599,6 +606,9 @@
   //  Mapeo cédula → bucket
   // ──────────────────────────────────────────────────────────────────────────
   function bucketDeCedula(cedula){
+    // Loterías agrupan con GO para totales/display, pero se enrutan al input de
+    // loterías (20%) vía CEDULAS_OPCIONES en la página.
+    if(cedula === 'gananciasOcasionalesLoterias') return 'gananciasOcasionales';
     var directos = ['trabajo','honorarios','capital','noLaboral','pensiones',
                     'dividendos_no_grav','dividendos_grav','gananciasOcasionales'];
     if(directos.indexOf(cedula) >= 0){
@@ -983,6 +993,14 @@
           cedulaSugerida = heur.cedula;
           fuenteCedula = heur.fuente;
         }
+      }
+
+      // Refinamiento GO → LOTERÍAS: loterías, rifas, apuestas y premios pagan
+      // tarifa especial del 20% (Art. 317), distinta del 15% de las demás GO.
+      // El R-código R112 es genérico de GO; el detalle decide si es lotería.
+      if(cedulaSugerida === 'gananciasOcasionales' &&
+         /loteri|rifa|\bpremio|apuesta|sorteo|juego de azar|chance\b/.test(normalizar(detalle))){
+        cedulaSugerida = 'gananciasOcasionalesLoterias';
       }
 
       registros.push({
