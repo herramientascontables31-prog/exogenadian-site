@@ -899,29 +899,11 @@
       if(usoSugerido){
         var usoNorm = normalizar(usoSugerido);
 
-        // GUARDA AUTORITATIVA: el "uso sugerido" de la DIAN manda sobre la heurística.
-        // Estos conceptos NO son ingreso de cédula (inflan c91 indebidamente):
-        //  · Topes 3/4 (consumos TC, consignaciones) — indicadores de obligación.
-        //  · SALDOS de cuentas/CDT/inversiones — patrimonio (c29), no renta.
-        //  · Inversiones/CDT "realizadas/efectuadas" en el año — movimiento (Tope 4).
-        //  · Avalúos, adquisiciones, cuentas por cobrar — patrimonio.
-        // Importante: el informante suele ser un banco, lo que engañaba a la heurística
-        // (la marcaba 'capital' por el nombre). Se distinguen de "Rendimientos/intereses
-        // pagados", que SÍ son renta de capital y NO matchean estos patrones.
-        if(RE_USO_NO_INGRESO.test(usoNorm)){
-          registros.push({
-            fila: r, descripcion: detalle, informante: informante, nitInformante: nitInfo,
-            valor: Math.round(valor), retencion: Math.round(retencion),
-            usoDIANSugerido: usoSugerido, cedulaSugerida: 'informativo',
-            cedulaFinal: 'informativo', fuenteCedula: 'uso_dian'
-          });
-          continue;
-        }
-
-        // EL R-CÓDIGO MANDA PRIMERO: es la señal más específica de la DIAN. Va ANTES
-        // del match por frase, porque frases como "...imputables a las rentas de trabajo"
-        // (que es R35, una renta EXENTA) engañaban al substring 'rentas de trabajo' y se
-        // clasificaban como INGRESO de trabajo, inflando la cédula (caso real Giraldo: +26,5M).
+        // EL R-CÓDIGO MANDA PRIMERO: es la señal más específica de la DIAN. Se
+        // extrae ANTES de cualquier match por frase o palabra clave, porque
+        // frases como "...imputables a las rentas de trabajo" (R35, renta EXENTA)
+        // engañaban al substring 'rentas de trabajo' y se clasificaban como
+        // INGRESO de trabajo, inflando la cédula (caso real Giraldo: +26,5M).
         var renglon = extraerRenglon(usoSugerido);
         if(renglon){
           if(MAPEO_RENGLON_CEDULA[renglon]){
@@ -931,6 +913,26 @@
             cedulaSugerida = 'informativo';
             fuenteCedula = 'renglon_dian';
           }
+        }
+
+        // GUARDA AUTORITATIVA por TEXTO (solo si el R-código no resolvió ya la
+        // cédula): conceptos que NO son ingreso e inflan c91 indebidamente:
+        //  · Topes 3/4 (consumos TC, consignaciones) — indicadores de obligación.
+        //  · SALDOS de cuentas/CDT/inversiones — patrimonio (c29), no renta.
+        //  · Inversiones/CDT "realizadas/efectuadas" en el año — movimiento (Tope 4).
+        //  · Avalúos, adquisiciones, cuentas por cobrar — patrimonio.
+        // OJO: va DESPUÉS del R-código para que un "Avalúo de VENTA de vehículos"
+        // con R112 (ganancia ocasional) no se marque informativo por la palabra
+        // 'avalúo'. El informante suele ser un banco (engañaba a la heurística por
+        // nombre); se distingue de "Rendimientos/intereses", que SÍ son capital.
+        if(!cedulaSugerida && RE_USO_NO_INGRESO.test(usoNorm)){
+          registros.push({
+            fila: r, descripcion: detalle, informante: informante, nitInformante: nitInfo,
+            valor: Math.round(valor), retencion: Math.round(retencion),
+            usoDIANSugerido: usoSugerido, cedulaSugerida: 'informativo',
+            cedulaFinal: 'informativo', fuenteCedula: 'uso_dian'
+          });
+          continue;
         }
 
         // Si el R-código no resolvió, recurrir al texto del uso sugerido.

@@ -377,7 +377,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 <script defer src="shared/nav.js?v=32646ce2"></script>
 <script defer src="shared/pro-banner.js?v=a5944c54"></script>
 <script src="shared/parametros-renta-pn.js?v=a63bcba7"></script>
-<script src="shared/calculo210.js?v=44cf1eb2"></script>
+<script src="shared/calculo210.js?v=8a46b62f"></script>
 <script src="shared/optimizer-210.js?v=658b477d"></script>
 <script src="shared/advisor-210.js?v=1765cc66"></script>
 <script src="shared/cert-parser-210.js?v=5815a414"></script>
@@ -388,7 +388,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 <script src="shared/reajuste-fiscal.js?v=761bd775"></script>
 <script src="shared/decl-prev-210.js?v=a03c70c1"></script>
 <script src="shared/validaciones210.js?v=83ea5821"></script>
-<script src="shared/parser-exogena-pn.js?v=dd8cdecd"></script>
+<script src="shared/parser-exogena-pn.js?v=9236a152"></script>
 <script src="shared/parser-muisca-consultante.js?v=a427c9ed"></script>
 <script src="shared/sugerida-parser-210.js?v=f53a18af"></script>
 <script src="shared/canonicalize-inputs.js?v=8e51ce11"></script>
@@ -1304,7 +1304,17 @@ function procesarArchivoExogena(file){
       var nReg = result.metadata.totalRegistros;
       if(typeof exoToast !== 'undefined'){
         if(nReg > 0) exoToast('Exógena cargada: ' + nReg + ' registros (' + nivel + ' ' + result.metadata.confianza + '%) → Paso 2: revisa la reconciliación', 'success');
-        else exoToast('Archivo leído pero sin registros válidos. Revisa los avisos.', 'warning');
+        else {
+          // Caso solo-topes: el MUISCA a veces exporta solo el resumen de Topes 1-5
+          // (sin detalle por tercero). No fallar en silencio: explicar y mostrar los
+          // topes detectados para que el contador sepa qué traía el archivo.
+          var tp = result.metadata.topes;
+          if(tp && (tp.ingresos || tp.patrimonio)){
+            exoToast('Este reporte solo trae el RESUMEN de topes (sin detalle por tercero): ingresos ' + fCOP(tp.ingresos||0) + ' · patrimonio ' + fCOP(tp.patrimonio||0) + '. Descarga el reporte detallado del MUISCA o captura las cédulas a mano.', 'warning');
+          } else {
+            exoToast('Archivo leído pero sin registros válidos. Revisa los avisos.', 'warning');
+          }
+        }
       }
       // Guiar el flujo: con la exógena cargada, el siguiente paso es la reconciliación
       if(nReg > 0) setTimeout(function(){ cambiarTabF210('texogena'); }, 900);

@@ -210,6 +210,34 @@ tr.mblur td{filter:blur(4px);user-select:none;pointer-events:none}
 #mFiltros:hover{background:var(--g800)}
 #mCount{font-size:.8rem;color:var(--f600);font-weight:700;margin-left:auto;white-space:nowrap}
 @media(max-width:720px){#matrixBar{position:static}#mCount{margin-left:0}}
+/* Matriz por cliente */
+#btnCliente{background:var(--navy);color:#fff;border:none;border-radius:10px;padding:9px 14px;font-family:inherit;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s}
+#btnCliente:hover{background:#1E40AF}
+#clientePanel{background:var(--f50);border:1px solid var(--g200);border-radius:12px;padding:16px 18px;margin-bottom:12px}
+.cp-row{margin-bottom:13px}
+.cp-lbl{display:block;font-size:.72rem;font-weight:700;color:var(--f600);text-transform:uppercase;letter-spacing:.4px;margin-bottom:7px}
+#clientePanel input[type=text],#clientePanel select{padding:9px 12px;border:1.5px solid var(--f200);border-radius:10px;font-family:inherit;font-size:.86rem;outline:none;width:100%;max-width:360px;color:var(--f900)}
+#clientePanel input[type=text]:focus,#clientePanel select:focus{border-color:var(--g600);box-shadow:0 0 0 3px var(--g100)}
+.cp-chips{display:flex;gap:7px;flex-wrap:wrap}
+.cp-chip{padding:6px 13px;border:1.5px solid var(--f200);border-radius:18px;background:#fff;cursor:pointer;font-family:inherit;font-size:.8rem;font-weight:600;color:var(--f600);transition:.15s;display:inline-flex;align-items:center;gap:6px}
+.cp-chip.on{border-color:var(--g600);background:var(--g600);color:#fff}
+.cp-chip:hover{border-color:var(--g500)}
+.cp-chip .dot{width:8px;height:8px;border-radius:50%}
+.cp-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:4px}
+#cliBar{display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:#fff;border:1px solid var(--g200);border-radius:12px;padding:10px 14px;margin-bottom:12px}
+.cli-pill{display:inline-flex;align-items:center;gap:9px;background:var(--navy);color:#fff;border-radius:10px;padding:7px 13px;font-size:.83rem;font-weight:700}
+.cli-pill .cli-meta{font-weight:500;opacity:.8;font-size:.74rem}
+.cli-pill button{background:rgba(255,255,255,.22);border:none;color:#fff;border-radius:6px;padding:3px 9px;font-size:.72rem;cursor:pointer;font-family:inherit;font-weight:700}
+.cli-pill button:hover{background:rgba(255,255,255,.35)}
+.cli-counts{display:inline-flex;gap:14px;flex-wrap:wrap;font-size:.82rem;font-weight:700;color:var(--f700)}
+.cli-counts span{display:inline-flex;align-items:center;gap:5px}
+.cli-toggle{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-size:.8rem;font-weight:600;color:var(--f600);cursor:pointer;user-select:none}
+.cli-toggle input{accent-color:var(--g600);width:15px;height:15px;cursor:pointer}
+.b-aplica{font-size:.68rem;font-weight:800;padding:3px 8px;border-radius:7px;white-space:nowrap}
+.ba-si{background:#ECFDF5;color:#047857}
+.ba-rev{background:#FFFBEB;color:#B45309}
+.ba-no{background:#F3F4F6;color:#9CA3AF}
+.cli-why{font-size:.72rem;color:var(--f500);margin-top:3px;line-height:1.4}
 .rel-links{display:flex;gap:10px;flex-wrap:wrap}
 .rel-links a{padding:8px 16px;background:var(--g50);color:var(--g700);border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:500}
 @media(max-width:720px){
@@ -317,9 +345,25 @@ tr.mblur td{filter:blur(4px);user-select:none;pointer-events:none}
 </div>
 <div id="matrixBar" hidden>
   <div class="mb-search"><span class="lupa">🔍</span><input type="text" id="mSearch" placeholder="Filtra la matriz: ley 2277, exógena, dividendos…" autocomplete="off"></div>
+  <button id="btnCliente">👤 Definir cliente</button>
   <button id="mFiltros">🎛️ Filtros avanzados</button>
   <span class="mb-lbl">Columnas</span><span id="mCols"></span>
   <span id="mCount"></span>
+</div>
+<div id="clientePanel" hidden>
+  <div class="cp-row"><label class="cp-lbl" for="cpNombre">Nombre del cliente o caso</label><input type="text" id="cpNombre" placeholder="Ej: Ferretería El Tornillo SAS" autocomplete="off"></div>
+  <div class="cp-row"><label class="cp-lbl">Tipo de contribuyente</label><div class="cp-chips" id="cpTipo"></div></div>
+  <div class="cp-row"><label class="cp-lbl" for="cpSector">Sector económico <span style="font-weight:400;text-transform:none;color:var(--f400)">(opcional — refina las normas sectoriales)</span></label><select id="cpSector"></select></div>
+  <div class="cp-row"><label class="cp-lbl">¿Qué obligaciones maneja? <span style="font-weight:400;text-transform:none;color:var(--f400)">(el filtro principal)</span></label><div class="cp-chips" id="cpOblig"></div></div>
+  <div class="cp-actions">
+    <button class="btn btn-primary btn-sm" id="cpGuardar">✅ Clasificar las normas para este cliente</button>
+    <button class="btn btn-outline btn-sm" id="cpCancelar">Cancelar</button>
+  </div>
+</div>
+<div id="cliBar" hidden>
+  <span class="cli-pill" id="cliPill"></span>
+  <span class="cli-counts" id="cliCounts"></span>
+  <label class="cli-toggle"><input type="checkbox" id="cliOcultarNo"> Ocultar las que no aplican</label>
 </div>
 <div id="lista"></div>
 <div class="mas-wrap"><button class="btn btn-primary" id="btnMas" style="display:none">Mostrar más normas</button></div>
@@ -519,8 +563,43 @@ var SYN={
 var POPULAR=['ley 2277','sanción exógena','plazos 2026','4x1000','POS','dividendos','zonas francas','AIU'];
 var QTERMS=[],HI=[],FUZZY='';
 // ─── Estado ───
-var S={q:'',impuestos:[],tipos:[],perfiles:[],sectores:[],estado:'',anio:'',orden:'relevancia',clave:false,shown:PAGE,ruta:-1,vista:'cards',tsort:'',tdir:1,cols:{tipo:true,anio:true,estado:true,imp:true,aplica:true}};
+var S={q:'',impuestos:[],tipos:[],perfiles:[],sectores:[],estado:'',anio:'',orden:'relevancia',clave:false,shown:PAGE,ruta:-1,vista:'cards',tsort:'',tdir:1,cols:{tipo:true,anio:true,estado:true,imp:true,aplica:true},
+ cliente:{activo:false,nombre:'',tipo:'persona-natural',sector:'',obligaciones:[],ocultarNo:false}};
 var MCOLS=[{k:'tipo',l:'Tipo'},{k:'anio',l:'Año'},{k:'estado',l:'Estado'},{k:'imp',l:'Impuestos'},{k:'aplica',l:'A quién aplica'}];
+// ─── Matriz por cliente: motor de aplicabilidad ───
+var TIPOS_CLIENTE=[{k:'persona-natural',l:'👤 Persona natural'},{k:'persona-juridica',l:'🏢 Persona jurídica'},{k:'gran-contribuyente',l:'🏦 Gran contribuyente'},{k:'esal',l:'🤝 ESAL'},{k:'regimen-simple',l:'🌱 Régimen Simple'}];
+var BASE_PERF=['persona-natural','persona-juridica','gran-contribuyente','esal','regimen-simple'];
+var SITU_PERF=['empleador','independiente','no-residente'];
+function perfTxt(k){return(PERF[k]||k).replace(/^\S+\s/,'')}
+function sectTxt(k){return(SECT[k]||k).replace(/^\S+\s/,'')}
+// Devuelve {b:'si'|'rev'|'no', r:'por qué'} para una norma frente al perfil del cliente
+function clasificarCliente(n,cli){
+ var imps=n.impuestos||[],perfs=n.perfiles||[],sects=n.sectores||[];
+ var impMatch=imps.filter(function(i){return cli.obligaciones.indexOf(i)>=0});
+ if(!impMatch.length)return{b:'no',r:'No corresponde a las obligaciones del cliente ('+(impLabel(imps)||'—')+')'};
+ var perfBase=perfs.filter(function(p){return BASE_PERF.indexOf(p)>=0});
+ if(perfBase.length&&perfBase.indexOf(cli.tipo)<0)return{b:'no',r:'Dirigida a '+perfBase.map(perfTxt).join(' / ')+', no a '+perfTxt(cli.tipo)};
+ if(sects.length){
+  if(!cli.sector)return{b:'rev',r:'Norma sectorial ('+sects.map(sectTxt).join(' / ')+'); define el sector del cliente para confirmar'};
+  if(sects.indexOf(cli.sector)<0)return{b:'no',r:'Aplica al sector '+sects.map(sectTxt).join(' / ')};
+ }
+ var situ=perfs.filter(function(p){return SITU_PERF.indexOf(p)>=0});
+ if(situ.length&&!perfBase.length)return{b:'rev',r:'Aplica solo si el cliente es '+situ.map(perfTxt).join(' / ')};
+ var why='Maneja '+impMatch.map(function(i){return(IMP[i]||{}).l||i}).join(', ');
+ if(cli.sector&&sects.indexOf(cli.sector)>=0)why+=' · sector '+sectTxt(cli.sector);
+ return{b:'si',r:why};
+}
+var CLI_BADGE={si:{i:'✅',l:'Aplica'},rev:{i:'🟡',l:'Revisar'},no:{i:'⬜',l:'No aplica'}};
+function cliResumen(cli){
+ var t=(TIPOS_CLIENTE.filter(function(x){return x.k===cli.tipo})[0]||{}).l||cli.tipo;
+ var parts=[t.replace(/^\S+\s/,'')];
+ if(cli.sector)parts.push(sectTxt(cli.sector));
+ parts.push(cli.obligaciones.length+' obligacion'+(cli.obligaciones.length===1?'':'es'));
+ return parts.join(' · ');
+}
+// Persistencia (un cliente activo por ahora)
+function cliGuardar(){try{localStorage.setItem('ng_cliente',JSON.stringify(S.cliente))}catch(e){}}
+function cliCargar(){try{var v=JSON.parse(localStorage.getItem('ng_cliente')||'null');if(v&&v.activo){S.cliente=Object.assign(S.cliente,v)}}catch(e){}}
 // ─── Utilidades ───
 function $(id){return document.getElementById(id)}
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
@@ -654,9 +733,11 @@ function cardHTML(n){
  return h;
 }
 function tablaHTML(items){
- var C=S.cols;
+ var C=S.cols,cli=S.cliente.activo;
  function arrow(k){return S.tsort===k?(S.tdir>0?' ↑':' ↓'):' ⇅'}
- var head='<thead><tr><th style="width:34px">#</th><th data-s="titulo">Norma'+arrow('titulo')+'</th>';
+ var head='<thead><tr><th style="width:34px">#</th>';
+ if(cli)head+='<th style="width:84px">Aplica</th>';
+ head+='<th data-s="titulo">Norma'+arrow('titulo')+'</th>';
  if(C.tipo)head+='<th data-s="tipo">Tipo'+arrow('tipo')+'</th>';
  if(C.anio)head+='<th data-s="anio">Año'+arrow('anio')+'</th>';
  if(C.estado)head+='<th data-s="estado">Estado'+arrow('estado')+'</th>';
@@ -666,7 +747,9 @@ function tablaHTML(items){
  var rows=items.map(function(n,ix){
   var e=EST[n.estado]||{l:n.estado,bg:'#F3F4F6',c:'#4B5563'};
   var url=n.url_dian||n.url_alt;
-  var tr='<tr'+((!proUnlocked&&ix>=3)?' class="mblur"':'')+'><td>'+(ix+1)+'</td><td><b>'+(n.importancia==='clave'?'⭐ ':'')+hi(n.titulo)+'</b></td>';
+  var tr='<tr'+((!proUnlocked&&ix>=3)?' class="mblur"':'')+'><td>'+(ix+1)+'</td>';
+  if(cli){var b=(n._cli||{}).b||'no',cb=CLI_BADGE[b];tr+='<td><span class="b-aplica ba-'+b+'">'+cb.i+' '+cb.l+'</span></td>'}
+  tr+='<td><b>'+(n.importancia==='clave'?'⭐ ':'')+hi(n.titulo)+'</b>'+(cli&&n._cli?'<div class="cli-why">'+esc(n._cli.r)+'</div>':'')+'</td>';
   if(C.tipo)tr+='<td>'+esc((TIPO[n.tipo]||{}).l||n.tipo)+'</td>';
   if(C.anio)tr+='<td>'+n.anio+'</td>';
   if(C.estado)tr+='<td><span class="est" style="background:'+e.bg+';color:'+e.c+'">'+esc(e.l)+'</span></td>';
@@ -704,6 +787,13 @@ function render(){
    return d*fold(a.titulo).localeCompare(fold(b.titulo));
   });
  }
+ var cliCounts=null;
+ if(S.cliente.activo&&S.vista==='tabla'){
+  cliCounts={si:0,rev:0,no:0};
+  r.forEach(function(n){var c=clasificarCliente(n,S.cliente);n._cli=c;cliCounts[c.b]++});
+  if(!S.tsort){var ord={si:0,rev:1,no:2};r=r.slice().sort(function(a,b){return ord[a._cli.b]-ord[b._cli.b]||a._rank-b._rank||b.anio-a.anio})}
+  if(S.cliente.ocultarNo)r=r.filter(function(n){return n._cli.b!=='no'});
+ }
  var vis=r.slice(0,S.shown);
  var vacio='<div class="vacio"><span>🔎</span>No encontramos normas con esos filtros.<br>Prueba quitando alguno o usa otra palabra.</div>';
  $('lista').innerHTML=vis.length?(S.vista==='tabla'?tablaHTML(vis):vis.map(cardHTML).join('')):vacio;
@@ -712,14 +802,24 @@ function render(){
  renderChips();
  renderActivos();
  renderMatrixBar(r.length);
+ renderCliBar(cliCounts);
 }
 function renderMatrixBar(total){
  var bar=$('matrixBar');
  if(S.vista!=='tabla'){bar.hidden=true;return}
  bar.hidden=false;
+ $('btnCliente').textContent=S.cliente.activo?'👤 Cambiar cliente':'👤 Definir cliente';
  $('mCols').innerHTML=MCOLS.map(function(c){return '<button class="mb-col'+(S.cols[c.k]?' on':'')+'" data-c="'+esc(c.k)+'">'+esc(c.l)+'</button>'}).join('');
  $('mCount').textContent=total+' norma'+(total===1?'':'s');
  if(document.activeElement!==$('mSearch')&&$('mSearch').value!==S.q)$('mSearch').value=S.q;
+}
+function renderCliBar(counts){
+ var bar=$('cliBar');
+ if(!(S.cliente.activo&&S.vista==='tabla')){bar.hidden=true;return}
+ bar.hidden=false;
+ $('cliPill').innerHTML='👤 <span>'+esc(S.cliente.nombre||'Cliente sin nombre')+'</span> <span class="cli-meta">'+esc(cliResumen(S.cliente))+'</span> <button data-cli="editar">editar</button> <button data-cli="quitar">quitar</button>';
+ if(counts)$('cliCounts').innerHTML='<span>✅ <b>'+counts.si+'</b> aplican</span><span>🟡 <b>'+counts.rev+'</b> revisar</span><span>⬜ <b>'+counts.no+'</b> no aplican</span>';
+ $('cliOcultarNo').checked=S.cliente.ocultarNo;
 }
 function chipHTML(key,label,on,color){
  // --cc alimenta hover/activo en CSS: cada chip tinta con el color de su categoría
@@ -900,6 +1000,40 @@ $('mFiltros').addEventListener('click',function(){
  $('filtrosBody').classList.remove('colapsado');
  $('filtrosCard').scrollIntoView({behavior:'smooth',block:'start'});
 });
+// ─── Matriz por cliente: panel + eventos ───
+var cpTmp=null;
+function abrirClientePanel(){
+ var c=S.cliente.activo?S.cliente:{nombre:'',tipo:'persona-natural',sector:'',obligaciones:[]};
+ cpTmp={nombre:c.nombre,tipo:c.tipo,sector:c.sector,obligaciones:c.obligaciones.slice()};
+ $('cpNombre').value=cpTmp.nombre;
+ $('cpSector').innerHTML='<option value="">— Sin especificar —</option>'+Object.keys(SECT).map(function(k){return '<option value="'+esc(k)+'"'+(cpTmp.sector===k?' selected':'')+'>'+esc(SECT[k])+'</option>'}).join('');
+ renderCpChips();
+ $('clientePanel').hidden=false;
+ $('clientePanel').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function renderCpChips(){
+ $('cpTipo').innerHTML=TIPOS_CLIENTE.map(function(t){return '<button class="cp-chip'+(cpTmp.tipo===t.k?' on':'')+'" data-t="'+esc(t.k)+'">'+esc(t.l)+'</button>'}).join('');
+ $('cpOblig').innerHTML=Object.keys(IMP).map(function(k){return '<button class="cp-chip'+(cpTmp.obligaciones.indexOf(k)>=0?' on':'')+'" data-o="'+esc(k)+'"><span class="dot" style="background:'+IMP[k].c+'"></span>'+esc(IMP[k].l)+'</button>'}).join('');
+}
+$('btnCliente').addEventListener('click',abrirClientePanel);
+$('cpCancelar').addEventListener('click',function(){$('clientePanel').hidden=true});
+$('cpTipo').addEventListener('click',function(e){var b=e.target.closest('.cp-chip');if(!b)return;cpTmp.tipo=b.dataset.t;renderCpChips()});
+$('cpOblig').addEventListener('click',function(e){var b=e.target.closest('.cp-chip');if(!b)return;var k=b.dataset.o,i=cpTmp.obligaciones.indexOf(k);if(i>=0)cpTmp.obligaciones.splice(i,1);else cpTmp.obligaciones.push(k);renderCpChips()});
+$('cpSector').addEventListener('change',function(){cpTmp.sector=this.value});
+$('cpGuardar').addEventListener('click',function(){
+ cpTmp.nombre=$('cpNombre').value.trim();cpTmp.sector=$('cpSector').value;
+ if(!cpTmp.obligaciones.length){if(typeof toast==='function')toast('Marca al menos una obligación que maneja el cliente.','warn');return}
+ S.cliente.nombre=cpTmp.nombre;S.cliente.tipo=cpTmp.tipo;S.cliente.sector=cpTmp.sector;S.cliente.obligaciones=cpTmp.obligaciones.slice();S.cliente.activo=true;
+ cliGuardar();$('clientePanel').hidden=true;S.shown=PAGE;
+ if(S.vista!=='tabla')setVista('tabla','cliente');else render();
+ if(typeof gtag==='function')gtag('event','normograma_cliente_set',{tipo:S.cliente.tipo,oblig:S.cliente.obligaciones.length});
+});
+$('cliOcultarNo').addEventListener('change',function(){S.cliente.ocultarNo=this.checked;cliGuardar();S.shown=PAGE;render()});
+$('cliBar').addEventListener('click',function(e){
+ var b=e.target.closest('button[data-cli]');if(!b)return;
+ if(b.dataset.cli==='editar'){abrirClientePanel();return}
+ if(b.dataset.cli==='quitar'){S.cliente.activo=false;cliGuardar();$('clientePanel').hidden=true;render()}
+});
 // ─── Preview del Excel en la vitrina ───
 var XL_TAB='papeles';
 function xlClaves(){return DATA.filter(function(n){return n.importancia==='clave'}).slice(0,3)}
@@ -998,6 +1132,7 @@ function descargarMatriz(origen){
  if(typeof ExcelJS==='undefined'){if(typeof toast==='function')toast('La librería de Excel aún está cargando, intenta de nuevo en unos segundos.','warn');return}
  var sel=filtrar();
  var hayFiltro=sel.length<DATA.length;
+ var nHojas=4+((hayFiltro&&sel.length)?1:0)+(S.cliente.activo?1:0);
  var filtrosTxt=[];
  if(S.q)filtrosTxt.push('Búsqueda: "'+S.q+'"');
  if(S.impuestos.length)filtrosTxt.push('Impuestos: '+impLabel(S.impuestos));
@@ -1039,6 +1174,12 @@ function descargarMatriz(origen){
   else if(par[1]==='b'){row.font={bold:true,size:10}}
   else{row.font={size:10}}
  });
+ if(S.cliente.activo){
+  wl.addRow(['']);
+  wl.addRow(['MATRIZ DE CUMPLIMIENTO DEL CLIENTE']).font={bold:true,size:11,color:{argb:'FF1E3A8A'}};
+  wl.addRow(['Cliente: '+(S.cliente.nombre||'(sin nombre)')+' — '+cliResumen(S.cliente)]).font={bold:true,size:10};
+  wl.addRow(['La hoja "✅ '+(S.cliente.nombre||'Cliente')+'" clasifica las '+DATA.length+' normas en Aplica / Revisar / No aplica según el perfil del cliente, con la justificación de cada decisión. Es tu papel de trabajo defendible: el "No aplica" queda documentado, no es un olvido.']).font={size:10};
+ }
  // ── Hoja 2: Resumen ──
  var wr=wb.addWorksheet('📊 Resumen');
  wr.properties.tabColor={argb:'FF0E7490'};
@@ -1061,6 +1202,30 @@ function descargarMatriz(origen){
  }));
  // ── Hoja 3: Normograma completo ──
  hojaNormas(wb,'📚 Normograma completo',DATA,'FF059669');
+ // ── Hoja: Matriz de cumplimiento del cliente (si hay cliente activo) ──
+ if(S.cliente.activo){
+  var cli=S.cliente;
+  var nom=('✅ '+(cli.nombre||'Cliente')).replace(/[\\\/\?\*\[\]:]/g,' ').slice(0,31);
+  var wc=wb.addWorksheet(nom);
+  wc.properties.tabColor={argb:'FF1E3A8A'};
+  wc.columns=[
+   {header:'#',key:'n',width:5},{header:'Aplica',key:'ap',width:12},{header:'Por qué',key:'pq',width:50},
+   {header:'Norma',key:'t',width:50},{header:'Tipo',key:'tp',width:13},{header:'Año',key:'a',width:7},
+   {header:'Estado',key:'e',width:19},{header:'Impuestos',key:'i',width:26},{header:'Texto oficial',key:'u',width:16}
+  ];
+  ['pq','t'].forEach(function(k){wc.getColumn(k).alignment={wrapText:true,vertical:'top'}});
+  var APXL={si:{t:'✅ Aplica',bg:'FFD1FAE5',c:'FF047857'},rev:{t:'🟡 Revisar',bg:'FFFEF3C7',c:'FFB45309'},no:{t:'⬜ No aplica',bg:'FFF3F4F6',c:'FF9CA3AF'}};
+  var ordC={si:0,rev:1,no:2};
+  var clasif=DATA.map(function(n){return{n:n,c:clasificarCliente(n,cli)}}).sort(function(a,b){return ordC[a.c.b]-ordC[b.c.b]||a.n._rank-b.n._rank||b.n.anio-a.n.anio});
+  clasif.forEach(function(o,ix){
+   var n=o.n,ap=APXL[o.c.b];
+   var row=wc.addRow({n:ix+1,ap:ap.t,pq:o.c.r,t:n.titulo,tp:(TIPO[n.tipo]||{}).l||n.tipo,a:n.anio,e:(EST[n.estado]||{}).l||n.estado,i:impLabel(n.impuestos)});
+   var ac=row.getCell('ap');ac.fill={type:'pattern',pattern:'solid',fgColor:{argb:ap.bg}};ac.font={bold:true,color:{argb:ap.c},size:10};
+   var ec=row.getCell('e'),st=ESTXL[n.estado];if(st){ec.fill={type:'pattern',pattern:'solid',fgColor:{argb:st.bg}};ec.font={bold:true,color:{argb:st.c},size:10}}
+   var url=n.url_dian||n.url_alt;if(url){var uc=row.getCell('u');uc.value={text:'Abrir norma',hyperlink:url};uc.font={color:{argb:'FF047857'},underline:true,size:10}}
+  });
+  xlHead(wc,9);
+ }
  // ── Hoja 4: Mi selección (solo si hay filtros) ──
  if(hayFiltro&&sel.length){
   var wsSel=hojaNormas(wb,'🎯 Mi selección',sel,'FFF59E0B');
@@ -1079,8 +1244,10 @@ function descargarMatriz(origen){
  ];
  wp.getColumn('t').alignment={wrapText:true,vertical:'top'};
  var base=sel.length?sel:DATA;
+ var AP_PAP={si:'Sí',rev:'Por revisar',no:'No'};
  base.forEach(function(n,ix){
-  var row=wp.addRow({n:ix+1,t:n.titulo,a:n.anio,e:(EST[n.estado]||{}).l||n.estado,ap:'Por revisar',av:'Pendiente'});
+  var cc=S.cliente.activo?clasificarCliente(n,S.cliente):null;
+  var row=wp.addRow({n:ix+1,t:n.titulo,a:n.anio,e:(EST[n.estado]||{}).l||n.estado,ap:cc?AP_PAP[cc.b]:'Por revisar',av:'Pendiente',no:cc?cc.r:''});
   var r=row.number;
   wp.getCell('E'+r).dataValidation={type:'list',allowBlank:true,formulae:['"Sí,No,Por revisar"']};
   wp.getCell('F'+r).dataValidation={type:'list',allowBlank:true,formulae:['"Alto,Medio,Bajo,N/A"']};
@@ -1094,8 +1261,8 @@ function descargarMatriz(origen){
   var a=document.createElement('a');a.href=URL.createObjectURL(blob);
   a.download='matriz_normativa_exogenadian.xlsx';a.click();
   setTimeout(function(){URL.revokeObjectURL(a.href)},4000);
-  if(typeof toast==='function')toast('Matriz generada: '+(hayFiltro?'5':'4')+' hojas, '+sel.length+' normas en tu selección.','ok');
-  if(typeof gtag==='function')gtag('event','normograma_excel',{normas:sel.length,filtrada:hayFiltro});
+  if(typeof toast==='function')toast('Matriz generada: '+nHojas+' hojas'+(S.cliente.activo?' (incluye la matriz de cumplimiento del cliente)':'')+'.','ok');
+  if(typeof gtag==='function')gtag('event','normograma_excel',{normas:sel.length,filtrada:hayFiltro,cliente:S.cliente.activo});
  });
 }
 $('btnExcel').addEventListener('click',function(){descargarMatriz('top')});
@@ -1114,7 +1281,7 @@ if(!DATA.length){
  $('lista').innerHTML='<div class="vacio"><span>⚠️</span>No pudimos cargar la base de normas. Recarga la página o inténtalo más tarde.</div>';
  $('hdrBadge').textContent='Sin datos';
 }else{
- fillAnios();renderStats();render();xlRender();
+ cliCargar();fillAnios();renderStats();render();xlRender();
 }
 })();
 </script>

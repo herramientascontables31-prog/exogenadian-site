@@ -51,7 +51,9 @@
     return 0;
   }
 
-  /** Impuesto Art. 242 ET — dividendos no gravados (1.090 UVT exento, 15% exceso). */
+  /** OBSOLETO (no usar): tarifa fija 15% Art. 242 pre-reforma, derogada por la
+   *  Ley 2277/2022. Hoy los dividendos integran la cedula general (Art. 241).
+   *  Se conserva solo por compatibilidad historica. */
   function impuestoArt242(basePesos, year){
     if(basePesos <= 0) return 0;
     var p = getParams(year);
@@ -61,9 +63,9 @@
     return r1k(imp * p.uvt);
   }
 
-  /** Impuesto Art. 242-1 ET — dividendos gravados.
-   *  Paso 1: 35% sobre dividendo bruto.
-   *  Paso 2: sobre el neto (65%) aplica Art. 242. */
+  /** OBSOLETO (no usar): liquidaba 35% + 15% fijo sobre el neto. Post Ley
+   *  2277/2022 el gravado paga 35% (Art. 240) y el neto integra la general
+   *  (Art. 241). La liquidacion ya no usa esta funcion. */
   function impuestoArt242_1(basePesos, year){
     if(basePesos <= 0) return 0;
     var p = getParams(year);
@@ -471,27 +473,32 @@
     var decl = estado.declarante || {};
 
     // Casilla 111: Renta liquida gravable total tabla Art. 241
-    //   = max(c97, presuntiva) + c103 + c107
     //   Art. 331 ET (mod. Ley 2277/2022): las rentas liquidas cedulares de
-    //   trabajo, capital, no laborales, pensiones Y dividendos no gravados
-    //   se SUMAN para aplicar la tabla del Art. 241.
-    //   La 2a subcedula (gravados, c108) tributa Art. 242-1 aparte.
+    //   trabajo, capital, no laborales, pensiones Y dividendos (no gravados +
+    //   NETO de los gravados) se SUMAN para aplicar la tabla del Art. 241.
     //   Los dividendos 2016 y anteriores (c106) tributan Art. 241 aparte (regimen historico).
     var c98 = (estado.cedulaGeneral && estado.cedulaGeneral.rentaPresuntiva) || 0;
     var baseConPresuntiva = Math.max(cedulas.general.c97, c98);
-    var c111 = baseConPresuntiva + cedulas.pensiones.c103 + cedulas.dividendos.c107;
 
-    // Casilla 116: Impuesto Art. 241 sobre c111 (general + pensiones + dividendos no gravados)
+    // Dividendos GRAVADOS 2017+ (Art. 49 par. 2): primero la tarifa del Art. 240
+    // (35%) como impuesto (c119); el NETO resultante (65%) integra la cedula
+    // general y tributa con la tabla progresiva del Art. 241 (Art. 242 inc. 2,
+    // Ley 2277/2022). Antes se liquidaba 35% + 15% fijo y el neto no integraba
+    // — la tarifa fija del 15% (Art. 242 pre-reforma) quedo derogada por la 2277.
+    var c108Gravado = cedulas.dividendos.c108 || 0;
+    var c119 = r1k(c108Gravado * p.divGravadosTarifaCorporativa);     // 35% Art. 240/242-1
+    var netoGravado = maxZero(c108Gravado - c119);                    // 65% → cedula general
+    var rentaCedularDiv = (cedulas.dividendos.c107 || 0) + netoGravado;
+    var c111 = baseConPresuntiva + cedulas.pensiones.c103 + rentaCedularDiv;
+
+    // Casilla 116: Impuesto Art. 241 sobre c111 (general + pensiones + dividendos a tabla)
     var c116 = impuestoArt241(c111, year);
 
     // Casilla 117: si renta presuntiva supera cedula general, mismo impuesto (no doble)
     var c117 = (c98 > cedulas.general.c97) ? c116 : 0;
 
-    // Casilla 118: reservada (Art. 242 ya no aplica directo a c107 — se consolida en c111)
+    // Casilla 118: reservada (Art. 242 ya no aplica tarifa fija — se consolida en c111)
     var c118 = 0;
-
-    // Casilla 119: Impuesto Art. 242-1 ET sobre 2a subcedula 2017+ (gravados)
-    var c119 = impuestoArt242_1(cedulas.dividendos.c108, year);
 
     // Casilla 120: Impuesto sobre dividendos 2016 y anteriores + dividendos exterior
     //   c106 (anteriores 2016): Art. 241 con tabla cedular ordinaria
@@ -505,8 +512,10 @@
     // Descuento Art. 254-1 ET (adicionado Ley 2277/2022):
     //   19% × max(0, c107 - 1.090 UVT). Limite implicito vía max(0, c121-c125)
     //   para que c126 no quede negativo (DIAN Concepto 100208192-272/2023).
+    //   La base es la renta cedular de dividendos a tabla = no gravados (c107)
+    //   + neto de los gravados (ambos integraron la general).
     var rl1090EnPesos = p.divNoGravadosExentoUvt * p.uvt;
-    var excesoDividendos = maxZero(cedulas.dividendos.c107 - rl1090EnPesos);
+    var excesoDividendos = maxZero(rentaCedularDiv - rl1090EnPesos);
     var descuento254_1 = r1k(excesoDividendos * 0.19);
 
     // Casilla 125: Total descuentos tributarios (Arts. 254, 254-1, 255, 256)
