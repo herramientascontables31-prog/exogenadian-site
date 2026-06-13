@@ -277,8 +277,9 @@
         if (icaDecl) obls.push({id:'ica_ctg_anual',group:'ica',label:'ICA Anual (vig.2025 + ant.40%)',date:ICA_CTG_ANUAL,link:null,linkText:'Cartagena'});
         if (icaRete) RETEICA_CTG.forEach(function (d, i) { obls.push({id:'reteica_ctg_'+i,group:'ica',label:'ReteICA '+ICA_BIMS[i],date:d,link:null,linkText:'Cartagena'}); });
       } else if (icaM === 'vup') {
+        // Régimen común NO presenta anual consolidada en Valledupar; solo bimestral
+        // (confirmado por contador local, jun-2026).
         if (icaDecl) {
-          obls.push({id:'ica_vup_anual',group:'ica',label:'ICA Anual consolidada AG2025',date:ICA_VUP_ANUAL,link:null,linkText:'Valledupar'});
           ICA_VUP.forEach(function (d, i) { obls.push({id:'ica_vup_'+i,group:'ica',label:'ICA '+ICA_BIMS[i],date:d,link:null,linkText:'Valledupar'}); });
         }
         if (icaRete) RETEICA_VUP.forEach(function (d, i) { obls.push({id:'reteica_vup_'+i,group:'ica',label:'ReteICA '+RETEICA_VUP_MESES[i],date:d,link:null,linkText:'Valledupar'}); });

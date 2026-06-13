@@ -1070,8 +1070,8 @@ function computeVencimientos(emp) {
       RETEICA_CTG.forEach(function(f,i){out.push({oblId:oblId,label:meta.label,periodo:'ReteICA '+ICA_BIMS[i],fecha:f,color:meta.color})});
     }
     else if(oblId === 'ica_vup') {
-      // Valledupar: consolidada anual AG2025 (27-feb) + ICA bimestral + ReteICA MENSUAL (Decreto 1244/2025).
-      out.push({oblId:oblId,label:meta.label,periodo:'ICA Anual consolidada AG2025',fecha:ICA_VUP_ANUAL,color:meta.color});
+      // Valledupar: ICA bimestral + ReteICA MENSUAL (Decreto 1244/2025). El régimen común
+      // NO presenta declaración anual consolidada (confirmado por contador local, jun-2026).
       ICA_VUP.forEach(function(f,i){out.push({oblId:oblId,label:meta.label,periodo:'ICA '+ICA_BIMS[i],fecha:f,color:meta.color})});
       RETEICA_VUP.forEach(function(f,i){out.push({oblId:oblId,label:meta.label,periodo:'ReteICA '+RETEICA_VUP_MESES[i],fecha:f,color:meta.color})});
     }
