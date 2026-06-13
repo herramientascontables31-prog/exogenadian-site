@@ -690,6 +690,16 @@
       "orden": 99
     },
     {
+      "url": "estatuto-tributario.html",
+      "grupo": "consultas",
+      "titulo": "Estatuto Tributario",
+      "desc": "",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 1
+    },
+    {
       "url": "normograma.html",
       "grupo": "consultas",
       "titulo": "Normograma Tributario",
@@ -697,7 +707,7 @@
       "popular": true,
       "hidden": false,
       "sub": false,
-      "orden": 1
+      "orden": 2
     },
     {
       "url": "oficina.html",
@@ -707,7 +717,7 @@
       "popular": true,
       "hidden": false,
       "sub": false,
-      "orden": 2
+      "orden": 3
     },
     {
       "url": "consultanit.html",
@@ -717,7 +727,7 @@
       "popular": true,
       "hidden": false,
       "sub": false,
-      "orden": 3
+      "orden": 4
     },
     {
       "url": "vencimientos.html",
@@ -727,7 +737,7 @@
       "popular": true,
       "hidden": false,
       "sub": false,
-      "orden": 4
+      "orden": 5
     },
     {
       "url": "tablero.html",
@@ -737,7 +747,7 @@
       "popular": true,
       "hidden": false,
       "sub": false,
-      "orden": 5
+      "orden": 6
     },
     {
       "url": "consultamasiva.html",
