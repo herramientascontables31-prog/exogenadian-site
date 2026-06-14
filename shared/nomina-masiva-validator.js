@@ -26,6 +26,8 @@ var NOMINA_VALIDATOR = (function() {
     'banco', 'tipoCuenta', 'numeroCuenta',
     // Salario integral (opcional, SI/NO)
     'salarioIntegral',
+    // Incapacidad laboral (ATEL) y licencia remunerada (maternidad/paternidad/luto)
+    'diasIncapLaboral', 'diasLicencia',
   ];
   var COLS_ALL = COLS_BASE.concat(COLS_AVANZADAS);
 
@@ -43,6 +45,7 @@ var NOMINA_VALIDATOR = (function() {
     'bonificaciones', 'comisiones',
     'noSalarialGravable', 'noSalarialNoGravable',
     'interesesVivienda', 'medicinaPrepagada',
+    'diasIncapLaboral', 'diasLicencia',
   ];
 
   /* ─── Helpers ─── */
@@ -150,6 +153,7 @@ var NOMINA_VALIDATOR = (function() {
       'diasIncapacidad', 'bonificaciones', 'comisiones',
       'noSalarialGravable', 'noSalarialNoGravable',
       'interesesVivienda', 'medicinaPrepagada',
+      'diasIncapLaboral', 'diasLicencia',
     ];
     for (var i = 0; i < camposNoNeg.length; i++) {
       var k = camposNoNeg[i];

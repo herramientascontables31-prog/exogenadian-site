@@ -187,7 +187,7 @@ details > div{padding:0 16px 16px}
 </div>
 <div class="card">
   <div class="card-title"><span class="step-num">1</span> Descarga la plantilla</div>
-  <p style="font-size:.88rem;color:var(--muted);margin-bottom:12px">Excel con las columnas necesarias y dos filas de ejemplo. Tiene <strong>12 columnas base obligatorias</strong> y <strong>17 avanzadas opcionales</strong> (no salariales, dominicales, deducciones especiales, datos bancarios y salario integral).</p>
+  <p style="font-size:.88rem;color:var(--muted);margin-bottom:12px">Excel con las columnas necesarias y dos filas de ejemplo. Tiene <strong>12 columnas base obligatorias</strong> y <strong>19 avanzadas opcionales</strong> (no salariales, dominicales, deducciones especiales, datos bancarios, salario integral, incapacidad laboral y licencias).</p>
   <button class="btn btn-green" onclick="descargarPlantilla()">&#128190; Descargar plantilla Excel</button>
   <details style="margin-top:16px">
     <summary>Ver descripción de cada columna</summary>
@@ -265,13 +265,16 @@ details > div{padding:0 16px 16px}
   </div>
   <div style="margin-top:18px;padding:14px 16px;background:#FAFBFC;border:1px solid var(--border);border-radius:8px">
     <div style="font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px">Empresa pagadora (para Excel y desprendibles)</div>
-    <div style="display:grid;grid-template-columns:2fr 1fr;gap:10px;margin-bottom:14px">
-      <input id="empNombre" type="text" placeholder="Razón social (ej. Mi Empresa SAS)" style="padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.88rem;font-family:inherit">
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:10px;margin-bottom:6px">
+      <input id="empNombre" type="text" list="empresasGuardadas" autocomplete="off" placeholder="Razón social (ej. Mi Empresa SAS)" style="padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.88rem;font-family:inherit">
+      <datalist id="empresasGuardadas"></datalist>
       <input id="empNit" type="text" placeholder="NIT" style="padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.88rem;font-family:inherit">
     </div>
+    <p style="font-size:.7rem;color:var(--muted);margin-bottom:14px">Las empresas que uses se guardan en este navegador — elige una de la lista y el NIT se autocompleta. Útil si liquidas varias.</p>
     <div style="display:flex;gap:10px;flex-wrap:wrap">
       <button class="btn btn-green" onclick="exportarExcelMasiva()">&#128190; Exportar Excel (6 hojas)</button>
-      <button class="btn btn-outline" onclick="imprimirDesprendibles()">&#128424; Imprimir desprendibles (PDF)</button>
+      <button class="btn btn-outline" onclick="descargarDesprendiblesPDF()">&#128196; Descargar desprendibles (PDF)</button>
+      <button class="btn btn-outline" onclick="imprimirDesprendibles()">&#128424; Imprimir desprendibles</button>
     </div>
     <p style="font-size:.72rem;color:var(--muted);margin-top:10px;line-height:1.5">
       El Excel trae 6 hojas: resumen, detalle por empleado, aportes empresa, <strong>asiento contable</strong>, <strong>dispersión bancaria</strong> e <strong>insumo PILA</strong>. Los desprendibles abren el diálogo de impresión del navegador con una página por empleado — elige <strong>"Guardar como PDF"</strong> para descargar.
@@ -390,6 +393,18 @@ details > div{padding:0 16px 16px}
   <br><br>
   Verifica siempre los parámetros del año (SMLMV, auxilio de transporte y UVT) contra el Decreto y la Resolución DIAN vigentes a la fecha en que liquides.
 </div>
+<div class="card">
+  <div class="card-title">&#129520; Completa tu nómina</div>
+  <p style="font-size:.84rem;color:var(--muted);margin-bottom:12px">Esta calculadora cierra el mes. Para casos puntuales usa las demás piezas del módulo de nómina:</p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <a href="liquidador-horas.html" style="padding:8px 16px;background:#EFF6FF;color:#1B3A5C;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:600">Horas extras y recargos</a>
+    <a href="retencion-fuente.html" style="padding:8px 16px;background:#EFF6FF;color:#1B3A5C;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:600">Retención en la fuente (Proc. 1 y 2)</a>
+    <a href="liquidador-general.html" style="padding:8px 16px;background:#EFF6FF;color:#1B3A5C;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:600">Liquidación de contrato</a>
+    <a href="liquidador-prima.html" style="padding:8px 16px;background:#EFF6FF;color:#1B3A5C;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:600">Prima de servicios</a>
+    <a href="costoreal.html" style="padding:8px 16px;background:#EFF6FF;color:#1B3A5C;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:600">Costo del empleado</a>
+    <a href="liquidador.html" style="padding:8px 16px;background:#ECFDF5;color:#047857;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:600">Ver todo el hub laboral &rarr;</a>
+  </div>
+</div>
 </div>
 <section style="max-width:1100px;margin:24px auto 0;padding:0 22px 40px">
   <h3 style="font-size:.95rem;font-weight:700;color:#374151;margin-bottom:12px">Herramientas relacionadas</h3>
@@ -404,9 +419,11 @@ details > div{padding:0 16px 16px}
 </section>
 <div id="desprendibles-print" aria-hidden="true"></div>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js"></script>
 <script src="shared/jornada-laboral.js?v=a7826f23"></script>
-<script src="shared/nomina-engine.js?v=0625c285"></script>
-<script src="shared/nomina-masiva-validator.js?v=5b26e722"></script>
+<script src="shared/nomina-engine.js?v=9bb32076"></script>
+<script src="shared/nomina-masiva-validator.js?v=ccf94a79"></script>
 <script>
 /* ─── Generación de plantilla Excel descargable ─── */
 function descargarPlantilla() {
@@ -429,6 +446,8 @@ function descargarPlantilla() {
     'banco', 'tipoCuenta', 'numeroCuenta',
     // ─── SALARIO INTEGRAL (1, opcional, SI/NO) ───
     'salarioIntegral',
+    // ─── AUSENTISMO ESPECIAL (2, opcionales — días) ───
+    'diasIncapLaboral', 'diasLicencia',
   ];
   // Filas de ejemplo
   var ejemplos = [
@@ -444,7 +463,7 @@ function descargarPlantilla() {
       noSalarialGravable: 0, noSalarialNoGravable: 0,
       depDependientes: 'NO', interesesVivienda: 0, medicinaPrepagada: 0,
       banco: 'Bancolombia', tipoCuenta: 'AHORRO', numeroCuenta: '12345678901',
-      salarioIntegral: 'NO',
+      salarioIntegral: 'NO', diasIncapLaboral: 0, diasLicencia: 0,
     },
     {
       cedula: '2020202020', nombre: 'EJEMPLO 2 — con HE, recargos y bono no salarial',
@@ -458,7 +477,7 @@ function descargarPlantilla() {
       noSalarialGravable: 500000, noSalarialNoGravable: 0,
       depDependientes: 'SI', interesesVivienda: 0, medicinaPrepagada: 0,
       banco: 'Davivienda', tipoCuenta: 'CORRIENTE', numeroCuenta: '98765432100',
-      salarioIntegral: 'NO',
+      salarioIntegral: 'NO', diasIncapLaboral: 0, diasLicencia: 0,
     },
   ];
   // Hoja 1: Empleados
@@ -479,7 +498,7 @@ function descargarPlantilla() {
     ['INSTRUCCIONES — Plantilla de liquidación de nómina mensual'],
     [''],
     ['1. Reemplaza las filas de ejemplo con tus empleados.'],
-    ['2. Las primeras 12 columnas son OBLIGATORIAS. Las 17 siguientes son OPCIONALES (déjalas en 0 o vacías si no aplica).'],
+    ['2. Las primeras 12 columnas son OBLIGATORIAS. Las 19 siguientes son OPCIONALES (déjalas en 0 o vacías si no aplica).'],
     ['3. No cambies los nombres de columna ni el orden.'],
     ['4. Sube esta hoja "Empleados" a la herramienta y obtén la liquidación completa.'],
     [''],
@@ -491,6 +510,8 @@ function descargarPlantilla() {
     ['  depDependientes     →  SI | NO  (Art. 387 ET — deducción 10% del ingreso, máx. 32 UVT)'],
     ['  salarioIntegral     →  SI | NO  (Art. 132 CST — mínimo 13 SMLMV; IBC y parafiscales sobre 70%)'],
     ['  tipoCuenta          →  AHORRO | CORRIENTE  (para la dispersión bancaria)'],
+    ['  diasIncapLaboral    →  días de incapacidad por accidente/enf. laboral (ATEL, ARL 100% desde día 1)'],
+    ['  diasLicencia        →  días de licencia remunerada al 100% (maternidad, paternidad, luto)'],
     [''],
     ['NOTAS:'],
     ['  • Si auxTransporteModo = MANUAL, debes diligenciar auxTransporteValor.'],
@@ -896,23 +917,64 @@ function resetTodo() {
   document.getElementById('fileInput').value = '';
   document.getElementById('dropzone').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-/* ─── Empresa pagadora: persistencia en localStorage ─── */
+/* ─── Empresa pagadora: persistencia multiempresa en localStorage ─── */
 (function setupEmpresa() {
+  var LISTA = 'exo_nomina_empresas';      // JSON [{nombre,nit}]
+  var ULT = 'exo_nomina_empresa_ult';     // nombre de la última usada
+  function leerLista() {
+    try { return JSON.parse(localStorage.getItem(LISTA) || '[]') || []; } catch (e) { return []; }
+  }
+  function guardarLista(arr) { try { localStorage.setItem(LISTA, JSON.stringify(arr.slice(0, 50))); } catch (e) {} }
+  function pintarDatalist() {
+    var dl = document.getElementById('empresasGuardadas');
+    if (!dl) return;
+    dl.innerHTML = leerLista().map(function(e) {
+      return '<option value="' + esc(e.nombre) + '">' + esc(e.nit || '') + '</option>';
+    }).join('');
+  }
+  function upsert() {
+    var nombre = (document.getElementById('empNombre') || {}).value || '';
+    var nit = (document.getElementById('empNit') || {}).value || '';
+    if (!nombre.trim()) return;
+    var arr = leerLista();
+    var ix = arr.findIndex(function(e) { return e.nombre.toLowerCase() === nombre.toLowerCase(); });
+    if (ix >= 0) arr[ix].nit = nit; else arr.unshift({ nombre: nombre, nit: nit });
+    guardarLista(arr);
+    try { localStorage.setItem(ULT, nombre); } catch (e) {}
+    pintarDatalist();
+  }
+  // Migrar claves antiguas (single empresa) → lista
   try {
-    var n = localStorage.getItem('exo_nomina_empresa_nombre');
-    var i = localStorage.getItem('exo_nomina_empresa_nit');
-    if (n) { var en = document.getElementById('empNombre'); if (en) en.value = n; }
-    if (i) { var ei = document.getElementById('empNit'); if (ei) ei.value = i; }
+    var oldN = localStorage.getItem('exo_nomina_empresa_nombre');
+    var oldI = localStorage.getItem('exo_nomina_empresa_nit');
+    if (oldN && !leerLista().length) { guardarLista([{ nombre: oldN, nit: oldI || '' }]); }
   } catch (e) {}
+  // Restaurar última empresa usada
+  try {
+    var ult = localStorage.getItem(ULT) || localStorage.getItem('exo_nomina_empresa_nombre');
+    if (ult) {
+      var match = leerLista().filter(function(e) { return e.nombre === ult; })[0];
+      if (match) {
+        var en = document.getElementById('empNombre'); if (en) en.value = match.nombre;
+        var ei = document.getElementById('empNit'); if (ei) ei.value = match.nit || '';
+      }
+    }
+  } catch (e) {}
+  pintarDatalist();
+  // Al elegir/escribir un nombre guardado, autocompletar el NIT
+  var enEl = document.getElementById('empNombre');
+  if (enEl) enEl.addEventListener('input', function() {
+    var match = leerLista().filter(function(e) { return e.nombre === enEl.value; })[0];
+    if (match) {
+      var ei = document.getElementById('empNit'); if (ei) ei.value = match.nit || '';
+      if (ESTADO.resultados && typeof setupXmlNomina === 'function') setupXmlNomina(ESTADO.resultados);
+    }
+  });
   ['empNombre', 'empNit'].forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
     el.addEventListener('change', function() {
-      try {
-        localStorage.setItem('exo_nomina_empresa_nombre', document.getElementById('empNombre').value || '');
-        localStorage.setItem('exo_nomina_empresa_nit', document.getElementById('empNit').value || '');
-      } catch (e) {}
-      // Refrescar el borrador XML (usa NIT/razón social)
+      upsert();
       if (ESTADO.resultados && typeof setupXmlNomina === 'function') setupXmlNomina(ESTADO.resultados);
     });
   });
@@ -932,7 +994,8 @@ function getEmpresaInfo() {
 function construirAsiento(R) {
   var s = R.reduce(function(t, r) {
     t.sueldos += (r.salarioBase||0) + (r.bonificaciones||0) + (r.comisiones||0)
-               + (r.otrosDevengados||0) + (r.vacacionesVal||0) + (r.incapacidadVal||0);
+               + (r.otrosDevengados||0) + (r.vacacionesVal||0) + (r.incapacidadVal||0)
+               + (r.incapLaboralVal||0) + (r.licenciaVal||0);
     t.recargos += (r.heDigVal||0)+(r.heNocVal||0)+(r.heDomDigVal||0)+(r.heDomNocVal||0)
                 + (r.recNocVal||0)+(r.recDomDigVal||0)+(r.recDomNocVal||0);
     t.aux += r.auxTransporte||0;
@@ -1046,6 +1109,8 @@ function construirXmlNomina(r, emp) {
   if (heRec > 0) x += '    <HEDsRecargos><HEDRecargo Cantidad="" Porcentaje="" Pago="' + _n2(heRec) + '"/></HEDsRecargos>\n';
   if (r.vacacionesVal > 0) x += '    <Vacaciones><VacacionesComunes Pago="' + _n2(r.vacacionesVal) + '"/></Vacaciones>\n';
   if (r.incapacidadVal > 0) x += '    <Incapacidades><Incapacidad Tipo="1" Pago="' + _n2(r.incapacidadVal) + '"/></Incapacidades>\n';
+  if (r.incapLaboralVal > 0) x += '    <Incapacidades><Incapacidad Tipo="2" Pago="' + _n2(r.incapLaboralVal) + '"/></Incapacidades>\n';
+  if (r.licenciaVal > 0) x += '    <LicenciaMaternidadORemunerada><LicenciaMR Pago="' + _n2(r.licenciaVal) + '"/></LicenciaMaternidadORemunerada>\n';
   if (otrosDev > 0) x += '    <OtrosConceptos><OtroConcepto DescripcionConcepto="Otros devengados" ConceptoS="' + _n2(otrosDev) + '"/></OtrosConceptos>\n';
   x += '  </Devengados>\n';
   x += '  <Deducciones>\n';
@@ -1191,7 +1256,7 @@ function exportarExcelMasiva() {
     'Total devengado', 'IBC SS',
     'Salud 4%', 'Pensión 4%', 'Fondo solidaridad', 'Retención fuente',
     'Libranza', 'Embargo', 'Otros desc.', 'Total deducciones',
-    'NETO A PAGAR',
+    'NETO A PAGAR', 'Incap. laboral (ATEL)', 'Licencia rem.',
   ];
   var detFilas = R.map(function(r, i) {
     return [
@@ -1205,7 +1270,7 @@ function exportarExcelMasiva() {
       r.totalDevengado || 0, r.ibcSS || 0,
       r.deduccionSalud || 0, r.deduccionPension || 0, r.fondoSolidaridad || 0, r.retencionFuente || 0,
       r.libranza || 0, r.embargo || 0, r.otrosDesc || 0, r.totalDeducciones || 0,
-      r.netoPagar || 0,
+      r.netoPagar || 0, r.incapLaboralVal || 0, r.licenciaVal || 0,
     ];
   });
   var detTotalRow = ['', '', 'TOTALES (' + R.length + ')', '', '', tot.aux];
@@ -1321,6 +1386,77 @@ function exportarExcelMasiva() {
   if (typeof exoTrack !== 'undefined') exoTrack.generate('nomina-masiva', 'export-excel');
 }
 /* ═══════════════════════════════════════════════════════════════════════════
+   DESCARGAR DESPRENDIBLES EN PDF NATIVO — una página por empleado (jsPDF)
+   ═══════════════════════════════════════════════════════════════════════════ */
+function descargarDesprendiblesPDF() {
+  if (!ESTADO.resultados || !ESTADO.resultados.length) {
+    if (typeof exoToast !== 'undefined') exoToast('Calcula la liquidación antes de descargar.', 'warn');
+    return;
+  }
+  var J = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
+  if (!J) { if (typeof exoToast !== 'undefined') exoToast('No se cargó jsPDF. Recarga la página.', 'error'); return; }
+  var emp = getEmpresaInfo();
+  var hoy = new Date().toLocaleDateString('es-CO');
+  var periodoMes = new Date().toLocaleString('es-CO', { month: 'long', year: 'numeric' });
+  var doc = new J('p', 'mm', 'letter');
+  var W = 216, M = 16;
+  ESTADO.resultados.forEach(function(r, idx) {
+    if (idx > 0) doc.addPage();
+    doc.setFillColor(27, 58, 92); doc.rect(0, 0, W, 26, 'F');
+    doc.setTextColor(255); doc.setFont('helvetica', 'bold'); doc.setFontSize(13);
+    doc.text(emp.nombre || '(Empresa)', M, 12);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(8);
+    if (emp.nit) doc.text('NIT ' + emp.nit, M, 17);
+    doc.text('Desprendible de nómina', W - M, 11, { align: 'right' });
+    doc.text('Período: ' + periodoMes, W - M, 16, { align: 'right' });
+    doc.text('Fecha: ' + hoy, W - M, 20, { align: 'right' });
+    doc.setTextColor(0);
+    var y = 34;
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(9); doc.text(r.nombre || '', M, y);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(8);
+    doc.text('C.C. ' + (r.cedula || '') + '   ·   Días: ' + (r.diasTrabajados || 0) + '   ·   IBC: ' + fCOP(r.ibcSS), M, y + 5);
+    y += 11;
+    var d = desprendibleData(r);
+    doc.autoTable({
+      startY: y, margin: { left: M, right: M }, theme: 'striped',
+      head: [['Devengados', 'Valor']],
+      body: d.dev.map(function(x) { return [x[0], fCOP(x[1])]; })
+        .concat([[{ content: 'Total devengado', styles: { fontStyle: 'bold' } }, { content: fCOP(r.totalDevengado), styles: { fontStyle: 'bold', halign: 'right' } }]]),
+      headStyles: { fillColor: [27, 58, 92], fontSize: 8 }, styles: { fontSize: 8, cellPadding: 1.8 },
+      columnStyles: { 1: { halign: 'right' } },
+    });
+    y = doc.lastAutoTable.finalY + 4;
+    var dedBody = d.ded.length
+      ? d.ded.map(function(x) { return [x[0], fCOP(x[1])]; })
+          .concat([[{ content: 'Total deducciones', styles: { fontStyle: 'bold' } }, { content: fCOP(r.totalDeducciones), styles: { fontStyle: 'bold', halign: 'right' } }]])
+      : [[{ content: 'Sin deducciones', colSpan: 2, styles: { textColor: [136, 136, 136], fontStyle: 'italic' } }]];
+    doc.autoTable({
+      startY: y, margin: { left: M, right: M }, theme: 'striped',
+      head: [['Deducciones', 'Valor']], body: dedBody,
+      headStyles: { fillColor: [27, 58, 92], fontSize: 8 }, styles: { fontSize: 8, cellPadding: 1.8 },
+      columnStyles: { 1: { halign: 'right' } },
+    });
+    y = doc.lastAutoTable.finalY + 6;
+    doc.setFillColor(27, 58, 92); doc.rect(M, y, W - 2 * M, 10, 'F');
+    doc.setTextColor(255); doc.setFont('helvetica', 'bold'); doc.setFontSize(11);
+    doc.text('NETO A PAGAR', M + 3, y + 6.5);
+    doc.text(fCOP(r.netoPagar), W - M - 3, y + 6.5, { align: 'right' });
+    doc.setTextColor(0); y += 22;
+    doc.setDrawColor(150); doc.setFont('helvetica', 'normal'); doc.setFontSize(8);
+    doc.line(M, y, M + 70, y); doc.line(W - M - 70, y, W - M, y);
+    doc.text('El empleador', M, y + 5); doc.text('El trabajador', W - M - 70, y + 5);
+    doc.setFontSize(7); doc.setTextColor(120);
+    doc.text(emp.nombre || '', M, y + 9);
+    doc.text((r.nombre || '') + ' — C.C. ' + (r.cedula || ''), W - M - 70, y + 9);
+    doc.setTextColor(150); doc.setFontSize(6.5);
+    doc.text('Documento informativo. CST · Ley 100/93 · Ley 797/03 · Ley 1393/10 · Ley 2101/21 · exogenadian.com', M, 268);
+    doc.setTextColor(0);
+  });
+  doc.save('desprendibles_' + (emp.nombre || 'empresa').replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_|_$/g, '').slice(0, 32) + '_' + new Date().toISOString().slice(0, 10) + '.pdf');
+  if (typeof exoToast !== 'undefined') exoToast('PDF descargado: ' + ESTADO.resultados.length + ' desprendibles.', 'success');
+  if (typeof exoTrack !== 'undefined') exoTrack.generate('nomina-masiva', 'desprendibles-pdf');
+}
+/* ═══════════════════════════════════════════════════════════════════════════
    IMPRIMIR DESPRENDIBLES — uno por empleado, abre diálogo de impresión
    ═══════════════════════════════════════════════════════════════════════════ */
 function imprimirDesprendibles() {
@@ -1340,7 +1476,9 @@ function imprimirDesprendibles() {
     if (typeof exoTrack !== 'undefined') exoTrack.generate('nomina-masiva', 'print-desprendible');
   }, 80);
 }
-function desprendibleHTML(r, emp, hoy, periodoMes) {
+/* Datos del desprendible (devengados/deducciones) reutilizados por el HTML
+   imprimible y por el PDF nativo. */
+function desprendibleData(r) {
   var dev = [];
   if (r.salarioBase > 0) dev.push(['Salario (' + (r.diasTrabajados || 30) + ' días)', r.salarioBase]);
   if (r.auxTransporte > 0) dev.push(['Auxilio de transporte', r.auxTransporte]);
@@ -1352,7 +1490,9 @@ function desprendibleHTML(r, emp, hoy, periodoMes) {
   if (r.recDomDigVal > 0) dev.push(['Recargo dominical/festivo diurno', r.recDomDigVal]);
   if (r.recDomNocVal > 0) dev.push(['Recargo dominical/festivo nocturno', r.recDomNocVal]);
   if (r.vacacionesVal > 0) dev.push(['Vacaciones disfrutadas', r.vacacionesVal]);
-  if (r.incapacidadVal > 0) dev.push(['Incapacidad', r.incapacidadVal]);
+  if (r.incapacidadVal > 0) dev.push(['Incapacidad enfermedad general', r.incapacidadVal]);
+  if (r.incapLaboralVal > 0) dev.push(['Incapacidad laboral / ATEL (ARL 100%)', r.incapLaboralVal]);
+  if (r.licenciaVal > 0) dev.push(['Licencia remunerada (maternidad/paternidad/luto)', r.licenciaVal]);
   if (r.bonificaciones > 0) dev.push(['Bonificaciones (constitutivas)', r.bonificaciones]);
   if (r.comisiones > 0) dev.push(['Comisiones', r.comisiones]);
   if (r.otrosDevengados > 0) dev.push(['Otros devengados', r.otrosDevengados]);
@@ -1366,6 +1506,10 @@ function desprendibleHTML(r, emp, hoy, periodoMes) {
   if (r.libranza > 0) ded.push(['Libranza', r.libranza]);
   if (r.embargo > 0) ded.push(['Embargo judicial', r.embargo]);
   if (r.otrosDesc > 0) ded.push(['Otros descuentos', r.otrosDesc]);
+  return { dev: dev, ded: ded };
+}
+function desprendibleHTML(r, emp, hoy, periodoMes) {
+  var d0 = desprendibleData(r), dev = d0.dev, ded = d0.ded;
   var devRows = dev.map(function(d) {
     return '<tr><td class="concepto">' + esc(d[0]) + '</td><td class="valor">' + fCOP(d[1]) + '</td></tr>';
   }).join('');

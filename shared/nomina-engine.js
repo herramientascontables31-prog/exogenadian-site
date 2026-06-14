@@ -204,17 +204,39 @@ function calcVacaciones(salarioBase, dias) {
   return Math.round(salarioDia(salarioBase) * (dias || 0));
 }
 
-/* ─── Incapacidad enfermedad general
-   Decreto 2943/2013: días 1-2 al 100% empresa; del día 3 al 66.67% EPS (Art. 227 CST).
+/* ─── Incapacidad por enfermedad general (EG)
+   Decreto 2943/2013: días 1-2 al 100% empresa; del día 3 al 66.67% EPS
+   (Art. 227 CST). Piso legal: el auxilio diario no puede ser inferior al
+   SMLMV diario (Art. 207 Ley 100; reiterado por Mintrabajo) — se aplica
+   cuando se pasa `anio`. Para minisalarios la incapacidad termina pagando
+   el mínimo aunque el 66.67% sea menor.
 */
-function calcIncapacidad(salarioBase, dias) {
+function calcIncapacidad(salarioBase, dias, anio) {
   dias = dias || 0;
+  var diaSal = salarioDia(salarioBase);
   var diasEmpresa = Math.min(dias, CONST_NOMINA.INCAP_DIAS_EMPRESA);
   var diasEps = Math.max(dias - CONST_NOMINA.INCAP_DIAS_EMPRESA, 0);
-  return Math.round(
-    salarioDia(salarioBase) * diasEmpresa +
-    salarioDia(salarioBase) * CONST_NOMINA.INCAP_FACTOR_EPS * diasEps
-  );
+  var diaEps = diaSal * CONST_NOMINA.INCAP_FACTOR_EPS;
+  if (anio) {
+    var pisoDia = getParamsNomina(anio).SMLMV / 30;
+    if (diaEps < pisoDia) diaEps = pisoDia;       // subsidio no inferior al SMLMV diario
+  }
+  return Math.round(diaSal * diasEmpresa + diaEps * diasEps);
+}
+
+/* ─── Incapacidad por accidente de trabajo / enfermedad laboral (ATEL)
+   Decreto 1295/1994: la ARL paga el 100% del IBC desde el día 1.
+*/
+function calcIncapacidadLaboral(salarioBase, dias) {
+  return Math.round(salarioDia(salarioBase) * (dias || 0));
+}
+
+/* ─── Licencia remunerada al 100% (maternidad 18 sem, paternidad 2 sem, luto
+   5 días hábiles). Se liquida sobre el salario diario; maternidad/paternidad
+   las reembolsa la EPS, el luto lo asume el empleador (Art. 1 Ley 1280/2009).
+*/
+function calcLicenciaRemunerada(salarioBase, dias) {
+  return Math.round(salarioDia(salarioBase) * (dias || 0));
 }
 
 /* ─── Provisión mensual de prestaciones sociales ───
@@ -485,7 +507,9 @@ function liquidarEmpleadoNomina(datos, novedades) {
   var recDomNocVal = Math.round(sh * fRDN * (nov.recargoDomNocturno || 0));
 
   var vacacionesVal = calcVacaciones(datos.salarioBase, nov.diasVacaciones);
-  var incapacidadVal = calcIncapacidad(datos.salarioBase, nov.diasIncapacidad);
+  var incapacidadVal = calcIncapacidad(datos.salarioBase, nov.diasIncapacidad, anio);
+  var incapLaboralVal = calcIncapacidadLaboral(datos.salarioBase, nov.diasIncapLaboral);
+  var licenciaVal = calcLicenciaRemunerada(datos.salarioBase, nov.diasLicencia);
 
   // Provisiones de prestaciones (causación) se calculan más abajo, una vez se
   // conoce el devengado constitutivo y el auxilio de transporte.
@@ -502,7 +526,7 @@ function liquidarEmpleadoNomina(datos, novedades) {
   var devengoConstitutivo = salBase
     + heDigVal + heNocVal + heDomDigVal + heDomNocVal
     + recNocVal + recDomDigVal + recDomNocVal
-    + vacacionesVal + incapacidadVal
+    + vacacionesVal + incapacidadVal + incapLaboralVal + licenciaVal
     + bonificaciones + comisiones + otrosDevengados;
 
   var totalNoSalarial = noSalGravable + noSalNoGravable;
@@ -511,7 +535,7 @@ function liquidarEmpleadoNomina(datos, novedades) {
   // ─── Provisión de prestaciones (causación mensual) ───
   // Base sin las vacaciones/incapacidad ya pagadas en el mes (esas no se
   // re-provisionan). Cesantías/prima incluyen aux transporte; vacaciones no.
-  var provBase = Math.max(0, devengoConstitutivo - vacacionesVal - incapacidadVal);
+  var provBase = Math.max(0, devengoConstitutivo - vacacionesVal - incapacidadVal - incapLaboralVal - licenciaVal);
   // El salario integral ya incluye las prestaciones en su factor del 30% → no se provisiona.
   var provisiones = esIntegral
     ? { cesantias: 0, intereses: 0, prima: 0, vacaciones: 0, total: 0 }
@@ -595,6 +619,8 @@ function liquidarEmpleadoNomina(datos, novedades) {
     recNocVal: recNocVal, recDomDigVal: recDomDigVal, recDomNocVal: recDomNocVal,
     vacacionesVal: vacacionesVal,
     incapacidadVal: incapacidadVal,
+    incapLaboralVal: incapLaboralVal,
+    licenciaVal: licenciaVal,
     bonificaciones: bonificaciones, comisiones: comisiones,
     otrosDevengados: otrosDevengados,
     noSalarialGravable: noSalGravable,
@@ -662,6 +688,8 @@ function liquidarNominaMasiva(filas) {
       recargoDomNocturno: emp.recargoDomNocturno,
       diasVacaciones: emp.diasVacaciones,
       diasIncapacidad: emp.diasIncapacidad,
+      diasIncapLaboral: emp.diasIncapLaboral,
+      diasLicencia: emp.diasLicencia,
       bonificaciones: emp.bonificaciones,
       comisiones: emp.comisiones,
       otrosDevengados: emp.otrosDevengados,
@@ -718,7 +746,13 @@ function nominaSelfTest() {
   // ─── Incapacidad ───
   eq(calcIncapacidad(1200000, 1), 40000, 'incap 1 día');
   eq(calcIncapacidad(1200000, 2), 80000, 'incap 2 días');
-  eq(calcIncapacidad(1200000, 5), Math.round(40000 * 2 + 40000 * 0.6667 * 3), 'incap 5 días');
+  eq(calcIncapacidad(1200000, 5), Math.round(40000 * 2 + 40000 * 0.6667 * 3), 'incap 5 días (sin piso)');
+  // Con piso del SMLMV diario (anio): para salario alto el 66.67% manda; para
+  // mini-salario el piso del SMLMV diario sube el subsidio.
+  var diaSM = SMLMV / 30;
+  eq(calcIncapacidad(SMLMV, 5, 2026), Math.round(diaSM * 2 + diaSM * 3), 'incap 5 días SMLMV → piso = 100% mínimo');
+  eq(calcIncapacidadLaboral(3000000, 4), Math.round(3000000 / 30 * 4), 'incap laboral ATEL 100% × 4 días');
+  eq(calcLicenciaRemunerada(3000000, 14), Math.round(3000000 / 30 * 14), 'licencia 14 días 100%');
 
   // ─── Ley 1393/2010 — Art. 30 ───
   // Caso 1: no salarial = 0 → no exceso
@@ -945,6 +979,8 @@ if (typeof window !== 'undefined') {
     calcExtraOrRecargo: calcExtraOrRecargo,
     calcVacaciones: calcVacaciones,
     calcIncapacidad: calcIncapacidad,
+    calcIncapacidadLaboral: calcIncapacidadLaboral,
+    calcLicenciaRemunerada: calcLicenciaRemunerada,
     calcProvisiones: calcProvisiones,
     calcExcesoLey1393: calcExcesoLey1393,
     aplicarTopesIBC: aplicarTopesIBC,
