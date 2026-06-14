@@ -216,6 +216,26 @@ function calcIncapacidad(salarioBase, dias) {
   );
 }
 
+/* ─── Provisión mensual de prestaciones sociales ───
+   Factores convencionales: cesantías 8,33% (1/12), intereses sobre cesantías
+   1% (12% anual del 8,33%), prima 8,33%, vacaciones 4,17% (15 días / 360).
+   Base cesantías/prima = salario + auxilio de transporte + constitutivos
+   variables. Base vacaciones = salario constitutivo SIN auxilio (Art. 192 CST).
+   La causación mensual de la nómina provisiona estos pasivos aunque se paguen
+   después; alimenta el asiento contable. */
+function calcProvisiones(baseConAux, baseSinAux) {
+  baseConAux = baseConAux || 0;
+  baseSinAux = baseSinAux || 0;
+  var ces  = Math.round(baseConAux * 0.0833);
+  var intC = Math.round(baseConAux * 0.0100);
+  var prima = Math.round(baseConAux * 0.0833);
+  var vac  = Math.round(baseSinAux * 0.0417);
+  return {
+    cesantias: ces, intereses: intC, prima: prima, vacaciones: vac,
+    total: ces + intC + prima + vac,
+  };
+}
+
 /* ─── Exceso Ley 1393/2010 Art. 30
    Si los pagos NO salariales superan el 40% del total remuneración, el exceso
    suma al IBC para EFECTOS DE SEGURIDAD SOCIAL (salud, pensión, ARL, fondo
@@ -460,6 +480,9 @@ function liquidarEmpleadoNomina(datos, novedades) {
   var vacacionesVal = calcVacaciones(datos.salarioBase, nov.diasVacaciones);
   var incapacidadVal = calcIncapacidad(datos.salarioBase, nov.diasIncapacidad);
 
+  // Provisiones de prestaciones (causación) se calculan más abajo, una vez se
+  // conoce el devengado constitutivo y el auxilio de transporte.
+
   var bonificaciones = nov.bonificaciones || 0;
   var comisiones = nov.comisiones || 0;
   var otrosDevengados = nov.otrosDevengados || 0;
@@ -477,6 +500,12 @@ function liquidarEmpleadoNomina(datos, novedades) {
 
   var totalNoSalarial = noSalGravable + noSalNoGravable;
   var totalDevengado = devengoConstitutivo + auxTransporte + totalNoSalarial;
+
+  // ─── Provisión de prestaciones (causación mensual) ───
+  // Base sin las vacaciones/incapacidad ya pagadas en el mes (esas no se
+  // re-provisionan). Cesantías/prima incluyen aux transporte; vacaciones no.
+  var provBase = Math.max(0, devengoConstitutivo - vacacionesVal - incapacidadVal);
+  var provisiones = calcProvisiones(provBase + auxTransporte, provBase);
 
   // ─── IBC con ajuste Ley 1393/2010 ───
   // Para SS: IBC nominal (constitutivo) + exceso del 40% no salarial sobre total
@@ -555,6 +584,9 @@ function liquidarEmpleadoNomina(datos, novedades) {
     devengoConstitutivo: devengoConstitutivo,
     totalNoSalarial: totalNoSalarial,
     totalDevengado: totalDevengado,
+
+    // Provisión de prestaciones (causación)
+    provisiones: provisiones,
 
     // IBCs y exceso Ley 1393
     excesoLey1393: excesoLey1393,
@@ -826,6 +858,16 @@ function nominaSelfTest() {
   // ─── Costo total empresa ───
   eq(r.costoTotalEmpresa, r.totalDevengado + r.totalAportesEmpresa, 'costo total empresa');
 
+  // ─── Provisiones de prestaciones ───
+  var prov = calcProvisiones(SMLMV + AUX, SMLMV);
+  eq(prov.cesantias, Math.round((SMLMV + AUX) * 0.0833), 'provisión cesantías 8.33%');
+  eq(prov.prima, Math.round((SMLMV + AUX) * 0.0833), 'provisión prima 8.33%');
+  eq(prov.intereses, Math.round((SMLMV + AUX) * 0.01), 'provisión intereses 1%');
+  eq(prov.vacaciones, Math.round(SMLMV * 0.0417), 'provisión vacaciones 4.17% (sin aux)');
+  // El SMLMV con aux transporte trae provisiones en el resultado
+  truthy(r.provisiones && r.provisiones.total > 0, 'liquidación incluye provisiones');
+  eq(r.provisiones.cesantias, Math.round((SMLMV + AUX) * 0.0833), 'provisión cesantías en liquidación SMLMV');
+
   // ─── Deducciones Art. 387 ───
   var ded = calcDeduccionesArt387(SMLMV * 5, { dependientes: true }, 2026);
   near(ded.dependientes, Math.min(SMLMV * 5 * 0.10, 32 * P26.UVT), 'Art 387 dependientes', 1);
@@ -865,6 +907,7 @@ if (typeof window !== 'undefined') {
     calcExtraOrRecargo: calcExtraOrRecargo,
     calcVacaciones: calcVacaciones,
     calcIncapacidad: calcIncapacidad,
+    calcProvisiones: calcProvisiones,
     calcExcesoLey1393: calcExcesoLey1393,
     aplicarTopesIBC: aplicarTopesIBC,
     calcIBC: calcIBC,

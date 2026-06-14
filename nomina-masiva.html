@@ -257,6 +257,11 @@ details > div{padding:0 16px 16px}
     <table id="aportesTable" class="data-table"></table>
   </div>
   <div id="warningsBox" style="display:none"></div>
+  <h3 style="font-size:.95rem;font-weight:700;color:var(--pri);margin:18px 0 8px;display:flex;align-items:center;gap:8px">&#128220; Asiento contable de causación <span id="asientoBalance" style="font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:20px"></span></h3>
+  <p style="font-size:.74rem;color:var(--muted);margin:-2px 0 8px;line-height:1.5">Comprobante de causación de la nómina del período (consolidado de todos los empleados), con provisión de prestaciones. Cuentas del PUC comercial (Decreto 2650) como referencia — <strong>ajústalas a tu plan y centro de costo</strong>. Débitos y créditos cuadran automáticamente.</p>
+  <div style="overflow-x:auto">
+    <table id="asientoTable" class="data-table"></table>
+  </div>
   <div style="margin-top:18px;padding:14px 16px;background:#FAFBFC;border:1px solid var(--border);border-radius:8px">
     <div style="font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px">Empresa pagadora (para Excel y desprendibles)</div>
     <div style="display:grid;grid-template-columns:2fr 1fr;gap:10px;margin-bottom:14px">
@@ -264,11 +269,11 @@ details > div{padding:0 16px 16px}
       <input id="empNit" type="text" placeholder="NIT" style="padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.88rem;font-family:inherit">
     </div>
     <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <button class="btn btn-green" onclick="exportarExcelMasiva()">&#128190; Exportar Excel (3 hojas)</button>
+      <button class="btn btn-green" onclick="exportarExcelMasiva()">&#128190; Exportar Excel (4 hojas)</button>
       <button class="btn btn-outline" onclick="imprimirDesprendibles()">&#128424; Imprimir desprendibles (PDF)</button>
     </div>
     <p style="font-size:.72rem;color:var(--muted);margin-top:10px;line-height:1.5">
-      El Excel trae 3 hojas: resumen, detalle por empleado y aportes empresa. Los desprendibles abren el diálogo de impresión del navegador con una página por empleado — elige <strong>"Guardar como PDF"</strong> para descargar.
+      El Excel trae 4 hojas: resumen, detalle por empleado, aportes empresa y <strong>asiento contable</strong>. Los desprendibles abren el diálogo de impresión del navegador con una página por empleado — elige <strong>"Guardar como PDF"</strong> para descargar.
     </p>
   </div>
 </div>
@@ -382,7 +387,7 @@ details > div{padding:0 16px 16px}
 <div id="desprendibles-print" aria-hidden="true"></div>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw" crossorigin="anonymous"></script>
 <script src="shared/jornada-laboral.js?v=a7826f23"></script>
-<script src="shared/nomina-engine.js?v=418b2e8d"></script>
+<script src="shared/nomina-engine.js?v=a548f01d"></script>
 <script src="shared/nomina-masiva-validator.js?v=9e652fc3"></script>
 <script>
 /* ─── Generación de plantilla Excel descargable ─── */
@@ -787,6 +792,8 @@ function renderResultados(resultados) {
     + '<td>' + fCOP(totales.costoEmp) + '</td>'
     + '<td></td></tr></tbody>';
   document.getElementById('aportesTable').innerHTML = ahtml;
+  // ─── Asiento contable de causación ───
+  renderAsiento(resultados);
   // ─── Warnings (HE excedidas) ───
   var allWarnings = [];
   resultados.forEach(function(r, i) {
@@ -844,6 +851,92 @@ function getEmpresaInfo() {
     nombre: (document.getElementById('empNombre') || {}).value || '',
     nit: (document.getElementById('empNit') || {}).value || '',
   };
+}
+/* ═══════════════════════════════════════════════════════════════════════════
+   ASIENTO CONTABLE DE CAUSACIÓN — consolida todos los empleados en un
+   comprobante balanceado. Cuentas PUC comercial (Decreto 2650) como referencia.
+   Por construcción débitos = créditos (devengado = neto + deducciones, y las
+   provisiones y aportes empresa entran por igual al débito y al crédito).
+   ═══════════════════════════════════════════════════════════════════════════ */
+function construirAsiento(R) {
+  var s = R.reduce(function(t, r) {
+    t.sueldos += (r.salarioBase||0) + (r.bonificaciones||0) + (r.comisiones||0)
+               + (r.otrosDevengados||0) + (r.vacacionesVal||0) + (r.incapacidadVal||0);
+    t.recargos += (r.heDigVal||0)+(r.heNocVal||0)+(r.heDomDigVal||0)+(r.heDomNocVal||0)
+                + (r.recNocVal||0)+(r.recDomDigVal||0)+(r.recDomNocVal||0);
+    t.aux += r.auxTransporte||0;
+    t.noSal += (r.noSalarialGravable||0)+(r.noSalarialNoGravable||0);
+    t.aSalud += r.aporteEmpSalud||0; t.aPension += r.aporteEmpPension||0; t.aArl += r.aporteArl||0;
+    t.aCaja += r.aporteCajaComp||0; t.aSena += r.aporteSena||0; t.aIcbf += r.aporteIcbf||0;
+    var p = r.provisiones || {};
+    t.pCes += p.cesantias||0; t.pInt += p.intereses||0; t.pPrima += p.prima||0; t.pVac += p.vacaciones||0;
+    t.dSalud += r.deduccionSalud||0; t.dPension += r.deduccionPension||0; t.fsp += r.fondoSolidaridad||0;
+    t.rete += r.retencionFuente||0;
+    t.otrosDesc += (r.libranza||0)+(r.embargo||0)+(r.otrosDesc||0);
+    t.neto += r.netoPagar||0;
+    return t;
+  }, { sueldos:0, recargos:0, aux:0, noSal:0, aSalud:0, aPension:0, aArl:0, aCaja:0, aSena:0, aIcbf:0,
+       pCes:0, pInt:0, pPrima:0, pVac:0, dSalud:0, dPension:0, fsp:0, rete:0, otrosDesc:0, neto:0 });
+  var L = [];
+  function deb(c, n, v) { if (Math.round(v) > 0) L.push({ codigo:c, cuenta:n, debito:Math.round(v), credito:0 }); }
+  function cred(c, n, v) { if (Math.round(v) > 0) L.push({ codigo:c, cuenta:n, debito:0, credito:Math.round(v) }); }
+  // ─── DÉBITOS — gastos de personal (clase 5105, administración; ajustar a centro de costo) ───
+  deb('510506', 'Sueldos y salarios', s.sueldos);
+  deb('510515', 'Horas extras y recargos', s.recargos);
+  deb('510527', 'Auxilio de transporte', s.aux);
+  deb('510548', 'Pagos no salariales (no constitutivos)', s.noSal);
+  deb('510530', 'Cesantías (provisión)', s.pCes);
+  deb('510533', 'Intereses sobre cesantías (provisión)', s.pInt);
+  deb('510536', 'Prima de servicios (provisión)', s.pPrima);
+  deb('510539', 'Vacaciones (provisión)', s.pVac);
+  deb('510569', 'Aportes EPS — salud empresa (8,5%)', s.aSalud);
+  deb('510570', 'Aportes fondos de pensiones — empresa (12%)', s.aPension);
+  deb('510568', 'Aportes ARL', s.aArl);
+  deb('510572', 'Aportes caja de compensación (4%)', s.aCaja);
+  deb('510575', 'Aportes ICBF (3%)', s.aIcbf);
+  deb('510578', 'Aportes SENA (2%)', s.aSena);
+  // ─── CRÉDITOS — pasivos ───
+  cred('250505', 'Salarios por pagar (neto a empleados)', s.neto);
+  cred('236505', 'Retención en la fuente por pagar', s.rete);
+  cred('237005', 'Aportes EPS por pagar (empleado 4% + empresa 8,5%)', s.dSalud + s.aSalud);
+  cred('238030', 'Fondos de pensión por pagar (empleado 4% + empresa 12% + FSP)', s.dPension + s.aPension + s.fsp);
+  cred('237006', 'ARL por pagar', s.aArl);
+  cred('237010', 'Aportes parafiscales por pagar (SENA, ICBF, caja)', s.aCaja + s.aSena + s.aIcbf);
+  cred('250510', 'Deducciones de nómina por pagar (libranzas, embargos, otros)', s.otrosDesc);
+  cred('261005', 'Cesantías consolidadas por pagar', s.pCes);
+  cred('261010', 'Intereses sobre cesantías por pagar', s.pInt);
+  cred('261015', 'Vacaciones por pagar', s.pVac);
+  cred('261020', 'Prima de servicios por pagar', s.pPrima);
+  var totDeb = L.reduce(function(a, x) { return a + x.debito; }, 0);
+  var totCred = L.reduce(function(a, x) { return a + x.credito; }, 0);
+  return { lineas: L, debito: totDeb, credito: totCred, cuadra: totDeb === totCred };
+}
+function renderAsiento(resultados) {
+  var a = construirAsiento(resultados);
+  var rows = a.lineas.map(function(l) {
+    return '<tr>'
+      + '<td class="t" style="font-family:JetBrains Mono,monospace">' + l.codigo + '</td>'
+      + '<td class="t">' + esc(l.cuenta) + '</td>'
+      + '<td>' + (l.debito ? fCOP(l.debito) : '') + '</td>'
+      + '<td>' + (l.credito ? fCOP(l.credito) : '') + '</td>'
+      + '</tr>';
+  }).join('');
+  var html = '<thead><tr><th>Código</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr></thead><tbody>'
+    + rows
+    + '<tr class="total-row"><td colspan="2">TOTALES</td><td>' + fCOP(a.debito) + '</td><td>' + fCOP(a.credito) + '</td></tr>'
+    + '</tbody>';
+  document.getElementById('asientoTable').innerHTML = html;
+  var badge = document.getElementById('asientoBalance');
+  if (a.cuadra) {
+    badge.textContent = '✓ Cuadra';
+    badge.style.background = 'var(--green3,#D1FAE5)';
+    badge.style.color = '#065F46';
+  } else {
+    badge.textContent = '⚠ Descuadre ' + fCOP(Math.abs(a.debito - a.credito));
+    badge.style.background = '#FEE2E2';
+    badge.style.color = '#991B1B';
+  }
+  return a;
 }
 /* ═══════════════════════════════════════════════════════════════════════════
    EXPORTAR EXCEL — 3 hojas: Resumen, Detalle empleados, Aportes empresa
@@ -986,11 +1079,30 @@ function exportarExcelMasiva() {
     return { wch: 16 };
   });
   wsAportes['!freeze'] = { ySplit: 1 };
+  /* ─── Hoja 4: Asiento contable de causación ─── */
+  var asiento = construirAsiento(R);
+  var asHeader = [
+    ['ASIENTO CONTABLE DE CAUSACIÓN DE NÓMINA'],
+    ['Empresa', emp.nombre || '(sin nombre)'],
+    ['NIT', emp.nit || ''],
+    ['Período', periodoMes],
+    ['Cuentas PUC comercial (Decreto 2650) de referencia — ajustar a su plan y centro de costo.'],
+    [''],
+    ['Código', 'Cuenta', 'Débito', 'Crédito'],
+  ];
+  var asFilas = asiento.lineas.map(function(l) {
+    return [l.codigo, l.cuenta, l.debito || '', l.credito || ''];
+  });
+  asFilas.push(['', 'TOTALES', asiento.debito, asiento.credito]);
+  asFilas.push(['', asiento.cuadra ? 'El comprobante CUADRA (débito = crédito)' : 'REVISAR: descuadre', '', '']);
+  var wsAsiento = XLSX.utils.aoa_to_sheet(asHeader.concat(asFilas));
+  wsAsiento['!cols'] = [{ wch: 10 }, { wch: 52 }, { wch: 18 }, { wch: 18 }];
   /* ─── Workbook ─── */
   var wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, wsResumen, 'Resumen');
   XLSX.utils.book_append_sheet(wb, wsDetalle, 'Detalle empleados');
   XLSX.utils.book_append_sheet(wb, wsAportes, 'Aportes empresa');
+  XLSX.utils.book_append_sheet(wb, wsAsiento, 'Asiento contable');
   var nombreArchivo = 'nomina_' + (emp.nombre || 'empresa').replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_|_$/g, '').slice(0, 32) + '_' + new Date().toISOString().slice(0, 10) + '.xlsx';
   XLSX.writeFile(wb, nombreArchivo);
   if (typeof exoToast !== 'undefined') exoToast('Excel descargado: ' + R.length + ' empleados.', 'success');
