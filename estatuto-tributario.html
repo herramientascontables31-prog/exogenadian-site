@@ -264,6 +264,9 @@ body[data-fs="sm"] .art-body{font-size:.94rem}
     </div>
   </header>
   <div class="toolbar">
+    <div class="tb-group keep"><span class="tb-label">📋 Artículo</span>
+      <select class="tb-sel" id="artJump" title="Ir directamente a cualquier artículo del Estatuto"><option value="">Ir a un artículo…</option></select>
+    </div>
     <div class="tb-group keep"><span class="tb-label">📐 UVT</span>
       <select class="tb-sel" id="uvtYear" title="Año para convertir los montos en UVT a pesos"></select>
     </div>
@@ -363,6 +366,19 @@ document.getElementById('disc').innerHTML = '<b>Sobre este Estatuto.</b> Reprodu
   (ET.libros||[]).forEach(function(L){
     var o=document.createElement('option');o.value=L.n;o.textContent=(LIBRO_NOMBRE[L.n]||('Libro '+L.n));sel.appendChild(o);
   });
+})();
+// ── Dropdown con TODOS los artículos (ir directo) ──
+(function(){
+  var sel=document.getElementById('artJump');
+  var frag=document.createDocumentFragment();
+  ARTS.forEach(function(a){
+    var o=document.createElement('option');o.value=a.num;
+    var epi=a.epigrafe||'(sin epígrafe)'; if(epi.length>62)epi=epi.slice(0,60)+'…';
+    o.textContent='Art. '+a.num+' — '+epi+(a.estado!=='vigente'?' ['+a.estado+']':'');
+    frag.appendChild(o);
+  });
+  sel.appendChild(frag);
+  sel.addEventListener('change',function(){ if(this.value){ goTo(this.value); this.value=''; } });
 })();
 // ── Rutas rápidas (mapa tema → artículos clave, curado) ──
 var RUTAS = [
