@@ -38,11 +38,27 @@ function getParams(y) {
   return PARAMS[usar];
 }
 
-/* ─── Días entre dos fechas (método laboral 360) ─── */
+/* ─── Parseo de fecha en hora LOCAL ───
+   new Date("2026-01-01") interpreta el string como UTC medianoche; en
+   Colombia (UTC-5) eso retrocede al día anterior y desfasa todos los días.
+   Construimos la fecha con componentes locales para evitarlo. */
+function parseFechaLocal(s) {
+  if (s instanceof Date) return s;
+  if (typeof s === 'string') {
+    var p = s.split('T')[0].split('-');
+    if (p.length === 3) return new Date(+p[0], +p[1] - 1, +p[2]);
+  }
+  return new Date(s);
+}
+
+/* ─── Días laborados entre dos fechas (método 360, conteo INCLUSIVO) ───
+   La liquidación colombiana cuenta el período de forma inclusiva: un
+   trabajador del 1-ene al 30-jun laboró 180 días (6 meses), y del 1-ene
+   al 31-dic, 360 días. Por eso se suma 1 a la diferencia 30/360. */
 function dias360(d1, d2) {
   var y1=d1.getFullYear(), m1=d1.getMonth()+1, dd1=Math.min(d1.getDate(),30);
   var y2=d2.getFullYear(), m2=d2.getMonth()+1, dd2=Math.min(d2.getDate(),30);
-  return (y2-y1)*360 + (m2-m1)*30 + (dd2-dd1);
+  return (y2-y1)*360 + (m2-m1)*30 + (dd2-dd1) + 1;
 }
 
 /* Días reales entre fechas */
@@ -195,8 +211,8 @@ function diasAnioActual(fechaInicio, fechaFin) {
 
 /* ─── LIQUIDACIÓN COMPLETA ─── */
 function liquidar(d) {
-  var fi = new Date(d.fechaInicio);
-  var ff = new Date(d.fechaFin);
+  var fi = parseFechaLocal(d.fechaInicio);
+  var ff = parseFechaLocal(d.fechaFin);
   var anioFin = ff.getFullYear();
   var p = getParams(anioFin);
 
@@ -283,7 +299,7 @@ function liquidar(d) {
   }
 
   // Indemnización
-  var fv = d.fechaVencimiento ? new Date(d.fechaVencimiento) : null;
+  var fv = d.fechaVencimiento ? parseFechaLocal(d.fechaVencimiento) : null;
   var indem = calcIndemnizacion(d.causa, d.tipoContrato, salario, diasTotal, esIntegral, ff, fv);
 
   // Deducciones

@@ -600,6 +600,16 @@
       "orden": 99
     },
     {
+      "url": "liquidador-prima.html",
+      "grupo": "laboral",
+      "titulo": "Prima de servicios",
+      "desc": "",
+      "popular": false,
+      "hidden": false,
+      "sub": true,
+      "orden": 99
+    },
+    {
       "url": "ia-asistente.html",
       "grupo": "ia",
       "titulo": "Asistente Contable IA",
