@@ -492,8 +492,7 @@ function renderArt(a){
   return div;
 }
 function enrichHTML(a){
-  var e=ENR[a.num]; var out='';
-  var rows='';
+  var e=ENR[a.num];
   // tabla curada (p.ej. tarifa de retención art. 383)
   var tabla = e&&e.tabla ? '<div class="enr-tabla">'+e.tabla+'</div>' : '';
   // en simple
@@ -503,23 +502,22 @@ function enrichHTML(a){
   if(e&&e.concordancias&&e.concordancias.length){
     conc='<span class="conc"><b>↔ Concordancias:</b> '+e.concordancias.map(function(n){return BYNUM[n]?'<a data-go="'+n+'" title="'+esc(BYNUM[n].epigrafe)+'">'+n+'</a>':'';}).join('')+'</span>';
   }
-  // herramientas
+  // herramientas que aplican el artículo
   var tools='';
   if(e&&e.herramientas&&e.herramientas.length){
     tools=e.herramientas.map(function(h){var t=TOOL_NAMES[h]||h;return '<a class="enr-chip tool" href="'+h+'"><span class="ico">🔗</span> '+esc(t)+'</a>';}).join('');
   }
-  // chat ET + fuente
-  var chat='<a class="enr-chip chat" href="ia-chat-et.html?art='+a.num+'"><span class="ico">🤖</span> Pregúntale al chat del ET</a>';
-  if(simple||tabla){ out+='<div class="enr">'+simple+tabla; }
-  else out+='<div class="enr">';
-  var chips=tools+chat;
-  out+='<div class="enr-row">'+(conc?'<div class="enr-chip" style="cursor:default;border-style:dashed">'+conc+'</div>':'')+chips+'</div>';
-  out+='</div>';
-  // notas personales (PRO)
+  // nota personal (PRO)
+  var note='';
   if(isPro()){
     var saved=loadNota(a.num);
-    out+='<div class="nota-box"><textarea placeholder="✎ Tu nota personal sobre el art. '+a.num+' (solo tú la ves, se guarda en este equipo)" data-nota="'+a.num+'">'+esc(saved||'')+'</textarea></div>';
+    note='<div class="nota-box"><textarea placeholder="✎ Tu nota personal sobre el art. '+a.num+' (solo tú la ves, se guarda en este equipo)" data-nota="'+a.num+'">'+esc(saved||'')+'</textarea></div>';
   }
+  var hasRow = conc || tools;
+  if(!simple && !tabla && !hasRow && !note) return ''; // sin capa de valor: no dibujar bloque vacío
+  var out='<div class="enr">'+simple+tabla;
+  if(hasRow) out+='<div class="enr-row">'+(conc?'<div class="enr-chip" style="cursor:default;border-style:dashed">'+conc+'</div>':'')+tools+'</div>';
+  out+=note+'</div>';
   return out;
 }
 var TOOL_NAMES={'retencion-fuente.html':'Retención por salarios','retencion350.html':'Retención 350','renta-personas-naturales.html':'Renta PN (F210)','renta-juridica.html':'Renta PJ (F110)','iva300.html':'IVA 300','regimen-simple.html':'Régimen Simple','formato2593.html':'RST anual (F2593)','sanciones-dian.html':'Sanciones DIAN','intereses.html':'Intereses de mora','exogena.html':'Exógena','uvt.html':'Conversor UVT','retencion-dividendos.html':'Retención dividendos','retencion-compras.html':'Retenciones en compras','impuesto-consumo.html':'Impuesto al consumo','patrimonio420.html':'Impuesto al patrimonio','beneficio-auditoria.js':'Beneficio de auditoría'};
