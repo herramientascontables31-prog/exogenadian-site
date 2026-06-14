@@ -22,6 +22,10 @@ var NOMINA_VALIDATOR = (function() {
     'recargoDomNocturno', 'diasIncapacidad', 'bonificaciones', 'comisiones',
     'noSalarialGravable', 'noSalarialNoGravable',
     'depDependientes', 'interesesVivienda', 'medicinaPrepagada',
+    // Datos bancarios (opcionales) — para el archivo de dispersión bancaria
+    'banco', 'tipoCuenta', 'numeroCuenta',
+    // Salario integral (opcional, SI/NO)
+    'salarioIntegral',
   ];
   var COLS_ALL = COLS_BASE.concat(COLS_AVANZADAS);
 
@@ -78,6 +82,14 @@ var NOMINA_VALIDATOR = (function() {
 
     // Booleano depDependientes
     out.depDependientes = toBool(raw.depDependientes);
+
+    // Datos bancarios (opcionales) — passthrough como string para dispersión
+    out.banco = raw.banco != null ? String(raw.banco).trim() : '';
+    out.tipoCuenta = toUpperEnum(raw.tipoCuenta);  // AHORRO / CORRIENTE
+    out.numeroCuenta = raw.numeroCuenta != null ? String(raw.numeroCuenta).trim() : '';
+
+    // Salario integral (opcional)
+    out.salarioIntegral = toBool(raw.salarioIntegral);
 
     // Numéricos
     for (var i = 0; i < CAMPOS_NUMERICOS.length; i++) {
@@ -219,6 +231,36 @@ var NOMINA_VALIDATOR = (function() {
     };
   }
 
+  /* ─── Revisión "Pulso": anomalías sobre la nómina YA calculada ───
+        Recibe los resultados del engine (liquidarNominaMasiva) y el SMLMV
+        vigente. Devuelve [{ nivel:'alta'|'media'|'info', i, msg }]. Es lógica
+        pura para detectar errores típicos antes de pagar/transmitir. */
+  function revisionPulso(resultados, smlmv) {
+    var issues = [];
+    smlmv = smlmv || 1750905;
+    (resultados || []).forEach(function(r, i) {
+      var ref = 'Fila ' + (i + 1) + ' (' + (r.nombre || r.cedula || '?') + '): ';
+      var dias = r.diasTrabajados || 30;
+      var mesCompleto = dias >= 30;
+
+      if (r.netoPagar < 0)
+        issues.push({ nivel: 'alta', i: i, msg: ref + 'neto a pagar NEGATIVO — las deducciones superan el devengado.' });
+      if (mesCompleto && r.salarioBase < smlmv)
+        issues.push({ nivel: 'alta', i: i, msg: ref + 'salario de mes completo por debajo del SMLMV.' });
+      if (mesCompleto && r.ibcSS < smlmv)
+        issues.push({ nivel: 'alta', i: i, msg: ref + 'IBC de seguridad social menor a 1 SMLMV (sub-cotización, riesgo UGPP).' });
+      if (r.salarioBase > 0 && r.salarioBase <= smlmv * 2 && r.auxTransporte === 0)
+        issues.push({ nivel: 'media', i: i, msg: ref + 'devenga ≤ 2 SMLMV pero sin auxilio de transporte — verifica si aplica (modo NO).' });
+      if (r.salarioBase > smlmv * 25)
+        issues.push({ nivel: 'info', i: i, msg: ref + 'salario supera 25 SMLMV — el IBC quedó topado en 25 SMLMV.' });
+      if (r.salarioBase >= smlmv * 13 && !r.esIntegral)
+        issues.push({ nivel: 'info', i: i, msg: ref + 'salario ≥ 13 SMLMV — evalúa si debería pactarse salario integral (Art. 132 CST).' });
+      if (r.warnings && r.warnings.length)
+        r.warnings.forEach(function(w) { issues.push({ nivel: 'media', i: i, msg: ref + w }); });
+    });
+    return issues;
+  }
+
   /* ═══ SELF-TESTS ═══ */
   function selfTest() {
     var pass = 0, fail = 0, errors = [];
@@ -334,6 +376,17 @@ var NOMINA_VALIDATOR = (function() {
     eq(pipelineErr.filas[0].valido, false, 'pipeline err: fila no válida');
     truthy(pipelineErr.filas[0].errores.length >= 4, 'pipeline err: múltiples errores');
 
+    // ─── revisionPulso ───
+    var SM = 1750905;
+    var pl1 = revisionPulso([{ nombre:'A', diasTrabajados:30, salarioBase:1000000, ibcSS:1000000, auxTransporte:0, netoPagar:900000 }], SM);
+    truthy(pl1.some(function(x){ return x.nivel==='alta' && /SMLMV/.test(x.msg); }), 'pulso: salario < SMLMV alta');
+    var pl2 = revisionPulso([{ nombre:'B', diasTrabajados:30, salarioBase:SM, ibcSS:SM, auxTransporte:249095, netoPagar:1600000 }], SM);
+    eq(pl2.length, 0, 'pulso: SMLMV con aux → sin alertas');
+    var pl3 = revisionPulso([{ nombre:'C', diasTrabajados:30, salarioBase:2000000, ibcSS:2000000, auxTransporte:0, netoPagar:1800000 }], SM);
+    truthy(pl3.some(function(x){ return x.nivel==='media' && /auxilio/.test(x.msg); }), 'pulso: ≤2 SMLMV sin aux → media');
+    var pl4 = revisionPulso([{ nombre:'D', diasTrabajados:30, salarioBase:SM, ibcSS:SM, auxTransporte:249095, netoPagar:-5000 }], SM);
+    truthy(pl4.some(function(x){ return x.nivel==='alta' && /NEGATIVO/.test(x.msg); }), 'pulso: neto negativo alta');
+
     console.log('NominaValidator selftest: ' + pass + ' ✓  ' + fail + ' ✗');
     if (fail > 0) errors.forEach(function(e){ console.error('  ✗ ' + e); });
     return { pass: pass, fail: fail, errors: errors };
@@ -351,6 +404,7 @@ var NOMINA_VALIDATOR = (function() {
     validarFila: validarFila,
     aoaAFilasCrudas: aoaAFilasCrudas,
     procesarAoA: procesarAoA,
+    revisionPulso: revisionPulso,
     selfTest: selfTest,
   };
 

@@ -11,7 +11,8 @@
    ✓ Aplicación Art. 30 Ley 1393/2010 (40% no salarial al IBC SS)
    ✓ Exoneración Art. 114-1 ET con criterio Concepto DIAN 956/2024
    ✓ Retención Procedimiento 1 con depuración Art. 388 ET
-   ✗ Salario integral (Art. 132 CST) — v2
+   ✓ Salario integral (Art. 132 CST) — IBC y parafiscales sobre el 70%
+   ✓ Provisión mensual de prestaciones (cesantías, intereses, prima, vacaciones)
    ✗ Trabajadores de dirección/confianza/manejo (Art. 162 CST) — v2
    ✗ Aprendices SENA Ley 2466/2025 (régimen propio) — v2
    ✗ Procedimiento 2 retefuente (Art. 386 ET) — v2
@@ -454,10 +455,16 @@ function liquidarEmpleadoNomina(datos, novedades) {
   var nov = novedades || {};
   var p = getParamsNomina(anio);
 
+  // Salario integral (Art. 132 CST): mínimo 13 SMLMV (10 salario + 30% factor
+  // prestacional). IBC y base de parafiscales = 70% (Art. 18 Ley 100, Art. 49
+  // Ley 789/2002). No causa auxilio de transporte ni provisión de prestaciones
+  // (ya incluidas en el factor del 30%). Nunca exonera (siempre ≥ 10 SMLMV).
+  var esIntegral = datos.tipoSalario === 'INTEGRAL' || datos.salarioIntegral === true;
+
   // ─── Cálculos base ───
   var salBase = Math.round(datos.salarioBase * dias / 30);
 
-  var auxBase = calcAuxTransporte(datos.salarioBase, datos.auxTransporteModo || 'AUTO',
+  var auxBase = esIntegral ? 0 : calcAuxTransporte(datos.salarioBase, datos.auxTransporteModo || 'AUTO',
                                     datos.auxTransporteValor, anio);
   var auxTransporte = Math.round(auxBase * dias / 30);
 
@@ -505,14 +512,20 @@ function liquidarEmpleadoNomina(datos, novedades) {
   // Base sin las vacaciones/incapacidad ya pagadas en el mes (esas no se
   // re-provisionan). Cesantías/prima incluyen aux transporte; vacaciones no.
   var provBase = Math.max(0, devengoConstitutivo - vacacionesVal - incapacidadVal);
-  var provisiones = calcProvisiones(provBase + auxTransporte, provBase);
+  // El salario integral ya incluye las prestaciones en su factor del 30% → no se provisiona.
+  var provisiones = esIntegral
+    ? { cesantias: 0, intereses: 0, prima: 0, vacaciones: 0, total: 0 }
+    : calcProvisiones(provBase + auxTransporte, provBase);
 
   // ─── IBC con ajuste Ley 1393/2010 ───
   // Para SS: IBC nominal (constitutivo) + exceso del 40% no salarial sobre total
   var excesoLey1393 = calcExcesoLey1393(devengoConstitutivo, totalNoSalarial);
-  var ibcSS = aplicarTopesIBC(devengoConstitutivo + excesoLey1393, anio, dias);
-  // Para parafiscales (SENA/ICBF/Caja): solo lo constitutivo (Ley 21/82 + Sentencia CE 2022)
-  var ibcParafiscales = aplicarTopesIBC(devengoConstitutivo, anio, dias);
+  // Base del IBC: en salario integral es el 70% del devengado constitutivo.
+  var baseIBC = esIntegral ? Math.round(devengoConstitutivo * 0.70) : devengoConstitutivo;
+  var ibcSS = aplicarTopesIBC(baseIBC + excesoLey1393, anio, dias);
+  // Para parafiscales (SENA/ICBF/Caja): solo lo constitutivo (Ley 21/82 + Sentencia CE 2022);
+  // en integral también sobre el 70% (Art. 49 Ley 789/2002).
+  var ibcParafiscales = aplicarTopesIBC(baseIBC, anio, dias);
 
   // ─── Deducciones empleado (sobre IBC SS) ───
   var deduccionSalud = Math.round(ibcSS * CONST_NOMINA.SALUD_EMPLEADO);
@@ -563,11 +576,16 @@ function liquidarEmpleadoNomina(datos, novedades) {
 
   // ─── Validaciones (warnings, no errores) ───
   var warnings = validarHorasExtras(nov, dias);
+  if (esIntegral && datos.salarioBase < p.SMLMV * 13) {
+    warnings.push('Salario integral por debajo del mínimo legal de 13 SMLMV ('
+      + (p.SMLMV * 13).toLocaleString('es-CO') + ') — Art. 132 CST.');
+  }
 
   return {
     cedula: datos.cedula || '',
     nombre: datos.nombre || '',
     diasTrabajados: dias,
+    esIntegral: esIntegral,
 
     // Devengados — desagregados
     salarioBase: salBase,
@@ -628,6 +646,8 @@ function liquidarNominaMasiva(filas) {
     var datos = {
       cedula: emp.cedula, nombre: emp.nombre, anio: emp.anio,
       salarioBase: emp.salarioBase,
+      salarioIntegral: emp.salarioIntegral,
+      tipoSalario: emp.tipoSalario,
       diasTrabajados: emp.diasTrabajados,
       auxTransporteModo: emp.auxTransporteModo,
       auxTransporteValor: emp.auxTransporteValor,
@@ -857,6 +877,24 @@ function nominaSelfTest() {
 
   // ─── Costo total empresa ───
   eq(r.costoTotalEmpresa, r.totalDevengado + r.totalAportesEmpresa, 'costo total empresa');
+
+  // ─── Salario integral (Art. 132 CST) ───
+  var SI = SMLMV * 14; // 14 SMLMV, válido (≥13)
+  var rInt = liquidarEmpleadoNomina(
+    { salarioBase: SI, tipoSalario: 'INTEGRAL', nivelARL: 1, tipoEmpleador: 'SOCIEDAD', anio: 2026 }, {}
+  );
+  truthy(rInt.esIntegral, 'integral: flag esIntegral');
+  eq(rInt.auxTransporte, 0, 'integral: sin auxilio de transporte');
+  eq(rInt.ibcSS, Math.round(SI * 0.70), 'integral: IBC SS = 70%');
+  eq(rInt.ibcParafiscales, Math.round(SI * 0.70), 'integral: IBC parafiscales = 70%');
+  eq(rInt.provisiones.total, 0, 'integral: sin provisión de prestaciones');
+  falsy(rInt.exoneracion114_1, 'integral: nunca exonera (≥10 SMLMV)');
+  eq(rInt.deduccionSalud, Math.round(Math.round(SI * 0.70) * 0.04), 'integral: salud 4% sobre 70%');
+  // Integral por debajo de 13 SMLMV → warning
+  var rIntBajo = liquidarEmpleadoNomina(
+    { salarioBase: SMLMV * 5, tipoSalario: 'INTEGRAL', nivelARL: 1, tipoEmpleador: 'SOCIEDAD', anio: 2026 }, {}
+  );
+  truthy(rIntBajo.warnings.some(function(w){ return /13 SMLMV/.test(w); }), 'integral < 13 SMLMV → warning');
 
   // ─── Provisiones de prestaciones ───
   var prov = calcProvisiones(SMLMV + AUX, SMLMV);

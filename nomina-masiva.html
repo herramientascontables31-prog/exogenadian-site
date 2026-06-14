@@ -187,7 +187,7 @@ details > div{padding:0 16px 16px}
 </div>
 <div class="card">
   <div class="card-title"><span class="step-num">1</span> Descarga la plantilla</div>
-  <p style="font-size:.88rem;color:var(--muted);margin-bottom:12px">Excel con las columnas necesarias y dos filas de ejemplo. Tiene <strong>12 columnas base obligatorias</strong> y <strong>13 avanzadas opcionales</strong> (no salariales, dominicales, deducciones especiales).</p>
+  <p style="font-size:.88rem;color:var(--muted);margin-bottom:12px">Excel con las columnas necesarias y dos filas de ejemplo. Tiene <strong>12 columnas base obligatorias</strong> y <strong>17 avanzadas opcionales</strong> (no salariales, dominicales, deducciones especiales, datos bancarios y salario integral).</p>
   <button class="btn btn-green" onclick="descargarPlantilla()">&#128190; Descargar plantilla Excel</button>
   <details style="margin-top:16px">
     <summary>Ver descripción de cada columna</summary>
@@ -257,6 +257,7 @@ details > div{padding:0 16px 16px}
     <table id="aportesTable" class="data-table"></table>
   </div>
   <div id="warningsBox" style="display:none"></div>
+  <div id="pulsoBox" style="display:none"></div>
   <h3 style="font-size:.95rem;font-weight:700;color:var(--pri);margin:18px 0 8px;display:flex;align-items:center;gap:8px">&#128220; Asiento contable de causación <span id="asientoBalance" style="font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:20px"></span></h3>
   <p style="font-size:.74rem;color:var(--muted);margin:-2px 0 8px;line-height:1.5">Comprobante de causación de la nómina del período (consolidado de todos los empleados), con provisión de prestaciones. Cuentas del PUC comercial (Decreto 2650) como referencia — <strong>ajústalas a tu plan y centro de costo</strong>. Débitos y créditos cuadran automáticamente.</p>
   <div style="overflow-x:auto">
@@ -269,13 +270,30 @@ details > div{padding:0 16px 16px}
       <input id="empNit" type="text" placeholder="NIT" style="padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.88rem;font-family:inherit">
     </div>
     <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <button class="btn btn-green" onclick="exportarExcelMasiva()">&#128190; Exportar Excel (4 hojas)</button>
+      <button class="btn btn-green" onclick="exportarExcelMasiva()">&#128190; Exportar Excel (6 hojas)</button>
       <button class="btn btn-outline" onclick="imprimirDesprendibles()">&#128424; Imprimir desprendibles (PDF)</button>
     </div>
     <p style="font-size:.72rem;color:var(--muted);margin-top:10px;line-height:1.5">
-      El Excel trae 4 hojas: resumen, detalle por empleado, aportes empresa y <strong>asiento contable</strong>. Los desprendibles abren el diálogo de impresión del navegador con una página por empleado — elige <strong>"Guardar como PDF"</strong> para descargar.
+      El Excel trae 6 hojas: resumen, detalle por empleado, aportes empresa, <strong>asiento contable</strong>, <strong>dispersión bancaria</strong> e <strong>insumo PILA</strong>. Los desprendibles abren el diálogo de impresión del navegador con una página por empleado — elige <strong>"Guardar como PDF"</strong> para descargar.
     </p>
   </div>
+  <details style="margin-top:18px;border:1px solid var(--border);border-radius:8px;overflow:hidden">
+    <summary style="cursor:pointer;padding:12px 16px;background:#FAFBFC;font-weight:700;font-size:.9rem;color:var(--pri)">&#129534; Borrador XML — Nómina Electrónica DIAN</summary>
+    <div style="padding:14px 16px">
+      <div class="alert alert-warn" style="margin:0 0 12px">
+        <span>&#9888;</span>
+        <span><strong>Es un borrador de revisión, NO el archivo oficial.</strong> Reproduce la estructura del Documento Soporte de Pago de Nómina Electrónica (Res. DIAN 000013/2021) con tus valores, para revisar y aprender. El archivo válido para la DIAN debe generarse y <strong>firmarse</strong> desde un software habilitado (lleva CUNE, firma digital y numeración autorizada).</span>
+      </div>
+      <div id="xmlChecklist" style="font-size:.78rem;margin-bottom:10px"></div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px">
+        <label style="font-size:.8rem;color:var(--muted);font-weight:600">Empleado:</label>
+        <select id="xmlEmpSel" onchange="renderXmlPreview()" style="padding:7px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:.85rem;font-family:inherit;max-width:340px"></select>
+        <button class="btn btn-outline" onclick="copiarXml()" style="padding:7px 14px">&#128203; Copiar</button>
+        <button class="btn btn-outline" onclick="descargarXml()" style="padding:7px 14px">&#11015; Descargar .xml</button>
+      </div>
+      <pre id="xmlPreview" style="background:#0f172a;color:#e2e8f0;padding:14px;border-radius:8px;overflow-x:auto;font-family:JetBrains Mono,monospace;font-size:.72rem;line-height:1.5;max-height:380px;white-space:pre;margin:0"></pre>
+    </div>
+  </details>
 </div>
 <div class="card">
   <div class="card-title">&#9878; Fundamento legal de cada cálculo</div>
@@ -338,6 +356,7 @@ details > div{padding:0 16px 16px}
       <p style="font-weight:700;color:#065F46;margin-bottom:6px">&#10003; Sí cubre (v1)</p>
       <ul style="padding-left:18px;color:#065F46">
         <li>Empleado ordinario en relación de dependencia</li>
+        <li><strong>Salario integral</strong> (Art. 132 CST) — IBC y parafiscales sobre el 70%</li>
         <li>Salario fijo más HE/recargos en 7 categorías estándar</li>
         <li>Pagos salariales y no salariales (gravables y no gravables)</li>
         <li>Aplicación Art. 30 Ley 1393/2010 al IBC SS</li>
@@ -350,7 +369,6 @@ details > div{padding:0 16px 16px}
     <div style="padding:14px;background:var(--amber2);border:1px solid #FDE68A;border-radius:8px">
       <p style="font-weight:700;color:#92400E;margin-bottom:6px">&#9888; NO cubre — requieren liquidación aparte</p>
       <ul style="padding-left:18px;color:#92400E">
-        <li>Salario integral (Art. 132 CST) — IBC sobre 70%</li>
         <li>Trabajadores de dirección, confianza y manejo (Art. 162 CST)</li>
         <li>Aprendices SENA (Ley 2466/2025)</li>
         <li>Trabajadores ocasionales (Art. 6 CST)</li>
@@ -387,8 +405,8 @@ details > div{padding:0 16px 16px}
 <div id="desprendibles-print" aria-hidden="true"></div>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw" crossorigin="anonymous"></script>
 <script src="shared/jornada-laboral.js?v=a7826f23"></script>
-<script src="shared/nomina-engine.js?v=a548f01d"></script>
-<script src="shared/nomina-masiva-validator.js?v=9e652fc3"></script>
+<script src="shared/nomina-engine.js?v=0625c285"></script>
+<script src="shared/nomina-masiva-validator.js?v=5b26e722"></script>
 <script>
 /* ─── Generación de plantilla Excel descargable ─── */
 function descargarPlantilla() {
@@ -407,6 +425,10 @@ function descargarPlantilla() {
     'recargoDomNocturno', 'diasIncapacidad', 'bonificaciones', 'comisiones',
     'noSalarialGravable', 'noSalarialNoGravable',
     'depDependientes', 'interesesVivienda', 'medicinaPrepagada',
+    // ─── BANCARIAS (3, opcionales — para dispersión) ───
+    'banco', 'tipoCuenta', 'numeroCuenta',
+    // ─── SALARIO INTEGRAL (1, opcional, SI/NO) ───
+    'salarioIntegral',
   ];
   // Filas de ejemplo
   var ejemplos = [
@@ -421,6 +443,8 @@ function descargarPlantilla() {
       diasIncapacidad: 0, bonificaciones: 0, comisiones: 0,
       noSalarialGravable: 0, noSalarialNoGravable: 0,
       depDependientes: 'NO', interesesVivienda: 0, medicinaPrepagada: 0,
+      banco: 'Bancolombia', tipoCuenta: 'AHORRO', numeroCuenta: '12345678901',
+      salarioIntegral: 'NO',
     },
     {
       cedula: '2020202020', nombre: 'EJEMPLO 2 — con HE, recargos y bono no salarial',
@@ -433,6 +457,8 @@ function descargarPlantilla() {
       diasIncapacidad: 0, bonificaciones: 200000, comisiones: 0,
       noSalarialGravable: 500000, noSalarialNoGravable: 0,
       depDependientes: 'SI', interesesVivienda: 0, medicinaPrepagada: 0,
+      banco: 'Davivienda', tipoCuenta: 'CORRIENTE', numeroCuenta: '98765432100',
+      salarioIntegral: 'NO',
     },
   ];
   // Hoja 1: Empleados
@@ -453,7 +479,7 @@ function descargarPlantilla() {
     ['INSTRUCCIONES — Plantilla de liquidación de nómina mensual'],
     [''],
     ['1. Reemplaza las filas de ejemplo con tus empleados.'],
-    ['2. Las primeras 12 columnas son OBLIGATORIAS. Las 13 siguientes son OPCIONALES (déjalas en 0 o vacías si no aplica).'],
+    ['2. Las primeras 12 columnas son OBLIGATORIAS. Las 17 siguientes son OPCIONALES (déjalas en 0 o vacías si no aplica).'],
     ['3. No cambies los nombres de columna ni el orden.'],
     ['4. Sube esta hoja "Empleados" a la herramienta y obtén la liquidación completa.'],
     [''],
@@ -463,6 +489,8 @@ function descargarPlantilla() {
     ['                          (Solo SOCIEDAD y PN_2_MAS aplican exoneración Art. 114-1 ET)'],
     ['  nivelARL            →  1 (mínimo) al 5 (máximo) — Decreto 1295/1994 + Decreto 1607/2002'],
     ['  depDependientes     →  SI | NO  (Art. 387 ET — deducción 10% del ingreso, máx. 32 UVT)'],
+    ['  salarioIntegral     →  SI | NO  (Art. 132 CST — mínimo 13 SMLMV; IBC y parafiscales sobre 70%)'],
+    ['  tipoCuenta          →  AHORRO | CORRIENTE  (para la dispersión bancaria)'],
     [''],
     ['NOTAS:'],
     ['  • Si auxTransporteModo = MANUAL, debes diligenciar auxTransporteValor.'],
@@ -480,10 +508,10 @@ function descargarPlantilla() {
     ['  Auxilio transporte: $249.095   (Decreto 1470 de 29-dic-2025)'],
     ['  UVT: $52.374   (Resolución DIAN 000238 de 15-dic-2025)'],
     [''],
-    ['ALCANCE: solo cubre empleados ordinarios en relación de dependencia.'],
-    ['NO cubre: salario integral, dirección/confianza/manejo, aprendiz SENA, ocasional,'],
-    ['          pensionado reingresado, suspensión contrato, doméstica por días,'],
-    ['          procedimiento 2 retefuente, auxilio conectividad, licencias.'],
+    ['ALCANCE: empleados ordinarios y de salario integral en relación de dependencia.'],
+    ['NO cubre: dirección/confianza/manejo, aprendiz SENA, ocasional, pensionado'],
+    ['          reingresado, suspensión contrato, doméstica por días, procedimiento 2'],
+    ['          retefuente (usa la calculadora de retención), auxilio conectividad, licencias.'],
     [''],
     ['Generado por exogenadian.com'],
   ];
@@ -794,6 +822,10 @@ function renderResultados(resultados) {
   document.getElementById('aportesTable').innerHTML = ahtml;
   // ─── Asiento contable de causación ───
   renderAsiento(resultados);
+  // ─── Revisión automática "Pulso" ───
+  renderPulso(resultados);
+  // ─── Borrador XML nómina electrónica ───
+  setupXmlNomina(resultados);
   // ─── Warnings (HE excedidas) ───
   var allWarnings = [];
   resultados.forEach(function(r, i) {
@@ -814,6 +846,43 @@ function renderResultados(resultados) {
     wb.style.display = 'none';
   }
   card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+/* ─── Revisión "Pulso": anomalías de la nómina calculada ─── */
+function renderPulso(resultados) {
+  var box = document.getElementById('pulsoBox');
+  if (!box) return;
+  var smlmv = NominaEngine.getParamsNomina(2026).SMLMV;
+  var issues = NOMINA_VALIDATOR.revisionPulso(resultados, smlmv);
+  box.style.display = 'block';
+  if (!issues.length) {
+    box.className = '';
+    box.innerHTML = '<div style="margin-top:14px;padding:12px 16px;background:#ECFDF5;border:1px solid #A7F3D0;border-radius:8px;font-size:.84rem;color:#065F46">'
+      + '<strong>&#128154; Revisión Pulso:</strong> sin anomalías detectadas en ' + resultados.length + ' empleado(s).</div>';
+    return;
+  }
+  var orden = { alta: 0, media: 1, info: 2 };
+  issues.sort(function(a, b) { return orden[a.nivel] - orden[b.nivel]; });
+  var estilo = {
+    alta:  { bg:'#FEF2F2', bd:'#FCA5A5', col:'#991B1B', ic:'&#128308;', t:'Revisar' },
+    media: { bg:'#FFFBEB', bd:'#FDE68A', col:'#92400E', ic:'&#128993;', t:'Atención' },
+    info:  { bg:'#EFF6FF', bd:'#BFDBFE', col:'#1E40AF', ic:'&#128309;', t:'Info' },
+  };
+  var n = { alta:0, media:0, info:0 };
+  issues.forEach(function(x){ n[x.nivel]++; });
+  var resumen = [];
+  if (n.alta) resumen.push(n.alta + ' por revisar');
+  if (n.media) resumen.push(n.media + ' de atención');
+  if (n.info) resumen.push(n.info + ' informativas');
+  var html = '<div style="margin-top:14px;padding:14px 16px;background:#FAFBFC;border:1px solid var(--border);border-radius:8px">'
+    + '<div style="font-weight:700;color:var(--pri);margin-bottom:8px">&#128202; Revisión Pulso — ' + resumen.join(' · ') + '</div>'
+    + '<div style="display:flex;flex-direction:column;gap:6px">';
+  issues.forEach(function(x) {
+    var s = estilo[x.nivel];
+    html += '<div style="display:flex;gap:8px;align-items:flex-start;padding:8px 10px;background:' + s.bg + ';border:1px solid ' + s.bd + ';border-radius:6px;font-size:.8rem;color:' + s.col + '">'
+      + '<span>' + s.ic + '</span><span><strong>' + s.t + ':</strong> ' + esc(x.msg) + '</span></div>';
+  });
+  html += '</div><p style="font-size:.7rem;color:var(--muted);margin-top:8px">Chequeos orientativos sobre IBC, salario mínimo, auxilio de transporte, neto y topes. No reemplazan tu criterio profesional.</p></div>';
+  box.innerHTML = html;
 }
 function kpiCard(color, lbl, val) {
   return '<div class="kpi-card ' + color + '"><div class="lbl">' + esc(lbl) + '</div><div class="val">' + val + '</div></div>';
@@ -843,6 +912,8 @@ function resetTodo() {
         localStorage.setItem('exo_nomina_empresa_nombre', document.getElementById('empNombre').value || '');
         localStorage.setItem('exo_nomina_empresa_nit', document.getElementById('empNit').value || '');
       } catch (e) {}
+      // Refrescar el borrador XML (usa NIT/razón social)
+      if (ESTADO.resultados && typeof setupXmlNomina === 'function') setupXmlNomina(ESTADO.resultados);
     });
   });
 })();
@@ -939,7 +1010,106 @@ function renderAsiento(resultados) {
   return a;
 }
 /* ═══════════════════════════════════════════════════════════════════════════
-   EXPORTAR EXCEL — 3 hojas: Resumen, Detalle empleados, Aportes empresa
+   BORRADOR XML — Documento Soporte de Pago de Nómina Electrónica (Res. DIAN
+   000013/2021). Reproduce la estructura con los valores calculados, para
+   revisión/aprendizaje. NO es el archivo oficial: el válido lleva CUNE, firma
+   digital y numeración autorizada, y se genera desde software habilitado.
+   ═══════════════════════════════════════════════════════════════════════════ */
+function _xmlEsc(s) {
+  return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+}
+function _fechaISO(d) {
+  return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+}
+function _n2(v) { return (Math.round(v || 0)).toFixed(2); }
+function construirXmlNomina(r, emp) {
+  var now = new Date();
+  var ini = new Date(now.getFullYear(), now.getMonth(), 1);
+  var fin = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+  var heRec = (r.heDigVal || 0) + (r.heNocVal || 0) + (r.heDomDigVal || 0) + (r.heDomNocVal || 0)
+            + (r.recNocVal || 0) + (r.recDomDigVal || 0) + (r.recDomNocVal || 0);
+  var otrosDev = (r.bonificaciones || 0) + (r.comisiones || 0) + (r.otrosDevengados || 0)
+               + (r.noSalarialGravable || 0) + (r.noSalarialNoGravable || 0);
+  var x = '';
+  x += '<?xml version="1.0" encoding="UTF-8"?>\n';
+  x += '\n';
+  x += '<NominaIndividual SchemaLocation="" Version="V1.0: Documento Soporte de Pago de Nómina Electrónica">\n';
+  x += '  <Periodo FechaIngreso="' + _fechaISO(ini) + '" FechaLiquidacionInicio="' + _fechaISO(ini) + '" FechaLiquidacionFin="' + _fechaISO(fin) + '" TiempoLaborado="30"/>\n';
+  x += '  <NumeroSecuenciaXML Prefijo="NE" Consecutivo="" NumeroDocumento="(lo asigna el software habilitado)"/>\n';
+  x += '  <Empleador NIT="' + _xmlEsc(emp.nit) + '" RazonSocial="' + _xmlEsc(emp.nombre) + '" Pais="CO"/>\n';
+  x += '  <Trabajador TipoTrabajador="01" TipoDocumento="13" NumeroDocumento="' + _xmlEsc(r.cedula) + '" PrimerNombre="' + _xmlEsc(r.nombre) + '" SalarioIntegral="false" Sueldo="' + _n2(r.salarioBase) + '"/>\n';
+  x += '  <Pago Forma="1" Metodo="' + '10' + '"/>\n';
+  x += '  <Devengados>\n';
+  x += '    <Basico DiasTrabajados="' + (r.diasTrabajados || 0) + '" SueldoTrabajado="' + _n2(r.salarioBase) + '"/>\n';
+  if (r.auxTransporte > 0) x += '    <Transporte AuxilioTransporte="' + _n2(r.auxTransporte) + '"/>\n';
+  if (heRec > 0) x += '    <HEDsRecargos><HEDRecargo Cantidad="" Porcentaje="" Pago="' + _n2(heRec) + '"/></HEDsRecargos>\n';
+  if (r.vacacionesVal > 0) x += '    <Vacaciones><VacacionesComunes Pago="' + _n2(r.vacacionesVal) + '"/></Vacaciones>\n';
+  if (r.incapacidadVal > 0) x += '    <Incapacidades><Incapacidad Tipo="1" Pago="' + _n2(r.incapacidadVal) + '"/></Incapacidades>\n';
+  if (otrosDev > 0) x += '    <OtrosConceptos><OtroConcepto DescripcionConcepto="Otros devengados" ConceptoS="' + _n2(otrosDev) + '"/></OtrosConceptos>\n';
+  x += '  </Devengados>\n';
+  x += '  <Deducciones>\n';
+  x += '    <Salud Porcentaje="4.00" Deduccion="' + _n2(r.deduccionSalud) + '"/>\n';
+  x += '    <FondoPension Porcentaje="4.00" Deduccion="' + _n2(r.deduccionPension) + '"/>\n';
+  if (r.fondoSolidaridad > 0) x += '    <FondoSP Porcentaje="" DeduccionSP="' + _n2(r.fondoSolidaridad) + '"/>\n';
+  if (r.retencionFuente > 0) x += '    <RetencionFuente Deduccion="' + _n2(r.retencionFuente) + '"/>\n';
+  var otrasDed = (r.libranza || 0) + (r.embargo || 0) + (r.otrosDesc || 0);
+  if (otrasDed > 0) x += '    <Libranzas><Libranza Descripcion="Libranzas/embargos/otros" Deduccion="' + _n2(otrasDed) + '"/></Libranzas>\n';
+  x += '  </Deducciones>\n';
+  x += '  <DevengadosTotal>' + _n2(r.totalDevengado) + '</DevengadosTotal>\n';
+  x += '  <DeduccionesTotal>' + _n2(r.totalDeducciones) + '</DeduccionesTotal>\n';
+  x += '  <ComprobanteTotal>' + _n2(r.netoPagar) + '</ComprobanteTotal>\n';
+  x += '</NominaIndividual>\n';
+  return x;
+}
+function setupXmlNomina(resultados) {
+  var sel = document.getElementById('xmlEmpSel');
+  if (!sel) return;
+  sel.innerHTML = resultados.map(function(r, i) {
+    return '<option value="' + i + '">' + esc((r.cedula || '') + ' — ' + (r.nombre || 'Empleado ' + (i + 1))) + '</option>';
+  }).join('');
+  // Checklist de datos requeridos
+  var emp = getEmpresaInfo();
+  var checks = [
+    ['NIT del empleador', !!emp.nit],
+    ['Razón social del empleador', !!emp.nombre],
+    ['Cédula en todos los empleados', resultados.every(function(r){ return !!r.cedula; })],
+    ['Nombre en todos los empleados', resultados.every(function(r){ return !!r.nombre; })],
+  ];
+  document.getElementById('xmlChecklist').innerHTML = checks.map(function(c) {
+    return '<div style="display:flex;align-items:center;gap:6px;color:' + (c[1] ? '#065F46' : '#991B1B') + '">'
+      + (c[1] ? '&#10003;' : '&#9888;') + ' ' + esc(c[0]) + (c[1] ? '' : ' — <em>completa este dato arriba</em>') + '</div>';
+  }).join('');
+  renderXmlPreview();
+}
+function renderXmlPreview() {
+  if (!ESTADO.resultados) return;
+  var i = parseInt((document.getElementById('xmlEmpSel') || {}).value || '0', 10) || 0;
+  var r = ESTADO.resultados[i];
+  if (!r) return;
+  document.getElementById('xmlPreview').textContent = construirXmlNomina(r, getEmpresaInfo());
+}
+function copiarXml() {
+  var txt = (document.getElementById('xmlPreview') || {}).textContent || '';
+  if (!txt) return;
+  if (navigator.clipboard) navigator.clipboard.writeText(txt).then(function(){ if (typeof exoToast !== 'undefined') exoToast('XML copiado.', 'success'); });
+  else prompt('Copia el XML:', txt);
+}
+function descargarXml() {
+  if (!ESTADO.resultados) return;
+  var i = parseInt((document.getElementById('xmlEmpSel') || {}).value || '0', 10) || 0;
+  var r = ESTADO.resultados[i];
+  if (!r) return;
+  var xml = construirXmlNomina(r, getEmpresaInfo());
+  var blob = new Blob([xml], { type: 'application/xml' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'nomina_borrador_' + (r.cedula || ('empleado_' + (i + 1))) + '.xml';
+  a.click();
+  if (typeof exoTrack !== 'undefined') exoTrack.generate('nomina-masiva', 'xml-borrador');
+}
+/* ═══════════════════════════════════════════════════════════════════════════
+   EXPORTAR EXCEL — Resumen, Detalle, Aportes, Asiento, Dispersión, Insumo PILA
    ═══════════════════════════════════════════════════════════════════════════ */
 function exportarExcelMasiva() {
   if (!ESTADO.resultados || !ESTADO.resultados.length) {
@@ -951,6 +1121,7 @@ function exportarExcelMasiva() {
     return;
   }
   var R = ESTADO.resultados;
+  var F = (ESTADO.filasProcesadas && ESTADO.filasProcesadas.filas) || [];  // para datos bancarios
   var emp = getEmpresaInfo();
   var hoy = new Date().toLocaleDateString('es-CO');
   var periodoMes = new Date().toLocaleString('es-CO', { month: 'long', year: 'numeric' });
@@ -1097,12 +1268,53 @@ function exportarExcelMasiva() {
   asFilas.push(['', asiento.cuadra ? 'El comprobante CUADRA (débito = crédito)' : 'REVISAR: descuadre', '', '']);
   var wsAsiento = XLSX.utils.aoa_to_sheet(asHeader.concat(asFilas));
   wsAsiento['!cols'] = [{ wch: 10 }, { wch: 52 }, { wch: 18 }, { wch: 18 }];
+  /* ─── Hoja 5: Dispersión bancaria (pago a empleados) ─── */
+  var dispHeaders = ['#', 'Cédula', 'Nombre', 'Banco', 'Tipo cuenta', 'Número cuenta', 'Valor a pagar (neto)'];
+  var dispFilas = R.map(function(r, i) {
+    var f = (F[i] && F[i].fila) || {};
+    return [i + 1, r.cedula || '', r.nombre || '', f.banco || '', f.tipoCuenta || '', f.numeroCuenta || '', r.netoPagar || 0];
+  });
+  dispFilas.push(['', '', 'TOTAL A DISPERSAR', '', '', '', tot.neto]);
+  var wsDisp = XLSX.utils.aoa_to_sheet([
+    ['DISPERSIÓN BANCARIA — ' + (emp.nombre || '(empresa)') + ' · ' + periodoMes],
+    ['Llena banco / tipo de cuenta / número en la plantilla para que salgan aquí.'],
+    [''],
+    dispHeaders,
+  ].concat(dispFilas));
+  wsDisp['!cols'] = [{ wch: 4 }, { wch: 14 }, { wch: 32 }, { wch: 16 }, { wch: 12 }, { wch: 20 }, { wch: 18 }];
+  /* ─── Hoja 6: Insumo PILA (base para la planilla del operador) ─── */
+  var pilaHeaders = ['#', 'Cédula', 'Nombre', 'Días', 'IBC',
+    'Salud empleado 4%', 'Salud empresa 8.5%', 'Pensión empleado 4%', 'Pensión empresa 12%',
+    'Fondo solidaridad', 'ARL', 'Caja 4%', 'SENA 2%', 'ICBF 3%'];
+  var pilaFilas = R.map(function(r, i) {
+    return [i + 1, r.cedula || '', r.nombre || '', r.diasTrabajados || 0, r.ibcSS || 0,
+      r.deduccionSalud || 0, r.aporteEmpSalud || 0, r.deduccionPension || 0, r.aporteEmpPension || 0,
+      r.fondoSolidaridad || 0, r.aporteArl || 0, r.aporteCajaComp || 0, r.aporteSena || 0, r.aporteIcbf || 0];
+  });
+  var pilaTot = ['', '', 'TOTALES', '', tot.ibc, tot.salud, tot.aSalud, tot.pension, tot.aPension,
+    tot.fsp, tot.aArl, tot.aCaja, tot.aSena, tot.aIcbf];
+  var wsPila = XLSX.utils.aoa_to_sheet([
+    ['INSUMO PILA — ' + (emp.nombre || '(empresa)') + ' · ' + periodoMes],
+    ['Base por empleado para diligenciar la planilla en tu operador (Aportes en Línea, SOI, etc.).'],
+    ['No es el archivo plano oficial: faltan EPS/AFP/CCF y tipo de cotizante, que dependen de cada trabajador.'],
+    [''],
+    pilaHeaders,
+  ].concat(pilaFilas).concat([pilaTot]));
+  wsPila['!cols'] = pilaHeaders.map(function(h, i) {
+    if (i === 0) return { wch: 4 };
+    if (h === 'Cédula') return { wch: 14 };
+    if (h === 'Nombre') return { wch: 30 };
+    if (h === 'Días') return { wch: 6 };
+    return { wch: 16 };
+  });
   /* ─── Workbook ─── */
   var wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, wsResumen, 'Resumen');
   XLSX.utils.book_append_sheet(wb, wsDetalle, 'Detalle empleados');
   XLSX.utils.book_append_sheet(wb, wsAportes, 'Aportes empresa');
   XLSX.utils.book_append_sheet(wb, wsAsiento, 'Asiento contable');
+  XLSX.utils.book_append_sheet(wb, wsDisp, 'Dispersion bancaria');
+  XLSX.utils.book_append_sheet(wb, wsPila, 'Insumo PILA');
   var nombreArchivo = 'nomina_' + (emp.nombre || 'empresa').replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_|_$/g, '').slice(0, 32) + '_' + new Date().toISOString().slice(0, 10) + '.xlsx';
   XLSX.writeFile(wb, nombreArchivo);
   if (typeof exoToast !== 'undefined') exoToast('Excel descargado: ' + R.length + ' empleados.', 'success');
