@@ -1469,11 +1469,91 @@ function _wireMaestroDropzone(){
 // Como el elemento está en el HTML estático (display:none), podemos wirearlo ya.
 document.addEventListener('DOMContentLoaded',_wireMaestroDropzone,{once:true});
 if(document.readyState!=='loading')_wireMaestroDropzone();
+/* Formato "Zeus / Listado de Anexos de Balance" (caso INSTITUTO OCULAR DE
+   OCCIDENTE SAS): el código de cuenta (8 díg. positivo) y el NIT del tercero
+   conviven en la MISMA columna 0; el tercero se distingue porque su número
+   viene NEGATIVO (-1059600745). No hay columna NIT separada. Filas "TOTAL …"
+   son subtotales (no se suman). Esta función detecta esa firma única y aplana
+   al estándar de 8 columnas que ya consume processData(). Si la firma no
+   coincide EXACTAMENTE, devuelve `data` sin tocar (no afecta otros formatos).
+   Triple guarda anti-falsos-positivos:
+     1) header de saldos Zeus (saldo anterior + débito + crédito + saldo actual)
+     2) una columna que mezcla ≥3 códigos ^\d{8}$ con ≥5 NITs negativos ^-\d+$,
+        y que está a la IZQUIERDA de todas las columnas de valor
+     3) la columna siguiente (nombre/razón) es mayoritariamente texto */
+function flattenZeusAnexosBalance(data){
+  if(!data||data.length<10)return data;
+  function _zn(v){return String(v==null?'':v).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ').trim()}
+  function _zT(v){if(v==null||v==='')return 0;if(typeof v==='number')return v;var s=String(v).replace(/[^\d.,\-]/g,'').replace(/\./g,'').replace(',','.');var n=parseFloat(s);return isFinite(n)?n:0}
+  // (1) Localizar fila de encabezado de saldos.
+  var hdr=-1,sI=-1,dB=-1,cR=-1,sF=-1;
+  for(var i=0;i<Math.min(40,data.length);i++){
+    var r=data[i];if(!r)continue;
+    var si=-1,db=-1,cr=-1,sf=-1;
+    for(var j=0;j<r.length;j++){
+      var h=_zn(r[j]);if(!h)continue;
+      if(si<0&&(h==='saldo anterior'||h==='saldo inicial'))si=j;
+      else if(db<0&&(h==='movimiento debito'||h==='debitos'||h==='debito'||h==='debe'))db=j;
+      else if(cr<0&&(h==='movimiento credito'||h==='creditos'||h==='credito'||h==='haber'))cr=j;
+      else if(sf<0&&(h==='saldo actual'||h==='saldo final'||h==='nuevo saldo'))sf=j;
+    }
+    if(si>=0&&db>=0&&cr>=0&&sf>=0){hdr=i;sI=si;dB=db;cR=cr;sF=sf;break}
+  }
+  if(hdr<0)return data;
+  var leftVal=Math.min(sI,dB,cR,sF);
+  // (2) Detectar la columna código/NIT: ≥3 códigos ^\d{8}$ + ≥5 NITs negativos.
+  var ncols=0;for(var k=hdr+1;k<Math.min(data.length,hdr+500);k++){if(data[k]&&data[k].length>ncols)ncols=data[k].length}
+  var codeCol=-1,bestScore=-1;
+  for(var col=0;col<ncols&&col<leftVal;col++){
+    var acc=0,neg=0;
+    for(var k2=hdr+1;k2<Math.min(data.length,hdr+500);k2++){
+      var rr=data[k2];if(!rr)continue;var c=String(rr[col]==null?'':rr[col]).trim();
+      if(/^\d{8}$/.test(c))acc++;
+      else if(/^-\d{3,}$/.test(c))neg++;
+    }
+    if(acc>=3&&neg>=5&&(acc+neg)>bestScore){bestScore=acc+neg;codeCol=col}
+  }
+  if(codeCol<0)return data;
+  // (3) La columna siguiente debe ser texto (nombre cuenta / razón social).
+  var nameCol=codeCol+1;
+  var nmText=0,nmTot=0;
+  for(var k3=hdr+1;k3<Math.min(data.length,hdr+500);k3++){
+    var r3=data[k3];if(!r3)continue;var c3=String(r3[codeCol]==null?'':r3[codeCol]).trim();
+    if(!/^-?\d{3,}$/.test(c3))continue;
+    var nv=String(r3[nameCol]==null?'':r3[nameCol]).trim();if(!nv)continue;
+    nmTot++;if(/[A-Za-zÁÉÍÓÚáéíóúÑñ]{3,}/.test(nv))nmText++;
+  }
+  if(nmTot<3||nmText/nmTot<0.5)return data;
+  // Emitir flat estándar de 8 columnas.
+  var flat=[['Código','Nombre Cuenta','NIT','Saldo Inicial','Débitos','Créditos','Saldo Final','Nombre Tercero']];
+  var lastCode=null,lastName='';
+  for(var idx=hdr+1;idx<data.length;idx++){
+    var row=data[idx];if(!row)continue;
+    var c0=String(row[codeCol]==null?'':row[codeCol]).trim();
+    if(!c0||/^total/i.test(c0))continue;            // subtotales y vacíos
+    var nm=String(row[nameCol]==null?'':row[nameCol]).trim();
+    if(/^\d{8}$/.test(c0)){
+      // Fila de cuenta agregada (sin tercero). Bug1/A3 de processData la
+      // descartan si la cuenta tiene terceros; si no, se conserva.
+      lastCode=c0;lastName=nm;
+      flat.push([c0,nm,'',_zT(row[sI]),_zT(row[dB]),_zT(row[cR]),_zT(row[sF]),'']);
+    }else if(/^-\d{3,}$/.test(c0)&&lastCode){
+      var nit=c0.replace(/\D/g,'');
+      if(nit)flat.push([lastCode,lastName,nit,_zT(row[sI]),_zT(row[dB]),_zT(row[cR]),_zT(row[sF]),nm]);
+    }
+  }
+  if(flat.length<6)return data;
+  return flat;
+}
 /* World Office: detecta Método 1 (árbol con "Total NNNN" + filas de tercero)
    y Método 2 (cols CODIGO|NOMBRE|TERCERO|...). Aplana a 7 cols estándar.
    Self-contained: no depende de helpers externos. */
 function flattenFixedWidthPUCTree(data){
   if(!data||data.length<5)return data;
+  // Formato Zeus "Listado de Anexos" (código y NIT-negativo en la misma col).
+  // Si coincide, ya queda aplanado al estándar; si no, sigue el flujo normal.
+  var _zeus=flattenZeusAnexosBalance(data);
+  if(_zeus!==data)return _zeus;
   function _fwn(v){return String(v==null?'':v).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim()}
   function _fwT(v){if(v==null)return 0;if(typeof v==='number')return v;var s=String(v).replace(/[^\d.,\-]/g,'').replace(/\./g,'').replace(',','.');var n=parseFloat(s);return isFinite(n)?n:0}
   var hdr=-1,cC=-1,nC=-1,dC=-1,sI=-1,dB=-1,cR=-1,sF=-1;
