@@ -714,16 +714,21 @@ async function consultarSingle() {
     // El spinner ya está en el placeholder de razón social
     consultarBackend(input).then(function(online) {
       if (!online || !online._from_cache) consumeQuota();
+      var enMantenimiento = !!(online && online.dian_mantenimiento);
       if (online && !online.error) {
         r = mergeResults(r, online);
         renderSingleResult(r);
       } else {
         // DIAN no respondió o devolvió error: cerrar el spinner con estado final
         r._searchDone = true;
+        if (enMantenimiento) r.dianMantenimiento = true;  // mostrar banner aunque el fallback no halle nombre
         renderSingleResult(r);
       }
       // Resultado DIAN recibido
-      if (online && online.error) {
+      if (enMantenimiento) {
+        // El portal oficial también está caído: NO enviar al usuario allá.
+        // El banner de mantenimiento ya explica la situación; no duplicar mensajes.
+      } else if (online && online.error) {
         document.getElementById('singleResult').innerHTML += '<div style="margin-top:10px;padding:12px 16px;background:#FEF3C7;border:1px solid #FDE68A;border-radius:10px;font-size:.82rem;color:#92400E;line-height:1.5">'
           + '<div style="font-weight:700;margin-bottom:4px">No se pudo consultar en DIAN MUISCA</div>'
           + '<div style="font-size:.78rem">Puedes consultar directamente en: <a href="https://muisca.dian.gov.co/WebRutMuisca/DefConsultaEstadoRUT.faces" target="_blank" rel="noopener" style="color:#1E40AF;font-weight:600">Portal MUISCA DIAN</a></div></div>';
@@ -763,8 +768,8 @@ function renderSingleResult(r) {
   html += '</div>';
   if (r.dianMantenimiento) {
     html += '<div style="margin-bottom:16px;padding:14px 18px;border-radius:12px;border:1px solid #FDE68A;background:#FEF3C7;font-size:.85rem;color:#92400E;line-height:1.5">';
-    html += '<strong>⚠️ La DIAN tiene su servicio de Consulta de Estado RUT en mantenimiento.</strong><br>';
-    html += 'Mostramos la información disponible de directorios públicos. El <strong>estado del RUT</strong> no se puede verificar en este momento — intenta de nuevo más tarde.';
+    html += '<strong>⚠️ La DIAN tiene su portal de Consulta de Estado RUT en mantenimiento</strong> (es del lado de la DIAN, no de esta herramienta).<br>';
+    html += 'Por eso el <strong>estado del RUT en vivo</strong> (activo/cancelado/suspendido) no se puede verificar en este momento. El resto de la información que ves abajo (razón social, gran contribuyente, autorretenedor, proveedor ficticio) sí está disponible. Vuelve a intentar más tarde para el estado oficial.';
     html += '</div>';
   }
   if (r.estadoRut) {
