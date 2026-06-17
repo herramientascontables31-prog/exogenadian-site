@@ -2845,6 +2845,12 @@ const PARAM_1009=[
   ['2201','2205','2225'],
   /* 2315-2355 Cuentas vinculadas → 2202 */
   ['2202','2315','2315'],['2202','2355','2355'],
+  /* 2360 Dividendos o participaciones por pagar → 2202 (pasivos con
+     accionistas/socios). Antes caía en el hueco 2356-2364 y quedaba "Sin
+     Clasificar", restando del F1009 el saldo de dividendos por pagar al cierre
+     (cruce CxP clase 2 vs F1009 descuadraba justo por ese monto). Cada fila
+     trae el NIT del socio receptor. */
+  ['2202','2360','2364'],
   /* 2305-2314 Costos y gastos por pagar → 2206 (demás pasivos) */
   ['2206','2305','2314'],
   /* 2316-2354 Otras CxP → 2206 */
