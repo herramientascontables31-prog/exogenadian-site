@@ -1549,6 +1549,14 @@ function encontrarSubconjunto(pool, target, tol, minSize, maxSize) {
   return found.res;
 }
 function sum(arr, field) { return arr.reduce((s, r) => s + (r[field]||0), 0); }
+// Plegar/desplegar un grupo de cargos recurrentes en la tabla "Solo Extracto".
+function toggleGrp(gid) {
+  const rows = document.querySelectorAll('.grp-body-' + gid);
+  const arr = document.getElementById('grpArrow' + gid);
+  const abrir = arr && arr.textContent === '▸';
+  rows.forEach(r => { r.style.display = abrir ? '' : 'none'; });
+  if (arr) arr.textContent = abrir ? '▾' : '▸';
+}
 /* ── 8. CATEGORIZATION ── */
 const CATEGORIES = [
   {id:'gmf',name:'GMF / 4×1000',icon:'🏛️',color:'#DC2626',bg:'#FEF2F2',puc:'530525',pucName:'Gastos legales - GMF',test:d=>d.includes('4x1000')||d.includes('impto gobierno')||d.includes('gmf')||d.includes('4 x 1000')||d.includes('gravamen')},
@@ -1715,13 +1723,37 @@ function renderResults() {
   });
   p += '</table></div></div>';
   p += '<div class="results-panel" id="panel-ext"><div class="results-scroll"><table class="rtable"><tr><th style="width:30px"></th><th>#</th><th>Fecha</th><th>Descripción</th><th>Tipo</th><th>Valor</th><th>Categoría</th></tr>';
-  soloE.forEach((e,i) => {
+  // Agrupa los cargos/abonos recurrentes (mismo concepto, ≥3 veces) en una fila-resumen
+  // plegable para que el listado no se vea "demasiado largo" cuando el banco fragmenta micro-cargos
+  // (GMF, IVA pagos automáticos, servicios). Cada fila individual se conserva con su checkbox y
+  // data-idx intactos (no se toca el cruce manual ni el export — solo es presentación).
+  const rowExt = (i, gid) => {
+    const e = soloE[i];
     const tipo = e.deb > 0 ? 'Entrada' : 'Salida';
     const tc = e.deb > 0 ? 'tipo-in' : 'tipo-out';
     const cat = guessCausa(e.desc);
     const flags = ruidoPills(e);
-    p += `<tr><td><input type="checkbox" class="chkSoloE" data-idx="${i}" onchange="actualizarBotonCruzar()" style="width:14px;height:14px;accent-color:var(--g500);cursor:pointer"></td><td>${i+1}</td><td>${fD(e.fecha)}</td><td class="desc-cell" title="${esc(e.desc)}">${esc(e.desc)}${flags}</td><td class="${tc}">${tipo}</td><td class="num">${fmtN(e.deb||e.cre)}</td><td style="font-size:.7rem;color:var(--f500)">${cat}</td></tr>`;
-  });
+    const hide = gid > 0 ? ' style="display:none"' : '';
+    const cls = gid > 0 ? ' grp-body-' + gid : '';
+    const ind = gid > 0 ? 'padding-left:18px;' : '';
+    return `<tr class="rowExt${cls}"${hide}><td><input type="checkbox" class="chkSoloE" data-idx="${i}" onchange="actualizarBotonCruzar()" style="width:14px;height:14px;accent-color:var(--g500);cursor:pointer"></td><td>${i+1}</td><td>${fD(e.fecha)}</td><td class="desc-cell" style="${ind}" title="${esc(e.desc)}">${esc(e.desc)}${flags}</td><td class="${tc}">${tipo}</td><td class="num">${fmtN(e.deb||e.cre)}</td><td style="font-size:.7rem;color:var(--f500)">${cat}</td></tr>`;
+  };
+  const keyOf = e => ((e.desc||'').toUpperCase().replace(/\s+/g,' ').trim().slice(0,32)) || '(sin concepto)';
+  const grpMap = new Map();
+  soloE.forEach((e,i) => { const k = keyOf(e); if (!grpMap.has(k)) grpMap.set(k, []); grpMap.get(k).push(i); });
+  const recurrentes = [...grpMap.entries()].filter(([,idxs]) => idxs.length >= 3).sort((a,b) => b[1].length - a[1].length);
+  const sueltos = [...grpMap.entries()].filter(([,idxs]) => idxs.length < 3);
+  let gid = 0;
+  for (const [k, idxs] of recurrentes) {
+    gid++;
+    const e0 = soloE[idxs[0]];
+    const tot = idxs.reduce((s,i) => s + (soloE[i].deb || soloE[i].cre || 0), 0);
+    const tipo = e0.deb > 0 ? 'Entrada' : 'Salida';
+    const tc = e0.deb > 0 ? 'tipo-in' : 'tipo-out';
+    p += `<tr class="grp-hdr" onclick="toggleGrp(${gid})" style="cursor:pointer;background:var(--f50)"><td style="text-align:center"><span id="grpArrow${gid}">▸</span></td><td style="font-weight:700;white-space:nowrap">${idxs.length}×</td><td style="color:var(--f300)">—</td><td class="desc-cell" style="font-weight:600" title="${esc(k)}">${esc(k)}</td><td class="${tc}">${tipo}</td><td class="num" style="font-weight:700">${fmtN(tot)}</td><td style="font-size:.7rem;color:var(--f500)">${guessCausa(e0.desc)}</td></tr>`;
+    for (const i of idxs) p += rowExt(i, gid);
+  }
+  for (const [, idxs] of sueltos) for (const i of idxs) p += rowExt(i, 0);
   p += '</table></div></div>';
   p += '<div class="results-panel" id="panel-aux"><div class="results-scroll"><table class="rtable"><tr><th style="width:30px"></th><th>#</th><th>Fecha</th><th>Tercero</th><th>Descripción</th><th>Ref</th><th>Tipo</th><th>Valor</th></tr>';
   soloA.forEach((a,i) => {
