@@ -718,12 +718,6 @@ async function revalidarPro(){
 (function(){
   function _init(){
     if(typeof exoPro==='undefined'){setTimeout(_init,50);return}
-    // Optimista: si hay credencial PRO guardada, desbloquear YA para evitar la
-    // carrera donde un usuario PRO hace clic en una descarga (p.ej. notas)
-    // antes de que el check async confirme. El check refina/degrada después.
-    // (Reportado: gerente@cambel.co veía el paywall de notas pese a tener
-    // suscripción válida; el server devolvía valid:true.)
-    if(exoPro.getSaved()){ proUnlocked=true; updateProUI(); }
     exoPro.check().then(function(isPro){
       proUnlocked=isPro;
       updateProUI();
@@ -6697,12 +6691,6 @@ ${firmaBlock}
   descargarDocx(html,`Conciliacion_EFE_${empresa.replace(/\s+/g,'_')}_${year}`);
 }
 async function exportRevelacionesWordPro(){
-  // Si proUnlocked aún es false pero hay credencial guardada, puede ser que el
-  // check async no haya resuelto: confírmalo contra el server antes de bloquear.
-  if(!proUnlocked && exoPro.getSaved()){
-    proUnlocked=await exoPro.check();
-    updateProUI();
-  }
   if(!proUnlocked){exoToast('La versión con Notas detalladas es una función PRO. Desbloquea PRO para descargar las Revelaciones completas con notas por cuenta.','info');return}
   const valid=await revalidarPro();
   if(!valid){proUnlocked=false;updateProUI();exoToast('Tu clave PRO expiró o fue desactivada. Verifica tu suscripción.','warning');return}

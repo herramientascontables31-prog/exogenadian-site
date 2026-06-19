@@ -942,10 +942,18 @@ function refreshDetection(k) {
   renderFileCard(k);
 }
 function cleanRows(rows) {
+  const esRotuloNoMovimiento = s => {
+    const fc = norm(String(s||''));
+    if (!fc) return false;
+    return fc.startsWith('total') || fc.includes('fin estado') || fc.includes('procesado en') || fc.startsWith('saldo anterior') || fc.startsWith('saldo inicial') || fc.startsWith('subtotal') || fc.includes('resumen');
+  };
   return rows.filter(r => {
     if (!r || r.every(c => c == null || c === '')) return false;
-    const fc = norm(String(r[0]||''));
-    if (fc.startsWith('total') || fc.includes('fin estado') || fc.includes('procesado en') || fc.startsWith('saldo anterior') || fc.startsWith('subtotal') || fc.includes('resumen')) return false;
+    // El rótulo "Total/Subtotal/Saldo anterior" suele ir en la 1ª columna (extractos), pero
+    // World Office y otros .rpt lo ponen en una columna intermedia (p.ej. "Totales cuenta" en col 3).
+    // Revisamos las primeras columnas para no contar esa fila pie como un movimiento (doblaba débitos
+    // y leía el total como saldo final). Se limita a las primeras 4 para no pisar concepto/beneficiario.
+    for (let i = 0; i < Math.min(4, r.length); i++) { if (esRotuloNoMovimiento(r[i])) return false; }
     return true;
   });
 }
