@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <script src="shared/cookie-consent.js?v=dc60b695"></script>
-<script src="shared/version.js?v=23fdec01"></script>
+<script src="shared/version.js?v=17a64a2d"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -344,6 +344,36 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
         <div class="flex gap12">
           <button class="btn btn-outline" onclick="goStep(3)">← Ajustar</button>
           <button class="btn btn-success" onclick="btnLoading(this,exportXls350)">📥 Descargar Excel</button>
+          <button class="btn btn-primary" onclick="abrirModalDian350()" title="Diligencia el 350 en la DIAN hasta el borrador; tú lo firmas y presentas">🟢 Crear borrador en la DIAN</button>
+        </div>
+      </div>
+      <div id="dian350Modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center">
+        <div style="background:#fff;max-width:470px;width:92%;border-radius:14px;padding:22px;max-height:92vh;overflow:auto;font-family:inherit">
+          <div style="font-weight:800;font-size:1.12rem;color:#1B3A5C;margin-bottom:4px">🟢 Crear borrador del 350 en la DIAN</div>
+          <p style="font-size:.82rem;color:#475569;margin:0 0 14px;line-height:1.5">Diligenciamos el formulario en MUISCA <strong>hasta el borrador</strong>. <strong>Tú lo revisas, lo firmas y lo presentas</strong>. Las claves se usan solo para esta operación y <strong>no se guardan</strong>.</p>
+          <label style="font-size:.76rem;font-weight:700;color:#334155">NIT de la empresa (sin DV)</label>
+          <input id="d350_nit" inputmode="numeric" placeholder="901846130" style="width:100%;box-sizing:border-box;padding:9px;border:1px solid #cbd5e1;border-radius:8px;margin:4px 0 10px;font-family:inherit">
+          <label style="font-size:.76rem;font-weight:700;color:#334155">Cédula del representante legal</label>
+          <input id="d350_ced" inputmode="numeric" placeholder="10375…" style="width:100%;box-sizing:border-box;padding:9px;border:1px solid #cbd5e1;border-radius:8px;margin:4px 0 10px;font-family:inherit">
+          <label style="font-size:.76rem;font-weight:700;color:#334155">Contraseña MUISCA (login)</label>
+          <input id="d350_pass" type="password" autocomplete="off" style="width:100%;box-sizing:border-box;padding:9px;border:1px solid #cbd5e1;border-radius:8px;margin:4px 0 10px;font-family:inherit">
+          <div style="display:flex;gap:10px">
+            <div style="flex:1"><label style="font-size:.76rem;font-weight:700;color:#334155">Año</label>
+              <input id="d350_anio" inputmode="numeric" value="2026" style="width:100%;box-sizing:border-box;padding:9px;border:1px solid #cbd5e1;border-radius:8px;margin:4px 0 10px;font-family:inherit"></div>
+            <div style="flex:1"><label style="font-size:.76rem;font-weight:700;color:#334155">Mes</label>
+              <select id="d350_periodo" style="width:100%;box-sizing:border-box;padding:9px;border:1px solid #cbd5e1;border-radius:8px;margin:4px 0 10px;font-family:inherit">
+                <option value="1">01 - Enero</option><option value="2">02 - Febrero</option><option value="3">03 - Marzo</option>
+                <option value="4">04 - Abril</option><option value="5">05 - Mayo</option><option value="6">06 - Junio</option>
+                <option value="7">07 - Julio</option><option value="8">08 - Agosto</option><option value="9">09 - Septiembre</option>
+                <option value="10">10 - Octubre</option><option value="11">11 - Noviembre</option><option value="12">12 - Diciembre</option>
+              </select></div>
+          </div>
+          <div id="d350_status" style="font-size:.82rem;margin:6px 0;min-height:18px;line-height:1.5"></div>
+          <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:6px">
+            <button class="btn btn-outline" onclick="cerrarModalDian350()">Cancelar</button>
+            <button class="btn btn-primary" onclick="btnLoading(this,enviarBorradorDian350)">Crear borrador</button>
+          </div>
+          <p style="font-size:.7rem;color:#94a3b8;margin:12px 0 0">🔒 Conexión directa a la DIAN. No almacenamos credenciales. Nunca firmamos ni presentamos. Función PRO.</p>
         </div>
       </div>
       <div style="margin:8px 0 14px;padding:16px 18px;background:linear-gradient(135deg,#FEF2F2,#FFFBEB);border:2px solid #FCA5A5;border-radius:12px;color:#7F1D1D;font-size:.9rem;line-height:1.6">
@@ -1988,6 +2018,43 @@ function renderDet(){
   document.getElementById('detailTable').innerHTML=h;
 }
 /* ═══ EXCEL EXPORT ═══ */
+// ── Crear borrador del 350 en la DIAN (PRO). Credenciales por sesión, NO se guardan. ──
+function _exoProKey(){ try{ return (window.exoPro&&exoPro.getSaved&&exoPro.getSaved())||localStorage.getItem('exo_pro_key')||''; }catch(e){ return ''; } }
+function cerrarModalDian350(){ var m=document.getElementById('dian350Modal'); if(m) m.style.display='none'; }
+async function abrirModalDian350(){
+  if(!window.result350||!result350.cas){ alert('Primero genera el borrador del 350 (paso 4).'); return; }
+  if(!(await exoProGate('Crear borrador 350 en la DIAN'))) return;
+  document.getElementById('dian350Modal').style.display='flex';
+}
+async function enviarBorradorDian350(){
+  var nit=(document.getElementById('d350_nit').value||'').trim();
+  var ced=(document.getElementById('d350_ced').value||'').trim();
+  var pass=document.getElementById('d350_pass').value||'';
+  var anio=parseInt(document.getElementById('d350_anio').value,10);
+  var periodo=parseInt(document.getElementById('d350_periodo').value,10);
+  var st=document.getElementById('d350_status');
+  if(!nit||!ced||!pass||!anio||!periodo){ st.innerHTML='<span style="color:#b91c1c">Completa NIT, cédula, contraseña, año y mes.</span>'; return; }
+  var cas=(result350&&result350.cas)||{};
+  st.innerHTML='⏳ Conectando con la DIAN y diligenciando el borrador… (1–2 min, no cierres esta ventana).';
+  try{
+    var resp=await fetch(IA_API_BASE+'/api/rete350/borrador',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({nit:nit,cedula:ced,password:pass,anio:anio,periodo:periodo,casillas:cas,pro_key:_exoProKey()})
+    });
+    var data=await resp.json();
+    if(resp.ok&&data.ok){
+      var notaHtml = (data.nota) ? '<div style="margin-top:6px;color:#92400e;background:#FEF3C7;border:1px solid #FCD34D;border-radius:8px;padding:8px 10px;font-size:.78rem">⚠️ '+data.nota+'</div>' : '';
+      st.innerHTML='<div style="color:#166534;font-weight:700">✅ '+(data.estado||'Borrador creado')+'</div>'+
+        '<div style="color:#334155;margin-top:4px">Período '+(data.periodo||'')+' · casillas escritas: '+((data.casillas_escritas||[]).length)+'</div>'+
+        notaHtml+
+        '<div style="margin-top:8px;font-weight:700;color:#1B3A5C">Abre el borrador en MUISCA, revísalo, fírmalo y preséntalo tú.</div>';
+    } else {
+      st.innerHTML='<span style="color:#b91c1c">❌ '+(data.error||data.detail||'No se pudo crear el borrador.')+'</span>';
+    }
+  }catch(e){
+    st.innerHTML='<span style="color:#b91c1c">❌ Error de conexión: '+(e&&e.message||e)+'</span>';
+  }
+}
 async function exportXls350(){
   if(!(await exoProGate('F350 Retención en la Fuente'))) return;
   const cas=result350.cas;

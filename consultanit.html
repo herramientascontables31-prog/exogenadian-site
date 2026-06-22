@@ -345,7 +345,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--f50);color:var(--f900);mi
    Individual + Masiva — Daily NIT quotas
    =================================================================== */
 // ─── Constants & State ───
-var API_URL = 'https://exogenadian-api-337146111457.us-central1.run.app';
+var API_URL = 'https://dian-proxy-337146111457.southamerica-east1.run.app';
 var LISTAS = { gc: {}, ar: {}, pf: {}, iv: {} };
 var DIRECTORIO = {};
 var SINGLE_DAILY_FREE = 10;
@@ -582,8 +582,11 @@ function checkBackend() {
     });
 }
 // ─── 10. getCachedResult / setCachedResult — localStorage cache with 24h TTL ───
-var RESULT_CACHE_KEY = 'nit_results';
+// v2: invalida la caché vieja que pudo guardar un estado_rut "CANCELADO" falso
+// proveniente del fallback (registronit.com) cuando la DIAN no respondía.
+var RESULT_CACHE_KEY = 'nit_results_v2';
 var RESULT_CACHE_TTL = 24 * 3600 * 1000;
+try { localStorage.removeItem('nit_results'); } catch (e) { /* noop */ }
 function getCachedResult(nit) {
   try {
     var cache = JSON.parse(localStorage.getItem(RESULT_CACHE_KEY) || '{}');
@@ -647,7 +650,7 @@ function consultarBackend(nit) {
             renderSingleQuota();
           }
         }
-        if (data && !data.error && data.razon_social) {
+        if (data && !data.error && data.razon_social && !data.dian_mantenimiento) {
           setCachedResult(nit, data);
         }
         return data;
@@ -678,6 +681,7 @@ function mergeResults(offline, online) {
   merged.departamento = online.departamento || '';
   merged.municipio = online.municipio || '';
   merged.fuente = online.fuente || 'DIAN MUISCA';
+  merged.dianMantenimiento = !!online.dian_mantenimiento;
   merged.encontrado = true;
   return merged;
 }
@@ -710,16 +714,21 @@ async function consultarSingle() {
     // El spinner ya está en el placeholder de razón social
     consultarBackend(input).then(function(online) {
       if (!online || !online._from_cache) consumeQuota();
+      var enMantenimiento = !!(online && online.dian_mantenimiento);
       if (online && !online.error) {
         r = mergeResults(r, online);
         renderSingleResult(r);
       } else {
         // DIAN no respondió o devolvió error: cerrar el spinner con estado final
         r._searchDone = true;
+        if (enMantenimiento) r.dianMantenimiento = true;  // mostrar banner aunque el fallback no halle nombre
         renderSingleResult(r);
       }
       // Resultado DIAN recibido
-      if (online && online.error) {
+      if (enMantenimiento) {
+        // El portal oficial también está caído: NO enviar al usuario allá.
+        // El banner de mantenimiento ya explica la situación; no duplicar mensajes.
+      } else if (online && online.error) {
         document.getElementById('singleResult').innerHTML += '<div style="margin-top:10px;padding:12px 16px;background:#FEF3C7;border:1px solid #FDE68A;border-radius:10px;font-size:.82rem;color:#92400E;line-height:1.5">'
           + '<div style="font-weight:700;margin-bottom:4px">No se pudo consultar en DIAN MUISCA</div>'
           + '<div style="font-size:.78rem">Puedes consultar directamente en: <a href="https://muisca.dian.gov.co/WebRutMuisca/DefConsultaEstadoRUT.faces" target="_blank" rel="noopener" style="color:#1E40AF;font-weight:600">Portal MUISCA DIAN</a></div></div>';
@@ -757,6 +766,12 @@ function renderSingleResult(r) {
   html += '</div>';
   html += '<div class="sr-dv">DV: ' + r.dv + '</div>';
   html += '</div>';
+  if (r.dianMantenimiento) {
+    html += '<div style="margin-bottom:16px;padding:14px 18px;border-radius:12px;border:1px solid #FDE68A;background:#FEF3C7;font-size:.85rem;color:#92400E;line-height:1.5">';
+    html += '<strong>⚠️ La DIAN tiene su portal de Consulta de Estado RUT en mantenimiento</strong> (es del lado de la DIAN, no de esta herramienta).<br>';
+    html += 'Por eso el <strong>estado del RUT en vivo</strong> (activo/cancelado/suspendido) no se puede verificar en este momento. El resto de la información que ves abajo (razón social, gran contribuyente, autorretenedor, proveedor ficticio) sí está disponible. Vuelve a intentar más tarde para el estado oficial.';
+    html += '</div>';
+  }
   if (r.estadoRut) {
     var esActivo = r.estadoRut === 'ACTIVO';
     html += '<div style="margin-bottom:16px;padding:16px 20px;border-radius:12px;border:2px solid ' + (esActivo ? 'var(--g200)' : '#FECACA') + ';background:' + (esActivo ? 'var(--g50)' : '#FEF2F2') + ';display:flex;align-items:center;gap:12px">';
