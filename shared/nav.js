@@ -326,9 +326,7 @@ var MEGA_MENU_HTML='<div class="mega-grid"><div class="mega-group"><h6>📂 Exó
   '  <div class="nav-links" id="navLinks">'+
        /* Links directos de alto tráfico */
   '    <a href="'+P+'exogena-suite.html">Exógena</a>'+
-  '    <a href="'+P+'renta-juridica.html">Renta F110</a>'+
   '    <a href="'+P+'renta-personas-naturales.html">Renta PN F210</a>'+
-  '    <a href="'+P+'sitemap.html">🗺️ Mapa</a>'+
        /* Mega-menu dropdown */
   '    <div class="nav-dropdown" id="navDropdown">'+
   '      <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true" aria-label="Abrir menú de herramientas" onclick="var dd=document.getElementById(\'navDropdown\');dd.classList.toggle(\'open\');this.setAttribute(\'aria-expanded\',dd.classList.contains(\'open\'))">'+
