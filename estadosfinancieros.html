@@ -329,7 +329,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 <script defer src="shared/pro.js?v=848fbf16"></script>
 <script defer src="shared/pro-gate.js?v=c9ccfa6c"></script>
 <script defer src="shared/toast.js?v=9d7a298c"></script>
-<script defer src="shared/nav.js?v=feb6be5e"></script>
+<script defer src="shared/nav.js?v=628a5456"></script>
 <script defer src="shared/pro-banner.js?v=a5944c54"></script>
 <div class="container">
   <div class="header"><div>
@@ -2650,7 +2650,20 @@ function getPeriodoERI(){
     return`Del ${d.getDate()} de ${meses[d.getMonth()]} al ${h.getDate()} de ${meses[h.getMonth()]} de ${h.getFullYear()}`;
   }
   const year=document.getElementById('cfgYear').value;
-  return`Del 1 de enero al 31 de diciembre de ${year}`;
+  return`Del 1 de enero al ${corteFecha()}`;
+}
+/* Fecha de corte legible ("31 de diciembre de 2026" o "28 de febrero de 2026").
+   Lee cfgFechaCorte para que los EEFF intermedios reflejen el corte real y no
+   asuman cierre anual. Fallback: 31 de diciembre del año configurado. */
+function corteFecha(){
+  const meses=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const v=document.getElementById('cfgFechaCorte')?.value;
+  if(v){
+    const d=new Date(v+'T12:00:00');
+    return`${d.getDate()} de ${meses[d.getMonth()]} de ${d.getFullYear()}`;
+  }
+  const year=document.getElementById('cfgYear')?.value;
+  return`31 de diciembre de `+year;
 }
 /* Sincroniza inputs hidden cuando cambia la fecha de corte */
 function onFechaCorteChange(){
@@ -3265,7 +3278,7 @@ function buildESFHtml(){
     +'<h2>'+empresa+'</h2>'
     +'<p>NIT: '+nit+'</p>'
     +'<h3>Estado de Situaci\u00f3n Financiera'+(comp?' Comparativo':'')+'</h3>'
-    +'<p>Al 31 de diciembre de '+year+(comp?' (con comparativo '+yearAnt+')':'')+'</p>'
+    +'<p>Al '+corteFecha()+(comp?' (con comparativo '+yearAnt+')':'')+'</p>'
     +'<p style="font-size:10px;color:#888">(Cifras expresadas en '+unitLabel(moneda)+')</p>'
     +'</div>';
   // Column headers
@@ -3927,7 +3940,7 @@ function buildECPHtml(){
   const hasDC=colMap.deb>=0&&colMap.cre>=0;
   const hasIni=hasChangeData();
   let h=`<div class="eeff-doc">
-<div class="doc-header"><strong>${empresa}</strong><br>NIT: ${nit}<br><span style="font-size:12px;font-weight:700">ESTADO DE CAMBIOS EN EL PATRIMONIO</span><br><span style="font-size:11px">Al 31 de diciembre de ${year}</span><br><span style="font-size:10px;color:#888">(Cifras expresadas en ${monedaLabel})</span></div>`;
+<div class="doc-header"><strong>${empresa}</strong><br>NIT: ${nit}<br><span style="font-size:12px;font-weight:700">ESTADO DE CAMBIOS EN EL PATRIMONIO</span><br><span style="font-size:11px">Al ${corteFecha()}</span><br><span style="font-size:10px;color:#888">(Cifras expresadas en ${monedaLabel})</span></div>`;
   h+=`<table class="ecp-table"><thead><tr>
     <th style="width:35%">Componente</th>`;
   if(hasIni) h+=`<th style="width:16%">Saldo Inicial</th>`;
@@ -4115,7 +4128,7 @@ function buildPoliciesHtml(){
   const fraseConstitucion=fechaConstStr?`fue constituida el ${fechaConstStr} de acuerdo con las leyes colombianas`:'fue constituida de acuerdo con las leyes colombianas';
   const fraseDuracion=duracion?` Su término de duración es ${duracion}.`:'';
   h+=policySection('1. Entidad Reportante',
-    `${empresa}, identificada con NIT ${nit}, es una entidad domiciliada en ${ciudad}, Colombia.${fraseTipoSoc}${fraseDomicilio} La entidad aplica el marco técnico normativo de ${tipoLabel}.\n\nLa entidad ${fraseConstitucion} y ${objetoFrase}.${fraseDuracion}\n\nLos presentes estados financieros corresponden al período comprendido entre el 1 de enero y el 31 de diciembre de ${year}.`);
+    `${empresa}, identificada con NIT ${nit}, es una entidad domiciliada en ${ciudad}, Colombia.${fraseTipoSoc}${fraseDomicilio} La entidad aplica el marco técnico normativo de ${tipoLabel}.\n\nLa entidad ${fraseConstitucion} y ${objetoFrase}.${fraseDuracion}\n\nLos presentes estados financieros corresponden al período comprendido entre el 1 de enero y el ${corteFecha()}.`);
   // 2. Bases de Presentacion
   h+=policySection('2. Bases de Presentación',
     `Los estados financieros han sido preparados de conformidad con las ${tipoLabel}, y las interpretaciones emitidas y aceptadas por el Consejo Técnico de la Contaduría Pública (CTCP).\n\nLos estados financieros se presentan en pesos colombianos (COP), que es la moneda funcional y de presentación de la entidad.\n\nLos estados financieros se preparan sobre la base del costo histórico, excepto por ciertos instrumentos financieros que se miden a valor razonable.\n\nLa preparación de estados financieros de conformidad con las ${tipoLabel} requiere el uso de ciertas estimaciones contables críticas. También requiere que la administración ejerza su juicio en el proceso de aplicar las políticas contables de la entidad.\n\nEstos estados financieros han sido aprobados para su emisión por la administración de la entidad el [FECHA].`);
@@ -4205,7 +4218,7 @@ function buildPoliciesHtml(){
     `La preparación de los estados financieros requiere que la administración realice estimaciones y supuestos que afectan los importes reportados de activos, pasivos, ingresos y gastos, y la revelación de activos y pasivos contingentes a la fecha de los estados financieros.\n\nLas principales estimaciones y juicios incluyen:\n\n- Deterioro de cuentas por cobrar: La entidad evalúa periódicamente la recuperabilidad de las cuentas por cobrar con base en la antigüedad y las condiciones de mercado.\n\n- Vida útil y valor residual de PPE: La vida útil y el valor residual se determinan con base en la experiencia previa y las condiciones esperadas de uso.\n\n- Provisiones: Las provisiones requieren estimaciones sobre la probabilidad de ocurrencia y el monto de las obligaciones.\n\n- Valor neto realizable de inventarios: Se estima considerando el precio de venta menos los costos necesarios para la venta.\n\n- Impuesto diferido: Se requiere juicio para determinar la probabilidad de obtención de beneficios fiscales futuros contra los cuales utilizar las diferencias temporarias deducibles.\n\nLas estimaciones se revisan periódicamente. Los cambios se reconocen en el período en que se revisa la estimación si el cambio afecta solo ese período, o en períodos futuros si afecta tanto al período actual como a períodos posteriores.`);
   // 5. Hechos posteriores
   h+=policySection('5. Hechos posteriores al período sobre el que se informa',
-    `[Incluir aquí cualquier hecho significativo ocurrido entre la fecha de cierre (31 de diciembre de ${year}) y la fecha de aprobación de los estados financieros que pueda afectar la situación financiera o los resultados de la entidad.\n\nSi no existen hechos posteriores significativos, indicar: "Entre la fecha de cierre de los estados financieros y la fecha de su autorización para su publicación, no han ocurrido hechos que requieran ajuste o revelación en los presentes estados financieros."]`);
+    `[Incluir aquí cualquier hecho significativo ocurrido entre la fecha de cierre (${corteFecha()}) y la fecha de aprobación de los estados financieros que pueda afectar la situación financiera o los resultados de la entidad.\n\nSi no existen hechos posteriores significativos, indicar: "Entre la fecha de cierre de los estados financieros y la fecha de su autorización para su publicación, no han ocurrido hechos que requieran ajuste o revelación en los presentes estados financieros."]`);
   return h;
 }
 function policySection(title,content,options){
@@ -4241,7 +4254,7 @@ function buildPortada(empresa,nit,year,ciudad){
     <h2 style="font-size:1.3rem;color:#2E75B6;font-weight:600;margin-bottom:8px">REVELACIONES A LOS<br>ESTADOS FINANCIEROS</h2>
     <p style="font-size:.95rem;color:#6b7280">Bajo Normas Internacionales de Información Financiera (NIIF)</p>
     <div style="width:60px;height:2px;background:#D6E4F0;margin:20px 0"></div>
-    <p style="font-size:1rem;color:#1B3A5C;font-weight:600">Al 31 de diciembre de ${year}</p>
+    <p style="font-size:1rem;color:#1B3A5C;font-weight:600">Al ${corteFecha()}</p>
     <p style="font-size:.82rem;color:#999;margin-top:4px">(Cifras expresadas en ${unitLabel(document.getElementById('cfgMoneda').value)})</p>
     <div style="margin-top:60px;font-size:.85rem;color:#999;line-height:2">
       <p>Representante Legal: ________________________________</p>
@@ -5763,7 +5776,7 @@ async function exportRevelacionesPdf(){
     <h2 style="font-size:16px;color:${tc.primary};margin-bottom:6px;font-family:var(--eeff-font)">REVELACIONES A LOS<br>ESTADOS FINANCIEROS</h2>
     <p style="font-size:11px;color:#444">Bajo Normas Internacionales de Información Financiera (NIIF)</p>
     <div style="width:40px;height:1px;background:${tc.primary};margin:16px 0"></div>
-    <p style="font-size:12px;color:${tc.primary};font-weight:700">${(document.getElementById('cfgFechaCorte')?.value)?'Al '+new Date(document.getElementById('cfgFechaCorte').value+'T12:00:00').toLocaleDateString('es-CO',{day:'numeric',month:'long',year:'numeric'}):'Al 31 de diciembre de '+year}</p>
+    <p style="font-size:12px;color:${tc.primary};font-weight:700">${(document.getElementById('cfgFechaCorte')?.value)?'Al '+new Date(document.getElementById('cfgFechaCorte').value+'T12:00:00').toLocaleDateString('es-CO',{day:'numeric',month:'long',year:'numeric'}):'Al '+corteFecha()}</p>
     <p style="font-size:10px;color:#888;margin-top:4px">(Cifras expresadas en ${monedaLabel})</p>
     <div style="margin-top:80px;font-size:10px;color:#888;line-height:2.2">
       <p>Representante Legal: ________________________________</p>
@@ -5780,7 +5793,7 @@ async function exportRevelacionesPdf(){
       <h2>${empresa}</h2>
       <p>NIT: ${nit}</p>
       <h3>Estado de Situación Financiera</h3>
-      <p>Al 31 de diciembre de ${year}</p>
+      <p>Al ${corteFecha()}</p>
       <p>(Cifras expresadas en ${monedaLabel})</p>
     </div>
     <table>
@@ -5889,7 +5902,7 @@ async function exportRevelacionesPdf(){
       <h2>${empresa}</h2>
       <p>NIT: ${nit}</p>
       <h3>Estado de Cambios en el Patrimonio</h3>
-      <p>Al 31 de diciembre de ${year}</p>
+      <p>Al ${corteFecha()}</p>
       <p>(Cifras expresadas en ${monedaLabel})</p>
     </div>
     ${buildECPWordHtml()}
@@ -6014,7 +6027,7 @@ function buildEsfWordHtml(){
     }
     return s+'</tr>';
   }
-  let h='<p style="text-align:center;font-weight:bold;font-size:11pt">'+empresa+'<br>NIT: '+nit+'<br>ESTADO DE SITUACI\u00d3N FINANCIERA'+(comp?' COMPARATIVO':'')+'<br>Al 31 de diciembre de '+year+(comp?' (con comparativo '+yearAnt+')':'')+'<br><span style="font-size:9pt;color:#888;font-style:italic;font-weight:normal">(Cifras expresadas en '+unitLabel(moneda)+')</span></p>';
+  let h='<p style="text-align:center;font-weight:bold;font-size:11pt">'+empresa+'<br>NIT: '+nit+'<br>ESTADO DE SITUACI\u00d3N FINANCIERA'+(comp?' COMPARATIVO':'')+'<br>Al '+corteFecha()+(comp?' (con comparativo '+yearAnt+')':'')+'<br><span style="font-size:9pt;color:#888;font-style:italic;font-weight:normal">(Cifras expresadas en '+unitLabel(moneda)+')</span></p>';
   h+='<table>';
   h+='<tr><th></th><th class="num" style="width:50px">Nota</th><th class="num">'+year+'</th>'+(comp?'<th class="num">'+yearAnt+'</th>'+(showVar?'<th class="num">Var. $</th><th class="num">Var. %</th>':''):'')+'</tr>';
   h+='<tr><td colspan="'+cols+'" class="section-row">ACTIVOS</td></tr>';
@@ -6258,7 +6271,7 @@ ${(function(){const t=imgTag('cfgLogoEmpresa',64,'margin-bottom:6pt');return t?t
 <h1>Certificación de los Estados Financieros</h1>
 <p style="text-align:right">${ciudad}, ${fechaStr}</p>
 <p><strong>Los suscritos Representante Legal y Contador Público de ${empresa}, identificada con NIT ${nit}, certificamos en cumplimiento del artículo 37 de la Ley 222 de 1995, que:</strong></p>
-<p>Hemos preparado los Estados Financieros con corte al 31 de diciembre de ${year}, comprendidos por el Estado de Situación Financiera, el Estado de Resultados, el Estado de Cambios en el Patrimonio, el Estado de Flujos de Efectivo y las Notas a los Estados Financieros, conforme al marco técnico normativo de ${tipoLabel}.</p>
+<p>Hemos preparado los Estados Financieros con corte al ${corteFecha()}, comprendidos por el Estado de Situación Financiera, el Estado de Resultados, el Estado de Cambios en el Patrimonio, el Estado de Flujos de Efectivo y las Notas a los Estados Financieros, conforme al marco técnico normativo de ${tipoLabel}.</p>
 <p>Antes de ser puestos a disposición y consideración de terceros, hemos verificado las siguientes afirmaciones contenidas en ellos:</p>
 <p><strong>a)</strong> Los activos y pasivos de la entidad existen en la fecha de corte y las transacciones registradas se han realizado durante el período.</p>
 <p><strong>b)</strong> Los hechos económicos realizados por la entidad han sido reconocidos.</p>
@@ -6361,7 +6374,7 @@ async function exportRevelacionesWord(opciones){
   <p style="font-size:11pt;color:#444">NIT: ${nit}</p>
   <p class="subtitle">REVELACIONES A LOS ESTADOS FINANCIEROS</p>
   <p style="font-size:10pt;color:#555">Bajo Normas Internacionales de Información Financiera (NIIF)</p>
-  <p class="date">Al 31 de diciembre de ${year}</p>
+  <p class="date">Al ${corteFecha()}</p>
   <p class="cifras">(Cifras expresadas en ${unitLabel(moneda)})</p>
   <p style="font-size:10pt;margin-top:12pt;color:#444">${ciudad}</p>
 ${coverSignatures}
@@ -6514,12 +6527,12 @@ async function exportCartaHallazgosWord(){
   <p style="font-size:11pt;color:#444">NIT: ${nit}</p>
   <p class="subtitle">INFORME DE HALLAZGOS — REVISIÓN ANALÍTICA DE ESTADOS FINANCIEROS</p>
   <p style="font-size:10pt;color:#555">Aplicando procedimientos analíticos conforme a la NIA 520 e indicadores forenses</p>
-  <p class="date">Período terminado al 31 de diciembre de ${year}</p>
+  <p class="date">Período terminado al ${corteFecha()}</p>
   <p class="cifras">(Cifras expresadas en ${unitLabel(moneda)})</p>
   <p style="font-size:10pt;margin-top:12pt;color:#444">${ciudad} · ${fechaHoy}</p>
 </div>
 <div class="section">1. ALCANCE Y NATURALEZA DEL TRABAJO</div>
-<p style="font-size:10.5pt;line-height:1.6;text-align:justify">Este informe documenta los resultados de procedimientos analíticos aplicados a los estados financieros de <strong>${empresa}</strong> correspondientes al período terminado al 31 de diciembre de ${year}. Los procedimientos se diseñaron siguiendo los lineamientos de la <strong>NIA 520 (Procedimientos Analíticos)</strong> y comprenden:</p>
+<p style="font-size:10.5pt;line-height:1.6;text-align:justify">Este informe documenta los resultados de procedimientos analíticos aplicados a los estados financieros de <strong>${empresa}</strong> correspondientes al período terminado al ${corteFecha()}. Los procedimientos se diseñaron siguiendo los lineamientos de la <strong>NIA 520 (Procedimientos Analíticos)</strong> y comprenden:</p>
 <ul style="font-size:10.5pt;line-height:1.6">
   <li><strong>Cuadres aritméticos y validaciones contables fundamentales</strong> (ecuación contable, consistencia ER vs balance, validación patrimonial intertemporal, conciliación ECP y EFE).</li>
   <li><strong>Errores formales</strong> sobre la naturaleza de los saldos (efectivo, deudores, inventarios, depreciación vs activo bruto, capital, cuentas transitorias).</li>
@@ -6670,7 +6683,7 @@ async function exportConciliacionEFEWord(){
   <p style="font-size:11pt;color:#444">NIT: ${nit}</p>
   <p class="subtitle">CONCILIACIÓN DEL ESTADO DE FLUJO DE EFECTIVO</p>
   <p style="font-size:10pt;color:#555">Método indirecto detallado con cuadres y verificación cruzada vs método directo</p>
-  <p class="date">Período terminado al 31 de diciembre de ${year}</p>
+  <p class="date">Período terminado al ${corteFecha()}</p>
   <p class="cifras">(Cifras expresadas en ${unitLabel(moneda)})</p>
   <p style="font-size:10pt;margin-top:12pt;color:#444">${ciudad} · ${fechaHoy}</p>
 </div>
@@ -6733,7 +6746,7 @@ async function exportRevelacionesWordPro(){
   <p>NIT: ${nit}</p>
   <p class="subtitle">REVELACIONES A LOS<br>ESTADOS FINANCIEROS</p>
   <p>Bajo Normas Internacionales de Información Financiera (NIIF)</p>
-  <p style="font-size:12pt;margin-top:16pt">Al 31 de diciembre de ${year}</p>
+  <p style="font-size:12pt;margin-top:16pt">Al ${corteFecha()}</p>
   <p style="font-size:9pt;color:#999">(Cifras expresadas en ${unitLabel(moneda)})</p>
   ${(repLegal||contador||revisor)?`<div class="firmas" style="margin-top:40pt;font-size:9pt;color:#666">
     ${repLegal?`<p>Representante Legal: <strong>${repLegal}</strong></p>`:''}
@@ -6832,7 +6845,7 @@ function exportPdfEEFF(){
   +'.sig-line{border-top:1px solid #000;padding-top:4px;font-size:9px}'
   +'</style></head><body>'
   +'<div class="page">'
-  +'<div class="header"><h2>'+empresa+'</h2><p>NIT: '+nit+'</p><h3>Estado de Situaci\u00f3n Financiera'+(comp?' Comparativo':'')+'</h3><p>Al 31 de diciembre de '+year+(comp?' (con comparativo '+yearAnt+')':'')+'</p><p>(Cifras expresadas en '+monedaLabel+')</p></div>'
+  +'<div class="header"><h2>'+empresa+'</h2><p>NIT: '+nit+'</p><h3>Estado de Situaci\u00f3n Financiera'+(comp?' Comparativo':'')+'</h3><p>Al '+corteFecha()+(comp?' (con comparativo '+yearAnt+')':'')+'</p><p>(Cifras expresadas en '+monedaLabel+')</p></div>'
   +'<table>'+hdrRow()
   +secRow('ACTIVOS')+subSecRow('Activos Corrientes')
   +pdfRow('Efectivo y equivalentes de efectivo',esfVal('efectivo'),1,0,0,cv('efectivo'))
@@ -6936,7 +6949,7 @@ async function exportExcelEEFF(){
   ws1.mergeCells('A1:'+lastColLetter+'1');ws1.getCell('A1').value=empresa;ws1.getCell('A1').font={name:FONT,bold:true,size:14,color:{argb:tc.primaryArgb}};ws1.getCell('A1').alignment={horizontal:'center'};
   ws1.mergeCells('A2:'+lastColLetter+'2');ws1.getCell('A2').value='NIT: '+nit;ws1.getCell('A2').font={name:FONT,size:10};ws1.getCell('A2').alignment={horizontal:'center'};
   ws1.mergeCells('A3:'+lastColLetter+'3');ws1.getCell('A3').value='ESTADO DE SITUACIÓN FINANCIERA'+(compXL?' COMPARATIVO':'');ws1.getCell('A3').font={name:FONT,bold:true,size:12,color:{argb:tc.primaryArgb}};ws1.getCell('A3').alignment={horizontal:'center'};
-  ws1.mergeCells('A4:'+lastColLetter+'4');ws1.getCell('A4').value=`Al 31 de diciembre de ${year} (Cifras en ${unitLabel(moneda)})`;ws1.getCell('A4').alignment={horizontal:'center'};ws1.getCell('A4').font={name:FONT,size:9,italic:true,color:{argb:tc.mutedArgb}};
+  ws1.mergeCells('A4:'+lastColLetter+'4');ws1.getCell('A4').value=`Al ${corteFecha()} (Cifras en ${unitLabel(moneda)})`;ws1.getCell('A4').alignment={horizontal:'center'};ws1.getCell('A4').font={name:FONT,size:9,italic:true,color:{argb:tc.mutedArgb}};
   let r=6;
   const xlDiv=unitDivisor();
   function xlVal(v){return Math.round((v||0)/xlDiv)}
@@ -7281,7 +7294,7 @@ function exportPoliciesPdf(){
     <h2>${empresa}</h2>
     <p>NIT: ${nit}</p>
     <h3>POLÍTICAS CONTABLES</h3>
-    <p>Año terminado el 31 de diciembre de ${year}</p>
+    <p>Año terminado el ${corteFecha()}</p>
   </div>
   ${content}
   <div class="footer">Documento generado como borrador. Debe ser revisado y aprobado por la administraci\u00f3n de la entidad.</div>
@@ -7312,7 +7325,7 @@ th{background:#D6E4F0;font-weight:bold;color:#1B3A5C}
   <h1>${empresa}</h1>
   <p>NIT: ${nit}</p>
   <p><strong>POLÍTICAS CONTABLES</strong></p>
-  <p>Año terminado el 31 de diciembre de ${year}</p>
+  <p>Año terminado el ${corteFecha()}</p>
 </div>`;
   let inTable=false;
   sections.forEach(s=>{
@@ -7625,7 +7638,7 @@ function buildNotasHtml(skipHeader,interactive){
       <div style="font-size:14pt;font-weight:bold;text-transform:uppercase;letter-spacing:.5px;color:#1B3A5C;margin:0 0 4pt 0">${empresa}</div>
       <div style="font-size:10.5pt;color:#444;margin:0 0 10pt 0">NIT: ${nit}</div>
       <div style="font-size:12.5pt;font-weight:bold;text-transform:uppercase;letter-spacing:.3px;color:#1B3A5C;margin:0 0 4pt 0">Notas a los Estados Financieros</div>
-      <div style="font-size:10.5pt;color:#444;margin:0">Al 31 de diciembre de ${year}</div>
+      <div style="font-size:10.5pt;color:#444;margin:0">Al ${corteFecha()}</div>
       <div style="font-size:9.5pt;color:#888;margin:3pt 0 0 0;font-style:italic">(Cifras expresadas en ${monedaLabel})</div>
       ${fechaEmStrN}
     </div>`;
@@ -7647,7 +7660,7 @@ function buildNotasHtml(skipHeader,interactive){
     `<p><strong>${empresa}</strong>, identificada con NIT <strong>${nit}</strong>, es una entidad domiciliada en <strong>${ciudad}</strong>, Colombia.</p>
     <p>La entidad aplica el marco técnico normativo de <strong>${tipoLabel}</strong>.</p>
     <p>Su objeto social principal comprende: ${objetoSocialTxt}.</p>
-    <p>Los presentes estados financieros corresponden al período comprendido entre el 1 de enero y el 31 de diciembre de ${year}.</p>`);
+    <p>Los presentes estados financieros corresponden al período comprendido entre el 1 de enero y el ${corteFecha()}.</p>`);
   // Nota 2
   noteNum++;
   h+=notaCard(`Nota ${noteNum} - Bases de presentación`,
@@ -7664,14 +7677,14 @@ function buildNotasHtml(skipHeader,interactive){
   if(grupos.has('efectivo')){
     noteNum++;
     h+=notaCard(`Nota ${noteNum} - Efectivo y equivalentes de efectivo`,
-      `<p>El saldo de efectivo y equivalentes de efectivo al 31 de diciembre de ${year} se compone de:</p>`+acctTable(acctsByGrupo('efectivo'))+
+      `<p>El saldo de efectivo y equivalentes de efectivo al ${corteFecha()} se compone de:</p>`+acctTable(acctsByGrupo('efectivo'))+
       `<p style="margin-top:8pt"><strong>Restricciones sobre el efectivo:</strong> <em>A la fecha de cierre, los saldos de efectivo y equivalentes de efectivo se encuentran disponibles sin restricciones de uso por parte de la entidad.</em></p>
       <p style="color:#888;font-size:9pt;font-style:italic">[Edite este texto si existen embargos, pignoraciones, fondos de garantía, depósitos en garantía u otras restricciones — Decreto 2649/1993 Art. 115 y NIIF 7]</p>`);
   }
   // Nota 5 - Inversiones
   if(grupos.has('inv_cp')||grupos.has('inv_lp')){
     noteNum++;
-    let body='<p>El detalle de las inversiones al 31 de diciembre de '+year+' es el siguiente:</p>';
+    let body='<p>El detalle de las inversiones al '+corteFecha()+' es el siguiente:</p>';
     const invCp=acctsByGrupo('inv_cp');
     const invLp=acctsByGrupo('inv_lp');
     if(invCp.length){body+='<p><strong>Inversiones a corto plazo:</strong></p>'+acctTable(invCp)}
@@ -7681,7 +7694,7 @@ function buildNotasHtml(skipHeader,interactive){
   // Nota 6 - CxC
   if(grupos.has('cxc')||grupos.has('deterioro_cartera')){
     noteNum++;
-    let body='<p>El detalle de deudores comerciales y otras cuentas por cobrar al 31 de diciembre de '+year+' es el siguiente:</p>';
+    let body='<p>El detalle de deudores comerciales y otras cuentas por cobrar al '+corteFecha()+' es el siguiente:</p>';
     body+=acctTable(acctsByGrupo('cxc'));
     const det=acctsByGrupo('deterioro_cartera');
     if(det.length){body+='<p><strong>Deterioro de cartera:</strong></p>'+acctTable(det)}
@@ -7691,12 +7704,12 @@ function buildNotasHtml(skipHeader,interactive){
   if(grupos.has('inventarios')){
     noteNum++;
     h+=notaCard(`Nota ${noteNum} - Inventarios`,
-      `<p>El detalle de los inventarios al 31 de diciembre de ${year} es el siguiente:</p>`+acctTable(acctsByGrupo('inventarios')));
+      `<p>El detalle de los inventarios al ${corteFecha()} es el siguiente:</p>`+acctTable(acctsByGrupo('inventarios')));
   }
   // Nota 8 - PPE (Ninfa #11: quitar columna código, agregar incorporaciones/bajas, añadir párrafo deterioro)
   if(grupos.has('ppe')||grupos.has('depreciacion')){
     noteNum++;
-    let body='<p>El detalle de propiedad, planta y equipo al 31 de diciembre de '+year+' es el siguiente:</p>';
+    let body='<p>El detalle de propiedad, planta y equipo al '+corteFecha()+' es el siguiente:</p>';
     const ppeAccts=acctsByGrupo('ppe');
     const depAccts=acctsByGrupo('depreciacion');
     if(ppeAccts.length||depAccts.length){
@@ -7715,12 +7728,12 @@ function buildNotasHtml(skipHeader,interactive){
   if(otrosActAccts.length){
     noteNum++;
     h+=notaCard(`Nota ${noteNum} - Otros activos`,
-      `<p>El detalle de otros activos al 31 de diciembre de ${year} es el siguiente:</p>`+acctTable(otrosActAccts));
+      `<p>El detalle de otros activos al ${corteFecha()} es el siguiente:</p>`+acctTable(otrosActAccts));
   }
   // Nota 10 - Obligaciones financieras (Ninfa #13: revelar condiciones de partidas materiales)
   if(grupos.has('oblig_fin_cp')||grupos.has('oblig_fin_lp')){
     noteNum++;
-    let body='<p>El detalle de las obligaciones financieras al 31 de diciembre de '+year+' es el siguiente:</p>';
+    let body='<p>El detalle de las obligaciones financieras al '+corteFecha()+' es el siguiente:</p>';
     const cp=acctsByGrupo('oblig_fin_cp');
     const lp=acctsByGrupo('oblig_fin_lp');
     if(cp.length){body+='<p><strong>Corto plazo:</strong></p>'+acctTable(cp)}
@@ -7732,7 +7745,7 @@ function buildNotasHtml(skipHeader,interactive){
   // Nota 11 - Proveedores y CxP
   if(grupos.has('proveedores')||grupos.has('cxp')){
     noteNum++;
-    let body='<p>El detalle de proveedores y cuentas por pagar al 31 de diciembre de '+year+' es el siguiente:</p>';
+    let body='<p>El detalle de proveedores y cuentas por pagar al '+corteFecha()+' es el siguiente:</p>';
     const prov=acctsByGrupo('proveedores');
     const cxp=acctsByGrupo('cxp');
     if(prov.length){body+='<p><strong>Proveedores:</strong></p>'+acctTable(prov)}
@@ -7743,24 +7756,24 @@ function buildNotasHtml(skipHeader,interactive){
   if(grupos.has('impuestos')){
     noteNum++;
     h+=notaCard(`Nota ${noteNum} - Impuestos, gravamenes y tasas`,
-      `<p>El detalle de impuestos por pagar al 31 de diciembre de ${year} es el siguiente:</p>`+acctTable(acctsByGrupo('impuestos')));
+      `<p>El detalle de impuestos por pagar al ${corteFecha()} es el siguiente:</p>`+acctTable(acctsByGrupo('impuestos')));
   }
   // Nota 13 - Obligaciones laborales
   if(grupos.has('laborales')){
     noteNum++;
     h+=notaCard(`Nota ${noteNum} - Obligaciones laborales`,
-      `<p>El detalle de las obligaciones laborales al 31 de diciembre de ${year} es el siguiente:</p>`+acctTable(acctsByGrupo('laborales')));
+      `<p>El detalle de las obligaciones laborales al ${corteFecha()} es el siguiente:</p>`+acctTable(acctsByGrupo('laborales')));
   }
   // Nota 14 - Provisiones
   if(grupos.has('provisiones')){
     noteNum++;
     h+=notaCard(`Nota ${noteNum} - Pasivos estimados y provisiones`,
-      `<p>El detalle de los pasivos estimados y provisiones al 31 de diciembre de ${year} es el siguiente:</p>`+acctTable(acctsByGrupo('provisiones')));
+      `<p>El detalle de los pasivos estimados y provisiones al ${corteFecha()} es el siguiente:</p>`+acctTable(acctsByGrupo('provisiones')));
   }
   // Nota 15 - Capital social (Ninfa #19: revelar número de acciones / cuotas)
   if(grupos.has('capital')||grupos.has('superavit_cap')){
     noteNum++;
-    let body='<p>El detalle del capital social al 31 de diciembre de '+year+' es el siguiente:</p>';
+    let body='<p>El detalle del capital social al '+corteFecha()+' es el siguiente:</p>';
     body+=acctTable(acctsByGrupos(['capital','superavit_cap']));
     const numAcc=parseInt((document.getElementById('cfgNumAcciones')||{}).value||'0');
     const valNom=parseFloat((document.getElementById('cfgValorNominal')||{}).value||'0');
@@ -7784,7 +7797,7 @@ function buildNotasHtml(skipHeader,interactive){
   if(grupos.has('reservas')){
     noteNum++;
     h+=notaCard(`Nota ${noteNum} - Reservas`,
-      `<p>El detalle de las reservas al 31 de diciembre de ${year} es el siguiente:</p>`+acctTable(acctsByGrupo('reservas')));
+      `<p>El detalle de las reservas al ${corteFecha()} es el siguiente:</p>`+acctTable(acctsByGrupo('reservas')));
   }
   // Nota 17 - Resultado del ejercicio (Ninfa #21: siempre comparado; Ninfa #22: dedup vs Nota 18)
   {
@@ -7811,7 +7824,7 @@ function buildNotasHtml(skipHeader,interactive){
   if(grupos.has('resultados_ant')){
     noteNum++;
     h+=notaCard(`Nota ${noteNum} - Resultados de ejercicios anteriores`,
-      `<p>El detalle de los resultados acumulados de ejercicios anteriores al 31 de diciembre de ${year} es el siguiente:</p>`+acctTable(acctsByGrupo('resultados_ant')));
+      `<p>El detalle de los resultados acumulados de ejercicios anteriores al ${corteFecha()} es el siguiente:</p>`+acctTable(acctsByGrupo('resultados_ant')));
   }
   // Nota 19 - Ingresos operacionales (Ninfa #23: revelar concepto específico que origina los ingresos)
   if(grupos.has('ing_operacionales')||grupos.has('dev_ventas')){
@@ -7820,7 +7833,7 @@ function buildNotasHtml(skipHeader,interactive){
     let body=objetoIng
       ? `<p><strong>Naturaleza de los ingresos:</strong> los ingresos de actividades ordinarias provienen del giro principal de la entidad: <em>${objetoIng}</em>. Estos ingresos se reconocen cuando se transfiere el control del bien o se ha prestado el servicio al cliente, y su importe puede medirse con fiabilidad (NIIF 15 / Sección 23 NIIF PYMES).</p>`
       : `<p style="color:#888;font-size:9pt;font-style:italic">[Diligencie el campo "Objeto social" en la sección de Configuración para que esta nota describa el concepto específico que origina los ingresos — requerido por NIC 1.117 / Sección 23 NIIF PYMES]</p>`;
-    body+='<p>El detalle de los ingresos operacionales del período terminado el 31 de diciembre de '+year+' es el siguiente:</p>';
+    body+='<p>El detalle de los ingresos operacionales del período terminado el '+corteFecha()+' es el siguiente:</p>';
     const ing=acctsByGrupo('ing_operacionales');
     if(ing.length) body+=acctTable(ing);
     const dev=acctsByGrupo('dev_ventas');
@@ -7830,7 +7843,7 @@ function buildNotasHtml(skipHeader,interactive){
   // Nota 20 - Gastos de administración y ventas
   if(grupos.has('gtos_admin')||grupos.has('gtos_ventas')){
     noteNum++;
-    let body='<p>El detalle de los gastos de administración y ventas del período terminado el 31 de diciembre de '+year+' es el siguiente:</p>';
+    let body='<p>El detalle de los gastos de administración y ventas del período terminado el '+corteFecha()+' es el siguiente:</p>';
     const admin=acctsByGrupo('gtos_admin');
     const ventas=acctsByGrupo('gtos_ventas');
     if(admin.length){body+='<p><strong>Gastos de administración:</strong></p>'+acctTable(admin,true)}
@@ -7840,7 +7853,7 @@ function buildNotasHtml(skipHeader,interactive){
   // Nota 21 - Otros ingresos y gastos
   if(grupos.has('ing_no_operacionales')||grupos.has('otros_ing')||grupos.has('gtos_no_op')){
     noteNum++;
-    let body='<p>El detalle de otros ingresos y gastos no operacionales del período terminado el 31 de diciembre de '+year+' es el siguiente:</p>';
+    let body='<p>El detalle de otros ingresos y gastos no operacionales del período terminado el '+corteFecha()+' es el siguiente:</p>';
     const oing=acctsByGrupos(['ing_no_operacionales','otros_ing']);
     const ogto=acctsByGrupo('gtos_no_op');
     if(oing.length){body+='<p><strong>Otros ingresos:</strong></p>'+acctTable(oing)}
@@ -7851,18 +7864,18 @@ function buildNotasHtml(skipHeader,interactive){
   if(grupos.has('imp_renta')){
     noteNum++;
     h+=notaCard(`Nota ${noteNum} - Impuesto de renta`,
-      `<p>El detalle del gasto por impuesto de renta del período terminado el 31 de diciembre de ${year} es el siguiente:</p>`+acctTable(acctsByGrupo('imp_renta')));
+      `<p>El detalle del gasto por impuesto de renta del período terminado el ${corteFecha()} es el siguiente:</p>`+acctTable(acctsByGrupo('imp_renta')));
   }
   // Nota 23 - Costo de ventas
   if(grupos.has('costo_ventas')||grupos.has('costo_prod')){
     noteNum++;
     h+=notaCard(`Nota ${noteNum} - Costo de ventas`,
-      `<p>El detalle del costo de ventas del período terminado el 31 de diciembre de ${year} es el siguiente:</p>`+acctTable(acctsByGrupos(['costo_ventas','costo_prod'])));
+      `<p>El detalle del costo de ventas del período terminado el ${corteFecha()} es el siguiente:</p>`+acctTable(acctsByGrupos(['costo_ventas','costo_prod'])));
   }
   // Nota - Hechos posteriores
   noteNum++;
   h+=notaCard(`Nota ${noteNum} - Hechos posteriores al período sobre el que se informa`,
-    `<p><em>Entre la fecha de cierre de los estados financieros (31 de diciembre de ${year}) y la fecha de su autorización para su publicación, no han ocurrido hechos que requieran ajuste o revelación en los presentes estados financieros.</em></p>
+    `<p><em>Entre la fecha de cierre de los estados financieros (${corteFecha()}) y la fecha de su autorización para su publicación, no han ocurrido hechos que requieran ajuste o revelación en los presentes estados financieros.</em></p>
     <p style="color:#888;font-size:9pt;font-style:italic">[Edite este texto si existen hechos posteriores significativos que deban revelarse]</p>`);
   // Nota - Contingencias
   noteNum++;
