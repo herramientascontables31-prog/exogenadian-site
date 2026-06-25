@@ -2665,6 +2665,38 @@ function corteFecha(){
   const year=document.getElementById('cfgYear')?.value;
   return`31 de diciembre de `+year;
 }
+/* Fecha de corte del comparativo, larga ("31 de diciembre de 2025" / "28 de febrero de 2025").
+   Lee cfgFechaCorteAnt para que la columna anterior refleje la fecha que el usuario eligió
+   comparar (mismo mes año anterior, cierre dic, o el mes inmediatamente anterior). */
+function corteFechaAnt(){
+  const meses=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const v=document.getElementById('cfgFechaCorteAnt')?.value;
+  if(v){const d=new Date(v+'T12:00:00');return`${d.getDate()} de ${meses[d.getMonth()]} de ${d.getFullYear()}`;}
+  const ya=Number(document.getElementById('cfgYear')?.value||0)-1;
+  return`31 de diciembre de `+ya;
+}
+/* Etiqueta de columna (encabezados de ESF/ERI/EFE/ECP/notas).
+   Cierre anual (31-dic) → solo el año, para preservar el look clásico de la mayoría.
+   Corte parcial → fecha corta "28 feb 2026" para no confundir columnas de periodos distintos. */
+function colLabel(inputId,isAnt){
+  const mesesAbr=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  const y=Number(document.getElementById('cfgYear')?.value||0);
+  const v=document.getElementById(inputId)?.value;
+  if(!v) return String(isAnt?y-1:y);
+  const d=new Date(v+'T12:00:00');
+  if(d.getMonth()===11 && d.getDate()===31) return String(d.getFullYear());
+  return`${d.getDate()} ${mesesAbr[d.getMonth()]} ${d.getFullYear()}`;
+}
+/* Texto del paréntesis "(con comparativo …)" del título del ESF.
+   Anual → solo el año (look clásico); parcial → "al 28 de febrero de 2025". */
+function compLabel(){
+  const v=document.getElementById('cfgFechaCorteAnt')?.value;
+  const ya=String(Number(document.getElementById('cfgYear')?.value||0)-1);
+  if(!v) return ya;
+  const d=new Date(v+'T12:00:00');
+  if(d.getMonth()===11 && d.getDate()===31) return String(d.getFullYear());
+  return'al '+corteFechaAnt();
+}
 /* Sincroniza inputs hidden cuando cambia la fecha de corte */
 function onFechaCorteChange(){
   const v=document.getElementById('cfgFechaCorte')?.value;
@@ -3278,14 +3310,14 @@ function buildESFHtml(){
     +'<h2>'+empresa+'</h2>'
     +'<p>NIT: '+nit+'</p>'
     +'<h3>Estado de Situaci\u00f3n Financiera'+(comp?' Comparativo':'')+'</h3>'
-    +'<p>Al '+corteFecha()+(comp?' (con comparativo '+yearAnt+')':'')+'</p>'
+    +'<p>Al '+corteFecha()+(comp?' (con comparativo '+compLabel()+')':'')+'</p>'
     +'<p style="font-size:10px;color:#888">(Cifras expresadas en '+unitLabel(moneda)+')</p>'
     +'</div>';
   // Column headers
   if(comp){
-    h+='<div class="eeff-row" style="font-weight:700;font-size:11px;color:#6B7280;border-bottom:2px solid #E5E7EB;padding:8px 0"><div></div><div class="eeff-nota" style="color:#6B7280">Notas</div><div class="eeff-val">'+year+'</div><div class="eeff-val">'+yearAnt+'</div>'+(mostrarVariaciones()?'<div class="eeff-val">Var. $</div><div class="eeff-val">Var. %</div>':'')+'</div>';
+    h+='<div class="eeff-row" style="font-weight:700;font-size:11px;color:#6B7280;border-bottom:2px solid #E5E7EB;padding:8px 0"><div></div><div class="eeff-nota" style="color:#6B7280">Notas</div><div class="eeff-val">'+colLabel('cfgFechaCorte',false)+'</div><div class="eeff-val">'+colLabel('cfgFechaCorteAnt',true)+'</div>'+(mostrarVariaciones()?'<div class="eeff-val">Var. $</div><div class="eeff-val">Var. %</div>':'')+'</div>';
   } else {
-    h+='<div class="eeff-row" style="font-weight:700;font-size:11px;color:#6B7280;border-bottom:2px solid #E5E7EB;padding:8px 0"><div></div><div class="eeff-nota" style="color:#6B7280">Notas</div><div class="eeff-val">'+year+'</div></div>';
+    h+='<div class="eeff-row" style="font-weight:700;font-size:11px;color:#6B7280;border-bottom:2px solid #E5E7EB;padding:8px 0"><div></div><div class="eeff-nota" style="color:#6B7280">Notas</div><div class="eeff-val">'+colLabel('cfgFechaCorte',false)+'</div></div>';
   }
   h+=`<div class="eeff-section">ACTIVOS</div>`;
   h+=`<div class="eeff-subsection">Activos Corrientes</div>`;
@@ -3473,7 +3505,7 @@ function buildERIHtml(){
         +'<strong>\u26a0 Periodos no comparables:</strong> el corte actual es parcial ('+tipoC+') pero el comparativo suele cubrir el a\u00f1o completo. La variaci\u00f3n % puede no ser representativa.'
         +'</div>';
     }
-    h+='<div class="eeff-row" style="font-weight:700;font-size:11px;color:#6B7280;border-bottom:2px solid #E5E7EB;padding:8px 0"><div></div><div class="eeff-nota" style="color:#6B7280">Notas</div><div class="eeff-val">'+year+'</div><div class="eeff-val">'+yearAnt+'</div>'+(mostrarVariaciones()?'<div class="eeff-val">Var. $</div><div class="eeff-val">Var. %</div>':'')+'</div>';
+    h+='<div class="eeff-row" style="font-weight:700;font-size:11px;color:#6B7280;border-bottom:2px solid #E5E7EB;padding:8px 0"><div></div><div class="eeff-nota" style="color:#6B7280">Notas</div><div class="eeff-val">'+colLabel('cfgFechaCorte',false)+'</div><div class="eeff-val">'+colLabel('cfgFechaCorteAnt',true)+'</div>'+(mostrarVariaciones()?'<div class="eeff-val">Var. $</div><div class="eeff-val">Var. %</div>':'')+'</div>';
   }
   h+=eriRow('Ingresos de actividades ordinarias','ing_operacionales',0,'41xx');
   h+=eriRow('(-) Devoluciones, rebajas y descuentos','dev_ventas',0,'4175');
@@ -3807,7 +3839,7 @@ function buildEFEHtml(metodo){
   const tot=(label,key)=>`<div class="eeff-row eeff-total"${gs}><div></div><div style="font-weight:700">${label}</div><div class="eeff-val${(d[key]||0)<0?' eeff-negative':''}" style="font-weight:700;font-family:'JetBrains Mono',monospace">${fN(d[key]||0)}</div>${ccB(key,700)}</div>`;
   let h=`<div class="eeff-doc">
 <div class="doc-header"><strong>${empresa}</strong><br>NIT: ${nit}<br><span style="font-size:12px;font-weight:700">ESTADO DE FLUJOS DE EFECTIVO${comp?' COMPARATIVO':''}</span><br><span style="font-size:11px">${metodo==='indirecto'?'Método Indirecto':'Método Directo'}</span><br><span style="font-size:11px">${periodo}</span><br><span style="font-size:10px;color:#888">(Cifras expresadas en ${monedaLabel})</span></div>`;
-  if(comp)h+=`<div class="eeff-row" style="grid-template-columns:42px 1fr 130px 130px;font-weight:700;font-size:11px;color:#6B7280;border-bottom:2px solid #E5E7EB;padding:8px 0"><div></div><div></div><div class="eeff-val">${year}</div><div class="eeff-val">${yearAnt}</div></div>`;
+  if(comp)h+=`<div class="eeff-row" style="grid-template-columns:42px 1fr 130px 130px;font-weight:700;font-size:11px;color:#6B7280;border-bottom:2px solid #E5E7EB;padding:8px 0"><div></div><div></div><div class="eeff-val">${colLabel('cfgFechaCorte',false)}</div><div class="eeff-val">${colLabel('cfgFechaCorteAnt',true)}</div></div>`;
   h+=`<div class="eeff-section">ACTIVIDADES DE OPERACIÓN</div>`;
   if(metodo==='indirecto'){
     h+=row('Utilidad neta del ejercicio','utilNeta');
@@ -4032,7 +4064,7 @@ function buildEFEWordHtml(){
   const s=(l,key)=>`<tr><td style="padding:4pt 6pt;font-size:10pt;font-weight:bold;font-family:var(--eeff-font);border-top:1pt solid #666;border-bottom:1pt solid #666">${l}</td><td style="padding:4pt 6pt;text-align:right;font-size:10pt;font-weight:bold;${MN};border-top:1pt solid #666;border-bottom:1pt solid #666">${fN(d[key]||0)}</td>${compCell(key,'font-weight:bold;border-top:1pt solid #666;border-bottom:1pt solid #666')}</tr>`;
   const sec=(l)=>`<tr><td colspan="${colspan}" style="padding:8pt 6pt 3pt;font-weight:bold;font-size:10.5pt;color:${tc.primary};font-family:var(--eeff-font);text-transform:uppercase;letter-spacing:.3px;border-bottom:1px solid ${tc.primary};background:transparent">${l}</td></tr>`;
   let h=`<table style="width:100%;border-collapse:collapse;margin:8pt 0"><tbody>`;
-  if(comp) h+=`<tr><td></td><td style="padding:3pt 6pt;text-align:right;font-weight:bold;font-size:9pt;color:${tc.primary};font-family:var(--eeff-font)">${year}</td><td style="padding:3pt 6pt;text-align:right;font-weight:bold;font-size:9pt;color:${tc.primary};font-family:var(--eeff-font)">${yearAnt}</td></tr>`;
+  if(comp) h+=`<tr><td></td><td style="padding:3pt 6pt;text-align:right;font-weight:bold;font-size:9pt;color:${tc.primary};font-family:var(--eeff-font)">${colLabel('cfgFechaCorte',false)}</td><td style="padding:3pt 6pt;text-align:right;font-weight:bold;font-size:9pt;color:${tc.primary};font-family:var(--eeff-font)">${colLabel('cfgFechaCorteAnt',true)}</td></tr>`;
   h+=sec('ACTIVIDADES DE OPERACIÓN — Método Indirecto');
   h+=r('Utilidad neta del ejercicio','utilNeta');
   if(d.ajDepreciacion||dc.ajDepreciacion) h+=r('(+) Depreciaciones','ajDepreciacion');
@@ -6027,9 +6059,9 @@ function buildEsfWordHtml(){
     }
     return s+'</tr>';
   }
-  let h='<p style="text-align:center;font-weight:bold;font-size:11pt">'+empresa+'<br>NIT: '+nit+'<br>ESTADO DE SITUACI\u00d3N FINANCIERA'+(comp?' COMPARATIVO':'')+'<br>Al '+corteFecha()+(comp?' (con comparativo '+yearAnt+')':'')+'<br><span style="font-size:9pt;color:#888;font-style:italic;font-weight:normal">(Cifras expresadas en '+unitLabel(moneda)+')</span></p>';
+  let h='<p style="text-align:center;font-weight:bold;font-size:11pt">'+empresa+'<br>NIT: '+nit+'<br>ESTADO DE SITUACI\u00d3N FINANCIERA'+(comp?' COMPARATIVO':'')+'<br>Al '+corteFecha()+(comp?' (con comparativo '+compLabel()+')':'')+'<br><span style="font-size:9pt;color:#888;font-style:italic;font-weight:normal">(Cifras expresadas en '+unitLabel(moneda)+')</span></p>';
   h+='<table>';
-  h+='<tr><th></th><th class="num" style="width:50px">Nota</th><th class="num">'+year+'</th>'+(comp?'<th class="num">'+yearAnt+'</th>'+(showVar?'<th class="num">Var. $</th><th class="num">Var. %</th>':''):'')+'</tr>';
+  h+='<tr><th></th><th class="num" style="width:50px">Nota</th><th class="num">'+colLabel('cfgFechaCorte',false)+'</th>'+(comp?'<th class="num">'+colLabel('cfgFechaCorteAnt',true)+'</th>'+(showVar?'<th class="num">Var. $</th><th class="num">Var. %</th>':''):'')+'</tr>';
   h+='<tr><td colspan="'+cols+'" class="section-row">ACTIVOS</td></tr>';
   h+='<tr><td colspan="'+cols+'" class="subsec">Activos Corrientes</td></tr>';
   h+=r('Efectivo y equivalentes de efectivo',esfVal('efectivo'),'',cv('efectivo'),'efectivo');
@@ -6135,7 +6167,7 @@ function buildEriWordHtml(){
   }
   let h='<p style="text-align:center;font-weight:bold;font-size:11pt">'+empresa+'<br>NIT: '+nit+'<br>'+eriTitle()+(comp?' COMPARATIVO':'')+'<br>'+periodo+'<br><span style="font-size:9pt;color:#888;font-style:italic;font-weight:normal">(Cifras expresadas en '+unitLabel(moneda)+')</span></p>';
   h+='<table>';
-  h+='<tr><th></th><th class="num" style="width:50px">Nota</th><th class="num">'+year+'</th>'+(comp?'<th class="num">'+yearAnt+'</th>'+(showVar?'<th class="num">Var. $</th><th class="num">Var. %</th>':''):'')+'</tr>';
+  h+='<tr><th></th><th class="num" style="width:50px">Nota</th><th class="num">'+colLabel('cfgFechaCorte',false)+'</th>'+(comp?'<th class="num">'+colLabel('cfgFechaCorteAnt',true)+'</th>'+(showVar?'<th class="num">Var. $</th><th class="num">Var. %</th>':''):'')+'</tr>';
   h+=r('Ingresos de actividades ordinarias',ingOp,'',cV('ing_operacionales'),'ing_operacionales');
   if(devVtas||cV('dev_ventas'))h+=r('(-) Devoluciones, rebajas y descuentos',devVtas,'',cV('dev_ventas'),'dev_ventas');
   h+=r('INGRESOS NETOS',ingNetos,'subtotal',cIngNetos);
@@ -6826,7 +6858,7 @@ function exportPdfEEFF(){
   function secRow(label){return '<tr><td colspan="'+cols+'" style="background:#d4e6f1;font-weight:700;text-transform:uppercase;color:#1a3c6e;padding:6px 8px">'+label+'</td></tr>'}
   function subSecRow(label){return '<tr><td colspan="'+cols+'" style="background:#eef3f8;font-weight:700;color:#2E75B6;padding:4px 8px">'+label+'</td></tr>'}
   function spaceRow(){return '<tr><td colspan="'+cols+'" style="height:8px"></td></tr>'}
-  function hdrRow(){return comp?'<tr style="font-weight:700;font-size:9px;color:#555;border-bottom:2px solid #ccc"><td></td><td style="text-align:right;padding:4px 8px">'+year+'</td><td style="text-align:right;padding:4px 8px">'+yearAnt+'</td><td style="text-align:right;padding:4px 8px">Variación</td></tr>':''}
+  function hdrRow(){return comp?'<tr style="font-weight:700;font-size:9px;color:#555;border-bottom:2px solid #ccc"><td></td><td style="text-align:right;padding:4px 8px">'+colLabel('cfgFechaCorte',false)+'</td><td style="text-align:right;padding:4px 8px">'+colLabel('cfgFechaCorteAnt',true)+'</td><td style="text-align:right;padding:4px 8px">Variación</td></tr>':''}
   const w=window.open('','_blank');
   w.document.write('<!DOCTYPE html><html><head><title>EEFF - '+empresa+'</title>'
   +'<style>'
@@ -6845,7 +6877,7 @@ function exportPdfEEFF(){
   +'.sig-line{border-top:1px solid #000;padding-top:4px;font-size:9px}'
   +'</style></head><body>'
   +'<div class="page">'
-  +'<div class="header"><h2>'+empresa+'</h2><p>NIT: '+nit+'</p><h3>Estado de Situaci\u00f3n Financiera'+(comp?' Comparativo':'')+'</h3><p>Al '+corteFecha()+(comp?' (con comparativo '+yearAnt+')':'')+'</p><p>(Cifras expresadas en '+monedaLabel+')</p></div>'
+  +'<div class="header"><h2>'+empresa+'</h2><p>NIT: '+nit+'</p><h3>Estado de Situaci\u00f3n Financiera'+(comp?' Comparativo':'')+'</h3><p>Al '+corteFecha()+(comp?' (con comparativo '+compLabel()+')':'')+'</p><p>(Cifras expresadas en '+monedaLabel+')</p></div>'
   +'<table>'+hdrRow()
   +secRow('ACTIVOS')+subSecRow('Activos Corrientes')
   +pdfRow('Efectivo y equivalentes de efectivo',esfVal('efectivo'),1,0,0,cv('efectivo'))
@@ -6959,7 +6991,7 @@ async function exportExcelEEFF(){
   if(compXL){
     const hr=ws1.getRow(5);
     hr.getCell(1).value='';
-    hr.getCell(2).value=year;hr.getCell(3).value=String(Number(year)-1);hr.getCell(4).value='Variación';
+    hr.getCell(2).value=colLabel('cfgFechaCorte',false);hr.getCell(3).value=colLabel('cfgFechaCorteAnt',true);hr.getCell(4).value='Variación';
     [2,3,4].forEach(i=>{const c=hr.getCell(i);c.font={name:FONT,bold:true,size:10,color:{argb:tc.primaryArgb}};c.alignment={horizontal:'right'};c.border={bottom:{style:'thin',color:{argb:tc.primaryArgb}}}});
   }
   function addSec(label){const row=ws1.getRow(r);row.getCell(1).value=label;for(let i=1;i<=(compXL?4:2);i++){row.getCell(i).fill={type:'pattern',pattern:'solid',fgColor:{argb:tc.sectionBgArgb}};row.getCell(i).font={name:FONT,bold:true,color:{argb:tc.primaryArgb},size:10}}r++}
@@ -7046,7 +7078,7 @@ async function exportExcelEEFF(){
   ws2.mergeCells('A4:'+lc2+'4');ws2.getCell('A4').value=getPeriodoERI()+` (Cifras en ${unitLabel(moneda)})`;ws2.getCell('A4').alignment={horizontal:'center'};ws2.getCell('A4').font={name:FONT,size:9,italic:true,color:{argb:tc.mutedArgb}};
   if(compE){
     const hr=ws2.getRow(5);
-    hr.getCell(2).value=year;hr.getCell(3).value=String(Number(year)-1);hr.getCell(4).value='Variación';
+    hr.getCell(2).value=colLabel('cfgFechaCorte',false);hr.getCell(3).value=colLabel('cfgFechaCorteAnt',true);hr.getCell(4).value='Variación';
     [2,3,4].forEach(i=>{const c=hr.getCell(i);c.font={name:FONT,bold:true,size:10,color:{argb:tc.primaryArgb}};c.alignment={horizontal:'right'};c.border={bottom:{style:'thin',color:{argb:tc.primaryArgb}}}});
   }
   ws2.views=[{state:'frozen',ySplit:compE?5:4}];
@@ -7507,8 +7539,8 @@ function buildNotasHtml(skipHeader,interactive){
     const totN='padding:2pt 4pt 1pt;text-align:right;font-weight:bold;border-top:1px solid #1B3A5C;border-bottom:3px double #1B3A5C;font-size:9pt;'+mono;
     let grandTotal=0,grandTotalComp=0;
     let h='<table style="width:100%;border-collapse:collapse;margin:3pt 0 6pt 0;'+ser+'">';
-    h+='<thead><tr><th style="'+th+'">Concepto</th><th style="'+thN+'">'+year+'</th>';
-    if(comp)h+='<th style="'+thN+'">'+yearAnt+'</th><th style="'+thN+'">Variaci\u00f3n</th>';
+    h+='<thead><tr><th style="'+th+'">Concepto</th><th style="'+thN+'">'+colLabel('cfgFechaCorte',false)+'</th>';
+    if(comp)h+='<th style="'+thN+'">'+colLabel('cfgFechaCorteAnt',true)+'</th><th style="'+thN+'">Variaci\u00f3n</th>';
     h+='</tr></thead><tbody>';
     // Helper: emitir una fila plana (sin sangría) de aux o consolidación
     function rowPlano(name,v,cv,dv){
@@ -7812,7 +7844,7 @@ function buildNotasHtml(skipHeader,interactive){
     const rAnt=(compEsfData&&compEsfData.resultado_periodo)||0;
     const diff=rAct-rAnt;
     body+='<table style="width:100%;border-collapse:collapse;margin:3pt 0 6pt 0;'+ser+'">';
-    body+='<thead><tr><th style="padding:5pt 8pt;border-bottom:1px solid #1B3A5C;text-align:left;color:#1B3A5C;font-size:9pt;text-transform:uppercase">Concepto</th><th style="padding:5pt 8pt;border-bottom:1px solid #1B3A5C;text-align:right;color:#1B3A5C;font-size:9pt">'+year+'</th><th style="padding:5pt 8pt;border-bottom:1px solid #1B3A5C;text-align:right;color:#1B3A5C;font-size:9pt">'+yearAnt+'</th><th style="padding:5pt 8pt;border-bottom:1px solid #1B3A5C;text-align:right;color:#1B3A5C;font-size:9pt">Variación</th></tr></thead><tbody>';
+    body+='<thead><tr><th style="padding:5pt 8pt;border-bottom:1px solid #1B3A5C;text-align:left;color:#1B3A5C;font-size:9pt;text-transform:uppercase">Concepto</th><th style="padding:5pt 8pt;border-bottom:1px solid #1B3A5C;text-align:right;color:#1B3A5C;font-size:9pt">'+colLabel('cfgFechaCorte',false)+'</th><th style="padding:5pt 8pt;border-bottom:1px solid #1B3A5C;text-align:right;color:#1B3A5C;font-size:9pt">'+colLabel('cfgFechaCorteAnt',true)+'</th><th style="padding:5pt 8pt;border-bottom:1px solid #1B3A5C;text-align:right;color:#1B3A5C;font-size:9pt">Variación</th></tr></thead><tbody>';
     body+='<tr><td style="padding:3pt 8pt;font-size:10pt">Resultado del ejercicio (ingresos menos gastos)</td>';
     body+='<td style="padding:3pt 8pt;text-align:right;'+mono+'">'+fN(rAct)+'</td>';
     body+='<td style="padding:3pt 8pt;text-align:right;'+mono+';color:#666">'+(hasComparative?fN(rAnt):'<em style="color:#aaa">— sin comparativo cargado</em>')+'</td>';
