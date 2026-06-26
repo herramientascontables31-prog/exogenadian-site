@@ -96,7 +96,7 @@
           out.push({
             titulo: 'Honorarios: conviene cambiar al modo ' + (haciaTrabajo ? 'rentas de trabajo (25% exento)' : 'no laboral (costos reales)'),
             detalle: haciaTrabajo
-              ? 'Tratando los honorarios como rentas de trabajo el impuesto a cargo bajaria ' + fmt(difModo) + '. Requisitos del par. 5 Art. 206 ET: haber contratado menos de 2 trabajadores y RENUNCIAR a imputar costos (las opciones son excluyentes: 25% exento O costos).'
+              ? 'Tratando los honorarios como rentas de trabajo el impuesto a cargo bajaria ' + fmt(difModo) + '. El 25% exento (par. 5 Art. 206 ET) aplica a las rentas de trabajo que NO provienen de un vinculo laboral; para que los honorarios clasifiquen como rentas de trabajo (y no como "no laborales") no se debe haber vinculado 2 o mas trabajadores por 90+ dias (Art. 1.2.1.20.3 DUR 1625/2016). Ademas el 25% es EXCLUYENTE con imputar costos: o el 25% exento o los costos, no ambos.'
               : 'Imputando los costos reales (modo no laboral, en vez del 25% exento) el impuesto a cargo bajaria ' + fmt(difModo) + '. Requiere soportes de los costos; si superan el 60% de los ingresos aplica la casilla 140 y el soporte con factura electronica (Art. 336-1 ET).',
             ahorro: Math.round(difModo)
           });

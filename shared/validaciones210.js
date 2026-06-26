@@ -239,9 +239,11 @@
     // B.5 #3 — Dependientes Art. 387 sin Art. 336 num. 3 inc. 2 (oportunidad de planeación)
     var depArt387 = (estado.cedulaGeneral && estado.cedulaGeneral.dependientesArt387Numero) || 0;
     if(estado.cedulaGeneral){
-      // Heurística: si hay deducciones nominales > 0 en trabajo Y no hay Art. 336 num. 3 inc. 2
+      // Si el declarante registra dependientes (Art. 387) pero NO la deduccion adicional del
+      // Art. 336 num. 3 inc. 2, sugerir aprovecharla. (Antes leia resultado.capsAplicados, que
+      // el motor no produce, por lo que la advertencia nunca se disparaba.)
       var depArt336 = (estado.cedulaGeneral.dependientesArt336Numero) || 0;
-      var hayDepArt387 = (resultado.capsAplicados && resultado.capsAplicados.dedDep387 > 0);
+      var hayDepArt387 = depArt387 > 0;
       if(hayDepArt387 && depArt336 === 0){
         var ahorroPotencial = Math.min(4, 1) * 72 * p.uvt; // mínimo 1 dependiente
         advertencias.push({

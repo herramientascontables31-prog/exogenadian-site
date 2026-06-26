@@ -399,7 +399,7 @@
       { tipo: 'banda', titulo: 'INFORMACIÓN ADICIONAL' },
       { tipo: 'casilla', cas: 138, etiqueta: 'Número de dependientes económicos (Art. 336 num. 3 inc. 2)',         motorPath: '_depArt336Num',   categoria: 'subtotal', tipoValor: 'numero' },
       { tipo: 'casilla', cas: 139, etiqueta: 'Deducción dependientes Art. 336 num. 3 inc. 2 (72 UVT × dep, máx 4)', motorPath: '_depArt336Pesos', categoria: 'subtotal', comentario: 'capDep4' },
-      { tipo: 'casilla', cas: 140, etiqueta: 'Superó tope indicativo Art. 336 num. 3 (40% / 1.340 UVT)',          motorPath: '_excedeTope',      categoria: 'alerta' },
+      { tipo: 'casilla', cas: 140, etiqueta: 'Marca X: rentas de trabajo sin vínculo laboral con costos > 60% de los ingresos (Art. 336-1)', motorPath: '_costos60', categoria: 'alerta' },
       { tipo: 'casilla', cas: 141, etiqueta: 'Aporte voluntario (Art. 244-1 ET)',                                  motorPath: null,              categoria: 'input' }
     ];
   }
@@ -423,6 +423,17 @@
       case '_depArt336Num':   return (ctx.estado.cedulaGeneral && ctx.estado.cedulaGeneral.dependientesArt336Numero) || 0;
       case '_depArt336Pesos': return (r.cedulaGeneral && r.cedulaGeneral.tope && r.cedulaGeneral.tope.deduccionesFueraTope && r.cedulaGeneral.tope.deduccionesFueraTope.dependientesArt336) || 0;
       case '_excedeTope':     return (r.cedulaGeneral && r.cedulaGeneral.tope) ? (r.cedulaGeneral.tope.excedeTope ? 'SÍ' : 'NO') : 'NO';
+      case '_costos60': {
+        // Casilla 140 (Art. 336-1): marcar X si en rentas de trabajo sin vínculo laboral
+        // (honorarios) o no laborales los costos imputados superan el 60% de los ingresos.
+        var sc140 = (r.cedulaGeneral && r.cedulaGeneral.subcedulas) || {};
+        var subs140 = [sc140.honorarios, sc140.noLaboral];
+        for(var i140 = 0; i140 < subs140.length; i140++){
+          var s140 = subs140[i140];
+          if(s140 && s140.ingresosBrutos > 0 && (s140.costos || 0) / s140.ingresosBrutos > 0.60) return 'SÍ';
+        }
+        return 'NO';
+      }
     }
     return getByPath(r, path);
   }
@@ -724,8 +735,9 @@
           cellNota.font = { name:FONT_BASE, size:8, bold:true, color:{argb:COLORS.alertText} };
         }
         if(item.cas === 140){
-          cellVal.value = (r.cedulaGeneral.tope.excedeTope ? 'SÍ' : 'NO');
-          cellNota.value = 'Verificar planeación tributaria si "SÍ"';
+          cellNota.value = (cellVal.value === 'SÍ')
+            ? 'Marca la casilla 140 y soporta TODOS los costos con factura/nómina electrónica (Art. 336-1)'
+            : 'Costos ≤ 60%: no requiere marcar';
         }
         if(item.cas === 91){
           cellNota.value = 'Suma rentas líquidas subcédulas (sin perdidas Art. 331)';
