@@ -140,7 +140,8 @@
 
     // Ingreso neto = bruto - INCRNGO - costos (capital y no laboral)
     // Para trabajo: bruto incluye salario + cesantias e intereses. INCRNGO incluye salud y pension.
-    var ingresoNeto = maxZero(ing + ces - incrngo - costos);
+    var rentaBrutaSubcedula = ing + ces - incrngo - costos;  // con signo (puede ser negativa)
+    var ingresoNeto = maxZero(rentaBrutaSubcedula);
 
     // Renta exenta 25% Art. 206 num. 10 — solo trabajo y honorarios modo trabajo
     var exenta25 = 0;
@@ -161,12 +162,11 @@
     // Renta liquida ordinaria de la subcedula (antes de aplicar tope global)
     var rentaLiquidaAntesExentas = maxZero(ingresoNeto + ece);
     var rentaSinTope = rentaLiquidaAntesExentas - exentasYDeducciones;
-    // Las rentas exentas y deducciones NO generan perdida: se limitan en la casilla 92
-    // (min 40% / 1.340 UVT / c91). El ingresoNeto ya esta pisado en 0, asi que no hay
-    // perdida real de subcedula que propagar a la c91 (un eventual exceso de costos se
-    // difiere como perdida fiscal de anios siguientes, Art. 147 ET, no compensa en el anio).
-    // Antes: perdida = max(0, exentas - rentaLiquida) reducia indebidamente la c91 (subpago).
-    var perdida = 0;
+    // Perdida liquida de la subcedula (casillas 55/71/88 del 210): es la perdida REAL, cuando
+    // los costos + INCRNGO superan los ingresos. NO la generan las exentas/deducciones (esas se
+    // limitan en la casilla 92). La perdida se difiere (Art. 147 ET) y NO reduce la c91 en el
+    // anio: cada subcedula se piso en 0 para la c91 (ver calcularCedulaGeneral).
+    var perdida = rentaBrutaSubcedula < 0 ? -rentaBrutaSubcedula : 0;
 
     return {
       ingresosBrutos: ing,
@@ -250,13 +250,15 @@
     var noLaboral = calcularSubcedulaNoLaboral(input.noLaboral || {}, year);
 
     // 2) Casilla 91: Renta liquida cedular general (antes de exentas y deducciones limitadas)
-    //    Suma rentas liquidas - perdidas (compensables entre subcedulas, no contra trabajo)
+    //    = suma de las rentas liquidas POSITIVAS de cada subcedula (las perdidas se difieren).
     var sumRentas = trabajo.rentaLiquidaAntesExentas
                   + honorarios.rentaLiquidaAntesExentas
                   + capital.rentaLiquidaAntesExentas
                   + noLaboral.rentaLiquidaAntesExentas;
-    var sumPerdidas = honorarios.perdida + capital.perdida + noLaboral.perdida;
-    var c91 = maxZero(sumRentas - sumPerdidas);
+    // Cada subcedula ya esta pisada en 0 (maxZero): una perdida real de capital/no laboral NO
+    // compensa en el anio contra las demas subcedulas (se difiere, Art. 147 ET, y se reporta en
+    // las casillas 55/71/88). Por eso la c91 es la suma de las rentas liquidas positivas.
+    var c91 = maxZero(sumRentas);
 
     // 3) Casilla 92: Total exentas y deducciones imputables, limitadas al tope
     //    Tope = min(40% × c91, 1340 UVT, c91)
