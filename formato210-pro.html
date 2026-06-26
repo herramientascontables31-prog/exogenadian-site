@@ -2415,12 +2415,13 @@ function construirEstado(){
         otrasRentasExentas: 0,
         deduccionesNominales: dedNomNoLaboral
       },
-      // Concepto DIAN 416/2025: desde AG2025 el 1er dependiente toma el 10% (Art.387) y
-      // los ADICIONALES (hasta 4 distintos) toman 72 UVT c/u (Art.336). AG2024: cada uno 72 UVT.
-      // Decreto 2231/2025: desde AG2025 la deducción 72 UVT solo aplica a RENTA LABORAL
-      // (salarios), excluye honorarios → sin rentas de trabajo no aplica.
-      dependientesArt336Numero: ((year >= 2025 && trabIngBruto <= 0) ? 0
-        : (year >= 2025 ? Math.max(depArt387Num - 1, 0) : depArt387Num)),
+      // Dependientes Art. 336 num. 3 inc. 2: 72 UVT por dependiente, hasta 4 (Decreto 2231 de 2023).
+      // Aplica a rentas de trabajo (salarios u honorarios por servicios personales); con relación
+      // laboral COEXISTE con el 10% del Art. 387 sobre el MISMO dependiente, sin excluir ninguno
+      // (Conceptos DIAN 416-3966 de 2023 y 433 de 2024; vigente desde AG2023). El motor limita el
+      // VALOR a la renta de trabajo disponible, así que basta pasar el número de dependientes (el
+      // mismo del Art. 387), con tope de 4.
+      dependientesArt336Numero: Math.min(depArt387Num, 4),
       facturaElectronica1Pct: v('ded1PctFE'),
       deduccionVehiculoElectrico: v('dedVehElec')
     },
