@@ -79,6 +79,28 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
   .form-grid{grid-template-columns:1fr}
   .container{padding:12px}
 }
+/* ─── Liquidación masiva ─── */
+.dropzone{border:2px dashed #cbd5e1;border-radius:10px;padding:32px 20px;text-align:center;background:#FAFBFC;color:var(--muted);cursor:pointer;transition:.15s}
+.dropzone:hover{border-color:var(--green);background:var(--green2)}
+.dropzone.dragover{border-color:var(--green);background:var(--green3);color:var(--pri)}
+.dropzone strong{color:var(--text)}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--green);color:#fff;font-weight:700;font-size:.75rem;flex-shrink:0}
+.data-table{width:100%;border-collapse:collapse;font-size:.8rem;border:1px solid var(--border)}
+.data-table th{background:var(--pri);color:#fff;padding:7px 9px;text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.3px;white-space:nowrap}
+.data-table td{padding:6px 9px;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:.76rem;white-space:nowrap}
+.data-table td.t{font-family:'DM Sans',sans-serif;white-space:normal}
+.data-table tr:nth-child(even) td{background:#FAFBFC}
+.data-table tr.error-row td{background:#FEF2F2}
+.data-table tr.total-row td{background:var(--pri);color:#fff;font-weight:700}
+.badge-ok{display:inline-block;background:var(--green3);color:#065F46;font-size:.68rem;font-weight:700;padding:2px 7px;border-radius:10px}
+.badge-err{display:inline-block;background:#FEE2E2;color:#991B1B;font-size:.68rem;font-weight:700;padding:2px 7px;border-radius:10px}
+.kpis-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.kpi-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px 14px;border-left:4px solid var(--pri2)}
+.kpi-card.green{border-left-color:var(--green)}.kpi-card.amber{border-left-color:var(--amber)}
+.kpi-card .lbl{font-size:.68rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+.kpi-card .val{font-size:1.05rem;font-weight:800;font-family:'JetBrains Mono',monospace;margin-top:3px;color:var(--pri)}
+.error-list{margin-top:10px;padding:10px 14px;background:#FEF2F2;border:1px solid #FECACA;border-radius:8px;font-size:.76rem;color:#991B1B;line-height:1.6}
+.error-list ul{padding-left:18px;margin-top:4px}
 @media print {
   body{background:#fff!important;color:#000!important;font-size:11pt;margin:0;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   body > *:not(.container){display:none!important}
@@ -189,6 +211,65 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
   <button class="btn btn-blue" onclick="window.print()">&#128424; Imprimir / PDF</button>
   <button class="btn btn-outline" onclick="copiarTexto()">&#128203; Copiar resumen</button>
 </div>
+<div class="card" id="masivaCard" style="margin-top:28px;border:2px solid var(--pri3)">
+  <div class="card-title" style="font-size:1.1rem">&#128202; ¿Tienes varios empleados? Liquida la prima en masivo</div>
+  <p style="font-size:.88rem;color:var(--muted);margin-bottom:6px">
+    Descarga la plantilla, escribe tus empleados (con su <strong>tipo de documento</strong>), súbela y obtén la prima de todos por semestre, con la <strong>retención en la fuente calculada y explicada</strong>. El mismo archivo te sirve de <strong>historial</strong>: lo actualizas cada semestre y lo vuelves a subir. Todo en tu navegador — no se guarda en la nube.
+  </p>
+  <div style="margin:16px 0 8px;font-weight:700;color:var(--pri);display:flex;align-items:center;gap:8px;font-size:.92rem"><span class="step-num">1</span> Descarga la plantilla</div>
+  <button class="btn btn-blue" onclick="primaDescargarPlantilla()">&#128190; Descargar plantilla Excel</button>
+  <details style="margin-top:12px">
+    <summary style="cursor:pointer;font-size:.84rem;color:var(--pri2);font-weight:600">Ver columnas de la plantilla</summary>
+    <ul style="font-size:.8rem;line-height:1.7;color:var(--text);margin-top:8px;padding-left:18px">
+      <li><strong>tipoDocumento</strong> — CC, CE, TI, PEP, PPT, PA, NIT, NUIP o RC</li>
+      <li><strong>documento</strong>, <strong>nombre</strong> — identificación y nombre del empleado</li>
+      <li><strong>salarioBase</strong> — salario básico mensual (sin auxilio de transporte)</li>
+      <li><strong>fechaInicio</strong> / <strong>fechaFin</strong> — período a liquidar (AAAA-MM-DD)</li>
+      <li><em>Opcionales:</em> cargo, auxTransporteModo (AUTO/MANUAL/NO), auxTransporteValor, promedioVariable (comisiones/HE/bonos promedio), aplicaRetencion (SI/NO)</li>
+    </ul>
+  </details>
+  <div style="margin:18px 0 8px;font-weight:700;color:var(--pri);display:flex;align-items:center;gap:8px;font-size:.92rem"><span class="step-num">2</span> Sube la plantilla diligenciada</div>
+  <input type="file" id="primaFileInput" accept=".xlsx,.xls" style="display:none">
+  <div id="primaDropzone" class="dropzone" onclick="document.getElementById('primaFileInput').click()">
+    <p style="font-size:.92rem;margin-bottom:4px">&#128228; Arrastra tu archivo aquí o <strong>haz clic para seleccionar</strong></p>
+    <p style="font-size:.76rem">.xlsx / .xls — se lee 100% en tu navegador</p>
+  </div>
+  <div id="primaUploadStatus" class="alert" style="display:none"></div>
+  <div id="primaPreviewWrap" style="display:none;margin-top:18px">
+    <div id="primaPreviewSummary" style="font-size:.86rem;margin-bottom:8px"></div>
+    <div style="overflow-x:auto"><table id="primaPreviewTable" class="data-table"></table></div>
+    <div id="primaPreviewErrors" style="display:none"></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+      <button class="btn btn-blue" onclick="primaCalcularMasivo()">&#129518; Calcular prima de todos</button>
+      <button class="btn btn-outline" onclick="primaReset()">&#128260; Limpiar</button>
+    </div>
+  </div>
+  <div id="primaResultsWrap" style="display:none;margin-top:20px">
+    <div id="primaKpis" class="kpis-row"></div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px">
+      <input id="primaEmpNombre" type="text" placeholder="Empresa (opcional, para el Excel)" style="flex:1;min-width:180px;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.86rem;font-family:inherit">
+      <input id="primaEmpNit" type="text" placeholder="NIT" style="width:140px;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.86rem;font-family:inherit">
+      <input id="primaProceso" type="text" placeholder="Etiqueta del proceso (ej. Prima jun-2026)" style="width:230px;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.86rem;font-family:inherit">
+    </div>
+    <div style="overflow-x:auto"><table id="primaResultsTable" class="data-table"></table></div>
+    <details style="margin-top:12px">
+      <summary style="cursor:pointer;font-size:.84rem;color:var(--pri2);font-weight:600">Ver cómo se calculó la retención en la fuente de cada empleado</summary>
+      <div id="primaRetExplica" style="margin-top:8px"></div>
+    </details>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+      <button class="btn btn-blue" onclick="primaExportar()">&#128190; Exportar Excel (3 hojas)</button>
+      <button class="btn btn-outline" onclick="primaGuardarHistorial()">&#128190; Guardar en historial</button>
+    </div>
+  </div>
+  <div id="primaHistorialWrap" style="display:none;margin-top:22px;padding-top:18px;border-top:1px solid var(--border)">
+    <div class="card-title" style="font-size:.95rem">&#128338; Historial de procesos <span style="font-weight:400;font-size:.74rem;color:var(--muted)">(guardado solo en este navegador)</span></div>
+    <div style="overflow-x:auto"><table id="primaHistorialTable" class="data-table"></table></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+      <button class="btn btn-outline" onclick="primaExportarHistorial()">&#11015; Exportar historial completo (Excel)</button>
+      <button class="btn btn-outline" onclick="primaLimpiarHistorial()" style="color:var(--red);border-color:#FECACA">&#128465; Borrar historial</button>
+    </div>
+  </div>
+</div>
 <details class="normativa-list" open>
   <summary style="cursor:pointer;font-weight:700;color:var(--text)">Cómo se calcula la prima</summary>
   <ul style="margin-top:8px;padding-left:18px">
@@ -201,6 +282,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 <div class="disclaimer">Cálculo orientativo de la prima de servicios. Para la liquidación completa de un contrato (cesantías, vacaciones, indemnización y deducciones) usa el <a href="liquidador-general.html" style="color:inherit;font-weight:700">liquidador laboral general</a>. Para varias prestaciones por separado, la <a href="liquidador-prestaciones.html" style="color:inherit;font-weight:700">calculadora de prestaciones</a>. Servicio doméstico: <a href="liquidador-domestica.html" style="color:inherit;font-weight:700">liquidador especializado</a>.</div>
 </div>
 <script src="shared/liquidador-engine.js?v=77603d3e"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw" crossorigin="anonymous"></script>
+<script src="shared/nomina-engine.js?v=addb77c6"></script>
+<script src="shared/prima-masiva.js?v=9023cdc1"></script>
 <script>
 function parseMoney(id){return parseInt(document.getElementById(id).value.replace(/\./g,'').replace(/,/g,''))||0;}
 function val(id){return document.getElementById(id).value.trim();}
@@ -315,6 +399,206 @@ function copiarTexto(){
   if(typeof exoTrack!=='undefined')exoTrack.tool('liquidador-prima');
 }
 recalc();
+/* ═══════════════ LIQUIDACIÓN MASIVA POR EXCEL ═══════════════ */
+var PRIMA_ESTADO = { procesado:null, resultados:null };
+var PRIMA_HIST_KEY = 'primaMasiva:historial';
+function primaToast(msg,tipo){ if(typeof exoToast!=='undefined')exoToast(msg,tipo||'info'); }
+function primaDescargarPlantilla(){
+  try{
+    PrimaMasiva.descargarPlantilla(window.XLSX);
+    primaToast('Plantilla descargada. Llénala y vuelve para liquidar.','success');
+    if(typeof exoTrack!=='undefined')exoTrack.generate('prima-masiva','plantilla');
+  }catch(e){ primaToast('No se pudo generar la plantilla: '+e.message,'error'); }
+}
+(function primaSetupUpload(){
+  var dz=document.getElementById('primaDropzone'), fi=document.getElementById('primaFileInput');
+  if(!dz||!fi)return;
+  fi.addEventListener('change',function(e){ if(e.target.files&&e.target.files[0])primaProcesar(e.target.files[0]); });
+  dz.addEventListener('dragover',function(e){ e.preventDefault();dz.classList.add('dragover'); });
+  dz.addEventListener('dragleave',function(e){ e.preventDefault();dz.classList.remove('dragover'); });
+  dz.addEventListener('drop',function(e){ e.preventDefault();dz.classList.remove('dragover'); if(e.dataTransfer.files&&e.dataTransfer.files[0])primaProcesar(e.dataTransfer.files[0]); });
+  primaRenderHistorial();
+})();
+function primaStatus(tipo,msg){
+  var el=document.getElementById('primaUploadStatus');
+  el.style.display='flex';
+  el.className='alert '+(tipo==='error'?'alert-warn':'alert-info');
+  el.style.marginTop='12px';
+  el.innerHTML='<span>'+(tipo==='error'?'&#9888;':'&#10003;')+'</span><span>'+msg+'</span>';
+}
+function primaProcesar(file){
+  if(typeof XLSX==='undefined'){ primaStatus('error','No cargó la librería Excel. Recarga la página.'); return; }
+  if(!/\.(xlsx|xls)$/i.test(file.name||'')){ primaStatus('error','Sube un archivo .xlsx o .xls.'); return; }
+  var reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      var wb=XLSX.read(new Uint8Array(e.target.result),{type:'array'});
+      var hoja=wb.SheetNames.indexOf('Empleados')>=0?'Empleados':wb.SheetNames[0];
+      var aoa=XLSX.utils.sheet_to_json(wb.Sheets[hoja],{header:1,defval:null,blankrows:false});
+      var proc=PrimaMasiva.procesarAoA(aoa);
+      if(proc.errorEsquema){ primaStatus('error',proc.errorEsquema); return; }
+      if(proc.filas.length===0){ primaStatus('error','No hay empleados en la plantilla (¿solo dejaste las filas de ejemplo?).'); return; }
+      PRIMA_ESTADO.procesado=proc; PRIMA_ESTADO.resultados=null;
+      primaStatus('success','"'+file.name+'" cargado: '+proc.resumen.total+' empleados ('+proc.resumen.validas+' válidos, '+proc.resumen.conErrores+' con errores).');
+      primaRenderPreview(proc);
+      document.getElementById('primaResultsWrap').style.display='none';
+      if(typeof exoTrack!=='undefined')exoTrack.generate('prima-masiva','upload');
+    }catch(err){ console.error(err); primaStatus('error','No se pudo leer el archivo: '+err.message); }
+  };
+  reader.onerror=function(){ primaStatus('error','Error leyendo el archivo.'); };
+  reader.readAsArrayBuffer(file);
+}
+function primaRenderPreview(proc){
+  document.getElementById('primaPreviewWrap').style.display='block';
+  var r=proc.resumen;
+  document.getElementById('primaPreviewSummary').innerHTML=
+    '<strong>'+r.total+'</strong> empleados · <span style="color:#065F46"><strong>'+r.validas+'</strong> válidos</span> · <span style="color:#991B1B"><strong>'+r.conErrores+'</strong> con errores</span>';
+  var heads=['#','Tipo','Documento','Nombre','Salario','Desde','Hasta','Estado'];
+  var html='<thead><tr>'+heads.map(function(h){return '<th>'+h+'</th>';}).join('')+'</tr></thead><tbody>';
+  proc.filas.forEach(function(it,i){
+    var f=it.fila;
+    html+='<tr'+(it.valido?'':' class="error-row"')+'>'+
+      '<td>'+(i+1)+'</td><td>'+esc(f.tipoDocumento)+'</td><td>'+esc(f.documento)+'</td>'+
+      '<td class="t">'+esc(f.nombre)+'</td><td>'+fCOPm(f.salarioBase)+'</td>'+
+      '<td>'+esc(f.fechaInicio)+'</td><td>'+esc(f.fechaFin)+'</td>'+
+      '<td>'+(it.valido?'<span class="badge-ok">OK</span>':'<span class="badge-err">'+it.errores.length+' error(es)</span>')+'</td></tr>';
+  });
+  html+='</tbody>';
+  document.getElementById('primaPreviewTable').innerHTML=html;
+  // Errores
+  var errs=proc.filas.map(function(it,i){return {i:i+1,it:it};}).filter(function(x){return !x.it.valido;});
+  var ebox=document.getElementById('primaPreviewErrors');
+  if(errs.length){
+    var eh='<div class="error-list"><strong>Corrige estas filas antes de calcular:</strong><ul>';
+    errs.forEach(function(x){ eh+='<li>Fila '+x.i+' ('+esc(x.it.fila.nombre||x.it.fila.documento||'sin nombre')+'): '+x.it.errores.join('; ')+'</li>'; });
+    eh+='</ul></div>';
+    ebox.innerHTML=eh; ebox.style.display='block';
+  }else{ ebox.style.display='none'; }
+}
+function primaCalcularMasivo(){
+  if(!PRIMA_ESTADO.procesado)return;
+  var validas=PRIMA_ESTADO.procesado.filas.filter(function(r){return r.valido;});
+  if(!validas.length){ primaToast('No hay filas válidas para calcular.','warning'); return; }
+  PRIMA_ESTADO.resultados=PrimaMasiva.calcularTodos(validas);
+  primaRenderResultados(PRIMA_ESTADO.resultados);
+  if(typeof exoTrack!=='undefined')exoTrack.generate('prima-masiva','calculo');
+}
+function primaRenderResultados(res){
+  document.getElementById('primaResultsWrap').style.display='block';
+  var tP=0,tR=0,tN=0,nSem=0;
+  res.forEach(function(r){ tP+=r.totalPrima; tR+=r.totalRetencion; tN+=r.totalNeto; nSem+=r.semestres.length; });
+  document.getElementById('primaKpis').innerHTML=
+    kpi('Empleados',res.length,'')+
+    kpi('Primas liquidadas',nSem,'')+
+    kpi('Total prima',fCOPm(tP),'green')+
+    kpi('Total retención fuente',fCOPm(tR),'amber')+
+    kpi('Total neto a pagar',fCOPm(tN),'green');
+  var heads=['Tipo','Documento','Nombre','Semestre','Base','Días','Prima','Retención','Neto'];
+  var html='<thead><tr>'+heads.map(function(h){return '<th>'+h+'</th>';}).join('')+'</tr></thead><tbody>';
+  res.forEach(function(r){
+    r.semestres.forEach(function(s,j){
+      html+='<tr>'+
+        '<td>'+(j===0?esc(r.tipoDocumento):'')+'</td>'+
+        '<td>'+(j===0?esc(r.documento):'')+'</td>'+
+        '<td class="t">'+(j===0?esc(r.nombre):'')+'</td>'+
+        '<td class="t">'+esc(s.label)+'</td>'+
+        '<td>'+fCOPm(r.sbl)+'</td><td>'+s.dias+'</td>'+
+        '<td>'+fCOPm(s.prima)+'</td><td>'+fCOPm(s.ret.retencion)+'</td><td>'+fCOPm(s.neto)+'</td></tr>';
+    });
+  });
+  html+='<tr class="total-row"><td colspan="6">TOTALES</td><td>'+fCOPm(tP)+'</td><td>'+fCOPm(tR)+'</td><td>'+fCOPm(tN)+'</td></tr>';
+  html+='</tbody>';
+  document.getElementById('primaResultsTable').innerHTML=html;
+  // Explicación retención
+  var ex='';
+  res.forEach(function(r){
+    r.semestres.forEach(function(s){
+      ex+='<div style="margin-bottom:10px;padding:10px 12px;background:#FAFBFC;border:1px solid var(--border);border-radius:8px;font-size:.78rem">'+
+        '<strong>'+esc(r.nombre)+' — '+esc(s.label)+'</strong>'+
+        '<pre style="white-space:pre-wrap;font-family:JetBrains Mono,monospace;font-size:.74rem;margin:6px 0 0;line-height:1.6;color:var(--text)">'+esc(s.ret.explicacion)+'</pre></div>';
+    });
+  });
+  document.getElementById('primaRetExplica').innerHTML=ex;
+  document.getElementById('primaResultsWrap').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function primaEmpresa(){ return { nombre:document.getElementById('primaEmpNombre').value.trim(), nit:document.getElementById('primaEmpNit').value.trim() }; }
+function primaEtiqueta(){ return document.getElementById('primaProceso').value.trim(); }
+function primaExportar(){
+  if(!PRIMA_ESTADO.resultados){ primaToast('Calcula primero.','warning'); return; }
+  try{
+    PrimaMasiva.exportarExcel(window.XLSX,PRIMA_ESTADO.resultados,primaEmpresa(),primaEtiqueta());
+    primaToast('Excel descargado.','success');
+    if(typeof exoTrack!=='undefined')exoTrack.generate('prima-masiva','export');
+  }catch(e){ primaToast('No se pudo exportar: '+e.message,'error'); }
+}
+/* ─── Historial en localStorage ─── */
+function primaLeerHist(){ try{ return JSON.parse(localStorage.getItem(PRIMA_HIST_KEY)||'[]'); }catch(e){ return []; } }
+function primaGuardarHistorial(){
+  if(!PRIMA_ESTADO.resultados){ primaToast('Calcula primero.','warning'); return; }
+  var et=primaEtiqueta(); var emp=primaEmpresa();
+  if(!et){ et='Proceso '+new Date().toLocaleDateString('es-CO'); }
+  var fecha=new Date().toLocaleDateString('es-CO')+' '+new Date().toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit'});
+  var hist=primaLeerHist();
+  PRIMA_ESTADO.resultados.forEach(function(r){
+    r.semestres.forEach(function(s){
+      hist.push({ fecha:fecha, proceso:et, empresa:emp.nombre, nit:emp.nit,
+        tipoDocumento:r.tipoDocumento, documento:r.documento, nombre:r.nombre, cargo:r.cargo,
+        semestre:s.label, base:r.sbl, dias:s.dias, prima:s.prima, retencion:s.ret.retencion, neto:s.neto });
+    });
+  });
+  try{
+    localStorage.setItem(PRIMA_HIST_KEY,JSON.stringify(hist));
+    primaToast('Guardado en el historial de este navegador.','success');
+    primaRenderHistorial();
+  }catch(e){ primaToast('No se pudo guardar (almacenamiento lleno).','error'); }
+}
+function primaRenderHistorial(){
+  var hist=primaLeerHist();
+  var wrap=document.getElementById('primaHistorialWrap');
+  if(!hist.length){ wrap.style.display='none'; return; }
+  wrap.style.display='block';
+  // Agrupar por proceso para mostrar resumen
+  var grupos={};
+  hist.forEach(function(h){ var k=h.proceso+'|'+h.fecha; if(!grupos[k])grupos[k]={proceso:h.proceso,fecha:h.fecha,empresa:h.empresa,emp:{},prima:0,ret:0,neto:0}; grupos[k].emp[h.documento]=1; grupos[k].prima+=h.prima; grupos[k].ret+=h.retencion; grupos[k].neto+=h.neto; });
+  var heads=['Proceso','Fecha','Empresa','Empleados','Total prima','Retención','Neto'];
+  var html='<thead><tr>'+heads.map(function(h){return '<th>'+h+'</th>';}).join('')+'</tr></thead><tbody>';
+  Object.keys(grupos).forEach(function(k){ var g=grupos[k];
+    html+='<tr><td class="t">'+esc(g.proceso)+'</td><td class="t">'+esc(g.fecha)+'</td><td class="t">'+esc(g.empresa||'—')+'</td>'+
+      '<td>'+Object.keys(g.emp).length+'</td><td>'+fCOPm(g.prima)+'</td><td>'+fCOPm(g.ret)+'</td><td>'+fCOPm(g.neto)+'</td></tr>';
+  });
+  html+='</tbody>';
+  document.getElementById('primaHistorialTable').innerHTML=html;
+}
+function primaExportarHistorial(){
+  var hist=primaLeerHist();
+  if(!hist.length){ primaToast('No hay historial guardado.','warning'); return; }
+  var heads=['Fecha','Proceso','Empresa','NIT','Tipo doc','Documento','Nombre','Cargo','Semestre','Base prima','Días','Prima','Retención fuente','Neto'];
+  var aoa=[heads].concat(hist.map(function(h){ return [h.fecha,h.proceso,h.empresa||'',h.nit||'',h.tipoDocumento,h.documento,h.nombre,h.cargo||'',h.semestre,Math.round(h.base),h.dias,h.prima,h.retencion,h.neto]; }));
+  var ws=XLSX.utils.aoa_to_sheet(aoa);
+  ws['!cols']=[{wch:16},{wch:20},{wch:24},{wch:14},{wch:9},{wch:14},{wch:30},{wch:18},{wch:18},{wch:14},{wch:6},{wch:14},{wch:15},{wch:14}];
+  ws['!freeze']={xSplit:0,ySplit:1};
+  var wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,'Historial prima');
+  XLSX.writeFile(wb,'historial_prima_exogenadian.xlsx');
+  primaToast('Historial exportado.','success');
+}
+function primaLimpiarHistorial(){
+  if(!confirm('¿Borrar todo el historial guardado en este navegador? No se puede deshacer.'))return;
+  localStorage.removeItem(PRIMA_HIST_KEY);
+  primaRenderHistorial();
+  primaToast('Historial borrado.','success');
+}
+function primaReset(){
+  PRIMA_ESTADO.procesado=null; PRIMA_ESTADO.resultados=null;
+  document.getElementById('primaPreviewWrap').style.display='none';
+  document.getElementById('primaResultsWrap').style.display='none';
+  document.getElementById('primaUploadStatus').style.display='none';
+  document.getElementById('primaFileInput').value='';
+}
+/* helpers masiva */
+function kpi(lbl,val,cls){ return '<div class="kpi-card'+(cls?' '+cls:'')+'"><div class="lbl">'+lbl+'</div><div class="val">'+val+'</div></div>'; }
+function fCOPm(n){ if(n==null||isNaN(n))return '$0'; var s=n<0?'-':''; return s+'$'+Math.abs(Math.round(n)).toLocaleString('es-CO'); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
 </script>
 <script src="shared/analytics.js?v=1df688c5"></script>
 <link rel="stylesheet" href="shared/chat.css?v=78c6b2c3">

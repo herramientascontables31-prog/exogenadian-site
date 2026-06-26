@@ -132,9 +132,16 @@
     // Cesantias e intereses (Art. 206 num. 4): exencion ESCALONADA segun el salario mensual
     // promedio de los ultimos 6 meses. Solo se activa si llega ese dato; si no, comportamiento
     // anterior intacto (las cesantias quedan dentro del ingreso y reciben el 25% generico).
-    var cesExenta = 0, modoCesEscala = false;
-    if(ces > 0 && input.salarioPromedio6mUvt != null && !isNaN(input.salarioPromedio6mUvt)){
-      cesExenta = cesantiasExentasArt206_4(ces, input.salarioPromedio6mUvt, year);
+    var cesExenta = 0, modoCesEscala = false, cesSalarioEstimado = false;
+    if(ces > 0){
+      var salProm = input.salarioPromedio6mUvt;
+      // Si no se dio el salario promedio, estimarlo (ingreso laboral / 12) para aplicar la escala
+      // Art. 206-4 ET, en vez de caer a un 25% generico (que SUB-exime salarios bajos y SOBRE-exime altos).
+      if(salProm == null || isNaN(salProm)){
+        salProm = ing > 0 ? (ing / 12) / p.uvt : 0;
+        cesSalarioEstimado = true;
+      }
+      cesExenta = cesantiasExentasArt206_4(ces, salProm, year);
       modoCesEscala = true;
     }
 
@@ -470,10 +477,22 @@
   // ═══════════════════════════════════════
 
   function calcularGananciasOcasionales(input, year){
+    var p = getParams(year);
     var ing = input.ingresos || 0;
     var costos = input.costos || 0;
-    var exentas = input.rentasExentas || 0;
     var loterias = input.loterias || 0;
+
+    // Exencion de GO (herencias Art.307, seguros Art.303-1): antes se tomaba tal cual del usuario
+    // (riesgo: eximir de mas -> sub-declaracion). Ahora se TOPA segun el tipo.
+    // Topes ET (UVT): vivienda urbana causante 13.000 (Art.307-1); inmueble rural 6.500 (Art.307-2);
+    // legitimarios/conyuge 3.490 (Art.307-3); no legitimarios/donaciones 2.290 (Art.307-4); seguro vida 3.250 (Art.303-1).
+    var TOPES_GO_UVT = { viviendaUrbana:13000, inmuebleRural:6500, legitimario:3490, noLegitimario:2290, seguroVida:3250 };
+    var exentas = input.rentasExentas || 0;
+    var tipo = input.rentasExentasTipo, avisoExentaGO = null;
+    if(exentas > 0 && tipo && TOPES_GO_UVT[tipo]){
+      var capGO = r1k(TOPES_GO_UVT[tipo] * p.uvt);
+      if(exentas > capGO){ avisoExentaGO = { tipo:tipo, topeUvt:TOPES_GO_UVT[tipo], topePesos:capGO, solicitado:(input.rentasExentas||0) }; exentas = capGO; }
+    }
 
     // Casilla 112: ingresos brutos GO
     var c112 = ing + loterias;
@@ -487,7 +506,8 @@
       c114: c114,
       c115: c115,
       ingresosNoLoterias: ing,
-      loterias: loterias
+      loterias: loterias,
+      avisoExentaGO: avisoExentaGO
     };
   }
 
