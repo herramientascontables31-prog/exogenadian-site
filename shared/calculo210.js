@@ -161,7 +161,12 @@
     // Renta liquida ordinaria de la subcedula (antes de aplicar tope global)
     var rentaLiquidaAntesExentas = maxZero(ingresoNeto + ece);
     var rentaSinTope = rentaLiquidaAntesExentas - exentasYDeducciones;
-    var perdida = rentaSinTope < 0 ? -rentaSinTope : 0;
+    // Las rentas exentas y deducciones NO generan perdida: se limitan en la casilla 92
+    // (min 40% / 1.340 UVT / c91). El ingresoNeto ya esta pisado en 0, asi que no hay
+    // perdida real de subcedula que propagar a la c91 (un eventual exceso de costos se
+    // difiere como perdida fiscal de anios siguientes, Art. 147 ET, no compensa en el anio).
+    // Antes: perdida = max(0, exentas - rentaLiquida) reducia indebidamente la c91 (subpago).
+    var perdida = 0;
 
     return {
       ingresosBrutos: ing,

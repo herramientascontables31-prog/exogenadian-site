@@ -376,8 +376,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 <script defer src="shared/toast.js?v=9843f93f"></script>
 <script defer src="shared/nav.js?v=81ac8d15"></script>
 <script defer src="shared/pro-banner.js?v=f0acfdc0"></script>
-<script src="shared/parametros-renta-pn.js?v=5f077a26"></script>
-<script src="shared/calculo210.js?v=21518ddc"></script>
+<script src="shared/parametros-renta-pn.js?v=a0b1c6a8"></script>
+<script src="shared/calculo210.js?v=f513f3bb"></script>
 <script src="shared/optimizer-210.js?v=e353e2c8"></script>
 <script src="shared/advisor-210.js?v=88e15f04"></script>
 <script src="shared/cert-parser-210.js?v=a9c6c1f3"></script>
@@ -780,7 +780,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
               <li><strong>Escritura de venta</strong> del activo (notaría + registro)</li>
               <li><strong>Costo fiscal histórico</strong>: factura de compra + ajustes (mejoras capitalizables, gastos notariales originales)</li>
               <li>Verificar <strong>posesión</strong>: ¿más de 2 años? → <strong>GO 15%</strong> (Art. 314 ET) / Menos → renta ordinaria</li>
-              <li><em>Si vivienda urbana:</em> aplicar <strong>exención hasta 7.500 UVT</strong> (Art. 311-1 ET) — destino debe ser AFC o pago crédito vivienda</li>
+              <li><em>Si vivienda urbana:</em> aplicar <strong>exención hasta 5.000 UVT</strong> (Art. 311-1 ET, mod. Ley 2277/2022) — destino debe ser AFC o pago crédito vivienda</li>
               <li><em>Si herencia / legado / donación:</em> aplicar <strong>Art. 302-303 ET</strong> (exenciones específicas)</li>
               <li><em>Si premios / loterías:</em> verificar que la <strong>retención del pagador</strong> esté correcta (15-20% según evento)</li>
             </ul>
@@ -788,7 +788,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
           <div class="field-grid">
             <div class="field"><label>Ingresos por ganancias ocasionales <span class="hint">(c112 · venta activos &gt;2 años, herencias)</span></label><input id="goIngresos" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
             <div class="field"><label>Costos / costo fiscal <span class="hint">(c113)</span></label><input id="goCostos" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
-            <div class="field"><label>GO no gravadas y exentas <span class="hint">(c114 · ej. vivienda 7.500 UVT)</span></label><input id="goExentas" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
+            <div class="field"><label>GO no gravadas y exentas <span class="hint">(c114 · ej. vivienda 5.000 UVT)</span></label><input id="goExentas" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
             <div class="field"><label>Loterías, rifas y apuestas <span class="hint">(tarifa 20% Art. 317)</span></label><input id="goLoterias" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
           </div>
           <div style="font-size:.74rem;color:var(--muted);margin-top:6px">GO gravable (c115) = ingresos − costos − exentas. Tributa al 15% (20% loterías). Para activos de menos de 2 años, no es GO: va a renta no laboral.</div>
@@ -2442,6 +2442,14 @@ function construirEstado(){
     },
     liquidacion: {
       retencionesAno: v('retenciones'),
+      // Saldo a favor (cas 131) y anticipo pagado del AG anterior (cas 130). Se entregan con
+      // los DOS nombres: el motor lee anticipoPagado/saldoFavorAnoAnterior; el papel de trabajo
+      // Excel lee anticipoPrev/saldoFavorPrev. Sin esto, el motor los tomaba como 0 e inflaba el
+      // saldo a pagar (c134/c136) y subestimaba el saldo a favor (c137).
+      anticipoPagado: v('anticipoPrevPagado'),
+      saldoFavorAnoAnterior: v('saldoFavorAnt'),
+      anticipoPrev: v('anticipoPrevPagado'),
+      saldoFavorPrev: v('saldoFavorAnt'),
       descuentos: 0
     },
     comparativoAGAnterior: construirComparativoAGAnterior()
@@ -3364,9 +3372,21 @@ function renderComparacionSugerida(){
   var R = ultimoResultado.renglones || {};
   var S = sugeridaCasillas;
   var f$ = function(n){ return '$' + Math.round(n || 0).toLocaleString('es-CO'); };
+  // Los ingresos brutos por subcédula (cas 32/43/58/74/99) NO viven en `renglones`, sino en
+  // cedulaGeneral.subcedulas.* y cedulaPensiones. Sin esto, R.c32… quedaban undefined y la
+  // comparación mostraba "—" en ingresos y disparaba SIEMPRE la falsa alerta "omitiste ingresos".
+  var _sub = (ultimoResultado.cedulaGeneral && ultimoResultado.cedulaGeneral.subcedulas) || {};
+  var INGRESOS_SUB = {
+    32: (_sub.trabajo && _sub.trabajo.ingresosBrutos) || 0,
+    43: (_sub.honorarios && _sub.honorarios.ingresosBrutos) || 0,
+    58: (_sub.capital && _sub.capital.ingresosBrutos) || 0,
+    74: (_sub.noLaboral && _sub.noLaboral.ingresosBrutos) || 0,
+    99: (ultimoResultado.cedulaPensiones && ultimoResultado.cedulaPensiones.ingresosBrutos) || 0
+  };
+  var mioDe = function(c){ return (c in INGRESOS_SUB) ? INGRESOS_SUB[c] : R['c' + c]; };
   var rows = '';
   SUGERIDA_FILAS.forEach(function(par){
-    var c = par[0], sug = S[c], mio = R['c' + c];
+    var c = par[0], sug = S[c], mio = mioDe(c);
     if((sug == null || sug === 0) && !mio) return;
     var dif = (mio || 0) - (sug || 0);
     var difTxt = dif === 0 ? '—' : ((dif > 0 ? '+' : '−') + f$(Math.abs(dif)).slice(1));
@@ -3392,7 +3412,7 @@ function renderComparacionSugerida(){
   }
   // Alerta de ingresos: la sugerida conoce ingresos que el borrador no tiene
   var ingSug = (S[32]||0) + (S[43]||0) + (S[58]||0) + (S[74]||0) + (S[99]||0);
-  var ingMio = (R.c32||0) + (R.c43||0) + (R.c58||0) + (R.c74||0) + (R.c99||0);
+  var ingMio = mioDe(32) + mioDe(43) + mioDe(58) + mioDe(74) + mioDe(99);
   var alertaIngresos = '';
   if(ingSug > ingMio * 1.02 && ingSug - ingMio > 1000000){
     alertaIngresos = '<div style="background:#FEE2E2;border-left:4px solid #991B1B;border-radius:6px;padding:10px 14px;margin:8px 0;font-size:.8rem;color:#7F1D1D"><strong>La sugerida trae ' + f$(ingSug - ingMio) + ' más de ingresos que tu borrador.</strong> La DIAN conoce esos reportes: si los omites, te expones a un requerimiento. Identifícalos en la tabla y complétalos antes de presentar.</div>';

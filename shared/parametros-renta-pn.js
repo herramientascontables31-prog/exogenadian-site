@@ -98,8 +98,8 @@
       // === Ganancias ocasionales (Arts. 313 ss. ET) ===
       goTarifa: 0.15,                      // Art. 314 ET (mod. Ley 2277/2022)
       goLoteriasTarifa: 0.20,              // Art. 317 ET
-      goViviendaUrbanaExentaUvt: 5000,     // Art. 311-1 ET (mod. Ley 2277/2022 art. 32): primeras 5.000 UVT, con condiciones AFC/hipoteca
-      goSegurosVidaExentaUvt: 12500,       // Art. 303-1 ET
+      goViviendaUrbanaExentaUvt: 5000,     // Art. 311-1 ET (mod. Ley 2277/2022 art. 31): primeras 5.000 UVT, con condiciones AFC/hipoteca
+      goSegurosVidaExentaUvt: 3250,        // Art. 303-1 ET (mod. Ley 2277/2022 art. 29): 3.250 UVT (antes 12.500). Sent. C-317/2025 exequible
       goHerenciasViviendaExentaUvt: 13000, // Art. 307 num. 1 ET
       goHerenciasOtrosExentaUvt: 6500,     // Art. 307 num. 2 ET
 
