@@ -141,12 +141,14 @@
       if(v != null && v > 0) detectados++;
     });
 
-    // Pensiones NO son renta de trabajo (van a su cédula). Ingreso de trabajo
-    // = total - pensiones, o la suma de pagos laborales si no hay total.
+    // Pensiones NO son renta de trabajo (van a su cédula). El motor (cédula de trabajo) suma
+    // ingresosBrutos + cesantiasIntereses, así que `trabajo.ingresos` debe EXCLUIR las cesantías
+    // (se devuelven aparte en trabajo.cesantias); de lo contrario el llamador que pase ambos las
+    // contaría dos veces. Ingreso de trabajo SIN cesantías = total - pensiones - cesantias.
     var sumaPagos = campos.salarios + campos.honorarios + campos.cesantias + campos.pensiones;
     var ingresoTrabajo = campos.totalIngresos > 0
-        ? Math.max(0, campos.totalIngresos - campos.pensiones)
-        : Math.max(0, campos.salarios + campos.honorarios + campos.cesantias);
+        ? Math.max(0, campos.totalIngresos - campos.pensiones - campos.cesantias)
+        : Math.max(0, campos.salarios + campos.honorarios);
 
     var cuadra = campos.totalIngresos > 0
         ? Math.abs(campos.totalIngresos - sumaPagos) <= Math.max(1000, campos.totalIngresos * 0.01)
