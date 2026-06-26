@@ -221,11 +221,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
   <details style="margin-top:12px">
     <summary style="cursor:pointer;font-size:.84rem;color:var(--pri2);font-weight:600">Ver columnas de la plantilla</summary>
     <ul style="font-size:.8rem;line-height:1.7;color:var(--text);margin-top:8px;padding-left:18px">
-      <li><strong>tipoDocumento</strong> — CC, CE, TI, PEP, PPT, PA, NIT, NUIP o RC</li>
-      <li><strong>documento</strong>, <strong>nombre</strong> — identificación y nombre del empleado</li>
+      <li><strong>TIPO DE DOCUMENTO</strong> — CC, CE, TI, PEP, PPT, PA, NIT, NUIP o RC</li>
+      <li><strong>NÚMERO DE DOCUMENTO</strong>, <strong>nombre</strong> — identificación y nombre del empleado</li>
+      <li><strong>CARGO</strong>, <strong>TIPO DE CONTRATO</strong>, <strong>CAUSA DE RETIRO</strong> — informativos (resaltados en amarillo)</li>
+      <li><strong>FECHA DE INGRESO</strong> / <strong>FECHA DE RETIRO</strong> — período a liquidar (formato fecha DD/MM/AAAA)</li>
       <li><strong>salarioBase</strong> — salario básico mensual (sin auxilio de transporte)</li>
-      <li><strong>fechaInicio</strong> / <strong>fechaFin</strong> — período a liquidar (AAAA-MM-DD)</li>
-      <li><em>Opcionales:</em> cargo, auxTransporteModo (AUTO/MANUAL/NO), auxTransporteValor, promedioVariable (comisiones/HE/bonos promedio), aplicaRetencion (SI/NO)</li>
+      <li><strong>diasTrabajados</strong> — opcional; si lo dejas vacío se calcula por las fechas (método 360)</li>
+      <li><strong>AUXILIO DE TRANSPORTE</strong> — un valor en $ (se usa tal cual), <code>AUTO</code> (regla legal) o <code>NO</code></li>
+      <li><em>Opcionales:</em> PROMEDIO VARIABLE (comisiones/HE/bonos promedio), APLICA RETENCIÓN (SI/NO)</li>
     </ul>
   </details>
   <div style="margin:18px 0 8px;font-weight:700;color:var(--pri);display:flex;align-items:center;gap:8px;font-size:.92rem"><span class="step-num">2</span> Sube la plantilla diligenciada</div>
@@ -283,8 +286,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 </div>
 <script src="shared/liquidador-engine.js?v=77603d3e"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js" integrity="sha384-Pqp51FUN2/qzfxZxBCtF0stpc9ONI6MYZpVqmo8m20SoaQCzf+arZvACkLkirlPz" crossorigin="anonymous"></script>
 <script src="shared/nomina-engine.js?v=addb77c6"></script>
-<script src="shared/prima-masiva.js?v=9023cdc1"></script>
+<script src="shared/prima-masiva.js?v=cda86472"></script>
 <script>
 function parseMoney(id){return parseInt(document.getElementById(id).value.replace(/\./g,'').replace(/,/g,''))||0;}
 function val(id){return document.getElementById(id).value.trim();}
@@ -404,11 +408,11 @@ var PRIMA_ESTADO = { procesado:null, resultados:null };
 var PRIMA_HIST_KEY = 'primaMasiva:historial';
 function primaToast(msg,tipo){ if(typeof exoToast!=='undefined')exoToast(msg,tipo||'info'); }
 function primaDescargarPlantilla(){
-  try{
-    PrimaMasiva.descargarPlantilla(window.XLSX);
+  if(typeof ExcelJS==='undefined'){ primaToast('Cargando librería de Excel… intenta de nuevo en un segundo.','warning'); return; }
+  Promise.resolve(PrimaMasiva.descargarPlantilla(window.ExcelJS)).then(function(){
     primaToast('Plantilla descargada. Llénala y vuelve para liquidar.','success');
     if(typeof exoTrack!=='undefined')exoTrack.generate('prima-masiva','plantilla');
-  }catch(e){ primaToast('No se pudo generar la plantilla: '+e.message,'error'); }
+  }).catch(function(e){ primaToast('No se pudo generar la plantilla: '+e.message,'error'); });
 }
 (function primaSetupUpload(){
   var dz=document.getElementById('primaDropzone'), fi=document.getElementById('primaFileInput');
@@ -543,6 +547,7 @@ function primaGuardarHistorial(){
     r.semestres.forEach(function(s){
       hist.push({ fecha:fecha, proceso:et, empresa:emp.nombre, nit:emp.nit,
         tipoDocumento:r.tipoDocumento, documento:r.documento, nombre:r.nombre, cargo:r.cargo,
+        tipoContrato:r.tipoContrato, causaRetiro:r.causaRetiro,
         semestre:s.label, base:r.sbl, dias:s.dias, prima:s.prima, retencion:s.ret.retencion, neto:s.neto });
     });
   });
@@ -572,10 +577,10 @@ function primaRenderHistorial(){
 function primaExportarHistorial(){
   var hist=primaLeerHist();
   if(!hist.length){ primaToast('No hay historial guardado.','warning'); return; }
-  var heads=['Fecha','Proceso','Empresa','NIT','Tipo doc','Documento','Nombre','Cargo','Semestre','Base prima','Días','Prima','Retención fuente','Neto'];
-  var aoa=[heads].concat(hist.map(function(h){ return [h.fecha,h.proceso,h.empresa||'',h.nit||'',h.tipoDocumento,h.documento,h.nombre,h.cargo||'',h.semestre,Math.round(h.base),h.dias,h.prima,h.retencion,h.neto]; }));
+  var heads=['Fecha','Proceso','Empresa','NIT','Tipo doc','Documento','Nombre','Cargo','Contrato','Causa retiro','Semestre','Base prima','Días','Prima','Retención fuente','Neto'];
+  var aoa=[heads].concat(hist.map(function(h){ return [h.fecha,h.proceso,h.empresa||'',h.nit||'',h.tipoDocumento,h.documento,h.nombre,h.cargo||'',h.tipoContrato||'',h.causaRetiro||'',h.semestre,Math.round(h.base),h.dias,h.prima,h.retencion,h.neto]; }));
   var ws=XLSX.utils.aoa_to_sheet(aoa);
-  ws['!cols']=[{wch:16},{wch:20},{wch:24},{wch:14},{wch:9},{wch:14},{wch:30},{wch:18},{wch:18},{wch:14},{wch:6},{wch:14},{wch:15},{wch:14}];
+  ws['!cols']=[{wch:16},{wch:20},{wch:24},{wch:14},{wch:9},{wch:14},{wch:30},{wch:18},{wch:14},{wch:20},{wch:18},{wch:14},{wch:6},{wch:14},{wch:15},{wch:14}];
   ws['!freeze']={xSplit:0,ySplit:1};
   var wb=XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb,ws,'Historial prima');
