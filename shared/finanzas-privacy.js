@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Finanzas Privacy + Backup
+ * Aziendale — Finanzas Privacy + Backup
  *
  * Modulo unificado para herramientas de finanzas personales:
  *  - Badge de privacidad (verde, expandible)
@@ -24,7 +24,7 @@
   'use strict';
 
   var PREFIX = 'fp:';
-  var APP_NAME = 'ExogenaDIAN — Finanzas Personales';
+  var APP_NAME = 'Aziendale — Finanzas Personales';
 
   // ───────────────────────────────────────────
   //  Helpers internos

@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   ExogenaDIAN — obligaciones-dian-2026.js
+   Aziendale — obligaciones-dian-2026.js
    Motor ÚNICO de generación de obligaciones tributarias DIAN 2026 a partir de la
    ficha de un cliente. Fuente de verdad compartida entre:
      • oficina.html  (render del tablero + sync al servidor)

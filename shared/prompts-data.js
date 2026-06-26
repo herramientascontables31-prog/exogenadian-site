@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Librería de Prompts para Contadores ═══
+/* ═══ Aziendale — Librería de Prompts para Contadores ═══
    35 prompts de calidad para usar con Claude / ChatGPT / Gemini.
    Cada uno parametrizado con {placeholders} y citas legales verificadas.
 

@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Parametros Renta Personas Naturales (Formulario 210)
+ * Aziendale — Parametros Renta Personas Naturales (Formulario 210)
  *
  * Fuente normativa:
  *   - Estatuto Tributario Nacional (ET)
@@ -91,14 +91,14 @@
       tabla241: TABLA_241,
 
       // === Dividendos (Arts. 242, 242-1 ET, mod. Ley 2277/2022) ===
-      divNoGravadosExentoUvt: 1090,        // Art. 242: exentos hasta 1.090 UVT
-      divNoGravadosTarifaExceso: 0.15,     // 15% sobre el exceso de 1.090 UVT
-      divGravadosTarifaCorporativa: 0.35,  // Art. 242-1: 35% sobre dividendo, luego Art. 242 sobre neto
+      divNoGravadosExentoUvt: 1090,        // Art. 254-1: descuento sobre el exceso de 1.090 UVT
+      divNoGravadosTarifaExceso: 0.19,     // 19% sobre el exceso de 1.090 UVT (Art. 254-1, Ley 2277/2022; el 15% pre-reforma quedo derogado)
+      divGravadosTarifaCorporativa: 0.35,  // Art. 242-1: 35% sobre dividendo, luego el neto integra la general (Art. 241)
 
       // === Ganancias ocasionales (Arts. 313 ss. ET) ===
       goTarifa: 0.15,                      // Art. 314 ET (mod. Ley 2277/2022)
       goLoteriasTarifa: 0.20,              // Art. 317 ET
-      goViviendaUrbanaExentaUvt: 7500,     // Art. 311-1 ET (con condiciones)
+      goViviendaUrbanaExentaUvt: 5000,     // Art. 311-1 ET (mod. Ley 2277/2022 art. 32): primeras 5.000 UVT, con condiciones AFC/hipoteca
       goSegurosVidaExentaUvt: 12500,       // Art. 303-1 ET
       goHerenciasViviendaExentaUvt: 13000, // Art. 307 num. 1 ET
       goHerenciasOtrosExentaUvt: 6500,     // Art. 307 num. 2 ET

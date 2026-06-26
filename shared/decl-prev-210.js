@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Lector del 210 del AÑO ANTERIOR (declaración de renta PN)
+ * Aziendale — Lector del 210 del AÑO ANTERIOR (declaración de renta PN)
  *
  * Lee el PDF del Formulario 210 del año gravable anterior y extrae, para
  * alimentar la conciliación patrimonial (Art. 236-239) y el beneficio de

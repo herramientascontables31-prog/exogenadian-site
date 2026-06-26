@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Widget de emisión de certificado por curso ═══
+/* ═══ Aziendale — Widget de emisión de certificado por curso ═══
    Uso:
      <div data-cert-widget="iva300"></div>
      <script src="../shared/cert-emit-widget.js"></script>
@@ -39,7 +39,7 @@
             '<span style="background:#D97706;color:#fff;font-size:.65rem;font-weight:800;padding:3px 10px;border-radius:100px;letter-spacing:1px">PRO</span>' +
             '<strong style="color:#92400E;font-size:.92rem">Certificado exclusivo para suscriptores</strong>' +
           '</div>' +
-          '<p style="color:#78350F;font-size:.84rem;line-height:1.55;margin:0">Demuestra dominio del curso con un certificado verificable mediante hash criptográfico. Incluido en el plan PRO de ExógenaDIAN junto con todas las herramientas profesionales.</p>' +
+          '<p style="color:#78350F;font-size:.84rem;line-height:1.55;margin:0">Demuestra dominio del curso con un certificado verificable mediante hash criptográfico. Incluido en el plan PRO de Aziendale junto con todas las herramientas profesionales.</p>' +
         '</div>' +
         '<a href="' + basePath() + 'precios.html" style="display:inline-block;padding:14px 28px;background:linear-gradient(135deg,#059669,#047857);color:#fff;border-radius:12px;font-weight:700;text-decoration:none;font-size:.96rem;box-shadow:0 4px 16px rgba(5,150,105,.25)">Ver planes PRO &rarr;</a>' +
         '<p style="margin-top:14px;font-size:.78rem;color:#6B7280">Ya tienes PRO? <a href="javascript:location.reload()" style="color:#059669;font-weight:600;text-decoration:none">Recargar</a></p>';

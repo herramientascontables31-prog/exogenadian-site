@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Parser del Certificado de Ingresos y Retenciones (Formulario 220)
+ * Aziendale — Parser del Certificado de Ingresos y Retenciones (Formulario 220)
  *
  * Lee el texto ya extraído de un PDF (vía pdf.js en el navegador) del Certificado
  * de Ingresos y Retenciones por rentas de trabajo y de pensiones, y devuelve los

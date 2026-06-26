@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="es-CO">
 <head>
-<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script src="shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="theme-color" content="#059669">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>PyG Personal — Tu Estado de Resultados Mensual | ExógenaDIAN</title>
+<title>PyG Personal — Tu Estado de Resultados Mensual | Aziendale</title>
 <meta name="description" content="Registra tus ingresos y gastos del mes. Detecta fugas, mide tu tasa de ahorro real, compara con la regla 50/30/20 y guarda histórico mes a mes.">
 <link rel="canonical" href="https://exogenadian.com/pyg-personal.html">
 <meta name="robots" content="index, follow">
@@ -16,7 +16,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.0/jspdf.plugin.autotable.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
-<link rel="stylesheet" href="shared/finanzas-wow.css?v=a660abd8">
+<link rel="stylesheet" href="shared/finanzas-wow.css?v=b735b850">
 <style>
 :root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--green:#059669;--green2:#ECFDF5;--green3:#D1FAE5;--red:#DC2626;--red2:#FEF2F2;--amber:#D97706;--amber2:#FFF8E1;--amber3:#FEF3C7;--border:#e2e8f0;--radius:10px;--shadow:0 2px 12px rgba(0,0,0,.06)}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -91,7 +91,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 .history-table tr.curr{background:var(--green2)}
 @media(max-width:768px){.kpis,.bucket-grid,.cross-links,.month-row,.cat-body{grid-template-columns:1fr}.kpis,.bucket-grid{grid-template-columns:1fr 1fr}}
 </style>
-<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+<script async src="shared/error-tracker.js?v=dd1f7f1d"></script><style id="exo-loading-css">
 #exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
 #exo-loading.hide{opacity:0;pointer-events:none}
 #exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
@@ -308,12 +308,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
   </div>
 </div>
 </div>
-<script src="shared/parametros-financieros.js?v=e116ea2a"></script>
-<script src="shared/finanzas-store.js?v=61d9057f"></script>
-<script src="shared/finanzas-export.js?v=abe34dd6"></script>
-<script defer src="shared/toast.js?v=9d7a298c"></script>
-<script defer src="shared/nav.js?v=628a5456"></script>
-<script src="shared/finanzas-privacy.js?v=aed97e2f"></script>
+<script src="shared/parametros-financieros.js?v=4fc5e2f1"></script>
+<script src="shared/finanzas-store.js?v=5fb9f244"></script>
+<script src="shared/finanzas-export.js?v=ed74f22d"></script>
+<script defer src="shared/toast.js?v=9843f93f"></script>
+<script defer src="shared/nav.js?v=81ac8d15"></script>
+<script src="shared/finanzas-privacy.js?v=4d46bf26"></script>
 <script>
 'use strict';
 var ultimoCalculo = null;
@@ -634,7 +634,7 @@ var CATS = [
 function descargarPlantillaAnual(){
   if (!window.ExcelJS){ exoToast('ExcelJS no cargó','error'); return; }
   var anio = new Date().getFullYear();
-  var wb = new ExcelJS.Workbook(); wb.created = new Date(); wb.creator = 'ExógenaDIAN';
+  var wb = new ExcelJS.Workbook(); wb.created = new Date(); wb.creator = 'Aziendale';
   // Pre-cargar histórico del usuario: si tiene PyG guardado para algún mes, lo incluimos
   var historicoUsuario = {};
   var mesesConDatos = 0;
@@ -894,11 +894,11 @@ function exportPDF(){
   var ahorroBajo = c.pctAho < 10;
   // Frase hero
   var fraseHero;
-  if (deficit)              fraseHero = { texto:'Gastas más de lo que ganas.\nLa tasa de ahorro real: negativa.', autor:'ExógenaDIAN' };
-  else if (c.pctAho >= 20)  fraseHero = { texto:'20% de ahorro real.\nEstás en el percentil alto.', autor:'ExógenaDIAN' };
+  if (deficit)              fraseHero = { texto:'Gastas más de lo que ganas.\nLa tasa de ahorro real: negativa.', autor:'Aziendale' };
+  else if (c.pctAho >= 20)  fraseHero = { texto:'20% de ahorro real.\nEstás en el percentil alto.', autor:'Aziendale' };
   else if (ahorroBajo)      fraseHero = { texto:'Casi todos creen que ahorran 15%.\nEl promedio real es 7-9%.', autor:'Adaptación de Morgan Housel' };
-  else if (c.pctDeu > 30)   fraseHero = { texto:'30% del ingreso en cuotas malas.\nMargen cero.', autor:'ExógenaDIAN' };
-  else                       fraseHero = { texto:'Tu PyG no juzga.\nSolo informa.', autor:'ExógenaDIAN' };
+  else if (c.pctDeu > 30)   fraseHero = { texto:'30% del ingreso en cuotas malas.\nMargen cero.', autor:'Aziendale' };
+  else                       fraseHero = { texto:'Tu PyG no juzga.\nSolo informa.', autor:'Aziendale' };
   // Narrativa
   var narrativa = 'Este mes ('+claveMes()+') entraron '+fmt(c.ing)+' y se fueron '+fmt(totalGastos)+'. ';
   narrativa += 'Tu balance: '+(c.balance >= 0 ? '+'+fmt(c.balance)+' a favor.' : fmt(c.balance)+' en contra.');

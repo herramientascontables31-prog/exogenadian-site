@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Motor de exámenes finales ═══
+/* ═══ Aziendale — Motor de exámenes finales ═══
    Quiz client-side: 10 preguntas MCQ random del banco del curso, nota mínima 70%, 3 intentos.
 
    API:

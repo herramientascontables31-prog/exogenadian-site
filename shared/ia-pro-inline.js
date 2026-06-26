@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Activación PRO inline en el banner de límite de las herramientas IA ═══
+/* ═══ Aziendale — Activación PRO inline en el banner de límite de las herramientas IA ═══
    Resuelve el caso: un cliente PRO entra desde un navegador donde no activó (o limpió localStorage)
    y ve "3/3 gratis" sin forma evidente de decir "soy PRO". Este script detecta cuando el banner de
    límite gratis aparece e inyecta un formulario inline con email + botón Activar que llama a

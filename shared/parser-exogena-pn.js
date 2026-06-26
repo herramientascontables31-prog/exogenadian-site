@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Parser robusto reporte exógena DIAN para Persona Natural
+ * Aziendale — Parser robusto reporte exógena DIAN para Persona Natural
  *
  * Refactor Corrección 2: detección semántica por contenido (no por nombres
  * exactos de cabecera). 3 niveles:

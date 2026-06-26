@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es-CO">
 <head>
-<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script src="shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
@@ -9,14 +9,14 @@
 <link rel="apple-touch-icon" href="og-image.png">
 <meta name="theme-color" content="#1B3A5C">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Contabilizar desde reporte FE del MUISCA — Libro diario + Plano contable | ExógenaDIAN</title>
+<title>Contabilizar desde reporte FE del MUISCA — Libro diario + Plano contable | Aziendale</title>
 <meta name="description" content="Sube el listado de facturación electrónica del MUISCA y obtén la contabilización completa: libro diario, libro auxiliar, mayor, balance de comprobación y plano CSV listo para importar a Helisa, World Office, Siigo, Loggro o cualquier software. Detecta tu PUC propio y aprende de tu maestro de terceros.">
 <meta name="keywords" content="contabilizar facturación electrónica, contabilización automática DIAN, plano contable desde FE, libro diario MUISCA, asientos automáticos facturas electrónicas">
 <link rel="canonical" href="https://exogenadian.com/contabilizar-fe.html">
-<meta property="og:title" content="Contabilizar facturas electrónicas DIAN — Excel + plano contable | ExógenaDIAN">
+<meta property="og:title" content="Contabilizar facturas electrónicas DIAN — Excel + plano contable | Aziendale">
 <meta property="og:description" content="Del reporte FE del MUISCA a libro diario + plano contable importable en minutos. Detecta tu PUC, aprende de tu maestro de terceros, calcula retefuente/ReteIVA/ReteICA.">
 <meta property="og:url" content="https://exogenadian.com/contabilizar-fe.html">
-<meta property="og:type" content="website"><meta property="og:locale" content="es_CO"><meta property="og:site_name" content="ExógenaDIAN">
+<meta property="og:type" content="website"><meta property="og:locale" content="es_CO"><meta property="og:site_name" content="Aziendale">
 <meta property="og:image" content="https://exogenadian.com/og-image.png">
 <meta name="robots" content="index, follow">
 <script type="application/ld+json">
@@ -161,7 +161,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 .ecard-skip{display:inline-block;margin-left:14px;color:rgba(255,255,255,.7);font-size:.82rem;text-decoration:none;font-weight:500}
 .ecard-skip:hover{color:#fff;text-decoration:underline}
 </style>
-<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+<script async src="shared/error-tracker.js?v=dd1f7f1d"></script><style id="exo-loading-css">
 #exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
 #exo-loading.hide{opacity:0;pointer-events:none}
 #exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
@@ -482,13 +482,13 @@ Las retenciones se devuelven proporcionalmente.</pre>
 </div>
 <script defer src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
-<script defer src="shared/toast.js?v=9d7a298c"></script>
-<script src="shared/analytics.js?v=b756a0cb"></script>
-<script defer src="shared/nav.js?v=628a5456"></script>
-<script src="shared/version.js?v=e1f37056"></script>
-<script defer src="shared/pro.js?v=848fbf16"></script>
-<script defer src="shared/pro-gate.js?v=c9ccfa6c"></script>
-<script defer src="shared/pro-banner.js?v=a5944c54"></script>
+<script defer src="shared/toast.js?v=9843f93f"></script>
+<script src="shared/analytics.js?v=1df688c5"></script>
+<script defer src="shared/nav.js?v=81ac8d15"></script>
+<script src="shared/version.js?v=33c39a43"></script>
+<script defer src="shared/pro.js?v=ccea4108"></script>
+<script defer src="shared/pro-gate.js?v=dafb5761"></script>
+<script defer src="shared/pro-banner.js?v=f0acfdc0"></script>
 <script>
 // ═══════════════════════════════════════════════════════════════════════════
 // HELPERS REUTILIZADOS
@@ -2132,7 +2132,7 @@ document.querySelectorAll('.tab-btn').forEach(b=>{
 // ═══════════════════════════════════════════════════════════════════════════
 // DESCARGAS — Excel estilizado con ExcelJS
 // ═══════════════════════════════════════════════════════════════════════════
-// Paleta corporativa ExógenaDIAN
+// Paleta corporativa Aziendale
 const XL_THEME={
   primary:'FF1B3A5C',     // azul oscuro corporativo
   primarySoft:'FFD6E4F0', // pri3
@@ -2166,7 +2166,7 @@ async function descargarExcel(){
   const NOMC=['','enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
   const sufijoMes=mesFiltro?'_'+NOMC[parseInt(mesFiltro.split('-')[1],10)]+'_'+mesFiltro.split('-')[0]:'';
   const wb=new ExcelJS.Workbook();
-  wb.creator='ExógenaDIAN.com';wb.created=new Date();
+  wb.creator='Aziendale.com';wb.created=new Date();
   const nit=(document.getElementById('iNit')||{}).value||'';
   const empresa=(window._declaranteNombre)||'Empresa';
   const desde=document.getElementById('iDesde').value||'';
@@ -2214,7 +2214,7 @@ async function descargarExcel(){
     ['Total créditos',expCre],
     ['Cuadre',Math.abs(expDeb-expCre)<1?'OK ✓':'⚠ Diferencia: '+(expDeb-expCre).toFixed(2)],
     ['Terceros aprendidos del auxiliar histórico',Object.keys(AUX_HIST||{}).length],
-    ['Generado por','ExógenaDIAN.com (contabilizar-fe)'],
+    ['Generado por','Aziendale.com (contabilizar-fe)'],
     ['Versión',(window.EXOGENA_VERSION||{}).shortHash||'dev'],
     ['Fecha generación',new Date().toLocaleString('es-CO')]
   ];
@@ -2698,7 +2698,7 @@ async function descargarTotalInnovation(){
   const NOMC=['','enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
   const sufijoMes=mesFiltro?'_'+NOMC[parseInt(mesFiltro.split('-')[1],10)]+'_'+mesFiltro.split('-')[0]:'';
   const wb=new ExcelJS.Workbook();
-  wb.creator='ExógenaDIAN.com';wb.created=new Date();
+  wb.creator='Aziendale.com';wb.created=new Date();
   // ═══ HOJA 1: Doc- contabilidad (formato Total Innovation, sin estilos) ═══
   const wsTI=wb.addWorksheet('Doc- contabilidad');
   wsTI.columns=[

@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Parser reporte MUISCA del consultante (PN)
+ * Aziendale — Parser reporte MUISCA del consultante (PN)
  *
  * Se aplica al XLSX que la DIAN genera cuando uno entra a Usuario Registrado →
  * Consulta de Información Reportada. Estructura fija:

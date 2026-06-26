@@ -1,6 +1,6 @@
 {
  "_meta": {
-  "fuente": "Directorio Central ExógenaDIAN (DESACTIVADO)",
+  "fuente": "Directorio Central Aziendale (DESACTIVADO)",
   "nota": "Vaciado 2026-06-01: la data NIT↔razon_social estaba cruzada (84% incorrecta vs listas oficiales DIAN). Los nombres se resuelven ahora desde gran_contribuyentes/autoretenedores/proveedores_ficticios + consulta en vivo MUISCA.",
   "total_registros": 0,
   "ultima_actualizacion": "2026-06-01",

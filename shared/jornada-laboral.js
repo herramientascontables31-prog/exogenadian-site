@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Jornada laboral y recargos POR FECHA (chokepoint único).
+ * Aziendale — Jornada laboral y recargos POR FECHA (chokepoint único).
  *
  * Dos leyes cambian los recargos/jornada de forma gradual:
  *   · Ley 2101/2021 (reducción de jornada — afecta el DIVISOR de la hora):

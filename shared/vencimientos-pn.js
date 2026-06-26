@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Vencimientos Renta Personas Naturales (módulo compartido)
+ * Aziendale — Vencimientos Renta Personas Naturales (módulo compartido)
  *
  * Expone el calendario oficial DIAN de cuota única para renta PN AG 2025
  * (declarado en 2026), así como utilidades para consultar por NIT y

@@ -76,26 +76,26 @@ html.f2516-from-f110 #cardEntradaBloqueada{display:none!important}
 /* Mostrar step 2 inmediatamente cuando viene del F110, sin esperar a procesarBalance */
 html.f2516-from-f110 #step2{display:block!important}
 </style>
-<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script src="shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
 <meta charset="UTF-8">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="theme-color" content="#059669">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Formato 2516 — Conciliación Fiscal | ExogenaDIAN</title>
+<title>Formato 2516 — Conciliación Fiscal | Aziendale</title>
 <meta name="description" content="Genera el Formato 2516 Versión 9 (Conciliación Fiscal) desde tu balance de prueba. Réplica exacta del prevalidador DIAN con 7 hojas: ESF Patrimonio, ERI Renta Líquida, Impuesto Diferido, Activos Fijos. Excel formulado.">
 <link rel="canonical" href="https://exogenadian.com/formato2516.html">
-<meta property="og:title" content="Formato 2516 Conciliación Fiscal — Prevalidador DIAN | ExogenaDIAN">
+<meta property="og:title" content="Formato 2516 Conciliación Fiscal — Prevalidador DIAN | Aziendale">
 <meta property="og:description" content="Genera el F2516 V9 desde tu balance. Réplica del prevalidador DIAN con las 7 hojas. Excel formulado listo para MUISCA.">
 <meta property="og:url" content="https://exogenadian.com/formato2516.html">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_CO">
-<meta property="og:site_name" content="ExogenaDIAN">
+<meta property="og:site_name" content="Aziendale">
 <meta property="og:image" content="https://exogenadian.com/og-image.png">
 <meta name="robots" content="index, follow">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Formato 2516 Conciliación Fiscal","url":"https://exogenadian.com/formato2516.html","description":"Genera el Formato 2516 V9 de Conciliación Fiscal desde balance de prueba. Prevalidador DIAN completo.","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"COP"},"author":{"@type":"Organization","name":"ExogenaDIAN","url":"https://exogenadian.com"}}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Formato 2516 Conciliación Fiscal","url":"https://exogenadian.com/formato2516.html","description":"Genera el Formato 2516 V9 de Conciliación Fiscal desde balance de prueba. Prevalidador DIAN completo.","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"COP"},"author":{"@type":"Organization","name":"Aziendale","url":"https://exogenadian.com"}}
 </script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js" integrity="sha384-Pqp51FUN2/qzfxZxBCtF0stpc9ONI6MYZpVqmo8m20SoaQCzf+arZvACkLkirlPz" crossorigin="anonymous"></script>
@@ -178,7 +178,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 .f110-r.f-tot .f-v{color:#1B3A5C;font-weight:800}
 .f110-r.f-res{background:#fff3e0}.f110-r.f-res .f-v{color:#E65100;font-weight:800;font-size:12px}
 </style>
-<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+<script async src="shared/error-tracker.js?v=dd1f7f1d"></script><style id="exo-loading-css">
 #exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
 #exo-loading.hide{opacity:0;pointer-events:none}
 #exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
@@ -217,10 +217,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 <div class="exo-loading" id="loadingOverlay"><div class="spinner"></div><div class="spinner-text" id="spinnerText">Procesando balance...</div></div>
 <div id="nav-container"></div>
 <script src="shared/reglas-no-ded.js?v=16d40899"></script>
-<script defer src="shared/pro.js?v=848fbf16"></script>
-<script defer src="shared/toast.js?v=9d7a298c"></script>
-<script defer src="shared/nav.js?v=628a5456"></script>
-<script defer src="shared/pro-banner.js?v=a5944c54"></script>
+<script defer src="shared/pro.js?v=ccea4108"></script>
+<script defer src="shared/toast.js?v=9843f93f"></script>
+<script defer src="shared/nav.js?v=81ac8d15"></script>
+<script defer src="shared/pro-banner.js?v=f0acfdc0"></script>
 <div id="f2516EntryGate" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);z-index:99999;align-items:center;justify-content:center;padding:20px;font-family:Outfit,system-ui,sans-serif">
   <div style="background:#fff;border-radius:16px;padding:36px;max-width:480px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3)">
     <div style="font-size:2.8rem;margin-bottom:14px">🔒</div>
@@ -688,9 +688,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
   </div>
   <div style="text-align:center;padding:20px;font-size:.75rem;color:var(--muted)">
     Los formatos generados son borradores que deben ser revisados y validados por un contador público antes de presentarlos a la DIAN.<br>
-    ExogenaDIAN es una herramienta de apoyo, no reemplaza el criterio profesional contable.<br>
+    Aziendale es una herramienta de apoyo, no reemplaza el criterio profesional contable.<br>
     &#128274; Procesado en tu navegador &middot; IA sin almacenamiento ni entrenamiento &middot; <a href="https://exogenadian.com/politica-privacidad.html" style="color:var(--pri2)">Pol&iacute;tica de privacidad</a><br>
-    <a href="https://exogenadian.com" style="color:var(--pri2)">ExogenaDIAN.com</a>
+    <a href="https://exogenadian.com" style="color:var(--pri2)">Aziendale.com</a>
   </div>
 </div>
 <script>
@@ -3898,7 +3898,7 @@ async function exportExcel2516(){
     };
     ws.headerFooter={
       oddHeader:'&L&"Arial,Bold"&12'+(opts.title||'')+'&R&"Arial"&8 NIT '+(nit||'____')+' · AG '+year,
-      oddFooter:'&LExógenaDIAN.com — borrador, debe verificarse por contador público&CPágina &P de &N&R'+new Date().toLocaleDateString('es-CO')
+      oddFooter:'&LAziendale.com — borrador, debe verificarse por contador público&CPágina &P de &N&R'+new Date().toLocaleDateString('es-CO')
     };
   };
   // ── H1: CARATULA ──
@@ -4024,12 +4024,12 @@ async function exportExcel2516(){
   ws1.getCell('B'+r1).fill={type:'pattern',pattern:'solid',fgColor:{argb:'FFFEF3C7'}};
   ws1.mergeCells('B'+r1+':D'+r1);r1++;
   ws1.mergeCells('B'+r1+':D'+(r1+3));
-  ws1.getCell('B'+r1).value='Este reporte es un BORRADOR generado a partir del balance de prueba cargado por el usuario en ExogenaDIAN.com. Las clasificaciones automáticas se basan en el código PUC y deben ser revisadas y validadas por un Contador Público o Revisor Fiscal antes de su presentación oficial ante la DIAN.\n\nLa presentación del Formato 2516 V9 ante la DIAN se realiza por el Servicio Informático Electrónico — Reporte de Conciliación Fiscal, siguiendo los plazos del calendario tributario nacional. Base normativa: Art. 772-1 ET · Decreto 1998 de 2017 · Resolución 071 de 2019 · Resolución 246 del 30-dic-2025.';
+  ws1.getCell('B'+r1).value='Este reporte es un BORRADOR generado a partir del balance de prueba cargado por el usuario en Aziendale.com. Las clasificaciones automáticas se basan en el código PUC y deben ser revisadas y validadas por un Contador Público o Revisor Fiscal antes de su presentación oficial ante la DIAN.\n\nLa presentación del Formato 2516 V9 ante la DIAN se realiza por el Servicio Informático Electrónico — Reporte de Conciliación Fiscal, siguiendo los plazos del calendario tributario nacional. Base normativa: Art. 772-1 ET · Decreto 1998 de 2017 · Resolución 071 de 2019 · Resolución 246 del 30-dic-2025.';
   ws1.getCell('B'+r1).font={...fN,size:9,color:{argb:'FF78350F'}};
   ws1.getCell('B'+r1).alignment={wrapText:true,vertical:'top'};
   for(let rr=r1;rr<=r1+3;rr++)ws1.getRow(rr).height=22;
   r1+=5;
-  ws1.getCell('B'+r1).value='Generado por ExogenaDIAN.com';
+  ws1.getCell('B'+r1).value='Generado por Aziendale.com';
   ws1.getCell('B'+r1).font={...fN,size:9,italic:true,color:{argb:'FF9CA3AF'}};
   // ── BalancePrueba: hoja compatible con el prevalidador V9 oficial DIAN ──
   // El usuario puede COPIAR Y PEGAR esta hoja a la hoja 'BalancePrueba' del
@@ -4514,6 +4514,6 @@ async function exportExcel2516(){
   gtag('event','f2516_excel_descargado',{cuentas:cuentas2516.length});
 }
 </script>
-<script src="shared/nota-auditor.js?v=c2019bf6"></script>
+<script src="shared/nota-auditor.js?v=b3a0150d"></script>
 </body>
 </html>

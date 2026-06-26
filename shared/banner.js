@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Standalone Announcement Banner ═══
+/* ═══ Aziendale — Standalone Announcement Banner ═══
    For pages that don't load nav.js (blog posts).
    nav.js has this same banner built in.
 */

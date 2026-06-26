@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — pdf-lines.js
+ * Aziendale — pdf-lines.js
  * Utilidad compartida: carga pdf.js bajo demanda (CDN) y extrae el texto de un
  * PDF reconstruyendo las LÍNEAS por coordenada Y, de modo que "ETIQUETA … VALOR"
  * quede en una sola línea (pdf.js separa los items y mete espacios extra).

@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Bancos de preguntas para exámenes finales ═══
+/* ═══ Aziendale — Bancos de preguntas para exámenes finales ═══
    Cada curso con banco tiene >= 15 preguntas MCQ originales.
    Estructura: { q, opts:[A,B,C,D], correct:0..3, explanation }
 

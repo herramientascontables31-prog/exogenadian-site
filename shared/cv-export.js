@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Exportación de Hoja de Vida ═══
+/* ═══ Aziendale — Exportación de Hoja de Vida ═══
    PDF (gratis, vía print) · Word .doc (PRO) · Página web .html autónoma (PRO).
    Depende de CVBuilder (estado) y de exoPro (gating). 100% client-side.
 */

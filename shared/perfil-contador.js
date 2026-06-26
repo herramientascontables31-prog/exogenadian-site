@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Perfil del Contador + Libreta de Clientes ═══
+/* ═══ Aziendale — Perfil del Contador + Libreta de Clientes ═══
    Persistencia local (localStorage) usada por el módulo Certificados.
 
    Uso:

@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Asesor pensional con reglas normativas verificadas
+ * Aziendale — Asesor pensional con reglas normativas verificadas
  *
  * Motor de reglas que recibe los datos del cotizante + resultado del
  * cálculo y devuelve un dictamen ordenado por severidad. Cada hallazgo

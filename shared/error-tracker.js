@@ -1,4 +1,4 @@
-/* ExógenaDIAN — Error tracker
+/* Aziendale — Error tracker
  *
  * Captura errores TÉCNICOS del navegador y los envía al backend para que
  * podamos arreglarlos. NO captura datos personales, contenido de archivos

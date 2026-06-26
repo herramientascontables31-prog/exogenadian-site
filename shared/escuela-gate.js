@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Escuela Access Gate ═══
+/* ═══ Aziendale — Escuela Access Gate ═══
    Controla el acceso a cursos de la Escuela Contable.
    Cursos gratuitos: iva300.html (no incluir este script ahí).
    El resto requiere plan PRO+Escuela o PRO Anual.

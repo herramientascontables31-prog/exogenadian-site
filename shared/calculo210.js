@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Motor de calculo Formulario 210 (Renta Personas Naturales)
+ * Aziendale — Motor de calculo Formulario 210 (Renta Personas Naturales)
  *
  * Diseno: motor PURO multi-ano. No accede al DOM. Recibe un `estado`
  * jerarquico y devuelve renglones del 210 + diagnostico del tope Art. 336
@@ -129,23 +129,34 @@
     var otrasExentas = input.otrasRentasExentas || 0;
     var dedNominales = input.deduccionesNominales || 0;
 
+    // Cesantias e intereses (Art. 206 num. 4): exencion ESCALONADA segun el salario mensual
+    // promedio de los ultimos 6 meses. Solo se activa si llega ese dato; si no, comportamiento
+    // anterior intacto (las cesantias quedan dentro del ingreso y reciben el 25% generico).
+    var cesExenta = 0, modoCesEscala = false;
+    if(ces > 0 && input.salarioPromedio6mUvt != null && !isNaN(input.salarioPromedio6mUvt)){
+      cesExenta = cesantiasExentasArt206_4(ces, input.salarioPromedio6mUvt, year);
+      modoCesEscala = true;
+    }
+
     // Ingreso neto = bruto - INCRNGO - costos (capital y no laboral)
     // Para trabajo: bruto incluye salario + cesantias e intereses. INCRNGO incluye salud y pension.
     var ingresoNeto = maxZero(ing + ces - incrngo - costos);
 
     // Renta exenta 25% Art. 206 num. 10 — solo trabajo y honorarios modo trabajo
     var exenta25 = 0;
-    if(opts.aplicaExenta25 && ingresoNeto > 0){
-      // 25% del ingreso neto, tope 790 UVT/ano
-      exenta25 = Math.min(
-        ingresoNeto * p.exentaTrabajo25Pct,
+    if(opts.aplicaExenta25){
+      // Art. 206 num. 10 ET (paragrafo): el 25% se calcula DESPUES de detraer del pago laboral
+      // los INCRNGO, las DEDUCCIONES y las DEMAS RENTAS EXENTAS. Base = ingresoNeto − deducciones − otras exentas.
+      // Si las cesantias van por la escala del num. 4, NO entran en la base del 25% (su exencion es la escala).
+      var base25 = maxZero(ingresoNeto - (modoCesEscala ? ces : 0) - dedNominales - otrasExentas);
+      exenta25 = r1k(Math.min(
+        base25 * p.exentaTrabajo25Pct,
         p.exentaTrabajo25MaxUvt * p.uvt
-      );
-      exenta25 = r1k(exenta25);
+      ));
     }
 
     // Total exentas y deducciones imputables a esta subcedula (DENTRO del tope global)
-    var exentasYDeducciones = exenta25 + otrasExentas + dedNominales;
+    var exentasYDeducciones = exenta25 + otrasExentas + cesExenta + dedNominales;
 
     // Renta liquida ordinaria de la subcedula (antes de aplicar tope global)
     var rentaLiquidaAntesExentas = maxZero(ingresoNeto + ece);
@@ -159,6 +170,7 @@
       ingresoNeto: ingresoNeto,
       ingresosECE: ece,
       exenta25: exenta25,
+      cesantiasExenta: cesExenta,
       otrasRentasExentas: otrasExentas,
       deduccionesNominales: dedNominales,
       exentasYDeducciones: exentasYDeducciones,
@@ -174,6 +186,7 @@
       incrngo: input.incrngo,
       costos: 0,
       cesantiasIntereses: input.cesantiasIntereses,
+      salarioPromedio6mUvt: input.salarioPromedio6mUvt,
       otrasRentasExentas: input.otrasRentasExentas,
       deduccionesNominales: input.deduccionesNominales,
       ingresosECE: 0
@@ -252,11 +265,19 @@
     var excedeTope = rawDentroTope > Math.min(limite40, limite1340);
 
     // 4) Deducciones FUERA del tope (Art. 336 num. 3 inc. 2 + num. 5)
-    var depArt336Num = Math.min(
-      input.dependientesArt336Numero || 0,
+    // Dependientes (Art. 336 num. 3 inc. 2 ET): entero, piso 0, tope 4.
+    var depArt336Num = Math.max(0, Math.min(
+      Math.floor(input.dependientesArt336Numero || 0),
       p.dependientesArt336MaxNumero
-    );
-    var depArt336Valor = r1k(depArt336Num * p.dependientesArt336UvtPorDep * p.uvt);
+    ));
+    // Decreto 2231/2023 (Art. 1.2.1.20.3 Dcto 1625/2016): los 72 UVT/dependiente aplican SOLO a rentas de
+    // trabajo (vinculo laboral u honorarios por servicios personales). No proceden sobre capital ni no laborales,
+    // y no pueden exceder la renta de trabajo disponible.
+    var honEsTrabajo = !!(input.honorarios && input.honorarios.modo === 'rentasTrabajo');
+    var rentaTrabajoDisp = trabajo.rentaSubcedula + (honEsTrabajo ? honorarios.rentaSubcedula : 0);
+    var depArt336Valor = rentaTrabajoDisp > 0
+      ? Math.min(r1k(depArt336Num * p.dependientesArt336UvtPorDep * p.uvt), rentaTrabajoDisp)
+      : 0;
 
     var fe1Pct = input.facturaElectronica1Pct || 0;
     var fe1PctMax = r1k(p.facturaElectronica1PctMaxUvt * p.uvt);
@@ -486,8 +507,8 @@
     // Ley 2277/2022). Antes se liquidaba 35% + 15% fijo y el neto no integraba
     // — la tarifa fija del 15% (Art. 242 pre-reforma) quedo derogada por la 2277.
     var c108Gravado = cedulas.dividendos.c108 || 0;
-    var c119 = r1k(c108Gravado * p.divGravadosTarifaCorporativa);     // 35% Art. 240/242-1
-    var netoGravado = maxZero(c108Gravado - c119);                    // 65% → cedula general
+    var impGravado35 = r1k(c108Gravado * p.divGravadosTarifaCorporativa); // 35% Art. 240/242-1 → casilla 118
+    var netoGravado = maxZero(c108Gravado - impGravado35);               // 65% → cedula general
     var rentaCedularDiv = (cedulas.dividendos.c107 || 0) + netoGravado;
     var c111 = baseConPresuntiva + cedulas.pensiones.c103 + rentaCedularDiv;
 
@@ -497,14 +518,17 @@
     // Casilla 117: si renta presuntiva supera cedula general, mismo impuesto (no doble)
     var c117 = (c98 > cedulas.general.c97) ? c116 : 0;
 
-    // Casilla 118: reservada (Art. 242 ya no aplica tarifa fija — se consolida en c111)
-    var c118 = 0;
+    // Casilla 118: Impuesto de la 2a subcedula de dividendos 2017+ GRAVADOS = 35% (Art. 240/242-1).
+    //   El template oficial rotula la casilla 118 "Por dividendos y participaciones ano 2017 y
+    //   siguientes, 2a subcedula (Art. 240 E.T.)". El neto (65%) ya tributo en c116 via la cedula general.
+    var c118 = impGravado35;
 
-    // Casilla 120: Impuesto sobre dividendos 2016 y anteriores + dividendos exterior
-    //   c106 (anteriores 2016): Art. 241 con tabla cedular ordinaria
-    //   c109-c110 (exterior): Art. 241
+    // Casilla 119: Impuesto sobre dividendos y participaciones ANO 2016 y anteriores (tabla Art. 241).
+    var c119 = impuestoArt241(cedulas.dividendos.c106, year);
+
+    // Casilla 120: Impuesto sobre dividendos y participaciones recibidas del EXTERIOR (tabla Art. 241).
     var divExt = maxZero(cedulas.dividendos.c109 - cedulas.dividendos.c110);
-    var c120 = impuestoArt241(cedulas.dividendos.c106, year) + impuestoArt241(divExt, year);
+    var c120 = impuestoArt241(divExt, year);
 
     // Casilla 121: Total impuesto rentas cedulares
     var c121 = c116 + c118 + c119 + c120;
@@ -536,10 +560,12 @@
     // Casilla 129: Total impuesto a cargo
     var c129 = maxZero(c126 + c127 - c128);
 
+    // El MUISCA aproxima cada casilla al multiplo de mil mas cercano; redondeamos
+    // las entradas del usuario para que los saldos finales salgan en miles.
     // Casilla 130: Anticipo del ano anterior pagado
-    var c130 = liq.anticipoPagado || 0;
+    var c130 = r1k(liq.anticipoPagado || 0);
     // Casilla 131: Saldo a favor ano anterior
-    var c131 = liq.saldoFavorAnoAnterior || 0;
+    var c131 = r1k(liq.saldoFavorAnoAnterior || 0);
     // Casilla 132: Retenciones del ano
     var c132 = r1k(liq.retencionesAno || 0); // DIAN: aproximar al multiplo de mil
 

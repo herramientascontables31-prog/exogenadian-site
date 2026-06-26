@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Storage local para Finanzas Personales
+ * Aziendale — Storage local para Finanzas Personales
  *
  * Persistencia sin login: todo vive en localStorage del navegador del usuario.
  * Si el usuario quiere mover datos a otro dispositivo: exportar JSON e importar.
@@ -93,7 +93,7 @@ window.FinanzasStore = (function () {
   // === Export / import JSON (para que el usuario lleve sus datos a otro navegador) ===
   function exportAll() {
     var dump = {
-      app: 'ExogenaDIAN/finanzas-personales',
+      app: 'Aziendale/finanzas-personales',
       version: 1,
       exportedAt: new Date().toISOString(),
       data: {}

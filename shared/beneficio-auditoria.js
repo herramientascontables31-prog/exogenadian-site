@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Beneficio de auditoría (Art. 689-3 ET)
+ * Aziendale — Beneficio de auditoría (Art. 689-3 ET)
  *
  * Determina si una declaración de renta PN puede acogerse al beneficio de
  * auditoría (firmeza reducida a 6 ó 12 meses) comparando el impuesto neto de

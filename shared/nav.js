@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Shared Navigation Component ═══
+/* ═══ Aziendale — Shared Navigation Component ═══
    Uso:
      Paginas principales (index, blog):
        <div id="nav-container" data-variant="full"></div>
@@ -229,7 +229,7 @@
   '<nav class="ed-nav" role="navigation" aria-label="Navegación de herramientas" style="display:flex;align-items:center;justify-content:space-between;padding:8px 20px;background:#fff;border-bottom:1px solid #e2e8f0;font-family:Outfit,DM Sans,sans-serif;flex-wrap:wrap">'+
   '  <a href="'+P+'index.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;color:#1a1a2e;font-weight:800;font-size:.95rem;flex-shrink:0">'+
   '    <div style="width:28px;height:28px;background:linear-gradient(135deg,#059669,#34D399);border-radius:7px;display:grid;place-items:center;color:#fff;font-size:.7rem;font-weight:900">E</div>'+
-  '    ExógenaDIAN'+
+  '    Aziendale'+
   '  </a>'+
   '  <button class="tn-hamburger" aria-expanded="false" aria-label="Abrir menú" onclick="var nl=document.getElementById(\'navLinks\');nl.classList.toggle(\'open\');this.setAttribute(\'aria-expanded\',nl.classList.contains(\'open\'))">☰</button>'+
   '  <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap" id="navLinks">'+
@@ -320,8 +320,8 @@ var MEGA_MENU_HTML='<div class="mega-grid"><div class="mega-group"><h6>📂 Exó
   var fullNav=skipLink+
   '<nav id="nav" role="navigation" aria-label="Navegación principal">'+
   '  <a href="'+P+'index.html" class="logo">'+
-  '    <div class="logo-mark">E</div>'+
-  '    <div>ExógenaDIAN<small>Portal Contable \u00b7 IA</small></div>'+
+  '    <div class="logo-mark">A</div>'+
+  '    <div>Aziendale<small>Portal Contable \u00b7 IA</small></div>'+
   '  </a>'+
   '  <div class="nav-links" id="navLinks">'+
        /* Links directos de alto tráfico */

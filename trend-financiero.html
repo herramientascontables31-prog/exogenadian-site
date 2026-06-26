@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<script src="shared/cookie-consent.js?v=dc60b695"></script>
+<script src="shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
@@ -9,16 +9,16 @@
 <link rel="apple-touch-icon" href="og-image.png">
 <meta name="theme-color" content="#059669">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trend Financiero — Tendencia mensual de Balance y P&G | ExógenaDIAN</title>
+<title>Trend Financiero — Tendencia mensual de Balance y P&G | Aziendale</title>
 <meta name="description" content="Carga varios balances mensuales (hasta 12) y genera automáticamente la tendencia comparativa de Activos, Pasivos, Patrimonio, Ingresos y Utilidad. Sparkline + variación + notas de análisis editables. Exporta a Excel y Word.">
 <meta name="keywords" content="trend financiero, tendencia balance, análisis mensual, P&G mensual, balance comparativo mensual, evolución utilidad, gerencial contable">
 <link rel="canonical" href="https://exogenadian.com/trend-financiero.html">
-<meta property="og:title" content="Trend Financiero — Tendencia mensual | ExógenaDIAN">
+<meta property="og:title" content="Trend Financiero — Tendencia mensual | Aziendale">
 <meta property="og:description" content="Carga varios balances mensuales y genera tendencia comparativa con sparkline y notas de análisis.">
 <meta property="og:url" content="https://exogenadian.com/trend-financiero.html">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_CO">
-<meta property="og:site_name" content="ExógenaDIAN">
+<meta property="og:site_name" content="Aziendale">
 <meta property="og:image" content="https://exogenadian.com/og-image.png">
 <meta name="robots" content="index, follow">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw" crossorigin="anonymous"></script>
@@ -148,7 +148,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 .dash-empresa .dash-periodo .label{font-size:.7rem;opacity:.7;text-transform:uppercase;letter-spacing:.3px}
 .dash-empresa .dash-periodo .val{font-size:1rem;font-weight:700}
 </style>
-<script async src="shared/error-tracker.js?v=a6f6c956"></script><style id="exo-loading-css">
+<script async src="shared/error-tracker.js?v=dd1f7f1d"></script><style id="exo-loading-css">
 #exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
 #exo-loading.hide{opacity:0;pointer-events:none}
 #exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
@@ -338,7 +338,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
   </div>
 </div>
 <script src="shared/exopro.js"></script>
-<script defer src="shared/nav.js?v=628a5456"></script>
+<script defer src="shared/nav.js?v=81ac8d15"></script>
 <script src="shared/related-links.js"></script>
 <script>
 /* ═══════════════════════════════════════════════════════════════════
@@ -1835,7 +1835,7 @@ body{font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;backgrou
   <div id="notasMensuales"></div>
   <div id="notas"></div>
   <div class="footer">
-    <div class="brand">Generado con ExógenaDIAN.com</div>
+    <div class="brand">Generado con Aziendale.com</div>
     <div>Herramienta gratuita para contadores · Tus datos no salen del navegador</div>
     <div style="margin-top:6px">Crea tu propio dashboard en <a href="https://exogenadian.com/trend-financiero.html">https://exogenadian.com/trend-financiero.html</a></div>
   </div>
@@ -2066,7 +2066,7 @@ async function exportarExcel(){
   const meses=monthlyFiles.map(f=>f.mes);
   const periodo=MESES_CORTO[meses[0]]+' a '+MESES_CORTO[meses[meses.length-1]]+' '+year;
   const wb=new ExcelJS.Workbook();
-  wb.creator='ExogenaDIAN.com';wb.created=new Date();
+  wb.creator='Aziendale.com';wb.created=new Date();
   // Paleta corporativa
   const CC={pri:'FF1B3A5C',pri2:'FF2E75B6',pri3:'FFD6E4F0',acc:'FF7C3AED',
     g:'FF10B981',gBg:'FFD1FAE5',a:'FFF59E0B',aBg:'FFFEF3C7',r:'FFDC2626',rBg:'FFFEE2E2',n:'FF9CA3AF',
@@ -2123,7 +2123,7 @@ async function exportarExcel(){
   infoRow(8,'Periodo cubierto:',periodo,true);
   infoRow(9,'Meses cargados:',monthlyFiles.length);
   infoRow(10,'Fecha de emisión:',new Date().toLocaleDateString('es-CO',{year:'numeric',month:'long',day:'numeric'}));
-  infoRow(11,'Generado con:','ExógenaDIAN.com — Trend Financiero');
+  infoRow(11,'Generado con:','Aziendale.com — Trend Financiero');
   // Contenido
   s0.mergeCells('B13:C13');
   s0.getCell('B13').value='📑 CONTENIDO';

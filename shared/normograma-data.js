@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Normograma Tributario: base de normas ═══
+/* ═══ Aziendale — Normograma Tributario: base de normas ═══
    Generado por scripts/normograma-import.js con verificación multiagente contra fuentes oficiales.
    NO editar a mano: regenerar con node scripts/normograma-import.js <json> "<corte>" */
 window.NORMOGRAMA = {

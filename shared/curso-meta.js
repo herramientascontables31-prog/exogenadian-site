@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Metadatos de cursos y especializaciones ═══
+/* ═══ Aziendale — Metadatos de cursos y especializaciones ═══
    Define nivel, tiempo de lectura, pre-requisitos y especialización de cada curso.
 
    El tiempo se mide de forma honesta: minutos de lectura reales calculados

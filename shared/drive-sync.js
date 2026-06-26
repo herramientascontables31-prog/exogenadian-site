@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Google Drive sync ═══
+/* ═══ Aziendale — Google Drive sync ═══
    Sincroniza un blob JSON contra Google Drive del propio usuario.
    100% client-side (sin backend). Scope `drive.file` (solo archivos
    creados por la app — no toca otros archivos del Drive del user).
@@ -21,7 +21,7 @@
   'use strict';
   if(window.ExoDrive)return;
 
-  const FOLDER_NAME='ExogenaDIAN';
+  const FOLDER_NAME='Aziendale';
   const TOKEN_KEY='exo_drive_token_v1';
   const FOLDER_KEY='exo_drive_folder_v1';
 
@@ -124,7 +124,7 @@
     setEstado('desconectado');
   }
 
-  // Asegura que la carpeta ExogenaDIAN existe en el Drive del user
+  // Asegura que la carpeta Aziendale existe en el Drive del user
   async function ensureFolder(){
     if(folderId)return folderId;
     const cached=localStorage.getItem(FOLDER_KEY);

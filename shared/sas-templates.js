@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Templates de constitución S.A.S. ═══
+/* ═══ Aziendale — Templates de constitución S.A.S. ═══
    Genera HTML de los estatutos y cartas de aceptación a partir del state
    del wizard crear-sas.html. Redacciones originales basadas en Ley 1258/2008,
    Decreto 410/1971 (Código de Comercio) y Decreto 2020/2009.

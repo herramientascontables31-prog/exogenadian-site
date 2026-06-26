@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Motor de Cálculo Liquidación Laboral ═══
+/* ═══ Aziendale — Motor de Cálculo Liquidación Laboral ═══
    Normativa: CST Arts. 249, 306, 186-189, 64 | Ley 52/75 | Normatividad laboral vigente 2025-2026
    Jurisprudencia CSJ, Sala Laboral — criterio reiterado sobre salario variable
 */

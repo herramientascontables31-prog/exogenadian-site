@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Lector de oficios / requerimientos de la DIAN
+ * Aziendale — Lector de oficios / requerimientos de la DIAN
  *
  * El contador pega (o sube) el oficio persuasivo / emplazamiento / requerimiento
  * que le llegó al contribuyente. Este módulo extrae —con ALGORITMO, no IA— las

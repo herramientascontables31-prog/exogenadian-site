@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Blog In-Content CTA + Floating Side CTA ═══
+/* ═══ Aziendale — Blog In-Content CTA + Floating Side CTA ═══
    Uso: <script src="../shared/blog-cta.js"></script> al final del <body>
    Inyecta:
    1. Tarjeta CTA después del 3er párrafo del artículo

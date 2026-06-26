@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Parser de extractos de pensión (Colpensiones + AFPs)
+ * Aziendale — Parser de extractos de pensión (Colpensiones + AFPs)
  *
  * Detecta automáticamente el fondo desde el contenido del PDF y extrae:
  *   semanas cotizadas, IBC promedio últimos 12 meses, sexo, edad

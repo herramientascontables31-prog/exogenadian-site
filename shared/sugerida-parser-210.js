@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   ExogenaDIAN — sugerida-parser-210.js (portado de CalculaRenta, herramienta hermana)
+   Aziendale — sugerida-parser-210.js (portado de CalculaRenta, herramienta hermana)
    Lee el PDF del Formulario 210 (declaración SUGERIDA de la DIAN, o una
    declaración presentada) y extrae las casillas por POSICIÓN: el PDF oficial
    es un formulario de fondo + solo los VALORES como texto, así que cada

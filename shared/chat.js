@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Exa Chat Widget v2 ═══
+/* ═══ Aziendale — Exa Chat Widget v2 ═══
    Uso:
      <link rel="stylesheet" href="shared/chat.css">
      <script src="shared/chat.js"></script>

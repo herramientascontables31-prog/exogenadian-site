@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Reajuste fiscal del costo de activos fijos (Art. 70 ET)
+ * Aziendale — Reajuste fiscal del costo de activos fijos (Art. 70 ET)
  *
  * El Art. 70 ET permite (de forma VOLUNTARIA) ajustar el costo fiscal de los
  * bienes muebles e inmuebles con carácter de activos fijos, en el porcentaje

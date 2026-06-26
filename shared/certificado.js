@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Certificate Generation System ═══
+/* ═══ Aziendale — Certificate Generation System ═══
    Uso:
      <script src="shared/certificado.js"></script>   (o ../shared/certificado.js desde /escuela/)
 

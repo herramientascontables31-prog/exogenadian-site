@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Cookie Consent Banner (Google Consent Mode v2) ═══
+/* ═══ Aziendale — Cookie Consent Banner (Google Consent Mode v2) ═══
    Carga ANTES de gtag. Bloquea analytics hasta aceptar.
    Guarda preferencia en localStorage.
 */

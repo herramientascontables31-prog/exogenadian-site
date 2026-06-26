@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Selector de modo unificado para Renta Personas Naturales
+ * Aziendale — Selector de modo unificado para Renta Personas Naturales
  *
  * Coordina los 3 archivos del liquidador F210 (réplica oficial, express,
  * profesional) en una experiencia unificada. Inyecta tabs visuales en la

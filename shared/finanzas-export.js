@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Exports Finanzas Personales (PDF + Excel)
+ * Aziendale — Exports Finanzas Personales (PDF + Excel)
  *
  * Patron calcado de liquidador-export.js. Cualquier calculadora del modulo
  * de finanzas personales lo invoca pasando un payload uniforme:
@@ -60,7 +60,7 @@
     // Header navy
     _setFill(doc, COLOR_NAVY); doc.rect(0, 0, W, 40, 'F');
     _setText(doc, [255, 255, 255]); doc.setFontSize(15); doc.setFont('helvetica', 'bold');
-    doc.text(opts.titulo || 'Finanzas Personales — ExógenaDIAN', M, y); y += 8;
+    doc.text(opts.titulo || 'Finanzas Personales — Aziendale', M, y); y += 8;
     doc.setFontSize(9); doc.setFont('helvetica', 'normal');
     var sub = (opts.subtitulo || '') + (opts.subtitulo ? '  |  ' : '') +
               'Generado: ' + new Date().toLocaleDateString('es-CO');
@@ -125,7 +125,7 @@
 
     // Pie
     doc.setFontSize(6.5); _setText(doc, [160, 160, 160]);
-    doc.text((opts.fuente || '') + '  |  ExógenaDIAN — finanzas-personales', M, 270);
+    doc.text((opts.fuente || '') + '  |  Aziendale — finanzas-personales', M, 270);
     doc.text('Cálculo de referencia con fines didácticos. No constituye asesoría financiera.', M, 274);
 
     var slug = (opts.slug || 'finanzas') + '_' + new Date().toISOString().slice(0, 10);
@@ -157,7 +157,7 @@
       // Titulo
       ws.mergeCells('A1:B1');
       var c1 = ws.getCell('A1');
-      c1.value = opts.titulo || 'Finanzas Personales — ExógenaDIAN';
+      c1.value = opts.titulo || 'Finanzas Personales — Aziendale';
       c1.fill = hF; c1.font = { bold: true, color: { argb: 'FFFFFFFF' }, size: 14 };
       c1.alignment = { horizontal: 'center', vertical: 'middle' };
       ws.getRow(1).height = 28;
@@ -273,7 +273,7 @@
    *
    *     fraseHero: {
    *       texto: 'Tu sueldo bruto es ficción.\nTu neto es la verdad.',
-   *       autor: 'Adaptación — ExógenaDIAN'
+   *       autor: 'Adaptación — Aziendale'
    *     },
    *
    *     inputs: [['Salario bruto', '$5.000.000'], ...],

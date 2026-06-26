@@ -1,8 +1,8 @@
-/* ═══ ExógenaDIAN — Estatuto Tributario: capa de valor propia ═══
+/* ═══ Aziendale — Estatuto Tributario: capa de valor propia ═══
    Para cada artículo destacado: explicación "en simple", concordancias (remisiones),
    herramientas del portal que lo aplican y, cuando corresponde, una tabla curada
    (las tarifas que la fuente publica como imagen y no quedan en el texto).
-   Redacción y selección 100% ExógenaDIAN — no reproduce anotaciones de terceros.
+   Redacción y selección 100% Aziendale — no reproduce anotaciones de terceros.
    Datos verificados contra normativa vigente (Leyes 1819/2016, 2010/2019, 2155/2021, 2277/2022). */
 (function(){
 // Tabla de retención en la fuente por salarios y pensiones — art. 383 (vigente Ley 2010/2019).

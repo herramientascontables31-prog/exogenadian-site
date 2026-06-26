@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Catálogo de certificados para verificar vs reporte exógena (Renta PN)
+ * Aziendale — Catálogo de certificados para verificar vs reporte exógena (Renta PN)
  *
  * El reporte exógena DIAN es PUNTO DE PARTIDA, no verdad — la propia DIAN
  * advierte que puede actualizarse. Este módulo genera, después de cargar el

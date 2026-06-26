@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Guía Contextual Paso a Paso ═══
+/* ═══ Aziendale — Guía Contextual Paso a Paso ═══
    Uso: <script src="shared/guide.js"></script>
 
    Sistema de tips inteligentes que aparecen según la herramienta

@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Nota Auditor ═══
+/* ═══ Aziendale — Nota Auditor ═══
    Reencuadre de mentalidad en las herramientas de formulario: el resultado lo
    prediligenció un ALGORITMO (no IA) a partir de los datos cargados; el
    contador audita y responde. Calmado, una línea, no bloquea, descartable

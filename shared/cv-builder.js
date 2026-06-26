@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Constructor de Hoja de Vida (motor) ═══
+/* ═══ Aziendale — Constructor de Hoja de Vida (motor) ═══
    Estado único cvData + render derivado (la hoja se reconstruye entera en cada cambio).
    El FORMULARIO no se re-renderiza por tecla (preserva el foco); solo cambia al
    agregar/quitar/mover items. 100% client-side, sin dependencias.
@@ -94,7 +94,7 @@
     ]},
     certificaciones:{titulo:'Certificaciones y cursos', singular:'certificación', fields:[
       {k:'nombre',label:'Nombre',ph:'Especialización en Tributaria PJ'},
-      {k:'entidad',label:'Entidad',ph:'ExógenaDIAN — Escuela',half:true},
+      {k:'entidad',label:'Entidad',ph:'Aziendale — Escuela',half:true},
       {k:'ano',label:'Año',ph:'2026',half:true},
     ]},
     referencias:{titulo:'Referencias', singular:'referencia', fields:[

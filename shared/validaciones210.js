@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Validaciones Formulario 210
+ * Aziendale — Validaciones Formulario 210
  * Solo advertencias. NO bloquean avance del wizard.
  */
 (function(){

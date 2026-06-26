@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Agente IA pre-clasificador del reporte exógena (Renta PN)
+ * Aziendale — Agente IA pre-clasificador del reporte exógena (Renta PN)
  *
  * Capa opcional sobre `parser-exogena-pn.js`. Cuando el parser deja registros
  * sin `cedulaFinal` (concepto desconocido o ambiguo), este módulo agrupa esos

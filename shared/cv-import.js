@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Mejora tu HV con IA ═══
+/* ═══ Aziendale — Mejora tu HV con IA ═══
    Lee la HV actual (PDF o texto), pide a la IA reescribir los logros y
    devolver JSON mapeable a cvData, y precarga el constructor.
    One-shot (sin historial) para minimizar consumo. PRO + límite gratis diario.

@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Asesor F210: tips de ahorro cuantificados + riesgo umbral IVA
+ * Aziendale — Asesor F210: tips de ahorro cuantificados + riesgo umbral IVA
  * + explicacion de casillas en lenguaje claro (para el PDF entregable al cliente).
  *
  * Portado de CalculaRenta (advisor.js) — herramienta hermana que comparte el

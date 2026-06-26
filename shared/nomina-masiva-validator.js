@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   ExógenaDIAN — Validador de Plantilla de Nómina Masiva
+   Aziendale — Validador de Plantilla de Nómina Masiva
    ═══════════════════════════════════════════════════════════════════════════
    Pure logic (no DOM): parsea filas crudas del Excel, normaliza tipos y valida
    cada fila. Testable en node. Consumido por nomina-masiva.html.

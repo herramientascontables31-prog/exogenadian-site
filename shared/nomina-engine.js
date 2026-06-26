@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   ExógenaDIAN — Motor de Cálculo de Nómina Mensual
+   Aziendale — Motor de Cálculo de Nómina Mensual
    ═══════════════════════════════════════════════════════════════════════════
    Liquida nómina mensual de uno o varios empleados en relación de dependencia
    ordinaria. Pensado para liquidación masiva desde plantilla Excel.

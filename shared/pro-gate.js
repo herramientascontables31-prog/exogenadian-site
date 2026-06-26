@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Gate de descarga PRO ═══
+/* ═══ Aziendale — Gate de descarga PRO ═══
    Uso:
      <script src="shared/pro.js"></script>
      <script src="shared/pro-gate.js"></script>

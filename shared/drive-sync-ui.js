@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Drive Sync UI Helper ═══
+/* ═══ Aziendale — Drive Sync UI Helper ═══
    Wrapper sobre ExoDrive (shared/drive-sync.js) que monta automáticamente:
      • Botón "☁️ Conectar Drive" (toggle)
      • Banner de status (verde/ámbar/rojo)
@@ -8,7 +8,7 @@
    Uso (1 sola llamada desde cada tool):
      ExoDriveUI.attach({
        clientId: 'xxx.apps.googleusercontent.com',
-       fileName: 'oficina-clientes.json',  // en carpeta ExogenaDIAN
+       fileName: 'oficina-clientes.json',  // en carpeta Aziendale
        buttonContainer: '#barraHeader',    // selector donde inyectar el botón
        bannerContainer: '#barraHeader',    // (opcional, usa buttonContainer si no)
        // Cómo obtener los datos a guardar — debe devolver un objeto JSON-able
@@ -101,7 +101,7 @@
       ico.textContent='✓';
       txt.textContent=email?email.split('@')[0]:'Drive ✓';
       if(bn){bn.style.display='flex';bn.style.background='#ECFDF5';bn.style.borderColor='#6EE7B7';bn.style.color='#065F46';
-        bn.innerHTML='<span style="font-size:1rem">☁️</span><span style="flex:1"><strong>Sincronizado con Drive</strong>'+(email?' ('+email+')':'')+' — '+CONFIG.fileName+' en carpeta <code style="background:#fff;padding:1px 5px;border-radius:3px">ExogenaDIAN</code></span>';}
+        bn.innerHTML='<span style="font-size:1rem">☁️</span><span style="flex:1"><strong>Sincronizado con Drive</strong>'+(email?' ('+email+')':'')+' — '+CONFIG.fileName+' en carpeta <code style="background:#fff;padding:1px 5px;border-radius:3px">Aziendale</code></span>';}
     } else if(s==='sincronizando'){
       btn.style.background='#FFFBEB';btn.style.borderColor='#FCD34D';btn.style.color='#92400E';
       ico.textContent='⏳';txt.textContent='Sincronizando...';
@@ -177,7 +177,7 @@
     try{
       const r=await ExoDrive.load('README.md').catch(()=>null);
       if(r)return; // ya existe
-      const contenido='# ExogenaDIAN — Tus datos sincronizados\n\n'+
+      const contenido='# Aziendale — Tus datos sincronizados\n\n'+
         'Esta carpeta contiene los datos de las herramientas de **exogenadian.com**\n'+
         'que has elegido sincronizar con tu Google Drive personal.\n\n'+
         '## 📂 Archivos en esta carpeta\n\n'+
@@ -191,7 +191,7 @@
         '## ⚠️ NO BORRES estos archivos\n\n'+
         'Son tu data contable. Si los borras manualmente, perderás la información\n'+
         'al cerrar el navegador.\n\n'+
-        'Si los necesitas mover: mantén la estructura de la carpeta `ExogenaDIAN/`\n'+
+        'Si los necesitas mover: mantén la estructura de la carpeta `Aziendale/`\n'+
         'en tu Drive y las herramientas web los seguirán encontrando.\n\n'+
         '## 🔒 Privacidad\n\n'+
         'NADIE en exogenadian.com tiene acceso a estos archivos — están en TU Drive\n'+

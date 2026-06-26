@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Canonicalización de inputs para hash de auditoría
+ * Aziendale — Canonicalización de inputs para hash de auditoría
  *
  * Construye una representación determinística (string JSON con claves ordenadas
  * recursivamente, sin espacios) del estado del wizard + año gravable + UVT del

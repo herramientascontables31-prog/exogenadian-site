@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Toast Notification System ═══ */
+/* ═══ Aziendale — Toast Notification System ═══ */
 (function(){
   'use strict';
   var COLORS={

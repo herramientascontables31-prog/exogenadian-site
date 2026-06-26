@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Asesor Mode (white-label para contadores) ═══
+/* ═══ Aziendale — Asesor Mode (white-label para contadores) ═══
    Cuando el contador activa "modo asesor", los reportes de finanzas
    personales salen con el branding de su firma en el footer.
 

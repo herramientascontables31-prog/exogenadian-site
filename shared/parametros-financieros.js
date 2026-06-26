@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Parametros Finanzas Personales
+ * Aziendale — Parametros Finanzas Personales
  *
  * Vigente: 2026-06  (actualizar al certificarse cada nuevo IBC SuperFin)
  *

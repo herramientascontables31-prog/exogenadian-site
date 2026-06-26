@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Frase Ecard flotante ═══
+/* ═══ Aziendale — Frase Ecard flotante ═══
    Modal verde icónico con frases para contadores colombianos, con botón para
    guardar la imagen lista para Instagram/WhatsApp. Se abre solo bajo demanda
    (escuela/frases-contadores.html); el auto-disparo tras descargas se retiró

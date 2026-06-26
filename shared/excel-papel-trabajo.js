@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Generador del Excel papel de trabajo (8 hojas)
+ * Aziendale — Generador del Excel papel de trabajo (8 hojas)
  *
  * Construido incrementalmente en sub-checkpoints 9.1 → 9.5:
  *   9.1 — Esqueleto + Hoja 1 Carátula con hash de inputs
@@ -77,7 +77,7 @@
 
     w1.mergeCells('A2:D2');
     var sub = w1.getCell('A2');
-    sub.value = 'ExogenaDIAN Pro — Motor ' + MOTOR_VERSION + ' — ' + new Date().toLocaleDateString('es-CO');
+    sub.value = 'Aziendale Pro — Motor ' + MOTOR_VERSION + ' — ' + new Date().toLocaleDateString('es-CO');
     sub.font = { name: FONT_BASE, italic:true, color:{argb:COLORS.muted}, size:9 };
     sub.alignment = { horizontal:'center' };
 
@@ -2040,7 +2040,7 @@
   //  API pública
   // ──────────────────────────────────────────────────────────────────────────
   function generarExcelPapelTrabajo(wb, r, ctx, hash, reconciliacionEstado){
-    wb.creator = 'ExogenaDIAN Pro';
+    wb.creator = 'Aziendale Pro';
     wb.created = new Date();
     wb.title = 'Excel Papel de Trabajo F210 AG ' + ctx.year;
 

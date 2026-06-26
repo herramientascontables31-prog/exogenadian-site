@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — UI compartida para importar el Certificado de Ingresos y
+ * Aziendale — UI compartida para importar el Certificado de Ingresos y
  * Retenciones (F220) en el F210 (Pro y Express).
  *
  * Hace el trabajo común: cargar pdf.js bajo demanda, extraer el texto

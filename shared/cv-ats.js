@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Chequeo ATS de la Hoja de Vida ═══
+/* ═══ Aziendale — Chequeo ATS de la Hoja de Vida ═══
    Análisis heurístico 100% local (sin IA, instantáneo): puntúa la HV,
    da recomendaciones accionables y compara contra una vacante pegada.
    Escucha el evento 'cv-render' que dispara CVBuilder y se actualiza en vivo.

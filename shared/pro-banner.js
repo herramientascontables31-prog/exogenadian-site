@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Shared PRO Status Banner ═══
+/* ═══ Aziendale — Shared PRO Status Banner ═══
    Uso:
      <script src="shared/pro-banner.js"></script>
    Se auto-inyecta despues del nav o header de cada herramienta.

@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Helpers comunes del módulo Certificados ═══
+/* ═══ Aziendale — Helpers comunes del módulo Certificados ═══
    Funciones puras compartidas por los 6 generadores.
 
    Uso:

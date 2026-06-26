@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Optimizador de beneficios F210 (Renta PN)
+ * Aziendale — Optimizador de beneficios F210 (Renta PN)
  *
  * Calcula cuánto puede BAJAR el impuesto un declarante aportando a un fondo de
  * pensión voluntaria / cuenta AFC, respetando los topes legales:

@@ -1,5 +1,5 @@
 /**
- * ExogenaDIAN — Parser de declaraciones oficiales DIAN en PDF (F110 / F300 / F350)
+ * Aziendale — Parser de declaraciones oficiales DIAN en PDF (F110 / F300 / F350)
  *
  * Hallazgo clave: el PDF oficial diligenciado (el que descarga el contribuyente
  * del MUISCA) vuelca los valores de las casillas EN ORDEN al final del flujo de

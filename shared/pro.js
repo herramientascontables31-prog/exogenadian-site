@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — Shared PRO Validation Module ═══
+/* ═══ Aziendale — Shared PRO Validation Module ═══
    Uso:
      <script src="shared/pro.js"></script>
      <script>

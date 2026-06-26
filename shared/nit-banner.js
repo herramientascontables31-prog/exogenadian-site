@@ -1,4 +1,4 @@
-/* ═══ ExógenaDIAN — NIT Next-Step Banner ═══
+/* ═══ Aziendale — NIT Next-Step Banner ═══
    Banner post-consulta NIT que sugiere el próximo paso contextual y
    (opcionalmente) hace nudge de upgrade a PRO según cantidad de
    consultas en la sesión.
