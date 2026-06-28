@@ -70,20 +70,28 @@ window.PrimaMasiva = (function () {
     if (typeof PARAMS_NOMINA !== 'undefined' && PARAMS_NOMINA[2026]) return PARAMS_NOMINA[2026];
     return FALLBACK[anio] || FALLBACK[2026];
   }
+  // Tabla del Art. 383 ET TAL CUAL la imprime el estatuto: el "impuesto
+  // acumulado" usa las constantes redondeadas oficiales (10, 69, 162, 268, 770
+  // UVT), NO el acumulado exacto. Así coincide con la liquidación de la DIAN y
+  // con la doctrina (Gerencie/Actualícese). Por eso NO reusamos la tabla del
+  // motor de nómina (que computa el acumulado exacto, 10,45…).
   function tablaRetencion() {
-    if (typeof CONST_NOMINA !== 'undefined' && CONST_NOMINA.TABLA_RETENCION) return CONST_NOMINA.TABLA_RETENCION;
     return [
-      { hasta: 95,  tarifa: 0.00, base: 0,    acum: 0 },
-      { hasta: 150, tarifa: 0.19, base: 95,   acum: 0 },
-      { hasta: 360, tarifa: 0.28, base: 150,  acum: (150 - 95) * 0.19 },
-      { hasta: 640, tarifa: 0.33, base: 360,  acum: (150 - 95) * 0.19 + (360 - 150) * 0.28 },
-      { hasta: 945, tarifa: 0.35, base: 640,  acum: (150 - 95) * 0.19 + (360 - 150) * 0.28 + (640 - 360) * 0.33 },
-      { hasta: 2300,tarifa: 0.37, base: 945,  acum: (150 - 95) * 0.19 + (360 - 150) * 0.28 + (640 - 360) * 0.33 + (945 - 640) * 0.35 },
-      { hasta: Infinity, tarifa: 0.39, base: 2300, acum: (150 - 95) * 0.19 + (360 - 150) * 0.28 + (640 - 360) * 0.33 + (945 - 640) * 0.35 + (2300 - 945) * 0.37 },
+      { hasta: 95,       tarifa: 0.00, base: 0,    acum: 0 },
+      { hasta: 150,      tarifa: 0.19, base: 95,   acum: 0 },
+      { hasta: 360,      tarifa: 0.28, base: 150,  acum: 10 },
+      { hasta: 640,      tarifa: 0.33, base: 360,  acum: 69 },
+      { hasta: 945,      tarifa: 0.35, base: 640,  acum: 162 },
+      { hasta: 2300,     tarifa: 0.37, base: 945,  acum: 268 },
+      { hasta: Infinity, tarifa: 0.39, base: 2300, acum: 770 },
     ];
   }
   var RENTA_EXENTA_PCT = 0.25;
-  var RENTA_EXENTA_TOPE_UVT_MES = 790 / 12;
+  // La prima se liquida como pago INDEPENDIENTE (no mensual): el tope del 25%
+  // de renta exenta (Art. 206 num 10 ET) es el ANUAL de 790 UVT, que en la
+  // práctica casi nunca topa una sola prima. (No se usa 790/12 como en el
+  // salario mensual — eso retendría de más.) Confirmado: Gerencie/Actualícese.
+  var RENTA_EXENTA_TOPE_UVT = 790;
 
   /* ─── Helpers de fecha ─────────────────────────────────────────────────── */
   function _parseFecha(s) {
@@ -225,7 +233,7 @@ window.PrimaMasiva = (function () {
   /* ─── Retención en la fuente sobre UNA prima (Procedimiento 1) ─────────── */
   function retencionPrima(prima, anio, aplica) {
     var p = params(anio);
-    var topeExenta = RENTA_EXENTA_TOPE_UVT_MES * p.UVT;
+    var topeExenta = RENTA_EXENTA_TOPE_UVT * p.UVT;
     var exenta = Math.min(prima * RENTA_EXENTA_PCT, topeExenta);
     var baseGravable = Math.max(0, prima - exenta);
     var baseUVT = baseGravable / p.UVT;
@@ -254,7 +262,7 @@ window.PrimaMasiva = (function () {
     var pasos = [];
     pasos.push('1) Prima del semestre: ' + f(prima));
     pasos.push('2) Renta exenta 25% (Art. 206 num 10 ET): −' + f(exenta) +
-      (exenta < prima * 0.25 - 1 ? ' (limitada al tope de 65,83 UVT/mes)' : ''));
+      (exenta < prima * 0.25 - 1 ? ' (limitada al tope anual de 790 UVT)' : ''));
     pasos.push('3) Base gravable = ' + f(base) + '  →  ' + base.toLocaleString('es-CO') + ' / ' + f(uvt) + ' = ' + baseUVT.toFixed(2) + ' UVT');
     if (baseUVT <= 95) pasos.push('4) La base (' + baseUVT.toFixed(2) + ' UVT) no supera 95 UVT → retención = $0 (Art. 383 ET).');
     else pasos.push('4) Base ' + baseUVT.toFixed(2) + ' UVT cae en el tramo del ' + (tarifa * 100) + '% (tabla Art. 383 ET) → retención = ' + f(ret) + '.');
@@ -397,7 +405,7 @@ window.PrimaMasiva = (function () {
     titulo('CÓMO SE CALCULA');
     linea('  Prima = (salario + auxilio + promedio variable) × días del semestre / 360  (Art. 306 CST).');
     linea('  Retención (Procedimiento 1, prima independiente — DUR 1625/2016 art. 1.2.4.1.6):');
-    linea('    Prima − 25% renta exenta (Art. 206 num 10 ET, tope 65,83 UVT/mes) → ubicar en tabla Art. 383 ET.');
+    linea('    Prima − 25% renta exenta (Art. 206 num 10 ET, tope anual 790 UVT) → ubicar en tabla Art. 383 ET.');
     linea('    Si la base no supera 95 UVT, la retención es $0 (la mayoría de primas de salario mínimo).'); linea('');
     titulo('PARÁMETROS 2026');
     linea('  SMLMV: $1.750.905   ·   Auxilio: $249.095   ·   UVT: $52.374 (Res. DIAN 000238/2025).');
