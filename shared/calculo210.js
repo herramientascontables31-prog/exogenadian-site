@@ -503,18 +503,25 @@
     var ing = input.ingresos || 0;
     var costos = input.costos || 0;
     var loterias = input.loterias || 0;
+    var gananciaNoLoteria = maxZero(ing - costos);
 
-    // Exencion de GO (herencias Art.307, seguros Art.303-1): antes se tomaba tal cual del usuario
+    // Exencion de la casa/apto de habitacion al venderla (Art. 311-1 ET, mod. Ley 2277/2022 art. 31):
+    // primeras 5.000 UVT de la GANANCIA, si se consigno en AFC o se pago la hipoteca de esa misma
+    // vivienda (lo valida el contador; el motor solo aplica el tope si input.viviendaHabitacion=true).
+    var exVivienda = input.viviendaHabitacion ? Math.min(gananciaNoLoteria, p.goViviendaUrbanaExentaUvt * p.uvt) : 0;
+
+    // Otras exenciones de GO (herencias Art.307, seguros Art.303-1): antes se tomaba tal cual del usuario
     // (riesgo: eximir de mas -> sub-declaracion). Ahora se TOPA segun el tipo.
     // Topes ET (UVT): vivienda urbana causante 13.000 (Art.307-1); inmueble rural 6.500 (Art.307-2);
     // legitimarios/conyuge 3.490 (Art.307-3); no legitimarios/donaciones 2.290 (Art.307-4); seguro vida 3.250 (Art.303-1).
     var TOPES_GO_UVT = { viviendaUrbana:13000, inmuebleRural:6500, legitimario:3490, noLegitimario:2290, seguroVida:3250 };
-    var exentas = input.rentasExentas || 0;
+    var exentaOtras = input.rentasExentas || 0;
     var tipo = input.rentasExentasTipo, avisoExentaGO = null;
-    if(exentas > 0 && tipo && TOPES_GO_UVT[tipo]){
+    if(exentaOtras > 0 && tipo && TOPES_GO_UVT[tipo]){
       var capGO = r1k(TOPES_GO_UVT[tipo] * p.uvt);
-      if(exentas > capGO){ avisoExentaGO = { tipo:tipo, topeUvt:TOPES_GO_UVT[tipo], topePesos:capGO, solicitado:(input.rentasExentas||0) }; exentas = capGO; }
+      if(exentaOtras > capGO){ avisoExentaGO = { tipo:tipo, topeUvt:TOPES_GO_UVT[tipo], topePesos:capGO, solicitado:exentaOtras }; exentaOtras = capGO; }
     }
+    var exentas = Math.min(gananciaNoLoteria, exVivienda + exentaOtras);
 
     // Casilla 112: ingresos brutos GO
     var c112 = ing + loterias;
@@ -529,6 +536,8 @@
       c115: c115,
       ingresosNoLoterias: ing,
       loterias: loterias,
+      exentaVivienda: exVivienda,
+      exentaOtrasAplicada: exentaOtras,
       avisoExentaGO: avisoExentaGO
     };
   }
@@ -730,9 +739,9 @@
         c104: dividendos.c104, c105: dividendos.c105, c106: dividendos.c106,
         c107: dividendos.c107, c108: dividendos.c108,
         c112: go.c112, c113: go.c113, c114: go.c114, c115: go.c115,
-        c111: liq.c111,
+        c98: liq.c98, c111: liq.c111,
         c116: liq.c116, c118: liq.c118, c119: liq.c119, c120: liq.c120,
-        c121: liq.c121, c125: liq.c125, c126: liq.c126, c127: liq.c127, c129: liq.c129,
+        c121: liq.c121, c125: liq.c125, c126: liq.c126, c127: liq.c127, c128: liq.c128, c129: liq.c129,
         c130: liq.c130, c131: liq.c131, c132: liq.c132, c133: liq.c133,
         c134: liq.c134, c135: liq.c135, c136: liq.c136, c137: liq.c137,
         // Casilla específica del descuento Art. 254-1 ET (Ley 2277/2022) — A.3.c
