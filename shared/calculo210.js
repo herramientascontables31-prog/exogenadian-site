@@ -165,6 +165,13 @@
 
     // Total exentas y deducciones imputables a esta subcedula (DENTRO del tope global)
     var exentasYDeducciones = exenta25 + otrasExentas + cesExenta + dedNominales;
+    // Verificado contra AyudaRenta DIAN oficial (Formulario!L28/T28/AC28/AJ28, casillas 41/53/69/86):
+    // cada subcedula limita lo imputable al MENOR entre lo solicitado, el cupo del tope global, Y
+    // la renta liquida de ESA MISMA subcedula (Formulario!L20/T20/AC20/AJ20, casillas 34/46/etc) —
+    // no se puede deducir mas de lo que esa subcedula gano. Sin este tope individual, una subcedula
+    // con perdida (deducciones > ingreso) "presta" su exceso al pool consolidado y el tope global
+    // absorbe deducciones que en realidad no redujeron ningun ingreso real: impuesto de menos.
+    var exentasYDeduccionesTope = Math.min(exentasYDeducciones, ingresoNeto);
 
     // Renta liquida ordinaria de la subcedula (antes de aplicar tope global)
     var rentaLiquidaAntesExentas = maxZero(ingresoNeto + ece);
@@ -192,6 +199,7 @@
       otrasRentasExentas: otrasExentas,
       deduccionesNominales: dedNominales,
       exentasYDeducciones: exentasYDeducciones,
+      exentasYDeduccionesTope: exentasYDeduccionesTope,
       rentaLiquidaAntesExentas: rentaLiquidaAntesExentas,
       base40: base40,
       rentaSubcedula: maxZero(rentaSinTope),
@@ -276,10 +284,13 @@
 
     // 3) Casilla 92: Total exentas y deducciones imputables, limitadas al tope
     //    Tope = min(40% × c91, 1340 UVT, c91)
-    var rawDentroTope = trabajo.exentasYDeducciones
-                      + honorarios.exentasYDeducciones
-                      + capital.exentasYDeducciones
-                      + noLaboral.exentasYDeducciones;
+    // Cada subcedula entra ya capada a su propia renta liquida (exentasYDeduccionesTope, verificado
+    // contra AyudaRenta DIAN oficial: casillas 41/53/69/86 = min(solicitado, cupo tope, renta de ESA
+    // subcedula)). Sin este tope individual, una subcedula en perdida "prestaria" su exceso al pool.
+    var rawDentroTope = trabajo.exentasYDeduccionesTope
+                      + honorarios.exentasYDeduccionesTope
+                      + capital.exentasYDeduccionesTope
+                      + noLaboral.exentasYDeduccionesTope;
     // Base del 40% = suma(ingresos brutos - INCRNGO) de las subcedulas, SIN restar costos (Art. 336-3 ET).
     // No es el 40% de c91, porque c91 si descuenta los costos de capital/no laboral/honorarios.
     var base40Total = trabajo.base40 + honorarios.base40 + capital.base40 + noLaboral.base40;
