@@ -455,7 +455,7 @@
                '   = exentas25 + deducciones nominales imputables, por subcédula\n' +
                '   (c28 1% FE y c139 dependientes Art. 336 inc. 2 van FUERA del tope)\n' +
                '\n' +
-               'Límite 40% × c91 (' + fmt(r.renglones.c91) + '):  ' + fmt(t.limite40) + '\n' +
+               'Límite 40% × (ingresos − INCRNGO) (' + fmt(t.base40) + '):  ' + fmt(t.limite40) + '\n' +
                'Límite 1.340 UVT × ' + fmt(uvt) + ': ' + fmt(t.limite1340) + '\n' +
                '\n' +
                'Aplicado dentro del tope: ' + fmt(t.deduccionesAplicadasDentroTope) + '\n' +
@@ -892,7 +892,8 @@
     var cajaRows = [
       ['Raw consolidado (c41 + c53 + c69 + c86) — sin c28 ni c139',  t.rawDentroTope, ''],
       ['Renta líquida cedular general (c91)',                         r.renglones.c91, ''],
-      ['Límite 40% × c91',                                            t.limite40, '40% × ' + fmtCOP(r.renglones.c91)],
+      ['Base 40% (ingresos − INCRNGO, sin restar costos)',            t.base40, ''],
+      ['Límite 40% × base40',                                         t.limite40, '40% × ' + fmtCOP(t.base40)],
       ['Límite 1.340 UVT (AG ' + ctx.year + ')',                       t.limite1340, '1.340 × ' + fmtCOP(uvt)],
       ['Tope efectivo (menor de los dos)',                            Math.min(t.limite40, t.limite1340), 'Art. 336 num. 3 inc. 1'],
       ['Aplicado dentro del tope (c92)',                              t.deduccionesAplicadasDentroTope, '']

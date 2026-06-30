@@ -377,7 +377,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 <script defer src="shared/nav.js?v=81ac8d15"></script>
 <script defer src="shared/pro-banner.js?v=f0acfdc0"></script>
 <script src="shared/parametros-renta-pn.js?v=a0b1c6a8"></script>
-<script src="shared/calculo210.js?v=56aae171"></script>
+<script src="shared/calculo210.js?v=a6c96539"></script>
 <script src="shared/optimizer-210.js?v=e353e2c8"></script>
 <script src="shared/advisor-210.js?v=7db1f6f7"></script>
 <script src="shared/cert-parser-210.js?v=bf1e7ff8"></script>
@@ -392,7 +392,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 <script src="shared/parser-muisca-consultante.js?v=03bd8bbd"></script>
 <script src="shared/sugerida-parser-210.js?v=ac8cf814"></script>
 <script src="shared/canonicalize-inputs.js?v=5fe6d4a7"></script>
-<script src="shared/excel-papel-trabajo.js?v=b698312d"></script>
+<script src="shared/excel-papel-trabajo.js?v=4d3e1c5b"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="shared/agente-preclasificador-pn.js?v=badbfce6"></script>
 <script src="shared/certificados-renta-pn.js?v=bd52b9d2"></script>
@@ -578,6 +578,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
           </div>
           <div class="field-grid" style="margin-top:10px">
             <div class="field"><label>Anticipo pagado año anterior <span class="hint">(cas 130)</span></label><input id="anticipoPrevPagado" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
+          </div>
+          <div class="field-grid" style="margin-top:10px">
+            <div class="field" style="display:flex;align-items:center;gap:8px">
+              <input id="antManualChk" type="checkbox" onchange="recalcular()" style="width:auto">
+              <label for="antManualChk" style="margin:0">Fijar anticipo año siguiente manualmente <span class="hint">(cas 133, Art. 807 ET)</span></label>
+            </div>
+            <div class="field"><label>Anticipo manual <span class="hint">(reemplaza el cálculo automático)</span></label><input id="antManual" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
           </div>
         </div>
         <div class="card" id="cardCedulaGeneral">
@@ -2451,6 +2458,8 @@ function construirEstado(){
       saldoFavorAnoAnterior: v('saldoFavorAnt'),
       anticipoPrev: v('anticipoPrevPagado'),
       saldoFavorPrev: v('saldoFavorAnt'),
+      metodoAnticipo: ((document.getElementById('antManualChk')||{}).checked) ? 'manual' : undefined,
+      anticipoManual: v('antManual'),
       descuentos: 0
     },
     comparativoAGAnterior: construirComparativoAGAnterior()

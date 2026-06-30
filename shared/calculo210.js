@@ -168,6 +168,12 @@
 
     // Renta liquida ordinaria de la subcedula (antes de aplicar tope global)
     var rentaLiquidaAntesExentas = maxZero(ingresoNeto + ece);
+    // Base del limite del 40% (Art. 336 num. 3 ET): "se hara sobre el resultado de restar de los
+    // ingresos brutos por todo concepto los ingresos no constitutivos de renta imputables". Es decir,
+    // ingresos - INCRNGO SIN restar los costos/gastos procedentes. Por eso NO se usa la renta liquida
+    // (ingresoNeto, que si resta costos): un declarante con costos de capital/no laboral/honorarios
+    // tendria un tope del 40% sub-estimado -> se le rechazarian exentas de mas -> impuesto de mas.
+    var base40 = maxZero(ing + ces - incrngo) + ece;
     var rentaSinTope = rentaLiquidaAntesExentas - exentasYDeducciones;
     // Perdida liquida de la subcedula (casillas 55/71/88 del 210): es la perdida REAL, cuando
     // los costos + INCRNGO superan los ingresos. NO la generan las exentas/deducciones (esas se
@@ -187,6 +193,7 @@
       deduccionesNominales: dedNominales,
       exentasYDeducciones: exentasYDeducciones,
       rentaLiquidaAntesExentas: rentaLiquidaAntesExentas,
+      base40: base40,
       rentaSubcedula: maxZero(rentaSinTope),
       perdida: perdida
     };
@@ -273,7 +280,10 @@
                       + honorarios.exentasYDeducciones
                       + capital.exentasYDeducciones
                       + noLaboral.exentasYDeducciones;
-    var limite40 = r1k(c91 * p.topeCedularPct);
+    // Base del 40% = suma(ingresos brutos - INCRNGO) de las subcedulas, SIN restar costos (Art. 336-3 ET).
+    // No es el 40% de c91, porque c91 si descuenta los costos de capital/no laboral/honorarios.
+    var base40Total = trabajo.base40 + honorarios.base40 + capital.base40 + noLaboral.base40;
+    var limite40 = r1k(base40Total * p.topeCedularPct);
     var limite1340 = r1k(p.topeCedularUvt * p.uvt);
     var c92 = Math.min(rawDentroTope, limite40, limite1340, c91);
     var excedeTope = rawDentroTope > Math.min(limite40, limite1340);
@@ -334,6 +344,7 @@
       c97: c97,
       tope: {
         rawDentroTope: rawDentroTope,
+        base40: base40Total,
         limite40: limite40,
         limite1340: limite1340,
         excedeTope: excedeTope,
@@ -625,7 +636,10 @@
     var anticipoBase = (liq.metodoAnticipo === 'simple')
       ? anticipoSimple
       : Math.min(anticipoSimple, anticipoPromedio);
-    var c133 = maxZero(anticipoBase - c132);
+    // Override manual: el contador puede fijar el anticipo (Art. 807 lo permite estimar), incluso en 0.
+    var c133 = (liq.metodoAnticipo === 'manual')
+      ? maxZero(r1k(liq.anticipoManual || 0))
+      : maxZero(anticipoBase - c132);
 
     // Casilla 134: Saldo a pagar por impuesto
     var totalPagos = c130 + c131 + c132;
