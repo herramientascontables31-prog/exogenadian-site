@@ -923,7 +923,13 @@ document.querySelectorAll('.tab').forEach(function(t){
     'Tarjeta de propiedad de vehículos (con avalúo)',
     'Saldos de créditos y deudas a 31 de diciembre',
     'Soportes de compras con factura electrónica (para la deducción del 1%)',
-    'Extractos bancarios del año (para conciliar consignaciones)'
+    'Extractos bancarios del año (para conciliar consignaciones)',
+    // Ítems de la Lista de Chequeo AG2025 de la Defensoría del Contribuyente DIAN (jul-2026).
+    // Solo AGREGAR al final: tailorByReport marca ítems por índice (0-15).
+    'Certificado de donaciones a entidades sin ánimo de lucro del Régimen Tributario Especial (descuento tributario)',
+    'Saldos de criptoactivos y billeteras digitales a 31 de diciembre',
+    'ICA e impuesto predial pagados en el año (deducibles si tienen relación con la actividad)',
+    'Avalúo de bienes de valor: joyas, obras de arte, marcas o patentes registradas'
   ];
   var DOC_ITEMS = DEFAULT.map(function(t){ return {t:t,on:true}; });
   var $cli=el('cartaCliente'), $anio=el('cartaAnio'), $plazo=el('cartaPlazo'), $firma=el('cartaFirma'),

@@ -677,6 +677,19 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
         </div>
         <div class="card" id="cardPatrimonio">
           <div class="section-title"><span class="num">6</span> Patrimonio (a dic. 31)</div>
+          <details class="soportes-panel">
+            <summary>📋 Lista de verificación de soportes — Patrimonio</summary>
+            <ul>
+              <li><strong>Inmuebles:</strong> escritura / certificado de tradición + recibo del predial (mayor valor entre costo de adquisición, costo fiscal, autoavalúo o avalúo catastral)</li>
+              <li><strong>Vehículos:</strong> tarjeta de propiedad + declaración del impuesto vehicular (valor comercial)</li>
+              <li><strong>Cuentas, CDT e inversiones:</strong> certificados tributarios con saldos a 31 de diciembre</li>
+              <li><strong>Criptoactivos y billeteras digitales:</strong> saldos a 31 de diciembre — son activos, igual que una cuenta de ahorros</li>
+              <li><em>Si aplica:</em> <strong>bienes de valor</strong> (joyas, obras de arte) y <strong>intangibles</strong> (marcas, patentes) con su avalúo y soporte del costo</li>
+              <li><strong>Deudas:</strong> certificados de saldos de créditos a 31 de diciembre (solo deudas con soporte)</li>
+              <li>Cruza contra el <strong>patrimonio líquido del año anterior</strong>: una variación no justificada puede volverse renta gravable (Arts. 236-239-1 ET)</li>
+            </ul>
+            <div class="nota">Fuente: Lista de chequeo renta AG 2025 — Defensoría del Contribuyente DIAN.</div>
+          </details>
           <div class="field-grid cols3">
             <div class="field"><label>Patrimonio bruto <button class="icon-ayuda" onclick="mostrarAyuda('patBruto')" title="Ver ayuda">ⓘ</button></label><input id="patBruto" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
             <div class="field"><label>Deudas</label><input id="patDeudas" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
