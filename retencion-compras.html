@@ -10,7 +10,7 @@
 <meta name="theme-color" content="#1B3A5C">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Calculadora de Retenciones en Compras — Renta + IVA + ICA + Autorretención | Aziendale</title>
-<meta name="description" content="Calcula las 4 retenciones aplicables a una compra en Colombia 2026: retención en la fuente renta (Art. 392 ET — bases del Decreto 0572/2025 vigentes desde el 1-jul-2026), reteIVA 15 % (Art. 437-2 ET — incluye num 9 al Régimen Simple), reteICA por mil municipal y autorretención especial de renta. Gratis.">
+<meta name="description" content="Calcula las 4 retenciones aplicables a una compra en Colombia 2026: retención en la fuente renta (Art. 392 ET — bases vigentes tras suspensión del Decreto 0572/2025 por el Consejo de Estado), reteIVA 15 % (Art. 437-2 ET — incluye num 9 al Régimen Simple), reteICA por mil municipal y autorretención especial de renta. Gratis.">
 <meta name="keywords" content="calculadora retenciones compras, retencion fuente renta IVA ICA, reteIVA 15% Art 437-1, autorretencion renta CIIU Decreto 1123 2024, base minima retefuente UVT, tarifa retencion bienes servicios honorarios, ICA por mil Bogota Medellin">
 <link rel="canonical" href="https://exogenadian.com/retencion-compras.html">
 <meta property="og:title" content="Calculadora de Retenciones en Compras | Aziendale">
@@ -269,10 +269,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
   <details class="normativa-list" style="margin-top:14px" open>
     <summary style="cursor:pointer;font-weight:700;color:var(--text)">Normativa aplicada (vigente 2026)</summary>
     <div style="background:#FEF3C7;border:1px solid #FDE68A;border-radius:8px;padding:10px 12px;margin:8px 0;color:#92400E;font-size:.82rem;line-height:1.6">
-      <strong>✔ Decreto 0572 de 2025 — VIGENTE desde el 1 de julio de 2026.</strong> El Consejo de Estado (Secci&oacute;n Cuarta, exp./Auto 30229) revoc&oacute; el 2 de junio de 2026 la suspensi&oacute;n provisional que hab&iacute;a decretado el 7 de mayo, por lo que el Decreto 0572/2025 <strong>rige de forma plena a partir del 1 de julio de 2026</strong> (primer d&iacute;a del mes siguiente a la ejecutoria del auto). <strong>Esta calculadora ya aplica las bases m&iacute;nimas del 572:</strong> compras generales 10 UVT ($524.000), servicios 2 UVT ($105.000), productos agr&iacute;colas sin proceso y caf&eacute; 70 UVT ($3.666.000), arrendamientos e ingresos tributarios 10 UVT. Antes del 1-jul-2026 reg&iacute;an las bases de transici&oacute;n (27/4/92 UVT). La tarifa CDAT del art. 1 nunca se suspendi&oacute;.
+      <strong>⚠ Decreto 0572 de 2025 — REACTIVADO (actualizado 2-jun-2026).</strong> El Consejo de Estado (Secci&oacute;n Cuarta, exp. 30229) <strong>revoc&oacute; el 2 de junio de 2026</strong> la suspensi&oacute;n provisional que hab&iacute;a decretado el 7 de mayo, por lo que el Decreto 0572/2025 <strong>vuelve a regir</strong>. La reactivaci&oacute;n es <strong>gradual</strong>: las nuevas bases m&iacute;nimas (compras 10 UVT, servicios 2 UVT) y las tarifas de autorretenci&oacute;n del 572 aplican <strong>desde el 1 de julio de 2026</strong> (primer d&iacute;a del mes siguiente a la ejecutoria del auto). Hasta esa fecha rigen las bases del periodo de transici&oacute;n: compras generales 27 UVT, servicios 4 UVT, productos agr&iacute;colas 92 UVT. La tarifa CDAT del art. 1 nunca se suspendi&oacute;. <strong>Esta calculadora a&uacute;n refleja las bases de transici&oacute;n (27/4 UVT)</strong>; se actualizar&aacute;n a las del 572 el 1-jul-2026.
     </div>
     <ul style="margin-top:8px;padding-left:18px">
-      <li><strong>Retefuente renta:</strong> Art. 392 y siguientes del ET. Bases m&iacute;nimas <strong>vigentes desde el 1-jul-2026</strong> (Decreto 0572/2025): compras generales 10 UVT, servicios 2 UVT, productos agr&iacute;colas sin proceso industrial y caf&eacute; 70 UVT, arrendamientos e ingresos tributarios 10 UVT. Antes del 1-jul-2026 reg&iacute;an las bases de transici&oacute;n (27/4/92 UVT del Decreto 1625 de 2016 en su versi&oacute;n previa al D0572/2025).</li>
+      <li><strong>Retefuente renta:</strong> Art. 392 y siguientes del ET. Bases m&iacute;nimas en el periodo de transici&oacute;n (hasta 30-jun-2026): compras generales 27 UVT, servicios 4 UVT, productos agr&iacute;colas sin proceso industrial 92 UVT (Decreto 1625 de 2016 en su versi&oacute;n previa al D0572/2025). <strong>Desde el 1-jul-2026</strong> rigen las del Decreto 0572/2025 reactivado: compras 10 UVT, servicios 2 UVT.</li>
       <li><strong>ReteIVA:</strong> Art. 437-2 ET. Solo se practica en los casos taxativos del art&iacute;culo:
         <ul style="margin-top:4px;padding-left:18px">
           <li>Num 1 — Entidades estatales &rarr; 15 % al responsable com&uacute;n.</li>
@@ -302,12 +302,13 @@ var UVT=52374;
 // HISTORIAL Decreto 0572/2025:
 //   7-may-2026: Consejo de Estado SUSPENDE provisionalmente arts. 2-8 (exp. 30229) → bases viejas (27/4/92 UVT).
 //   2-jun-2026: Consejo de Estado REVOCA la suspensión → el 572 se reactiva de forma gradual.
-//   1-jul-2026 (VIGENTE): entran a regir las bases del Decreto 0572/2025 reactivado (compras 10 UVT,
-//     servicios 2 UVT, productores/café 70 UVT). Confirmado con tabla Gilma Vargas (Auto 30229/2026).
+// Estas bases (27/4/92 UVT) son las del periodo de TRANSICIÓN, vigentes hasta el 30-jun-2026.
+// TODO 1-jul-2026: cambiar compras_general baseMinUVT 27→10 y serv_* baseMinUVT 4→2 (Decreto 0572/2025),
+//   y revisar tarifas de autorretención CIIU. Cutoff: primer día del mes siguiente a la ejecutoria del auto.
 var CONCEPTOS_BIEN = [
-  {k:'compras_general', label:'Compras generales (no productores)', tarPJ:0.025, tarPN_decl:0.025, tarPN_no_decl:0.035, baseMinUVT:10}, // D0572/2025 vigente 1-jul-2026 (antes 27)
-  {k:'compras_productores', label:'Compras a productores agropecuarios sin proceso industrial', tarPJ:0.015, tarPN_decl:0.015, tarPN_no_decl:0.015, baseMinUVT:70}, // D0572/2025 vigente 1-jul-2026 (antes 92)
-  {k:'compras_cafe', label:'Compras de caf&eacute; pergamino o cereza', tarPJ:0.005, tarPN_decl:0.005, tarPN_no_decl:0.005, baseMinUVT:70}, // D0572/2025 vigente 1-jul-2026 (antes 160)
+  {k:'compras_general', label:'Compras generales (no productores)', tarPJ:0.025, tarPN_decl:0.025, tarPN_no_decl:0.035, baseMinUVT:27}, // transición; 1-jul-2026 → 10 UVT (D0572/2025 reactivado)
+  {k:'compras_productores', label:'Compras a productores agropecuarios sin proceso industrial', tarPJ:0.015, tarPN_decl:0.015, tarPN_no_decl:0.015, baseMinUVT:92}, // transición
+  {k:'compras_cafe', label:'Compras de caf&eacute; pergamino o cereza', tarPJ:0.005, tarPN_decl:0.005, tarPN_no_decl:0.005, baseMinUVT:160},
   {k:'compras_oro', label:'Compras de oro', tarPJ:0.01, tarPN_decl:0.01, tarPN_no_decl:0.01, baseMinUVT:0},
   {k:'compras_combustible', label:'Combustibles derivados del petr&oacute;leo', tarPJ:0.001, tarPN_decl:0.001, tarPN_no_decl:0.001, baseMinUVT:0},
   {k:'adquis_vehiculos', label:'Adquisici&oacute;n de veh&iacute;culos', tarPJ:0.01, tarPN_decl:0.01, tarPN_no_decl:0.01, baseMinUVT:27},
@@ -318,11 +319,11 @@ var CONCEPTOS_BIEN = [
 var CONCEPTOS_SERV = [
   {k:'honorarios', label:'Honorarios (intelectuales)', tarPJ:0.11, tarPN_decl:0.11, tarPN_no_decl:0.10, baseMinUVT:0},
   {k:'comisiones', label:'Comisiones', tarPJ:0.11, tarPN_decl:0.11, tarPN_no_decl:0.10, baseMinUVT:0},
-  {k:'serv_tec_oblig', label:'Servicios t&eacute;cnicos (oblig. llevar contabilidad)', tarPJ:0.06, tarPN_decl:0.06, tarPN_no_decl:0.06, baseMinUVT:2}, // D0572/2025 vigente 1-jul-2026 (antes 4)
+  {k:'serv_tec_oblig', label:'Servicios t&eacute;cnicos (oblig. llevar contabilidad)', tarPJ:0.06, tarPN_decl:0.06, tarPN_no_decl:0.06, baseMinUVT:4}, // transición; 1-jul-2026 → 2 UVT (D0572/2025 reactivado)
   // FIX 2026-05-11: tarifas estaban invertidas. PDF Consultor Contable 2026 vigencia 8-mayo:
   // declarantes 4 %, no declarantes 6 % (Art. 392 ET / Art. 1.2.4.4.14 DUR 1625/2016).
-  {k:'serv_generales', label:'Servicios generales', tarPJ:0.04, tarPN_decl:0.04, tarPN_no_decl:0.06, baseMinUVT:2}, // D0572/2025 vigente 1-jul-2026 (antes 4)
-  {k:'serv_salud_ips', label:'Servicios integrales de salud (IPS)', tarPJ:0.02, tarPN_decl:0.02, tarPN_no_decl:0.02, baseMinUVT:2}, // D0572/2025 vigente 1-jul-2026 (antes 4)
+  {k:'serv_generales', label:'Servicios generales', tarPJ:0.04, tarPN_decl:0.04, tarPN_no_decl:0.06, baseMinUVT:4},
+  {k:'serv_salud_ips', label:'Servicios integrales de salud (IPS)', tarPJ:0.02, tarPN_decl:0.02, tarPN_no_decl:0.02, baseMinUVT:4},
   {k:'serv_sismica', label:'Servicios de s&iacute;smica', tarPJ:0.06, tarPN_decl:0.06, tarPN_no_decl:0.06, baseMinUVT:0},
   {k:'serv_software', label:'Software y dise&ntilde;o web (declarante)', tarPJ:0.035, tarPN_decl:0.035, tarPN_no_decl:0.035, baseMinUVT:0},
   {k:'consultoria_obras', label:'Consultor&iacute;a de obras p&uacute;blicas', tarPJ:0.02, tarPN_decl:0.02, tarPN_no_decl:0.02, baseMinUVT:0},
@@ -330,10 +331,10 @@ var CONCEPTOS_SERV = [
   {k:'rend_financieros', label:'Rendimientos financieros', tarPJ:0.07, tarPN_decl:0.07, tarPN_no_decl:0.07, baseMinUVT:0},
   {k:'transporte_pas_terrestre', label:'Transporte de pasajeros terrestre', tarPJ:0.035, tarPN_decl:0.035, tarPN_no_decl:0.035, baseMinUVT:27},
   {k:'transporte_pas_aereo', label:'Transporte de pasajeros a&eacute;reo/mar&iacute;timo', tarPJ:0.01, tarPN_decl:0.01, tarPN_no_decl:0.01, baseMinUVT:4},
-  {k:'arrend_inmueble', label:'Arrendamiento bien ra&iacute;z', tarPJ:0.035, tarPN_decl:0.035, tarPN_no_decl:0.035, baseMinUVT:10}, // D0572/2025 vigente 1-jul-2026, otros ingresos tributarios (antes 27)
-  {k:'serv_aseo_vig', label:'Servicios de aseo y vigilancia (sobre AIU)', tarPJ:0.02, tarPN_decl:0.02, tarPN_no_decl:0.02, baseMinUVT:2}, // D0572/2025 vigente 1-jul-2026 (antes 4)
-  {k:'serv_temporal', label:'Servicios de empresa temporal (sobre AIU)', tarPJ:0.01, tarPN_decl:0.01, tarPN_no_decl:0.01, baseMinUVT:2}, // D0572/2025 vigente 1-jul-2026 (antes 4)
-  {k:'restaurante', label:'Restaurantes y hoteles', tarPJ:0.035, tarPN_decl:0.035, tarPN_no_decl:0.035, baseMinUVT:2} // D0572/2025 vigente 1-jul-2026 (antes 4)
+  {k:'arrend_inmueble', label:'Arrendamiento bien ra&iacute;z', tarPJ:0.035, tarPN_decl:0.035, tarPN_no_decl:0.035, baseMinUVT:27},
+  {k:'serv_aseo_vig', label:'Servicios de aseo y vigilancia (sobre AIU)', tarPJ:0.02, tarPN_decl:0.02, tarPN_no_decl:0.02, baseMinUVT:4},
+  {k:'serv_temporal', label:'Servicios de empresa temporal (sobre AIU)', tarPJ:0.01, tarPN_decl:0.01, tarPN_no_decl:0.01, baseMinUVT:4},
+  {k:'restaurante', label:'Restaurantes y hoteles', tarPJ:0.035, tarPN_decl:0.035, tarPN_no_decl:0.035, baseMinUVT:4}
 ];
 function actualizarConceptos(){
   var tipo=document.getElementById('iTipoOp').value;

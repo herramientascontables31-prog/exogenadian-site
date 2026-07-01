@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <script src="shared/cookie-consent.js?v=10d7f382"></script>
-<script src="shared/version.js?v=8c915185"></script>
+<script src="shared/version.js?v=efdcbc63"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -422,7 +422,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
           <summary style="cursor:pointer;font-weight:600;font-size:.92rem">📐 Honorarios, servicios y compras — bases mínimas en UVT</summary>
           <div style="margin-top:10px;font-size:.85rem;line-height:1.6;color:#374151">
             Cada concepto tiene una <strong>base mínima en UVT</strong> por debajo de la cual no se practica retención. Pagos por debajo del mínimo no entran en cas. 29-41 ni en cas. 79-92.
-            <div style="margin-top:8px"><strong>Norma:</strong> Art. 392 E.T. + DUR 1625/2016 Art. 1.2.4.x. Bases vigentes desde 1-jul-2026 (Decreto 0572/2025): 2 UVT servicios, 10 UVT compras generales, 70 UVT compras agrícolas y café.</div>
+            <div style="margin-top:8px"><strong>Norma:</strong> Art. 392 E.T. + DUR 1625/2016 Art. 1.2.4.x. Bases típicas: 4 UVT servicios, 27 UVT compras generales, 92 UVT compras agrícolas.</div>
             <div style="margin-top:6px"><strong>Qué hacer:</strong> filtra del balance los pagos individuales por debajo del mínimo. La retención que aparece en 2365 puede ya estar correcta porque solo se causa si superó la base; verifica que la base reportada en cas. 29-41 corresponda a pagos efectivamente sometidos a retención.</div>
           </div>
         </details>
@@ -2386,18 +2386,18 @@ async function exportXls350(){
   }
   if(_concs.has('honorarios')||_concs.has('comisiones')||_concs.has('servicios')){
     _addRec('🧾','Honorarios, comisiones y servicios — bases mínimas',
-      'Bases mínimas para causar retención (Decreto 0572/2025, vigente desde 1-jul-2026):\n'+
-      '• Servicios generales: 2 UVT (~$104.748) — tarifa 4% PJ, 6% PN no declarante.\n'+
+      'Bases mínimas para causar retención (2026):\n'+
+      '• Servicios generales: 4 UVT (~$199.240) — tarifa 4% PJ, 6% PN no declarante.\n'+
       '• Honorarios y comisiones: sin base mínima — tarifa 11% PJ; PN < 3.300 UVT/año = 10%, > 3.300 UVT = 11%.\n'+
       'Caso especial PN: si tiene contrato de prestación de servicios + NO contrata 2+ trabajadores por > 90 días, aplica tabla del Art. 383 con depuración Art. 388 ET (NO tarifa fija).',
       'FFFFFBEB');
   }
   if(_concs.has('compras')){
     _addRec('🛒','Compras — base mínima y sub-tarifas',
-      'Base mínima general: 10 UVT (~$523.740) — tarifa 2.5% (declarante) o 3.5% (no declarante). Decreto 0572/2025, vigente desde 1-jul-2026.\n'+
+      'Base mínima general: 27 UVT (~$1.344.870 para 2026) — tarifa 2.5% (declarante) o 3.5% (no declarante).\n'+
       'Sub-tarifas específicas a verificar en el paso 3:\n'+
-      '• Compras agrícolas/pecuarios sin procesamiento industrial: 1.5% (base 70 UVT).\n'+
-      '• Café pergamino o cereza: 0.5% (base 70 UVT).\n'+
+      '• Compras agrícolas/pecuarios sin procesamiento industrial: 1.5%.\n'+
+      '• Café pergamino o cereza: 0.5%.\n'+
       '• Combustibles derivados del petróleo: 0.1%.\n'+
       '• Bienes raíces para vivienda del trabajador: 1% (Art. 401 par.).',
       'FFFFFBEB');
@@ -2413,7 +2413,7 @@ async function exportXls350(){
   }
   if(_concs.has('arrendamientos')){
     _addRec('🏢','Arrendamientos',
-      'Base mínima 10 UVT (~$523.740, ingresos tributarios — Decreto 0572/2025 vigente 1-jul-2026). Tarifas:\n'+
+      'Base mínima 27 UVT (compras). Tarifas:\n'+
       '• Bienes raíces (vivienda u oficina): 3.5% PJ o PN declarante; 4% PN no declarante.\n'+
       '• Bienes muebles (equipos, vehículos): 4% (cualquier sujeto).\n'+
       'Verifica que esté discriminada la naturaleza del bien arrendado para aplicar la tarifa correcta — confúndelas y queda inexactitud (Art. 647 ET).',

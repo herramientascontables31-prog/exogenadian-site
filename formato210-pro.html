@@ -323,6 +323,72 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 /* Print */
 @media print{.sidebar,.actions,#proGate,#nav-container,.btn{display:none!important}.express-grid{grid-template-columns:1fr}}
 </style>
+<style id="wsx-skin">
+/* ── Modo estudio: ocultar chrome de marketing, dar foco de espacio de trabajo ── */
+body.wsx #nav-container,
+body.wsx #nav,
+body.wsx .exo-breadcrumb,
+body.wsx .skip-link,
+body.wsx > footer,
+body.wsx .exo-announce,
+body.wsx .pro-status-banner{display:none!important}
+body.wsx{background:#eef1f5;padding-top:0!important}
+body.wsx .container{max-width:1440px;padding:0 22px 40px}
+/* Selector de cliente / contexto: sub-barra limpia bajo el header */
+body.wsx #clienteContextBar{border:1px solid var(--border);border-left:1px solid var(--border);border-radius:12px;background:#fff}
+/* ── Header slim del estudio ── */
+body.wsx .wsx-top{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:16px;
+  padding:11px 22px;margin:0 -22px 18px;background:rgba(255,255,255,.86);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);flex-wrap:wrap}
+body.wsx .wsx-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--pri);font-weight:800;font-size:1.02rem;letter-spacing:-.2px}
+body.wsx .wsx-brand .wsx-logo{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#1B3A5C,#2E75B6);color:#fff;display:grid;place-items:center;font-weight:800;font-size:.95rem;box-shadow:0 2px 8px rgba(27,58,92,.28)}
+body.wsx .wsx-brand b{color:var(--green)}
+body.wsx .wsx-tag{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--pri2);background:var(--pri3);padding:3px 8px;border-radius:6px}
+body.wsx .wsx-top .wsx-spacer{flex:1}
+body.wsx .wsx-top .wsx-links{display:flex;align-items:center;gap:4px}
+body.wsx .wsx-top .wsx-links a{font-size:.82rem;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 11px;border-radius:8px;transition:.15s}
+body.wsx .wsx-top .wsx-links a:hover{color:var(--pri);background:#eef4fb}
+body.wsx .wsx-top .wsx-save{font-size:.7rem;color:var(--muted);min-height:14px;text-align:right;font-family:'JetBrains Mono',monospace}
+body.wsx .wsx-badge{background:var(--green2);color:#065F46;padding:3px 10px;border-radius:20px;font-size:.68rem;font-weight:800;letter-spacing:.4px}
+body.wsx .wsx-newcli{background:#fff;border:1px solid var(--border);color:var(--pri);padding:7px 13px;border-radius:9px;font-size:.78rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s}
+body.wsx .wsx-newcli:hover{border-color:var(--pri2);background:#f5f9ff}
+/* ── Layout de estudio: sidebar de pasos + contenido ── */
+body.wsx #proContent{display:grid;grid-template-columns:250px minmax(0,1fr);gap:24px;align-items:start}
+body.wsx #bienvenidaPanel{grid-column:1/-1}
+body.wsx .foot{grid-column:1/-1}
+@media(max-width:1080px){body.wsx #proContent{grid-template-columns:1fr}}
+/* ── Sidebar de pasos (reusa los botones .f210-tab existentes) ── */
+body.wsx #f210Tabs{display:flex;flex-direction:column;gap:6px;margin:0;border:none;position:sticky;top:74px}
+body.wsx #f210Tabs::before{content:"PASOS";display:block;font-size:.67rem;font-weight:800;letter-spacing:1px;color:#94a3b8;padding:2px 10px 8px}
+body.wsx .f210-tab{width:100%;justify-content:flex-start;text-align:left;gap:11px;padding:12px 14px;border-radius:12px;
+  background:#fff;border:1px solid var(--border);color:#475569;font-size:.9rem;font-weight:600;position:relative;line-height:1.25;
+  border-bottom:1px solid var(--border);box-shadow:0 1px 2px rgba(0,0,0,.03)}
+body.wsx .f210-tab .wsx-ico{width:30px;height:30px;flex:0 0 30px;border-radius:9px;background:#eef4fb;color:var(--pri2);display:grid;place-items:center;font-size:1rem;transition:.15s}
+body.wsx .f210-tab .wsx-lbl{display:flex;flex-direction:column;gap:1px}
+body.wsx .f210-tab .wsx-lbl small{font-weight:600;font-size:.7rem;color:#94a3b8}
+body.wsx .f210-tab:hover{background:#f5f9ff;border-color:#cdddf0;color:var(--pri);transform:none}
+body.wsx .f210-tab:hover .wsx-ico{background:var(--pri3)}
+body.wsx .f210-tab.active{background:linear-gradient(135deg,#1B3A5C,#274d78);color:#fff;border-color:transparent;box-shadow:0 6px 18px -8px rgba(27,58,92,.6)}
+body.wsx .f210-tab.active .wsx-ico{background:rgba(255,255,255,.18);color:#fff}
+body.wsx .f210-tab.active .wsx-lbl small{color:rgba(255,255,255,.72)}
+body.wsx .f210-tab .tab-dot{position:absolute;top:11px;right:11px;width:8px;height:8px;background:#f59e0b}
+/* ── Contenido principal ── */
+body.wsx .express-grid{grid-column:2;margin:0;grid-template-columns:minmax(0,1fr) 320px;min-width:0}
+body.wsx #colFormulario{min-width:0}
+body.wsx #colFormulario .card{max-width:100%;overflow-x:auto}
+@media(max-width:1080px){body.wsx .express-grid{grid-column:1;grid-template-columns:1fr}}
+body.wsx .card{border-radius:14px;box-shadow:0 1px 3px rgba(16,24,40,.06),0 1px 2px rgba(16,24,40,.04)}
+/* ── Panel de cifras elevado a "hero" ── */
+body.wsx .sidebar{top:74px}
+body.wsx .cifras-hero{padding:0;overflow:hidden;border:1px solid #d7e2f0;box-shadow:0 10px 30px -18px rgba(27,58,92,.55)}
+body.wsx .cifras-hero > h3{margin:0;padding:13px 18px;background:linear-gradient(135deg,#1B3A5C,#2E75B6);color:#fff;font-size:.86rem;display:flex;align-items:center;gap:8px}
+body.wsx .cifras-hero .live-row{padding:7px 18px;margin:0}
+body.wsx .cifras-hero .live-row.big{background:#f8fafc}
+body.wsx .cifras-hero .live-row.big .val{font-size:1.28rem}
+body.wsx .cifras-hero .live-row.divider{margin-top:0}
+body.wsx .cifras-hero #lvSaldo{font-size:1.42rem!important}
+body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linear-gradient(90deg,#ecfdf5,#f8fafc)}
+</style>
 <script async src="shared/error-tracker.js?v=dd1f7f1d"></script><style id="exo-loading-css">
 #exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
 #exo-loading.hide{opacity:0;pointer-events:none}
@@ -358,7 +424,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
   setTimeout(hide,4000);
 })();
 </script></head>
-<body>
+<body class="wsx">
 <div class="exo-loading hidden" id="loadingOverlay"><div class="spinner"></div><div>Procesando...</div></div>
 <div id="origenModal" onclick="if(event.target===this)cerrarOrigen()">
   <div class="origen-box">
@@ -397,17 +463,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 <script src="shared/agente-preclasificador-pn.js?v=badbfce6"></script>
 <script src="shared/certificados-renta-pn.js?v=bd52b9d2"></script>
 <div class="container">
-  <div class="header">
-    <div>
-      <h1><span>210</span> <em>PRO</em></h1>
-      <p>Declaración Persona Natural &middot; prefill desde reporte exógena DIAN</p>
-    </div>
-    <div class="header-right" style="text-align:right">
-      <span id="proBadgeHeader" style="display:none;background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:.7rem;font-weight:700">PRO</span>
-      <button id="btnNuevoCliente" onclick="reiniciarTodo()" title="Borra todo y empieza una declaración nueva" style="display:none;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#fff;padding:5px 12px;border-radius:8px;font-size:.74rem;font-weight:600;cursor:pointer;font-family:inherit;margin-left:8px">&#128260; Nuevo cliente / Reiniciar</button>
-      <div style="font-size:.7rem;margin-top:4px;opacity:.85">100% en navegador</div>
-      <div id="selloGuardado" style="font-size:.7rem;margin-top:2px;opacity:.9;min-height:14px"></div>
-    </div>
+  <div class="wsx-top">
+    <a class="wsx-brand" href="index.html"><span class="wsx-logo">A</span> Aziendale<b>.</b></a>
+    <span class="wsx-tag">Estudio de Renta · F210</span>
+    <span class="wsx-spacer"></span>
+    <span id="proBadgeHeader" class="wsx-badge" style="display:none">PRO</span>
+    <button id="btnNuevoCliente" onclick="reiniciarTodo()" title="Borra todo y empieza una declaración nueva" class="wsx-newcli" style="display:none">&#128260; Nuevo cliente</button>
+    <div id="selloGuardado" class="wsx-save"></div>
+    <nav class="wsx-links">
+      <a href="renta-personas-naturales.html" title="Volver al hub de Renta PN">&larr; Hub Renta PN</a>
+      <a href="precios.html">Planes</a>
+    </nav>
+  </div>
+  <div class="header" style="display:none" aria-hidden="true">
+    <div><h1><span>210</span> <em>PRO</em></h1></div>
   </div>
   <div id="clienteContextBar" style="background:#fff;border:1px solid #e5e7eb;border-left:4px solid #1B3A5C;border-radius:12px;padding:10px 16px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.04);font-size:.88rem"></div>
   <div id="vinculoClienteBox" style="display:none;border:1.5px solid #C4B5FD;background:#F5F3FF;border-radius:12px;padding:10px 16px;margin-bottom:14px;font-size:.86rem;align-items:center;gap:12px;flex-wrap:wrap"></div>
@@ -449,10 +518,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
       </div>
     </div>
     <div class="f210-tabs" id="f210Tabs">
-      <button class="f210-tab active" data-tab="t210" onclick="cambiarTabF210('t210')">1&#xFE0F;&#x20E3; Cliente, ex&oacute;gena y patrimonio</button>
-      <button class="f210-tab" data-tab="texogena" onclick="cambiarTabF210('texogena')">2&#xFE0F;&#x20E3; Reconciliaci&oacute;n</button>
-      <button class="f210-tab" data-tab="trentas" onclick="cambiarTabF210('trentas')">3&#xFE0F;&#x20E3; Rentas por c&eacute;dula <span class="tab-dot"></span></button>
-      <button class="f210-tab" data-tab="trevision" onclick="cambiarTabF210('trevision')">4&#xFE0F;&#x20E3; Formulario 210 y descarga</button>
+      <button class="f210-tab active" data-tab="t210" onclick="cambiarTabF210('t210')"><span class="wsx-ico">🚀</span><span class="wsx-lbl"><small>Paso 1</small>Cliente y exógena</span></button>
+      <button class="f210-tab" data-tab="texogena" onclick="cambiarTabF210('texogena')"><span class="wsx-ico">⚖️</span><span class="wsx-lbl"><small>Paso 2</small>Reconciliación</span></button>
+      <button class="f210-tab" data-tab="trentas" onclick="cambiarTabF210('trentas')"><span class="wsx-ico">💰</span><span class="wsx-lbl"><small>Paso 3</small>Rentas por cédula</span><span class="tab-dot"></span></button>
+      <button class="f210-tab" data-tab="trevision" onclick="cambiarTabF210('trevision')"><span class="wsx-ico">📊</span><span class="wsx-lbl"><small>Paso 4</small>Formulario 210 y descarga</span></button>
     </div>
     <div class="express-grid">
       <div id="colFormulario">
@@ -854,7 +923,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
         <div class="card" id="cardVencimiento" style="display:none;padding:12px 16px">
           <div id="lvVencimiento" style="font-size:.84rem;line-height:1.45"></div>
         </div>
-        <div class="card">
+        <div class="card cifras-hero">
           <h3>&#128202; Cifras en vivo</h3>
           <div class="live-row"><span class="lbl">Ingreso neto</span><span class="val" id="lvIngresoNeto">$0</span></div>
           <div class="live-row"><span class="lbl">Renta liq. cedular (c91)</span><span class="val" id="lvC91">$0</span></div>

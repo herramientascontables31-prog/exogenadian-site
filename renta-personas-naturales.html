@@ -241,6 +241,50 @@ body{background:radial-gradient(1100px 560px at 72% -12%, #e7eef8 0%, #f0f2f5 46
 @media(max-width:760px){.header{padding:26px 22px}.header h1{font-size:1.5rem}}
 @media print{.tabs,.toolbar,.modal-overlay{display:none!important}}
 </style>
+<style id="wsx-skin">
+body.wsx #nav-container,
+body.wsx #nav,
+body.wsx .exo-breadcrumb,
+body.wsx .skip-link,
+body.wsx > footer,
+body.wsx .exo-announce,
+body.wsx .pro-status-banner{display:none!important}
+body.wsx{background:#eef1f5;padding-top:0!important}
+/* Layout de estudio: header slim (span) + hero compacto (span) + sidebar + panel */
+body.wsx .container{max-width:1440px;display:grid;grid-template-columns:250px minmax(0,1fr);gap:20px 24px;align-items:start;padding:0 22px 44px}
+body.wsx .wsx-top,body.wsx .header,body.wsx .foot,body.wsx #panel-cli>.privacy-banner{grid-column:1/-1}
+body.wsx .tabs{grid-column:1}
+body.wsx .tab-panel{grid-column:2;min-width:0}
+@media(max-width:1080px){body.wsx .container{grid-template-columns:1fr}body.wsx .tab-panel,body.wsx .tabs{grid-column:1}}
+/* Header slim */
+body.wsx .wsx-top{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:16px;padding:11px 22px;margin:0 -22px 4px;background:rgba(255,255,255,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);flex-wrap:wrap}
+body.wsx .wsx-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--pri);font-weight:800;font-size:1.02rem;letter-spacing:-.2px}
+body.wsx .wsx-brand .wsx-logo{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#1B3A5C,#2E75B6);color:#fff;display:grid;place-items:center;font-weight:800;font-size:.95rem;box-shadow:0 2px 8px rgba(27,58,92,.28)}
+body.wsx .wsx-brand b{color:var(--green)}
+body.wsx .wsx-tag{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--pri2);background:var(--pri3);padding:3px 8px;border-radius:6px}
+body.wsx .wsx-top .wsx-spacer{flex:1}
+body.wsx .wsx-top .wsx-season{font-size:.72rem;color:var(--muted);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.4}
+body.wsx .wsx-top .wsx-links{display:flex;gap:4px}
+body.wsx .wsx-top .wsx-links a{font-size:.82rem;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 11px;border-radius:8px;transition:.15s}
+body.wsx .wsx-top .wsx-links a:hover{color:var(--pri);background:#eef4fb}
+/* Hero compacto (conserva H1 + descripción para SEO) */
+body.wsx .header{padding:20px 26px;margin:0 0 4px;border-radius:16px}
+body.wsx .header h1{font-size:1.5rem}
+body.wsx .header p{font-size:.82rem;max-width:640px}
+/* Sidebar de secciones (reusa los .tab existentes) */
+body.wsx .tabs{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;border:none;box-shadow:none;background:transparent;overflow:visible;position:sticky;top:70px}
+body.wsx .tabs::before{content:"SECCIONES";display:block;font-size:.67rem;font-weight:800;letter-spacing:1px;color:#94a3b8;padding:2px 10px 8px}
+body.wsx .tab{flex:none;min-width:0;width:100%;justify-content:flex-start;text-align:left;gap:11px;padding:12px 14px;border-radius:12px;background:#fff;border:1px solid var(--border);color:#475569;font-size:.9rem;font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.03);white-space:normal}
+body.wsx .tab .wsx-ico{width:30px;height:30px;flex:0 0 30px;border-radius:9px;background:#eef4fb;color:var(--pri2);display:grid;place-items:center;font-size:1rem;transition:.15s}
+body.wsx .tab:hover{background:#f5f9ff;border-color:#cdddf0;color:var(--pri)}
+body.wsx .tab:hover .wsx-ico{background:var(--pri3)}
+body.wsx .tab.active{background:linear-gradient(135deg,#1B3A5C,#274d78);color:#fff;border-color:transparent;box-shadow:0 6px 18px -8px rgba(27,58,92,.6)}
+body.wsx .tab.active .wsx-ico{background:rgba(255,255,255,.18);color:#fff}
+body.wsx .tab .badge{margin-left:auto}
+/* Contenidos anchos (tabla de clientes, calendario) hacen scroll dentro de su card */
+body.wsx .table-wrap{overflow-x:auto}
+body.wsx .cal-wrap{overflow-x:auto}
+</style>
 <script async src="shared/error-tracker.js?v=dd1f7f1d"></script><style id="exo-loading-css">
 #exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
 #exo-loading.hide{opacity:0;pointer-events:none}
@@ -276,7 +320,7 @@ body{background:radial-gradient(1100px 560px at 72% -12%, #e7eef8 0%, #f0f2f5 46
   setTimeout(hide,4000);
 })();
 </script></head>
-<body>
+<body class="wsx">
 <div id="nav-container"></div>
 <script defer src="shared/pro.js?v=ccea4108"></script>
 <script defer src="shared/pro-gate.js?v=dafb5761"></script>
@@ -289,21 +333,30 @@ body{background:radial-gradient(1100px 560px at 72% -12%, #e7eef8 0%, #f0f2f5 46
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="shared/parser-muisca-consultante.js?v=03bd8bbd"></script>
 <div class="container">
+  <div class="wsx-top">
+    <a class="wsx-brand" href="index.html"><span class="wsx-logo">A</span> Aziendale<b>.</b></a>
+    <span class="wsx-tag">Estudio de Renta · Hub PN</span>
+    <span class="wsx-spacer"></span>
+    <div class="wsx-season">AG 2025 · UVT $49.799<br>Vence: 12-ago a 26-oct 2026</div>
+    <nav class="wsx-links">
+      <a href="formato210-pro.html">Liquidador →</a>
+      <a href="precios.html">Planes</a>
+    </nav>
+  </div>
   <header class="header">
     <div>
       <div class="hero-badge">★ Temporada de renta 2026</div>
       <h1><span>📊</span> Renta Personas Naturales</h1>
       <p>Tu centro de mando para la renta de personas naturales: liquida el 210, gestiona tus clientes, crea contenido para tus redes y anticipa los cruces de la DIAN.</p>
     </div>
-    <div class="header-right">AG 2025 · UVT $49.799<br>Vence: 12-ago a 26-oct 2026</div>
   </header>
   <nav class="tabs" role="tablist">
-    <button class="tab active" data-tab="liq" role="tab">🧮 Liquidador</button>
-    <button class="tab" data-tab="cli" role="tab">👥 Clientes <span class="badge" id="badgeCli">0</span></button>
-    <button class="tab" data-tab="apr" role="tab">📚 Aprende</button>
-    <button class="tab" data-tab="card" role="tab">🎨 Tarjeta <span class="badge" style="background:#fbbf24;color:#3b2a00">PRO</span></button>
-    <button class="tab" data-tab="carta" role="tab">📄 Cartas <span class="badge" style="background:#fbbf24;color:#3b2a00">PRO</span></button>
-    <button class="tab" data-tab="riesgo" role="tab">⚠️ Diagnóstico <span class="badge" style="background:#fbbf24;color:#3b2a00">PRO</span></button>
+    <button class="tab active" data-tab="liq" role="tab"><span class="wsx-ico">🧮</span> Liquidador</button>
+    <button class="tab" data-tab="cli" role="tab"><span class="wsx-ico">👥</span> Clientes <span class="badge" id="badgeCli">0</span></button>
+    <button class="tab" data-tab="apr" role="tab"><span class="wsx-ico">📚</span> Aprende</button>
+    <button class="tab" data-tab="card" role="tab"><span class="wsx-ico">🎨</span> Tarjeta <span class="badge" style="background:#fbbf24;color:#3b2a00">PRO</span></button>
+    <button class="tab" data-tab="carta" role="tab"><span class="wsx-ico">📄</span> Cartas <span class="badge" style="background:#fbbf24;color:#3b2a00">PRO</span></button>
+    <button class="tab" data-tab="riesgo" role="tab"><span class="wsx-ico">⚠️</span> Diagnóstico <span class="badge" style="background:#fbbf24;color:#3b2a00">PRO</span></button>
   </nav>
   <section class="tab-panel active" id="panel-liq">
     <div class="liq-grid" style="grid-template-columns:1fr;max-width:560px;margin:0 auto">
