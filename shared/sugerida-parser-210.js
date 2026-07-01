@@ -164,6 +164,12 @@
       var all = tc.items.map(function(i){
         return { str: i.str, x: i.transform[4], y: i.transform[5], h: i.height || 0 };
       }).filter(function(i){ return i.str.trim(); });
+      // Escaneo/foto sin capa de texto: este parser lee por COORDENADAS y necesita el
+      // PDF digital del MUISCA. Avisar claro en vez de devolver casillas vacías.
+      if(all.length < 5){
+        return { ok: false, casillas: {}, anio: null, tipo: null,
+          avisos: ['Este PDF parece un escaneo o foto (no trae texto). Para comparar, descarga el PDF digital de la sugerida directamente del MUISCA (Diligenciar y presentar → declaración sugerida). Si solo tienes el escaneo del 210 del año pasado, cárgalo en el paso 1 — “Importar el 210 del año anterior” — que sí lee escaneos con OCR.'] };
+      }
       // Los números de casilla impresos son diminutos (h≈5); los valores miden h≈8.
       var items = all.filter(function(i){ return i.h >= 7; });
       var avisos = [];

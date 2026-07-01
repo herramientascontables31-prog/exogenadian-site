@@ -9,7 +9,7 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-S7SM6ST4CC');
 </script>
-<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<meta charset="UTF-8">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="og-image.png">
 <meta name="theme-color" content="#059669">
@@ -26,8 +26,8 @@ gtag('config', 'G-S7SM6ST4CC');
 <meta property="og:site_name" content="Aziendale">
 <meta property="og:image" content="https://exogenadian.com/og-image.png">
 <meta name="robots" content="index, follow">
-<script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js" integrity="sha384-Pqp51FUN2/qzfxZxBCtF0stpc9ONI6MYZpVqmo8m20SoaQCzf+arZvACkLkirlPz" crossorigin="anonymous"></script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
@@ -148,6 +148,30 @@ body.f210-free .f210-tab.locked:hover{opacity:1}
 .ro-lock-note .btn-unlock:hover{background:var(--pri2)}
 /* Modo gratis: la comparación contra la sugerida es una función PRO (no dejar dropzone sin cablear) */
 body.f210-free #cardSugerida{display:none!important}
+/* Modo gratis: menos ruido — el héroe del Paso 1 es la dropzone. Las cards de captura
+   (todas con inputs deshabilitados) reaparecen al activar PRO. */
+body.f210-free #cardDeclarante,body.f210-free #cardF160,body.f210-free #cardPatrimonio,
+body.f210-free #cardReajusteFiscal,body.f210-free #cardComparativoAGAnterior,
+body.f210-free #cardPagosPrevios,body.f210-free #cardCertificado{display:none!important}
+/* ── Hero de resultado (lo que pagaría / le devolverían) ── */
+.resultado-hero{border-radius:16px;padding:18px 22px;margin-bottom:16px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;box-shadow:var(--shadow);border:1px solid var(--border);background:#fff}
+.resultado-hero.hidden{display:none!important}
+.resultado-hero.pagar{background:linear-gradient(135deg,#fff 55%,#fdf3f3);border-color:#f3d9d9}
+.resultado-hero.favor{background:linear-gradient(135deg,#fff 55%,#eefaf4);border-color:#cdeede}
+.resultado-hero .rh-main{flex:1;min-width:230px}
+.resultado-hero .rh-lbl{font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:2px}
+.resultado-hero .rh-num{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:clamp(1.6rem,4.5vw,2.3rem);line-height:1.15;letter-spacing:-.5px}
+.resultado-hero.pagar .rh-num{color:#c04747}
+.resultado-hero.favor .rh-num{color:#0d9f6e}
+.resultado-hero .rh-sub{font-size:.78rem;color:var(--muted);margin-top:3px}
+.resultado-hero .rh-chips{display:flex;gap:8px;flex-wrap:wrap}
+.resultado-hero .rh-chip{background:#f6f9fc;border:1px solid var(--border);border-radius:10px;padding:7px 12px;font-size:.74rem;color:var(--muted)}
+.resultado-hero .rh-chip b{display:block;font-family:'JetBrains Mono',monospace;font-size:.88rem;color:var(--text);font-weight:700}
+.resultado-hero .rh-cta{background:var(--pri);color:#fff;border:none;padding:11px 20px;border-radius:11px;font-size:.86rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s;box-shadow:0 4px 14px -5px rgba(43,86,127,.5);white-space:nowrap}
+.resultado-hero .rh-cta:hover{background:var(--pri2);transform:translateY(-1px)}
+.resultado-hero .rh-hint{flex-basis:100%;font-size:.76rem;color:#6d7d95;background:#f6f9fc;border-left:3px solid var(--pri2);border-radius:6px;padding:7px 11px;line-height:1.5;margin-top:2px}
+@media(max-width:640px){.resultado-hero{padding:15px 16px}.resultado-hero .rh-cta{width:100%}}
+/* (las reglas móviles de los pasos viven al final del skin wsx para ganar la cascada) */
 /* Inputs deshabilitados: look de solo-lectura calmado, no "roto" */
 body.f210-free .field input:disabled,body.f210-free .field select:disabled{background:#f4f7fb;color:#42506a;cursor:default;opacity:1;-webkit-text-fill-color:#42506a}
 body.f210-free .p210-edit:disabled{background:transparent;border-bottom-color:transparent;color:#1a3c6e;cursor:default;opacity:1;-webkit-text-fill-color:#1a3c6e}
@@ -395,6 +419,7 @@ body.wsx .wsx-newcli:hover{border-color:var(--pri2);background:#f5f9ff}
 body.wsx #proContent{display:grid;grid-template-columns:250px minmax(0,1fr);gap:24px;align-items:start}
 body.wsx #bienvenidaPanel{grid-column:1/-1}
 body.wsx #freeBanner{grid-column:1/-1}
+body.wsx #resultadoHero{grid-column:1/-1}
 body.wsx .foot{grid-column:1/-1}
 @media(max-width:1080px){body.wsx #proContent{grid-template-columns:1fr}}
 /* ── Sidebar de pasos (reusa los botones .f210-tab existentes) ── */
@@ -412,6 +437,15 @@ body.wsx .f210-tab.active{background:linear-gradient(135deg,#2b567f,#33628f);col
 body.wsx .f210-tab.active .wsx-ico{background:rgba(255,255,255,.18);color:#fff}
 body.wsx .f210-tab.active .wsx-lbl small{color:rgba(255,255,255,.72)}
 body.wsx .f210-tab .tab-dot{position:absolute;top:11px;right:11px;width:8px;height:8px;background:#f59e0b}
+/* ── Secciones del estudio en el sidebar (clientes, cartas, tarjeta, aprende) ── */
+body.wsx .wsx-side-sep{font-size:.67rem;font-weight:800;letter-spacing:1px;color:#94a3b8;text-transform:uppercase;padding:12px 10px 2px}
+body.wsx .wsx-side-link{display:flex;align-items:center;gap:11px;padding:10px 14px;border-radius:12px;background:transparent;border:1px solid transparent;color:#5a6b84;font-size:.86rem;font-weight:600;text-decoration:none;transition:.15s;line-height:1.25}
+body.wsx .wsx-side-link .wsx-ico{width:26px;height:26px;flex:0 0 26px;border-radius:8px;background:#eef4fb;color:var(--pri2);display:grid;place-items:center;font-size:.9rem}
+body.wsx .wsx-side-link:hover{background:#fff;border-color:var(--border);color:var(--pri)}
+@media(max-width:1080px){
+  body.wsx .wsx-side-sep{grid-column:1/-1;padding-top:8px}
+  body.wsx .wsx-side-link{padding:8px 11px;font-size:.8rem}
+}
 /* ── Contenido principal ── */
 body.wsx .express-grid{grid-column:2;margin:0;grid-template-columns:minmax(0,1fr) 320px;min-width:0}
 body.wsx #colFormulario{min-width:0}
@@ -428,6 +462,17 @@ body.wsx .cifras-hero .live-row.big .val{font-size:1.28rem}
 body.wsx .cifras-hero .live-row.divider{margin-top:0}
 body.wsx .cifras-hero #lvSaldo{font-size:1.42rem!important}
 body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linear-gradient(90deg,#ecfdf5,#f8fafc)}
+/* ── Móvil / tablet: pasos como grilla compacta 2×2 (la dropzone sube, el gancho manda) ── */
+@media(max-width:1080px){
+  body.wsx #f210Tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;position:static}
+  body.wsx #f210Tabs::before{grid-column:1/-1}
+  body.wsx .f210-tab{padding:9px 11px;font-size:.8rem;gap:8px}
+  body.wsx .f210-tab .wsx-ico{width:24px;height:24px;flex-basis:24px;font-size:.85rem}
+  body.wsx .f210-tab .wsx-lbl small{font-size:.62rem}
+  body.wsx .wsx-side-sep{grid-column:1/-1;padding:8px 10px 0}
+  body.wsx .wsx-side-link{padding:8px 10px;font-size:.78rem;gap:8px}
+  body.wsx .wsx-side-link .wsx-ico{width:22px;height:22px;flex-basis:22px;font-size:.8rem}
+}
 </style>
 <script async src="shared/error-tracker.js?v=dd1f7f1d"></script><style id="exo-loading-css">
 #exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
@@ -478,30 +523,6 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
   <div id="ayudaContent">Cargando...</div>
 </aside>
 <div id="nav-container"></div>
-<script defer src="shared/pro.js?v=ccea4108"></script>
-<script defer src="shared/toast.js?v=9843f93f"></script>
-<script defer src="shared/nav.js?v=81ac8d15"></script>
-<script defer src="shared/pro-banner.js?v=f0acfdc0"></script>
-<script src="shared/parametros-renta-pn.js?v=a0b1c6a8"></script>
-<script src="shared/calculo210.js?v=0007de6f"></script>
-<script src="shared/optimizer-210.js?v=e353e2c8"></script>
-<script src="shared/advisor-210.js?v=7db1f6f7"></script>
-<script src="shared/cert-parser-210.js?v=bf1e7ff8"></script>
-<script src="shared/pdf-lines.js?v=902ec3d1"></script>
-<script src="shared/cert-ui-210.js?v=ad66b035"></script>
-<script src="shared/vencimientos-pn.js?v=99caf5fe"></script>
-<script src="shared/beneficio-auditoria.js?v=72c01703"></script>
-<script src="shared/reajuste-fiscal.js?v=c4b58391"></script>
-<script src="shared/decl-prev-210.js?v=753d9722"></script>
-<script src="shared/validaciones210.js?v=257a3ee7"></script>
-<script src="shared/parser-exogena-pn.js?v=06d0354d"></script>
-<script src="shared/parser-muisca-consultante.js?v=03bd8bbd"></script>
-<script src="shared/sugerida-parser-210.js?v=ac8cf814"></script>
-<script src="shared/canonicalize-inputs.js?v=5fe6d4a7"></script>
-<script src="shared/excel-papel-trabajo.js?v=4d3e1c5b"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="shared/agente-preclasificador-pn.js?v=badbfce6"></script>
-<script src="shared/certificados-renta-pn.js?v=bd52b9d2"></script>
 <div class="container">
   <div class="wsx-top">
     <a class="wsx-brand" href="index.html"><span class="wsx-logo">A</span> Aziendale<b>.</b></a>
@@ -549,6 +570,7 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
       </div>
       <button class="fb-cta" onclick="abrirPaywall()">Desbloquear PRO</button>
     </div>
+    <div id="resultadoHero" class="resultado-hero hidden"></div>
     <div id="bienvenidaPanel" class="bienvenida-panel hidden">
       <h2>👋 Declaración de Renta Persona Natural — AG 2024 / AG 2025</h2>
       <p class="lead">Esta herramienta te ayuda a hacer una declaración bien hecha y defendible, antes de digitar en MUISCA.</p>
@@ -576,6 +598,11 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
       <button class="f210-tab" data-tab="texogena" onclick="cambiarTabF210('texogena')"><span class="wsx-ico">⚖️</span><span class="wsx-lbl"><small>Paso 2</small>Reconciliación</span></button>
       <button class="f210-tab" data-tab="trentas" onclick="cambiarTabF210('trentas')"><span class="wsx-ico">💰</span><span class="wsx-lbl"><small>Paso 3</small>Rentas por cédula</span><span class="tab-dot"></span></button>
       <button class="f210-tab" data-tab="trevision" onclick="cambiarTabF210('trevision')"><span class="wsx-ico">📊</span><span class="wsx-lbl"><small>Paso 4</small>Formulario 210 y descarga</span></button>
+      <div class="wsx-side-sep">Estudio</div>
+      <a class="wsx-side-link" href="renta-personas-naturales.html#cli"><span class="wsx-ico">👥</span> Mis clientes</a>
+      <a class="wsx-side-link" href="renta-personas-naturales.html#carta"><span class="wsx-ico">📄</span> Cartas al cliente</a>
+      <a class="wsx-side-link" href="renta-personas-naturales.html#card"><span class="wsx-ico">🎨</span> Tarjeta para redes</a>
+      <a class="wsx-side-link" href="renta-personas-naturales.html#apr"><span class="wsx-ico">📚</span> Aprende</a>
     </div>
     <div class="express-grid">
       <div id="colFormulario">
@@ -1017,10 +1044,64 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
     <div class="foot"><strong>Aziendale</strong> &middot; Pro v2025.1 &middot; Tope Art. 336 (1.340 UVT) &middot; Descuento Art. 254-1 ET &middot; Validar antes de presentar. <a class="bienvenida-link" onclick="reabrirBienvenida()">ℹ Ver introducción</a></div>
   </div>
 </div>
+<script defer src="shared/pro.js?v=ccea4108"></script>
+<script defer src="shared/toast.js?v=9843f93f"></script>
+<script defer src="shared/nav.js?v=81ac8d15"></script>
+<script defer src="shared/pro-banner.js?v=f0acfdc0"></script>
+<script src="shared/parametros-renta-pn.js?v=a0b1c6a8"></script>
+<script src="shared/calculo210.js?v=0007de6f"></script>
+<script src="shared/optimizer-210.js?v=e353e2c8"></script>
+<script src="shared/advisor-210.js?v=7db1f6f7"></script>
+<script src="shared/cert-parser-210.js?v=bf1e7ff8"></script>
+<script src="shared/pdf-lines.js?v=c4030a51"></script>
+<script src="shared/cert-ui-210.js?v=ad66b035"></script>
+<script src="shared/vencimientos-pn.js?v=99caf5fe"></script>
+<script src="shared/beneficio-auditoria.js?v=72c01703"></script>
+<script src="shared/reajuste-fiscal.js?v=c4b58391"></script>
+<script src="shared/decl-prev-210.js?v=753d9722"></script>
+<script src="shared/validaciones210.js?v=257a3ee7"></script>
+<script src="shared/parser-exogena-pn.js?v=06d0354d"></script>
+<script src="shared/parser-muisca-consultante.js?v=03bd8bbd"></script>
+<script src="shared/sugerida-parser-210.js?v=34d26f6a"></script>
+<script src="shared/canonicalize-inputs.js?v=5fe6d4a7"></script>
+<script src="shared/excel-papel-trabajo.js?v=4d3e1c5b"></script>
+<script src="shared/ocr-pdf.js?v=06fa2f17"></script>
+<script src="shared/agente-preclasificador-pn.js?v=badbfce6"></script>
+<script src="shared/certificados-renta-pn.js?v=bd52b9d2"></script>
 <script>
 /* ═════════════════════════════════════════════════════════════════════════════
    FORMATO 210 PRO — adapter UI ↔ motor calculo210
    ═════════════════════════════════════════════════════════════════════════════ */
+/* ── LIBRERÍAS BAJO DEMANDA (jul-2026) ──
+   ExcelJS+XLSX (~1.4MB) y jsPDF (~350KB) ya no bloquean el primer pintado.
+   Se pre-calientan al acercarse a la dropzone y se esperan al usarlas. */
+var __libsExcelP = null, __jspdfP = null;
+function __cargarScript(src, integrity){
+  return new Promise(function(res, rej){
+    var e = document.createElement('script');
+    e.src = src;
+    if(integrity){ e.integrity = integrity; e.crossOrigin = 'anonymous'; }
+    e.onload = res;
+    e.onerror = function(){ rej(new Error('No se pudo cargar ' + src)); };
+    document.head.appendChild(e);
+  });
+}
+function cargarLibsExcel(){
+  if(window.ExcelJS && window.XLSX) return Promise.resolve();
+  if(__libsExcelP) return __libsExcelP;
+  __libsExcelP = Promise.all([
+    __cargarScript('https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js','sha384-Pqp51FUN2/qzfxZxBCtF0stpc9ONI6MYZpVqmo8m20SoaQCzf+arZvACkLkirlPz'),
+    __cargarScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js','sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw')
+  ]).catch(function(e){ __libsExcelP = null; throw e; });
+  return __libsExcelP;
+}
+function cargarJsPDF(){
+  if(window.jspdf) return Promise.resolve();
+  if(__jspdfP) return __jspdfP;
+  __jspdfP = __cargarScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js')
+    .catch(function(e){ __jspdfP = null; throw e; });
+  return __jspdfP;
+}
 /* ── PRO GATE / MODO GRATIS (jul-2026) ──
    El liquidador se muestra SIEMPRE. Sin PRO el usuario carga la exógena y VE
    el formulario 210 clasificado en vivo (solo lectura — "el gancho"). Editar
@@ -1385,6 +1466,11 @@ function inicializarDropZone(){
   var dz = document.getElementById('exogenaDropZone');
   if(!dz || dz.dataset.inicializada === '1') return;
   dz.dataset.inicializada = '1';
+  // Pre-calentar las librerías Excel cuando el usuario se acerca a la dropzone:
+  // así el drop real no espera la descarga (~1.4MB) y el preview sale al instante.
+  ['pointerenter','dragenter','focus','touchstart'].forEach(function(ev){
+    dz.addEventListener(ev, function(){ cargarLibsExcel().catch(function(){}); }, { once: true, passive: true });
+  });
   var fileInput = document.createElement('input');
   fileInput.type = 'file';
   fileInput.accept = '.xlsx,.xls';
@@ -1449,7 +1535,7 @@ function procesarArchivoExogena(file){
   document.getElementById('loadingOverlay').classList.remove('hidden');
   var reader = new FileReader();
   reader.onload = function(e){
-    leerExcelCompat(e.target.result).then(function(wb){
+    cargarLibsExcel().then(function(){ return leerExcelCompat(e.target.result); }).then(function(wb){
       ultimoExogenaWorkbook = wb;
       var result = parserExogenaPN.parseExogenaPN(wb);
       ultimoExogenaResult = result;
@@ -1508,7 +1594,7 @@ function procesarArchivoExogena(file){
       // los inputs recién creados (tabla de reconciliación, patrimonio, etc.).
       if(!window.__f210Pro){
         aplicarBloqueoLectura();
-        if(nReg > 0) setTimeout(function(){ cambiarTabF210('trevision'); }, 700);
+        if(nReg > 0) setTimeout(function(){ cambiarTabF210('trevision'); }, 350);
       } else if(nReg > 0){
         setTimeout(function(){ cambiarTabF210('texogena'); }, 900);
       }
@@ -2743,6 +2829,40 @@ function recalcular(){
   if(typeof renderComparacionPatrimonial === 'function') renderComparacionPatrimonial();
   if(typeof renderSugerenciasCedula === 'function') renderSugerenciasCedula(ctx);
   if(typeof autoGuardarBorrador === 'function') autoGuardarBorrador();
+  renderResultadoHero();
+}
+/* ── HERO DE RESULTADO: el número que el declarante quiere ver ──
+   Aparece apenas hay exógena cargada + motor calculado. En gratis es el gancho
+   (con CTA); en PRO es el resumen persistente entre pasos. */
+function renderResultadoHero(){
+  var el = document.getElementById('resultadoHero');
+  if(!el) return;
+  var hayExogena = !!(window.ultimoExogenaResult && ultimoExogenaResult.metadata && ultimoExogenaResult.metadata.totalRegistros > 0);
+  if(!hayExogena || !ultimoResultado || !ultimoResultado.renglones){ el.classList.add('hidden'); return; }
+  var R = ultimoResultado.renglones;
+  var pagar = Math.max(0, Math.round(R.c134 || 0)), favor = Math.max(0, Math.round(R.c137 || 0));
+  var $ = function(n){ return '$' + Math.round(n || 0).toLocaleString('es-CO'); };
+  var esFavor = favor > 0 && !pagar;
+  var num = esFavor ? favor : pagar;
+  var lbl = esFavor ? 'Saldo a favor estimado' : (pagar > 0 ? 'Pagaría (saldo a cargo estimado)' : 'Sin saldo a pagar');
+  var year = (ultimoEstado && ultimoEstado.year) || getYear();
+  var nReg = ultimoExogenaResult.metadata.totalRegistros;
+  var chips =
+    '<div class="rh-chip">Registros exógena<b>' + nReg + '</b></div>' +
+    '<div class="rh-chip">Impuesto neto (c126)<b>' + $(R.c126) + '</b></div>' +
+    '<div class="rh-chip">Retenciones (c132)<b>' + $(R.c132) + '</b></div>';
+  var h = '<div class="rh-main"><div class="rh-lbl">AG ' + year + ' &middot; clasificado desde la ex&oacute;gena DIAN</div>' +
+          '<div class="rh-num">' + (num > 0 ? $(num) : '$0') + '</div>' +
+          '<div class="rh-sub">' + lbl + ' &middot; estimaci&oacute;n autom&aacute;tica, antes de deducciones personales</div></div>' +
+          '<div class="rh-chips">' + chips + '</div>';
+  if(!window.__f210Pro){
+    h += '<button class="rh-cta" onclick="abrirPaywall()">Ajustar y bajar este saldo &rarr;</button>';
+    if(pagar > 0){
+      h += '<div class="rh-hint">💡 Este saldo suele <b>bajar</b> al aplicar deducciones personales (dependientes, intereses de vivienda, prepagada, AFC) — eso se ajusta con PRO, casilla por casilla.</div>';
+    }
+  }
+  el.className = 'resultado-hero ' + (esFavor ? 'favor' : 'pagar');
+  el.innerHTML = h;
 }
 /* Desglose de bienes del patrimonio (c29) leídos de la exógena: vehículos, inmuebles,
    cuentas, inversiones… para que el contador verifique cada activo a 31-dic. */
@@ -3154,14 +3274,19 @@ function renderClienteBar(){
   var pr = progresoPN();
   var selCli = selectorClientesHTML();
   if(!CLIENTE_ACTIVO){
+    // Sin cliente activo y sin clientes en el panel: no mostrar nada — las secciones
+    // del estudio ya viven en el sidebar (no duplicar navegación).
+    if(!pr.total && !selCli){ bar.style.display = 'none'; return; }
+    bar.style.display = '';
     bar.innerHTML =
       '<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">' +
-        '<a href="renta-personas-naturales.html#cli" style="color:#1B3A5C;font-weight:600;text-decoration:none">👥 Hub Renta PN: clientes, cartas y calendario' + (pr.total ? (' — <b>' + pr.hechas + ' de ' + pr.total + ' presentadas</b>') : '') + ' →</a>' +
+        '<a href="renta-personas-naturales.html#cli" style="color:#2b567f;font-weight:600;text-decoration:none">👥 Mis clientes' + (pr.total ? (' — <b>' + pr.hechas + ' de ' + pr.total + ' presentadas</b>') : '') + ' →</a>' +
         (selCli ? ('<span style="margin-left:auto">' + selCli + '</span>') : '') +
       '</div>';
     bindClienteSwitch();
     return;
   }
+  bar.style.display = '';
   var meta = leerMetaPN()[CLIENTE_ACTIVO.nit] || {};
   var estado = meta.estado || 'por_presentar';
   var venc = '';
@@ -3405,6 +3530,14 @@ function exportarExcelAsesor(){
   if(gatePro('Descargar el <strong>Excel papel de trabajo</strong> (borrador 210 oficial + memoria de cálculo + citas normativas) es parte de PRO.')) return;
   if(!ultimoResultado || !ultimoEstado){
     if(typeof exoToast !== 'undefined') exoToast('Llena los campos primero', 'error');
+    return;
+  }
+  if(!window.ExcelJS){ // lib bajo demanda: cargar y reintentar
+    document.getElementById('loadingOverlay').classList.remove('hidden');
+    cargarLibsExcel().then(function(){ exportarExcelAsesor(); }).catch(function(){
+      document.getElementById('loadingOverlay').classList.add('hidden');
+      if(typeof exoToast !== 'undefined') exoToast('No se pudo cargar el generador de Excel. Revisa tu conexión.', 'error');
+    });
     return;
   }
   document.getElementById('loadingOverlay').classList.remove('hidden');
@@ -3921,7 +4054,12 @@ function exportarEntregablePDF(){
   if(gatePro('Generar el <strong>entregable PDF para el cliente</strong> es parte de PRO.')) return;
   if((!ultimoResultado || !ultimoEstado) && typeof recalcular==='function') recalcular();
   if(!ultimoResultado || !ultimoEstado){ if(typeof exoToast!=='undefined') exoToast('Llena los campos primero','error'); return; }
-  if(typeof window.jspdf==='undefined'){ if(typeof exoToast!=='undefined') exoToast('No se cargó el generador de PDF','error'); return; }
+  if(typeof window.jspdf==='undefined'){ // lib bajo demanda: cargar y reintentar
+    cargarJsPDF().then(function(){ exportarEntregablePDF(); }).catch(function(){
+      if(typeof exoToast!=='undefined') exoToast('No se pudo cargar el generador de PDF. Revisa tu conexión.','error');
+    });
+    return;
+  }
   var R=ultimoResultado, E=ultimoEstado.estado, year=ultimoEstado.year;
   var uvt=(paramsRentaPN.getParams(year).uvt)||49799, SMMLV=(paramsRentaPN.getParams(year).smlmv)||1423500;
   function f(n){ return '$ '+Math.round(n||0).toLocaleString('es-CO'); }

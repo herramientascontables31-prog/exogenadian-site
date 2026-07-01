@@ -45,5 +45,20 @@
     });
   }
 
-  global.pdfLines = { extraer: extraer, cargarPdfJs: cargarPdfJs };
+  /* Fallback OCR (jul-2026): si el PDF no trae capa de texto (escaneo o foto),
+     leerlo con Tesseract vía ocr-pdf.js — solo se descarga si hace falta.
+     El contrato no cambia: resuelve con las líneas, vengan de donde vengan. */
+  function extraerConOcr(file){
+    return extraer(file).then(function(lineas){
+      var sinTexto = lineas.join('').replace(/\s+/g,'').length < 40;
+      if(!sinTexto || !global.ocrPdf) return lineas;
+      if(typeof global.exoToast === 'function') global.exoToast('El PDF parece un escaneo (sin texto). Leyéndolo con OCR — puede tardar un momento la primera vez…', 'info');
+      return global.ocrPdf.extraerLineas(file).catch(function(e){
+        console.warn('OCR falló:', e);
+        return lineas; // devolver lo que había: el caller muestra su mensaje de "sin montos"
+      });
+    });
+  }
+
+  global.pdfLines = { extraer: extraerConOcr, extraerSinOcr: extraer, cargarPdfJs: cargarPdfJs };
 })(typeof window !== 'undefined' ? window : this);

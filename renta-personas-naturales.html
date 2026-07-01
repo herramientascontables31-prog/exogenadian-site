@@ -816,6 +816,13 @@ function escHtml(s){
 document.querySelectorAll('.tab').forEach(function(t){
   t.addEventListener('click', function(){
     var key = t.getAttribute('data-tab');
+    // "Liquidador" abre directo la herramienta (mismo estudio, sin doble clic por la landing).
+    // El panel-liq queda como landing SEO para quien llega al hub sin contexto.
+    if(key === 'liq' && !document.getElementById('panel-liq').classList.contains('active')){
+      if(typeof gtag !== 'undefined') gtag('event','renta_pn_hub_tab', { tab: 'liq_directo' });
+      location.href = 'formato210-pro.html';
+      return;
+    }
     document.querySelectorAll('.tab').forEach(function(x){ x.classList.toggle('active', x === t); });
     document.querySelectorAll('.tab-panel').forEach(function(p){
       p.classList.toggle('active', p.id === 'panel-' + key);
