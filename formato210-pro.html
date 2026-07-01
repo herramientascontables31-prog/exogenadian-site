@@ -32,11 +32,11 @@ gtag('config', 'G-S7SM6ST4CC');
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
 <style>
-:root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--green:#059669;--green2:#D1FAE5;--red:#CC0000;--amber:#D97706;--amber2:#FFF8E1;--border:#e2e8f0;--radius:10px;--shadow:0 2px 12px rgba(0,0,0,.06)}
+:root{--bg:#f4f7fb;--card:#fff;--text:#22303f;--muted:#71809a;--pri:#2b567f;--pri2:#4285c4;--pri3:#eaf2fa;--green:#0d9f6e;--green2:#ddf6ec;--red:#dc4646;--amber:#d98b1f;--amber2:#fdf6e7;--border:#e8edf4;--radius:14px;--shadow:0 1px 2px rgba(20,33,61,.04),0 6px 20px -8px rgba(20,33,61,.08)}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
 .container{max-width:1280px;margin:0 auto;padding:20px}
-.header{background:linear-gradient(135deg,#1B3A5C 0%,#2E75B6 100%);padding:24px 28px;border-radius:16px;margin-bottom:20px;color:#fff;display:flex;align-items:center;justify-content:space-between}
+.header{background:linear-gradient(135deg,#3a6693 0%,#4285c4 100%);padding:24px 28px;border-radius:16px;margin-bottom:20px;color:#fff;display:flex;align-items:center;justify-content:space-between}
 .header h1{font-size:1.4rem;font-weight:700;display:flex;align-items:center;gap:10px}
 .header h1 span{background:rgba(255,255,255,.15);padding:4px 12px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:600}
 .header h1 em{font-style:normal;background:#059669;color:#fff;padding:3px 10px;border-radius:6px;font-size:.85rem;letter-spacing:.5px}
@@ -96,8 +96,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 .field{display:flex;flex-direction:column;gap:4px}
 .field label{font-size:.78rem;font-weight:600;color:var(--muted)}
 .field label .hint{font-weight:400;font-size:.72rem;color:var(--pri2)}
-.field input,.field select{padding:10px 12px;border:1.5px solid #94a3b8;background:#f8fafc;border-radius:8px;font-size:.9rem;font-family:inherit;font-family:'JetBrains Mono',monospace;text-align:right}
-.field input:hover,.field select:hover{border-color:#64748b}
+.field input,.field select{padding:10px 12px;border:1px solid #dbe3ee;background:#fbfcfe;border-radius:9px;font-size:.9rem;font-family:inherit;font-family:'JetBrains Mono',monospace;text-align:right;transition:border-color .12s,box-shadow .12s}
+.field input:hover,.field select:hover{border-color:#b9c7dc}
 .field input[type=text]:not(.no-mono),.field input[type=number]{font-family:'JetBrains Mono',monospace;text-align:right}
 .field input.text-left,.field select{text-align:left;font-family:'DM Sans',sans-serif}
 .field input:focus,.field select:focus{outline:none;border-color:var(--pri2);box-shadow:0 0 0 3px rgba(46,117,182,.15)}
@@ -109,10 +109,49 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 .radio-pill input{display:none}
 .section-title{font-size:.92rem;font-weight:700;color:var(--pri);margin:18px 0 10px;display:flex;align-items:center;gap:8px}
 .section-title .num{background:var(--pri);color:#fff;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700}
-/* Pro Gate */
-.pro-gate{padding:60px 32px;text-align:center;background:linear-gradient(135deg,#1B3A5C 0%,#2E75B6 100%);color:#fff}
-.pro-gate h2{font-size:1.5rem;margin-bottom:12px;color:#fff}
-.pro-gate p{opacity:.85;margin-bottom:20px;font-size:.9rem;max-width:480px;margin-left:auto;margin-right:auto}
+/* ── Paywall (modal, ya no bloquea todo) ── */
+.paywall-overlay{position:fixed;inset:0;background:rgba(24,38,58,.42);backdrop-filter:blur(3px);z-index:9996;display:flex;align-items:center;justify-content:center;padding:18px}
+.paywall-overlay.hidden{display:none!important}
+.paywall-box{position:relative;background:#fff;border-radius:20px;max-width:440px;width:100%;padding:34px 30px 28px;text-align:center;box-shadow:0 24px 60px -12px rgba(20,33,61,.4);animation:pwIn .22s ease}
+@keyframes pwIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+.paywall-close{position:absolute;top:12px;right:14px;background:none;border:none;font-size:1.7rem;line-height:1;color:#aeb8c9;cursor:pointer;padding:2px 8px;border-radius:8px}
+.paywall-close:hover{color:var(--pri);background:var(--pri3)}
+.paywall-ico{width:60px;height:60px;margin:0 auto 12px;border-radius:16px;background:linear-gradient(135deg,#eaf2fa,#dcebf8);display:grid;place-items:center;font-size:1.8rem}
+.paywall-box h2{font-size:1.32rem;color:var(--pri);margin-bottom:8px;font-weight:800}
+.paywall-box p{color:var(--muted);font-size:.88rem;line-height:1.55;margin-bottom:16px}
+.paywall-box p strong{color:var(--text)}
+.paywall-feats{list-style:none;text-align:left;margin:0 auto 18px;max-width:340px;display:grid;gap:7px}
+.paywall-feats li{font-size:.84rem;color:var(--text);padding-left:26px;position:relative;line-height:1.4}
+.paywall-feats li::before{content:'✓';position:absolute;left:0;top:0;width:18px;height:18px;border-radius:50%;background:var(--green2);color:#0d7a54;font-size:.7rem;font-weight:800;display:grid;place-items:center}
+.paywall-form{display:flex;gap:8px;max-width:360px;margin:0 auto}
+.paywall-form input{flex:1;min-width:0;padding:11px 14px;border:1px solid #dbe3ee;background:#fbfcfe;border-radius:10px;font-size:.9rem;font-family:inherit}
+.paywall-form input:focus{outline:none;border-color:var(--pri2);box-shadow:0 0 0 3px rgba(66,133,196,.15)}
+.paywall-form .btn-primary{padding:11px 22px;white-space:nowrap}
+.paywall-link{font-size:.85rem;color:var(--pri2);font-weight:700;text-decoration:none}
+.paywall-link:hover{text-decoration:underline}
+/* ── Banner de modo gratis ── */
+.free-banner{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#f0f7ff,#eaf2fa);border:1px solid #d5e6f7;border-radius:14px;padding:12px 16px;margin-bottom:16px;box-shadow:var(--shadow)}
+.free-banner.hidden{display:none!important}
+.free-banner .fb-ico{font-size:1.4rem;flex-shrink:0}
+.free-banner .fb-txt{flex:1;font-size:.84rem;color:#3a5876;line-height:1.45}
+.free-banner .fb-txt strong{color:var(--pri)}
+.free-banner .fb-cta{flex-shrink:0;background:var(--pri);color:#fff;border:none;padding:9px 18px;border-radius:10px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s;box-shadow:0 4px 12px -4px rgba(43,86,127,.5)}
+.free-banner .fb-cta:hover{background:var(--pri2);transform:translateY(-1px)}
+@media(max-width:640px){.free-banner{flex-wrap:wrap}.free-banner .fb-cta{width:100%}}
+/* ── Candado en pasos bloqueados + tarjetas de solo-lectura ── */
+.f210-tab.locked .wsx-ico::after{content:'🔒';position:absolute;font-size:.62rem;margin-left:-6px;margin-top:-10px}
+body.f210-free .f210-tab.locked{opacity:.72}
+body.f210-free .f210-tab.locked:hover{opacity:1}
+.ro-lock-note{display:flex;align-items:center;gap:8px;background:#fbfcfe;border:1px dashed #d5deeb;border-radius:10px;padding:9px 13px;font-size:.8rem;color:var(--muted);margin-bottom:10px}
+.ro-lock-note b{color:var(--pri)}
+.ro-lock-note .btn-unlock{margin-left:auto;background:var(--pri);color:#fff;border:none;padding:6px 13px;border-radius:8px;font-size:.76rem;font-weight:700;cursor:pointer;font-family:inherit}
+.ro-lock-note .btn-unlock:hover{background:var(--pri2)}
+/* Modo gratis: la comparación contra la sugerida es una función PRO (no dejar dropzone sin cablear) */
+body.f210-free #cardSugerida{display:none!important}
+/* Inputs deshabilitados: look de solo-lectura calmado, no "roto" */
+body.f210-free .field input:disabled,body.f210-free .field select:disabled{background:#f4f7fb;color:#42506a;cursor:default;opacity:1;-webkit-text-fill-color:#42506a}
+body.f210-free .p210-edit:disabled{background:transparent;border-bottom-color:transparent;color:#1a3c6e;cursor:default;opacity:1;-webkit-text-fill-color:#1a3c6e}
+body.f210-free .radio-pill input:disabled + *,body.f210-free .radio-pill:has(input:disabled){cursor:default}
 /* Loader */
 .exo-loading{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:12px;color:#fff}
 .exo-loading.hidden{display:none}
@@ -156,7 +195,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 .exogena-summary .warn{padding:6px 10px;background:#FFF8E1;border-left:3px solid var(--amber);font-size:.76rem;margin-bottom:4px;border-radius:4px;color:#92400E}
 .exogena-summary .warn-error{background:#FEE2E2;border-left-color:var(--red);color:#991B1B}
 /* Pantalla de bienvenida educativa (B.1) */
-.bienvenida-panel{padding:32px 28px;background:linear-gradient(135deg,#1E1B4B 0%,#2E75B6 100%);color:#fff;border-radius:16px;margin-bottom:18px;box-shadow:var(--shadow)}
+.bienvenida-panel{padding:32px 28px;background:linear-gradient(135deg,#33628f 0%,#4285c4 100%);color:#fff;border-radius:16px;margin-bottom:18px;box-shadow:var(--shadow)}
 .bienvenida-panel h2{font-size:1.4rem;margin-bottom:14px;color:#fff;font-weight:700}
 .bienvenida-panel .lead{opacity:.92;font-size:.95rem;margin-bottom:18px;line-height:1.6}
 .bienvenida-panel h3{font-size:.85rem;font-weight:700;color:#A7F3D0;margin:18px 0 10px;text-transform:uppercase;letter-spacing:.5px}
@@ -215,9 +254,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 .recon-table tr.manual td:first-child{border-left:3px solid #7C3AED}
 .recon-table .num-cell{font-family:'JetBrains Mono',monospace;text-align:right;white-space:nowrap}
 /* ── Preview del Formulario 210 real (grilla oficial DIAN) ── */
-.p210{border:1px solid #cbd5e1;border-radius:8px;overflow:hidden;font-size:11px;margin-top:8px;background:#fff}
-.p210-hdr{background:#1B3A5C;color:#fff;text-align:center;font-weight:700;padding:7px;font-size:12px;letter-spacing:.5px}
-.p210-sec{background:#1B3A5C;color:#fff;font-weight:700;font-size:10px;padding:5px 8px;text-transform:uppercase;letter-spacing:.4px}
+.p210{border:1px solid #dde5ef;border-radius:10px;overflow:hidden;font-size:11px;margin-top:8px;background:#fff}
+.p210-hdr{background:linear-gradient(135deg,#3a6693,#4285c4);color:#fff;text-align:center;font-weight:700;padding:8px;font-size:12px;letter-spacing:.5px}
+.p210-sec{background:#eef4fa;color:#2b567f;font-weight:700;font-size:10px;padding:6px 8px;text-transform:uppercase;letter-spacing:.4px;border-top:1px solid #e3ebf4;border-bottom:1px solid #e3ebf4}
 .p210-row{display:grid;grid-template-columns:1fr 34px 124px;border-bottom:1px solid #eef1f5;min-height:24px}
 .p210-row>div{display:flex;align-items:center;padding:2px 7px}
 .p210-row .pl{font-size:10px;line-height:1.2;color:#334155}
@@ -341,7 +380,7 @@ body.wsx .wsx-top{position:sticky;top:0;z-index:40;display:flex;align-items:cent
   padding:11px 22px;margin:0 -22px 18px;background:rgba(255,255,255,.86);backdrop-filter:blur(10px);
   border-bottom:1px solid var(--border);flex-wrap:wrap}
 body.wsx .wsx-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--pri);font-weight:800;font-size:1.02rem;letter-spacing:-.2px}
-body.wsx .wsx-brand .wsx-logo{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#1B3A5C,#2E75B6);color:#fff;display:grid;place-items:center;font-weight:800;font-size:.95rem;box-shadow:0 2px 8px rgba(27,58,92,.28)}
+body.wsx .wsx-brand .wsx-logo{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#3a6693,#4285c4);color:#fff;display:grid;place-items:center;font-weight:800;font-size:.95rem;box-shadow:0 2px 8px rgba(43,86,127,.24)}
 body.wsx .wsx-brand b{color:var(--green)}
 body.wsx .wsx-tag{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--pri2);background:var(--pri3);padding:3px 8px;border-radius:6px}
 body.wsx .wsx-top .wsx-spacer{flex:1}
@@ -355,6 +394,7 @@ body.wsx .wsx-newcli:hover{border-color:var(--pri2);background:#f5f9ff}
 /* ── Layout de estudio: sidebar de pasos + contenido ── */
 body.wsx #proContent{display:grid;grid-template-columns:250px minmax(0,1fr);gap:24px;align-items:start}
 body.wsx #bienvenidaPanel{grid-column:1/-1}
+body.wsx #freeBanner{grid-column:1/-1}
 body.wsx .foot{grid-column:1/-1}
 @media(max-width:1080px){body.wsx #proContent{grid-template-columns:1fr}}
 /* ── Sidebar de pasos (reusa los botones .f210-tab existentes) ── */
@@ -368,7 +408,7 @@ body.wsx .f210-tab .wsx-lbl{display:flex;flex-direction:column;gap:1px}
 body.wsx .f210-tab .wsx-lbl small{font-weight:600;font-size:.7rem;color:#94a3b8}
 body.wsx .f210-tab:hover{background:#f5f9ff;border-color:#cdddf0;color:var(--pri);transform:none}
 body.wsx .f210-tab:hover .wsx-ico{background:var(--pri3)}
-body.wsx .f210-tab.active{background:linear-gradient(135deg,#1B3A5C,#274d78);color:#fff;border-color:transparent;box-shadow:0 6px 18px -8px rgba(27,58,92,.6)}
+body.wsx .f210-tab.active{background:linear-gradient(135deg,#2b567f,#33628f);color:#fff;border-color:transparent;box-shadow:0 6px 18px -10px rgba(43,86,127,.5)}
 body.wsx .f210-tab.active .wsx-ico{background:rgba(255,255,255,.18);color:#fff}
 body.wsx .f210-tab.active .wsx-lbl small{color:rgba(255,255,255,.72)}
 body.wsx .f210-tab .tab-dot{position:absolute;top:11px;right:11px;width:8px;height:8px;background:#f59e0b}
@@ -381,7 +421,7 @@ body.wsx .card{border-radius:14px;box-shadow:0 1px 3px rgba(16,24,40,.06),0 1px 
 /* ── Panel de cifras elevado a "hero" ── */
 body.wsx .sidebar{top:74px}
 body.wsx .cifras-hero{padding:0;overflow:hidden;border:1px solid #d7e2f0;box-shadow:0 10px 30px -18px rgba(27,58,92,.55)}
-body.wsx .cifras-hero > h3{margin:0;padding:13px 18px;background:linear-gradient(135deg,#1B3A5C,#2E75B6);color:#fff;font-size:.86rem;display:flex;align-items:center;gap:8px}
+body.wsx .cifras-hero > h3{margin:0;padding:13px 18px;background:linear-gradient(135deg,#3a6693,#4285c4);color:#fff;font-size:.86rem;display:flex;align-items:center;gap:8px}
 body.wsx .cifras-hero .live-row{padding:7px 18px;margin:0}
 body.wsx .cifras-hero .live-row.big{background:#f8fafc}
 body.wsx .cifras-hero .live-row.big .val{font-size:1.28rem}
@@ -468,6 +508,7 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
     <span class="wsx-tag">Estudio de Renta · F210</span>
     <span class="wsx-spacer"></span>
     <span id="proBadgeHeader" class="wsx-badge" style="display:none">PRO</span>
+    <button id="btnUnlockPro" onclick="abrirPaywall()" class="wsx-newcli" style="display:none;background:var(--pri);color:#fff;border-color:var(--pri)">&#128274; Desbloquear PRO</button>
     <button id="btnNuevoCliente" onclick="reiniciarTodo()" title="Borra todo y empieza una declaración nueva" class="wsx-newcli" style="display:none">&#128260; Nuevo cliente</button>
     <div id="selloGuardado" class="wsx-save"></div>
     <nav class="wsx-links">
@@ -480,21 +521,34 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
   </div>
   <div id="clienteContextBar" style="background:#fff;border:1px solid #e5e7eb;border-left:4px solid #1B3A5C;border-radius:12px;padding:10px 16px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.04);font-size:.88rem"></div>
   <div id="vinculoClienteBox" style="display:none;border:1.5px solid #C4B5FD;background:#F5F3FF;border-radius:12px;padding:10px 16px;margin-bottom:14px;font-size:.86rem;align-items:center;gap:12px;flex-wrap:wrap"></div>
-  <div id="proGate" class="card" style="padding:0;overflow:hidden">
-    <div class="pro-gate">
-      <div style="font-size:2.5rem;margin-bottom:12px">&#128274;</div>
-      <h2>Liquidador 210 Pro</h2>
-      <p>Declaración de Renta Persona Natural completa. Motor multi-cédula con tope Art. 336 (1.340 UVT), descuento Art. 254-1 y anticipo Art. 807. Excel papel de trabajo con memoria de cálculo, citas normativas y conciliación patrimonial.</p>
-      <div style="margin-bottom:14px">
-        <input type="email" id="proKeyGate" placeholder="Ingresa tu email PRO" style="padding:10px 16px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;border-radius:8px;font-size:.9rem;font-family:inherit;width:280px;text-align:center">
+  <div id="proGate" class="paywall-overlay hidden" onclick="if(event.target===this)cerrarPaywall()">
+    <div class="paywall-box">
+      <button class="paywall-close" onclick="cerrarPaywall()" aria-label="Cerrar">&times;</button>
+      <div class="paywall-ico">&#128274;</div>
+      <h2>Desbloquea el 210 Pro</h2>
+      <p id="paywallReason">Estás viendo el borrador prediligenciado en modo lectura. Actívate PRO para <strong>editar cada casilla, reconciliar los conceptos y descargar el Excel papel de trabajo</strong> con memoria de cálculo y citas normativas.</p>
+      <ul class="paywall-feats">
+        <li>Editar el formulario 210 casilla por casilla</li>
+        <li>Reconciliar y reclasificar los conceptos de la exógena</li>
+        <li>Deducciones, dependientes e imputación fina por cédula</li>
+        <li>Excel papel de trabajo + borrador 210 oficial + PDF para el cliente</li>
+      </ul>
+      <div class="paywall-form">
+        <input type="email" id="proKeyGate" placeholder="Tu email PRO" autocomplete="email">
+        <button onclick="validarProGate()" class="btn btn-primary">Activar</button>
       </div>
-      <button onclick="validarProGate()" class="btn btn-primary" style="padding:10px 28px">Activar PRO</button>
-      <div id="proGateError" style="margin-top:10px;font-size:.8rem;min-height:20px"></div>
-      <div style="margin-top:14px"><a href="precios.html" style="font-size:.85rem;color:#A7F3D0;font-weight:600;text-decoration:none">¿No tienes suscripción? Suscríbete PRO &rarr;</a></div>
-      <div style="margin-top:16px;font-size:.75rem;opacity:.7">También puedes usar el <a href="formato210.html" style="color:#A7F3D0">liquidador público gratis</a> con la réplica visual del 210 oficial.</div>
+      <div id="proGateError" style="margin-top:10px;font-size:.82rem;min-height:20px"></div>
+      <div style="margin-top:14px"><a href="precios.html" class="paywall-link">¿No tienes plan? Ver planes PRO &rarr;</a></div>
     </div>
   </div>
   <div id="proContent" class="hidden">
+    <div id="freeBanner" class="free-banner hidden">
+      <div class="fb-ico">&#128064;</div>
+      <div class="fb-txt">
+        <strong>Vista previa gratis.</strong> Carga la exógena y mira cómo se clasifica tu declaración en el formulario 210 real. Para <b>editar, reconciliar y descargar</b> necesitas PRO.
+      </div>
+      <button class="fb-cta" onclick="abrirPaywall()">Desbloquear PRO</button>
+    </div>
     <div id="bienvenidaPanel" class="bienvenida-panel hidden">
       <h2>👋 Declaración de Renta Persona Natural — AG 2024 / AG 2025</h2>
       <p class="lead">Esta herramienta te ayuda a hacer una declaración bien hecha y defendible, antes de digitar en MUISCA.</p>
@@ -904,7 +958,7 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
           </div>
         </div>
         <div class="card" id="cardReplica210" style="border:2px solid var(--pri,#1B3A5C)">
-          <h3 onclick="toggleReplica210()" style="cursor:pointer;user-select:none">&#128203; Formulario 210 — réplica oficial editable <span style="font-size:.74rem;color:var(--muted);font-weight:400" id="replica210Hint">(clic para contraer)</span></h3>
+          <h3 onclick="toggleReplica210()" style="cursor:pointer;user-select:none">&#128203; Formulario 210 — réplica oficial DIAN <span style="font-size:.74rem;color:var(--muted);font-weight:400" id="replica210Hint">(clic para contraer)</span></h3>
           <div id="replica210Body" style="margin-top:8px"></div>
         </div>
         <div class="card" id="cardSugerida">
@@ -967,58 +1021,114 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
 /* ═════════════════════════════════════════════════════════════════════════════
    FORMATO 210 PRO — adapter UI ↔ motor calculo210
    ═════════════════════════════════════════════════════════════════════════════ */
-/* ── PRO GATE ── */
+/* ── PRO GATE / MODO GRATIS (jul-2026) ──
+   El liquidador se muestra SIEMPRE. Sin PRO el usuario carga la exógena y VE
+   el formulario 210 clasificado en vivo (solo lectura — "el gancho"). Editar
+   casillas, entrar a Reconciliación y descargar requieren PRO. */
+window.__f210Pro = false;
+function entrarModoPro(opts){
+  opts = opts || {};
+  window.__f210Pro = true;
+  document.body.classList.remove('f210-free');
+  document.getElementById('proContent').classList.remove('hidden');
+  var fb=document.getElementById('freeBanner'); if(fb) fb.classList.add('hidden');
+  var b=document.getElementById('proBadgeHeader'); if(b) b.style.display='inline-block';
+  var bn=document.getElementById('btnNuevoCliente'); if(bn) bn.style.display='inline-block';
+  var ub=document.getElementById('btnUnlockPro'); if(ub) ub.style.display='none';
+  quitarCandadosTabs();
+  quitarBloqueoLectura();
+  inicializarDropZone();
+  inicializarSugerida();
+  if(opts.restaurar){ migrarBorradorHuerfanoSiAplica(); restaurarBorrador(); }
+  verificarBienvenida();
+  recalcular();
+  cambiarTabF210(opts.tab || tabGuardadoOInicial());
+  prefillClienteActivo();
+  renderClienteBar();
+}
+function entrarModoGratis(){
+  window.__f210Pro = false;
+  document.body.classList.add('f210-free');
+  document.getElementById('proContent').classList.remove('hidden');
+  var fb=document.getElementById('freeBanner'); if(fb) fb.classList.remove('hidden');
+  var b=document.getElementById('proBadgeHeader'); if(b) b.style.display='none';
+  var bn=document.getElementById('btnNuevoCliente'); if(bn) bn.style.display='none';
+  var ub=document.getElementById('btnUnlockPro'); if(ub) ub.style.display='inline-block';
+  marcarCandadosTabs();
+  inicializarDropZone();
+  recalcular();
+  cambiarTabF210('t210');
+  aplicarBloqueoLectura();
+}
+function abrirPaywall(motivo){
+  var r=document.getElementById('paywallReason');
+  if(r && motivo) r.innerHTML = motivo;
+  document.getElementById('proGate').classList.remove('hidden');
+  var inp=document.getElementById('proKeyGate');
+  if(inp){ var g=(exoPro&&exoPro.getSaved)?exoPro.getSaved():null; if(g&&!inp.value)inp.value=g; setTimeout(function(){try{inp.focus();}catch(_){}},60); }
+  if(typeof gtag!=='undefined') gtag('event','f210_paywall_open', { motivo: (motivo?'accion':'cta') });
+}
+function cerrarPaywall(){ document.getElementById('proGate').classList.add('hidden'); }
+/* Bloquea una acción PRO: si NO es pro, abre el paywall y devuelve true. */
+function gatePro(motivo){
+  if(window.__f210Pro) return false;
+  abrirPaywall(motivo);
+  return true;
+}
+function marcarCandadosTabs(){
+  document.querySelectorAll('.f210-tab').forEach(function(t){
+    var d=t.getAttribute('data-tab');
+    t.classList.toggle('locked', d==='texogena' || d==='trentas');
+  });
+}
+function quitarCandadosTabs(){
+  document.querySelectorAll('.f210-tab.locked').forEach(function(t){ t.classList.remove('locked'); });
+}
+/* Modo gratis: deshabilita todo lo editable. Deja vivo: año gravable, carga de
+   exógena (dropzone + file inputs). El motor sigue leyendo .value de inputs
+   deshabilitados, así que el 210 se prediligencia y muestra igual. */
+function aplicarBloqueoLectura(){
+  if(window.__f210Pro) return;
+  document.querySelectorAll('#proContent input, #proContent select, #proContent textarea').forEach(function(el){
+    if(el.type==='file') return;
+    if(el.name==='year') return;
+    if(el.closest('#freeBanner')) return;
+    el.setAttribute('data-ro-locked','1');
+    el.disabled = true;
+  });
+}
+function quitarBloqueoLectura(){
+  document.querySelectorAll('#proContent [data-ro-locked]').forEach(function(el){
+    el.disabled = false; el.removeAttribute('data-ro-locked');
+  });
+}
 function validarProGate(){
   var input = document.getElementById('proKeyGate');
   var email = input.value.trim();
   var errEl = document.getElementById('proGateError');
-  if(!email){errEl.style.color='#FCA5A5';errEl.textContent='Ingresa tu email PRO';return}
-  errEl.style.color='#A7F3D0';errEl.textContent='Verificando...';
+  if(!email){errEl.style.color='#dc4646';errEl.textContent='Ingresa tu email PRO';return}
+  errEl.style.color='var(--pri2)';errEl.textContent='Verificando...';
   input.disabled=true;
   exoPro.activate(email).then(function(ok){
     if(ok){
-      document.getElementById('proGate').classList.add('hidden');
-      document.getElementById('proContent').classList.remove('hidden');
-      var b=document.getElementById('proBadgeHeader');if(b)b.style.display='inline-block';
-      var bn=document.getElementById('btnNuevoCliente');if(bn)bn.style.display='inline-block';
-      if(typeof gtag!=='undefined'){
-        gtag('event','f210_pro_activated');
-        // TODO: eliminar evento legacy f210_express_pro_activated después de 2026-07-31 (transición rebrand Express → Pro)
-        gtag('event','f210_express_pro_activated');
-      }
-      inicializarDropZone();
-      inicializarSugerida();
-      verificarBienvenida(); // B.1 — muestra panel educativo si es primer acceso
-      recalcular();
-      cambiarTabF210('t210'); // arrancar en el paso 1 (cliente y exógena)
-      prefillClienteActivo();
-      renderClienteBar();
+      if(typeof gtag!=='undefined'){ gtag('event','f210_pro_activated'); gtag('event','f210_express_pro_activated'); }
+      cerrarPaywall();
+      entrarModoPro({ restaurar:true, tab:'t210' });
+      if(typeof exoToast!=='undefined') exoToast('PRO activado. Ya puedes editar, reconciliar y descargar.', 'success');
     } else {
-      errEl.style.color='#FCA5A5';
+      errEl.style.color='#dc4646';
       errEl.textContent='Email no encontrado o suscripción inactiva.';
     }
   }).catch(function(){
-    errEl.style.color='#FCA5A5';
+    errEl.style.color='#dc4646';
     errEl.textContent='Error de conexión. Intenta de nuevo.';
   }).finally(function(){input.disabled=false});
 }
 document.addEventListener('DOMContentLoaded', function(){
   renderClienteBar();
   exoPro.check().then(function(ok){
-    if(ok){
-      document.getElementById('proGate').classList.add('hidden');
-      document.getElementById('proContent').classList.remove('hidden');
-      var b=document.getElementById('proBadgeHeader');if(b)b.style.display='inline-block';
-      var bn=document.getElementById('btnNuevoCliente');if(bn)bn.style.display='inline-block';
-      migrarBorradorHuerfanoSiAplica();   // #3 adopta borrador sin cliente
-      restaurarBorrador();
-      inicializarDropZone();
-      inicializarSugerida();
-      verificarBienvenida(); // B.1 — muestra panel educativo si es primer acceso
-      recalcular();
-      cambiarTabF210(tabGuardadoOInicial()); // #7 retomar el último paso editado
-      prefillClienteActivo();
-    }
+    if(ok) entrarModoPro({ restaurar:true });
+    else   entrarModoGratis();
     renderClienteBar();
   });
   // Pills (radio activa)
@@ -1224,6 +1334,7 @@ function renderComparacionPatrimonial(){
   panel.innerHTML = html;
 }
 function skipExogena(){
+  if(gatePro('Capturar conceptos <strong>a mano</strong> (sin exógena, o para agregar lo no reportado a DIAN) es parte de PRO. La vista gratis parte del reporte de exógena.')) return;
   var hayReconciliacion = window.reconciliacionEstado &&
                           reconciliacionEstado.filas &&
                           reconciliacionEstado.filas.length > 0;
@@ -1379,7 +1490,7 @@ function procesarArchivoExogena(file){
       }
       var nReg = result.metadata.totalRegistros;
       if(typeof exoToast !== 'undefined'){
-        if(nReg > 0) exoToast('Exógena cargada: ' + nReg + ' registros (' + nivel + ' ' + result.metadata.confianza + '%) → Paso 2: revisa la reconciliación', 'success');
+        if(nReg > 0) exoToast('Exógena cargada: ' + nReg + ' registros (' + nivel + ' ' + result.metadata.confianza + '%) → ' + (window.__f210Pro ? 'Paso 2: revisa la reconciliación' : 'mira tu formulario 210 clasificado'), 'success');
         else {
           // Caso solo-topes: el MUISCA a veces exporta solo el resumen de Topes 1-5
           // (sin detalle por tercero). No fallar en silencio: explicar y mostrar los
@@ -1392,8 +1503,15 @@ function procesarArchivoExogena(file){
           }
         }
       }
-      // Guiar el flujo: con la exógena cargada, el siguiente paso es la reconciliación
-      if(nReg > 0) setTimeout(function(){ cambiarTabF210('texogena'); }, 900);
+      // Guiar el flujo: PRO → reconciliación (Paso 2); gratis → el 210 clasificado
+      // en vivo (Paso 4), que es el gancho. Reaplicar el bloqueo de lectura sobre
+      // los inputs recién creados (tabla de reconciliación, patrimonio, etc.).
+      if(!window.__f210Pro){
+        aplicarBloqueoLectura();
+        if(nReg > 0) setTimeout(function(){ cambiarTabF210('trevision'); }, 700);
+      } else if(nReg > 0){
+        setTimeout(function(){ cambiarTabF210('texogena'); }, 900);
+      }
       if(typeof gtag !== 'undefined') gtag('event','f210_pro_exogena_cargada', { registros: nReg, nivel: nivel });
     }).catch(function(err){
       console.error(err);
@@ -3284,6 +3402,7 @@ function restaurarBorrador(){
    canonicalización del estado + año + UVT del año + versión del motor —
    determinístico, NO incluye fecha de exportación ni datos cosméticos. */
 function exportarExcelAsesor(){
+  if(gatePro('Descargar el <strong>Excel papel de trabajo</strong> (borrador 210 oficial + memoria de cálculo + citas normativas) es parte de PRO.')) return;
   if(!ultimoResultado || !ultimoEstado){
     if(typeof exoToast !== 'undefined') exoToast('Llena los campos primero', 'error');
     return;
@@ -3524,6 +3643,13 @@ var TABS_F210 = {
   trevision:   ['cardReplica210', 'cardSugerida', 'cardLiquidacion']
 };
 function cambiarTabF210(tab){
+  // Modo gratis: Reconciliación (texogena) y Rentas por cédula (trentas) son PRO.
+  if(!window.__f210Pro && (tab==='texogena' || tab==='trentas')){
+    abrirPaywall(tab==='texogena'
+      ? 'La <strong>reconciliación de conceptos</strong> — reclasificar cada registro de la exógena a su cédula — es parte de PRO. En la vista gratis ves el 210 ya clasificado automáticamente; con PRO lo ajustas registro por registro.'
+      : 'Editar las <strong>rentas por cédula</strong> (deducciones, dependientes, INCRNGO, imputación fina) es parte de PRO. En la vista gratis ves el resultado clasificado; con PRO lo modificas.');
+    return;
+  }
   Object.keys(TABS_F210).forEach(function(t){
     TABS_F210[t].forEach(function(id){
       var el = document.getElementById(id);
@@ -3625,6 +3751,7 @@ var CASILLA_INPUT_210 = {
   28:'ded1PctFE', 131:'saldoFavorAnt', 132:'retenciones'
 };
 function replica210Edit(el){
+  if(gatePro('Editar el formulario 210 casilla por casilla es parte de PRO. En la vista gratis puedes ver el borrador prediligenciado; actívate para modificarlo y descargarlo.')){ recalcular(); return; }
   var wiz = document.getElementById(el.getAttribute('data-wiz'));
   if(!wiz) return;
   wiz.value = el.value;
@@ -3650,7 +3777,8 @@ function renderizarReplica210(){
   function edit(cas, val){
     var wizId = CASILLA_INPUT_210[cas];
     var v = nz(val);
-    return '<input class="p210-edit" inputmode="numeric" value="' + (v ? v.toLocaleString('es-CO') : '') + '" data-wiz="' + wizId + '" onchange="replica210Edit(this)" title="Editable — casilla ' + cas + '">';
+    var ro = window.__f210Pro ? '' : ' disabled title="Editable con PRO — casilla ' + cas + '"';
+    return '<input class="p210-edit" inputmode="numeric" value="' + (v ? v.toLocaleString('es-CO') : '') + '" data-wiz="' + wizId + '" onchange="replica210Edit(this)"' + (ro || (' title="Editable — casilla ' + cas + '"')) + '>';
   }
   // Ícono "de dónde salió" si la casilla tiene origen rastreable en la exógena.
   function origenIc(cas){
@@ -3748,10 +3876,16 @@ function renderizarReplica210(){
   if(nz(R.c137)) h += row('SALDO A FAVOR', 137, R.c137, 'res');
   if(!nz(R.c134) && !nz(R.c137)) h += row('Saldo', 134, 0, 'res');
   h += '</div>';
-  h += '<div style="font-size:.7rem;color:var(--muted);margin-top:6px;line-height:1.4">'
-     + '<span style="background:#FFFDE7;border-bottom:1px dashed #d4b500;padding:0 4px;color:#1a3c6e;font-weight:700">Amarillo</span> = editable (escribe aquí y recalcula) &middot; '
-     + '<span style="color:#2E7D32;font-weight:700">verde</span> = lo calcula el motor. '
-     + 'Edita cualquier casilla directamente sobre el formulario, como en el MUISCA. Las deducciones, dependientes e imputación fina están en las tarjetas de arriba. Descárgalo con <strong>Calcular y descargar Excel</strong>.</div>';
+  if(window.__f210Pro){
+    h += '<div style="font-size:.7rem;color:var(--muted);margin-top:6px;line-height:1.4">'
+       + '<span style="background:#FFFDE7;border-bottom:1px dashed #d4b500;padding:0 4px;color:#1a3c6e;font-weight:700">Amarillo</span> = editable (escribe aquí y recalcula) &middot; '
+       + '<span style="color:#2E7D32;font-weight:700">verde</span> = lo calcula el motor. '
+       + 'Edita cualquier casilla directamente sobre el formulario, como en el MUISCA. Las deducciones, dependientes e imputación fina están en las tarjetas de arriba. Descárgalo con <strong>Calcular y descargar Excel</strong>.</div>';
+  } else {
+    h += '<div class="ro-lock-note" style="margin-top:8px">'
+       + '<span>🔒</span><div><b>Vista previa en solo lectura.</b> Así clasifica tu declaración desde la exógena. Para editar casilla por casilla, reconciliar y descargar el Excel, activa PRO.</div>'
+       + '<button class="btn-unlock" onclick="abrirPaywall()">Desbloquear</button></div>';
+  }
   cont.innerHTML = h;
 }
 // ── Entregable para el cliente: borrador 210 + diagnóstico + planeación ──
@@ -3784,6 +3918,7 @@ function calcularRiesgos210(R, E, year, consBanco, aportesSS, actividadIva){
   return W;
 }
 function exportarEntregablePDF(){
+  if(gatePro('Generar el <strong>entregable PDF para el cliente</strong> es parte de PRO.')) return;
   if((!ultimoResultado || !ultimoEstado) && typeof recalcular==='function') recalcular();
   if(!ultimoResultado || !ultimoEstado){ if(typeof exoToast!=='undefined') exoToast('Llena los campos primero','error'); return; }
   if(typeof window.jspdf==='undefined'){ if(typeof exoToast!=='undefined') exoToast('No se cargó el generador de PDF','error'); return; }
