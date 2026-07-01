@@ -462,6 +462,14 @@ body.wsx .cifras-hero .live-row.big .val{font-size:1.28rem}
 body.wsx .cifras-hero .live-row.divider{margin-top:0}
 body.wsx .cifras-hero #lvSaldo{font-size:1.42rem!important}
 body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linear-gradient(90deg,#ecfdf5,#f8fafc)}
+/* ── Paneles sticky más altos que la pantalla: scroll interno en vez de quedarse cortados ──
+   Sin esto hay que bajar hasta el final de la página para poder ver lo último del panel. */
+@media(min-width:1081px){
+  body.wsx #f210Tabs{max-height:calc(100vh - 90px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding-right:2px}
+}
+@media(min-width:981px){
+  body.wsx .sidebar{max-height:calc(100vh - 90px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:2px 4px 12px 2px}
+}
 /* ── Móvil / tablet: pasos como grilla compacta 2×2 (la dropzone sube, el gancho manda) ── */
 @media(max-width:1080px){
   body.wsx #f210Tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;position:static}
