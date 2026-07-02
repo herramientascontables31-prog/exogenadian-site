@@ -34,7 +34,11 @@ gtag('config', 'G-S7SM6ST4CC');
 <style>
 :root{--bg:#f4f7fb;--card:#fff;--text:#22303f;--muted:#71809a;--pri:#2b567f;--pri2:#4285c4;--pri3:#eaf2fa;--green:#0d9f6e;--green2:#ddf6ec;--red:#dc4646;--amber:#d98b1f;--amber2:#fdf6e7;--border:#e8edf4;--radius:14px;--shadow:0 1px 2px rgba(20,33,61,.04),0 6px 20px -8px rgba(20,33,61,.08)}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+body{font-family:'DM Sans',sans-serif;color:var(--text);line-height:1.5;
+  /* Cuadrícula de papel de formulario: textura ambiental casi invisible */
+  background:radial-gradient(rgba(43,86,127,.05) 1px,transparent 1px) 0 0/22px 22px,var(--bg)}
+/* Accesibilidad: foco visible consistente en toda la herramienta */
+:focus-visible{outline:2px solid var(--pri2);outline-offset:2px;border-radius:4px}
 .container{max-width:1280px;margin:0 auto;padding:20px}
 .header{background:linear-gradient(135deg,#3a6693 0%,#4285c4 100%);padding:24px 28px;border-radius:16px;margin-bottom:20px;color:#fff;display:flex;align-items:center;justify-content:space-between}
 .header h1{font-size:1.4rem;font-weight:700;display:flex;align-items:center;gap:10px}
@@ -395,7 +399,7 @@ body.wsx .skip-link,
 body.wsx > footer,
 body.wsx .exo-announce,
 body.wsx .pro-status-banner{display:none!important}
-body.wsx{background:#eef1f5;padding-top:0!important}
+body.wsx{background:radial-gradient(rgba(43,86,127,.05) 1px,transparent 1px) 0 0/22px 22px,#f2f5f9;padding-top:0!important}
 body.wsx .container{max-width:1440px;padding:0 22px 40px}
 /* Selector de cliente / contexto: sub-barra limpia bajo el header */
 body.wsx #clienteContextBar{border:1px solid var(--border);border-left:1px solid var(--border);border-radius:12px;background:#fff}
@@ -470,6 +474,42 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
 @media(min-width:981px){
   body.wsx .sidebar{max-height:calc(100vh - 90px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:2px 4px 12px 2px}
 }
+/* ══ FIRMA VISUAL: el sello de tinta + la secuencia del resultado ══
+   En este oficio el artefacto es el documento sellado. El sello marca honesto
+   el estado (VISTA PREVIA / BORRADOR) y es EL momento memorable del gancho. */
+.rh-stamp{position:absolute;top:10px;right:18px;pointer-events:none;user-select:none;
+  font-weight:800;font-size:.78rem;letter-spacing:2.5px;text-transform:uppercase;
+  color:rgba(43,86,127,.34);border:2.5px solid rgba(43,86,127,.30);border-radius:7px;
+  padding:5px 12px 4px;transform:rotate(-6deg);
+  -webkit-mask-image:radial-gradient(circle at 30% 60%,#000 55%,rgba(0,0,0,.72));
+  mask-image:radial-gradient(circle at 30% 60%,#000 55%,rgba(0,0,0,.72))}
+.resultado-hero{position:relative;overflow:visible}
+.resultado-hero .rh-num{font-variant-numeric:tabular-nums}
+@media(max-width:640px){.rh-stamp{font-size:.64rem;padding:4px 9px 3px;right:10px;top:8px}}
+/* Una sola secuencia orquestada: entrada del estudio + estampado del sello */
+@media (prefers-reduced-motion: no-preference){
+  @keyframes wsxRise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  @keyframes selloCae{0%{opacity:0;transform:rotate(-6deg) scale(1.9)}62%{opacity:1;transform:rotate(-6deg) scale(.94)}82%{transform:rotate(-6deg) scale(1.04)}100%{transform:rotate(-6deg) scale(1)}}
+  body.anim-in .wsx-top{animation:wsxRise .4s cubic-bezier(.22,.9,.3,1) both}
+  body.anim-in #freeBanner{animation:wsxRise .45s .06s cubic-bezier(.22,.9,.3,1) both}
+  body.anim-in #f210Tabs{animation:wsxRise .45s .12s cubic-bezier(.22,.9,.3,1) both}
+  body.anim-in .express-grid{animation:wsxRise .5s .18s cubic-bezier(.22,.9,.3,1) both}
+  .resultado-hero.estampar{animation:wsxRise .4s cubic-bezier(.22,.9,.3,1) both}
+  .resultado-hero.estampar .rh-stamp{animation:selloCae .55s .55s cubic-bezier(.3,1.2,.4,1) both}
+  #lvSaldo.tick{animation:saldoTick .5s ease-out}
+  @keyframes saldoTick{0%{transform:scale(1)}35%{transform:scale(1.07)}100%{transform:scale(1)}}
+  #lvSaldo{display:inline-block;transform-origin:right center}
+}
+/* ── Dropzone como portada: la puerta de entrada merece artesanía ── */
+.dropzone{padding:36px 24px 30px;border:1.5px dashed #c5d6ea;border-radius:16px;
+  background:linear-gradient(180deg,#fbfdff,#f5f9fe);transition:border-color .18s,box-shadow .18s,transform .18s,background .18s}
+.dropzone:hover,.dropzone:focus{border-color:var(--pri2);background:#f3f8ff;transform:translateY(-2px);
+  box-shadow:0 14px 34px -20px rgba(43,86,127,.45);outline:none}
+.dropzone.dragover{border-color:var(--pri2);border-style:solid;background:#eef6ff;transform:scale(1.012);
+  box-shadow:0 0 0 5px rgba(66,133,196,.16),0 18px 40px -20px rgba(43,86,127,.5)}
+.dz-art{display:block;margin:0 auto 12px;color:var(--pri2)}
+.dropzone:hover .dz-art .dz-flecha,.dropzone.dragover .dz-art .dz-flecha{transform:translateY(3px)}
+.dz-art .dz-flecha{transition:transform .2s cubic-bezier(.3,1.4,.4,1)}
 /* ── Móvil / tablet: pasos como grilla compacta 2×2 (la dropzone sube, el gancho manda) ── */
 @media(max-width:1080px){
   body.wsx #f210Tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;position:static}
@@ -518,7 +558,7 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
 })();
 </script></head>
 <body class="wsx">
-<div class="exo-loading hidden" id="loadingOverlay"><div class="spinner"></div><div>Procesando...</div></div>
+<div class="exo-loading hidden" id="loadingOverlay"><div class="spinner"></div><div id="loadingTxt">Procesando…</div></div>
 <div id="origenModal" onclick="if(event.target===this)cerrarOrigen()">
   <div class="origen-box">
     <div class="origen-box-hd"><h4 id="origenTitulo">De dónde salió</h4><button onclick="cerrarOrigen()" title="Cerrar">&times;</button></div>
@@ -624,17 +664,24 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
         <div class="card" id="cardExogena">
           <div class="section-title"><span class="num">2</span> Cargar reporte de información exógena DIAN <span class="hint" style="font-weight:400;color:var(--muted);font-size:.78rem">(descargado del MUISCA)</span> <button class="icon-ayuda" onclick="mostrarAyuda('descargaMUISCA')" title="¿Cómo descargarlo del MUISCA?">ⓘ</button></div>
           <div id="exogenaDropZone" class="dropzone" tabindex="0" role="button" aria-label="Cargar reporte exógena DIAN del MUISCA">
-            <div class="dropzone-icon">&#128228;</div>
-            <strong>Arrastra el archivo <code style="background:#fff;padding:1px 6px;border-radius:3px;border:1px solid var(--border);font-size:.86em">reporteExogena2024_*.xlsx</code> aquí</strong>
-            <div style="margin-top:4px;font-size:.78rem">o haz clic para seleccionarlo</div>
-            <div style="margin-top:8px;font-size:.74rem;color:var(--muted);line-height:1.5">
-              📍 En MUISCA: <strong>Consultas</strong> → <strong>Información reportada por terceros</strong> → <strong>Año {año gravable}</strong> → descargar Excel.<br>
-              <a href="javascript:void(0)" onclick="mostrarAyuda('descargaMUISCA')" style="color:var(--pri);text-decoration:underline;font-size:.74rem">¿Cómo descargarlo paso a paso?</a>
+            <svg class="dz-art" width="88" height="64" viewBox="0 0 88 64" fill="none" aria-hidden="true">
+              <rect x="3" y="3" width="34" height="44" rx="4" stroke="currentColor" stroke-width="2.2"/>
+              <path d="M9 13h22M9 20h22M9 27h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" opacity=".55"/>
+              <g class="dz-flecha"><path d="M44 25h14m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+              <rect x="52" y="9" width="33" height="46" rx="4" stroke="currentColor" stroke-width="2.2"/>
+              <path d="M52 21h33M52 33h33M52 45h33M63 9v46M74 9v46" stroke="currentColor" stroke-width="1.6" opacity=".45"/>
+              <path d="M56 15.5h4M56 27h4M77 27.5l2 2 3.5-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".8"/>
+            </svg>
+            <strong>Arrastra tu reporte de exógena y mira tu 210 armado</strong>
+            <div style="margin-top:4px;font-size:.8rem"><code style="background:#fff;padding:1px 7px;border-radius:4px;border:1px solid var(--border);font-size:.9em">reporteExogena*.xlsx</code> &nbsp;·&nbsp; o haz clic para buscarlo</div>
+            <div style="margin-top:10px;font-size:.74rem;color:var(--muted);line-height:1.5">
+              Se descarga del MUISCA: <b style="color:var(--pri)">Consultas → Información reportada por terceros</b>.
+              <a href="javascript:void(0)" onclick="event.stopPropagation();mostrarAyuda('descargaMUISCA')" style="color:var(--pri);text-decoration:underline">Guía paso a paso</a>
             </div>
           </div>
-          <div style="margin-top:10px;text-align:center">
-            <button class="btn btn-outline" id="btnSkipExogena" onclick="skipExogena()" style="font-size:.82rem">Saltar carga manual &rarr;</button>
-            <span style="font-size:.75rem;color:var(--muted);margin-left:10px">Útil si no tienes el reporte exógena (cliente nuevo) <strong>o</strong> si necesitas agregar conceptos no reportados a DIAN después de cargar.</span>
+          <div style="margin-top:12px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <button class="btn btn-outline" id="btnSkipExogena" onclick="skipExogena()" style="font-size:.82rem;white-space:nowrap">Capturar a mano &rarr;</button>
+            <span style="flex:1;min-width:220px;font-size:.75rem;color:var(--muted);line-height:1.5">Si no tienes el reporte (cliente nuevo) o quieres agregar conceptos no reportados a DIAN después de cargar.</span>
           </div>
         </div>
         <div class="card tab-off" id="cardReconVacio" style="text-align:center;padding:28px 18px">
@@ -1131,6 +1178,7 @@ window.__f210Pro = false;
 function entrarModoPro(opts){
   opts = opts || {};
   window.__f210Pro = true;
+  document.body.classList.add('anim-in'); // secuencia de entrada del estudio (una vez)
   document.body.classList.remove('f210-free');
   document.getElementById('proContent').classList.remove('hidden');
   var fb=document.getElementById('freeBanner'); if(fb) fb.classList.add('hidden');
@@ -1150,6 +1198,7 @@ function entrarModoPro(opts){
 }
 function entrarModoGratis(){
   window.__f210Pro = false;
+  document.body.classList.add('anim-in'); // secuencia de entrada del estudio (una vez)
   document.body.classList.add('f210-free');
   document.getElementById('proContent').classList.remove('hidden');
   var fb=document.getElementById('freeBanner'); if(fb) fb.classList.remove('hidden');
@@ -1233,6 +1282,19 @@ document.addEventListener('DOMContentLoaded', function(){
     else   entrarModoGratis();
     renderClienteBar();
   });
+  // El saldo del panel late suavemente cuando cambia (solo ese valor: no
+  // parpadear todo el panel en cada tecla). Respeta prefers-reduced-motion vía CSS.
+  try{
+    var lvS = document.getElementById('lvSaldo');
+    if(lvS && window.MutationObserver){
+      var ultimoSaldo = lvS.textContent;
+      new MutationObserver(function(){
+        if(lvS.textContent === ultimoSaldo) return;
+        ultimoSaldo = lvS.textContent;
+        lvS.classList.remove('tick'); void lvS.offsetWidth; lvS.classList.add('tick');
+      }).observe(lvS, { characterData:true, childList:true, subtree:true });
+    }
+  }catch(_){}
   // Pills (radio activa)
   document.querySelectorAll('.radio-pill input').forEach(function(r){
     r.addEventListener('change', function(){
@@ -1554,6 +1616,7 @@ function procesarArchivoExogena(file){
     return;
   }
   document.getElementById('loadingOverlay').classList.remove('hidden');
+  var lt = document.getElementById('loadingTxt'); if(lt) lt.textContent = 'Leyendo tu exógena y armando el 210…';
   var reader = new FileReader();
   reader.onload = function(e){
     cargarLibsExcel().then(function(){ return leerExcelCompat(e.target.result); }).then(function(wb){
@@ -1613,6 +1676,7 @@ function procesarArchivoExogena(file){
       // Guiar el flujo: PRO → reconciliación (Paso 2); gratis → el 210 clasificado
       // en vivo (Paso 4), que es el gancho. Reaplicar el bloqueo de lectura sobre
       // los inputs recién creados (tabla de reconciliación, patrimonio, etc.).
+      if(nReg > 0) dispararEstampado(); // el momento del gancho: conteo + sello, una vez
       if(!window.__f210Pro){
         aplicarBloqueoLectura();
         if(nReg > 0) setTimeout(function(){ cambiarTabF210('trevision'); }, 350);
@@ -2859,7 +2923,7 @@ function renderResultadoHero(){
   var el = document.getElementById('resultadoHero');
   if(!el) return;
   var hayExogena = !!(window.ultimoExogenaResult && ultimoExogenaResult.metadata && ultimoExogenaResult.metadata.totalRegistros > 0);
-  if(!hayExogena || !ultimoResultado || !ultimoResultado.renglones){ el.classList.add('hidden'); return; }
+  if(!hayExogena || !ultimoResultado || !ultimoResultado.renglones){ el.classList.add('hidden'); delete el.dataset.estampado; return; }
   var R = ultimoResultado.renglones;
   var pagar = Math.max(0, Math.round(R.c134 || 0)), favor = Math.max(0, Math.round(R.c137 || 0));
   var $ = function(n){ return '$' + Math.round(n || 0).toLocaleString('es-CO'); };
@@ -2872,8 +2936,9 @@ function renderResultadoHero(){
     '<div class="rh-chip">Registros exógena<b>' + nReg + '</b></div>' +
     '<div class="rh-chip">Impuesto neto (c126)<b>' + $(R.c126) + '</b></div>' +
     '<div class="rh-chip">Retenciones (c132)<b>' + $(R.c132) + '</b></div>';
-  var h = '<div class="rh-main"><div class="rh-lbl">AG ' + year + ' &middot; clasificado desde la ex&oacute;gena DIAN</div>' +
-          '<div class="rh-num">' + (num > 0 ? $(num) : '$0') + '</div>' +
+  var h = '<div class="rh-stamp">' + (window.__f210Pro ? 'Borrador' : 'Vista previa') + '</div>' +
+          '<div class="rh-main"><div class="rh-lbl">AG ' + year + ' &middot; clasificado desde la ex&oacute;gena DIAN</div>' +
+          '<div class="rh-num" data-valor="' + num + '">' + (num > 0 ? $(num) : '$0') + '</div>' +
           '<div class="rh-sub">' + lbl + ' &middot; estimaci&oacute;n autom&aacute;tica, antes de deducciones personales</div></div>' +
           '<div class="rh-chips">' + chips + '</div>';
   if(!window.__f210Pro){
@@ -2884,6 +2949,31 @@ function renderResultadoHero(){
   }
   el.className = 'resultado-hero ' + (esFavor ? 'favor' : 'pagar');
   el.innerHTML = h;
+}
+/* El momento del gancho: al TERMINAR de procesar la exógena (no en cada
+   recalcular del burst), el número cuenta hasta el saldo y el sello se estampa.
+   Una sola vez por carga; al editar después, el hero actualiza en seco. */
+function dispararEstampado(){
+  var el = document.getElementById('resultadoHero');
+  if(!el || el.classList.contains('hidden') || el.dataset.estampado === '1') return;
+  el.dataset.estampado = '1';
+  el.classList.add('estampar');
+  var n = el.querySelector('.rh-num');
+  if(n) animarConteo(n, parseInt(n.getAttribute('data-valor'), 10) || 0);
+}
+/* Cuenta de 0 al saldo en ~850ms (ease-out cúbico). Con reduced-motion va directo. */
+function animarConteo(nEl, objetivo){
+  if(!nEl) return;
+  try{ if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return; }catch(_){}
+  var t0 = null, dur = 850;
+  function frame(t){
+    if(!nEl.isConnected) return;             // el hero se re-renderizó: dejar el valor final
+    if(t0 === null) t0 = t;
+    var p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+    nEl.textContent = '$' + Math.round(objetivo * e).toLocaleString('es-CO');
+    if(p < 1) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
 }
 /* Desglose de bienes del patrimonio (c29) leídos de la exógena: vehículos, inmuebles,
    cuentas, inversiones… para que el contador verifique cada activo a 31-dic. */
