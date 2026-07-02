@@ -174,6 +174,9 @@ body.f210-free #cardPagosPrevios,body.f210-free #cardCertificado{display:none!im
 .resultado-hero .rh-cta{background:var(--pri);color:#fff;border:none;padding:11px 20px;border-radius:11px;font-size:.86rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s;box-shadow:0 4px 14px -5px rgba(43,86,127,.5);white-space:nowrap}
 .resultado-hero .rh-cta:hover{background:var(--pri2);transform:translateY(-1px)}
 .resultado-hero .rh-hint{flex-basis:100%;font-size:.76rem;color:#6d7d95;background:#f6f9fc;border-left:3px solid var(--pri2);border-radius:6px;padding:7px 11px;line-height:1.5;margin-top:2px}
+.resultado-hero .rh-guia{flex-basis:100%;font-size:.76rem;color:#7a6a3f;background:#fdf9ef;border-left:3px solid #d9b25f;border-radius:6px;padding:7px 11px;line-height:1.5;margin-top:2px}
+.resultado-hero .rh-guia b{color:#5f5232}
+.resultado-hero .rh-guia a{color:#8a6d2f;font-weight:700;text-decoration:underline}
 @media(max-width:640px){.resultado-hero{padding:15px 16px}.resultado-hero .rh-cta{width:100%}}
 /* (las reglas móviles de los pasos viven al final del skin wsx para ganar la cascada) */
 /* Inputs deshabilitados: look de solo-lectura calmado, no "roto" */
@@ -726,8 +729,8 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
         <div class="card" id="cardCertificado">
           <div class="section-title"><span class="num">3b</span> Certificado de Ingresos y Retenciones (opcional)</div>
           <p style="font-size:.82rem;color:var(--muted);margin:0 0 8px">Sube el <strong>Certificado de Ingresos y Retenciones (Formulario 220)</strong> del empleador en PDF y prellena la cédula de trabajo. El archivo se procesa <strong>en tu navegador</strong> (no se sube a ningún servidor).</p>
-          <label for="certFile" class="btn-sec" style="display:inline-block;cursor:pointer">&#128206; Elegir certificado PDF</label>
-          <input id="certFile" type="file" accept="application/pdf,.pdf" style="display:none">
+          <label for="certFile" class="btn-sec" style="display:inline-block;cursor:pointer">&#128206; Elegir certificado (PDF o foto)</label>
+          <input id="certFile" type="file" accept="application/pdf,.pdf,image/*,.jpg,.jpeg,.png,.webp" style="display:none">
           <div id="certResultado" style="margin-top:10px"></div>
         </div>
         <div class="card" id="cardDeclarante">
@@ -786,8 +789,8 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
           <div class="section-title"><span class="num">6b</span> Declaración del año anterior y comparación patrimonial <span class="hint" style="font-weight:400;color:var(--muted);font-size:.78rem">(sube el PDF — recomendado)</span></div>
           <div style="font-size:.78rem;color:var(--muted);margin-bottom:8px">Si tienes los datos del año anterior, las hojas <strong>4 (validaciones)</strong>, <strong>7 (liquidación)</strong> y comparativos del Excel se enriquecen significativamente: aparece la conciliación patrimonial Art. 236-237 ET y el anticipo Art. 807 con opción 2 (promedio).</div>
           <div style="margin-bottom:10px;padding:8px 10px;border:1px dashed var(--border);border-radius:8px;background:#fafbff">
-            <label for="declPrevFile" class="btn-sec" style="display:inline-block;cursor:pointer;font-size:.8rem">&#128206; Importar el 210 del año anterior (PDF)</label>
-            <input id="declPrevFile" type="file" accept="application/pdf,.pdf" style="display:none">
+            <label for="declPrevFile" class="btn-sec" style="display:inline-block;cursor:pointer;font-size:.8rem">&#128206; Importar el 210 del año anterior (PDF, escaneo o foto)</label>
+            <input id="declPrevFile" type="file" accept="application/pdf,.pdf,image/*,.jpg,.jpeg,.png,.webp" style="display:none">
             <span style="font-size:.7rem;color:var(--muted);margin-left:6px">Se procesa en tu navegador. Tú confirmas qué monto es cada casilla.</span>
             <div id="declPrevResultado" style="margin-top:8px"></div>
           </div>
@@ -1149,7 +1152,7 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
 <script src="shared/optimizer-210.js?v=e353e2c8"></script>
 <script src="shared/advisor-210.js?v=7db1f6f7"></script>
 <script src="shared/cert-parser-210.js?v=bf1e7ff8"></script>
-<script src="shared/pdf-lines.js?v=c4030a51"></script>
+<script src="shared/pdf-lines.js?v=e233a305"></script>
 <script src="shared/cert-ui-210.js?v=ad66b035"></script>
 <script src="shared/vencimientos-pn.js?v=99caf5fe"></script>
 <script src="shared/beneficio-auditoria.js?v=72c01703"></script>
@@ -1161,7 +1164,7 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
 <script src="shared/sugerida-parser-210.js?v=34d26f6a"></script>
 <script src="shared/canonicalize-inputs.js?v=5fe6d4a7"></script>
 <script src="shared/excel-papel-trabajo.js?v=4d3e1c5b"></script>
-<script src="shared/ocr-pdf.js?v=06fa2f17"></script>
+<script src="shared/ocr-pdf.js?v=e91567a8"></script>
 <script src="shared/agente-preclasificador-pn.js?v=badbfce6"></script>
 <script src="shared/certificados-renta-pn.js?v=bd52b9d2"></script>
 <script>
@@ -2992,6 +2995,9 @@ function renderResultadoHero(){
       h += '<div class="rh-hint">💡 Este saldo suele <b>bajar</b> al aplicar deducciones personales (dependientes, intereses de vivienda, prepagada, AFC) — eso se ajusta con PRO, casilla por casilla.</div>';
     }
   }
+  // Siempre visible (gratis y PRO): la exógena es GUÍA, no verdad. La DIAN la
+  // actualiza y no lo trae todo — el cierre profesional es contra soportes.
+  h += '<div class="rh-guia">⚖️ <b>Esto es una guía, no la declaración final.</b> La DIAN actualiza la exógena y no siempre lo trae todo. Pídele los soportes al cliente y verifica contra ellos — <a href="renta-personas-naturales.html#carta">genera la carta de solicitud →</a></div>';
   el.className = 'resultado-hero ' + (esFavor ? 'favor' : 'pagar');
   el.innerHTML = h;
 }

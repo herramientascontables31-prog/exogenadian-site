@@ -49,6 +49,11 @@
      leerlo con Tesseract vía ocr-pdf.js — solo se descarga si hace falta.
      El contrato no cambia: resuelve con las líneas, vengan de donde vengan. */
   function extraerConOcr(file){
+    // Fotos/imágenes (jpg del celular, capturas): van directo al OCR — pdf.js no las lee.
+    if(global.ocrPdf && global.ocrPdf.esImagen && global.ocrPdf.esImagen(file)){
+      if(typeof global.exoToast === 'function') global.exoToast('Leyendo la foto con OCR — puede tardar un momento la primera vez…', 'info');
+      return global.ocrPdf.extraerLineas(file);
+    }
     return extraer(file).then(function(lineas){
       var sinTexto = lineas.join('').replace(/\s+/g,'').length < 40;
       if(!sinTexto || !global.ocrPdf) return lineas;
