@@ -168,7 +168,7 @@ body.f210-free #cardPagosPrevios,body.f210-free #cardCertificado{display:none!im
 .resultado-hero.pagar .rh-num{color:#c04747}
 .resultado-hero.favor .rh-num{color:#0d9f6e}
 .resultado-hero .rh-sub{font-size:.78rem;color:var(--muted);margin-top:3px}
-.resultado-hero .rh-chips{display:flex;gap:8px;flex-wrap:wrap}
+.resultado-hero .rh-chips{display:flex;gap:8px;flex-wrap:wrap;min-width:0}
 .resultado-hero .rh-chip{background:#f6f9fc;border:1px solid var(--border);border-radius:10px;padding:7px 12px;font-size:.74rem;color:var(--muted)}
 .resultado-hero .rh-chip b{display:block;font-family:'JetBrains Mono',monospace;font-size:.88rem;color:var(--text);font-weight:700}
 .resultado-hero .rh-cta{background:var(--pri);color:#fff;border:none;padding:11px 20px;border-radius:11px;font-size:.86rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s;box-shadow:0 4px 14px -5px rgba(43,86,127,.5);white-space:nowrap}
@@ -520,6 +520,34 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
   body.wsx .wsx-side-sep{grid-column:1/-1;padding:8px 10px 0}
   body.wsx .wsx-side-link{padding:8px 10px;font-size:.78rem;gap:8px}
   body.wsx .wsx-side-link .wsx-ico{width:22px;height:22px;flex-basis:22px;font-size:.8rem}
+}
+/* ── Móvil: aire real. Menos padding lateral, y la réplica del 210 SCROLLEA
+      horizontal en vez de aplastar los números unos sobre otros. ── */
+@media(max-width:680px){
+  .p210-cg{overflow-x:auto;grid-template-columns:minmax(112px,1.2fr) repeat(4,minmax(96px,1fr));font-size:10px;
+    -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:thin}
+  .p210-cr .cc{font-size:10px}
+  .p210-cr .cl{font-size:9.5px}
+}
+@media(max-width:640px){
+  body.wsx .container{padding:0 12px 34px}
+  /* Ningún hijo del grid puede imponer un mínimo mayor que la pantalla */
+  body.wsx #proContent>*{min-width:0;max-width:100%}
+  body.wsx .f210-tab{white-space:normal}
+  body.wsx .wsx-top{padding:9px 14px;margin:0 -12px 12px;gap:10px}
+  body.wsx .card{padding:14px 12px}
+  body.wsx .subcard{padding:10px 10px}
+  .field-grid{gap:10px 10px}
+  .resultado-hero{padding:16px 13px;gap:12px}
+  /* El sello se posa medio afuera de la esquina (no choca con el texto) */
+  .rh-stamp{top:-12px;right:10px;background:rgba(255,255,255,.9);box-shadow:0 3px 10px rgba(20,33,61,.09)}
+  .resultado-hero .rh-lbl{padding-right:0}
+  .exogena-summary .totales{grid-template-columns:1fr 1fr}
+  .recon-actions{gap:6px}
+  .btn{padding:10px 16px}
+  .btn-success{width:100%;justify-content:center;padding:13px 18px;font-size:.92rem}
+  /* Botones de descarga: apilados a lo ancho, sin scroll lateral en la card */
+  #cardLiquidacion .btn{width:100%;margin-left:0!important;justify-content:center;white-space:normal;text-align:center}
 }
 </style>
 <script async src="shared/error-tracker.js?v=dd1f7f1d"></script><style id="exo-loading-css">
@@ -1636,8 +1664,9 @@ function procesarArchivoExogena(file){
       cargarReconciliacionDesdeExogena(result);
       // Auto-aplicar lo que el parser clasificó con confianza: el usuario ve el
       // wizard ya prediligenciado y ajusta en la tabla (mismo patrón del F110).
+      // Silencioso: el toast de "exógena cargada" ya lo cuenta (menos ruido en móvil).
       if(nivel === 'N1' || nivel === 'N2'){
-        aplicarReconciliacionAlWizard();
+        aplicarReconciliacionAlWizard(true);
       }
       // Prediligenciar patrimonio (R29/R30) y retenciones (R132): la reconciliación
       // solo cubre cédulas de ingreso y estos renglones quedaban en cero.
@@ -2521,7 +2550,7 @@ function reconAceptarTodo(){
   }
   aplicarReconciliacionAlWizard();
 }
-function aplicarReconciliacionAlWizard(){
+function aplicarReconciliacionAlWizard(silencioso){
   // Acumular por inputId
   var acums = {};
   CEDULAS_OPCIONES.forEach(function(o){ if(o.implementada && o.inputId) acums[o.inputId] = 0; });
@@ -2556,7 +2585,7 @@ function aplicarReconciliacionAlWizard(){
   reconciliacionEstado.retencionTotal = retencionTotal;
   reconciliacionEstado.aplicada = true;
   if(ultimoExogenaResult) ultimoExogenaResult._reconciliacionAplicada = true;
-  if(typeof exoToast !== 'undefined') exoToast('Reconciliación aplicada · formulario prediligenciado', 'success');
+  if(!silencioso && typeof exoToast !== 'undefined') exoToast('Reconciliación aplicada · formulario prediligenciado', 'success');
   if(typeof gtag !== 'undefined') gtag('event','f210_pro_reconciliacion_aplicada');
   renderizarTablaReconciliacion();
   recalcular();
