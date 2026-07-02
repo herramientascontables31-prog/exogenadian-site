@@ -434,7 +434,7 @@ body.wsx .foot{grid-column:1/-1}
 @media(max-width:1080px){body.wsx #proContent{grid-template-columns:1fr}}
 /* ── Sidebar de pasos (reusa los botones .f210-tab existentes) ── */
 body.wsx #f210Tabs{display:flex;flex-direction:column;gap:6px;margin:0;border:none;position:sticky;top:74px}
-body.wsx #f210Tabs::before{content:"PASOS";display:block;font-size:.67rem;font-weight:800;letter-spacing:1px;color:#94a3b8;padding:2px 10px 8px}
+/* Eyebrow "PASOS" retirado (jul-2026): la nav ahora es agrupada, no una secuencia lineal. */
 body.wsx .f210-tab{width:100%;justify-content:flex-start;text-align:left;gap:11px;padding:12px 14px;border-radius:12px;
   background:#fff;border:1px solid var(--border);color:#475569;font-size:.9rem;font-weight:600;position:relative;line-height:1.25;
   border-bottom:1px solid var(--border);box-shadow:0 1px 2px rgba(0,0,0,.03)}
@@ -447,6 +447,17 @@ body.wsx .f210-tab.active{background:linear-gradient(135deg,#2b567f,#33628f);col
 body.wsx .f210-tab.active .wsx-ico{background:rgba(255,255,255,.18);color:#fff}
 body.wsx .f210-tab.active .wsx-lbl small{color:rgba(255,255,255,.72)}
 body.wsx .f210-tab .tab-dot{position:absolute;top:11px;right:11px;width:8px;height:8px;background:#f59e0b}
+body.wsx .f210-tab .tab-badge{margin-left:auto;font-size:.72rem;font-weight:700;padding:1px 7px;border-radius:99px;background:var(--pri3);color:var(--pri)}
+body.wsx .f210-tab .tab-badge:empty{display:none}
+body.wsx .f210-tab.active .tab-badge{background:rgba(255,255,255,.22);color:#fff}
+/* ── Vista enfocada de una subcédula dentro de Cédula General (Deventia: una cédula por pantalla) ── */
+#cardCedulaGeneral[data-focus] #cgIntro{display:none}
+#cardCedulaGeneral[data-focus="trabajo"] > .subcard:not(#subTrabajo){display:none!important}
+#cardCedulaGeneral[data-focus="honorarios"] > .subcard:not(#subHonorarios){display:none!important}
+#cardCedulaGeneral[data-focus="capital"] > .subcard:not(#subCapital){display:none!important}
+#cardCedulaGeneral[data-focus="nolaboral"] > .subcard:not(#subNoLaboral){display:none!important}
+#cardCedulaGeneral[data-focus] > .subcard{border:none;background:transparent;padding:0;margin-top:2px}
+#cardCedulaGeneral[data-focus] > .subcard > .sub-title{display:none}
 /* ── Secciones del estudio en el sidebar (clientes, cartas, tarjeta, aprende) ── */
 body.wsx .wsx-side-sep{font-size:.67rem;font-weight:800;letter-spacing:1px;color:#94a3b8;text-transform:uppercase;padding:12px 10px 2px}
 body.wsx .wsx-side-link{display:flex;align-items:center;gap:11px;padding:10px 14px;border-radius:12px;background:transparent;border:1px solid transparent;color:#5a6b84;font-size:.86rem;font-weight:600;text-decoration:none;transition:.15s;line-height:1.25}
@@ -681,10 +692,19 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
       </div>
     </div>
     <div class="f210-tabs" id="f210Tabs">
-      <button class="f210-tab active" data-tab="t210" onclick="cambiarTabF210('t210')"><span class="wsx-ico">🚀</span><span class="wsx-lbl"><small>Paso 1</small>Cliente y exógena</span></button>
-      <button class="f210-tab" data-tab="texogena" onclick="cambiarTabF210('texogena')"><span class="wsx-ico">⚖️</span><span class="wsx-lbl"><small>Paso 2</small>Reconciliación</span></button>
-      <button class="f210-tab" data-tab="trentas" onclick="cambiarTabF210('trentas')"><span class="wsx-ico">💰</span><span class="wsx-lbl"><small>Paso 3</small>Rentas por cédula</span><span class="tab-dot"></span></button>
-      <button class="f210-tab" data-tab="trevision" onclick="cambiarTabF210('trevision')"><span class="wsx-ico">📊</span><span class="wsx-lbl"><small>Paso 4</small>Formulario 210 y descarga</span></button>
+      <button class="f210-tab active" data-tab="t210" onclick="cambiarTabF210('t210')"><span class="wsx-ico">🚀</span><span class="wsx-lbl">Punto de partida</span></button>
+      <button class="f210-tab" data-tab="texogena" onclick="cambiarTabF210('texogena')"><span class="wsx-ico">⚖️</span><span class="wsx-lbl">Reconciliación</span><span class="tab-dot"></span></button>
+      <button class="f210-tab" data-tab="trevision" onclick="cambiarTabF210('trevision')"><span class="wsx-ico">📊</span><span class="wsx-lbl">Formulario 210</span></button>
+      <div class="wsx-side-sep">Cédulas</div>
+      <button class="f210-tab" data-tab="ctrabajo" onclick="cambiarTabF210('ctrabajo')"><span class="wsx-ico">💼</span><span class="wsx-lbl">Trabajo</span><span class="tab-badge" id="badge-ctrabajo"></span></button>
+      <button class="f210-tab" data-tab="chonorarios" onclick="cambiarTabF210('chonorarios')"><span class="wsx-ico">🧰</span><span class="wsx-lbl">Honorarios</span><span class="tab-badge" id="badge-chonorarios"></span></button>
+      <button class="f210-tab" data-tab="ccapital" onclick="cambiarTabF210('ccapital')"><span class="wsx-ico">🏠</span><span class="wsx-lbl">Capital</span><span class="tab-badge" id="badge-ccapital"></span></button>
+      <button class="f210-tab" data-tab="cnolaboral" onclick="cambiarTabF210('cnolaboral')"><span class="wsx-ico">📋</span><span class="wsx-lbl">No laborales</span><span class="tab-badge" id="badge-cnolaboral"></span></button>
+      <button class="f210-tab" data-tab="cpensiones" onclick="cambiarTabF210('cpensiones')"><span class="wsx-ico">👵</span><span class="wsx-lbl">Pensiones</span><span class="tab-badge" id="badge-cpensiones"></span></button>
+      <button class="f210-tab" data-tab="cdividendos" onclick="cambiarTabF210('cdividendos')"><span class="wsx-ico">📈</span><span class="wsx-lbl">Dividendos</span><span class="tab-badge" id="badge-cdividendos"></span></button>
+      <button class="f210-tab" data-tab="cgo" onclick="cambiarTabF210('cgo')"><span class="wsx-ico">🎁</span><span class="wsx-lbl">Gan. ocasionales</span><span class="tab-badge" id="badge-cgo"></span></button>
+      <div class="wsx-side-sep">Declaración</div>
+      <button class="f210-tab" data-tab="cpatrimonio" onclick="cambiarTabF210('cpatrimonio')"><span class="wsx-ico">🏦</span><span class="wsx-lbl">Patrimonio</span></button>
       <div class="wsx-side-sep">Estudio</div>
       <a class="wsx-side-link" href="renta-personas-naturales.html#cli"><span class="wsx-ico">👥</span> Mis clientes</a>
       <a class="wsx-side-link" href="renta-personas-naturales.html#carta"><span class="wsx-ico">📄</span> Solicitudes al cliente</a>
@@ -848,7 +868,7 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
         </div>
         <div class="card" id="cardCedulaGeneral">
           <div class="section-title"><span class="num">8</span> Cédula General</div>
-          <div style="font-size:.78rem;color:var(--muted);margin-bottom:6px">Expanda las subcédulas que apliquen para este declarante. El motor consolida y aplica el tope Art. 336 (40% / 1.340 UVT) sobre el total — no por subcédula.</div>
+          <div id="cgIntro" style="font-size:.78rem;color:var(--muted);margin-bottom:6px">Expanda las subcédulas que apliquen para este declarante. El motor consolida y aplica el tope Art. 336 (40% / 1.340 UVT) sobre el total — no por subcédula.</div>
           <div id="sugCedulaGeneral"></div>
           <div class="subcard" id="subTrabajo" data-expandible="true" data-expanded="true">
             <div class="sub-title">Rentas de trabajo (salarios)<span class="sub-tag">25% Art. 206 num. 10 automático</span></div>
@@ -1155,7 +1175,7 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
 </div>
 <script defer src="shared/pro.js?v=ccea4108"></script>
 <script defer src="shared/toast.js?v=9843f93f"></script>
-<script defer src="shared/nav.js?v=738bc59a"></script>
+<script defer src="shared/nav.js?v=659103a7"></script>
 <script defer src="shared/pro-banner.js?v=f0acfdc0"></script>
 <script src="shared/parametros-renta-pn.js?v=a0b1c6a8"></script>
 <script src="shared/calculo210.js?v=0007de6f"></script>
@@ -1269,8 +1289,8 @@ function gatePro(motivo){
 }
 function marcarCandadosTabs(){
   document.querySelectorAll('.f210-tab').forEach(function(t){
-    var d=t.getAttribute('data-tab');
-    t.classList.toggle('locked', d==='texogena' || d==='trentas');
+    var d = t.getAttribute('data-tab');
+    t.classList.toggle('locked', PRO_GATED_TABS.indexOf(d) !== -1);
   });
 }
 function quitarCandadosTabs(){
@@ -2978,6 +2998,7 @@ function recalcular(){
   if(typeof renderSugerenciasCedula === 'function') renderSugerenciasCedula(ctx);
   if(typeof autoGuardarBorrador === 'function') autoGuardarBorrador();
   renderResultadoHero();
+  renderBadgesCedulas();
 }
 /* ── HERO DE RESULTADO: el número que el declarante quiere ver ──
    Aparece apenas hay exógena cargada + motor calculado. En gratis es el gancho
@@ -3046,8 +3067,7 @@ function marcarPendientesTabs(){
   var sinCed = filas.filter(function(f){ return !f.cedulaFinal && !f.excluida; }).length;
   var t2 = document.querySelector('.f210-tab[data-tab="texogena"]');
   if(t2) t2.classList.toggle('tiene-pendiente', sinCed > 0);
-  var t3 = document.querySelector('.f210-tab[data-tab="trentas"]');
-  if(t3) t3.classList.toggle('tiene-pendiente', filas.length > 0);
+  renderBadgesCedulas();
 }
 /* Soportes A PEDIR con nombres propios, desde la propia exógena (feedback Juan):
    "necesitas el F220 de tal empresa, el extracto de tal otra". */
@@ -3598,7 +3618,7 @@ function reiniciarTodo(){
 }
 // #7/#8 helpers de borrador
 function nowTs(){ return new Date().getTime(); }
-var TABS_VALIDOS = { t210:1, texogena:1, trentas:1, trevision:1 };
+var TABS_VALIDOS = { t210:1, texogena:1, ctrabajo:1, chonorarios:1, ccapital:1, cnolaboral:1, cpensiones:1, cdividendos:1, cgo:1, cpatrimonio:1, trevision:1 };
 function tabGuardadoOInicial(){
   try{
     var raw = localStorage.getItem(BORRADOR_KEY);
@@ -4013,28 +4033,98 @@ function toggleReplica210(){
 // No se mueve el HTML: solo se muestra/oculta cada card según la pestaña activa
 // (con .tab-off, que respeta la lógica de .hidden propia de cada card).
 var TABS_F210 = {
-  t210:        ['cardAnio', 'cardExogena', 'cardSoportesCliente', 'cardDeclarante', 'cardComparativoAGAnterior', 'cardPatrimonio', 'cardReajusteFiscal', 'cardF160', 'cardPagosPrevios'],
+  t210:        ['cardAnio', 'cardExogena', 'cardSoportesCliente', 'cardDeclarante', 'cardF160', 'cardPagosPrevios'],
   texogena:    ['cardReconciliacion', 'cardCertificado'],
-  trentas:     ['cardCedulaGeneral', 'cardPensiones', 'cardDividendos', 'cardGO'],
+  ctrabajo:    ['cardCedulaGeneral'],
+  chonorarios: ['cardCedulaGeneral'],
+  ccapital:    ['cardCedulaGeneral'],
+  cnolaboral:  ['cardCedulaGeneral'],
+  cpensiones:  ['cardPensiones'],
+  cdividendos: ['cardDividendos'],
+  cgo:         ['cardGO'],
+  cpatrimonio: ['cardPatrimonio', 'cardReajusteFiscal', 'cardComparativoAGAnterior'],
   trevision:   ['cardReplica210', 'cardSugerida', 'cardLiquidacion']
 };
+// Unión de todas las cards controladas por tabs — permite tratar el toggle de
+// forma correcta aunque una misma card (p.ej. cardCedulaGeneral) viva en
+// varias llaves de vista (una por subcédula enfocada).
+var TODAS_LAS_CARDS_DE_TABS = (function(){
+  var s = {};
+  Object.keys(TABS_F210).forEach(function(t){ TABS_F210[t].forEach(function(id){ s[id] = 1; }); });
+  return Object.keys(s);
+})();
+// Vistas que requieren PRO (todo excepto Punto de partida y Formulario 210, que son el gancho gratis).
+var PRO_GATED_TABS = ['texogena','ctrabajo','chonorarios','ccapital','cnolaboral','cpensiones','cdividendos','cgo','cpatrimonio'];
+// Cédula enfocada dentro de #cardCedulaGeneral por cada tab granular + su título de sección.
+var CEDULA_FOCUS = {
+  ctrabajo:    { sub:'subTrabajo',    icono:'💼', titulo:'Rentas de trabajo' },
+  chonorarios: { sub:'subHonorarios', icono:'🧰', titulo:'Honorarios y servicios' },
+  ccapital:    { sub:'subCapital',    icono:'🏠', titulo:'Rentas de capital' },
+  cnolaboral:  { sub:'subNoLaboral',  icono:'📋', titulo:'Rentas no laborales' }
+};
+// Cards de cédula "sueltas" (no viven dentro de cardCedulaGeneral) que también
+// se auto-expanden al entrar a su vista dedicada — igual que Deventia, sin clics extra.
+var CEDULA_CARD_SOLA = { cpensiones:'cardPensiones', cdividendos:'cardDividendos', cgo:'cardGO' };
+function enfocarCedula(tab){
+  var cg = document.getElementById('cardCedulaGeneral');
+  if(cg){
+    var f = CEDULA_FOCUS[tab];
+    if(f){
+      cg.setAttribute('data-focus', f.sub.replace('sub', '').toLowerCase());
+      var subEl = document.getElementById(f.sub);
+      if(subEl) subEl.setAttribute('data-expanded', 'true');
+      var h = cg.querySelector('.section-title');
+      if(h) h.innerHTML = '<span style="font-size:1.15em">' + f.icono + '</span> ' + f.titulo;
+    } else {
+      cg.removeAttribute('data-focus');
+    }
+  }
+  var solaId = CEDULA_CARD_SOLA[tab];
+  if(solaId){ var el = document.getElementById(solaId); if(el) el.setAttribute('data-expanded', 'true'); }
+}
+// Badge por cédula: nº de conceptos de la exógena asignados a esa cédula (pendientes de revisar).
+var BADGE_BUCKETS = {
+  ctrabajo:    ['trabajo', 'trabajo_exenta', 'incrngo_trabajo', 'incrngo', 'incrngo_salud', 'incrngo_pension'],
+  chonorarios: ['honorarios'],
+  ccapital:    ['capital'],
+  cnolaboral:  ['noLaboral', 'incrngo_nolaboral'],
+  cpensiones:  ['pensiones'],
+  cdividendos: ['dividendos_no_grav', 'dividendos_grav'],
+  cgo:         ['gananciasOcasionales', 'gananciasOcasionalesLoterias']
+};
+function renderBadgesCedulas(){
+  var filas = (window.reconciliacionEstado && reconciliacionEstado.filas) || [];
+  Object.keys(BADGE_BUCKETS).forEach(function(tabKey){
+    var b = document.getElementById('badge-' + tabKey);
+    if(!b) return;
+    var buckets = BADGE_BUCKETS[tabKey];
+    var n = filas.filter(function(f){ return !f.excluida && buckets.indexOf(f.cedulaFinal) >= 0; }).length;
+    b.textContent = n > 0 ? String(n) : '';
+  });
+}
 function cambiarTabF210(tab){
   // Paso 4: el 210 ocupa TODO el ancho (feedback Juan: "el 210 está muy estrecho,
   // las cifras en vivo quitan espacio y ya todo está en la réplica").
   document.body.classList.toggle('tab-trevision', tab === 'trevision');
-  // Modo gratis: Reconciliación (texogena) y Rentas por cédula (trentas) son PRO.
-  if(!window.__f210Pro && (tab==='texogena' || tab==='trentas')){
-    abrirPaywall(tab==='texogena'
-      ? 'La <strong>reconciliación de conceptos</strong> — reclasificar cada registro de la exógena a su cédula — es parte de PRO. En la vista gratis ves el 210 ya clasificado automáticamente; con PRO lo ajustas registro por registro.'
-      : 'Editar las <strong>rentas por cédula</strong> (deducciones, dependientes, INCRNGO, imputación fina) es parte de PRO. En la vista gratis ves el resultado clasificado; con PRO lo modificas.');
+  // Modo gratis: todo excepto Punto de partida y Formulario 210 es PRO.
+  if(!window.__f210Pro && PRO_GATED_TABS.indexOf(tab) !== -1){
+    var msgs = {
+      texogena: 'La <strong>reconciliación de conceptos</strong> — reclasificar cada registro de la exógena a su cédula — es parte de PRO. En la vista gratis ves el 210 ya clasificado automáticamente; con PRO lo ajustas registro por registro.',
+      cpatrimonio: 'Editar el <strong>patrimonio</strong> y activar la comparación con el año anterior es parte de PRO.'
+    };
+    var generico = 'Editar esta <strong>cédula</strong> (deducciones, INCRNGO, imputación fina) es parte de PRO. En la vista gratis ves el resultado ya clasificado; con PRO lo ajustas.';
+    abrirPaywall(msgs[tab] || generico);
     return;
   }
-  Object.keys(TABS_F210).forEach(function(t){
-    TABS_F210[t].forEach(function(id){
-      var el = document.getElementById(id);
-      if(el) el.classList.toggle('tab-off', t !== tab);
-    });
+  // Cada card conocida se muestra SOLO si pertenece a la vista activa — evita que una
+  // card compartida por varias vistas (cardCedulaGeneral en las 4 subcédulas) quede
+  // mal si la última llave iterada no era la activa.
+  var visibles = TABS_F210[tab] || [];
+  TODAS_LAS_CARDS_DE_TABS.forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.classList.toggle('tab-off', visibles.indexOf(id) === -1);
   });
+  enfocarCedula(tab);
   var tabs = document.querySelectorAll('.f210-tab');
   for(var i = 0; i < tabs.length; i++){ tabs[i].classList.toggle('active', tabs[i].getAttribute('data-tab') === tab); }
   if(tab === 'trevision'){

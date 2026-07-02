@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<script src="shared/cookie-consent.js?v=10d7f382"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Presupuesto Empresarial (Presupuesto Maestro) — Gratis 2026 | Aziendale</title>
+<meta name="description" content="Presupuesto empresarial didáctico para pyme: ventas, costo de venta, gastos fijos y variables, y Estado de Resultados presupuestado mes a mes. Control presupuestal plan vs real con variaciones. Conéctalo con tu flujo de caja en un clic. Gratis.">
+<meta name="keywords" content="presupuesto empresarial pyme, presupuesto maestro, estado de resultados presupuestado, presupuesto de ventas, control presupuestal, plan vs real, presupuesto por drivers, presupuesto excel gratis colombia">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://exogenadian.com/presupuesto-empresarial.html">
+<meta property="og:title" content="Presupuesto Empresarial (Presupuesto Maestro) — Gratis 2026 | Aziendale">
+<meta property="og:description" content="Ventas → costo de venta → gastos → utilidad presupuestada, mes a mes, con control presupuestal plan vs real. Se conecta directo con el Flujo de Caja Proyectado.">
+<meta property="og:url" content="https://exogenadian.com/presupuesto-empresarial.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="Aziendale">
+<meta property="og:image" content="https://exogenadian.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Presupuesto Empresarial — Aziendale","url":"https://exogenadian.com/presupuesto-empresarial.html","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"COP"},"description":"Presupuesto maestro operativo para pyme colombiana: ventas, costo de venta, gastos y utilidad presupuestada mes a mes, con control presupuestal plan vs real y conexión directa a flujo de caja."}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://exogenadian.com/"},{"@type":"ListItem","position":2,"name":"Contabilidad y EEFF","item":"https://exogenadian.com/eeff-hub.html"},{"@type":"ListItem","position":3,"name":"Presupuesto Empresarial","item":"https://exogenadian.com/presupuesto-empresarial.html"}]}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.0/jspdf.plugin.autotable.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js" integrity="sha384-Pqp51FUN2/qzfxZxBCtF0stpc9ONI6MYZpVqmo8m20SoaQCzf+arZvACkLkirlPz" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="shared/guia-didactica.css?v=3482d08f">
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--green:#059669;--green2:#ECFDF5;--green3:#D1FAE5;--red:#DC2626;--red2:#FEF2F2;--amber:#D97706;--amber2:#FFF8E1;--amber3:#FEF3C7;--border:#e2e8f0;--radius:12px;--shadow:0 2px 12px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased}
+.container{max-width:1140px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#1B3A5C 0%,#7C3AED 100%);padding:30px 34px;border-radius:18px;margin-bottom:20px;color:#fff;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(255,255,255,.08) 0%,transparent 70%);pointer-events:none}
+.header-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:5px 14px;font-size:.74rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;margin-bottom:12px}
+.header h1{font-size:clamp(1.4rem,3.2vw,1.9rem);font-weight:800;letter-spacing:-.02em;margin-bottom:8px;line-height:1.15}
+.header p{opacity:.92;font-size:.92rem;max-width:700px;line-height:1.55}
+.header-link{display:inline-flex;align-items:center;gap:6px;margin-top:12px;color:#fff;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:8px 14px;font-size:.82rem;font-weight:700;text-decoration:none}
+.header-link:hover{background:rgba(255,255,255,.25)}
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:24px;margin-bottom:18px;box-shadow:var(--shadow)}
+.card-title{font-size:1.05rem;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px;color:var(--pri)}
+.card-sub{font-size:.84rem;color:var(--muted);margin-bottom:16px}
+.stepper{display:flex;gap:8px;margin-bottom:20px}
+.step-dot{flex:1;text-align:center;padding:10px 6px;border-radius:10px;background:#fff;border:1.5px solid var(--border);font-size:.78rem;font-weight:700;color:var(--muted);cursor:pointer;transition:.15s}
+.step-dot .num{display:inline-flex;width:20px;height:20px;border-radius:50%;background:var(--border);color:#fff;align-items:center;justify-content:center;font-size:.72rem;margin-right:6px}
+.step-dot.active{background:var(--pri);border-color:var(--pri);color:#fff}
+.step-dot.active .num{background:#fff;color:var(--pri)}
+.step-dot.done{border-color:var(--green);color:var(--green)}
+.step-dot.done .num{background:var(--green);color:#fff}
+.step-panel{display:none}
+.step-panel.active{display:block}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.field-row.f3{grid-template-columns:1fr 1fr 1fr}
+.field{display:flex;flex-direction:column;gap:4px}
+.field label{font-size:.76rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.3px}
+.field input,.field select{padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.92rem;font-family:'DM Sans',sans-serif}
+.field input:focus,.field select:focus{outline:none;border-color:var(--pri2);box-shadow:0 0 0 3px rgba(46,117,182,.12)}
+.mini-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.86rem}
+.mini-table th{background:#f1f5f9;padding:8px 10px;text-align:left;font-weight:700;color:var(--pri);font-size:.78rem}
+.mini-table td{padding:6px 8px;border-bottom:1px solid var(--border)}
+.mini-table input{width:100%;padding:6px 8px;border:1.3px solid var(--border);border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.85rem;text-align:right}
+.mini-table .rm-row{background:none;border:none;color:var(--red);cursor:pointer;font-size:1rem}
+.fill-row{display:flex;gap:8px;align-items:end;margin-bottom:8px}
+.btn-sm{padding:8px 14px;border-radius:8px;font-size:.82rem;font-weight:700;cursor:pointer;border:1.5px solid var(--pri2);background:#fff;color:var(--pri2)}
+.btn-sm:hover{background:var(--pri3)}
+.btn-add{background:none;border:1.5px dashed var(--border);color:var(--muted);padding:8px 14px;border-radius:8px;font-size:.82rem;font-weight:700;cursor:pointer;width:100%;margin-top:4px}
+.btn-add:hover{border-color:var(--pri2);color:var(--pri2)}
+.nav-buttons{display:flex;justify-content:space-between;margin-top:6px}
+.btn{padding:13px 26px;border-radius:10px;font-weight:700;font-size:.92rem;cursor:pointer;border:none;font-family:inherit;display:inline-flex;align-items:center;gap:8px}
+.btn-pri{background:var(--pri);color:#fff}
+.btn-pri:hover{background:#15304d}
+.btn-green{background:var(--green);color:#fff}
+.btn-green:hover{background:#047857}
+.btn-purple{background:#7C3AED;color:#fff}
+.btn-purple:hover{background:#6D28D9}
+.btn-ghost{background:#fff;border:1.5px solid var(--border);color:var(--muted)}
+.btn-ghost:hover{border-color:var(--pri2);color:var(--pri2)}
+.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+.summary-card{background:#F9FAFB;border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.summary-card .lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.3px;color:var(--muted);font-weight:700;margin-bottom:4px}
+.summary-card .val{font-size:1.2rem;font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--pri)}
+.summary-card .sub{font-size:.74rem;color:var(--muted);margin-top:2px}
+.result-table-wrap{overflow-x:auto;margin-bottom:10px}
+.result-table{width:100%;border-collapse:collapse;font-size:.82rem;min-width:760px}
+.result-table th{background:var(--pri);color:#fff;padding:9px 10px;text-align:right;font-size:.72rem;text-transform:uppercase;letter-spacing:.2px;white-space:nowrap}
+.result-table th:first-child{text-align:left}
+.result-table td{padding:8px 10px;border-bottom:1px solid var(--border);text-align:right;font-family:'JetBrains Mono',monospace;white-space:nowrap}
+.result-table td:first-child{text-align:left;font-family:'DM Sans',sans-serif;font-weight:600}
+.result-table tr.total-row td{background:#F0F2F5;font-weight:800;border-top:2px solid var(--pri)}
+.result-table input{width:100px;padding:5px 6px;border:1.3px solid var(--border);border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.8rem;text-align:right}
+.var-fav{color:var(--green);font-weight:700}
+.var-desfav{color:var(--red);font-weight:700}
+.var-na{color:var(--muted)}
+.marca-agua{text-align:center;font-size:.76rem;color:var(--muted);margin:14px 0 4px;padding-top:10px;border-top:1px dashed var(--border)}
+.export-bar{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.pro-badge{display:inline-block;background:#111827;color:#FCD34D;font-size:.62rem;font-weight:800;padding:2px 7px;border-radius:5px;margin-left:6px;letter-spacing:.3px;vertical-align:middle}
+@media print{
+  .stepper,.nav-buttons,.export-bar,.no-print{display:none!important}
+  body{background:#fff}
+  .card{box-shadow:none;border:1px solid #ddd}
+}
+@media(max-width:720px){
+  .field-row,.field-row.f3{grid-template-columns:1fr}
+  .summary-grid{grid-template-columns:1fr}
+  .stepper{flex-wrap:wrap}
+}
+</style>
+<script async src="shared/error-tracker.js?v=dd1f7f1d"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(hide,30);
+  }else{
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+  }
+  // Failsafe: nunca dejar el overlay más de 4s
+  setTimeout(hide,4000);
+})();
+</script></head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="header-pill">📐 Nuevo · Gratis</div>
+    <h1>Presupuesto Empresarial — Presupuesto Maestro</h1>
+    <p>Arma tu presupuesto operativo mes a mes: ventas, costo de venta, gastos fijos y variables, hasta la utilidad presupuestada. Al final compara plan vs real de lo que ya transcurrió del año — y conviértelo en un flujo de caja con un clic.</p>
+    <a class="header-link" href="flujo-caja.html">💧 Ya tengo mi presupuesto — ver mi Flujo de Caja →</a>
+  </div>
+  <div class="stepper">
+    <div class="step-dot" data-step="1"><span class="num">1</span> Tu empresa</div>
+    <div class="step-dot" data-step="2"><span class="num">2</span> Ventas</div>
+    <div class="step-dot" data-step="3"><span class="num">3</span> Costos y gastos</div>
+    <div class="step-dot" data-step="4"><span class="num">4</span> Resultado</div>
+  </div>
+  <div class="step-panel" id="panel1">
+    <div class="card">
+      <div class="card-title">🏢 Tu empresa</div>
+      <div class="card-sub">El presupuesto maestro tiene dos mitades: la <strong>operativa</strong> (ventas → costos → gastos → utilidad, lo que armamos aquí) y la <strong>financiera</strong> (efectivo e inversiones, lo que arma <a href="flujo-caja.html">Flujo de Caja</a>). Este presupuesto se calcula para el año calendario en curso.</div>
+      <div class="field-row">
+        <div class="field"><label>Nombre de la empresa</label><input type="text" id="fNombre"></div>
+        <div class="field"><label>Año presupuestado</label><input type="text" id="fAnio" disabled></div>
+      </div>
+      <div class="guia-concept" style="margin-top:8px">
+        <strong>¿Qué es el presupuesto maestro?</strong> Es el plan financiero completo de un periodo: primero el <em>presupuesto operativo</em> (cuánto vas a vender, cuánto te cuesta producir/comprar, cuánto gastas en operar) que resulta en un <em>Estado de Resultados presupuestado</em>. Ese resultado alimenta el <em>presupuesto financiero</em> (efectivo e inversiones), que resulta en un balance presupuestado. Aquí construimos la mitad operativa — la de caja ya la tienes en Flujo de Caja.
+      </div>
+    </div>
+    <div class="nav-buttons"><span></span><button class="btn btn-pri" onclick="irPaso(2)">Siguiente: Ventas →</button></div>
+  </div>
+  <div class="step-panel" id="panel2">
+    <div class="card">
+      <div class="card-title">📈 Presupuesto de ventas</div>
+      <div class="card-sub">El punto de partida de todo presupuesto maestro. Puedes proyectar con un crecimiento mensual (presupuesto por driver) o editar cada mes a mano (presupuesto incremental basado en tu propia estimación).</div>
+      <div class="field-row f3">
+        <div class="field"><label>Ventas del primer mes (enero)</label><input type="number" id="fVentaBase" placeholder="10000000"></div>
+        <div class="field"><label>Crecimiento mensual estimado (%)</label><input type="number" id="fCrecimiento" step="0.1"></div>
+        <div class="field" style="justify-content:flex-end"><button class="btn-sm" onclick="recalcularVentas()">Recalcular con estos datos</button></div>
+      </div>
+      <table class="mini-table"><thead><tr><th>Mes</th><th style="text-align:right">Ventas presupuestadas</th></tr></thead><tbody id="tablaVentasPresu"></tbody></table>
+      <div class="guia-concept">
+        <strong>Tres formas de presupuestar ventas:</strong> <em>por driver</em> (partes de un dato y un % de crecimiento — lo que hicimos arriba), <em>incremental</em> (ajustas el año pasado con un % de inflación o meta comercial) o <em>base cero</em> (construyes desde ceros sin mirar el histórico, útil si el negocio cambió de rumbo). Puedes editar cualquier mes de la tabla a mano — eso combina el driver con tu criterio.
+      </div>
+    </div>
+    <div class="nav-buttons"><button class="btn btn-ghost" onclick="irPaso(1)">← Atrás</button><button class="btn btn-pri" onclick="irPaso(3)">Siguiente: Costos y gastos →</button></div>
+  </div>
+  <div class="step-panel" id="panel3">
+    <div class="card">
+      <div class="card-title">📉 Costos y gastos</div>
+      <div class="card-sub">El costo de venta y los gastos variables se calculan como % de tus ventas — así el presupuesto se ajusta solo si cambias las ventas.</div>
+      <div class="field-row">
+        <div class="field"><label>Costo de venta (% sobre ventas)</label><input type="number" id="fCostoVentaPct" step="0.1"></div>
+        <div class="field"><label>Gastos variables — comisiones, fletes… (% sobre ventas)</label><input type="number" id="fGastoVariablePct" step="0.1"></div>
+      </div>
+      <div class="guia-concept">
+        <strong>Margen bruto:</strong> ventas − costo de venta. Si tu costo de venta es 40%, tu margen bruto es 60% — de ahí sales a pagar gastos fijos y, lo que sobra, es utilidad operativa. Compara tu % con el de tu sector: un margen bruto muy distinto al de tu competencia suele ser la primera señal de un precio mal puesto o un costo mal controlado.
+      </div>
+      <h3 style="font-size:.9rem;color:var(--pri);margin:18px 0 8px">🏠 Gastos fijos mensuales de operación</h3>
+      <table class="mini-table"><thead><tr><th>Concepto</th><th style="text-align:right">Valor mensual</th><th></th></tr></thead><tbody id="tablaGastosFijos"></tbody></table>
+      <button class="btn-add" onclick="agregarGastoFijo()">+ Agregar gasto fijo</button>
+    </div>
+    <div class="nav-buttons"><button class="btn btn-ghost" onclick="irPaso(2)">← Atrás</button><button class="btn btn-green" onclick="calcularYMostrar()">Ver mi presupuesto →</button></div>
+  </div>
+  <div class="step-panel" id="panel4">
+    <div class="card">
+      <div class="card-title">📊 Estado de Resultados presupuestado</div>
+      <div class="card-sub">Ventas − costo de venta = utilidad bruta. Utilidad bruta − gastos = utilidad operativa. Esto es lo que se espera; en la tabla de abajo comparamos contra lo que realmente pasó.</div>
+      <div class="summary-grid" id="summaryGrid"></div>
+      <div class="result-table-wrap">
+        <table class="result-table" id="tablaResultado"></table>
+      </div>
+      <div class="marca-agua">Generado con exogenadian.com — herramienta gratuita</div>
+    </div>
+    <div class="card">
+      <div class="card-title">🔍 Control presupuestal — Plan vs Real</div>
+      <div class="card-sub">Para los meses que ya transcurrieron este año, ingresa lo que realmente vendiste y gastaste. El color te dice si la variación te favorece o no.</div>
+      <div class="result-table-wrap">
+        <table class="result-table" id="tablaPlanReal"></table>
+      </div>
+      <div class="guia-concept">
+        <strong>Cómo actuar sobre una variación:</strong> si vendiste <em>menos</em> de lo presupuestado, revisa si es un problema de demanda o de ejecución comercial antes de recortar gastos de golpe. Si gastaste <em>más</em> de lo presupuestado, identifica si fue un gasto puntual (no se repite) o estructural (sí se repite, y debes ajustar el presupuesto de los meses que faltan — no solo lamentarlo).
+      </div>
+      <div class="export-bar no-print">
+        <button class="btn btn-ghost" onclick="window.print()">🖨️ Imprimir / PDF</button>
+        <button class="btn btn-pri" onclick="descargarExcel()">📥 Descargar Excel completo<span class="pro-badge">PRO</span></button>
+        <button class="btn btn-purple" onclick="verComoFlujoCaja()">💧 Ver este presupuesto como Flujo de Caja →</button>
+      </div>
+    </div>
+    <div class="nav-buttons no-print"><button class="btn btn-ghost" onclick="irPaso(3)">← Atrás</button><span></span></div>
+  </div>
+  <p style="text-align:center;font-size:.76rem;color:var(--muted);margin:20px 0 40px">
+    Herramienta de referencia didáctica — no constituye asesoría financiera. Tus datos no salen de tu navegador.
+  </p>
+</div>
+<script src="shared/caja-engine.js?v=2287b492"></script>
+<script src="shared/finanzas-store.js?v=5fb9f244"></script>
+<script defer src="shared/toast.js?v=9843f93f"></script>
+<script defer src="shared/pro.js?v=ccea4108"></script>
+<script defer src="shared/pro-gate.js?v=dafb5761"></script>
+<script defer src="shared/nav.js?v=659103a7"></script>
+<script src="shared/finanzas-privacy.js?v=4d46bf26"></script>
+<script>
+(function(){
+'use strict';
+var STORE_KEY = 'pyme:presupuesto-empresarial';
+var FLUJO_KEY = 'pyme:flujo-caja';
+var ANIO = new Date().getFullYear();
+var MES_ACTUAL = ANIO + '-' + String(new Date().getMonth()+1).padStart(2,'0');
+var DEFAULT_STATE = {
+  empresa: { nombre:'Mi Empresa SAS' },
+  ventaBase: 10000000,
+  crecimientoMensualPct: 3,
+  ventasPorMes: {},
+  costoVentaPct: 40,
+  gastoVariablePct: 5,
+  gastosFijos: [ {concepto:'Arriendo', valor:2000000}, {concepto:'Nómina administrativa', valor:3000000} ],
+  reales: {}
+};
+var state = cargarEstado();
+var resultado = null;
+function cargarEstado(){
+  var saved = (window.FinanzasStore && FinanzasStore.get(STORE_KEY)) || null;
+  var base = JSON.parse(JSON.stringify(DEFAULT_STATE));
+  if(!saved) return base;
+  Object.keys(saved).forEach(function(k){
+    if(saved[k] && typeof saved[k]==='object' && !Array.isArray(saved[k]) && base[k] && typeof base[k]==='object' && !Array.isArray(base[k])) Object.assign(base[k], saved[k]);
+    else base[k]=saved[k];
+  });
+  return base;
+}
+function guardarEstado(){ if(window.FinanzasStore) FinanzasStore.set(STORE_KEY, state); }
+function mesesAnio(){
+  var out=[];
+  for(var m=1;m<=12;m++) out.push(ANIO+'-'+String(m).padStart(2,'0'));
+  return out;
+}
+function labelMesCorto(ym){
+  var MESES=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  return MESES[+ym.slice(5,7)-1];
+}
+function fmt(n){ n=Math.round(n||0); return (n<0?'-$':'$')+Math.abs(n).toLocaleString('es-CO'); }
+function fmtPct(n){ return (n>=0?'+':'')+n.toFixed(1)+'%'; }
+/* ═══ Paso 1 ═══ */
+function pintarPaso1(){
+  document.getElementById('fNombre').value = state.empresa.nombre;
+  document.getElementById('fAnio').value = ANIO;
+}
+function leerPaso1(){ state.empresa.nombre = document.getElementById('fNombre').value || DEFAULT_STATE.empresa.nombre; }
+/* ═══ Paso 2 — ventas ═══ */
+function pintarTablaVentas(){
+  var tbody = document.getElementById('tablaVentasPresu');
+  var preview = CajaEngine.presupuestoMensual({ventaBase:state.ventaBase, crecimientoMensualPct:state.crecimientoMensualPct, ventasPorMes:state.ventasPorMes}, mesesAnio());
+  tbody.innerHTML='';
+  preview.forEach(function(r){
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>'+labelMesCorto(r.mes)+' '+ANIO+'</td><td><input type="number" data-ym="'+r.mes+'" value="'+Math.round(r.ventas)+'"></td>';
+    tbody.appendChild(tr);
+  });
+}
+window.recalcularVentas = function(){
+  state.ventaBase = +document.getElementById('fVentaBase').value || 0;
+  state.crecimientoMensualPct = +document.getElementById('fCrecimiento').value || 0;
+  state.ventasPorMes = {};
+  pintarTablaVentas();
+};
+function pintarPaso2(){
+  document.getElementById('fVentaBase').value = state.ventaBase;
+  document.getElementById('fCrecimiento').value = state.crecimientoMensualPct;
+  pintarTablaVentas();
+}
+function leerPaso2(){
+  state.ventaBase = +document.getElementById('fVentaBase').value || 0;
+  state.crecimientoMensualPct = +document.getElementById('fCrecimiento').value || 0;
+  var out={};
+  document.querySelectorAll('#tablaVentasPresu input').forEach(function(inp){ out[inp.getAttribute('data-ym')] = +inp.value || 0; });
+  state.ventasPorMes = out;
+}
+/* ═══ Paso 3 — costos y gastos ═══ */
+function pintarGastosFijos(){
+  var tbody = document.getElementById('tablaGastosFijos');
+  tbody.innerHTML='';
+  state.gastosFijos.forEach(function(g,i){
+    var tr=document.createElement('tr');
+    tr.innerHTML = '<td><input type="text" data-i="'+i+'" data-f="concepto" value="'+g.concepto+'" style="text-align:left"></td>'+
+      '<td><input type="number" data-i="'+i+'" data-f="valor" value="'+g.valor+'"></td>'+
+      '<td><button class="rm-row" onclick="quitarGastoFijo('+i+')">✕</button></td>';
+    tbody.appendChild(tr);
+  });
+}
+window.agregarGastoFijo = function(){ leerGastosFijos(); state.gastosFijos.push({concepto:'Nuevo gasto', valor:0}); pintarGastosFijos(); };
+window.quitarGastoFijo = function(i){ leerGastosFijos(); state.gastosFijos.splice(i,1); pintarGastosFijos(); };
+function leerGastosFijos(){
+  var out=[];
+  document.querySelectorAll('#tablaGastosFijos tr').forEach(function(tr){
+    out.push({ concepto: tr.querySelector('[data-f="concepto"]').value, valor: +tr.querySelector('[data-f="valor"]').value || 0 });
+  });
+  state.gastosFijos = out;
+}
+function pintarPaso3(){
+  document.getElementById('fCostoVentaPct').value = state.costoVentaPct;
+  document.getElementById('fGastoVariablePct').value = state.gastoVariablePct;
+  pintarGastosFijos();
+}
+function leerPaso3(){
+  state.costoVentaPct = +document.getElementById('fCostoVentaPct').value || 0;
+  state.gastoVariablePct = +document.getElementById('fGastoVariablePct').value || 0;
+  leerGastosFijos();
+}
+/* ═══ Navegación ═══ */
+window.irPaso = function(n){
+  if(n===2) leerPaso1();
+  if(n===3) leerPaso2();
+  guardarEstado();
+  document.querySelectorAll('.step-panel').forEach(function(p){p.classList.remove('active')});
+  document.getElementById('panel'+n).classList.add('active');
+  document.querySelectorAll('.step-dot').forEach(function(d){
+    var s=+d.getAttribute('data-step');
+    d.classList.toggle('active', s===n);
+    d.classList.toggle('done', s<n);
+  });
+  if(n===2) pintarPaso2();
+  if(n===3) pintarPaso3();
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(typeof gtag==='function') gtag('event','presupuesto_empresarial_paso',{paso:n});
+};
+document.querySelectorAll('.step-dot').forEach(function(d){
+  d.addEventListener('click', function(){ var n=+d.getAttribute('data-step'); if(n<=4) window.irPaso(n); });
+});
+/* ═══ Cálculo ═══ */
+function calcular(){
+  leerPaso3();
+  guardarEstado();
+  var cfg = { ventaBase:state.ventaBase, crecimientoMensualPct:state.crecimientoMensualPct, ventasPorMes:state.ventasPorMes,
+    costoVentaPct:state.costoVentaPct, gastosFijos:state.gastosFijos, gastoVariablePct:state.gastoVariablePct };
+  var filas = CajaEngine.presupuestoMensual(cfg, mesesAnio());
+  resultado = { filas: filas };
+  return resultado;
+}
+window.calcularYMostrar = function(){
+  calcular();
+  window.irPaso(4);
+  pintarResultado();
+  if(typeof gtag==='function') gtag('event','presupuesto_empresarial_calculado');
+};
+function pintarResultado(){
+  if(!resultado) return;
+  var filas = resultado.filas;
+  var totVentas=0, totCosto=0, totGastoFijo=0, totGastoVar=0, totUtil=0;
+  filas.forEach(function(r){ totVentas+=r.ventas; totCosto+=r.costoVenta; totGastoFijo+=r.gastoFijo; totGastoVar+=r.gastoVariable; totUtil+=r.utilidadOperativa; });
+  var margenAnual = totVentas ? (totUtil/totVentas*100) : 0;
+  document.getElementById('summaryGrid').innerHTML =
+    '<div class="summary-card"><div class="lbl">Ventas presupuestadas '+ANIO+'</div><div class="val">'+fmt(totVentas)+'</div></div>'+
+    '<div class="summary-card"><div class="lbl">Utilidad operativa presupuestada</div><div class="val">'+fmt(totUtil)+'</div><div class="sub">Margen operativo: '+margenAnual.toFixed(1)+'%</div></div>'+
+    '<div class="summary-card"><div class="lbl">Costos + gastos totales</div><div class="val">'+fmt(totCosto+totGastoFijo+totGastoVar)+'</div></div>';
+  var head = '<tr><th>Concepto</th>'+filas.map(function(r){return '<th>'+labelMesCorto(r.mes)+'</th>'}).join('')+'<th>Total año</th></tr>';
+  function fila(label, key, esNegativo){
+    var vals = filas.map(function(r){ return r[key]; });
+    var tot = vals.reduce(function(s,v){return s+v},0);
+    return '<tr><td>'+label+'</td>'+vals.map(function(v){return '<td>'+(esNegativo?'-':'')+fmt(v).replace('-','')+'</td>'}).join('')+'<td>'+(esNegativo?'-':'')+fmt(tot).replace('-','')+'</td></tr>';
+  }
+  var body =
+    fila('Ventas','ventas') +
+    fila('(-) Costo de venta','costoVenta',true) +
+    '<tr class="total-row"><td>Utilidad bruta</td>'+filas.map(function(r){return '<td>'+fmt(r.utilidadBruta)+'</td>'}).join('')+'<td>'+fmt(filas.reduce(function(s,r){return s+r.utilidadBruta},0))+'</td></tr>'+
+    fila('(-) Gastos fijos','gastoFijo',true) +
+    fila('(-) Gastos variables','gastoVariable',true) +
+    '<tr class="total-row"><td>Utilidad operativa</td>'+filas.map(function(r){return '<td>'+fmt(r.utilidadOperativa)+'</td>'}).join('')+'<td>'+fmt(totUtil)+'</td></tr>';
+  document.getElementById('tablaResultado').innerHTML = head + body;
+  pintarPlanReal(filas);
+}
+function pintarPlanReal(filas){
+  var head = '<tr><th>Mes</th><th>Ventas presu.</th><th>Ventas real</th><th>Var. ventas</th><th>Costos+gastos presu.</th><th>Costos+gastos real</th><th>Var. C&amp;G</th><th>Utilidad presu.</th><th>Utilidad real</th><th>Var. utilidad</th></tr>';
+  var body = filas.map(function(r){
+    var elapsed = r.mes <= MES_ACTUAL;
+    var real = state.reales[r.mes] || {};
+    var cgPresu = r.costoVenta + r.gastoFijo + r.gastoVariable;
+    if(!elapsed){
+      return '<tr><td>'+labelMesCorto(r.mes)+'</td><td>'+fmt(r.ventas)+'</td><td class="var-na">—</td><td class="var-na">—</td><td>'+fmt(cgPresu)+'</td><td class="var-na">—</td><td class="var-na">—</td><td>'+fmt(r.utilidadOperativa)+'</td><td class="var-na">—</td><td class="var-na">—</td></tr>';
+    }
+    var ventasReal = real.ventas!=null ? real.ventas : '';
+    var cgReal = real.costosGastos!=null ? real.costosGastos : '';
+    var vVentas = (ventasReal!=='') ? CajaEngine.varianza(r.ventas, +ventasReal, 'ingreso') : null;
+    var vCG = (cgReal!=='') ? CajaEngine.varianza(cgPresu, +cgReal, 'gasto') : null;
+    var utilReal = (ventasReal!=='' && cgReal!=='') ? (+ventasReal - +cgReal) : null;
+    var vUtil = (utilReal!=null) ? CajaEngine.varianza(r.utilidadOperativa, utilReal, 'ingreso') : null;
+    return '<tr><td>'+labelMesCorto(r.mes)+'</td><td>'+fmt(r.ventas)+'</td>'+
+      '<td><input type="number" data-ym="'+r.mes+'" data-campo="ventas" value="'+ventasReal+'" onchange="actualizarReal(this)"></td>'+
+      '<td class="'+(vVentas?(vVentas.favorable?'var-fav':'var-desfav'):'var-na')+'">'+(vVentas?fmtPct(vVentas.pct):'—')+'</td>'+
+      '<td>'+fmt(cgPresu)+'</td>'+
+      '<td><input type="number" data-ym="'+r.mes+'" data-campo="costosGastos" value="'+cgReal+'" onchange="actualizarReal(this)"></td>'+
+      '<td class="'+(vCG?(vCG.favorable?'var-fav':'var-desfav'):'var-na')+'">'+(vCG?fmtPct(vCG.pct):'—')+'</td>'+
+      '<td>'+fmt(r.utilidadOperativa)+'</td>'+
+      '<td>'+(utilReal!=null?fmt(utilReal):'—')+'</td>'+
+      '<td class="'+(vUtil?(vUtil.favorable?'var-fav':'var-desfav'):'var-na')+'">'+(vUtil?fmtPct(vUtil.pct):'—')+'</td></tr>';
+  }).join('');
+  document.getElementById('tablaPlanReal').innerHTML = head + body;
+}
+window.actualizarReal = function(inp){
+  var ym = inp.getAttribute('data-ym'), campo = inp.getAttribute('data-campo');
+  state.reales[ym] = state.reales[ym] || {};
+  state.reales[ym][campo] = inp.value === '' ? null : +inp.value;
+  guardarEstado();
+  // Diferido: reemplazar el innerHTML de la tabla DENTRO del propio evento
+  // 'change' del input que vive en esa tabla dispara un error del DOM
+  // (el nodo se intenta remover mientras el navegador aún procesa el blur).
+  setTimeout(function(){ pintarPlanReal(resultado.filas); }, 0);
+};
+/* ═══ Puente a Flujo de Caja ═══ */
+window.verComoFlujoCaja = function(){
+  if(!resultado) calcular();
+  var flujoState = (window.FinanzasStore && FinanzasStore.get(FLUJO_KEY)) || {};
+  flujoState.empresa = flujoState.empresa || {};
+  flujoState.empresa.nombre = state.empresa.nombre;
+  var ventasPorMes = {}, comprasPorMes = {};
+  resultado.filas.forEach(function(r){
+    ventasPorMes[r.mes] = Math.round(r.ventas);
+    comprasPorMes[r.mes] = Math.round(r.costoVenta); // el costo de venta es la mejor aproximación a "compras/costos" de flujo-caja
+  });
+  flujoState.ventasPorMes = ventasPorMes;
+  flujoState.comprasPorMes = comprasPorMes;
+  flujoState.ventaBase = Math.round(resultado.filas[0] ? resultado.filas[0].ventas : 0);
+  flujoState.compraBase = Math.round(resultado.filas[0] ? resultado.filas[0].costoVenta : 0);
+  // Los gastos fijos del presupuesto también se transfieren (sin día de pago: se asume día 5 por defecto)
+  flujoState.gastosFijos = state.gastosFijos.map(function(g){ return {concepto:g.concepto, valor:g.valor, diaPago:5}; });
+  if(window.FinanzasStore) FinanzasStore.set(FLUJO_KEY, flujoState);
+  if(typeof gtag==='function') gtag('event','presupuesto_a_flujo_caja');
+  window.location.href = 'flujo-caja.html';
+};
+/* ═══ Export Excel (PRO) ═══ */
+window.descargarExcel = async function(){
+  if(!(await exoProGate('Presupuesto Empresarial'))) return;
+  if(!resultado) calcular();
+  var wb = new ExcelJS.Workbook(); wb.created = new Date();
+  var hF = { type:'pattern', pattern:'solid', fgColor:{argb:'FF1B3A5C'} };
+  var wFont = { bold:true, color:{argb:'FFFFFFFF'}, size:11 };
+  var ws1 = wb.addWorksheet('Presupuesto '+ANIO);
+  ws1.columns = [{width:24}].concat(resultado.filas.map(function(){return {width:14}})).concat([{width:16}]);
+  var headRow = ['Concepto'].concat(resultado.filas.map(function(r){return labelMesCorto(r.mes)})).concat(['Total año']);
+  ws1.addRow(headRow).eachCell(function(c){ c.fill=hF; c.font=wFont; });
+  function addFilaExcel(label, key, neg){
+    var vals = resultado.filas.map(function(r){ return neg ? -r[key] : r[key]; });
+    var tot = vals.reduce(function(s,v){return s+v},0);
+    var r = ws1.addRow([label].concat(vals).concat([tot]));
+    for(var i=2;i<=vals.length+2;i++) r.getCell(i).numFmt='#,##0';
+  }
+  addFilaExcel('Ventas','ventas');
+  addFilaExcel('Costo de venta','costoVenta',true);
+  addFilaExcel('Utilidad bruta','utilidadBruta');
+  addFilaExcel('Gastos fijos','gastoFijo',true);
+  addFilaExcel('Gastos variables','gastoVariable',true);
+  addFilaExcel('Utilidad operativa','utilidadOperativa');
+  var ws2 = wb.addWorksheet('Plan vs Real');
+  ws2.columns = [{width:10},{width:16},{width:16},{width:12},{width:18},{width:18},{width:12}];
+  ws2.addRow(['Mes','Ventas presu.','Ventas real','Var %','Costos+gastos presu.','Costos+gastos real','Var %']).eachCell(function(c){ c.fill=hF; c.font=wFont; });
+  resultado.filas.forEach(function(r){
+    var real = state.reales[r.mes] || {};
+    var cgPresu = r.costoVenta + r.gastoFijo + r.gastoVariable;
+    var vVentas = real.ventas!=null ? CajaEngine.varianza(r.ventas, real.ventas, 'ingreso').pct : null;
+    var vCG = real.costosGastos!=null ? CajaEngine.varianza(cgPresu, real.costosGastos, 'gasto').pct : null;
+    var row = ws2.addRow([labelMesCorto(r.mes), r.ventas, real.ventas!=null?real.ventas:null, vVentas!=null?(vVentas.toFixed(1)+'%'):'', cgPresu, real.costosGastos!=null?real.costosGastos:null, vCG!=null?(vCG.toFixed(1)+'%'):'']);
+    [2,3,5,6].forEach(function(i){ row.getCell(i).numFmt='#,##0'; });
+  });
+  wb.xlsx.writeBuffer().then(function(buf){
+    var blob = new Blob([buf], {type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'presupuesto-'+(state.empresa.nombre||'pyme').replace(/\s+/g,'-').toLowerCase()+'-'+ANIO+'.xlsx';
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){document.body.removeChild(a); URL.revokeObjectURL(a.href);},0);
+    if(typeof gtag==='function') gtag('event','presupuesto_excel_descargado');
+  });
+};
+/* ═══ Init ═══ */
+pintarPaso1();
+window.irPaso(1);
+})();
+</script>
+</body>
+</html>

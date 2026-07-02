@@ -16,6 +16,11 @@
         Contable). Es el diferenciador: nadie más calendariza esto.
      5. bucketize()       — agrupa todos los eventos fechados en semanas
         (rolling 13 semanas), quincenas o meses, con saldo acumulado.
+     6. presupuestoMensual() — presupuesto maestro operativo (ventas → costo
+        de venta → gastos → utilidad), con drivers (% crecimiento, % costo/
+        gasto sobre ventas). Usado por presupuesto-empresarial.html; sus
+        ventas/costos mensuales alimentan directamente la cédula de cobros/
+        pagos de flujo-caja.html — las dos herramientas comparten este motor.
 
    Dependencia opcional: window.ObligacionesDIAN (shared/obligaciones-dian-2026.js).
    Si no está cargado, salidasTributarias() devuelve [] silenciosamente (la
@@ -272,6 +277,42 @@
     return alertas;
   }
 
+  /* ═══ 7. Presupuesto maestro operativo — cédula ventas→costo→gastos→utilidad ═══
+     cfg: {ventaBase, crecimientoMensualPct, ventasPorMes (override por mes),
+           costoVentaPct, gastosFijos:[{concepto,valor}], gastoVariablePct}
+     mesesISO: array 'YYYY-MM'. Devuelve una fila presupuestada por mes, con
+     el crecimiento compuesto mes a mes salvo que ese mes tenga override. */
+  function presupuestoMensual(cfg, mesesISO) {
+    cfg = cfg || {};
+    var out = [];
+    (mesesISO || []).forEach(function (ym, idx) {
+      var ventas;
+      if (cfg.ventasPorMes && cfg.ventasPorMes[ym] != null) ventas = cfg.ventasPorMes[ym];
+      else if (idx === 0) ventas = cfg.ventaBase || 0;
+      else ventas = (out[idx - 1] ? out[idx - 1].ventas : (cfg.ventaBase || 0)) * (1 + (cfg.crecimientoMensualPct || 0) / 100);
+      var costoVenta = ventas * ((cfg.costoVentaPct || 0) / 100);
+      var gastoFijo = (cfg.gastosFijos || []).reduce(function (s, g) { return s + (g.valor || 0); }, 0);
+      var gastoVariable = ventas * ((cfg.gastoVariablePct || 0) / 100);
+      var utilidadBruta = ventas - costoVenta;
+      var utilidadOperativa = utilidadBruta - gastoFijo - gastoVariable;
+      out.push({
+        mes: ym, ventas: ventas, costoVenta: costoVenta, gastoFijo: gastoFijo, gastoVariable: gastoVariable,
+        utilidadBruta: utilidadBruta, utilidadOperativa: utilidadOperativa,
+        margenOperativo: ventas ? (utilidadOperativa / ventas * 100) : 0
+      });
+    });
+    return out;
+  }
+
+  /* Variación presupuesto vs real. tipo:'ingreso' (más real es favorable) o
+     'gasto' (menos real es favorable) — determina el signo de "favorable". */
+  function varianza(presupuestado, real, tipo) {
+    var diff = real - presupuestado;
+    var pct = presupuestado ? (diff / Math.abs(presupuestado) * 100) : (real ? 100 : 0);
+    var favorable = tipo === 'gasto' ? diff <= 0 : diff >= 0;
+    return { diff: diff, pct: pct, favorable: favorable };
+  }
+
   return {
     cedulaCobros: cedulaCobros,
     cedulaPagos: cedulaPagos,
@@ -280,6 +321,8 @@
     salidasTributarias: salidasTributarias,
     bucketize: bucketize,
     detectarAlertas: detectarAlertas,
+    presupuestoMensual: presupuestoMensual,
+    varianza: varianza,
     monthsBetween: monthsBetween,
     // expuestos para tests
     _util: { dateISO: dateISO, addMonths: addMonths, addDays: addDays, lastDayOfMonth: lastDayOfMonth, labelMes: labelMes }
