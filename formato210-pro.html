@@ -1645,6 +1645,11 @@ function procesarArchivoExogena(file){
         try{
           var rm = parserMuiscaConsultante.parse(wb);
           var setIfEmpty = function(id, v){ var el = document.getElementById(id); if(el && v > 0 && !el.value.trim()) el.value = Math.round(v).toLocaleString('es-CO'); };
+          // Identidad del declarante desde el propio reporte (filas 7/8 del MUISCA):
+          // cédula y nombre se autocompletan si el contador no los ha digitado.
+          var setTxtIfEmpty = function(id, v){ var el = document.getElementById(id); if(el && v && !el.value.trim()) el.value = v; };
+          setTxtIfEmpty('cc', String(rm.metadata.nit || '').replace(/\D/g, ''));
+          setTxtIfEmpty('nombre', nombreNaturalDIAN(rm.metadata.nombre || ''));
           setIfEmpty('patBruto', rm.resumen.patrimonioBruto);
           setIfEmpty('patDeudas', rm.resumen.patrimonioDeudas);
           setIfEmpty('retenciones', rm.resumen.retencionesC132);
