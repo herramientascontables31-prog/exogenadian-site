@@ -359,8 +359,7 @@ body.wsx .cal-wrap{overflow-x:auto}
     <button class="tab active" data-tab="liq" role="tab"><span class="wsx-ico">🧮</span> Liquidador</button>
     <button class="tab" data-tab="cli" role="tab"><span class="wsx-ico">👥</span> Clientes <span class="badge" id="badgeCli">0</span></button>
     <button class="tab" data-tab="apr" role="tab"><span class="wsx-ico">📚</span> Aprende</button>
-    <button class="tab" data-tab="card" role="tab"><span class="wsx-ico">🎨</span> Tarjeta</button>
-    <button class="tab" data-tab="carta" role="tab"><span class="wsx-ico">📄</span> Cartas</button>
+    <button class="tab" data-tab="carta" role="tab"><span class="wsx-ico">📄</span> Solicitudes al cliente</button>
     <button class="tab" data-tab="riesgo" role="tab"><span class="wsx-ico">⚠️</span> Diagnóstico <span class="badge" style="background:#fbbf24;color:#3b2a00">PRO</span></button>
   </nav>
   <section class="tab-panel active" id="panel-liq">
@@ -655,16 +654,16 @@ body.wsx .cal-wrap{overflow-x:auto}
   </section>
   <section class="tab-panel" id="panel-carta">
     <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin-bottom:16px;box-shadow:var(--shadow)">
-      <h2 style="font-size:1.15rem;color:var(--pri);font-weight:700;margin-bottom:4px">📄 Carta de solicitud de documentos</h2>
+      <h2 style="font-size:1.15rem;color:var(--pri);font-weight:700;margin-bottom:4px">📄 Solicitudes al cliente</h2>
       <p style="font-size:.88rem;color:var(--muted)">Genera la lista de documentos que necesitas del cliente para su declaración de renta, en PDF o Word. Personalízala por cliente o hazla masiva para todos tus clientes del hub.</p>
     </div>
-    <label id="cartaDrop" style="display:block;border:2px dashed var(--pri2);border-radius:var(--radius);padding:18px;text-align:center;cursor:pointer;background:var(--pri3);margin-bottom:16px;transition:.2s">
+    <label id="cartaDrop" style="display:block;border:1.5px dashed var(--pri2);border-radius:10px;padding:9px 12px;text-align:center;cursor:pointer;background:var(--pri3);margin-bottom:10px;transition:.2s;font-size:.85rem">
       <input type="file" id="cartaFile" accept=".xlsx,.xls" style="display:none">
       <div style="font-weight:700;color:var(--pri)">🔎 Arrastra el reporte de exógena del cliente y te digo qué pedir</div>
       <div style="font-size:.82rem;color:var(--muted);margin-top:4px">Detecto sus ingresos y patrimonio, marco los documentos que aplican y prellenо nombre/NIT. Opcional.</div>
       <div id="cartaDropMsg" style="font-size:.84rem;font-weight:600;color:var(--green);margin-top:8px"></div>
     </label>
-    <div style="display:grid;grid-template-columns:380px 1fr;gap:20px;align-items:start" id="cartaLayout">
+    <div style="display:grid;grid-template-columns:330px 1fr;gap:14px;align-items:start" id="cartaLayout">
       <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px">
         <div>
           <label style="font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px">Dirigida a</label>
@@ -823,6 +822,11 @@ document.querySelectorAll('.tab').forEach(function(t){
     var key = t.getAttribute('data-tab');
     // "Liquidador" abre directo la herramienta (mismo estudio, sin doble clic por la landing).
     // El panel-liq queda como landing SEO para quien llega al hub sin contexto.
+    if(key === 'apr'){
+      // Feedback jul-2026: lo formativo vive en la Escuela, no duplicado aquí.
+      location.href = 'escuela.html';
+      return;
+    }
     if(key === 'liq' && !document.getElementById('panel-liq').classList.contains('active')){
       if(typeof gtag !== 'undefined') gtag('event','renta_pn_hub_tab', { tab: 'liq_directo' });
       location.href = 'formato210-pro.html';

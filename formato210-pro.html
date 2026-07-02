@@ -160,12 +160,12 @@ body.f210-free #cardPagosPrevios,body.f210-free #cardCertificado{display:none!im
 /* ── Hero de resultado (lo que pagaría / le devolverían) ── */
 .resultado-hero{border-radius:16px;padding:18px 22px;margin-bottom:16px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;box-shadow:var(--shadow);border:1px solid var(--border);background:#fff}
 .resultado-hero.hidden{display:none!important}
-.resultado-hero.pagar{background:linear-gradient(135deg,#fff 55%,#fdf3f3);border-color:#f3d9d9}
+.resultado-hero.pagar{background:#fff;border-color:var(--border)}
 .resultado-hero.favor{background:linear-gradient(135deg,#fff 55%,#eefaf4);border-color:#cdeede}
 .resultado-hero .rh-main{flex:1;min-width:230px}
 .resultado-hero .rh-lbl{font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:2px}
 .resultado-hero .rh-num{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:clamp(1.6rem,4.5vw,2.3rem);line-height:1.15;letter-spacing:-.5px}
-.resultado-hero.pagar .rh-num{color:#c04747}
+.resultado-hero.pagar .rh-num{color:var(--pri)}
 .resultado-hero.favor .rh-num{color:#0d9f6e}
 .resultado-hero .rh-sub{font-size:.78rem;color:var(--muted);margin-top:3px}
 .resultado-hero .rh-chips{display:flex;gap:8px;flex-wrap:wrap;min-width:0}
@@ -274,7 +274,10 @@ body.f210-free .radio-pill input:disabled + *,body.f210-free .radio-pill:has(inp
 .recon-wrap{margin-top:6px}
 .recon-intro{font-size:.78rem;color:var(--muted);margin-bottom:10px;padding:8px 12px;background:#fafbfc;border-left:3px solid var(--pri2);border-radius:4px}
 .recon-table-scroll{overflow-x:auto;border:1px solid var(--border);border-radius:6px}
-.recon-table{width:100%;border-collapse:collapse;font-size:.78rem;min-width:760px}
+.recon-table{width:100%;border-collapse:collapse;font-size:.78rem;min-width:680px}
+.recon-table td:nth-child(4){min-width:120px}
+.recon-table input.recon-valor{min-width:112px;font-size:.8rem}
+.recon-table .concepto-cell{font-family:'DM Sans',sans-serif!important;font-size:.78rem;color:var(--text);display:block;max-width:250px;line-height:1.35}
 .recon-table th{background:var(--pri3);color:var(--pri);font-weight:600;text-align:left;padding:8px;border-bottom:2px solid #B4C6E7;font-size:.7rem;text-transform:uppercase;letter-spacing:.4px;white-space:nowrap;position:sticky;top:0}
 .recon-table td{padding:5px 8px;border-bottom:1px solid var(--border);vertical-align:middle}
 .recon-table tbody tr:hover td{background:#f9fafb}
@@ -462,7 +465,12 @@ body.wsx .card{border-radius:14px;box-shadow:0 1px 3px rgba(16,24,40,.06),0 1px 
 /* ── Panel de cifras elevado a "hero" ── */
 body.wsx .sidebar{top:74px}
 body.wsx .cifras-hero{padding:0;overflow:hidden;border:1px solid #d7e2f0;box-shadow:0 10px 30px -18px rgba(27,58,92,.55)}
-body.wsx .cifras-hero > h3{margin:0;padding:13px 18px;background:linear-gradient(135deg,#3a6693,#4285c4);color:#fff;font-size:.86rem;display:flex;align-items:center;gap:8px}
+body.wsx .cifras-hero > h3{margin:0;padding:12px 18px;background:#f1f5f9;color:var(--pri);font-size:.8rem;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)}
+/* Paso 4: formulario a lo ancho, sin panel lateral (la réplica ya lo trae todo) */
+body.wsx.tab-trevision .express-grid{grid-template-columns:1fr}
+body.wsx.tab-trevision .sidebar{display:none}
+/* El vencimiento vive en el hero desde jul-2026 (era ruido duplicado en el panel) */
+body.wsx #cardVencimiento{display:none!important}
 body.wsx .cifras-hero .live-row{padding:7px 18px;margin:0}
 body.wsx .cifras-hero .live-row.big{background:#f8fafc}
 body.wsx .cifras-hero .live-row.big .val{font-size:1.28rem}
@@ -679,9 +687,9 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
       <button class="f210-tab" data-tab="trevision" onclick="cambiarTabF210('trevision')"><span class="wsx-ico">📊</span><span class="wsx-lbl"><small>Paso 4</small>Formulario 210 y descarga</span></button>
       <div class="wsx-side-sep">Estudio</div>
       <a class="wsx-side-link" href="renta-personas-naturales.html#cli"><span class="wsx-ico">👥</span> Mis clientes</a>
-      <a class="wsx-side-link" href="renta-personas-naturales.html#carta"><span class="wsx-ico">📄</span> Cartas al cliente</a>
-      <a class="wsx-side-link" href="renta-personas-naturales.html#card"><span class="wsx-ico">🎨</span> Tarjeta para redes</a>
-      <a class="wsx-side-link" href="renta-personas-naturales.html#apr"><span class="wsx-ico">📚</span> Aprende</a>
+      <a class="wsx-side-link" href="renta-personas-naturales.html#carta"><span class="wsx-ico">📄</span> Solicitudes al cliente</a>
+      <a class="wsx-side-link" href="renta-personas-naturales.html#riesgo"><span class="wsx-ico">⚠️</span> Diagnóstico</a>
+      <a class="wsx-side-link" href="escuela.html"><span class="wsx-ico">📚</span> Aprende (Escuela)</a>
     </div>
     <div class="express-grid">
       <div id="colFormulario">
@@ -715,6 +723,7 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
             <span style="flex:1;min-width:220px;font-size:.75rem;color:var(--muted);line-height:1.5">Si no tienes el reporte (cliente nuevo) o quieres agregar conceptos no reportados a DIAN después de cargar.</span>
           </div>
         </div>
+        <div class="card hidden" id="cardSoportesCliente"></div>
         <div class="card tab-off" id="cardReconVacio" style="text-align:center;padding:28px 18px">
           <div style="font-size:2rem;margin-bottom:8px">🧾</div>
           <p style="font-size:.9rem;color:var(--muted);margin:0 0 14px">La <strong>reconciliación de conceptos</strong> aparece aquí después de cargar el reporte de exógena.<br>Cada concepto se clasifica en su cédula y te avisamos lo que requiere tu decisión.</p>
@@ -786,7 +795,8 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
           <div id="reajNota" style="margin-top:6px;font-size:.74rem;color:var(--muted)"></div>
         </div>
         <div class="card" id="cardComparativoAGAnterior">
-          <div class="section-title"><span class="num">6b</span> Declaración del año anterior y comparación patrimonial <span class="hint" style="font-weight:400;color:var(--muted);font-size:.78rem">(sube el PDF — recomendado)</span></div>
+          <div class="section-title"><span class="num">6b</span> Declaración del año anterior <span class="hint" style="font-weight:400;color:var(--muted);font-size:.78rem">(activa la comparación patrimonial)</span></div>
+          <div style="font-size:.8rem;color:var(--text);margin-bottom:8px"><b>¿Cómo?</b> Sube el 210 del año pasado (PDF del MUISCA, escaneo o foto) con el botón de abajo — la herramienta lee los valores y tú los confirmas. Si no lo tienes, digita los 3 campos clave manualmente.</div>
           <div style="font-size:.78rem;color:var(--muted);margin-bottom:8px">Si tienes los datos del año anterior, las hojas <strong>4 (validaciones)</strong>, <strong>7 (liquidación)</strong> y comparativos del Excel se enriquecen significativamente: aparece la conciliación patrimonial Art. 236-237 ET y el anticipo Art. 807 con opción 2 (promedio).</div>
           <div style="margin-bottom:10px;padding:8px 10px;border:1px dashed var(--border);border-radius:8px;background:#fafbff">
             <label for="declPrevFile" class="btn-sec" style="display:inline-block;cursor:pointer;font-size:.8rem">&#128206; Importar el 210 del año anterior (PDF, escaneo o foto)</label>
@@ -1708,7 +1718,7 @@ function procesarArchivoExogena(file){
       }
       var nReg = result.metadata.totalRegistros;
       if(typeof exoToast !== 'undefined'){
-        if(nReg > 0) exoToast('Exógena cargada: ' + nReg + ' registros (' + nivel + ' ' + result.metadata.confianza + '%) → ' + (window.__f210Pro ? 'Paso 2: revisa la reconciliación' : 'mira tu formulario 210 clasificado'), 'success');
+        if(nReg > 0) exoToast('Exógena cargada: ' + nReg + ' registros (' + nivel + ' ' + result.metadata.confianza + '%). Revisa los pasos marcados con punto.', 'success');
         else {
           // Caso solo-topes: el MUISCA a veces exporta solo el resumen de Topes 1-5
           // (sin detalle por tercero). No fallar en silencio: explicar y mostrar los
@@ -1725,12 +1735,11 @@ function procesarArchivoExogena(file){
       // en vivo (Paso 4), que es el gancho. Reaplicar el bloqueo de lectura sobre
       // los inputs recién creados (tabla de reconciliación, patrimonio, etc.).
       if(nReg > 0) dispararEstampado(); // el momento del gancho: conteo + sello, una vez
-      if(!window.__f210Pro){
-        aplicarBloqueoLectura();
-        if(nReg > 0) setTimeout(function(){ cambiarTabF210('trevision'); }, 350);
-      } else if(nReg > 0){
-        setTimeout(function(){ cambiarTabF210('texogena'); }, 900);
-      }
+      if(!window.__f210Pro) aplicarBloqueoLectura();
+      // Feedback Juan (jul-2026): NO saltar de paso — quedarse en el Paso 1 con el
+      // resumen y marcar con puntos los pasos que requieren revisión.
+      marcarPendientesTabs();
+      renderSoportesCliente();
       if(typeof gtag !== 'undefined') gtag('event','f210_pro_exogena_cargada', { registros: nReg, nivel: nivel });
     }).catch(function(err){
       console.error(err);
@@ -2060,7 +2069,7 @@ function cargarReconciliacionDesdeExogena(result){
     return {
       id: 'exo-' + reconciliacionEstado._seq,
       fuente: 'exogena',
-      concepto: r.concepto,
+      concepto: r.concepto || r.descripcion || '', // el parser emite "descripcion" (fix: salía undefined)
       descripcion: r.descripcion,
       informante: r.informante,
       nit: r.nitInformante,
@@ -2188,8 +2197,8 @@ function renderizarTablaReconciliacion(){
       sugCls = f.cedulaSugerida ? '' : ' null';
     }
     var conceptoCell = f.fuente === 'manual'
-      ? '<input type="text" value="' + escAttr(f.concepto) + '" oninput="reconCambiarConcepto(\'' + f.id + '\', this.value)" style="width:80px;font-family:JetBrains Mono,monospace" placeholder="cód.">'
-      : '<span class="concepto-cell">' + f.concepto + '</span>';
+      ? '<input type="text" value="' + escAttr(f.concepto) + '" oninput="reconCambiarConcepto(\'' + f.id + '\', this.value)" style="width:130px" placeholder="Descripción">'
+      : '<span class="concepto-cell" title="' + escAttr(f.concepto || '') + '">' + escHtml(String(f.concepto || '—').slice(0, 65)) + '</span>';
     var informanteCell = f.fuente === 'manual'
       ? '<input type="text" value="' + escAttr(f.informante || '') + '" oninput="reconCambiarInformante(\'' + f.id + '\', this.value)" placeholder="Informante">'
       : '<div class="informante-cell" title="' + escAttr(f.informante) + ' · NIT ' + escAttr(f.nit) + '">' +
@@ -2199,12 +2208,12 @@ function renderizarTablaReconciliacion(){
       '<td>' + (idx + 1) + '</td>' +
       '<td>' + conceptoCell + '</td>' +
       '<td>' + informanteCell + '</td>' +
-      '<td><input type="text" class="recon-valor" value="' + (f.valor ? f.valor.toLocaleString('es-CO') : '') + '" oninput="reconCambiarValor(\'' + f.id + '\', this.value)"></td>' +
-      '<td class="num-cell" style="color:var(--muted)">' + (f.retencion ? '$' + f.retencion.toLocaleString('es-CO') : '—') + '</td>' +
+      '<td><input type="text" class="recon-valor" value="' + (f.valor ? f.valor.toLocaleString('es-CO') : '') + '" oninput="reconCambiarValor(\'' + f.id + '\', this.value)">' +
+        (f.retencion ? '<div style="font-size:.68rem;color:var(--muted);text-align:right;margin-top:2px">ret. $' + f.retencion.toLocaleString('es-CO') + '</div>' : '') + '</td>' +
       '<td><span class="sug-tag' + sugCls + '">' + sugLabel + '</span>' + iaBadge + '</td>' +
       '<td><select class="recon-cedula" onchange="reconCambiarCedula(\'' + f.id + '\', this.value)">' + buildCedulaSelectOptions(f.cedulaFinal) + '</select></td>' +
-      '<td><button class="btn-row ' + (f.excluida ? '' : 'danger') + '" onclick="reconToggleExclusion(\'' + f.id + '\')" title="' + (f.excluida ? 'Restaurar' : 'Excluir de la declaración') + '">' +
-        (f.excluida ? '↺ Restaurar' : '✕ Excluir') +
+      '<td><button class="btn-row ' + (f.excluida ? '' : 'danger') + '" onclick="reconToggleExclusion(\'' + f.id + '\')" title="' + (f.excluida ? 'Restaurar en la declaración' : 'Excluir de la declaración') + '">' +
+        (f.excluida ? '↺' : '✕') +
       '</button></td>' +
     '</tr>';
   }).join('');
@@ -2212,8 +2221,8 @@ function renderizarTablaReconciliacion(){
     ? '<div style="padding:20px;text-align:center;color:var(--muted);font-size:.85rem">Sin registros. Agrega conceptos manualmente con el botón abajo si el declarante tiene ingresos no reportados a DIAN.</div>'
     : '<div class="recon-table-scroll"><table class="recon-table">' +
         '<thead><tr>' +
-          '<th>#</th><th>Concepto</th><th>Informante / NIT</th><th>Valor</th><th>Retención</th>' +
-          '<th>Sugerida</th><th>Cédula final</th><th>Acción</th>' +
+          '<th>#</th><th>Concepto</th><th>Informante / NIT</th><th>Valor</th>' +
+          '<th>Sugerida</th><th>Cédula final</th><th></th>' +
         '</tr></thead><tbody>' + rowsHtml + '</tbody></table></div>';
   var alertasHtml = '';
   if(sinCedula > 0){
@@ -2235,8 +2244,8 @@ function renderizarTablaReconciliacion(){
         '<button class="btn btn-outline" onclick="reconLimpiar()" style="font-size:.82rem;padding:8px 14px">Limpiar tabla</button>' +
         iaBtnHtml +
       '</div>' +
-      '<button class="btn btn-success" onclick="reconAceptarTodo()" style="font-size:.92rem;padding:10px 22px"' + (sinCedula > 0 ? ' disabled style="opacity:.5;cursor:not-allowed;font-size:.92rem;padding:10px 22px"' : '') + '>' +
-        'Aplicar al formulario 210 &rarr;' +
+      '<button class="btn btn-success" onclick="reconAceptarTodo()" style="font-size:.92rem;padding:10px 22px">' +
+        'Ver el formulario 210 &rarr;' +
       '</button>' +
     '</div>';
   var aplicadaHtml = '';
@@ -2385,6 +2394,11 @@ function escAttr(s){
   });
 }
 function _findFila(id){ return reconciliacionEstado.filas.find(function(f){ return f.id === id; }); }
+/* Auto-montaje al 210 (jul-2026, feedback Juan): cada cambio en la tabla se
+   aplica de una al formulario — sin boton "Aceptar". Silencioso (sin toast). */
+function reconAutoAplicar(){
+  try{ aplicarReconciliacionAlWizard(true, true); }catch(_){ reconciliacionEstado.aplicada = false; }
+}
 function reconCambiarCedula(id, value){
   var f = _findFila(id); if(!f) return;
   f.cedulaFinal = value || null;
@@ -2392,14 +2406,14 @@ function reconCambiarCedula(id, value){
   // para auditoría y para que el badge IA desaparezca o se atenúe.
   f.cedulaFinalSource = f.cedulaFinal ? 'manual' : null;
   if(f.cedulaFinal === 'excluir'){ f.excluida = true; f.cedulaFinal = null; f.cedulaFinalSource = null; }
-  reconciliacionEstado.aplicada = false;
+  reconAutoAplicar();
   renderizarTablaReconciliacion();
 }
 function reconCambiarValor(id, raw){
   var f = _findFila(id); if(!f) return;
   var n = parseInt(String(raw||'').replace(/[^\d-]/g,''));
   f.valor = isNaN(n) ? 0 : n;
-  reconciliacionEstado.aplicada = false;
+  reconAutoAplicar();
 }
 function reconCambiarConcepto(id, val){
   var f = _findFila(id); if(!f) return;
@@ -2416,7 +2430,7 @@ function reconToggleExclusion(id){
     var motivo = prompt('Motivo de exclusión (queda registrado en Hoja 5B del Excel papel de trabajo):', f.motivoExclusion || '');
     f.motivoExclusion = motivo || '';
   }
-  reconciliacionEstado.aplicada = false;
+  reconAutoAplicar();
   renderizarTablaReconciliacion();
 }
 function reconAgregarManual(){
@@ -2546,14 +2560,15 @@ function reconClasificarConIA(){
   });
 }
 function reconAceptarTodo(){
+  // Todo cambio ya se monta solo al 210 (auto-aplicar). Este boton solo navega.
   var sinCedula = reconciliacionEstado.filas.filter(function(f){ return !f.cedulaFinal && !f.excluida; });
-  if(sinCedula.length > 0){
-    if(typeof exoToast !== 'undefined') exoToast('Asigna cédula a los registros en amarillo antes de aceptar', 'error');
-    return;
+  aplicarReconciliacionAlWizard(true);
+  if(sinCedula.length > 0 && typeof exoToast !== 'undefined'){
+    exoToast(sinCedula.length + ' registro(s) en amarillo sin cédula: no entran al 210 hasta que les asignes una.', 'warning');
   }
-  aplicarReconciliacionAlWizard();
+  cambiarTabF210('trevision');
 }
-function aplicarReconciliacionAlWizard(silencioso){
+function aplicarReconciliacionAlWizard(silencioso, sinRender){
   // Acumular por inputId
   var acums = {};
   CEDULAS_OPCIONES.forEach(function(o){ if(o.implementada && o.inputId) acums[o.inputId] = 0; });
@@ -2590,7 +2605,7 @@ function aplicarReconciliacionAlWizard(silencioso){
   if(ultimoExogenaResult) ultimoExogenaResult._reconciliacionAplicada = true;
   if(!silencioso && typeof exoToast !== 'undefined') exoToast('Reconciliación aplicada · formulario prediligenciado', 'success');
   if(typeof gtag !== 'undefined') gtag('event','f210_pro_reconciliacion_aplicada');
-  renderizarTablaReconciliacion();
+  if(!sinRender) renderizarTablaReconciliacion();
   recalcular();
 }
 function aplicarIncrngoDanoEmergente(monto){
@@ -2977,18 +2992,31 @@ function renderResultadoHero(){
   var $ = function(n){ return '$' + Math.round(n || 0).toLocaleString('es-CO'); };
   var esFavor = favor > 0 && !pagar;
   var num = esFavor ? favor : pagar;
-  var lbl = esFavor ? 'Saldo a favor estimado' : (pagar > 0 ? 'Pagaría (saldo a cargo estimado)' : 'Sin saldo a pagar');
+  var lbl = esFavor ? 'Saldo a favor estimado' : (pagar > 0 ? 'Punto de partida — saldo SIN depurar' : 'Sin saldo a pagar');
   var year = (ultimoEstado && ultimoEstado.year) || getYear();
   var nReg = ultimoExogenaResult.metadata.totalRegistros;
   var chips =
     '<div class="rh-chip">Registros exógena<b>' + nReg + '</b></div>' +
     '<div class="rh-chip">Impuesto neto (c126)<b>' + $(R.c126) + '</b></div>' +
     '<div class="rh-chip">Retenciones (c132)<b>' + $(R.c132) + '</b></div>';
+  // Vencimiento y obligatoriedad apenas carga la exógena (feedback Juan jul-2026)
+  try{
+    if(window.vencimientosPN){
+      var vcc = (document.getElementById('cc')||{}).value || '';
+      var vv = vcc ? vencimientosPN.getVencimientoPN(vcc) : null;
+      if(vv && vv.fechaFmt) chips += '<div class="rh-chip">Vence su renta<b>' + vv.fechaFmt + '</b></div>';
+      var sub2 = (ultimoResultado.cedulaGeneral && ultimoResultado.cedulaGeneral.subcedulas) || {};
+      var ingT = ((sub2.trabajo||{}).ingresosBrutos||0)+((sub2.honorarios||{}).ingresosBrutos||0)+((sub2.capital||{}).ingresosBrutos||0)+((sub2.noLaboral||{}).ingresosBrutos||0)+(((ultimoResultado.cedulaPensiones)||{}).ingresosBrutos||0);
+      var ob = vencimientosPN.badgeObligatoriedadHTML({ patrimonioBruto:(ultimoResultado.patrimonio&&ultimoResultado.patrimonio.c29)||0, ingresosBrutos:ingT, consignaciones:0 }) || '';
+      if(/obligado a declarar/i.test(ob) && !/no obligado/i.test(ob)) chips += '<div class="rh-chip">&iquest;Debe declarar?<b>S&iacute; &middot; supera topes</b></div>';
+    }
+  }catch(_){}
   var h = '<div class="rh-stamp">' + (window.__f210Pro ? 'Borrador' : 'Vista previa') + '</div>' +
           '<div class="rh-main"><div class="rh-lbl">AG ' + year + ' &middot; clasificado desde la ex&oacute;gena DIAN</div>' +
           '<div class="rh-num" data-valor="' + num + '">' + (num > 0 ? $(num) : '$0') + '</div>' +
-          '<div class="rh-sub">' + lbl + ' &middot; estimaci&oacute;n autom&aacute;tica, antes de deducciones personales</div></div>' +
+          '<div class="rh-sub">' + lbl + ' &middot; normalmente <b>baja</b> al depurar y aplicar deducciones</div></div>' +
           '<div class="rh-chips">' + chips + '</div>';
+  h += '<button class="rh-cta" style="background:#fff;color:var(--pri);border:1.5px solid var(--pri);box-shadow:none" onclick="cambiarTabF210(&quot;trevision&quot;)">Ver el 210 armado &rarr;</button>';
   if(!window.__f210Pro){
     h += '<button class="rh-cta" onclick="abrirPaywall()">Ajustar y bajar este saldo &rarr;</button>';
     if(pagar > 0){
@@ -2997,7 +3025,7 @@ function renderResultadoHero(){
   }
   // Siempre visible (gratis y PRO): la exógena es GUÍA, no verdad. La DIAN la
   // actualiza y no lo trae todo — el cierre profesional es contra soportes.
-  h += '<div class="rh-guia">⚖️ <b>Esto es una guía, no la declaración final.</b> La DIAN actualiza la exógena y no siempre lo trae todo. Pídele los soportes al cliente y verifica contra ellos — <a href="renta-personas-naturales.html#carta">genera la carta de solicitud →</a></div>';
+  h += '<div class="rh-guia">⚖️ <b>Esto es una guía, no la declaración final.</b> La DIAN actualiza la exógena y no siempre lo trae todo. Pídele los soportes al cliente y verifica contra ellos — <a href="renta-personas-naturales.html#carta">genera la solicitud de documentos →</a></div>';
   el.className = 'resultado-hero ' + (esFavor ? 'favor' : 'pagar');
   el.innerHTML = h;
 }
@@ -3011,6 +3039,58 @@ function dispararEstampado(){
   el.classList.add('estampar');
   var n = el.querySelector('.rh-num');
   if(n) animarConteo(n, parseInt(n.getAttribute('data-valor'), 10) || 0);
+}
+/* Alertas por paso: punto naranja en los pasos que requieren decisión (feedback Juan). */
+function marcarPendientesTabs(){
+  var filas = (window.reconciliacionEstado && reconciliacionEstado.filas) || [];
+  var sinCed = filas.filter(function(f){ return !f.cedulaFinal && !f.excluida; }).length;
+  var t2 = document.querySelector('.f210-tab[data-tab="texogena"]');
+  if(t2) t2.classList.toggle('tiene-pendiente', sinCed > 0);
+  var t3 = document.querySelector('.f210-tab[data-tab="trentas"]');
+  if(t3) t3.classList.toggle('tiene-pendiente', filas.length > 0);
+}
+/* Soportes A PEDIR con nombres propios, desde la propia exógena (feedback Juan):
+   "necesitas el F220 de tal empresa, el extracto de tal otra". */
+function renderSoportesCliente(){
+  var card = document.getElementById('cardSoportesCliente');
+  if(!card) return;
+  var filas = (window.reconciliacionEstado && reconciliacionEstado.filas) || [];
+  if(!filas.length){ card.classList.add('hidden'); return; }
+  var DOC = {
+    trabajo: ['📄', 'Certificado de ingresos y retenciones (F220)'],
+    trabajo_exenta: ['📄', 'Certificado de ingresos y retenciones (F220)'],
+    honorarios: ['🧾', 'Certificación de ingresos / facturas del año'],
+    noLaboral: ['🧾', 'Certificación de pagos del año'],
+    capital: ['🏦', 'Certificado tributario de rendimientos'],
+    pensiones: ['📄', 'Certificado del fondo de pensiones'],
+    dividendos_no_grav: ['📈', 'Certificado de dividendos'],
+    dividendos_grav: ['📈', 'Certificado de dividendos'],
+    gananciasOcasionales: ['⚡', 'Soporte de la venta / premio (contrato, escritura)']
+  };
+  var vistos = {}, items = [];
+  filas.forEach(function(f){
+    if(f.excluida || !f.informante) return;
+    var d = DOC[f.cedulaFinal || f.cedulaSugerida];
+    if(!d) return;
+    var key = d[1] + '::' + f.informante;
+    if(vistos[key]) return; vistos[key] = 1;
+    items.push('<li>' + d[0] + ' <b>' + d[1] + '</b> de <span style="color:var(--pri2);font-weight:600">' + escHtml(f.informante) + '</span></li>');
+  });
+  try{
+    var bienes = (reconciliacionEstado.muiscaResumen && reconciliacionEstado.muiscaResumen.bienes) || [];
+    var bt = {};
+    bienes.forEach(function(b){ if(b.informante) bt[(b.tipo||'bien') + '::' + b.informante] = b; });
+    Object.keys(bt).slice(0, 6).forEach(function(k){
+      var b = bt[k];
+      var doc = /veh/i.test(b.tipo||'') ? 'Impuesto vehicular / tarjeta de propiedad' : (/inmueble|predial/i.test(b.tipo||'') ? 'Predial y escritura' : 'Certificado de saldos a 31-dic');
+      items.push('<li>🏛️ <b>' + doc + '</b> de <span style="color:var(--pri2);font-weight:600">' + escHtml(b.informante) + '</span></li>');
+    });
+  }catch(_){}
+  if(!items.length){ card.classList.add('hidden'); return; }
+  card.classList.remove('hidden');
+  card.innerHTML = '<div class="section-title"><span class="num">✓</span> Soportes a pedirle al cliente <span class="hint" style="font-weight:400;color:var(--muted);font-size:.78rem">(según su propia exógena)</span></div>' +
+    '<ul style="margin:0 0 10px;padding-left:20px;font-size:.84rem;line-height:1.9">' + items.slice(0, 14).join('') + '</ul>' +
+    '<a href="renta-personas-naturales.html#carta" class="btn-aplicar secondary" style="text-decoration:none;display:inline-block">📄 Generar la solicitud para el cliente &rarr;</a>';
 }
 /* Cuenta de 0 al saldo en ~850ms (ease-out cúbico). Con reduced-motion va directo. */
 function animarConteo(nEl, objetivo){
@@ -3933,12 +4013,15 @@ function toggleReplica210(){
 // No se mueve el HTML: solo se muestra/oculta cada card según la pestaña activa
 // (con .tab-off, que respeta la lógica de .hidden propia de cada card).
 var TABS_F210 = {
-  t210:        ['cardAnio', 'cardExogena', 'cardDeclarante', 'cardComparativoAGAnterior', 'cardPatrimonio', 'cardReajusteFiscal', 'cardF160', 'cardPagosPrevios'],
+  t210:        ['cardAnio', 'cardExogena', 'cardSoportesCliente', 'cardDeclarante', 'cardComparativoAGAnterior', 'cardPatrimonio', 'cardReajusteFiscal', 'cardF160', 'cardPagosPrevios'],
   texogena:    ['cardReconciliacion', 'cardCertificado'],
   trentas:     ['cardCedulaGeneral', 'cardPensiones', 'cardDividendos', 'cardGO'],
   trevision:   ['cardReplica210', 'cardSugerida', 'cardLiquidacion']
 };
 function cambiarTabF210(tab){
+  // Paso 4: el 210 ocupa TODO el ancho (feedback Juan: "el 210 está muy estrecho,
+  // las cifras en vivo quitan espacio y ya todo está en la réplica").
+  document.body.classList.toggle('tab-trevision', tab === 'trevision');
   // Modo gratis: Reconciliación (texogena) y Rentas por cédula (trentas) son PRO.
   if(!window.__f210Pro && (tab==='texogena' || tab==='trentas')){
     abrirPaywall(tab==='texogena'
