@@ -243,18 +243,32 @@
     });
   }
 
-  /* Alertas didácticas: buckets donde el saldo se vuelve negativo, con el
-     detalle de qué obligación (si es tributaria) causó el bache. */
+  /* Alertas didácticas: agrupa RACHAS consecutivas de saldo negativo en un
+     solo aviso (no una caja por semana), con la causa principal de la
+     racha y su punto más bajo. */
   function detectarAlertas(buckets) {
-    var alertas = [];
-    (buckets || []).forEach(function (b) {
-      if (b.saldoFinal < 0 && b.saldoInicial >= 0) {
-        var causa = b.movimientos.filter(function (m) { return m.monto < 0; }).sort(function (a, c) { return a.monto - c.monto; })[0];
-        alertas.push({ periodo: b.label, saldoFinal: b.saldoFinal, causaPrincipal: causa ? causa.concepto : null });
-      } else if (b.saldoFinal < 0) {
-        alertas.push({ periodo: b.label, saldoFinal: b.saldoFinal, causaPrincipal: null, continua: true });
-      }
-    });
+    buckets = buckets || [];
+    var alertas = [], i = 0;
+    while (i < buckets.length) {
+      if (buckets[i].saldoFinal < 0) {
+        var inicio = i, minB = buckets[i];
+        while (i < buckets.length && buckets[i].saldoFinal < 0) {
+          if (buckets[i].saldoFinal < minB.saldoFinal) minB = buckets[i];
+          i++;
+        }
+        var fin = i - 1;
+        var causa = buckets[inicio].movimientos.filter(function (m) { return m.monto < 0; })
+          .sort(function (a, c) { return a.monto - c.monto; })[0];
+        alertas.push({
+          periodoInicio: buckets[inicio].label,
+          periodoFin: buckets[fin].label,
+          continuo: fin > inicio,
+          saldoMinimo: minB.saldoFinal,
+          periodoMinimo: minB.label,
+          causaPrincipal: causa ? causa.concepto : null
+        });
+      } else { i++; }
+    }
     return alertas;
   }
 
