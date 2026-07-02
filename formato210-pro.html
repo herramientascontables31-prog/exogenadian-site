@@ -1650,6 +1650,17 @@ function procesarArchivoExogena(file){
           var setTxtIfEmpty = function(id, v){ var el = document.getElementById(id); if(el && v && !el.value.trim()) el.value = v; };
           setTxtIfEmpty('cc', String(rm.metadata.nit || '').replace(/\D/g, ''));
           setTxtIfEmpty('nombre', nombreNaturalDIAN(rm.metadata.nombre || ''));
+          // Año gravable del propio reporte: seleccionarlo solo (evita liquidar
+          // un reporte 2024 con parámetros 2025 sin que nadie lo note).
+          var anioRep = (String(rm.metadata.anio || '').match(/20\d{2}/) || [])[0];
+          if(anioRep){
+            var radioAnio = document.querySelector('input[name="year"][value="' + anioRep + '"]');
+            if(radioAnio && !radioAnio.checked){
+              radioAnio.checked = true;
+              document.querySelectorAll('.radio-pill').forEach(function(p){ var i = p.querySelector('input[name="year"]'); if(i) p.classList.toggle('active', i.checked); });
+              if(typeof exoToast !== 'undefined') exoToast('Año gravable ajustado a AG ' + anioRep + ' — es el año del reporte de exógena que cargaste', 'info');
+            }
+          }
           setIfEmpty('patBruto', rm.resumen.patrimonioBruto);
           setIfEmpty('patDeudas', rm.resumen.patrimonioDeudas);
           setIfEmpty('retenciones', rm.resumen.retencionesC132);
@@ -3347,10 +3358,11 @@ function ofrecerVinculoCliente(meta){
     return;
   }
   if(enPanel){
-    show('#F5F3FF', '#C4B5FD',
-      '<span style="color:#1B3A5C">👤 Este reporte es de <b>' + escHtml(enPanel.nombre || nit) + '</b>, que ya está en tu panel de clientes.</span>' +
-      '<button id="vincBtn" style="' + BTN + ';background:#7C3AED;color:#fff">Trabajar con este cliente →</button>');
-    bind(function(){ vincularClienteActivo(enPanel.nit, enPanel.nombre); });
+    // Menos pasos: si el cliente ya está en el panel, enlazar SOLO (sin clic).
+    vincularClienteActivo(enPanel.nit, enPanel.nombre);
+    show('#ECFDF5', '#A7F3D0',
+      '<span style="color:#065F46">✓ Reporte de <b>' + escHtml(enPanel.nombre || nit) + '</b> — enlazado con tu panel automáticamente; su borrador se guarda aparte.</span>');
+    setTimeout(ocultarVinculoBox, 9000);
   } else {
     show('#F5F3FF', '#C4B5FD',
       '<span style="color:#1B3A5C">👤 Reporte de <b>' + escHtml(nombre || ('NIT ' + nit)) + '</b> · NIT ' + nit + '. ¿Lo agrego a tu panel para llevarle el control y guardar su borrador aparte?</span>' +
