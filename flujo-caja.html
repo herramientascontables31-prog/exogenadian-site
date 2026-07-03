@@ -36,7 +36,7 @@
 {"@type":"Question","name":"¿Por qué el flujo de caja necesita mi NIT?","acceptedAnswer":{"@type":"Answer","text":"Porque el calendario tributario DIAN asigna la fecha de vencimiento de IVA, retención en la fuente, renta e ICA según el último dígito de tu NIT. Sin el NIT no se puede calendarizar automáticamente cuándo sale esa plata."}}
 ]}
 </script>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.0/jspdf.plugin.autotable.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js" integrity="sha384-Pqp51FUN2/qzfxZxBCtF0stpc9ONI6MYZpVqmo8m20SoaQCzf+arZvACkLkirlPz" crossorigin="anonymous"></script>
@@ -55,7 +55,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 .header-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:5px 14px;font-size:.74rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;margin-bottom:12px}
 .header-link{display:inline-flex;align-items:center;gap:6px;margin-top:12px;color:#fff;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:8px 14px;font-size:.82rem;font-weight:700;text-decoration:none}
 .header-link:hover{background:rgba(255,255,255,.25)}
-.header h1{font-size:clamp(1.4rem,3.2vw,1.9rem);font-weight:800;letter-spacing:-.02em;margin-bottom:8px;line-height:1.15}
+.reset-link{background:none;border:none;color:var(--muted);font-size:.78rem;font-weight:600;cursor:pointer;font-family:inherit;padding:4px 6px;text-decoration:underline;text-decoration-style:dotted}
+.reset-link:hover{color:var(--red)}
+.header h1{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3.6vw,2.3rem);font-weight:600;letter-spacing:-.01em;margin-bottom:8px;line-height:1.15}
 .header p{opacity:.92;font-size:.92rem;max-width:680px;line-height:1.55}
 .card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:24px;margin-bottom:18px;box-shadow:var(--shadow)}
 .card-title{font-size:1.05rem;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px;color:var(--pri)}
@@ -107,6 +109,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 .summary-card .val{font-size:1.25rem;font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--pri)}
 .summary-card .val.neg{color:var(--red)}
 .summary-card .val.pos{color:var(--green)}
+.summary-card.hero{background:linear-gradient(135deg,#0F2942 0%,#1B3A5C 100%);border:none;padding:20px 20px;position:relative;overflow:hidden}
+.summary-card.hero::before{content:'💧';position:absolute;right:10px;top:6px;font-size:2.2rem;opacity:.14}
+.summary-card.hero .lbl{color:rgba(255,255,255,.65)}
+.summary-card.hero .val{font-family:'Fraunces',serif;font-size:clamp(1.4rem,3vw,1.9rem);font-weight:600;letter-spacing:-.02em;color:#fff}
+.summary-card.hero .val.neg{color:#FCA5A5}
+.summary-card.hero .val.pos{color:#6EE7B7}
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.step-panel.active .card{animation:fadeSlideUp .45s ease both}
+.step-panel.active .card:nth-of-type(2){animation-delay:.07s}
+@media(prefers-reduced-motion:reduce){.step-panel.active .card{animation:none}}
 .chart-wrap{background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:18px;height:280px}
 .alert-box{background:var(--amber2);border-left:4px solid var(--amber);border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:10px;font-size:.86rem;color:#78350F}
 .alert-box strong{color:#92400E}
@@ -187,6 +199,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
     <div class="step-dot" data-step="3"><span class="num">3</span> Egresos</div>
     <div class="step-dot" data-step="4"><span class="num">4</span> Tu flujo</div>
   </div>
+  <div class="no-print" style="text-align:right;margin:-10px 0 14px"><button class="reset-link" onclick="borrarMisDatos()">🗑️ Borrar mis datos y empezar de nuevo</button></div>
   <div class="step-panel" id="panel1">
     <div class="card">
       <div class="card-title">🏢 Tu empresa</div>
@@ -261,7 +274,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
       </div>
       <table class="mini-table"><thead><tr><th>Mes</th><th style="text-align:right">Compras/costos</th></tr></thead><tbody id="tablaCompras"></tbody></table>
       <div class="field" style="max-width:280px;margin-top:8px"><label>Días de pago a proveedores</label><input type="number" id="fDiasPagoProveedor" min="0"></div>
-      <h3 style="font-size:.9rem;color:var(--pri);margin:18px 0 8px">🏠 Gastos fijos mensuales</h3>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin:18px 0 8px">
+        <h3 style="font-size:.9rem;color:var(--pri)">🏠 Gastos fijos mensuales</h3>
+        <button class="reset-link" onclick="vaciarGastosFijos()">🗑️ Vaciar esta lista</button>
+      </div>
       <table class="mini-table"><thead><tr><th>Concepto</th><th style="text-align:right">Valor</th><th style="text-align:right">Día de pago</th><th></th></tr></thead><tbody id="tablaGastosFijos"></tbody></table>
       <button class="btn-add" onclick="agregarGastoFijo()">+ Agregar gasto fijo</button>
       <h3 style="font-size:.9rem;color:var(--pri);margin:18px 0 8px">🧾 Impuestos (montos estimados por periodo)</h3>
@@ -329,7 +345,18 @@ var DEFAULT_STATE = {
   ventasPorMes: {},
   politicaCartera: { pctContado:60, diasCredito:30, pctRetencionPromedio:4 },
   nomina: { numEmpleados:3, salarioBase:6000000, exonerado:true },
-  gastosFijos: [ {concepto:'Arriendo', valor:2000000, diaPago:5}, {concepto:'Servicios públicos', valor:600000, diaPago:10} ],
+  gastosFijos: [
+    {concepto:'Arriendo', valor:2000000, diaPago:5},
+    {concepto:'Servicios públicos (agua, luz, gas)', valor:600000, diaPago:10},
+    {concepto:'Internet y telefonía', valor:0, diaPago:10},
+    {concepto:'Seguros', valor:0, diaPago:15},
+    {concepto:'Software y suscripciones', valor:0, diaPago:5},
+    {concepto:'Honorarios contador/revisor fiscal', valor:0, diaPago:10},
+    {concepto:'Aseo y cafetería', valor:0, diaPago:5},
+    {concepto:'Publicidad y mercadeo', valor:0, diaPago:5},
+    {concepto:'Transporte y parqueadero', valor:0, diaPago:5},
+    {concepto:'Mantenimiento', valor:0, diaPago:5}
+  ],
   compraBase: 5000000,
   comprasPorMes: {},
   diasPagoProveedor: 30,
@@ -351,6 +378,16 @@ function cargarEstado(){
   return base;
 }
 function guardarEstado(){ if(window.FinanzasStore) FinanzasStore.set(STORE_KEY, state); }
+window.borrarMisDatos = function(){
+  if(!confirm('¿Borrar todos los datos que has ingresado en Flujo de Caja y empezar de nuevo?\n\nEsto no se puede deshacer.')) return;
+  if(window.FinanzasStore) FinanzasStore.remove(STORE_KEY);
+  state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+  resultado = null;
+  pintarPaso1();
+  window.irPaso(1);
+  if(typeof exoToast==='function') exoToast('Tus datos fueron borrados. Empezando de nuevo.', 'info');
+  if(typeof gtag==='function') gtag('event','flujo_caja_datos_borrados');
+};
 function mesesHorizonte(){
   var d = new Date();
   var desde = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
@@ -451,6 +488,12 @@ window.quitarGastoFijo = function(i){
   leerGastosFijos();
   state.gastosFijos.splice(i,1);
   pintarGastosFijos();
+};
+window.vaciarGastosFijos = function(){
+  if(!confirm('¿Vaciar toda la lista de gastos fijos?')) return;
+  state.gastosFijos = [];
+  pintarGastosFijos();
+  guardarEstado();
 };
 function leerGastosFijos(){
   var rows = document.querySelectorAll('#tablaGastosFijos tr');
@@ -568,7 +611,7 @@ function pintarResultado(){
   var minBucket = buckets.reduce(function(min,b){ return (!min||b.saldoFinal<min.saldoFinal)?b:min; }, null);
   document.getElementById('summaryGrid').innerHTML =
     '<div class="summary-card"><div class="lbl">Saldo hoy</div><div class="val">'+fmt(saldoHoy)+'</div></div>'+
-    '<div class="summary-card"><div class="lbl">Saldo al final del horizonte</div><div class="val '+(saldoFinalHorizonte<0?'neg':'pos')+'">'+fmt(saldoFinalHorizonte)+'</div></div>'+
+    '<div class="summary-card hero"><div class="lbl">Saldo al final del horizonte</div><div class="val '+(saldoFinalHorizonte<0?'neg':'pos')+'">'+fmt(saldoFinalHorizonte)+'</div></div>'+
     '<div class="summary-card"><div class="lbl">Punto más bajo</div><div class="val '+(minBucket&&minBucket.saldoFinal<0?'neg':'pos')+'">'+(minBucket?fmt(minBucket.saldoFinal)+' — '+minBucket.label:'—')+'</div></div>';
   // Chart
   var ctx = document.getElementById('chartSaldo').getContext('2d');
@@ -612,44 +655,117 @@ window.toggleMov = function(i){
   if(row) row.style.display = row.style.display==='none' ? '' : 'none';
 };
 /* ═══ Export Excel (PRO) ═══ */
+function sumBucket(bucket, grupo, prefix){
+  return bucket.movimientos.filter(function(m){
+    return m.grupo===grupo && (!prefix || m.concepto.indexOf(prefix)===0);
+  }).reduce(function(s,m){ return s+Math.abs(m.monto); }, 0);
+}
 window.descargarExcel = async function(){
   if(!(await exoProGate('Flujo de Caja'))) return;
   if(!resultado) calcular();
+  var buckets = resultado.buckets;
+  var nCols = buckets.length + 1;
   var wb = new ExcelJS.Workbook(); wb.created = new Date();
-  var hF = { type:'pattern', pattern:'solid', fgColor:{argb:'FF1B3A5C'} };
+  var NAVY='FF1B3A5C', GREENTXT='FF047857', REDTXT='FFDC2626', LIGHTBG='FFF0F2F5', OKBG='FFECFDF5';
+  var hF = { type:'pattern', pattern:'solid', fgColor:{argb:NAVY} };
   var wFont = { bold:true, color:{argb:'FFFFFFFF'}, size:11 };
-  var ws1 = wb.addWorksheet('Flujo de Caja');
-  ws1.columns = [{width:26},{width:18},{width:18},{width:18},{width:18}];
-  ws1.mergeCells('A1:E1');
-  ws1.getCell('A1').value = 'Flujo de Caja Proyectado — '+state.empresa.nombre;
-  ws1.getCell('A1').fill = hF; ws1.getCell('A1').font = {bold:true,color:{argb:'FFFFFFFF'},size:13};
-  ws1.getCell('A1').alignment = {horizontal:'center'};
-  ws1.getRow(1).height = 24;
-  ws1.addRow(['Generado', new Date().toLocaleDateString('es-CO'), 'NIT', state.empresa.nit, '']);
-  ws1.addRow([]);
-  var head = ws1.addRow(['Periodo','Saldo inicial','Ingresos','Egresos','Saldo final']);
-  head.eachCell(function(c){ c.fill=hF; c.font=wFont; });
-  resultado.buckets.forEach(function(b){
-    var r = ws1.addRow([b.label, b.saldoInicial, b.ingresos, b.egresos, b.saldoFinal]);
-    for(var col=2; col<=5; col++){ r.getCell(col).numFmt='#,##0'; }
-    if(b.saldoFinal<0) r.eachCell(function(c){ c.font={color:{argb:'FFDC2626'},bold:true}; });
+  var sectionFill = { type:'pattern', pattern:'solid', fgColor:{argb:LIGHTBG} };
+  var thinBorder = { top:{style:'thin',color:{argb:'FFE2E8F0'}}, bottom:{style:'thin',color:{argb:'FFE2E8F0'}}, left:{style:'thin',color:{argb:'FFE2E8F0'}}, right:{style:'thin',color:{argb:'FFE2E8F0'}} };
+  /* ═══ Hoja 1 — Flujo de Caja como estado financiero: conceptos en filas, periodos en columnas ═══ */
+  var ws1 = wb.addWorksheet('Flujo de Caja', { views:[{ state:'frozen', xSplit:1, ySplit:4 }] });
+  ws1.columns = [{width:30}].concat(buckets.map(function(){ return {width:15}; }));
+  ws1.mergeCells(1,1,1,nCols);
+  var cTitulo = ws1.getCell(1,1);
+  cTitulo.value = 'Flujo de Caja Proyectado — '+state.empresa.nombre;
+  cTitulo.fill = hF; cTitulo.font = {bold:true,color:{argb:'FFFFFFFF'},size:15}; cTitulo.alignment = {horizontal:'center',vertical:'middle'};
+  ws1.getRow(1).height = 30;
+  ws1.mergeCells(2,1,2,nCols);
+  var cSub = ws1.getCell(2,1);
+  cSub.value = 'NIT '+state.empresa.nit+'  ·  Periodicidad: '+state.periodicidad+'  ·  Del '+resultado.desde+' al '+resultado.hasta+'  ·  Generado: '+new Date().toLocaleDateString('es-CO');
+  cSub.font = {italic:true, color:{argb:'FF6B7280'}, size:9}; cSub.alignment = {horizontal:'center'};
+  var headRow = ws1.getRow(4);
+  headRow.getCell(1).value = 'Concepto';
+  buckets.forEach(function(b,i){ headRow.getCell(i+2).value = b.label; });
+  headRow.eachCell(function(c){ c.fill=hF; c.font=wFont; c.alignment={horizontal:'center'}; });
+  headRow.getCell(1).alignment = {horizontal:'left'};
+  var rIdx = 5;
+  function addConceptRow(label, values, opts){
+    opts = opts || {};
+    var row = ws1.getRow(rIdx);
+    row.getCell(1).value = label;
+    row.getCell(1).font = { bold: !!opts.bold, color:{argb:opts.color||'FF374151'}, italic: !!opts.indent };
+    if(opts.indent) row.getCell(1).alignment = { indent: 1 };
+    if(opts.mergeRest){
+      ws1.mergeCells(rIdx,2,rIdx,nCols);
+    } else {
+      values.forEach(function(v,i){
+        var cell = row.getCell(i+2);
+        cell.value = Math.round(v);
+        cell.numFmt = '#,##0';
+        cell.font = { bold: !!opts.bold, color:{argb:opts.color||'FF000000'} };
+      });
+    }
+    if(opts.fill){ row.eachCell({includeEmpty:true}, function(c){ if(c.col<=nCols) c.fill = opts.fill; }); }
+    for(var col=1; col<=nCols; col++){ row.getCell(col).border = thinBorder; }
+    rIdx++;
+    return row;
+  }
+  addConceptRow('SALDO INICIAL', buckets.map(function(b){return b.saldoInicial}), {bold:true});
+  rIdx++;
+  addConceptRow('INGRESOS', [], {bold:true, fill:sectionFill, mergeRest:true});
+  addConceptRow('Cobro de contado', buckets.map(function(b){return sumBucket(b,'ingresos','Cobro de contado')}), {indent:true});
+  addConceptRow('Cobro de cartera', buckets.map(function(b){return sumBucket(b,'ingresos','Cobro de cartera')}), {indent:true});
+  addConceptRow('Total Ingresos', buckets.map(function(b){return b.ingresos}), {bold:true, color:GREENTXT});
+  rIdx++;
+  addConceptRow('EGRESOS', [], {bold:true, fill:sectionFill, mergeRest:true});
+  addConceptRow('Nómina (salarios, PILA, prima, cesantías)', buckets.map(function(b){return sumBucket(b,'nomina')}), {indent:true});
+  addConceptRow('Proveedores', buckets.map(function(b){return sumBucket(b,'proveedores')}), {indent:true});
+  addConceptRow('Gastos fijos', buckets.map(function(b){return sumBucket(b,'gastos-fijos')}), {indent:true});
+  addConceptRow('Impuestos (IVA, retefuente, renta, ICA)', buckets.map(function(b){return sumBucket(b,'impuestos')}), {indent:true});
+  addConceptRow('Total Egresos', buckets.map(function(b){return b.egresos}), {bold:true, color:REDTXT});
+  rIdx++;
+  var saldoFinalRow = addConceptRow('SALDO FINAL', buckets.map(function(b){return b.saldoFinal}), {bold:true, fill:{type:'pattern',pattern:'solid',fgColor:{argb:OKBG}}});
+  ws1.addConditionalFormatting({
+    ref: saldoFinalRow.getCell(2).address+':'+saldoFinalRow.getCell(nCols).address,
+    rules: [{ type:'cellIs', operator:'lessThan', formulae:[0], style:{ font:{ color:{argb:REDTXT}, bold:true } } }]
   });
-  var ws2 = wb.addWorksheet('Movimientos detalle');
-  ws2.columns = [{width:14},{width:44},{width:16},{width:18}];
-  ws2.addRow(['Fecha','Concepto','Grupo','Monto']).eachCell(function(c){ c.fill=hF; c.font=wFont; });
-  resultado.eventos.sort(function(a,c){return a.fecha<c.fecha?-1:1}).forEach(function(e){
-    var r = ws2.addRow([e.fecha, e.concepto, e.grupo, e.monto]);
-    r.getCell(4).numFmt='#,##0';
+  // Gráfico embebido: la misma línea de saldo que se ve en pantalla, como imagen
+  rIdx += 2;
+  if(chartInstance){
+    try{
+      var imgId = wb.addImage({ base64: chartInstance.toBase64Image(), extension:'png' });
+      ws1.addImage(imgId, { tl:{ col:0, row:rIdx-1 }, ext:{ width:720, height:280 } });
+    }catch(e){}
+  }
+  /* ═══ Hoja 2 — Movimientos detalle ═══ */
+  var GRUPO_LABEL = { ingresos:'Ingresos', proveedores:'Proveedores', nomina:'Nómina', 'gastos-fijos':'Gastos fijos', impuestos:'Impuestos' };
+  var ws2 = wb.addWorksheet('Movimientos detalle', { views:[{ state:'frozen', ySplit:1 }] });
+  ws2.columns = [{width:13},{width:48},{width:16},{width:18}];
+  ws2.autoFilter = 'A1:D1';
+  var h2 = ws2.addRow(['Fecha','Concepto','Categoría','Monto']);
+  h2.eachCell(function(c){ c.fill=hF; c.font=wFont; });
+  resultado.eventos.slice().sort(function(a,c){return a.fecha<c.fecha?-1:1}).forEach(function(e,i){
+    var r = ws2.addRow([e.fecha, e.concepto, GRUPO_LABEL[e.grupo]||e.grupo, e.monto]);
+    r.getCell(4).numFmt = '#,##0';
+    r.getCell(4).font = { color:{argb: e.monto<0?REDTXT:GREENTXT} };
+    if(i%2===1) r.eachCell(function(c){ c.fill = sectionFill; });
+    r.eachCell(function(c){ c.border = thinBorder; });
   });
-  var ws3 = wb.addWorksheet('Calendario tributario');
-  ws3.columns = [{width:14},{width:44},{width:18}];
-  ws3.addRow(['Fecha','Obligación','Monto estimado']).eachCell(function(c){ c.fill=hF; c.font=wFont; });
-  resultado.eventos.filter(function(e){return e.grupo==='impuestos'}).sort(function(a,c){return a.fecha<c.fecha?-1:1}).forEach(function(e){
+  /* ═══ Hoja 3 — Calendario tributario (el diferenciador) ═══ */
+  var ws3 = wb.addWorksheet('Calendario tributario', { views:[{ state:'frozen', ySplit:1 }] });
+  ws3.columns = [{width:13},{width:48},{width:18}];
+  var h3 = ws3.addRow(['Fecha','Obligación','Monto estimado']);
+  h3.eachCell(function(c){ c.fill=hF; c.font=wFont; });
+  resultado.eventos.filter(function(e){return e.grupo==='impuestos'}).sort(function(a,c){return a.fecha<c.fecha?-1:1}).forEach(function(e,i){
     var r = ws3.addRow([e.fecha, e.concepto, e.monto]);
-    r.getCell(3).numFmt='#,##0';
+    r.getCell(3).numFmt = '#,##0';
+    r.getCell(3).font = { color:{argb:'FF92400E'} };
+    if(i%2===1) r.eachCell(function(c){ c.fill = { type:'pattern', pattern:'solid', fgColor:{argb:'FFFFF8E1'} }; });
+    r.eachCell(function(c){ c.border = thinBorder; });
   });
   ws3.addRow([]);
-  ws3.addRow(['Fuente: Calendario Tributario DIAN (Decreto 2229/2023), calculado según el NIT '+state.empresa.nit]);
+  var pieRow = ws3.addRow(['Fuente: Calendario Tributario DIAN (Decreto 2229/2023), calculado según el NIT '+state.empresa.nit]);
+  pieRow.getCell(1).font = { italic:true, size:8, color:{argb:'FF9CA3AF'} };
   wb.xlsx.writeBuffer().then(function(buf){
     var blob = new Blob([buf], {type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
     var a = document.createElement('a');

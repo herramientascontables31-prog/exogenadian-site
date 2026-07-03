@@ -30,12 +30,13 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://exogenadian.com/"},{"@type":"ListItem","position":2,"name":"Contabilidad y EEFF","item":"https://exogenadian.com/eeff-hub.html"},{"@type":"ListItem","position":3,"name":"Presupuesto Empresarial","item":"https://exogenadian.com/presupuesto-empresarial.html"}]}
 </script>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.0/jspdf.plugin.autotable.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js" integrity="sha384-Pqp51FUN2/qzfxZxBCtF0stpc9ONI6MYZpVqmo8m20SoaQCzf+arZvACkLkirlPz" crossorigin="anonymous"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw" crossorigin="anonymous"></script>
 <script src="shared/balance-loader.js?v=9347f34a"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <link rel="stylesheet" href="shared/guia-didactica.css?v=3482d08f">
 <style>
 :root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--green:#059669;--green2:#ECFDF5;--green3:#D1FAE5;--red:#DC2626;--red2:#FEF2F2;--amber:#D97706;--amber2:#FFF8E1;--amber3:#FEF3C7;--border:#e2e8f0;--radius:12px;--shadow:0 2px 12px rgba(0,0,0,.06)}
@@ -46,10 +47,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 .header{background:linear-gradient(135deg,#1B3A5C 0%,#7C3AED 100%);padding:30px 34px;border-radius:18px;margin-bottom:20px;color:#fff;position:relative;overflow:hidden}
 .header::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(255,255,255,.08) 0%,transparent 70%);pointer-events:none}
 .header-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:5px 14px;font-size:.74rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;margin-bottom:12px}
-.header h1{font-size:clamp(1.4rem,3.2vw,1.9rem);font-weight:800;letter-spacing:-.02em;margin-bottom:8px;line-height:1.15}
+.header h1{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3.6vw,2.3rem);font-weight:600;letter-spacing:-.01em;margin-bottom:8px;line-height:1.15}
 .header p{opacity:.92;font-size:.92rem;max-width:700px;line-height:1.55}
 .header-link{display:inline-flex;align-items:center;gap:6px;margin-top:12px;color:#fff;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:8px 14px;font-size:.82rem;font-weight:700;text-decoration:none}
 .header-link:hover{background:rgba(255,255,255,.25)}
+.reset-link{background:none;border:none;color:var(--muted);font-size:.78rem;font-weight:600;cursor:pointer;font-family:inherit;padding:4px 6px;text-decoration:underline;text-decoration-style:dotted}
+.reset-link:hover{color:var(--red)}
 .card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:24px;margin-bottom:18px;box-shadow:var(--shadow)}
 .card-title{font-size:1.05rem;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px;color:var(--pri)}
 .card-sub{font-size:.84rem;color:var(--muted);margin-bottom:16px}
@@ -89,10 +92,23 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 .btn-ghost{background:#fff;border:1.5px solid var(--border);color:var(--muted)}
 .btn-ghost:hover{border-color:var(--pri2);color:var(--pri2)}
 .summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+.summary-grid.cols-4{grid-template-columns:repeat(4,1fr)}
+.summary-grid.cols-2{grid-template-columns:1fr 1fr;margin-bottom:14px}
 .summary-card{background:#F9FAFB;border:1px solid var(--border);border-radius:10px;padding:14px 16px}
 .summary-card .lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.3px;color:var(--muted);font-weight:700;margin-bottom:4px}
 .summary-card .val{font-size:1.2rem;font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--pri)}
 .summary-card .sub{font-size:.74rem;color:var(--muted);margin-top:2px}
+.summary-card.hero{background:linear-gradient(135deg,#4C1D95 0%,#312E81 100%);border:none;padding:20px 20px;position:relative;overflow:hidden}
+.summary-card.hero::before{content:'📐';position:absolute;right:10px;top:6px;font-size:2.2rem;opacity:.14}
+.summary-card.hero .lbl{color:rgba(255,255,255,.65)}
+.summary-card.hero .val{font-family:'Fraunces',serif;font-size:clamp(1.3rem,3vw,1.7rem);font-weight:600;letter-spacing:-.02em;color:#fff}
+.summary-card.hero .val.neg{color:#FCA5A5}
+.summary-card.hero .val.pos{color:#6EE7B7}
+.summary-card.hero .sub{color:rgba(255,255,255,.65)}
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.step-panel.active .card{animation:fadeSlideUp .45s ease both}
+.step-panel.active .card:nth-of-type(2){animation-delay:.07s}
+@media(prefers-reduced-motion:reduce){.step-panel.active .card{animation:none}}
 .result-table-wrap{overflow-x:auto;margin-bottom:10px}
 .result-table{width:100%;border-collapse:collapse;font-size:.82rem;min-width:760px}
 .result-table th{background:var(--pri);color:#fff;padding:9px 10px;text-align:right;font-size:.72rem;text-transform:uppercase;letter-spacing:.2px;white-space:nowrap}
@@ -100,6 +116,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 .result-table td{padding:8px 10px;border-bottom:1px solid var(--border);text-align:right;font-family:'JetBrains Mono',monospace;white-space:nowrap}
 .result-table td:first-child{text-align:left;font-family:'DM Sans',sans-serif;font-weight:600}
 .result-table tr.total-row td{background:#F0F2F5;font-weight:800;border-top:2px solid var(--pri)}
+.result-table tr.subtotal-row td{font-weight:700;border-top:1px solid var(--pri3);color:var(--pri)}
+.result-table tr.itemizado td{color:var(--muted);font-size:.9em}
+.result-table tr.itemizado td:first-child{padding-left:26px}
+.resumen-narrativo{background:linear-gradient(135deg,#F5F3FF 0%,#ECFDF5 100%);border:1px solid #DDD6FE;border-radius:12px;padding:18px 20px;margin-bottom:18px;font-size:.92rem;line-height:1.65;color:#312E81}
+.resumen-narrativo strong{color:#1B3A5C}
+.chart-wrap{background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:18px;height:300px}
 .result-table input{width:100px;padding:5px 6px;border:1.3px solid var(--border);border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.8rem;text-align:right}
 .var-fav{color:var(--green);font-weight:700}
 .var-desfav{color:var(--red);font-weight:700}
@@ -114,7 +136,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 }
 @media(max-width:720px){
   .field-row,.field-row.f3{grid-template-columns:1fr}
-  .summary-grid{grid-template-columns:1fr}
+  .summary-grid,.summary-grid.cols-4,.summary-grid.cols-2{grid-template-columns:1fr}
   .stepper{flex-wrap:wrap}
 }
 </style>
@@ -167,6 +189,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
     <div class="step-dot" data-step="3"><span class="num">3</span> Costos y gastos</div>
     <div class="step-dot" data-step="4"><span class="num">4</span> Resultado</div>
   </div>
+  <div class="no-print" style="text-align:right;margin:-10px 0 14px"><button class="reset-link" onclick="borrarMisDatos()">🗑️ Borrar mis datos y empezar de nuevo</button></div>
   <div class="step-panel" id="panel1">
     <div class="card">
       <div class="card-title">🏢 Tu empresa</div>
@@ -187,8 +210,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
       <div class="card-sub">El punto de partida de todo presupuesto maestro. Puedes proyectar con un crecimiento mensual (presupuesto por driver) o editar cada mes a mano (presupuesto incremental basado en tu propia estimación).</div>
       <div class="field-row f3">
         <div class="field"><label>Ventas del primer mes (enero)</label><input type="number" id="fVentaBase" placeholder="10000000"></div>
-        <div class="field"><label>Crecimiento mensual estimado (%)</label><input type="number" id="fCrecimiento" step="0.1"></div>
+        <div class="field"><label>Crecimiento estimado (%)</label>
+          <div style="display:flex;gap:6px">
+            <input type="number" id="fCrecimiento" step="0.1" style="flex:1">
+            <select id="fCrecimientoTipo" style="width:110px"><option value="mensual">mensual</option><option value="anual">anual</option></select>
+          </div>
+        </div>
         <div class="field" style="justify-content:flex-end"><button class="btn-sm" onclick="recalcularVentas()">Recalcular con estos datos</button></div>
+      </div>
+      <div class="fill-row" style="margin-top:2px">
+        <span style="font-size:.78rem;color:var(--muted);flex:1">¿Ya tienes tu presupuesto de ventas armado? Cárgalo en vez de digitarlo mes a mes.</span>
+        <button class="btn-sm" onclick="document.getElementById('inputVentasExcel').click()">📥 Importar ventas desde Excel</button>
+        <input type="file" id="inputVentasExcel" accept=".xlsx,.xls,.csv" style="display:none" onchange="importarVentasExcel(this.files[0])">
       </div>
       <table class="mini-table"><thead><tr><th>Mes</th><th style="text-align:right">Ventas presupuestadas</th></tr></thead><tbody id="tablaVentasPresu"></tbody></table>
       <div class="guia-concept">
@@ -208,7 +241,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
       <div class="guia-concept">
         <strong>Margen bruto:</strong> ventas − costo de venta. Si tu costo de venta es 40%, tu margen bruto es 60% — de ahí sales a pagar gastos fijos y, lo que sobra, es utilidad operativa. Compara tu % con el de tu sector: un margen bruto muy distinto al de tu competencia suele ser la primera señal de un precio mal puesto o un costo mal controlado.
       </div>
-      <h3 style="font-size:.9rem;color:var(--pri);margin:18px 0 8px">🏠 Gastos fijos mensuales de operación</h3>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin:18px 0 8px">
+        <h3 style="font-size:.9rem;color:var(--pri)">🏠 Gastos fijos mensuales de operación</h3>
+        <button class="reset-link" onclick="vaciarGastosFijos()">🗑️ Vaciar esta lista</button>
+      </div>
       <table class="mini-table"><thead><tr><th>Concepto</th><th style="text-align:right">Valor mensual</th><th></th></tr></thead><tbody id="tablaGastosFijos"></tbody></table>
       <button class="btn-add" onclick="agregarGastoFijo()">+ Agregar gasto fijo</button>
     </div>
@@ -218,7 +254,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
     <div class="card">
       <div class="card-title">📊 Estado de Resultados presupuestado</div>
       <div class="card-sub">Ventas − costo de venta = utilidad bruta. Utilidad bruta − gastos = utilidad operativa. Esto es lo que se espera; en la tabla de abajo comparamos contra lo que realmente pasó.</div>
-      <div class="summary-grid" id="summaryGrid"></div>
+      <div class="resumen-narrativo" id="resumenNarrativo"></div>
+      <div class="summary-grid cols-4" id="summaryGrid"></div>
+      <div class="chart-wrap"><canvas id="chartWaterfall"></canvas></div>
       <div class="result-table-wrap">
         <table class="result-table" id="tablaResultado"></table>
       </div>
@@ -265,15 +303,29 @@ var MES_ACTUAL = ANIO + '-' + String(new Date().getMonth()+1).padStart(2,'0');
 var DEFAULT_STATE = {
   empresa: { nombre:'Mi Empresa SAS' },
   ventaBase: 10000000,
-  crecimientoMensualPct: 3,
+  crecimientoTipo: 'mensual',
+  crecimientoValor: 3,
   ventasPorMes: {},
   costoVentaPct: 40,
   gastoVariablePct: 5,
-  gastosFijos: [ {concepto:'Arriendo', valor:2000000}, {concepto:'Nómina administrativa', valor:3000000} ],
+  gastosFijos: [
+    {concepto:'Arriendo', valor:2000000},
+    {concepto:'Nómina administrativa', valor:3000000},
+    {concepto:'Servicios públicos (agua, luz, gas)', valor:600000},
+    {concepto:'Internet y telefonía', valor:0},
+    {concepto:'Seguros', valor:0},
+    {concepto:'Software y suscripciones', valor:0},
+    {concepto:'Honorarios contador/revisor fiscal', valor:0},
+    {concepto:'Aseo y cafetería', valor:0},
+    {concepto:'Publicidad y mercadeo', valor:0},
+    {concepto:'Transporte y parqueadero', valor:0},
+    {concepto:'Mantenimiento', valor:0}
+  ],
   reales: {}
 };
 var state = cargarEstado();
 var resultado = null;
+var chartInstance = null;
 function cargarEstado(){
   var saved = (window.FinanzasStore && FinanzasStore.get(STORE_KEY)) || null;
   var base = JSON.parse(JSON.stringify(DEFAULT_STATE));
@@ -285,6 +337,17 @@ function cargarEstado(){
   return base;
 }
 function guardarEstado(){ if(window.FinanzasStore) FinanzasStore.set(STORE_KEY, state); }
+window.borrarMisDatos = function(){
+  if(!confirm('¿Borrar todos los datos que has ingresado en Presupuesto Empresarial y empezar de nuevo?\n\nEsto no se puede deshacer.')) return;
+  if(window.FinanzasStore) FinanzasStore.remove(STORE_KEY);
+  state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+  resultado = null;
+  realYtdActual = null;
+  pintarPaso1();
+  window.irPaso(1);
+  if(typeof exoToast==='function') exoToast('Tus datos fueron borrados. Empezando de nuevo.', 'info');
+  if(typeof gtag==='function') gtag('event','presupuesto_empresarial_datos_borrados');
+};
 function mesesAnio(){
   var out=[];
   for(var m=1;m<=12;m++) out.push(ANIO+'-'+String(m).padStart(2,'0'));
@@ -303,9 +366,14 @@ function pintarPaso1(){
 }
 function leerPaso1(){ state.empresa.nombre = document.getElementById('fNombre').value || DEFAULT_STATE.empresa.nombre; }
 /* ═══ Paso 2 — ventas ═══ */
+// Crecimiento anual → tasa mensual equivalente compuesta: (1+anual)^(1/12)-1
+function crecimientoMensualEfectivo(){
+  if(state.crecimientoTipo==='anual') return (Math.pow(1+state.crecimientoValor/100, 1/12)-1)*100;
+  return state.crecimientoValor;
+}
 function pintarTablaVentas(){
   var tbody = document.getElementById('tablaVentasPresu');
-  var preview = CajaEngine.presupuestoMensual({ventaBase:state.ventaBase, crecimientoMensualPct:state.crecimientoMensualPct, ventasPorMes:state.ventasPorMes}, mesesAnio());
+  var preview = CajaEngine.presupuestoMensual({ventaBase:state.ventaBase, crecimientoMensualPct:crecimientoMensualEfectivo(), ventasPorMes:state.ventasPorMes}, mesesAnio());
   tbody.innerHTML='';
   preview.forEach(function(r){
     var tr = document.createElement('tr');
@@ -315,22 +383,56 @@ function pintarTablaVentas(){
 }
 window.recalcularVentas = function(){
   state.ventaBase = +document.getElementById('fVentaBase').value || 0;
-  state.crecimientoMensualPct = +document.getElementById('fCrecimiento').value || 0;
+  state.crecimientoValor = +document.getElementById('fCrecimiento').value || 0;
+  state.crecimientoTipo = document.getElementById('fCrecimientoTipo').value;
   state.ventasPorMes = {};
   pintarTablaVentas();
 };
 function pintarPaso2(){
   document.getElementById('fVentaBase').value = state.ventaBase;
-  document.getElementById('fCrecimiento').value = state.crecimientoMensualPct;
+  document.getElementById('fCrecimiento').value = state.crecimientoValor;
+  document.getElementById('fCrecimientoTipo').value = state.crecimientoTipo;
   pintarTablaVentas();
 }
 function leerPaso2(){
   state.ventaBase = +document.getElementById('fVentaBase').value || 0;
-  state.crecimientoMensualPct = +document.getElementById('fCrecimiento').value || 0;
+  state.crecimientoValor = +document.getElementById('fCrecimiento').value || 0;
+  state.crecimientoTipo = document.getElementById('fCrecimientoTipo').value;
   var out={};
   document.querySelectorAll('#tablaVentasPresu input').forEach(function(inp){ out[inp.getAttribute('data-ym')] = +inp.value || 0; });
   state.ventasPorMes = out;
 }
+/* Importar presupuesto de ventas desde un Excel del cliente (formato libre):
+   se toman los primeros 12 valores numéricos "grandes" encontrados en el
+   archivo y se asignan en orden a enero..diciembre. El usuario revisa y
+   ajusta la tabla después — no se garantiza que el orden sea el correcto
+   si el archivo trae más de una serie de números. */
+window.importarVentasExcel = function(file){
+  if(!file || typeof XLSX==='undefined') return;
+  var reader = new FileReader();
+  reader.onload = function(e){
+    try{
+      var wb = XLSX.read(new Uint8Array(e.target.result), {type:'array'});
+      var ws = wb.Sheets[wb.SheetNames[0]];
+      var rows = XLSX.utils.sheet_to_json(ws, {header:1, defval:''});
+      var numeros = [];
+      rows.forEach(function(row){
+        row.forEach(function(cell){
+          var n = typeof cell==='number' ? cell : parseFloat(String(cell).replace(/[^\d.\-]/g,''));
+          if(!isNaN(n) && isFinite(n) && Math.abs(n) >= 1000) numeros.push(n);
+        });
+      });
+      if(!numeros.length){ if(typeof exoToast==='function') exoToast('No encontramos valores numéricos en el archivo.', 'error'); return; }
+      var meses = mesesAnio();
+      state.ventasPorMes = {};
+      meses.forEach(function(ym, i){ if(numeros[i]!=null) state.ventasPorMes[ym] = Math.round(numeros[i]); });
+      pintarTablaVentas();
+      if(typeof exoToast==='function') exoToast('Se importaron '+Math.min(numeros.length,12)+' valores. Revisa que el orden (Ene→Dic) sea el correcto y ajusta si no.', 'info');
+      if(typeof gtag==='function') gtag('event','presupuesto_ventas_excel_importado');
+    }catch(err){ if(typeof exoToast==='function') exoToast('No pudimos leer ese archivo.', 'error'); }
+  };
+  reader.readAsArrayBuffer(file);
+};
 /* ═══ Paso 3 — costos y gastos ═══ */
 function pintarGastosFijos(){
   var tbody = document.getElementById('tablaGastosFijos');
@@ -345,6 +447,12 @@ function pintarGastosFijos(){
 }
 window.agregarGastoFijo = function(){ leerGastosFijos(); state.gastosFijos.push({concepto:'Nuevo gasto', valor:0}); pintarGastosFijos(); };
 window.quitarGastoFijo = function(i){ leerGastosFijos(); state.gastosFijos.splice(i,1); pintarGastosFijos(); };
+window.vaciarGastosFijos = function(){
+  if(!confirm('¿Vaciar toda la lista de gastos fijos?')) return;
+  state.gastosFijos = [];
+  pintarGastosFijos();
+  guardarEstado();
+};
 function leerGastosFijos(){
   var out=[];
   document.querySelectorAll('#tablaGastosFijos tr').forEach(function(tr){
@@ -386,7 +494,7 @@ document.querySelectorAll('.step-dot').forEach(function(d){
 function calcular(){
   leerPaso3();
   guardarEstado();
-  var cfg = { ventaBase:state.ventaBase, crecimientoMensualPct:state.crecimientoMensualPct, ventasPorMes:state.ventasPorMes,
+  var cfg = { ventaBase:state.ventaBase, crecimientoMensualPct:crecimientoMensualEfectivo(), ventasPorMes:state.ventasPorMes,
     costoVentaPct:state.costoVentaPct, gastosFijos:state.gastosFijos, gastoVariablePct:state.gastoVariablePct };
   var filas = CajaEngine.presupuestoMensual(cfg, mesesAnio());
   resultado = { filas: filas };
@@ -398,32 +506,80 @@ window.calcularYMostrar = function(){
   pintarResultado();
   if(typeof gtag==='function') gtag('event','presupuesto_empresarial_calculado');
 };
+function narrativaPresupuesto(filas, margenBruto, margenOperativo){
+  var primerMes = filas[0].ventas, ultimoMes = filas[filas.length-1].ventas;
+  var crecimiento = primerMes ? ((ultimoMes/primerMes - 1)*100) : 0;
+  var tendencia = crecimiento > 1 ? 'crecer' : (crecimiento < -1 ? 'decrecer' : 'mantenerse estable');
+  var saludMargen = margenOperativo >= 15 ? 'saludable' : (margenOperativo >= 5 ? 'ajustado' : (margenOperativo >= 0 ? 'muy ajustado' : 'negativo — el presupuesto proyecta pérdida operativa'));
+  return '<strong>📊 Cómo va tu presupuesto '+ANIO+':</strong> proyectas '+tendencia+' tus ventas mensuales '+Math.abs(crecimiento).toFixed(0)+'% entre enero ('+fmt(primerMes)+') y diciembre ('+fmt(ultimoMes)+'). '+
+    'De cada peso que vendes, te quedan <strong>'+margenBruto.toFixed(0)+' centavos</strong> tras el costo de venta, y <strong>'+margenOperativo.toFixed(0)+' centavos</strong> tras todos los gastos — un margen operativo <strong>'+saludMargen+'</strong>. '+
+    'Compáralo con tus años anteriores o con tu sector para saber si vas por buen camino.';
+}
 function pintarResultado(){
   if(!resultado) return;
   var filas = resultado.filas;
-  var totVentas=0, totCosto=0, totGastoFijo=0, totGastoVar=0, totUtil=0;
-  filas.forEach(function(r){ totVentas+=r.ventas; totCosto+=r.costoVenta; totGastoFijo+=r.gastoFijo; totGastoVar+=r.gastoVariable; totUtil+=r.utilidadOperativa; });
-  var margenAnual = totVentas ? (totUtil/totVentas*100) : 0;
+  var totVentas=0, totCosto=0, totGastoVar=0, totUtilBruta=0, totUtil=0;
+  filas.forEach(function(r){ totVentas+=r.ventas; totCosto+=r.costoVenta; totGastoVar+=r.gastoVariable; totUtilBruta+=r.utilidadBruta; totUtil+=r.utilidadOperativa; });
+  var totGastoFijoAnual = filas.reduce(function(s,r){return s+r.gastoFijo},0);
+  var margenBruto = totVentas ? (totUtilBruta/totVentas*100) : 0;
+  var margenOperativo = totVentas ? (totUtil/totVentas*100) : 0;
+  document.getElementById('resumenNarrativo').innerHTML = narrativaPresupuesto(filas, margenBruto, margenOperativo);
   document.getElementById('summaryGrid').innerHTML =
     '<div class="summary-card"><div class="lbl">Ventas presupuestadas '+ANIO+'</div><div class="val">'+fmt(totVentas)+'</div></div>'+
-    '<div class="summary-card"><div class="lbl">Utilidad operativa presupuestada</div><div class="val">'+fmt(totUtil)+'</div><div class="sub">Margen operativo: '+margenAnual.toFixed(1)+'%</div></div>'+
-    '<div class="summary-card"><div class="lbl">Costos + gastos totales</div><div class="val">'+fmt(totCosto+totGastoFijo+totGastoVar)+'</div></div>';
+    '<div class="summary-card"><div class="lbl">Margen bruto</div><div class="val">'+margenBruto.toFixed(1)+'%</div><div class="sub">'+fmt(totUtilBruta)+' de utilidad bruta</div></div>'+
+    '<div class="summary-card hero"><div class="lbl">Utilidad operativa</div><div class="val '+(totUtil<0?'neg':'pos')+'">'+fmt(totUtil)+'</div><div class="sub">Margen operativo: '+margenOperativo.toFixed(1)+'%</div></div>'+
+    '<div class="summary-card"><div class="lbl">Costos + gastos totales</div><div class="val">'+fmt(totCosto+totGastoFijoAnual+totGastoVar)+'</div></div>';
   var head = '<tr><th>Concepto</th>'+filas.map(function(r){return '<th>'+labelMesCorto(r.mes)+'</th>'}).join('')+'<th>Total año</th></tr>';
   function fila(label, key, esNegativo){
     var vals = filas.map(function(r){ return r[key]; });
     var tot = vals.reduce(function(s,v){return s+v},0);
     return '<tr><td>'+label+'</td>'+vals.map(function(v){return '<td>'+(esNegativo?'-':'')+fmt(v).replace('-','')+'</td>'}).join('')+'<td>'+(esNegativo?'-':'')+fmt(tot).replace('-','')+'</td></tr>';
   }
+  function filaConstante(label, valor, esNegativo){
+    var cell = '<td>'+(esNegativo&&valor?'-':'')+fmt(valor).replace('-','')+'</td>';
+    var cells = filas.map(function(){return cell}).join('');
+    var tot = valor*filas.length;
+    return '<tr class="itemizado"><td>'+label+'</td>'+cells+'<td>'+(esNegativo&&tot?'-':'')+fmt(tot).replace('-','')+'</td></tr>';
+  }
+  var gastosFijosItemizados = state.gastosFijos.map(function(g){ return filaConstante(g.concepto, g.valor, true); }).join('');
   var body =
     fila('Ventas','ventas') +
     fila('(-) Costo de venta','costoVenta',true) +
-    '<tr class="total-row"><td>Utilidad bruta</td>'+filas.map(function(r){return '<td>'+fmt(r.utilidadBruta)+'</td>'}).join('')+'<td>'+fmt(filas.reduce(function(s,r){return s+r.utilidadBruta},0))+'</td></tr>'+
-    fila('(-) Gastos fijos','gastoFijo',true) +
+    '<tr class="total-row"><td>Utilidad bruta</td>'+filas.map(function(r){return '<td>'+fmt(r.utilidadBruta)+'</td>'}).join('')+'<td>'+fmt(totUtilBruta)+'</td></tr>'+
+    gastosFijosItemizados +
+    '<tr class="subtotal-row"><td>Total gastos fijos</td>'+filas.map(function(r){return '<td>'+fmt(r.gastoFijo)+'</td>'}).join('')+'<td>'+fmt(totGastoFijoAnual)+'</td></tr>'+
     fila('(-) Gastos variables','gastoVariable',true) +
     '<tr class="total-row"><td>Utilidad operativa</td>'+filas.map(function(r){return '<td>'+fmt(r.utilidadOperativa)+'</td>'}).join('')+'<td>'+fmt(totUtil)+'</td></tr>';
   document.getElementById('tablaResultado').innerHTML = head + body;
+  pintarWaterfall(totVentas, totCosto, totUtilBruta, totGastoFijoAnual, totGastoVar, totUtil);
   pintarPlanReal(filas);
   pintarRealYtdBox();
+}
+/* ═══ Waterfall: Ventas → Costo → Utilidad Bruta → Gastos → Utilidad Operativa ═══
+   Chart.js soporta "floating bars": cada dato es [inicio,fin] en vez de un
+   solo número, así se dibuja el puente clásico de un análisis de utilidad. */
+function pintarWaterfall(ventas, costo, utilBruta, gastoFijo, gastoVar, utilOperativa){
+  var NAVY='#1B3A5C', GREEN='#059669', RED='#DC2626';
+  var labels = ['Ventas','Costo de venta','Utilidad bruta','Gastos fijos','Gastos variables','Utilidad operativa'];
+  var cum0 = ventas, cum1 = utilBruta, cum2 = utilBruta - gastoFijo, cum3 = utilOperativa;
+  var datos = [
+    { rango:[0, ventas], color:GREEN },
+    { rango:[cum1, cum0], color:RED },
+    { rango:[0, utilBruta], color:NAVY },
+    { rango:[cum2, cum1], color:RED },
+    { rango:[cum3, cum2], color:RED },
+    { rango:[0, utilOperativa], color: utilOperativa>=0?GREEN:RED }
+  ];
+  var ctx = document.getElementById('chartWaterfall').getContext('2d');
+  if(chartInstance) chartInstance.destroy();
+  chartInstance = new Chart(ctx, {
+    type:'bar',
+    data:{ labels:labels, datasets:[{ data:datos.map(function(d){return d.rango}), backgroundColor:datos.map(function(d){return d.color}), borderRadius:4, barPercentage:0.6 }] },
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:function(c){ var v=c.raw; return fmt(Math.abs(v[1]-v[0])); } } } },
+      scales:{ y:{ ticks:{ callback:function(v){ return fmt(v); } }, grid:{color:'#F0F2F5'} }, x:{ grid:{display:false} } }
+    }
+  });
 }
 function pintarPlanReal(filas){
   var head = '<tr><th>Mes</th><th>Ventas presu.</th><th>Ventas real</th><th>Var. ventas</th><th>Costos+gastos presu.</th><th>Costos+gastos real</th><th>Var. C&amp;G</th><th>Utilidad presu.</th><th>Utilidad real</th><th>Var. utilidad</th></tr>';
@@ -487,35 +643,93 @@ window.verComoFlujoCaja = function(){
 window.descargarExcel = async function(){
   if(!(await exoProGate('Presupuesto Empresarial'))) return;
   if(!resultado) calcular();
+  var filas = resultado.filas;
+  var nCols = filas.length + 2; // Concepto + 12 meses + Total año
   var wb = new ExcelJS.Workbook(); wb.created = new Date();
-  var hF = { type:'pattern', pattern:'solid', fgColor:{argb:'FF1B3A5C'} };
+  var NAVY='FF1B3A5C', GREENTXT='FF047857', REDTXT='FFDC2626', LIGHTBG='FFF0F2F5', OKBG='FFECFDF5';
+  var hF = { type:'pattern', pattern:'solid', fgColor:{argb:NAVY} };
   var wFont = { bold:true, color:{argb:'FFFFFFFF'}, size:11 };
-  var ws1 = wb.addWorksheet('Presupuesto '+ANIO);
-  ws1.columns = [{width:24}].concat(resultado.filas.map(function(){return {width:14}})).concat([{width:16}]);
-  var headRow = ['Concepto'].concat(resultado.filas.map(function(r){return labelMesCorto(r.mes)})).concat(['Total año']);
-  ws1.addRow(headRow).eachCell(function(c){ c.fill=hF; c.font=wFont; });
-  function addFilaExcel(label, key, neg){
-    var vals = resultado.filas.map(function(r){ return neg ? -r[key] : r[key]; });
-    var tot = vals.reduce(function(s,v){return s+v},0);
-    var r = ws1.addRow([label].concat(vals).concat([tot]));
-    for(var i=2;i<=vals.length+2;i++) r.getCell(i).numFmt='#,##0';
+  var sectionFill = { type:'pattern', pattern:'solid', fgColor:{argb:LIGHTBG} };
+  var thinBorder = { top:{style:'thin',color:{argb:'FFE2E8F0'}}, bottom:{style:'thin',color:{argb:'FFE2E8F0'}}, left:{style:'thin',color:{argb:'FFE2E8F0'}}, right:{style:'thin',color:{argb:'FFE2E8F0'}} };
+  var totVentas=0, totCosto=0, totGastoVar=0, totUtilBruta=0, totUtil=0;
+  filas.forEach(function(r){ totVentas+=r.ventas; totCosto+=r.costoVenta; totGastoVar+=r.gastoVariable; totUtilBruta+=r.utilidadBruta; totUtil+=r.utilidadOperativa; });
+  var totGastoFijoAnual = filas.reduce(function(s,r){return s+r.gastoFijo},0);
+  /* ═══ Hoja 1 — Estado de Resultados presupuestado (conceptos en filas, meses en columnas) ═══ */
+  var ws1 = wb.addWorksheet('Presupuesto '+ANIO, { views:[{ state:'frozen', xSplit:1, ySplit:4 }] });
+  ws1.columns = [{width:32}].concat(filas.map(function(){return {width:14}})).concat([{width:16}]);
+  ws1.mergeCells(1,1,1,nCols);
+  var cTitulo = ws1.getCell(1,1);
+  cTitulo.value = 'Presupuesto Empresarial '+ANIO+' — '+state.empresa.nombre;
+  cTitulo.fill = hF; cTitulo.font = {bold:true,color:{argb:'FFFFFFFF'},size:15}; cTitulo.alignment = {horizontal:'center',vertical:'middle'};
+  ws1.getRow(1).height = 30;
+  ws1.mergeCells(2,1,2,nCols);
+  var cSub = ws1.getCell(2,1);
+  cSub.value = 'Margen bruto: '+(totVentas?(totUtilBruta/totVentas*100).toFixed(1):'0')+'%  ·  Margen operativo: '+(totVentas?(totUtil/totVentas*100).toFixed(1):'0')+'%  ·  Generado: '+new Date().toLocaleDateString('es-CO');
+  cSub.font = {italic:true, color:{argb:'FF6B7280'}, size:9}; cSub.alignment = {horizontal:'center'};
+  var headRow = ws1.getRow(4);
+  headRow.getCell(1).value = 'Concepto';
+  filas.forEach(function(r,i){ headRow.getCell(i+2).value = labelMesCorto(r.mes); });
+  headRow.getCell(nCols).value = 'Total año';
+  headRow.eachCell(function(c){ c.fill=hF; c.font=wFont; c.alignment={horizontal:'center'}; });
+  headRow.getCell(1).alignment = {horizontal:'left'};
+  var rIdx = 5;
+  function addFilaExcel(label, values, opts){
+    opts = opts || {};
+    var row = ws1.getRow(rIdx);
+    row.getCell(1).value = label;
+    row.getCell(1).font = { bold: !!opts.bold, color:{argb:opts.color||'FF374151'}, italic: !!opts.indent };
+    if(opts.indent) row.getCell(1).alignment = { indent: 1 };
+    var tot = 0;
+    values.forEach(function(v,i){
+      var cell = row.getCell(i+2);
+      cell.value = Math.round(v); cell.numFmt = '#,##0';
+      cell.font = { bold: !!opts.bold, color:{argb:opts.color||'FF000000'} };
+      tot += v;
+    });
+    var totCell = row.getCell(nCols);
+    totCell.value = Math.round(tot); totCell.numFmt = '#,##0';
+    totCell.font = { bold:true, color:{argb:opts.color||'FF000000'} };
+    if(opts.fill){ row.eachCell({includeEmpty:true}, function(c){ if(c.col<=nCols) c.fill = opts.fill; }); }
+    for(var col=1; col<=nCols; col++){ row.getCell(col).border = thinBorder; }
+    rIdx++;
+    return row;
   }
-  addFilaExcel('Ventas','ventas');
-  addFilaExcel('Costo de venta','costoVenta',true);
-  addFilaExcel('Utilidad bruta','utilidadBruta');
-  addFilaExcel('Gastos fijos','gastoFijo',true);
-  addFilaExcel('Gastos variables','gastoVariable',true);
-  addFilaExcel('Utilidad operativa','utilidadOperativa');
-  var ws2 = wb.addWorksheet('Plan vs Real');
+  addFilaExcel('Ventas', filas.map(function(r){return r.ventas}));
+  addFilaExcel('(-) Costo de venta', filas.map(function(r){return -r.costoVenta}));
+  addFilaExcel('Utilidad bruta', filas.map(function(r){return r.utilidadBruta}), {bold:true, fill:sectionFill});
+  rIdx++;
+  state.gastosFijos.forEach(function(g){
+    addFilaExcel('(-) '+g.concepto, filas.map(function(){return -g.valor}), {indent:true});
+  });
+  addFilaExcel('Total gastos fijos', filas.map(function(r){return -r.gastoFijo}), {bold:true, color:REDTXT});
+  addFilaExcel('(-) Gastos variables', filas.map(function(r){return -r.gastoVariable}));
+  rIdx++;
+  var utilRow = addFilaExcel('Utilidad operativa', filas.map(function(r){return r.utilidadOperativa}), {bold:true, fill:{type:'pattern',pattern:'solid',fgColor:{argb:OKBG}}});
+  ws1.addConditionalFormatting({
+    ref: utilRow.getCell(2).address+':'+utilRow.getCell(nCols).address,
+    rules: [{ type:'cellIs', operator:'lessThan', formulae:[0], style:{ font:{ color:{argb:REDTXT}, bold:true } } }]
+  });
+  rIdx += 2;
+  if(chartInstance){
+    try{
+      var imgId = wb.addImage({ base64: chartInstance.toBase64Image(), extension:'png' });
+      ws1.addImage(imgId, { tl:{ col:0, row:rIdx-1 }, ext:{ width:640, height:280 } });
+    }catch(e){}
+  }
+  /* ═══ Hoja 2 — Plan vs Real ═══ */
+  var ws2 = wb.addWorksheet('Plan vs Real', { views:[{ state:'frozen', ySplit:1 }] });
   ws2.columns = [{width:10},{width:16},{width:16},{width:12},{width:18},{width:18},{width:12}];
-  ws2.addRow(['Mes','Ventas presu.','Ventas real','Var %','Costos+gastos presu.','Costos+gastos real','Var %']).eachCell(function(c){ c.fill=hF; c.font=wFont; });
-  resultado.filas.forEach(function(r){
+  var h2 = ws2.addRow(['Mes','Ventas presu.','Ventas real','Var %','Costos+gastos presu.','Costos+gastos real','Var %']);
+  h2.eachCell(function(c){ c.fill=hF; c.font=wFont; });
+  filas.forEach(function(r,i){
     var real = state.reales[r.mes] || {};
     var cgPresu = r.costoVenta + r.gastoFijo + r.gastoVariable;
     var vVentas = real.ventas!=null ? CajaEngine.varianza(r.ventas, real.ventas, 'ingreso').pct : null;
     var vCG = real.costosGastos!=null ? CajaEngine.varianza(cgPresu, real.costosGastos, 'gasto').pct : null;
     var row = ws2.addRow([labelMesCorto(r.mes), r.ventas, real.ventas!=null?real.ventas:null, vVentas!=null?(vVentas.toFixed(1)+'%'):'', cgPresu, real.costosGastos!=null?real.costosGastos:null, vCG!=null?(vCG.toFixed(1)+'%'):'']);
-    [2,3,5,6].forEach(function(i){ row.getCell(i).numFmt='#,##0'; });
+    [2,3,5,6].forEach(function(ci){ row.getCell(ci).numFmt='#,##0'; });
+    if(i%2===1) row.eachCell(function(c){ c.fill = sectionFill; });
+    row.eachCell(function(c){ c.border = thinBorder; });
   });
   wb.xlsx.writeBuffer().then(function(buf){
     var blob = new Blob([buf], {type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
@@ -541,7 +755,7 @@ function pintarRealYtdBox(){
   var vVentas = CajaEngine.varianza(ventasPresuYtd, realYtdActual.ventas, 'ingreso');
   var vCG = CajaEngine.varianza(cgPresuYtd, realYtdActual.costosGastos, 'gasto');
   box.innerHTML =
-    '<div class="summary-grid" style="grid-template-columns:1fr 1fr;margin-bottom:14px">'+
+    '<div class="summary-grid cols-2">'+
       '<div class="summary-card"><div class="lbl">Ventas — presupuestado vs real (año a la fecha)</div>'+
         '<div class="val">'+fmt(ventasPresuYtd)+' <span style="font-size:.85rem;color:var(--muted)">vs</span> '+fmt(realYtdActual.ventas)+'</div>'+
         '<div class="sub '+(vVentas.favorable?'var-fav':'var-desfav')+'">'+fmtPct(vVentas.pct)+'</div></div>'+
