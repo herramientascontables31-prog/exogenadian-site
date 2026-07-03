@@ -187,13 +187,21 @@ footer .legal{max-width:900px;margin:0 auto 10px;padding:10px 14px;background:#f
     el.classList.add('hide');
     setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
   }
+  // Páginas pesadas pueden RETENER el overlay hasta estar listas:
+  //   window.EXO_LOADING_HOLD=true  (en un <script> del body, antes de DOMContentLoaded)
+  //   window.exoLoadingHide()       (cuando la app ya es usable)
+  //   window.exoLoadingText('…')    (mensaje propio, p.ej. 'Cargando el liquidador 210…')
+  window.exoLoadingHide=hide;
+  window.exoLoadingText=function(t){ var x=d.querySelector('.exo-txt'); if(x)x.textContent=t; };
+  function autoHide(){ if(!window.EXO_LOADING_HOLD) setTimeout(hide,30); }
   if(document.readyState==='complete'||document.readyState==='interactive'){
-    setTimeout(hide,30);
+    autoHide();
   }else{
-    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+    document.addEventListener('DOMContentLoaded',autoHide);
   }
-  // Failsafe: nunca dejar el overlay más de 4s
-  setTimeout(hide,4000);
+  // Failsafe: nunca atrapar al usuario (4s normal; 12s si la página lo retiene)
+  setTimeout(function(){ if(!window.EXO_LOADING_HOLD) hide(); },4000);
+  setTimeout(hide,12000);
 })();
 </script></head>
 <body>

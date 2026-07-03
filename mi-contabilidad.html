@@ -344,13 +344,21 @@ body.has-beta-bar .app-side{top:34px;height:calc(100vh - 34px)}
     el.classList.add('hide');
     setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
   }
+  // Páginas pesadas pueden RETENER el overlay hasta estar listas:
+  //   window.EXO_LOADING_HOLD=true  (en un <script> del body, antes de DOMContentLoaded)
+  //   window.exoLoadingHide()       (cuando la app ya es usable)
+  //   window.exoLoadingText('…')    (mensaje propio, p.ej. 'Cargando el liquidador 210…')
+  window.exoLoadingHide=hide;
+  window.exoLoadingText=function(t){ var x=d.querySelector('.exo-txt'); if(x)x.textContent=t; };
+  function autoHide(){ if(!window.EXO_LOADING_HOLD) setTimeout(hide,30); }
   if(document.readyState==='complete'||document.readyState==='interactive'){
-    setTimeout(hide,30);
+    autoHide();
   }else{
-    document.addEventListener('DOMContentLoaded',function(){setTimeout(hide,30)});
+    document.addEventListener('DOMContentLoaded',autoHide);
   }
-  // Failsafe: nunca dejar el overlay más de 4s
-  setTimeout(hide,4000);
+  // Failsafe: nunca atrapar al usuario (4s normal; 12s si la página lo retiene)
+  setTimeout(function(){ if(!window.EXO_LOADING_HOLD) hide(); },4000);
+  setTimeout(hide,12000);
 })();
 </script></head>
 <body class="has-beta-bar">
@@ -1825,7 +1833,7 @@ body.has-beta-bar .app-side{top:34px;height:calc(100vh - 34px)}
 <script defer src="shared/pro.js?v=7298bbab"></script>
 <script src="shared/analytics.js?v=1df688c5"></script>
 <script defer src="shared/nav.js?v=659103a7"></script>
-<script src="shared/version.js?v=95a03b3a"></script>
+<script src="shared/version.js?v=e73f8233"></script>
 <script src="shared/drive-sync.js?v=0868ec29"></script>
 <script src="shared/drive-sync-ui.js?v=116c209e"></script>
 <script>
