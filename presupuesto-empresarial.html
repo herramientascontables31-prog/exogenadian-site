@@ -34,6 +34,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.0/jspdf.plugin.autotable.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js" integrity="sha384-Pqp51FUN2/qzfxZxBCtF0stpc9ONI6MYZpVqmo8m20SoaQCzf+arZvACkLkirlPz" crossorigin="anonymous"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw" crossorigin="anonymous"></script>
+<script src="shared/balance-loader.js?v=9347f34a"></script>
 <link rel="stylesheet" href="shared/guia-didactica.css?v=3482d08f">
 <style>
 :root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--green:#059669;--green2:#ECFDF5;--green3:#D1FAE5;--red:#DC2626;--red2:#FEF2F2;--amber:#D97706;--amber2:#FFF8E1;--amber3:#FEF3C7;--border:#e2e8f0;--radius:12px;--shadow:0 2px 12px rgba(0,0,0,.06)}
@@ -224,7 +226,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
     </div>
     <div class="card">
       <div class="card-title">🔍 Control presupuestal — Plan vs Real</div>
-      <div class="card-sub">Para los meses que ya transcurrieron este año, ingresa lo que realmente vendiste y gastaste. El color te dice si la variación te favorece o no.</div>
+      <div class="card-sub">Para los meses que ya transcurrieron este año, ingresa lo que realmente vendiste y gastaste — o carga tu balance de prueba y te lo calculamos. El color te dice si la variación te favorece o no.</div>
+      <button class="btn-sm no-print" id="btnUsarBalanceExistentePresu" style="display:none;margin-bottom:10px" onclick="usarBalanceExistente()">🔗 Usar el balance que ya cargué en otra herramienta</button>
+      <div id="dzBalancePresu" style="max-width:420px;margin-bottom:14px"></div>
+      <div id="realYtdBox"></div>
       <div class="result-table-wrap">
         <table class="result-table" id="tablaPlanReal"></table>
       </div>
@@ -418,6 +423,7 @@ function pintarResultado(){
     '<tr class="total-row"><td>Utilidad operativa</td>'+filas.map(function(r){return '<td>'+fmt(r.utilidadOperativa)+'</td>'}).join('')+'<td>'+fmt(totUtil)+'</td></tr>';
   document.getElementById('tablaResultado').innerHTML = head + body;
   pintarPlanReal(filas);
+  pintarRealYtdBox();
 }
 function pintarPlanReal(filas){
   var head = '<tr><th>Mes</th><th>Ventas presu.</th><th>Ventas real</th><th>Var. ventas</th><th>Costos+gastos presu.</th><th>Costos+gastos real</th><th>Var. C&amp;G</th><th>Utilidad presu.</th><th>Utilidad real</th><th>Var. utilidad</th></tr>';
@@ -521,6 +527,69 @@ window.descargarExcel = async function(){
     if(typeof gtag==='function') gtag('event','presupuesto_excel_descargado');
   });
 };
+/* ═══ Import balance de prueba → Real YTD ═══ */
+var BALANCE_STORAGE_KEY = 'pyme_balance_actual';
+var BALANCE_KEYS_CONOCIDAS = ['pyme_balance_actual','razones_actual','eeff_actual','avh_actual'];
+var realYtdActual = null; // {ventas, costosGastos, origen}
+function mesesTranscurridos(filas){ return filas.filter(function(r){ return r.mes <= MES_ACTUAL; }); }
+function pintarRealYtdBox(){
+  var box = document.getElementById('realYtdBox');
+  if(!realYtdActual || !resultado){ box.innerHTML=''; return; }
+  var elapsed = mesesTranscurridos(resultado.filas);
+  var ventasPresuYtd = elapsed.reduce(function(s,r){return s+r.ventas},0);
+  var cgPresuYtd = elapsed.reduce(function(s,r){return s+r.costoVenta+r.gastoFijo+r.gastoVariable},0);
+  var vVentas = CajaEngine.varianza(ventasPresuYtd, realYtdActual.ventas, 'ingreso');
+  var vCG = CajaEngine.varianza(cgPresuYtd, realYtdActual.costosGastos, 'gasto');
+  box.innerHTML =
+    '<div class="summary-grid" style="grid-template-columns:1fr 1fr;margin-bottom:14px">'+
+      '<div class="summary-card"><div class="lbl">Ventas — presupuestado vs real (año a la fecha)</div>'+
+        '<div class="val">'+fmt(ventasPresuYtd)+' <span style="font-size:.85rem;color:var(--muted)">vs</span> '+fmt(realYtdActual.ventas)+'</div>'+
+        '<div class="sub '+(vVentas.favorable?'var-fav':'var-desfav')+'">'+fmtPct(vVentas.pct)+'</div></div>'+
+      '<div class="summary-card"><div class="lbl">Costos+gastos — presupuestado vs real (año a la fecha)</div>'+
+        '<div class="val">'+fmt(cgPresuYtd)+' <span style="font-size:.85rem;color:var(--muted)">vs</span> '+fmt(realYtdActual.costosGastos)+'</div>'+
+        '<div class="sub '+(vCG.favorable?'var-fav':'var-desfav')+'">'+fmtPct(vCG.pct)+'</div></div>'+
+    '</div>'+
+    '<button class="btn-sm no-print" onclick="distribuirRealYtd()">↓ Distribuir este real entre los '+elapsed.length+' meses transcurridos</button>';
+}
+window.distribuirRealYtd = function(){
+  if(!realYtdActual || !resultado) return;
+  var elapsed = mesesTranscurridos(resultado.filas);
+  if(!elapsed.length) return;
+  var ventasCada = realYtdActual.ventas / elapsed.length;
+  var cgCada = realYtdActual.costosGastos / elapsed.length;
+  elapsed.forEach(function(r){
+    state.reales[r.mes] = { ventas: Math.round(ventasCada), costosGastos: Math.round(cgCada) };
+  });
+  guardarEstado();
+  pintarPlanReal(resultado.filas);
+  if(typeof exoToast==='function') exoToast('Real distribuido en partes iguales entre los '+elapsed.length+' meses. Ajusta mes a mes si tienes el detalle.', 'success');
+};
+function aplicarBalanceAYtd(aggregates, meta, origen){
+  if(!aggregates || !aggregates._totals) return;
+  var t = aggregates._totals;
+  realYtdActual = { ventas: Math.abs(t.ingresos||0), costosGastos: Math.abs(t.costos||0)+Math.abs(t.gastos||0) };
+  var empresaTxt = meta && meta.empresa ? (' de '+meta.empresa) : '';
+  if(typeof exoToast==='function') exoToast('Real YTD calculado desde tu balance'+empresaTxt+origen+'.', 'success');
+  if(typeof gtag==='function') gtag('event','presupuesto_empresarial_balance_importado');
+  pintarRealYtdBox();
+}
+window.usarBalanceExistente = function(){
+  for(var i=0;i<BALANCE_KEYS_CONOCIDAS.length;i++){
+    var rec = window.BalanceLoader && BalanceLoader.recover(BALANCE_KEYS_CONOCIDAS[i]);
+    if(rec && rec.aggregates){ aplicarBalanceAYtd(rec.aggregates, rec.meta, ' (recuperado de otra herramienta)'); return; }
+  }
+  if(typeof exoToast==='function') exoToast('No encontramos un balance cargado en esta sesión — súbelo abajo.', 'info');
+};
+if(window.BalanceLoader && BalanceLoader.mountDropZone){
+  BalanceLoader.mountDropZone(document.getElementById('dzBalancePresu'), {
+    label: 'Cargar balance de prueba (acumulado a la fecha)',
+    sublabel: 'Calculamos tus ventas y costos+gastos reales del año',
+    storageKey: BALANCE_STORAGE_KEY,
+    onLoad: function(res){ if(res && res.ok) aplicarBalanceAYtd(res.aggregates, res.meta, ''); }
+  });
+  var hayRecuperable = BALANCE_KEYS_CONOCIDAS.some(function(k){ return !!BalanceLoader.recover(k); });
+  if(hayRecuperable) document.getElementById('btnUsarBalanceExistentePresu').style.display = 'inline-flex';
+}
 /* ═══ Init ═══ */
 pintarPaso1();
 window.irPaso(1);

@@ -41,6 +41,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.0/jspdf.plugin.autotable.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js" integrity="sha384-Pqp51FUN2/qzfxZxBCtF0stpc9ONI6MYZpVqmo8m20SoaQCzf+arZvACkLkirlPz" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw" crossorigin="anonymous"></script>
+<script src="shared/balance-loader.js?v=9347f34a"></script>
 <link rel="stylesheet" href="shared/guia-didactica.css?v=3482d08f">
 <style>
 :root{--bg:#f0f2f5;--card:#fff;--text:#1a1a2e;--muted:#6b7280;--pri:#1B3A5C;--pri2:#2E75B6;--pri3:#D6E4F0;--green:#059669;--green2:#ECFDF5;--green3:#D1FAE5;--red:#DC2626;--red2:#FEF2F2;--amber:#D97706;--amber2:#FFF8E1;--amber3:#FEF3C7;--border:#e2e8f0;--radius:12px;--shadow:0 2px 12px rgba(0,0,0,.06)}
@@ -270,7 +272,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
       </div>
       <div class="field" style="max-width:300px"><label>Renta anual estimada</label><input type="number" id="fRentaAnual"></div>
       <h3 style="font-size:.9rem;color:var(--pri);margin:18px 0 8px">💰 Disponible hoy</h3>
-      <div class="field" style="max-width:300px"><label>Saldo inicial en bancos + caja</label><input type="number" id="fSaldoInicial"></div>
+      <div class="field" style="max-width:300px;margin-bottom:14px"><label>Saldo inicial en bancos + caja</label><input type="number" id="fSaldoInicial"></div>
+      <button class="btn-sm no-print" id="btnUsarBalanceExistente" style="display:none;margin-bottom:10px" onclick="usarBalanceExistente()">🔗 Usar el balance que ya cargué en otra herramienta</button>
+      <div id="dzBalanceSaldo" style="max-width:420px"></div>
     </div>
     <div class="nav-buttons"><button class="btn btn-ghost" onclick="irPaso(2)">← Atrás</button><button class="btn btn-green" onclick="calcularYMostrar()">Ver mi flujo de caja →</button></div>
   </div>
@@ -656,6 +660,39 @@ window.descargarExcel = async function(){
     if(typeof gtag==='function') gtag('event','flujo_caja_excel_descargado');
   });
 };
+/* ═══ Import balance de prueba → saldo inicial real ═══ */
+var BALANCE_STORAGE_KEY = 'pyme_balance_actual';
+var BALANCE_KEYS_CONOCIDAS = ['pyme_balance_actual','razones_actual','eeff_actual','avh_actual'];
+function aplicarBalanceASaldo(aggregates, meta, origen){
+  if(!aggregates) return;
+  // OJO: no forzar Math.abs() — el signo es real (una cuenta de efectivo puede
+  // quedar en negativo por sobregiro o partidas pendientes de conciliar), y
+  // ese signo es justo la señal que el motor de alertas de déficit necesita.
+  var efectivo = (aggregates.efectivo||0) + (aggregates.inv_cp||0);
+  state.saldoInicial = Math.round(efectivo);
+  document.getElementById('fSaldoInicial').value = state.saldoInicial;
+  guardarEstado();
+  var empresaTxt = meta && meta.empresa ? (' de '+meta.empresa) : '';
+  if(typeof exoToast==='function') exoToast('Saldo inicial actualizado desde tu balance'+empresaTxt+origen+': '+fmt(efectivo), 'success');
+  if(typeof gtag==='function') gtag('event','flujo_caja_balance_importado');
+}
+window.usarBalanceExistente = function(){
+  for(var i=0;i<BALANCE_KEYS_CONOCIDAS.length;i++){
+    var rec = window.BalanceLoader && BalanceLoader.recover(BALANCE_KEYS_CONOCIDAS[i]);
+    if(rec && rec.aggregates){ aplicarBalanceASaldo(rec.aggregates, rec.meta, ' (recuperado de otra herramienta)'); return; }
+  }
+  if(typeof exoToast==='function') exoToast('No encontramos un balance cargado en esta sesión — súbelo abajo.', 'info');
+};
+if(window.BalanceLoader && BalanceLoader.mountDropZone){
+  BalanceLoader.mountDropZone(document.getElementById('dzBalanceSaldo'), {
+    label: 'Cargar balance de prueba (opcional)',
+    sublabel: 'Calculamos tu saldo de bancos + caja automáticamente',
+    storageKey: BALANCE_STORAGE_KEY,
+    onLoad: function(res){ if(res && res.ok) aplicarBalanceASaldo(res.aggregates, res.meta, ''); }
+  });
+  var hayRecuperable = BALANCE_KEYS_CONOCIDAS.some(function(k){ return !!BalanceLoader.recover(k); });
+  if(hayRecuperable) document.getElementById('btnUsarBalanceExistente').style.display = 'inline-flex';
+}
 /* ═══ Init ═══ */
 document.getElementById('fIvaRegimen').addEventListener('change', function(){ state.empresa.ivaRegimen=this.value; actualizarCamposCondicionales(); });
 document.getElementById('fIcaMunicipio').addEventListener('change', function(){ state.empresa.icaMunicipio=this.value; actualizarCamposCondicionales(); });

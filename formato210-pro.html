@@ -431,7 +431,7 @@ body.wsx #bienvenidaPanel{grid-column:1/-1}
 body.wsx #freeBanner{grid-column:1/-1}
 body.wsx #resultadoHero{grid-column:1/-1}
 body.wsx .foot{grid-column:1/-1}
-@media(max-width:1080px){body.wsx #proContent{grid-template-columns:1fr}}
+@media(max-width:760px){body.wsx #proContent{grid-template-columns:1fr}}
 /* ── Sidebar de pasos (reusa los botones .f210-tab existentes) ── */
 body.wsx #f210Tabs{display:flex;flex-direction:column;gap:6px;margin:0;border:none;position:sticky;top:74px}
 /* Eyebrow "PASOS" retirado (jul-2026): la nav ahora es agrupada, no una secuencia lineal. */
@@ -463,20 +463,31 @@ body.wsx .wsx-side-sep{font-size:.67rem;font-weight:800;letter-spacing:1px;color
 body.wsx .wsx-side-link{display:flex;align-items:center;gap:11px;padding:10px 14px;border-radius:12px;background:transparent;border:1px solid transparent;color:#5a6b84;font-size:.86rem;font-weight:600;text-decoration:none;transition:.15s;line-height:1.25}
 body.wsx .wsx-side-link .wsx-ico{width:26px;height:26px;flex:0 0 26px;border-radius:8px;background:#eef4fb;color:var(--pri2);display:grid;place-items:center;font-size:.9rem}
 body.wsx .wsx-side-link:hover{background:#fff;border-color:var(--border);color:var(--pri)}
-@media(max-width:1080px){
-  body.wsx .wsx-side-sep{grid-column:1/-1;padding-top:8px}
+@media(max-width:760px){
+  body.wsx .wsx-side-sep{padding-top:8px}
   body.wsx .wsx-side-link{padding:8px 11px;font-size:.8rem}
 }
 /* ── Contenido principal ── */
-body.wsx .express-grid{grid-column:2;margin:0;grid-template-columns:minmax(0,1fr) 320px;min-width:0}
+body.wsx .express-grid{grid-column:2;margin:0;grid-template-columns:minmax(0,1fr) 280px;min-width:0}
 body.wsx #colFormulario{min-width:0}
 body.wsx #colFormulario .card{max-width:100%;overflow-x:auto}
-@media(max-width:1080px){body.wsx .express-grid{grid-column:1;grid-template-columns:1fr}}
+@media(max-width:760px){body.wsx .express-grid{grid-column:1}}
 body.wsx .card{border-radius:14px;box-shadow:0 1px 3px rgba(16,24,40,.06),0 1px 2px rgba(16,24,40,.04)}
 /* ── Panel de cifras elevado a "hero" ── */
 body.wsx .sidebar{top:74px}
 body.wsx .cifras-hero{padding:0;overflow:hidden;border:1px solid #d7e2f0;box-shadow:0 10px 30px -18px rgba(27,58,92,.55)}
-body.wsx .cifras-hero > h3{margin:0;padding:12px 18px;background:#f1f5f9;color:var(--pri);font-size:.8rem;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)}
+body.wsx .cifras-hero > h3{margin:0;padding:12px 18px;background:#f1f5f9;color:var(--pri);font-size:.8rem;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);cursor:pointer;user-select:none}
+body.wsx .cifras-hero > h3:hover{background:#eaf1f8}
+body.wsx .cifras-hero .cifras-toggle-ico{margin-left:auto;font-size:.7rem;color:var(--muted);transition:transform .15s}
+/* Colapsadas: el contenido recupera todo el ancho; queda una pestaña flotante para reabrir */
+body.wsx.cifras-colapsadas .express-grid{grid-template-columns:1fr}
+body.wsx.cifras-colapsadas .sidebar{display:none}
+.cifras-reabrir{display:none;position:fixed;right:20px;bottom:24px;z-index:60;background:var(--pri);color:#fff;border:none;
+  border-radius:26px;padding:12px 18px 12px 15px;font-size:.84rem;font-weight:700;cursor:pointer;font-family:inherit;
+  box-shadow:0 10px 26px -8px rgba(43,86,127,.55);align-items:center;gap:7px;transition:.15s}
+.cifras-reabrir:hover{background:var(--pri2);transform:translateY(-1px)}
+body.wsx.cifras-colapsadas .cifras-reabrir{display:inline-flex}
+@media(max-width:760px){.cifras-reabrir{right:14px;bottom:14px;padding:10px 15px 10px 13px;font-size:.8rem}}
 /* Paso 4: formulario a lo ancho, sin panel lateral (la réplica ya lo trae todo) */
 body.wsx.tab-trevision .express-grid{grid-template-columns:1fr}
 body.wsx.tab-trevision .sidebar{display:none}
@@ -490,10 +501,8 @@ body.wsx .cifras-hero #lvSaldo{font-size:1.42rem!important}
 body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linear-gradient(90deg,#ecfdf5,#f8fafc)}
 /* ── Paneles sticky más altos que la pantalla: scroll interno en vez de quedarse cortados ──
    Sin esto hay que bajar hasta el final de la página para poder ver lo último del panel. */
-@media(min-width:1081px){
+@media(min-width:761px){
   body.wsx #f210Tabs{max-height:calc(100vh - 90px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding-right:2px}
-}
-@media(min-width:981px){
   body.wsx .sidebar{max-height:calc(100vh - 90px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:2px 4px 12px 2px}
 }
 /* ══ FIRMA VISUAL: el sello de tinta + la secuencia del resultado ══
@@ -532,16 +541,12 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
 .dz-art{display:block;margin:0 auto 12px;color:var(--pri2)}
 .dropzone:hover .dz-art .dz-flecha,.dropzone.dragover .dz-art .dz-flecha{transform:translateY(3px)}
 .dz-art .dz-flecha{transition:transform .2s cubic-bezier(.3,1.4,.4,1)}
-/* ── Móvil / tablet: pasos como grilla compacta 2×2 (la dropzone sube, el gancho manda) ── */
-@media(max-width:1080px){
-  body.wsx #f210Tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;position:static}
-  body.wsx #f210Tabs::before{grid-column:1/-1}
+/* ── Móvil real (≤760px): el nav sigue siendo la MISMA lista vertical, solo
+      apilada arriba de #proContent — sin transformación a grid horizontal
+      (esa transformación era el bug: empujaba todo el formulario hacia abajo). ── */
+@media(max-width:760px){
   body.wsx .f210-tab{padding:9px 11px;font-size:.8rem;gap:8px}
   body.wsx .f210-tab .wsx-ico{width:24px;height:24px;flex-basis:24px;font-size:.85rem}
-  body.wsx .f210-tab .wsx-lbl small{font-size:.62rem}
-  body.wsx .wsx-side-sep{grid-column:1/-1;padding:8px 10px 0}
-  body.wsx .wsx-side-link{padding:8px 10px;font-size:.78rem;gap:8px}
-  body.wsx .wsx-side-link .wsx-ico{width:22px;height:22px;flex-basis:22px;font-size:.8rem}
 }
 /* ── Móvil: aire real. Menos padding lateral, y la réplica del 210 SCROLLEA
       horizontal en vez de aplastar los números unos sobre otros. ── */
@@ -1134,7 +1139,7 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
           <div id="lvVencimiento" style="font-size:.84rem;line-height:1.45"></div>
         </div>
         <div class="card cifras-hero">
-          <h3>&#128202; Cifras en vivo</h3>
+          <h3 onclick="toggleCifrasEnVivo()" title="Clic para colapsar y darle todo el ancho al formulario">&#128202; Cifras en vivo <span class="cifras-toggle-ico">&#9660; ocultar</span></h3>
           <div class="live-row"><span class="lbl">Ingreso neto</span><span class="val" id="lvIngresoNeto">$0</span></div>
           <div class="live-row"><span class="lbl">Renta liq. cedular (c91)</span><span class="val" id="lvC91">$0</span></div>
           <div class="live-row"><span class="lbl">Exentas+ded limitadas (c92)</span><span class="val" id="lvC92">$0</span></div>
@@ -1169,6 +1174,7 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
           <div style="margin-top:8px;font-size:.68rem;color:var(--muted)">Mismo diagnóstico que va en el PDF entregable. Las alertas de consignaciones y aportes UGPP usan los campos del entregable.</div>
         </div>
       </aside>
+      <button id="cifrasReabrir" class="cifras-reabrir" onclick="toggleCifrasEnVivo()" title="Mostrar Cifras en vivo">&#128202; Cifras en vivo</button>
     </div>
     <div class="foot"><strong>Aziendale</strong> &middot; Pro v2025.1 &middot; Tope Art. 336 (1.340 UVT) &middot; Descuento Art. 254-1 ET &middot; Validar antes de presentar. <a class="bienvenida-link" onclick="reabrirBienvenida()">ℹ Ver introducción</a></div>
   </div>
@@ -1336,7 +1342,22 @@ function validarProGate(){
     errEl.textContent='Error de conexión. Intenta de nuevo.';
   }).finally(function(){input.disabled=false});
 }
+// Cifras en vivo: colapsable — el usuario decide, se recuerda la preferencia.
+// Sin preferencia guardada, arranca colapsada si la ventana es angosta (una sola
+// vez al cargar; después el usuario tiene control total con el toggle).
+function initCifrasEnVivo(){
+  var guardado = null;
+  try{ guardado = localStorage.getItem('f210_cifras_colapsadas'); }catch(_){}
+  var colapsar = guardado !== null ? (guardado === '1') : (window.innerWidth <= 1150);
+  document.body.classList.toggle('cifras-colapsadas', colapsar);
+}
+function toggleCifrasEnVivo(){
+  var colapsado = document.body.classList.toggle('cifras-colapsadas');
+  try{ localStorage.setItem('f210_cifras_colapsadas', colapsado ? '1' : '0'); }catch(_){}
+  if(typeof gtag !== 'undefined') gtag('event','f210_pro_cifras_toggle', { colapsado: colapsado });
+}
 document.addEventListener('DOMContentLoaded', function(){
+  initCifrasEnVivo();
   renderClienteBar();
   exoPro.check().then(function(ok){
     if(ok) entrarModoPro({ restaurar:true });
