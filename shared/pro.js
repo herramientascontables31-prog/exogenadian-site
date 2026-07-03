@@ -209,30 +209,10 @@
     return localStorage.getItem(KEY_ESCUELA) === 'true';
   }
 
-  /* SESION UNICA por herramienta (scope, p.ej. 'renta'): un dispositivo a la vez.
-     claim=true al ABRIR la herramienta (reclama el puesto y expulsa al anterior);
-     claim=false en la verificacion periodica. NO toca el estado PRO general.
-     Fail-open: sin credencial guardada, red caida o backend viejo -> valid:true. */
-  function session(scope, claim){
-    var saved=getSaved();
-    if(!saved || !scope) return Promise.resolve({valid:true, skipped:true});
-    var fp=getDeviceFingerprint();
-    var isEmail=saved.includes('@');
-    var url=APPS_SCRIPT_URL+'?action='+(isEmail?'validateEmail':'validateKey')
-      +'&'+(isEmail?'email':'key')+'='+encodeURIComponent(saved)
-      +'&device='+encodeURIComponent(fp)
-      +'&scope='+encodeURIComponent(scope)+(claim?'&claim=1':'');
-    return fetch(url).then(function(r){return r.json();}).then(function(d){
-      if(d && d.valid===false && d.reason==='sesion_en_otro_dispositivo') return {valid:false, reason:d.reason};
-      return {valid:true};
-    }).catch(function(){ return {valid:true, offline:true}; });
-  }
-
   // Exportar API global
   window.exoPro={
     check: check,
     revalidate: revalidate,
-    session: session,
     activate: activate,
     getSaved: getSaved,
     clearPro: clearPro,
