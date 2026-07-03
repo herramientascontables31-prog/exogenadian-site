@@ -37,6 +37,9 @@
   let driveDisponible=false;
   let pendingSave=false;
   let listenersMontados=false;
+  let syncing=false;              // hay una fusión/carga en curso
+  let lastRemoteModified=null;    // modifiedTime del archivo la última vez que lo vimos/escribimos
+  const POLL_MS=60000;            // cada 60s revisa si otro equipo escribió
 
   async function attach(cfg){
     if(!cfg||!cfg.clientId||!cfg.fileName||!cfg.getData||!cfg.setData){
@@ -63,8 +66,14 @@
     // nunca subía a Drive. Best-effort (visibilitychange 'hidden' es fiable).
     if(!listenersMontados){
       listenersMontados=true;
-      document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')flushSave();});
+      document.addEventListener('visibilitychange',function(){
+        if(document.visibilityState==='hidden')flushSave();
+        else pollTick(); // al volver a la pestaña, chequea cambios de otro equipo
+      });
       window.addEventListener('pagehide',flushSave);
+      // Re-chequeo periódico (solo tools con fusión): trae cambios de otros
+      // equipos sin que el usuario recargue. pollTick decide si hay algo nuevo.
+      if(typeof CONFIG.merge==='function')setInterval(pollTick,POLL_MS);
     }
 
     // Si ya estaba conectado de sesión previa → cargar de Drive
@@ -158,7 +167,8 @@
   }
 
   async function cargarSiCorresponde(silencioso){
-    if(!ExoDrive.isConnected())return;
+    if(!ExoDrive.isConnected()||syncing)return;
+    syncing=true;
     try{
       const r=await ExoDrive.load(CONFIG.fileName);
       const localTs=CONFIG.getLocalTs();
@@ -166,13 +176,15 @@
       if(!r){
         // No hay archivo en Drive → sube el local si existe
         if(localTieneData){
-          await ExoDrive.save(CONFIG.fileName,CONFIG.getData());
+          const meta=await ExoDrive.save(CONFIG.fileName,CONFIG.getData());
+          if(meta&&meta.modifiedTime)lastRemoteModified=meta.modifiedTime;
           if(!silencioso&&typeof exoToast==='function')exoToast('✓ Tu data local se subió a Drive','success');
         }
         // Crear README la primera vez (no existe)
         await asegurarReadme();
         return;
       }
+      lastRemoteModified=r.modifiedTime||lastRemoteModified;
       const remoto=r.data;
       // FUSIÓN (si la tool la provee): combina Drive + local elemento por
       // elemento en vez de que "el último snapshot gane" y borre lo del otro
@@ -180,9 +192,15 @@
       // pisaba a la anterior y se perdían clientes. El resultado fusionado se
       // sube para que todos los equipos converjan al mismo estado.
       if(typeof CONFIG.merge==='function'){
+        // Respaldo de seguridad UNA sola vez por equipo, antes de la primera
+        // fusión: si algún caso borde hiciera algo raro, la lista previa de este
+        // equipo queda recuperable en Drive. La fusión ya es no-destructiva; esto
+        // es solo un cinturón de seguridad extra.
+        await ensurePreMergeBackup();
         const fusion=CONFIG.merge(remoto,CONFIG.getData());
         CONFIG.setData(fusion);
-        await ExoDrive.save(CONFIG.fileName,fusion);
+        const meta=await ExoDrive.save(CONFIG.fileName,fusion);
+        if(meta&&meta.modifiedTime)lastRemoteModified=meta.modifiedTime; // no reaccionar a nuestra propia escritura
         if(!silencioso&&typeof exoToast==='function')exoToast('✓ Sincronizado con tu Drive','success');
         await asegurarReadme();
         return;
@@ -203,7 +221,45 @@
       await asegurarReadme();
     }catch(e){
       console.error('[ExoDriveUI] cargarSiCorresponde:',e);
+    }finally{
+      syncing=false;
     }
+  }
+
+  // ─── Respaldo pre-fusión (una vez por equipo) ───
+  async function ensurePreMergeBackup(){
+    const KEY='exo_premerge_backup_'+CONFIG.fileName;
+    if(localStorage.getItem(KEY))return;              // ya se hizo
+    let local;try{local=CONFIG.getData();}catch(_){local=null;}
+    const hayAlgo=local&&((local.clientes&&local.clientes.length)||Object.keys(local).length>1);
+    try{
+      if(hayAlgo){
+        const name=CONFIG.fileName.replace(/\.json$/i,'')+'.backup-pre-merge.json';
+        await ExoDrive.save(name,{savedAt:Date.now(),note:'Respaldo automático de la lista de este equipo antes de la primera fusión multi-dispositivo. Puedes borrarlo si todo quedó bien.',data:local});
+      }
+      localStorage.setItem(KEY,'1');
+    }catch(e){
+      // No bloquear la sincronización por un fallo de respaldo.
+      console.warn('[ExoDriveUI] no se pudo crear respaldo pre-fusión:',e);
+    }
+  }
+
+  // ─── Re-chequeo periódico: trae cambios de OTROS equipos sin recargar ───
+  async function pollTick(){
+    if(!driveDisponible||!ExoDrive.isConnected())return;
+    if(typeof CONFIG.merge!=='function')return;        // solo tools con fusión (no-destructiva)
+    if(document.visibilityState!=='visible')return;    // pestaña en segundo plano: no gastar cuota
+    if(syncing||pendingSave)return;                    // hay algo en curso: no pisar
+    // No interrumpir al usuario si está editando en un modal.
+    if(document.querySelector('.modal-overlay.open, dialog[open], [aria-modal="true"]'))return;
+    try{
+      const st=await ExoDrive.stat(CONFIG.fileName);
+      const mt=st&&st.modifiedTime;
+      // Solo bajar si el archivo cambió desde la última vez que lo vimos/escribimos
+      // (es decir, otro equipo escribió). Si es igual, no hay nada nuevo.
+      if(!mt||mt===lastRemoteModified)return;
+      await cargarSiCorresponde(true);
+    }catch(_){/* silencioso: es un chequeo de fondo */}
   }
 
   // ─── README.md en la carpeta — solo se crea si no existe ───
@@ -268,7 +324,8 @@
     saveTimer=setTimeout(async()=>{
       pendingSave=false;
       try{
-        await ExoDrive.save(CONFIG.fileName,CONFIG.getData());
+        const meta=await ExoDrive.save(CONFIG.fileName,CONFIG.getData());
+        if(meta&&meta.modifiedTime)lastRemoteModified=meta.modifiedTime; // nuestra propia escritura: que el poll no la confunda con cambio ajeno
         // Después de cada save exitoso, chequea si toca snapshot semanal
         chequearSnapshotSemanal();
       }catch(e){
@@ -283,7 +340,10 @@
     if(!pendingSave||!driveDisponible||!ExoDrive.isConnected())return;
     clearTimeout(saveTimer);
     pendingSave=false;
-    try{ExoDrive.save(CONFIG.fileName,CONFIG.getData());}catch(_){}
+    try{
+      const p=ExoDrive.save(CONFIG.fileName,CONFIG.getData());
+      if(p&&p.then)p.then(function(meta){if(meta&&meta.modifiedTime)lastRemoteModified=meta.modifiedTime;}).catch(function(){});
+    }catch(_){}
   }
 
   async function forceSync(){

@@ -199,6 +199,13 @@
     return (r.files&&r.files[0])||null;
   }
 
+  // Metadata liviana (sin descargar el contenido). Para detectar si OTRO equipo
+  // escribió el archivo, comparando modifiedTime — así el re-chequeo periódico
+  // solo baja cuando hay cambios reales, no cada minuto.
+  async function stat(name){
+    try{return await findFile(name);}catch(_){return null;}
+  }
+
   async function save(name,data){
     return saveRaw(name,'application/json',typeof data==='string'?data:JSON.stringify(data));
   }
@@ -307,7 +314,7 @@
 
   window.ExoDrive={
     init,connect,disconnect,resume,isConnected,
-    save,saveText,saveBinary,load,list,
+    save,saveText,saveBinary,load,list,stat,
     onStatusChange:(fn)=>{statusListeners.push(fn);try{fn(estado)}catch(_){}},
     getStatus:()=>estado,
     getUserEmail:()=>userEmail,
