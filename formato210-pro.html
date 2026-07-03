@@ -2,12 +2,24 @@
 <html lang="es">
 <head>
 <script src="shared/cookie-consent.js?v=10d7f382"></script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-S7SM6ST4CC');
+// Cargar el script de gtag (540KB) DESPUÉS de que la página termine de cargar:
+// no compite por ancho de banda con la herramienta en la ventana crítica.
+// Los eventos disparados antes quedan en dataLayer, gtag los procesa al llegar.
+(function(){
+  function cargarGTM(){
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC';
+    document.head.appendChild(s);
+  }
+  if(document.readyState === 'complete') setTimeout(cargarGTM, 1);
+  else window.addEventListener('load', function(){ setTimeout(cargarGTM, 1); });
+})();
 </script>
 <meta charset="UTF-8">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -433,12 +445,12 @@ body.wsx #resultadoHero{grid-column:1/-1}
 body.wsx .foot{grid-column:1/-1}
 @media(max-width:760px){body.wsx #proContent{grid-template-columns:1fr}}
 /* ── Sidebar de pasos (reusa los botones .f210-tab existentes) ── */
-body.wsx #f210Tabs{display:flex;flex-direction:column;gap:6px;margin:0;border:none;position:sticky;top:74px}
+body.wsx #f210Tabs{display:flex;flex-direction:column;gap:2px;margin:0;border:none;position:sticky;top:64px}
 /* Eyebrow "PASOS" retirado (jul-2026): la nav ahora es agrupada, no una secuencia lineal. */
-body.wsx .f210-tab{width:100%;justify-content:flex-start;text-align:left;gap:11px;padding:12px 14px;border-radius:12px;
-  background:#fff;border:1px solid var(--border);color:#475569;font-size:.9rem;font-weight:600;position:relative;line-height:1.25;
-  border-bottom:1px solid var(--border);box-shadow:0 1px 2px rgba(0,0,0,.03)}
-body.wsx .f210-tab .wsx-ico{width:30px;height:30px;flex:0 0 30px;border-radius:9px;background:#eef4fb;color:var(--pri2);display:grid;place-items:center;font-size:1rem;transition:.15s}
+body.wsx .f210-tab{width:100%;justify-content:flex-start;text-align:left;gap:9px;padding:6px 11px;border-radius:9px;
+  background:#fff;border:1px solid var(--border);color:#475569;font-size:.82rem;font-weight:600;position:relative;line-height:1.15;
+  box-shadow:0 1px 2px rgba(0,0,0,.03)}
+body.wsx .f210-tab .wsx-ico{width:21px;height:21px;flex:0 0 21px;border-radius:6px;background:#eef4fb;color:var(--pri2);display:grid;place-items:center;font-size:.76rem;transition:.15s}
 body.wsx .f210-tab .wsx-lbl{display:flex;flex-direction:column;gap:1px}
 body.wsx .f210-tab .wsx-lbl small{font-weight:600;font-size:.7rem;color:#94a3b8}
 body.wsx .f210-tab:hover{background:#f5f9ff;border-color:#cdddf0;color:var(--pri);transform:none}
@@ -459,9 +471,9 @@ body.wsx .f210-tab.active .tab-badge{background:rgba(255,255,255,.22);color:#fff
 #cardCedulaGeneral[data-focus] > .subcard{border:none;background:transparent;padding:0;margin-top:2px}
 #cardCedulaGeneral[data-focus] > .subcard > .sub-title{display:none}
 /* ── Secciones del estudio en el sidebar (clientes, cartas, tarjeta, aprende) ── */
-body.wsx .wsx-side-sep{font-size:.67rem;font-weight:800;letter-spacing:1px;color:#94a3b8;text-transform:uppercase;padding:12px 10px 2px}
-body.wsx .wsx-side-link{display:flex;align-items:center;gap:11px;padding:10px 14px;border-radius:12px;background:transparent;border:1px solid transparent;color:#5a6b84;font-size:.86rem;font-weight:600;text-decoration:none;transition:.15s;line-height:1.25}
-body.wsx .wsx-side-link .wsx-ico{width:26px;height:26px;flex:0 0 26px;border-radius:8px;background:#eef4fb;color:var(--pri2);display:grid;place-items:center;font-size:.9rem}
+body.wsx .wsx-side-sep{font-size:.62rem;font-weight:800;letter-spacing:1px;color:#94a3b8;text-transform:uppercase;padding:5px 10px 1px}
+body.wsx .wsx-side-link{display:flex;align-items:center;gap:9px;padding:5px 11px;border-radius:9px;background:transparent;border:1px solid transparent;color:#5a6b84;font-size:.78rem;font-weight:600;text-decoration:none;transition:.15s;line-height:1.15}
+body.wsx .wsx-side-link .wsx-ico{width:20px;height:20px;flex:0 0 20px;border-radius:6px;background:#eef4fb;color:var(--pri2);display:grid;place-items:center;font-size:.72rem}
 body.wsx .wsx-side-link:hover{background:#fff;border-color:var(--border);color:var(--pri)}
 @media(max-width:760px){
   body.wsx .wsx-side-sep{padding-top:8px}
@@ -502,7 +514,7 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
 /* ── Paneles sticky más altos que la pantalla: scroll interno en vez de quedarse cortados ──
    Sin esto hay que bajar hasta el final de la página para poder ver lo último del panel. */
 @media(min-width:761px){
-  body.wsx #f210Tabs{max-height:calc(100vh - 90px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding-right:2px}
+  body.wsx #f210Tabs{max-height:calc(100vh - 78px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding-right:2px}
   body.wsx .sidebar{max-height:calc(100vh - 90px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:2px 4px 12px 2px}
 }
 /* ══ FIRMA VISUAL: el sello de tinta + la secuencia del resultado ══
@@ -1199,7 +1211,6 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
 <script src="shared/parser-muisca-consultante.js?v=03bd8bbd"></script>
 <script src="shared/sugerida-parser-210.js?v=34d26f6a"></script>
 <script src="shared/canonicalize-inputs.js?v=5fe6d4a7"></script>
-<script src="shared/excel-papel-trabajo.js?v=4d3e1c5b"></script>
 <script src="shared/ocr-pdf.js?v=e91567a8"></script>
 <script src="shared/agente-preclasificador-pn.js?v=badbfce6"></script>
 <script src="shared/certificados-renta-pn.js?v=bd52b9d2"></script>
@@ -1222,11 +1233,12 @@ function __cargarScript(src, integrity){
   });
 }
 function cargarLibsExcel(){
-  if(window.ExcelJS && window.XLSX) return Promise.resolve();
+  if(window.ExcelJS && window.XLSX && window.excelPapelTrabajo) return Promise.resolve();
   if(__libsExcelP) return __libsExcelP;
   __libsExcelP = Promise.all([
     __cargarScript('https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js','sha384-Pqp51FUN2/qzfxZxBCtF0stpc9ONI6MYZpVqmo8m20SoaQCzf+arZvACkLkirlPz'),
-    __cargarScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js','sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw')
+    __cargarScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js','sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw'),
+    __cargarScript('shared/excel-papel-trabajo.js')
   ]).catch(function(e){ __libsExcelP = null; throw e; });
   return __libsExcelP;
 }
@@ -3816,7 +3828,7 @@ function exportarExcelAsesor(){
     if(typeof exoToast !== 'undefined') exoToast('Llena los campos primero', 'error');
     return;
   }
-  if(!window.ExcelJS){ // lib bajo demanda: cargar y reintentar
+  if(!window.ExcelJS || !window.excelPapelTrabajo){ // libs bajo demanda: cargar y reintentar
     document.getElementById('loadingOverlay').classList.remove('hidden');
     cargarLibsExcel().then(function(){ exportarExcelAsesor(); }).catch(function(){
       document.getElementById('loadingOverlay').classList.add('hidden');
