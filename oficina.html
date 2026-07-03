@@ -1083,8 +1083,8 @@ body{font-family:var(--font);background:var(--f50);color:var(--f900);min-height:
 <script defer src="shared/nav.js?v=659103a7"></script>
 <script defer src="shared/pro.js?v=ccea4108"></script>
 <script defer src="shared/toast.js?v=9843f93f"></script>
-<script src="shared/drive-sync.js?v=8459c1df"></script>
-<script src="shared/drive-sync-ui.js?v=7941a649"></script>
+<script src="shared/drive-sync.js?v=bbc1759e"></script>
+<script src="shared/drive-sync-ui.js?v=a312e2ff"></script>
 <script>
 (function(){
 'use strict';
@@ -1468,6 +1468,60 @@ function saveEstado(obj){
   localStorage.setItem('oficina_last_save',String(Date.now()));
   if(typeof ExoDriveUI!=='undefined')ExoDriveUI.scheduleSave();
 }
+// Marca de tiempo del último cambio de cada estado (presentada) — resuelve
+// conflictos al fusionar entre dispositivos sin cambiar la forma de 'estado'.
+function loadEstadoTs(){try{return JSON.parse(localStorage.getItem('oficina_estado_ts'))||{}}catch(e){return{}}}
+function saveEstadoTs(o){localStorage.setItem('oficina_estado_ts',JSON.stringify(o));}
+// Lápidas (tombstones): NIT -> timestamp de borrado. Permiten que una
+// eliminación se propague en la fusión en vez de que otro equipo "resucite"
+// el cliente. loadClients/loadEstado no las tocan (solo sync las usa).
+function loadDeleted(){try{return JSON.parse(localStorage.getItem('oficina_deleted'))||{}}catch(e){return{}}}
+function saveDeleted(o){localStorage.setItem('oficina_deleted',JSON.stringify(o));}
+function nitKey(nit){return String(nit||'').replace(/\D/g,'');}
+// ═══ FUSIÓN MULTI-DISPOSITIVO ═══
+// Combina Drive (remote) + este equipo (local) elemento por elemento, en vez de
+// que "el último snapshot gane" y borre lo del otro. Es conmutativa y converge:
+// da igual en qué orden sincronicen los 3 equipos.
+function mergeOficina(remote,local){
+  remote=remote||{};local=local||{};
+  var rC=remote.clientes||[],lC=local.clientes||[];
+  // 1) Lápidas fusionadas (máximo timestamp por NIT); se podan a los 180 días.
+  var deleted={},CUT=Date.now()-180*86400000;
+  [remote.deleted||{},local.deleted||{}].forEach(function(src){
+    Object.keys(src).forEach(function(k){var t=+src[k]||0;if(t>(deleted[k]||0))deleted[k]=t;});
+  });
+  Object.keys(deleted).forEach(function(k){if(deleted[k]<CUT)delete deleted[k];});
+  // 2) Clientes: unión por NIT; en colisión gana el updatedAt mayor (empate→local).
+  var byNit={};
+  rC.forEach(function(c){var k=nitKey(c.nit);if(k)byNit[k]=c;});
+  lC.forEach(function(c){var k=nitKey(c.nit);if(!k)return;
+    var ex=byNit[k];
+    if(!ex||(+c.updatedAt||0)>=(+ex.updatedAt||0))byNit[k]=c;
+  });
+  // 3) Aplica lápidas: se elimina si el borrado es posterior a su última edición.
+  var clientes=[],vivos={};
+  Object.keys(byNit).forEach(function(k){
+    var c=byNit[k];
+    if((deleted[k]||0)>(+c.updatedAt||0))return;
+    clientes.push(c);vivos[k]=true;
+  });
+  // 4) Estado (presentadas): por clave gana el toggle más reciente (estadoTs).
+  //    Solo se conserva estado de clientes vivos. Sin timestamps (datos legados)
+  //    se hace unión para no perder marcas viejas.
+  var rE=remote.estado||{},lE=local.estado||{},rEt=remote.estadoTs||{},lEt=local.estadoTs||{};
+  var estado={},estadoTs={},keys={};
+  [rEt,lEt,rE,lE].forEach(function(src){Object.keys(src).forEach(function(k){keys[k]=1;});});
+  Object.keys(keys).forEach(function(k){
+    if(!vivos[k.split('_')[0]])return; // NIT limpio = parte antes del primer '_'
+    var rt=+rEt[k]||0,lt=+lEt[k]||0,val,t;
+    if(rt>lt){val=rE[k];t=rt;}
+    else if(lt>rt){val=lE[k];t=lt;}
+    else {val=rE[k]||lE[k];t=0;}
+    if(t>0)estadoTs[k]=t;
+    if(val)estado[k]=true;
+  });
+  return {clientes:clientes,estado:estado,estadoTs:estadoTs,deleted:deleted,ts:Date.now()};
+}
 function stateKey(nit,oblId){
   return nit.replace(/\D/g,'')+'_'+oblId;
 }
@@ -1478,6 +1532,7 @@ function togglePresentada(nit,oblId){
   var estado=loadEstado();
   var k=stateKey(nit,oblId);
   estado[k]=!estado[k];
+  var ets=loadEstadoTs();ets[k]=Date.now();saveEstadoTs(ets);
   saveEstado(estado);
   if(typeof gtag==='function'){
     gtag('event','oficina_marcar_presentada',{obligation:oblId,status:estado[k]?'presentada':'pendiente'});
@@ -2288,6 +2343,11 @@ window.confirmDelete=function(){
   var clients=loadClients();
   var removed=clients.splice(deleteIdx,1)[0];
   saveClients(clients);
+  // Lápida para que el borrado se propague en la fusión (si no, otro equipo lo
+  // resucita al sincronizar).
+  if(removed){
+    var delMap=loadDeleted();delMap[nitKey(removed.nit)]=Date.now();saveDeleted(delMap);
+  }
   // Clean estado entries for this client
   if(removed){
     var estado=loadEstado();
@@ -2392,13 +2452,17 @@ window.saveClient=function(){
     obligaciones:obligaciones,
     icaMunicipio:document.getElementById('cIcaMunicipio').value,
     icaDecl:document.getElementById('cIcaDecl').checked,
-    icaRete:document.getElementById('cIcaRete').checked
+    icaRete:document.getElementById('cIcaRete').checked,
+    updatedAt:Date.now()
   };
   if(idx>=0&&idx<clients.length){
     // Edit - preserve old NIT in estado if changed
     var oldNit=clients[idx].nit;
     clients[idx]=clientObj;
     if(oldNit!==nitClean){
+      // El NIT cambió: para la fusión, el NIT viejo debe quedar como lápida o
+      // otro equipo lo resucitaría al sincronizar.
+      var delMap=loadDeleted();delMap[nitKey(oldNit)]=Date.now();saveDeleted(delMap);
       // Migrate estado keys
       var estado=loadEstado();
       var oldPrefix=oldNit.replace(/\D/g,'')+'_';
@@ -2816,7 +2880,8 @@ window.bulkImport=function(){
       responsable:bulkResp,
       granContribuyente:gc,
       obligaciones:obligaciones,
-      icaMunicipio:'none'
+      icaMunicipio:'none',
+      updatedAt:Date.now()
     });
   });
   saveClients(clients);
@@ -2987,6 +3052,7 @@ window.importVencEmpresas=function(){
     var cl=vencEmpresaToCliente(e);
     if(!cl.nit||cl.nit.length<5||seen[cl.nit])return;
     seen[cl.nit]=1;
+    cl.updatedAt=Date.now();
     clients.push(cl);
     added++;
   });
@@ -3185,15 +3251,22 @@ if(typeof ExoDriveUI!=='undefined'){
       return {
         clientes: loadClients(),
         estado: loadEstado(),
+        estadoTs: loadEstadoTs(),
+        deleted: loadDeleted(),
         ts: parseInt(localStorage.getItem('oficina_last_save')||String(Date.now()),10)
       };
     },
     setData: function(obj){
       if(obj.clientes)localStorage.setItem('oficina_clientes',JSON.stringify(obj.clientes));
       if(obj.estado)localStorage.setItem('oficina_estado',JSON.stringify(obj.estado));
+      if(obj.estadoTs)localStorage.setItem('oficina_estado_ts',JSON.stringify(obj.estadoTs));
+      if(obj.deleted)localStorage.setItem('oficina_deleted',JSON.stringify(obj.deleted));
       localStorage.setItem('oficina_last_save',String(obj.ts||Date.now()));
       render();
     },
+    // Fusión multi-dispositivo (ver mergeOficina): combina Drive + local por
+    // cliente en vez de sobrescribir. Sin esto, 3 equipos se pisaban la lista.
+    merge: function(remote,local){return mergeOficina(remote,local);},
     getLocalTs: function(){return parseInt(localStorage.getItem('oficina_last_save')||'0',10);},
     snapshotXlsx: async function(){
       if(typeof ExcelJS==='undefined')return null;

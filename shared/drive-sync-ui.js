@@ -35,6 +35,8 @@
   let CONFIG=null;
   let saveTimer=null;
   let driveDisponible=false;
+  let pendingSave=false;
+  let listenersMontados=false;
 
   async function attach(cfg){
     if(!cfg||!cfg.clientId||!cfg.fileName||!cfg.getData||!cfg.setData){
@@ -56,12 +58,30 @@
     montarUI();
     ExoDrive.onStatusChange(s=>pintar(s));
 
+    // Flush del guardado pendiente al ocultar/cerrar la pestaña: el debounce de
+    // 2.5s antes se perdía si el usuario editaba y cerraba rápido → ese cambio
+    // nunca subía a Drive. Best-effort (visibilitychange 'hidden' es fiable).
+    if(!listenersMontados){
+      listenersMontados=true;
+      document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')flushSave();});
+      window.addEventListener('pagehide',flushSave);
+    }
+
     // Si ya estaba conectado de sesión previa → cargar de Drive
     if(ExoDrive.isConnected()){
       pintar('conectado');
       await cargarSiCorresponde(true);
     } else {
-      pintar('desconectado');
+      // El token dura ~1h. Si venció pero el usuario ya autorizó antes en este
+      // navegador, resume() lo renueva sin popup para que la bajada-al-abrir sí
+      // ocurra. Si Google exige interacción, queda desconectado (sin ruido).
+      const reconecto=await ExoDrive.resume();
+      if(reconecto){
+        pintar('conectado');
+        await cargarSiCorresponde(true);
+      } else {
+        pintar('desconectado');
+      }
     }
   }
 
@@ -154,6 +174,20 @@
         return;
       }
       const remoto=r.data;
+      // FUSIÓN (si la tool la provee): combina Drive + local elemento por
+      // elemento en vez de que "el último snapshot gane" y borre lo del otro
+      // equipo. Con 3 dispositivos, sus listas divergen; sin fusión, cada carga
+      // pisaba a la anterior y se perdían clientes. El resultado fusionado se
+      // sube para que todos los equipos converjan al mismo estado.
+      if(typeof CONFIG.merge==='function'){
+        const fusion=CONFIG.merge(remoto,CONFIG.getData());
+        CONFIG.setData(fusion);
+        await ExoDrive.save(CONFIG.fileName,fusion);
+        if(!silencioso&&typeof exoToast==='function')exoToast('✓ Sincronizado con tu Drive','success');
+        await asegurarReadme();
+        return;
+      }
+      // Fallback histórico (tools sin merge): última escritura gana, por timestamp.
       const remotoTs=(remoto&&remoto.ts)||0;
       if(remotoTs>localTs){
         // Drive es más nuevo → reemplaza local
@@ -229,16 +263,27 @@
 
   function scheduleSave(){
     if(!driveDisponible||!ExoDrive.isConnected())return;
+    pendingSave=true;
     clearTimeout(saveTimer);
     saveTimer=setTimeout(async()=>{
+      pendingSave=false;
       try{
         await ExoDrive.save(CONFIG.fileName,CONFIG.getData());
         // Después de cada save exitoso, chequea si toca snapshot semanal
         chequearSnapshotSemanal();
       }catch(e){
+        pendingSave=true; // no se subió → sigue pendiente para el próximo flush
         console.error('[ExoDriveUI] save:',e);
       }
     },2500);
+  }
+
+  // Sube ya lo pendiente (al ocultar/cerrar la pestaña) sin esperar el debounce.
+  function flushSave(){
+    if(!pendingSave||!driveDisponible||!ExoDrive.isConnected())return;
+    clearTimeout(saveTimer);
+    pendingSave=false;
+    try{ExoDrive.save(CONFIG.fileName,CONFIG.getData());}catch(_){}
   }
 
   async function forceSync(){

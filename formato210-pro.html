@@ -1194,8 +1194,8 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
 <script defer src="shared/toast.js?v=9843f93f"></script>
 <script defer src="shared/nav.js?v=659103a7"></script>
 <script defer src="shared/pro-banner.js?v=f0acfdc0"></script>
-<script src="shared/parametros-renta-pn.js?v=a0b1c6a8"></script>
-<script src="shared/calculo210.js?v=0007de6f"></script>
+<script src="shared/parametros-renta-pn.js?v=b8b8fedd"></script>
+<script src="shared/calculo210.js?v=cc0db6ad"></script>
 <script src="shared/optimizer-210.js?v=e353e2c8"></script>
 <script src="shared/advisor-210.js?v=7db1f6f7"></script>
 <script src="shared/cert-parser-210.js?v=bf1e7ff8"></script>
@@ -1206,7 +1206,7 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
 <script src="shared/reajuste-fiscal.js?v=c4b58391"></script>
 <script src="shared/decl-prev-210.js?v=753d9722"></script>
 <script src="shared/validaciones210.js?v=257a3ee7"></script>
-<script src="shared/parser-exogena-pn.js?v=06d0354d"></script>
+<script src="shared/parser-exogena-pn.js?v=2e5aecc6"></script>
 <script src="shared/parser-muisca-consultante.js?v=03bd8bbd"></script>
 <script src="shared/sugerida-parser-210.js?v=34d26f6a"></script>
 <script src="shared/canonicalize-inputs.js?v=5fe6d4a7"></script>
@@ -2108,6 +2108,8 @@ var CEDULAS_OPCIONES = [
   { value: 'pensiones',            label: 'Pensiones',                        implementada: true,  inputId: 'pensIngBruto' },
   { value: 'dividendos_no_grav',   label: 'Dividendos no gravados (2017+)',   implementada: true,  inputId: 'divNoGrav2017' },
   { value: 'dividendos_grav',      label: 'Dividendos gravados (2017+)',      implementada: true,  inputId: 'divGrav2017' },
+  { value: 'dividendos_2016',      label: 'Dividendos 2016 y anteriores',     implementada: true,  inputId: 'divAnt2016' },
+  { value: 'dividendos_ext',       label: 'Dividendos del exterior',          implementada: true,  inputId: 'divExterior' },
   { value: 'gananciasOcasionales', label: 'Ganancias ocasionales',           implementada: true,  inputId: 'goIngresos' },
   { value: 'gananciasOcasionalesLoterias', label: 'Loterías, rifas y premios (20%)', implementada: true, inputId: 'goLoterias' },
   { value: 'informativo',          label: 'Informativo (consignaciones — no va al 210)', implementada: true },
@@ -3119,6 +3121,8 @@ function renderSoportesCliente(){
     pensiones: ['📄', 'Certificado del fondo de pensiones'],
     dividendos_no_grav: ['📈', 'Certificado de dividendos'],
     dividendos_grav: ['📈', 'Certificado de dividendos'],
+    dividendos_2016: ['📈', 'Certificado de dividendos'],
+    dividendos_ext: ['📈', 'Certificado de dividendos (exterior)'],
     gananciasOcasionales: ['⚡', 'Soporte de la venta / premio (contrato, escritura)']
   };
   var vistos = {}, items = [];
@@ -3898,6 +3902,7 @@ function ofrecerMarcarPresentada(){
   if(pd) pd.classList.remove('hidden');
 }
 function marcarPresentadaDesdeDescarga(){
+  if(!CLIENTE_ACTIVO) return;
   escribirEstadoPN('presentada');
   renderClienteBar();
   var pd = document.getElementById('postDescargaEstado');
@@ -4132,7 +4137,7 @@ var BADGE_BUCKETS = {
   ccapital:    ['capital'],
   cnolaboral:  ['noLaboral', 'incrngo_nolaboral'],
   cpensiones:  ['pensiones'],
-  cdividendos: ['dividendos_no_grav', 'dividendos_grav'],
+  cdividendos: ['dividendos_no_grav', 'dividendos_grav', 'dividendos_2016', 'dividendos_ext'],
   cgo:         ['gananciasOcasionales', 'gananciasOcasionalesLoterias']
 };
 function renderBadgesCedulas(){

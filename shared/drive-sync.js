@@ -124,6 +124,28 @@
     setEstado('desconectado');
   }
 
+  // Reactiva la sesión SIN popup (prompt:'') cuando el usuario ya autorizó antes
+  // en este navegador pero el token venció (dura ~1h). Devuelve true si quedó
+  // conectado. No lanza: si Google exige interacción, resuelve false y se queda
+  // desconectado. Antes esto no existía y, al vencer el token, la bajada-al-abrir
+  // se saltaba: el equipo dejaba de recibir cambios sin avisar.
+  async function resume(){
+    if(isConnected())return true;
+    // La presencia de la clave (aunque su token esté vencido) prueba que este
+    // navegador ya conectó alguna vez. Si nunca conectó, no intentamos nada.
+    if(!localStorage.getItem(TOKEN_KEY)||!tokenClient)return false;
+    try{
+      await requestToken('');   // silencioso
+      try{
+        const r=await fetch('https://www.googleapis.com/oauth2/v3/userinfo',{headers:{Authorization:'Bearer '+accessToken}});
+        if(r.ok){const u=await r.json();userEmail=u.email;saveToken({token:accessToken,exp:tokenExpiry,folder:folderId,email:userEmail});}
+      }catch(_){}
+      await ensureFolder();
+      setEstado('conectado');
+      return true;
+    }catch(_){setEstado('desconectado');return false;}
+  }
+
   // Asegura que la carpeta Aziendale existe en el Drive del user
   async function ensureFolder(){
     if(folderId)return folderId;
@@ -284,7 +306,7 @@
   }
 
   window.ExoDrive={
-    init,connect,disconnect,isConnected,
+    init,connect,disconnect,resume,isConnected,
     save,saveText,saveBinary,load,list,
     onStatusChange:(fn)=>{statusListeners.push(fn);try{fn(estado)}catch(_){}},
     getStatus:()=>estado,

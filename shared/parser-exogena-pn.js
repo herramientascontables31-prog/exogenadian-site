@@ -91,10 +91,10 @@
     'R74':  'noLaboral',               // Casilla 74 — Ingresos brutos rentas no laborales
     'R99':  'pensiones',               // Casilla 99 — Ingresos brutos rentas de pensiones
     'R100': 'incrngo',                 // Casilla 100 — INCRNGO cédula de pensiones
-    'R104': 'dividendos_no_grav',      // Casilla 104 — Dividendos y participaciones 2016 y anteriores
+    'R104': 'dividendos_2016',        // Casilla 104 — Dividendos 2016 y anteriores (régimen de transición, tabla máx. 33%)
     'R107': 'dividendos_no_grav',      // Casilla 107 — Dividendos 2017+ 1a subcédula (num 3 art 49, no gravados)
     'R108': 'dividendos_grav',         // Casilla 108 — Dividendos 2017+ 2a subcédula (par 2 art 49, gravados)
-    'R109': 'dividendos_no_grav',      // Casilla 109 — Dividendos y participaciones del exterior
+    'R109': 'dividendos_ext',          // Casilla 109 — Dividendos del exterior (tabla 241 + descuento 254, NO 35%)
     'R112': 'gananciasOcasionales'     // Casilla 112 — Ingresos por ganancias ocasionales
   };
   // R-códigos que NO son ingreso de cédula: patrimonio (R29/R30), 1% FE (R28),
@@ -610,9 +610,9 @@
     // loterías (20%) vía CEDULAS_OPCIONES en la página.
     if(cedula === 'gananciasOcasionalesLoterias') return 'gananciasOcasionales';
     var directos = ['trabajo','honorarios','capital','noLaboral','pensiones',
-                    'dividendos_no_grav','dividendos_grav','gananciasOcasionales'];
+                    'dividendos_no_grav','dividendos_grav','dividendos_2016','dividendos_ext','gananciasOcasionales'];
     if(directos.indexOf(cedula) >= 0){
-      if(cedula === 'dividendos_no_grav' || cedula === 'dividendos_grav') return 'dividendos';
+      if(cedula.indexOf('dividendos') === 0) return 'dividendos';
       return cedula;
     }
     if(cedula === 'informativo') return 'informativo';
@@ -629,7 +629,7 @@
   //  Devuelve además la alerta de consignaciones vs ingresos (cruce DIAN 1019).
   // ──────────────────────────────────────────────────────────────────────────
   var CEDULAS_INGRESO = ['trabajo','honorarios','capital','noLaboral','pensiones',
-                         'dividendos_no_grav','dividendos_grav','gananciasOcasionales'];
+                         'dividendos_no_grav','dividendos_grav','dividendos_2016','dividendos_ext','gananciasOcasionales'];
 
   // Explica POR QUÉ una fila quedó como 'informativo' y A DÓNDE va realmente.
   // Clave para el contador: distinguir lo que SÍ entra a la declaración (patrimonio,
@@ -646,13 +646,13 @@
     if(/tope\s*4|consignaciones|valor total de (los )?movimientos/.test(u))
       return 'NO va al 210: consignaciones/movimientos bancarios — la DIAN los cruza (formato 1019). Deben poder justificarse (traslados, préstamos, dineros de terceros).';
     if(/^saldo|tope\s*2|\br29\b|inversion(es)?.*(realizad|efectuad)|cuenta por cobrar|saldo inversion|aporte.*derecho social/.test(u))
-      return '→ SÍ va a la declaración: es un ACTIVO del PATRIMONIO (casilla 29, ya prellenada). Verifica el saldo a 31-dic.';
+      return '→ SÍ va a la declaración: es un ACTIVO del PATRIMONIO (casilla 29; se prellena con el reporte MUISCA). Verifica el saldo a 31-dic.';
     if(/\br30\b|deuda|pasivo/.test(u))
-      return '→ SÍ va a la declaración: es una DEUDA (casilla 30, ya prellenada con el patrimonio). Verifica el saldo a 31-dic.';
+      return '→ SÍ va a la declaración: es una DEUDA (casilla 30; se prellena con el reporte MUISCA). Verifica el saldo a 31-dic.';
     if(/saldo a favor/.test(u))
-      return '→ SÍ va a la declaración: es el SALDO A FAVOR del año anterior (casilla 131, ya prellenada). Confírmalo contra la declaración del año pasado.';
+      return '→ SÍ va a la declaración: es el SALDO A FAVOR del año anterior (casilla 131; se prellena con el reporte MUISCA). Confírmalo contra la declaración del año pasado.';
     if(/\br132\b|retencion/.test(u))
-      return '→ SÍ va a la declaración: es una RETENCIÓN (casilla 132, ya prellenada). Confirma contra el certificado.';
+      return '→ SÍ va a la declaración: es una RETENCIÓN (casilla 132; se prellena con el reporte MUISCA). Confirma contra el certificado.';
     if(/\br28\b|factura electr[oó]nica|susceptible de beneficio/.test(u))
       return '→ Base de compras con factura electrónica: el 1% deducible (casilla 28) ya quedó prellenado.';
     if(/promedio|ingreso laboral promedio|cesantia|\br3[67]\b/.test(u))

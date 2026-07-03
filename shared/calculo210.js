@@ -54,6 +54,23 @@
   /** OBSOLETO (no usar): tarifa fija 15% Art. 242 pre-reforma, derogada por la
    *  Ley 2277/2022. Hoy los dividendos integran la cedula general (Art. 241).
    *  Se conserva solo por compatibilidad historica. */
+  /** Impuesto sobre dividendos de utilidades 2016 y anteriores (c119): tabla del
+   *  regimen de transicion (Art. 241 version Ley 1819, marginal max. 33%). */
+  function impuestoDividendos2016(basePesos, year){
+    if(basePesos <= 0) return 0;
+    var p = getParams(year);
+    var tabla = p.tabla241Div2016 || p.tabla241;
+    var rlUvt = pesosAUvt(basePesos, year);
+    for(var i=0; i<tabla.length; i++){
+      var t = tabla[i];
+      if(rlUvt > t.desdeUvt && rlUvt <= t.hastaUvt){
+        var impUvt = (rlUvt - t.desdeUvt) * t.tarifa + t.baseUvt;
+        return r1k(impUvt * p.uvt);
+      }
+    }
+    return 0;
+  }
+
   function impuestoArt242(basePesos, year){
     if(basePesos <= 0) return 0;
     var p = getParams(year);
@@ -196,6 +213,7 @@
       ingresosECE: ece,
       exenta25: exenta25,
       cesantiasExenta: cesExenta,
+      cesSalarioEstimado: cesSalarioEstimado,
       otrasRentasExentas: otrasExentas,
       deduccionesNominales: dedNominales,
       exentasYDeducciones: exentasYDeducciones,
@@ -324,23 +342,28 @@
     // deducciones especiales y del límite del Art. 336 (Concepto DIAN 013853/2025;
     // "renta líquida" del Art. 26 ET, antes de rentas exentas). Requiere certificación
     // UPME (lo valida el contador). El usuario ingresa el monto a deducir ESTE año.
-    var vehElecSolicitado = input.deduccionVehiculoElectrico || 0;
+    var vehElecSolicitado = Math.max(0, input.deduccionVehiculoElectrico || 0);
     var vehElecTope = r1k(c91 * 0.5);   // art. 11: máx 50% de la renta líquida cedular (c91)
     var vehElecAplicado = Math.min(vehElecSolicitado, vehElecTope);
     var vehElecDiferible = maxZero(vehElecSolicitado - vehElecAplicado);
 
     var deduccionesFueraTope = depArt336Valor + fe1PctAplicado + vehElecAplicado;
 
+    // MUISCA/AyudaRenta redondean CADA casilla al multiplo de mil (nunca decimales
+    // ni negativos). Redondeo progresivo para que la aritmetica entre casillas cuadre.
+    c91 = r1k(c91);
+    c92 = r1k(Math.min(c92, c91));
+
     // 5) Casilla 93: Renta liquida ordinaria
-    var c93 = maxZero(c91 - c92 - deduccionesFueraTope);
+    var c93 = r1k(maxZero(c91 - c92 - deduccionesFueraTope));
 
     // 6) Casilla 97: Renta liquida gravable (con compensaciones)
-    var c97 = maxZero(
+    var c97 = r1k(maxZero(
       c93
       + (input.rentasGravablesAdicionales || 0)
       - (input.perdidasFiscales || 0)
       - (input.excesoRentaPresuntiva || 0)
-    );
+    ));
 
     return {
       subcedulas: {
@@ -393,7 +416,7 @@
     var topeMes = p.pensionExentaUvtMes * p.uvt;
 
     // Casilla 101: Ingresos netos
-    var c101 = maxZero(ing - incrngo);
+    var c101 = r1k(maxZero(ing - incrngo));
 
     var rentaExenta;
     var modoAnualFallback = false;
@@ -479,13 +502,13 @@
     // c108: 2a subcedula 2017+ (gravados Art. 49 par. 2) — tributan Art. 242-1
     // c109/c110: dividendos exterior y descuento
 
-    var c104 = input.anteriores2016 || 0;
-    var c105 = input.incrngoAnteriores2016 || 0;
+    var c104 = r1k(input.anteriores2016 || 0);
+    var c105 = r1k(input.incrngoAnteriores2016 || 0);
     var c106 = maxZero(c104 - c105);
-    var c107 = input.noGravados2017 || 0;
-    var c108 = input.gravados2017 || 0;
-    var c109 = input.exterior || 0;
-    var c110 = input.incrngoExterior || 0;
+    var c107 = r1k(input.noGravados2017 || 0);
+    var c108 = r1k(input.gravados2017 || 0);
+    var c109 = r1k(input.exterior || 0);
+    var c110 = r1k(input.incrngoExterior || 0);
 
     return {
       c104: c104, c105: c105, c106: c106,
@@ -524,9 +547,9 @@
     var exentas = Math.min(gananciaNoLoteria, exVivienda + exentaOtras);
 
     // Casilla 112: ingresos brutos GO
-    var c112 = ing + loterias;
-    var c113 = costos;
-    var c114 = exentas;
+    var c112 = r1k(ing + loterias);
+    var c113 = r1k(costos);
+    var c114 = r1k(exentas);
     var c115 = maxZero(c112 - c113 - c114);
 
     return {
@@ -568,7 +591,7 @@
     var impGravado35 = r1k(c108Gravado * p.divGravadosTarifaCorporativa); // 35% Art. 240/242-1 → casilla 118
     var netoGravado = maxZero(c108Gravado - impGravado35);               // 65% → cedula general
     var rentaCedularDiv = (cedulas.dividendos.c107 || 0) + netoGravado;
-    var c111 = baseConPresuntiva + cedulas.pensiones.c103 + rentaCedularDiv;
+    var c111 = r1k(baseConPresuntiva + cedulas.pensiones.c103 + rentaCedularDiv);
 
     // Casilla 116: Impuesto Art. 241 sobre c111 (general + pensiones + dividendos a tabla)
     var c116 = impuestoArt241(c111, year);
@@ -581,8 +604,10 @@
     //   siguientes, 2a subcedula (Art. 240 E.T.)". El neto (65%) ya tributo en c116 via la cedula general.
     var c118 = impGravado35;
 
-    // Casilla 119: Impuesto sobre dividendos y participaciones ANO 2016 y anteriores (tabla Art. 241).
-    var c119 = impuestoArt241(cedulas.dividendos.c106, year);
+    // Casilla 119: Impuesto sobre dividendos y participaciones ANO 2016 y anteriores —
+    // tabla del regimen de transicion (Art. 241 version Ley 1819, marginal max. 33%),
+    // NO la tabla 241 actual (que sobre-liquidaria por encima de 4.100 UVT).
+    var c119 = impuestoDividendos2016(cedulas.dividendos.c106, year);
 
     // Casilla 120: Impuesto sobre dividendos y participaciones recibidas del EXTERIOR (tabla Art. 241).
     var divExt = maxZero(cedulas.dividendos.c109 - cedulas.dividendos.c110);
@@ -759,6 +784,7 @@
   var api = {
     // Tarifas
     impuestoArt241: impuestoArt241,
+    impuestoDividendos2016: impuestoDividendos2016,
     impuestoArt242: impuestoArt242,
     impuestoArt242_1: impuestoArt242_1,
     impuestoArt314: impuestoArt314,

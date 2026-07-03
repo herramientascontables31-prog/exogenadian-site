@@ -41,6 +41,17 @@
     { desdeUvt: 31000, hastaUvt: Infinity, tarifa: 0.39, baseUvt: 10352, descripcion: '39%' }
   ];
 
+  // === Tabla para dividendos de utilidades 2016 y anteriores (regimen de transicion,
+  // Dcto. 2250/2017 / DUR 1.2.1.10.6): tabla del Art. 241 num. 1 version Ley 1819
+  // (4 tramos, marginal maxima 33%). Coincide con la actual hasta 4.100 UVT; por encima
+  // NO aplican 35/37/39%. Es la tabla "DIVIDENDOS 2016 Y ANTER" del AyudaRenta oficial DIAN.
+  var TABLA_241_DIV2016 = [
+    { desdeUvt: 0,    hastaUvt: 1090,     tarifa: 0.00, baseUvt: 0,   descripcion: '0%' },
+    { desdeUvt: 1090, hastaUvt: 1700,     tarifa: 0.19, baseUvt: 0,   descripcion: '19%' },
+    { desdeUvt: 1700, hastaUvt: 4100,     tarifa: 0.28, baseUvt: 116, descripcion: '28%' },
+    { desdeUvt: 4100, hastaUvt: Infinity, tarifa: 0.33, baseUvt: 788, descripcion: '33%' }
+  ];
+
   function buildAnio(uvt, smlmv, aux, notas){
     return {
       uvt: uvt,
@@ -89,6 +100,7 @@
 
       // === Tabla Art. 241 ET ===
       tabla241: TABLA_241,
+      tabla241Div2016: TABLA_241_DIV2016,
 
       // === Dividendos (Arts. 242, 242-1 ET, mod. Ley 2277/2022) ===
       divNoGravadosExentoUvt: 1090,        // Art. 254-1: descuento sobre el exceso de 1.090 UVT
@@ -149,6 +161,7 @@
   var api = {
     PARAMS: PARAMS,
     TABLA_241: TABLA_241,
+    TABLA_241_DIV2016: TABLA_241_DIV2016,
     getParams: getParams,
     pesosAUvt: pesosAUvt,
     uvtAPesos: uvtAPesos,
