@@ -328,6 +328,11 @@ body.f210-free .radio-pill input:disabled + *,body.f210-free .radio-pill:has(inp
 .p210-cr .cc.filled{font-weight:700;color:#1B3A5C;background:#eff6ff}
 .p210-cr .cc.calc{font-weight:700;color:#15803d;background:#f6fdf9}
 .p210-cr.tot>div{background:#f1f5f9;font-weight:700}
+/* Candado "Desbloquea PRO" en deducciones/rentas exentas vacías (gratis) — en vez de
+   un "—" silencioso que parece que la herramienta no las soporta. */
+.p210-cr .cc.cc-locked{cursor:pointer;justify-content:center;font-weight:800;font-size:9px;letter-spacing:.3px;
+  color:#a5650c;background:#fdf6e9;transition:background .12s}
+.p210-cr .cc.cc-locked:hover{background:#fbecd2}
 @media(max-width:680px){.p210-cg{grid-template-columns:minmax(90px,1fr) repeat(4,minmax(48px,1fr));font-size:9px}}
 .p210-edit{border:none;background:#FFFDE7;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;width:100%;outline:none;padding:1px 3px;color:#1a3c6e;font-weight:700;border-bottom:1px dashed #d4b500}
 /* Ícono "de dónde salió" en las casillas prediligenciadas desde la exógena */
@@ -723,7 +728,6 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
       <button class="f210-tab" data-tab="cpensiones" onclick="cambiarTabF210('cpensiones')"><span class="wsx-ico">👵</span><span class="wsx-lbl">Pensiones</span><span class="tab-badge" id="badge-cpensiones"></span></button>
       <button class="f210-tab" data-tab="cdividendos" onclick="cambiarTabF210('cdividendos')"><span class="wsx-ico">📈</span><span class="wsx-lbl">Dividendos</span><span class="tab-badge" id="badge-cdividendos"></span></button>
       <button class="f210-tab" data-tab="cgo" onclick="cambiarTabF210('cgo')"><span class="wsx-ico">🎁</span><span class="wsx-lbl">Gan. ocasionales</span><span class="tab-badge" id="badge-cgo"></span></button>
-      <div class="wsx-side-sep">Declaración</div>
       <button class="f210-tab" data-tab="cpatrimonio" onclick="cambiarTabF210('cpatrimonio')"><span class="wsx-ico">🏦</span><span class="wsx-lbl">Patrimonio</span></button>
       <div class="wsx-side-sep">Estudio</div>
       <a class="wsx-side-link" href="renta-personas-naturales.html#cli"><span class="wsx-ico">👥</span> Mis clientes</a>
@@ -1300,6 +1304,9 @@ function abrirPaywall(motivo){
   if(typeof gtag!=='undefined') gtag('event','f210_paywall_open', { motivo: (motivo?'accion':'cta') });
 }
 function cerrarPaywall(){ document.getElementById('proGate').classList.add('hidden'); }
+function abrirPaywallDeducciones(){
+  abrirPaywall('Agregar <strong>deducciones y rentas exentas</strong> (AFC, intereses de vivienda, otras deducciones imputables) es parte de PRO — normalmente bajan el impuesto a cargo.');
+}
 /* Bloquea una acción PRO: si NO es pro, abre el paywall y devuelve true. */
 function gatePro(motivo){
   if(window.__f210Pro) return false;
@@ -1789,9 +1796,12 @@ function procesarArchivoExogena(file){
       // en vivo (Paso 4), que es el gancho. Reaplicar el bloqueo de lectura sobre
       // los inputs recién creados (tabla de reconciliación, patrimonio, etc.).
       if(nReg > 0) dispararEstampado(); // el momento del gancho: conteo + sello, una vez
-      if(!window.__f210Pro) aplicarBloqueoLectura();
-      // Feedback Juan (jul-2026): NO saltar de paso — quedarse en el Paso 1 con el
-      // resumen y marcar con puntos los pasos que requieren revisión.
+      if(!window.__f210Pro){
+        aplicarBloqueoLectura();
+        // Gratis: el gancho ES el 210 armado — saltar directo ahí (feedback jul-2026).
+        // PRO sigue quedándose en Punto de partida (trabajo metódico, sin saltos).
+        if(nReg > 0) setTimeout(function(){ cambiarTabF210('trevision'); }, 700);
+      }
       marcarPendientesTabs();
       renderSoportesCliente();
       if(typeof gtag !== 'undefined') gtag('event','f210_pro_exogena_cargada', { registros: nReg, nivel: nivel });
@@ -4324,11 +4334,11 @@ function renderizarReplica210(){
     { lbl:'Ingresos no constitutivos de renta',       fn:function(s){return sc[s].incrngo;},              cas:[33,44,59,76] },
     { lbl:'Costos y deducciones procedentes',         fn:function(s){return sc[s].costos;},               cas:[null,45,60,77] },
     { lbl:'Renta líquida',                            fn:function(s){return sc[s].ingresoNeto;},          cas:[34,46,61,78], calc:true },
-    { lbl:'Aportes voluntarios AFC, FVP y/o AVC',     fn:function(s){return null;},                       cas:[35,47,63,80] },
+    { lbl:'Aportes voluntarios AFC, FVP y/o AVC',     fn:function(s){return null;},                       cas:[35,47,63,80], lock:true },
     { lbl:'Otras rentas exentas (incl. 25% Art.206)', fn:function(s){return totalExentas(s);},            cas:[36,48,64,81] },
     { lbl:'Total rentas exentas',                     fn:function(s){return totalExentas(s);},            cas:[37,49,65,82], calc:true },
-    { lbl:'Intereses de vivienda',                    fn:function(s){return null;},                       cas:[38,50,66,83] },
-    { lbl:'Otras deducciones imputables',             fn:function(s){return sc[s].deduccionesNominales;}, cas:[39,51,67,84] },
+    { lbl:'Intereses de vivienda',                    fn:function(s){return null;},                       cas:[38,50,66,83], lock:true },
+    { lbl:'Otras deducciones imputables',             fn:function(s){return sc[s].deduccionesNominales;}, cas:[39,51,67,84], lock:true },
     { lbl:'Total deducciones imputables',             fn:function(s){return sc[s].deduccionesNominales;}, cas:[40,52,68,85], calc:true },
     { lbl:'Rentas exentas y/o ded. imputables (limitadas)', fn:function(s){return sc[s].exentasYDeducciones;}, cas:[41,53,69,86], calc:true },
     { lbl:'Renta líquida ordinaria del ejercicio',    fn:function(s){return sc[s].rentaLiquidaAntesExentas;}, cas:[null,54,70,87], calc:true },
@@ -4340,6 +4350,11 @@ function renderizarReplica210(){
     subs.forEach(function(s, i){
       if(f.cas[i] === null){ h += '<div class="cc" style="background:#f5f5f5"></div>'; return; }
       var val = sc[s] ? f.fn(s) : null;
+      var vacio = (val === null) || nz(val) === 0;
+      if(f.lock && vacio && !window.__f210Pro){
+        h += '<div class="cc cc-locked" onclick="abrirPaywallDeducciones()" title="Desbloquea PRO para agregar esta deducción"><span class="cn">' + f.cas[i] + '</span>&#128274; PRO</div>';
+        return;
+      }
       if(val === null){ h += '<div class="cc"><span class="cn">' + f.cas[i] + '</span>—</div>'; return; }
       h += cell(f.cas[i], val, f.calc);
     });

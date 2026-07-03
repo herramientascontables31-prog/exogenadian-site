@@ -660,20 +660,64 @@ function sumBucket(bucket, grupo, prefix){
     return m.grupo===grupo && (!prefix || m.concepto.indexOf(prefix)===0);
   }).reduce(function(s,m){ return s+Math.abs(m.monto); }, 0);
 }
+function sumBucketExacto(bucket, grupo, concepto){
+  return bucket.movimientos.filter(function(m){
+    return m.grupo===grupo && m.concepto===concepto;
+  }).reduce(function(s,m){ return s+Math.abs(m.monto); }, 0);
+}
+function tipoNomina(concepto){
+  if(concepto.indexOf('salarios')>=0) return 'sal';
+  if(concepto.indexOf('PILA')>=0) return 'pila';
+  if(concepto.indexOf('prima de servicios')>=0) return 'prima';
+  if(concepto.indexOf('cesantías (consignación')>=0) return 'cesantias';
+  if(concepto.indexOf('intereses a las cesantías')>=0) return 'intereses';
+  return 'otro';
+}
+function tipoImpuesto(concepto){
+  if(concepto.indexOf('Renta')===0) return 'renta';
+  if(concepto.indexOf('IVA')===0) return 'iva';
+  if(concepto.indexOf('Retención en la fuente')===0) return 'ret';
+  if(concepto.indexOf('ICA')>=0 || concepto.indexOf('ReteICA')>=0) return 'ica';
+  if(concepto.indexOf('RST')===0) return 'rst';
+  return 'otro';
+}
+function sumBucketPor(bucket, grupo, clasificador, etiqueta){
+  return bucket.movimientos.filter(function(m){
+    return m.grupo===grupo && clasificador(m.concepto)===etiqueta;
+  }).reduce(function(s,m){ return s+Math.abs(m.monto); }, 0);
+}
 window.descargarExcel = async function(){
   if(!(await exoProGate('Flujo de Caja'))) return;
   if(!resultado) calcular();
   var buckets = resultado.buckets;
   var nCols = buckets.length + 1;
+  var k = state.gastosFijos.length;
+  // Plan fijo de filas (calculado ANTES de escribir nada, para poder tejer fórmulas
+  // que se referencian entre sí — ej. saldo inicial de un periodo = saldo final del anterior).
+  var ROW = {
+    saldoInicial: 5, ingresosHeader: 6, cobroContado: 7, cobroCartera: 8, totalIngresos: 9,
+    egresosHeader: 10, nominaSalarios: 11, nominaPila: 12, nominaPrima: 13, nominaCesantias: 14, nominaIntereses: 15,
+    proveedores: 16, gastosFijosStart: 17, gastosFijosEnd: 17 + Math.max(k,1) - 1
+  };
+  ROW.renta = ROW.gastosFijosEnd + 1;
+  ROW.iva = ROW.renta + 1;
+  ROW.ret = ROW.iva + 1;
+  ROW.ica = ROW.ret + 1;
+  ROW.rst = ROW.ica + 1;
+  ROW.totalEgresos = ROW.rst + 1;
+  ROW.saldoFinal = ROW.totalEgresos + 2;
   var wb = new ExcelJS.Workbook(); wb.created = new Date();
   var NAVY='FF1B3A5C', GREENTXT='FF047857', REDTXT='FFDC2626', LIGHTBG='FFF0F2F5', OKBG='FFECFDF5';
   var hF = { type:'pattern', pattern:'solid', fgColor:{argb:NAVY} };
   var wFont = { bold:true, color:{argb:'FFFFFFFF'}, size:11 };
   var sectionFill = { type:'pattern', pattern:'solid', fgColor:{argb:LIGHTBG} };
   var thinBorder = { top:{style:'thin',color:{argb:'FFE2E8F0'}}, bottom:{style:'thin',color:{argb:'FFE2E8F0'}}, left:{style:'thin',color:{argb:'FFE2E8F0'}}, right:{style:'thin',color:{argb:'FFE2E8F0'}} };
-  /* ═══ Hoja 1 — Flujo de Caja como estado financiero: conceptos en filas, periodos en columnas ═══ */
+  /* ═══ Hoja 1 — Flujo de Caja como estado financiero, CON FÓRMULAS reales de Excel ═══
+     Cada total es SUM() sobre sus filas de detalle; el saldo inicial de un periodo
+     referencia el saldo final del periodo anterior; el saldo final es una resta
+     encadenada. Así el contador puede editar cualquier valor y todo recalcula. */
   var ws1 = wb.addWorksheet('Flujo de Caja', { views:[{ state:'frozen', xSplit:1, ySplit:4 }] });
-  ws1.columns = [{width:30}].concat(buckets.map(function(){ return {width:15}; }));
+  ws1.columns = [{width:38}].concat(buckets.map(function(){ return {width:15}; }));
   ws1.mergeCells(1,1,1,nCols);
   var cTitulo = ws1.getCell(1,1);
   cTitulo.value = 'Flujo de Caja Proyectado — '+state.empresa.nombre;
@@ -681,56 +725,100 @@ window.descargarExcel = async function(){
   ws1.getRow(1).height = 30;
   ws1.mergeCells(2,1,2,nCols);
   var cSub = ws1.getCell(2,1);
-  cSub.value = 'NIT '+state.empresa.nit+'  ·  Periodicidad: '+state.periodicidad+'  ·  Del '+resultado.desde+' al '+resultado.hasta+'  ·  Generado: '+new Date().toLocaleDateString('es-CO');
+  cSub.value = 'NIT '+state.empresa.nit+'  ·  Periodicidad: '+state.periodicidad+'  ·  Del '+resultado.desde+' al '+resultado.hasta+'  ·  Generado: '+new Date().toLocaleDateString('es-CO')+'  ·  Celdas con fórmula: edítalas y todo recalcula';
   cSub.font = {italic:true, color:{argb:'FF6B7280'}, size:9}; cSub.alignment = {horizontal:'center'};
   var headRow = ws1.getRow(4);
   headRow.getCell(1).value = 'Concepto';
   buckets.forEach(function(b,i){ headRow.getCell(i+2).value = b.label; });
   headRow.eachCell(function(c){ c.fill=hF; c.font=wFont; c.alignment={horizontal:'center'}; });
   headRow.getCell(1).alignment = {horizontal:'left'};
-  var rIdx = 5;
-  function addConceptRow(label, values, opts){
-    opts = opts || {};
-    var row = ws1.getRow(rIdx);
+  function labelRow(rowNum, label){
+    var row = ws1.getRow(rowNum);
     row.getCell(1).value = label;
-    row.getCell(1).font = { bold: !!opts.bold, color:{argb:opts.color||'FF374151'}, italic: !!opts.indent };
-    if(opts.indent) row.getCell(1).alignment = { indent: 1 };
-    if(opts.mergeRest){
-      ws1.mergeCells(rIdx,2,rIdx,nCols);
-    } else {
-      values.forEach(function(v,i){
-        var cell = row.getCell(i+2);
-        cell.value = Math.round(v);
-        cell.numFmt = '#,##0';
-        cell.font = { bold: !!opts.bold, color:{argb:opts.color||'FF000000'} };
-      });
-    }
-    if(opts.fill){ row.eachCell({includeEmpty:true}, function(c){ if(c.col<=nCols) c.fill = opts.fill; }); }
-    for(var col=1; col<=nCols; col++){ row.getCell(col).border = thinBorder; }
-    rIdx++;
+    row.getCell(1).font = { bold:true, color:{argb:'FF1B3A5C'} };
+    ws1.mergeCells(rowNum,2,rowNum,nCols);
+    for(var c=1;c<=nCols;c++){ row.getCell(c).fill = sectionFill; row.getCell(c).border = thinBorder; }
+  }
+  function detalleRow(rowNum, label, valuesFn){
+    var row = ws1.getRow(rowNum);
+    row.getCell(1).value = label;
+    row.getCell(1).font = { italic:true, color:{argb:'FF374151'} };
+    row.getCell(1).alignment = { indent:1 };
+    buckets.forEach(function(b,i){
+      var cell = row.getCell(i+2);
+      cell.value = Math.round(valuesFn(b));
+      cell.numFmt = '#,##0';
+    });
+    for(var c=1;c<=nCols;c++){ row.getCell(c).border = thinBorder; }
     return row;
   }
-  addConceptRow('SALDO INICIAL', buckets.map(function(b){return b.saldoInicial}), {bold:true});
-  rIdx++;
-  addConceptRow('INGRESOS', [], {bold:true, fill:sectionFill, mergeRest:true});
-  addConceptRow('Cobro de contado', buckets.map(function(b){return sumBucket(b,'ingresos','Cobro de contado')}), {indent:true});
-  addConceptRow('Cobro de cartera', buckets.map(function(b){return sumBucket(b,'ingresos','Cobro de cartera')}), {indent:true});
-  addConceptRow('Total Ingresos', buckets.map(function(b){return b.ingresos}), {bold:true, color:GREENTXT});
-  rIdx++;
-  addConceptRow('EGRESOS', [], {bold:true, fill:sectionFill, mergeRest:true});
-  addConceptRow('Nómina (salarios, PILA, prima, cesantías)', buckets.map(function(b){return sumBucket(b,'nomina')}), {indent:true});
-  addConceptRow('Proveedores', buckets.map(function(b){return sumBucket(b,'proveedores')}), {indent:true});
-  addConceptRow('Gastos fijos', buckets.map(function(b){return sumBucket(b,'gastos-fijos')}), {indent:true});
-  addConceptRow('Impuestos (IVA, retefuente, renta, ICA)', buckets.map(function(b){return sumBucket(b,'impuestos')}), {indent:true});
-  addConceptRow('Total Egresos', buckets.map(function(b){return b.egresos}), {bold:true, color:REDTXT});
-  rIdx++;
-  var saldoFinalRow = addConceptRow('SALDO FINAL', buckets.map(function(b){return b.saldoFinal}), {bold:true, fill:{type:'pattern',pattern:'solid',fgColor:{argb:OKBG}}});
+  function colLetra(rowObj, colIdx){ return rowObj.getCell(colIdx).address.replace(/\d+$/,''); }
+  // SALDO INICIAL — col 2 = valor real; col>2 = fórmula = saldo final del periodo anterior
+  var rowSI = ws1.getRow(ROW.saldoInicial);
+  rowSI.getCell(1).value = 'SALDO INICIAL'; rowSI.getCell(1).font = { bold:true };
+  buckets.forEach(function(b,i){
+    var cell = rowSI.getCell(i+2);
+    if(i===0){ cell.value = Math.round(b.saldoInicial); }
+    else { cell.value = { formula: colLetra(rowSI,i+1)+ROW.saldoFinal, result: Math.round(b.saldoInicial) }; }
+    cell.numFmt = '#,##0'; cell.font = { bold:true };
+    cell.border = thinBorder;
+  });
+  rowSI.getCell(1).border = thinBorder;
+  labelRow(ROW.ingresosHeader, 'INGRESOS');
+  detalleRow(ROW.cobroContado, 'Cobro de contado', function(b){ return sumBucket(b,'ingresos','Cobro de contado'); });
+  detalleRow(ROW.cobroCartera, 'Cobro de cartera', function(b){ return sumBucket(b,'ingresos','Cobro de cartera'); });
+  var rowTI = ws1.getRow(ROW.totalIngresos);
+  rowTI.getCell(1).value = 'Total Ingresos'; rowTI.getCell(1).font = { bold:true, color:{argb:GREENTXT} };
+  buckets.forEach(function(b,i){
+    var cell = rowTI.getCell(i+2);
+    var L = colLetra(rowTI,i+2);
+    cell.value = { formula: 'SUM('+L+ROW.cobroContado+':'+L+ROW.cobroCartera+')', result: Math.round(b.ingresos) };
+    cell.numFmt = '#,##0'; cell.font = { bold:true, color:{argb:GREENTXT} }; cell.border = thinBorder;
+  });
+  rowTI.getCell(1).border = thinBorder;
+  labelRow(ROW.egresosHeader, 'EGRESOS');
+  detalleRow(ROW.nominaSalarios, 'Nómina — salarios', function(b){ return sumBucketPor(b,'nomina',tipoNomina,'sal'); });
+  detalleRow(ROW.nominaPila, 'Nómina — seguridad social y parafiscales (PILA)', function(b){ return sumBucketPor(b,'nomina',tipoNomina,'pila'); });
+  detalleRow(ROW.nominaPrima, 'Nómina — prima de servicios', function(b){ return sumBucketPor(b,'nomina',tipoNomina,'prima'); });
+  detalleRow(ROW.nominaCesantias, 'Nómina — cesantías', function(b){ return sumBucketPor(b,'nomina',tipoNomina,'cesantias'); });
+  detalleRow(ROW.nominaIntereses, 'Nómina — intereses a las cesantías', function(b){ return sumBucketPor(b,'nomina',tipoNomina,'intereses'); });
+  detalleRow(ROW.proveedores, 'Proveedores', function(b){ return sumBucket(b,'proveedores'); });
+  if(k>0){
+    state.gastosFijos.forEach(function(g,i){
+      detalleRow(ROW.gastosFijosStart+i, g.concepto, function(b){ return sumBucketExacto(b,'gastos-fijos',g.concepto); });
+    });
+  } else {
+    detalleRow(ROW.gastosFijosStart, '(sin gastos fijos configurados)', function(){ return 0; });
+  }
+  detalleRow(ROW.renta, 'Impuestos — Renta', function(b){ return sumBucketPor(b,'impuestos',tipoImpuesto,'renta'); });
+  detalleRow(ROW.iva, 'Impuestos — IVA', function(b){ return sumBucketPor(b,'impuestos',tipoImpuesto,'iva'); });
+  detalleRow(ROW.ret, 'Impuestos — Retención en la fuente', function(b){ return sumBucketPor(b,'impuestos',tipoImpuesto,'ret'); });
+  detalleRow(ROW.ica, 'Impuestos — ICA', function(b){ return sumBucketPor(b,'impuestos',tipoImpuesto,'ica'); });
+  detalleRow(ROW.rst, 'Impuestos — Régimen Simple (RST)', function(b){ return sumBucketPor(b,'impuestos',tipoImpuesto,'rst'); });
+  var rowTE = ws1.getRow(ROW.totalEgresos);
+  rowTE.getCell(1).value = 'Total Egresos'; rowTE.getCell(1).font = { bold:true, color:{argb:REDTXT} };
+  buckets.forEach(function(b,i){
+    var cell = rowTE.getCell(i+2);
+    var L = colLetra(rowTE,i+2);
+    cell.value = { formula: 'SUM('+L+ROW.nominaSalarios+':'+L+ROW.rst+')', result: Math.round(b.egresos) };
+    cell.numFmt = '#,##0'; cell.font = { bold:true, color:{argb:REDTXT} }; cell.border = thinBorder;
+  });
+  rowTE.getCell(1).border = thinBorder;
+  var rowSF = ws1.getRow(ROW.saldoFinal);
+  rowSF.getCell(1).value = 'SALDO FINAL'; rowSF.getCell(1).font = { bold:true };
+  buckets.forEach(function(b,i){
+    var cell = rowSF.getCell(i+2);
+    var L = colLetra(rowSF,i+2);
+    cell.value = { formula: L+ROW.saldoInicial+'+'+L+ROW.totalIngresos+'-'+L+ROW.totalEgresos, result: Math.round(b.saldoFinal) };
+    cell.numFmt = '#,##0'; cell.font = { bold:true }; cell.fill = { type:'pattern', pattern:'solid', fgColor:{argb:OKBG} }; cell.border = thinBorder;
+  });
+  rowSF.getCell(1).fill = { type:'pattern', pattern:'solid', fgColor:{argb:OKBG} }; rowSF.getCell(1).border = thinBorder;
   ws1.addConditionalFormatting({
-    ref: saldoFinalRow.getCell(2).address+':'+saldoFinalRow.getCell(nCols).address,
+    ref: rowSF.getCell(2).address+':'+rowSF.getCell(nCols).address,
     rules: [{ type:'cellIs', operator:'lessThan', formulae:[0], style:{ font:{ color:{argb:REDTXT}, bold:true } } }]
   });
   // Gráfico embebido: la misma línea de saldo que se ve en pantalla, como imagen
-  rIdx += 2;
+  var rIdx = ROW.saldoFinal + 2;
   if(chartInstance){
     try{
       var imgId = wb.addImage({ base64: chartInstance.toBase64Image(), extension:'png' });

@@ -672,44 +672,71 @@ window.descargarExcel = async function(){
   headRow.getCell(nCols).value = 'Total año';
   headRow.eachCell(function(c){ c.fill=hF; c.font=wFont; c.alignment={horizontal:'center'}; });
   headRow.getCell(1).alignment = {horizontal:'left'};
-  var rIdx = 5;
-  function addFilaExcel(label, values, opts){
+  var k = state.gastosFijos.length;
+  var lastPeriodCol = filas.length + 1; // columna B=2 es el primer mes; esta es la del último mes
+  function colLetra(rowObj, colIdx){ return rowObj.getCell(colIdx).address.replace(/\d+$/,''); }
+  // Plan fijo de filas — permite tejer fórmulas entre sí antes de saber los valores finales
+  var ROW = { ventas:5, costoVenta:6, utilidadBruta:7 };
+  ROW.gastosFijosStart = 9;
+  ROW.gastosFijosEnd = 9 + Math.max(k,1) - 1;
+  ROW.totalGastosFijos = ROW.gastosFijosEnd + 1;
+  ROW.gastoVariable = ROW.totalGastosFijos + 1;
+  ROW.utilidadOperativa = ROW.gastoVariable + 2;
+  function filaValores(rowNum, label, values, opts){
     opts = opts || {};
-    var row = ws1.getRow(rIdx);
+    var row = ws1.getRow(rowNum);
     row.getCell(1).value = label;
     row.getCell(1).font = { bold: !!opts.bold, color:{argb:opts.color||'FF374151'}, italic: !!opts.indent };
     if(opts.indent) row.getCell(1).alignment = { indent: 1 };
-    var tot = 0;
     values.forEach(function(v,i){
       var cell = row.getCell(i+2);
       cell.value = Math.round(v); cell.numFmt = '#,##0';
       cell.font = { bold: !!opts.bold, color:{argb:opts.color||'FF000000'} };
-      tot += v;
     });
+    var L1 = colLetra(row,2), L2 = colLetra(row,lastPeriodCol);
     var totCell = row.getCell(nCols);
-    totCell.value = Math.round(tot); totCell.numFmt = '#,##0';
-    totCell.font = { bold:true, color:{argb:opts.color||'FF000000'} };
+    totCell.value = { formula:'SUM('+L1+rowNum+':'+L2+rowNum+')', result: Math.round(values.reduce(function(s,v){return s+v},0)) };
+    totCell.numFmt = '#,##0'; totCell.font = { bold:true, color:{argb:opts.color||'FF000000'} };
     if(opts.fill){ row.eachCell({includeEmpty:true}, function(c){ if(c.col<=nCols) c.fill = opts.fill; }); }
     for(var col=1; col<=nCols; col++){ row.getCell(col).border = thinBorder; }
-    rIdx++;
     return row;
   }
-  addFilaExcel('Ventas', filas.map(function(r){return r.ventas}));
-  addFilaExcel('(-) Costo de venta', filas.map(function(r){return -r.costoVenta}));
-  addFilaExcel('Utilidad bruta', filas.map(function(r){return r.utilidadBruta}), {bold:true, fill:sectionFill});
-  rIdx++;
-  state.gastosFijos.forEach(function(g){
-    addFilaExcel('(-) '+g.concepto, filas.map(function(){return -g.valor}), {indent:true});
-  });
-  addFilaExcel('Total gastos fijos', filas.map(function(r){return -r.gastoFijo}), {bold:true, color:REDTXT});
-  addFilaExcel('(-) Gastos variables', filas.map(function(r){return -r.gastoVariable}));
-  rIdx++;
-  var utilRow = addFilaExcel('Utilidad operativa', filas.map(function(r){return r.utilidadOperativa}), {bold:true, fill:{type:'pattern',pattern:'solid',fgColor:{argb:OKBG}}});
+  function filaFormula(rowNum, label, formulaFn, cachedValues, opts){
+    opts = opts || {};
+    var row = ws1.getRow(rowNum);
+    row.getCell(1).value = label;
+    row.getCell(1).font = { bold: !!opts.bold, color:{argb:opts.color||'FF000000'} };
+    filas.forEach(function(f,i){
+      var cell = row.getCell(i+2);
+      cell.value = { formula: formulaFn(colLetra(row,i+2)), result: Math.round(cachedValues[i]) };
+      cell.numFmt = '#,##0'; cell.font = { bold: !!opts.bold, color:{argb:opts.color||'FF000000'} };
+    });
+    var L1 = colLetra(row,2), L2 = colLetra(row,lastPeriodCol);
+    var totCell = row.getCell(nCols);
+    totCell.value = { formula:'SUM('+L1+rowNum+':'+L2+rowNum+')', result: Math.round(cachedValues.reduce(function(s,v){return s+v},0)) };
+    totCell.numFmt = '#,##0'; totCell.font = { bold:true, color:{argb:opts.color||'FF000000'} };
+    if(opts.fill){ row.eachCell({includeEmpty:true}, function(c){ if(c.col<=nCols) c.fill = opts.fill; }); }
+    for(var col=1; col<=nCols; col++){ row.getCell(col).border = thinBorder; }
+    return row;
+  }
+  filaValores(ROW.ventas, 'Ventas', filas.map(function(r){return r.ventas}));
+  filaValores(ROW.costoVenta, '(-) Costo de venta', filas.map(function(r){return -r.costoVenta}));
+  filaFormula(ROW.utilidadBruta, 'Utilidad bruta', function(L){return L+ROW.ventas+'+'+L+ROW.costoVenta;}, filas.map(function(r){return r.utilidadBruta}), {bold:true, fill:sectionFill});
+  if(k>0){
+    state.gastosFijos.forEach(function(g,i){
+      filaValores(ROW.gastosFijosStart+i, '(-) '+g.concepto, filas.map(function(){return -g.valor}), {indent:true});
+    });
+  } else {
+    filaValores(ROW.gastosFijosStart, '(sin gastos fijos configurados)', filas.map(function(){return 0}), {indent:true});
+  }
+  filaFormula(ROW.totalGastosFijos, 'Total gastos fijos', function(L){return 'SUM('+L+ROW.gastosFijosStart+':'+L+ROW.gastosFijosEnd+')';}, filas.map(function(r){return -r.gastoFijo}), {bold:true, color:REDTXT});
+  filaValores(ROW.gastoVariable, '(-) Gastos variables', filas.map(function(r){return -r.gastoVariable}));
+  var utilRow = filaFormula(ROW.utilidadOperativa, 'Utilidad operativa', function(L){return L+ROW.utilidadBruta+'+'+L+ROW.totalGastosFijos+'+'+L+ROW.gastoVariable;}, filas.map(function(r){return r.utilidadOperativa}), {bold:true, fill:{type:'pattern',pattern:'solid',fgColor:{argb:OKBG}}});
   ws1.addConditionalFormatting({
     ref: utilRow.getCell(2).address+':'+utilRow.getCell(nCols).address,
     rules: [{ type:'cellIs', operator:'lessThan', formulae:[0], style:{ font:{ color:{argb:REDTXT}, bold:true } } }]
   });
-  rIdx += 2;
+  var rIdx = ROW.utilidadOperativa + 2;
   if(chartInstance){
     try{
       var imgId = wb.addImage({ base64: chartInstance.toBase64Image(), extension:'png' });
