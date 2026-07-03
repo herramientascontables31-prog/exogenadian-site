@@ -614,6 +614,7 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
 </script></head>
 <body class="wsx">
 <div class="exo-loading hidden" id="loadingOverlay"><div class="spinner"></div><div id="loadingTxt">Procesando…</div></div>
+<button id="cifrasReabrir" class="cifras-reabrir" onclick="toggleCifrasEnVivo()" title="Mostrar Cifras en vivo">&#128202; Cifras en vivo</button>
 <div id="origenModal" onclick="if(event.target===this)cerrarOrigen()">
   <div class="origen-box">
     <div class="origen-box-hd"><h4 id="origenTitulo">De dónde salió</h4><button onclick="cerrarOrigen()" title="Cerrar">&times;</button></div>
@@ -1174,7 +1175,6 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
           <div style="margin-top:8px;font-size:.68rem;color:var(--muted)">Mismo diagnóstico que va en el PDF entregable. Las alertas de consignaciones y aportes UGPP usan los campos del entregable.</div>
         </div>
       </aside>
-      <button id="cifrasReabrir" class="cifras-reabrir" onclick="toggleCifrasEnVivo()" title="Mostrar Cifras en vivo">&#128202; Cifras en vivo</button>
     </div>
     <div class="foot"><strong>Aziendale</strong> &middot; Pro v2025.1 &middot; Tope Art. 336 (1.340 UVT) &middot; Descuento Art. 254-1 ET &middot; Validar antes de presentar. <a class="bienvenida-link" onclick="reabrirBienvenida()">ℹ Ver introducción</a></div>
   </div>
