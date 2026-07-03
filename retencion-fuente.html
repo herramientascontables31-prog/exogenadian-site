@@ -516,8 +516,8 @@ function calcIndependiente(anio,uvt,smlmv){
   else if(tipo==='servicios')tarifaFija=declarante?0.04:0.06;
   else tarifaFija=declarante?0.10:0.11;
   const retFija=Math.round(ingreso*tarifaFija);
-  // Cuantía mínima
-  const cuantiaMinima=tipo==='servicios'?4*uvt:0;
+  // Cuantía mínima (Decreto 0572/2025, vigente desde 1-jul-2026)
+  const cuantiaMinima=tipo==='servicios'?2*uvt:0;
   const aplicaCuantia=tipo!=='honorarios'&&ingreso<cuantiaMinima;
   // Depuración Art. 383
   const baseCot=Math.round(ingreso*0.4);
@@ -591,7 +591,7 @@ function renderResults(r,perfil,uvt){
     $('cardTarifaFija').classList.remove('hidden');
     const mejor=r.retCOP<r.retFija;
     $('tarifaFijaContent').innerHTML=`
-      ${r.aplicaCuantia?'<div class="alert alert-warn">&#9888; No aplica retención: el pago es menor a la cuantía mínima ('+fmt(r.cuantiaMinima)+' = 4 UVT para servicios)</div>':''}
+      ${r.aplicaCuantia?'<div class="alert alert-warn">&#9888; No aplica retención: el pago es menor a la cuantía mínima ('+fmt(r.cuantiaMinima)+' = 2 UVT para servicios, Decreto 0572/2025)</div>':''}
       <div class="compare-box">
         <div class="compare-col ${mejor?'con':'sin'}"><div class="compare-label">Depuración Art. 383</div><div class="compare-val">${fmt(r.retCOP)}</div></div>
         <div class="compare-col ${mejor?'sin':'con'}"><div class="compare-label">Tarifa fija Art. 392 (${(r.tarifaFija*100)}%)</div><div class="compare-val">${fmt(r.retFija)}</div></div>
