@@ -228,9 +228,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
         </div>
       </div>
       <div class="field-row">
-        <div class="field"><label>Mes de inicio del flujo</label><input type="month" id="fMesInicio"></div>
+        <div class="field"><label>Mes de inicio del flujo</label><input type="month" id="fMesInicio" min="2026-01" max="2026-12"></div>
         <div class="field"><small style="margin-top:26px;color:var(--muted)">Por defecto es el mes actual. Cámbialo si quieres proyectar desde otra fecha — por ejemplo justo después del corte de tu último balance.</small></div>
       </div>
+      <div id="avisoCoberturaFiscal" style="display:none" class="guia-warn">⚠️ El calendario tributario DIAN que usamos cubre hasta enero de 2027. Los meses de tu horizonte que caigan después de esa fecha van a mostrar $0 en Impuestos — no porque no debas nada, sino porque todavía no calendarizamos ese año. Ajusta el mes de inicio o el horizonte para quedarte dentro del rango cubierto.</div>
       <label class="checkline"><input type="checkbox" id="fGranContribuyente"> Somos Gran Contribuyente (la renta se paga en 3 cuotas en vez de 2)</label>
       <div class="guia-concept" style="margin-top:16px">
         <strong>¿Por qué pedimos el NIT?</strong> El Calendario Tributario DIAN asigna una fecha de vencimiento distinta a cada contribuyente según el <em>último dígito de su NIT</em> (o los dos últimos, para renta de personas naturales e ICA). Sin el NIT, cualquier flujo de caja solo puede poner una fecha genérica de impuestos — y eso es lo que te distingue de una plantilla de Excel: aquí la fecha es la tuya, no un promedio.
@@ -904,18 +905,30 @@ if(window.BalanceLoader && BalanceLoader.mountDropZone){
   var hayRecuperable = BALANCE_KEYS_CONOCIDAS.some(function(k){ return !!BalanceLoader.recover(k); });
   if(hayRecuperable) document.getElementById('btnUsarBalanceExistente').style.display = 'inline-flex';
 }
+/* El calendario tributario (shared/obligaciones-dian-2026.js) solo tiene fechas
+   reales para 2026 (retefuente/IVA de diciembre vencen en enero 2027). Fuera de
+   ese rango, salidasTributarias() no encuentra eventos y los impuestos se ven
+   en $0 — no porque no haya, sino porque no está calendarizado. Avisamos. */
+function verificarCoberturaFiscal(){
+  var ultimoMes = CajaEngine._util.addMonths(state.mesInicio, state.horizonteMeses-1);
+  var fueraDeRango = state.mesInicio < '2026-01' || ultimoMes > '2027-01';
+  document.getElementById('avisoCoberturaFiscal').style.display = fueraDeRango ? 'block' : 'none';
+}
 /* ═══ Init ═══ */
 document.getElementById('fIvaRegimen').addEventListener('change', function(){ state.empresa.ivaRegimen=this.value; actualizarCamposCondicionales(); });
 document.getElementById('fIcaMunicipio').addEventListener('change', function(){ state.empresa.icaMunicipio=this.value; actualizarCamposCondicionales(); });
 document.getElementById('fHorizonte').addEventListener('change', function(){
   state.horizonteMeses = +this.value;
   pintarTablaMeses('tablaVentas', state.ventasPorMes, state.ventaBase);
+  verificarCoberturaFiscal();
 });
 document.getElementById('fMesInicio').addEventListener('change', function(){
   state.mesInicio = this.value || mesActualISO();
   pintarTablaMeses('tablaVentas', state.ventasPorMes, state.ventaBase);
+  verificarCoberturaFiscal();
 });
 pintarPaso1();
+verificarCoberturaFiscal();
 window.irPaso(1);
 })();
 </script>

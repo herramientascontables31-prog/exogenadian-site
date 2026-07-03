@@ -719,7 +719,7 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
       <button class="f210-tab active" data-tab="t210" onclick="cambiarTabF210('t210')"><span class="wsx-ico">🚀</span><span class="wsx-lbl">Punto de partida</span></button>
       <button class="f210-tab" data-tab="texogena" onclick="cambiarTabF210('texogena')"><span class="wsx-ico">⚖️</span><span class="wsx-lbl">Reconciliación</span><span class="tab-dot"></span></button>
       <button class="f210-tab" data-tab="trevision" onclick="cambiarTabF210('trevision')"><span class="wsx-ico">📊</span><span class="wsx-lbl">Formulario 210</span></button>
-      <a class="wsx-side-link" href="escuela.html"><span class="wsx-ico">📚</span> Aprende (Escuela)</a>
+      <a class="wsx-side-link" href="escuela/renta-pn-210.html"><span class="wsx-ico">📚</span> Aprende (Escuela)</a>
       <div class="wsx-side-sep">Cédulas</div>
       <button class="f210-tab" data-tab="ctrabajo" onclick="cambiarTabF210('ctrabajo')"><span class="wsx-ico">💼</span><span class="wsx-lbl">Trabajo</span><span class="tab-badge" id="badge-ctrabajo"></span></button>
       <button class="f210-tab" data-tab="chonorarios" onclick="cambiarTabF210('chonorarios')"><span class="wsx-ico">🧰</span><span class="wsx-lbl">Honorarios</span><span class="tab-badge" id="badge-chonorarios"></span></button>
@@ -853,15 +853,9 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
             <div class="field"><label>Patrimonio líquido AG-1 <span class="hint">(calculado)</span></label><input id="agAntPatLiquido" type="text" readonly placeholder="0" style="background:#f5f9ff"></div>
           </div>
           <div class="field-grid cols3" style="margin-top:8px">
-            <div class="field"><label>Renta líquida cedular general AG-1</label><input id="agAntRentaCedularGen" type="text" oninput="formatNum(this)" placeholder="0"></div>
-            <div class="field"><label>Renta líquida pensiones AG-1</label><input id="agAntRentaPensiones" type="text" oninput="formatNum(this)" placeholder="0"></div>
-            <div class="field"><label>Renta líquida dividendos AG-1</label><input id="agAntRentaDividendos" type="text" oninput="formatNum(this)" placeholder="0"></div>
+            <div class="field"><label>Impuesto neto de renta AG-1 <span class="hint">(c126 AG-1 — audit. y anticipo)</span></label><input id="agAntImpuestoNeto" type="text" oninput="formatNum(this);renderBeneficioAuditoria()" placeholder="0"></div>
           </div>
-          <div class="field-grid cols3" style="margin-top:8px">
-            <div class="field"><label>Impuesto neto de renta AG-1 <span class="hint">(c126 AG-1)</span></label><input id="agAntImpuestoNeto" type="text" oninput="formatNum(this);renderBeneficioAuditoria()" placeholder="0"></div>
-            <div class="field"><label>Retenciones AG-1</label><input id="agAntRetenciones" type="text" oninput="formatNum(this)" placeholder="0"></div>
-            <div class="field"><label>Saldo a favor AG-2 <span class="hint">(opcional)</span></label><input id="agAntSaldoFavorAG2" type="text" oninput="formatNum(this)" placeholder="0"></div>
-          </div>
+          <div style="margin-top:6px;font-size:.72rem;color:var(--muted)">El anticipo (cas. 130) y el saldo a favor (cas. 131) del año anterior se autocompletan solos abajo en "Pagos previos" al leer este PDF — no hace falta digitarlos aquí.</div>
           <div style="margin-top:6px;font-size:.74rem;color:var(--muted);font-style:italic">Si dejas todo en cero, el modo comparativo no se activa y las hojas 4/7 omiten esas secciones con nota explicativa.</div>
           <div id="comparPatrimonialPanel" style="margin-top:12px"></div>
         </div>
@@ -2765,21 +2759,17 @@ function renderizarResumenAplicado(){
    Si NO hay datos llenados (todo cero), devuelve { activo: false } para que
    el módulo Excel sepa que debe omitir secciones comparativas. */
 function construirComparativoAGAnterior(){
+  // Solo los 3 campos con uso real: conciliación patrimonial (patBruto/deudas) y
+  // beneficio de auditoría + anticipo opción 2 (impuestoNeto). Se retiraron
+  // rentaCedularGen/rentaPensiones/rentaDividendos/retenciones/saldoFavorAG2 —
+  // no alimentaban ningún cálculo, solo ocupaban espacio en el formulario.
   var c = {
     patBruto:          v('agAntPatBruto'),
     deudas:            v('agAntDeudas'),
     patLiquido:        Math.max(0, v('agAntPatBruto') - v('agAntDeudas')),
-    rentaCedularGen:   v('agAntRentaCedularGen'),
-    rentaPensiones:    v('agAntRentaPensiones'),
-    rentaDividendos:   v('agAntRentaDividendos'),
-    impuestoNeto:      v('agAntImpuestoNeto'),
-    retenciones:       v('agAntRetenciones'),
-    saldoFavorAG2:     v('agAntSaldoFavorAG2')
+    impuestoNeto:      v('agAntImpuestoNeto')
   };
-  // Activo si hay al menos un campo llenado
-  c.activo = (c.patBruto > 0 || c.deudas > 0 || c.rentaCedularGen > 0 ||
-              c.rentaPensiones > 0 || c.rentaDividendos > 0 ||
-              c.impuestoNeto > 0 || c.retenciones > 0 || c.saldoFavorAG2 > 0);
+  c.activo = (c.patBruto > 0 || c.deudas > 0 || c.impuestoNeto > 0);
   return c;
 }
 /* ── BUILD ESTADO PARA EL MOTOR ──
@@ -3399,13 +3389,20 @@ function procesarDeclAnteriorPDF(file){
     }
     var c = r.casillas;
     function set(id, v){ var e=document.getElementById(id); if(!e || !v) return; e.value=String(Math.round(v)); if(typeof formatNum==='function') formatNum(e); }
-    set('agAntPatBruto', c[29]); set('agAntDeudas', c[30]);
-    set('agAntRentaCedularGen', c[97]); set('agAntRentaPensiones', c[103]); set('agAntRentaDividendos', c[107]);
-    set('agAntImpuestoNeto', c[126]); set('agAntRetenciones', c[132]); set('agAntSaldoFavorAG2', c[137]);
+    function setIfEmpty(id, v){ var e=document.getElementById(id); if(!e || !v || e.value.trim()) return; e.value=String(Math.round(v)); if(typeof formatNum==='function') formatNum(e); }
+    // Lo que de verdad alimenta un cálculo: patrimonio (conciliación Art. 236-237)
+    // e impuesto neto (beneficio de auditoría Art. 689-3 + anticipo opción 2 Art. 807).
+    set('agAntPatBruto', c[29]); set('agAntDeudas', c[30]); set('agAntImpuestoNeto', c[126]);
+    // El anticipo y el saldo a favor que AG-1 liquidó (c133/c137 DE ESE año) son
+    // exactamente lo que la declaración ACTUAL necesita como "anticipo pagado año
+    // anterior" (cas 130) y "saldo a favor año anterior" (cas 131) — antes esto NO
+    // se conectaba y había que digitarlo a mano aparte, aunque el PDF ya lo traía.
+    setIfEmpty('anticipoPrevPagado', c[133]);
+    setIfEmpty('saldoFavorAnt', c[137]);
     if(typeof recalcAGAnterior==='function') recalcAGAnterior();
     if(typeof renderBeneficioAuditoria==='function') renderBeneficioAuditoria();
     if(typeof recalcular==='function') recalcular();
-    if(out) out.innerHTML = '<div style="background:#ECFDF5;border-left:3px solid #059669;border-radius:6px;padding:8px 10px;font-size:.78rem;color:#065F46">✓ Declaración AG ' + (r.anio||'anterior') + ' leída — patrimonio, rentas, impuesto y retenciones del año anterior cargados. Revisa los valores abajo.</div>';
+    if(out) out.innerHTML = '<div style="background:#ECFDF5;border-left:3px solid #059669;border-radius:6px;padding:8px 10px;font-size:.78rem;color:#065F46">✓ Declaración AG ' + (r.anio||'anterior') + ' leída — patrimonio, impuesto neto, anticipo y saldo a favor del año anterior cargados. Revisa los valores abajo.</div>';
     if(typeof gtag !== 'undefined') gtag('event','f210_pro_decl_anterior_pdf');
   }).catch(function(e){ if(out) out.innerHTML = '<span style="color:var(--red);font-size:.78rem">No se pudo leer el PDF: ' + ((e&&e.message)||'error') + '</span>'; });
 }
@@ -3697,9 +3694,8 @@ function guardarBorrador(silencioso){
     'dedSalud','depArt387Num','dedVivienda','dedViviendaImputarA',
     'dedAvcAfc','dedAvcAfcImputarA','depArt336Num','ded1PctFE','dedVehElec',
     'patBruto','patDeudas','patLiqAnt','prevDecl',
-    // Datos comparativos AG-1
-    'agAntPatBruto','agAntDeudas','agAntRentaCedularGen','agAntRentaPensiones',
-    'agAntRentaDividendos','agAntImpuestoNeto','agAntRetenciones','agAntSaldoFavorAG2'
+    // Datos comparativos AG-1 (solo los 3 con uso real: conciliación patrimonial + beneficio auditoría/anticipo)
+    'agAntPatBruto','agAntDeudas','agAntImpuestoNeto'
   ];
   var data = {};
   ids.forEach(function(id){ var el=document.getElementById(id); if(el) data[id]=el.value; });

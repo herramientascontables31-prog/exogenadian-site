@@ -2007,9 +2007,7 @@
       }
       var patAct = ctx.estado.patrimonio || {};
       filaC('Patrimonio líquido', ag.patLiquido, ((patAct.bruto || 0) - (patAct.deudas || 0)));
-      filaC('Renta líquida cedular general', ag.rentaCedularGen, r.renglones.c91);
       filaC('Impuesto neto de renta', ag.impuestoNeto, r.renglones.c126);
-      filaC('Retenciones', ag.retenciones, r.renglones.c132);
     }
 
     bandaSeccion(ws, 'DISCLAIMER');
