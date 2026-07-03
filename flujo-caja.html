@@ -227,6 +227,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
           <select id="fHorizonte"><option value="3">3 meses</option><option value="6" selected>6 meses</option><option value="12">12 meses</option></select>
         </div>
       </div>
+      <div class="field-row">
+        <div class="field"><label>Mes de inicio del flujo</label><input type="month" id="fMesInicio"></div>
+        <div class="field"><small style="margin-top:26px;color:var(--muted)">Por defecto es el mes actual. Cámbialo si quieres proyectar desde otra fecha — por ejemplo justo después del corte de tu último balance.</small></div>
+      </div>
       <label class="checkline"><input type="checkbox" id="fGranContribuyente"> Somos Gran Contribuyente (la renta se paga en 3 cuotas en vez de 2)</label>
       <div class="guia-concept" style="margin-top:16px">
         <strong>¿Por qué pedimos el NIT?</strong> El Calendario Tributario DIAN asigna una fecha de vencimiento distinta a cada contribuyente según el <em>último dígito de su NIT</em> (o los dos últimos, para renta de personas naturales e ICA). Sin el NIT, cualquier flujo de caja solo puede poner una fecha genérica de impuestos — y eso es lo que te distingue de una plantilla de Excel: aquí la fecha es la tuya, no un promedio.
@@ -338,6 +342,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 (function(){
 'use strict';
 var STORE_KEY = 'pyme:flujo-caja';
+function mesActualISO(){ var d = new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'); }
 var DEFAULT_STATE = {
   empresa: { nombre:'Mi Empresa SAS', nit:'900123456-7', tipo:'PJ', granContribuyente:false, regimenTrib:'ordinario', ivaRegimen:'bimestral', icaMunicipio:'bog' },
   saldoInicial: 8000000,
@@ -362,6 +367,7 @@ var DEFAULT_STATE = {
   diasPagoProveedor: 30,
   impuestos: { retefuenteMensual:1200000, ivaPeriodo:2500000, rentaAnual:9000000, icaBimestral:500000, rstAnticipo:0 },
   horizonteMeses: 6,
+  mesInicio: mesActualISO(),
   periodicidad: 'semanal'
 };
 var state = cargarEstado();
@@ -389,8 +395,7 @@ window.borrarMisDatos = function(){
   if(typeof gtag==='function') gtag('event','flujo_caja_datos_borrados');
 };
 function mesesHorizonte(){
-  var d = new Date();
-  var desde = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+  var desde = state.mesInicio || mesActualISO();
   var out=[desde];
   for(var i=1;i<state.horizonteMeses;i++) out.push(CajaEngine._util.addMonths(desde,i));
   return out;
@@ -410,6 +415,7 @@ function leerPaso1(){
   state.empresa.icaMunicipio = document.getElementById('fIcaMunicipio').value;
   state.empresa.granContribuyente = document.getElementById('fGranContribuyente').checked;
   state.horizonteMeses = +document.getElementById('fHorizonte').value;
+  state.mesInicio = document.getElementById('fMesInicio').value || mesActualISO();
 }
 function pintarPaso1(){
   document.getElementById('fNombre').value = state.empresa.nombre;
@@ -420,6 +426,7 @@ function pintarPaso1(){
   document.getElementById('fIcaMunicipio').value = state.empresa.icaMunicipio;
   document.getElementById('fGranContribuyente').checked = state.empresa.granContribuyente;
   document.getElementById('fHorizonte').value = state.horizonteMeses;
+  document.getElementById('fMesInicio').value = state.mesInicio || mesActualISO();
 }
 /* ═══ Paso 2 — tablas de meses ═══ */
 function pintarTablaMeses(tbodyId, overrides, base){
@@ -902,6 +909,10 @@ document.getElementById('fIvaRegimen').addEventListener('change', function(){ st
 document.getElementById('fIcaMunicipio').addEventListener('change', function(){ state.empresa.icaMunicipio=this.value; actualizarCamposCondicionales(); });
 document.getElementById('fHorizonte').addEventListener('change', function(){
   state.horizonteMeses = +this.value;
+  pintarTablaMeses('tablaVentas', state.ventasPorMes, state.ventaBase);
+});
+document.getElementById('fMesInicio').addEventListener('change', function(){
+  state.mesInicio = this.value || mesActualISO();
   pintarTablaMeses('tablaVentas', state.ventasPorMes, state.ventaBase);
 });
 pintarPaso1();

@@ -167,7 +167,7 @@ body.f210-free #cardSugerida{display:none!important}
 /* Modo gratis: menos ruido — el héroe del Paso 1 es la dropzone. Las cards de captura
    (todas con inputs deshabilitados) reaparecen al activar PRO. */
 body.f210-free #cardDeclarante,body.f210-free #cardF160,body.f210-free #cardPatrimonio,
-body.f210-free #cardReajusteFiscal,body.f210-free #cardComparativoAGAnterior,
+body.f210-free #cardReajusteFiscal,
 body.f210-free #cardPagosPrevios,body.f210-free #cardCertificado{display:none!important}
 /* ── Hero de resultado (lo que pagaría / le devolverían) ── */
 .resultado-hero{border-radius:16px;padding:18px 22px;margin-bottom:16px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;box-shadow:var(--shadow);border:1px solid var(--border);background:#fff}
@@ -4077,7 +4077,10 @@ function toggleReplica210(){
 // No se mueve el HTML: solo se muestra/oculta cada card según la pestaña activa
 // (con .tab-off, que respeta la lógica de .hidden propia de cada card).
 var TABS_F210 = {
-  t210:        ['cardAnio', 'cardExogena', 'cardSoportesCliente', 'cardDeclarante', 'cardF160', 'cardPagosPrevios'],
+  // "Declaración del año anterior" vive en Punto de partida (jul-2026, Juan): es
+  // captura de datos de origen (como la exógena), no edición de cédula — debe
+  // estar visible y usable (aunque los campos queden bloqueados) en modo gratis.
+  t210:        ['cardAnio', 'cardExogena', 'cardSoportesCliente', 'cardDeclarante', 'cardComparativoAGAnterior', 'cardF160', 'cardPagosPrevios'],
   texogena:    ['cardReconciliacion', 'cardCertificado'],
   ctrabajo:    ['cardCedulaGeneral'],
   chonorarios: ['cardCedulaGeneral'],
@@ -4086,7 +4089,7 @@ var TABS_F210 = {
   cpensiones:  ['cardPensiones'],
   cdividendos: ['cardDividendos'],
   cgo:         ['cardGO'],
-  cpatrimonio: ['cardPatrimonio', 'cardReajusteFiscal', 'cardComparativoAGAnterior'],
+  cpatrimonio: ['cardPatrimonio', 'cardReajusteFiscal'],
   trevision:   ['cardReplica210', 'cardSugerida', 'cardLiquidacion']
 };
 // Unión de todas las cards controladas por tabs — permite tratar el toggle de
