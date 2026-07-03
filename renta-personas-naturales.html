@@ -336,6 +336,7 @@ body.wsx .cal-wrap{overflow-x:auto}
 <body class="wsx">
 <div id="nav-container"></div>
 <script defer src="shared/pro.js?v=c1eec299"></script>
+<script src="shared/cartera-sync.js?v=c32849a0"></script>
 <script defer src="shared/pro-gate.js?v=dafb5761"></script>
 <script defer src="shared/toast.js?v=9843f93f"></script>
 <script defer src="shared/nav.js?v=659103a7"></script>
@@ -389,8 +390,13 @@ body.wsx .cal-wrap{overflow-x:auto}
       <span class="pb-icon">🔒</span>
       <div>
         <strong>No almacenamos claves MUISCA ni de firma electrónica.</strong>
-        Todo lo que ves aquí vive en tu navegador (localStorage). Las claves del cliente las usas tú directamente cuando vayas a presentar — esta herramienta NO las pide ni las guarda.
+        Tus datos viven en tu navegador; si eres <b>PRO</b>, tu lista de clientes además se respalda cifrada en tu cuenta y te sigue a cualquier dispositivo donde actives tu correo. Las claves del cliente las usas tú directamente cuando vayas a presentar — esta herramienta NO las pide ni las guarda.
       </div>
+    </div>
+    <div id="ctaSyncPro" class="hidden" style="display:flex;gap:10px;align-items:center;background:linear-gradient(135deg,#ECFDF5,#D1FAE5);border:1px solid #A7F3D0;border-radius:12px;padding:12px 16px;margin-bottom:14px;font-size:.9rem;color:#065F46">
+      <span style="font-size:1.3rem">☁️</span>
+      <div><b>Tu lista de clientes vive solo en este navegador.</b> Con el plan PRO se respalda en tu cuenta y te sigue a cualquier dispositivo — cambia de equipo sin perder nada.
+        <a href="precios.html" style="color:#047857;font-weight:700">Ver planes →</a></div>
     </div>
     <div id="emptyOficina" class="empty-banner hidden">
       <h3>Aún no tienes clientes cargados</h3>
@@ -783,6 +789,7 @@ function loadOficinaClientes(){
 }
 function saveOficinaClientes(arr){
   try { localStorage.setItem(KEY_OFICINA, JSON.stringify(arr)); } catch(e){}
+  try { document.dispatchEvent(new Event('oficinaClientesUpdated')); } catch(e){}  // dispara el respaldo/sync PRO
 }
 function loadMeta(){
   try { return JSON.parse(localStorage.getItem(KEY_META)) || {}; }
@@ -2241,6 +2248,18 @@ window.addEventListener('storage', function(e){
   if(e.key === KEY_OFICINA || e.key === KEY_META){
     cargarClientes();
   }
+});
+// La cartera llegó del servidor (sync PRO): recargar la vista
+document.addEventListener('carteraSyncApplied', function(){ try{ cargarClientes(); }catch(_){} });
+// CTA de sync: solo para usuarios SIN PRO que ya tienen clientes cargados.
+// En DOMContentLoaded porque el build difiere (defer) shared/pro.js: en el
+// parse inline exoPro aún no existe.
+document.addEventListener('DOMContentLoaded', function(){
+  if(!window.exoPro || !exoPro.check) return;
+  exoPro.check().then(function(ok){
+    var cta=document.getElementById('ctaSyncPro');
+    if(cta && !ok && loadOficinaClientes().length) cta.classList.remove('hidden');
+  }).catch(function(){});
 });
 if(typeof gtag !== 'undefined') gtag('event','renta_pn_hub_visto');
 </script>

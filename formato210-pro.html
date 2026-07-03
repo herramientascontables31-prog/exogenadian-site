@@ -1205,6 +1205,7 @@ window.EXO_LOADING_HOLD=true;
 if(window.exoLoadingText)exoLoadingText('Cargando el liquidador 210…');
 </script>
 <script defer src="shared/pro.js?v=c1eec299"></script>
+<script src="shared/cartera-sync.js?v=c32849a0"></script>
 <script defer src="shared/toast.js?v=9843f93f"></script>
 <script defer src="shared/nav.js?v=659103a7"></script>
 <script defer src="shared/pro-banner.js?v=f0acfdc0"></script>
@@ -1384,6 +1385,7 @@ function toggleCifrasEnVivo(){
   try{ localStorage.setItem('f210_cifras_colapsadas', colapsado ? '1' : '0'); }catch(_){}
   if(typeof gtag !== 'undefined') gtag('event','f210_pro_cifras_toggle', { colapsado: colapsado });
 }
+document.addEventListener('carteraSyncApplied', function(){ try{ renderClienteBar(); }catch(_){} });
 document.addEventListener('DOMContentLoaded', function(){
   initCifrasEnVivo();
   renderClienteBar();
@@ -3524,6 +3526,7 @@ function crearClienteEnPanel(nit, nombre){
         obligaciones: { exogena: false, renta: true, iva: false, retefte: false, f2516: false, rst: false, patrimonio: false, activosExt: false, ica: false, inc: false }
       });
       localStorage.setItem('oficina_clientes', JSON.stringify(arr));
+      try{ document.dispatchEvent(new Event('oficinaClientesUpdated')); }catch(_){}
     }
   }catch(_){}
   if(typeof gtag !== 'undefined') gtag('event','f210_pro_cliente_creado_desde_exogena');
