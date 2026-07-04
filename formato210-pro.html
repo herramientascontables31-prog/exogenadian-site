@@ -1207,7 +1207,7 @@ if(window.exoLoadingText)exoLoadingText('Cargando el liquidador 210…');
 <script defer src="shared/pro.js?v=c1eec299"></script>
 <script src="shared/cartera-sync.js?v=c32849a0"></script>
 <script defer src="shared/toast.js?v=9843f93f"></script>
-<script defer src="shared/nav.js?v=659103a7"></script>
+<script defer src="shared/nav.js?v=2d4a8d07"></script>
 <script defer src="shared/pro-banner.js?v=f0acfdc0"></script>
 <script src="shared/parametros-renta-pn.js?v=b8b8fedd"></script>
 <script src="shared/calculo210.js?v=cc0db6ad"></script>
@@ -1395,6 +1395,7 @@ document.addEventListener('DOMContentLoaded', function(){
     renderClienteBar();
   }).finally(function(){
     if(window.exoLoadingHide) exoLoadingHide();   // la app ya es usable: soltar el "Cargando"
+    cargarExogenaHandoff();                       // el hub pudo mandar la exógena ya soltada
   });
   // El saldo del panel late suavemente cuando cambia (solo ese valor: no
   // parpadear todo el panel en cada tecla). Respeta prefers-reduced-motion vía CSS.
@@ -1719,6 +1720,24 @@ function leerExcelCompat(ab){
     var wb2 = new ExcelJS.Workbook();
     return wb2.xlsx.load(ab2).then(function(){ return wb2; });
   });
+}
+/* Hand-off desde el hub (renta-personas-naturales.html): si el contador soltó la
+   exógena en la landing, llega aquí como base64 en sessionStorage y armamos el 210
+   de una vez — el preview del 210 prediligenciado es el gancho, sin doble carga. */
+function cargarExogenaHandoff(){
+  var raw;
+  try{ raw = sessionStorage.getItem('f210_exogena_handoff'); }catch(_){ return; }
+  if(!raw) return;
+  try{ sessionStorage.removeItem('f210_exogena_handoff'); }catch(_){}
+  try{
+    var meta = JSON.parse(raw);
+    if(!meta || !meta.b64 || !meta.name) return;
+    var bin = atob(meta.b64), len = bin.length, bytes = new Uint8Array(len);
+    for(var i = 0; i < len; i++) bytes[i] = bin.charCodeAt(i);
+    var file = new File([bytes], meta.name, { type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    procesarArchivoExogena(file);
+    if(typeof gtag !== 'undefined') gtag('event','f210_pro_exogena_handoff');
+  }catch(_){}
 }
 function procesarArchivoExogena(file){
   if(!/\.(xlsx|xls)$/i.test(file.name)){

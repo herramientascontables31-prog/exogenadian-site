@@ -14,6 +14,18 @@
   /* ═══ Banner unificado: vencimientos + disclaimer en una sola barra ═══ */
   (function(){
     if(localStorage.getItem('exo_banner_renta_pn_2026_06')) return;
+    // Prefijo de ruta propio: la var P del nav se asigna DESPUÉS de este IIFE
+    // (estaba llegando como undefined y rompía los hrefs del banner).
+    var _bSegs=location.pathname.split('/').filter(function(s){return s;});
+    var _bDepth=Math.max(0,_bSegs.length-1);
+    var BP=_bDepth>0?new Array(_bDepth+1).join('../'):'';
+    // Cuenta regresiva real hacia el primer vencimiento (12-ago-2026)
+    var _hoy=new Date();_hoy.setHours(0,0,0,0);
+    var _dias=Math.round((new Date('2026-08-12T00:00:00')-_hoy)/864e5);
+    var _lead;
+    if(_dias>1) _lead='📊 Renta de personas naturales AG 2025 — el primer vencimiento es en <strong>'+_dias+' días</strong> (12 de agosto)';
+    else if(_dias>=0) _lead='📊 Renta de personas naturales AG 2025 — <strong>el primer vencimiento es el 12 de agosto</strong>';
+    else _lead='📊 Renta de personas naturales AG 2025 — <strong>vencimientos en curso</strong> hasta el 26 de octubre';
     var bannerCSS=document.createElement('style');
     bannerCSS.textContent=`
       .exo-announce{position:relative;top:0;left:0;right:0;z-index:50;background:#0A0F1E;color:#E2E8F0;font-family:'Outfit',sans-serif;padding:9px 20px 7px;border-bottom:2px solid #22C55E}
@@ -35,12 +47,20 @@
     banner.setAttribute('aria-label','Anuncio y disclaimer');
     banner.innerHTML=
       '<div class="exo-announce-row">'+
-        '<span class="exo-announce-text">📊 Se viene renta de personas naturales AG 2025 — vencimientos desde el <strong>12 de agosto de 2026</strong></span>'+
-        '<a href="'+P+'renta-personas-naturales.html" class="exo-announce-cta" onclick="if(typeof exoTrack!==\'undefined\')exoTrack.ctaClick(\'banner_renta_pn\',\'renta_pn\')">Preparar renta →</a>'+
+        '<span class="exo-announce-text">'+_lead+'</span>'+
+        '<a href="'+BP+'renta-personas-naturales.html" class="exo-announce-cta" onclick="if(typeof exoTrack!==\'undefined\')exoTrack.ctaClick(\'banner_renta_pn\',\'renta_pn\')">Preparar renta →</a>'+
         '<button class="exo-announce-x" aria-label="Cerrar anuncio" onclick="this.parentElement.parentElement.remove();localStorage.setItem(\'exo_banner_renta_pn_2026_06\',\'1\')">&times;</button>'+
       '</div>'+
-      '<div class="exo-announce-sub">El F210 se prediligencia desde la exógena del cliente · control de cartera con estados · calendario por NIT · <a href="'+P+'escuela/renta-pn-210.html">curso gratis de 14 módulos →</a> · <strong>Borrador prediligenciado por algoritmos</strong> — el contador verifica y firma.</div>';
+      '<div class="exo-announce-sub">El F210 se prediligencia desde la exógena del cliente · control de cartera con estados · calendario por NIT · <a href="'+BP+'escuela/renta-pn-210.html">curso gratis de 14 módulos →</a> · <strong>Borrador prediligenciado por algoritmos</strong> — el contador verifica y firma.</div>';
     document.body.insertAdjacentElement('afterbegin',banner);
+    // En páginas con nav fixed (index), el nav tapaba el banner por completo:
+    // bajarlo para que quede visible debajo del nav.
+    requestAnimationFrame(function(){
+      var _nav=document.querySelector('nav');
+      if(_nav&&getComputedStyle(_nav).position==='fixed'){
+        banner.style.marginTop=_nav.offsetHeight+'px';
+      }
+    });
   })();
 
   /* ─── Security: inject CSP meta tag if not present ───
