@@ -724,14 +724,10 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
       </div>
     </div>
     <div class="f210-tabs" id="f210Tabs">
+      <a class="wsx-side-link" href="renta-personas-naturales.html#cli"><span class="wsx-ico">👥</span> Mis clientes</a>
+      <div class="wsx-side-sep">Hacer la declaración</div>
       <button class="f210-tab active" data-tab="t210" onclick="cambiarTabF210('t210')"><span class="wsx-ico">🚀</span><span class="wsx-lbl">Punto de partida</span></button>
       <button class="f210-tab" data-tab="texogena" onclick="cambiarTabF210('texogena')"><span class="wsx-ico">⚖️</span><span class="wsx-lbl">Reconciliación</span><span class="tab-dot"></span></button>
-      <button class="f210-tab" data-tab="trevision" onclick="cambiarTabF210('trevision')"><span class="wsx-ico">📊</span><span class="wsx-lbl">Formulario 210</span></button>
-      <a class="wsx-side-link" href="escuela/renta-pn-210.html"><span class="wsx-ico">📚</span> Aprende (Escuela)</a>
-      <div class="wsx-side-sep">Estudio</div>
-      <a class="wsx-side-link" href="renta-personas-naturales.html#cli"><span class="wsx-ico">👥</span> Mis clientes</a>
-      <a class="wsx-side-link" href="renta-personas-naturales.html#carta"><span class="wsx-ico">📄</span> Solicitudes al cliente</a>
-      <a class="wsx-side-link" href="renta-personas-naturales.html#riesgo"><span class="wsx-ico">⚠️</span> Diagnóstico <span class="wsx-beta-badge">BETA</span></a>
       <div class="wsx-side-sep">Cédulas</div>
       <button class="f210-tab" data-tab="ctrabajo" onclick="cambiarTabF210('ctrabajo')"><span class="wsx-ico">💼</span><span class="wsx-lbl">Trabajo</span><span class="tab-badge" id="badge-ctrabajo"></span></button>
       <button class="f210-tab" data-tab="chonorarios" onclick="cambiarTabF210('chonorarios')"><span class="wsx-ico">🧰</span><span class="wsx-lbl">Honorarios</span><span class="tab-badge" id="badge-chonorarios"></span></button>
@@ -741,6 +737,11 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
       <button class="f210-tab" data-tab="cdividendos" onclick="cambiarTabF210('cdividendos')"><span class="wsx-ico">📈</span><span class="wsx-lbl">Dividendos</span><span class="tab-badge" id="badge-cdividendos"></span></button>
       <button class="f210-tab" data-tab="cgo" onclick="cambiarTabF210('cgo')"><span class="wsx-ico">🎁</span><span class="wsx-lbl">Gan. ocasionales</span><span class="tab-badge" id="badge-cgo"></span></button>
       <button class="f210-tab" data-tab="cpatrimonio" onclick="cambiarTabF210('cpatrimonio')"><span class="wsx-ico">🏦</span><span class="wsx-lbl">Patrimonio</span></button>
+      <button class="f210-tab" data-tab="trevision" onclick="cambiarTabF210('trevision')"><span class="wsx-ico">📊</span><span class="wsx-lbl">Formulario 210</span></button>
+      <div class="wsx-side-sep">Apoyo</div>
+      <a class="wsx-side-link" href="renta-personas-naturales.html#carta"><span class="wsx-ico">📄</span> Solicitudes al cliente</a>
+      <a class="wsx-side-link" href="renta-personas-naturales.html#riesgo"><span class="wsx-ico">⚠️</span> Diagnóstico <span class="wsx-beta-badge">BETA</span></a>
+      <a class="wsx-side-link" href="escuela/renta-pn-210.html"><span class="wsx-ico">📚</span> Aprende (Escuela)</a>
     </div>
     <div class="express-grid">
       <div id="colFormulario">
@@ -1204,7 +1205,7 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
 window.EXO_LOADING_HOLD=true;
 if(window.exoLoadingText)exoLoadingText('Cargando el liquidador 210…');
 </script>
-<script defer src="shared/pro.js?v=c1eec299"></script>
+<script defer src="shared/pro.js?v=9ec24c76"></script>
 <script src="shared/cartera-sync.js?v=c32849a0"></script>
 <script defer src="shared/toast.js?v=9843f93f"></script>
 <script defer src="shared/nav.js?v=2d4a8d07"></script>
@@ -1389,14 +1390,22 @@ document.addEventListener('carteraSyncApplied', function(){ try{ renderClienteBa
 document.addEventListener('DOMContentLoaded', function(){
   initCifrasEnVivo();
   renderClienteBar();
-  exoPro.check().then(function(ok){
-    if(ok) entrarModoPro({ restaurar:true });
-    else   entrarModoGratis();
-    renderClienteBar();
-  }).finally(function(){
-    if(window.exoLoadingHide) exoLoadingHide();   // la app ya es usable: soltar el "Cargando"
-    cargarExogenaHandoff();                       // el hub pudo mandar la exógena ya soltada
-  });
+  // Apertura OPTIMISTA: revelamos el estudio de inmediato según la señal local,
+  // sin esperar la validación PRO contra el Apps Script (tarda ~8s en frío y
+  // dejaba la pantalla "Cargando" ~20s). Reconciliamos en segundo plano.
+  var optimistaPro = (window.exoPro && exoPro.optimistic) ? exoPro.optimistic() : false;
+  if(optimistaPro) entrarModoPro({ restaurar:true });
+  else             entrarModoGratis();
+  renderClienteBar();
+  if(window.exoLoadingHide) exoLoadingHide();   // la app ya es usable: soltar el "Cargando"
+  cargarExogenaHandoff();                       // el hub pudo mandar la exógena ya soltada
+  // Validación real contra el server en segundo plano (NO bloquea la UI): si el
+  // server dice que ya no es PRO, degradamos a modo gratis en caliente.
+  if(optimistaPro && window.exoPro && exoPro.check){
+    exoPro.check().then(function(ok){
+      if(!ok){ entrarModoGratis(); renderClienteBar(); }
+    }).catch(function(){});
+  }
   // El saldo del panel late suavemente cuando cambia (solo ese valor: no
   // parpadear todo el panel en cada tecla). Respeta prefers-reduced-motion vía CSS.
   try{

@@ -163,6 +163,18 @@
     });
   }
 
+  // Decisión SÍNCRONA para revelar la UI sin esperar la red. Respeta la
+  // expiración local (única capa que sí podemos evaluar sin server). El caller
+  // debe llamar check()/revalidate() en segundo plano para reconciliar con el
+  // server (el Apps Script tarda ~8s en frío y no debe bloquear la apertura).
+  function optimistic(){
+    migrateOldKeys();
+    var saved=getSaved();
+    if(!saved) return false;
+    if(isLocallyExpired()){ clearPro(); return false; }
+    return true;
+  }
+
   // Fuerza re-validación ignorando caché
   function revalidate(){
     migrateOldKeys();
@@ -212,6 +224,7 @@
   // Exportar API global
   window.exoPro={
     check: check,
+    optimistic: optimistic,
     revalidate: revalidate,
     activate: activate,
     getSaved: getSaved,
