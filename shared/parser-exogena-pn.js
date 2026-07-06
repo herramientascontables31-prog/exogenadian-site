@@ -201,9 +201,13 @@
     { re: /\bpension(es|ado)?\b|mesada|colpensiones|porvenir|proteccion|colfondos|old mutual/, cedula: 'pensiones' },
     { re: /dividendo|participacion(es)?\b/,                                            cedula: 'dividendos_no_grav' },
     { re: /arrendamiento|arriendo|canon|alquiler/,                                     cedula: 'capital' },
+    // Vocabulario real (inventario de 264 reportes, jul-2026): la DIAN nombra el mismo ingreso
+    // de muchas maneras. Compras QUE LE HICIERON al declarante = ventas suyas (ingreso).
+    { re: /cartera colectiva|patrimonios? autonomos|encargos? fiduciari/,              cedula: 'capital' },
+    { re: /compra de activos movibles|otros costos y deducciones|fondo de proteccion de aportes|remanente/, cedula: 'noLaboral' },
     { re: /interes(es)?|rendimiento|financier|banco|bancolombia|davivienda|bbva|fiducia|fondo de inversion|cdt|cuenta de ahorro/, cedula: 'capital' },
     { re: /honorario|servicio(s)? (profesional|tecnico|personal)|comision/,            cedula: 'honorarios' },
-    { re: /salario|sueldo|nomina|prestacion(es)? social|cesantia|viatico|bonificacion|laboral/, cedula: 'trabajo' }
+    { re: /salario|sueldo|nomina|prestacion(es)? social|cesantia|viatico|bonificacion|laboral|gastos? de representacion|gastos rep|emolumento/, cedula: 'trabajo' }
   ];
 
   // Patrones del "uso sugerido" que NUNCA son ingreso de cédula (van a 'informativo').
@@ -1012,6 +1016,15 @@
           cedulaSugerida = heur.cedula;
           fuenteCedula = heur.fuente;
         }
+      }
+
+      // CATCH-ALL de ingreso (después de la heurística por detalle, para no robarle
+      // "pagos por salarios" a trabajo): si la DIAN marcó el uso como "Tope 1 /
+      // ingresos brutos" y nada lo clasificó, ES ingreso — mejor en no laborales con
+      // revisión que mudo (caso real: $630M de "Compra de activos movibles" invisibles).
+      if(!cedulaSugerida && /tope\s*1|ingresos\s*brutos/i.test(String(usoSugerido||''))){
+        cedulaSugerida = 'noLaboral';
+        fuenteCedula = 'uso_dian_tope1';
       }
 
       // Refinamiento GO → LOTERÍAS: loterías, rifas, apuestas y premios pagan

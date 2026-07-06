@@ -249,6 +249,19 @@
           metadata.registrosProcesados++;
           continue;
         }
+        // Uso "Tope 1 / ingresos brutos" SIN R-código: ES ingreso del declarante (ej.
+        // "Compra de activos movibles", "Otros Costos y Deducciones" del pagador —
+        // caso real: $630M invisibles). Se rutea por palabras del concepto.
+        if(/tope\s*1|ingresos\s*brutos/i.test(usoSugerido)){
+          var dlow = String(detalleConcepto||'').toLowerCase();
+          var bTope1 = /salario|laboral|prestacion|cesantia|viatico|emolumento/.test(dlow) ? 'ingTrabajo'
+            : /honorario|servicio|comision/.test(dlow) ? 'ingHonorarios'
+            : /interes|rendimiento|arrenda|cartera colectiva|patrimonios? autonomos|regalia/.test(dlow) ? 'ingCapital'
+            : 'ingNoLaboral';
+          resumen[bTope1] += valor;
+          metadata.registrosProcesados++;
+          continue;
+        }
         warnings.push({
           tipo: 'sin_renglon',
           mensaje: 'Fila ' + r + ': "' + (detalleConcepto||'').slice(0,60) + '" sin sugerencia DIAN. No se pre-llena. Revisa manualmente.'
