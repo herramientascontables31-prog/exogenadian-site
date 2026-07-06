@@ -174,10 +174,13 @@
       // los INCRNGO, las DEDUCCIONES y las DEMAS RENTAS EXENTAS. Base = ingresoNeto − deducciones − otras exentas.
       // Si las cesantias van por la escala del num. 4, NO entran en la base del 25% (su exencion es la escala).
       var base25 = maxZero(ingresoNeto - (modoCesEscala ? ces : 0) - dedNominales - otrasExentas);
-      exenta25 = r1k(Math.min(
-        base25 * p.exentaTrabajo25Pct,
-        p.exentaTrabajo25MaxUvt * p.uvt
-      ));
+      // Prorrateo por meses trabajados (AyudaRenta DIAN, 'renta exenta '!L5: tope mensual
+      // ROUND(790/12 × UVT, -1) × meses). Con 12 meses (default) el tope anual es 790 UVT.
+      var meses25 = Math.min(12, Math.max(1, Math.round(input.mesesTrabajados || 12)));
+      var tope25 = (meses25 >= 12)
+        ? p.exentaTrabajo25MaxUvt * p.uvt
+        : Math.round(p.exentaTrabajo25MaxUvt / 12 * p.uvt / 10) * 10 * meses25;
+      exenta25 = r1k(Math.min(base25 * p.exentaTrabajo25Pct, tope25));
     }
 
     // Total exentas y deducciones imputables a esta subcedula (DENTRO del tope global)
@@ -232,6 +235,7 @@
       costos: 0,
       cesantiasIntereses: input.cesantiasIntereses,
       salarioPromedio6mUvt: input.salarioPromedio6mUvt,
+      mesesTrabajados: input.mesesTrabajados,
       otrasRentasExentas: input.otrasRentasExentas,
       deduccionesNominales: input.deduccionesNominales,
       ingresosECE: 0

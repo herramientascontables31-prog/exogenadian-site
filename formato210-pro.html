@@ -914,6 +914,7 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
               <div class="field"><label>Honorarios sin costos <span class="hint">(c356, modo trabajo Art. 206 par. 5)</span></label><input id="trab356HonorariosSinCostos" type="text" oninput="formatNum(this);sincTrabIngBruto();recalcular()" placeholder="0"></div>
               <div class="field"><label>Ingreso bruto consolidado <span class="hint">(c32 = c355 + c356, calculado)</span> <button class="icon-ayuda" onclick="mostrarAyuda('trabIngBruto')" title="Ver ayuda">ⓘ</button></label><input id="trabIngBruto" type="text" oninput="formatNum(this);recalcular()" placeholder="0" style="background:#f5f9ff"></div>
               <div class="field"><label>INCRNGO (aportes salud + pensión) <button class="icon-ayuda" onclick="mostrarAyuda('trabIncrngo')" title="Ver ayuda">ⓘ</button></label><input id="trabIncrngo" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
+              <div class="field"><label>Meses laborados en el año <span class="hint">(el tope de 790 UVT del 25% exento se prorratea por mes, igual que el Ayuda Renta DIAN)</span></label><select id="trabMeses25" onchange="recalcular()"><option value="12" selected>12 — todo el año</option><option value="11">11</option><option value="10">10</option><option value="9">9</option><option value="8">8</option><option value="7">7</option><option value="6">6</option><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select></div>
               <div class="field"><label>Cesantías e intereses recibidos <span class="hint">(ingreso NO incluido arriba)</span> <button class="icon-ayuda" onclick="mostrarAyuda('trabCesantias')" title="Ver ayuda">ⓘ</button></label><input id="trabCesantias" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
               <div class="field"><label>Otras rentas exentas de trabajo <span class="hint">(cesantías exentas Art. 206-4, etc. — distintas al 25%)</span></label><input id="trabOtrasExentas" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
             </div>
@@ -962,7 +963,7 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
             </details>
             <div class="field-grid">
               <div class="field"><label>Ingreso bruto del año <span class="hint">(intereses + arrendamientos + regalías brutos)</span></label><input id="capIngBruto" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
-              <div class="field"><label>INCRNGO <span class="hint">(componente inflacionario Arts. 38-41)</span></label><input id="capIncrngo" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
+              <div class="field"><label>INCRNGO <span class="hint">(componente inflacionario Arts. 38-41 — AG 2025: el <strong>55,43%</strong> de los rendimientos financieros, igual que el Ayuda Renta DIAN)</span></label><input id="capIncrngo" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
               <div class="field"><label>Costos / gastos asociados <span class="hint">(sin contar GMF — ver abajo)</span></label><input id="capCostos" type="text" oninput="formatNum(this);recalcular()" placeholder="0"></div>
             </div>
             <div class="field-grid" style="margin-top:8px">
@@ -1207,8 +1208,8 @@ if(window.exoLoadingText)exoLoadingText('Cargando el liquidador 210…');
 <script defer src="shared/toast.js?v=9843f93f"></script>
 <script defer src="shared/nav.js?v=2d4a8d07"></script>
 <script defer src="shared/pro-banner.js?v=f0acfdc0"></script>
-<script src="shared/parametros-renta-pn.js?v=b8b8fedd"></script>
-<script src="shared/calculo210.js?v=cc35828d"></script>
+<script src="shared/parametros-renta-pn.js?v=b11fd153"></script>
+<script src="shared/calculo210.js?v=820b3530"></script>
 <script src="shared/optimizer-210.js?v=e353e2c8"></script>
 <script src="shared/advisor-210.js?v=7db1f6f7"></script>
 <script src="shared/cert-parser-210.js?v=bf1e7ff8"></script>
@@ -2868,9 +2869,15 @@ function construirEstado(){
     v('dedVivienda'),
     Math.round(p.interesesViviendaMaxUvt * p.uvt / 1000) * 1000
   );
+  // Base del 30% AFC/FVP (Arts. 126-1/126-4): el AyudaRenta DIAN (Formulario!W75) la calcula
+  // sobre los ingresos de TODAS las cédulas — general + pensiones + dividendos + GO — no solo
+  // la general. Un pensionado o rentista de dividendos con AFC perdía cupo de beneficio.
+  var ingBrutoTotalAfc = ingBrutoTotal + v('pensIngBruto')
+    + v('divAnt2016') + v('divNoGrav2017') + v('divGrav2017') + v('divExterior')
+    + v('goIngresos') + v('goLoterias');
   var dedAvcAfc = Math.min(
     v('dedAvcAfc'),
-    Math.round(ingBrutoTotal * p.avcAfcMaxPct / 1000) * 1000,
+    Math.round(ingBrutoTotalAfc * p.avcAfcMaxPct / 1000) * 1000,
     Math.round(p.avcAfcMaxUvt * p.uvt / 1000) * 1000
   );
   var depArt387Num = parseInt(document.getElementById('depArt387Num').value) || 0;
@@ -2916,6 +2923,7 @@ function construirEstado(){
       trabajo: {
         ingresosBrutos: trabIngBruto,
         incrngo: trabIncrngo,
+        mesesTrabajados: parseInt((document.getElementById('trabMeses25')||{}).value||'12',10) || 12,
         cesantiasIntereses: trabCesantias,
         otrasRentasExentas: trabOtrasExentas,
         deduccionesNominales: dedNomTrabajo
@@ -3733,7 +3741,7 @@ function guardarBorrador(silencioso){
     'cc','nombre','retenciones','saldoFavorAnt','anticipoPrevPagado',
     // A.3.a — c355/c356 discriminados
     'trab355Salarios','trab356HonorariosSinCostos',
-    'trabIngBruto','trabIncrngo','trabCesantias','trabOtrasExentas',
+    'trabIngBruto','trabIncrngo','trabMeses25','trabCesantias','trabOtrasExentas',
     'honIngBruto','honIncrngo','honCostos',
     'capIngBruto','capIncrngo','capCostos','capGMFTotal',
     'nlIngBruto','nlIncrngo','nlCostos',

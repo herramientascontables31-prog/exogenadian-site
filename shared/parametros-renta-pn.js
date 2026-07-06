@@ -138,6 +138,13 @@
       'AG 2026 se declara en 2027'
     ])
   };
+  // Componente inflacionario (Arts. 38-41 ET, no obligados a llevar contabilidad):
+  // % de los rendimientos financieros que es INCR. Solo del ano con dato oficial —
+  // AG2025 tomado del AyudaRenta DIAN 2025 (TOPES!B60: inflacion 5,1% / captacion 9,2%
+  // = 55,43%; gastos financieros B61: 5,1% / colocacion 17,99% = 28,35%). Los anos sin
+  // dato quedan en null y la UI oculta el auto-calculo.
+  PARAMS[2025].compInflacionarioRendimientos = 0.5543;
+  PARAMS[2025].compInflacionarioGastos = 0.2835;
 
   function getParams(year){
     var p = PARAMS[year];
