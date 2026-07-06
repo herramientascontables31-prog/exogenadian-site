@@ -1806,10 +1806,31 @@ body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-
         </div>
         <p>Las herencias y legados están parcialmente exentas según el bien recibido:</p>
         <ul>
-          <li><strong>Inmueble de habitación del causante:</strong> primeros <strong>13.000 UVT</strong> exentos. AG 2025 = $647.387.000.</li>
-          <li><strong>Otros bienes y derechos:</strong> primeros <strong>3.490 UVT</strong> exentos. AG 2025 = $173.798.510.</li>
-          <li><strong>Asignaciones a hijos / cónyuge en común:</strong> primeros <strong>3.490 UVT</strong> exentos por cada heredero (mismo tope que otros bienes).</li>
+          <li><strong>Vivienda urbana de habitación del causante (num. 1):</strong> primeros <strong>13.000 UVT</strong> exentos. AG 2025 = $647.387.000.</li>
+          <li><strong>Inmuebles rurales del causante (num. 2):</strong> primeros <strong>6.500 UVT</strong> exentos. AG 2025 = $323.693.500.</li>
+          <li><strong>Legitimarios o cónyuge — porción conyugal, herencia o legado (num. 3):</strong> primeros <strong>3.250 UVT</strong> exentos por heredero. AG 2025 = $161.846.750.</li>
+          <li><strong>No legitimarios y donaciones (num. 4):</strong> exento el <strong>20% de lo recibido, sin exceder 1.625 UVT</strong>. AG 2025 = tope $80.923.375. Así lo liquida también el Ayuda Renta oficial de la DIAN.</li>
           <li><strong>Donaciones a entidades sin ánimo de lucro RTE:</strong> exentas si cumplen Art. 257.</li>
+        </ul>
+      </div>
+      <h3>Las gemas del Ayuda Renta oficial (auditoría AG 2025)</h3>
+      <div class="norma">
+        <div class="norma-header">
+          <div class="norma-icon">💎</div>
+          <h4>Detalles del programa oficial que marcan la diferencia frente a un cálculo "a ojo"</h4>
+        </div>
+        <p>Auditamos el <strong>AyudaRenta 2025 V1.0</strong> de la DIAN fórmula por fórmula. Estos son los detalles finos que el Excel oficial aplica y que conviene dominar (nuestro motor los replica):</p>
+        <ul>
+          <li><strong>Dependiente #1 con doble beneficio:</strong> el programa oficial otorga al mismo primer dependiente el <strong>10% del Art. 387</strong> (máx. 32 UVT/mes, dentro del límite del 40%) <strong>y</strong> los <strong>72 UVT del Art. 336</strong> (casilla 139, por fuera del límite). Del 2º al 4º/5º: 72 UVT cada uno, con techo total de 4 × 72 UVT. Solo con rentas de trabajo por salarios (Decreto 2231/2023).</li>
+          <li><strong>La casilla 92 impresa suma lo de afuera:</strong> el rótulo oficial es "(41 + 53 + 69 + 86 <strong>+ 28 + 139</strong>)": el 1% de compras con FE y los dependientes 72 UVT quedan por fuera del límite del 40% pero <em>dentro</em> de la casilla 92, para que 93 = 91 − 92 cuadre en MUISCA.</li>
+          <li><strong>El 25% exento se depura de último:</strong> la base es el ingreso laboral menos INCR, deducciones imputables y demás exentas — cada deducción adicional reduce también el 25%. Tope 790 UVT, que el Excel prorratea por meses laborados.</li>
+          <li><strong>Componente inflacionario AG 2025:</strong> el Excel resta automático el <strong>55,43%</strong> de los rendimientos financieros como INCR (28,35% para gastos financieros; inflación 5,1%, captación 9,2%).</li>
+          <li><strong>Dividendos del exterior (casilla 120):</strong> tarifa plana del <strong>35%</strong> (Art. 240) sobre c109 − c110; no integran la base de la tabla 241. Y en la 2ª subcédula el Excel permite digitar la <em>tarifa societaria real</em> por fila (default 35%) para utilidades gravadas de años con otra tarifa.</li>
+          <li><strong>Límite del 40% en cascada:</strong> el Excel calcula el cupo global (40% de ingresos−INCR, sin costos, máx. 1.340 UVT) y lo va asignando trabajo → honorarios → capital → no laborales, topando cada subcédula a su propia renta líquida.</li>
+          <li><strong>Beneficio de auditoría (Art. 689-3):</strong> el formulario muestra la leyenda de firmeza automática — 6 meses si el impuesto neto crece ≥35% (y el del año base fue ≥71 UVT), 12 meses si crece ≥25% — con opción de "completar" el impuesto para alcanzarlo. Palanca de planeación legítima al cierre.</li>
+          <li><strong>Casilla 140 (Art. 336-1):</strong> el Excel marca X automática cuando los costos y gastos de honorarios superan el 60% de los ingresos — es el umbral indicativo que dispara la obligación de soportar en debida forma. Revísalo antes de presentar.</li>
+          <li><strong>Cesantías de independientes (Art. 126-1):</strong> los aportes directos a fondos de cesantías deducen hasta <strong>min(2.500 UVT, 25% del ingreso)</strong> — deducción distinta del AFC y poco usada.</li>
+          <li><strong>TRM oficial 31-dic-2025:</strong> el Excel valora moneda extranjera a <strong>$4.409,15</strong>; sanción mínima 2026 = 10 UVT = <strong>$524.000</strong>.</li>
         </ul>
       </div>
       <div class="error-comun">

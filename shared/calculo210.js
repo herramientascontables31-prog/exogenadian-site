@@ -352,10 +352,16 @@
     // MUISCA/AyudaRenta redondean CADA casilla al multiplo de mil (nunca decimales
     // ni negativos). Redondeo progresivo para que la aritmetica entre casillas cuadre.
     c91 = r1k(c91);
-    c92 = r1k(Math.min(c92, c91));
+    var c92DentroTope = r1k(Math.min(c92, c91));
+    // Casilla 92 OFICIAL = "(41 + 53 + 69 + 86 + 28 + 139)": el formulario suma DENTRO de la casilla
+    // 92 el 1% de compras con factura electronica (casilla 28) y los 72 UVT por dependientes (casilla
+    // 139), topada a c91 — AyudaRenta DIAN: Formulario!S33 = MIN(L28+T28+AC28+AJ28+Q53+AN13, I33).
+    // El limite 40%/1.340 UVT solo restringe la parte "dentro del tope"; estos conceptos van por fuera
+    // del limite pero DENTRO de la casilla impresa, y asi 93 = 91 − 92 cuadra en MUISCA.
+    c92 = r1k(Math.min(c92DentroTope + deduccionesFueraTope, c91));
 
-    // 5) Casilla 93: Renta liquida ordinaria
-    var c93 = r1k(maxZero(c91 - c92 - deduccionesFueraTope));
+    // 5) Casilla 93: Renta liquida ordinaria (91 - 92)
+    var c93 = r1k(maxZero(c91 - c92));
 
     // 6) Casilla 97: Renta liquida gravable (con compensaciones)
     var c97 = r1k(maxZero(
@@ -382,7 +388,7 @@
         limite40: limite40,
         limite1340: limite1340,
         excedeTope: excedeTope,
-        deduccionesAplicadasDentroTope: c92,
+        deduccionesAplicadasDentroTope: c92DentroTope,
         deduccionesFueraTope: {
           dependientesArt336: depArt336Valor,
           facturaElectronica1Pct: fe1PctAplicado,
@@ -535,13 +541,18 @@
 
     // Otras exenciones de GO (herencias Art.307, seguros Art.303-1): antes se tomaba tal cual del usuario
     // (riesgo: eximir de mas -> sub-declaracion). Ahora se TOPA segun el tipo.
-    // Topes ET (UVT): vivienda urbana causante 13.000 (Art.307-1); inmueble rural 6.500 (Art.307-2);
-    // legitimarios/conyuge 3.490 (Art.307-3); no legitimarios/donaciones 2.290 (Art.307-4); seguro vida 3.250 (Art.303-1).
-    var TOPES_GO_UVT = { viviendaUrbana:13000, inmuebleRural:6500, legitimario:3490, noLegitimario:2290, seguroVida:3250 };
+    // Topes ET Art. 307 (mod. Ley 2277/2022 art. 30), verificados contra AyudaRenta DIAN 2025
+    // (hoja TOPES B28/B29/B54-B56 y hoja go F138:F152): vivienda urbana causante 13.000 (num. 1);
+    // inmueble rural 6.500 (num. 2); legitimarios/conyuge 3.250 (num. 3); no legitimarios/donaciones
+    // 20% del valor recibido sin exceder 1.625 UVT (num. 4); seguro vida 3.250 (Art. 303-1).
+    var TOPES_GO_UVT = { viviendaUrbana:13000, inmuebleRural:6500, legitimario:3250, noLegitimario:1625, seguroVida:3250 };
     var exentaOtras = input.rentasExentas || 0;
     var tipo = input.rentasExentasTipo, avisoExentaGO = null;
     if(exentaOtras > 0 && tipo && TOPES_GO_UVT[tipo]){
       var capGO = r1k(TOPES_GO_UVT[tipo] * p.uvt);
+      // Art. 307 num. 4: la exencion del no legitimario/donatario es el 20% de lo recibido,
+      // ADEMAS del techo en UVT (igual que AyudaRenta DIAN: MIN(D*20%, 1.625 UVT)).
+      if(tipo === 'noLegitimario') capGO = Math.min(capGO, r1k(ing * 0.20));
       if(exentaOtras > capGO){ avisoExentaGO = { tipo:tipo, topeUvt:TOPES_GO_UVT[tipo], topePesos:capGO, solicitado:exentaOtras }; exentaOtras = capGO; }
     }
     var exentas = Math.min(gananciaNoLoteria, exVivienda + exentaOtras);
@@ -609,9 +620,12 @@
     // NO la tabla 241 actual (que sobre-liquidaria por encima de 4.100 UVT).
     var c119 = impuestoDividendos2016(cedulas.dividendos.c106, year);
 
-    // Casilla 120: Impuesto sobre dividendos y participaciones recibidas del EXTERIOR (tabla Art. 241).
+    // Casilla 120: Impuesto sobre dividendos y participaciones recibidas del EXTERIOR:
+    // tarifa PLANA del 35% (Art. 240 ET) sobre (c109 - c110), NO la tabla del Art. 241.
+    // Asi lo liquida el AyudaRenta DIAN 2025 (hoja "tarifa imporenta" I110 = (P45-P46)*0.35)
+    // y el instructivo oficial de la casilla 120; el exterior tampoco integra la base de c111.
     var divExt = maxZero(cedulas.dividendos.c109 - cedulas.dividendos.c110);
-    var c120 = impuestoArt241(divExt, year);
+    var c120 = r1k(divExt * p.divGravadosTarifaCorporativa);
 
     // Casilla 121: Total impuesto rentas cedulares
     var c121 = c116 + c118 + c119 + c120;
