@@ -3,6 +3,6 @@ window.EXOGENA_VERSION = {
   commit: "680f6910503fe46c8a218d2bc683eaf0eeaedb1e",
   shortHash: "680f6910",
   commitDate: "2026-07-06T09:10:42-05:00",
-  buildDate: "2026-07-06T14:12:58.261Z",
+  buildDate: "2026-07-06T14:27:48.859Z",
   repoUrl: "https://github.com/herramientascontables31-prog/exogena-dian-2025"
 };
