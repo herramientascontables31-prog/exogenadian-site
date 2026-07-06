@@ -146,7 +146,7 @@ body{font-family:'DM Sans',sans-serif;color:var(--text);line-height:1.5;
 .paywall-link{font-size:.85rem;color:var(--pri2);font-weight:700;text-decoration:none}
 .paywall-link:hover{text-decoration:underline}
 /* ── Banner de modo gratis ── */
-.free-banner{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#f0f7ff,#eaf2fa);border:1px solid #d5e6f7;border-radius:14px;padding:12px 16px;margin-bottom:16px;box-shadow:var(--shadow)}
+.free-banner{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#f0f7ff,#eaf2fa);border:1px solid #d5e6f7;border-radius:12px;padding:8px 14px;margin-bottom:8px;box-shadow:var(--shadow);font-size:.82rem}
 .free-banner.hidden{display:none!important}
 .free-banner .fb-ico{font-size:1.4rem;flex-shrink:0}
 .free-banner .fb-txt{flex:1;font-size:.84rem;color:#3a5876;line-height:1.45}
@@ -170,7 +170,7 @@ body.f210-free #cardDeclarante,body.f210-free #cardF160,body.f210-free #cardPatr
 body.f210-free #cardReajusteFiscal,
 body.f210-free #cardPagosPrevios,body.f210-free #cardCertificado{display:none!important}
 /* ── Hero de resultado (lo que pagaría / le devolverían) ── */
-.resultado-hero{border-radius:16px;padding:18px 22px;margin-bottom:16px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;box-shadow:var(--shadow);border:1px solid var(--border);background:#fff}
+.resultado-hero{border-radius:14px;padding:12px 18px;margin-bottom:10px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;box-shadow:var(--shadow);border:1px solid var(--border);background:#fff}
 .resultado-hero.hidden{display:none!important}
 .resultado-hero.pagar{background:#fff;border-color:var(--border)}
 .resultado-hero.favor{background:linear-gradient(135deg,#fff 55%,#eefaf4);border-color:#cdeede}
@@ -1220,8 +1220,8 @@ if(window.exoLoadingText)exoLoadingText('Cargando el liquidador 210…');
 <script src="shared/reajuste-fiscal.js?v=c4b58391"></script>
 <script src="shared/decl-prev-210.js?v=753d9722"></script>
 <script src="shared/validaciones210.js?v=257a3ee7"></script>
-<script src="shared/parser-exogena-pn.js?v=2e5aecc6"></script>
-<script src="shared/parser-muisca-consultante.js?v=03bd8bbd"></script>
+<script src="shared/parser-exogena-pn.js?v=b3b017b4"></script>
+<script src="shared/parser-muisca-consultante.js?v=be6ae467"></script>
 <script src="shared/sugerida-parser-210.js?v=34d26f6a"></script>
 <script src="shared/canonicalize-inputs.js?v=5fe6d4a7"></script>
 <script src="shared/ocr-pdf.js?v=e91567a8"></script>
@@ -2225,16 +2225,29 @@ function renderizarTablaReconciliacion(){
     var txt = (f.concepto || '') + ' ' + (f.descripcion || '') + ' ' + (f.informante || '');
     if(/venta ante notari|notarios y tr[aá]nsito/i.test(txt)) retVentaActivos += (f.valor || 0);
   });
-  // Asesoría documento soporte: compras que terceros reportaron porque el declarante
-  // NO factura → es un ingreso suyo que debe entrar a la declaración.
+  // Asesoría documento soporte — REGLA DIAN DEL MAYOR VALOR (nota literal del reporte MUISCA):
+  // "El Tope 1 toma el MAYOR valor entre las variables de ingresos de la exógena y los ingresos
+  // por documentos soporte". Es el MISMO ingreso visto desde la facturación del comprador:
+  // sumarlo completo DUPLICA ingresos (caso real: +$84,5M fantasma). Solo el EXCESO sobre lo
+  // reportado por terceros es ingreso adicional.
   var mresDS = reconciliacionEstado.muiscaResumen;
   if(mresDS && mresDS.ingDocSoporte > 0 && !reconciliacionEstado.docSoporteAplicado){
-    introHtml += '<div style="background:#FDF4FF;border-left:4px solid #A855F7;border-radius:6px;padding:10px 14px;margin:8px 0;font-size:.8rem;color:#581C87;line-height:1.5">' +
-      '🧾 <strong>Ingresos por documento soporte: $' + Math.round(mresDS.ingDocSoporte).toLocaleString('es-CO') + '.</strong> ' +
-      'Empresas reportaron compras hechas al declarante con <strong>documento soporte</strong> (porque él no factura electrónicamente). Eso es un <strong>ingreso</strong> que debe entrar a la declaración — clasifícalo según la actividad: honorarios/servicios personales o renta no laboral (venta de bienes u otra actividad).' +
-      ' <button class="btn-aplicar" onclick="aplicarDocSoporte(' + Math.round(mresDS.ingDocSoporte) + ',\'honIngBruto\')">A honorarios c43</button>' +
-      ' <button class="btn-aplicar secondary" onclick="aplicarDocSoporte(' + Math.round(mresDS.ingDocSoporte) + ',\'nlIngBruto\')">A no laborales c74</button>' +
-    '</div>';
+    var _ingTerceros = (mresDS.ingTrabajo||0)+(mresDS.ingHonorarios||0)+(mresDS.ingCapital||0)
+      +(mresDS.ingNoLaboral||0)+(mresDS.ingPensiones||0)+(mresDS.ingDividendos||0)+(mresDS.gananciasOcasionales||0);
+    var _dsExceso = Math.max(0, Math.round(mresDS.ingDocSoporte) - Math.round(_ingTerceros));
+    if(_dsExceso > 0){
+      introHtml += '<div style="background:#FDF4FF;border-left:4px solid #A855F7;border-radius:6px;padding:10px 14px;margin:8px 0;font-size:.8rem;color:#581C87;line-height:1.5">' +
+        '🧾 <strong>Documento soporte: $' + Math.round(mresDS.ingDocSoporte).toLocaleString('es-CO') + '</strong>, y lo reportado por terceros solo suma $' + Math.round(_ingTerceros).toLocaleString('es-CO') + '. ' +
+        'El <strong>exceso de $' + _dsExceso.toLocaleString('es-CO') + '</strong> es ingreso no cubierto por la exógena (regla DIAN del mayor valor) — agrégalo según la actividad:' +
+        ' <button class="btn-aplicar" onclick="aplicarDocSoporte(' + _dsExceso + ',\'honIngBruto\')">Exceso a honorarios c43</button>' +
+        ' <button class="btn-aplicar secondary" onclick="aplicarDocSoporte(' + _dsExceso + ',\'nlIngBruto\')">Exceso a no laborales c74</button>' +
+      '</div>';
+    } else {
+      introHtml += '<div style="background:#F0FDF4;border-left:4px solid #16A34A;border-radius:6px;padding:10px 14px;margin:8px 0;font-size:.8rem;color:#14532D;line-height:1.5">' +
+        '🧾 <strong>Documento soporte: $' + Math.round(mresDS.ingDocSoporte).toLocaleString('es-CO') + ' — ya está contenido en lo reportado por terceros</strong> ($' + Math.round(_ingTerceros).toLocaleString('es-CO') + '). ' +
+        'La propia DIAN aplica la regla del <strong>mayor valor</strong> entre ambas fuentes (nota del reporte): <strong>NO lo sumes otra vez</strong>. Solo agrégalo manualmente si sabes que corresponde a un ingreso distinto de los ya clasificados.' +
+      '</div>';
+    }
   }
   // Asesoría cesantías Art. 206-4: el reporte trae el insumo exacto (ingreso laboral
   // promedio de los últimos 6 meses) para calcular el % exento por la escala.
@@ -3127,13 +3140,9 @@ function renderResultadoHero(){
   h += '<button class="rh-cta" style="background:#fff;color:var(--pri);border:1.5px solid var(--pri);box-shadow:none" onclick="cambiarTabF210(&quot;trevision&quot;)">Ver el 210 armado &rarr;</button>';
   if(!window.__f210Pro){
     h += '<button class="rh-cta" onclick="abrirPaywall()">Ajustar y bajar este saldo &rarr;</button>';
-    if(pagar > 0){
-      h += '<div class="rh-hint">💡 Este saldo suele <b>bajar</b> al aplicar deducciones personales (dependientes, intereses de vivienda, prepagada, AFC) — eso se ajusta con PRO, casilla por casilla.</div>';
-    }
   }
-  // Siempre visible (gratis y PRO): la exógena es GUÍA, no verdad. La DIAN la
-  // actualiza y no lo trae todo — el cierre profesional es contra soportes.
-  h += '<div class="rh-guia">⚖️ <b>Esto es una guía, no la declaración final.</b> La DIAN actualiza la exógena y no siempre lo trae todo. Pídele los soportes al cliente y verifica contra ellos — <a href="renta-personas-naturales.html#carta">genera la solicitud de documentos →</a></div>';
+  // Una sola línea compacta (gratis y PRO): guía, no verdad — el "suele bajar" ya está en rh-sub.
+  h += '<div class="rh-guia">⚖️ Guía, no declaración final: la exógena no lo trae todo — verifica contra soportes (<a href="renta-personas-naturales.html#carta">solicitar documentos →</a>).</div>';
   el.className = 'resultado-hero ' + (esFavor ? 'favor' : 'pagar');
   el.innerHTML = h;
 }

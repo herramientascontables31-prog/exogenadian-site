@@ -43,7 +43,9 @@
     'R99':  'ingPensiones',            // Casilla 99 — Ingresos brutos rentas de pensiones
     'R100': 'incrngo',                 // Casilla 100 — INCRNGO cédula de pensiones
     'R104': 'ingDividendos',           // Casilla 104 — Dividendos y participaciones 2016 y anteriores
+    'R106': 'ingDividendos',           // Casilla 106 — Renta líquida año 2016 y anteriores
     'R107': 'ingDividendos',           // Casilla 107 — Dividendos 2017+ 1a subcédula (no gravados)
+    'R108': 'ingDividendos',           // Casilla 108 — Dividendos 2017+ 2a subcédula GRAVADOS (par. 2 art. 49; caso real: $144M perdidos por no mapearla)
     'R109': 'ingDividendos',           // Casilla 109 — Dividendos y participaciones del exterior
     'R112': 'gananciasOcasionales',    // Casilla 112 — Ingresos por ganancias ocasionales
     'R132': 'retencionesC132'          // Casilla 132 — Retenciones del año gravable
@@ -174,6 +176,14 @@
       var usoSugerido = getCellText(row.getCell(7));
       var infoAdicional = getCellText(row.getCell(8));
 
+      // Filas con VALOR pero sin NIT/concepto = formato roto del reporte DIAN (celdas
+      // combinadas dañadas). NO se pueden clasificar, pero SÍ se avisan: en un caso real
+      // una fila así traía $47,5M de ingresos (81% del Tope 1) y el silencio lo ocultaba.
+      if(!nitInformante && valor >= 1000 && !detalleConcepto){
+        resumen.valoresHuerfanos = (resumen.valoresHuerfanos||0) + valor;
+        warnings.push({ tipo:'fila_rota', mensaje:'Fila '+r+': valor de $'+Math.round(valor).toLocaleString('es-CO')+' SIN concepto ni NIT (formato roto del reporte). Ábrelo en Excel, identifica el concepto y agrégalo a mano.' });
+        continue;
+      }
       // Saltar filas vacías o de subtotal
       if(!nitInformante || !valor) continue;
 

@@ -47,10 +47,13 @@
     'capital - arrendamientos':                     'capital',
     'rentas no laborales':                          'noLaboral',
     'no laborales':                                 'noLaboral',
-    // Ventas del declarante a quien le emite documento soporte (no obligado a
-    // facturar). Es INGRESO del declarante → rentas no laborales. Substring que
-    // matchea "Ingresos documentos soporte de adquisiciones no obligados a facturar".
-    'soporte de adquisic':                          'noLaboral',
+    // "Ingresos documentos soporte de adquisiciones no obligados a facturar": es el
+    // MISMO ingreso del declarante visto desde la facturación de sus compradores, NO
+    // un ingreso adicional. La nota del reporte DIAN: "El Tope 1 toma el MAYOR valor
+    // entre las variables de la exógena y los documentos soporte". Va a un bucket
+    // propio y la regla del mayor se aplica al final (sumarlo duplicaba ingresos:
+    // caso real Daniel V. +$84,5M fantasma).
+    'soporte de adquisic':                          'docSoporte',
     'rentas de pensiones':                          'pensiones',
     'pensiones':                                    'pensiones',
     'dividendos y participaciones no gravados':     'dividendos_no_grav',
@@ -92,6 +95,7 @@
     'R99':  'pensiones',               // Casilla 99 — Ingresos brutos rentas de pensiones
     'R100': 'incrngo',                 // Casilla 100 — INCRNGO cédula de pensiones
     'R104': 'dividendos_2016',        // Casilla 104 — Dividendos 2016 y anteriores (régimen de transición, tabla máx. 33%)
+    'R106': 'dividendos_2016',        // Casilla 106 — Renta líquida dividendos 2016 y anteriores
     'R107': 'dividendos_no_grav',      // Casilla 107 — Dividendos 2017+ 1a subcédula (num 3 art 49, no gravados)
     'R108': 'dividendos_grav',         // Casilla 108 — Dividendos 2017+ 2a subcédula (par 2 art 49, gravados)
     'R109': 'dividendos_ext',          // Casilla 109 — Dividendos del exterior (tabla 241 + descuento 254, NO 35%)
@@ -187,9 +191,9 @@
     // Van antes que capital porque el informante suele ser un banco (matchea 'capital' por
     // nombre) y "Saldo cuentas/CDT/inversión" o "Inversiones realizadas" no es renta.
     { re: /^saldo\b|saldo a favor|inversion(es)?.*(realizad|efectuad)|avaluo|adquisicion de bienes|bienes (o derechos|raices|inmuebles)|cuenta por cobrar|aporte.*derecho social/, cedula: 'informativo' },
-    // Ingresos por ventas soportadas en documento soporte (comprador no obligado a
-    // facturar reporta su compra) = ingreso del declarante → rentas no laborales.
-    { re: /soporte de adquisic|documento.{0,3}soporte.*adquisic|venta.*documento soporte/, cedula: 'noLaboral' },
+    // Documento soporte: el MISMO ingreso ya reportado por terceros (regla DIAN del
+    // mayor valor) → bucket propio, la regla se aplica al cierre del parseo.
+    { re: /soporte de adquisic|documento.{0,3}soporte.*adquisic|venta.*documento soporte/, cedula: 'docSoporte' },
     { re: /credito de vivienda|hipotecari|intereses (de )?vivienda/,                   cedula: 'deduccion_vivienda' },
     { re: /\bafc\b|\bavc\b|aporte(s)? voluntari|fondo.*pension.*voluntari|fvp\b/,      cedula: 'deduccion_avc' },
     { re: /prepagada|medicina prepagada|poliza de salud/,                              cedula: 'deduccion_salud_prepag' },
@@ -616,6 +620,7 @@
       return cedula;
     }
     if(cedula === 'informativo') return 'informativo';
+    if(cedula === 'docSoporte') return 'docSoporte';
     if(cedula === 'excluir') return 'excluido';
     return 'otros';
   }
@@ -677,6 +682,10 @@
       } else if(ced === 'informativo'){
         c.informativo += v; c.conteo.informativo++;
         c.noVanEnDeclaracion.push({ descripcion: f.descripcion || f.concepto || '', informante: f.informante || '', valor: v, motivo: motivoInformativo(f) });
+      } else if(ced === 'docSoporte'){
+        c.informativo += v; c.conteo.informativo++;
+        c.noVanEnDeclaracion.push({ descripcion: f.descripcion || f.concepto || '', informante: f.informante || '', valor: v,
+          motivo: 'Documento soporte: es el MISMO ingreso que ya reportaron los compradores (regla DIAN del mayor valor, Tope 1). NO se suma dos veces; solo el exceso sobre lo reportado por terceros sería ingreso adicional.' });
       } else if(!ced){
         c.pendiente += v; c.conteo.pendiente++;
       } else {
@@ -880,7 +889,17 @@
         }
       }
 
-      if(!detalle) continue;
+      if(!detalle){
+        // Fila con VALOR pero sin concepto/NIT = formato roto del reporte DIAN (celdas
+        // combinadas dañadas). No clasificable, pero SE AVISA: en un caso real una fila así
+        // traía $47,5M de ingresos (81% del Tope 1) y el silencio lo ocultaba.
+        var vHuerf = getCellNumValue(row.getCell(colValor)) || 0;
+        if(vHuerf >= 1000 && !nitInfo){
+          metadata.valoresHuerfanos = (metadata.valoresHuerfanos||0) + vHuerf;
+          warnings.push({ tipo:'fila_rota', mensaje:'Fila '+r+': valor de $'+Math.round(vHuerf).toLocaleString('es-CO')+' SIN concepto ni NIT (formato roto del reporte DIAN). Ábrelo en Excel, identifica el concepto y agrégalo a mano.' });
+        }
+        continue;
+      }
 
       // Skip filas de subtotales: NIT informante vacío Y/o solo Detalle+Valor pobladas
       if(colNitInf && !nitInfo){
@@ -1033,6 +1052,53 @@
     Object.keys(totales.porCedula).forEach(function(k){ totales.porCedula[k] = Math.round(totales.porCedula[k]); });
     totales.totalGeneral = Math.round(totales.totalGeneral);
     totales.totalRetencion = Math.round(totales.totalRetencion);
+
+    // ── CRUCE OBLIGATORIO contra los TOPES OFICIALES del reporte ──
+    // La propia DIAN trae en el resumen lo que ELLA suma por tope. Si lo clasificado
+    // no cuadra con el Tope 1, hay conceptos contados de más o de menos: se avisa
+    // SIEMPRE, con semáforo. (Regla del mayor: documento soporte NO se suma dos veces;
+    // solo su exceso sobre lo reportado por terceros es ingreso adicional.)
+    var pc = totales.porCedula;
+    var ingClasificado = Math.round((pc.trabajo||0)+(pc.honorarios||0)+(pc.capital||0)+(pc.noLaboral||0)
+      +(pc.pensiones||0)+(pc.dividendos||0)+(pc.gananciasOcasionales||0));
+    var docSoporteTotal = Math.round(pc.docSoporte||0);
+    var docSoporteExceso = Math.max(0, docSoporteTotal - ingClasificado);
+    metadata.docSoporte = docSoporteTotal;
+    metadata.docSoporteExceso = docSoporteExceso;
+    if(docSoporteTotal > 0){
+      warnings.push({ tipo: 'doc_soporte',
+        mensaje: docSoporteExceso > 0
+          ? 'Ventas por documento soporte ($' + docSoporteTotal.toLocaleString('es-CO') + ') SUPERAN lo reportado por terceros: el exceso de $' + docSoporteExceso.toLocaleString('es-CO') + ' es ingreso no cubierto — agrégalo a rentas no laborales (regla DIAN del mayor valor).'
+          : 'El reporte trae $' + docSoporteTotal.toLocaleString('es-CO') + ' por documento soporte: es el mismo ingreso ya reportado por terceros y NO se sumó dos veces (regla DIAN del mayor valor, nota del propio reporte).' });
+    }
+    var tp2 = metadata.topes || {};
+    // Patrimonio detectado = filas cuyo uso DIAN apunta a la casilla 29 (van al bucket informativo
+    // porque el PRO las prellena en su card de patrimonio, no como ingreso).
+    var patDetectado = 0;
+    registros.forEach(function(f){
+      if(/\br29\b|patrimonio bruto/i.test(String(f.usoDIANSugerido||''))) patDetectado += f.valor||0;
+    });
+    metadata.contraste = {
+      ingresos:   { oficial: Math.round(tp2.ingresos||0),   clasificado: ingClasificado },
+      patrimonio: { oficial: Math.round(tp2.patrimonio||0), detectado: Math.round(patDetectado),
+                    nota: 'El Tope 2 oficial es el MAYOR entre la suma de variables del año y el patrimonio declarado el año anterior — pueden diferir legítimamente.' },
+      compras:    { oficial: Math.round(tp2.compras||0) }
+    };
+    if(tp2.ingresos > 0){
+      var difIng = ingClasificado - Math.round(tp2.ingresos);
+      var pctIng = Math.abs(difIng) / tp2.ingresos;
+      metadata.contraste.ingresos.diferencia = difIng;
+      metadata.contraste.ingresos.cuadra = pctIng <= 0.03;
+      warnings.push({ tipo: pctIng <= 0.03 ? 'contraste_ok' : 'contraste_diferencia',
+        mensaje: (pctIng <= 0.03 ? '✅ CRUCE con el resumen oficial DIAN: ' : '⚠️ CRUCE con el resumen oficial DIAN: ')
+          + 'ingresos clasificados $' + ingClasificado.toLocaleString('es-CO')
+          + ' vs Tope 1 oficial $' + Math.round(tp2.ingresos).toLocaleString('es-CO')
+          + (pctIng <= 0.03 ? ' — cuadran (' + (pctIng*100).toFixed(1) + '%).'
+             : ' — DIFIEREN en $' + Math.abs(difIng).toLocaleString('es-CO')
+               + ((metadata.valoresHuerfanos||0) > 0 ? ' (hay $' + Math.round(metadata.valoresHuerfanos).toLocaleString('es-CO') + ' en filas ROTAS sin concepto que explican parte o todo el hueco — agrégalas a mano).'
+                  : (difIng > 0 ? '. Puede haber conceptos contados de más: revisa la reconciliación antes de liquidar.'
+                                : '. Puede haber registros sin clasificar o conceptos que la DIAN cuenta en el tope y aquí van a otra casilla: revisa la reconciliación.'))) });
+    }
 
     return { metadata: metadata, registros: registros, totales: totales, warnings: warnings };
   }
