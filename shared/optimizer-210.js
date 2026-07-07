@@ -32,16 +32,20 @@
 
   function clone(o){ return JSON.parse(JSON.stringify(o)); }
 
-  // Recalcula el impuesto agregando `extraAfc` a las deducciones de la subcédula
-  // de trabajo. El motor aplica el tope global del 40%/1.340 UVT por su cuenta.
-  function impuestoCon(estado, year, extraAfc){
+  // Recalcula el impuesto agregando `extraAfc` a las deducciones de una subcédula.
+  // El motor aplica el tope global del 40%/1.340 UVT por su cuenta. `sub` (opcional,
+  // default 'trabajo'): a qué subcédula imputar — si el declarante no tiene rentas de
+  // trabajo, imputar ahí no bajaba nada (el tope individual capa a la renta de ESA
+  // subcédula) y el optimizador decía "ya óptimo" en falso.
+  function impuestoCon(estado, year, extraAfc, sub){
     var cal = getCal210();
     if(!cal) throw new Error('optimizador210: motor cal210 no disponible');
+    sub = sub || 'trabajo';
     var e = clone(estado || {});
     e.cedulaGeneral = e.cedulaGeneral || {};
-    e.cedulaGeneral.trabajo = e.cedulaGeneral.trabajo || {};
-    e.cedulaGeneral.trabajo.deduccionesNominales =
-      (e.cedulaGeneral.trabajo.deduccionesNominales || 0) + Math.max(0, extraAfc || 0);
+    e.cedulaGeneral[sub] = e.cedulaGeneral[sub] || {};
+    e.cedulaGeneral[sub].deduccionesNominales =
+      (e.cedulaGeneral[sub].deduccionesNominales || 0) + Math.max(0, extraAfc || 0);
     var r = cal.calcular210(e, year).renglones;
     return { c126: r.c126, c129: r.c129, c134: r.c134, c137: r.c137 };
   }
@@ -69,14 +73,35 @@
     var afcUvt = par.avcAfcMaxUvt || 3800;
     var afcMax = Math.max(0, Math.min(afcPct * ingreso, afcUvt * uvt));
 
-    var actual = impuestoCon(estado, year, 0);
+    // Cupo REMANENTE del tope global (Art. 336 num. 3: 40% de la base / 1.340 UVT),
+    // descontando las exentas y deducciones YA imputadas. Sin esto el optimizador
+    // sugería aportes mayores al margen que el Diagnóstico de riesgos reporta
+    // (doc arreglos 7-jul: $48,7M sugeridos vs $36,4M de margen real) — plata del
+    // cliente inmovilizada en el fondo sin bajar un peso más de impuesto.
+    var cal = getCal210();
+    var rBase = cal.calcular210(clone(estado || {}), year);
+    var tope = (rBase.cedulaGeneral && rBase.cedulaGeneral.tope) || {};
+    var margen336 = Math.max(0, Math.min(tope.limite40 || Infinity, tope.limite1340 || Infinity)
+                                - (tope.deduccionesAplicadasDentroTope || 0));
+    if(!isFinite(margen336)) margen336 = afcMax;
+    var techo = Math.min(afcMax, margen336);
+
+    // Subcédula destino: la de mayor ingreso bruto (el tope individual limita lo
+    // imputable a la renta de esa subcédula — imputar a una sin ingresos no baja nada).
+    var subDestino = 'trabajo', mayor = -1;
+    ['trabajo','honorarios','capital','noLaboral'].forEach(function(s){
+      var ib = (cg[s] && cg[s].ingresosBrutos) || 0;
+      if(ib > mayor){ mayor = ib; subDestino = s; }
+    });
+
+    var actual = impuestoCon(estado, year, 0, subDestino);
 
     // Escaneo de la curva impuesto vs aporte
     var steps = opts.steps || 40, curva = [], minImp = actual.c129;
-    var stepSize = afcMax / steps;
+    var stepSize = techo / steps;
     for(var i = 0; i <= steps; i++){
       var ap = Math.round(stepSize * i);
-      var imp = impuestoCon(estado, year, ap);
+      var imp = impuestoCon(estado, year, ap, subDestino);
       curva.push({
         aporte: ap, impuesto: imp.c129,
         saldoPagar: imp.c134, saldoFavor: imp.c137,
@@ -90,12 +115,16 @@
     for(var j = 0; j < curva.length; j++){
       if(curva[j].impuesto <= minImp + 1000){ optAporte = curva[j].aporte; break; }
     }
-    var opt = impuestoCon(estado, year, optAporte);
+    var opt = impuestoCon(estado, year, optAporte, subDestino);
     var ahorro = Math.max(0, actual.c129 - opt.c129);
 
     return {
       ingreso: Math.round(ingreso),
       afcMax: Math.round(afcMax),
+      margen336: Math.round(margen336),
+      techo: Math.round(techo),
+      limitadoPor: techo === afcMax ? 'afc' : 'tope336',
+      subDestino: subDestino,
       actual: actual,
       optimo: { aporte: optAporte, impuesto: opt.c129, saldoPagar: opt.c134, saldoFavor: opt.c137 },
       ahorro: ahorro,

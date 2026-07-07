@@ -7,7 +7,8 @@
  *
  * Porcentajes verificados (fuente: decretos reglamentarios):
  *   - AG 2025: 5.81%  (Decreto 449 de 2026)
- *   - AG 2024: 10.97% (Decreto 128 de 2024)
+ *   - AG 2024: 10.97% (Decreto 174 de 2025)
+ *   - AG 2023: 13.12% (Decreto 128 de 2024 — histórico, no cargado en PCT)
  * Para años anteriores el reajuste es acumulativo; usar la tabla histórica
  * oficial (no se incluyen aquí porcentajes sin verificar).
  *

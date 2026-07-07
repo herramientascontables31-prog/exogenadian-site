@@ -108,8 +108,14 @@ body{font-family:'DM Sans',sans-serif;color:var(--text);line-height:1.5;
 .live-tag.amber{background:var(--amber2);color:#92400E}
 .live-tag.red{background:#FEE2E2;color:#991B1B}
 /* Form fields */
-.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 14px}
-.field-grid.cols3{grid-template-columns:1fr 1fr 1fr}
+/* minmax(0,1fr): sin el 0, los inputs monoespaciados fijan un min-content ancho y
+   la columna no encoge cuando el panel derecho (wsx) angosta el área → campos cortados
+   fuera del encuadre (doc arreglos 7-jul: secciones 6b, 7, 7b). */
+.field-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 14px}
+.field-grid.cols3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.field-grid>.field{min-width:0}
+.field input,.field select{width:100%;box-sizing:border-box}
+@media (max-width:920px){.field-grid.cols3{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:640px){.field-grid,.field-grid.cols3{grid-template-columns:1fr}}
 .field{display:flex;flex-direction:column;gap:4px}
 .field label{font-size:.78rem;font-weight:600;color:var(--muted)}
@@ -295,12 +301,15 @@ body.f210-free .radio-pill input:disabled + *,body.f210-free .radio-pill:has(inp
    hacía la página interminable. El thead queda fijo mientras se recorre. */
 .recon-table-scroll{overflow-x:auto;overflow-y:auto;max-height:540px;border:1px solid var(--border);border-radius:6px}
 .recon-table-scroll thead th{position:sticky;top:0;background:#f1f5f9;z-index:2;box-shadow:0 1px 0 var(--border)}
-.recon-table{width:100%;border-collapse:collapse;font-size:.78rem;min-width:620px}
-.recon-table td:nth-child(4){min-width:104px}
-.recon-table input.recon-valor{min-width:96px;font-size:.8rem}
-.recon-table .concepto-cell{font-family:'DM Sans',sans-serif!important;font-size:.76rem;color:var(--text);display:block;max-width:180px;line-height:1.35}
-.recon-table select.recon-cedula{max-width:150px;font-size:.74rem}
-.recon-table th{background:var(--pri3);color:var(--pri);font-weight:600;text-align:left;padding:8px;border-bottom:2px solid #B4C6E7;font-size:.7rem;text-transform:uppercase;letter-spacing:.4px;white-space:nowrap;position:sticky;top:0}
+/* Sin min-width fijo: la tabla se acomoda al ancho de la card (doc arreglos 7-jul:
+   "queda fuera del encuadre"). Las celdas de texto envuelven; el scroll horizontal
+   queda solo como red de seguridad en pantallas muy angostas. */
+.recon-table{width:100%;border-collapse:collapse;font-size:.78rem}
+.recon-table td:nth-child(4){min-width:88px}
+.recon-table input.recon-valor{min-width:80px;font-size:.8rem}
+.recon-table .concepto-cell{font-family:'DM Sans',sans-serif!important;font-size:.76rem;color:var(--text);display:block;max-width:200px;line-height:1.35;overflow-wrap:break-word}
+.recon-table select.recon-cedula{min-width:92px;max-width:140px;font-size:.74rem}
+.recon-table th{background:var(--pri3);color:var(--pri);font-weight:600;text-align:left;padding:8px 6px;border-bottom:2px solid #B4C6E7;font-size:.7rem;text-transform:uppercase;letter-spacing:.4px;line-height:1.2;position:sticky;top:0}
 .recon-table td{padding:3px 6px;border-bottom:1px solid var(--border);vertical-align:middle;line-height:1.3}
 .recon-table tbody tr:hover td{background:#f9fafb}
 .recon-table tr.excluida td{opacity:.45;text-decoration:line-through}
@@ -364,7 +373,7 @@ body.f210-free .radio-pill input:disabled + *,body.f210-free .radio-pill:has(inp
 .p210-edit:focus{background:#FFF9C4;box-shadow:inset 0 -2px 0 #f0c000}
 .p210-cr .cc .p210-edit{font-size:9px}
 .recon-table .concepto-cell{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--pri)}
-.recon-table .informante-cell{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.recon-table .informante-cell{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .recon-table select.recon-cedula{padding:3px 5px;font-size:.74rem;border:1px solid var(--border);border-radius:4px;font-family:inherit;width:100%;background:#fff;font-family:'DM Sans',sans-serif}
 .recon-table select.recon-cedula:focus{outline:none;border-color:var(--pri2);box-shadow:0 0 0 2px rgba(46,117,182,.15)}
 .recon-table input.recon-valor{padding:3px 5px;font-size:.76rem;border:1px solid var(--border);border-radius:4px;font-family:'JetBrains Mono',monospace;width:100%;text-align:right;background:#fff}
@@ -482,6 +491,11 @@ body.wsx .f210-tab.active .tab-badge{background:rgba(255,255,255,.22);color:#fff
 /* Globo ROJO: registros de la exógena que el usuario aún no ha entrado a revisar en esa cédula.
    Al abrir la pestaña se marca visitada y el globo vuelve al estilo neutro. */
 body.wsx .f210-tab .tab-badge.pendiente{background:#DC2626;color:#fff;box-shadow:0 0 0 0 rgba(220,38,38,.45);animation:globoPulso 1.6s ease-out 3}
+/* Chip DORADO 💡: oportunidades de ahorro activas en esa cédula (doc arreglos 7-jul:
+   "las sugerencias son ganadoras pero se pierden en la barra") — visible desde el nav. */
+body.wsx .f210-tab .tab-sug{margin-left:auto;font-size:.68rem;font-weight:700;padding:1px 6px;border-radius:99px;background:#FEF3C7;border:1px solid #FDE68A;color:#92400E;line-height:1.3}
+body.wsx .f210-tab .tab-sug ~ .tab-badge{margin-left:4px}
+body.wsx .f210-tab.active .tab-sug{background:#FDE68A;border-color:#FCD34D}
 @keyframes globoPulso{0%{box-shadow:0 0 0 0 rgba(220,38,38,.45)}70%{box-shadow:0 0 0 7px rgba(220,38,38,0)}100%{box-shadow:0 0 0 0 rgba(220,38,38,0)}}
 /* Panel de desglose: qué trajo la exógena a la cédula activa */
 .exo-desglose{background:#F8FBFF;border:1.5px solid #BFDBFE;border-radius:12px;padding:12px 16px;margin-bottom:12px}
@@ -936,15 +950,26 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
           <div class="section-title"><span class="num">6b</span> Declaración del año anterior <span class="hint" style="font-weight:400;color:var(--muted);font-size:.78rem">(activa la comparación patrimonial)</span></div>
           <div style="font-size:.8rem;color:var(--text);margin-bottom:8px"><b>¿Cómo?</b> Sube el 210 del año pasado (PDF del MUISCA, escaneo o foto) con el botón de abajo — la herramienta lee los valores y tú los confirmas. Si no lo tienes, digita los 3 campos clave manualmente.</div>
           <div style="font-size:.78rem;color:var(--muted);margin-bottom:8px">Si tienes los datos del año anterior, las hojas <strong>4 (validaciones)</strong>, <strong>7 (liquidación)</strong> y comparativos del Excel se enriquecen significativamente: aparece la conciliación patrimonial Art. 236-237 ET y el anticipo Art. 807 con opción 2 (promedio).</div>
-          <div style="margin-bottom:10px;padding:8px 10px;border:1px dashed var(--border);border-radius:8px;background:#fafbff">
-            <label for="declPrevFile" class="btn-sec" style="display:inline-block;cursor:pointer;font-size:.8rem">&#128206; Importar el 210 del año anterior (PDF, escaneo o foto)</label>
-            <input id="declPrevFile" type="file" accept="application/pdf,.pdf,image/*,.jpg,.jpeg,.png,.webp" style="display:none">
-            <label for="exoAntFile" class="btn-sec" style="display:inline-block;cursor:pointer;font-size:.8rem;margin-left:6px">&#128202; O la exógena del año anterior (.xlsx)</label>
-            <input id="exoAntFile" type="file" accept=".xlsx" style="display:none">
-            <span style="font-size:.7rem;color:var(--muted);margin-left:6px">Se procesa en tu navegador. Tú confirmas qué monto es cada casilla.</span>
-            <div id="declPrevResultado" style="margin-top:8px"></div>
-            <div id="exoAntResultado" style="margin-top:4px"></div>
+          <div id="declAntDropZone" class="dropzone" tabindex="0" role="button" aria-label="Arrastra la declaración 210 del año anterior (PDF, escaneo o foto) o la exógena del año anterior (.xlsx)" style="padding:22px 16px 18px;margin-bottom:10px;text-align:center">
+            <svg class="dz-art" width="66" height="48" viewBox="0 0 88 64" fill="none" aria-hidden="true">
+              <rect x="3" y="3" width="34" height="44" rx="4" stroke="currentColor" stroke-width="2.2"/>
+              <path d="M9 13h22M9 20h22M9 27h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" opacity=".55"/>
+              <g class="dz-flecha"><path d="M44 25h14m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+              <rect x="52" y="9" width="33" height="46" rx="4" stroke="currentColor" stroke-width="2.2"/>
+              <path d="M52 21h33M52 33h33M52 45h33" stroke="currentColor" stroke-width="1.6" opacity=".45"/>
+            </svg>
+            <strong style="font-size:.88rem">Arrastra la declaración del año anterior</strong>
+            <div style="margin-top:3px;font-size:.76rem;color:var(--muted)">210 en <b>PDF, escaneo o foto</b> · o la <b>exógena AG-1 (.xlsx)</b> · o haz clic para buscarla</div>
+            <div style="margin-top:10px">
+              <label for="declPrevFile" class="btn-sec" onclick="event.stopPropagation()" style="display:inline-block;cursor:pointer;font-size:.78rem">&#128206; 210 anterior (PDF/foto)</label>
+              <label for="exoAntFile" class="btn-sec" onclick="event.stopPropagation()" style="display:inline-block;cursor:pointer;font-size:.78rem;margin-left:6px">&#128202; Exógena AG-1 (.xlsx)</label>
+            </div>
+            <div style="margin-top:6px;font-size:.7rem;color:var(--muted)">Se procesa en tu navegador. Tú confirmas qué monto es cada casilla.</div>
           </div>
+          <input id="declPrevFile" type="file" accept="application/pdf,.pdf,image/*,.jpg,.jpeg,.png,.webp" style="display:none">
+          <input id="exoAntFile" type="file" accept=".xlsx" style="display:none">
+          <div id="declPrevResultado" style="margin-bottom:6px"></div>
+          <div id="exoAntResultado" style="margin-bottom:6px"></div>
           <div class="field-grid cols3">
             <div class="field"><label>Patrimonio bruto AG-1 <span class="hint">(cas. 29 del 210 anterior)</span></label><input id="agAntPatBruto" type="text" oninput="formatNum(this);recalcAGAnterior()" placeholder="0"></div>
             <div class="field"><label>Deudas AG-1 <span class="hint">(cas. 30)</span></label><input id="agAntDeudas" type="text" oninput="formatNum(this);recalcAGAnterior()" placeholder="0"></div>
@@ -952,6 +977,7 @@ body.wsx .cifras-hero .live-row:has(#lvSaldo){padding:12px 18px;background:linea
           </div>
           <div class="field-grid cols3" style="margin-top:8px">
             <div class="field"><label>Impuesto neto de renta AG-1 <span class="hint">(cas. 126 del 210 anterior — audit. y anticipo)</span></label><input id="agAntImpuestoNeto" type="text" oninput="formatNum(this);renderBeneficioAuditoria()" placeholder="0"></div>
+            <div class="field"><label>Ajustes no renta que justifican el aumento <span class="hint">(opc. — reajuste fiscal Art. 70/868, valorización nominal de avalúos, gananciales, capitalizaciones no gravadas: Art. 236-237 ET)</span></label><input id="patAjustesJustifican" type="text" oninput="formatNum(this);renderComparacionPatrimonial()" placeholder="0"></div>
           </div>
           <div style="margin-top:6px;font-size:.72rem;color:var(--muted)">El anticipo (cas. 130) y el saldo a favor (cas. 131) del año anterior se autocompletan solos abajo en "Pagos previos" al leer este PDF — no hace falta digitarlos aquí.</div>
           <div style="margin-top:6px;font-size:.74rem;color:var(--muted);font-style:italic">Si dejas todo en cero, el modo comparativo no se activa y las hojas 4/7 omiten esas secciones con nota explicativa.</div>
@@ -1324,17 +1350,17 @@ if(window.exoLoadingText)exoLoadingText('Cargando el liquidador 210…');
 <script src="shared/pro-banner.js?v=f0acfdc0" defer></script>
 <script src="shared/parametros-renta-pn.js?v=398ff16d" defer></script>
 <script src="shared/calculo210.js?v=bc147554" defer></script>
-<script src="shared/optimizer-210.js?v=e353e2c8" defer></script>
-<script src="shared/advisor-210.js?v=ca2549b0" defer></script>
+<script src="shared/optimizer-210.js?v=1b2d362c" defer></script>
+<script src="shared/advisor-210.js?v=719dbe93" defer></script>
 <script src="shared/cert-parser-210.js?v=bf1e7ff8" defer></script>
 <script src="shared/pdf-lines.js?v=e233a305" defer></script>
 <script src="shared/cert-ui-210.js?v=fe4c4229" defer></script>
 <script src="shared/vencimientos-pn.js?v=99caf5fe" defer></script>
 <script src="shared/beneficio-auditoria.js?v=72c01703" defer></script>
-<script src="shared/reajuste-fiscal.js?v=c4b58391" defer></script>
+<script src="shared/reajuste-fiscal.js?v=e29e4ab8" defer></script>
 <script src="shared/decl-prev-210.js?v=753d9722" defer></script>
 <script src="shared/validaciones210.js?v=257a3ee7" defer></script>
-<script src="shared/parser-exogena-pn.js?v=9d9cc7ea" defer></script>
+<script src="shared/parser-exogena-pn.js?v=6139f61e" defer></script>
 <script src="shared/parser-muisca-consultante.js?v=7a099cfe" defer></script>
 <script src="shared/sugerida-parser-210.js?v=34d26f6a" defer></script>
 <script src="shared/canonicalize-inputs.js?v=5fe6d4a7" defer></script>
@@ -1719,10 +1745,18 @@ function renderComparacionPatrimonial(){
   var R = (ultimoResultado && ultimoResultado.renglones) || {};
   var f = function(n){ return '$' + Math.round(n||0).toLocaleString('es-CO'); };
   var incremento = patLiqHoy - patLiqAnt;
-  // Lo que financia el crecimiento del patrimonio en el año: renta líquida gravable +
-  // rentas exentas y deducciones (sí entran al bolsillo) + ganancia ocasional gravable +
-  // ingresos no constitutivos − impuesto a cargo − retenciones ya pagadas no recuperadas.
-  var rentaDisponible = (R.c97||0) + (R.c92||0) + (R.c103||0) + (R.c107||0) + (R.c115||0) - (R.c129||0);
+  // Lo que financia el crecimiento del patrimonio en el año (Art. 236-237 ET y doctrina):
+  //   renta líquida gravable + rentas exentas y deducciones (sí entran al bolsillo)
+  //   + ganancia ocasional gravable + dividendos no gravados
+  //   + INCRNGO del año (componente inflacionario, aportes obligatorios: son ingresos
+  //     REALES que no tributan pero sí financian patrimonio — antes no se sumaban)
+  //   + ajustes NO renta digitados por el contador (reajuste fiscal Art. 70/868,
+  //     valorización nominal de avalúos, gananciales, capitalizaciones no gravadas)
+  //   − impuesto a cargo.
+  var sub = (ultimoResultado && ultimoResultado.cedulaGeneral && ultimoResultado.cedulaGeneral.subcedulas) || {};
+  var incrngoCG = ['trabajo','honorarios','capital','noLaboral'].reduce(function(s,k){ return s + ((sub[k] && sub[k].incrngo) || 0); }, 0);
+  var ajustesNoRenta = v('patAjustesJustifican');
+  var rentaDisponible = (R.c97||0) + (R.c92||0) + (R.c103||0) + (R.c107||0) + (R.c115||0) + incrngoCG + ajustesNoRenta - (R.c129||0);
   var noJustificado = incremento - rentaDisponible;
   var html = '<div style="border:1px solid var(--border);border-radius:10px;overflow:hidden">'
     + '<div style="background:var(--pri);color:#fff;padding:8px 12px;font-weight:700;font-size:.85rem">⚖️ Comparación patrimonial (Art. 236-239 ET)</div>'
@@ -1730,10 +1764,11 @@ function renderComparacionPatrimonial(){
     + '<div style="display:flex;justify-content:space-between;padding:2px 0"><span>Patrimonio líquido año anterior</span><strong>' + f(patLiqAnt) + '</strong></div>'
     + '<div style="display:flex;justify-content:space-between;padding:2px 0"><span>Patrimonio líquido este año</span><strong>' + f(patLiqHoy) + '</strong></div>'
     + '<div style="display:flex;justify-content:space-between;padding:2px 0;border-top:1px solid #eee;margin-top:3px"><span><strong>Creció</strong></span><strong style="color:' + (incremento>=0?'#1a3c6e':'#059669') + '">' + f(incremento) + '</strong></div>'
-    + '<div style="display:flex;justify-content:space-between;padding:2px 0"><span>Lo que tus ingresos del año justifican</span><strong>' + f(rentaDisponible) + '</strong></div>';
+    + '<div style="display:flex;justify-content:space-between;padding:2px 0"><span>Lo que la renta del año justifica <span style="color:var(--muted);font-size:.72rem">(gravable + exentas + INCRNGO + GO − impuesto)</span></span><strong>' + f(rentaDisponible - ajustesNoRenta) + '</strong></div>'
+    + (ajustesNoRenta > 0 ? '<div style="display:flex;justify-content:space-between;padding:2px 0"><span>+ Ajustes no renta <span style="color:var(--muted);font-size:.72rem">(reajuste fiscal, valorizaciones…)</span></span><strong>' + f(ajustesNoRenta) + '</strong></div>' : '');
   if(incremento > 0 && noJustificado > 1000000){
     html += '<div style="background:#FEE2E2;border-left:4px solid #991B1B;border-radius:6px;padding:8px 10px;margin-top:8px;font-size:.78rem;color:#7F1D1D">'
-      + '<strong>⚠ ' + f(noJustificado) + ' sin justificar.</strong> El patrimonio creció más de lo que la renta declarada permite financiar. La DIAN puede gravar ese exceso como renta (arts. 236-239 ET). Documenta el origen: préstamos recibidos, herencias o donaciones, valorizaciones, gananciales, o ingresos que faltan por declarar.</div>';
+      + '<strong>⚠ ' + f(noJustificado) + ' sin justificar.</strong> El patrimonio creció más de lo que la renta declarada permite financiar. La DIAN puede gravar ese exceso como renta (arts. 236-239 ET). Antes de alarmarte, revisa los aumentos PERMITIDOS que no son renta: reajuste fiscal de activos (Art. 70/868 ET), valorización nominal de avalúos catastrales, herencias/donaciones (van en ganancias ocasionales), gananciales, préstamos recibidos (van en deudas), capitalizaciones no gravadas — digítalos en "Ajustes no renta que justifican el aumento" (arriba) y documenta el soporte de cada uno.</div>';
   } else {
     html += '<div style="background:#ECFDF5;border-left:4px solid #059669;border-radius:6px;padding:8px 10px;margin-top:8px;font-size:.78rem;color:#065F46">'
       + '✓ El crecimiento del patrimonio está respaldado por los ingresos del año. Sin riesgo por comparación patrimonial.</div>';
@@ -1934,7 +1969,10 @@ function procesarArchivoExogena(file){
           setTxtIfEmpty('nombre', nombreNaturalDIAN(rm.metadata.nombre || ''));
           // Año gravable del propio reporte: seleccionarlo solo (evita liquidar
           // un reporte 2024 con parámetros 2025 sin que nadie lo note).
-          var anioRep = (String(rm.metadata.anio || '').match(/20\d{2}/) || [])[0];
+          // Fallback: si el xlsx no trae el año en la fila 4 (variantes del MUISCA),
+          // se toma del nombre del archivo ("reporteExogena2024 - …").
+          var anioRep = (String(rm.metadata.anio || '').match(/20\d{2}/) || [])[0]
+                     || ((String(file.name || '').match(/exogena\D{0,3}(20\d{2})/i) || [])[1]);
           if(anioRep){
             // Guarda PERMANENTE (doc R4, Juan: "¿por qué lo clasifica como AG 2025 si es
             // 2024?"): además de ajustar el radio, el año del reporte queda registrado y
@@ -2497,9 +2535,10 @@ function renderizarTablaReconciliacion(){
     var ciIncr = Math.round(ciBase * pCI.compInflacionarioRendimientos);
     var ciPct = (pCI.compInflacionarioRendimientos*100).toFixed(2).replace('.',',');
     introHtml += '<div style="background:#F0F9FF;border-left:4px solid #0284C7;border-radius:6px;padding:10px 14px;margin:8px 0;font-size:.8rem;color:#0C4A6E;line-height:1.5">' +
-      '💎 <strong>Componente inflacionario:</strong> la exógena trae <strong>$' + ciBase.toLocaleString('es-CO') + '</strong> en rendimientos financieros. ' +
+      '💎 <strong>Componente inflacionario (rentas de capital):</strong> la exógena trae <strong>$' + ciBase.toLocaleString('es-CO') + '</strong> en rendimientos financieros. ' +
       'El <strong>' + ciPct + '%</strong> no constituye renta (Arts. 38-41 ET, % oficial del Ayuda Renta) → INCRNGO sugerido: <strong>$' + ciIncr.toLocaleString('es-CO') + '</strong>.' +
       ' <button class="btn-aplicar" onclick="aplicarCompInflacionario(' + ciIncr + ')">Aplicar a INCRNGO capital c59</button>' +
+      ' <a href="javascript:void(0)" onclick="cambiarTabF210(\'ccapital\')" style="font-size:.76rem;color:#0369A1;text-decoration:underline;white-space:nowrap">resolver en Capital →</a>' +
     '</div>';
   }
   // Asesoría cesantías Art. 206-4: el reporte trae el insumo exacto (ingreso laboral
@@ -2703,8 +2742,12 @@ function _renderCuadreReporte(filas){
       return '<div style="margin-top:3px"><select onchange="if(this.value){reclasificarDesdeDesglose(\'' + n.id + '\', this.value);}" style="font-size:.74rem;padding:2px 6px;border:1px solid #D97706;border-radius:5px;background:#fff;color:#78350F;max-width:300px">' + opts + '</select></div>';
     }
     function itemHtml(n, conAccion){
-      return '<li style="margin-bottom:7px"><strong style="color:#0f172a">' + $(n.valor) + '</strong> <span style="color:#1e293b">— ' + escHtml((n.descripcion||'(sin detalle)').slice(0,60)) +
-             (n.informante ? ' · ' + escHtml(n.informante.slice(0,30)) : '') + '</span>' +
+      // Texto completo, sin recortes a media palabra (doc arreglos 7-jul: "nversiones…dura").
+      // Solo se capa a 140 chars como red de seguridad, con el texto íntegro en el title.
+      var desc = n.descripcion || '(sin detalle)';
+      var descVis = desc.length > 140 ? desc.slice(0,137) + '…' : desc;
+      return '<li style="margin-bottom:7px" title="' + escAttr(desc + (n.informante ? ' · ' + n.informante : '')) + '"><strong style="color:#0f172a">' + $(n.valor) + '</strong> <span style="color:#1e293b">— ' + escHtml(descVis) +
+             (n.informante ? ' · ' + escHtml(n.informante) : '') + '</span>' +
              '<br><span style="color:#475569">' + escHtml(n.motivo) + '</span>' +
              (conAccion ? accionesDecision(n) : '') + '</li>';
     }
@@ -2791,7 +2834,10 @@ function _renderChecklistCertificados(filas){
       '</div>';
     }).join('') +
     '</div>';
-  return '<details class="checklist-cert" id="checklistCerts">' +
+  // open persistente (doc arreglos 7-jul: "ese checklist no muestra nada"): cada
+  // recalcular re-renderiza el bloque y un <details> sin estado se cerraba solo
+  // justo después del clic — mismo patrón que window.__reconTablaAbierta.
+  return '<details class="checklist-cert" id="checklistCerts"' + (window.__checklistCertsAbierto ? ' open' : '') + ' ontoggle="window.__checklistCertsAbierto=this.open">' +
     '<summary>📋 Checklist de certificados — qué cruzar contra el original (' + (an._gruposCount || an.porRegistro.length) + ' certificado(s) · ' + an.faltantesSistemicos.length + ' posibles faltantes)</summary>' +
     '<div class="cc-body">' +
       '<div class="cc-intro"><strong>El reporte exógena es punto de partida, no la verdad.</strong>' +
@@ -3051,6 +3097,18 @@ function aplicarReconciliacionAlWizard(silencioso, sinRender){
   var elC32 = document.getElementById('trabIngBruto');
   if(elC32 && compo['trabIngBruto']) elC32.title = 'Suma de la exógena:\n' + compo['trabIngBruto'].join('\n');
   if(typeof sincTrabIngBruto === 'function') sincTrabIngBruto(); // c32 = c355 + c356
+  // El INCRNGO del daño emergente (Art. 45) sobrevive a CUALQUIER re-run del wizard
+  // (doc R8): el volcado de arriba resetea nlIncrngo, así que lo re-sumamos aquí.
+  if(reconciliacionEstado.danoEmergenteAplicado){
+    var danoW = 0;
+    reconciliacionEstado.filas.forEach(function(fW){
+      if(!fW.excluida && /da[ñn]o emergente/i.test((fW.concepto || '') + ' ' + (fW.descripcion || ''))) danoW += (fW.valor || 0);
+    });
+    if(danoW > 0){
+      var elNl = document.getElementById('nlIncrngo');
+      if(elNl){ var actNl = parseInt((elNl.value || '').replace(/[^\d]/g, ''), 10) || 0; elNl.value = (actNl + Math.round(danoW)).toLocaleString('es-CO'); }
+    }
+  }
   // Retenciones — sumar al input retenciones (no reemplazar si el contador puso algo distinto)
   if(retencionTotal > 0){
     var elR = document.getElementById('retenciones');
@@ -3757,7 +3815,10 @@ function agregarBienPatrimonio(){
   var vv = parseInt(String((document.getElementById('nuevoBienValor')||{}).value||'').replace(/[^\d]/g,''),10)||0;
   var esPasivo = ((document.getElementById('nuevoBienTipo')||{}).value === 'pasivo');
   if(!d.trim() || !vv){ if(typeof exoToast!=='undefined') exoToast('Escribe la descripción y el valor del ' + (esPasivo?'pasivo':'activo') + '.', 'warning'); return; }
-  window.__bienesManuales.push({ descripcion: d.trim(), valor: vv, pasivo: esPasivo });
+  // Categoría del activo (doc arreglos 7-jul): el bien manual suma en su subgrupo
+  // de la relación (Vehículo, Bien raíz, …), no en un cajón aparte.
+  var cat = esPasivo ? null : (((document.getElementById('nuevoBienCat')||{}).value) || 'Otro activo');
+  window.__bienesManuales.push({ descripcion: d.trim(), valor: vv, pasivo: esPasivo, tipo: cat });
   var el = document.getElementById(esPasivo ? 'patDeudas' : 'patBruto');
   if(el){ var act = parseInt((el.value||'').replace(/[^\d]/g,''),10)||0; el.value = (act + vv).toLocaleString('es-CO'); }
   if(typeof recalcular === 'function') recalcular();
@@ -3881,15 +3942,25 @@ function renderBienesPatrimonio(bienes, deudas){
     '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;padding:10px 12px;background:#F8FAFC;border:1px dashed var(--border);border-radius:8px;margin-top:8px">' +
       '<div style="flex:2;min-width:160px"><label style="display:block;font-size:.7rem;color:var(--muted);margin-bottom:2px">Descripción</label><input id="nuevoBienDesc" type="text" class="no-mono" placeholder="ej. Apartamento Cra 7 # 45-12" style="width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:.8rem;text-align:left"></div>' +
       '<div style="flex:1;min-width:110px"><label style="display:block;font-size:.7rem;color:var(--muted);margin-bottom:2px">Valor a 31-dic</label><input id="nuevoBienValor" type="text" inputmode="numeric" oninput="formatNum(this)" placeholder="0" style="width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:.8rem;text-align:right"></div>' +
-      '<div><label style="display:block;font-size:.7rem;color:var(--muted);margin-bottom:2px">Tipo</label><select id="nuevoBienTipo" style="padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:.8rem"><option value="activo">Activo (c29)</option><option value="pasivo">Pasivo / deuda (c30)</option></select></div>' +
+      '<div><label style="display:block;font-size:.7rem;color:var(--muted);margin-bottom:2px">Tipo</label><select id="nuevoBienTipo" onchange="var c=document.getElementById(\'nuevoBienCat\');if(c)c.disabled=(this.value===\'pasivo\')" style="padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:.8rem"><option value="activo">Activo (c29)</option><option value="pasivo">Pasivo / deuda (c30)</option></select></div>' +
+      // Categoría del activo (doc arreglos 7-jul: "si quiere agregar un vehículo,
+      // que sume a donde pertenezca") — el bien manual entra a su subgrupo.
+      '<div><label style="display:block;font-size:.7rem;color:var(--muted);margin-bottom:2px">Categoría</label><select id="nuevoBienCat" style="padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:.8rem">' +
+        '<option value="Bien raíz">🏠 Bien raíz</option><option value="Vehículo">🚗 Vehículo</option><option value="Cuenta bancaria">💳 Cuenta bancaria</option><option value="CDT">🏦 CDT</option><option value="Inversión / acciones">📈 Inversión / acciones</option><option value="Cuenta por cobrar">📄 Cuenta por cobrar</option><option value="Otro activo" selected>📦 Otro activo</option>' +
+      '</select></div>' +
       '<button class="btn-aplicar" onclick="agregarBienPatrimonio()" style="white-space:nowrap">+ Agregar</button>' +
     '</div>';
   var visibles = _bienesPatrimonio.map(function(b,i){ return { b:b, key:_bienKey(b,i), i:i }; })
     .filter(function(x){ return !window.__bienesQuitados[x.key]; });
   if(!visibles.length && !manuales.length && !_deudasPatrimonio.length){ box.innerHTML = formAdd; return; }
-  var valorDe = function(x){ return (window.__bienesEdits[x.key] != null) ? window.__bienesEdits[x.key] : (x.b.valor||0); };
+  var valorDe = function(x){ return x.manual ? (x.b.valor||0) : ((window.__bienesEdits[x.key] != null) ? window.__bienesEdits[x.key] : (x.b.valor||0)); };
   var grupos = {};
   visibles.forEach(function(x){ (grupos[x.b.tipo] = grupos[x.b.tipo] || []).push(x); });
+  // Manuales CON categoría: suman dentro de su subgrupo (doc arreglos 7-jul). Los
+  // viejos sin categoría (o pasivos) siguen en "Agregados a mano".
+  manuales.forEach(function(b, i){
+    if(!b.pasivo && b.tipo) (grupos[b.tipo] = grupos[b.tipo] || []).push({ manual:true, mi:i, b:b });
+  });
   var total = visibles.reduce(function(a,x){ return a + valorDe(x); }, 0) +
               manuales.reduce(function(a,b){ return a + (b.pasivo ? 0 : b.valor||0); }, 0);
   var totalAnt = 0;
@@ -3901,12 +3972,33 @@ function renderBienesPatrimonio(bienes, deudas){
   // Año ANTERIOR a la IZQUIERDA del actual (doc R5) y sin placeholder repetido —
   // el encabezado de columna ya lo dice.
   var encabezado = '<div style="display:flex;justify-content:flex-end;gap:8px;padding:4px 40px 2px 12px;font-size:.66rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.4px"><span style="width:104px;text-align:right">31-dic ' + anioAnt + ' (opc.)</span><span style="width:104px;text-align:right">31-dic ' + anioAct + '</span></div>';
+  // Reajuste fiscal Art. 70/868 ET (doc arreglos 7-jul): si el bien tiene valor AG-1,
+  // un clic lo trae a 31-dic del año actual con el % oficial del decreto. Solo para
+  // activos fijos (bienes raíces, vehículos, otros) — no cuentas/CDT/inversiones líquidas.
+  var pctReaj = (window.reajusteFiscal && reajusteFiscal.porcentaje(anioAct)) || null;
+  var REAJUSTABLE = { 'Vehículo':1, 'Bien raíz':1, 'Otro activo':1 };
   function filaBien(x){
     var b = x.b;
     var full = escAttr((b.descripcion||'') + (b.informante ? ' · ' + b.informante : ''));
+    if(x.manual){
+      // Bien agregado a mano dentro de su categoría: valor fijo + quitar (ajusta c29)
+      return '<div style="padding:4px 12px 4px 26px;font-size:.78rem;display:flex;align-items:center;gap:8px;border-bottom:1px solid #f3f3f3" title="' + full + ' (agregado a mano)">'
+        + '<span style="flex:1;min-width:120px">' + escHtml((b.descripcion||'').slice(0,55)) + ' <span style="color:#7C3AED;font-size:.68rem;font-weight:700">✍️ manual</span></span>'
+        + '<span style="width:104px"></span>'
+        + '<span style="font-family:JetBrains Mono,monospace;width:104px;text-align:right">' + $(b.valor) + '</span>'
+        + '<button onclick="quitarBienManual(' + x.mi + ')" title="Quitar este bien y restarlo del patrimonio bruto (c29)" style="border:none;background:none;color:#DC2626;cursor:pointer;font-weight:700">✕</button></div>';
+    }
     var vAnt = window.__bienesValoresAnt[x.key];
+    var btnReaj = '';
+    if(vAnt > 0 && pctReaj && REAJUSTABLE[b.tipo]){
+      var reaj = Math.round(vAnt * (1 + pctReaj/100));
+      btnReaj = '<button onclick="cambiarValorBien(\'' + x.key.replace(/'/g,'') + '\',' + x.i + ',\'' + reaj + '\')" '
+        + 'title="Reajuste fiscal Art. 70/868 ET (opcional): +' + String(pctReaj).replace('.',',') + '% oficial AG ' + anioAct + ' sobre el valor AG-1 → deja el valor a 31-dic en ' + $(reaj) + '" '
+        + 'style="border:1px solid #A5B4FC;background:#EEF2FF;color:#3730A3;border-radius:6px;font-size:.66rem;font-weight:700;padding:2px 6px;cursor:pointer;white-space:nowrap">↗ +' + String(pctReaj).replace('.',',') + '%</button>';
+    }
     return '<div style="padding:4px 12px 4px 26px;font-size:.78rem;display:flex;align-items:center;gap:8px;border-bottom:1px solid #f3f3f3" title="' + full + '">'
       + '<span style="flex:1;min-width:120px">' + escHtml((b.descripcion||'').slice(0,55)) + (b.informante ? '<span style="color:var(--muted);font-size:.72rem"> · ' + escHtml((b.informante||'').slice(0,30)) + '</span>' : '') + '</span>'
+      + btnReaj
       + '<input value="' + (vAnt ? $(vAnt) : '') + '" inputmode="numeric" onchange="cambiarValorAntBien(\'' + x.key.replace(/'/g,'') + '\', this.value)" title="Valor de este bien a 31-dic del año ANTERIOR (para la comparación patrimonial)" ' + INPANT + '>'
       + '<input value="' + $(valorDe(x)) + '" inputmode="numeric" onchange="cambiarValorBien(\'' + x.key.replace(/'/g,'') + '\',' + x.i + ', this.value)" title="Corrige el valor a 31-dic — ajusta c29 y recalcula" ' + INP + '>'
       + '<button onclick="quitarBienPatrimonio(\'' + x.key.replace(/'/g,'') + '\',' + Math.round(valorDe(x)) + ')" title="Quitar este bien y restarlo del patrimonio bruto (c29)" style="border:none;background:none;color:#DC2626;cursor:pointer;font-weight:700">✕</button></div>';
@@ -3933,13 +4025,18 @@ function renderBienesPatrimonio(bienes, deudas){
             + '<input value="' + $(vD) + '" inputmode="numeric" onchange="cambiarValorDeuda(' + i + ', this.value)" title="Corrige el saldo de la deuda a 31-dic — ajusta c30 y recalcula" ' + INP + '></div>';
         }).join('') + '</details>';
   }
-  if(manuales.length){
+  // Solo los manuales SIN categoría (borradores viejos) o pasivos manuales quedan en
+  // este cajón — los activos con categoría ya se pintaron dentro de su subgrupo.
+  var manualesSueltos = [];
+  manuales.forEach(function(b, i){ if(b.pasivo || !b.tipo) manualesSueltos.push({ b:b, i:i }); });
+  if(manualesSueltos.length){
     html += '<div style="padding:5px 12px;background:#fafbff;font-size:.76rem;font-weight:700;color:var(--muted)">✍️ Agregados a mano</div>';
-    manuales.forEach(function(b, i){
+    manualesSueltos.forEach(function(m){
+      var b = m.b;
       html += '<div style="padding:4px 12px 4px 26px;font-size:.78rem;display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #f3f3f3" title="' + escAttr(b.descripcion) + '">'
         + '<span style="flex:1">' + escHtml(b.descripcion.slice(0,55)) + (b.pasivo ? ' <span style="color:#B45309;font-size:.7rem;font-weight:700">DEUDA c30</span>' : '') + '</span>'
         + '<span style="font-family:JetBrains Mono,monospace;white-space:nowrap">' + $(b.valor) + '</span>'
-        + '<button onclick="quitarBienManual(' + i + ')" title="Quitar" style="border:none;background:none;color:#DC2626;cursor:pointer;font-weight:700">✕</button></div>';
+        + '<button onclick="quitarBienManual(' + m.i + ')" title="Quitar" style="border:none;background:none;color:#DC2626;cursor:pointer;font-weight:700">✕</button></div>';
     });
   }
   // Suma del año anterior → un clic la lleva al patrimonio bruto AG-1 (comparación patrimonial)
@@ -3991,6 +4088,32 @@ function _tipHtml(t){
       '</span></div>' +
     '<span style="color:#475569">' + t.detalle + '</span>' + accion + '</div>';
 }
+/* Chips 💡 por cédula en el nav (doc arreglos 7-jul): las oportunidades de ahorro
+   "se pierden en la barra lateral" — el chip dorado en la pestaña lleva al contador
+   a la cédula donde está el detalle y el botón de aplicar. */
+function renderSugerenciasTabs(tips){
+  var por = {};
+  (tips || []).forEach(function(t){
+    if(window.__sugDescartadas && window.__sugDescartadas[claveSugerencia(t)]) return;
+    var c = t.cedula || 'all';
+    if(c === 'all') return;
+    por[c] = (por[c] || 0) + 1;
+  });
+  document.querySelectorAll('.f210-tab').forEach(function(btn){
+    var tab = btn.getAttribute('data-tab');
+    var el = btn.querySelector('.tab-sug');
+    var n = por[tab] || 0;
+    if(n > 0){
+      if(!el){
+        el = document.createElement('span');
+        el.className = 'tab-sug';
+        btn.insertBefore(el, btn.querySelector('.tab-badge'));
+      }
+      el.textContent = '💡' + (n > 1 ? n : '');
+      el.title = n + ' oportunidad(es) de ahorro detectada(s) en esta cédula — entra a verla(s)';
+    } else if(el){ el.remove(); }
+  });
+}
 function renderSugerenciasCedula(ctx){
   var box = document.getElementById('sugCedulaGeneral');
   if(!box || !ultimoResultado) { if(box) box.innerHTML=''; return; }
@@ -3998,7 +4121,9 @@ function renderSugerenciasCedula(ctx){
   var tips = [];
   if(window.advisor210){ try { tips = advisor210.tips(ultimoResultado, ctx.estado, ctx.year) || []; } catch(e){ tips = []; } }
   renderSugerenciasCaso(tips); // panel consolidado en Punto de partida (doc R3)
+  try{ renderSugerenciasTabs(tips); }catch(_){}  // chips 💡 en el nav (doc arreglos 7-jul)
   try{ renderCompInflCapital(); }catch(_){}  // sugerencia 55,43% dentro de la cédula capital (doc R3)
+  try{ injectOrigenIcons(); }catch(_){}      // Σ "qué suma esta casilla" en el asistente (doc arreglos 7-jul)
   try{ renderAlertaCostoGO(); }catch(_){}    // alerta grande GO sin costo fiscal (doc R3)
   try{ renderAnioMismatch(); }catch(_){}     // año del reporte ≠ año liquidado (doc R4)
   try{ renderAvisoResidencia(); }catch(_){}  // residente/contabilidad (auditoría 6-jul)
@@ -4060,23 +4185,41 @@ function autoAplicarReglasInformativos(){
   var enBienes = {}, enDeudas = {};
   (res.bienes || []).forEach(function(b){ enBienes[clave(b.descripcion, b.informante)] = 1; });
   (res.deudas || []).forEach(function(d){ enDeudas[clave(d.descripcion, d.informante)] = 1; });
-  var nAuto = 0;
+  var nAuto = 0, huboRetencion = false;
   (reconciliacionEstado.filas || []).forEach(function(f){
-    if(f.excluida || f.aplicadoA) return;
+    if(f.excluida || f.aplicadoA || f.autoResuelto) return;
     if(f.cedulaFinal && f.cedulaFinal !== 'informativo') return;
     var t = norm((f.descripcion || f.concepto || '') + ' ' + (f.usoDIANSugerido || ''));
     var k = clave(f.descripcion || f.concepto, f.informante);
+    // 1) Cosas que NO van a ninguna casilla y NO requieren decisión (doc R8, Juan):
+    //    · "Valor ingreso laboral promedio" = insumo de la escala de cesantías (Art. 206-4),
+    //      ya lo usa la asesoría; NO es un ingreso adicional, no se reclasifica.
+    //    · Compras/adquisiciones por comisionista o notaría (que NO son la venta enajenante)
+    //      son movimientos: solo cuentan si quedaron como SALDO en el patrimonio (ya prellenado).
+    if(/ingreso laboral promedio|promedio de los ultimos/.test(t)){
+      f.cedulaFinal = 'informativo'; f.cedulaFinalSource = 'auto'; f.autoResuelto = 'insumo_cesantias'; nAuto++; return;
+    }
+    if(/compra a traves de comisionista|compra.*comisionista|adquisicion de acciones|compra de (activos|acciones)/.test(t) &&
+       !/venta|enajenant/.test(t)){
+      f.cedulaFinal = 'informativo'; f.cedulaFinalSource = 'auto'; f.autoResuelto = 'movimiento'; nAuto++; return;
+    }
+    // 2) Destino OBVIO a una casilla única — se aplica solo:
     var destino = null, yaIncluido = false;
     if(enBienes[k]){ destino = '29'; yaIncluido = true; }
     else if(enDeudas[k]){ destino = '30'; yaIncluido = true; }
     else if(/prestamo|credito (de )?consumo|credito hipotec/.test(t)) destino = '30';
     else if(/ahorro voluntario.*saldo|saldo final|capital socio|aporte.*derecho social|valor total de la inversion/.test(t)) destino = '29';
+    else if(/rte\s*fte|rtefte|retencion.*(fuente|practicad|pagos|rentas de trabajo)|^retenciones?\b/.test(t)) destino = '132';
     if(!destino) return;
     f.cedulaFinal = 'informativo';
     f.cedulaFinalSource = 'auto';
     f.aplicadoA = destino;
     f.aplicadoYaIncluido = yaIncluido;
-    if(!yaIncluido){
+    if(destino === '132'){
+      // La retención (casilla 132) va a un solo renglón: la suma la hace el wizard
+      // (retencionTotal incluye f.aplicadoA==='132'). Marcar y re-correr al final.
+      huboRetencion = true;
+    } else if(!yaIncluido){
       var elP = document.getElementById(destino === '29' ? 'patBruto' : 'patDeudas');
       if(elP){
         var actP = parseInt((elP.value || '').replace(/[^\d]/g, ''), 10) || 0;
@@ -4085,6 +4228,8 @@ function autoAplicarReglasInformativos(){
     }
     nAuto++;
   });
+  // Recalcular la retención c132 sumando las RteFte auto-aplicadas
+  if(huboRetencion && typeof aplicarReconciliacionAlWizard === 'function') aplicarReconciliacionAlWizard(true, true);
   return nAuto;
 }
 /* Cesantías escondidas en "prestaciones sociales" (doc R6, Juan: "las cesantías e
@@ -4265,10 +4410,21 @@ function renderBeneficioAuditoria(ctx){
   var year=(ctx&&ctx.year)||getYear();
   var uvtBase; try{ uvtBase=paramsRentaPN.getParams(year-1).uvt; }catch(e){ uvtBase=paramsRentaPN.getParams(year).uvt; }
   var r=beneficioAuditoria.evaluar(c126, ant, uvtBase);
-  var color = r.aplica ? 'var(--green2)' : (r.evaluable ? 'var(--amber)' : 'var(--muted)');
+  // --green (texto legible), NO --green2 (es un verde de FONDO #ddf6ec: sobre la
+  // tarjeta blanca el mensaje quedaba invisible — doc arreglos 7-jul).
+  var color = r.aplica ? 'var(--green)' : (r.evaluable ? '#92400E' : 'var(--muted)');
   var icono = r.aplica ? '&#10003;' : (r.evaluable ? '&#9888;' : '&#8505;');
   var extra = '';
-  if(r.aplica) extra = '<div style="margin-top:6px;padding:7px 9px;background:#fff;border-radius:8px;text-align:center;font-weight:700;color:var(--green)">Firmeza en '+r.meses+' meses</div>';
+  if(r.aplica){
+    extra = '<div style="margin-top:6px;padding:7px 9px;background:#ECFDF5;border-radius:8px;text-align:center;font-weight:700;color:var(--green)">Firmeza en '+r.meses+' meses</div>';
+    // En vivo: si ya tiene 12 meses, cuánto impuesto neto adicional lo sube a 6 meses.
+    if(r.meses===12 && ant>0){
+      var meta6=Math.ceil(ant*(1+beneficioAuditoria.PCT_6_MESES));
+      if(meta6>c126) extra += '<div style="margin-top:5px;font-size:.74rem;color:var(--muted)">Para firmeza de <b>6 meses</b> el impuesto neto debe llegar a <b>$'+meta6.toLocaleString('es-CO')+'</b> — le faltan $'+(meta6-c126).toLocaleString('es-CO')+'.</div>';
+    }
+  } else if(r.evaluable && r.baseSuficiente && r.faltaParaIncremento>0){
+    extra = '<div style="margin-top:5px;font-size:.74rem;color:#92400E">Le faltan <b>$'+r.faltaParaIncremento.toLocaleString('es-CO')+'</b> de impuesto neto para el beneficio de 12 meses.</div>';
+  }
   box.innerHTML = '<strong style="color:'+color+'">'+icono+' '+r.mensaje+'</strong>'+extra;
   card.style.display='';
 }
@@ -4362,6 +4518,14 @@ function renderOptimizador(ctx){
     + '<span class="num">' + fCOP(o.actual.c129) + '</span> a <span class="num">' + fCOP(o.optimo.impuesto) + '</span>.'
     + '<div style="margin-top:6px;padding:7px 9px;background:#fff;border-radius:8px;text-align:center">'
     +   'Ahorro estimado en renta: <span class="num" style="color:var(--green);font-weight:700;font-size:1.05rem">' + fCOP(o.ahorro) + '</span>'
+    + '</div>'
+    // Coherencia con el Diagnóstico de riesgos (doc arreglos 7-jul): el aporte sugerido
+    // ya viene topado por el MENOR entre 30%/3.800 UVT (Arts. 126-1/126-4) y el cupo
+    // remanente del 40%/1.340 UVT (Art. 336) — se muestra cuál límite está mandando.
+    + '<div style="margin-top:6px;font-size:.7rem;color:var(--muted);line-height:1.45">Respeta los límites: '
+    + (o.limitadoPor === 'tope336'
+        ? 'cupo restante del tope conjunto 40% / 1.340 UVT (Art. 336): <b>' + fCOP(o.margen336) + '</b> — es lo que manda aquí (el tope AFC 30%/3.800 UVT da ' + fCOP(o.afcMax) + ').'
+        : 'tope AFC/FPV 30% del ingreso / 3.800 UVT (Arts. 126-1/126-4): <b>' + fCOP(o.afcMax) + '</b>' + (isFinite(o.margen336) && o.margen336 > 0 ? ' — dentro del cupo restante del Art. 336 (' + fCOP(o.margen336) + ')' : '') + '.')
     + '</div>';
   // Simulador "¿qué pasa si?" sobre la curva aporte → impuesto (la curva ya la
   // devuelve optimizador210.analizar; aquí solo se visualiza)
@@ -4480,6 +4644,29 @@ function procesarDeclAnteriorPDF(file){
 }
 // El PDF del año anterior se lee con el parser posicional (robusto, autollena todo).
 (function(){ var inp = document.getElementById('declPrevFile'); if(inp) inp.addEventListener('change', function(){ if(inp.files && inp.files[0]) procesarDeclAnteriorPDF(inp.files[0]); }); })();
+// Dropzone 6b (doc arreglos 7-jul): arrastre único para el 210 AG-1 (PDF/foto) o la
+// exógena AG-1 (.xlsx) — enruta por extensión. El clic abre el picker del 210 (el caso
+// más común); los dos botones internos siguen abriendo cada picker específico.
+(function(){
+  var dz = document.getElementById('declAntDropZone');
+  if(!dz) return;
+  function rutear(file){
+    if(!file) return;
+    if(/\.xlsx?$/i.test(file.name)){
+      if(typeof procesarExogenaAnterior === 'function') procesarExogenaAnterior(file);
+    } else {
+      procesarDeclAnteriorPDF(file);
+    }
+  }
+  dz.addEventListener('click', function(){ var inp = document.getElementById('declPrevFile'); if(inp) inp.click(); });
+  dz.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); var inp = document.getElementById('declPrevFile'); if(inp) inp.click(); } });
+  ['dragenter','dragover'].forEach(function(ev){ dz.addEventListener(ev, function(e){ e.preventDefault(); e.stopPropagation(); dz.classList.add('dragover'); }); });
+  ['dragleave','dragend'].forEach(function(ev){ dz.addEventListener(ev, function(e){ e.preventDefault(); e.stopPropagation(); dz.classList.remove('dragover'); }); });
+  dz.addEventListener('drop', function(e){
+    e.preventDefault(); e.stopPropagation(); dz.classList.remove('dragover');
+    if(e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) rutear(e.dataTransfer.files[0]);
+  });
+})();
 function setText(id, txt){
   var el = document.getElementById(id);
   if(el) el.textContent = txt;
@@ -4786,8 +4973,8 @@ function guardarBorrador(silencioso){
     'dedSalud','depArt387Num','dedVivienda','dedViviendaImputarA',
     'dedAvcAfc','dedAvcAfcImputarA','depArt336Num','ded1PctFE','dedVehElec',
     'patBruto','patDeudas','patLiqAnt','prevDecl',
-    // Datos comparativos AG-1 (solo los 3 con uso real: conciliación patrimonial + beneficio auditoría/anticipo)
-    'agAntPatBruto','agAntDeudas','agAntImpuestoNeto'
+    // Datos comparativos AG-1 (conciliación patrimonial + beneficio auditoría/anticipo)
+    'agAntPatBruto','agAntDeudas','agAntImpuestoNeto','patAjustesJustifican'
   ];
   var data = {};
   ids.forEach(function(id){ var el=document.getElementById(id); if(el) data[id]=el.value; });
@@ -4917,7 +5104,14 @@ function restaurarBorrador(){
     Object.keys(data).forEach(function(k){
       if(k === 'year'){
         var rad = document.querySelector('input[name="year"][value="'+data.year+'"]');
-        if(rad){ rad.checked=true; rad.dispatchEvent(new Event('change')); }
+        // Sincronizar también la clase .active de las pastillas: sin esto el motor
+        // quedaba en el año restaurado pero la pastilla oscura seguía siendo la otra
+        // — parecía que "no detectaba el año" (doc arreglos 7-jul).
+        if(rad){
+          rad.checked=true;
+          document.querySelectorAll('.radio-pill').forEach(function(p){ var i = p.querySelector('input[name="year"]'); if(i) p.classList.toggle('active', i.checked); });
+          rad.dispatchEvent(new Event('change'));
+        }
       } else if(k === 'honModo'){
         var rad = document.querySelector('input[name="honModo"][value="'+data.honModo+'"]');
         if(rad){ rad.checked=true; rad.dispatchEvent(new Event('change')); }
@@ -4996,6 +5190,9 @@ function restaurarBorrador(){
       }catch(_){}
     }
     if(migrado && typeof exoToast !== 'undefined') exoToast('Borrador migrado a formato multi-cédula', 'info');
+    // La divergencia año-reporte vs año-liquidado debe verse desde el arranque (el
+    // recalcular del loop pudo correr ANTES de que _anioReporte quedara restaurado).
+    try{ renderAnioMismatch(); }catch(_){}
   } catch(e){}
 }
 /* ── EXCEL PAPEL DE TRABAJO (8 hojas) ──
@@ -5581,6 +5778,38 @@ var CASILLA_ORIGEN = {
 };
 // Devuelve {total, filas:[{valor, desc, informante}]} de la reconciliación para una casilla.
 function getOrigenCasilla(cas){
+  // Patrimonio (29/30): el desglose sale de la relación de bienes/deudas, con las
+  // ediciones y exclusiones del contador aplicadas (doc arreglos 7-jul: "si me paro
+  // en la casilla no muestra lo que está sumando").
+  if(cas === 29 || cas === 30){
+    var items = [];
+    if(cas === 29){
+      (_bienesPatrimonio || []).forEach(function(b, i){
+        var k = _bienKey(b, i);
+        if(window.__bienesQuitados[k]) return;
+        var vb = (window.__bienesEdits[k] != null) ? window.__bienesEdits[k] : (b.valor || 0);
+        if(vb > 0) items.push({ valor: vb, descripcion: b.descripcion, informante: b.informante, nit: b.nit });
+      });
+      (window.__bienesManuales || []).forEach(function(b){ if(!b.pasivo && (b.valor||0) > 0) items.push({ valor: b.valor, descripcion: (b.descripcion||'') + ' (agregado a mano)' }); });
+    } else {
+      (_deudasPatrimonio || []).forEach(function(d, i){
+        var kd = 'D' + i + '|' + Math.round(d.valor || 0);
+        var vd = (window.__bienesEdits[kd] != null) ? window.__bienesEdits[kd] : (d.valor || 0);
+        if(vd > 0) items.push({ valor: vd, descripcion: d.descripcion, informante: d.informante, nit: d.nit });
+      });
+      (window.__bienesManuales || []).forEach(function(b){ if(b.pasivo && (b.valor||0) > 0) items.push({ valor: b.valor, descripcion: (b.descripcion||'') + ' (agregado a mano)' }); });
+    }
+    if(!items.length) return null;
+    return { total: items.reduce(function(a,f){ return a + f.valor; }, 0), filas: items };
+  }
+  // Retenciones (132): suma las retenciones informadas por registro.
+  if(cas === 132){
+    if(!window.reconciliacionEstado || !reconciliacionEstado.filas) return null;
+    var conRet = reconciliacionEstado.filas.filter(function(f){ return !f.excluida && (f.retencion || 0) > 0; })
+      .map(function(f){ return { valor: f.retencion, descripcion: 'Retención · ' + (f.descripcion || f.concepto || ''), informante: f.informante, nit: f.nit }; });
+    if(!conRet.length) return null;
+    return { total: conRet.reduce(function(a,f){ return a + f.valor; }, 0), filas: conRet };
+  }
   var ceds = CASILLA_ORIGEN[cas];
   if(!ceds || !window.reconciliacionEstado || !reconciliacionEstado.filas) return null;
   var filas = reconciliacionEstado.filas.filter(function(f){
@@ -5602,11 +5831,48 @@ function mostrarOrigenCasilla(cas){
       + '</div><div class="ov">' + $(f.valor) + '</div></div>';
   }).join('');
   rows += '<div class="origen-row origen-total"><div class="od">Total casilla ' + cas + ' (' + o.filas.length + ' concepto' + (o.filas.length>1?'s':'') + ')</div><div class="ov">' + $(o.total) + '</div></div>';
+  // Si el contador sobreescribió el valor a mano, el detalle ya no explica el total
+  // (doc arreglos 7-jul: "si la persona lo modifica manualmente, no daría el detalle").
+  try{
+    var wizId = CASILLA_INPUT_210[cas];
+    if(wizId){
+      var elW = document.getElementById(wizId);
+      var actualW = elW ? (parseInt((elW.value||'').replace(/[^\d]/g,''),10) || 0) : 0;
+      if(actualW && Math.abs(actualW - o.total) > 1000){
+        rows += '<div style="margin-top:8px;padding:8px 10px;background:#FFFBEB;border-left:3px solid #D97706;border-radius:6px;font-size:.76rem;color:#78350F">⚠ El valor actual de la casilla (' + $(actualW) + ') difiere de lo que trajo la exógena (' + $(o.total) + '): fue modificado a mano o incluye conceptos agregados — este detalle ya no explica el valor completo.</div>';
+      }
+    }
+  }catch(_){}
   document.getElementById('origenBody').innerHTML = rows;
   document.getElementById('origenModal').classList.add('show');
   if(typeof gtag !== 'undefined') gtag('event','f210_pro_origen_casilla', { casilla: cas });
 }
 function cerrarOrigen(){ document.getElementById('origenModal').classList.remove('show'); }
+/* Icono Σ "qué suma esta casilla" TAMBIÉN en los inputs del asistente (doc arreglos
+   7-jul) — mismo modal de la réplica 210. Idempotente: se refresca en cada recálculo
+   (el desglose aparece solo cuando hay exógena que lo respalde). */
+var ORIGEN_WIZ = { 29:'patBruto', 30:'patDeudas', 32:'trabIngBruto', 33:'trabIncrngo', 43:'honIngBruto', 58:'capIngBruto', 74:'nlIngBruto', 76:'nlIncrngo', 99:'pensIngBruto', 104:'divAnt2016', 107:'divNoGrav2017', 108:'divGrav2017', 112:'goIngresos', 132:'retenciones' };
+function injectOrigenIcons(){
+  Object.keys(ORIGEN_WIZ).forEach(function(casStr){
+    var cas = parseInt(casStr, 10);
+    var inp = document.getElementById(ORIGEN_WIZ[casStr]);
+    if(!inp) return;
+    var field = inp.closest('.field'); if(!field) return;
+    var lbl = field.querySelector('label'); if(!lbl) return;
+    var btn = lbl.querySelector('.origen-wiz');
+    var tiene = null;
+    try{ tiene = getOrigenCasilla(cas); }catch(_){}
+    if(tiene && !btn){
+      btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'icon-ayuda origen-wiz';
+      btn.textContent = 'Σ';
+      btn.title = 'Qué suma esta casilla — ver el detalle que trajo la exógena';
+      btn.onclick = function(e){ e.preventDefault(); mostrarOrigenCasilla(cas); };
+      lbl.appendChild(btn);
+    } else if(!tiene && btn){ btn.remove(); }
+  });
+}
 // Abre el Liquidador de Sanciones DIAN con las 3 bases del 210 ya cargadas.
 function irASancionExtemporaneidad(){
   var R = (ultimoResultado && ultimoResultado.renglones) || {};

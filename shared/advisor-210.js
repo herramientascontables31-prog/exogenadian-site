@@ -115,14 +115,23 @@
           var haciaTrabajo = alt.cedulaGeneral.honorarios.modo === 'rentasTrabajo';
           var notaTope = '';
           if(haciaTrabajo && vsTope){
+            // Responde la duda tipica del contador (doc arreglos 7-jul): "¿conviene
+            // aun si el cliente PUDIERA imputar costos cercanos al 60%?" — simulado
+            // de verdad con el motor, no aproximado.
             notaTope = vsTope.difTrabajoVsTope > 0
-              ? ' ¿Y si en vez de eso imputara costos al maximo sin marcar la casilla 140 (' + fmt(vsTope.topeSeguro) + ', ~59,9%)? AUN ASI el modo trabajo gana por ~' + fmt(vsTope.difTrabajoVsTope) + ' — esos costos ademas exigirian soporte real de cada uno.'
+              ? ' ¿Y si en vez de cambiar de modo imputara costos al maximo sin marcar la casilla 140 (' + fmt(vsTope.topeSeguro) + ', ~59,9% del ingreso)? Se simulo ese escenario: AUN ASI el modo trabajo gana por ~' + fmt(vsTope.difTrabajoVsTope) + ', y esos costos ademas exigirian soporte real de cada uno.'
               : ' OJO: si el cliente tiene costos REALES soportables cercanos al 60% (' + fmt(vsTope.topeSeguro) + ' sin marcar la 140), imputarlos ganaria por ~' + fmt(-vsTope.difTrabajoVsTope) + ' frente al 25% — evalua cual via tiene soportes de verdad (los costos no se inventan: Art. 87).';
           }
+          var costosHoy = hon.costos || 0;
+          var pctCostosHoy = hon.ingresosBrutos > 0 ? Math.round(costosHoy * 100 / hon.ingresosBrutos) : 0;
           out.push({
-            titulo: 'Honorarios: conviene el modo ' + (haciaTrabajo ? 'rentas de trabajo (25% exento)' : 'no laboral (costos reales)'),
+            titulo: haciaTrabajo
+              ? 'Honorarios: cambiar al modo rentas de trabajo ahorra ~' + fmt(difModo)
+              : 'Honorarios: volver al modo no laboral (costos reales) ahorra ~' + fmt(difModo),
             detalle: haciaTrabajo
-              ? 'NO se reparte nada entre casillas: se cambia el TRATAMIENTO de los ' + fmt(hon.ingresosBrutos) + ' de la subcedula de honorarios completa. Hoy tributan como "no laborales" (admiten costos); con el boton pasan al modo rentas de trabajo del par. 5 Art. 206 ET: ganan el 25% exento y el impuesto a cargo baja ~' + fmt(difModo) + '. Requisito: NO haber vinculado 2+ trabajadores por 90+ dias (Art. 1.2.1.20.3 DUR 1625/2016) — la herramienta te pide esa declaracion al aplicar. OJO: el 25% es EXCLUYENTE con imputar costos (' + fmt(hon.costos||0) + ' registrados hoy se dejarian de restar).' + notaTope
+              ? 'HOY: los ' + fmt(hon.ingresosBrutos) + ' de honorarios tributan como "no laborales", restando los costos digitados (' + fmt(costosHoy) + (costosHoy > 0 ? ' = ' + pctCostosHoy + '% del ingreso' : ' — no hay costos digitados') + '). ' +
+                'SI CAMBIA: toda la subcedula pasa al modo rentas de trabajo del par. 5 Art. 206 ET — deja de restar costos y a cambio gana el 25% exento. Con las cifras actuales el impuesto a cargo baja ~' + fmt(difModo) + '. Es un cambio de TRATAMIENTO de la subcedula completa, no un traslado entre casillas. ' +
+                'REQUISITO: no haber vinculado 2 o mas trabajadores por 90+ dias (Art. 1.2.1.20.3 DUR 1625/2016) — la herramienta te pide esa declaracion al aplicar.' + notaTope
               : 'Imputando los costos reales (modo no laboral, en vez del 25% exento) el impuesto a cargo bajaria ' + fmt(difModo) + '. Requiere soportes de los costos; si superan el 60% de los ingresos aplica la casilla 140 y el soporte con factura electronica (Art. 336-1 ET).',
             ahorro: Math.round(difModo),
             cedula: 'chonorarios',

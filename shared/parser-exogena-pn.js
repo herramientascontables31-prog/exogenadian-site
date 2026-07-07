@@ -645,6 +645,10 @@
   // deudas, retención — prellenadas por separado) de lo que de verdad no va (consumos,
   // consignaciones: solo indicadores que la DIAN cruza). El uso sugerido de la DIAN manda.
   function motivoInformativo(f){
+    // Resueltos AUTOMÁTICO que NO van a ninguna casilla (doc R8): insumo de cesantías
+    // y movimientos/compras — no requieren decisión del contador.
+    if(f.autoResuelto === 'insumo_cesantias') return 'NO va al 210: es el ingreso laboral PROMEDIO de los últimos 6 meses — insumo de la escala de cesantías (Art. 206-4), que la herramienta ya usa. NO es un ingreso adicional ni se reclasifica.';
+    if(f.autoResuelto === 'movimiento') return 'NO va al 210: es una compra/adquisición (movimiento). Solo cuenta si quedó como SALDO en el patrimonio a 31-dic, que ya viene prellenado (c29). No se suma como ingreso.';
     // Aplicado (a mano o por regla automática — doc R5/R7): ya quedó en su casilla.
     if(f.aplicadoA && f.aplicadoYaIncluido) return '→ SÍ va a la declaración: ya estaba DENTRO del valor prellenado de la casilla ' + f.aplicadoA + ' (verificado automáticamente — no se suma dos veces).';
     if(f.aplicadoA && f.cedulaFinalSource === 'auto') return '→ SÍ va a la declaración: clasificado AUTOMÁTICO a la casilla ' + f.aplicadoA + ' — corrígelo con el selector si no aplica.';
@@ -677,8 +681,8 @@
       return '→ SÍ va a la declaración: es el SALDO A FAVOR del año anterior (casilla 131; se prellena con el reporte MUISCA). Confírmalo contra la declaración del año pasado.';
     if(/\br132\b|retencion/.test(u))
       return '→ SÍ va a la declaración: es una RETENCIÓN (casilla 132; se prellena con el reporte MUISCA). Confirma contra el certificado.';
-    if(/\br28\b|factura electr[oó]nica|susceptible de beneficio/.test(u))
-      return '→ Base de compras con factura electrónica: el 1% deducible (casilla 28) ya quedó prellenado.';
+    if(/\br28\b|factura electr[oó]nica|susceptible de beneficio|suma valor total facturas|valor total (de )?facturas|compras con factura/.test(u))
+      return '→ Base de compras con factura electrónica: el 1% deducible (casilla 28) ya quedó prellenado — no se toca este total, solo su 1%.';
     if(/promedio|ingreso laboral promedio|cesantia|\br3[67]\b/.test(u))
       return '→ Renta exenta de trabajo / insumo de cesantías (Art. 206-4). Aplícalo desde la asesoría de cesantías si corresponde.';
     return 'Informativo: revisa si corresponde a patrimonio, deuda o retención (van a sus casillas) o a un movimiento que no va al 210.';
@@ -744,7 +748,7 @@
         nivel: 'dian',
         mensaje: 'Las consignaciones bancarias del año ($' + c.consignaciones.toLocaleString('es-CO') +
                  ', Tope 4 del reporte) superan ampliamente los ingresos declarables ($' + c.ingresos.toLocaleString('es-CO') +
-                 '). La DIAN cruza esto (formato 1019) y puede generar requerimiento. Verifica que estén justificadas (traslados, préstamos, dineros de terceros).'
+                 '). La DIAN cruza esto con el formato 1019 (la exógena que los bancos le reportan con los movimientos de cuentas de cada titular) y puede generar requerimiento. Verifica que estén justificadas (traslados, préstamos, dineros de terceros).'
       });
     } else if(c.consignaciones > 0){
       c.alertas.push({
