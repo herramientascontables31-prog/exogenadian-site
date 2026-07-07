@@ -302,7 +302,24 @@
     // Cada subcedula ya esta pisada en 0 (maxZero): una perdida real de capital/no laboral NO
     // compensa en el anio contra las demas subcedulas (se difiere, Art. 147 ET, y se reporta en
     // las casillas 55/71/88). Por eso la c91 es la suma de las rentas liquidas positivas.
+    // NOTA (auditoria 6-jul-2026 vs Contadia): Contadia SI netea la perdida en c91; el
+    // AyudaRenta DIAN oficial (Formulario!I33 = MAX(0, Σ subcedulas pisadas en 0)) NO.
+    // Seguimos al AyudaRenta/MUISCA, que es contra lo que se presenta.
     var c91 = maxZero(sumRentas);
+
+    // Compensaciones por perdidas de ejercicios ANTERIORES por subcedula (casillas
+    // 56/72/89 del 210 — auditoria 6-jul-2026 vs Contadia/AyudaRenta): reducen la renta
+    // ordinaria de SU subcedula (57=54-56, 73=70-72, 90=87-89), con piso en 0 — el
+    // exceso no usado se sigue difiriendo. En la c91 oficial (I33) entran restando.
+    function compAplicada(comp, sub){
+      var ordinaria = maxZero(sub.rentaLiquidaAntesExentas - sub.exentasYDeduccionesTope);
+      return Math.min(r1k(maxZero(comp || 0)), ordinaria);
+    }
+    var comp56 = compAplicada((input.honorarios || {}).compensacionesPerdidas, honorarios);
+    var comp72 = compAplicada((input.capital || {}).compensacionesPerdidas, capital);
+    var comp89 = compAplicada((input.noLaboral || {}).compensacionesPerdidas, noLaboral);
+    var compensacionesSubcedulas = comp56 + comp72 + comp89;
+    c91 = maxZero(c91 - compensacionesSubcedulas);
 
     // 3) Casilla 92: Total exentas y deducciones imputables, limitadas al tope
     //    Tope = min(40% × c91, 1340 UVT, c91)
@@ -386,6 +403,7 @@
       c92: c92,
       c93: c93,
       c97: c97,
+      compensaciones: { c56: comp56, c72: comp72, c89: comp89, total: compensacionesSubcedulas },
       tope: {
         rawDentroTope: rawDentroTope,
         base40: base40Total,
@@ -643,8 +661,15 @@
     var excesoDividendos = maxZero(rentaCedularDiv - rl1090EnPesos);
     var descuento254_1 = r1k(excesoDividendos * 0.19);
 
-    // Casilla 125: Total descuentos tributarios (Arts. 254, 254-1, 255, 256)
-    var c125 = (liq.descuentos || 0) + descuento254_1;
+    // Descuento por DONACIONES (casilla 123 — Arts. 255/256/257 ET): limitado por el
+    // Art. 258 al 25% del impuesto sobre la renta del año (base c121). Verificado
+    // contra el caso Contadia AG2025 (donaciones 14M → tope 25% × 19.394.000 = 4.849.000).
+    var donacionesSolicitado = r1k(maxZero(liq.descuentoDonaciones || 0));
+    var topeArt258 = r1k(c121 * 0.25);
+    var descuentoDonaciones = Math.min(donacionesSolicitado, topeArt258);
+
+    // Casilla 125: Total descuentos tributarios (122 + 123 + 124)
+    var c125 = (liq.descuentos || 0) + descuentoDonaciones + descuento254_1;
 
     // Casilla 126: Impuesto neto de renta. El max(0,...) limita el descuento
     // implicitamente: nunca puede dejar c126 negativo.
@@ -727,6 +752,9 @@
       c134: c134, c135: c135, c136: c136, c137: c137,
       descuentos: {
         externos: liq.descuentos || 0,
+        donaciones: descuentoDonaciones,
+        donacionesSolicitado: donacionesSolicitado,
+        topeArt258: topeArt258,
         art254_1: descuento254_1,
         total: c125
       },
@@ -750,9 +778,10 @@
     var pat = estado.patrimonio || {};
     var cg = estado.cedulaGeneral || {};
 
-    // Patrimonio
-    var c29 = pat.bruto || 0;
-    var c30 = pat.deudas || 0;
+    // Patrimonio — redondeado a miles como toda casilla del 210 (regla administrativa
+    // DIAN; doc Deventia R1: "deberían ser múltiplos de 1.000, mira patrimonio líquido").
+    var c29 = r1k(pat.bruto || 0);
+    var c30 = r1k(pat.deudas || 0);
     var c31 = maxZero(c29 - c30);
 
     // Cedulas

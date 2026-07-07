@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <script src="shared/cookie-consent.js?v=10d7f382"></script>
-<script src="shared/version.js?v=74cfebcc"></script>
+<script src="shared/version.js?v=0bf90490"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -183,9 +183,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
   }else{
     document.addEventListener('DOMContentLoaded',autoHide);
   }
-  // Failsafe: nunca atrapar al usuario (4s normal; 12s si la página lo retiene)
+  // Failsafe: nunca atrapar al usuario (4s normal; 5s si la página lo retiene —
+  // la apertura del 210 es optimista y la validación PRO va en background, nada
+  // legítimo necesita retener más). Carrera vista en móvil: el hide de
+  // DOMContentLoaded a veces pierde contra el hold → soltar también en load.
   setTimeout(function(){ if(!window.EXO_LOADING_HOLD) hide(); },4000);
-  setTimeout(hide,12000);
+  setTimeout(hide,5000);
+  window.addEventListener('load',function(){ setTimeout(hide,600); });
 })();
 </script></head>
 <body>
@@ -194,7 +198,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 <script src="shared/reglas-no-ded.js?v=16d40899"></script>
 <script defer src="shared/pro.js?v=9ec24c76"></script>
 <script defer src="shared/toast.js?v=9843f93f"></script>
-<script defer src="shared/nav.js?v=2d4a8d07"></script>
+<script defer src="shared/nav.js?v=8da24a14"></script>
 <script defer src="shared/pro-banner.js?v=f0acfdc0"></script>
 <script defer src="shared/fe-rst-loader.js?v=54013499"></script>
 <div class="container">

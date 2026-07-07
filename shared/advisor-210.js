@@ -79,11 +79,15 @@
     var tasa = marginal(result, year);
     if(tasa <= 0) return out;
 
-    var ingTrab = (cg.trabajo && cg.trabajo.ingresosBrutos) || 0;
+    // Rentas de trabajo disponibles para dependientes (Decreto 2231/2023): incluye
+    // honorarios cuando optaron por el modo rentas de trabajo (par. 5 Art. 206).
+    var ingTrab = ((cg.trabajo && cg.trabajo.ingresosBrutos) || 0) +
+                  ((cg.honorarios && cg.honorarios.modo === 'rentasTrabajo' && cg.honorarios.ingresosBrutos) || 0);
 
     // Honorarios: comparar los dos tratamientos posibles (excluyentes entre si):
     //  - modo rentas de trabajo → 25% exento (par. 5 Art. 206: <2 trabajadores, SIN costos)
     //  - modo no laboral → costos reales deducibles
+    // Doc R3 (Juan): decir CUANTO hay, QUE se cambia y CUANTO ahorra — y dar el boton.
     var hon = cg.honorarios || {};
     if((hon.ingresosBrutos || 0) > 0 && window.cal210 && estado){
       try {
@@ -91,14 +95,39 @@
         alt.cedulaGeneral.honorarios.modo = (hon.modo === 'rentasTrabajo') ? 'rentasNoLaborales' : 'rentasTrabajo';
         var rAlt = window.cal210.calcular210(alt, year).renglones;
         var difModo = (R.c129 || 0) - (rAlt.c129 || 0);
+        // Doc R5 (Juan): "¿y si pone costos hasta el 60% para no soportar con FE —
+        // sigue siendo mas barato pasarlos a trabajo?" → tercer escenario: modo no
+        // laboral con costos al MAXIMO seguro bajo el 60% (sin casilla 140).
+        var vsTope = null;
+        try {
+          var topeSeguro = Math.max(0, Math.floor(hon.ingresosBrutos * 0.60 / 1000) * 1000 - 1000);
+          var alt2 = JSON.parse(JSON.stringify(estado));
+          alt2.cedulaGeneral.honorarios.modo = 'rentasNoLaborales';
+          alt2.cedulaGeneral.honorarios.costos = topeSeguro;
+          var rTope = window.cal210.calcular210(alt2, year).renglones;
+          var rTrab = JSON.parse(JSON.stringify(estado));
+          rTrab.cedulaGeneral.honorarios.modo = 'rentasTrabajo';
+          rTrab.cedulaGeneral.honorarios.costos = 0;
+          var rT = window.cal210.calcular210(rTrab, year).renglones;
+          vsTope = { topeSeguro: topeSeguro, difTrabajoVsTope: (rTope.c129 || 0) - (rT.c129 || 0) };
+        } catch(e2){}
         if(difModo > 100000){
           var haciaTrabajo = alt.cedulaGeneral.honorarios.modo === 'rentasTrabajo';
+          var notaTope = '';
+          if(haciaTrabajo && vsTope){
+            notaTope = vsTope.difTrabajoVsTope > 0
+              ? ' ¿Y si en vez de eso imputara costos al maximo sin marcar la casilla 140 (' + fmt(vsTope.topeSeguro) + ', ~59,9%)? AUN ASI el modo trabajo gana por ~' + fmt(vsTope.difTrabajoVsTope) + ' — esos costos ademas exigirian soporte real de cada uno.'
+              : ' OJO: si el cliente tiene costos REALES soportables cercanos al 60% (' + fmt(vsTope.topeSeguro) + ' sin marcar la 140), imputarlos ganaria por ~' + fmt(-vsTope.difTrabajoVsTope) + ' frente al 25% — evalua cual via tiene soportes de verdad (los costos no se inventan: Art. 87).';
+          }
           out.push({
-            titulo: 'Honorarios: conviene cambiar al modo ' + (haciaTrabajo ? 'rentas de trabajo (25% exento)' : 'no laboral (costos reales)'),
+            titulo: 'Honorarios: conviene el modo ' + (haciaTrabajo ? 'rentas de trabajo (25% exento)' : 'no laboral (costos reales)'),
             detalle: haciaTrabajo
-              ? 'Tratando los honorarios como rentas de trabajo el impuesto a cargo bajaria ' + fmt(difModo) + '. El 25% exento (par. 5 Art. 206 ET) aplica a las rentas de trabajo que NO provienen de un vinculo laboral; para que los honorarios clasifiquen como rentas de trabajo (y no como "no laborales") no se debe haber vinculado 2 o mas trabajadores por 90+ dias (Art. 1.2.1.20.3 DUR 1625/2016). Ademas el 25% es EXCLUYENTE con imputar costos: o el 25% exento o los costos, no ambos.'
+              ? 'NO se reparte nada entre casillas: se cambia el TRATAMIENTO de los ' + fmt(hon.ingresosBrutos) + ' de la subcedula de honorarios completa. Hoy tributan como "no laborales" (admiten costos); con el boton pasan al modo rentas de trabajo del par. 5 Art. 206 ET: ganan el 25% exento y el impuesto a cargo baja ~' + fmt(difModo) + '. Requisito: NO haber vinculado 2+ trabajadores por 90+ dias (Art. 1.2.1.20.3 DUR 1625/2016) — la herramienta te pide esa declaracion al aplicar. OJO: el 25% es EXCLUYENTE con imputar costos (' + fmt(hon.costos||0) + ' registrados hoy se dejarian de restar).' + notaTope
               : 'Imputando los costos reales (modo no laboral, en vez del 25% exento) el impuesto a cargo bajaria ' + fmt(difModo) + '. Requiere soportes de los costos; si superan el 60% de los ingresos aplica la casilla 140 y el soporte con factura electronica (Art. 336-1 ET).',
-            ahorro: Math.round(difModo)
+            ahorro: Math.round(difModo),
+            cedula: 'chonorarios',
+            accion: { label: haciaTrabajo ? 'Aplicar modo trabajo →' : 'Aplicar modo no laboral →',
+                      js: 'aplicarModoHonorarios(\'' + (haciaTrabajo ? 'rentasTrabajo' : 'rentasNoLaborales') + '\')' }
           });
         }
       } catch(e){}
@@ -112,25 +141,35 @@
         out.push({
           titulo: 'Costos superan el tope indicativo del 60% — casilla 140 obligatoria (Art. 336-1)',
           detalle: 'Los costos imputados (' + fmt(honCostos) + ') son el ' + Math.round(ratioCostos*100) + '% de los ingresos por servicios personales. Hay que MARCAR la casilla 140 y TODOS esos costos deben estar soportados con factura electronica, nomina electronica o documento equivalente electronico; de lo contrario la DIAN puede rechazarlos.',
-          ahorro: 0
+          ahorro: 0,
+          cedula: 'chonorarios'
         });
       } else if(ratioCostos > 0.45){
         out.push({
           titulo: 'Costos bajo el tope indicativo del 60% (Art. 336-1)',
           detalle: 'Los costos imputados son el ' + Math.round(ratioCostos*100) + '% de los ingresos: por debajo del tope indicativo del 60%, NO se exige marcar la casilla 140 ni el soporte pleno con factura electronica. Conserva igualmente los soportes ordinarios de cada costo.',
-          ahorro: 0
+          ahorro: 0,
+          cedula: 'chonorarios'
         });
       }
     }
 
-    // Dependientes Art. 336 num. 3: 72 UVT por dependiente, maximo 4 (rentas de trabajo)
+    // Dependientes Art. 336 num. 3: 72 UVT por dependiente, maximo 4 (rentas de trabajo).
+    // Precision normativa (doc R3, Juan): el 10% del Art. 387 SOLO aplica sobre pagos de una
+    // RELACION LABORAL (salarios); las 72 UVT del 336-3 aplican a cualquier renta de trabajo
+    // (honorarios en modo trabajo incluidos, Decreto 2231/2023).
     var depNum = cg.dependientesArt336Numero || 0;
+    var haySalarios = ((cg.trabajo && cg.trabajo.ingresosBrutos) || 0) > 0;
     if(depNum < 4 && ingTrab > 0){
       var valorDep = 72 * uvt * (4 - depNum);
       out.push({
         titulo: 'Dependientes sin registrar (Art. 336 num. 3)',
-        detalle: 'Se pueden deducir 72 UVT (' + fmt(72*uvt) + ') por cada dependiente, hasta 4. Este borrador registra ' + depNum + '. Con mas personas a cargo (y su soporte), se podrian deducir hasta ' + fmt(valorDep) + ' adicionales. Ojo: un mismo dependiente solo da lugar a UNA deduccion (10% Art. 387 o 72 UVT), salvo que existan rentas de una relacion laboral, caso en que aplican ambas.',
-        ahorro: Math.round(valorDep * tasa)
+        detalle: 'Se pueden deducir 72 UVT (' + fmt(72*uvt) + ') por cada dependiente, hasta un MAXIMO de 4 (288 UVT). Este borrador registra ' + depNum + '. Con mas personas a cargo (y su soporte), se podrian deducir hasta ' + fmt(valorDep) + ' adicionales — esta deduccion va FUERA del tope del 40% (se resta despues de los limites). ' +
+          (haySalarios
+            ? 'Como hay salarios, ADEMAS aplica el 10% del Art. 387 (tope 384 UVT) sobre la renta laboral: el Decreto 2231/2023 permite tomar AMBAS a la vez, incluso por los mismos dependientes.'
+            : 'OJO: aqui NO hay salarios — el 10% del Art. 387 NO aplica (exige relacion laboral); unicamente las 72 UVT del Art. 336-3.'),
+        ahorro: Math.round(valorDep * tasa),
+        cedula: 'ctrabajo'
       });
     }
 
@@ -141,18 +180,20 @@
       out.push({
         titulo: 'Deduccion 1% por factura electronica (Art. 336 num. 5)',
         detalle: 'El 1% de las compras personales con factura electronica y pago electronico es deducible (hasta 240 UVT = ' + fmt(topeFE) + '). Vale la pena reunir los soportes de compras del año.',
-        ahorro: Math.round(Math.min(topeFE, (R.c97 || 0) * 0.01) * tasa)
+        ahorro: Math.round(Math.min(topeFE, (R.c97 || 0) * 0.01) * tasa),
+        cedula: 'all'
       });
     }
 
-    // Recordatorio: prepagada e intereses de vivienda (si no registro deducciones nominales)
+    // Recordatorio: deducciones y exentas que la exogena casi nunca trae (doc R3: "falta poner mas")
     var dedNom = ((cg.trabajo && cg.trabajo.deduccionesNominales) || 0)
                + ((cg.honorarios && cg.honorarios.deduccionesNominales) || 0);
     if(dedNom === 0){
       out.push({
-        titulo: 'Medicina prepagada e intereses de vivienda',
-        detalle: 'La medicina prepagada (hasta 16 UVT/mes) y los intereses de credito de vivienda (hasta 1.200 UVT = ' + fmt(1200*uvt) + ') son deducibles y no aparecen registrados en este borrador.',
-        ahorro: 0
+        titulo: 'Deducciones y exentas que la exogena NO trae — preguntale al cliente',
+        detalle: 'Ninguna de estas aparece en el reporte y todas bajan el impuesto: medicina PREPAGADA (hasta 16 UVT/mes, Art. 387) · intereses de CREDITO DE VIVIENDA o leasing habitacional (hasta 1.200 UVT = ' + fmt(1200*uvt) + ', Art. 119) · aportes AFC/FVP del año (Arts. 126-1/126-4, los cuantifica el optimizador) · aportes VOLUNTARIOS al fondo obligatorio de pension (Art. 55 — INCRNGO sin tope del 40%) · cesantias retiradas con ingreso laboral promedio ≤ 350 UVT (exentas por escala, Art. 206-4) · indemnizaciones por seguros de daño en la parte del daño emergente (Art. 45).',
+        ahorro: 0,
+        cedula: 'all'
       });
     }
     return out;

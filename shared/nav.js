@@ -978,3 +978,17 @@ var MEGA_MENU_HTML='<div class="mega-grid"><div class="mega-group"><h6>📂 Exó
   })();
 
 })();
+
+/* ── PWA (jul-2026, gema portada de Deventia): manifest + service worker network-first.
+   nav.js carga en todas las páginas → un solo punto de registro. ── */
+(function(){
+  try{
+    if(!document.querySelector('link[rel="manifest"]')){
+      var l=document.createElement('link'); l.rel='manifest'; l.href='/manifest.webmanifest';
+      document.head.appendChild(l);
+    }
+    if('serviceWorker' in navigator){
+      window.addEventListener('load', function(){ navigator.serviceWorker.register('/sw.js').catch(function(){}); });
+    }
+  }catch(e){}
+})();

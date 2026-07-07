@@ -356,9 +356,13 @@ body.has-beta-bar .app-side{top:34px;height:calc(100vh - 34px)}
   }else{
     document.addEventListener('DOMContentLoaded',autoHide);
   }
-  // Failsafe: nunca atrapar al usuario (4s normal; 12s si la página lo retiene)
+  // Failsafe: nunca atrapar al usuario (4s normal; 5s si la página lo retiene —
+  // la apertura del 210 es optimista y la validación PRO va en background, nada
+  // legítimo necesita retener más). Carrera vista en móvil: el hide de
+  // DOMContentLoaded a veces pierde contra el hold → soltar también en load.
   setTimeout(function(){ if(!window.EXO_LOADING_HOLD) hide(); },4000);
-  setTimeout(hide,12000);
+  setTimeout(hide,5000);
+  window.addEventListener('load',function(){ setTimeout(hide,600); });
 })();
 </script></head>
 <body class="has-beta-bar">
@@ -1832,8 +1836,8 @@ body.has-beta-bar .app-side{top:34px;height:calc(100vh - 34px)}
 <script defer src="shared/toast.js?v=9843f93f"></script>
 <script defer src="shared/pro.js?v=9ec24c76"></script>
 <script src="shared/analytics.js?v=1df688c5"></script>
-<script defer src="shared/nav.js?v=2d4a8d07"></script>
-<script src="shared/version.js?v=74cfebcc"></script>
+<script defer src="shared/nav.js?v=8da24a14"></script>
+<script src="shared/version.js?v=0bf90490"></script>
 <script src="shared/drive-sync.js?v=0868ec29"></script>
 <script src="shared/drive-sync-ui.js?v=116c209e"></script>
 <script>

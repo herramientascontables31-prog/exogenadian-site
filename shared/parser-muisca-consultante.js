@@ -117,6 +117,7 @@
       gananciasOcasionales: 0,
       patrimonioBruto: 0,
       bienes: [],            // desglose de activos patrimoniales (vehículos, inmuebles, cuentas…)
+      deudas: [],            // desglose de deudas reportadas (R30) — doc R4: "faltan las deudas"
       patrimonioDeudas: 0,
       retencionesC132: 0,
       fe1Pct: 0,              // = 1% de las compras FE (lo que va en la casilla 28), NO el monto de compras
@@ -126,6 +127,7 @@
       saldoFavorAnterior: 0,  // "Total saldo a favor" del AG anterior → casilla 131
       cesantiasIngreso: 0,    // cesantías pagadas/consignadas dentro de ingTrabajo (insumo asesoría 206-4)
       ingDocSoporte: 0,       // ventas reportadas por compradores vía documento soporte (no factura) → ingreso a clasificar
+      rendimientosFinancieros: 0, // rendimientos puros (base del componente inflacionario Arts. 38-41)
       informativo: 0          // R35/R123 y similares: no van al 210, solo para cuadre
     };
     var metadata = { nit: null, nombre: null, anio: null, fechaCorte: null, registrosProcesados: 0 };
@@ -278,9 +280,25 @@
         continue;
       }
 
+      // Venta por notaría (ENAJENANTE): el reporte suele marcarla con uso R29
+      // (patrimonio), pero es un INGRESO del año — NO un activo a 31-dic. Si se
+      // dejara en patrimonio quedaría DOBLE (ya clasifica a ganancias ocasionales
+      // en el parser de reconciliación) e inflaría c29. Doc R3 (Juan, 6-jul):
+      // "¿Por qué clasificaste un ingreso como patrimonio? El de 65 millones."
+      if(bucket === 'patrimonioBruto' &&
+         /ingreso por venta de bienes|venta de bienes a trav|notarias?\s*\(enajenant/i.test(detalleConcepto)){
+        bucket = 'gananciasOcasionales';
+      }
+
       resumen[bucket] = (resumen[bucket] || 0) + valor;
       if(bucket === 'ingTrabajo' && /cesant/i.test(detalleConcepto)) resumen.cesantiasIngreso += valor;
+      // Rendimientos financieros PUROS (base del componente inflacionario Arts. 38-41 —
+      // NO arriendos ni regalías): insumo de la asesoría "sugerir → confirmar".
+      if(bucket === 'ingCapital' && /interes|rendimient|cdt|cartera colectiva/i.test(detalleConcepto) && !/arrenda|regalia/i.test(detalleConcepto)){
+        resumen.rendimientosFinancieros = (resumen.rendimientosFinancieros||0) + valor;
+      }
       if(bucket === 'patrimonioBruto') resumen.bienes.push({ tipo: tipoBien(detalleConcepto), descripcion: detalleConcepto, valor: valor, informante: nombreInformante });
+      if(bucket === 'patrimonioDeudas') resumen.deudas.push({ descripcion: detalleConcepto, valor: valor, informante: nombreInformante });
       metadata.registrosProcesados++;
     }
 
@@ -288,9 +306,9 @@
     // "susceptible de beneficio" que la DIAN ya filtró; si no viene, las compras R28.
     resumen.fe1Pct = Math.round(0.01 * (resumen.feSusceptible || resumen.feBaseCompras));
 
-    // Redondear a miles (regla administrativa DIAN). 'bienes' es un array → no se redondea.
+    // Redondear a miles (regla administrativa DIAN). Los arrays no se redondean.
     Object.keys(resumen).forEach(function(k){
-      if(k === 'bienes') return;
+      if(k === 'bienes' || k === 'deudas') return;
       resumen[k] = Math.round(resumen[k] / 1000) * 1000;
     });
 

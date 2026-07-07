@@ -145,6 +145,11 @@
   // dato quedan en null y la UI oculta el auto-calculo.
   PARAMS[2025].compInflacionarioRendimientos = 0.5543;
   PARAMS[2025].compInflacionarioGastos = 0.2835;
+  // AG2024: Decreto 771 del 7-jul-2025 (Arts. 1.2.1.12.6 y 1.2.1.17.19 DUR) —
+  // verificado contra el normograma DIAN. El caso real AG2024 no mostraba la
+  // sugerencia del componente inflacionario por falta de este dato (doc R3).
+  PARAMS[2024].compInflacionarioRendimientos = 0.5088;
+  PARAMS[2024].compInflacionarioGastos = 0.2501;
 
   function getParams(year){
     var p = PARAMS[year];

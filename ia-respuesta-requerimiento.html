@@ -434,9 +434,13 @@ body {
   }else{
     document.addEventListener('DOMContentLoaded',autoHide);
   }
-  // Failsafe: nunca atrapar al usuario (4s normal; 12s si la página lo retiene)
+  // Failsafe: nunca atrapar al usuario (4s normal; 5s si la página lo retiene —
+  // la apertura del 210 es optimista y la validación PRO va en background, nada
+  // legítimo necesita retener más). Carrera vista en móvil: el hide de
+  // DOMContentLoaded a veces pierde contra el hold → soltar también en load.
   setTimeout(function(){ if(!window.EXO_LOADING_HOLD) hide(); },4000);
-  setTimeout(hide,12000);
+  setTimeout(hide,5000);
+  window.addEventListener('load',function(){ setTimeout(hide,600); });
 })();
 </script></head>
 <body>

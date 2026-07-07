@@ -645,7 +645,22 @@
   // deudas, retención — prellenadas por separado) de lo que de verdad no va (consumos,
   // consignaciones: solo indicadores que la DIAN cruza). El uso sugerido de la DIAN manda.
   function motivoInformativo(f){
+    // Aplicado (a mano o por regla automática — doc R5/R7): ya quedó en su casilla.
+    if(f.aplicadoA && f.aplicadoYaIncluido) return '→ SÍ va a la declaración: ya estaba DENTRO del valor prellenado de la casilla ' + f.aplicadoA + ' (verificado automáticamente — no se suma dos veces).';
+    if(f.aplicadoA && f.cedulaFinalSource === 'auto') return '→ SÍ va a la declaración: clasificado AUTOMÁTICO a la casilla ' + f.aplicadoA + ' — corrígelo con el selector si no aplica.';
+    if(f.aplicadoA) return '→ SÍ va a la declaración: lo aplicaste a la casilla ' + f.aplicadoA + ' — ya está sumado.';
     var u = normalizar((f.usoDIANSugerido || '') + ' ' + (f.descripcion || f.concepto || ''));
+    // Motivos con NOMBRE PROPIO (doc R5, Juan: "la mayoría ya tienen destino obvio").
+    if(/prestamo|credito (de )?consumo|credito hipotec/.test(u))
+      return '→ Es una DEUDA del cliente a 31-dic (casilla 30). La DIAN la trae informativa: aplícala a c30 con el selector si el saldo es real.';
+    if(/ingreso laboral promedio|promedio de los ultimos/.test(u))
+      return '→ NO es un ingreso adicional: es el PROMEDIO mensual de los últimos 6 meses — el insumo de la escala de cesantías (Art. 206-4). Sus salarios ya están en la cédula de trabajo; la asesoría de cesantías lo usa sola.';
+    if(/aportes? voluntario/.test(u) && !/saldo/.test(u))
+      return '→ Aporte VOLUNTARIO a pensión del año: si fue a FVP/AFC va como DEDUCCIÓN (Arts. 126-1/126-4 — opción "Deducciones · AVC + AFC" del selector); si fue voluntario al fondo OBLIGATORIO es INCRNGO del Art. 55 (Trabajo · INCRNGO). El optimizador del caso calcula cuál conviene.';
+    if(/ahorro voluntario.*saldo|saldo final|capital socio|aporte.*derecho social/.test(u))
+      return '→ Es un ACTIVO a 31-dic (casilla 29): saldo de ahorro / aporte social. Aplícalo a c29 con el selector si no está ya dentro del patrimonio prellenado.';
+    if(/rte\s*fte|rtefte/.test(u))
+      return '→ Es RETENCIÓN practicada (casilla 132). Verifica que esté dentro del total de retenciones; si falta, aplícala con el selector.';
     // Orden: lo MULTI-renglón/ambiguo (adquisiciones que mencionan varias casillas) primero,
     // luego consumos/consignaciones, y al final los R-código limpios (deuda/retención/FE).
     if(/se usa en renglones como|adquisicion de bienes|avaluo|bienes (o derechos|raices)/.test(u))
@@ -669,26 +684,34 @@
     return 'Informativo: revisa si corresponde a patrimonio, deuda o retención (van a sus casillas) o a un movimiento que no va al 210.';
   }
 
-  function calcularCuadre(filas){
+  function calcularCuadre(filas, topes){
     var c = {
       total: 0, clasificado: 0, ingresos: 0, informativo: 0, excluido: 0, pendiente: 0,
+      consignaciones: 0, // SOLO consignaciones/movimientos 1019 (Tope 4) — doc R6, Juan:
+                         // la alerta sumaba TODO lo informativo (saldos, consumos, avalúos)
+                         // y lo llamaba "consignaciones" ($1.070M cuando fueron $554M).
       conteo: { total: 0, clasificado: 0, informativo: 0, excluido: 0, pendiente: 0 },
       noVanEnDeclaracion: [], // {descripcion, informante, valor, motivo}
       alertas: []
     };
+    var RE_CONSIG = /tope\s*4|consignacion|valor total de (los )?movimientos|deposito(s)? bancari/;
     (filas || []).forEach(function(f){
       var v = Math.round(Number(f.valor) || 0);
       c.total += v; c.conteo.total++;
       var ced = f.cedulaFinal;
+      if(!f.excluida && ced === 'informativo' &&
+         RE_CONSIG.test(normalizar((f.usoDIANSugerido || '') + ' ' + (f.descripcion || f.concepto || '')))){
+        c.consignaciones += v;
+      }
       if(f.excluida || ced === 'excluir'){
         c.excluido += v; c.conteo.excluido++;
-        c.noVanEnDeclaracion.push({ descripcion: f.descripcion || f.concepto || '', informante: f.informante || '', valor: v, motivo: f.motivoExclusion || 'Excluido manualmente' });
+        c.noVanEnDeclaracion.push({ id: f.id, descripcion: f.descripcion || f.concepto || '', informante: f.informante || '', valor: v, motivo: f.motivoExclusion || 'Excluido manualmente' });
       } else if(ced === 'informativo'){
         c.informativo += v; c.conteo.informativo++;
-        c.noVanEnDeclaracion.push({ descripcion: f.descripcion || f.concepto || '', informante: f.informante || '', valor: v, motivo: motivoInformativo(f) });
+        c.noVanEnDeclaracion.push({ id: f.id, descripcion: f.descripcion || f.concepto || '', informante: f.informante || '', valor: v, motivo: motivoInformativo(f) });
       } else if(ced === 'docSoporte'){
         c.informativo += v; c.conteo.informativo++;
-        c.noVanEnDeclaracion.push({ descripcion: f.descripcion || f.concepto || '', informante: f.informante || '', valor: v,
+        c.noVanEnDeclaracion.push({ id: f.id, descripcion: f.descripcion || f.concepto || '', informante: f.informante || '', valor: v,
           motivo: 'Documento soporte: es el MISMO ingreso que ya reportaron los compradores (regla DIAN del mayor valor, Tope 1). NO se suma dos veces; solo el exceso sobre lo reportado por terceros sería ingreso adicional.' });
       } else if(!ced){
         c.pendiente += v; c.conteo.pendiente++;
@@ -710,18 +733,25 @@
                  ' sin clasificar. Asígnalos a una cédula o márcalos informativos/excluidos para cuadrar el reporte.'
       });
     }
-    // Alerta de consignaciones vs ingresos (cruce DIAN formato 1019/1020).
-    if(c.informativo > 0 && c.ingresos > 0 && c.informativo > c.ingresos * 1.3){
+    // Alerta de consignaciones vs ingresos (cruce DIAN formato 1019/1020) — usa SOLO
+    // las consignaciones reales del Tope 4, no todo lo informativo (doc R6, Juan:
+    // "las consignaciones fueron 554.239.936", no el total informativo de $1.070M).
+    // El Tope 4 OFICIAL del reporte manda cuando existe (algunos renglones 1019
+    // vienen con texto que la heurística no reconoce — caso real: $16,5M de menos).
+    if(topes && topes.movimientos > 0) c.consignaciones = Math.round(topes.movimientos);
+    if(c.consignaciones > 0 && c.ingresos > 0 && c.consignaciones > c.ingresos * 1.3){
       c.alertas.push({
         nivel: 'dian',
-        mensaje: 'Las consignaciones/movimientos informativos ($' + c.informativo.toLocaleString('es-CO') +
-                 ') superan ampliamente los ingresos declarables ($' + c.ingresos.toLocaleString('es-CO') +
+        mensaje: 'Las consignaciones bancarias del año ($' + c.consignaciones.toLocaleString('es-CO') +
+                 ', Tope 4 del reporte) superan ampliamente los ingresos declarables ($' + c.ingresos.toLocaleString('es-CO') +
                  '). La DIAN cruza esto (formato 1019) y puede generar requerimiento. Verifica que estén justificadas (traslados, préstamos, dineros de terceros).'
       });
-    } else if(c.informativo > 0){
+    } else if(c.consignaciones > 0){
       c.alertas.push({
         nivel: 'info',
-        mensaje: 'Hay $' + c.informativo.toLocaleString('es-CO') + ' en consignaciones/movimientos que NO van en ninguna casilla del 210. Infórmaselo al cliente: la DIAN las cruza y deben poder justificarse.'
+        mensaje: 'Consignaciones bancarias del año: $' + c.consignaciones.toLocaleString('es-CO') +
+                 ' (Tope 4 — no van en ninguna casilla del 210). La DIAN las cruza y deben poder justificarse.' +
+                 (c.informativo > c.consignaciones ? ' Los demás informativos ($' + (c.informativo - c.consignaciones).toLocaleString('es-CO') + ') son saldos, consumos y avalúos — indicadores, no movimientos.' : '')
       });
     }
     return c;
@@ -947,6 +977,35 @@
             fuenteCedula = 'renglon_dian';
           }
         }
+        // CESANTÍAS RECIBIDAS con uso R36/R37 (doc R6, Juan: "siguen sin precargarse"):
+        // el MUISCA las marca como renta exenta (R36) y caían en 'informativo', pero SON
+        // ingreso del año → van al campo propio (trabCesantias) donde el motor aplica la
+        // escala del Art. 206-4. Los SALDOS del fondo y el promedio NO (esos sí informan).
+        if(cedulaSugerida === 'informativo' &&
+           /cesant/i.test(String(detalle)) &&
+           !/saldo|fondo a 31|promedio/i.test(normalizar(detalle))){
+          cedulaSugerida = 'trabajo_exenta';
+          fuenteCedula = 'heuristica_concepto';
+        }
+        // Excepción par. 5 Art. 206 (doc arreglos 6-jul): "Pagos por honorarios/servicios"
+        // que el 220 trae con uso R32 — la DIAN los sugiere como rentas de trabajo, pero el
+        // DEFAULT correcto es la subcédula de honorarios (admite costos). Tratarlos como
+        // rentas de trabajo (25% exento, sin costos) es una OPCIÓN: el optimizador la
+        // sugiere con el ahorro calculado y el contador confirma.
+        if(cedulaSugerida === 'trabajo' && /honorario|pagos? por servicio|comision(es)?\b/.test(normalizar(detalle))){
+          cedulaSugerida = 'honorarios';
+          fuenteCedula = 'heuristica_concepto';
+        }
+        // Venta por notaría (ENAJENANTE): es un INGRESO que la DIAN cuenta en el Tope 1 aunque
+        // el uso diga "R29 Patrimonio / R114 GO" (ambiguo). Va a GANANCIAS OCASIONALES por
+        // defecto (doc R2: "no cargó ganancias ocasionales"); la asesoría de venta de activos
+        // captura costo fiscal y año, y permite moverla a no laboral si se poseyó <2 años.
+        var _dNorm = normalizar(detalle);
+        if(/ingreso por venta de bienes|venta de bienes a traves de notar|notarias?\s*\(enajenant/.test(_dNorm) &&
+           cedulaSugerida !== 'retencion' && !/retencion|retenci/.test(_dNorm)){
+          cedulaSugerida = 'gananciasOcasionales';
+          fuenteCedula = 'heuristica_concepto';
+        }
 
         // GUARDA AUTORITATIVA por TEXTO (solo si el R-código no resolvió ya la
         // cédula): conceptos que NO son ingreso e inflan c91 indebidamente:
@@ -1097,11 +1156,35 @@
                     nota: 'El Tope 2 oficial es el MAYOR entre la suma de variables del año y el patrimonio declarado el año anterior — pueden diferir legítimamente.' },
       compras:    { oficial: Math.round(tp2.compras||0) }
     };
+    // Ventas por notaría (enajenante): la DIAN SÍ las cuenta en el Tope 1, pero requieren
+    // criterio (GO vs no laboral + costo fiscal) → no se auto-clasifican. Se detectan aquí
+    // para EXPLICAR el descuadre por su nombre (caso real: -$65M "sin explicación").
+    var ventaNotaria = 0;
+    var reVN = /ingreso por venta de bienes|venta de bienes.*(notaria|cesion)|notarias?\s*\(enajenant/i;
+    registros.forEach(function(f){
+      if(!f.excluida && reVN.test(String(f.descripcion||'') + ' ' + String(f.usoDIANSugerido||''))) ventaNotaria += (f.valor||0);
+    });
+    metadata.ventaNotaria = Math.round(ventaNotaria);
+    if(ventaNotaria > 0){
+      warnings.push({ tipo: 'venta_notaria',
+        mensaje: '🏠 Venta por notaría de $' + Math.round(ventaNotaria).toLocaleString('es-CO') +
+          ' detectada: va en GANANCIAS OCASIONALES (así la cuenta la DIAN en el Tope 1). Registra el costo fiscal en la asesoría de venta de activos y confirma que el bien se poseyó ≥2 años — si fue menos, muévela a rentas no laborales (tarifa progresiva).' });
+    }
     if(tp2.ingresos > 0){
       var difIng = ingClasificado - Math.round(tp2.ingresos);
       var pctIng = Math.abs(difIng) / tp2.ingresos;
       metadata.contraste.ingresos.diferencia = difIng;
       metadata.contraste.ingresos.cuadra = pctIng <= 0.03;
+      // Si la venta por notaría explica el hueco, decirlo con nombre propio
+      if(!metadata.contraste.ingresos.cuadra && ventaNotaria > 0 && Math.abs(difIng + ventaNotaria) / tp2.ingresos <= 0.01){
+        metadata.contraste.ingresos.explicacion = 'venta_notaria';
+        warnings.push({ tipo: 'contraste_diferencia',
+          mensaje: '⚠️ CRUCE: ingresos clasificados $' + ingClasificado.toLocaleString('es-CO') + ' vs Tope 1 oficial $' + Math.round(tp2.ingresos).toLocaleString('es-CO') +
+            ' — la diferencia ES la venta por notaría de $' + Math.round(ventaNotaria).toLocaleString('es-CO') +
+            ': la DIAN la cuenta en el Tope 1. Aplícala con la asesoría de venta de activos (GO 15% si lo poseyó ≥2 años) y el cruce concilia.' });
+      }
+    }
+    if(tp2.ingresos > 0 && metadata.contraste.ingresos.explicacion !== 'venta_notaria'){
       warnings.push({ tipo: pctIng <= 0.03 ? 'contraste_ok' : 'contraste_diferencia',
         mensaje: (pctIng <= 0.03 ? '✅ CRUCE con el resumen oficial DIAN: ' : '⚠️ CRUCE con el resumen oficial DIAN: ')
           + 'ingresos clasificados $' + ingClasificado.toLocaleString('es-CO')

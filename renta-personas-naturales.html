@@ -382,9 +382,13 @@ body.wsx .cal-wrap{overflow-x:auto}
   }else{
     document.addEventListener('DOMContentLoaded',autoHide);
   }
-  // Failsafe: nunca atrapar al usuario (4s normal; 12s si la página lo retiene)
+  // Failsafe: nunca atrapar al usuario (4s normal; 5s si la página lo retiene —
+  // la apertura del 210 es optimista y la validación PRO va en background, nada
+  // legítimo necesita retener más). Carrera vista en móvil: el hide de
+  // DOMContentLoaded a veces pierde contra el hold → soltar también en load.
   setTimeout(function(){ if(!window.EXO_LOADING_HOLD) hide(); },4000);
-  setTimeout(hide,12000);
+  setTimeout(hide,5000);
+  window.addEventListener('load',function(){ setTimeout(hide,600); });
 })();
 </script></head>
 <body class="wsx">
@@ -393,13 +397,13 @@ body.wsx .cal-wrap{overflow-x:auto}
 <script src="shared/cartera-sync.js?v=c32849a0"></script>
 <script defer src="shared/pro-gate.js?v=dafb5761"></script>
 <script defer src="shared/toast.js?v=9843f93f"></script>
-<script defer src="shared/nav.js?v=2d4a8d07"></script>
+<script defer src="shared/nav.js?v=8da24a14"></script>
 <script src="shared/vencimientos-pn.js?v=99caf5fe"></script>
 <script src="shared/perfil-contador.js?v=1fe630d0"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js" integrity="sha384-Pqp51FUN2/qzfxZxBCtF0stpc9ONI6MYZpVqmo8m20SoaQCzf+arZvACkLkirlPz" crossorigin="anonymous"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="shared/parser-muisca-consultante.js?v=3ebc3c02"></script>
+<script src="shared/parser-muisca-consultante.js?v=7a099cfe"></script>
 <div class="container">
   <div class="wsx-top">
     <a class="wsx-brand" href="index.html"><span class="wsx-logo">A</span> Aziendale<b>.</b></a>
@@ -423,7 +427,6 @@ body.wsx .cal-wrap{overflow-x:auto}
     <button class="tab" data-tab="cli" role="tab"><span class="wsx-ico">👥</span> Clientes <span class="badge" id="badgeCli">0</span></button>
     <button class="tab" data-tab="apr" role="tab"><span class="wsx-ico">📚</span> Aprende</button>
     <button class="tab" data-tab="carta" role="tab"><span class="wsx-ico">📄</span> Solicitudes al cliente</button>
-    <button class="tab" data-tab="riesgo" role="tab"><span class="wsx-ico">⚠️</span> Diagnóstico <span class="badge" style="background:#fbbf24;color:#3b2a00">PRO</span></button>
   </nav>
   <section class="tab-panel active" id="panel-liq">
     <div class="ll-hero">
@@ -475,11 +478,6 @@ body.wsx .cal-wrap{overflow-x:auto}
           <div class="ll-mod-ico">📄</div>
           <h4>Solicitudes al cliente</h4>
           <p>Genera la lista de documentos que necesitas, en PDF o Word — por cliente o masiva.</p>
-        </button>
-        <button type="button" class="ll-mod" onclick="llIrTab('riesgo')">
-          <div class="ll-mod-ico">⚠️</div>
-          <h4>Diagnóstico de riesgos</h4>
-          <p>Anticipa los cruces de la DIAN y detecta inconsistencias antes de presentar.</p>
         </button>
         <a class="ll-mod" href="escuela.html">
           <div class="ll-mod-ico">📚</div>
@@ -1396,6 +1394,23 @@ document.querySelectorAll('.tab').forEach(function(t){
   el('cartaDrop').addEventListener('drop',function(e){ e.preventDefault(); el('cartaDrop').style.background='var(--pri3)'; var f=e.dataTransfer.files[0]; if(f) loadCartaReport(f); });
   try{ var pf=JSON.parse(localStorage.getItem('renta_pn_card_pf')||'{}'); if(pf.nombre)$firma.value=pf.nombre; }catch(_){}
   fillClientes(); renderItems(); preview();
+  // Hand-off desde el 210 PRO (doc R2: "Solicitudes al cliente la pide de nuevo"): si la
+  // exógena ya se cargó allá, la carta se arma sola — el PRO deja {name,b64} en sessionStorage.
+  // Con reintentos: ExcelJS (CDN) puede llegar después de este script inline.
+  (function intentarHandoff(n){
+    var _h=null;
+    try{ _h=JSON.parse(sessionStorage.getItem('pn_exo_handoff')||'null'); }catch(_){}
+    if(!_h || !_h.b64) return;
+    if(typeof ExcelJS==='undefined' || typeof parserMuiscaConsultante==='undefined'){
+      if(n>0) setTimeout(function(){ intentarHandoff(n-1); }, 400);
+      return;
+    }
+    try{
+      var _b=atob(_h.b64), _a=new Uint8Array(_b.length);
+      for(var _j=0;_j<_b.length;_j++) _a[_j]=_b.charCodeAt(_j);
+      loadCartaReport(new File([_a], _h.name||'exogena.xlsx', {type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}));
+    }catch(_){}
+  })(15);
 })();
 // ════════════════════════════════════════════════════════════════════
 //  Tab 6: Diagnóstico de riesgos DIAN/UGPP (entregable PDF)
