@@ -309,7 +309,7 @@ body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--gray-90
   </div>
 </section>
 <script src="shared/perfil-contador.js?v=1fe630d0"></script>
-<script defer src="shared/pro.js?v=9ec24c76"></script>
+<script defer src="shared/pro.js?v=284da17c"></script>
 <script src="shared/asesor-mode.js?v=24a000b1"></script>
 <script>(function(){function refresh(){var e=document.getElementById("asesorBanner");var o=document.getElementById("asesorToggle");var n=document.getElementById("asesorSub");if(!e)return;if(window.exoPro&&window.exoPro.check){window.exoPro.check().then(function(r){if(!r){e.style.display="none";return}e.style.display="flex";var t=window.asesorMode.isOn();var i=window.perfilContador&&window.perfilContador.has();if(!i){n.innerHTML='Primero llena tu <a href="oficina.html" style="color:#FCD34D;font-weight:700">perfil del contador</a> con nombre y TP. Luego puedes activar el modo.';o.textContent="Configurar perfil";o.onclick=function(){window.location.href="oficina.html"};return}if(t){var a=window.asesorMode.getBranding();n.innerHTML="✅ <strong>Modo Asesor activo.</strong> Reportes saldrán con: "+(a.firma||a.nombre||"tu firma");o.textContent="Desactivar";o.onclick=function(){window.asesorMode.set(false);refresh()}}else{n.innerHTML="Activa <strong>Modo Asesor</strong>: los reportes de finanzas que descargues saldrán brandeados con tu firma.";o.textContent="Activar →";o.onclick=function(){window.asesorMode.set(true);refresh()}}})}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",refresh);else refresh()})();</script>
 <section class="hub-school-link">
@@ -338,7 +338,7 @@ body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--gray-90
   </div>
 </section>
 <script defer src="shared/nav.js?v=8da24a14"></script>
-<script defer src="shared/pro.js?v=9ec24c76"></script>
+<script defer src="shared/pro.js?v=284da17c"></script>
 <script src="shared/analytics.js?v=1df688c5"></script>
 </body>
 </html>
