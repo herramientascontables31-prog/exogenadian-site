@@ -3,7 +3,7 @@
 <head>
 <script src="shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="og-image.png">
@@ -127,16 +127,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 <script defer src="shared/toast.js?v=9843f93f"></script>
 <script defer src="shared/nav.js?v=8da24a14"></script>
 <script src="shared/finanzas-privacy.js?v=4d46bf26"></script>
-<script>
-(function(){
-  function init(){
-    if(!window.FinanzasPrivacy)return;
-    var c=document.querySelector('.container');
-    if(c){FinanzasPrivacy.autoLoad(c,'inversion-101');FinanzasPrivacy.autoSave(c,'inversion-101',{debounce:800});}
-  }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
-})();
-</script>
+<script>(function(){function init(){if(!window.FinanzasPrivacy)return;var n=document.querySelector(".container");if(n){FinanzasPrivacy.autoLoad(n,"inversion-101");FinanzasPrivacy.autoSave(n,"inversion-101",{debounce:800})}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init()})();</script>
 <div class="container">
 <div class="header">
   <div>
@@ -228,146 +219,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
   </div>
 </div>
 </div>
-<script>
-'use strict';
-function $(id){return document.getElementById(id)}
-function fmt(n){if(n==null||isNaN(n))return'$0';return'$'+Math.round(n).toLocaleString('es-CO')}
-function num(id){var v=$(id).value.replace(/[^\d]/g,'');return parseInt(v,10)||0}
-['capital','aporte'].forEach(function(id){
-  var el=$(id);
-  el.addEventListener('input',function(){
-    var raw=this.value.replace(/[^\d]/g,'');
-    this.value=raw?'$'+parseInt(raw,10).toLocaleString('es-CO'):'';
-  });
-});
-var ultimoCalc=null;
-// Vehículos de inversión en Colombia 2026 con descripciones
-var VEHICULOS=[
-  {key:'icolcap',nombre:'ETF iCOLCAP',color:'#10B981',tipo:'rv',desc:'Acciones colombianas BVC. Diversificación local, dividendos. T+2 liquidación.'},
-  {key:'sp500',nombre:'ETF S&P 500 / NASDAQ',color:'#3B82F6',tipo:'rv',desc:'Renta variable internacional vía Renta4, BTG. Reduce riesgo país, exposición USD.'},
-  {key:'afc',nombre:'AFC + Pensión Voluntaria',color:'#059669',tipo:'rf',desc:'Art. 126-1/126-4 ET. Doble beneficio: rendimiento + reduce retefuente mensual.'},
-  {key:'fic',nombre:'FIC moderado / cuenta alta rent.',color:'#F59E0B',tipo:'rf',desc:'Liquidez 1-3 días. 9-13% E.A. típico. Bancolombia, Davivienda, BTG, Lulo, Nu.'},
-  {key:'cdt',nombre:'CDT 360 días',color:'#6366F1',tipo:'rf',desc:'Tasa fija, plazo cerrado. 12-14% E.A. Cuando quieres certeza absoluta.'},
-  {key:'efectivo',nombre:'Efectivo / cuenta de ahorro',color:'#9CA3AF',tipo:'rf',desc:'Buffer mínimo. NO contar como inversión. Solo para movimientos.'}
-];
-function calcular(){
-  var edad=parseInt($('edad').value,10)||32;
-  var perfil=parseInt($('perfil').value,10)||2;
-  var capital=num('capital');
-  var aporte=num('aporte');
-  if(capital<=0 && aporte<=0){exoToast('Mete al menos capital o aporte mensual','warning');return}
-  // Regla 100-edad ajustada por perfil
-  var pctRV=Math.max(Math.min(100-edad+(perfil-2)*10,90),20)/100;
-  var pctRF=1-pctRV;
-  // Distribución dentro de RV (60% local, 40% internacional)
-  var pctICOLCAP=pctRV*0.6;
-  var pctSP500=pctRV*0.4;
-  // Distribución dentro de RF (50% AFC, 30% FIC, 15% CDT, 5% efectivo)
-  var pctAFC=pctRF*0.5;
-  var pctFIC=pctRF*0.3;
-  var pctCDT=pctRF*0.15;
-  var pctEfe=pctRF*0.05;
-  var alloc={
-    icolcap:{pct:pctICOLCAP,capital:capital*pctICOLCAP,aporte:aporte*pctICOLCAP},
-    sp500:{pct:pctSP500,capital:capital*pctSP500,aporte:aporte*pctSP500},
-    afc:{pct:pctAFC,capital:capital*pctAFC,aporte:aporte*pctAFC},
-    fic:{pct:pctFIC,capital:capital*pctFIC,aporte:aporte*pctFIC},
-    cdt:{pct:pctCDT,capital:capital*pctCDT,aporte:aporte*pctCDT},
-    efectivo:{pct:pctEfe,capital:capital*pctEfe,aporte:aporte*pctEfe}
-  };
-  ultimoCalc={edad:edad,perfil:perfil,capital:capital,aporte:aporte,pctRV:pctRV,pctRF:pctRF,alloc:alloc};
-  // KPIs
-  $('kRV').textContent=Math.round(pctRV*100)+'%';
-  $('kRF').textContent=Math.round(pctRF*100)+'%';
-  $('kAporte').textContent=fmt(aporte);
-  // Barra visual
-  var barHTML=VEHICULOS.map(function(v){
-    var pct=alloc[v.key].pct*100;
-    return pct>=2?'<div class="alloc-seg" style="background:'+v.color+';width:'+pct+'%" title="'+v.nombre+': '+pct.toFixed(1)+'%">'+(pct>=5?Math.round(pct)+'%':'')+'</div>':'';
-  }).filter(Boolean).join('');
-  $('allocBar').innerHTML=barHTML;
-  // Grid detallado
-  var gridHTML=VEHICULOS.map(function(v){
-    var a=alloc[v.key];
-    if(a.pct<0.005)return ''; // skip si <0.5%
-    return '<div class="alloc-row">'+
-      '<div class="alloc-dot" style="background:'+v.color+'"></div>'+
-      '<div class="alloc-info"><h4>'+v.nombre+'</h4><p>'+v.desc+'</p></div>'+
-      '<div class="alloc-numbers"><span class="pct">'+(a.pct*100).toFixed(1)+'%</span><span class="monto">'+fmt(a.capital)+(a.aporte>0?' + '+fmt(a.aporte)+'/m':'')+'</span></div>'+
-    '</div>';
-  }).filter(Boolean).join('');
-  $('allocGrid').innerHTML=gridHTML;
-  renderWow();
-  $('results').style.display='block';
-  $('results').scrollIntoView({behavior:'smooth'});
-}
-function renderWow(){
-  var c=ultimoCalc;
-  var perfilNombre=c.perfil===1?'Conservador':c.perfil===3?'Agresivo':'Moderado';
-  // Gancho
-  var gancho;
-  if(c.edad<=30 && c.perfil>=2)         gancho='Joven y moderado/agresivo: <em>el tiempo es tu mejor activo</em>.';
-  else if(c.edad>=55)                    gancho='A tu edad, la prioridad es <em>preservar lo construido</em>.';
-  else if(c.perfil===1)                  gancho='Perfil conservador. <em>Menos sustos, más paciencia.</em>';
-  else if(c.perfil===3)                  gancho='Perfil agresivo. <em>Aguanta caídas. Premio: rendimiento.</em>';
-  else                                    gancho='Asignación clásica. <em>Boring funciona.</em>';
-  $('gancho').innerHTML=gancho;
-  // Narrativa
-  var narr='A tus <strong>'+c.edad+' años</strong> con perfil <strong>'+perfilNombre+'</strong>, la regla 100-edad '+(c.perfil!==2?'ajustada':'')+' sugiere <strong>'+Math.round(c.pctRV*100)+'%</strong> en renta variable y <strong>'+Math.round(c.pctRF*100)+'%</strong> en renta fija.';
-  narr+='<br><br>Distribución dentro de cada tipo:<br>';
-  narr+='• <strong>Renta variable ('+Math.round(c.pctRV*100)+'%):</strong> 60% local (iCOLCAP) + 40% internacional (S&P 500). Diversificación geográfica reduce riesgo país.<br>';
-  narr+='• <strong>Renta fija ('+Math.round(c.pctRF*100)+'%):</strong> 50% AFC/Pensión vol., 30% FIC, 15% CDT, 5% efectivo. AFC tiene <strong>doble beneficio</strong>: rendimiento + reduce retefuente mensual.';
-  if(c.aporte>0) narr+='<br><br>Tu aporte mensual de <span class="num">'+fmt(c.aporte)+'</span> se distribuye igual. La consistencia mensual es lo que entrena el hábito y suma con compounding — más que el lump sum inicial.';
-  narr+='<br><br><strong>Lo que NO incluye esta asignación:</strong> finca raíz (categoría aparte), criptomonedas (aún no maduras como activo principal), inversiones exóticas. Mantente con lo simple y comprobado al menos hasta tu primer $400M de patrimonio (Munger: el primer $100K es lo más difícil).';
-  $('narrativa').innerHTML=narr;
-  // Ahas
-  var ahas=[
-    '<div class="aha-card '+(c.pctRV>=0.5?'good':'')+'"><span class="aha-tag">RV</span><div class="aha-num">'+Math.round(c.pctRV*100)+'%</div><div class="aha-lbl">renta variable (acciones, ETFs)</div></div>',
-    '<div class="aha-card '+(c.alloc.afc.pct>=0.2?'good':'')+'"><span class="aha-tag">sesgo fiscal</span><div class="aha-num">'+Math.round(c.alloc.afc.pct*100)+'%</div><div class="aha-lbl">en AFC + Pensión vol. (Art. 126 ET)</div></div>',
-    '<div class="aha-card good"><span class="aha-tag">internacional</span><div class="aha-num">'+Math.round(c.alloc.sp500.pct*100)+'%</div><div class="aha-lbl">USD via ETF — reduce riesgo país</div></div>'
-  ];
-  $('ahaGrid').innerHTML=ahas.join('');
-  // Action ladder
-  var actions=[];
-  if(c.alloc.afc.aporte>0 || c.alloc.afc.capital>0) actions.push({h:'Empieza por AFC + Pensión Voluntaria',p:'Es la maquina perfecta de Colombia: rendimiento + ahorra retefuente del mes (Art. 126-1/126-4 ET). Sin retefuente del 4% si cumples permanencia. <strong>Doble beneficio.</strong> Tope conjunto: 30% del ingreso o 3.800 UVT/año.'});
-  actions.push({h:'Abre cuenta de bolsa para ETFs',p:'Renta4 / BTG Pactual / Trii — todas online, sin mínimo elevado. Empieza con <strong>iCOLCAP</strong> (acciones colombianas). Cuando tengas $20M+ diversifica con S&P 500 vía la misma plataforma.'});
-  actions.push({h:'Programa transferencia automática',p:'El día que te pagan, <strong>'+fmt(c.aporte)+'</strong>/mes salen automático a tus cuentas de inversión. La fricción protege la plata. En 6 meses ya no la extrañas.'});
-  if(c.edad<=35) actions.push({h:'No saques antes de 5 años',p:'A tu edad el compounding es tu mejor amigo. Sacar para "aprovechar oportunidades" o cubrir un imprevisto que no era imprevisto resetea la curva. Para imprevistos: fondo de emergencia separado.'});
-  $('cardActions').style.display='block';
-  $('actionLadder').innerHTML=actions.slice(0,3).map(function(a,i){
-    return '<div class="action-step"><div class="action-num">'+(i+1)+'</div><div class="action-body"><h4>'+a.h+'</h4><p>'+a.p+'</p></div></div>';
-  }).join('');
-  // Share card
-  var shareLine;
-  if(c.edad<=30) shareLine='A los <em>'+c.edad+'</em>, mi cartera es <em>'+Math.round(c.pctRV*100)+'% renta variable</em>. El tiempo trabaja para mí.';
-  else if(c.edad>=55) shareLine='A los <em>'+c.edad+'</em>, mi cartera es <em>'+Math.round(c.pctRF*100)+'% renta fija</em>. Preservar > apostar.';
-  else shareLine='Mi asignación: <em>'+Math.round(c.pctRV*100)+'% RV / '+Math.round(c.pctRF*100)+'% RF</em>. Regla 100-edad.';
-  $('cardShare').style.display='block';
-  $('shareCard').innerHTML=
-    '<div class="share-card-label">Mi asignación de inversión Colombia</div>'+
-    '<div class="share-card-amount">'+Math.round(c.pctRV*100)+'/'+Math.round(c.pctRF*100)+'</div>'+
-    '<div class="share-card-line">'+shareLine+' Distribuida en 6 vehículos.</div>'+
-    '<div class="share-card-stats">'+
-      '<div class="share-card-stat">Edad<strong>'+c.edad+'</strong></div>'+
-      '<div class="share-card-stat">Capital<strong>'+fmt(c.capital)+'</strong></div>'+
-      '<div class="share-card-stat">Aporte<strong>'+fmt(c.aporte)+'/m</strong></div>'+
-    '</div>'+
-    '<div class="share-actions">'+
-      '<button onclick="copiarShareInv()">📋 Copiar texto</button>'+
-    '</div>'+
-    '<div class="share-card-foot">exogenadian.com/inversion-101</div>';
-}
-function copiarShareInv(){
-  if(!ultimoCalc)return;
-  var c=ultimoCalc;
-  var txt='Mi asignación de inversión Colombia 2026\n';
-  txt+='Edad '+c.edad+' · Perfil '+(c.perfil===1?'conservador':c.perfil===3?'agresivo':'moderado')+'\n';
-  txt+=Math.round(c.pctRV*100)+'% renta variable / '+Math.round(c.pctRF*100)+'% renta fija\n';
-  txt+='AFC '+Math.round(c.alloc.afc.pct*100)+'% · iCOLCAP '+Math.round(c.alloc.icolcap.pct*100)+'% · S&P 500 '+Math.round(c.alloc.sp500.pct*100)+'%\n';
-  txt+='Calculado en exogenadian.com/inversion-101';
-  if(navigator.clipboard) navigator.clipboard.writeText(txt).then(function(){exoToast('Copiado al portapapeles','success')});
-  if(typeof gtag!=='undefined') gtag('event','inv_share',{tipo:'copy'});
-}
-</script>
+<script>"use strict";function $(a){return document.getElementById(a)}function fmt(a){if(a==null||isNaN(a))return"$0";return"$"+Math.round(a).toLocaleString("es-CO")}function num(a){var e=$(a).value.replace(/[^\d]/g,"");return parseInt(e,10)||0}["capital","aporte"].forEach(function(a){var e=$(a);e.addEventListener("input",function(){var a=this.value.replace(/[^\d]/g,"");this.value=a?"$"+parseInt(a,10).toLocaleString("es-CO"):""})});var ultimoCalc=null;var VEHICULOS=[{key:"icolcap",nombre:"ETF iCOLCAP",color:"#10B981",tipo:"rv",desc:"Acciones colombianas BVC. Diversificación local, dividendos. T+2 liquidación."},{key:"sp500",nombre:"ETF S&P 500 / NASDAQ",color:"#3B82F6",tipo:"rv",desc:"Renta variable internacional vía Renta4, BTG. Reduce riesgo país, exposición USD."},{key:"afc",nombre:"AFC + Pensión Voluntaria",color:"#059669",tipo:"rf",desc:"Art. 126-1/126-4 ET. Doble beneficio: rendimiento + reduce retefuente mensual."},{key:"fic",nombre:"FIC moderado / cuenta alta rent.",color:"#F59E0B",tipo:"rf",desc:"Liquidez 1-3 días. 9-13% E.A. típico. Bancolombia, Davivienda, BTG, Lulo, Nu."},{key:"cdt",nombre:"CDT 360 días",color:"#6366F1",tipo:"rf",desc:"Tasa fija, plazo cerrado. 12-14% E.A. Cuando quieres certeza absoluta."},{key:"efectivo",nombre:"Efectivo / cuenta de ahorro",color:"#9CA3AF",tipo:"rf",desc:"Buffer mínimo. NO contar como inversión. Solo para movimientos."}];function calcular(){var a=parseInt($("edad").value,10)||32;var e=parseInt($("perfil").value,10)||2;var r=num("capital");var o=num("aporte");if(r<=0&&o<=0){exoToast("Mete al menos capital o aporte mensual","warning");return}var i=Math.max(Math.min(100-a+(e-2)*10,90),20)/100;var n=1-i;var t=i*.6;var s=i*.4;var c=n*.5;var l=n*.3;var d=n*.15;var p=n*.05;var u={icolcap:{pct:t,capital:r*t,aporte:o*t},sp500:{pct:s,capital:r*s,aporte:o*s},afc:{pct:c,capital:r*c,aporte:o*c},fic:{pct:l,capital:r*l,aporte:o*l},cdt:{pct:d,capital:r*d,aporte:o*d},efectivo:{pct:p,capital:r*p,aporte:o*p}};ultimoCalc={edad:a,perfil:e,capital:r,aporte:o,pctRV:i,pctRF:n,alloc:u};$("kRV").textContent=Math.round(i*100)+"%";$("kRF").textContent=Math.round(n*100)+"%";$("kAporte").textContent=fmt(o);var v=VEHICULOS.map(function(a){var e=u[a.key].pct*100;return e>=2?'<div class="alloc-seg" style="background:'+a.color+";width:"+e+'%" title="'+a.nombre+": "+e.toFixed(1)+'%">'+(e>=5?Math.round(e)+"%":"")+"</div>":""}).filter(Boolean).join("");$("allocBar").innerHTML=v;var m=VEHICULOS.map(function(a){var e=u[a.key];if(e.pct<.005)return"";return'<div class="alloc-row">'+'<div class="alloc-dot" style="background:'+a.color+'"></div>'+'<div class="alloc-info"><h4>'+a.nombre+"</h4><p>"+a.desc+"</p></div>"+'<div class="alloc-numbers"><span class="pct">'+(e.pct*100).toFixed(1)+'%</span><span class="monto">'+fmt(e.capital)+(e.aporte>0?" + "+fmt(e.aporte)+"/m":"")+"</span></div>"+"</div>"}).filter(Boolean).join("");$("allocGrid").innerHTML=m;renderWow();$("results").style.display="block";$("results").scrollIntoView({behavior:"smooth"})}function renderWow(){var a=ultimoCalc;var e=a.perfil===1?"Conservador":a.perfil===3?"Agresivo":"Moderado";var r;if(a.edad<=30&&a.perfil>=2)r="Joven y moderado/agresivo: <em>el tiempo es tu mejor activo</em>.";else if(a.edad>=55)r="A tu edad, la prioridad es <em>preservar lo construido</em>.";else if(a.perfil===1)r="Perfil conservador. <em>Menos sustos, más paciencia.</em>";else if(a.perfil===3)r="Perfil agresivo. <em>Aguanta caídas. Premio: rendimiento.</em>";else r="Asignación clásica. <em>Boring funciona.</em>";$("gancho").innerHTML=r;var o="A tus <strong>"+a.edad+" años</strong> con perfil <strong>"+e+"</strong>, la regla 100-edad "+(a.perfil!==2?"ajustada":"")+" sugiere <strong>"+Math.round(a.pctRV*100)+"%</strong> en renta variable y <strong>"+Math.round(a.pctRF*100)+"%</strong> en renta fija.";o+="<br><br>Distribución dentro de cada tipo:<br>";o+="• <strong>Renta variable ("+Math.round(a.pctRV*100)+"%):</strong> 60% local (iCOLCAP) + 40% internacional (S&P 500). Diversificación geográfica reduce riesgo país.<br>";o+="• <strong>Renta fija ("+Math.round(a.pctRF*100)+"%):</strong> 50% AFC/Pensión vol., 30% FIC, 15% CDT, 5% efectivo. AFC tiene <strong>doble beneficio</strong>: rendimiento + reduce retefuente mensual.";if(a.aporte>0)o+='<br><br>Tu aporte mensual de <span class="num">'+fmt(a.aporte)+"</span> se distribuye igual. La consistencia mensual es lo que entrena el hábito y suma con compounding — más que el lump sum inicial.";o+="<br><br><strong>Lo que NO incluye esta asignación:</strong> finca raíz (categoría aparte), criptomonedas (aún no maduras como activo principal), inversiones exóticas. Mantente con lo simple y comprobado al menos hasta tu primer $400M de patrimonio (Munger: el primer $100K es lo más difícil).";$("narrativa").innerHTML=o;var i=['<div class="aha-card '+(a.pctRV>=.5?"good":"")+'"><span class="aha-tag">RV</span><div class="aha-num">'+Math.round(a.pctRV*100)+'%</div><div class="aha-lbl">renta variable (acciones, ETFs)</div></div>','<div class="aha-card '+(a.alloc.afc.pct>=.2?"good":"")+'"><span class="aha-tag">sesgo fiscal</span><div class="aha-num">'+Math.round(a.alloc.afc.pct*100)+'%</div><div class="aha-lbl">en AFC + Pensión vol. (Art. 126 ET)</div></div>','<div class="aha-card good"><span class="aha-tag">internacional</span><div class="aha-num">'+Math.round(a.alloc.sp500.pct*100)+'%</div><div class="aha-lbl">USD via ETF — reduce riesgo país</div></div>'];$("ahaGrid").innerHTML=i.join("");var n=[];if(a.alloc.afc.aporte>0||a.alloc.afc.capital>0)n.push({h:"Empieza por AFC + Pensión Voluntaria",p:"Es la maquina perfecta de Colombia: rendimiento + ahorra retefuente del mes (Art. 126-1/126-4 ET). Sin retefuente del 4% si cumples permanencia. <strong>Doble beneficio.</strong> Tope conjunto: 30% del ingreso o 3.800 UVT/año."});n.push({h:"Abre cuenta de bolsa para ETFs",p:"Renta4 / BTG Pactual / Trii — todas online, sin mínimo elevado. Empieza con <strong>iCOLCAP</strong> (acciones colombianas). Cuando tengas $20M+ diversifica con S&P 500 vía la misma plataforma."});n.push({h:"Programa transferencia automática",p:"El día que te pagan, <strong>"+fmt(a.aporte)+"</strong>/mes salen automático a tus cuentas de inversión. La fricción protege la plata. En 6 meses ya no la extrañas."});if(a.edad<=35)n.push({h:"No saques antes de 5 años",p:'A tu edad el compounding es tu mejor amigo. Sacar para "aprovechar oportunidades" o cubrir un imprevisto que no era imprevisto resetea la curva. Para imprevistos: fondo de emergencia separado.'});$("cardActions").style.display="block";$("actionLadder").innerHTML=n.slice(0,3).map(function(a,e){return'<div class="action-step"><div class="action-num">'+(e+1)+'</div><div class="action-body"><h4>'+a.h+"</h4><p>"+a.p+"</p></div></div>"}).join("");var t;if(a.edad<=30)t="A los <em>"+a.edad+"</em>, mi cartera es <em>"+Math.round(a.pctRV*100)+"% renta variable</em>. El tiempo trabaja para mí.";else if(a.edad>=55)t="A los <em>"+a.edad+"</em>, mi cartera es <em>"+Math.round(a.pctRF*100)+"% renta fija</em>. Preservar > apostar.";else t="Mi asignación: <em>"+Math.round(a.pctRV*100)+"% RV / "+Math.round(a.pctRF*100)+"% RF</em>. Regla 100-edad.";$("cardShare").style.display="block";$("shareCard").innerHTML='<div class="share-card-label">Mi asignación de inversión Colombia</div>'+'<div class="share-card-amount">'+Math.round(a.pctRV*100)+"/"+Math.round(a.pctRF*100)+"</div>"+'<div class="share-card-line">'+t+" Distribuida en 6 vehículos.</div>"+'<div class="share-card-stats">'+'<div class="share-card-stat">Edad<strong>'+a.edad+"</strong></div>"+'<div class="share-card-stat">Capital<strong>'+fmt(a.capital)+"</strong></div>"+'<div class="share-card-stat">Aporte<strong>'+fmt(a.aporte)+"/m</strong></div>"+"</div>"+'<div class="share-actions">'+'<button onclick="copiarShareInv()">📋 Copiar texto</button>'+"</div>"+'<div class="share-card-foot">exogenadian.com/inversion-101</div>'}function copiarShareInv(){if(!ultimoCalc)return;var a=ultimoCalc;var e="Mi asignación de inversión Colombia 2026\n";e+="Edad "+a.edad+" · Perfil "+(a.perfil===1?"conservador":a.perfil===3?"agresivo":"moderado")+"\n";e+=Math.round(a.pctRV*100)+"% renta variable / "+Math.round(a.pctRF*100)+"% renta fija\n";e+="AFC "+Math.round(a.alloc.afc.pct*100)+"% · iCOLCAP "+Math.round(a.alloc.icolcap.pct*100)+"% · S&P 500 "+Math.round(a.alloc.sp500.pct*100)+"%\n";e+="Calculado en exogenadian.com/inversion-101";if(navigator.clipboard)navigator.clipboard.writeText(e).then(function(){exoToast("Copiado al portapapeles","success")});if(typeof gtag!=="undefined")gtag("event","inv_share",{tipo:"copy"})}</script>
 </body>
 </html>

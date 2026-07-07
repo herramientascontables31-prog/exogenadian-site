@@ -3,7 +3,7 @@
 <head>
 <script src="shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="og-image.png">
@@ -211,123 +211,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
   </div>
 </div>
 <script src="shared/certificado.js?v=a964ed74"></script>
-<script>
-(function(){
-  'use strict';
-  var input = document.getElementById('codeInput');
-  var resultValid = document.getElementById('resultValid');
-  var resultInvalid = document.getElementById('resultInvalid');
-  var resultPartial = document.getElementById('resultPartial');
-  var MONTHS = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-  function formatFecha(yyyymmdd) {
-    var parts = String(yyyymmdd || '').split('-');
-    if (parts.length !== 3) return yyyymmdd || '';
-    var d = parseInt(parts[2], 10), m = parseInt(parts[1], 10);
-    if (isNaN(d) || isNaN(m) || m < 1 || m > 12) return yyyymmdd;
-    return d + ' de ' + MONTHS[m - 1] + ' de ' + parts[0];
-  }
-  function hideAll() {
-    resultValid.className = 'result';
-    resultInvalid.className = 'result';
-    resultPartial.className = 'result';
-  }
-  function buildCertUrl(nombre, cursoId, codigo, fecha) {
-    return 'certificado.html#nombre=' + encodeURIComponent(nombre) +
-      '&curso=' + encodeURIComponent(cursoId) +
-      '&codigo=' + encodeURIComponent(codigo) +
-      '&fecha=' + encodeURIComponent(fecha);
-  }
-  function showValid(nombre, cursoId, codigo, fecha) {
-    var course = window.exoCertificado.COURSES[cursoId] || { name: cursoId };
-    document.getElementById('resNombre').textContent = nombre;
-    document.getElementById('resCurso').textContent = course.name;
-    document.getElementById('resFecha').textContent = formatFecha(fecha);
-    document.getElementById('resCodigo').textContent = codigo;
-    document.getElementById('resLink').href = buildCertUrl(nombre, cursoId, codigo, fecha);
-    resultValid.className = 'result valid';
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'certificado_verificado', { codigo: codigo, valido: true, modo: 'hash' });
-    }
-  }
-  function showPartial(cert) {
-    document.getElementById('resPartialNombre').textContent = cert.nombre;
-    document.getElementById('resPartialCurso').textContent = cert.cursoNombre;
-    document.getElementById('resPartialFecha').textContent = formatFecha(cert.fecha);
-    document.getElementById('resPartialCodigo').textContent = cert.codigo;
-    document.getElementById('resPartialLink').href = buildCertUrl(cert.nombre, cert.cursoId, cert.codigo, cert.fecha);
-    resultPartial.className = 'result partial';
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'certificado_verificado', { codigo: cert.codigo, valido: true, modo: 'localStorage' });
-    }
-  }
-  function showInvalid(codigo) {
-    resultInvalid.className = 'result invalid';
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'certificado_verificado', { codigo: codigo || '', valido: false });
-    }
-  }
-  // Auto-uppercase
-  input.addEventListener('input', function() {
-    this.value = this.value.toUpperCase();
-  });
-  input.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') verificar();
-  });
-  // Parse #hash params
-  function parseHashParams() {
-    var hash = window.location.hash.substring(1);
-    if (!hash) return null;
-    if (hash.indexOf('=') === -1) {
-      // Solo código (estilo viejo)
-      return { codigo: decodeURIComponent(hash.replace(/\+/g, ' ')).toUpperCase() };
-    }
-    var params = {};
-    hash.split('&').forEach(function(pair) {
-      var kv = pair.split('=');
-      if (kv.length === 2) params[decodeURIComponent(kv[0])] = decodeURIComponent(kv[1].replace(/\+/g, ' '));
-    });
-    return params;
-  }
-  window.verificar = function() {
-    hideAll();
-    var code = (input.value || '').trim().toUpperCase();
-    if (!code) { input.focus(); return; }
-    // Modo solo-código: fallback a localStorage local
-    var cert = window.exoCertificado.find(code);
-    if (cert) {
-      showPartial(cert);
-    } else {
-      showInvalid(code);
-    }
-  };
-  // Auto-run on load
-  var params = parseHashParams();
-  if (params) {
-    // Caso 1: payload completo (nombre + curso + codigo + fecha) → verifica por hash
-    if (params.nombre && params.curso && params.codigo && params.fecha) {
-      input.value = params.codigo.toUpperCase();
-      window.exoCertificado.verify(params.nombre, params.curso, params.fecha, params.codigo)
-        .then(function(ok) {
-          hideAll();
-          if (ok) {
-            showValid(params.nombre, params.curso, params.codigo, params.fecha);
-          } else {
-            showInvalid(params.codigo);
-          }
-        })
-        .catch(function(err) {
-          hideAll();
-          showInvalid(params.codigo);
-          console.error('Error verificando:', err);
-        });
-    }
-    // Caso 2: solo código → buscar en localStorage local
-    else if (params.codigo) {
-      input.value = params.codigo;
-      verificar();
-    }
-  }
-})();
-</script>
+<script>(function(){"use strict";var e=document.getElementById("codeInput");var t=document.getElementById("resultValid");var o=document.getElementById("resultInvalid");var n=document.getElementById("resultPartial");var r=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];function formatFecha(e){var t=String(e||"").split("-");if(t.length!==3)return e||"";var o=parseInt(t[2],10),n=parseInt(t[1],10);if(isNaN(o)||isNaN(n)||n<1||n>12)return e;return o+" de "+r[n-1]+" de "+t[0]}function hideAll(){t.className="result";o.className="result";n.className="result"}function buildCertUrl(e,t,o,n){return"certificado.html#nombre="+encodeURIComponent(e)+"&curso="+encodeURIComponent(t)+"&codigo="+encodeURIComponent(o)+"&fecha="+encodeURIComponent(n)}function showValid(e,o,n,r){var i=window.exoCertificado.COURSES[o]||{name:o};document.getElementById("resNombre").textContent=e;document.getElementById("resCurso").textContent=i.name;document.getElementById("resFecha").textContent=formatFecha(r);document.getElementById("resCodigo").textContent=n;document.getElementById("resLink").href=buildCertUrl(e,o,n,r);t.className="result valid";if(typeof gtag!=="undefined"){gtag("event","certificado_verificado",{codigo:n,valido:true,modo:"hash"})}}function showPartial(e){document.getElementById("resPartialNombre").textContent=e.nombre;document.getElementById("resPartialCurso").textContent=e.cursoNombre;document.getElementById("resPartialFecha").textContent=formatFecha(e.fecha);document.getElementById("resPartialCodigo").textContent=e.codigo;document.getElementById("resPartialLink").href=buildCertUrl(e.nombre,e.cursoId,e.codigo,e.fecha);n.className="result partial";if(typeof gtag!=="undefined"){gtag("event","certificado_verificado",{codigo:e.codigo,valido:true,modo:"localStorage"})}}function showInvalid(e){o.className="result invalid";if(typeof gtag!=="undefined"){gtag("event","certificado_verificado",{codigo:e||"",valido:false})}}e.addEventListener("input",function(){this.value=this.value.toUpperCase()});e.addEventListener("keydown",function(e){if(e.key==="Enter")verificar()});function parseHashParams(){var e=window.location.hash.substring(1);if(!e)return null;if(e.indexOf("=")===-1){return{codigo:decodeURIComponent(e.replace(/\+/g," ")).toUpperCase()}}var t={};e.split("&").forEach(function(e){var o=e.split("=");if(o.length===2)t[decodeURIComponent(o[0])]=decodeURIComponent(o[1].replace(/\+/g," "))});return t}window.verificar=function(){hideAll();var t=(e.value||"").trim().toUpperCase();if(!t){e.focus();return}var o=window.exoCertificado.find(t);if(o){showPartial(o)}else{showInvalid(t)}};var i=parseHashParams();if(i){if(i.nombre&&i.curso&&i.codigo&&i.fecha){e.value=i.codigo.toUpperCase();window.exoCertificado.verify(i.nombre,i.curso,i.fecha,i.codigo).then(function(e){hideAll();if(e){showValid(i.nombre,i.curso,i.codigo,i.fecha)}else{showInvalid(i.codigo)}}).catch(function(e){hideAll();showInvalid(i.codigo);console.error("Error verificando:",e)})}else if(i.codigo){e.value=i.codigo;verificar()}}})();</script>
 </body>
 </html>

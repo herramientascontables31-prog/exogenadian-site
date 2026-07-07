@@ -3,12 +3,7 @@
 <head>
 <script src="shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-S7SM6ST4CC');
-</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="og-image.png">
@@ -491,60 +486,7 @@ footer{padding:32px 48px 24px;background:var(--gray-900);color:var(--gray-400)}
   </div>
 </section>
 <script src="shared/vencimientos-pn.js?v=99caf5fe"></script>
-<script>
-(function(){
-  var SEASON_START = new Date('2026-08-12T00:00:00');
-  var SEASON_END   = new Date('2026-10-26T00:00:00');
-  var hoy = new Date(); hoy.setHours(0,0,0,0);
-  // Pill del hero con cuenta regresiva real
-  var pill = document.getElementById('heroSeasonPill');
-  if (pill) {
-    var dSeason = Math.round((SEASON_START - hoy) / 864e5);
-    if (dSeason > 1) pill.innerHTML = 'Temporada de renta AG 2025 &middot; el primer vencimiento es en <strong>' + dSeason + ' d&iacute;as</strong> (12 de agosto)';
-    else if (dSeason >= 0) pill.innerHTML = 'Temporada de renta AG 2025 &middot; <strong>el primer vencimiento es el 12 de agosto</strong>';
-    else if (hoy <= SEASON_END) pill.innerHTML = 'Temporada de renta AG 2025 &middot; <strong>vencimientos en curso</strong> hasta el 26 de octubre';
-  }
-  // Vencímetro
-  var inp = document.getElementById('venciInput');
-  var out = document.getElementById('venciOut');
-  var dot = document.getElementById('venciDot');
-  var cta = document.getElementById('venciCta');
-  if (!inp || !out || typeof vencimientosPN === 'undefined') return;
-  var hintHTML = out.innerHTML;
-  var tracked = false;
-  inp.addEventListener('input', function(){
-    var v = inp.value.replace(/\D/g, '');
-    if (v !== inp.value) inp.value = v;
-    if (v.length === 0) {
-      out.innerHTML = hintHTML;
-      dot.classList.remove('on');
-      cta.innerHTML = 'Preparar su 210 con tiempo &rarr;';
-      return;
-    }
-    if (v.length === 1) {
-      out.innerHTML = '<span class="venci-hint">Un d&iacute;gito m&aacute;s&hellip; la DIAN asigna la fecha por los <strong>dos</strong> &uacute;ltimos.</span>';
-      dot.classList.remove('on');
-      return;
-    }
-    var info = vencimientosPN.getVencimientoPN(v, 2026);
-    if (!info) return;
-    var dias = info.diasRestantes;
-    var chip, cls;
-    if (info.vencido) { cls = 'late'; chip = 'venci&oacute; hace ' + Math.abs(dias) + ' d&iacute;as'; }
-    else if (dias <= 15) { cls = 'warn'; chip = 'faltan ' + dias + ' d&iacute;as'; }
-    else { cls = 'ok'; chip = 'faltan ' + dias + ' d&iacute;as'; }
-    out.innerHTML =
-      '<span class="venci-date">' + info.fechaLarga + '</span>' +
-      '<span class="venci-days ' + cls + '">' + chip + '</span>' +
-      '<span class="venci-sub">D&iacute;gitos ' + String(info.rangoLo).padStart(2,'0') + '&ndash;' + String(info.rangoHi).padStart(2,'0') + ' &middot; cuota &uacute;nica</span>';
-    var pct = (new Date(info.fechaIso + 'T00:00:00') - SEASON_START) / (SEASON_END - SEASON_START) * 100;
-    dot.style.left = Math.max(0, Math.min(100, pct)) + '%';
-    dot.classList.add('on');
-    cta.innerHTML = info.vencido ? 'Preparar su 210 extempor&aacute;nea &rarr;' : 'Preparar el 210 de este cliente &rarr;';
-    if (!tracked && typeof gtag !== 'undefined') { tracked = true; gtag('event', 'vencimetro_consulta', { digitos: info.ultimosDosDigitos }); }
-  });
-})();
-</script>
+<script>(function(){var e=new Date("2026-08-12T00:00:00");var a=new Date("2026-10-26T00:00:00");var n=new Date;n.setHours(0,0,0,0);var t=document.getElementById("heroSeasonPill");if(t){var r=Math.round((e-n)/864e5);if(r>1)t.innerHTML="Temporada de renta AG 2025 &middot; el primer vencimiento es en <strong>"+r+" d&iacute;as</strong> (12 de agosto)";else if(r>=0)t.innerHTML="Temporada de renta AG 2025 &middot; <strong>el primer vencimiento es el 12 de agosto</strong>";else if(n<=a)t.innerHTML="Temporada de renta AG 2025 &middot; <strong>vencimientos en curso</strong> hasta el 26 de octubre"}var i=document.getElementById("venciInput");var s=document.getElementById("venciOut");var o=document.getElementById("venciDot");var c=document.getElementById("venciCta");if(!i||!s||typeof vencimientosPN==="undefined")return;var d=s.innerHTML;var l=false;i.addEventListener("input",function(){var n=i.value.replace(/\D/g,"");if(n!==i.value)i.value=n;if(n.length===0){s.innerHTML=d;o.classList.remove("on");c.innerHTML="Preparar su 210 con tiempo &rarr;";return}if(n.length===1){s.innerHTML='<span class="venci-hint">Un d&iacute;gito m&aacute;s&hellip; la DIAN asigna la fecha por los <strong>dos</strong> &uacute;ltimos.</span>';o.classList.remove("on");return}var t=vencimientosPN.getVencimientoPN(n,2026);if(!t)return;var r=t.diasRestantes;var u,v;if(t.vencido){v="late";u="venci&oacute; hace "+Math.abs(r)+" d&iacute;as"}else if(r<=15){v="warn";u="faltan "+r+" d&iacute;as"}else{v="ok";u="faltan "+r+" d&iacute;as"}s.innerHTML='<span class="venci-date">'+t.fechaLarga+"</span>"+'<span class="venci-days '+v+'">'+u+"</span>"+'<span class="venci-sub">D&iacute;gitos '+String(t.rangoLo).padStart(2,"0")+"&ndash;"+String(t.rangoHi).padStart(2,"0")+" &middot; cuota &uacute;nica</span>";var m=(new Date(t.fechaIso+"T00:00:00")-e)/(a-e)*100;o.style.left=Math.max(0,Math.min(100,m))+"%";o.classList.add("on");c.innerHTML=t.vencido?"Preparar su 210 extempor&aacute;nea &rarr;":"Preparar el 210 de este cliente &rarr;";if(!l&&typeof gtag!=="undefined"){l=true;gtag("event","vencimetro_consulta",{digitos:t.ultimosDosDigitos})}})})();</script>
 <section class="fade-in" id="renta-pn" style="padding:60px 20px;background:linear-gradient(170deg,#ECFDF5 0%,#fff 50%,#D1FAE5 100%);position:relative;overflow:hidden">
   <div style="max-width:1100px;margin:0 auto">
     <div style="text-align:center;margin-bottom:32px">
@@ -723,12 +665,7 @@ footer{padding:32px 48px 24px;background:var(--gray-900);color:var(--gray-400)}
     <p style="text-align:center;margin-top:16px;font-size:.82rem;color:var(--gray-400)">¿No encuentras lo que buscas? <a href="#" onclick="event.preventDefault();document.querySelector('.exa-fab')&&document.querySelector('.exa-fab').click()" style="color:var(--green-600);font-weight:600;text-decoration:underline">Preg&uacute;ntale a Exa</a></p>
   </div>
 </section>
-<script>
-function wizardGo(url, eventName) {
-  if (typeof gtag !== 'undefined') gtag('event', 'wizard_select', { herramienta: eventName });
-  window.location.href = url;
-}
-</script>
+<script>function wizardGo(e,i){if(typeof gtag!=="undefined")gtag("event","wizard_select",{herramienta:i});window.location.href=e}</script>
 <section class="fade-in" id="gestion" style="padding:60px 20px;background:linear-gradient(170deg,#FFFBEB 0%,#FFF 50%,#FEF3C7 100%);position:relative;overflow:hidden">
   <div style="max-width:1100px;margin:0 auto">
     <div style="text-align:center;margin-bottom:32px">
@@ -931,13 +868,7 @@ function wizardGo(url, eventName) {
     </div>
   </div>
 </section>
-<script>
-function testimScroll(dir){
-  var s=document.getElementById('testimSlider');
-  if(!s)return;
-  s.scrollBy({left:dir*300,behavior:'smooth'});
-}
-</script>
+<script>function testimScroll(t){var e=document.getElementById("testimSlider");if(!e)return;e.scrollBy({left:t*300,behavior:"smooth"})}</script>
 <section class="fade-in" id="ia" style="padding:50px 20px;background:linear-gradient(170deg,#0B1210 0%,#111C18 50%,#0E1915 100%);position:relative;overflow:hidden">
   <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;position:relative;z-index:1" class="ia-home-banner">
     <div>
@@ -1268,166 +1199,8 @@ function testimScroll(dir){
     </div>
   </div>
 </footer>
-<script>
-/* === Nav scroll + mobile menu + dropdown === */
-const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>20));
-document.querySelectorAll('#navLinks a').forEach(a=>a.addEventListener('click',()=>{
-  document.getElementById('navLinks').classList.remove('open');
-}));
-/* Cerrar dropdown al hacer click fuera */
-document.addEventListener('click',function(e){
-  const dd=document.getElementById('navDropdown');
-  if(dd&&!dd.contains(e.target)){dd.classList.remove('open')}
-});
-/* === Fade in observer === */
-const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:.1});
-document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
-/* GA4: trackear si el usuario ve la sección de precios */
-(function(){
-  var tracked=false;
-  var planes=document.getElementById('precios');
-  if(planes && typeof IntersectionObserver!=='undefined'){
-    new IntersectionObserver(function(entries){
-      if(!tracked && entries[0].isIntersecting){
-        tracked=true;
-        gtag('event','seccion_precios_vista',{pagina:'home'});
-      }
-    },{threshold:0.3}).observe(planes);
-  }
-})();
-/* ═══ Nudge anti-abandono ═══ */
-(function(){
-  var interacted=false;
-  function markInteracted(){interacted=true}
-  document.addEventListener('click',markInteracted,{ once:true });
-  document.addEventListener('scroll',markInteracted,{ once:true });
-  // Tooltip sutil a los 30s sin interacción
-  setTimeout(function(){
-    if(interacted) return;
-    var nudge=document.createElement('div');
-    nudge.id='nudgeTooltip';
-    nudge.innerHTML='<span style="margin-right:8px">👋</span> ¿Primera vez aquí? Empieza por la <a href="exogena-suite.html" style="color:#059669;font-weight:700;text-decoration:underline">Kit Exógena — 21 formatos</a> <button onclick="this.parentElement.remove()" style="background:none;border:none;color:#9CA3AF;font-size:1rem;cursor:pointer;margin-left:8px;vertical-align:middle">✕</button>';
-    nudge.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#fff;border:1.5px solid #A7F3D0;border-radius:12px;padding:12px 20px;font-size:.88rem;color:#374151;box-shadow:0 8px 30px rgba(0,0,0,.12);z-index:95;opacity:0;transition:all .4s ease-out;white-space:nowrap;max-width:90vw';
-    document.body.appendChild(nudge);
-    requestAnimationFrame(function(){nudge.style.opacity='1';nudge.style.transform='translateX(-50%) translateY(0)'});
-    // Auto-cerrar a los 15s
-    setTimeout(function(){if(nudge.parentElement){nudge.style.opacity='0';setTimeout(function(){nudge.remove()},400)}},15000);
-    gtag('event','nudge_mostrado',{tipo:'primera_vez_30s'});
-  },30000);
-  // Evento abandono_sin_interaccion a los 45s
-  setTimeout(function(){
-    if(!interacted){
-      gtag('event','abandono_sin_interaccion',{segundos:45,pagina:'home'});
-    }
-  },45000);
-})();
-</script>
-<script>
-/* === PRO Session (global, compartida con todas las paginas) === */
-const PRO_API='https://script.google.com/macros/s/AKfycbwT5ofExiwOKKLnBlwH6Uqhs4cdDpaieSiLn2dYf5D-6yPIdJ_9XEWeIGYyq1ViNKiasQ/exec';
-function getDeviceFingerprint(){
-  let uid=localStorage.getItem('exogenadian_device_id');
-  if(!uid){uid='D-'+(crypto.randomUUID?crypto.randomUUID():Math.random().toString(36).substr(2,9)+'-'+Math.random().toString(36).substr(2,9)).split('-').slice(0,2).join('');localStorage.setItem('exogenadian_device_id',uid)}
-  return uid;
-}
-function showProNav(){
-  document.getElementById('proNavLogin').style.display='none';
-  document.getElementById('proNavActive').style.display='flex';
-}
-function cerrarProNav(){
-  localStorage.removeItem('exogenadian_pro_email');
-  localStorage.removeItem('exogenadian_pro_key');
-  document.getElementById('proNavLogin').style.display='flex';
-  document.getElementById('proNavActive').style.display='none';
-  document.getElementById('proNavKey').value='';
-}
-function _navLoadingShow(msg){
-  let ov=document.getElementById('exoNavLoading');
-  if(!ov){
-    ov=document.createElement('div');
-    ov.id='exoNavLoading';
-    ov.className='exo-loading';
-    ov.innerHTML='<div class="spinner"></div><div class="spinner-text">'+(msg||'Verificando...')+'</div>';
-    document.body.appendChild(ov);
-  } else {
-    const t=ov.querySelector('.spinner-text');if(t)t.textContent=msg||'Verificando...';
-  }
-  // force reflow then activate
-  requestAnimationFrame(()=>ov.classList.add('active'));
-}
-function _navLoadingHide(){
-  const ov=document.getElementById('exoNavLoading');
-  if(ov)ov.classList.remove('active');
-}
-async function activarProNav(){
-  const inp=document.getElementById('proNavKey');
-  const val=inp?inp.value.trim().toLowerCase():'';
-  if(!val){exoToast('Ingresa tu email PRO','warning');return}
-  // Loading state (overlay + button)
-  const btn=inp.nextElementSibling;
-  const btnText=btn?btn.textContent:'';
-  if(btn){btn.textContent='Verificando...';btn.disabled=true}
-  inp.style.borderColor='var(--green-400)';
-  inp.disabled=true;
-  _navLoadingShow('Verificando suscripción...');
-  const t0=Date.now();
-  try{
-    const fp=getDeviceFingerprint();
-    const isEmail=val.includes('@');
-    const action=isEmail?'validateEmail':'validateKey';
-    const param=isEmail?'email':'key';
-    const url=PRO_API+'?action='+action+'&'+param+'='+encodeURIComponent(val)+'&device='+encodeURIComponent(fp);
-    const res=await fetch(url);
-    const data=await res.json();
-    // Esperar mínimo 1s para dar feedback visual
-    const elapsed=Date.now()-t0;
-    if(elapsed<1000) await new Promise(r=>setTimeout(r,1000-elapsed));
-    if(data.valid){
-      if(isEmail){localStorage.setItem('exogenadian_pro_email',val)}
-      else{localStorage.setItem('exogenadian_pro_key',val)}
-      localStorage.setItem('exogenadian_pro_lastcheck',Date.now().toString());
-      if(typeof exoTrack!=='undefined') exoTrack.proActivated(isEmail?'email':'key');
-      showProNav();
-    }else{
-      inp.style.borderColor='#EF4444';
-      const msg=data.reason==='Clave expirada'||data.reason==='Suscripción expirada'?'Suscripción expirada'
-        :data.reason&&data.reason.includes('dispositivos')?'Límite de dispositivos (máx 3)'
-        :data.reason&&data.reason.includes('No se encontró')?'No hay suscripción activa para este email'
-        :data.reason||'No encontrado';
-      exoToast(msg,'warning');
-    }
-  }catch(e){console.error('[PRO] Error:',e);exoToast('Error de conexión: '+e.message,'error')}
-  finally{
-    _navLoadingHide();
-    if(inp)inp.disabled=false;
-    if(btn){btn.textContent=btnText;btn.disabled=false}
-  }
-}
-// Auto-check al cargar
-try{
-  const savedEmail=localStorage.getItem('exogenadian_pro_email');
-  const savedKey=localStorage.getItem('exogenadian_pro_key');
-  const saved=savedEmail||savedKey;
-  if(saved){
-    (async()=>{
-      try{
-        const fp=getDeviceFingerprint();
-        const isEmail=!!savedEmail;
-        const action=isEmail?'validateEmail':'validateKey';
-        const param=isEmail?'email':'key';
-        const res=await fetch(PRO_API+'?action='+action+'&'+param+'='+encodeURIComponent(saved)+'&device='+encodeURIComponent(fp));
-        const data=await res.json();
-        if(data.valid){showProNav()}
-        else{localStorage.removeItem('exogenadian_pro_email');localStorage.removeItem('exogenadian_pro_key')}
-      }catch(e){
-        const last=localStorage.getItem('exogenadian_pro_lastcheck');
-        if(last&&Date.now()-parseInt(last)<86400000){showProNav()}
-      }
-    })();
-  }
-}catch(e){console.error('[PRO] Init error:',e)}
-</script>
+<script>const nav=document.getElementById("nav");window.addEventListener("scroll",()=>nav.classList.toggle("scrolled",window.scrollY>20));document.querySelectorAll("#navLinks a").forEach(e=>e.addEventListener("click",()=>{document.getElementById("navLinks").classList.remove("open")}));document.addEventListener("click",function(e){const t=document.getElementById("navDropdown");if(t&&!t.contains(e.target)){t.classList.remove("open")}});const obs=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible")})},{threshold:.1});document.querySelectorAll(".fade-in").forEach(e=>obs.observe(e));(function(){var e=false;var t=document.getElementById("precios");if(t&&typeof IntersectionObserver!=="undefined"){new IntersectionObserver(function(t){if(!e&&t[0].isIntersecting){e=true;gtag("event","seccion_precios_vista",{pagina:"home"})}},{threshold:.3}).observe(t)}})();(function(){var e=false;function markInteracted(){e=true}document.addEventListener("click",markInteracted,{once:true});document.addEventListener("scroll",markInteracted,{once:true});setTimeout(function(){if(e)return;var t=document.createElement("div");t.id="nudgeTooltip";t.innerHTML='<span style="margin-right:8px">👋</span> ¿Primera vez aquí? Empieza por la <a href="exogena-suite.html" style="color:#059669;font-weight:700;text-decoration:underline">Kit Exógena — 21 formatos</a> <button onclick="this.parentElement.remove()" style="background:none;border:none;color:#9CA3AF;font-size:1rem;cursor:pointer;margin-left:8px;vertical-align:middle">✕</button>';t.style.cssText="position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#fff;border:1.5px solid #A7F3D0;border-radius:12px;padding:12px 20px;font-size:.88rem;color:#374151;box-shadow:0 8px 30px rgba(0,0,0,.12);z-index:95;opacity:0;transition:all .4s ease-out;white-space:nowrap;max-width:90vw";document.body.appendChild(t);requestAnimationFrame(function(){t.style.opacity="1";t.style.transform="translateX(-50%) translateY(0)"});setTimeout(function(){if(t.parentElement){t.style.opacity="0";setTimeout(function(){t.remove()},400)}},15e3);gtag("event","nudge_mostrado",{tipo:"primera_vez_30s"})},3e4);setTimeout(function(){if(!e){gtag("event","abandono_sin_interaccion",{segundos:45,pagina:"home"})}},45e3)})();</script>
+<script>const PRO_API="https://script.google.com/macros/s/AKfycbwT5ofExiwOKKLnBlwH6Uqhs4cdDpaieSiLn2dYf5D-6yPIdJ_9XEWeIGYyq1ViNKiasQ/exec";function getDeviceFingerprint(){let e=localStorage.getItem("exogenadian_device_id");if(!e){e="D-"+(crypto.randomUUID?crypto.randomUUID():Math.random().toString(36).substr(2,9)+"-"+Math.random().toString(36).substr(2,9)).split("-").slice(0,2).join("");localStorage.setItem("exogenadian_device_id",e)}return e}function showProNav(){document.getElementById("proNavLogin").style.display="none";document.getElementById("proNavActive").style.display="flex"}function cerrarProNav(){localStorage.removeItem("exogenadian_pro_email");localStorage.removeItem("exogenadian_pro_key");document.getElementById("proNavLogin").style.display="flex";document.getElementById("proNavActive").style.display="none";document.getElementById("proNavKey").value=""}function _navLoadingShow(e){let o=document.getElementById("exoNavLoading");if(!o){o=document.createElement("div");o.id="exoNavLoading";o.className="exo-loading";o.innerHTML='<div class="spinner"></div><div class="spinner-text">'+(e||"Verificando...")+"</div>";document.body.appendChild(o)}else{const t=o.querySelector(".spinner-text");if(t)t.textContent=e||"Verificando..."}requestAnimationFrame(()=>o.classList.add("active"))}function _navLoadingHide(){const e=document.getElementById("exoNavLoading");if(e)e.classList.remove("active")}async function activarProNav(){const e=document.getElementById("proNavKey");const o=e?e.value.trim().toLowerCase():"";if(!o){exoToast("Ingresa tu email PRO","warning");return}const t=e.nextElementSibling;const n=t?t.textContent:"";if(t){t.textContent="Verificando...";t.disabled=true}e.style.borderColor="var(--green-400)";e.disabled=true;_navLoadingShow("Verificando suscripción...");const a=Date.now();try{const t=getDeviceFingerprint();const n=o.includes("@");const i=n?"validateEmail":"validateKey";const r=n?"email":"key";const c=PRO_API+"?action="+i+"&"+r+"="+encodeURIComponent(o)+"&device="+encodeURIComponent(t);const s=await fetch(c);const d=await s.json();const l=Date.now()-a;if(l<1e3)await new Promise(e=>setTimeout(e,1e3-l));if(d.valid){if(n){localStorage.setItem("exogenadian_pro_email",o)}else{localStorage.setItem("exogenadian_pro_key",o)}localStorage.setItem("exogenadian_pro_lastcheck",Date.now().toString());if(typeof exoTrack!=="undefined")exoTrack.proActivated(n?"email":"key");showProNav()}else{e.style.borderColor="#EF4444";const o=d.reason==="Clave expirada"||d.reason==="Suscripción expirada"?"Suscripción expirada":d.reason&&d.reason.includes("dispositivos")?"Límite de dispositivos (máx 3)":d.reason&&d.reason.includes("No se encontró")?"No hay suscripción activa para este email":d.reason||"No encontrado";exoToast(o,"warning")}}catch(e){console.error("[PRO] Error:",e);exoToast("Error de conexión: "+e.message,"error")}finally{_navLoadingHide();if(e)e.disabled=false;if(t){t.textContent=n;t.disabled=false}}}try{const e=localStorage.getItem("exogenadian_pro_email");const o=localStorage.getItem("exogenadian_pro_key");const t=e||o;if(t){(async()=>{try{const o=getDeviceFingerprint();const n=!!e;const a=n?"validateEmail":"validateKey";const i=n?"email":"key";const r=await fetch(PRO_API+"?action="+a+"&"+i+"="+encodeURIComponent(t)+"&device="+encodeURIComponent(o));const c=await r.json();if(c.valid){showProNav()}else{localStorage.removeItem("exogenadian_pro_email");localStorage.removeItem("exogenadian_pro_key")}}catch(e){const o=localStorage.getItem("exogenadian_pro_lastcheck");if(o&&Date.now()-parseInt(o)<864e5){showProNav()}}})()}}catch(e){console.error("[PRO] Init error:",e)}</script>
 <link rel="stylesheet" href="shared/chat.css?v=78c6b2c3">
 <script defer src="shared/chat.js?v=d7b50b20"></script>
 </main>

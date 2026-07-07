@@ -3,7 +3,7 @@
 <head>
 <script src="shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="og-image.png">
@@ -269,76 +269,7 @@ h3{font-size:1rem;color:var(--text)}
 </div>
 <script src="shared/parametros-renta-pn.js?v=398ff16d"></script>
 <script src="shared/calculo210.js?v=bc147554"></script>
-<script>
-(function(){
-  var YEAR=2025;
-  function n(v){return parseInt((''+(v||'')).replace(/[^\d]/g,''),10)||0;}
-  function fmt(x){return '$'+(Math.round(x||0)).toLocaleString('es-CO');}
-  function fmtMiles(el){el.value=el.value.replace(/[^\d]/g,'').replace(/\B(?=(\d{3})+(?!\d))/g,'.');}
-  var ids=['ingresos','aportes','reten'];
-  ids.forEach(function(id){
-    var el=document.getElementById(id);
-    el.addEventListener('input',function(){fmtMiles(el);estimar();});
-  });
-  document.getElementById('tipo').addEventListener('change',function(){
-    var t=this.value;
-    document.getElementById('fAportes').style.display=(t==='pensionado')?'none':'block';
-    document.getElementById('fDeps').style.display=(t==='pensionado')?'none':'block';
-    estimar();
-  });
-  document.getElementById('deps').addEventListener('change',estimar);
-  document.querySelectorAll('#yearPills .year-pill').forEach(function(b){
-    b.addEventListener('click',function(){
-      document.querySelectorAll('#yearPills .year-pill').forEach(function(x){x.classList.remove('sel');});
-      b.classList.add('sel');YEAR=parseInt(b.getAttribute('data-y'),10);estimar();
-    });
-  });
-  function estimar(){
-    var tipo=document.getElementById('tipo').value;
-    var ing=n(document.getElementById('ingresos').value);
-    var aportes=n(document.getElementById('aportes').value);
-    var ret=n(document.getElementById('reten').value);
-    var deps=parseInt(document.getElementById('deps').value,10)||0;
-    var rEl=document.getElementById('result');
-    var bdEl=document.getElementById('bd');
-    if(ing<=0){
-      rEl.className='result zero';
-      rEl.innerHTML='<div class="lbl">Tu estimado</div><div class="val">— </div><div class="sub">Llena tus datos para ver el resultado</div>';
-      bdEl.style.display='none';
-      return;
-    }
-    var estado={cedulaGeneral:{trabajo:{},honorarios:{},capital:{},noLaboral:{}},cedulaPensiones:{},liquidacion:{}};
-    if(tipo==='empleado'){
-      estado.cedulaGeneral.trabajo={ingresosBrutos:ing,incrngo:aportes};
-    }else if(tipo==='independiente'){
-      // Servicios personales sin costos: modo rentas de trabajo (25% exento, par. 5 Art. 206)
-      estado.cedulaGeneral.honorarios={ingresosBrutos:ing,modo:'rentasTrabajo',incrngo:aportes};
-    }else{
-      estado.cedulaPensiones={ingresosBrutos:ing};
-    }
-    estado.cedulaGeneral.dependientesArt336Numero=Math.min(deps,4);
-    estado.liquidacion.retencionesAno=ret;
-    var r=window.cal210.calcular210(estado,YEAR);
-    var imp=(r.renglones&&r.renglones.c129)||0;   // impuesto a cargo (después de descuentos)
-    var devol=Math.max(0,ret-imp);
-    var pagar=Math.max(0,imp-ret);
-    if(ret>0 && devol>0){
-      rEl.className='result favor';
-      rEl.innerHTML='<div class="lbl">Saldo a favor estimado · te devuelven</div><div class="val">'+fmt(devol)+'</div><div class="sub">Te retuvieron más impuesto del que te corresponde</div>';
-    }else if(pagar>0){
-      rEl.className='result pagar';
-      rEl.innerHTML='<div class="lbl">Estimado · te tocaría pagar</div><div class="val">'+fmt(pagar)+'</div><div class="sub">Sin contar el anticipo del año siguiente</div>';
-    }else{
-      rEl.className='result zero';
-      rEl.innerHTML='<div class="lbl">Estimado</div><div class="val">$0</div><div class="sub">Ni saldo a favor ni a pagar significativos</div>';
-    }
-    bdEl.style.display='block';
-    bdEl.innerHTML=''+
-      '<div class="row"><span>Impuesto que te corresponde (aprox.)</span><span>'+fmt(imp)+'</span></div>'+
-      '<div class="row"><span>Retenciones del año</span><span>'+fmt(ret)+'</span></div>';
-  }
-})();
-</script>
+<script>(function(){var e=2025;function n(e){return parseInt((""+(e||"")).replace(/[^\d]/g,""),10)||0}function fmt(e){return"$"+Math.round(e||0).toLocaleString("es-CO")}function fmtMiles(e){e.value=e.value.replace(/[^\d]/g,"").replace(/\B(?=(\d{3})+(?!\d))/g,".")}var a=["ingresos","aportes","reten"];a.forEach(function(e){var a=document.getElementById(e);a.addEventListener("input",function(){fmtMiles(a);estimar()})});document.getElementById("tipo").addEventListener("change",function(){var e=this.value;document.getElementById("fAportes").style.display=e==="pensionado"?"none":"block";document.getElementById("fDeps").style.display=e==="pensionado"?"none":"block";estimar()});document.getElementById("deps").addEventListener("change",estimar);document.querySelectorAll("#yearPills .year-pill").forEach(function(a){a.addEventListener("click",function(){document.querySelectorAll("#yearPills .year-pill").forEach(function(e){e.classList.remove("sel")});a.classList.add("sel");e=parseInt(a.getAttribute("data-y"),10);estimar()})});function estimar(){var a=document.getElementById("tipo").value;var s=n(document.getElementById("ingresos").value);var t=n(document.getElementById("aportes").value);var l=n(document.getElementById("reten").value);var i=parseInt(document.getElementById("deps").value,10)||0;var r=document.getElementById("result");var o=document.getElementById("bd");if(s<=0){r.className="result zero";r.innerHTML='<div class="lbl">Tu estimado</div><div class="val">— </div><div class="sub">Llena tus datos para ver el resultado</div>';o.style.display="none";return}var d={cedulaGeneral:{trabajo:{},honorarios:{},capital:{},noLaboral:{}},cedulaPensiones:{},liquidacion:{}};if(a==="empleado"){d.cedulaGeneral.trabajo={ingresosBrutos:s,incrngo:t}}else if(a==="independiente"){d.cedulaGeneral.honorarios={ingresosBrutos:s,modo:"rentasTrabajo",incrngo:t}}else{d.cedulaPensiones={ingresosBrutos:s}}d.cedulaGeneral.dependientesArt336Numero=Math.min(i,4);d.liquidacion.retencionesAno=l;var c=window.cal210.calcular210(d,e);var u=c.renglones&&c.renglones.c129||0;var v=Math.max(0,l-u);var m=Math.max(0,u-l);if(l>0&&v>0){r.className="result favor";r.innerHTML='<div class="lbl">Saldo a favor estimado · te devuelven</div><div class="val">'+fmt(v)+'</div><div class="sub">Te retuvieron más impuesto del que te corresponde</div>'}else if(m>0){r.className="result pagar";r.innerHTML='<div class="lbl">Estimado · te tocaría pagar</div><div class="val">'+fmt(m)+'</div><div class="sub">Sin contar el anticipo del año siguiente</div>'}else{r.className="result zero";r.innerHTML='<div class="lbl">Estimado</div><div class="val">$0</div><div class="sub">Ni saldo a favor ni a pagar significativos</div>'}o.style.display="block";o.innerHTML=""+'<div class="row"><span>Impuesto que te corresponde (aprox.)</span><span>'+fmt(u)+"</span></div>"+'<div class="row"><span>Retenciones del año</span><span>'+fmt(l)+"</span></div>"}})();</script>
 <link rel="stylesheet" href="shared/chat.css?v=78c6b2c3">
 <script defer src="shared/chat.js?v=d7b50b20"></script>
 </body>

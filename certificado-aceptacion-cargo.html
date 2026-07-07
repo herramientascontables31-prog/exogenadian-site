@@ -3,12 +3,7 @@
 <head>
 <script src="shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-S7SM6ST4CC');
-</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="og-image.png">
@@ -200,111 +195,6 @@ a{color:#2E75B6}
     </article>
   </div>
 </div>
-<script>
-(function(){
-  'use strict';
-  var $=function(id){return document.getElementById(id);};
-  var H=window.certHelpers;
-  var perfil=perfilContador.get()||{};
-  if(!perfil.nombre){
-    var aviso=document.createElement('div');
-    aviso.className='no-perfil';
-    aviso.style.cssText='grid-column:1/-1;margin:0 0 14px;padding:12px 16px;font-size:.9rem';
-    aviso.innerHTML='💡 <strong>Tip:</strong> <a href="certificados.html">guarda tu perfil</a> para autollenar tu nombre, cédula y T.P. También puedes diligenciar manualmente abajo y descargar.';
-    var layout=document.querySelector('.cert-layout');
-    if(layout) layout.insertBefore(aviso, layout.firstChild);
-  }
-  // Periodo por defecto: año actual completo
-  var hoy=new Date();
-  function pad(n){ return n<10?('0'+n):String(n); }
-  $('periodo_desde').value=hoy.getFullYear()+'-01';
-  $('periodo_hasta').value=hoy.getFullYear()+'-12';
-  // Cargar libreta
-  var clientes=perfilContador.clientes.list();
-  var sel=$('cliSelect');
-  clientes.forEach(function(c){
-    var opt=document.createElement('option');
-    opt.value=c.id;
-    opt.textContent=c.nombre+(c.nit?(' — '+c.nit):'');
-    sel.appendChild(opt);
-  });
-  sel.addEventListener('change', function(){
-    if(!sel.value) return;
-    var c=perfilContador.clientes.get(sel.value);
-    if(!c) return;
-    $('emp_nombre').value=c.nombre||'';
-    $('emp_nit').value=c.nit||'';
-    $('emp_ciudad').value=c.ciudad||'';
-    if(c.rl_nombre) $('rl_nombre').value=c.rl_nombre;
-    render();
-  });
-  H.bindMonedaInput($('honorarios_mensuales'), render);
-  function render(){
-    var p=perfilContador.get()||{};
-    var empNombre=$('emp_nombre').value.trim()||'[Empresa]';
-    var empNit=$('emp_nit').value.trim()||'—';
-    var empCiudad=$('emp_ciudad').value.trim();
-    // Membrete: del contador (es carta del contador a la empresa)
-    var logoHtml=p.logo_base64?('<div class="cert-membrete-logo"><img src="'+p.logo_base64+'" alt=""></div>'):'';
-    $('membrete').innerHTML=logoHtml+'<div class="cert-membrete-info">'+
-      '<div class="nombre">'+H.esc(p.nombre||'')+'</div>'+
-      '<div class="sub">Contador Público · T.P. '+H.esc(p.tp||'')+
-      (p.ciudad?(' · '+H.esc(p.ciudad)):'')+
-      (p.telefono?('<br>Tel: '+H.esc(p.telefono)):'')+
-      (p.email?(' · '+H.esc(p.email)):'')+
-      (p.direccion?('<br>'+H.esc(p.direccion)):'')+'</div></div>';
-    var hoy=new Date();
-    $('vCiudadFecha').textContent=(p.ciudad?(p.ciudad+', '):'')+hoy.getDate()+' de '+H.MESES[hoy.getMonth()]+' de '+hoy.getFullYear();
-    $('vEmpNombre').textContent=empNombre;
-    $('vEmpNombre2').textContent=empNombre;
-    $('vEmpNit').textContent=empNit;
-    $('vEmpCiudad').textContent=empCiudad||'—';
-    $('vRl').textContent=$('rl_nombre').value.trim()||'[Representante Legal]';
-    var tipo=$('tipo_encargo').value;
-    var esRF=(tipo==='rf');
-    $('vTipoEncargoTitulo').textContent=esRF?'Revisoría Fiscal':'Servicios Contables Profesionales';
-    $('vTipoEncargo').textContent=esRF?'Revisor(a) Fiscal':'Contador(a) Público(a) externo(a)';
-    if(esRF){
-      $('vObjeto').textContent='Ejercer como Revisor(a) Fiscal de '+empNombre+', cumpliendo las funciones señaladas en los artículos 207 y 208 del Código de Comercio: examinar las operaciones, los inventarios, las actas y los libros; dictaminar los estados financieros; verificar el cumplimiento de las normas legales y estatutarias; e impartir las instrucciones necesarias para que la contabilidad refleje fielmente la situación financiera de la sociedad.';
-    } else {
-      $('vObjeto').textContent='Prestar servicios profesionales de Contaduría Pública a '+empNombre+', incluyendo: registro de operaciones, elaboración de estados financieros, presentación de declaraciones tributarias (renta, IVA, retención, ICA, exógena), liquidación de nómina y aportes a seguridad social, y elaboración de información financiera para la toma de decisiones.';
-    }
-    $('vActaRef').textContent=$('acta_referencia').value.trim()||'el acta de nombramiento aprobada por la Asamblea';
-    // Periodo
-    function fmtMonth(m){
-      if(!m) return '—';
-      var p=m.split('-');
-      return H.MESES[parseInt(p[1],10)-1]+' de '+p[0];
-    }
-    $('vPeriodo').textContent=fmtMonth($('periodo_desde').value)+' a '+fmtMonth($('periodo_hasta').value);
-    var hon=H.parseCOP($('honorarios_mensuales').value);
-    $('vHonorarios').textContent=H.formatCOP(hon);
-    $('vHonLetras').textContent=hon?H.numeroALetras(hon):'CERO';
-    $('vFormaPago').textContent=$('forma_pago').value;
-    // Firma
-    $('vFirmaImg').innerHTML=p.firma_base64?('<img src="'+p.firma_base64+'" alt="">'):'';
-    $('vFirmaNombre').textContent=p.nombre||'';
-    $('vFirmaCC').textContent=p.cc||'—';
-    $('vFirmaTP').textContent=p.tp||'—';
-    if(p.telefono){ $('vFirmaTel').style.display=''; $('vFirmaTel').textContent='Tel: '+p.telefono; }
-  }
-  ;['emp_nombre','emp_nit','emp_ciudad','rl_nombre','periodo_desde','periodo_hasta','acta_referencia','referencia_cliente'].forEach(function(id){
-    $(id).addEventListener('input', render);
-  });
-  ['tipo_encargo','forma_pago'].forEach(function(id){
-    $(id).addEventListener('change', render);
-  });
-  if(window.exoPro && exoPro.check){
-    exoPro.check().then(function(isPro){
-      if(isPro) $('sheet').setAttribute('data-pro','1');
-    });
-  }
-  window.descargarWord=function(){
-    var emp=$('emp_nombre').value.trim().replace(/[^a-zA-Z0-9]/g,'-')||'cliente';
-    H.downloadAsWord($('sheet'), 'aceptacion-cargo-'+emp);
-  };
-  render();
-})();
-</script>
+<script>(function(){"use strict";var $=function(e){return document.getElementById(e)};var e=window.certHelpers;var a=perfilContador.get()||{};if(!a.nombre){var t=document.createElement("div");t.className="no-perfil";t.style.cssText="grid-column:1/-1;margin:0 0 14px;padding:12px 16px;font-size:.9rem";t.innerHTML='💡 <strong>Tip:</strong> <a href="certificados.html">guarda tu perfil</a> para autollenar tu nombre, cédula y T.P. También puedes diligenciar manualmente abajo y descargar.';var r=document.querySelector(".cert-layout");if(r)r.insertBefore(t,r.firstChild)}var n=new Date;function pad(e){return e<10?"0"+e:String(e)}$("periodo_desde").value=n.getFullYear()+"-01";$("periodo_hasta").value=n.getFullYear()+"-12";var o=perfilContador.clientes.list();var i=$("cliSelect");o.forEach(function(e){var a=document.createElement("option");a.value=e.id;a.textContent=e.nombre+(e.nit?" — "+e.nit:"");i.appendChild(a)});i.addEventListener("change",function(){if(!i.value)return;var e=perfilContador.clientes.get(i.value);if(!e)return;$("emp_nombre").value=e.nombre||"";$("emp_nit").value=e.nit||"";$("emp_ciudad").value=e.ciudad||"";if(e.rl_nombre)$("rl_nombre").value=e.rl_nombre;render()});e.bindMonedaInput($("honorarios_mensuales"),render);function render(){var a=perfilContador.get()||{};var t=$("emp_nombre").value.trim()||"[Empresa]";var r=$("emp_nit").value.trim()||"—";var n=$("emp_ciudad").value.trim();var o=a.logo_base64?'<div class="cert-membrete-logo"><img src="'+a.logo_base64+'" alt=""></div>':"";$("membrete").innerHTML=o+'<div class="cert-membrete-info">'+'<div class="nombre">'+e.esc(a.nombre||"")+"</div>"+'<div class="sub">Contador Público · T.P. '+e.esc(a.tp||"")+(a.ciudad?" · "+e.esc(a.ciudad):"")+(a.telefono?"<br>Tel: "+e.esc(a.telefono):"")+(a.email?" · "+e.esc(a.email):"")+(a.direccion?"<br>"+e.esc(a.direccion):"")+"</div></div>";var i=new Date;$("vCiudadFecha").textContent=(a.ciudad?a.ciudad+", ":"")+i.getDate()+" de "+e.MESES[i.getMonth()]+" de "+i.getFullYear();$("vEmpNombre").textContent=t;$("vEmpNombre2").textContent=t;$("vEmpNit").textContent=r;$("vEmpCiudad").textContent=n||"—";$("vRl").textContent=$("rl_nombre").value.trim()||"[Representante Legal]";var l=$("tipo_encargo").value;var c=l==="rf";$("vTipoEncargoTitulo").textContent=c?"Revisoría Fiscal":"Servicios Contables Profesionales";$("vTipoEncargo").textContent=c?"Revisor(a) Fiscal":"Contador(a) Público(a) externo(a)";if(c){$("vObjeto").textContent="Ejercer como Revisor(a) Fiscal de "+t+", cumpliendo las funciones señaladas en los artículos 207 y 208 del Código de Comercio: examinar las operaciones, los inventarios, las actas y los libros; dictaminar los estados financieros; verificar el cumplimiento de las normas legales y estatutarias; e impartir las instrucciones necesarias para que la contabilidad refleje fielmente la situación financiera de la sociedad."}else{$("vObjeto").textContent="Prestar servicios profesionales de Contaduría Pública a "+t+", incluyendo: registro de operaciones, elaboración de estados financieros, presentación de declaraciones tributarias (renta, IVA, retención, ICA, exógena), liquidación de nómina y aportes a seguridad social, y elaboración de información financiera para la toma de decisiones."}$("vActaRef").textContent=$("acta_referencia").value.trim()||"el acta de nombramiento aprobada por la Asamblea";function fmtMonth(a){if(!a)return"—";var t=a.split("-");return e.MESES[parseInt(t[1],10)-1]+" de "+t[0]}$("vPeriodo").textContent=fmtMonth($("periodo_desde").value)+" a "+fmtMonth($("periodo_hasta").value);var s=e.parseCOP($("honorarios_mensuales").value);$("vHonorarios").textContent=e.formatCOP(s);$("vHonLetras").textContent=s?e.numeroALetras(s):"CERO";$("vFormaPago").textContent=$("forma_pago").value;$("vFirmaImg").innerHTML=a.firma_base64?'<img src="'+a.firma_base64+'" alt="">':"";$("vFirmaNombre").textContent=a.nombre||"";$("vFirmaCC").textContent=a.cc||"—";$("vFirmaTP").textContent=a.tp||"—";if(a.telefono){$("vFirmaTel").style.display="";$("vFirmaTel").textContent="Tel: "+a.telefono}}["emp_nombre","emp_nit","emp_ciudad","rl_nombre","periodo_desde","periodo_hasta","acta_referencia","referencia_cliente"].forEach(function(e){$(e).addEventListener("input",render)});["tipo_encargo","forma_pago"].forEach(function(e){$(e).addEventListener("change",render)});if(window.exoPro&&exoPro.check){exoPro.check().then(function(e){if(e)$("sheet").setAttribute("data-pro","1")})}window.descargarWord=function(){var a=$("emp_nombre").value.trim().replace(/[^a-zA-Z0-9]/g,"-")||"cliente";e.downloadAsWord($("sheet"),"aceptacion-cargo-"+a)};render()})();</script>
 </body>
 </html>

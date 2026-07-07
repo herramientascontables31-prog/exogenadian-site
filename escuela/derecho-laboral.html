@@ -3,12 +3,7 @@
 <head>
 <script src="../shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-S7SM6ST4CC');
-</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <meta name="theme-color" content="#059669">
@@ -1417,131 +1412,6 @@ C.C. [n&uacute;mero]
   </main>
 </div>
 <div class="toast-mini" id="toastMini">Plantilla copiada</div>
-<script>
-// ===== Paginaci&oacute;n entre m&oacute;dulos =====
-var TOTAL_MODULOS = 15;
-var STORAGE_KEY = 'curso-derecho-laboral-mod';
-var TITULOS = {
-  1:'Tipos de contrato',2:'Laboral vs prestación',3:'Salario y aux. transporte',
-  4:'Período de prueba',5:'Jornada laboral',6:'Recargos y horas extra',
-  7:'Descansos y vacaciones',8:'Cesantías e intereses',9:'Prima y dotación',
-  10:'EPS, pensión y ARL',11:'Licencias',12:'Incapacidad y fuero',
-  13:'Acoso laboral',14:'Terminación e indemnización',15:'Cómo hacerlos respetar'
-};
-function inyectarNav(){
-  for(var n=1;n<=TOTAL_MODULOS;n++){
-    var sec=document.getElementById('m'+n);
-    if(!sec)continue;
-    if(sec.querySelector('.mod-nav'))continue;
-    var div=document.createElement('div');
-    div.className='mod-nav';
-    var html='';
-    if(n>1){
-      html+='<a href="#m'+(n-1)+'" class="prev" onclick="navegar('+(n-1)+');return false;">&larr; '+TITULOS[n-1]+'</a>';
-    } else {
-      html+='<span class="mod-nav-spacer"></span>';
-    }
-    if(n<TOTAL_MODULOS){
-      html+='<a href="#m'+(n+1)+'" class="next" onclick="navegar('+(n+1)+');return false;">Módulo '+(n+1)+': '+TITULOS[n+1]+' &rarr;</a>';
-    } else {
-      html+='<a href="../escuela.html" class="next finalizar">Volver a la Escuela &rarr;</a>';
-    }
-    div.innerHTML=html;
-    sec.appendChild(div);
-  }
-}
-function navegar(n){
-  if(n<1||n>TOTAL_MODULOS)return;
-  document.querySelectorAll('.modulo').forEach(function(s){s.classList.remove('activo');});
-  var t=document.getElementById('m'+n);
-  if(t)t.classList.add('activo');
-  document.querySelectorAll('#sidebarNav a[data-mod]').forEach(function(a){
-    var i=parseInt(a.getAttribute('data-mod'),10);
-    a.classList.remove('active');a.classList.remove('completed');
-    if(i<n)a.classList.add('completed');
-    if(i===n)a.classList.add('active');
-  });
-  var pct=Math.round((n/TOTAL_MODULOS)*100);
-  var fill=document.getElementById('progressFill');
-  if(fill)fill.style.width=pct+'%';
-  try{localStorage.setItem(STORAGE_KEY,String(n));}catch(e){}
-  if(history.replaceState){history.replaceState(null,'','#m'+n);}
-  window.scrollTo({top:0,behavior:'smooth'});
-  var sb=document.getElementById('sidebar');
-  var ov=document.getElementById('sidebarOverlay');
-  if(sb)sb.classList.remove('open');
-  if(ov)ov.classList.remove('open');
-  if(typeof gtag!=='undefined'){gtag('event','escuela_modulo',{curso:'derecho-laboral',modulo:n});}
-}
-(function(){
-  inyectarNav();
-  // Sidebar links
-  document.querySelectorAll('#sidebarNav a[data-mod]').forEach(function(a){
-    a.addEventListener('click',function(ev){
-      ev.preventDefault();
-      navegar(parseInt(a.getAttribute('data-mod'),10));
-    });
-  });
-  // Mobile toggle
-  var btn=document.getElementById('sidebarToggle');
-  var sb=document.getElementById('sidebar');
-  var ov=document.getElementById('sidebarOverlay');
-  if(btn){btn.addEventListener('click',function(){sb.classList.add('open');ov.classList.add('open');});}
-  if(ov){ov.addEventListener('click',function(){sb.classList.remove('open');ov.classList.remove('open');});}
-  // M&oacute;dulo inicial: hash > localStorage > 1
-  var inicial=1;
-  var m=(location.hash||'').match(/^#m(\d+)$/);
-  if(m){inicial=parseInt(m[1],10);}
-  else{
-    try{var saved=localStorage.getItem(STORAGE_KEY);if(saved){inicial=parseInt(saved,10)||1;}}catch(e){}
-  }
-  if(inicial<1||inicial>TOTAL_MODULOS)inicial=1;
-  navegar(inicial);
-  // Soporte navegaci&oacute;n con hash manual
-  window.addEventListener('hashchange',function(){
-    var mh=(location.hash||'').match(/^#m(\d+)$/);
-    if(mh){navegar(parseInt(mh[1],10));}
-  });
-  // Atajos de teclado: flechas izq/der
-  document.addEventListener('keydown',function(ev){
-    if(ev.target&&(ev.target.tagName==='INPUT'||ev.target.tagName==='TEXTAREA'))return;
-    var current=null;
-    document.querySelectorAll('.modulo').forEach(function(s){if(s.classList.contains('activo'))current=parseInt(s.id.replace('m',''),10);});
-    if(!current)return;
-    if(ev.key==='ArrowRight'&&current<TOTAL_MODULOS)navegar(current+1);
-    if(ev.key==='ArrowLeft'&&current>1)navegar(current-1);
-  });
-})();
-// ===== Plantillas: copiar al portapapeles =====
-(function(){
-  var toast=document.getElementById('toastMini');
-  function show(msg){
-    toast.textContent=msg||'Plantilla copiada';
-    toast.classList.add('show');
-    setTimeout(function(){toast.classList.remove('show');},1800);
-  }
-  document.querySelectorAll('.copiar').forEach(function(b){
-    b.addEventListener('click',function(){
-      var id=b.getAttribute('data-target');
-      var pre=document.getElementById(id);
-      if(!pre)return;
-      var txt=pre.textContent;
-      if(navigator.clipboard&&navigator.clipboard.writeText){
-        navigator.clipboard.writeText(txt).then(function(){
-          b.textContent='Copiado';
-          b.classList.add('copiado');
-          show('Plantilla copiada');
-          setTimeout(function(){b.textContent='Copiar';b.classList.remove('copiado');},2000);
-        });
-      } else {
-        var ta=document.createElement('textarea');
-        ta.value=txt;document.body.appendChild(ta);ta.select();
-        try{document.execCommand('copy');show('Plantilla copiada');}catch(e){show('No se pudo copiar');}
-        document.body.removeChild(ta);
-      }
-    });
-  });
-})();
-</script>
+<script>var TOTAL_MODULOS=15;var STORAGE_KEY="curso-derecho-laboral-mod";var TITULOS={1:"Tipos de contrato",2:"Laboral vs prestación",3:"Salario y aux. transporte",4:"Período de prueba",5:"Jornada laboral",6:"Recargos y horas extra",7:"Descansos y vacaciones",8:"Cesantías e intereses",9:"Prima y dotación",10:"EPS, pensión y ARL",11:"Licencias",12:"Incapacidad y fuero",13:"Acoso laboral",14:"Terminación e indemnización",15:"Cómo hacerlos respetar"};function inyectarNav(){for(var e=1;e<=TOTAL_MODULOS;e++){var a=document.getElementById("m"+e);if(!a)continue;if(a.querySelector(".mod-nav"))continue;var t=document.createElement("div");t.className="mod-nav";var o="";if(e>1){o+='<a href="#m'+(e-1)+'" class="prev" onclick="navegar('+(e-1)+');return false;">&larr; '+TITULOS[e-1]+"</a>"}else{o+='<span class="mod-nav-spacer"></span>'}if(e<TOTAL_MODULOS){o+='<a href="#m'+(e+1)+'" class="next" onclick="navegar('+(e+1)+');return false;">Módulo '+(e+1)+": "+TITULOS[e+1]+" &rarr;</a>"}else{o+='<a href="../escuela.html" class="next finalizar">Volver a la Escuela &rarr;</a>'}t.innerHTML=o;a.appendChild(t)}}function navegar(e){if(e<1||e>TOTAL_MODULOS)return;document.querySelectorAll(".modulo").forEach(function(e){e.classList.remove("activo")});var a=document.getElementById("m"+e);if(a)a.classList.add("activo");document.querySelectorAll("#sidebarNav a[data-mod]").forEach(function(a){var t=parseInt(a.getAttribute("data-mod"),10);a.classList.remove("active");a.classList.remove("completed");if(t<e)a.classList.add("completed");if(t===e)a.classList.add("active")});var t=Math.round(e/TOTAL_MODULOS*100);var o=document.getElementById("progressFill");if(o)o.style.width=t+"%";try{localStorage.setItem(STORAGE_KEY,String(e))}catch(e){}if(history.replaceState){history.replaceState(null,"","#m"+e)}window.scrollTo({top:0,behavior:"smooth"});var r=document.getElementById("sidebar");var n=document.getElementById("sidebarOverlay");if(r)r.classList.remove("open");if(n)n.classList.remove("open");if(typeof gtag!=="undefined"){gtag("event","escuela_modulo",{curso:"derecho-laboral",modulo:e})}}(function(){inyectarNav();document.querySelectorAll("#sidebarNav a[data-mod]").forEach(function(e){e.addEventListener("click",function(a){a.preventDefault();navegar(parseInt(e.getAttribute("data-mod"),10))})});var e=document.getElementById("sidebarToggle");var a=document.getElementById("sidebar");var t=document.getElementById("sidebarOverlay");if(e){e.addEventListener("click",function(){a.classList.add("open");t.classList.add("open")})}if(t){t.addEventListener("click",function(){a.classList.remove("open");t.classList.remove("open")})}var o=1;var r=(location.hash||"").match(/^#m(\d+)$/);if(r){o=parseInt(r[1],10)}else{try{var n=localStorage.getItem(STORAGE_KEY);if(n){o=parseInt(n,10)||1}}catch(e){}}if(o<1||o>TOTAL_MODULOS)o=1;navegar(o);window.addEventListener("hashchange",function(){var e=(location.hash||"").match(/^#m(\d+)$/);if(e){navegar(parseInt(e[1],10))}});document.addEventListener("keydown",function(e){if(e.target&&(e.target.tagName==="INPUT"||e.target.tagName==="TEXTAREA"))return;var a=null;document.querySelectorAll(".modulo").forEach(function(e){if(e.classList.contains("activo"))a=parseInt(e.id.replace("m",""),10)});if(!a)return;if(e.key==="ArrowRight"&&a<TOTAL_MODULOS)navegar(a+1);if(e.key==="ArrowLeft"&&a>1)navegar(a-1)})})();(function(){var e=document.getElementById("toastMini");function show(a){e.textContent=a||"Plantilla copiada";e.classList.add("show");setTimeout(function(){e.classList.remove("show")},1800)}document.querySelectorAll(".copiar").forEach(function(e){e.addEventListener("click",function(){var a=e.getAttribute("data-target");var t=document.getElementById(a);if(!t)return;var o=t.textContent;if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(o).then(function(){e.textContent="Copiado";e.classList.add("copiado");show("Plantilla copiada");setTimeout(function(){e.textContent="Copiar";e.classList.remove("copiado")},2e3)})}else{var r=document.createElement("textarea");r.value=o;document.body.appendChild(r);r.select();try{document.execCommand("copy");show("Plantilla copiada")}catch(e){show("No se pudo copiar")}document.body.removeChild(r)}})})})();</script>
 </body>
 </html>

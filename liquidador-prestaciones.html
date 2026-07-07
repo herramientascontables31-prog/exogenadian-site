@@ -3,7 +3,7 @@
 <head>
 <script src="shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="og-image.png">
@@ -189,83 +189,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 </details>
 <div class="disclaimer">Cálculo orientativo para consultas rápidas. Para liquidaciones de contrato terminado, indemnizaciones por despido y deducciones, usa el <a href="liquidador-general.html" style="color:inherit;font-weight:700">liquidador laboral general</a>. Casos de servicio doméstico: <a href="liquidador-domestica.html" style="color:inherit;font-weight:700">liquidador especializado</a>.</div>
 </div>
-<script>
-function parseMoney(id){return parseInt(document.getElementById(id).value.replace(/\./g,'').replace(/,/g,''))||0;}
-function n(id){return parseFloat(document.getElementById(id).value)||0;}
-function fCOP(v){return '$'+Math.round(v).toLocaleString('es-CO');}
-document.querySelectorAll('.money').forEach(function(el){
-  el.addEventListener('input',function(){var v=this.value.replace(/\D/g,'');this.value=v?parseInt(v).toLocaleString('es-CO'):'';recalc();});
-});
-document.getElementById('iDias').addEventListener('input',recalc);
-function recalc(){
-  var s=parseMoney('iSalario');
-  var aux=parseMoney('iAux');
-  var dias=n('iDias');
-  var sblCesPrima=s+aux;
-  var sblVac=s;
-  var alertSBL=document.getElementById('alertSBL');
-  if(s>0){
-    alertSBL.style.display='flex';
-    alertSBL.innerHTML='Salario base de liquidación &mdash; Cesantías y Prima: <strong style="margin:0 4px">'+fCOP(sblCesPrima)+'</strong> &middot; Vacaciones: <strong style="margin:0 4px">'+fCOP(sblVac)+'</strong>';
-  }else{
-    alertSBL.style.display='none';
-  }
-  var grid=document.getElementById('resultados');
-  if(s<1||dias<1){grid.innerHTML='';document.getElementById('totalBar').style.display='none';return;}
-  var cesantias = sblCesPrima * dias / 360;
-  var intereses = cesantias * dias * 0.12 / 360;
-  var prima = sblCesPrima * dias / 360;
-  var vacaciones = sblVac * dias / 720;
-  var html='';
-  html+=card('cesantias','&#128176;','Cesantías', cesantias,
-    'SBL ('+fCOP(sblCesPrima)+') &times; '+dias+' días / 360',
-    'Art. 249 CST &middot; Ley 50/1990');
-  html+=card('intereses','&#128202;','Intereses sobre cesantías', intereses,
-    'Cesantías ('+fCOP(cesantias)+') &times; '+dias+' días &times; 12% / 360',
-    'Ley 52/1975');
-  html+=card('prima','&#127873;','Prima de servicios', prima,
-    'SBL ('+fCOP(sblCesPrima)+') &times; '+dias+' días / 360',
-    'Art. 306 CST &middot; Ley 1788/2016');
-  html+=card('vacaciones','&#127796;','Vacaciones', vacaciones,
-    'Salario básico ('+fCOP(sblVac)+') &times; '+dias+' días / 720',
-    'Art. 186 CST &middot; sin aux. transporte');
-  grid.innerHTML=html;
-  var total=cesantias+intereses+prima+vacaciones;
-  document.getElementById('totalVal').textContent=fCOP(total);
-  document.getElementById('totalBar').style.display='flex';
-}
-function card(cls,ico,titulo,monto,formula,norma){
-  return '<div class="prest-card '+cls+'">'+
-    '<div class="icono">'+ico+'</div>'+
-    '<h3>'+titulo+'</h3>'+
-    '<div class="monto">'+fCOP(monto)+'</div>'+
-    '<div class="formula">'+formula+'</div>'+
-    '<div class="norma">'+norma+'</div>'+
-  '</div>';
-}
-function copiarTexto(){
-  var s=parseMoney('iSalario'),aux=parseMoney('iAux'),dias=n('iDias');
-  if(s<1||dias<1){exoToast('Ingresa salario y días primero.','warning');return;}
-  var sblCesPrima=s+aux;
-  var ces=sblCesPrima*dias/360, inte=ces*dias*0.12/360, pri=sblCesPrima*dias/360, vac=s*dias/720;
-  var t='Liquidación de prestaciones — '+dias+' días\n';
-  t+='Salario base: '+fCOP(s)+'  Aux. transporte: '+fCOP(aux)+'\n\n';
-  t+='Cesantías:           '+fCOP(ces)+'\n';
-  t+='Intereses (12%):     '+fCOP(inte)+'\n';
-  t+='Prima de servicios:  '+fCOP(pri)+'\n';
-  t+='Vacaciones:          '+fCOP(vac)+'\n';
-  t+='─────────────────────\n';
-  t+='Total:               '+fCOP(ces+inte+pri+vac)+'\n\n';
-  t+='Calculado en exogenadian.com';
-  if(navigator.clipboard){
-    navigator.clipboard.writeText(t).then(function(){exoToast('Resumen copiado al portapapeles.','success');});
-  }else{
-    prompt('Copia este texto:',t);
-  }
-  if(typeof exoTrack!=='undefined')exoTrack.tool('liquidador-prestaciones');
-}
-recalc();
-</script>
+<script>function parseMoney(e){return parseInt(document.getElementById(e).value.replace(/\./g,"").replace(/,/g,""))||0}function n(e){return parseFloat(document.getElementById(e).value)||0}function fCOP(e){return"$"+Math.round(e).toLocaleString("es-CO")}document.querySelectorAll(".money").forEach(function(e){e.addEventListener("input",function(){var e=this.value.replace(/\D/g,"");this.value=e?parseInt(e).toLocaleString("es-CO"):"";recalc()})});document.getElementById("iDias").addEventListener("input",recalc);function recalc(){var e=parseMoney("iSalario");var a=parseMoney("iAux");var t=n("iDias");var r=e+a;var i=e;var s=document.getElementById("alertSBL");if(e>0){s.style.display="flex";s.innerHTML='Salario base de liquidación &mdash; Cesantías y Prima: <strong style="margin:0 4px">'+fCOP(r)+'</strong> &middot; Vacaciones: <strong style="margin:0 4px">'+fCOP(i)+"</strong>"}else{s.style.display="none"}var o=document.getElementById("resultados");if(e<1||t<1){o.innerHTML="";document.getElementById("totalBar").style.display="none";return}var d=r*t/360;var c=d*t*.12/360;var l=r*t/360;var u=i*t/720;var m="";m+=card("cesantias","&#128176;","Cesantías",d,"SBL ("+fCOP(r)+") &times; "+t+" días / 360","Art. 249 CST &middot; Ley 50/1990");m+=card("intereses","&#128202;","Intereses sobre cesantías",c,"Cesantías ("+fCOP(d)+") &times; "+t+" días &times; 12% / 360","Ley 52/1975");m+=card("prima","&#127873;","Prima de servicios",l,"SBL ("+fCOP(r)+") &times; "+t+" días / 360","Art. 306 CST &middot; Ley 1788/2016");m+=card("vacaciones","&#127796;","Vacaciones",u,"Salario básico ("+fCOP(i)+") &times; "+t+" días / 720","Art. 186 CST &middot; sin aux. transporte");o.innerHTML=m;var v=d+c+l+u;document.getElementById("totalVal").textContent=fCOP(v);document.getElementById("totalBar").style.display="flex"}function card(e,a,t,r,i,s){return'<div class="prest-card '+e+'">'+'<div class="icono">'+a+"</div>"+"<h3>"+t+"</h3>"+'<div class="monto">'+fCOP(r)+"</div>"+'<div class="formula">'+i+"</div>"+'<div class="norma">'+s+"</div>"+"</div>"}function copiarTexto(){var e=parseMoney("iSalario"),a=parseMoney("iAux"),t=n("iDias");if(e<1||t<1){exoToast("Ingresa salario y días primero.","warning");return}var r=e+a;var i=r*t/360,s=i*t*.12/360,o=r*t/360,d=e*t/720;var c="Liquidación de prestaciones — "+t+" días\n";c+="Salario base: "+fCOP(e)+"  Aux. transporte: "+fCOP(a)+"\n\n";c+="Cesantías:           "+fCOP(i)+"\n";c+="Intereses (12%):     "+fCOP(s)+"\n";c+="Prima de servicios:  "+fCOP(o)+"\n";c+="Vacaciones:          "+fCOP(d)+"\n";c+="─────────────────────\n";c+="Total:               "+fCOP(i+s+o+d)+"\n\n";c+="Calculado en exogenadian.com";if(navigator.clipboard){navigator.clipboard.writeText(c).then(function(){exoToast("Resumen copiado al portapapeles.","success")})}else{prompt("Copia este texto:",c)}if(typeof exoTrack!=="undefined")exoTrack.tool("liquidador-prestaciones")}recalc();</script>
 <script src="shared/analytics.js?v=1df688c5"></script>
 <link rel="stylesheet" href="shared/chat.css?v=78c6b2c3">
 <script defer src="shared/chat.js?v=d7b50b20"></script>

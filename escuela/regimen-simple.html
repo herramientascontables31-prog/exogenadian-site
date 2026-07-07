@@ -3,12 +3,7 @@
 <head>
 <script src="../shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-S7SM6ST4CC');
-</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <meta name="theme-color" content="#059669">
@@ -1346,30 +1341,6 @@ body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-
 <script src="../shared/quiz-engine.js?v=ef04411f"></script>
 <script src="../shared/curso-meta.js?v=99c0a7d9"></script>
 <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()" aria-label="Abrir men&uacute;">&#9776;</button>
-<script>
-var totalModulos=14;
-var currentModulo=1;
-function navigateTo(n){
-  document.querySelectorAll('.modulo-section').forEach(function(s){s.classList.remove('active')});
-  document.getElementById('modulo-'+n).classList.add('active');
-  document.querySelectorAll('.sidebar-nav a').forEach(function(a,i){
-    a.classList.remove('active');
-    if(i<n-1) a.classList.add('completed');
-    if(i===n-1) a.classList.add('active');
-  });
-  document.getElementById('progressFill').style.width=((n/totalModulos)*100)+'%';
-  currentModulo=n;
-  window.scrollTo({top:0,behavior:'smooth'});
-  if(window.innerWidth<=900) closeSidebar();
-}
-function toggleSidebar(){
-  document.getElementById('sidebar').classList.toggle('open');
-  document.getElementById('sidebarOverlay').classList.toggle('open');
-}
-function closeSidebar(){
-  document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('sidebarOverlay').classList.remove('open');
-}
-</script>
+<script>var totalModulos=14;var currentModulo=1;function navigateTo(e){document.querySelectorAll(".modulo-section").forEach(function(e){e.classList.remove("active")});document.getElementById("modulo-"+e).classList.add("active");document.querySelectorAll(".sidebar-nav a").forEach(function(t,o){t.classList.remove("active");if(o<e-1)t.classList.add("completed");if(o===e-1)t.classList.add("active")});document.getElementById("progressFill").style.width=e/totalModulos*100+"%";currentModulo=e;window.scrollTo({top:0,behavior:"smooth"});if(window.innerWidth<=900)closeSidebar()}function toggleSidebar(){document.getElementById("sidebar").classList.toggle("open");document.getElementById("sidebarOverlay").classList.toggle("open")}function closeSidebar(){document.getElementById("sidebar").classList.remove("open");document.getElementById("sidebarOverlay").classList.remove("open")}</script>
 </body>
 </html>

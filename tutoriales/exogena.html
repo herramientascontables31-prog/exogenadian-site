@@ -3,12 +3,7 @@
 <head>
 <script src="../shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-S7SM6ST4CC');
-</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <meta name="theme-color" content="#059669">
@@ -623,24 +618,6 @@ p.tut-lead{font-size:1.05rem;color:var(--gray-600);max-width:680px;line-height:1
     </section>
   </div>
 </div>
-<script>
-// Highlight de la sección activa en sidebar al hacer scroll
-(function(){
-  var links = document.querySelectorAll('.sidebar-nav a');
-  var sections = Array.from(links).map(function(a){ var id = a.getAttribute('href').replace('#',''); return document.getElementById(id); }).filter(Boolean);
-  function update(){
-    var y = window.scrollY + 80;
-    var current = sections[0];
-    sections.forEach(function(s){ if(s && s.offsetTop <= y) current = s; });
-    links.forEach(function(a){ a.classList.remove('active'); });
-    if(current){
-      var match = document.querySelector('.sidebar-nav a[href="#'+current.id+'"]');
-      if(match) match.classList.add('active');
-    }
-  }
-  window.addEventListener('scroll', update, {passive:true});
-  update();
-})();
-</script>
+<script>(function(){var e=document.querySelectorAll(".sidebar-nav a");var r=Array.from(e).map(function(e){var r=e.getAttribute("href").replace("#","");return document.getElementById(r)}).filter(Boolean);function update(){var t=window.scrollY+80;var a=r[0];r.forEach(function(e){if(e&&e.offsetTop<=t)a=e});e.forEach(function(e){e.classList.remove("active")});if(a){var n=document.querySelector('.sidebar-nav a[href="#'+a.id+'"]');if(n)n.classList.add("active")}}window.addEventListener("scroll",update,{passive:true});update()})();</script>
 </body>
 </html>

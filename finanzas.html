@@ -3,7 +3,7 @@
 <head>
 <script src="shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="og-image.png">
@@ -311,42 +311,7 @@ body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--gray-90
 <script src="shared/perfil-contador.js?v=1fe630d0"></script>
 <script defer src="shared/pro.js?v=9ec24c76"></script>
 <script src="shared/asesor-mode.js?v=24a000b1"></script>
-<script>
-(function(){
-  function refresh(){
-    var banner=document.getElementById('asesorBanner');
-    var btn=document.getElementById('asesorToggle');
-    var sub=document.getElementById('asesorSub');
-    if(!banner) return;
-    if(window.exoPro && window.exoPro.check){
-      window.exoPro.check().then(function(isPro){
-        if(!isPro){banner.style.display='none';return}
-        banner.style.display='flex';
-        var on=window.asesorMode.isOn();
-        var hasProfile = window.perfilContador && window.perfilContador.has();
-        if(!hasProfile){
-          sub.innerHTML='Primero llena tu <a href="oficina.html" style="color:#FCD34D;font-weight:700">perfil del contador</a> con nombre y TP. Luego puedes activar el modo.';
-          btn.textContent='Configurar perfil';
-          btn.onclick=function(){window.location.href='oficina.html'};
-          return;
-        }
-        if(on){
-          var b=window.asesorMode.getBranding();
-          sub.innerHTML='✅ <strong>Modo Asesor activo.</strong> Reportes saldrán con: '+(b.firma||b.nombre||'tu firma');
-          btn.textContent='Desactivar';
-          btn.onclick=function(){window.asesorMode.set(false);refresh()};
-        } else {
-          sub.innerHTML='Activa <strong>Modo Asesor</strong>: los reportes de finanzas que descargues saldrán brandeados con tu firma.';
-          btn.textContent='Activar →';
-          btn.onclick=function(){window.asesorMode.set(true);refresh()};
-        }
-      });
-    }
-  }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', refresh);
-  else refresh();
-})();
-</script>
+<script>(function(){function refresh(){var e=document.getElementById("asesorBanner");var o=document.getElementById("asesorToggle");var n=document.getElementById("asesorSub");if(!e)return;if(window.exoPro&&window.exoPro.check){window.exoPro.check().then(function(r){if(!r){e.style.display="none";return}e.style.display="flex";var t=window.asesorMode.isOn();var i=window.perfilContador&&window.perfilContador.has();if(!i){n.innerHTML='Primero llena tu <a href="oficina.html" style="color:#FCD34D;font-weight:700">perfil del contador</a> con nombre y TP. Luego puedes activar el modo.';o.textContent="Configurar perfil";o.onclick=function(){window.location.href="oficina.html"};return}if(t){var a=window.asesorMode.getBranding();n.innerHTML="✅ <strong>Modo Asesor activo.</strong> Reportes saldrán con: "+(a.firma||a.nombre||"tu firma");o.textContent="Desactivar";o.onclick=function(){window.asesorMode.set(false);refresh()}}else{n.innerHTML="Activa <strong>Modo Asesor</strong>: los reportes de finanzas que descargues saldrán brandeados con tu firma.";o.textContent="Activar →";o.onclick=function(){window.asesorMode.set(true);refresh()}}})}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",refresh);else refresh()})();</script>
 <section class="hub-school-link">
   ¿Quieres aprender los conceptos antes de calcular? <a href="escuela/finanzas.html">→ Curso de Finanzas Personales en la Escuela</a> · 15 módulos gratis
 </section>

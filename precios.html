@@ -3,12 +3,7 @@
 <head>
 <script src="shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-S7SM6ST4CC');
-</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="og-image.png">
@@ -430,80 +425,8 @@ body{font-family:'Outfit',sans-serif;background:#fff;color:var(--gray-900);overf
     </div>
   </div>
 </div>
-<script>
-(function(){
-  var chk=document.getElementById('aceptaTerminos');
-  var label=document.getElementById('legalCheckLabel');
-  var containers=document.querySelectorAll('.wompi-btn-container');
-  function applyLock(){
-    var locked=!chk.checked;
-    containers.forEach(function(c){c.dataset.locked=locked?'1':'0'});
-    if(label)label.classList.toggle('accepted',!locked);
-    if(!locked&&typeof gtag==='function'){
-      gtag('event','acepta_disclaimer',{event_category:'precios'});
-    }
-  }
-  containers.forEach(function(c){c.dataset.locked='1'});
-  if(chk){chk.addEventListener('change',applyLock);applyLock()}
-})();
-</script>
-<script>
-(function(){
-  var API='https://script.google.com/macros/s/AKfycbwT5ofExiwOKKLnBlwH6Uqhs4cdDpaieSiLn2dYf5D-6yPIdJ_9XEWeIGYyq1ViNKiasQ/exec';
-  var PK='pub_prod_GrX0IYZSq3PZUDCgQDYJTOJBgwUYbFbt';
-  var uid=Date.now().toString(36)+Math.random().toString(36).substr(2,6);
-  var planes=[
-    {id:'wompi-mensual',amount:'4990000',ref:'M-'+uid},
-    {id:'wompi-trimestral',amount:'8990000',ref:'T-'+uid},
-    {id:'wompi-anual',amount:'17990000',ref:'A-'+uid}
-  ];
-  planes.forEach(function(p){
-    var url=API+'?action=wompiSignature&ref='+encodeURIComponent(p.ref)+'&amount='+p.amount+'&currency=COP';
-    fetch(url).then(function(r){return r.json();}).then(function(data){
-      if(!data.success) throw new Error(data.error);
-      var container=document.getElementById(p.id);
-      var loading=container.querySelector('.wompi-loading');
-      if(loading) loading.remove();
-      var s=document.createElement('script');
-      s.src='https://checkout.wompi.co/widget.js';
-      s.setAttribute('data-render','button');
-      s.setAttribute('data-public-key',PK);
-      s.setAttribute('data-currency','COP');
-      s.setAttribute('data-amount-in-cents',p.amount);
-      s.setAttribute('data-reference',p.ref);
-      s.setAttribute('data-signature:integrity',data.signature);
-      s.setAttribute('data-redirect-url','https://exogenadian.com/gracias.html');
-      container.prepend(s);
-    }).catch(function(err){
-      console.error('Wompi signature error:',err);
-      var container=document.getElementById(p.id);
-      var loading=container.querySelector('.wompi-loading');
-      if(loading) loading.remove();
-      var fb=container.querySelector('.wompi-fallback');
-      if(fb) fb.style.display='block';
-    });
-  });
-  // GA4: view_pricing event
-  gtag('event','view_pricing',{page_location:location.href});
-  // GA4: track clicks
-  var PLAN_INFO=[
-    {plan:'mensual',valor:49900},
-    {plan:'trimestral',valor:89900},
-    {plan:'anual',valor:179900}
-  ];
-  document.querySelectorAll('.wompi-btn-container').forEach(function(c,i){
-    c.addEventListener('click',function(){
-      var info=PLAN_INFO[i]||{plan:'desconocido',valor:0};
-      gtag('event','iniciar_pago',{
-        plan:info.plan,
-        valor:info.valor,
-        currency:'COP',
-        pagina:'precios'
-      });
-    });
-  });
-})();
-</script>
+<script>(function(){var e=document.getElementById("aceptaTerminos");var t=document.getElementById("legalCheckLabel");var c=document.querySelectorAll(".wompi-btn-container");function applyLock(){var a=!e.checked;c.forEach(function(e){e.dataset.locked=a?"1":"0"});if(t)t.classList.toggle("accepted",!a);if(!a&&typeof gtag==="function"){gtag("event","acepta_disclaimer",{event_category:"precios"})}}c.forEach(function(e){e.dataset.locked="1"});if(e){e.addEventListener("change",applyLock);applyLock()}})();</script>
+<script>(function(){var t="https://script.google.com/macros/s/AKfycbwT5ofExiwOKKLnBlwH6Uqhs4cdDpaieSiLn2dYf5D-6yPIdJ_9XEWeIGYyq1ViNKiasQ/exec";var e="pub_prod_GrX0IYZSq3PZUDCgQDYJTOJBgwUYbFbt";var r=Date.now().toString(36)+Math.random().toString(36).substr(2,6);var a=[{id:"wompi-mensual",amount:"4990000",ref:"M-"+r},{id:"wompi-trimestral",amount:"8990000",ref:"T-"+r},{id:"wompi-anual",amount:"17990000",ref:"A-"+r}];a.forEach(function(r){var a=t+"?action=wompiSignature&ref="+encodeURIComponent(r.ref)+"&amount="+r.amount+"&currency=COP";fetch(a).then(function(t){return t.json()}).then(function(t){if(!t.success)throw new Error(t.error);var a=document.getElementById(r.id);var n=a.querySelector(".wompi-loading");if(n)n.remove();var o=document.createElement("script");o.src="https://checkout.wompi.co/widget.js";o.setAttribute("data-render","button");o.setAttribute("data-public-key",e);o.setAttribute("data-currency","COP");o.setAttribute("data-amount-in-cents",r.amount);o.setAttribute("data-reference",r.ref);o.setAttribute("data-signature:integrity",t.signature);o.setAttribute("data-redirect-url","https://exogenadian.com/gracias.html");a.prepend(o)}).catch(function(t){console.error("Wompi signature error:",t);var e=document.getElementById(r.id);var a=e.querySelector(".wompi-loading");if(a)a.remove();var n=e.querySelector(".wompi-fallback");if(n)n.style.display="block"})});gtag("event","view_pricing",{page_location:location.href});var n=[{plan:"mensual",valor:49900},{plan:"trimestral",valor:89900},{plan:"anual",valor:179900}];document.querySelectorAll(".wompi-btn-container").forEach(function(t,e){t.addEventListener("click",function(){var t=n[e]||{plan:"desconocido",valor:0};gtag("event","iniciar_pago",{plan:t.plan,valor:t.valor,currency:"COP",pagina:"precios"})})})})();</script>
 <link rel="stylesheet" href="shared/chat.css?v=78c6b2c3">
 <script defer src="shared/chat.js?v=d7b50b20"></script>
 </body>

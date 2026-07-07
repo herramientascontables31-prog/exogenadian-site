@@ -3,12 +3,7 @@
 <head>
 <script src="../shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-S7SM6ST4CC');
-</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <meta name="theme-color" content="#059669">
@@ -1702,98 +1697,6 @@ NO modifiques los archivos originales.</div>
 <script src="../shared/quiz-banks.js?v=d32d7186"></script>
 <script src="../shared/quiz-engine.js?v=ef04411f"></script>
 <script src="../shared/cert-emit-widget.js?v=88f49f6b"></script>
-<script>
-var TOTAL_MODS = 12;
-var CURSO_SLUG = 'claude-cowork-contadores';
-function toggleSidebar(){
-  var sb = document.getElementById('sidebar');
-  var ov = document.getElementById('sidebarOverlay');
-  sb.classList.toggle('open');
-  ov.classList.toggle('open');
-}
-function navigateTo(n){
-  var secs = document.querySelectorAll('.modulo-section');
-  for (var i=0; i<secs.length; i++) secs[i].classList.remove('active');
-  var target = document.getElementById('modulo-' + n);
-  if (target) target.classList.add('active');
-  var links = document.querySelectorAll('.sidebar-nav a');
-  for (var j=0; j<links.length; j++) links[j].classList.remove('active');
-  var lk = document.querySelector('.sidebar-nav a[href="#modulo-' + n + '"]');
-  if (lk) lk.classList.add('active');
-  var fill = document.getElementById('progressFill');
-  if (fill) fill.style.width = Math.round((n/TOTAL_MODS)*100) + '%';
-  try { localStorage.setItem('exo-curso-' + CURSO_SLUG, String(n)); } catch(e){}
-  window.scrollTo({top:0, behavior:'smooth'});
-  var sb = document.getElementById('sidebar');
-  if (sb && sb.classList.contains('open')) toggleSidebar();
-}
-function copyBlock(btn){
-  var pre = btn.parentElement.querySelector('.code-block');
-  if (!pre) return;
-  var txt = pre.innerText;
-  navigator.clipboard.writeText(txt).then(function(){
-    btn.classList.add('copied');
-    var old = btn.textContent;
-    btn.textContent = 'Copiado';
-    setTimeout(function(){ btn.classList.remove('copied'); btn.textContent = old; }, 1500);
-  });
-}
-/* Checklists interactivas con progreso persistente */
-(function(){
-  var KEY = 'exo-checks-' + CURSO_SLUG;
-  function load(){ try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){ return {}; } }
-  function save(d){ try { localStorage.setItem(KEY, JSON.stringify(d)); } catch(e){} }
-  function refresh(list){
-    var boxes = list.querySelectorAll('input[type=checkbox]');
-    var done = 0;
-    for (var i=0;i<boxes.length;i++){
-      boxes[i].parentElement.classList.toggle('done', boxes[i].checked);
-      if (boxes[i].checked) done++;
-    }
-    var prog = list.querySelector('.check-progress');
-    if (prog) prog.textContent = done + ' / ' + boxes.length;
-  }
-  document.addEventListener('DOMContentLoaded', function(){
-    var data = load();
-    var lists = document.querySelectorAll('.checklist[data-checklist]');
-    for (var l=0; l<lists.length; l++){
-      (function(list){
-        var id = list.getAttribute('data-checklist');
-        var boxes = list.querySelectorAll('input[type=checkbox]');
-        for (var i=0;i<boxes.length;i++){
-          (function(box, idx){
-            var k = id + ':' + idx;
-            if (data[k]) box.checked = true;
-            box.addEventListener('change', function(){
-              var d = load();
-              if (box.checked) d[k] = 1; else delete d[k];
-              save(d);
-              refresh(list);
-            });
-          })(boxes[i], i);
-        }
-        refresh(list);
-      })(lists[l]);
-    }
-    /* Pipeline: pulso escalonado */
-    var steps = document.querySelectorAll('.pipeline .pipe-step');
-    for (var s=0;s<steps.length;s++){
-      steps[s].classList.add('pulse');
-      steps[s].style.animationDelay = (s * 0.35) + 's';
-    }
-  });
-})();
-(function(){
-  try {
-    var hash = (window.location.hash || '').match(/^#modulo-(\d+)$/);
-    if (hash) {
-      var n = parseInt(hash[1], 10);
-      if (n >= 1 && n <= TOTAL_MODS) { navigateTo(n); return; }
-    }
-    var saved = parseInt(localStorage.getItem('exo-curso-' + CURSO_SLUG) || '1', 10);
-    if (saved > 1 && saved <= TOTAL_MODS) navigateTo(saved);
-  } catch(e){}
-})();
-</script>
+<script>var TOTAL_MODS=12;var CURSO_SLUG="claude-cowork-contadores";function toggleSidebar(){var e=document.getElementById("sidebar");var t=document.getElementById("sidebarOverlay");e.classList.toggle("open");t.classList.toggle("open")}function navigateTo(e){var t=document.querySelectorAll(".modulo-section");for(var o=0;o<t.length;o++)t[o].classList.remove("active");var r=document.getElementById("modulo-"+e);if(r)r.classList.add("active");var a=document.querySelectorAll(".sidebar-nav a");for(var n=0;n<a.length;n++)a[n].classList.remove("active");var c=document.querySelector('.sidebar-nav a[href="#modulo-'+e+'"]');if(c)c.classList.add("active");var l=document.getElementById("progressFill");if(l)l.style.width=Math.round(e/TOTAL_MODS*100)+"%";try{localStorage.setItem("exo-curso-"+CURSO_SLUG,String(e))}catch(e){}window.scrollTo({top:0,behavior:"smooth"});var i=document.getElementById("sidebar");if(i&&i.classList.contains("open"))toggleSidebar()}function copyBlock(e){var t=e.parentElement.querySelector(".code-block");if(!t)return;var o=t.innerText;navigator.clipboard.writeText(o).then(function(){e.classList.add("copied");var t=e.textContent;e.textContent="Copiado";setTimeout(function(){e.classList.remove("copied");e.textContent=t},1500)})}(function(){var e="exo-checks-"+CURSO_SLUG;function load(){try{return JSON.parse(localStorage.getItem(e)||"{}")}catch(e){return{}}}function save(t){try{localStorage.setItem(e,JSON.stringify(t))}catch(e){}}function refresh(e){var t=e.querySelectorAll("input[type=checkbox]");var o=0;for(var r=0;r<t.length;r++){t[r].parentElement.classList.toggle("done",t[r].checked);if(t[r].checked)o++}var a=e.querySelector(".check-progress");if(a)a.textContent=o+" / "+t.length}document.addEventListener("DOMContentLoaded",function(){var e=load();var t=document.querySelectorAll(".checklist[data-checklist]");for(var o=0;o<t.length;o++){(function(t){var o=t.getAttribute("data-checklist");var r=t.querySelectorAll("input[type=checkbox]");for(var a=0;a<r.length;a++){(function(r,a){var n=o+":"+a;if(e[n])r.checked=true;r.addEventListener("change",function(){var e=load();if(r.checked)e[n]=1;else delete e[n];save(e);refresh(t)})})(r[a],a)}refresh(t)})(t[o])}var r=document.querySelectorAll(".pipeline .pipe-step");for(var a=0;a<r.length;a++){r[a].classList.add("pulse");r[a].style.animationDelay=a*.35+"s"}})})();(function(){try{var e=(window.location.hash||"").match(/^#modulo-(\d+)$/);if(e){var t=parseInt(e[1],10);if(t>=1&&t<=TOTAL_MODS){navigateTo(t);return}}var o=parseInt(localStorage.getItem("exo-curso-"+CURSO_SLUG)||"1",10);if(o>1&&o<=TOTAL_MODS)navigateTo(o)}catch(e){}})();</script>
 </body>
 </html>

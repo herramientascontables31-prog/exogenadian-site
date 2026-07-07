@@ -3,12 +3,7 @@
 <head>
 <script src="../shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-S7SM6ST4CC');
-</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <meta name="theme-color" content="#059669">
@@ -1613,102 +1608,7 @@ body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-
 </div>
 <script defer src="../shared/pro.js?v=9ec24c76"></script>
 <script src="../shared/certificado.js?v=a964ed74"></script>
-<script>
-/* ─── Sistema de progreso del curso ─── */
-(function(){
-  var TOTAL=15;
-  var KEY_PREFIX='fp:curso-finanzas:m';
-  function leer(n){try{return localStorage.getItem(KEY_PREFIX+n)==='1'}catch(e){return false}}
-  function escribir(n,v){try{localStorage.setItem(KEY_PREFIX+n,v?'1':'0')}catch(e){}}
-  function contarCompletados(){
-    var c=0;
-    for(var i=1;i<=TOTAL;i++) if(leer(i)) c++;
-    return c;
-  }
-  function actualizarBanner(){
-    var c=contarCompletados();
-    var banner=document.getElementById('certBanner');
-    if(banner) banner.classList.toggle('show', c===TOTAL);
-  }
-  function inyectarBotones(){
-    for(var n=1;n<=TOTAL;n++){
-      var sec=document.getElementById('modulo-'+n);
-      if(!sec) continue;
-      // Insertar antes del .mod-nav del módulo
-      var nav=sec.querySelector('.mod-nav');
-      if(!nav || sec.querySelector('.modulo-complete-box')) continue;
-      var box=document.createElement('div');
-      box.className='modulo-complete-box';
-      box.dataset.mod=n;
-      var done=leer(n);
-      if(done) box.classList.add('done');
-      box.innerHTML='<div class="info"><strong>¿Terminaste este módulo?</strong><small>Marcarlo aporta a tu certificado del curso. Se guarda solo en tu navegador.</small></div>'+
-        '<button class="modulo-complete-btn" type="button">'+(done?'Completado':'Marcar como completado')+'</button>';
-      var btn=box.querySelector('button');
-      btn.addEventListener('click', function(){
-        var modN=parseInt(this.parentNode.dataset.mod,10);
-        var nuevo=!leer(modN);
-        escribir(modN, nuevo);
-        this.parentNode.classList.toggle('done', nuevo);
-        this.textContent=nuevo?'Completado':'Marcar como completado';
-        actualizarBanner();
-        if(typeof gtag!=='undefined') gtag('event','curso_finanzas_modulo_check',{modulo:modN,marcado:nuevo});
-      });
-      nav.parentNode.insertBefore(box, nav);
-    }
-    actualizarBanner();
-  }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', inyectarBotones);
-  else inyectarBotones();
-})();
-window.abrirModalCertificado=function(){
-  document.getElementById('certNameModal').classList.add('show');
-  setTimeout(function(){document.getElementById('certNameInput').focus()},80);
-};
-window.cerrarModalCertificado=function(){
-  document.getElementById('certNameModal').classList.remove('show');
-};
-window.emitirCertificadoFinanzas=function(){
-  var nombre=(document.getElementById('certNameInput').value||'').trim();
-  if(nombre.length<3){
-    document.getElementById('certNameInput').focus();
-    return;
-  }
-  if(typeof gtag!=='undefined') gtag('event','curso_finanzas_certificado_generar');
-  if(window.exoCertificado && window.exoCertificado.generate){
-    window.exoCertificado.generate('finanzas', nombre, {modulosCompletados:15});
-  }
-};
-document.addEventListener('keydown',function(e){
-  if(e.key==='Escape') window.cerrarModalCertificado();
-});
-/* Module navigation — mismo patrón que niif.html */
-var currentModule = 1;
-var totalModules = 15;
-function navigateTo(n) {
-  document.querySelectorAll('.modulo-section').forEach(function(s){ s.style.display = 'none'; });
-  var target = document.getElementById('modulo-' + n);
-  if (target) target.style.display = 'block';
-  var links = document.querySelectorAll('.sidebar-nav a');
-  links.forEach(function(a, i) {
-    a.classList.remove('active');
-    a.classList.remove('completed');
-    if (i < n - 1) a.classList.add('completed');
-    if (i === n - 1) a.classList.add('active');
-  });
-  var pct = Math.round((n / totalModules) * 100);
-  document.getElementById('progressFill').style.width = pct + '%';
-  currentModule = n;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('sidebarOverlay').classList.remove('open');
-  if (typeof gtag !== 'undefined') gtag('event', 'escuela_modulo', { curso: 'finanzas', modulo: n });
-}
-function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
-  document.getElementById('sidebarOverlay').classList.toggle('open');
-}
-</script>
+<script>(function(){var e=15;var t="fp:curso-finanzas:m";function leer(e){try{return localStorage.getItem(t+e)==="1"}catch(e){return false}}function escribir(e,o){try{localStorage.setItem(t+e,o?"1":"0")}catch(e){}}function contarCompletados(){var t=0;for(var o=1;o<=e;o++)if(leer(o))t++;return t}function actualizarBanner(){var t=contarCompletados();var o=document.getElementById("certBanner");if(o)o.classList.toggle("show",t===e)}function inyectarBotones(){for(var t=1;t<=e;t++){var o=document.getElementById("modulo-"+t);if(!o)continue;var a=o.querySelector(".mod-nav");if(!a||o.querySelector(".modulo-complete-box"))continue;var n=document.createElement("div");n.className="modulo-complete-box";n.dataset.mod=t;var r=leer(t);if(r)n.classList.add("done");n.innerHTML='<div class="info"><strong>¿Terminaste este módulo?</strong><small>Marcarlo aporta a tu certificado del curso. Se guarda solo en tu navegador.</small></div>'+'<button class="modulo-complete-btn" type="button">'+(r?"Completado":"Marcar como completado")+"</button>";var d=n.querySelector("button");d.addEventListener("click",function(){var e=parseInt(this.parentNode.dataset.mod,10);var t=!leer(e);escribir(e,t);this.parentNode.classList.toggle("done",t);this.textContent=t?"Completado":"Marcar como completado";actualizarBanner();if(typeof gtag!=="undefined")gtag("event","curso_finanzas_modulo_check",{modulo:e,marcado:t})});a.parentNode.insertBefore(n,a)}actualizarBanner()}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",inyectarBotones);else inyectarBotones()})();window.abrirModalCertificado=function(){document.getElementById("certNameModal").classList.add("show");setTimeout(function(){document.getElementById("certNameInput").focus()},80)};window.cerrarModalCertificado=function(){document.getElementById("certNameModal").classList.remove("show")};window.emitirCertificadoFinanzas=function(){var e=(document.getElementById("certNameInput").value||"").trim();if(e.length<3){document.getElementById("certNameInput").focus();return}if(typeof gtag!=="undefined")gtag("event","curso_finanzas_certificado_generar");if(window.exoCertificado&&window.exoCertificado.generate){window.exoCertificado.generate("finanzas",e,{modulosCompletados:15})}};document.addEventListener("keydown",function(e){if(e.key==="Escape")window.cerrarModalCertificado()});var currentModule=1;var totalModules=15;function navigateTo(e){document.querySelectorAll(".modulo-section").forEach(function(e){e.style.display="none"});var t=document.getElementById("modulo-"+e);if(t)t.style.display="block";var o=document.querySelectorAll(".sidebar-nav a");o.forEach(function(t,o){t.classList.remove("active");t.classList.remove("completed");if(o<e-1)t.classList.add("completed");if(o===e-1)t.classList.add("active")});var a=Math.round(e/totalModules*100);document.getElementById("progressFill").style.width=a+"%";currentModule=e;window.scrollTo({top:0,behavior:"smooth"});document.getElementById("sidebar").classList.remove("open");document.getElementById("sidebarOverlay").classList.remove("open");if(typeof gtag!=="undefined")gtag("event","escuela_modulo",{curso:"finanzas",modulo:e})}function toggleSidebar(){document.getElementById("sidebar").classList.toggle("open");document.getElementById("sidebarOverlay").classList.toggle("open")}</script>
 <script defer src="../shared/nav.js?v=8da24a14"></script>
 </body>
 </html>

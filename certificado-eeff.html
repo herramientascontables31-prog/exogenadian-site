@@ -3,12 +3,7 @@
 <head>
 <script src="shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-S7SM6ST4CC');
-</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="og-image.png">
@@ -208,107 +203,6 @@ a{color:#2E75B6}
     </article>
   </div>
 </div>
-<script>
-(function(){
-  'use strict';
-  var $=function(id){return document.getElementById(id);};
-  var H=window.certHelpers;
-  var perfil=perfilContador.get()||{};
-  if(!perfil.nombre){
-    var aviso=document.createElement('div');
-    aviso.className='no-perfil';
-    aviso.style.cssText='grid-column:1/-1;margin:0 0 14px;padding:12px 16px;font-size:.9rem';
-    aviso.innerHTML='💡 <strong>Tip:</strong> <a href="certificados.html">guarda tu perfil</a> para autollenar tu nombre, cédula y T.P. También puedes diligenciar manualmente abajo y descargar.';
-    var layout=document.querySelector('.cert-layout');
-    if(layout) layout.insertBefore(aviso, layout.firstChild);
-  }
-  // Fecha de corte por defecto: 31 de diciembre del año pasado
-  var hoy=new Date();
-  $('fecha_corte').value=(hoy.getFullYear()-1)+'-12-31';
-  // Cargar libreta
-  var clientes=perfilContador.clientes.list();
-  var sel=$('cliSelect');
-  clientes.forEach(function(c){
-    var opt=document.createElement('option');
-    opt.value=c.id;
-    opt.textContent=c.nombre+(c.nit?(' — '+c.nit):'');
-    sel.appendChild(opt);
-  });
-  sel.addEventListener('change', function(){
-    if(!sel.value) return;
-    var c=perfilContador.clientes.get(sel.value);
-    if(!c) return;
-    $('emp_nombre').value=c.nombre||'';
-    $('emp_nit').value=c.nit||'';
-    $('emp_ciudad').value=c.ciudad||'';
-    if(c.rl_nombre) $('rl_nombre').value=c.rl_nombre;
-    if(c.rl_cc) $('rl_cc').value=c.rl_cc;
-    if(c.rl_cargo) $('rl_cargo').value=c.rl_cargo;
-    render();
-  });
-  function render(){
-    var p=perfilContador.get()||{};
-    // Membrete
-    var memb=$('membrete');
-    var empNombre=$('emp_nombre').value.trim()||'[Empresa]';
-    var empNit=$('emp_nit').value.trim()||'—';
-    var empCiudad=$('emp_ciudad').value.trim();
-    memb.innerHTML='<div class="cert-membrete-info" style="text-align:center;width:100%">'+
-      '<div class="nombre">'+H.esc(empNombre)+'</div>'+
-      '<div class="sub">NIT '+H.esc(empNit)+(empCiudad?(' · '+H.esc(empCiudad)):'')+'</div></div>';
-    var hoy=new Date();
-    $('vCiudadFecha').textContent=(empCiudad?(empCiudad+', '):'')+hoy.getDate()+' de '+H.MESES[hoy.getMonth()]+' de '+hoy.getFullYear();
-    $('vDia').textContent=hoy.getDate();
-    $('vMes').textContent=H.MESES[hoy.getMonth()];
-    $('vAnoEmision').textContent=hoy.getFullYear();
-    $('vRlNombre').textContent=$('rl_nombre').value.trim()||'[RL]';
-    $('vRlCC').textContent=$('rl_cc').value.trim()||'—';
-    $('vRlCargo').textContent=$('rl_cargo').value.trim()||'Representante Legal';
-    $('vContador').textContent=p.nombre||'';
-    $('vContadorCC').textContent=p.cc||'—';
-    $('vContadorTP').textContent=p.tp||'—';
-    $('vEmpNombre').textContent=empNombre;
-    $('vEmpNombre2').textContent=empNombre;
-    $('vEmpNit').textContent=empNit;
-    $('vFechaCorte').textContent=$('fecha_corte').value?H.formatFechaLarga($('fecha_corte').value):'—';
-    $('vMarco').textContent=$('marco').value;
-    // Lista EEFF certificados
-    var lista=[];
-    if($('eeff_esf').checked) lista.push('Estado de Situación Financiera');
-    if($('eeff_eri').checked) lista.push('Estado de Resultado Integral');
-    if($('eeff_cambios').checked) lista.push('Estado de Cambios en el Patrimonio');
-    if($('eeff_flujos').checked) lista.push('Estado de Flujos de Efectivo');
-    if($('eeff_notas').checked) lista.push('Notas a los Estados Financieros');
-    $('vListaEEFF').innerHTML=lista.map(function(n){return '<li>'+H.esc(n)+'</li>';}).join('');
-    var dest=$('destinatario').value.trim();
-    $('vDestinatario').textContent=dest?(', con destino a '+dest):'';
-    // Firmas
-    $('vF1Nombre').textContent=$('rl_nombre').value.trim()||'[RL]';
-    $('vF1CC').textContent=$('rl_cc').value.trim()||'—';
-    $('vF1Cargo').textContent=$('rl_cargo').value.trim()||'Representante Legal';
-    $('vF2Img').innerHTML=p.firma_base64?('<img src="'+p.firma_base64+'" alt="">'):'';
-    $('vF2Nombre').textContent=p.nombre||'';
-    $('vF2CC').textContent=p.cc||'—';
-    $('vF2TP').textContent=p.tp||'—';
-  }
-  ;['emp_nombre','emp_nit','emp_ciudad','rl_nombre','rl_cc','rl_cargo','fecha_corte','destinatario'].forEach(function(id){
-    $(id).addEventListener('input', render);
-  });
-  ['eeff_esf','eeff_eri','eeff_cambios','eeff_flujos','eeff_notas','marco'].forEach(function(id){
-    $(id).addEventListener('change', render);
-  });
-  if(window.exoPro && exoPro.check){
-    exoPro.check().then(function(isPro){
-      if(isPro) $('sheet').setAttribute('data-pro','1');
-    });
-  }
-  window.descargarWord=function(){
-    var emp=$('emp_nombre').value.trim().replace(/[^a-zA-Z0-9]/g,'-')||'empresa';
-    var fc=$('fecha_corte').value||'';
-    H.downloadAsWord($('sheet'), 'certificacion-eeff-'+emp+'-'+fc);
-  };
-  render();
-})();
-</script>
+<script>(function(){"use strict";var $=function(e){return document.getElementById(e)};var e=window.certHelpers;var t=perfilContador.get()||{};if(!t.nombre){var r=document.createElement("div");r.className="no-perfil";r.style.cssText="grid-column:1/-1;margin:0 0 14px;padding:12px 16px;font-size:.9rem";r.innerHTML='💡 <strong>Tip:</strong> <a href="certificados.html">guarda tu perfil</a> para autollenar tu nombre, cédula y T.P. También puedes diligenciar manualmente abajo y descargar.';var n=document.querySelector(".cert-layout");if(n)n.insertBefore(r,n.firstChild)}var a=new Date;$("fecha_corte").value=a.getFullYear()-1+"-12-31";var o=perfilContador.clientes.list();var i=$("cliSelect");o.forEach(function(e){var t=document.createElement("option");t.value=e.id;t.textContent=e.nombre+(e.nit?" — "+e.nit:"");i.appendChild(t)});i.addEventListener("change",function(){if(!i.value)return;var e=perfilContador.clientes.get(i.value);if(!e)return;$("emp_nombre").value=e.nombre||"";$("emp_nit").value=e.nit||"";$("emp_ciudad").value=e.ciudad||"";if(e.rl_nombre)$("rl_nombre").value=e.rl_nombre;if(e.rl_cc)$("rl_cc").value=e.rl_cc;if(e.rl_cargo)$("rl_cargo").value=e.rl_cargo;render()});function render(){var t=perfilContador.get()||{};var r=$("membrete");var n=$("emp_nombre").value.trim()||"[Empresa]";var a=$("emp_nit").value.trim()||"—";var o=$("emp_ciudad").value.trim();r.innerHTML='<div class="cert-membrete-info" style="text-align:center;width:100%">'+'<div class="nombre">'+e.esc(n)+"</div>"+'<div class="sub">NIT '+e.esc(a)+(o?" · "+e.esc(o):"")+"</div></div>";var i=new Date;$("vCiudadFecha").textContent=(o?o+", ":"")+i.getDate()+" de "+e.MESES[i.getMonth()]+" de "+i.getFullYear();$("vDia").textContent=i.getDate();$("vMes").textContent=e.MESES[i.getMonth()];$("vAnoEmision").textContent=i.getFullYear();$("vRlNombre").textContent=$("rl_nombre").value.trim()||"[RL]";$("vRlCC").textContent=$("rl_cc").value.trim()||"—";$("vRlCargo").textContent=$("rl_cargo").value.trim()||"Representante Legal";$("vContador").textContent=t.nombre||"";$("vContadorCC").textContent=t.cc||"—";$("vContadorTP").textContent=t.tp||"—";$("vEmpNombre").textContent=n;$("vEmpNombre2").textContent=n;$("vEmpNit").textContent=a;$("vFechaCorte").textContent=$("fecha_corte").value?e.formatFechaLarga($("fecha_corte").value):"—";$("vMarco").textContent=$("marco").value;var c=[];if($("eeff_esf").checked)c.push("Estado de Situación Financiera");if($("eeff_eri").checked)c.push("Estado de Resultado Integral");if($("eeff_cambios").checked)c.push("Estado de Cambios en el Patrimonio");if($("eeff_flujos").checked)c.push("Estado de Flujos de Efectivo");if($("eeff_notas").checked)c.push("Notas a los Estados Financieros");$("vListaEEFF").innerHTML=c.map(function(t){return"<li>"+e.esc(t)+"</li>"}).join("");var l=$("destinatario").value.trim();$("vDestinatario").textContent=l?", con destino a "+l:"";$("vF1Nombre").textContent=$("rl_nombre").value.trim()||"[RL]";$("vF1CC").textContent=$("rl_cc").value.trim()||"—";$("vF1Cargo").textContent=$("rl_cargo").value.trim()||"Representante Legal";$("vF2Img").innerHTML=t.firma_base64?'<img src="'+t.firma_base64+'" alt="">':"";$("vF2Nombre").textContent=t.nombre||"";$("vF2CC").textContent=t.cc||"—";$("vF2TP").textContent=t.tp||"—"}["emp_nombre","emp_nit","emp_ciudad","rl_nombre","rl_cc","rl_cargo","fecha_corte","destinatario"].forEach(function(e){$(e).addEventListener("input",render)});["eeff_esf","eeff_eri","eeff_cambios","eeff_flujos","eeff_notas","marco"].forEach(function(e){$(e).addEventListener("change",render)});if(window.exoPro&&exoPro.check){exoPro.check().then(function(e){if(e)$("sheet").setAttribute("data-pro","1")})}window.descargarWord=function(){var t=$("emp_nombre").value.trim().replace(/[^a-zA-Z0-9]/g,"-")||"empresa";var r=$("fecha_corte").value||"";e.downloadAsWord($("sheet"),"certificacion-eeff-"+t+"-"+r)};render()})();</script>
 </body>
 </html>

@@ -3,12 +3,7 @@
 <head>
 <script src="shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-S7SM6ST4CC');
-</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="og-image.png">
@@ -211,49 +206,6 @@ gtag('config', 'G-S7SM6ST4CC');
 <script src="shared/cv-builder.js?v=ba7db976"></script>
 <script src="shared/cv-export.js?v=d8002487"></script>
 <script src="shared/cv-ats.js?v=8d2170e7"></script>
-<script>
-  (function(){
-    function boot(){ CVBuilder.init(); CVExport.init(); CVAts.init(); perfilHelp(); }
-    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot);
-    else boot();
-    function perfilHelp(){
-      var ta=document.getElementById('f-resumen');
-      var cnt=document.getElementById('cvResumenCount');
-      var chips=document.getElementById('cvPerfilEjemplos');
-      var gpt=document.getElementById('cvPerfilGPT');
-      if(!ta||!chips) return;
-      var EJ={
-        'Contador':'Contador público con 5 años de experiencia en cierres contables, impuestos y NIIF para pymes. Automaticé la conciliación de la facturación electrónica y reduje 30% el tiempo de la declaración de IVA. Busco aportar precisión y mejora de procesos al área contable.',
-        'Auxiliar contable':'Auxiliar contable con 2 años de experiencia en causación, conciliaciones bancarias y manejo de Siigo. Organizada y detallista, cumplo los cierres en los plazos y bajo presión. Busco crecer dentro de un equipo contable sólido.',
-        'Administrativo':'Profesional administrativo con experiencia en gestión documental, atención a proveedores y apoyo a procesos financieros. Manejo avanzado de Excel y herramientas ofimáticas. Orientado a la organización, el orden y el buen servicio.',
-        'Ventas':'Asesor comercial con 4 años cumpliendo y superando metas de venta. Logré un crecimiento del 20% en la cartera de clientes con seguimiento postventa. Orientado a resultados y a construir relaciones de largo plazo.',
-        'Recién egresado':'Contador público recién egresado, con prácticas en liquidación de nómina y apoyo en declaraciones tributarias. Aprendizaje rápido y buen manejo de Excel y software contable. Busco mi primera oportunidad para aportar y seguir creciendo.'
-      };
-      function count(){
-        var w=ta.value.trim()?ta.value.trim().split(/\s+/).filter(Boolean).length:0;
-        var col=(w>=40&&w<=80)?'#059669':(w>80?'#B45309':'#6B7280');
-        cnt.innerHTML='<b style="color:'+col+'">'+w+' palabras</b> · recomendado 40–80 (3–4 líneas)';
-      }
-      Object.keys(EJ).forEach(function(k){
-        var b=document.createElement('button');
-        b.type='button'; b.className='cv-chip-btn'; b.textContent=k;
-        b.addEventListener('click',function(){
-          if(ta.value.trim() && !confirm('¿Reemplazar tu perfil actual con el ejemplo de "'+k+'"?')) return;
-          ta.value=EJ[k]; ta.dispatchEvent(new Event('input',{bubbles:true})); ta.focus(); count();
-        });
-        chips.appendChild(b);
-      });
-      ta.addEventListener('input',count); count();
-      if(gpt) gpt.addEventListener('click',function(){
-        var tit=(document.getElementById('f-titular')||{}).value||'mi cargo objetivo';
-        var draft=ta.value.trim()||'(aún no tengo borrador; ayúdame a escribirlo)';
-        var p='Actúa como experto en selección de personal en Colombia. Mejora este PERFIL PROFESIONAL para una hoja de vida: máximo 4 líneas, en primera persona, claro y con un logro medible si aplica. No inventes datos. Mi cargo objetivo: '+tit+'. Mi borrador: "'+draft+'"';
-        try{ navigator.clipboard.writeText(p); }catch(e){}
-        (window.exoToast&&exoToast.success?exoToast.success:function(){})('Prompt copiado. Pégalo en ChatGPT (se abrió en otra pestaña).');
-        window.open('https://chatgpt.com/','_blank','noopener');
-      });
-    }
-  })();
-</script>
+<script>(function(){function boot(){CVBuilder.init();CVExport.init();CVAts.init();perfilHelp()}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot);else boot();function perfilHelp(){var e=document.getElementById("f-resumen");var a=document.getElementById("cvResumenCount");var o=document.getElementById("cvPerfilEjemplos");var n=document.getElementById("cvPerfilGPT");if(!e||!o)return;var t={Contador:"Contador público con 5 años de experiencia en cierres contables, impuestos y NIIF para pymes. Automaticé la conciliación de la facturación electrónica y reduje 30% el tiempo de la declaración de IVA. Busco aportar precisión y mejora de procesos al área contable.","Auxiliar contable":"Auxiliar contable con 2 años de experiencia en causación, conciliaciones bancarias y manejo de Siigo. Organizada y detallista, cumplo los cierres en los plazos y bajo presión. Busco crecer dentro de un equipo contable sólido.",Administrativo:"Profesional administrativo con experiencia en gestión documental, atención a proveedores y apoyo a procesos financieros. Manejo avanzado de Excel y herramientas ofimáticas. Orientado a la organización, el orden y el buen servicio.",Ventas:"Asesor comercial con 4 años cumpliendo y superando metas de venta. Logré un crecimiento del 20% en la cartera de clientes con seguimiento postventa. Orientado a resultados y a construir relaciones de largo plazo.","Recién egresado":"Contador público recién egresado, con prácticas en liquidación de nómina y apoyo en declaraciones tributarias. Aprendizaje rápido y buen manejo de Excel y software contable. Busco mi primera oportunidad para aportar y seguir creciendo."};function count(){var o=e.value.trim()?e.value.trim().split(/\s+/).filter(Boolean).length:0;var n=o>=40&&o<=80?"#059669":o>80?"#B45309":"#6B7280";a.innerHTML='<b style="color:'+n+'">'+o+" palabras</b> · recomendado 40–80 (3–4 líneas)"}Object.keys(t).forEach(function(a){var n=document.createElement("button");n.type="button";n.className="cv-chip-btn";n.textContent=a;n.addEventListener("click",function(){if(e.value.trim()&&!confirm('¿Reemplazar tu perfil actual con el ejemplo de "'+a+'"?'))return;e.value=t[a];e.dispatchEvent(new Event("input",{bubbles:true}));e.focus();count()});o.appendChild(n)});e.addEventListener("input",count);count();if(n)n.addEventListener("click",function(){var a=(document.getElementById("f-titular")||{}).value||"mi cargo objetivo";var o=e.value.trim()||"(aún no tengo borrador; ayúdame a escribirlo)";var n="Actúa como experto en selección de personal en Colombia. Mejora este PERFIL PROFESIONAL para una hoja de vida: máximo 4 líneas, en primera persona, claro y con un logro medible si aplica. No inventes datos. Mi cargo objetivo: "+a+'. Mi borrador: "'+o+'"';try{navigator.clipboard.writeText(n)}catch(e){}(window.exoToast&&exoToast.success?exoToast.success:function(){})("Prompt copiado. Pégalo en ChatGPT (se abrió en otra pestaña).");window.open("https://chatgpt.com/","_blank","noopener")})}})();</script>
 </body>
 </html>

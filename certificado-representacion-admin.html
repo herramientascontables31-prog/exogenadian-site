@@ -3,7 +3,7 @@
 <head>
 <script src="shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="og-image.png">
@@ -198,97 +198,6 @@ a{color:#2E75B6}
     </article>
   </div>
 </div>
-<script>
-(function(){
-  'use strict';
-  var $=function(id){return document.getElementById(id);};
-  var H=window.certHelpers;
-  var perfil=perfilContador.get()||{};
-  if(!perfil.nombre){
-    var aviso=document.createElement('div');
-    aviso.className='no-perfil';
-    aviso.style.cssText='grid-column:1/-1;margin:0 0 14px;padding:12px 16px;font-size:.9rem';
-    aviso.innerHTML='💡 <strong>Tip:</strong> <a href="certificados.html">guarda tu perfil</a> para autollenar tu nombre, cédula y T.P.';
-    var layout=document.querySelector('.cert-layout');
-    if(layout) layout.insertBefore(aviso, layout.firstChild);
-  }
-  var hoy=new Date();
-  $('fecha_corte').value=(hoy.getFullYear()-1)+'-12-31';
-  var clientes=perfilContador.clientes.list();
-  var sel=$('cliSelect');
-  clientes.forEach(function(c){
-    var opt=document.createElement('option');opt.value=c.id;opt.textContent=c.nombre+(c.nit?(' — '+c.nit):'');sel.appendChild(opt);
-  });
-  sel.addEventListener('change', function(){
-    if(!sel.value) return;
-    var c=perfilContador.clientes.get(sel.value);if(!c) return;
-    $('emp_nombre').value=c.nombre||'';$('emp_nit').value=c.nit||'';$('emp_ciudad').value=c.ciudad||'';
-    if(c.rl_nombre) $('rl_nombre').value=c.rl_nombre;
-    if(c.rl_cc) $('rl_cc').value=c.rl_cc;
-    if(c.rl_cargo) $('rl_cargo').value=c.rl_cargo;
-    render();
-  });
-  // Texto de cada aseveración (NIA 580 adaptado)
-  var ASEVERACIONES={
-    a_resp:'<strong>Responsabilidad sobre los EEFF.</strong> Hemos cumplido nuestra responsabilidad por la preparación y presentación razonable de los estados financieros conforme al marco normativo aplicable, incluyendo su presentación correcta.',
-    a_control:'<strong>Control interno.</strong> Hemos diseñado, implementado y mantenido controles internos relevantes para la preparación y presentación de estados financieros libres de incorrección material, debida a fraude o error.',
-    a_info:'<strong>Información y acceso.</strong> Hemos puesto a su disposición todos los registros contables, soportes, actas, contratos y demás información solicitada relevante para los estados financieros y le hemos permitido acceso irrestricto a las personas y áreas necesarias para la auditoría.',
-    a_transac:'<strong>Integridad transaccional.</strong> Todas las transacciones realizadas por la entidad han sido reconocidas en los registros contables y se reflejan en los estados financieros.',
-    a_fraude:'<strong>Fraude.</strong> No tenemos conocimiento de fraudes, ni de sospechas de fraude, que afecten a la entidad, ni de comunicaciones o denuncias de fraude por parte de empleados, ex empleados, analistas, reguladores u otros, recibidas y no reveladas.',
-    a_partes:'<strong>Partes relacionadas.</strong> Hemos revelado todas las relaciones y transacciones con partes relacionadas, y los saldos pendientes con éstas, conforme al marco normativo aplicable.',
-    a_litigios:'<strong>Litigios y reclamaciones.</strong> Hemos revelado todos los litigios, reclamaciones y procesos legales conocidos, en curso o probables, cuyos efectos deban considerarse al preparar los estados financieros, y hemos contabilizado o revelado las provisiones y contingencias correspondientes.',
-    a_post:'<strong>Hechos posteriores.</strong> Hemos identificado y considerado los hechos ocurridos entre la fecha de corte y la fecha de esta carta que requieran ajuste o revelación en los estados financieros, y los hemos contabilizado o revelado adecuadamente.',
-    a_leyes:'<strong>Leyes y regulaciones.</strong> Hemos revelado al auditor todos los casos conocidos de incumplimiento o sospecha de incumplimiento de leyes y regulaciones cuyos efectos debieran ser considerados al preparar los estados financieros.',
-    a_negocio:'<strong>Negocio en marcha.</strong> Consideramos apropiada la utilización de la hipótesis de negocio en marcha al preparar los estados financieros. Hemos revelado todas las situaciones, eventos y condiciones que pudieran generar dudas significativas sobre la capacidad de la entidad para continuar como negocio en marcha durante los próximos doce (12) meses.',
-    a_estim:'<strong>Estimaciones contables.</strong> Los métodos, datos significativos y supuestos utilizados por la administración para realizar las estimaciones contables y sus revelaciones son razonables conforme al marco normativo aplicable.',
-    a_garantias:'<strong>Gravámenes y restricciones.</strong> Hemos revelado al auditor los activos otorgados como garantía, gravámenes, embargos, pignoraciones u otras restricciones sobre la propiedad y disponibilidad de los activos de la entidad.'
-  };
-  function render(){
-    var p=perfilContador.get()||{};
-    var memb=$('membrete');
-    var empNombre=$('emp_nombre').value.trim()||'[Empresa]';
-    var empNit=$('emp_nit').value.trim()||'—';
-    var empCiudad=$('emp_ciudad').value.trim();
-    memb.innerHTML='<div class="cert-membrete-info" style="text-align:center;width:100%">'+
-      '<div class="nombre">'+H.esc(empNombre)+'</div>'+
-      '<div class="sub">NIT '+H.esc(empNit)+(empCiudad?(' · '+H.esc(empCiudad)):'')+'</div></div>';
-    var hoyD=new Date();
-    $('vCiudadFecha').textContent=(empCiudad?(empCiudad+', '):'')+hoyD.getDate()+' de '+H.MESES[hoyD.getMonth()]+' de '+hoyD.getFullYear();
-    $('vCiudad').textContent=empCiudad||'la ciudad';
-    $('vDia').textContent=hoyD.getDate();
-    $('vMes').textContent=H.MESES[hoyD.getMonth()];
-    $('vAnoEmision').textContent=hoyD.getFullYear();
-    $('vEmpNombre').textContent=empNombre;
-    $('vEmpNit').textContent=empNit;
-    $('vFechaCorte').textContent=$('fecha_corte').value?H.formatFechaLarga($('fecha_corte').value):'—';
-    $('vMarco').textContent=$('marco').value;
-    $('vAuditorNombre').textContent=$('auditor_nombre').value.trim()||'[Auditor / Revisor Fiscal]';
-    var firma=$('auditor_firma').value.trim();
-    $('vAuditorFirma').textContent=firma?firma:'';
-    // Lista de aseveraciones
-    var lista='';
-    Object.keys(ASEVERACIONES).forEach(function(k){
-      if($(k)&&$(k).checked) lista+='<li>'+ASEVERACIONES[k]+'</li>';
-    });
-    $('vListaAseveraciones').innerHTML=lista;
-    $('vF1Nombre').textContent=$('rl_nombre').value.trim()||'[RL]';
-    $('vF1CC').textContent=$('rl_cc').value.trim()||'—';
-    $('vF1Cargo').textContent=$('rl_cargo').value.trim()||'Representante Legal';
-    $('vF2Img').innerHTML=p.firma_base64?('<img src="'+p.firma_base64+'" alt="">'):'';
-    $('vF2Nombre').textContent=p.nombre||'';
-    $('vF2CC').textContent=p.cc||'—';
-    $('vF2TP').textContent=p.tp||'—';
-  }
-  ;['emp_nombre','emp_nit','emp_ciudad','rl_nombre','rl_cc','rl_cargo','fecha_corte','auditor_nombre','auditor_firma'].forEach(function(id){$(id).addEventListener('input',render)});
-  ['marco','a_resp','a_control','a_info','a_transac','a_fraude','a_partes','a_litigios','a_post','a_leyes','a_negocio','a_estim','a_garantias'].forEach(function(id){$(id).addEventListener('change',render)});
-  if(window.exoPro && exoPro.check){exoPro.check().then(function(isPro){if(isPro) $('sheet').setAttribute('data-pro','1')})}
-  window.descargarWord=function(){
-    var emp=$('emp_nombre').value.trim().replace(/[^a-zA-Z0-9]/g,'-')||'empresa';
-    var fc=$('fecha_corte').value||'';
-    H.downloadAsWord($('sheet'), 'carta-representacion-administracion-'+emp+'-'+fc);
-  };
-  render();
-})();
-</script>
+<script>(function(){"use strict";var $=function(e){return document.getElementById(e)};var e=window.certHelpers;var a=perfilContador.get()||{};if(!a.nombre){var o=document.createElement("div");o.className="no-perfil";o.style.cssText="grid-column:1/-1;margin:0 0 14px;padding:12px 16px;font-size:.9rem";o.innerHTML='💡 <strong>Tip:</strong> <a href="certificados.html">guarda tu perfil</a> para autollenar tu nombre, cédula y T.P.';var r=document.querySelector(".cert-layout");if(r)r.insertBefore(o,r.firstChild)}var t=new Date;$("fecha_corte").value=t.getFullYear()-1+"-12-31";var n=perfilContador.clientes.list();var s=$("cliSelect");n.forEach(function(e){var a=document.createElement("option");a.value=e.id;a.textContent=e.nombre+(e.nit?" — "+e.nit:"");s.appendChild(a)});s.addEventListener("change",function(){if(!s.value)return;var e=perfilContador.clientes.get(s.value);if(!e)return;$("emp_nombre").value=e.nombre||"";$("emp_nit").value=e.nit||"";$("emp_ciudad").value=e.ciudad||"";if(e.rl_nombre)$("rl_nombre").value=e.rl_nombre;if(e.rl_cc)$("rl_cc").value=e.rl_cc;if(e.rl_cargo)$("rl_cargo").value=e.rl_cargo;render()});var i={a_resp:"<strong>Responsabilidad sobre los EEFF.</strong> Hemos cumplido nuestra responsabilidad por la preparación y presentación razonable de los estados financieros conforme al marco normativo aplicable, incluyendo su presentación correcta.",a_control:"<strong>Control interno.</strong> Hemos diseñado, implementado y mantenido controles internos relevantes para la preparación y presentación de estados financieros libres de incorrección material, debida a fraude o error.",a_info:"<strong>Información y acceso.</strong> Hemos puesto a su disposición todos los registros contables, soportes, actas, contratos y demás información solicitada relevante para los estados financieros y le hemos permitido acceso irrestricto a las personas y áreas necesarias para la auditoría.",a_transac:"<strong>Integridad transaccional.</strong> Todas las transacciones realizadas por la entidad han sido reconocidas en los registros contables y se reflejan en los estados financieros.",a_fraude:"<strong>Fraude.</strong> No tenemos conocimiento de fraudes, ni de sospechas de fraude, que afecten a la entidad, ni de comunicaciones o denuncias de fraude por parte de empleados, ex empleados, analistas, reguladores u otros, recibidas y no reveladas.",a_partes:"<strong>Partes relacionadas.</strong> Hemos revelado todas las relaciones y transacciones con partes relacionadas, y los saldos pendientes con éstas, conforme al marco normativo aplicable.",a_litigios:"<strong>Litigios y reclamaciones.</strong> Hemos revelado todos los litigios, reclamaciones y procesos legales conocidos, en curso o probables, cuyos efectos deban considerarse al preparar los estados financieros, y hemos contabilizado o revelado las provisiones y contingencias correspondientes.",a_post:"<strong>Hechos posteriores.</strong> Hemos identificado y considerado los hechos ocurridos entre la fecha de corte y la fecha de esta carta que requieran ajuste o revelación en los estados financieros, y los hemos contabilizado o revelado adecuadamente.",a_leyes:"<strong>Leyes y regulaciones.</strong> Hemos revelado al auditor todos los casos conocidos de incumplimiento o sospecha de incumplimiento de leyes y regulaciones cuyos efectos debieran ser considerados al preparar los estados financieros.",a_negocio:"<strong>Negocio en marcha.</strong> Consideramos apropiada la utilización de la hipótesis de negocio en marcha al preparar los estados financieros. Hemos revelado todas las situaciones, eventos y condiciones que pudieran generar dudas significativas sobre la capacidad de la entidad para continuar como negocio en marcha durante los próximos doce (12) meses.",a_estim:"<strong>Estimaciones contables.</strong> Los métodos, datos significativos y supuestos utilizados por la administración para realizar las estimaciones contables y sus revelaciones son razonables conforme al marco normativo aplicable.",a_garantias:"<strong>Gravámenes y restricciones.</strong> Hemos revelado al auditor los activos otorgados como garantía, gravámenes, embargos, pignoraciones u otras restricciones sobre la propiedad y disponibilidad de los activos de la entidad."};function render(){var a=perfilContador.get()||{};var o=$("membrete");var r=$("emp_nombre").value.trim()||"[Empresa]";var t=$("emp_nit").value.trim()||"—";var n=$("emp_ciudad").value.trim();o.innerHTML='<div class="cert-membrete-info" style="text-align:center;width:100%">'+'<div class="nombre">'+e.esc(r)+"</div>"+'<div class="sub">NIT '+e.esc(t)+(n?" · "+e.esc(n):"")+"</div></div>";var s=new Date;$("vCiudadFecha").textContent=(n?n+", ":"")+s.getDate()+" de "+e.MESES[s.getMonth()]+" de "+s.getFullYear();$("vCiudad").textContent=n||"la ciudad";$("vDia").textContent=s.getDate();$("vMes").textContent=e.MESES[s.getMonth()];$("vAnoEmision").textContent=s.getFullYear();$("vEmpNombre").textContent=r;$("vEmpNit").textContent=t;$("vFechaCorte").textContent=$("fecha_corte").value?e.formatFechaLarga($("fecha_corte").value):"—";$("vMarco").textContent=$("marco").value;$("vAuditorNombre").textContent=$("auditor_nombre").value.trim()||"[Auditor / Revisor Fiscal]";var c=$("auditor_firma").value.trim();$("vAuditorFirma").textContent=c?c:"";var d="";Object.keys(i).forEach(function(e){if($(e)&&$(e).checked)d+="<li>"+i[e]+"</li>"});$("vListaAseveraciones").innerHTML=d;$("vF1Nombre").textContent=$("rl_nombre").value.trim()||"[RL]";$("vF1CC").textContent=$("rl_cc").value.trim()||"—";$("vF1Cargo").textContent=$("rl_cargo").value.trim()||"Representante Legal";$("vF2Img").innerHTML=a.firma_base64?'<img src="'+a.firma_base64+'" alt="">':"";$("vF2Nombre").textContent=a.nombre||"";$("vF2CC").textContent=a.cc||"—";$("vF2TP").textContent=a.tp||"—"}["emp_nombre","emp_nit","emp_ciudad","rl_nombre","rl_cc","rl_cargo","fecha_corte","auditor_nombre","auditor_firma"].forEach(function(e){$(e).addEventListener("input",render)});["marco","a_resp","a_control","a_info","a_transac","a_fraude","a_partes","a_litigios","a_post","a_leyes","a_negocio","a_estim","a_garantias"].forEach(function(e){$(e).addEventListener("change",render)});if(window.exoPro&&exoPro.check){exoPro.check().then(function(e){if(e)$("sheet").setAttribute("data-pro","1")})}window.descargarWord=function(){var a=$("emp_nombre").value.trim().replace(/[^a-zA-Z0-9]/g,"-")||"empresa";var o=$("fecha_corte").value||"";e.downloadAsWord($("sheet"),"carta-representacion-administracion-"+a+"-"+o)};render()})();</script>
 </body>
 </html>

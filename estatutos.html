@@ -3,7 +3,7 @@
 <head>
 <script src="shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="og-image.png">
@@ -197,106 +197,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
     <a href="sanciones-dian.html" style="padding:8px 16px;background:#ECFDF5;color:#047857;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:500">Sanciones DIAN</a>
   </div>
 </section>
-<script>
-var DATA=[];
-var DEPTS={};
-function norm(s){return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()}
-fetch('data/directorio_estatutos.json')
-.then(function(r){return r.json()})
-.then(function(d){
-  DATA=d;
-  // Group by department
-  d.forEach(function(m){
-    if(!DEPTS[m.dc])DEPTS[m.dc]={name:m.d,code:m.dc,municipios:[]};
-    DEPTS[m.dc].municipios.push(m);
-  });
-  // Sort municipalities within each dept
-  Object.values(DEPTS).forEach(function(dept){
-    dept.municipios.sort(function(a,b){return a.n.localeCompare(b.n,'es')});
-  });
-  // Update stats
-  var total=d.length;
-  var avail=d.filter(function(m){return m.l}).length;
-  document.getElementById('sTotal').textContent=total.toLocaleString('es-CO');
-  document.getElementById('sDisp').textContent=avail;
-  document.getElementById('sPct').textContent=Math.round(avail/total*100)+'%';
-  document.getElementById('headerCount').textContent=avail+' disponibles';
-  renderDepts();
-});
-function renderDepts(){
-  var sorted=Object.values(DEPTS).sort(function(a,b){return a.name.localeCompare(b.name,'es')});
-  var html='';
-  sorted.forEach(function(dept){
-    var total=dept.municipios.length;
-    var avail=dept.municipios.filter(function(m){return m.l}).length;
-    var pct=total>0?Math.round(avail/total*100):0;
-    var barClass=pct>=50?'high':pct>0?'mid':'low';
-    html+='<div class="dept-card">';
-    html+='<div class="dept-header" onclick="toggleDept(this)">';
-    html+='<div class="dept-name">'+dept.name+'</div>';
-    html+='<div class="dept-stats">';
-    html+='<div class="dept-count">'+avail+' / '+total+'</div>';
-    html+='<div class="dept-bar"><div class="dept-bar-fill '+barClass+'" style="width:'+pct+'%"></div></div>';
-    html+='<span class="dept-chevron">&#9660;</span>';
-    html+='</div></div>';
-    html+='<div class="dept-body"><div class="mun-grid">';
-    dept.municipios.forEach(function(m){
-      if(m.l){
-        html+='<div class="mun-item"><div><span class="mun-name">'+m.n+'</span><span class="mun-code">'+m.c+'</span></div><a href="'+m.l+'" target="_blank" rel="noopener" class="mun-link yes">&#128196; Ver estatuto</a></div>';
-      }else{
-        html+='<div class="mun-item"><div><span class="mun-name" style="color:var(--muted)">'+m.n+'</span><span class="mun-code">'+m.c+'</span></div><span class="mun-link no">Pendiente</span></div>';
-      }
-    });
-    html+='</div></div></div>';
-  });
-  document.getElementById('deptList').innerHTML=html;
-}
-function toggleDept(el){
-  el.classList.toggle('open');
-}
-/* Search */
-function buscar(){
-  var q=norm(document.getElementById('searchInput').value);
-  var panel=document.getElementById('searchResults');
-  if(!q||q.length<2){panel.classList.remove('show');return}
-  var matches=DATA.filter(function(m){
-    return norm(m.n).includes(q)||norm(m.d).includes(q)||m.c.includes(q);
-  }).slice(0,15);
-  if(!matches.length){panel.classList.remove('show');return}
-  var html='';
-  matches.forEach(function(m){
-    var statusCls=m.l?'yes':'no';
-    var statusTxt=m.l?'Disponible':'Pendiente';
-    var safeLink=m.l?m.l.replace(/&/g,'&amp;').replace(/'/g,'&#39;'):'';
-    var onclick=m.l?'window.open(&#39;'+safeLink+'&#39;,&#39;_blank&#39;)':'expandDept(&#39;'+m.dc+'&#39;)';
-    html+='<div class="sr-item" onclick="'+onclick+'">';
-    html+='<div><div class="name">'+m.n+'</div><div class="dept">'+m.d+' &middot; '+m.c+'</div></div>';
-    html+='<span class="status '+statusCls+'">'+statusTxt+'</span>';
-    html+='</div>';
-  });
-  panel.innerHTML=html;
-  panel.classList.add('show');
-}
-function expandDept(dc){
-  document.getElementById('searchResults').classList.remove('show');
-  document.getElementById('searchInput').value='';
-  var headers=document.querySelectorAll('.dept-header');
-  headers.forEach(function(h){
-    var name=h.querySelector('.dept-name').textContent;
-    var dept=Object.values(DEPTS).find(function(d){return d.code===dc});
-    if(dept&&name===dept.name){
-      if(!h.classList.contains('open'))h.classList.add('open');
-      h.scrollIntoView({behavior:'smooth',block:'start'});
-    }
-  });
-}
-/* Close search on click outside */
-document.addEventListener('click',function(e){
-  if(!e.target.closest('.search-box')){
-    document.getElementById('searchResults').classList.remove('show');
-  }
-});
-</script>
+<script>var DATA=[];var DEPTS={};function norm(e){return e.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase()}fetch("data/directorio_estatutos.json").then(function(e){return e.json()}).then(function(e){DATA=e;e.forEach(function(e){if(!DEPTS[e.dc])DEPTS[e.dc]={name:e.d,code:e.dc,municipios:[]};DEPTS[e.dc].municipios.push(e)});Object.values(DEPTS).forEach(function(e){e.municipios.sort(function(e,n){return e.n.localeCompare(n.n,"es")})});var n=e.length;var t=e.filter(function(e){return e.l}).length;document.getElementById("sTotal").textContent=n.toLocaleString("es-CO");document.getElementById("sDisp").textContent=t;document.getElementById("sPct").textContent=Math.round(t/n*100)+"%";document.getElementById("headerCount").textContent=t+" disponibles";renderDepts()});function renderDepts(){var e=Object.values(DEPTS).sort(function(e,n){return e.name.localeCompare(n.name,"es")});var n="";e.forEach(function(e){var t=e.municipios.length;var s=e.municipios.filter(function(e){return e.l}).length;var a=t>0?Math.round(s/t*100):0;var i=a>=50?"high":a>0?"mid":"low";n+='<div class="dept-card">';n+='<div class="dept-header" onclick="toggleDept(this)">';n+='<div class="dept-name">'+e.name+"</div>";n+='<div class="dept-stats">';n+='<div class="dept-count">'+s+" / "+t+"</div>";n+='<div class="dept-bar"><div class="dept-bar-fill '+i+'" style="width:'+a+'%"></div></div>';n+='<span class="dept-chevron">&#9660;</span>';n+="</div></div>";n+='<div class="dept-body"><div class="mun-grid">';e.municipios.forEach(function(e){if(e.l){n+='<div class="mun-item"><div><span class="mun-name">'+e.n+'</span><span class="mun-code">'+e.c+'</span></div><a href="'+e.l+'" target="_blank" rel="noopener" class="mun-link yes">&#128196; Ver estatuto</a></div>'}else{n+='<div class="mun-item"><div><span class="mun-name" style="color:var(--muted)">'+e.n+'</span><span class="mun-code">'+e.c+'</span></div><span class="mun-link no">Pendiente</span></div>'}});n+="</div></div></div>"});document.getElementById("deptList").innerHTML=n}function toggleDept(e){e.classList.toggle("open")}function buscar(){var e=norm(document.getElementById("searchInput").value);var n=document.getElementById("searchResults");if(!e||e.length<2){n.classList.remove("show");return}var t=DATA.filter(function(n){return norm(n.n).includes(e)||norm(n.d).includes(e)||n.c.includes(e)}).slice(0,15);if(!t.length){n.classList.remove("show");return}var s="";t.forEach(function(e){var n=e.l?"yes":"no";var t=e.l?"Disponible":"Pendiente";var a=e.l?e.l.replace(/&/g,"&amp;").replace(/'/g,"&#39;"):"";var i=e.l?"window.open(&#39;"+a+"&#39;,&#39;_blank&#39;)":"expandDept(&#39;"+e.dc+"&#39;)";s+='<div class="sr-item" onclick="'+i+'">';s+='<div><div class="name">'+e.n+'</div><div class="dept">'+e.d+" &middot; "+e.c+"</div></div>";s+='<span class="status '+n+'">'+t+"</span>";s+="</div>"});n.innerHTML=s;n.classList.add("show")}function expandDept(e){document.getElementById("searchResults").classList.remove("show");document.getElementById("searchInput").value="";var n=document.querySelectorAll(".dept-header");n.forEach(function(n){var t=n.querySelector(".dept-name").textContent;var s=Object.values(DEPTS).find(function(n){return n.code===e});if(s&&t===s.name){if(!n.classList.contains("open"))n.classList.add("open");n.scrollIntoView({behavior:"smooth",block:"start"})}})}document.addEventListener("click",function(e){if(!e.target.closest(".search-box")){document.getElementById("searchResults").classList.remove("show")}});</script>
 <link rel="stylesheet" href="shared/chat.css?v=78c6b2c3">
 <script defer src="shared/chat.js?v=d7b50b20"></script>
 </body>

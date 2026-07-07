@@ -3,7 +3,7 @@
 <head>
 <script src="shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="theme-color" content="#4F46E5">
@@ -227,36 +227,6 @@ footer.foot a{color:#6B7280;text-decoration:none;margin:0 10px}
 <script src="shared/quiz-banks.js?v=d32d7186"></script>
 <script src="shared/quiz-engine.js?v=ef04411f"></script>
 <script src="shared/cert-emit-widget.js?v=88f49f6b"></script>
-<script>
-(function(){
-  function init(){
-    if(!window.exoCursoMeta||!window.exoCertificado) return;
-    var slug='exogena';
-    var esp=window.exoCursoMeta.ESPECIALIZACIONES[slug];
-    if(!esp) return;
-    var cursos=esp.cursos;
-    var COURSES=window.exoCertificado.COURSES;
-    var list=document.getElementById('cursos-list');
-    if(!list) return;
-    var html='';
-    for(var i=0;i<cursos.length;i++){
-      var id=cursos[i];
-      var c=COURSES[id]; var m=window.exoCursoMeta.get(id);
-      if(!c||!m) continue;
-      var prereqLabel='';
-      if(m.prereq && COURSES[m.prereq]) prereqLabel=' &middot; Pre-requisito: '+COURSES[m.prereq].name;
-      html+='<a class="cur-card" href="escuela/'+id+'.html">';
-      html+='<div class="num">'+(i+1)+'</div>';
-      html+='<div class="body"><h3>'+c.name+'</h3>';
-      html+='<div class="meta"><span>'+m.nivel+'</span><span>'+window.exoCursoMeta.fmtLectura(m.lecturaMin)+' lectura</span>'+(prereqLabel?'<span>'+prereqLabel.replace(' &middot; ','')+'</span>':'')+'</div>';
-      html+='<p>'+c.desc.substring(0,180)+(c.desc.length>180?'…':'')+'</p></div>';
-      html+='<div class="arrow">&rarr;</div></a>';
-    }
-    list.innerHTML=html;
-  }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
-  else init();
-})();
-</script>
+<script>(function(){function init(){if(!window.exoCursoMeta||!window.exoCertificado)return;var e="exogena";var r=window.exoCursoMeta.ESPECIALIZACIONES[e];if(!r)return;var a=r.cursos;var i=window.exoCertificado.COURSES;var n=document.getElementById("cursos-list");if(!n)return;var t="";for(var o=0;o<a.length;o++){var d=a[o];var s=i[d];var c=window.exoCursoMeta.get(d);if(!s||!c)continue;var u="";if(c.prereq&&i[c.prereq])u=" &middot; Pre-requisito: "+i[c.prereq].name;t+='<a class="cur-card" href="escuela/'+d+'.html">';t+='<div class="num">'+(o+1)+"</div>";t+='<div class="body"><h3>'+s.name+"</h3>";t+='<div class="meta"><span>'+c.nivel+"</span><span>"+window.exoCursoMeta.fmtLectura(c.lecturaMin)+" lectura</span>"+(u?"<span>"+u.replace(" &middot; ","")+"</span>":"")+"</div>";t+="<p>"+s.desc.substring(0,180)+(s.desc.length>180?"…":"")+"</p></div>";t+='<div class="arrow">&rarr;</div></a>'}n.innerHTML=t}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init()})();</script>
 </body>
 </html>

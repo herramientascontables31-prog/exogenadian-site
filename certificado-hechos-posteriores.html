@@ -3,7 +3,7 @@
 <head>
 <script src="shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="og-image.png">
@@ -189,130 +189,6 @@ a{color:#2E75B6}
     </article>
   </div>
 </div>
-<script>
-(function(){
-  'use strict';
-  var $=function(id){return document.getElementById(id);};
-  var H=window.certHelpers;
-  var perfil=perfilContador.get()||{};
-  if(!perfil.nombre){
-    var aviso=document.createElement('div');
-    aviso.style.cssText='grid-column:1/-1;margin:0 0 14px;padding:12px 16px;background:#FFFBEB;border:1px solid #FCD34D;color:#78350F;border-radius:12px;font-size:.9rem;line-height:1.55';
-    aviso.innerHTML='💡 <strong>Tip:</strong> <a href="certificados.html" style="color:#92400E;font-weight:700">guarda tu perfil</a> para autollenar tu nombre, cédula y T.P.';
-    var layout=document.querySelector('.cert-layout');
-    if(layout) layout.insertBefore(aviso, layout.firstChild);
-  }
-  var hoy=new Date();
-  $('fecha_corte').value=(hoy.getFullYear()-1)+'-12-31';
-  var clientes=perfilContador.clientes.list();
-  var sel=$('cliSelect');
-  clientes.forEach(function(c){
-    var opt=document.createElement('option');opt.value=c.id;opt.textContent=c.nombre+(c.nit?(' — '+c.nit):'');sel.appendChild(opt);
-  });
-  sel.addEventListener('change', function(){
-    if(!sel.value) return;
-    var c=perfilContador.clientes.get(sel.value);if(!c) return;
-    $('emp_nombre').value=c.nombre||'';$('emp_nit').value=c.nit||'';$('emp_ciudad').value=c.ciudad||'';
-    if(c.rl_nombre) $('rl_nombre').value=c.rl_nombre;
-    if(c.rl_cc) $('rl_cc').value=c.rl_cc;
-    if(c.rl_cargo) $('rl_cargo').value=c.rl_cargo;
-    render();
-  });
-  // Toggle hubo / no hubo
-  document.querySelectorAll('input[name=hubo]').forEach(function(r){
-    r.addEventListener('change', function(){
-      document.querySelectorAll('#rgHubo label').forEach(function(l){l.classList.remove('sel')});
-      r.parentElement.classList.add('sel');
-      $('hechosWrap').style.display=r.value==='si'?'':'none';
-      if(r.value==='si' && document.querySelectorAll('#hechosList .hecho-item').length===0) agregarHecho();
-      render();
-    });
-  });
-  window.agregarHecho=function(){
-    var idx=document.querySelectorAll('#hechosList .hecho-item').length;
-    var div=document.createElement('div');
-    div.className='hecho-item';
-    div.innerHTML=
-      '<input type="date" class="h-fecha" placeholder="Fecha">'+
-      '<input type="text" class="h-desc" placeholder="Descripción del hecho (ej. Incendio en bodega afecta inventarios por $X)">'+
-      '<select class="h-tipo"><option value="ajusta">Ajusta</option><option value="no-ajusta" selected>No ajusta</option></select>'+
-      '<button type="button" class="rm" onclick="quitarHecho(this)">✕</button>';
-    document.getElementById('hechosList').appendChild(div);
-    div.querySelector('.h-fecha').addEventListener('input',render);
-    div.querySelector('.h-desc').addEventListener('input',render);
-    div.querySelector('.h-tipo').addEventListener('change',render);
-    render();
-  };
-  window.quitarHecho=function(btn){btn.closest('.hecho-item').remove();render()};
-  function render(){
-    var p=perfilContador.get()||{};
-    var memb=$('membrete');
-    var empNombre=$('emp_nombre').value.trim()||'[Empresa]';
-    var empNit=$('emp_nit').value.trim()||'—';
-    var empCiudad=$('emp_ciudad').value.trim();
-    memb.innerHTML='<div class="cert-membrete-info" style="text-align:center;width:100%">'+
-      '<div class="nombre">'+H.esc(empNombre)+'</div>'+
-      '<div class="sub">NIT '+H.esc(empNit)+(empCiudad?(' · '+H.esc(empCiudad)):'')+'</div></div>';
-    var hoyD=new Date();
-    $('vCiudadFecha').textContent=(empCiudad?(empCiudad+', '):'')+hoyD.getDate()+' de '+H.MESES[hoyD.getMonth()]+' de '+hoyD.getFullYear();
-    $('vCiudad').textContent=empCiudad||'la ciudad';
-    $('vDia').textContent=hoyD.getDate();
-    $('vMes').textContent=H.MESES[hoyD.getMonth()];
-    $('vAnoEmision').textContent=hoyD.getFullYear();
-    $('vEmpNombre').textContent=empNombre;
-    $('vEmpNit').textContent=empNit;
-    $('vRlNombre').textContent=$('rl_nombre').value.trim()||'[RL]';
-    $('vRlCC').textContent=$('rl_cc').value.trim()||'—';
-    $('vRlCargo').textContent=$('rl_cargo').value.trim()||'Representante Legal';
-    $('vContador').textContent=p.nombre||'';
-    $('vContadorCC').textContent=p.cc||'—';
-    $('vContadorTP').textContent=p.tp||'—';
-    $('vFechaCorte').textContent=$('fecha_corte').value?H.formatFechaLarga($('fecha_corte').value):'—';
-    $('vFechaEmision').textContent=H.formatFechaLarga(hoyD.toISOString().slice(0,10));
-    var marcoSel=$('marco').value;
-    if(marcoSel.indexOf('Plenas')>=0) $('vNorma').textContent='NIC 10 — Hechos Ocurridos Después del Periodo sobre el que se Informa (NIIF Plenas)';
-    else if(marcoSel.indexOf('Micro')>=0) $('vNorma').textContent='Capítulo 14 — Hechos Posteriores (Decreto 2706/2012, Marco para Microempresas)';
-    else $('vNorma').textContent='Sección 32 — Hechos Ocurridos Después del Periodo sobre el que se Informa (NIIF para PYMES)';
-    var hubo=document.querySelector('input[name=hubo]:checked').value;
-    var bloque=$('vBloqueResultado');
-    if(hubo==='no'){
-      bloque.innerHTML='<p style="margin-top:8pt;background:#ECFDF5;padding:10pt 14pt;border-left:3px solid #059669"><strong>Resultado:</strong> Entre la fecha de cierre y la fecha de emisión <strong>no han ocurrido hechos que requieran ajuste o revelación</strong> en los presentes estados financieros conforme al marco normativo aplicable.</p>';
-    } else {
-      var items=document.querySelectorAll('#hechosList .hecho-item');
-      if(items.length===0){
-        bloque.innerHTML='<p style="margin-top:8pt;color:#991B1B;font-style:italic">[Agrega al menos un hecho en el panel de la izquierda]</p>';
-        return;
-      }
-      var rows='';
-      items.forEach(function(it){
-        var fecha=it.querySelector('.h-fecha').value;
-        var desc=it.querySelector('.h-desc').value.trim();
-        var tipo=it.querySelector('.h-tipo').value;
-        var fechaTxt=fecha?H.formatFechaLarga(fecha):'—';
-        var tipoTxt=tipo==='ajusta'?'Ajusta':'No ajusta';
-        rows+='<tr class="'+(tipo==='ajusta'?'ajusta':'no-ajusta')+'"><td>'+H.esc(fechaTxt)+'</td><td>'+H.esc(desc||'(sin descripción)')+'</td><td>'+tipoTxt+'</td></tr>';
-      });
-      bloque.innerHTML='<p style="margin-top:8pt"><strong>Resultado:</strong> Se identificaron los siguientes hechos posteriores significativos:</p>'+
-        '<table class="hechos-doc"><thead><tr><th style="width:140pt">Fecha</th><th>Descripción</th><th style="width:80pt">Tipo</th></tr></thead><tbody>'+rows+'</tbody></table>';
-    }
-    $('vF1Nombre').textContent=$('rl_nombre').value.trim()||'[RL]';
-    $('vF1CC').textContent=$('rl_cc').value.trim()||'—';
-    $('vF1Cargo').textContent=$('rl_cargo').value.trim()||'Representante Legal';
-    $('vF2Img').innerHTML=p.firma_base64?('<img src="'+p.firma_base64+'" alt="">'):'';
-    $('vF2Nombre').textContent=p.nombre||'';
-    $('vF2CC').textContent=p.cc||'—';
-    $('vF2TP').textContent=p.tp||'—';
-  }
-  ;['emp_nombre','emp_nit','emp_ciudad','rl_nombre','rl_cc','rl_cargo','fecha_corte'].forEach(function(id){$(id).addEventListener('input',render)});
-  $('marco').addEventListener('change',render);
-  if(window.exoPro && exoPro.check){exoPro.check().then(function(isPro){if(isPro) $('sheet').setAttribute('data-pro','1')})}
-  window.descargarWord=function(){
-    var emp=$('emp_nombre').value.trim().replace(/[^a-zA-Z0-9]/g,'-')||'empresa';
-    var fc=$('fecha_corte').value||'';
-    H.downloadAsWord($('sheet'), 'hechos-posteriores-'+emp+'-'+fc);
-  };
-  render();
-})();
-</script>
+<script>(function(){"use strict";var $=function(e){return document.getElementById(e)};var e=window.certHelpers;var t=perfilContador.get()||{};if(!t.nombre){var r=document.createElement("div");r.style.cssText="grid-column:1/-1;margin:0 0 14px;padding:12px 16px;background:#FFFBEB;border:1px solid #FCD34D;color:#78350F;border-radius:12px;font-size:.9rem;line-height:1.55";r.innerHTML='💡 <strong>Tip:</strong> <a href="certificados.html" style="color:#92400E;font-weight:700">guarda tu perfil</a> para autollenar tu nombre, cédula y T.P.';var n=document.querySelector(".cert-layout");if(n)n.insertBefore(r,n.firstChild)}var o=new Date;$("fecha_corte").value=o.getFullYear()-1+"-12-31";var a=perfilContador.clientes.list();var c=$("cliSelect");a.forEach(function(e){var t=document.createElement("option");t.value=e.id;t.textContent=e.nombre+(e.nit?" — "+e.nit:"");c.appendChild(t)});c.addEventListener("change",function(){if(!c.value)return;var e=perfilContador.clientes.get(c.value);if(!e)return;$("emp_nombre").value=e.nombre||"";$("emp_nit").value=e.nit||"";$("emp_ciudad").value=e.ciudad||"";if(e.rl_nombre)$("rl_nombre").value=e.rl_nombre;if(e.rl_cc)$("rl_cc").value=e.rl_cc;if(e.rl_cargo)$("rl_cargo").value=e.rl_cargo;render()});document.querySelectorAll("input[name=hubo]").forEach(function(e){e.addEventListener("change",function(){document.querySelectorAll("#rgHubo label").forEach(function(e){e.classList.remove("sel")});e.parentElement.classList.add("sel");$("hechosWrap").style.display=e.value==="si"?"":"none";if(e.value==="si"&&document.querySelectorAll("#hechosList .hecho-item").length===0)agregarHecho();render()})});window.agregarHecho=function(){var e=document.querySelectorAll("#hechosList .hecho-item").length;var t=document.createElement("div");t.className="hecho-item";t.innerHTML='<input type="date" class="h-fecha" placeholder="Fecha">'+'<input type="text" class="h-desc" placeholder="Descripción del hecho (ej. Incendio en bodega afecta inventarios por $X)">'+'<select class="h-tipo"><option value="ajusta">Ajusta</option><option value="no-ajusta" selected>No ajusta</option></select>'+'<button type="button" class="rm" onclick="quitarHecho(this)">✕</button>';document.getElementById("hechosList").appendChild(t);t.querySelector(".h-fecha").addEventListener("input",render);t.querySelector(".h-desc").addEventListener("input",render);t.querySelector(".h-tipo").addEventListener("change",render);render()};window.quitarHecho=function(e){e.closest(".hecho-item").remove();render()};function render(){var t=perfilContador.get()||{};var r=$("membrete");var n=$("emp_nombre").value.trim()||"[Empresa]";var o=$("emp_nit").value.trim()||"—";var a=$("emp_ciudad").value.trim();r.innerHTML='<div class="cert-membrete-info" style="text-align:center;width:100%">'+'<div class="nombre">'+e.esc(n)+"</div>"+'<div class="sub">NIT '+e.esc(o)+(a?" · "+e.esc(a):"")+"</div></div>";var c=new Date;$("vCiudadFecha").textContent=(a?a+", ":"")+c.getDate()+" de "+e.MESES[c.getMonth()]+" de "+c.getFullYear();$("vCiudad").textContent=a||"la ciudad";$("vDia").textContent=c.getDate();$("vMes").textContent=e.MESES[c.getMonth()];$("vAnoEmision").textContent=c.getFullYear();$("vEmpNombre").textContent=n;$("vEmpNit").textContent=o;$("vRlNombre").textContent=$("rl_nombre").value.trim()||"[RL]";$("vRlCC").textContent=$("rl_cc").value.trim()||"—";$("vRlCargo").textContent=$("rl_cargo").value.trim()||"Representante Legal";$("vContador").textContent=t.nombre||"";$("vContadorCC").textContent=t.cc||"—";$("vContadorTP").textContent=t.tp||"—";$("vFechaCorte").textContent=$("fecha_corte").value?e.formatFechaLarga($("fecha_corte").value):"—";$("vFechaEmision").textContent=e.formatFechaLarga(c.toISOString().slice(0,10));var i=$("marco").value;if(i.indexOf("Plenas")>=0)$("vNorma").textContent="NIC 10 — Hechos Ocurridos Después del Periodo sobre el que se Informa (NIIF Plenas)";else if(i.indexOf("Micro")>=0)$("vNorma").textContent="Capítulo 14 — Hechos Posteriores (Decreto 2706/2012, Marco para Microempresas)";else $("vNorma").textContent="Sección 32 — Hechos Ocurridos Después del Periodo sobre el que se Informa (NIIF para PYMES)";var l=document.querySelector("input[name=hubo]:checked").value;var s=$("vBloqueResultado");if(l==="no"){s.innerHTML='<p style="margin-top:8pt;background:#ECFDF5;padding:10pt 14pt;border-left:3px solid #059669"><strong>Resultado:</strong> Entre la fecha de cierre y la fecha de emisión <strong>no han ocurrido hechos que requieran ajuste o revelación</strong> en los presentes estados financieros conforme al marco normativo aplicable.</p>'}else{var d=document.querySelectorAll("#hechosList .hecho-item");if(d.length===0){s.innerHTML='<p style="margin-top:8pt;color:#991B1B;font-style:italic">[Agrega al menos un hecho en el panel de la izquierda]</p>';return}var u="";d.forEach(function(t){var r=t.querySelector(".h-fecha").value;var n=t.querySelector(".h-desc").value.trim();var o=t.querySelector(".h-tipo").value;var a=r?e.formatFechaLarga(r):"—";var c=o==="ajusta"?"Ajusta":"No ajusta";u+='<tr class="'+(o==="ajusta"?"ajusta":"no-ajusta")+'"><td>'+e.esc(a)+"</td><td>"+e.esc(n||"(sin descripción)")+"</td><td>"+c+"</td></tr>"});s.innerHTML='<p style="margin-top:8pt"><strong>Resultado:</strong> Se identificaron los siguientes hechos posteriores significativos:</p>'+'<table class="hechos-doc"><thead><tr><th style="width:140pt">Fecha</th><th>Descripción</th><th style="width:80pt">Tipo</th></tr></thead><tbody>'+u+"</tbody></table>"}$("vF1Nombre").textContent=$("rl_nombre").value.trim()||"[RL]";$("vF1CC").textContent=$("rl_cc").value.trim()||"—";$("vF1Cargo").textContent=$("rl_cargo").value.trim()||"Representante Legal";$("vF2Img").innerHTML=t.firma_base64?'<img src="'+t.firma_base64+'" alt="">':"";$("vF2Nombre").textContent=t.nombre||"";$("vF2CC").textContent=t.cc||"—";$("vF2TP").textContent=t.tp||"—"}["emp_nombre","emp_nit","emp_ciudad","rl_nombre","rl_cc","rl_cargo","fecha_corte"].forEach(function(e){$(e).addEventListener("input",render)});$("marco").addEventListener("change",render);if(window.exoPro&&exoPro.check){exoPro.check().then(function(e){if(e)$("sheet").setAttribute("data-pro","1")})}window.descargarWord=function(){var t=$("emp_nombre").value.trim().replace(/[^a-zA-Z0-9]/g,"-")||"empresa";var r=$("fecha_corte").value||"";e.downloadAsWord($("sheet"),"hechos-posteriores-"+t+"-"+r)};render()})();</script>
 </body>
 </html>

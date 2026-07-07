@@ -3,7 +3,7 @@
 <head>
 <script src="shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="icon" type="image/svg+xml" href="favicon.svg"><meta name="theme-color" content="#059669"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Ruta de formación en IA Contable &mdash; 7 cursos progresivos | Aziendale</title>
 <meta name="description" content="Ruta de formación en uso de IA para contadores colombianos: 7 cursos en niveles 0-5, desde IA sin miedo hasta crear tus propias Skills y software con Claude Code. Cubre los 4 frentes de Claude (Chat, Cowork, Skills, Code) con normativa CO.">
@@ -249,8 +249,6 @@ footer.foot{padding:32px 24px;background:#fff;border-top:1px solid #F3F4F6;text-
 <script src="shared/quiz-banks.js?v=d32d7186"></script>
 <script src="shared/quiz-engine.js?v=ef04411f"></script>
 <script src="shared/cert-emit-widget.js?v=88f49f6b"></script>
-<script>
-(function(){function init(){if(!window.exoCursoMeta||!window.exoCertificado)return;var slug='ia';var esp=window.exoCursoMeta.ESPECIALIZACIONES[slug];if(!esp)return;var cursos=esp.cursos;var COURSES=window.exoCertificado.COURSES;var list=document.getElementById('cursos-list');if(!list)return;var html='';for(var i=0;i<cursos.length;i++){var id=cursos[i];var c=COURSES[id];var m=window.exoCursoMeta.get(id);if(!c||!m)continue;var prereqLabel='';if(m.prereq&&COURSES[m.prereq])prereqLabel='Pre-requisito: '+COURSES[m.prereq].name;html+='<a class="cur-card" href="escuela/'+id+'.html"><div class="num">'+(i+1)+'</div><div class="body"><h3>'+c.name+'</h3><div class="meta"><span>'+m.nivel+'</span><span>'+window.exoCursoMeta.fmtLectura(m.lecturaMin)+' lectura</span>'+(prereqLabel?'<span>'+prereqLabel+'</span>':'')+'</div><p>'+c.desc.substring(0,180)+(c.desc.length>180?'…':'')+'</p></div><div class="arrow">&rarr;</div></a>';}list.innerHTML=html;}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();})();
-</script>
+<script>(function(){function init(){if(!window.exoCursoMeta||!window.exoCertificado)return;var e="ia";var r=window.exoCursoMeta.ESPECIALIZACIONES[e];if(!r)return;var a=r.cursos;var i=window.exoCertificado.COURSES;var n=document.getElementById("cursos-list");if(!n)return;var t="";for(var o=0;o<a.length;o++){var s=a[o];var d=i[s];var c=window.exoCursoMeta.get(s);if(!d||!c)continue;var u="";if(c.prereq&&i[c.prereq])u="Pre-requisito: "+i[c.prereq].name;t+='<a class="cur-card" href="escuela/'+s+'.html"><div class="num">'+(o+1)+'</div><div class="body"><h3>'+d.name+'</h3><div class="meta"><span>'+c.nivel+"</span><span>"+window.exoCursoMeta.fmtLectura(c.lecturaMin)+" lectura</span>"+(u?"<span>"+u+"</span>":"")+"</div><p>"+d.desc.substring(0,180)+(d.desc.length>180?"…":"")+'</p></div><div class="arrow">&rarr;</div></a>'}n.innerHTML=t}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init()})();</script>
 </body>
 </html>

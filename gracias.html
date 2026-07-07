@@ -3,12 +3,7 @@
 <head>
 <script src="shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-S7SM6ST4CC');
-</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="og-image.png">
@@ -259,106 +254,7 @@ gtag('config', 'G-S7SM6ST4CC');
   <a href="https://exogenadian.com" class="back-link">← Volver al inicio</a>
 </div>
 <script defer src="shared/pro.js?v=9ec24c76"></script>
-<script>
-  const APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbwT5ofExiwOKKLnBlwH6Uqhs4cdDpaieSiLn2dYf5D-6yPIdJ_9XEWeIGYyq1ViNKiasQ/exec';
-  const params = new URLSearchParams(window.location.search);
-  // Wompi redirige con ?id=TRANSACCION_ID
-  const transactionId = params.get('id') || '';
-  const referencia = params.get('reference') || params.get('ref') || transactionId || 'WEB-'+Date.now();
-  // Detectar plan por prefijo del ref (M=mensual, T=trimestral, A=anual)
-  var planFromRef={M:{name:'PRO Mensual',value:49900},T:{name:'PRO Trimestral',value:89900},A:{name:'PRO Anual',value:179900}};
-  var refPrefix=(referencia||'').charAt(0).toUpperCase();
-  var planInfo=planFromRef[refPrefix]||{name:'PRO Aziendale',value:49900};
-  // GA4: pago completado (el usuario llegó a la página de confirmación)
-  gtag('event','pago_completado',{
-    transaction_id: transactionId,
-    referencia: referencia,
-    plan: planInfo.name
-  });
-  // GA4: standard purchase event for native reports
-  gtag('event','purchase',{
-    transaction_id: transactionId,
-    value: planInfo.value,
-    currency: 'COP',
-    items: [{item_name:planInfo.name,item_category:'subscription',price:planInfo.value,quantity:1}]
-  });
-  if (referencia) {
-    document.getElementById('refBox').style.display = 'inline-flex';
-    document.getElementById('refId').textContent = referencia;
-  }
-  // Checkbox habilita botón
-  document.getElementById('acceptTerms').addEventListener('change',function(){
-    var btn=document.getElementById('acceptBtn');
-    if(this.checked){
-      btn.disabled=false;
-      btn.style.background='var(--green-600)';
-      btn.style.color='#fff';
-      btn.style.cursor='pointer';
-      btn.style.boxShadow='0 4px 14px rgba(5,150,105,0.3)';
-    }else{
-      btn.disabled=true;
-      btn.style.background='var(--gray-200)';
-      btn.style.color='var(--gray-400)';
-      btn.style.cursor='not-allowed';
-      btn.style.boxShadow='none';
-    }
-  });
-  // Mostrar aceptación en lugar del loading
-  document.getElementById('proAccept').style.display='block';
-  // Al aceptar, activar PRO
-  window.onAcceptTerms=async function(){
-    document.getElementById('proAccept').style.display='none';
-    document.getElementById('proLoading').style.display='block';
-    try{
-      if(!transactionId){
-        throw new Error('No transaction ID from Wompi');
-      }
-      const url=APPS_SCRIPT_URL
-        +'?action=generateKey'
-        +'&transactionId='+encodeURIComponent(transactionId)
-        +'&ref='+encodeURIComponent(referencia);
-      const resp=await fetch(url);
-      const data=await resp.json();
-      if(data.success && data.clave){
-        try{
-          const valResp=await fetch(APPS_SCRIPT_URL+'?action=validateKey&key='+encodeURIComponent(data.clave));
-          const valData=await valResp.json();
-        }catch(e){}
-        let email='';
-        try{
-          const txResp=await fetch('https://production.wompi.co/v1/transactions/'+transactionId);
-          const txData=await txResp.json();
-          email=txData.data?.customer_email||'';
-        }catch(e){}
-        document.getElementById('proLoading').style.display='none';
-        document.getElementById('proKeyBox').style.display='block';
-        document.getElementById('proEmailDisplay').textContent=email||'(revisa tu correo de pago)';
-        // GA4: registro/activación PRO completada
-        gtag('event','registro_completado',{
-          method: email?'email':'clave',
-          transaction_id: transactionId
-        });
-        // Activación consistente: además del email/clave, se fija la fecha
-        // de activación (red de seguridad de expiración local en pro.js) y se
-        // dispara una revalidación que puebla plan/escuela/caché desde el
-        // servidor. No se baja a minúsculas la clave (puede ser case-sensitive).
-        if(email){
-          localStorage.setItem('exogenadian_pro_email',email.toLowerCase());
-        }else{
-          localStorage.setItem('exogenadian_pro_key',data.clave);
-        }
-        localStorage.setItem('exogenadian_pro_activated_at',String(Date.now()));
-        try{ if(window.exoPro && window.exoPro.revalidate) window.exoPro.revalidate(); }catch(e){}
-      }else{
-        throw new Error(data.error || 'No key returned');
-      }
-    }catch(e){
-      console.error('Error activando PRO:',e);
-      document.getElementById('proLoading').style.display='none';
-      document.getElementById('proError').style.display='block';
-    }
-  };
-</script>
+<script>const APPS_SCRIPT_URL="https://script.google.com/macros/s/AKfycbwT5ofExiwOKKLnBlwH6Uqhs4cdDpaieSiLn2dYf5D-6yPIdJ_9XEWeIGYyq1ViNKiasQ/exec";const params=new URLSearchParams(window.location.search);const transactionId=params.get("id")||"";const referencia=params.get("reference")||params.get("ref")||transactionId||"WEB-"+Date.now();var planFromRef={M:{name:"PRO Mensual",value:49900},T:{name:"PRO Trimestral",value:89900},A:{name:"PRO Anual",value:179900}};var refPrefix=(referencia||"").charAt(0).toUpperCase();var planInfo=planFromRef[refPrefix]||{name:"PRO Aziendale",value:49900};gtag("event","pago_completado",{transaction_id:transactionId,referencia:referencia,plan:planInfo.name});gtag("event","purchase",{transaction_id:transactionId,value:planInfo.value,currency:"COP",items:[{item_name:planInfo.name,item_category:"subscription",price:planInfo.value,quantity:1}]});if(referencia){document.getElementById("refBox").style.display="inline-flex";document.getElementById("refId").textContent=referencia}document.getElementById("acceptTerms").addEventListener("change",function(){var e=document.getElementById("acceptBtn");if(this.checked){e.disabled=false;e.style.background="var(--green-600)";e.style.color="#fff";e.style.cursor="pointer";e.style.boxShadow="0 4px 14px rgba(5,150,105,0.3)"}else{e.disabled=true;e.style.background="var(--gray-200)";e.style.color="var(--gray-400)";e.style.cursor="not-allowed";e.style.boxShadow="none"}});document.getElementById("proAccept").style.display="block";window.onAcceptTerms=async function(){document.getElementById("proAccept").style.display="none";document.getElementById("proLoading").style.display="block";try{if(!transactionId){throw new Error("No transaction ID from Wompi")}const e=APPS_SCRIPT_URL+"?action=generateKey"+"&transactionId="+encodeURIComponent(transactionId)+"&ref="+encodeURIComponent(referencia);const t=await fetch(e);const a=await t.json();if(a.success&&a.clave){try{const e=await fetch(APPS_SCRIPT_URL+"?action=validateKey&key="+encodeURIComponent(a.clave));const t=await e.json()}catch(e){}let e="";try{const t=await fetch("https://production.wompi.co/v1/transactions/"+transactionId);const a=await t.json();e=a.data?.customer_email||""}catch(e){}document.getElementById("proLoading").style.display="none";document.getElementById("proKeyBox").style.display="block";document.getElementById("proEmailDisplay").textContent=e||"(revisa tu correo de pago)";gtag("event","registro_completado",{method:e?"email":"clave",transaction_id:transactionId});if(e){localStorage.setItem("exogenadian_pro_email",e.toLowerCase())}else{localStorage.setItem("exogenadian_pro_key",a.clave)}localStorage.setItem("exogenadian_pro_activated_at",String(Date.now()));try{if(window.exoPro&&window.exoPro.revalidate)window.exoPro.revalidate()}catch(e){}}else{throw new Error(a.error||"No key returned")}}catch(e){console.error("Error activando PRO:",e);document.getElementById("proLoading").style.display="none";document.getElementById("proError").style.display="block"}};</script>
 <script defer src="shared/toast.js?v=9843f93f"></script>
 <link rel="stylesheet" href="shared/chat.css?v=78c6b2c3">
 <script defer src="shared/chat.js?v=d7b50b20"></script>

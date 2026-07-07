@@ -3,7 +3,7 @@
 <head>
 <script src="shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="og-image.png">
@@ -202,120 +202,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
   <a href="finanzas.html" style="color:var(--pri2);text-decoration:none">Hub finanzas personales</a>
 </div>
 </div>
-<script>
-// === Lógica conversión tasas ===
-// Pivote: EA. Toda conversión pasa por EA.
-// Periodos por año: NMV/EM=12, NTV/ET=4, NSV/ES=2, NAV/EA=1
-var PERIODS={EM:12,ET:4,ES:2,EA:1,NMV:12,NTV:4,NSV:2,NAV:1,NMA:12,NTA:4,NSA:2,NAA:1};
-function toEA(rate, mod){
-  // rate viene en decimal (ej 0.30 para 30%)
-  var n=PERIODS[mod];
-  if(mod==='EA') return rate;
-  if(mod==='EM'||mod==='ET'||mod==='ES'){
-    // efectiva del periodo → EA
-    return Math.pow(1+rate, n) - 1;
-  }
-  if(mod==='NAV') return rate;
-  if(mod==='NMV'||mod==='NTV'||mod==='NSV'){
-    // nominal vencida → tasa periódica vencida → EA
-    var ip=rate/n;
-    return Math.pow(1+ip, n) - 1;
-  }
-  if(mod==='NAA'){
-    // anual anticipada → vencida → EA
-    return rate/(1-rate);
-  }
-  if(mod==='NMA'||mod==='NTA'||mod==='NSA'){
-    // nominal anticipada → tasa periódica anticipada → vencida → EA
-    var ia=rate/n;
-    var iv=ia/(1-ia);
-    return Math.pow(1+iv, n) - 1;
-  }
-  return 0;
-}
-function fromEA(ea, mod){
-  var n=PERIODS[mod];
-  if(mod==='EA') return ea;
-  if(mod==='EM'||mod==='ET'||mod==='ES'){
-    return Math.pow(1+ea, 1/n) - 1;
-  }
-  if(mod==='NAV') return ea;
-  if(mod==='NMV'||mod==='NTV'||mod==='NSV'){
-    var ip=Math.pow(1+ea, 1/n) - 1;
-    return ip*n;
-  }
-  if(mod==='NAA'){
-    return ea/(1+ea);
-  }
-  if(mod==='NMA'||mod==='NTA'||mod==='NSA'){
-    var iv=Math.pow(1+ea, 1/n) - 1;
-    var ia=iv/(1+iv);
-    return ia*n;
-  }
-  return 0;
-}
-var GROUPS=[
-  {label:'Efectivas', mods:[
-    {k:'EA',  d:'Efectiva anual'},
-    {k:'ES',  d:'Efectiva semestral'},
-    {k:'ET',  d:'Efectiva trimestral'},
-    {k:'EM',  d:'Efectiva mensual'}
-  ]},
-  {label:'Nominales vencidas', mods:[
-    {k:'NAV', d:'Nominal anual vencida'},
-    {k:'NSV', d:'Nominal capitalizable semestral vencida'},
-    {k:'NTV', d:'Nominal capitalizable trimestral vencida'},
-    {k:'NMV', d:'Nominal capitalizable mensual vencida'}
-  ]},
-  {label:'Nominales anticipadas', mods:[
-    {k:'NAA', d:'Nominal anual anticipada'},
-    {k:'NSA', d:'Nominal capitalizable semestral anticipada'},
-    {k:'NTA', d:'Nominal capitalizable trimestral anticipada'},
-    {k:'NMA', d:'Nominal capitalizable mensual anticipada'}
-  ]}
-];
-function fmt(v){
-  if(!isFinite(v)) return '—';
-  return (v*100).toFixed(4) + ' %';
-}
-function recalc(){
-  var raw=parseFloat(document.getElementById('iTasa').value);
-  var mod=document.getElementById('iMod').value;
-  if(isNaN(raw)){
-    document.getElementById('eaVal').textContent='—';
-    document.getElementById('results').innerHTML='';
-    return;
-  }
-  var rate=raw/100;
-  // Validación: NAA, NMA/NTA/NSA con tasa periódica anticipada >= 1 son inválidas (división por cero o negativa)
-  if(mod==='NAA' && rate>=1){
-    document.getElementById('eaVal').textContent='Tasa anticipada anual debe ser < 100 %';
-    document.getElementById('results').innerHTML='';
-    return;
-  }
-  if((mod==='NMA'||mod==='NTA'||mod==='NSA') && (rate/PERIODS[mod])>=1){
-    document.getElementById('eaVal').textContent='Tasa periódica anticipada inválida';
-    document.getElementById('results').innerHTML='';
-    return;
-  }
-  var ea=toEA(rate, mod);
-  document.getElementById('eaVal').textContent = fmt(ea);
-  var html='';
-  GROUPS.forEach(function(g){
-    html+='<tr class="group-header"><td colspan="2">'+g.label+'</td></tr>';
-    g.mods.forEach(function(m){
-      var v=fromEA(ea, m.k);
-      var hl=(m.k===mod)?' class="highlight"':'';
-      html+='<tr'+hl+'><td><strong>'+m.k+'</strong> &middot; <span style="color:var(--muted);font-size:.82rem">'+m.d+'</span></td><td>'+fmt(v)+'</td></tr>';
-    });
-  });
-  document.getElementById('results').innerHTML='<thead><tr><th>Modalidad</th><th>Tasa equivalente</th></tr></thead><tbody>'+html+'</tbody>';
-  if(typeof exoTrack!=='undefined')exoTrack.tool('tasas-equivalentes');
-}
-document.getElementById('iTasa').addEventListener('input',recalc);
-document.getElementById('iMod').addEventListener('change',recalc);
-recalc();
-</script>
+<script>var PERIODS={EM:12,ET:4,ES:2,EA:1,NMV:12,NTV:4,NSV:2,NAV:1,NMA:12,NTA:4,NSA:2,NAA:1};function toEA(e,t){var a=PERIODS[t];if(t==="EA")return e;if(t==="EM"||t==="ET"||t==="ES"){return Math.pow(1+e,a)-1}if(t==="NAV")return e;if(t==="NMV"||t==="NTV"||t==="NSV"){var n=e/a;return Math.pow(1+n,a)-1}if(t==="NAA"){return e/(1-e)}if(t==="NMA"||t==="NTA"||t==="NSA"){var i=e/a;var r=i/(1-i);return Math.pow(1+r,a)-1}return 0}function fromEA(e,t){var a=PERIODS[t];if(t==="EA")return e;if(t==="EM"||t==="ET"||t==="ES"){return Math.pow(1+e,1/a)-1}if(t==="NAV")return e;if(t==="NMV"||t==="NTV"||t==="NSV"){var n=Math.pow(1+e,1/a)-1;return n*a}if(t==="NAA"){return e/(1+e)}if(t==="NMA"||t==="NTA"||t==="NSA"){var i=Math.pow(1+e,1/a)-1;var r=i/(1+i);return r*a}return 0}var GROUPS=[{label:"Efectivas",mods:[{k:"EA",d:"Efectiva anual"},{k:"ES",d:"Efectiva semestral"},{k:"ET",d:"Efectiva trimestral"},{k:"EM",d:"Efectiva mensual"}]},{label:"Nominales vencidas",mods:[{k:"NAV",d:"Nominal anual vencida"},{k:"NSV",d:"Nominal capitalizable semestral vencida"},{k:"NTV",d:"Nominal capitalizable trimestral vencida"},{k:"NMV",d:"Nominal capitalizable mensual vencida"}]},{label:"Nominales anticipadas",mods:[{k:"NAA",d:"Nominal anual anticipada"},{k:"NSA",d:"Nominal capitalizable semestral anticipada"},{k:"NTA",d:"Nominal capitalizable trimestral anticipada"},{k:"NMA",d:"Nominal capitalizable mensual anticipada"}]}];function fmt(e){if(!isFinite(e))return"—";return(e*100).toFixed(4)+" %"}function recalc(){var e=parseFloat(document.getElementById("iTasa").value);var t=document.getElementById("iMod").value;if(isNaN(e)){document.getElementById("eaVal").textContent="—";document.getElementById("results").innerHTML="";return}var a=e/100;if(t==="NAA"&&a>=1){document.getElementById("eaVal").textContent="Tasa anticipada anual debe ser < 100 %";document.getElementById("results").innerHTML="";return}if((t==="NMA"||t==="NTA"||t==="NSA")&&a/PERIODS[t]>=1){document.getElementById("eaVal").textContent="Tasa periódica anticipada inválida";document.getElementById("results").innerHTML="";return}var n=toEA(a,t);document.getElementById("eaVal").textContent=fmt(n);var i="";GROUPS.forEach(function(e){i+='<tr class="group-header"><td colspan="2">'+e.label+"</td></tr>";e.mods.forEach(function(e){var a=fromEA(n,e.k);var r=e.k===t?' class="highlight"':"";i+="<tr"+r+"><td><strong>"+e.k+'</strong> &middot; <span style="color:var(--muted);font-size:.82rem">'+e.d+"</span></td><td>"+fmt(a)+"</td></tr>"})});document.getElementById("results").innerHTML="<thead><tr><th>Modalidad</th><th>Tasa equivalente</th></tr></thead><tbody>"+i+"</tbody>";if(typeof exoTrack!=="undefined")exoTrack.tool("tasas-equivalentes")}document.getElementById("iTasa").addEventListener("input",recalc);document.getElementById("iMod").addEventListener("change",recalc);recalc();</script>
 <script src="shared/analytics.js?v=1df688c5"></script>
 <link rel="stylesheet" href="shared/chat.css?v=78c6b2c3">
 <script defer src="shared/chat.js?v=d7b50b20"></script>

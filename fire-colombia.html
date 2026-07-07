@@ -3,7 +3,7 @@
 <head>
 <script src="shared/cookie-consent.js?v=10d7f382"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-S7SM6ST4CC');</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
 <meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="og-image.png">
@@ -128,16 +128,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 <script defer src="shared/toast.js?v=9843f93f"></script>
 <script defer src="shared/nav.js?v=8da24a14"></script>
 <script src="shared/finanzas-privacy.js?v=4d46bf26"></script>
-<script>
-(function(){
-  function init(){
-    if (!window.FinanzasPrivacy) return;
-    var c = document.querySelector('.container');
-    if (c) { FinanzasPrivacy.autoLoad(c, 'fire-colombia'); FinanzasPrivacy.autoSave(c, 'fire-colombia', {debounce:800}); }
-  }
-  if (document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
-})();
-</script>
+<script>(function(){function init(){if(!window.FinanzasPrivacy)return;var n=document.querySelector(".container");if(n){FinanzasPrivacy.autoLoad(n,"fire-colombia");FinanzasPrivacy.autoSave(n,"fire-colombia",{debounce:800})}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init()})();</script>
 <div class="container">
 <div class="header">
   <div>
@@ -250,168 +241,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
   </div>
 </div>
 </div>
-<script>
-'use strict';
-function $(id){return document.getElementById(id)}
-function fmt(n){if(n==null||isNaN(n))return'$0';return'$'+Math.round(n).toLocaleString('es-CO')}
-function num(id){var v=$(id).value.replace(/[^\d]/g,'');return parseInt(v,10)||0}
-['gastos','capital','aporte'].forEach(function(id){
-  var el=$(id);
-  el.addEventListener('input',function(){
-    var raw=this.value.replace(/[^\d]/g,'');
-    this.value=raw?'$'+parseInt(raw,10).toLocaleString('es-CO'):'';
-  });
-});
-var ultimoCalc=null;
-function calcular(){
-  var edad=parseInt($('edad').value,10)||32;
-  var gastos=num('gastos');
-  var capital=num('capital');
-  var aporte=num('aporte');
-  var tasa=parseFloat($('tasa').value)/100||0.06;
-  var multiplicador=parseInt($('tipoFire').value,10)||30;
-  if(gastos<=0){exoToast('Mete tus gastos mensuales','warning');return}
-  if(aporte<0){exoToast('El aporte no puede ser negativo','warning');return}
-  var gastosAnio=gastos*12;
-  var fireNumero=gastosAnio*multiplicador;
-  var fireLean=gastosAnio*20;
-  var fireStd=gastosAnio*25;
-  var fireFat=gastosAnio*35;
-  // Calcular años para FIRE — proyección año a año
-  var saldo=capital;
-  var anios=0;
-  var proyeccion=[{anio:0,edad:edad,aporte:0,saldo:capital}];
-  var MAX=80;
-  while(saldo<fireNumero && anios<MAX){
-    anios++;
-    saldo=saldo*(1+tasa)+aporte*12;
-    proyeccion.push({anio:anios,edad:edad+anios,aporte:aporte*12,saldo:saldo});
-  }
-  // Si no llega: mostrar 50 años
-  if(saldo<fireNumero){
-    anios=MAX;
-  }
-  // Calcular años Lean / Std / Fat
-  function aniosPara(target){
-    var s=capital,a=0;
-    while(s<target && a<MAX){
-      s=s*(1+tasa)+aporte*12;
-      a++;
-    }
-    return s>=target?a:null;
-  }
-  var aLean=aniosPara(fireLean);
-  var aStd=aniosPara(fireStd);
-  var aFat=aniosPara(fireFat);
-  ultimoCalc={
-    edad:edad,gastos:gastos,gastosAnio:gastosAnio,capital:capital,aporte:aporte,tasa:tasa,
-    multiplicador:multiplicador,fireNumero:fireNumero,
-    anios:anios,saldo:saldo,proyeccion:proyeccion,
-    fireLean:fireLean,fireStd:fireStd,fireFat:fireFat,
-    aLean:aLean,aStd:aStd,aFat:aFat,
-    edadFire:edad+anios
-  };
-  // KPIs
-  $('kFire').textContent=fmt(fireNumero);
-  $('kAnios').textContent=anios>=MAX?'>'+MAX+' años':anios+' años';
-  $('kEdad').textContent=anios>=MAX?'No alcanza':edad+anios+' años';
-  $('ftLean').textContent=fmt(fireLean);
-  $('ftStd').textContent=fmt(fireStd);
-  $('ftFat').textContent=fmt(fireFat);
-  $('ftLeanEdad').textContent=aLean!==null?'Edad '+(edad+aLean):'>'+MAX+' años';
-  $('ftStdEdad').textContent=aStd!==null?'Edad '+(edad+aStd):'>'+MAX+' años';
-  $('ftFatEdad').textContent=aFat!==null?'Edad '+(edad+aFat):'>'+MAX+' años';
-  // Tabla proyección — mostrar máximo 30 años o hasta que llegue
-  var maxRows=Math.min(proyeccion.length,Math.max(anios+1,30));
-  var rows='';
-  for(var i=0;i<maxRows;i++){
-    var p=proyeccion[i];
-    var llego=p.saldo>=fireNumero && (i===0?false:proyeccion[i-1].saldo<fireNumero);
-    rows+='<tr'+(llego?' class="fire-row"':'')+'><td>'+(i===0?'Hoy':'+'+p.anio)+'</td><td>'+p.edad+'</td><td>'+(i===0?'-':fmt(p.aporte))+'</td><td>'+fmt(p.saldo)+(llego?' 🔥 FIRE':'')+'</td></tr>';
-  }
-  $('tblProy').querySelector('tbody').innerHTML=rows;
-  renderWow();
-  $('results').style.display='block';
-  $('results').scrollIntoView({behavior:'smooth'});
-}
-function renderWow(){
-  var c=ultimoCalc;
-  var tasaAhorro=c.aporte>0 && (c.gastos+c.aporte)>0?(c.aporte/(c.gastos+c.aporte))*100:0;
-  // Gancho
-  var gancho;
-  if(c.anios>=80) gancho='Con tu plan actual <em>no llegas en vida</em>. Hay que recortar gastos o subir aporte.';
-  else if(c.anios<=10) gancho='En <em>'+c.anios+' años</em> ya puedes elegir. <em>Excepción, no regla.</em>';
-  else if(c.anios<=20) gancho='FIRE en <em>'+c.anios+' años</em>. La paciencia tiene fecha.';
-  else if(c.anios>=35) gancho='Tu plan llega tarde. <em>Los aportes mensuales son la palanca.</em>';
-  else gancho='FIRE Colombia — <em>'+c.anios+' años de paciencia</em>.';
-  $('gancho').innerHTML=gancho;
-  // Narrativa
-  var narr='Tus gastos esenciales son <span class="num">'+fmt(c.gastos)+'</span>/mes (<span class="num">'+fmt(c.gastosAnio)+'</span>/año). Multiplicado por '+c.multiplicador+' (regla del 4%'+(c.multiplicador===30?' con buffer Colombia':'')+'), tu número FIRE es <span class="num">'+fmt(c.fireNumero)+'</span>.';
-  narr+='<br><br>Empezando con <span class="num">'+fmt(c.capital)+'</span> de capital, aportando <span class="num">'+fmt(c.aporte)+'</span>/mes a una tasa real del '+(c.tasa*100).toFixed(1)+'%, llegas en <strong>'+c.anios+' años</strong> — a la edad de <strong>'+c.edadFire+'</strong>.';
-  if(tasaAhorro>0) narr+='<br><br>Tu tasa de ahorro implícita: <strong>'+tasaAhorro.toFixed(1)+'%</strong>. ';
-  if(tasaAhorro>=50) narr+='Eso es Lean FIRE clásico — vida ascética, retiras temprano.';
-  else if(tasaAhorro>=30) narr+='Alto. Profesional disciplinado.';
-  else if(tasaAhorro>=20) narr+='Razonable. Con consistencia llegas.';
-  else if(tasaAhorro>=10) narr+='Bajo. Sube 5 puntos cada 2 años para mover la curva.';
-  else narr+='Muy bajo. La aritmética del compounding necesita más combustible.';
-  narr+='<br><br><strong>FIRE no es retirarse</strong> — es tener la opción. La diferencia entre trabajar porque DEBES y trabajar porque QUIERES es la libertad real.';
-  $('narrativa').innerHTML=narr;
-  // Ahas
-  var ahas=[
-    '<div class="aha-card '+(c.anios<=15?'good':c.anios<=25?'':c.anios<=35?'':'bad')+'"><span class="aha-tag">tu plan</span><div class="aha-num">'+(c.anios>=80?'>'+80:c.anios+'')+' años</div><div class="aha-lbl">para llegar a FIRE</div></div>',
-    '<div class="aha-card '+(tasaAhorro>=30?'good':tasaAhorro>=20?'':'bad')+'"><span class="aha-tag">ahorro</span><div class="aha-num">'+tasaAhorro.toFixed(0)+'%</div><div class="aha-lbl">tasa de ahorro implícita</div></div>',
-    '<div class="aha-card '+(c.edadFire<=55?'good':c.edadFire<=65?'':'bad')+'"><span class="aha-tag">edad</span><div class="aha-num">'+(c.anios>=80?'—':c.edadFire+'')+' años</div><div class="aha-lbl">cuando podrás elegir</div></div>'
-  ];
-  $('ahaGrid').innerHTML=ahas.join('');
-  // Plan
-  var actions=[];
-  if(c.anios>=35 || c.aporte<500000){
-    actions.push({h:'Sube tu aporte mensual',p:'Cada 100K adicional al mes recorta ~2 años en planes a 25 años. La palanca más eficiente: <strong>recortar deseos sin tocar necesidades</strong>.'});
-  }
-  if(tasaAhorro<20){
-    actions.push({h:'Tu tasa de ahorro es la métrica clave',p:'Más que el ingreso, lo que define FIRE es <strong>qué % apartas</strong>. Mover de '+tasaAhorro.toFixed(0)+'% a 25-30% en 2-3 años es el camino más rápido.'});
-  }
-  actions.push({h:'AFC + Pensión voluntaria primero',p:'No solo rinden — bajan tu retefuente mensual (Art. 126-1, 126-4 ET). <strong>Ahorro fiscal + ahorro de inversión</strong>. Es el combo perfecto para FIRE.'});
-  actions.push({h:'Reduce gastos esenciales gradualmente',p:'Cada $200K que recortes de gastos esenciales reduce tu número FIRE en <strong>$60M a $84M</strong> (× 25 a × 35). Un cambio de vivienda inteligente puede mover años.'});
-  if(c.anios<=15){
-    actions.push({h:'Diversifica a internacional',p:'Si llegas en 10-15 años, parte de la cartera debería estar en ETFs internacionales (S&P 500). Reduce riesgo país.'});
-  }
-  $('cardActions').style.display='block';
-  $('actionLadder').innerHTML=actions.slice(0,3).map(function(a,i){
-    return '<div class="action-step"><div class="action-num">'+(i+1)+'</div><div class="action-body"><h4>'+a.h+'</h4><p>'+a.p+'</p></div></div>';
-  }).join('');
-  // Share card
-  var shareLine;
-  if(c.anios>=80) shareLine='Mi plan actual no llega a FIRE en vida. <em>Toca recalibrar.</em>';
-  else if(c.anios<=10) shareLine='FIRE en <em>'+c.anios+' años</em>. La libertad tiene fecha.';
-  else if(c.anios<=20) shareLine='FIRE Colombia: <em>'+c.anios+' años</em>. Edad '+c.edadFire+'.';
-  else shareLine='Mi plan FIRE: <em>'+c.anios+' años</em>. Subiendo el aporte.';
-  $('cardShare').style.display='block';
-  $('shareCard').innerHTML=
-    '<div class="share-card-label">Mi plan FIRE Colombia 2026</div>'+
-    '<div class="share-card-amount">'+fmt(c.fireNumero)+'</div>'+
-    '<div class="share-card-line">'+shareLine+'</div>'+
-    '<div class="share-card-stats">'+
-      '<div class="share-card-stat">Gastos<strong>'+fmt(c.gastos)+'/m</strong></div>'+
-      '<div class="share-card-stat">Aporte<strong>'+fmt(c.aporte)+'/m</strong></div>'+
-      '<div class="share-card-stat">Edad FIRE<strong>'+(c.anios>=80?'—':c.edadFire+' años')+'</strong></div>'+
-    '</div>'+
-    '<div class="share-actions">'+
-      '<button onclick="copiarShareFIRE()">📋 Copiar texto</button>'+
-    '</div>'+
-    '<div class="share-card-foot">exogenadian.com/fire-colombia</div>';
-}
-function copiarShareFIRE(){
-  if(!ultimoCalc)return;
-  var c=ultimoCalc;
-  var txt='Mi plan FIRE Colombia\n';
-  txt+='Número FIRE: '+fmt(c.fireNumero)+' (gastos × '+c.multiplicador+')\n';
-  txt+='Llego en '+c.anios+' años, a edad '+c.edadFire+'\n';
-  txt+='Aportando '+fmt(c.aporte)+'/mes a '+(c.tasa*100).toFixed(1)+'% real\n';
-  txt+='Calculado en exogenadian.com/fire-colombia';
-  if(navigator.clipboard) navigator.clipboard.writeText(txt).then(function(){exoToast('Copiado al portapapeles','success')});
-  if(typeof gtag!=='undefined') gtag('event','fire_share',{tipo:'copy'});
-}
-</script>
+<script>"use strict";function $(a){return document.getElementById(a)}function fmt(a){if(a==null||isNaN(a))return"$0";return"$"+Math.round(a).toLocaleString("es-CO")}function num(a){var e=$(a).value.replace(/[^\d]/g,"");return parseInt(e,10)||0}["gastos","capital","aporte"].forEach(function(a){var e=$(a);e.addEventListener("input",function(){var a=this.value.replace(/[^\d]/g,"");this.value=a?"$"+parseInt(a,10).toLocaleString("es-CO"):""})});var ultimoCalc=null;function calcular(){var a=parseInt($("edad").value,10)||32;var e=num("gastos");var s=num("capital");var o=num("aporte");var t=parseFloat($("tasa").value)/100||.06;var r=parseInt($("tipoFire").value,10)||30;if(e<=0){exoToast("Mete tus gastos mensuales","warning");return}if(o<0){exoToast("El aporte no puede ser negativo","warning");return}var n=e*12;var i=n*r;var l=n*20;var d=n*25;var c=n*35;var p=s;var u=0;var m=[{anio:0,edad:a,aporte:0,saldo:s}];var v=80;while(p<i&&u<v){u++;p=p*(1+t)+o*12;m.push({anio:u,edad:a+u,aporte:o*12,saldo:p})}if(p<i){u=v}function aniosPara(a){var e=s,r=0;while(e<a&&r<v){e=e*(1+t)+o*12;r++}return e>=a?r:null}var f=aniosPara(l);var g=aniosPara(d);var h=aniosPara(c);ultimoCalc={edad:a,gastos:e,gastosAnio:n,capital:s,aporte:o,tasa:t,multiplicador:r,fireNumero:i,anios:u,saldo:p,proyeccion:m,fireLean:l,fireStd:d,fireFat:c,aLean:f,aStd:g,aFat:h,edadFire:a+u};$("kFire").textContent=fmt(i);$("kAnios").textContent=u>=v?">"+v+" años":u+" años";$("kEdad").textContent=u>=v?"No alcanza":a+u+" años";$("ftLean").textContent=fmt(l);$("ftStd").textContent=fmt(d);$("ftFat").textContent=fmt(c);$("ftLeanEdad").textContent=f!==null?"Edad "+(a+f):">"+v+" años";$("ftStdEdad").textContent=g!==null?"Edad "+(a+g):">"+v+" años";$("ftFatEdad").textContent=h!==null?"Edad "+(a+h):">"+v+" años";var b=Math.min(m.length,Math.max(u+1,30));var E="";for(var F=0;F<b;F++){var C=m[F];var I=C.saldo>=i&&(F===0?false:m[F-1].saldo<i);E+="<tr"+(I?' class="fire-row"':"")+"><td>"+(F===0?"Hoy":"+"+C.anio)+"</td><td>"+C.edad+"</td><td>"+(F===0?"-":fmt(C.aporte))+"</td><td>"+fmt(C.saldo)+(I?" 🔥 FIRE":"")+"</td></tr>"}$("tblProy").querySelector("tbody").innerHTML=E;renderWow();$("results").style.display="block";$("results").scrollIntoView({behavior:"smooth"})}function renderWow(){var a=ultimoCalc;var e=a.aporte>0&&a.gastos+a.aporte>0?a.aporte/(a.gastos+a.aporte)*100:0;var s;if(a.anios>=80)s="Con tu plan actual <em>no llegas en vida</em>. Hay que recortar gastos o subir aporte.";else if(a.anios<=10)s="En <em>"+a.anios+" años</em> ya puedes elegir. <em>Excepción, no regla.</em>";else if(a.anios<=20)s="FIRE en <em>"+a.anios+" años</em>. La paciencia tiene fecha.";else if(a.anios>=35)s="Tu plan llega tarde. <em>Los aportes mensuales son la palanca.</em>";else s="FIRE Colombia — <em>"+a.anios+" años de paciencia</em>.";$("gancho").innerHTML=s;var o='Tus gastos esenciales son <span class="num">'+fmt(a.gastos)+'</span>/mes (<span class="num">'+fmt(a.gastosAnio)+"</span>/año). Multiplicado por "+a.multiplicador+" (regla del 4%"+(a.multiplicador===30?" con buffer Colombia":"")+'), tu número FIRE es <span class="num">'+fmt(a.fireNumero)+"</span>.";o+='<br><br>Empezando con <span class="num">'+fmt(a.capital)+'</span> de capital, aportando <span class="num">'+fmt(a.aporte)+"</span>/mes a una tasa real del "+(a.tasa*100).toFixed(1)+"%, llegas en <strong>"+a.anios+" años</strong> — a la edad de <strong>"+a.edadFire+"</strong>.";if(e>0)o+="<br><br>Tu tasa de ahorro implícita: <strong>"+e.toFixed(1)+"%</strong>. ";if(e>=50)o+="Eso es Lean FIRE clásico — vida ascética, retiras temprano.";else if(e>=30)o+="Alto. Profesional disciplinado.";else if(e>=20)o+="Razonable. Con consistencia llegas.";else if(e>=10)o+="Bajo. Sube 5 puntos cada 2 años para mover la curva.";else o+="Muy bajo. La aritmética del compounding necesita más combustible.";o+="<br><br><strong>FIRE no es retirarse</strong> — es tener la opción. La diferencia entre trabajar porque DEBES y trabajar porque QUIERES es la libertad real.";$("narrativa").innerHTML=o;var t=['<div class="aha-card '+(a.anios<=15?"good":a.anios<=25?"":a.anios<=35?"":"bad")+'"><span class="aha-tag">tu plan</span><div class="aha-num">'+(a.anios>=80?">"+80:a.anios+"")+' años</div><div class="aha-lbl">para llegar a FIRE</div></div>','<div class="aha-card '+(e>=30?"good":e>=20?"":"bad")+'"><span class="aha-tag">ahorro</span><div class="aha-num">'+e.toFixed(0)+'%</div><div class="aha-lbl">tasa de ahorro implícita</div></div>','<div class="aha-card '+(a.edadFire<=55?"good":a.edadFire<=65?"":"bad")+'"><span class="aha-tag">edad</span><div class="aha-num">'+(a.anios>=80?"—":a.edadFire+"")+' años</div><div class="aha-lbl">cuando podrás elegir</div></div>'];$("ahaGrid").innerHTML=t.join("");var r=[];if(a.anios>=35||a.aporte<5e5){r.push({h:"Sube tu aporte mensual",p:"Cada 100K adicional al mes recorta ~2 años en planes a 25 años. La palanca más eficiente: <strong>recortar deseos sin tocar necesidades</strong>."})}if(e<20){r.push({h:"Tu tasa de ahorro es la métrica clave",p:"Más que el ingreso, lo que define FIRE es <strong>qué % apartas</strong>. Mover de "+e.toFixed(0)+"% a 25-30% en 2-3 años es el camino más rápido."})}r.push({h:"AFC + Pensión voluntaria primero",p:"No solo rinden — bajan tu retefuente mensual (Art. 126-1, 126-4 ET). <strong>Ahorro fiscal + ahorro de inversión</strong>. Es el combo perfecto para FIRE."});r.push({h:"Reduce gastos esenciales gradualmente",p:"Cada $200K que recortes de gastos esenciales reduce tu número FIRE en <strong>$60M a $84M</strong> (× 25 a × 35). Un cambio de vivienda inteligente puede mover años."});if(a.anios<=15){r.push({h:"Diversifica a internacional",p:"Si llegas en 10-15 años, parte de la cartera debería estar en ETFs internacionales (S&P 500). Reduce riesgo país."})}$("cardActions").style.display="block";$("actionLadder").innerHTML=r.slice(0,3).map(function(a,e){return'<div class="action-step"><div class="action-num">'+(e+1)+'</div><div class="action-body"><h4>'+a.h+"</h4><p>"+a.p+"</p></div></div>"}).join("");var n;if(a.anios>=80)n="Mi plan actual no llega a FIRE en vida. <em>Toca recalibrar.</em>";else if(a.anios<=10)n="FIRE en <em>"+a.anios+" años</em>. La libertad tiene fecha.";else if(a.anios<=20)n="FIRE Colombia: <em>"+a.anios+" años</em>. Edad "+a.edadFire+".";else n="Mi plan FIRE: <em>"+a.anios+" años</em>. Subiendo el aporte.";$("cardShare").style.display="block";$("shareCard").innerHTML='<div class="share-card-label">Mi plan FIRE Colombia 2026</div>'+'<div class="share-card-amount">'+fmt(a.fireNumero)+"</div>"+'<div class="share-card-line">'+n+"</div>"+'<div class="share-card-stats">'+'<div class="share-card-stat">Gastos<strong>'+fmt(a.gastos)+"/m</strong></div>"+'<div class="share-card-stat">Aporte<strong>'+fmt(a.aporte)+"/m</strong></div>"+'<div class="share-card-stat">Edad FIRE<strong>'+(a.anios>=80?"—":a.edadFire+" años")+"</strong></div>"+"</div>"+'<div class="share-actions">'+'<button onclick="copiarShareFIRE()">📋 Copiar texto</button>'+"</div>"+'<div class="share-card-foot">exogenadian.com/fire-colombia</div>'}function copiarShareFIRE(){if(!ultimoCalc)return;var a=ultimoCalc;var e="Mi plan FIRE Colombia\n";e+="Número FIRE: "+fmt(a.fireNumero)+" (gastos × "+a.multiplicador+")\n";e+="Llego en "+a.anios+" años, a edad "+a.edadFire+"\n";e+="Aportando "+fmt(a.aporte)+"/mes a "+(a.tasa*100).toFixed(1)+"% real\n";e+="Calculado en exogenadian.com/fire-colombia";if(navigator.clipboard)navigator.clipboard.writeText(e).then(function(){exoToast("Copiado al portapapeles","success")});if(typeof gtag!=="undefined")gtag("event","fire_share",{tipo:"copy"})}</script>
 </body>
 </html>
