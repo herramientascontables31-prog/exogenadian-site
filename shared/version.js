@@ -1,1 +1,1 @@
-window.EXOGENA_VERSION={commit:"0b867eed8bce4f01148ea302d2b5afe1da935d9c",shortHash:"0b867eed",commitDate:"2026-07-07T14:21:25-05:00",buildDate:"2026-07-07T19:21:38.196Z",repoUrl:"https://github.com/herramientascontables31-prog/exogena-dian-2025"};
+window.EXOGENA_VERSION={commit:"8f6c8c313c15ba64d46c9138a5ad96d4695a1c6a",shortHash:"8f6c8c31",commitDate:"2026-07-08T09:47:00-05:00",buildDate:"2026-07-08T16:32:49.757Z",repoUrl:"https://github.com/herramientascontables31-prog/exogena-dian-2025"};
