@@ -240,6 +240,16 @@
       "orden": 99
     },
     {
+      "url": "simulador-renta.html",
+      "grupo": "renta",
+      "titulo": "Simulador de renta (gratis)",
+      "desc": "Estima tu impuesto de renta con pocos datos y termina en el 210",
+      "popular": true,
+      "hidden": false,
+      "sub": false,
+      "orden": 99
+    },
+    {
       "url": "cuanto-me-devuelven.html",
       "grupo": "renta",
       "titulo": "¿Cuánto me devuelven?",

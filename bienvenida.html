@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="shared/cookie-consent.js?v=10d7f382"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7SM6ST4CC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-S7SM6ST4CC");</script>
+<meta charset="UTF-8"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="og-image.png">
+<meta name="theme-color" content="#059669">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Bienvenido a PRO — ¿Por dónde empezamos? · Aziendale</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-900:#064E3B; --green-700:#047857; --green-600:#059669; --green-500:#10B981;
+    --green-400:#34D399; --green-300:#6EE7B7; --green-200:#A7F3D0; --green-100:#D1FAE5; --green-50:#ECFDF5;
+    --mint:#F0FFF4; --white:#FFFFFF;
+    --gray-50:#F9FAFB; --gray-100:#F3F4F6; --gray-200:#E5E7EB; --gray-300:#D1D5DB;
+    --gray-400:#9CA3AF; --gray-500:#6B7280; --gray-600:#4B5563; --gray-700:#374151; --gray-800:#1F2937; --gray-900:#111827;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:'Outfit',sans-serif;
+    background:linear-gradient(170deg,var(--white) 0%,var(--green-50) 50%,var(--mint) 100%);
+    color:var(--gray-900); min-height:100vh;
+    display:flex; align-items:center; justify-content:center;
+    padding:32px 20px; position:relative; overflow-x:hidden;
+  }
+  body::before { content:''; position:fixed; top:-20%; right:-15%; width:600px; height:600px;
+    background:radial-gradient(circle,rgba(16,185,129,0.1) 0%,transparent 70%); border-radius:50%; pointer-events:none; }
+  body::after { content:''; position:fixed; bottom:-15%; left:-10%; width:400px; height:400px;
+    background:radial-gradient(circle,rgba(52,211,153,0.07) 0%,transparent 70%); border-radius:50%; pointer-events:none; }
+  .wrap { max-width:680px; width:100%; position:relative; z-index:1; }
+  .brand { display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:20px; }
+  .brand-dot { width:24px; height:24px; border-radius:7px; background:linear-gradient(135deg,var(--green-500),var(--green-700)); box-shadow:0 4px 12px rgba(5,150,105,.3); }
+  .brand-name { font-family:'Fraunces',serif; font-weight:700; font-size:1.05rem; color:var(--green-900); letter-spacing:-.01em; }
+  /* progress */
+  .progress { display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:26px; }
+  .pdot { width:34px; height:5px; border-radius:99px; background:var(--gray-200); transition:all .35s; }
+  .pdot.active { background:var(--green-500); }
+  .pdot.done { background:var(--green-300); }
+  .step { animation:fadeUp .45s ease-out both; }
+  @keyframes fadeUp { from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);} }
+  @keyframes popIn { from{transform:scale(0); opacity:0;} to{transform:scale(1); opacity:1;} }
+  .eyebrow { text-align:center; text-transform:uppercase; letter-spacing:2.5px; font-size:.72rem; font-weight:800; color:var(--green-600); margin-bottom:12px; }
+  h1 { font-family:'Fraunces',serif; font-size:clamp(1.7rem,4.5vw,2.4rem); text-align:center; letter-spacing:-.02em; line-height:1.12; margin-bottom:12px; color:var(--gray-900); }
+  .lede { text-align:center; color:var(--gray-500); font-size:1.02rem; line-height:1.6; margin-bottom:30px; max-width:520px; margin-left:auto; margin-right:auto; }
+  .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  @media(max-width:560px){ .grid { grid-template-columns:1fr; } }
+  .card {
+    background:var(--white); border:1.5px solid var(--gray-200); border-radius:16px;
+    padding:20px 18px; text-align:left; cursor:pointer; position:relative;
+    transition:transform .2s, box-shadow .2s, border-color .2s;
+    box-shadow:0 2px 8px rgba(0,0,0,.03); display:flex; gap:14px; align-items:flex-start;
+    font-family:inherit; width:100%;
+  }
+  .card:hover { transform:translateY(-3px); border-color:var(--green-400); box-shadow:0 10px 28px rgba(5,150,105,.14); }
+  .card:focus-visible { outline:2px solid var(--green-500); outline-offset:2px; }
+  .card .ico { font-size:1.7rem; line-height:1; flex-shrink:0; margin-top:2px; }
+  .card .ct { font-weight:700; font-size:.98rem; color:var(--gray-800); margin-bottom:3px; }
+  .card .cd { font-size:.82rem; color:var(--gray-500); line-height:1.45; }
+  .card .arrow { position:absolute; right:16px; top:50%; transform:translateY(-50%); color:var(--green-400); font-size:1.1rem; opacity:0; transition:opacity .2s,transform .2s; }
+  .card:hover .arrow { opacity:1; transform:translateY(-50%) translateX(3px); }
+  .backbtn { display:inline-flex; align-items:center; gap:6px; background:none; border:none; color:var(--gray-400); font-family:inherit; font-size:.88rem; font-weight:600; cursor:pointer; margin-bottom:18px; transition:color .2s,gap .2s; }
+  .backbtn:hover { color:var(--green-600); gap:8px; }
+  /* result */
+  .hero-card {
+    background:var(--white); border:2.5px solid var(--green-400); border-radius:22px;
+    padding:30px 26px; text-align:center; box-shadow:0 14px 40px rgba(5,150,105,.16); margin-bottom:20px;
+    animation:popIn .5s cubic-bezier(.34,1.56,.64,1);
+  }
+  .hero-ico { width:74px; height:74px; margin:0 auto 16px; border-radius:20px; background:var(--green-100); border:2px solid var(--green-300); display:grid; place-items:center; font-size:2.1rem; }
+  .hero-card h2 { font-family:'Fraunces',serif; font-size:1.55rem; color:var(--gray-900); margin-bottom:8px; letter-spacing:-.01em; }
+  .hero-card p { color:var(--gray-500); font-size:.95rem; line-height:1.55; margin-bottom:22px; }
+  .cta { display:inline-flex; align-items:center; gap:8px; padding:15px 32px; background:var(--green-600); color:#fff; border-radius:14px; text-decoration:none; font-weight:800; font-size:1.02rem; box-shadow:0 6px 20px rgba(5,150,105,.32); transition:transform .2s,box-shadow .2s; }
+  .cta:hover { transform:translateY(-2px); box-shadow:0 10px 28px rgba(5,150,105,.4); }
+  .also { margin-bottom:20px; }
+  .also-title { font-size:.82rem; font-weight:700; color:var(--gray-500); text-align:center; margin-bottom:12px; }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+  .chip { display:inline-flex; align-items:center; gap:6px; padding:9px 15px; background:var(--white); border:1.5px solid var(--gray-200); border-radius:99px; text-decoration:none; color:var(--gray-700); font-weight:600; font-size:.85rem; transition:all .2s; }
+  .chip:hover { border-color:var(--green-400); color:var(--green-700); transform:translateY(-2px); }
+  .tip { background:var(--green-50); border:1px solid var(--green-100); border-radius:14px; padding:16px 20px; text-align:left; margin-bottom:18px; display:flex; gap:12px; align-items:flex-start; }
+  .tip .tk { font-size:1.3rem; flex-shrink:0; }
+  .tip p { font-size:.85rem; color:var(--gray-600); line-height:1.55; }
+  .tip strong { color:var(--green-700); }
+  .foot { text-align:center; }
+  .foot-links { display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin-bottom:14px; }
+  .foot-links a { color:var(--gray-500); font-size:.85rem; text-decoration:none; font-weight:600; transition:color .2s; }
+  .foot-links a:hover { color:var(--green-600); }
+  .skip { color:var(--gray-400); font-size:.83rem; text-decoration:none; }
+  .skip:hover { color:var(--green-600); }
+</style>
+<script async src="shared/error-tracker.js?v=dd1f7f1d"></script><style id="exo-loading-css">
+#exo-loading{position:fixed;inset:0;z-index:999999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:'Outfit','DM Sans',-apple-system,system-ui,sans-serif;color:#065F46;transition:opacity .25s ease}
+#exo-loading.hide{opacity:0;pointer-events:none}
+#exo-loading .exo-spin{width:36px;height:36px;border:3px solid #D1FAE5;border-top-color:#059669;border-radius:50%;animation:exo-rot .8s linear infinite}
+#exo-loading .exo-txt{font-size:.92rem;font-weight:500;letter-spacing:.01em;color:#475569}
+@keyframes exo-rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#exo-loading .exo-spin{animation:none;border-top-color:#059669}}
+</style><script id="exo-loading-js">
+(function(){
+  if(document.getElementById('exo-loading'))return;
+  var d=document.createElement('div');
+  d.id='exo-loading';
+  d.setAttribute('aria-live','polite');
+  d.innerHTML='<div class="exo-spin" aria-hidden="true"></div><div class="exo-txt">Cargando…</div>';
+  // Insertar al inicio del body en cuanto exista
+  function inject(){
+    if(!document.body){setTimeout(inject,10);return}
+    if(!document.getElementById('exo-loading'))document.body.insertBefore(d,document.body.firstChild);
+  }
+  inject();
+  function hide(){
+    var el=document.getElementById('exo-loading');
+    if(!el)return;
+    el.classList.add('hide');
+    setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},350);
+  }
+  // Páginas pesadas pueden RETENER el overlay hasta estar listas:
+  //   window.EXO_LOADING_HOLD=true  (en un <script> del body, antes de DOMContentLoaded)
+  //   window.exoLoadingHide()       (cuando la app ya es usable)
+  //   window.exoLoadingText('…')    (mensaje propio, p.ej. 'Cargando el liquidador 210…')
+  window.exoLoadingHide=hide;
+  window.exoLoadingText=function(t){ var x=d.querySelector('.exo-txt'); if(x)x.textContent=t; };
+  function autoHide(){ if(!window.EXO_LOADING_HOLD) setTimeout(hide,30); }
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    autoHide();
+  }else{
+    document.addEventListener('DOMContentLoaded',autoHide);
+  }
+  // Failsafe: nunca atrapar al usuario (4s normal; 5s si la página lo retiene —
+  // la apertura del 210 es optimista y la validación PRO va en background, nada
+  // legítimo necesita retener más). Carrera vista en móvil: el hide de
+  // DOMContentLoaded a veces pierde contra el hold → soltar también en load.
+  setTimeout(function(){ if(!window.EXO_LOADING_HOLD) hide(); },4000);
+  setTimeout(hide,5000);
+  window.addEventListener('load',function(){ setTimeout(hide,600); });
+})();
+</script></head>
+<body>
+<div class="wrap">
+  <div class="brand"><span class="brand-dot"></span><span class="brand-name">Aziendale</span></div>
+  <div class="progress">
+    <div class="pdot active" id="pd0"></div>
+    <div class="pdot" id="pd1"></div>
+    <div class="pdot" id="pd2"></div>
+  </div>
+  <div class="step" id="step-perfil">
+    <p class="eyebrow" id="greet">Bienvenido a PRO</p>
+    <h1>&iquest;Cu&aacute;l describe mejor tu trabajo?</h1>
+    <p class="lede">Respondenos una cosa y te llevamos directo a tu primera herramienta. Toma 15 segundos.</p>
+    <div class="grid" id="perfilGrid"></div>
+    <div class="foot" style="margin-top:24px">
+      <a href="index.html" class="skip">Prefiero explorar por mi cuenta &rarr;</a>
+    </div>
+  </div>
+  <div class="step" id="step-necesidad" style="display:none">
+    <button class="backbtn" onclick="volverPerfil()">&larr; Cambiar</button>
+    <p class="eyebrow" id="necEyebrow">Casi listo</p>
+    <h1 id="necTitulo">&iquest;Qu&eacute; necesitas resolver primero?</h1>
+    <p class="lede">Elige lo m&aacute;s urgente. Podr&aacute;s usar todas las dem&aacute;s cuando quieras.</p>
+    <div class="grid" id="necGrid"></div>
+  </div>
+  <div class="step" id="step-resultado" style="display:none">
+    <button class="backbtn" onclick="volverNecesidad()">&larr; Elegir otra</button>
+    <p class="eyebrow">Tu punto de partida</p>
+    <div class="hero-card">
+      <div class="hero-ico" id="resIco">&#128640;</div>
+      <h2 id="resTitulo"></h2>
+      <p id="resDesc"></p>
+      <a href="#" class="cta" id="resCta" target="_blank" rel="noopener">Abrir herramienta &rarr;</a>
+    </div>
+    <div class="tip">
+      <span class="tk">&#128273;</span>
+      <p><strong>Para desbloquear PRO:</strong> al abrir cualquier herramienta, ingresa el <strong>email con el que pagaste</strong> en el campo &ldquo;Email PRO&rdquo; y dale Activar. No necesitas guardar claves; si cambias de equipo, solo vuelve a ingresar tu email.</p>
+    </div>
+    <div class="also">
+      <p class="also-title">Tambi&eacute;n te puede servir</p>
+      <div class="chips" id="alsoChips"></div>
+    </div>
+    <div class="foot">
+      <div class="foot-links">
+        <a href="sitemap.html">Ver todas las herramientas</a>
+        <a href="tutoriales.html">Tutoriales</a>
+        <a href="https://wa.me/573054559574?text=Hola%2C%20acabo%20de%20activar%20PRO%20y%20tengo%20una%20duda" target="_blank">Ayuda por WhatsApp</a>
+      </div>
+      <a href="index.html" class="skip">Ir al inicio</a>
+    </div>
+  </div>
+</div>
+<script defer src="shared/pro.js?v=284da17c"></script>
+<script>(function(){"use strict";var e=[{id:"contador",ico:"🧮",t:"Contador / firma",d:"Manejo varios clientes o una firma"},{id:"empresa",ico:"🏢",t:"Empresa / emprendedor",d:"Llevo la contabilidad de mi negocio"},{id:"natural",ico:"👤",t:"Persona natural",d:"Mi declaracion y finanzas personales"},{id:"estudiante",ico:"🎓",t:"Estudiante / aprendiz",d:"Estoy aprendiendo contabilidad"}];var t={contador:[{ico:"📊",t:"Presentar informacion exogena",d:"Medios magneticos DIAN",url:"exogena-suite.html"},{ico:"🧾",t:"Declaracion de renta",d:"F110 juridica y F210 natural",url:"renta-juridica.html"},{ico:"💸",t:"IVA y Retencion en la fuente",d:"Formatos 300 y 350",url:"iva300.html"},{ico:"📑",t:"Estados financieros y cierre",d:"ESF, ERI y notas",url:"eeff-hub.html"},{ico:"🔍",t:"Anticiparme a cruces DIAN",d:"Auditor de riesgos",url:"auditor-cruces-dian.html"},{ico:"🗂️",t:"Gestionar oficina y clientes",d:"Vencimientos y equipo",url:"oficina.html"}],empresa:[{ico:"👥",t:"Nomina y liquidaciones",d:"Desde Excel, con desprendibles",url:"nomina-masiva.html"},{ico:"📑",t:"Estados financieros",d:"Balance y resultados",url:"eeff-hub.html"},{ico:"💧",t:"Flujo de caja y presupuesto",d:"Proyeccion de tesoreria",url:"flujo-caja.html"},{ico:"🧮",t:"Facturas a contabilidad",d:"Contabilizar desde FE",url:"contabilizar-fe.html"},{ico:"🟢",t:"Regimen Simple (RST)",d:"Liquidar y anticipos",url:"regimen-simple.html"},{ico:"🏛️",t:"Crear mi SAS",d:"Estatutos y documentos",url:"crear-sas.html"}],natural:[{ico:"❓",t:"Estoy obligado a declarar?",d:"Chequeo rapido",url:"obligado-a-declarar.html"},{ico:"🧾",t:"Mi declaracion de renta",d:"Formato 210",url:"renta-personas-naturales.html"},{ico:"💰",t:"Cuanto me devuelven?",d:"Simulador de saldo a favor",url:"cuanto-me-devuelven.html"},{ico:"💵",t:"Salario neto y liquidacion",d:"Laboral y prestaciones",url:"liquidador.html"},{ico:"📈",t:"Mis finanzas personales",d:"Diagnostico y presupuesto",url:"finanzas.html"}],estudiante:[{ico:"🎓",t:"Escuela contable",d:"Ruta de formacion",url:"escuela.html"},{ico:"📖",t:"Estatuto tributario",d:"1.300 articulos",url:"estatuto-tributario.html"},{ico:"🤖",t:"Practicar con IA",d:"Asistente contable",url:"ia-asistente.html"},{ico:"✨",t:"Libreria de prompts",d:"Prompts para contadores",url:"prompts.html"}]};var i={perfil:null};function ev(e,t){try{if(window.gtag)gtag("event",e,t||{})}catch(e){}}function setDots(e){for(var t=0;t<3;t++){var i=document.getElementById("pd"+t);i.className="pdot"+(t<e?" done":t===e?" active":"")}}function show(e){["step-perfil","step-necesidad","step-resultado"].forEach(function(t){document.getElementById(t).style.display=t===e?"block":"none"});window.scrollTo({top:0,behavior:"smooth"})}function cardHTML(e){return'<span class="ico">'+e.ico+"</span>"+'<div><div class="ct">'+e.t+'</div><div class="cd">'+e.d+"</div></div>"+'<span class="arrow">&rarr;</span>'}var a=document.getElementById("perfilGrid");e.forEach(function(e){var t=document.createElement("button");t.className="card";t.type="button";t.innerHTML=cardHTML(e);t.onclick=function(){elegirPerfil(e.id)};a.appendChild(t)});function elegirPerfil(e){i.perfil=e;ev("onboarding_perfil",{perfil:e});var a=document.getElementById("necGrid");a.innerHTML="";(t[e]||[]).forEach(function(e){var t=document.createElement("button");t.className="card";t.type="button";t.innerHTML=cardHTML(e);t.onclick=function(){elegirNecesidad(e)};a.appendChild(t)});setDots(1);show("step-necesidad")}function elegirNecesidad(e){ev("onboarding_necesidad",{perfil:i.perfil,herramienta:e.url,titulo:e.t});document.getElementById("resIco").textContent=e.ico;document.getElementById("resTitulo").textContent=e.t;document.getElementById("resDesc").textContent=e.d+". Es la herramienta ideal para empezar segun lo que nos dijiste.";var a=document.getElementById("resCta");a.href=e.url;a.onclick=function(){ev("onboarding_abrir_herramienta",{herramienta:e.url})};var o=document.getElementById("alsoChips");o.innerHTML="";(t[i.perfil]||[]).filter(function(t){return t.url!==e.url}).slice(0,4).forEach(function(e){var t=document.createElement("a");t.className="chip";t.href=e.url;t.innerHTML="<span>"+e.ico+"</span> "+e.t;t.onclick=function(){ev("onboarding_abrir_secundaria",{herramienta:e.url})};o.appendChild(t)});setDots(2);show("step-resultado")}window.volverPerfil=function(){setDots(0);show("step-perfil")};window.volverNecesidad=function(){setDots(1);show("step-necesidad")};try{var o=window.exoPro&&window.exoPro.getSaved?window.exoPro.getSaved():null;if(o){document.getElementById("greet").textContent="PRO activo - "+o}}catch(e){}ev("onboarding_inicio",{})})();</script>
+<script defer src="shared/toast.js?v=9843f93f"></script>
+</body>
+</html>
